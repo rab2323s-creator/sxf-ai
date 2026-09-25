@@ -2271,6 +2271,385 @@ def open_source_ai_models_guide_html(items):
       </article>
     </main>{page_footer()}</body></html>'''
 
+
+def best_ai_agents_guide_html(items):
+    canonical = f"{BASE_URL}/guides/best-ai-agents/"
+    published = "2026-09-26"
+    verified = "2026-09-26"
+    title = "Best AI Agents in 2026: Work, Research, Coding & Automation | SXF / AI"
+    description = "Compare the best AI agents in 2026: ChatGPT Work, Claude Cowork, Manus, Zapier Agents and Devin Desktop by autonomy, browser and computer use, integrations, pricing and best use."
+
+    agents = [
+        {
+            "name":"ChatGPT Work","company":"OpenAI","best":"General-purpose work across apps, files and the web",
+            "surface":"ChatGPT + cloud computer/browser","automation":"Scheduled and triggered tasks","free":"No",
+            "entry":"Plus $20/mo","human":"Approvals for important actions",
+            "source":"https://openai.com/index/chatgpt-for-your-most-ambitious-work/",
+            "pricing":"https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus",
+        },
+        {
+            "name":"Claude Cowork","company":"Anthropic","best":"Long-form knowledge work and file-based desktop tasks",
+            "surface":"Desktop + web/mobile beta","automation":"Multi-step work in chosen files/tools","free":"No",
+            "entry":"Pro $20/mo","human":"Permission-gated access",
+            "source":"https://claude.com/product/cowork",
+            "pricing":"https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+        },
+        {
+            "name":"Manus","company":"Manus AI","best":"Cloud research, reports, slides, websites and parallel tasks",
+            "surface":"Web + desktop + browser operator","automation":"Scheduled tasks + concurrent cloud tasks","free":"Yes",
+            "entry":"Free · Pro from $20/mo","human":"Task-level steering / approvals",
+            "source":"https://manus.im/",
+            "pricing":"https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus",
+        },
+        {
+            "name":"Zapier Agents","company":"Zapier","best":"Repeatable business automation across connected apps",
+            "surface":"Web + Chrome extension + app integrations","automation":"Agent behaviors and app actions","free":"Yes",
+            "entry":"Free · Pro $33.33/mo annual","human":"Workflow and app permissions",
+            "source":"https://zapier.com/agents",
+            "pricing":"https://zapier.com/pricing",
+        },
+        {
+            "name":"Devin Desktop","company":"Cognition","best":"Software engineering and multi-agent coding workflows",
+            "surface":"AI IDE + local/cloud agents","automation":"Delegated coding tasks and parallel agents","free":"Yes",
+            "entry":"Free · Pro $20/mo","human":"Code review and repository controls",
+            "source":"https://devin.ai/desktop",
+            "pricing":"https://devin.ai/desktop",
+        },
+    ]
+
+    rows = "".join(
+        f'''<tr>
+          <th scope="row"><a href="#{escape(slugify(a["name"]), quote=True)}">{escape(a["name"])}</a><small>{escape(a["company"])}</small></th>
+          <td>{escape(a["best"])}</td><td>{escape(a["surface"])}</td><td>{escape(a["automation"])}</td>
+          <td>{escape(a["free"])}</td><td>{escape(a["entry"])}</td><td>{escape(a["human"])}</td>
+        </tr>'''
+        for a in agents
+    )
+
+    toc = [
+        ("quick-answer","Quick answer"),
+        ("what-is-an-ai-agent","What is an AI agent?"),
+        ("comparison","AI agent comparison"),
+        ("how-we-evaluate","How we evaluate agents"),
+        ("chatgpt-work","ChatGPT Work"),
+        ("claude-cowork","Claude Cowork"),
+        ("manus","Manus"),
+        ("zapier-agents","Zapier Agents"),
+        ("devin-desktop","Devin Desktop"),
+        ("research","Best AI agent for research"),
+        ("work","Best AI agent for work"),
+        ("automation","Best AI agent for automation"),
+        ("coding","Best AI agent for coding"),
+        ("browser-computer-use","Browser & computer use"),
+        ("pricing","AI agent pricing"),
+        ("security","AI agent security"),
+        ("how-to-choose","How to choose"),
+        ("agent-vs-chatbot","AI agent vs chatbot"),
+        ("faq","FAQ"),
+    ]
+    toc_html = "".join(f'<a href="#{escape(a, quote=True)}">{escape(label)}</a>' for a,label in toc)
+
+    faq = [
+        ("What is the best AI agent in 2026?", "There is no universal best agent because the products operate in different environments. ChatGPT Work is the broadest general-work agent in this shortlist; Claude Cowork is strong for file-heavy knowledge work; Manus is optimized for cloud research and deliverables; Zapier Agents is built for repeatable cross-app automation; and Devin Desktop is specialized for software engineering."),
+        ("What is the best AI agent for research?", "ChatGPT Work and Manus are the strongest general research candidates in this shortlist because both can browse, gather information and produce finished deliverables. Claude Cowork is especially useful when research depends heavily on local files and long-form knowledge work. The best choice depends on source access, citation requirements and whether the final output must be a report, spreadsheet, slide deck or another artifact."),
+        ("What is the best AI agent for business automation?", "Zapier Agents is the clearest fit when the goal is repeatable actions across business apps because its product and pricing are organized around agent activities, connected data sources and automated behaviors. ChatGPT Work can also run scheduled or triggered tasks, but it is a broader work agent rather than a dedicated automation platform."),
+        ("What is the best AI agent for coding?", "Devin Desktop is the specialized coding agent in this comparison. ChatGPT includes Codex as a separate software-development mode, while Claude's coding-specific product is Claude Code. For a coding-only decision, compare dedicated coding agents rather than general-purpose work agents."),
+        ("Is ChatGPT Agent still available?", "No. OpenAI's current help documentation says ChatGPT Agent is no longer available and directs users to ChatGPT Work for longer multi-step tasks and finished deliverables."),
+        ("Are AI agents safe to run without supervision?", "Not for every action. Agents can misread intent, encounter prompt injection, expose data through over-broad permissions or take an irreversible action in the wrong context. High-impact actions such as sending, purchasing, deleting, publishing or changing production systems should use explicit permissions, scoped credentials and human approval."),
+        ("What is the difference between an AI agent and a chatbot?", "A chatbot primarily generates responses. An agent operates a loop: it interprets a goal, plans or chooses actions, uses tools or a computer, observes the result, adapts and continues until it finishes, fails or asks for human input. Autonomy is a spectrum rather than an all-or-nothing property."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    sources = [
+        ("OpenAI · Introducing ChatGPT Work","https://openai.com/index/chatgpt-for-your-most-ambitious-work/"),
+        ("OpenAI · ChatGPT Work and Codex","https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"),
+        ("OpenAI · retired ChatGPT Agent documentation","https://help.openai.com/en/articles/11752874-chatgpt-agent"),
+        ("OpenAI · ChatGPT Business pricing","https://openai.com/business/pricing/"),
+        ("Anthropic · Claude Cowork","https://claude.com/product/cowork"),
+        ("Anthropic · Trustworthy agents in practice","https://www.anthropic.com/research/trustworthy-agents"),
+        ("Anthropic · agent containment engineering","https://www.anthropic.com/engineering/how-we-contain-claude"),
+        ("Manus · plans and pricing","https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus"),
+        ("Manus · credit consumption","https://help.manus.im/en/articles/11711097-what-are-the-rules-for-credits-consumption-and-how-can-i-obtain-them"),
+        ("Zapier · Agents pricing","https://zapier.com/pricing"),
+        ("Zapier · Agent activity metering","https://help.zapier.com/hc/en-us/articles/26559132765325-How-is-Zapier-Agents-usage-measured"),
+        ("Cognition · Devin Desktop","https://devin.ai/desktop"),
+    ]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label,url in sources
+    )
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"TechArticle","@id":canonical+"#article","url":canonical,"mainEntityOfPage":canonical,
+                "headline":"Best AI Agents in 2026: Work, Research, Coding & Automation",
+                "description":description,"datePublished":published,"dateModified":verified,
+                "author":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "articleSection":"AI Agents",
+                "keywords":[
+                    "best AI agents 2026","best autonomous AI agents","AI agent tools","AI agents for work",
+                    "AI agents for research","AI agents for automation","ChatGPT Work","Claude Cowork",
+                    "Manus AI agent","Zapier Agents","Devin Desktop"
+                ],
+                "about":[{"@type":"SoftwareApplication","name":a["name"],"url":a["source"]} for a in agents],
+                "citation":[url for _label,url in sources],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Guides","item":BASE_URL+"/guides/"},
+                {"@type":"ListItem","position":3,"name":"Best AI Agents in 2026","item":canonical}
+            ]},
+            {"@type":"ItemList","name":"AI agents compared","numberOfItems":len(agents),"itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":a["name"],"url":a["source"]} for i,a in enumerate(agents)
+            ]},
+            {"@type":"FAQPage","mainEntity":[
+                {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq
+            ]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, page_type="article")}
+    <body class="intel-page guide-article-page">{page_header("guides")}<main>
+      <article>
+        <header class="guide-article-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Agents</span></nav>
+          <p class="eyebrow">SXF GUIDE / AGENTIC AI</p>
+          <h1>Best AI Agents in 2026:<br><span>Work, Research, Coding & Automation</span></h1>
+          <p class="guide-deck">AI agents are no longer one category. Some operate a cloud computer, some work inside your files, some orchestrate business apps and some are specialized software engineers. This guide compares the systems by where they act, how far they can run, how they are billed and where a human should remain in the loop.</p>
+          <div class="guide-byline">
+            <div><span>Published</span><strong>September 26, 2026</strong></div>
+            <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+            <div><span>Reading time</span><strong>25 min</strong></div>
+            <div><span>Research standard</span><strong>Primary-source first</strong></div>
+          </div>
+        </header>
+
+        <section class="guide-answer shell" id="quick-answer">
+          <div class="guide-answer-label">QUICK ANSWER</div>
+          <div><h2>The best AI agent is the one whose execution environment matches the work you actually want to delegate.</h2>
+          <p><strong>ChatGPT Work</strong> is the broadest general-purpose work agent in this shortlist, built to operate across apps, files, the web and finished deliverables. <strong>Claude Cowork</strong> is especially strong when the task starts from files and desktop knowledge work. <strong>Manus</strong> is designed for cloud-based research and artifact creation with parallel and scheduled tasks. <strong>Zapier Agents</strong> is the clearest choice for repeatable business automation across connected apps. <strong>Devin Desktop</strong> is the specialized option for software engineering and supervising coding agents. The important comparison is not “which agent is smartest?” but “what can it access, what can it execute, how is it governed and what does failure cost?”</p></div>
+        </section>
+
+        <div class="guide-reading shell">
+          <aside class="guide-toc"><span>IN THIS GUIDE</span>{toc_html}<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+
+          <div class="guide-prose" id="top">
+            <section id="what-is-an-ai-agent">
+              <p class="eyebrow">DEFINITION</p>
+              <h2>What is an AI agent in 2026?</h2>
+              <p>An AI agent is a system that can move beyond generating an answer and <strong>take a sequence of actions toward a goal</strong>. A useful agent can inspect context, decide what to do next, call tools or operate software, observe the result, recover from some failures and continue until the task is complete or human input is needed.</p>
+              <p>That definition is deliberately operational. “Agent” has become a marketing label for everything from a chatbot with one API call to a system that works for hours on a cloud computer. SXF treats autonomy as a spectrum and asks what the system can actually do without a human clicking every step.</p>
+              <div class="agent-loop">
+                <div><span>01</span><strong>Understand</strong><p>Interpret the goal, constraints and available context.</p></div>
+                <div><span>02</span><strong>Plan</strong><p>Choose a next action or decompose the task.</p></div>
+                <div><span>03</span><strong>Act</strong><p>Use an app, API, browser, shell, file or computer.</p></div>
+                <div><span>04</span><strong>Observe</strong><p>Read the outcome instead of assuming the action worked.</p></div>
+                <div><span>05</span><strong>Adapt</strong><p>Retry, change strategy or ask for approval when needed.</p></div>
+              </div>
+              <div class="guide-callout"><strong>Agent test</strong><p>If the system only writes instructions for you to execute, it is an assistant. If it can execute the work, inspect the result and continue through multiple steps, it is operating as an agent.</p></div>
+            </section>
+
+            <section id="comparison">
+              <p class="eyebrow">QUICK COMPARISON</p>
+              <h2>Best AI agents in 2026 at a glance</h2>
+              <div class="guide-table-wrap"><table class="guide-table agent-table"><thead><tr><th>Agent</th><th>Best fit</th><th>Execution surface</th><th>Automation</th><th>Free</th><th>Entry price</th><th>Human control</th></tr></thead><tbody>{rows}</tbody></table></div>
+              <p class="guide-fact-note">Prices and product availability verified September 26, 2026. Agent pricing is unusually difficult to compare because some products bundle usage into subscriptions, some meter credits or activities, and some consume model/API usage separately.</p>
+            </section>
+
+            <section id="how-we-evaluate">
+              <p class="eyebrow">METHODOLOGY</p>
+              <h2>How SXF evaluates AI agents</h2>
+              <p>A model benchmark is not enough to evaluate an agent. The agent is the whole execution system around the model. SXF separates seven layers that determine whether delegation is actually useful:</p>
+              <div class="guide-criteria agent-criteria">
+                <article><span>01</span><h3>Execution environment</h3><p>Does the agent operate in a cloud computer, local desktop, browser, business apps, terminal or a controlled sandbox?</p></article>
+                <article><span>02</span><h3>Tool breadth</h3><p>Can it work with files, websites, code, APIs and connected services without fragile manual handoffs?</p></article>
+                <article><span>03</span><h3>Autonomy horizon</h3><p>How many steps can it complete before it loses state, needs clarification or requires human intervention?</p></article>
+                <article><span>04</span><h3>Verification loop</h3><p>Can it check that the outcome is correct, or does it merely report that it completed an action?</p></article>
+                <article><span>05</span><h3>Permissions</h3><p>Can access be scoped by app, file, credential, action or workspace rather than granting a broad blast radius?</p></article>
+                <article><span>06</span><h3>Observability</h3><p>Can a human review steps, artifacts, logs or changes before trusting the result?</p></article>
+                <article><span>07</span><h3>Economics</h3><p>Does a plan price include useful work, or do credits, activities, tool calls and long runs dominate the real cost?</p></article>
+              </div>
+              <p>SXF does not publish a single numerical score here because these systems are not interchangeable. A Zapier agent that executes a reliable CRM workflow and a Devin agent that fixes a repository issue solve different classes of work.</p>
+            </section>
+
+            <section class="tool-review" id="chatgpt-work">
+              <div class="tool-review-head"><span>01</span><div><p class="eyebrow">OPENAI</p><h2>ChatGPT Work: best general-purpose AI agent for multi-step knowledge work</h2></div></div>
+              <p>OpenAI describes ChatGPT Work as an agent for longer, multi-step work and finished deliverables. It can gather information across connected apps and files, use a cloud computer and browser for supported web workflows, and produce documents, spreadsheets, presentations, reports and web outputs rather than stopping at a chat response.</p>
+              <p>The product is strategically important because it combines research, app context, browser action and artifact creation inside the same ChatGPT workspace. Scheduled Tasks can also run once, repeat on a schedule or react to a trigger, which moves Work from one-off delegation toward ongoing workflows.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>General multi-step work</strong></div><div><span>Environment</span><strong>Apps + files + cloud browser</strong></div><div><span>Entry plan</span><strong>Plus $20/mo</strong></div><div><span>Automation</span><strong>Scheduled / triggered tasks</strong></div></div>
+              <h3>Where ChatGPT Work is strongest</h3>
+              <p>It is strongest when a task crosses formats and information sources: research a market, inspect connected documents, calculate or structure data, navigate a web workflow and return a polished deliverable. That breadth is more important than any single browser benchmark.</p>
+              <h3>Important 2026 change: ChatGPT Agent is retired</h3>
+              <p>Older comparisons often list “ChatGPT Agent” or agent mode as the product. OpenAI's current documentation says <strong>ChatGPT Agent is no longer available</strong> and directs users to ChatGPT Work for longer multi-step tasks. A current buying guide should compare Work, not treat the retired product as the present-day option.</p>
+              <h3>What to watch</h3>
+              <p>Broad access creates broad risk. The useful question is not whether Work can connect to more data, but whether the minimum necessary apps, files and actions are exposed for the task. Important actions should remain approval-gated.</p>
+              <div class="tool-links"><a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener noreferrer">ChatGPT Work official page ↗</a><a href="https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex" target="_blank" rel="noopener noreferrer">Work documentation ↗</a><a href="/topics/openai/">SXF OpenAI intelligence ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="claude-cowork">
+              <div class="tool-review-head"><span>02</span><div><p class="eyebrow">ANTHROPIC</p><h2>Claude Cowork: best AI agent for file-heavy desktop and knowledge work</h2></div></div>
+              <p>Claude Cowork is Anthropic's general work-agent surface. Anthropic describes it as a place where you hand Claude real work: Cowork operates in files and tools you choose and completes multi-step tasks from start to finish. It runs on desktop, with web and mobile in beta.</p>
+              <p>The product's strongest conceptual advantage is controlled context. Instead of assuming an agent should see an entire digital life, Cowork starts from the files and tools a user selects. That is a useful pattern for document-heavy work where local files, reports, folders and structured deliverables matter more than broad browser automation.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Files + knowledge work</strong></div><div><span>Environment</span><strong>Desktop + selected tools</strong></div><div><span>Entry plan</span><strong>Pro $20/mo</strong></div><div><span>Included in</span><strong>Pro · Max · Team · Enterprise</strong></div></div>
+              <h3>Where Claude Cowork is strongest</h3>
+              <p>Organizing and transforming files, assembling reports, synthesizing material across documents and completing tasks where the human wants to define the workspace before delegating. For software engineering, Claude Code is the more specialized product; Cowork belongs in the broader knowledge-work comparison.</p>
+              <h3>Why Anthropic's safety work matters here</h3>
+              <p>Anthropic explicitly frames agent risk around intent errors and prompt injection, and has published engineering work on containment and reducing an agent's blast radius. Those are not abstract concerns once an agent can touch real files and tools.</p>
+              <div class="tool-links"><a href="https://claude.com/product/cowork" target="_blank" rel="noopener noreferrer">Claude Cowork ↗</a><a href="https://www.anthropic.com/research/trustworthy-agents" target="_blank" rel="noopener noreferrer">Trustworthy agents research ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="manus">
+              <div class="tool-review-head"><span>03</span><div><p class="eyebrow">MANUS</p><h2>Manus: best cloud AI agent for research, reports and parallel deliverables</h2></div></div>
+              <p>Manus is built around handing work to an agent that runs in cloud environments rather than keeping a chat session open. Its current product includes advanced research, Wide Research, website deployment, slides, a browser operator, integrations and scheduled tasks.</p>
+              <p>The pricing system reflects that architecture. Manus credits are consumed by LLM tokens, virtual machines and third-party APIs, so a task's cost depends on complexity and duration rather than a fixed “one prompt = one unit” rule. Free users receive limited agent access, while paid Pro tiers add larger monthly credit pools and more concurrency.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Cloud research + artifacts</strong></div><div><span>Free plan</span><strong>300 daily Lite credits</strong></div><div><span>Pro</span><strong>From $20/mo</strong></div><div><span>Paid concurrency</span><strong>Up to 20 tasks</strong></div></div>
+              <h3>Where Manus is strongest</h3>
+              <p>Research or production work where parallelism matters: collecting information, producing a report, creating slides or a website, or letting several cloud tasks run without tying execution to the user's machine.</p>
+              <h3>What to watch</h3>
+              <p>Credits are a compute abstraction, not a fixed number of finished tasks. A short lookup and a long browser/code workflow can consume very different amounts. The right way to evaluate Manus cost is to record credits consumed by your recurring task types.</p>
+              <div class="tool-links"><a href="https://manus.im/" target="_blank" rel="noopener noreferrer">Manus ↗</a><a href="https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus" target="_blank" rel="noopener noreferrer">Official pricing ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="zapier-agents">
+              <div class="tool-review-head"><span>04</span><div><p class="eyebrow">ZAPIER</p><h2>Zapier Agents: best AI agents for repeatable business automation</h2></div></div>
+              <p>Zapier Agents sits closer to automation infrastructure than a general-purpose cloud coworker. The agent can use live data sources, browse the web and take actions across connected applications, with usage metered in <strong>activities</strong>—billable actions the agent performs.</p>
+              <p>The Free plan includes 400 activities per month. The current Pro plan lists 1,500 activities per month at $400 billed annually, equivalent to $33.33 per month, with up to 40 activities in a single run. Enterprise adds organization-level sharing, audit logs and restricted-app controls.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Cross-app business workflows</strong></div><div><span>Free usage</span><strong>400 activities/mo</strong></div><div><span>Pro</span><strong>1,500 activities/mo</strong></div><div><span>Per-run cap</span><strong>40 activities on Pro</strong></div></div>
+              <h3>Where Zapier Agents is strongest</h3>
+              <p>When the process is recurring and app-centric: qualify information, look up records, update systems, summarize data and trigger downstream steps. The strength is less about a giant context window and more about an existing integration graph plus repeatable execution.</p>
+              <h3>Agent automation vs traditional automation</h3>
+              <p>A deterministic Zap should still handle a deterministic workflow when possible. An agent earns its cost when judgment is needed inside the process: interpreting unstructured input, choosing among tools or adapting the next action to context.</p>
+              <div class="tool-links"><a href="https://zapier.com/agents" target="_blank" rel="noopener noreferrer">Zapier Agents ↗</a><a href="https://zapier.com/pricing" target="_blank" rel="noopener noreferrer">Official pricing ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="devin-desktop">
+              <div class="tool-review-head"><span>05</span><div><p class="eyebrow">COGNITION</p><h2>Devin Desktop: best specialized AI agent for software engineering delegation</h2></div></div>
+              <p>Devin Desktop is not a general office agent. It is an AI software-engineering environment built around coding agents, an IDE and the ability to manage development work across local and cloud contexts. That specialization is exactly why it belongs in the agent landscape but should not be judged by the same criteria as a research or CRM agent.</p>
+              <p>The current Devin Desktop page lists Free, Pro at $20 per month and Max at $200 per month. The product also exposes integrations and MCP servers for developer infrastructure such as GitHub-adjacent services, deployment platforms and observability tools.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Software engineering</strong></div><div><span>Environment</span><strong>AI IDE + agents</strong></div><div><span>Entry</span><strong>Free</strong></div><div><span>Pro</span><strong>$20/mo</strong></div></div>
+              <h3>Where Devin Desktop is strongest</h3>
+              <p>Delegating implementation work while preserving an engineer's ability to inspect code, diffs and the environment. For organizations evaluating coding agents specifically, it should be compared with Claude Code, Codex, Cursor and GitHub Copilot—not just with general AI agents.</p>
+              <div class="tool-links"><a href="https://devin.ai/desktop" target="_blank" rel="noopener noreferrer">Devin Desktop ↗</a><a href="/guides/best-ai-coding-tools/">Best AI Coding Tools in 2026 ↗</a><a href="/topics/coding-ai/">Coding AI signals ↗</a></div>
+            </section>
+
+            <section id="research">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best AI agent for research in 2026?</h2>
+              <p><strong>ChatGPT Work and Manus are the strongest general research candidates in this shortlist, but for different reasons.</strong> Work is attractive when research must combine connected company context, web work and polished artifacts inside one workspace. Manus is attractive when cloud execution, parallel tasks and dedicated research/report generation are central to the job.</p>
+              <p>Claude Cowork becomes especially relevant when the research corpus is already sitting in local files and folders. In all three cases, “research agent” quality should be measured by source selection, traceability, contradictory-evidence handling and whether the final artifact preserves enough provenance for a human to audit it.</p>
+              <div class="guide-callout"><strong>Research rule</strong><p>An agent that produces a beautiful report without traceable sources has automated writing, not research. Require source links, verify high-impact claims and separate observed evidence from the agent's synthesis.</p></div>
+            </section>
+
+            <section id="work">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best AI agent for work and productivity?</h2>
+              <p>For broad knowledge work, <strong>ChatGPT Work</strong> has the widest role in this comparison: it is explicitly designed for multi-step tasks across apps and files and for producing finished deliverables. <strong>Claude Cowork</strong> is a strong alternative when the job is file-centric and the user wants to scope the tools and files Claude can work with.</p>
+              <p>The decision should follow your information architecture. If important work lives across SaaS apps and web workflows, integration breadth matters. If the work lives in documents, folders and local knowledge, file control and document reasoning matter more.</p>
+            </section>
+
+            <section id="automation">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best AI agent for business automation?</h2>
+              <p><strong>Zapier Agents is the clearest purpose-built choice here</strong> because the product is designed around automated behaviors, connected data sources and app actions. The monthly unit—activities—also maps more directly to automation volume than a conversational message limit.</p>
+              <p>ChatGPT Work's scheduled and triggered tasks make it capable of recurring work too. The architectural distinction is that Zapier begins with workflow infrastructure and adds agent judgment, while Work begins with a general agent and expands into recurring execution.</p>
+              <h3>When should you use a workflow instead of an agent?</h3>
+              <p>If every step and branch is known in advance, deterministic automation is easier to test and cheaper to govern. Add an agent where the workflow requires interpretation, tool selection, unstructured data or recovery from variable inputs.</p>
+            </section>
+
+            <section id="coding">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best autonomous AI agent for coding?</h2>
+              <p>For coding, use a coding agent rather than asking a general office agent to behave like one. <strong>Devin Desktop</strong> is the specialized agent in this article, but the category also includes Claude Code, OpenAI Codex, Cursor and GitHub Copilot. These systems understand repositories, edit multiple files, execute commands and return code changes instead of simply generating snippets.</p>
+              <p>The dedicated SXF coding guide compares that category in depth, including workflow architecture, free tiers and repo-scale work.</p>
+              <div class="guide-inline-cta"><div><span>SXF GUIDE</span><strong>Best AI Coding Tools in 2026</strong><p>Claude Code, Codex, GitHub Copilot, Cursor and Devin Desktop compared by workflow and autonomy.</p></div><a href="/guides/best-ai-coding-tools/">Open coding guide ↗</a></div>
+            </section>
+
+            <section id="browser-computer-use">
+              <p class="eyebrow">BROWSER & COMPUTER USE</p>
+              <h2>Which AI agents can browse the web or use a computer?</h2>
+              <p>Computer-use capability is one of the most important boundaries between assistants and action-taking agents. ChatGPT Work can use a cloud computer and browser for supported workflows. Manus includes browser automation and virtual-machine-backed tasks. Zapier Agents includes web browsing alongside app actions. Claude's broader agent stack includes computer-use capabilities, while Cowork focuses on work in selected files and tools.</p>
+              <p>Browser control should not be evaluated only by “can it click?” Real reliability comes from recognizing state changes, handling authentication, stopping at sensitive decisions and recovering when the page differs from what the model expected.</p>
+              <div class="guide-difference">
+                <div><span>API / TOOL ACTION</span><strong>Preferred when a reliable API exists.</strong><p>Structured inputs and outputs are easier to validate, authorize and audit.</p></div>
+                <div><span>COMPUTER / BROWSER USE</span><strong>Useful when software has no suitable API.</strong><p>More general, but also more exposed to visual ambiguity, prompt injection and unexpected interface states.</p></div>
+              </div>
+            </section>
+
+            <section id="pricing">
+              <p class="eyebrow">PRICING</p>
+              <h2>How much do AI agents cost in 2026?</h2>
+              <p>Agent pricing is moving away from one simple subscription metric because an agent consumes several resources: model inference, tool calls, browsers or virtual machines, third-party APIs and sometimes long-lived execution environments.</p>
+              <div class="guide-pricing-list">
+                <div><strong>ChatGPT Work</strong><p>Included on eligible paid ChatGPT plans; Plus is $20/month. Business Standard is $20/user/month annual or $25 monthly, with flexible credits available beyond included usage.</p><a href="https://openai.com/business/pricing/" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
+                <div><strong>Claude Cowork</strong><p>Included with Claude Pro at $20/month ($17/month equivalent annually), Max tiers, Team and Enterprise. Usage limits apply and heavy Cowork work consumes capacity faster than ordinary chat.</p><a href="https://claude.com/product/cowork" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
+                <div><strong>Manus</strong><p>Free plan available. Pro starts at $20/month with 4,000 monthly credits; a $40 tier starts at 8,000 credits. Credits reflect model tokens, virtual machines and third-party APIs.</p><a href="https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
+                <div><strong>Zapier Agents</strong><p>Free includes 400 activities/month. Pro is listed at $400 billed annually ($33.33/month equivalent) with 1,500 activities/month.</p><a href="https://zapier.com/pricing" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
+                <div><strong>Devin Desktop</strong><p>Current self-serve desktop tiers list Free, Pro at $20/month and Max at $200/month. Team and enterprise economics can differ.</p><a href="https://devin.ai/desktop" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
+              </div>
+              <div class="guide-callout"><strong>Measure cost per completed task</strong><p>Seat price is a weak agent metric. Track the total cost of a verified outcome: subscription or credits + compute/tool usage + human review time + retries + recovery from incorrect actions.</p></div>
+            </section>
+
+            <section id="security">
+              <p class="eyebrow">SAFETY & GOVERNANCE</p>
+              <h2>Are autonomous AI agents safe?</h2>
+              <p>Agents introduce a different security problem from chatbots because they combine model uncertainty with real permissions. Anthropic's agent-safety work highlights two central risks: the agent may misunderstand the user's intent, and external content can attempt <strong>prompt injection</strong> that manipulates the agent into taking an unintended action.</p>
+              <p>The risk grows with blast radius. Giving an agent access to read a report is different from giving it permission to send email, spend money, delete cloud resources or deploy code. Mature agent deployments therefore treat permissions as part of the product architecture.</p>
+              <div class="security-principles">
+                <article><span>01</span><h3>Least privilege</h3><p>Give the agent only the apps, files, secrets and actions necessary for the current workflow.</p></article>
+                <article><span>02</span><h3>Approval gates</h3><p>Require human confirmation before sending, purchasing, deleting, publishing or modifying critical systems.</p></article>
+                <article><span>03</span><h3>Isolation</h3><p>Use sandboxes or dedicated environments so a failure cannot freely propagate into production resources.</p></article>
+                <article><span>04</span><h3>Observability</h3><p>Keep logs, diffs and artifacts so a reviewer can understand what happened and why.</p></article>
+                <article><span>05</span><h3>Prompt-injection defense</h3><p>Treat external webpages, documents and messages as potentially hostile input rather than trusted instructions.</p></article>
+                <article><span>06</span><h3>Reversibility</h3><p>Prefer actions that can be reviewed, rolled back or staged before they become externally visible.</p></article>
+              </div>
+              <p>An agent should earn autonomy by proving reliability inside a bounded workflow. Do not start by handing it the maximum permissions and hoping the model behaves.</p>
+            </section>
+
+            <section id="how-to-choose">
+              <p class="eyebrow">DECISION FRAMEWORK</p>
+              <h2>How to choose the best AI agent for your workflow</h2>
+              <div class="guide-decision-table">
+                <div><span>Cross-app knowledge work</span><strong>Start with ChatGPT Work</strong><p>Broad general-work scope, connected context, browser workflows, finished artifacts and scheduled execution.</p></div>
+                <div><span>File-heavy desktop work</span><strong>Start with Claude Cowork</strong><p>Strong fit when the working set is local documents, folders and selected tools.</p></div>
+                <div><span>Cloud research and parallel tasks</span><strong>Start with Manus</strong><p>Research, reports, slides, websites, browser operator and concurrent cloud execution.</p></div>
+                <div><span>Repeatable SaaS automation</span><strong>Start with Zapier Agents</strong><p>Built around app actions and recurring agent behaviors with explicit activity metering.</p></div>
+                <div><span>Software engineering</span><strong>Start with Devin Desktop, then compare coding agents</strong><p>Specialized development environment; evaluate against Claude Code, Codex, Cursor and Copilot for your repository.</p></div>
+                <div><span>High-risk operations</span><strong>Start with governance, not a product</strong><p>Define permissions, approval gates, auditability and failure recovery before selecting the agent.</p></div>
+              </div>
+            </section>
+
+            <section id="agent-vs-chatbot">
+              <p class="eyebrow">FOUNDATION</p>
+              <h2>AI agent vs chatbot: what is the real difference?</h2>
+              <div class="guide-difference">
+                <div><span>CHATBOT</span><strong>Prompt → response</strong><p>Optimized for conversation, explanation, drafting and answering questions. Tools may exist, but the interaction is usually centered on each user turn.</p></div>
+                <div><span>AI AGENT</span><strong>Goal → actions → observations → outcome</strong><p>Optimized for delegation. The system can continue through multiple steps, use tools and environments, and return after work has been executed.</p></div>
+              </div>
+              <p>The boundary is not binary. Modern products can behave like a chatbot in one mode and an agent in another. The useful test is how much responsibility the system can take for the execution loop while remaining observable and controllable.</p>
+            </section>
+
+            <section class="guide-faq-section" id="faq">
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions about AI agents</h2>
+              <div class="model-faq">{faq_html}</div>
+            </section>
+
+            <section class="guide-sources">
+              <p class="eyebrow">PRIMARY SOURCES</p>
+              <h2>Official sources used for this guide</h2>
+              <p>SXF verifies product availability, pricing and agent capabilities against vendor documentation. Where vendors describe their own product as safer, smarter or more capable, this guide treats that as an attributed claim rather than an independent benchmark result.</p>
+              <div class="model-sources">{source_links}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -2307,6 +2686,17 @@ def guides_index_html(items, current_items):
             "meta": "Licenses · Hardware · Local AI",
             "updated": "Sep 26, 2026",
             "read_time": "24 min",
+        },
+        {
+            "href": "/guides/best-ai-agents/",
+            "category": "Agents · Automation",
+            "categories": ["agents", "coding", "research"],
+            "kicker": "AI AGENTS GUIDE",
+            "title": "Best AI Agents in 2026",
+            "description": "ChatGPT Work, Claude Cowork, Manus, Zapier Agents and Devin Desktop compared by autonomy, execution environment, pricing and best use.",
+            "meta": "Work · Research · Coding · Automation",
+            "updated": "Sep 26, 2026",
+            "read_time": "25 min",
         },
         {
             "href": f"/compare/{GPT6_COMPARE_SLUG}/",
@@ -2785,6 +3175,9 @@ def build_discovery_pages(items, current_items):
     open_models_guide_path = GUIDES_DIR / "open-source-ai-models"
     open_models_guide_path.mkdir(parents=True, exist_ok=True)
     (open_models_guide_path / "index.html").write_text(open_source_ai_models_guide_html(items), encoding="utf-8")
+    agents_guide_path = GUIDES_DIR / "best-ai-agents"
+    agents_guide_path.mkdir(parents=True, exist_ok=True)
+    (agents_guide_path / "index.html").write_text(best_ai_agents_guide_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -2837,6 +3230,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]

@@ -361,3 +361,22 @@
 .hardware-ladder p{margin:0!important;color:#7c8894!important;font-size:12px!important;line-height:1.65!important}
 @media(max-width:900px){.open-model-criteria{grid-template-columns:repeat(2,minmax(0,1fr))}.hardware-ladder>div{grid-template-columns:1fr}}
 @media(max-width:720px){.open-model-criteria{grid-template-columns:1fr}}
+
+
+/* Best AI Agents guide */
+.agent-table th:first-child{min-width:170px}
+.agent-table td:nth-child(2){min-width:250px}
+.agent-table td:nth-child(3){min-width:220px}
+.agent-loop{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:28px 0}
+.agent-loop>div{min-height:160px;padding:18px;border:1px solid var(--line);border-radius:15px;background:#0a0e13}
+.agent-loop span{display:block;color:#596572;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.agent-loop strong{display:block;margin:30px 0 7px;font-size:17px}
+.agent-loop p{margin:0!important;color:#75818e!important;font-size:11px!important;line-height:1.6!important}
+.agent-criteria{grid-template-columns:repeat(2,minmax(0,1fr))}
+.security-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0}
+.security-principles article{padding:20px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.security-principles article>span{color:#596572;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.security-principles h3{margin:30px 0 8px;font-size:18px}
+.security-principles p{margin:0!important;color:#778390!important;font-size:12px!important;line-height:1.65!important}
+@media(max-width:980px){.agent-loop{grid-template-columns:repeat(3,1fr)}.security-principles{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.agent-loop,.agent-criteria,.security-principles{grid-template-columns:1fr}.agent-loop>div{min-height:130px}}
