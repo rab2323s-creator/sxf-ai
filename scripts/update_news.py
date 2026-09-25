@@ -298,6 +298,7 @@ def update_section_pages(items):
             continue
         filtered = [item for item in items if item["category"] == category]
         page = path.read_text(encoding="utf-8")
+        page = page.replace('<a href="/open-source/">Open Source</a><a href="/brief/">Brief</a>', '<a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/brief/">Brief</a>')
         page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
         schema = {
             "@context": "https://schema.org",
@@ -322,6 +323,7 @@ SIGNALS_DIR = ROOT / "signals"
 TOPICS_DIR = ROOT / "topics"
 BRIEF_DIR = ROOT / "brief"
 COMPARE_DIR = ROOT / "compare"
+GUIDES_DIR = ROOT / "guides"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 
@@ -942,6 +944,7 @@ def page_header(active=""):
         ("/tools/", "Tools", "tools"),
         ("/research/", "Research", "research"),
         ("/open-source/", "Open Source", "open-source"),
+        ("/guides/", "Guides", "guides"),
         ("/brief/", "Brief", "brief"),
         ("/about/", "About", "about"),
     ]
@@ -1212,6 +1215,128 @@ def model_page_html(name, items):
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
+
+
+def guides_index_html(items, current_items):
+    canonical = f"{BASE_URL}/guides/"
+    description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
+    published = [
+        {
+            "href": f"/compare/{GPT6_COMPARE_SLUG}/",
+            "kicker": "MODEL SELECTION",
+            "title": "GPT-6 Astra vs Sol vs Luna",
+            "description": "Compare OpenAI’s GPT-6 family on capability positioning, context, API pricing and workload economics.",
+            "meta": "Pricing · Context · Use cases",
+        },
+        {
+            "href": f"/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/",
+            "kicker": "FRONTIER COMPARISON",
+            "title": "GPT-6 Sol vs Claude Opus 5.5",
+            "description": "A source-backed comparison of pricing, long-context economics, reasoning controls and agentic positioning.",
+            "meta": "API · Agents · Long context",
+        },
+    ]
+    guide_cards = "".join(
+        f'''<a class="guide-feature-card" href="{escape(g["href"], quote=True)}">
+          <span class="guide-card-kicker">{escape(g["kicker"])}</span>
+          <h2>{escape(g["title"])}</h2>
+          <p>{escape(g["description"])}</p>
+          <div><small>{escape(g["meta"])}</small><b>Read guide ↗</b></div>
+        </a>'''
+        for g in published
+    )
+    tracks = [
+        ("/models/", "01", "AI Models", "Capabilities, context windows, pricing, releases and persistent model reference pages.", "Explore models"),
+        ("/topics/coding-ai/", "02", "AI Coding", "Coding agents, copilots, developer workflows and the tools changing software engineering.", "Track coding AI"),
+        ("/topics/ai-agents/", "03", "AI Agents", "Agentic systems, APIs, orchestration and multi-step AI workflows.", "Explore agents"),
+        ("/open-source/", "04", "Open-Source AI", "Open weights, runtimes, local inference, frameworks and deployable model ecosystems.", "Open-source layer"),
+        ("/research/", "05", "Research & Safety", "Evaluations, benchmarks, alignment, security and evidence behind capability claims.", "Research layer"),
+        ("/topics/ai-safety/", "06", "Superintelligence", "A research path through capability scaling, autonomy, safety and systems that may shape intelligence beyond today’s frontier models.", "Follow the research"),
+    ]
+    track_cards = "".join(
+        f'''<a class="guide-track" href="{escape(href, quote=True)}"><span>{num}</span><div><h3>{escape(title)}</h3><p>{escape(copy)}</p></div><b>{escape(cta)} ↗</b></a>'''
+        for href, num, title, copy, cta in tracks
+    )
+    latest_rows = "".join(signal_row(item) for item in current_items[:6])
+    model_count = len(model_groups(items))
+    topic_count = len(topic_groups(items))
+    indexable_signals = sum(1 for item in items if item.get("seo_eligible", seo_signal_eligible(item)))
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical + "#webpage",
+                "url": canonical,
+                "name": "AI Guides — Models, Agents, Coding & Superintelligence | SXF / AI",
+                "description": description,
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "about": [
+                    {"@type": "Thing", "name": "Artificial intelligence"},
+                    {"@type": "Thing", "name": "Artificial superintelligence"},
+                ],
+                "hasPart": [{"@id": BASE_URL + g["href"]} for g in published],
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Guides", "item": canonical},
+                ],
+            },
+            {
+                "@type": "ItemList",
+                "name": "SXF AI guides",
+                "numberOfItems": len(published),
+                "itemListElement": [
+                    {"@type": "ListItem", "position": i + 1, "url": BASE_URL + g["href"]}
+                    for i, g in enumerate(published)
+                ],
+            },
+        ],
+    }
+    return f'''<!doctype html><html lang="en">{page_head("AI Guides — Models, Agents, Coding & Superintelligence | SXF / AI", description, canonical, schema)}
+    <body class="intel-page guides-page">{page_header("guides")}<main>
+      <section class="guides-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Guides</span></nav>
+        <div class="guides-hero-grid">
+          <div><p class="eyebrow">SXF GUIDES / REFERENCE LAYER</p><h1>Understand AI.<br><span>Track what comes next.</span></h1></div>
+          <div class="guides-hero-copy"><p>Long-form, source-backed guides for understanding artificial intelligence — from models and coding systems to agents, open-source ecosystems, safety and superintelligence research.</p><p>SXF Guides connect durable reference pages with the live signal layer, so important changes stay attached to the systems they affect.</p></div>
+        </div>
+        <div class="guide-stats">
+          <div><strong>{len(published):02d}</strong><span>published guides</span></div>
+          <div><strong>{model_count:02d}</strong><span>model entities</span></div>
+          <div><strong>{topic_count:02d}</strong><span>intelligence topics</span></div>
+          <div><strong>{indexable_signals:02d}</strong><span>search-grade signals</span></div>
+        </div>
+      </section>
+
+      <section class="guides-featured shell">
+        <div class="intel-section-head"><div><p class="eyebrow">FEATURED REFERENCES</p><h2>Start with a decision.</h2></div><span>Source-backed · Updated with the radar</span></div>
+        <div class="guide-feature-grid">{guide_cards}</div>
+      </section>
+
+      <section class="guides-map shell">
+        <div class="intel-section-head"><div><p class="eyebrow">REFERENCE MAP</p><h2>Explore the intelligence stack.</h2></div><span>Six paths through SXF</span></div>
+        <div class="guide-track-grid">{track_cards}</div>
+      </section>
+
+      <section class="guide-standard shell">
+        <div class="guide-standard-head"><p class="eyebrow">EDITORIAL STANDARD</p><h2>Built to remain useful after the launch cycle ends.</h2></div>
+        <div class="guide-standard-grid">
+          <article><span>01</span><h3>Primary-source first</h3><p>Specifications, pricing, availability and release details trace back to vendor documentation whenever a primary source exists.</p></article>
+          <article><span>02</span><h3>Facts before verdicts</h3><p>Directly comparable facts are separated from vendor claims, benchmarks and SXF interpretation.</p></article>
+          <article><span>03</span><h3>Decision-oriented</h3><p>Guides answer practical questions: what changed, what it costs, what it is built for and where the tradeoffs appear.</p></article>
+          <article><span>04</span><h3>Living references</h3><p>Persistent guides connect to Models, Topics and Signals so new developments update context instead of creating isolated posts.</p></article>
+        </div>
+      </section>
+
+      <section class="related-signals shell">
+        <div class="intel-section-head"><div><p class="eyebrow">LIVE CONTEXT</p><h2>Latest signals feeding the guides.</h2></div><a href="/signals/">All signals ↗</a></div>
+        <div class="signal-list">{latest_rows}</div>
+      </section>
+    </main>{page_footer()}</body></html>'''
 
 def gpt6_comparison_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
@@ -1492,7 +1617,9 @@ def build_discovery_pages(items, current_items):
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
     BRIEF_DIR.mkdir(parents=True, exist_ok=True)
     COMPARE_DIR.mkdir(parents=True, exist_ok=True)
+    GUIDES_DIR.mkdir(parents=True, exist_ok=True)
 
+    (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -1541,6 +1668,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/topics/", generated_today),
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
+        sitemap_entry(f"{BASE_URL}/guides/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]
