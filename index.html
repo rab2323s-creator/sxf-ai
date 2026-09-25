@@ -91,19 +91,79 @@
   </header>
 
   <main>
-    <section class="hero shell">
-      <div class="hero-kicker"><span class="pulse-dot"></span> LIVE INTELLIGENCE FEED</div>
-      <h1>AI moves fast.<br><span>SXF filters faster.</span></h1>
-      <p class="hero-copy">A focused radar for the AI developments worth knowing — models, tools, open source and research, pulled directly from primary sources.</p>
-      <div class="hero-actions">
-        <a class="primary-cta" href="#latest">Explore the radar <span>↘</span></a>
-        <a class="secondary-cta" href="#sources">View sources</a>
-      </div>
-      <div class="signal-strip" aria-label="Feed status">
-        <div><strong id="storyCount">80</strong><span>tracked updates</span></div>
-        <div><strong>4</strong><span>primary sources</span></div>
-        <div><strong>3h</strong><span>refresh cycle</span></div>
-        <div><strong id="lastUpdated">2h ago</strong><span>last refresh</span></div>
+    <section class="hero shell hero-premium">
+      <div class="hero-frame">
+        <div class="hero-identity">
+          <div class="hero-kicker"><span class="pulse-dot"></span> LIVE AI SIGNAL RADAR</div>
+          <h1>AI intelligence,<br><span>mapped in motion.</span></h1>
+          <p class="hero-copy">Models, tools, research and open-source developments — tracked from primary sources and organized as live signals.</p>
+          <div class="hero-actions">
+            <a class="primary-cta" href="#latest">Open the radar <span>↘</span></a>
+            <a class="secondary-cta" href="/about/">How SXF works</a>
+          </div>
+
+          <div class="signal-strip" aria-label="Feed status">
+            <div><strong id="storyCount">80</strong><span>tracked signals</span></div>
+            <div><strong>4</strong><span>source layers</span></div>
+            <div><strong>3h</strong><span>refresh cycle</span></div>
+            <div><strong id="lastUpdated">2h ago</strong><span>last refresh</span></div>
+          </div>
+        </div>
+
+        <div class="hero-radar" aria-label="SXF AI signal visualization">
+          <div class="hero-radar-grid" aria-hidden="true"></div>
+          <div class="hero-radar-haze" aria-hidden="true"></div>
+          <div class="hero-radar-sweep" aria-hidden="true"></div>
+
+          <div class="orbit orbit-outer" aria-hidden="true"></div>
+          <div class="orbit orbit-mid" aria-hidden="true"></div>
+          <div class="orbit orbit-inner" aria-hidden="true"></div>
+
+          <div class="axis axis-x" aria-hidden="true"></div>
+          <div class="axis axis-y" aria-hidden="true"></div>
+
+          <div class="radar-core" aria-hidden="true">
+            <span class="radar-core-mark">SXF</span>
+            <span class="radar-core-sub">SIGNAL CORE</span>
+          </div>
+
+          <div class="signal-node signal-node-openai">
+            <i></i><span>OPENAI</span><small>MODEL</small>
+          </div>
+          <div class="signal-node signal-node-google">
+            <i></i><span>GOOGLE AI</span><small>RESEARCH</small>
+          </div>
+          <div class="signal-node signal-node-hf">
+            <i></i><span>HUGGING FACE</span><small>OPEN SOURCE</small>
+          </div>
+          <div class="signal-node signal-node-github">
+            <i></i><span>GITHUB</span><small>TOOLS</small>
+          </div>
+
+          <div class="radar-chip chip-model">MODEL</div>
+          <div class="radar-chip chip-tools">TOOLS</div>
+          <div class="radar-chip chip-research">RESEARCH</div>
+          <div class="radar-chip chip-open">OPEN SOURCE</div>
+
+          <a class="hero-live-signal" id="heroSignalLink" href="#latest">
+            <div class="hero-live-top">
+              <span>LATEST SIGNAL</span>
+              <b><i></i> LIVE</b>
+            </div>
+            <div class="hero-live-source">
+              <strong id="heroSignalSource">GitHub</strong>
+              <span id="heroSignalTime">8h ago</span>
+            </div>
+            <h2 id="heroSignalTitle">Default Enablement of Copilot Features for Copilot Business and Enterprise</h2>
+            <div class="hero-live-foot">
+              <span class="category-pill" id="heroSignalCategory">Tools</span>
+              <span>View source ↗</span>
+            </div>
+          </a>
+
+          <div class="radar-meta radar-meta-a">SXF // SOURCE INTELLIGENCE</div>
+          <div class="radar-meta radar-meta-b">04 SOURCES · 04 LAYERS</div>
+        </div>
       </div>
     </section>
 
