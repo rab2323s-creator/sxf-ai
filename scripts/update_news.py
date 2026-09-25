@@ -298,7 +298,8 @@ def update_section_pages(items):
             continue
         filtered = [item for item in items if item["category"] == category]
         page = path.read_text(encoding="utf-8")
-        page = page.replace('<a href="/open-source/">Open Source</a><a href="/brief/">Brief</a>', '<a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/brief/">Brief</a>')
+        page = page.replace('<a href="/open-source/">Open Source</a><a href="/brief/">Brief</a>', '<a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a>')
+        page = page.replace('<a href="/guides/">Guides</a><a href="/brief/">Brief</a>', '<a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a>')
         page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
         schema = {
             "@context": "https://schema.org",
@@ -324,6 +325,7 @@ TOPICS_DIR = ROOT / "topics"
 BRIEF_DIR = ROOT / "brief"
 COMPARE_DIR = ROOT / "compare"
 GUIDES_DIR = ROOT / "guides"
+SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 
@@ -945,6 +947,7 @@ def page_header(active=""):
         ("/research/", "Research", "research"),
         ("/open-source/", "Open Source", "open-source"),
         ("/guides/", "Guides", "guides"),
+        ("/superintelligence/", "Superintelligence", "superintelligence"),
         ("/brief/", "Brief", "brief"),
         ("/about/", "About", "about"),
     ]
@@ -3074,6 +3077,278 @@ def ai_super_agents_guide_html(items):
       </article>
     </main>{page_footer()}</body></html>'''
 
+
+def superintelligence_index_html(items, current_items):
+    canonical = f"{BASE_URL}/superintelligence/"
+    verified = "2026-09-26"
+    title = "Superintelligence (ASI): What It Is, AGI vs ASI, Risks & Latest Research | SXF / AI"
+    description = "A living guide to artificial superintelligence (ASI): definition, AGI vs ASI, paths to superintelligence, capabilities, recursive self-improvement, risks, control and research."
+
+    source_records = [
+        ("Google DeepMind", "From AGI to ASI", "Jun 12, 2026", "Research", "Four pathways: scaling AGI, paradigm shifts, recursive improvement and large-scale multi-agent collectives.", "https://deepmind.google/research/publications/239142/"),
+        ("Google DeepMind", "Solipsistic superintelligence is unlikely to be cooperative", "Jun 4, 2026", "Cooperation", "Argues that highly capable task solvers need cooperation and institutions as design primitives rather than treating the world as stationary.", "https://deepmind.google/research/publications/231466/"),
+        ("Google DeepMind", "Securing the future of AI agents", "Jun 18, 2026", "Control", "Describes an AI Control Roadmap for securing increasingly capable and imperfectly aligned agents.", "https://deepmind.google/blog/securing-the-future-of-ai-agents/"),
+        ("OpenAI", "Industrial Policy for the Intelligence Age", "2026", "Transition", "Describes a transition toward systems that outperform the smartest humans even when those humans are AI-assisted, while emphasizing uncertainty about how the transition unfolds.", "https://openai.com/index/industrial-policy-for-the-intelligence-age/"),
+        ("OpenAI", "Our principles", "Apr 26, 2026", "Governance", "Frames a future in which superintelligence could concentrate power or be distributed more broadly, and argues for democratization and human agency.", "https://openai.com/index/our-principles/"),
+        ("Meta", "Personal superintelligence", "2026", "Vision", "Meta's stated vision is personal superintelligence directed by individuals toward goals they value.", "https://ai.meta.com/events/"),
+        ("Meta", "Muse Spark 1.1", "Jul 9, 2026", "Models", "Meta Superintelligence Labs positions its multimodal reasoning work as progress toward its personal-superintelligence vision.", "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/"),
+        ("Anthropic", "Automated Alignment Researchers", "Apr 14, 2026", "Alignment", "Studies whether frontier models can help scale alignment research and oversight as models become harder for humans to evaluate directly.", "https://www.anthropic.com/news/automated-alignment-researchers"),
+        ("Anthropic", "Agentic Misalignment in Summer 2026", "Jul 13, 2026", "Agent safety", "Reports controlled simulations of frontier-agent failures and argues for measuring such failure modes before agents receive more authority.", "https://alignment.anthropic.com/2026/agentic-misalignment-summer-2026/"),
+    ]
+
+    research_cards = "".join(
+        f'''<a class="si-research-card" href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">
+          <div><span>{escape(org)}</span><small>{escape(date)} · {escape(kind)}</small></div>
+          <h3>{escape(name)}</h3><p>{escape(copy)}</p><b>Primary source ↗</b>
+        </a>'''
+        for org,name,date,kind,copy,url in source_records
+    )
+
+    path_cards = [
+        ("01","Scaling AGI","Continue scaling and improving broadly capable AGI systems until capability moves beyond human and organizational baselines.","DeepMind pathway"),
+        ("02","AI paradigm shifts","A new architecture, learning paradigm or system design could unlock capabilities that scaling today's methods does not.","DeepMind pathway"),
+        ("03","Recursive improvement","AI systems may contribute increasingly to AI research, improving the systems and processes used to build their successors.","DeepMind pathway"),
+        ("04","Multi-agent collectives","Superhuman system-level capability could emerge from very large collections of interacting agents rather than one monolithic model.","DeepMind pathway"),
+    ]
+    paths_html = "".join(
+        f'''<article class="si-path"><span>{num}</span><small>{escape(note)}</small><h3>{escape(name)}</h3><p>{escape(copy)}</p></article>'''
+        for num,name,copy,note in path_cards
+    )
+
+    capabilities = [
+        ("Scientific discovery","Projected ASI","Generate and test hypotheses across disciplines at a pace and breadth beyond human research organizations."),
+        ("Software & AI R&D","Projected ASI","Design, implement and evaluate complex systems—including parts of the AI research process itself."),
+        ("Mathematics & reasoning","Projected ASI","Solve novel formal and conceptual problems beyond the strongest human specialists."),
+        ("Strategic planning","Projected ASI","Model long-horizon consequences and coordinate decisions across complex, changing environments."),
+        ("Robotics & physical systems","Projected ASI","Pair advanced cognition with perception, planning and control in the physical world."),
+        ("Collective coordination","Projected ASI","Coordinate many agents, tools or institutions at a scale that creates system-level cognitive capability."),
+    ]
+    capability_html = "".join(
+        f'''<article><span>{escape(status)}</span><h3>{escape(name)}</h3><p>{escape(copy)}</p></article>'''
+        for name,status,copy in capabilities
+    )
+
+    labs = [
+        ("Google DeepMind","Research framing","Published a dedicated AGI→ASI report defining artificial general superintelligence and analyzing four possible pathways beyond AGI.","https://deepmind.google/research/publications/239142/"),
+        ("OpenAI","Transition & governance","Public 2026 materials explicitly discuss a transition toward superintelligence, distribution of power, infrastructure and governance.","https://openai.com/index/our-principles/"),
+        ("Meta Superintelligence Labs","Personal superintelligence","Meta frames its goal as personal superintelligence placed in individuals' hands and links Muse model development to that vision.","https://ai.meta.com/events/"),
+        ("Anthropic","Alignment & oversight","Anthropic's public alignment work focuses on agentic failure modes, scalable oversight and using AI to help automate alignment research as capabilities grow.","https://www.anthropic.com/research/team/alignment"),
+    ]
+    labs_html = "".join(
+        f'''<a class="si-lab" href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(angle)}</span><h3>{escape(name)}</h3><p>{escape(copy)}</p><b>Official source ↗</b></a>'''
+        for name,angle,copy,url in labs
+    )
+
+    glossary = [
+        ("AGI","Artificial general intelligence","A debated category for AI with broad, general capability across domains rather than a narrow specialist system."),
+        ("ASI","Artificial superintelligence","AI that broadly exceeds human cognitive capability; current research sources treat it as a future state, not a demonstrated present-day system."),
+        ("Artificial general superintelligence","DeepMind terminology","A post-AGI system more intelligent and cognitively capable than large organizations of humans."),
+        ("Recursive self-improvement","AI improving AI","A pathway in which AI meaningfully contributes to improving models, training, research or the systems used to build successors."),
+        ("Scalable oversight","Supervising stronger systems","Methods for evaluating and steering models on tasks that humans cannot reliably assess unaided."),
+        ("Agentic AI","Action-taking AI","Systems that plan, use tools and execute multi-step tasks rather than only produce responses."),
+        ("Multi-agent system","Collective architecture","Multiple agents with distinct roles or policies that communicate or coordinate toward goals."),
+        ("AI control","Operational safeguards","Techniques for limiting, monitoring and containing advanced systems even when perfect alignment cannot be assumed."),
+        ("Alignment","Intent and behavior","Work on making AI systems behave in ways that reliably reflect intended goals, constraints and human values."),
+        ("Intelligence explosion","Hypothetical acceleration","A proposed feedback process where improvements to AI research capability accelerate further improvements."),
+    ]
+    glossary_html = "".join(
+        f'''<article><span>{escape(label)}</span><h3>{escape(term)}</h3><p>{escape(copy)}</p></article>'''
+        for term,label,copy in glossary
+    )
+
+    deep_guides = [
+        ("/guides/ai-super-agents/","SUPER AGENTS","AI Super Agents in 2026","How higher-level agent orchestrators differ from ordinary agents, multi-agent systems, AGI and superintelligence."),
+        ("/guides/best-ai-agents/","AGENTIC AI","Best AI Agents in 2026","Today's deployed work, research, coding and automation agents—the layer below the ASI question."),
+        ("/guides/gpt-6-vs-claude/","FRONTIER MODELS","GPT-6 vs Claude in 2026","Current frontier model families, reasoning, agents, pricing and API architecture."),
+        ("/guides/open-source-ai-models/","OPEN MODELS","Best Open-Source AI Models in 2026","Open and open-weight systems, deployment constraints and local AI."),
+    ]
+    guide_cards = "".join(
+        f'''<a class="si-guide-card" href="{escape(href, quote=True)}"><span>{escape(kicker)}</span><h3>{escape(name)}</h3><p>{escape(copy)}</p><b>Read guide ↗</b></a>'''
+        for href,kicker,name,copy in deep_guides
+    )
+
+    def is_frontier_signal(item):
+        hay = " ".join([
+            item.get("title",""), item.get("summary",""), item.get("category",""),
+            " ".join(item.get("tags",[]) or [])
+        ]).lower()
+        terms = ("superintelligen","agi","alignment","agentic","agent ","agents","safety","reasoning","research","evaluation","misalignment","autonomous")
+        return any(term in hay for term in terms)
+
+    related = [item for item in current_items if is_frontier_signal(item)]
+    if len(related) < 4:
+        extras = [item for item in current_items if item not in related and (item.get("category") == "Research" or "Research" in (item.get("tags") or []))]
+        related.extend(extras[:6-len(related)])
+    signal_rows = "".join(signal_row(item) for item in related[:6])
+
+    faq = [
+        ("What is superintelligence?", "Artificial superintelligence (ASI) generally refers to AI that exceeds human cognitive capability across broad domains. Google DeepMind's 2026 AGI-to-ASI report describes artificial general superintelligence as a system more intelligent and cognitively capable than large organizations of humans."),
+        ("Does artificial superintelligence exist today?", "The official research and company sources reviewed by SXF discuss ASI as a future or emerging target rather than a demonstrated existing system. Today's frontier models can already be superhuman on some narrow tasks, but narrow superhuman performance is not the same as broad artificial superintelligence."),
+        ("What is the difference between AGI and ASI?", "AGI is generally used for broadly capable AI at roughly human-level generality or competence, although definitions vary. ASI refers to a further level where machine intelligence broadly exceeds humans, potentially including the collective capability of large human organizations."),
+        ("Is GPT-6 or Claude superintelligent?", "No official source cited on this page classifies today's GPT-6 or Claude systems as artificial superintelligence. Frontier models can be highly capable and superhuman on selected tasks without meeting a broad ASI definition."),
+        ("How could superintelligence emerge?", "Google DeepMind's 2026 report analyzes four possible paths from AGI to ASI: scaling AGI, shifts in AI paradigms, recursive improvement, and emergence from large-scale multi-agent collectives."),
+        ("What is recursive self-improvement?", "Recursive self-improvement is the idea that AI could increasingly improve the models, algorithms, training methods, tools or research processes used to build more capable AI, creating a feedback loop. It is a proposed pathway, not a demonstrated inevitability."),
+        ("Could multi-agent systems become superintelligent?", "DeepMind includes large-scale multi-agent collectives as one possible route from AGI to ASI. Whether collective systems would produce broad superintelligence depends on coordination, communication, specialization, governance and many unresolved research questions."),
+        ("Can superintelligence be controlled?", "There is no demonstrated complete solution for controlling hypothetical ASI. Current research includes scalable oversight, alignment training, monitoring, containment, least-privilege tool access, AI control methods, cooperation and institutional safeguards."),
+        ("When will superintelligence arrive?", "There is no reliable consensus date. OpenAI and other labs publish views and scenarios, but these are forecasts or strategic positions rather than established timelines. DeepMind's AGI-to-ASI report analyzes pathways instead of assigning a fixed arrival date."),
+        ("Is a super agent the same as superintelligence?", "No. A super agent is an orchestration architecture that coordinates agents, models and tools. Superintelligence describes a level of broad cognitive capability. A system can be a powerful super agent without being AGI or ASI."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"CollectionPage","@id":canonical+"#webpage","url":canonical,
+                "name":"Superintelligence (ASI) — SXF / AI",
+                "headline":"Superintelligence: The Intelligence Beyond AGI",
+                "description":description,"dateModified":verified,
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":[
+                    {"@type":"Thing","name":"Artificial superintelligence"},
+                    {"@type":"Thing","name":"Artificial general intelligence"},
+                    {"@type":"Thing","name":"AI alignment"},
+                    {"@type":"Thing","name":"Multi-agent systems"},
+                    {"@type":"Thing","name":"Recursive self-improvement"}
+                ],
+                "citation":[url for _org,_name,_date,_kind,_copy,url in source_records],
+                "hasPart":[{"@id":BASE_URL+href} for href,_k,_n,_c in deep_guides],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Superintelligence","item":canonical}
+            ]},
+            {"@type":"ItemList","name":"SXF superintelligence reference guides","numberOfItems":len(deep_guides),"itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":name,"url":BASE_URL+href}
+                for i,(href,_k,name,_c) in enumerate(deep_guides)
+            ]},
+            {"@type":"FAQPage","mainEntity":[
+                {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq
+            ]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
+    <body class="intel-page si-page">{page_header("superintelligence")}<main>
+      <section class="si-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Superintelligence</span></nav>
+        <div class="si-hero-grid">
+          <div class="si-hero-copy">
+            <p class="eyebrow">SXF / SUPERINTELLIGENCE INTELLIGENCE HUB</p>
+            <h1>Superintelligence:<br><span>The intelligence beyond AGI.</span></h1>
+            <p>Artificial superintelligence (ASI) is the idea of AI that broadly exceeds human cognitive capability. This living reference separates demonstrated AI from proposed pathways, company visions and unresolved research—then connects the evidence to the systems being built now.</p>
+            <div class="hero-actions"><a class="primary-cta" href="#definition">Understand ASI <span>↓</span></a><a class="secondary-cta" href="#research">Latest research</a></div>
+          </div>
+          <div class="si-core" aria-label="Conceptual intelligence continuum">
+            <div class="si-ring si-ring-outer"></div><div class="si-ring si-ring-mid"></div><div class="si-ring si-ring-inner"></div>
+            <div class="si-core-center"><small>ARTIFICIAL</small><strong>ASI</strong><span>SUPERINTELLIGENCE</span></div>
+            <span class="si-node si-node-a">AGI</span><span class="si-node si-node-b">AGENTS</span><span class="si-node si-node-c">RESEARCH</span><span class="si-node si-node-d">CONTROL</span>
+          </div>
+        </div>
+        <div class="si-status-bar"><span>Last verified <strong>Sep 26, 2026</strong></span><span>Research-led reference</span><span>Living intelligence hub</span></div>
+      </section>
+
+      <section class="si-definition shell" id="definition">
+        <div class="si-definition-label">QUICK DEFINITION</div>
+        <div><h2>What is artificial superintelligence (ASI)?</h2><p><strong>Artificial superintelligence</strong> refers to AI that exceeds human cognitive capability across broad domains—not merely one benchmark or narrow task. DeepMind's 2026 framing goes further, describing artificial general superintelligence as a system more intelligent and cognitively capable than large organizations of humans.</p>
+        <p>ASI is not a label SXF applies to current frontier models. In the official sources tracked here, it remains a future state, research target or strategic vision. The evidence today is about increasingly capable models, agents and AI-assisted research—not a demonstrated general superintelligence.</p></div>
+      </section>
+
+      <section class="si-continuum shell">
+        <div class="intel-section-head"><div><p class="eyebrow">INTELLIGENCE CONTINUUM</p><h2>Current AI → AGI → ASI.</h2></div><span>Conceptual map, not a forecast</span></div>
+        <div class="si-continuum-grid">
+          <article><span>01 · NOW</span><h3>Frontier AI</h3><p>Broadly useful models and agents that can be superhuman on selected tasks but remain uneven, tool-dependent and failure-prone.</p><small>Demonstrated today</small></article>
+          <article><span>02 · DEBATED THRESHOLD</span><h3>AGI</h3><p>A contested category for broadly general machine intelligence. Definitions differ across labs, researchers and policy discussions.</p><small>No universal definition</small></article>
+          <article class="is-highlight"><span>03 · FUTURE STATE</span><h3>ASI</h3><p>Broad machine intelligence beyond human individuals—and in stronger definitions, beyond the cognitive capability of large human organizations.</p><small>Not demonstrated</small></article>
+          <article><span>04 · THEORETICAL LIMITS</span><h3>Universal AI</h3><p>A theoretical endpoint used in research to reason about the upper continuum of machine intelligence beyond practical present-day systems.</p><small>Theoretical framing</small></article>
+        </div>
+        <div class="guide-callout"><strong>Do not collapse the categories</strong><p>A model can beat humans at coding, chess, retrieval or a scientific benchmark without being AGI or ASI. Narrow superhuman performance is evidence about a capability—not proof of general superintelligence.</p></div>
+      </section>
+
+      <section class="si-paths shell">
+        <div class="intel-section-head"><div><p class="eyebrow">PATHS BEYOND AGI</p><h2>How could superintelligence emerge?</h2></div><a href="https://deepmind.google/research/publications/239142/" target="_blank" rel="noopener noreferrer">DeepMind primary source ↗</a></div>
+        <p class="si-section-intro">Google DeepMind's 2026 <em>From AGI to ASI</em> report analyzes four broad pathways. They are scenarios for reasoning about a post-AGI future—not claims that any one path is inevitable.</p>
+        <div class="si-path-grid">{paths_html}</div>
+      </section>
+
+      <section class="si-capabilities shell">
+        <div class="intel-section-head"><div><p class="eyebrow">CAPABILITY MAP</p><h2>What could ASI actually be able to do?</h2></div><span>Projected capabilities, not present-day claims</span></div>
+        <p class="si-section-intro">A useful ASI discussion must separate capabilities demonstrated by today's systems from capabilities implied by the definition of broad superintelligence. The cards below describe the latter.</p>
+        <div class="si-capability-grid">{capability_html}</div>
+      </section>
+
+      <section class="si-rsi shell">
+        <div class="si-split">
+          <article><p class="eyebrow">RECURSIVE SELF-IMPROVEMENT</p><h2>Can AI improve itself?</h2><p>AI already contributes to coding, model evaluation and parts of AI research. Recursive self-improvement is the stronger hypothesis that those contributions could form a feedback loop: better AI improves the process used to create better AI, which then improves that process again.</p><p>That does <strong>not</strong> mean an intelligence explosion is automatic. Progress could bottleneck on experiments, compute, data, hardware, evaluation, coordination, physical infrastructure or human institutions. DeepMind treats recursive improvement as one possible ASI pathway, not a guaranteed outcome.</p></article>
+          <article><p class="eyebrow">MULTI-AGENT SUPERINTELLIGENCE</p><h2>Could many agents become smarter than one model?</h2><p>Potentially. DeepMind includes large-scale multi-agent collectives as a possible route from AGI to ASI. Specialization and parallelism can create system-level capability that no single worker has.</p><p>But coordination creates its own limits: communication overhead, conflicting state, incentive problems, correlated failures and governance. Anthropic's 2026 work on AI organizations is an early warning that groups of agents can become more effective while also creating new alignment problems.</p></article>
+        </div>
+      </section>
+
+      <section class="si-personal shell">
+        <div class="si-personal-grid">
+          <div><p class="eyebrow">PERSONAL SUPERINTELLIGENCE</p><h2>Meta uses the term differently.</h2></div>
+          <div><p>Meta's public vision is <strong>“personal superintelligence”</strong>: advanced AI placed in individuals' hands to help them pursue goals they value. Meta Superintelligence Labs links Muse model development to that direction.</p><p>This is an important example of why terminology must be sourced. A company's product vision for “personal superintelligence” is not automatically the same thing as the broad ASI concept used in academic work.</p><a href="https://ai.meta.com/events/" target="_blank" rel="noopener noreferrer">Meta's stated vision ↗</a></div>
+        </div>
+      </section>
+
+      <section class="si-labs shell">
+        <div class="intel-section-head"><div><p class="eyebrow">LABS & RESEARCH DIRECTIONS</p><h2>Who is working on the path toward more powerful AI?</h2></div><span>Official positions · no ranking</span></div>
+        <p class="si-section-intro">These organizations use different terminology and pursue different research programs. SXF reports their documented positions without treating them as equivalent claims or predicting which organization reaches any future threshold first.</p>
+        <div class="si-lab-grid">{labs_html}</div>
+      </section>
+
+      <section class="si-safety shell">
+        <div class="intel-section-head"><div><p class="eyebrow">ALIGNMENT & CONTROL</p><h2>Can superintelligence be controlled?</h2></div><span>Open research problem</span></div>
+        <div class="si-safety-grid">
+          <article><span>ALIGNMENT</span><h3>Will the system pursue what humans actually intend?</h3><p>Current alignment methods depend heavily on human feedback and evaluation. If future systems outperform humans on hard tasks, supervision itself becomes a technical bottleneck.</p></article>
+          <article><span>SCALABLE OVERSIGHT</span><h3>How do humans evaluate work they cannot understand unaided?</h3><p>Research from Anthropic and others explores using AI to assist oversight and alignment research while testing whether those methods continue to generalize as capability rises.</p></article>
+          <article><span>AI CONTROL</span><h3>Can dangerous actions be contained even if alignment is imperfect?</h3><p>Control research focuses on monitoring, sandboxing, permissions, tripwires, restricted access and system architectures that limit what a capable model can do.</p></article>
+          <article><span>COOPERATION</span><h3>Will powerful systems act well in a world of other agents and institutions?</h3><p>DeepMind argues that a highly capable task solver is not automatically cooperative and that institutions and interdependence may need to be part of the design problem.</p></article>
+          <article><span>HUMAN AGENCY</span><h3>Who retains meaningful decision power?</h3><p>Technical safety is incomplete if humans lose practical control over goals, institutions or resource allocation. Several current research and policy frameworks explicitly preserve human agency.</p></article>
+          <article><span>GOVERNANCE</span><h3>Who gets to deploy, constrain or benefit from the most capable systems?</h3><p>Superintelligence raises questions beyond model behavior: concentration of power, access, accountability, infrastructure and democratic oversight.</p></article>
+        </div>
+      </section>
+
+      <section class="si-timeline shell">
+        <div class="intel-section-head"><div><p class="eyebrow">PATHWAY, NOT PREDICTION</p><h2>What would have to happen before ASI?</h2></div><span>No fixed arrival date</span></div>
+        <div class="si-timeline-list">
+          <div><span>NOW</span><strong>Frontier multimodal models and agents</strong><p>Systems increasingly reason, use tools, code, browse and act—but remain inconsistent and dependent on scaffolding.</p></div>
+          <div><span>STEP 01</span><strong>Broader autonomous competence</strong><p>Agents become more reliable across longer tasks, environments and modalities with better verification and memory.</p></div>
+          <div><span>STEP 02</span><strong>AGI-like breadth</strong><p>A debated threshold where machine capability becomes broadly general across major cognitive domains.</p></div>
+          <div><span>STEP 03</span><strong>AI-accelerated AI research</strong><p>AI contributes materially to model design, experimentation, coding, evaluation and scientific discovery.</p></div>
+          <div><span>STEP 04</span><strong>Post-AGI amplification</strong><p>Scaling, new paradigms, recursive improvement or collective intelligence could push system capability beyond human organizations.</p></div>
+          <div><span>ASI</span><strong>Artificial general superintelligence</strong><p>A future state of broad cognitive capability beyond humans; timing and feasibility remain uncertain.</p></div>
+        </div>
+        <div class="guide-callout"><strong>When will superintelligence arrive?</strong><p>There is no reliable consensus date. Public lab statements are forecasts, goals or scenarios—not measurements of an established timeline. SXF therefore tracks milestones and evidence instead of publishing a countdown.</p></div>
+      </section>
+
+      <section class="si-research shell" id="research">
+        <div class="intel-section-head"><div><p class="eyebrow">PRIMARY RESEARCH & POSITIONS</p><h2>The evidence layer.</h2></div><span>Official sources · 2026</span></div>
+        <div class="si-research-grid">{research_cards}</div>
+      </section>
+
+      <section class="si-guides shell">
+        <div class="intel-section-head"><div><p class="eyebrow">DEEP GUIDES</p><h2>Go deeper into the systems beneath ASI.</h2></div><a href="/guides/">All guides ↗</a></div>
+        <div class="si-guide-grid">{guide_cards}</div>
+      </section>
+
+      <section class="si-glossary shell">
+        <div class="intel-section-head"><div><p class="eyebrow">KEY TERMS</p><h2>Superintelligence glossary.</h2></div><span>Definitions used by SXF</span></div>
+        <div class="si-glossary-grid">{glossary_html}</div>
+      </section>
+
+      <section class="si-faq shell">
+        <div class="intel-section-head"><div><p class="eyebrow">QUICK ANSWERS</p><h2>Questions people ask about ASI.</h2></div><span>Direct answers · source-aware</span></div>
+        <div class="model-faq">{faq_html}</div>
+      </section>
+
+      <section class="related-signals shell">
+        <div class="intel-section-head"><div><p class="eyebrow">FRONTIER SIGNALS</p><h2>Research and agent signals feeding this hub.</h2></div><a href="/signals/">All signals ↗</a></div>
+        <div class="signal-list">{signal_rows}</div>
+      </section>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -3183,7 +3458,7 @@ def guides_index_html(items, current_items):
         ("/topics/ai-agents/", "03", "AI Agents", "Agentic systems, APIs, orchestration and multi-step AI workflows.", "Explore agents"),
         ("/open-source/", "04", "Open-Source AI", "Open weights, runtimes, local inference, frameworks and deployable model ecosystems.", "Open-source layer"),
         ("/research/", "05", "Research & Safety", "Evaluations, benchmarks, alignment, security and evidence behind capability claims.", "Research layer"),
-        ("/topics/ai-safety/", "06", "Superintelligence", "Capability scaling, autonomy, safety and the systems that may shape intelligence beyond today’s frontier models.", "Follow the research"),
+        ("/superintelligence/", "06", "Superintelligence", "ASI, paths beyond AGI, recursive improvement, multi-agent intelligence, alignment and control.", "Open the ASI hub"),
     ]
     track_cards = "".join(
         f'''<a class="guide-track" href="{escape(href, quote=True)}"><span>{num}</span><div><h3>{escape(title)}</h3><p>{escape(copy)}</p></div><b>{escape(cta)} ↗</b></a>'''
@@ -3599,7 +3874,9 @@ def build_discovery_pages(items, current_items):
     BRIEF_DIR.mkdir(parents=True, exist_ok=True)
     COMPARE_DIR.mkdir(parents=True, exist_ok=True)
     GUIDES_DIR.mkdir(parents=True, exist_ok=True)
+    SUPERINTELLIGENCE_DIR.mkdir(parents=True, exist_ok=True)
 
+    (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
@@ -3665,6 +3942,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
         sitemap_entry(f"{BASE_URL}/guides/", generated_today),
+        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
