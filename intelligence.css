@@ -130,3 +130,7 @@
 .comparison-notes p:last-child{color:#7f8a96;line-height:1.75}
 .comparison-cta{color:#8d98a5;font-size:11px;font-weight:800}
 @media(max-width:900px){.decision-grid,.cost-grid,.comparison-notes{grid-template-columns:1fr}.decision-grid article{min-height:260px}.comparison-hero{padding-top:52px}}
+
+.duel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cost-grid.two-up{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:900px){.duel-grid,.cost-grid.two-up{grid-template-columns:1fr}}
