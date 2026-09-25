@@ -60,3 +60,44 @@
 @media(max-width:980px){.signal-layout,.brief-issue-hero{grid-template-columns:1fr}.source-card{position:static}.brief-preview-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.intel-hero{padding-top:40px}.intel-breadcrumb{margin-bottom:36px}.signal-meta-strip,.collection-stats{grid-template-columns:1fr}.signal-meta-strip>div,.signal-meta-strip>div+div,.collection-stats>div,.collection-stats>div+div{min-height:0;padding:15px 0;border-right:0;border-bottom:1px solid var(--line)}.signal-meta-strip>div:last-child,.collection-stats>div:last-child{border-bottom:0}.signal-layout{padding-top:52px}.signal-brief{padding:25px}.signal-context{grid-template-columns:1fr;gap:10px}.signal-taxonomy{grid-template-columns:1fr}.related-signals{padding-top:70px}.intel-section-head{display:block}.intel-section-head>a{display:inline-block;margin-top:14px}.signal-row{grid-template-columns:1fr;gap:10px;padding:20px 0}.signal-row-foot{align-items:flex-start}.collection-hero{padding-top:56px}.collection-hero h1{font-size:clamp(52px,16vw,80px)}.topic-grid{grid-template-columns:1fr}.brief-signal{grid-template-columns:50px 1fr}.brief-no{font-size:28px}.brief-preview-grid{grid-template-columns:1fr}.brief-note{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.signal-row,.topic-card{transition:none}}
+
+
+/* Model reference layer */
+.model-reference{padding:30px 0 10px}
+.model-reference-intro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:stretch}
+.model-reference-copy,.model-fact-grid,.model-comparison,.model-sources,.model-faq{border:1px solid var(--line);border-radius:20px;background:#0a0e13}
+.model-reference-copy{padding:28px}
+.model-reference-copy h2{margin:8px 0 14px;font-size:clamp(30px,4vw,54px);line-height:.98;letter-spacing:-.05em}
+.model-reference-copy p{max-width:760px;color:#8d98a5;line-height:1.75}
+.reference-note{margin-top:16px;color:#66717e!important;font-size:11px!important;line-height:1.55!important}
+.model-fact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:hidden}
+.model-fact-grid>div{padding:22px;border-bottom:1px solid var(--line)}
+.model-fact-grid>div:nth-child(odd){border-right:1px solid var(--line)}
+.model-fact-grid>div:nth-last-child(-n+2){border-bottom:0}
+.model-fact-grid span{display:block;color:#5e6975;font-size:9px;letter-spacing:.13em}
+.model-fact-grid strong{display:block;margin-top:8px;color:#eef3f7;font-size:18px;line-height:1.2}
+.model-fact-grid small{display:block;margin-top:4px;color:#6f7a87;font-size:10px}
+.model-comparison{margin-top:22px;padding:28px}
+.model-comparison .intel-section-head{margin-bottom:18px}
+.model-comparison .intel-section-head>span{color:#697482;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+.model-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+.model-comparison table{width:100%;border-collapse:collapse;min-width:900px}
+.model-comparison th,.model-comparison td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;vertical-align:top}
+.model-comparison thead th{color:#67727f;font-size:9px;text-transform:uppercase;letter-spacing:.11em;background:#080b0f}
+.model-comparison tbody th{color:#dbe2e8}
+.model-comparison tbody th a:hover{color:var(--accent)}
+.model-comparison tbody th small{display:block;margin-top:5px;color:#66717e;font-size:9px;font-weight:500}
+.model-comparison td{color:#8f9aa6}
+.model-comparison tr:last-child th,.model-comparison tr:last-child td{border-bottom:0}
+.model-comparison tr.is-current{background:rgba(200,255,77,.035)}
+.model-reference-lower{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;margin-top:22px}
+.model-sources,.model-faq{padding:26px}
+.model-sources>a{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);color:#929da9;font-size:12px}
+.model-sources>a:last-child{border-bottom:0}
+.model-sources>a:hover{color:var(--accent)}
+.model-faq details{border-bottom:1px solid var(--line)}
+.model-faq details:last-child{border-bottom:0}
+.model-faq summary{cursor:pointer;padding:16px 0;color:#d4dbe2;font-size:13px;font-weight:700}
+.model-faq details p{padding:0 0 17px;margin:0;color:#7e8995;font-size:12px;line-height:1.7}
+@media(max-width:900px){.model-reference-intro,.model-reference-lower{grid-template-columns:1fr}}
+@media(max-width:620px){.model-reference{padding-top:10px}.model-reference-copy,.model-comparison,.model-sources,.model-faq{padding:20px}.model-fact-grid{grid-template-columns:1fr}.model-fact-grid>div,.model-fact-grid>div:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.model-fact-grid>div:last-child{border-bottom:0}}
