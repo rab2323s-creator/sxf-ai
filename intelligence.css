@@ -321,3 +321,27 @@
   .tool-review-head{grid-template-columns:38px 1fr}.tool-review-head>span{margin-top:48px;font-size:15px}
   .guide-pricing-list>div{grid-template-columns:1fr;gap:7px}
 }
+
+
+/* GPT-6 vs Claude guide additions */
+.guide-matchup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:28px 0}
+.guide-matchup-grid article{padding:22px;border:1px solid var(--line);border-radius:17px;background:#0a0e13}
+.guide-matchup-grid article>span{color:var(--accent);font-size:9px;font-weight:850;letter-spacing:.12em}
+.guide-matchup-grid h3{margin:32px 0 10px;font-size:22px;line-height:1.05}
+.guide-matchup-grid p{margin:0!important;color:#7f8b97!important;font-size:12px!important;line-height:1.68!important}
+.family-table th:first-child{min-width:170px}
+.guide-cost-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0 26px}
+.agent-platform-grid{margin:26px 0}
+.guide-decision-table{margin:28px 0;border-top:1px solid var(--line)}
+.guide-decision-table>div{display:grid;grid-template-columns:180px 260px 1fr;gap:22px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+.guide-decision-table span{color:#697582;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.guide-decision-table strong{font-size:14px;line-height:1.45}
+.guide-decision-table p{margin:0!important;color:#7c8894!important;font-size:12px!important;line-height:1.65!important}
+.guide-inline-cta{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;margin:28px 0;padding:24px;border:1px solid rgba(200,255,77,.18);border-radius:18px;background:linear-gradient(135deg,rgba(200,255,77,.045),#0a0e13)}
+.guide-inline-cta span{display:block;color:var(--accent);font-size:9px;font-weight:850;letter-spacing:.13em}
+.guide-inline-cta strong{display:block;margin-top:8px;font-size:23px;letter-spacing:-.035em}
+.guide-inline-cta p{margin:8px 0 0!important;color:#7e8a96!important;font-size:12px!important}
+.guide-inline-cta>a{padding:11px 14px;border:1px solid var(--line);border-radius:999px;color:#a3adb8;font-size:10px;font-weight:800;white-space:nowrap}
+.guide-inline-cta>a:hover{border-color:rgba(200,255,77,.35);color:var(--accent)}
+@media(max-width:900px){.guide-cost-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-decision-table>div{grid-template-columns:1fr}.guide-inline-cta{grid-template-columns:1fr}.guide-inline-cta>a{justify-self:start}}
+@media(max-width:720px){.guide-matchup-grid,.guide-cost-grid{grid-template-columns:1fr}}

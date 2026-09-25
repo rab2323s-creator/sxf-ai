@@ -1565,6 +1565,358 @@ def best_ai_coding_tools_html(items):
       </article>
     </main>{page_footer()}</body></html>'''
 
+
+def gpt6_vs_claude_guide_html(items):
+    canonical = f"{BASE_URL}/guides/gpt-6-vs-claude/"
+    published = "2026-09-25"
+    verified = "2026-09-25"
+    title = "GPT-6 vs Claude in 2026: Models, Pricing, Coding, Context & API Comparison | SXF / AI"
+    description = "GPT-6 vs Claude in 2026: compare Astra, Sol and Luna with Claude Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5 on pricing, context, coding, agents and APIs."
+
+    openai_models = [
+        {
+            "name":"GPT-6 Astra","id":"gpt-6-astra","role":"Highest capability","context":"1.05M","output":"128K",
+            "input":"$10","cached":"$1","output_price":"$50","reasoning":"Low → Max",
+            "best":"Hardest end-to-end reasoning, coding, research and computer use",
+            "source":"https://developers.openai.com/api/docs/models/gpt-6-astra",
+            "internal":"/models/gpt-6-astra/"
+        },
+        {
+            "name":"GPT-6 Sol","id":"gpt-6-sol","role":"Capability / cost balance","context":"1.05M","output":"128K",
+            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"None → Max",
+            "best":"Complex coding and agentic workflows",
+            "source":"https://developers.openai.com/api/docs/models/gpt-6-sol",
+            "internal":"/models/gpt-6-sol/"
+        },
+        {
+            "name":"GPT-6 Luna","id":"gpt-6-luna","role":"Efficiency","context":"1.05M","output":"128K",
+            "input":"$0.10","cached":"$0.01","output_price":"$0.50","reasoning":"None → Max",
+            "best":"Focused, high-volume and cost-sensitive work",
+            "source":"https://developers.openai.com/api/docs/models/gpt-6-luna",
+            "internal":"/models/gpt-6-luna/"
+        },
+    ]
+    claude_models = [
+        {
+            "name":"Claude Fable 5.1","id":"claude-fable-5-1","role":"Demanding reasoning","context":"1M","output":"128K",
+            "input":"$10","cached":"$0.25","output_price":"$50","reasoning":"Adaptive · always on",
+            "best":"Long-horizon agentic work and demanding reasoning",
+            "source":"https://platform.claude.com/docs/en/models/fable-5-1/overview"
+        },
+        {
+            "name":"Claude Opus 5.5","id":"claude-opus-5-5","role":"Agentic coding / knowledge work","context":"1M","output":"128K",
+            "input":"$4","cached":"$0.20","output_price":"$20","reasoning":"Adaptive · always on",
+            "best":"Long-running agentic coding and knowledge work",
+            "source":"https://platform.claude.com/docs/en/models/opus-5-5/overview",
+            "internal":"/models/claude-opus-5-5/"
+        },
+        {
+            "name":"Claude Sonnet 5","id":"claude-sonnet-5","role":"Speed / intelligence balance","context":"1M","output":"128K",
+            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"Adaptive",
+            "best":"Everyday coding, agents, analysis and enterprise work",
+            "source":"https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5"
+        },
+        {
+            "name":"Claude Haiku 4.5","id":"claude-haiku-4-5","role":"Lowest latency / cost","context":"200K","output":"64K",
+            "input":"$1","cached":"$0.10","output_price":"$5","reasoning":"Extended thinking",
+            "best":"Real-time and high-volume cost-sensitive workloads",
+            "source":"https://platform.claude.com/docs/en/models/haiku-4-5/overview"
+        },
+    ]
+
+    all_models = openai_models + claude_models
+    rows = "".join(
+        f'''<tr>
+          <th scope="row">{f'<a href="{escape(m.get("internal"), quote=True)}">{escape(m["name"])}</a>' if m.get("internal") else escape(m["name"])}<small>{escape(m["id"])}</small></th>
+          <td>{escape("OpenAI" if m in openai_models else "Anthropic")}</td>
+          <td>{escape(m["role"])}</td><td>{escape(m["context"])}</td><td>{escape(m["output"])}</td>
+          <td>{escape(m["reasoning"])}</td><td>{escape(m["input"])}</td><td>{escape(m["cached"])}</td><td>{escape(m["output_price"])}</td>
+        </tr>'''
+        for m in all_models
+    )
+
+    def cost(input_rate, output_rate, in_m, out_m):
+        value = input_rate * in_m + output_rate * out_m
+        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+
+    # Standard short-context example: 100K input + 10K output.
+    short = [
+        ("GPT-6 Astra", cost(10,50,.1,.01)),
+        ("Claude Fable 5.1", cost(10,50,.1,.01)),
+        ("GPT-6 Sol", cost(2,10,.1,.01)),
+        ("Claude Sonnet 5", cost(2,10,.1,.01)),
+        ("Claude Opus 5.5", cost(4,20,.1,.01)),
+        ("GPT-6 Luna", cost(.1,.5,.1,.01)),
+        ("Claude Haiku 4.5", cost(1,5,.1,.01)),
+    ]
+    short_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in short)
+
+    # Long-context example: 500K input + 50K output.
+    # GPT-6 uses 2x input and 1.5x output above 272K input; Claude 1M models keep standard token pricing.
+    long = [
+        ("GPT-6 Astra", cost(20,75,.5,.05)),
+        ("Claude Fable 5.1", cost(10,50,.5,.05)),
+        ("GPT-6 Sol", cost(4,15,.5,.05)),
+        ("Claude Sonnet 5", cost(2,10,.5,.05)),
+        ("Claude Opus 5.5", cost(4,20,.5,.05)),
+        ("GPT-6 Luna", cost(.2,.75,.5,.05)),
+    ]
+    long_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>500K input + 50K output</small></div>' for n,c in long)
+
+    toc = [
+        ("quick-answer","Quick answer"),
+        ("family-map","GPT-6 and Claude model map"),
+        ("pricing","GPT-6 vs Claude pricing"),
+        ("context-window","Context window and long context"),
+        ("coding","Coding"),
+        ("reasoning","Reasoning"),
+        ("agents","Agents and tool use"),
+        ("api","API differences"),
+        ("multimodal","Multimodal capabilities"),
+        ("speed","Speed and latency"),
+        ("research-writing","Research and writing"),
+        ("business","Business and enterprise"),
+        ("which-model","Which model should you use?"),
+        ("gpt6-vs-claude-opus","GPT-6 vs Claude Opus 5.5"),
+        ("faq","FAQ"),
+    ]
+    toc_html = "".join(f'<a href="#{escape(a, quote=True)}">{escape(label)}</a>' for a,label in toc)
+
+    sources = [
+        ("OpenAI GPT-6 model catalog","https://developers.openai.com/api/docs/models"),
+        ("OpenAI GPT-6 guidance","https://developers.openai.com/api/docs/guides/latest-model"),
+        ("OpenAI GPT-6 Astra","https://developers.openai.com/api/docs/models/gpt-6-astra"),
+        ("OpenAI GPT-6 Sol","https://developers.openai.com/api/docs/models/gpt-6-sol"),
+        ("OpenAI GPT-6 Luna","https://developers.openai.com/api/docs/models/gpt-6-luna"),
+        ("Anthropic current models","https://platform.claude.com/docs/en/models/overview"),
+        ("Claude Fable 5.1","https://platform.claude.com/docs/en/models/fable-5-1/overview"),
+        ("Claude Opus 5.5","https://platform.claude.com/docs/en/models/opus-5-5/overview"),
+        ("Claude Sonnet 5","https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5"),
+        ("Claude context windows","https://platform.claude.com/docs/en/build-with-claude/context-windows"),
+        ("Claude API pricing","https://platform.claude.com/docs/en/about-claude/pricing"),
+    ]
+    source_links = "".join(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>' for label,url in sources)
+
+    faq = [
+        ("Is GPT-6 better than Claude?", "There is no defensible universal answer from vendor specifications alone. GPT-6 and Claude each contain several models optimized for different capability, latency and cost targets. The useful comparison is workload-specific: model tier, token economics, tool stack, reasoning controls and your own evaluation results."),
+        ("Which is cheaper, GPT-6 or Claude?", "At standard short-context rates, GPT-6 Astra and Claude Fable 5.1 both list $10 input and $50 output per million tokens, while GPT-6 Sol and Claude Sonnet 5 both list $2 and $10. GPT-6 Luna is much cheaper than Claude Haiku 4.5 at $0.10/$0.50 versus $1/$5. Long-context economics differ because GPT-6 applies higher rates above 272K input tokens while Claude's 1M models keep standard token pricing."),
+        ("Which has the larger context window, GPT-6 or Claude?", "GPT-6 Astra, Sol and Luna each list 1,050,000 tokens. Claude Fable 5.1, Opus 5.5 and Sonnet 5 list 1,000,000 tokens. Claude Haiku 4.5 lists 200,000 tokens. Maximum output is 128K on the GPT-6 family and the three larger Claude models, while Haiku 4.5 lists 64K."),
+        ("Which is better for coding, GPT-6 or Claude?", "Both vendors explicitly position current models for coding. OpenAI describes GPT-6 Sol as built for complex coding and agentic workflows and Astra for the hardest end-to-end work. Anthropic positions Opus 5.5 for long-running agentic coding, Sonnet 5 for everyday coding and Fable 5.1 for demanding long-horizon work. The better choice depends on your repository, tools, latency target and cost profile."),
+        ("Which is better for AI agents?", "Both platforms now expose serious agent tool stacks. GPT-6 through the Responses API supports built-in tools including web search, file search, code interpreter, hosted shell, computer use and MCP. Claude supports server and client tools including web search, web fetch, code execution, computer use, browser use, tool search and MCP. Tool architecture and operational fit matter as much as the base model."),
+        ("Is GPT-6 vs Claude the same as ChatGPT vs Claude?", "No. GPT-6 and Claude refer to model families and APIs. ChatGPT and the Claude app are consumer or workplace products with their own plan limits, interface features, connectors and routing behavior. An API comparison should not be treated as a complete comparison of the apps."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"TechArticle","@id":canonical+"#article","url":canonical,"mainEntityOfPage":canonical,
+                "headline":"GPT-6 vs Claude in 2026: Models, Pricing, Coding, Context & API Comparison",
+                "description":description,"datePublished":published,"dateModified":verified,
+                "author":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "articleSection":"AI Models",
+                "keywords":["GPT-6 vs Claude","GPT-6 vs Claude 2026","GPT-6 vs Claude pricing","GPT-6 vs Claude coding","GPT-6 vs Claude API","GPT-6 vs Claude context window","GPT-6 vs Claude Opus 5.5"],
+                "about":[{"@type":"Thing","name":"GPT-6"},{"@type":"Thing","name":"Claude"}],
+                "citation":[url for _label,url in sources],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Guides","item":BASE_URL+"/guides/"},
+                {"@type":"ListItem","position":3,"name":"GPT-6 vs Claude","item":canonical}
+            ]},
+            {"@type":"ItemList","name":"GPT-6 and Claude models compared","numberOfItems":len(all_models),"itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":m["name"],"url":m["source"]} for i,m in enumerate(all_models)
+            ]},
+            {"@type":"FAQPage","mainEntity":[
+                {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq
+            ]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, page_type="article")}
+    <body class="intel-page guide-article-page">{page_header("guides")}<main>
+      <article>
+        <header class="guide-article-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>GPT-6 vs Claude</span></nav>
+          <p class="eyebrow">SXF GUIDE / FRONTIER MODELS</p>
+          <h1>GPT-6 vs Claude in 2026:<br><span>Models, Pricing, Coding, Context & API</span></h1>
+          <p class="guide-deck">GPT-6 and Claude are no longer single-model comparisons. They are model families with different tiers, reasoning controls, long-context economics and agent stacks. This guide compares the systems layer by layer so you can choose for a real workload instead of comparing brand names.</p>
+          <div class="guide-byline">
+            <div><span>Published</span><strong>September 25, 2026</strong></div>
+            <div><span>Last verified</span><strong>September 25, 2026</strong></div>
+            <div><span>Reading time</span><strong>22 min</strong></div>
+            <div><span>Evidence</span><strong>Official model docs</strong></div>
+          </div>
+        </header>
+
+        <section class="guide-answer shell" id="quick-answer">
+          <div class="guide-answer-label">QUICK ANSWER</div>
+          <div><h2>GPT-6 vs Claude is really a question of model tier, workload shape and agent architecture.</h2>
+          <p>At the top end, <strong>GPT-6 Astra</strong> and <strong>Claude Fable 5.1</strong> carry the same listed $10/$50 standard token price and nearly the same context size. In the balanced tier, <strong>GPT-6 Sol</strong> and <strong>Claude Sonnet 5</strong> are both $2/$10. Anthropic inserts <strong>Claude Opus 5.5</strong> between those tiers for long-running agentic coding at $4/$20. At the efficiency end, <strong>GPT-6 Luna</strong> is dramatically cheaper than Claude Haiku 4.5 on listed token rates. The biggest hidden difference is long context: GPT-6 applies higher pricing above 272K input tokens, while Anthropic bills its 1M-context Claude models at standard token rates.</p></div>
+        </section>
+
+        <div class="guide-reading shell">
+          <aside class="guide-toc"><span>IN THIS GUIDE</span>{toc_html}<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+
+          <div class="guide-prose" id="top">
+            <section id="family-map">
+              <p class="eyebrow">MODEL FAMILY MAP</p>
+              <h2>GPT-6 and Claude are families, not one-to-one models</h2>
+              <p>The first mistake in a GPT-6 vs Claude comparison is treating each brand as one model. OpenAI currently splits GPT-6 into Astra, Sol and Luna. Anthropic's current lineup includes Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5. Those tiers do not map perfectly, but their pricing and positioning reveal useful comparison pairs.</p>
+              <div class="guide-matchup-grid">
+                <article><span>TOP-END</span><h3>GPT-6 Astra ↔ Claude Fable 5.1</h3><p>Both list $10 input / $50 output per million tokens and roughly one million tokens of context. OpenAI positions Astra for its hardest end-to-end work; Anthropic reserves Fable for demanding reasoning and long-horizon agents.</p></article>
+                <article><span>EVERYDAY / BALANCED</span><h3>GPT-6 Sol ↔ Claude Sonnet 5</h3><p>Both list $2 input / $10 output. Sol is positioned around complex coding and agents; Sonnet 5 around speed plus intelligence for everyday coding, agents and enterprise tasks.</p></article>
+                <article><span>AGENTIC CODING</span><h3>GPT-6 Sol ↔ Claude Opus 5.5</h3><p>This is the more interesting coding comparison. Opus 5.5 costs twice Sol at standard token rates, but Anthropic specifically targets long-running agentic coding and keeps standard rates across its 1M context.</p></article>
+                <article><span>EFFICIENCY</span><h3>GPT-6 Luna ↔ Claude Haiku 4.5</h3><p>Both target efficient, high-volume work, but their economics are far apart: Luna lists $0.10/$0.50 while Haiku lists $1/$5, and Luna also has a much larger context window.</p></article>
+              </div>
+
+              <div class="guide-table-wrap"><table class="guide-table family-table"><thead><tr><th>Model</th><th>Provider</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Thinking</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+              <p class="guide-fact-note">Prices are USD per 1M text tokens at standard listed rates. GPT-6 long-context pricing changes above 272K input tokens; Claude's 1M-context models use standard token pricing across that context window.</p>
+            </section>
+
+            <section id="pricing">
+              <p class="eyebrow">GPT-6 VS CLAUDE PRICING</p>
+              <h2>Which is cheaper: GPT-6 or Claude?</h2>
+              <p>At short context, the answer depends entirely on tier. Astra and Fable 5.1 have identical headline input/output prices. Sol and Sonnet 5 also have identical headline prices. Opus 5.5 occupies a higher-cost coding tier. Luna is the outlier: its token price is one-tenth of Haiku 4.5's listed rate.</p>
+              <h3>Example: 100K input tokens + 10K output tokens</h3>
+              <div class="cost-grid guide-cost-grid">{short_cards}</div>
+              <p>The short-context numbers expose why brand-level statements like “Claude is cheaper” or “GPT is cheaper” are misleading. The model tier matters more than the logo.</p>
+
+              <h3>Long-context economics change the comparison</h3>
+              <p>OpenAI states that GPT-6 requests above 272K input tokens are billed at <strong>2× input/cache rates and 1.5× output rates for the full request</strong>. Anthropic states that its 1M-context models use 1M as the default and that long-context requests are billed at standard pricing.</p>
+              <h3>Example: 500K input tokens + 50K output tokens</h3>
+              <div class="cost-grid guide-cost-grid">{long_cards}</div>
+              <p class="guide-fact-note">Claude Haiku 4.5 is excluded from the 500K example because its context window is 200K. These examples cover token charges only; tools, regional processing, fast tiers, caching and other platform charges can alter total cost.</p>
+              <div class="guide-callout"><strong>SXF analysis</strong><p>For short prompts, GPT-6 Sol and Claude Sonnet 5 have essentially the same headline token economics. For very long prompts, Claude Sonnet 5 becomes materially cheaper than Sol because Anthropic does not add a long-context multiplier. That is a workload-level difference, not a generic statement that one vendor is cheaper.</p></div>
+            </section>
+
+            <section id="context-window">
+              <p class="eyebrow">CONTEXT WINDOW</p>
+              <h2>GPT-6 vs Claude context window: 1.05M vs 1M is not the whole story</h2>
+              <p>GPT-6 Astra, Sol and Luna each list a <strong>1,050,000-token</strong> context window and <strong>128,000 max output tokens</strong>. Claude Fable 5.1, Opus 5.5 and Sonnet 5 each list <strong>1,000,000 tokens</strong> of context and <strong>128,000 max output</strong>. Claude Haiku 4.5 is smaller at 200K context and 64K max output.</p>
+              <p>The raw 50K-token difference between 1.05M and 1M is unlikely to be the deciding factor for most systems. Retrieval quality, prompt structure, tool results, cached prefixes and how much context remains after reasoning tokens often matter more. The pricing rule above 272K is more operationally important than the 5% difference in nominal context.</p>
+              <h3>Which is better for long documents and giant codebases?</h3>
+              <p>For a one-shot request that genuinely needs 500K–1M tokens, Claude's standard long-context billing is economically attractive. For agentic systems, the better design may be to avoid repeatedly sending huge contexts at all: use retrieval, caching, compaction and tools to keep the active working set smaller.</p>
+            </section>
+
+            <section id="coding">
+              <p class="eyebrow">GPT-6 VS CLAUDE FOR CODING</p>
+              <h2>Which is better for coding: GPT-6 or Claude?</h2>
+              <p>Both vendors explicitly optimize current models for software engineering, but they emphasize different tiers. OpenAI calls GPT-6 Sol a model built for complex coding and agentic workflows and positions Astra above it for the hardest end-to-end work. Anthropic positions Opus 5.5 for long-running agentic coding, Sonnet 5 for everyday coding and Fable 5.1 for demanding long-horizon work.</p>
+              <p>That means the useful comparison is not “GPT-6 vs Claude coding score.” It is <strong>Sol vs Sonnet for everyday economics</strong>, <strong>Sol vs Opus 5.5 for long-running agents</strong>, and <strong>Astra vs Fable 5.1 when capability matters more than latency or token cost</strong>.</p>
+              <div class="guide-choice-grid">
+                <article><span>Use GPT-6 Sol when…</span><p>You want OpenAI's complex coding/agent tier at $2/$10 and your workflow benefits from explicit reasoning-effort controls and the Responses API tool stack.</p></article>
+                <article><span>Use Claude Opus 5.5 when…</span><p>Your workload is long-running agentic coding and you value Anthropic's 1M context at standard rates, adaptive thinking and Claude's tool ecosystem.</p></article>
+                <article><span>Use Astra or Fable when…</span><p>The task is difficult enough that cost and latency are secondary to getting a stronger end-to-end result. Test both on your own repository rather than extrapolating from vendor charts.</p></article>
+              </div>
+              <p>For product-level coding workflows, also separate the models from the coding tools around them. A developer using Claude Code is evaluating a different system than someone calling Claude through a raw API; the same is true for Codex versus a direct GPT-6 API call.</p>
+              <div class="tool-links"><a href="/guides/best-ai-coding-tools/">Best AI Coding Tools in 2026 ↗</a><a href="/compare/gpt-6-sol-vs-claude-opus-5-5/">Sol vs Opus 5.5 deep dive ↗</a><a href="/topics/coding-ai/">Coding AI signals ↗</a></div>
+            </section>
+
+            <section id="reasoning">
+              <p class="eyebrow">REASONING CONTROLS</p>
+              <h2>GPT-6 vs Claude reasoning: explicit effort vs adaptive thinking</h2>
+              <p>OpenAI exposes a broad reasoning-effort ladder on GPT-6. Astra supports low through max. Sol and Luna additionally support <strong>none</strong>, which lets applications trade reasoning depth for latency and cost on simpler requests.</p>
+              <p>Claude's newest models lean more heavily on adaptive thinking. Fable 5.1 and Opus 5.5 keep adaptive thinking always on, with default effort levels of high and medium respectively. Sonnet 5 uses adaptive thinking and allows it to be disabled; Haiku 4.5 uses the older extended-thinking model.</p>
+              <div class="guide-callout"><strong>Why this matters</strong><p>Reasoning controls affect more than benchmark quality. They change latency, output-token consumption, cache behavior and how deterministic your cost envelope feels. For production systems, the ability to route easy work to lighter reasoning can be as valuable as peak capability.</p></div>
+            </section>
+
+            <section id="agents">
+              <p class="eyebrow">AGENTS & TOOL USE</p>
+              <h2>GPT-6 vs Claude for AI agents: both are now full agent platforms</h2>
+              <p>The agent comparison is no longer “which model can call a function.” Both ecosystems expose substantial tool infrastructure.</p>
+              <div class="guide-difference agent-platform-grid">
+                <div><span>OPENAI / RESPONSES API</span><strong>Built-in execution surfaces</strong><p>GPT-6 model pages list support for web search, file search, image generation, code interpreter, hosted shell, apply patch, skills, computer use, MCP and tool search, in addition to function calling and structured outputs.</p></div>
+                <div><span>ANTHROPIC / MESSAGES API</span><strong>Server + client tool architecture</strong><p>Claude supports server tools such as web search, web fetch, code execution, advisor and tool search, plus MCP. Anthropic also defines client toolsets for computer use, browser use, bash, text editing and memory.</p></div>
+              </div>
+              <h3>Which agent stack is better?</h3>
+              <p>That cannot be answered responsibly from a feature checklist. The engineering questions are: where tools execute, how credentials are isolated, how state persists, how failures are retried, what is billed separately, and how easy it is to inspect what the agent actually did. The right answer can change by deployment architecture even when the model quality is similar.</p>
+            </section>
+
+            <section id="api">
+              <p class="eyebrow">API COMPARISON</p>
+              <h2>GPT-6 vs Claude API: Responses API vs Messages API</h2>
+              <p>OpenAI recommends the <strong>Responses API</strong> as the primary path for new GPT-6 applications. It combines model output with built-in tools, stateful workflows and agent features. Claude's core interface is the <strong>Messages API</strong>, with tool calls represented as structured content blocks and an expanding set of Anthropic-hosted server tools.</p>
+              <p>Both platforms support function/tool calling, vision, streaming and MCP-based integration. The deeper difference is interface philosophy. OpenAI increasingly bundles execution primitives directly around Responses. Anthropic distinguishes server tools from client tools more explicitly and gives developers detailed control over where execution occurs.</p>
+              <h3>Migration cost matters more than syntax</h3>
+              <p>If your application already depends on one provider's prompt caching, reasoning format, tool schemas, safety handling or streaming events, switching is not just replacing a model ID. The model may be API-compatible at the HTTP level while the surrounding control plane is not.</p>
+            </section>
+
+            <section id="multimodal">
+              <p class="eyebrow">MULTIMODAL</p>
+              <h2>GPT-6 vs Claude multimodal capabilities</h2>
+              <p>Current GPT-6 models accept <strong>text and image input</strong> and return text. OpenAI's model pages list audio and video as unsupported for these GPT-6 text models. Anthropic's current Claude lineup also supports text and image input with text output, plus vision across the family.</p>
+              <p>If your application needs speech, realtime audio or native image generation, the comparison moves beyond GPT-6 vs Claude base models and into each vendor's specialized model and tool ecosystem. Do not infer multimodal breadth from the flagship language-model name alone.</p>
+            </section>
+
+            <section id="speed">
+              <p class="eyebrow">SPEED & LATENCY</p>
+              <h2>Which is faster: GPT-6 or Claude?</h2>
+              <p>There is no clean cross-vendor answer in the official documentation. Anthropic publishes relative latency labels inside its own lineup: Fable 5.1 is slower, Opus 5.5 moderate, Sonnet 5 fast and Haiku 4.5 fastest. OpenAI exposes model-specific speed characteristics but does not provide a directly comparable, standardized latency number against Claude.</p>
+              <p>A serious latency test should measure <strong>time to first token, total completion time, output tokens per second, tool-call round trips and p95/p99 latency</strong> from the region where your application actually runs. Reasoning effort must be held constant enough to make the comparison meaningful.</p>
+              <div class="guide-callout"><strong>Do not benchmark the brand</strong><p>“GPT-6 vs Claude speed” is too broad. Benchmark the exact model, effort setting, service tier, prompt length, output length and tool path you plan to deploy.</p></div>
+            </section>
+
+            <section id="research-writing">
+              <p class="eyebrow">RESEARCH & WRITING</p>
+              <h2>GPT-6 vs Claude for research, writing and knowledge work</h2>
+              <p>OpenAI positions Astra for research and document creation and describes Sol as a strong everyday driver for writing, coding and work that needs judgment. Anthropic positions Opus 5.5 for long-running knowledge work, Fable 5.1 for multi-step research and demanding reasoning, and Sonnet 5 for everyday content creation and analysis.</p>
+              <p>For research systems, the surrounding tools again matter. Both providers offer web access and code execution paths. Citation quality, source-selection behavior and document handling should be tested on the actual research workflow rather than assumed from generic model intelligence.</p>
+              <h3>What about long reports?</h3>
+              <p>Both top families can emit up to 128K tokens in a single response under their documented limits, although practical applications usually benefit from structured generation, intermediate validation and section-by-section review. Anthropic additionally documents a 300K max-output beta for Opus 5.5 in the Batch API.</p>
+            </section>
+
+            <section id="business">
+              <p class="eyebrow">ENTERPRISE</p>
+              <h2>GPT-6 vs Claude for business and enterprise AI</h2>
+              <p>Enterprise choice should not start with “which chatbot feels smarter.” It should start with deployment requirements: data residency, cloud availability, identity and governance, auditability, tool permissions, rate limits, procurement and the cost of operating agents at scale.</p>
+              <p>Anthropic distributes current Claude models through the Claude API and major cloud platforms including Amazon Bedrock, Google Cloud and Microsoft Foundry. OpenAI exposes GPT-6 through its API platform with data-residency options that vary by model and processing tier. For regulated workloads, verify the exact model, region and service tier rather than assuming a family-wide policy.</p>
+              <h3>Multi-model routing may be better than choosing one vendor model</h3>
+              <p>Both companies' own guidance points toward workload-specific model selection. In practice, a robust system often routes easy/high-volume requests to an efficient model and escalates difficult tasks to a stronger one. The unit of optimization is therefore the <em>workflow</em>, not the prestige of the default model.</p>
+            </section>
+
+            <section id="which-model">
+              <p class="eyebrow">DECISION GUIDE</p>
+              <h2>Which GPT-6 or Claude model should you use?</h2>
+              <div class="guide-decision-table">
+                <div><span>Hardest end-to-end work</span><strong>GPT-6 Astra or Claude Fable 5.1</strong><p>Both occupy the $10/$50 top tier. Run your own evals on the exact task.</p></div>
+                <div><span>Everyday coding and agents</span><strong>GPT-6 Sol or Claude Sonnet 5</strong><p>Both list $2/$10 standard pricing; ecosystem and long-context behavior become key differentiators.</p></div>
+                <div><span>Long-running agentic coding</span><strong>Claude Opus 5.5 or GPT-6 Sol</strong><p>Opus is explicitly positioned for this workload; Sol is half the standard token price and built for complex coding/agents.</p></div>
+                <div><span>Huge prompts above 272K</span><strong>Claude 1M models deserve a close look</strong><p>Anthropic keeps standard token pricing across 1M context; GPT-6 raises rates once input exceeds 272K.</p></div>
+                <div><span>High-volume low-cost automation</span><strong>GPT-6 Luna</strong><p>Its $0.10/$0.50 listed rate is materially below Claude Haiku 4.5's $1/$5, while also offering a larger context window.</p></div>
+                <div><span>Lowest latency inside Claude</span><strong>Claude Haiku 4.5</strong><p>Anthropic labels it the fastest current Claude model; test against Luna if cross-vendor latency matters.</p></div>
+              </div>
+            </section>
+
+            <section id="gpt6-vs-claude-opus">
+              <p class="eyebrow">DEEP DIVE</p>
+              <h2>GPT-6 vs Claude Opus 5.5: which comparison matters most?</h2>
+              <p>“GPT-6 vs Claude Opus” can refer to several different pairings. If the question is cost-balanced coding, GPT-6 Sol is the logical OpenAI comparison. If the question is absolute capability, Astra is the higher OpenAI tier. That distinction matters because Sol is $2/$10 while Opus 5.5 is $4/$20, whereas Astra is $10/$50.</p>
+              <p>For a detailed Sol-specific comparison—including cache pricing, long-context cost examples and reasoning controls—use the dedicated SXF comparison below.</p>
+              <div class="guide-inline-cta"><div><span>SXF DEEP DIVE</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><p>Pricing, context, reasoning controls and long-context economics using official vendor specifications.</p></div><a href="/compare/gpt-6-sol-vs-claude-opus-5-5/">Open comparison ↗</a></div>
+            </section>
+
+            <section class="guide-faq-section" id="faq">
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions about GPT-6 vs Claude</h2>
+              <div class="model-faq">{faq_html}</div>
+            </section>
+
+            <section class="guide-sources">
+              <p class="eyebrow">PRIMARY SOURCES</p>
+              <h2>Official sources used for this comparison</h2>
+              <p>This guide separates vendor-documented specifications from SXF analysis. Pricing, context windows, reasoning controls and product positioning were checked against the official documentation linked below.</p>
+              <div class="model-sources">{source_links}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -1579,6 +1931,17 @@ def guides_index_html(items, current_items):
             "meta": "Coding agents · Pricing · Comparison",
             "updated": "Sep 25, 2026",
             "read_time": "18 min",
+        },
+        {
+            "href": "/guides/gpt-6-vs-claude/",
+            "category": "Models",
+            "categories": ["models", "coding", "agents", "research"],
+            "kicker": "FRONTIER MODEL GUIDE",
+            "title": "GPT-6 vs Claude in 2026",
+            "description": "A family-level comparison of models, pricing, coding, context windows, reasoning, agents and API architecture.",
+            "meta": "Models · Pricing · API · Agents",
+            "updated": "Sep 25, 2026",
+            "read_time": "22 min",
         },
         {
             "href": f"/compare/{GPT6_COMPARE_SLUG}/",
@@ -2051,6 +2414,9 @@ def build_discovery_pages(items, current_items):
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
     (coding_guide_path / "index.html").write_text(best_ai_coding_tools_html(items), encoding="utf-8")
+    model_guide_path = GUIDES_DIR / "gpt-6-vs-claude"
+    model_guide_path.mkdir(parents=True, exist_ok=True)
+    (model_guide_path / "index.html").write_text(gpt6_vs_claude_guide_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -2101,6 +2467,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
         sitemap_entry(f"{BASE_URL}/guides/", generated_today),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
+        sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]
