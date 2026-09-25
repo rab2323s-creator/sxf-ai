@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
+SECTION_PAGES = {
+    "Models": ROOT / "models" / "index.html",
+    "Tools": ROOT / "tools" / "index.html",
+    "Research": ROOT / "research" / "index.html",
+    "Open Source": ROOT / "open-source" / "index.html",
+}
 
 SOURCES = [
     ("OpenAI", "https://openai.com/news/rss.xml"),
@@ -177,16 +183,55 @@ def update_index(items):
     page = replace_block(page, "<!-- SXF:ITEMLIST_START -->", "<!-- SXF:ITEMLIST_END -->", schema)
     INDEX.write_text(page, encoding="utf-8")
 
+
+def section_cards_html(items):
+    rows = []
+    for item in items[:12]:
+        rows.append(f'''<a class="intel-card" href="{escape(item["url"], quote=True)}" target="_blank" rel="noopener noreferrer">
+  <div class="intel-meta"><strong>{escape(item["source"])}</strong><span>{escape(relative_time(item["published"]))}</span></div>
+  <h3>{escape(item["title"])}</h3>
+  <div class="intel-foot"><span>{escape(item["category"])}</span><b>↗</b></div>
+</a>''')
+    return "\n".join(rows)
+
+def update_section_pages(items):
+    for category, path in SECTION_PAGES.items():
+        if not path.exists():
+            continue
+        filtered = [item for item in items if item["category"] == category]
+        page = path.read_text(encoding="utf-8")
+        page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"Latest {category} AI signals",
+            "itemListOrder": "https://schema.org/ItemListOrderDescending",
+            "numberOfItems": min(len(filtered), 10),
+            "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "item": {"@type": "Thing", "name": item["title"], "url": item["url"]}}
+                for i, item in enumerate(filtered[:10])
+            ],
+        }
+        schema_html = '<script type="application/ld+json" id="section-signals-schema">' + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
+        page = replace_block(page, "<!-- SXF:SECTION_SCHEMA_START -->", "<!-- SXF:SECTION_SCHEMA_END -->", schema_html)
+        path.write_text(page, encoding="utf-8")
+
 def update_sitemap(items):
     latest = parse_date(items[0]["published"]).date().isoformat() if items else datetime.now(timezone.utc).date().isoformat()
+    urls = [
+        ("https://sxf.si/", "1.0"),
+        ("https://sxf.si/models/", "0.9"),
+        ("https://sxf.si/tools/", "0.9"),
+        ("https://sxf.si/research/", "0.9"),
+        ("https://sxf.si/open-source/", "0.9"),
+    ]
+    rows = "\n".join(
+        f"  <url>\n    <loc>{url}</loc>\n    <lastmod>{latest}</lastmod>\n    <changefreq>hourly</changefreq>\n    <priority>{priority}</priority>\n  </url>"
+        for url, priority in urls
+    )
     xml = f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://sxf.si/</loc>
-    <lastmod>{latest}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
-  </url>
+{rows}
 </urlset>
 '''
     SITEMAP.write_text(xml, encoding="utf-8")
@@ -228,6 +273,7 @@ def main():
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     update_index(final)
+    update_section_pages(final)
     update_sitemap(final)
     print(f"Wrote {len(final)} items. Errors: {len(errors)}")
 
