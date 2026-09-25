@@ -33,7 +33,7 @@ function filteredItems(){
 }
 function featuredMarkup(item){
   if(!item)return '';
-  return `<a class="featured-story" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
+  return `<a class="featured-story" href="${escapeHtml(item.signal_url||item.url)}">
     <div class="featured-main">
       <div>
         <div class="featured-topline"><strong>${escapeHtml(item.source)}</strong><i></i><span>${escapeHtml(relativeTime(item.published))}</span></div>
@@ -41,7 +41,7 @@ function featuredMarkup(item){
       </div>
       <div class="featured-footer">
         <span class="category-pill">${escapeHtml(item.category)}</span>
-        <span class="open-label">Open source <b>↗</b></span>
+        <span class="open-label">Read signal <b>↗</b></span>
       </div>
     </div>
     <div class="featured-visual" aria-hidden="true"><span class="signal-cross">+</span><span class="signal-number">01</span></div>
@@ -49,7 +49,7 @@ function featuredMarkup(item){
 }
 function cardMarkup(item,index){
   const n=String(index+2).padStart(2,'0');
-  return `<a class="story-card" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
+  return `<a class="story-card" href="${escapeHtml(item.signal_url||item.url)}">
     <div class="story-card-top"><span class="story-source">${escapeHtml(item.source)}</span><span class="story-time">${escapeHtml(relativeTime(item.published))}</span></div>
     <h3 class="story-title">${escapeHtml(item.title)}</h3>
     <div class="story-card-bottom"><span class="category-pill">${escapeHtml(item.category)}</span><span class="story-arrow" aria-hidden="true">↗</span></div>
@@ -63,8 +63,8 @@ function updateHeroSignal(item){
   const time=document.getElementById('heroSignalTime');
   const title=document.getElementById('heroSignalTitle');
   const category=document.getElementById('heroSignalCategory');
-  if(link)link.href=item.url||'#latest';
-  if(link){link.target='_blank';link.rel='noopener noreferrer'}
+  if(link)link.href=item.signal_url||item.url||'#latest';
+  if(link){link.removeAttribute('target');link.removeAttribute('rel')}
   if(source)source.textContent=item.source||'Primary source';
   if(time)time.textContent=relativeTime(item.published)||'recent';
   if(title)title.textContent=item.title||'Latest AI signal';
