@@ -1917,6 +1917,360 @@ def gpt6_vs_claude_guide_html(items):
       </article>
     </main>{page_footer()}</body></html>'''
 
+
+def open_source_ai_models_guide_html(items):
+    canonical = f"{BASE_URL}/guides/open-source-ai-models/"
+    published = "2026-09-26"
+    verified = "2026-09-26"
+    title = "Best Open-Source AI Models in 2026: Licenses, Hardware & Local Use | SXF / AI"
+    description = "Compare the best open-source and open-weight AI models in 2026: DeepSeek V4-Pro, Qwen3.5, GLM-5, Mistral Small 4, Gemma 4 and Kimi K3 by license, size, context and local use."
+
+    models = [
+        {
+            "name":"DeepSeek V4-Pro","publisher":"DeepSeek","license":"MIT","openness":"Permissive weights",
+            "params":"1.6T / 49B active","context":"1M","modalities":"Text","local":"Datacenter / multi-node",
+            "footprint":"865 GB repository","best":"Frontier reasoning, coding and million-token text workloads",
+            "source":"https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+        },
+        {
+            "name":"Qwen3.5-397B-A17B","publisher":"Qwen","license":"Apache 2.0","openness":"Permissive weights",
+            "params":"397B / 17B active","context":"262K native · ~1.01M extended","modalities":"Text + image","local":"Multi-GPU / server",
+            "footprint":"94 weight shards","best":"Multilingual multimodal agents and general-purpose deployment",
+            "source":"https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+        },
+        {
+            "name":"GLM-5","publisher":"Z.ai","license":"MIT","openness":"Permissive weights",
+            "params":"744B / 40B active","context":"202,752 config","modalities":"Text","local":"Multi-GPU / server",
+            "footprint":"744B-parameter MoE","best":"Systems engineering, coding and long-horizon agents",
+            "source":"https://huggingface.co/zai-org/GLM-5",
+        },
+        {
+            "name":"Mistral Small 4","publisher":"Mistral AI","license":"Apache 2.0","openness":"Permissive weights",
+            "params":"119B / 6.5B active","context":"256K","modalities":"Text + image","local":"High-memory workstation / server",
+            "footprint":"242 GB full · 70.8 GB NVFP4","best":"Efficient reasoning, coding, agents and multimodal enterprise use",
+            "source":"https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+        },
+        {
+            "name":"Gemma 4 12B","publisher":"Google DeepMind","license":"Apache 2.0","openness":"Permissive weights",
+            "params":"~12B dense","context":"256K","modalities":"Text + image + audio","local":"Yes · laptop-class",
+            "footprint":"23.9 GB weights · 16 GB-class local target",
+            "best":"Local multimodal AI, private assistants and on-device experimentation",
+            "source":"https://huggingface.co/google/gemma-4-12B",
+        },
+        {
+            "name":"Kimi K3","publisher":"Moonshot AI","license":"Kimi K3 License","openness":"Custom-license open weights",
+            "params":"2.8T / 104B active","context":"1M","modalities":"Text + image","local":"Datacenter-class",
+            "footprint":"96 large weight shards","best":"Frontier multimodal agents, long-context knowledge work and coding",
+            "source":"https://huggingface.co/moonshotai/Kimi-K3",
+        },
+    ]
+
+    rows = "".join(
+        f'''<tr>
+          <th scope="row"><a href="#{escape(slugify(m["name"]), quote=True)}">{escape(m["name"])}</a><small>{escape(m["publisher"])}</small></th>
+          <td><span class="license-badge {"license-permissive" if m["license"] in {"MIT","Apache 2.0"} else "license-custom"}">{escape(m["license"])}</span></td>
+          <td>{escape(m["params"])}</td><td>{escape(m["context"])}</td><td>{escape(m["modalities"])}</td>
+          <td>{escape(m["local"])}</td><td>{escape(m["best"])}</td>
+        </tr>'''
+        for m in models
+    )
+
+    toc = [
+        ("quick-answer","Quick answer"),
+        ("open-source-vs-open-weights","Open source vs open weights"),
+        ("comparison","Model comparison"),
+        ("deepseek-v4-pro","DeepSeek V4-Pro"),
+        ("qwen3-5-397b-a17b","Qwen3.5"),
+        ("glm-5","GLM-5"),
+        ("mistral-small-4","Mistral Small 4"),
+        ("gemma-4-12b","Gemma 4 12B"),
+        ("kimi-k3","Kimi K3"),
+        ("local-use","Best model for local use"),
+        ("hardware","Hardware requirements"),
+        ("coding","Best open model for coding"),
+        ("agents","Best open model for agents"),
+        ("commercial-use","Commercial use and licenses"),
+        ("benchmarks","How to read benchmarks"),
+        ("how-to-choose","How to choose"),
+        ("faq","FAQ"),
+    ]
+    toc_html = "".join(f'<a href="#{escape(a, quote=True)}">{escape(label)}</a>' for a,label in toc)
+
+    faq = [
+        ("What is the best open-source AI model in 2026?", "There is no single best model across every deployment. DeepSeek V4-Pro, Qwen3.5-397B-A17B and GLM-5 target frontier-scale server workloads; Mistral Small 4 is a more deployable 119B MoE; Gemma 4 12B is the practical local multimodal choice in this shortlist; and Kimi K3 is a frontier open-weight model under a custom license."),
+        ("What is the best open-source AI model to run locally?", "Gemma 4 12B is the clearest local choice in this shortlist. Google explicitly targets dedicated-GPU laptops with about 16 GB VRAM or unified memory, and the official checkpoint is about 23.9 GB. Mistral Small 4 can be self-hosted, but even its official NVFP4 checkpoint is about 70.8 GB and is better suited to high-memory workstations or servers."),
+        ("What is the difference between open-source AI and open-weight AI?", "Open weights means the trained parameters are downloadable. The Open Source Initiative's Open Source AI Definition requires more: freedoms to use, study, modify and share, plus the preferred form for modification, including sufficient training-data information, training and inference code, and model parameters. A permissive weight license alone does not prove the full AI system meets that definition."),
+        ("Which open AI model has the largest context window?", "DeepSeek V4-Pro and Kimi K3 list 1M-token context windows. Qwen3.5-397B-A17B has 262,144 tokens natively and can be extended to roughly 1.01M. Gemma 4 12B and Mistral Small 4 list 256K, while GLM-5's released configuration lists 202,752 positions."),
+        ("Which open model is best for coding?", "For frontier-scale coding, DeepSeek V4-Pro and GLM-5 are designed around reasoning, coding and agentic engineering. Qwen3.5 and Mistral Small 4 add strong multimodal or deployment advantages. For local coding assistants, Gemma 4 12B is much easier to run than the frontier-scale MoE models."),
+        ("Can open-source AI models be used commercially?", "MIT and Apache 2.0 are permissive software licenses commonly compatible with commercial use, subject to their terms and applicable law. Kimi K3 uses a custom license, so commercial deployments should review that license directly. Also distinguish a model-weight license from whether the entire AI system qualifies as Open Source AI under the OSI definition."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    sources = [
+        ("Open Source AI Definition 1.0","https://opensource.org/ai/open-source-ai-definition"),
+        ("DeepSeek V4-Pro model card","https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro"),
+        ("DeepSeek V4-Pro model downloads","https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/main/README.md"),
+        ("Qwen3.5-397B-A17B model card","https://huggingface.co/Qwen/Qwen3.5-397B-A17B"),
+        ("GLM-5 model card","https://huggingface.co/zai-org/GLM-5"),
+        ("Mistral Small 4 announcement","https://mistral.ai/news/mistral-small-4/"),
+        ("Mistral Small 4 weights","https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"),
+        ("Mistral Small 4 NVFP4 weights","https://huggingface.co/mistralai/Mistral-Small-4-119B-2603-NVFP4"),
+        ("Gemma 4 12B model card","https://huggingface.co/google/gemma-4-12B"),
+        ("Gemma 4 12B developer guide","https://developers.googleblog.com/gemma-4-12b-the-developer-guide/"),
+        ("Kimi K3 model card","https://huggingface.co/moonshotai/Kimi-K3"),
+    ]
+    source_links = "".join(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>' for label,url in sources)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"TechArticle","@id":canonical+"#article","url":canonical,"mainEntityOfPage":canonical,
+                "headline":"Best Open-Source AI Models in 2026: Licenses, Hardware & Local Use",
+                "description":description,"datePublished":published,"dateModified":verified,
+                "author":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "articleSection":"Open Source AI",
+                "keywords":[
+                    "best open source AI models 2026","best open weight models","local AI models",
+                    "DeepSeek V4 Pro","Qwen3.5","GLM-5","Mistral Small 4","Gemma 4","Kimi K3",
+                    "open source LLM","AI model hardware requirements"
+                ],
+                "about":[{"@type":"Thing","name":m["name"],"url":m["source"]} for m in models],
+                "citation":[url for _label,url in sources],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Guides","item":BASE_URL+"/guides/"},
+                {"@type":"ListItem","position":3,"name":"Best Open-Source AI Models in 2026","item":canonical}
+            ]},
+            {"@type":"ItemList","name":"Open and open-weight AI models compared","numberOfItems":len(models),"itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":m["name"],"url":m["source"]} for i,m in enumerate(models)
+            ]},
+            {"@type":"FAQPage","mainEntity":[
+                {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq
+            ]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, page_type="article")}
+    <body class="intel-page guide-article-page">{page_header("guides")}<main>
+      <article>
+        <header class="guide-article-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Open-Source AI Models</span></nav>
+          <p class="eyebrow">SXF GUIDE / OPEN MODELS</p>
+          <h1>Best Open-Source AI Models in 2026:<br><span>Licenses, Hardware & Local Use</span></h1>
+          <p class="guide-deck">The open-model market now spans laptop-sized multimodal models and multi-trillion-parameter systems that need datacenter hardware. This guide separates license reality from marketing, then compares the models by architecture, context, deployment footprint and the workloads they are actually practical for.</p>
+          <div class="guide-byline">
+            <div><span>Published</span><strong>September 26, 2026</strong></div>
+            <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+            <div><span>Reading time</span><strong>24 min</strong></div>
+            <div><span>Evidence</span><strong>Official weights & docs</strong></div>
+          </div>
+        </header>
+
+        <section class="guide-answer shell" id="quick-answer">
+          <div class="guide-answer-label">QUICK ANSWER</div>
+          <div><h2>The best open model depends more on hardware and license constraints than on a single benchmark score.</h2>
+          <p><strong>Gemma 4 12B</strong> is the most practical local multimodal model in this shortlist because Google explicitly targets 16 GB-class laptops. <strong>Mistral Small 4</strong> is a strong self-hosted middle ground with Apache 2.0 licensing, 119B total / 6.5B active parameters and an official 70.8 GB NVFP4 checkpoint. <strong>Qwen3.5-397B-A17B</strong> is a compelling multilingual multimodal MoE for large deployments. <strong>DeepSeek V4-Pro</strong> and <strong>GLM-5</strong> target frontier-scale reasoning and coding on server infrastructure. <strong>Kimi K3</strong> is the largest model here at 2.8T parameters with a 1M context window, but it uses a custom Kimi K3 license rather than MIT or Apache 2.0.</p></div>
+        </section>
+
+        <div class="guide-reading shell">
+          <aside class="guide-toc"><span>IN THIS GUIDE</span>{toc_html}<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+
+          <div class="guide-prose" id="top">
+            <section id="open-source-vs-open-weights">
+              <p class="eyebrow">DEFINITION FIRST</p>
+              <h2>Open-source AI vs open weights: the distinction most model lists skip</h2>
+              <p>The search phrase “open-source AI model” is useful, but technically it collapses several different ideas. A downloadable checkpoint is an <strong>open-weight release</strong>. A model carrying an MIT or Apache 2.0 license has permissive legal terms around the released artifacts. Neither fact, by itself, proves that the full AI system satisfies the Open Source Initiative's Open Source AI Definition.</p>
+              <p>OSI's definition asks whether users can use, study, modify and share the system and whether the preferred form for modification is available. For machine-learning systems, that includes sufficient information about training data, the code used to train and run the system, and the model parameters. That is a higher bar than “weights are on Hugging Face.”</p>
+              <div class="guide-difference">
+                <div><span>OPEN WEIGHTS</span><strong>You can download the trained parameters.</strong><p>Useful for self-hosting, fine-tuning and research, but the license may be custom and the training recipe may still be incomplete.</p></div>
+                <div><span>OPEN SOURCE AI</span><strong>The system is modifiable in its preferred form.</strong><p>Under OSAID 1.0, that means freedoms plus the relevant data information, code and parameters needed to study and modify the system.</p></div>
+              </div>
+              <div class="guide-callout"><strong>SXF terminology</strong><p>This page targets the common search term “open-source AI models,” but the comparison table reports the actual model-weight license. We avoid claiming that every downloadable model is an OSI-compliant Open Source AI system.</p></div>
+            </section>
+
+            <section id="comparison">
+              <p class="eyebrow">QUICK COMPARISON</p>
+              <h2>Best open-source and open-weight AI models in 2026 at a glance</h2>
+              <div class="guide-table-wrap"><table class="guide-table open-model-table"><thead><tr><th>Model</th><th>License</th><th>Parameters</th><th>Context</th><th>Modalities</th><th>Local fit</th><th>Best fit</th></tr></thead><tbody>{rows}</tbody></table></div>
+              <p class="guide-fact-note">“Local fit” means practical deployment class, not whether a framework can technically load the checkpoint. Exact RAM/VRAM requirements depend on precision, quantization, KV cache, context length, batching and runtime.</p>
+
+              <div class="guide-criteria open-model-criteria">
+                <article><span>01</span><h3>License</h3><p>Can you modify, redistribute or commercialize the released artifacts under clear terms?</p></article>
+                <article><span>02</span><h3>Active parameters</h3><p>For MoE models, active parameters matter for compute per token, while total parameters still matter for storage and memory distribution.</p></article>
+                <article><span>03</span><h3>Context</h3><p>Long context can help research and agents, but KV-cache memory and retrieval quality often become the real bottlenecks.</p></article>
+                <article><span>04</span><h3>Deployment footprint</h3><p>A model is only “local” in a useful sense if your hardware can run it at acceptable speed and context size.</p></article>
+                <article><span>05</span><h3>Tool use</h3><p>Agentic workloads need reliable structured outputs, function calling and compatibility with serving stacks.</p></article>
+                <article><span>06</span><h3>Multimodality</h3><p>Vision and audio can eliminate separate models, but may increase memory and preprocessing complexity.</p></article>
+              </div>
+            </section>
+
+            <section class="tool-review" id="deepseek-v4-pro">
+              <div class="tool-review-head"><span>01</span><div><p class="eyebrow">DEEPSEEK</p><h2>DeepSeek V4-Pro: frontier open weights for reasoning, coding and 1M-token text context</h2></div></div>
+              <p>DeepSeek V4-Pro is the largest MIT-licensed checkpoint in this shortlist by total storage footprint. DeepSeek lists <strong>1.6 trillion total parameters with 49 billion activated per token</strong> and a <strong>1M-token context window</strong>. The Hugging Face repository is roughly <strong>865 GB</strong>, with FP4 used for MoE expert parameters and FP8 for most other weights.</p>
+              <p>The MoE design is important. Only a fraction of the 1.6T parameters are active for each token, reducing inference compute compared with a dense model of the same total size. But sparsity does not magically make the full model laptop-sized: the weights still have to live somewhere, and distributed serving becomes part of the deployment architecture.</p>
+              <div class="tool-facts"><div><span>Total / active</span><strong>1.6T / 49B</strong></div><div><span>Context</span><strong>1M tokens</strong></div><div><span>License</span><strong>MIT</strong></div><div><span>Repository</span><strong>~865 GB</strong></div></div>
+              <h3>Who should use DeepSeek V4-Pro?</h3>
+              <p>It makes sense for teams that want frontier-class open weights and already operate serious GPU infrastructure. It is especially relevant to coding, reasoning and long-context systems where self-hosting control matters more than minimizing infrastructure complexity.</p>
+              <h3>Who should not use it?</h3>
+              <p>If your requirement is “run a strong model on one workstation” or “ship offline AI to end users,” V4-Pro is the wrong deployment class. Use a smaller model or a managed inference provider rather than turning model hosting into the main engineering project.</p>
+              <div class="tool-links"><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro" target="_blank" rel="noopener noreferrer">Official weights ↗</a><a href="/open-source/">SXF Open Source signals ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="qwen3-5-397b-a17b">
+              <div class="tool-review-head"><span>02</span><div><p class="eyebrow">QWEN</p><h2>Qwen3.5-397B-A17B: best fit for multilingual multimodal open deployment at scale</h2></div></div>
+              <p>Qwen3.5-397B-A17B combines a vision encoder with a sparse MoE language model. Qwen documents <strong>397B total parameters and 17B activated</strong>, a <strong>262,144-token native context window</strong> extensible to roughly <strong>1,010,000 tokens</strong>, and support for <strong>201 languages and dialects</strong>.</p>
+              <p>The architecture is attractive because the active parameter count is much smaller than the total parameter pool. For serving, Qwen documents compatibility with Transformers, vLLM, SGLang and KTransformers. The model still consists of dozens of large weight shards, so “17B active” should not be confused with “17B model footprint.”</p>
+              <div class="tool-facts"><div><span>Total / active</span><strong>397B / 17B</strong></div><div><span>Context</span><strong>262K native · ~1.01M extended</strong></div><div><span>License</span><strong>Apache 2.0</strong></div><div><span>Modality</span><strong>Text + image</strong></div></div>
+              <h3>Why Qwen3.5 stands out</h3>
+              <p>Its combination of multilingual coverage, multimodality, sparse compute and permissive Apache 2.0 weights makes it a strong platform model for organizations building international assistants, multimodal agents or their own managed inference layer.</p>
+              <h3>Deployment reality</h3>
+              <p>This is still a large-model deployment. Plan for multi-GPU or server infrastructure, especially at long context. Extending to ~1M context also increases KV-cache pressure; the advertised maximum is not a free operating point.</p>
+              <div class="tool-links"><a href="https://huggingface.co/Qwen/Qwen3.5-397B-A17B" target="_blank" rel="noopener noreferrer">Official model card ↗</a><a href="/topics/open-source-ai/">Open-source AI topic ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="glm-5">
+              <div class="tool-review-head"><span>03</span><div><p class="eyebrow">Z.AI</p><h2>GLM-5: an MIT-licensed MoE built for systems engineering and long-horizon agents</h2></div></div>
+              <p>GLM-5 targets a different center of gravity: complex systems engineering and long-horizon agentic tasks. Z.ai lists <strong>744B total parameters with 40B active</strong>, trained on 28.5T tokens, and uses DeepSeek Sparse Attention to reduce long-context deployment cost. The released configuration exposes <strong>202,752 maximum positions</strong>.</p>
+              <p>Z.ai publishes extensive coding, terminal, browser and tool-use evaluations. Those results are useful evidence about the model's intended workload, but they should not be merged mechanically with numbers from other vendors because harnesses, prompts, context strategies and tool environments differ.</p>
+              <div class="tool-facts"><div><span>Total / active</span><strong>744B / 40B</strong></div><div><span>Context config</span><strong>202,752</strong></div><div><span>License</span><strong>MIT</strong></div><div><span>Focus</span><strong>Systems + agents</strong></div></div>
+              <h3>Best use case for GLM-5</h3>
+              <p>Choose it when open deployment and agentic engineering are the priority and you have infrastructure for a very large MoE. It is particularly interesting for coding-agent research because the official evaluation suite includes SWE-bench, terminal and browser tasks rather than only general chat benchmarks.</p>
+              <div class="tool-links"><a href="https://huggingface.co/zai-org/GLM-5" target="_blank" rel="noopener noreferrer">Official model card ↗</a><a href="https://github.com/zai-org/GLM-5" target="_blank" rel="noopener noreferrer">Official GitHub ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="mistral-small-4">
+              <div class="tool-review-head"><span>04</span><div><p class="eyebrow">MISTRAL AI</p><h2>Mistral Small 4: the strongest middle ground between frontier capability and self-hosting practicality</h2></div></div>
+              <p>Mistral Small 4 is a <strong>119B-parameter MoE with 6.5B activated per token</strong>, a <strong>256K context window</strong>, text-and-image input, configurable reasoning and native function calling. Mistral releases it under Apache 2.0 and explicitly supports both instruct and reasoning modes.</p>
+              <p>Its deployment story is unusually clear. The full Hugging Face repository is about <strong>242 GB</strong>, while Mistral also publishes an official <strong>NVFP4 checkpoint of about 70.8 GB</strong>. That does not make it a normal laptop model, but it puts serious self-hosting within reach of high-memory workstations and smaller multi-GPU servers instead of requiring datacenter-scale model parallelism.</p>
+              <div class="tool-facts"><div><span>Total / active</span><strong>119B / 6.5B</strong></div><div><span>Context</span><strong>256K</strong></div><div><span>License</span><strong>Apache 2.0</strong></div><div><span>NVFP4 checkpoint</span><strong>~70.8 GB</strong></div></div>
+              <h3>Why Mistral Small 4 is strategically interesting</h3>
+              <p>It combines four things that often require separate models: general instruction following, reasoning, coding/agent behavior and vision. For enterprises that want to keep inference under their control without hosting a 400B–2.8T model, that balance can matter more than a narrow benchmark lead.</p>
+              <div class="tool-links"><a href="https://mistral.ai/news/mistral-small-4/" target="_blank" rel="noopener noreferrer">Official announcement ↗</a><a href="https://huggingface.co/mistralai/Mistral-Small-4-119B-2603-NVFP4" target="_blank" rel="noopener noreferrer">Official NVFP4 weights ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="gemma-4-12b">
+              <div class="tool-review-head"><span>05</span><div><p class="eyebrow">GOOGLE DEEPMIND</p><h2>Gemma 4 12B: best open model in this list for practical local multimodal AI</h2></div></div>
+              <p>Gemma 4 12B is the model in this shortlist that changes the hardware conversation. Google describes it as a dense, unified multimodal model with <strong>256K context</strong> and native text, image and audio input. The Hugging Face weight file is about <strong>23.9 GB</strong>.</p>
+              <p>More importantly, Google's developer guide explicitly targets <strong>dedicated-GPU laptops with about 16 GB VRAM or unified memory</strong>. That is possible through optimized local inference rather than by loading a full 24 GB BF16 checkpoint naively into a 16 GB GPU. It is the kind of distinction that matters when “runs locally” is the purchase criterion.</p>
+              <div class="tool-facts"><div><span>Architecture</span><strong>~12B dense</strong></div><div><span>Context</span><strong>256K</strong></div><div><span>License</span><strong>Apache 2.0</strong></div><div><span>Local target</span><strong>16 GB-class laptop</strong></div></div>
+              <h3>Best use cases for Gemma 4 12B</h3>
+              <p>Private desktop assistants, local document analysis, speech/image understanding, coding experiments and applications that cannot send data to a hosted API. It is not the largest or most expensive model here—and that is precisely why it is useful.</p>
+              <h3>What Gemma 4 12B is not</h3>
+              <p>It should not be compared with DeepSeek V4-Pro or Kimi K3 as if parameter scale were equal. The value proposition is deployment efficiency and multimodal local use, not replacing datacenter-scale models on every frontier reasoning task.</p>
+              <div class="tool-links"><a href="https://huggingface.co/google/gemma-4-12B" target="_blank" rel="noopener noreferrer">Official weights ↗</a><a href="https://developers.googleblog.com/gemma-4-12b-the-developer-guide/" target="_blank" rel="noopener noreferrer">Google local deployment guide ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="kimi-k3">
+              <div class="tool-review-head"><span>06</span><div><p class="eyebrow">MOONSHOT AI</p><h2>Kimi K3: frontier open weights at 2.8T parameters with a custom license</h2></div></div>
+              <p>Kimi K3 is the scale outlier. Moonshot lists <strong>2.8 trillion total parameters, 104 billion activated per token</strong>, native multimodality and a <strong>1,048,576-token context window</strong>. The published weights use MXFP4 with MXFP8 activations and are split across 96 large shards.</p>
+              <p>The licensing distinction is equally important: Kimi K3 uses the <strong>Kimi K3 License</strong>, not MIT or Apache 2.0. The weights are openly downloadable, but any commercial or redistribution decision should be based on the actual custom license rather than assuming “open weights” means standard permissive terms.</p>
+              <div class="tool-facts"><div><span>Total / active</span><strong>2.8T / 104B</strong></div><div><span>Context</span><strong>1M</strong></div><div><span>License</span><strong>Kimi K3 License</strong></div><div><span>Deployment</span><strong>Datacenter-class</strong></div></div>
+              <h3>Who is Kimi K3 for?</h3>
+              <p>Organizations and researchers exploring frontier-scale multimodal agents, long-context knowledge work and coding where model ownership matters and distributed infrastructure is already available. It is not a realistic “download and run on my gaming PC” model.</p>
+              <div class="tool-links"><a href="https://huggingface.co/moonshotai/Kimi-K3" target="_blank" rel="noopener noreferrer">Official model card ↗</a></div>
+            </section>
+
+            <section id="local-use">
+              <p class="eyebrow">LOCAL AI</p>
+              <h2>What is the best open-source AI model to run locally in 2026?</h2>
+              <p><strong>Gemma 4 12B is the practical answer in this shortlist.</strong> It is the only model here whose publisher explicitly targets dedicated-GPU laptops around the 16 GB VRAM/unified-memory class. Mistral Small 4 is the next step up if you have a high-memory workstation or multi-GPU server and want much more model capacity.</p>
+              <div class="guide-decision-table">
+                <div><span>Laptop / 16 GB-class</span><strong>Gemma 4 12B</strong><p>Google provides a local deployment path and targets consumer-grade devices.</p></div>
+                <div><span>High-memory workstation</span><strong>Mistral Small 4 NVFP4</strong><p>The official quantized checkpoint is ~70.8 GB before runtime overhead and KV cache.</p></div>
+                <div><span>Multi-GPU server</span><strong>Qwen3.5 or GLM-5</strong><p>Useful when model scale and agent capability justify distributed serving complexity.</p></div>
+                <div><span>Datacenter / multi-node</span><strong>DeepSeek V4-Pro or Kimi K3</strong><p>Frontier-scale weights whose storage and memory footprint dominate deployment design.</p></div>
+              </div>
+              <div class="guide-callout"><strong>Local does not mean offline laptop</strong><p>Every model with downloadable weights is technically self-hostable. That does not make every model practical on a single machine. “Local AI” should describe the hardware you actually control, from a laptop to a private GPU cluster.</p></div>
+            </section>
+
+            <section id="hardware">
+              <p class="eyebrow">HARDWARE REQUIREMENTS</p>
+              <h2>How much RAM or VRAM do open-source AI models need?</h2>
+              <p>There is no single VRAM number that follows directly from parameter count. Precision determines weight memory; MoE routing determines active compute; context length determines KV-cache growth; and runtimes may split weights across GPU, CPU and multiple nodes. The same model can therefore have very different hardware requirements at 4-bit quantization and 8K context versus BF16 and 256K context.</p>
+              <div class="hardware-ladder">
+                <div><span>~16 GB class</span><strong>Gemma 4 12B</strong><p>Google explicitly targets optimized local execution on dedicated-GPU laptops with 16 GB VRAM or unified memory.</p></div>
+                <div><span>~70+ GB checkpoint</span><strong>Mistral Small 4 NVFP4</strong><p>Official quantized files total about 70.8 GB, before runtime buffers and context cache.</p></div>
+                <div><span>Hundreds of GB</span><strong>Qwen3.5 / GLM-5</strong><p>Large MoE models where multi-GPU serving is a realistic baseline rather than an edge case.</p></div>
+                <div><span>~865 GB repository</span><strong>DeepSeek V4-Pro</strong><p>Distributed deployment territory even though only 49B parameters are activated per token.</p></div>
+                <div><span>Multi-terabyte-scale parameter pool</span><strong>Kimi K3</strong><p>2.8T total parameters and 104B active: architect for datacenter serving, not desktop inference.</p></div>
+              </div>
+              <h3>Why active parameters do not equal VRAM requirements</h3>
+              <p>In an MoE model, active parameters tell you roughly how much expert compute is used per token. They do <em>not</em> tell you how much memory is needed to store the expert pool. A 397B model with 17B active still has hundreds of billions of learned parameters that must be stored or distributed across devices.</p>
+            </section>
+
+            <section id="coding">
+              <p class="eyebrow">OPEN MODELS FOR CODING</p>
+              <h2>What is the best open-source AI model for coding?</h2>
+              <p>For frontier-scale coding, <strong>DeepSeek V4-Pro</strong> and <strong>GLM-5</strong> deserve evaluation because both are explicitly aimed at difficult coding and agentic engineering. <strong>Qwen3.5</strong> is attractive when coding sits inside a multilingual or multimodal agent. <strong>Mistral Small 4</strong> is easier to self-host and includes native function calling with configurable reasoning. <strong>Gemma 4 12B</strong> is the practical local coding option when hardware limits matter.</p>
+              <p>SXF does not declare a benchmark winner from vendor cards because coding evaluations are extremely harness-sensitive. A SWE-bench result obtained with one agent framework, context policy and retry budget is not automatically comparable with a number produced under another setup.</p>
+              <div class="tool-links"><a href="/guides/best-ai-coding-tools/">Best AI Coding Tools in 2026 ↗</a><a href="/topics/coding-ai/">Coding AI signals ↗</a></div>
+            </section>
+
+            <section id="agents">
+              <p class="eyebrow">OPEN MODELS FOR AGENTS</p>
+              <h2>Which open model is best for AI agents and tool use?</h2>
+              <p>Agent models need more than reasoning scores. They need stable structured outputs, tool-call accuracy, context management and affordable repeated inference. GLM-5 is explicitly trained and evaluated for long-horizon agents; Qwen3.5 emphasizes agent scaffolds and multilingual multimodality; Mistral Small 4 exposes native function calling and JSON output; Gemma 4 adds native function calling in a much smaller deployment envelope.</p>
+              <p>For autonomous systems, deployment reliability may matter more than another few benchmark points. A model that fits comfortably in your infrastructure, supports your serving stack and has predictable tool behavior can outperform a larger model operationally because you can run more parallel agents, keep latency under control and inspect failures.</p>
+            </section>
+
+            <section id="commercial-use">
+              <p class="eyebrow">LICENSES & COMMERCIAL USE</p>
+              <h2>Can you use open-source AI models commercially?</h2>
+              <p><strong>MIT and Apache 2.0 are permissive licenses commonly used for commercial software</strong>, but you still need to comply with their notice, attribution and other terms. DeepSeek V4-Pro and GLM-5 publish MIT metadata; Qwen3.5, Mistral Small 4 and Gemma 4 12B publish Apache 2.0 metadata.</p>
+              <p><strong>Kimi K3 is different.</strong> It uses a custom Kimi K3 License. A custom license can still permit broad deployment, but you should read its actual conditions before building a commercial product, redistributing derivatives or offering the model as a service.</p>
+              <h3>Model license vs application compliance</h3>
+              <p>A permissive model license does not resolve every legal issue around your application. Training-data rights, output usage, privacy, sector regulation, export controls and downstream datasets can create separate obligations. Treat the model license as one layer of compliance, not the whole answer.</p>
+              <div class="guide-callout"><strong>Important distinction</strong><p>“Apache 2.0 weights” is a precise statement about released artifacts. “Fully open-source AI system” is a broader claim. SXF keeps those statements separate.</p></div>
+            </section>
+
+            <section id="benchmarks">
+              <p class="eyebrow">BENCHMARKS</p>
+              <h2>How should you compare open-source AI model performance without fooling yourself?</h2>
+              <p>Official model cards are useful, but they are not a neutral league table. Vendors may use different prompt templates, reasoning budgets, tool harnesses, maximum context, judge models and retry policies. This is especially visible in agentic coding, where the surrounding harness can change the result as much as the base model.</p>
+              <div class="guide-criteria">
+                <article><span>01</span><h3>Match the harness</h3><p>Do not compare two benchmark numbers unless model settings, tools and evaluation rules are materially equivalent.</p></article>
+                <article><span>02</span><h3>Measure cost</h3><p>A higher score may require much longer reasoning traces or more agent steps. Track tokens, wall time and GPU cost.</p></article>
+                <article><span>03</span><h3>Use your data</h3><p>Build a private eval set from real tickets, documents, languages and failure modes rather than optimizing for public benchmarks only.</p></article>
+                <article><span>04</span><h3>Measure reliability</h3><p>For agents, pass rate across repeated runs matters more than one impressive output.</p></article>
+              </div>
+              <p>The right question is not “which model has the highest global score?” It is “which model meets our quality threshold at the latency, hardware, licensing and cost envelope we can operate?”</p>
+            </section>
+
+            <section id="how-to-choose">
+              <p class="eyebrow">DECISION FRAMEWORK</p>
+              <h2>How to choose an open-source AI model in 2026</h2>
+              <div class="guide-decision-table">
+                <div><span>You need local multimodal AI</span><strong>Start with Gemma 4 12B</strong><p>Small enough for optimized laptop-class deployment, 256K context, audio/image input and Apache 2.0 weights.</p></div>
+                <div><span>You need a self-hosted enterprise middle tier</span><strong>Evaluate Mistral Small 4</strong><p>Apache 2.0, 119B/6.5B MoE, vision, reasoning, coding and a 70.8 GB official NVFP4 checkpoint.</p></div>
+                <div><span>You need multilingual multimodal scale</span><strong>Evaluate Qwen3.5-397B-A17B</strong><p>201-language coverage, image input, Apache 2.0 and an efficient 17B-active MoE architecture.</p></div>
+                <div><span>You need coding / systems agents</span><strong>Evaluate GLM-5 and DeepSeek V4-Pro</strong><p>Both target difficult reasoning and engineering workloads, but require substantial serving infrastructure.</p></div>
+                <div><span>You need frontier open-weight scale</span><strong>Evaluate Kimi K3</strong><p>2.8T total, 104B active and 1M context—if the custom license and datacenter footprint fit your deployment.</p></div>
+                <div><span>You need commercial simplicity</span><strong>Prefer clear MIT or Apache 2.0 releases</strong><p>Then separately verify whether the overall system meets your organization's definition of open source and compliance requirements.</p></div>
+              </div>
+            </section>
+
+            <section class="guide-faq-section" id="faq">
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions about open-source AI models</h2>
+              <div class="model-faq">{faq_html}</div>
+            </section>
+
+            <section class="guide-sources">
+              <p class="eyebrow">PRIMARY SOURCES</p>
+              <h2>Official sources used for this guide</h2>
+              <p>SXF verifies licenses, parameter counts, context limits and deployment details against official model cards, vendor documentation and the Open Source Initiative. Vendor benchmark claims are treated as attributed evidence, not independent SXF measurements.</p>
+              <div class="model-sources">{source_links}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -1942,6 +2296,17 @@ def guides_index_html(items, current_items):
             "meta": "Models · Pricing · API · Agents",
             "updated": "Sep 25, 2026",
             "read_time": "22 min",
+        },
+        {
+            "href": "/guides/open-source-ai-models/",
+            "category": "Open Source · Models",
+            "categories": ["open-source", "models", "coding", "agents", "research"],
+            "kicker": "OPEN MODEL GUIDE",
+            "title": "Best Open-Source AI Models in 2026",
+            "description": "DeepSeek, Qwen, GLM, Mistral, Gemma and Kimi compared by license, architecture, context, hardware and local deployment.",
+            "meta": "Licenses · Hardware · Local AI",
+            "updated": "Sep 26, 2026",
+            "read_time": "24 min",
         },
         {
             "href": f"/compare/{GPT6_COMPARE_SLUG}/",
@@ -2417,6 +2782,9 @@ def build_discovery_pages(items, current_items):
     model_guide_path = GUIDES_DIR / "gpt-6-vs-claude"
     model_guide_path.mkdir(parents=True, exist_ok=True)
     (model_guide_path / "index.html").write_text(gpt6_vs_claude_guide_html(items), encoding="utf-8")
+    open_models_guide_path = GUIDES_DIR / "open-source-ai-models"
+    open_models_guide_path.mkdir(parents=True, exist_ok=True)
+    (open_models_guide_path / "index.html").write_text(open_source_ai_models_guide_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -2468,6 +2836,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/", generated_today),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
+        sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]

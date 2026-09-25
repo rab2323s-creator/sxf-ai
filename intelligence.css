@@ -345,3 +345,19 @@
 .guide-inline-cta>a:hover{border-color:rgba(200,255,77,.35);color:var(--accent)}
 @media(max-width:900px){.guide-cost-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.guide-decision-table>div{grid-template-columns:1fr}.guide-inline-cta{grid-template-columns:1fr}.guide-inline-cta>a{justify-self:start}}
 @media(max-width:720px){.guide-matchup-grid,.guide-cost-grid{grid-template-columns:1fr}}
+
+
+/* Open-source AI models guide */
+.open-model-table th:first-child{min-width:190px}
+.open-model-table td:last-child{min-width:240px}
+.license-badge{display:inline-flex;align-items:center;padding:5px 8px;border:1px solid var(--line);border-radius:999px;font-size:9px;font-weight:850;white-space:nowrap}
+.license-badge.license-permissive{border-color:rgba(200,255,77,.24);color:var(--accent);background:rgba(200,255,77,.035)}
+.license-badge.license-custom{border-color:rgba(142,159,255,.24);color:#aab8ff;background:rgba(142,159,255,.035)}
+.open-model-criteria{grid-template-columns:repeat(3,minmax(0,1fr))}
+.hardware-ladder{margin:28px 0;border-top:1px solid var(--line)}
+.hardware-ladder>div{display:grid;grid-template-columns:180px 240px 1fr;gap:22px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+.hardware-ladder span{color:#697582;font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.hardware-ladder strong{font-size:14px;line-height:1.45}
+.hardware-ladder p{margin:0!important;color:#7c8894!important;font-size:12px!important;line-height:1.65!important}
+@media(max-width:900px){.open-model-criteria{grid-template-columns:repeat(2,minmax(0,1fr))}.hardware-ladder>div{grid-template-columns:1fr}}
+@media(max-width:720px){.open-model-criteria{grid-template-columns:1fr}}
