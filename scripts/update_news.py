@@ -33,7 +33,8 @@ SOURCES = [
 USER_AGENT = "SXF-AI-Radar/1.1 (+https://sxf.si/)"
 MAX_ITEMS = 80
 MAX_AGE_DAYS = 21
-MAX_META_ENRICH_PER_RUN = 12
+MAX_META_ENRICH_PER_RUN = 8
+INITIAL_ARCHIVE_DAYS = 35
 
 def text(node, *names):
     for name in names:
@@ -613,6 +614,7 @@ def extract_models(title):
         for match in pattern.findall(text_value):
             name = re.sub(r"\s+", " ", match).strip()
             name = re.sub(r"gpt", "GPT", name, flags=re.I)
+            name = re.sub(r"^GPT\s+(?=\d)", "GPT-", name)
             name = re.sub(r"claude", "Claude", name, flags=re.I)
             name = re.sub(r"gemini", "Gemini", name, flags=re.I)
             if name and name not in found:
@@ -1036,6 +1038,11 @@ def main():
     if not existing:
         existing = load_items(OUT)
     existing_by_url = {item.get("url"): item for item in existing if item.get("url")}
+    ingest_cutoff = datetime.now(timezone.utc) - timedelta(days=INITIAL_ARCHIVE_DAYS)
+    incoming = [
+        item for item in incoming
+        if parse_date(item.get("published", "")) is not None and parse_date(item["published"]) >= ingest_cutoff
+    ]
     enriched = enrich_summaries(incoming, existing_by_url)
 
     archive = merge_archive(existing, incoming)
