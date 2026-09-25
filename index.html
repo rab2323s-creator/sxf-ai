@@ -33,10 +33,16 @@
     "@graph":[
       {
         "@type":"Organization",
-        "@id":"https://sxf.si/#organization",
-        "name":"SXF / AI",
-        "url":"https://sxf.si/",
-        "logo":{"@type":"ImageObject","url":"https://sxf.si/favicon.svg"}
+        "@id":"https://vivamediacreative.com/#organization",
+        "name":"Viva Media Creative",
+        "url":"https://vivamediacreative.com/"
+      },
+      {
+        "@type":"Organization",
+        "@id":"https://vivamediacreative.com/labs/#organization",
+        "name":"VMC Labs",
+        "url":"https://vivamediacreative.com/labs/",
+        "parentOrganization":{"@id":"https://vivamediacreative.com/#organization"}
       },
       {
         "@type":"WebSite",
@@ -44,7 +50,7 @@
         "url":"https://sxf.si/",
         "name":"SXF / AI",
         "description":"A focused radar for important artificial intelligence models, tools, open-source releases and research.",
-        "publisher":{"@id":"https://sxf.si/#organization"},
+        "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
         "inLanguage":"en"
       },
       {
@@ -54,6 +60,7 @@
         "name":"SXF / AI — Essential AI News, Models, Tools & Research",
         "description":"Track the most important AI models, tools, open-source releases and research from primary sources.",
         "isPartOf":{"@id":"https://sxf.si/#website"},
+        "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
         "about":{"@type":"Thing","name":"Artificial intelligence"},
         "inLanguage":"en"
       }
@@ -77,7 +84,7 @@
         <span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span>
       </a>
       <nav class="top-nav" aria-label="Primary navigation">
-        <a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a>
+        <a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/about/">About</a>
       </nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div>
@@ -241,6 +248,7 @@
         <article><span>01</span><h3>Fast by design</h3><p>No framework bloat, no heavy media, no unnecessary dependencies.</p></article>
         <article><span>02</span><h3>Source first</h3><p>Every signal points back to the original publisher for context and verification.</p></article>
         <article><span>03</span><h3>Noise resistant</h3><p>A compact interface built for scanning what changed — not maximizing time on site.</p></article>
+        <article><span>04</span><h3>Transparent by default</h3><p>Read how SXF selects sources, separates signal from noise, and who develops the project on the <a href="/about/">About page</a>.</p></article>
       </div>
     </section>
   </main>
