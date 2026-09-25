@@ -321,6 +321,8 @@ BASE_URL = "https://sxf.si"
 SIGNALS_DIR = ROOT / "signals"
 TOPICS_DIR = ROOT / "topics"
 BRIEF_DIR = ROOT / "brief"
+COMPARE_DIR = ROOT / "compare"
+GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 
 TOPICS = [
     {
@@ -800,7 +802,7 @@ def model_reference_html(name):
     return f'''<section class="model-reference shell">
       <div class="model-reference-intro">{intro}{facts}</div>
       <div class="model-comparison">
-        <div class="intel-section-head"><div><p class="eyebrow">FAMILY COMPARISON</p><h2>Astra, Sol and Luna.</h2></div><span>Official OpenAI specifications</span></div>
+        <div class="intel-section-head"><div><p class="eyebrow">FAMILY COMPARISON</p><h2>Astra, Sol and Luna.</h2></div><a class="comparison-cta" href="/compare/{GPT6_COMPARE_SLUG}/">Full decision guide ↗</a></div>
         <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
         <p class="reference-note">{escape(ref["pricing_note"])}</p>
       </div>
@@ -1209,6 +1211,87 @@ def model_page_html(name, items):
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
+
+def gpt6_comparison_html(items):
+    canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    ref = MODEL_REFERENCE["GPT-6"]
+    variants = ref["variants"]
+    family_signals = [item for item in items if any(name.startswith("GPT-6") for name in extract_models(item["title"]))][:10]
+
+    def money(value):
+        return ("$" + f"{value:,.3f}").rstrip("0").rstrip(".")
+
+    short_examples, monthly_examples = [], []
+    for v in variants:
+        input_rate = float(v["input_price"].replace("$", ""))
+        output_rate = float(v["output_price"].replace("$", ""))
+        short_examples.append((v["name"], money(input_rate * 0.1 + output_rate * 0.01)))
+        monthly_examples.append((v["name"], money(input_rate * 10 + output_rate)))
+
+    short_cards = "".join(
+        f'<div><span>{escape(name)}</span><strong>{escape(cost)}</strong><small>100K input + 10K output</small></div>'
+        for name, cost in short_examples
+    )
+    monthly_cards = "".join(
+        f'<div><span>{escape(name)}</span><strong>{escape(cost)}</strong><small>10M input + 1M output</small></div>'
+        for name, cost in monthly_examples
+    )
+    rows = "".join(
+        f'''<tr><th scope="row"><a href="/models/{escape(slugify(v["name"]), quote=True)}/">{escape(v["name"])}</a><small>{escape(v["model_id"])}</small></th>
+        <td>{escape(v["positioning"])}</td><td>{escape(v["best_for"])}</td><td>{escape(v["context"])}</td><td>{escape(v["max_output"])}</td>
+        <td>{escape(v["input_price"])}</td><td>{escape(v["cached_price"])}</td><td>{escape(v["output_price"])}</td></tr>'''
+        for v in variants
+    )
+    source_links = "".join(
+        f'<a href="{escape(v["source"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(v["name"])} model card</span><b>↗</b></a>'
+        for v in variants
+    ) + '<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>OpenAI API pricing</span><b>↗</b></a>'
+    signal_rows = "".join(signal_row(item) for item in family_signals)
+    faq_items = [
+        ("What is the difference between GPT-6 Astra, Sol and Luna?", "OpenAI positions Astra as its most capable model for the hardest end-to-end work, Sol for complex coding and agentic workflows, and Luna as its most efficient option for focused high-volume tasks."),
+        ("Do GPT-6 Astra, Sol and Luna have the same context window?", "Yes. OpenAI lists a 1,050,000-token context window and a 128,000-token maximum output for all three models."),
+        ("Which GPT-6 model is cheapest?", "GPT-6 Luna has the lowest listed token prices: $0.10 per 1M input tokens, $0.01 cached input and $0.50 output at the listed short-context rates."),
+        ("When does GPT-6 long-context pricing apply?", "OpenAI states that prompts above 272K input tokens use higher rates for the full request: 2x input and cache rates and 1.5x output rates."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q, a in faq_items)
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {"@type":"WebPage","@id":canonical+"#webpage","url":canonical,"name":"GPT-6 Astra vs Sol vs Luna: Pricing, Context & Use Cases","description":"Compare GPT-6 Astra, Sol and Luna on API pricing, context window, output limits and official use-case positioning.","dateModified":verified,"isPartOf":{"@id":"https://sxf.si/#website"},"about":[{"@type":"Thing","name":v["name"]} for v in variants],"citation":[v["source"] for v in variants]+["https://developers.openai.com/api/docs/pricing"],"inLanguage":"en"},
+            {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},{"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},{"@type":"ListItem","position":3,"name":"GPT-6 comparison","item":canonical}]},
+            {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]},
+        ],
+    }
+    description = "GPT-6 Astra vs Sol vs Luna: compare OpenAI API pricing, 1.05M context windows, 128K output limits and official use-case positioning."
+    return f'''<!doctype html><html lang="en">{page_head("GPT-6 Astra vs Sol vs Luna — Pricing & Use Cases | SXF / AI", description, canonical, schema)}
+    <body class="intel-page comparison-page">{page_header("models")}<main>
+      <section class="comparison-hero shell"><nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-6 comparison</span></nav>
+      <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p><h1>GPT-6 Astra<br><span>vs Sol vs Luna.</span></h1>
+      <p>A decision-oriented comparison built from OpenAI’s official model cards and API pricing. Same 1.05M context window. Very different capability positioning and unit economics.</p>
+      <div class="hero-actions"><a class="primary-cta" href="#decision">Choose by workload <span>↓</span></a><a class="secondary-cta" href="/models/gpt-6/">GPT-6 reference</a></div></section>
+
+      <section id="decision" class="decision-grid shell">
+        <article><span>ASTRA</span><h2>Maximize capability.</h2><p>For the hardest end-to-end work: complex reasoning, coding, computer use, research and document creation.</p><strong>$10 input · $50 output</strong><a href="/models/gpt-6-astra/">GPT-6 Astra reference ↗</a></article>
+        <article><span>SOL</span><h2>Balance capability and cost.</h2><p>Built for complex coding and agentic workflows, at one-fifth of Astra’s listed short-context token rates.</p><strong>$2 input · $10 output</strong><a href="/models/gpt-6-sol/">GPT-6 Sol reference ↗</a></article>
+        <article><span>LUNA</span><h2>Optimize for volume.</h2><p>OpenAI’s most efficient GPT-6 option for focused, high-volume tasks and cost-sensitive workloads.</p><strong>$0.10 input · $0.50 output</strong><a href="/models/gpt-6-luna/">GPT-6 Luna reference ↗</a></article>
+      </section>
+
+      <section class="comparison-table-section shell"><div class="intel-section-head"><div><p class="eyebrow">SPECIFICATIONS</p><h2>Side-by-side.</h2></div><span>Prices per 1M tokens</span></div>
+      <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Positioning</th><th>Best fit</th><th>Context</th><th>Max output</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="reference-note">Listed rates are the official short-context token prices shown on OpenAI’s model cards. Prompts above 272K input tokens use 2x input/cache rates and 1.5x output rates for the full request.</p></section>
+
+      <section class="cost-section shell"><div class="intel-section-head"><div><p class="eyebrow">COST EXAMPLES</p><h2>What the price gap means.</h2></div><span>Token charges only</span></div>
+      <h3>One short-context workload</h3><div class="cost-grid">{short_cards}</div><h3>Monthly volume</h3><div class="cost-grid">{monthly_cards}</div>
+      <p class="reference-note">Monthly example assumes requests remain at or below 272K input tokens each. Tool calls, regional processing and other service tiers can change total cost.</p></section>
+
+      <section class="comparison-notes shell"><article><p class="eyebrow">WHAT STAYS THE SAME</p><h2>Context is not the differentiator.</h2><p>All three official model cards list a 1,050,000-token context window and 128,000 maximum output tokens. The choice is driven more by capability needs, workload type and cost.</p></article>
+      <article><p class="eyebrow">PRICE RATIO</p><h2>100× from Luna to Astra.</h2><p>At the listed short-context rates, Astra’s input and output token prices are 100× Luna’s. Sol sits at 20× Luna and one-fifth of Astra.</p></article></section>
+
+      <section class="model-reference-lower shell"><div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div><div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div></section>
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST GPT-6 SIGNALS</p><h2>What changed recently.</h2></div><a href="/models/gpt-6/">GPT-6 reference ↗</a></div><div class="signal-list">{signal_rows}</div></section>
+    </main>{page_footer()}</body></html>'''
+
 def brief_issue_html(items, issue_date):
     selected = select_brief_items(items)
     pretty = issue_date.strftime("%B %-d, %Y")
@@ -1250,6 +1333,7 @@ def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
     BRIEF_DIR.mkdir(parents=True, exist_ok=True)
+    COMPARE_DIR.mkdir(parents=True, exist_ok=True)
 
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
@@ -1271,6 +1355,10 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(model_page_html(name, matched), encoding="utf-8")
 
+    comparison_path = COMPARE_DIR / GPT6_COMPARE_SLUG
+    comparison_path.mkdir(parents=True, exist_ok=True)
+    (comparison_path / "index.html").write_text(gpt6_comparison_html(items), encoding="utf-8")
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -1291,6 +1379,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/topics/", generated_today),
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
     ]
 
     for item in items:
