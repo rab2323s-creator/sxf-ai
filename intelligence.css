@@ -10,7 +10,8 @@
 .intel-kicker{display:flex;align-items:center;gap:10px;margin-bottom:20px;color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.16em}
 .intel-hero{padding:58px 0 0}
 .intel-hero h1{max-width:1040px;margin:0;font-size:clamp(42px,6vw,82px);line-height:.95;letter-spacing:-.058em}
-.signal-meta-strip,.collection-stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.signal-meta-strip{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.collection-stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .signal-meta-strip>div,.collection-stats>div{min-height:92px;padding:19px 22px 18px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
 .signal-meta-strip>div+div,.collection-stats>div+div{padding-left:22px}.signal-meta-strip>div:last-child,.collection-stats>div:last-child{border-right:0}
 .signal-meta-strip span,.collection-stats span{color:#5e6977;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
