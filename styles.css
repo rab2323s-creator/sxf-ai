@@ -514,3 +514,14 @@ button,input{font:inherit}
   .hero-radar-sweep,.signal-node i{animation:none}
   .hero-live-signal{transition:none}
 }
+
+/* SXF INTERNAL DISCOVERY GATEWAYS */
+.discovery-gateways{padding:28px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.discovery-gateway{min-height:210px;border:1px solid var(--line);border-radius:20px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.008));display:grid;grid-template-rows:auto 1fr auto;transition:transform .2s ease,border-color .2s ease}
+.discovery-gateway:hover{transform:translateY(-3px);border-color:rgba(200,255,77,.26)}
+.gateway-index{color:#596573;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em}
+.discovery-gateway div{align-self:end}
+.discovery-gateway strong{display:block;font-size:28px;letter-spacing:-.045em}
+.discovery-gateway p{max-width:520px;margin:8px 0 22px;color:#7e8997;font-size:13px;line-height:1.65}
+.discovery-gateway b{color:var(--accent);font-size:11px;font-weight:800}
+@media(max-width:720px){.discovery-gateways{grid-template-columns:1fr}.discovery-gateway{min-height:180px}}

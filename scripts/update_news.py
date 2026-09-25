@@ -229,6 +229,8 @@ def update_section_pages(items):
         }
         schema_html = '<script type="application/ld+json" id="section-signals-schema">' + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
         page = replace_block(page, "<!-- SXF:SECTION_SCHEMA_START -->", "<!-- SXF:SECTION_SCHEMA_END -->", schema_html)
+        if category == "Models":
+            page = replace_block(page, "<!-- SXF:TRACKED_MODELS_START -->", "<!-- SXF:TRACKED_MODELS_END -->", tracked_models_html(items))
         path.write_text(page, encoding="utf-8")
 
 
@@ -464,6 +466,17 @@ def model_groups(items):
             groups.setdefault(name, []).append(item)
     return dict(sorted(groups.items(), key=lambda kv: (-len(kv[1]), kv[0].lower())))
 
+def tracked_models_html(items):
+    groups = model_groups(items)
+    cards = []
+    for name, matched in list(groups.items())[:12]:
+        cards.append(
+            f'<a class="tracked-model" href="/models/{escape(slugify(name), quote=True)}/">'
+            f'<span>{len(matched):02d}</span><strong>{escape(name)}</strong>'
+            f'<small>{len(matched)} signal{"s" if len(matched) != 1 else ""}</small><b>↗</b></a>'
+        )
+    return "".join(cards)
+
 def topic_matches(item, topic):
     if topic.get("source") and item["source"] == topic["source"]:
         return True
@@ -498,6 +511,14 @@ def category_context(category):
         "Research": "Tracked in the Research layer for studies, evaluations, benchmarks, safety and scientific work.",
         "Open Source": "Tracked in the Open Source layer for repositories, weights, runtimes, frameworks and local AI.",
     }.get(category, "Tracked as part of the SXF AI signal layer.")
+
+def category_path(category):
+    return {
+        "Models": "/models/",
+        "Tools": "/tools/",
+        "Research": "/research/",
+        "Open Source": "/open-source/",
+    }.get(category, "/signals/")
 
 def page_header(active=""):
     links = [
@@ -616,7 +637,7 @@ def signal_page_html(item, items):
       {page_header()}
       <main id="signal-main">
         <section class="intel-hero shell">
-          <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><span>{escape(item["category"])}</span></nav>
+          <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="{escape(category_path(item["category"]), quote=True)}">{escape(item["category"])}</a></nav>
           <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / {escape(item["category"].upper())}</div>
           <h1>{escape(item["title"])}</h1>
           <div class="signal-meta-strip">
