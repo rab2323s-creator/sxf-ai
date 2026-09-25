@@ -3,54 +3,142 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SXF / AI — The AI signal. Without the noise.</title>
-  <meta name="description" content="A fast feed of important AI launches, models, tools, open-source releases and research from primary sources." />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="color-scheme" content="dark" />
+  <title>SXF / AI — The signal layer for artificial intelligence</title>
+  <meta name="description" content="SXF / AI tracks important AI models, tools, open-source releases and research from primary sources — fast, focused and noise-free." />
+  <meta name="theme-color" content="#07090d" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SXF / AI — The signal layer for artificial intelligence" />
+  <meta property="og:description" content="Important AI updates from primary sources. Fast, focused, noise-free." />
+  <meta property="og:url" content="https://sxf.si/" />
+  <meta name="twitter:card" content="summary" />
   <link rel="canonical" href="https://sxf.si/" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./site.webmanifest" />
   <link rel="stylesheet" href="./styles.css" />
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","name":"SXF / AI","url":"https://sxf.si/","description":"The AI signal. Without the noise."}
+  {"@context":"https://schema.org","@type":"WebSite","name":"SXF / AI","url":"https://sxf.si/","description":"The signal layer for artificial intelligence.","inLanguage":"en"}
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#latest">Skip to latest updates</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
   <header class="site-header">
-    <a class="brand" href="./" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-slash">/</span><span class="brand-ai">AI</span></a>
-    <nav class="top-nav" aria-label="Primary"><a href="#latest">Latest</a><a href="#sources">Sources</a><a href="#about">About</a></nav>
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="SXF AI home">
+        <span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#latest">Radar</a>
+        <a href="#sources">Sources</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div>
   </header>
+
   <main>
-    <section class="hero">
-      <p class="eyebrow">LIVE AI RADAR</p>
-      <h1>The AI signal.<br><span>Without the noise.</span></h1>
-      <p class="hero-copy">Important launches, models, tools, open-source releases and research — collected from primary sources.</p>
-      <div class="hero-meta"><span id="lastUpdated">Updating…</span><span class="dot">•</span><span id="storyCount">0 updates</span></div>
-    </section>
-    <section class="toolbar" id="latest">
-      <div class="filters" role="group" aria-label="Filter updates">
-        <button class="filter active" data-filter="All">All</button>
-        <button class="filter" data-filter="Models">Models</button>
-        <button class="filter" data-filter="Tools">Tools</button>
-        <button class="filter" data-filter="Open Source">Open Source</button>
-        <button class="filter" data-filter="Research">Research</button>
+    <section class="hero shell">
+      <div class="hero-kicker"><span class="pulse-dot"></span> LIVE INTELLIGENCE FEED</div>
+      <h1>AI moves fast.<br><span>SXF filters faster.</span></h1>
+      <p class="hero-copy">A focused radar for the AI developments worth knowing — models, tools, open source and research, pulled directly from primary sources.</p>
+      <div class="hero-actions">
+        <a class="primary-cta" href="#latest">Explore the radar <span>↘</span></a>
+        <a class="secondary-cta" href="#sources">View sources</a>
       </div>
-      <label class="search-wrap"><span class="sr-only">Search updates</span><input id="searchInput" type="search" placeholder="Search updates" autocomplete="off" /></label>
+      <div class="signal-strip" aria-label="Feed status">
+        <div><strong id="storyCount">—</strong><span>tracked updates</span></div>
+        <div><strong>4</strong><span>primary sources</span></div>
+        <div><strong>3h</strong><span>refresh cycle</span></div>
+        <div><strong id="lastUpdated">Syncing</strong><span>last refresh</span></div>
+      </div>
     </section>
-    <section class="feed-shell"><div id="feed" class="feed" aria-live="polite"></div><div id="emptyState" class="empty" hidden>No matching updates.</div></section>
-    <section class="newsletter" id="newsletter">
-      <div><p class="eyebrow">DAILY BRIEF</p><h2>5 AI updates that matter.</h2><p>Newsletter signup will be connected after launch. The first version stays completely free.</p></div>
-      <div class="newsletter-badge">COMING SOON</div>
+
+    <section class="source-marquee" aria-label="Tracked sources">
+      <div class="marquee-track">
+        <span>OPENAI</span><i>◆</i><span>GOOGLE AI</span><i>◆</i><span>HUGGING FACE</span><i>◆</i><span>GITHUB</span><i>◆</i>
+        <span>OPENAI</span><i>◆</i><span>GOOGLE AI</span><i>◆</i><span>HUGGING FACE</span><i>◆</i><span>GITHUB</span><i>◆</i>
+      </div>
     </section>
-    <section class="sources" id="sources">
-      <p class="eyebrow">PRIMARY SOURCES</p>
+
+    <section class="radar shell" id="latest">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE RADAR</p>
+          <h2>Latest signal</h2>
+        </div>
+        <p>Primary-source updates, ordered by recency.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filter updates">
+          <button class="filter active" data-filter="All">All</button>
+          <button class="filter" data-filter="Models">Models</button>
+          <button class="filter" data-filter="Tools">Tools</button>
+          <button class="filter" data-filter="Open Source">Open Source</button>
+          <button class="filter" data-filter="Research">Research</button>
+        </div>
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <span class="sr-only">Search updates</span>
+          <input id="searchInput" type="search" placeholder="Search the radar" autocomplete="off" />
+        </label>
+      </div>
+
+      <div id="featured" class="featured-wrap" aria-live="polite"></div>
+      <div id="feed" class="feed-grid" aria-live="polite"></div>
+      <div id="emptyState" class="empty" hidden>No matching signals found.</div>
+    </section>
+
+    <section class="brief shell" id="newsletter">
+      <div class="brief-glow" aria-hidden="true"></div>
+      <div>
+        <p class="eyebrow">SXF BRIEF</p>
+        <h2>Five signals.<br>Zero noise.</h2>
+      </div>
+      <div class="brief-copy">
+        <p>A concise AI briefing is next: the few developments that actually matter, delivered in minutes.</p>
+        <span class="coming-soon">COMING SOON</span>
+      </div>
+    </section>
+
+    <section class="sources shell" id="sources">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SOURCE LAYER</p>
+          <h2>Primary, not recycled.</h2>
+        </div>
+        <p>SXF links straight to the organizations publishing the updates.</p>
+      </div>
       <div class="source-grid">
-        <a href="https://openai.com/news/" target="_blank" rel="noopener">OpenAI</a>
-        <a href="https://blog.google/technology/ai/" target="_blank" rel="noopener">Google AI</a>
-        <a href="https://huggingface.co/blog" target="_blank" rel="noopener">Hugging Face</a>
-        <a href="https://github.blog/changelog/" target="_blank" rel="noopener">GitHub Changelog</a>
+        <a href="https://openai.com/news/" target="_blank" rel="noopener noreferrer"><span class="source-index">01</span><strong>OpenAI</strong><span>Official news & releases</span><b>↗</b></a>
+        <a href="https://blog.google/technology/ai/" target="_blank" rel="noopener noreferrer"><span class="source-index">02</span><strong>Google AI</strong><span>AI research & products</span><b>↗</b></a>
+        <a href="https://huggingface.co/blog" target="_blank" rel="noopener noreferrer"><span class="source-index">03</span><strong>Hugging Face</strong><span>Open ML ecosystem</span><b>↗</b></a>
+        <a href="https://github.blog/changelog/" target="_blank" rel="noopener noreferrer"><span class="source-index">04</span><strong>GitHub</strong><span>Developer AI updates</span><b>↗</b></a>
       </div>
     </section>
-    <section class="about" id="about"><p class="eyebrow">ABOUT SXF</p><h2>A compact radar for a fast-moving field.</h2><p>SXF / AI links to original sources and keeps summaries intentionally short. The goal is discovery, not republishing.</p></section>
+
+    <section class="about shell" id="about">
+      <div class="about-lead">
+        <p class="eyebrow">WHY SXF</p>
+        <h2>A signal layer for a field moving at machine speed.</h2>
+      </div>
+      <div class="principles">
+        <article><span>01</span><h3>Fast by design</h3><p>No framework bloat, no heavy media, no unnecessary dependencies.</p></article>
+        <article><span>02</span><h3>Source first</h3><p>Every signal points back to the original publisher for context and verification.</p></article>
+        <article><span>03</span><h3>Noise resistant</h3><p>A compact interface built for scanning what changed — not maximizing time on site.</p></article>
+      </div>
+    </section>
   </main>
-  <footer><span>© <span id="year"></span> SXF / AI</span><span>Independent AI discovery site.</span></footer>
+
+  <footer class="footer shell">
+    <a class="brand footer-brand" href="./"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+    <p>Independent AI discovery. Built for signal.</p>
+    <p>© <span id="year"></span> SXF</p>
+  </footer>
+
   <script src="./app.js" defer></script>
 </body>
 </html>
