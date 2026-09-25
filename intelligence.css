@@ -101,3 +101,32 @@
 .model-faq details p{padding:0 0 17px;margin:0;color:#7e8995;font-size:12px;line-height:1.7}
 @media(max-width:900px){.model-reference-intro,.model-reference-lower{grid-template-columns:1fr}}
 @media(max-width:620px){.model-reference{padding-top:10px}.model-reference-copy,.model-comparison,.model-sources,.model-faq{padding:20px}.model-fact-grid{grid-template-columns:1fr}.model-fact-grid>div,.model-fact-grid>div:nth-child(odd){border-right:0;border-bottom:1px solid var(--line)}.model-fact-grid>div:last-child{border-bottom:0}}
+
+
+/* GPT-6 comparison */
+.comparison-hero{padding:72px 0 30px}
+.comparison-hero h1{margin:18px 0 18px;font-size:clamp(54px,9vw,118px);line-height:.88;letter-spacing:-.065em}
+.comparison-hero h1 span{color:#66717e}
+.comparison-hero>p{max-width:820px;color:#8994a0;font-size:16px;line-height:1.75}
+.decision-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:38px 0}
+.decision-grid article{min-height:340px;padding:26px;border:1px solid var(--line);border-radius:20px;background:#0a0e13;display:flex;flex-direction:column}
+.decision-grid article>span{color:#687482;font-size:10px;letter-spacing:.15em}
+.decision-grid h2{margin:42px 0 14px;font-size:30px;line-height:1;letter-spacing:-.045em}
+.decision-grid p{color:#7e8995;font-size:13px;line-height:1.7}
+.decision-grid strong{margin-top:auto;color:#dbe2e8;font-size:13px}
+.decision-grid a{margin-top:16px;color:#99a4b0;font-size:11px;font-weight:800}
+.decision-grid a:hover,.comparison-cta:hover{color:var(--accent)}
+.comparison-table-section,.cost-section{padding:70px 0 10px}
+.comparison-table-section .model-table-wrap{background:#0a0e13}
+.cost-section h3{margin:30px 0 12px;color:#aab4bf;font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+.cost-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cost-grid>div{padding:24px;border:1px solid var(--line);border-radius:18px;background:#0a0e13}
+.cost-grid span{display:block;color:#687482;font-size:10px;letter-spacing:.12em}
+.cost-grid strong{display:block;margin-top:10px;font-size:34px;letter-spacing:-.05em}
+.cost-grid small{display:block;margin-top:6px;color:#6f7a87}
+.comparison-notes{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:76px 0 20px}
+.comparison-notes article{padding:28px;border:1px solid var(--line);border-radius:20px;background:#0a0e13}
+.comparison-notes h2{margin:8px 0 14px;font-size:34px;line-height:1;letter-spacing:-.045em}
+.comparison-notes p:last-child{color:#7f8a96;line-height:1.75}
+.comparison-cta{color:#8d98a5;font-size:11px;font-weight:800}
+@media(max-width:900px){.decision-grid,.cost-grid,.comparison-notes{grid-template-columns:1fr}.decision-grid article{min-height:260px}.comparison-hero{padding-top:52px}}
