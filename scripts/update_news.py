@@ -372,6 +372,12 @@ TOPICS = [
         "category": "Open Source",
         "keywords": ["open source", "open-source", "weights", "llama.cpp", "mlx", "repository"],
     },
+    {
+        "slug": "ai-security",
+        "name": "AI Security",
+        "description": "Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure.",
+        "keywords": ["security", "cyber", "sandbox", "sandboxing", "proof of presence"],
+    },
 ]
 
 MODEL_PATTERNS = [
@@ -541,6 +547,10 @@ def prepare_items(items):
         score, factors = signal_score(row)
         row["signal_score"] = score
         row["score_factors"] = factors
+        quality_score, quality_factors = seo_quality(row)
+        row["seo_quality_score"] = quality_score
+        row["seo_quality_factors"] = quality_factors
+        row["seo_eligible"] = seo_signal_eligible(row, quality_score)
         row["editorial"] = editorial_units(row)
         prepared.append(row)
     return prepared
@@ -637,6 +647,78 @@ def extract_models(title):
                     if parent not in found:
                         found.append(parent)
     return found
+
+SEO_MIN_SUMMARY_CHARS = 90
+SEO_MIN_QUALITY_SCORE = 50
+SEO_STRONG_EVENT = re.compile(
+    r"\bintroducing\b|\blaunch(?:ed|es)?\b|\brelease(?:d|s)?\b|\bnow available\b|"
+    r"\bavailable\b|\bbenchmark\b|\bevaluation\b|\bframework\b|\bpricing\b|"
+    r"\bsafety overview\b|\bnew features?\b|\bimprovements?\b|\bexpands?\b|\bprompt caching\b",
+    re.I,
+)
+SEO_HIGH_VALUE_TAGS = {
+    "GitHub Copilot", "AI Agents", "Coding AI", "Multimodal AI",
+    "Open Source AI", "Research", "Security",
+}
+MODEL_CASE_STUDY = re.compile(
+    r"\bhelps?\b|\btrusts?\b|\bcuts?\b|\bboost(?:ing|s|ed)?\b|\busing\b|\bwith GPT\b",
+    re.I,
+)
+
+def seo_quality(item):
+    summary_len = len(clean_summary(item.get("summary", "")))
+    score = 30 if summary_len >= 120 else 24 if summary_len >= 90 else 14 if summary_len >= 60 else 0
+    factors = []
+
+    if summary_len >= SEO_MIN_SUMMARY_CHARS:
+        factors.append("substantive-source-summary")
+    if SEO_STRONG_EVENT.search(item["title"]):
+        score += 18
+        factors.append("search-worthy-event")
+    if extract_models(item["title"]):
+        score += 18
+        factors.append("named-model")
+
+    signal = item.get("signal_score", 0)
+    score += 15 if signal >= 55 else 12 if signal >= 45 else 9 if signal >= 38 else 3
+
+    if item["category"] in {"Models", "Research", "Open Source"}:
+        score += 8
+        factors.append("durable-intelligence-layer")
+    if SEO_HIGH_VALUE_TAGS.intersection(item.get("tags", [])):
+        score += 10
+        factors.append("high-value-topic")
+
+    if item["category"] == "Models" and not SEO_STRONG_EVENT.search(item["title"]) and MODEL_CASE_STUDY.search(item["title"]):
+        score -= 20
+        factors.append("case-study-penalty")
+
+    return max(0, min(100, score)), factors
+
+def seo_signal_eligible(item, quality_score=None):
+    summary_len = len(clean_summary(item.get("summary", "")))
+    if summary_len < SEO_MIN_SUMMARY_CHARS:
+        return False
+    if quality_score is None:
+        quality_score, _ = seo_quality(item)
+    return quality_score >= SEO_MIN_QUALITY_SCORE
+
+def model_page_indexable(name, items):
+    substantive = [item for item in items if len(clean_summary(item.get("summary", ""))) >= SEO_MIN_SUMMARY_CHARS]
+    if len(items) >= 2 and len(substantive) >= 2:
+        return True
+    return any(
+        item.get("seo_eligible", seo_signal_eligible(item))
+        and SEO_STRONG_EVENT.search(item["title"])
+        for item in items
+    )
+
+def topic_page_indexable(items):
+    substantive = sum(
+        1 for item in items
+        if len(clean_summary(item.get("summary", ""))) >= SEO_MIN_SUMMARY_CHARS
+    )
+    return len(items) >= 3 and substantive >= 2
 
 def model_groups(items):
     groups = {}
@@ -789,7 +871,7 @@ def signal_page_html(item, items):
     canonical = item["signal_url"]
     description = compact_description(item)
     modified = item.get("modified_at") or item["published"]
-    indexable = bool(clean_summary(item.get("summary", "")))
+    indexable = bool(item.get("seo_eligible", seo_signal_eligible(item)))
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if indexable else "noindex,follow"
     schema = {
         "@context": "https://schema.org",
@@ -897,17 +979,25 @@ def signals_index_html(items):
 
 def topic_page_html(topic, items):
     canonical = f'{BASE_URL}/topics/{topic["slug"]}/'
+    latest = items[0]
+    latest_summary = clean_summary(latest.get("summary", "")) or compact_description(latest)
+    first_date = display_date(items[-1]["published"])
+    latest_date = display_date(latest["published"])
+    source_count = len({item["source"] for item in items})
+    robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if topic_page_indexable(items) else "noindex,follow"
     schema = {
         "@context": "https://schema.org", "@type": "CollectionPage",
         "name": f'{topic["name"]} AI Signals | SXF / AI', "url": canonical,
         "description": topic["description"], "isPartOf": {"@id": "https://sxf.si/#website"}, "inLanguage": "en"
     }
     rows = "".join(signal_row(item) for item in items[:30])
-    return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema)}
+    return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
       <p class="eyebrow">TOPIC INTELLIGENCE</p><h1>{escape(topic["name"])}<br><span>signal history.</span></h1><p>{escape(topic["description"])}</p>
-      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>Primary</strong><span>source links</span></div><div><strong>Live</strong><span>rolling index</span></div></div></section>
+      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
+      <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
+      <aside class="source-card"><span class="source-card-label">COVERAGE WINDOW</span><strong>{escape(topic["name"])}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RECENT</p><h2>Latest in {escape(topic["name"])}.</h2></div><a href="/topics/">All topics ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -928,13 +1018,21 @@ def model_page_html(name, items):
     slug = slugify(name)
     canonical = f"{BASE_URL}/models/{slug}/"
     description = f"Track {name} releases, capability changes and related primary-source signals on SXF / AI."
+    latest = items[0]
+    latest_summary = clean_summary(latest.get("summary", "")) or compact_description(latest)
+    first_date = display_date(items[-1]["published"])
+    latest_date = display_date(latest["published"])
+    source_count = len({item["source"] for item in items})
+    robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if model_page_indexable(name, items) else "noindex,follow"
     schema = {"@context":"https://schema.org","@type":"CollectionPage","name":f"{name} updates | SXF / AI","url":canonical,"description":description,"isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":name},"inLanguage":"en"}
     rows = "".join(signal_row(item) for item in items[:30])
-    return f'''<!doctype html><html lang="en">{page_head(name + " — Releases & Signals | SXF / AI", description, canonical, schema)}
+    return f'''<!doctype html><html lang="en">{page_head(name + " — Releases & Signals | SXF / AI", description, canonical, schema, robots=robots)}
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
       <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>release signals.</span></h1><p>{escape(description)}</p>
-      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>Primary</strong><span>source trail</span></div><div><strong>Rolling</strong><span>release history</span></div></div></section>
+      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
+      <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
+      <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>{escape(name)}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -948,7 +1046,7 @@ def brief_issue_html(items, issue_date):
     cards = ""
     for i,item in enumerate(selected, 1):
         cards += f'''<article class="brief-signal"><span class="brief-no">{i:02d}</span><div><div class="brief-meta"><strong>{escape(item["source"])}</strong><span>{escape(item["category"])}</span><span>SCORE {item.get("signal_score",0):02d}</span></div><h2><a href="/signals/{escape(item["signal_slug"], quote=True)}/">{escape(item["title"])}</a></h2><p>{escape(compact_description(item))}</p><a class="brief-open" href="/signals/{escape(item["signal_slug"], quote=True)}/">Open signal ↗</a></div></article>'''
-    return f'''<!doctype html><html lang="en">{page_head("SXF Brief — " + pretty, description, canonical, schema, "article")}
+    return f'''<!doctype html><html lang="en">{page_head("SXF Brief — " + pretty, description, canonical, schema, "article", "noindex,follow")}
     <body class="intel-page brief-page">{page_header("brief")}<main>
       <section class="brief-issue-hero shell"><div><p class="eyebrow">SXF BRIEF / {escape(slug)}</p><h1>Five signals.<br><span>Zero noise.</span></h1></div><p>Five high-priority signals selected by SXF’s internal scoring system, with source and category diversity built into the shortlist. Every item keeps the primary source attached.</p></section>
       <section class="brief-stack shell">{cards}</section>
@@ -1023,21 +1121,18 @@ def update_sitemap(items):
     ]
 
     for item in items:
-        if not clean_summary(item.get("summary", "")):
+        if not item.get("seo_eligible", seo_signal_eligible(item)):
             continue
         modified = parse_date(item.get("modified_at", "")) or parse_date(item["published"])
         rows.append(sitemap_entry(item["signal_url"], modified.date().isoformat()))
 
-    for slug, (_topic, _matched) in topic_groups(items).items():
-        rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", generated_today))
+    for slug, (_topic, matched) in topic_groups(items).items():
+        if topic_page_indexable(matched):
+            rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", generated_today))
 
-    for name in model_groups(items):
-        rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", generated_today))
-
-    if BRIEF_DIR.exists():
-        for p in sorted(BRIEF_DIR.iterdir()):
-            if p.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.name):
-                rows.append(sitemap_entry(f"{BASE_URL}/brief/{p.name}/", p.name))
+    for name, matched in model_groups(items).items():
+        if model_page_indexable(name, matched):
+            rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", generated_today))
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
@@ -1080,6 +1175,7 @@ def main():
         "items": archive,
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
+        "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     OUT.write_text(json.dumps({
