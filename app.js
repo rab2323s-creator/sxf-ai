@@ -87,7 +87,7 @@ filters.forEach(btn=>btn.addEventListener('click',()=>{
 }));
 search.addEventListener('input',e=>{state.query=e.target.value;render()});
 
-fetch('./data/news.json',{cache:'no-store'})
+fetch('./data/news.json',{cache:'no-cache'})
   .then(r=>{if(!r.ok)throw new Error('Could not load news');return r.json()})
   .then(data=>{
     state.items=Array.isArray(data.items)?data.items:[];

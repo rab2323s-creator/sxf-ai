@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
+ARCHIVE_OUT = ROOT / "data" / "archive.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -32,6 +33,7 @@ SOURCES = [
 USER_AGENT = "SXF-AI-Radar/1.1 (+https://sxf.si/)"
 MAX_ITEMS = 80
 MAX_AGE_DAYS = 21
+MAX_META_ENRICH_PER_RUN = 12
 
 def text(node, *names):
     for name in names:
@@ -53,7 +55,7 @@ def clean_summary(value):
 
 def parse_date(value):
     if not value:
-        return datetime.now(timezone.utc)
+        return None
     try:
         d = email.utils.parsedate_to_datetime(value)
         if d.tzinfo is None:
@@ -62,19 +64,55 @@ def parse_date(value):
     except Exception:
         pass
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+        d = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if d.tzinfo is None:
+            d = d.replace(tzinfo=timezone.utc)
+        return d.astimezone(timezone.utc)
     except Exception:
-        return datetime.now(timezone.utc)
+        return None
 
 def categorize(title, source):
-    t = title.lower()
-    if any(k in t for k in ["open source", "open-source", "github", "weights", "checkpoint"]):
-        return "Open Source"
-    if any(k in t for k in ["model", "gpt", "gemini", "claude", "llm", "vision", "reasoning", "multimodal", "embedding"]):
-        return "Models"
-    if any(k in t for k in ["research", "paper", "study", "benchmark", "evaluation", "science", "safety"]):
+    t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
+
+    # Product and developer surfaces beat incidental model mentions.
+    if re.search(r"\bcopilot\b|\bchatgpt\b|\bagents? api\b|\bsandbox(?:ing)?\b|\bcode reviews?\b|\bgithub actions\b", t):
+        if re.search(r"\bresearch\b|\bbenchmark\b|\bevaluation\b|\bstudy\b|\bsafety\b|\bmisalignment\b", t):
+            return "Research"
+        return "Tools"
+
+    if re.search(r"\bresearch\b|\bpaper\b|\bstudy\b|\bbenchmark\b|\bevaluation\b|\bscience\b|\bsafety\b|\bmisalignment\b|\bassessment\b", t):
         return "Research"
+
+    if re.search(r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b|\bquants?\b|\brepository release\b", t):
+        return "Open Source"
+
+    if re.search(r"\bgpt[- ]\d+(?:\.\d+)?\b|\bclaude(?:\s+[a-z]+)?\s+\d+(?:\.\d+)?\b|\bgemini(?:\s+\d+(?:\.\d+)?)?\b|\blfm\d+(?:\.\d+)?\b|\bllm\b|\bvision-language model\b|\bmultimodal model\b|\breasoning model\b|\bembedding model\b", t):
+        return "Models"
+
     return "Tools"
+
+def classify_tags(title, source, category):
+    t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
+    tags = []
+    rules = [
+        ("GitHub Copilot", r"\bcopilot\b"),
+        ("Coding AI", r"\bcode\b|\bcoding\b|\bcodex\b|\bdeveloper\b|\brepository\b|\bjetbrains\b"),
+        ("AI Agents", r"\bagents?\b|\bagentic\b"),
+        ("Security", r"\bsecurity\b|\bsafety\b|\bsandbox(?:ing)?\b|\bcyber\b|\bproof of presence\b"),
+        ("Multimodal AI", r"\bmultimodal\b|\bvision\b|\bimage\b|\bvideo\b|\bvoice\b|\baudio\b"),
+        ("Open Source AI", r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b|\bquants?\b"),
+        ("Research", r"\bresearch\b|\bpaper\b|\bstudy\b|\bbenchmark\b|\bevaluation\b|\bscience\b"),
+    ]
+    for label, pattern in rules:
+        if re.search(pattern, t):
+            tags.append(label)
+    if source == "OpenAI":
+        tags.append("OpenAI")
+    elif source == "Google AI":
+        tags.append("Google AI")
+    if category == "Open Source" and "Open Source AI" not in tags:
+        tags.append("Open Source AI")
+    return list(dict.fromkeys(tags))
 
 def fetch(url):
     req = urllib.request.Request(
@@ -93,9 +131,9 @@ def parse_feed(source, body):
     for item in root.findall(".//item"):
         title = clean_title(text(item, "title"))
         link = text(item, "link")
-        published = text(item, "pubDate", "date")
+        published = parse_date(text(item, "pubDate", "date"))
         summary = clean_summary(text(item, "description", "summary", "content"))
-        if title and link:
+        if title and link and published is not None:
             rows.append((title, link, published, summary))
     if not rows:
         for entry in root.findall(".//{*}entry"):
@@ -107,21 +145,62 @@ def parse_feed(source, body):
                 if href and rel in ("alternate", ""):
                     link = href
                     break
-            published = text(entry, "{*}published", "{*}updated")
+            published = parse_date(text(entry, "{*}published", "{*}updated"))
             summary = clean_summary(text(entry, "{*}summary", "{*}content"))
-            if title and link:
+            if title and link and published is not None:
                 rows.append((title, link, published, summary))
-    return [
-        {
+
+    output = []
+    for title, link, published, summary in rows:
+        category = categorize(title, source)
+        output.append({
             "title": title,
             "url": link,
             "source": source,
-            "published": parse_date(published).isoformat().replace("+00:00", "Z"),
-            "category": categorize(title, source),
+            "published": published.isoformat().replace("+00:00", "Z"),
+            "category": category,
+            "tags": classify_tags(title, source, category),
             "summary": summary,
-        }
-        for title, link, published, summary in rows
-    ]
+        })
+    return output
+
+def fetch_meta_description(url):
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"})
+        with urllib.request.urlopen(req, timeout=12) as r:
+            ctype = (r.headers.get("Content-Type") or "").lower()
+            if "html" not in ctype:
+                return ""
+            raw = r.read(350000).decode("utf-8", "ignore")
+        patterns = [
+            r'<meta[^>]+(?:name|property)=["\'](?:description|og:description)["\'][^>]+content=["\']([^"\']+)["\']',
+            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:name|property)=["\'](?:description|og:description)["\']',
+        ]
+        for pattern in patterns:
+            m = re.search(pattern, raw, re.I | re.S)
+            if m:
+                value = clean_summary(m.group(1))
+                if 40 <= len(value) <= 900:
+                    return value
+    except Exception:
+        pass
+    return ""
+
+def enrich_summaries(items, existing_by_url):
+    enriched = 0
+    floor = datetime.min.replace(tzinfo=timezone.utc)
+    for item in sorted(items, key=lambda x: parse_date(x["published"]) or floor, reverse=True):
+        if enriched >= MAX_META_ENRICH_PER_RUN:
+            break
+        previous = existing_by_url.get(item["url"], {})
+        if item.get("summary") or previous.get("summary"):
+            continue
+        summary = fetch_meta_description(item["url"])
+        if summary:
+            item["summary"] = summary
+            item["summary_origin"] = "source-meta"
+            enriched += 1
+    return enriched
 
 def valid_url(url):
     p = urlparse(url)
@@ -129,6 +208,8 @@ def valid_url(url):
 
 def relative_time(date_str):
     d = parse_date(date_str)
+    if d is None:
+        return ""
     diff = max(timedelta(0), datetime.now(timezone.utc) - d)
     minutes = int(diff.total_seconds() // 60)
     if minutes < 2:
@@ -324,7 +405,6 @@ SIGNAL_SCORE_RULES = [
 ]
 
 def signal_score(item, now=None):
-    now = now or datetime.now(timezone.utc)
     title = item["title"]
     score = 24
     factors = []
@@ -332,19 +412,6 @@ def signal_score(item, now=None):
         if pattern.search(title):
             score += points
             factors.append(label)
-
-    age_hours = max(0.0, (now - parse_date(item["published"])).total_seconds() / 3600)
-    if age_hours <= 12:
-        score += 18
-        factors.append("fresh")
-    elif age_hours <= 24:
-        score += 14
-        factors.append("recent")
-    elif age_hours <= 72:
-        score += 9
-        factors.append("recent")
-    elif age_hours <= 168:
-        score += 4
 
     if item["category"] == "Models":
         score += 8
@@ -354,9 +421,28 @@ def signal_score(item, now=None):
         score += 6
     else:
         score += 4
-
-    # Keep the score useful as an internal prioritization signal, not a claim of objective importance.
     return min(100, score), factors[:5]
+
+def brief_priority(item, now=None):
+    now = now or datetime.now(timezone.utc)
+    base = item.get("signal_score", 0)
+    published = parse_date(item.get("published", ""))
+    if published is None:
+        return base
+    age_hours = max(0.0, (now - published).total_seconds() / 3600)
+    freshness = 18 if age_hours <= 12 else 14 if age_hours <= 24 else 9 if age_hours <= 72 else 4 if age_hours <= 168 else 0
+    return min(100, base + freshness)
+
+def event_fingerprint(item):
+    title = item["title"].replace("‑", "-").replace("–", "-").replace("—", "-").lower()
+    models = sorted(set(slugify(name) for name in extract_models(item["title"])))
+    if models and re.search(r"\bintroducing\b|\brelease(?:d|s)?\b|\bavailable\b|\blaunch(?:ed|es)?\b", title):
+        return "model-release:" + "|".join(models)
+    tokens = [
+        token for token in re.findall(r"[a-z0-9]+", title)
+        if len(token) > 3 and token not in STOPWORDS and token not in {"openai","github","google","hugging","face"}
+    ]
+    return "title:" + "-".join(tokens[:8])
 
 def editorial_units(item):
     title = item["title"]
@@ -392,34 +478,40 @@ def editorial_units(item):
     }
 
 def select_brief_items(items, limit=5):
+    floor = datetime.min.replace(tzinfo=timezone.utc)
     ranked = sorted(
         items,
-        key=lambda item: (item.get("signal_score", 0), parse_date(item["published"])),
+        key=lambda item: (brief_priority(item), parse_date(item["published"]) or floor),
         reverse=True,
     )
     selected = []
     source_counts = {}
     category_counts = {}
+    events = set()
 
-    # First pass: prioritize high score while avoiding a one-source or one-category brief.
     for item in ranked:
         source = item["source"]
         category = item["category"]
+        event = event_fingerprint(item)
+        if event in events:
+            continue
         if source_counts.get(source, 0) >= 2:
             continue
         if category_counts.get(category, 0) >= 2 and len(selected) < limit - 1:
             continue
         selected.append(item)
+        events.add(event)
         source_counts[source] = source_counts.get(source, 0) + 1
         category_counts[category] = category_counts.get(category, 0) + 1
         if len(selected) == limit:
             return selected
 
-    # Fill any remaining slots strictly by score.
     for item in ranked:
-        if item in selected:
+        event = event_fingerprint(item)
+        if item in selected or event in events:
             continue
         selected.append(item)
+        events.add(event)
         if len(selected) == limit:
             break
     return selected
@@ -429,6 +521,8 @@ def prepare_items(items):
     for item in items:
         row = dict(item)
         row["summary"] = clean_summary(row.get("summary", ""))
+        row["category"] = categorize(row["title"], row["source"])
+        row["tags"] = classify_tags(row["title"], row["source"], row["category"])
         row["signal_slug"] = signal_slug(row)
         row["signal_url"] = f'{BASE_URL}/signals/{row["signal_slug"]}/'
         score, factors = signal_score(row)
@@ -437,6 +531,77 @@ def prepare_items(items):
         row["editorial"] = editorial_units(row)
         prepared.append(row)
     return prepared
+
+def load_items(path):
+    if not path.exists():
+        return []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        return payload.get("items", []) if isinstance(payload, dict) else []
+    except Exception:
+        return []
+
+def merge_archive(existing_items, incoming_items):
+    now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    by_url = {item.get("url"): dict(item) for item in existing_items if valid_url(item.get("url", ""))}
+
+    for incoming in incoming_items:
+        url = incoming["url"]
+        previous = by_url.get(url, {})
+        merged = dict(previous)
+        merged.update(incoming)
+        if not merged.get("summary") and previous.get("summary"):
+            merged["summary"] = previous["summary"]
+            merged["summary_origin"] = previous.get("summary_origin", "")
+        merged["category"] = categorize(merged["title"], merged["source"])
+        merged["tags"] = classify_tags(merged["title"], merged["source"], merged["category"])
+        merged["first_seen"] = previous.get("first_seen") or now_iso
+
+        before = {
+            "title": previous.get("title"),
+            "source": previous.get("source"),
+            "published": previous.get("published"),
+            "category": previous.get("category"),
+            "summary": clean_summary(previous.get("summary", "")),
+            "tags": previous.get("tags", []),
+        }
+        after = {
+            "title": merged.get("title"),
+            "source": merged.get("source"),
+            "published": merged.get("published"),
+            "category": merged.get("category"),
+            "summary": clean_summary(merged.get("summary", "")),
+            "tags": merged.get("tags", []),
+        }
+        merged["modified_at"] = now_iso if before != after else previous.get("modified_at", now_iso)
+        merged["last_seen"] = now_iso
+        by_url[url] = merged
+
+    valid = []
+    for item in by_url.values():
+        if not valid_url(item.get("url", "")):
+            continue
+        if parse_date(item.get("published", "")) is None:
+            continue
+        if not item.get("first_seen"):
+            item["first_seen"] = now_iso
+        if not item.get("modified_at"):
+            item["modified_at"] = now_iso
+        valid.append(item)
+    valid.sort(key=lambda x: parse_date(x["published"]), reverse=True)
+    return prepare_items(valid)
+
+def client_item(item):
+    return {
+        "title": item["title"],
+        "url": item["url"],
+        "signal_url": item["signal_url"],
+        "source": item["source"],
+        "published": item["published"],
+        "category": item["category"],
+        "tags": item.get("tags", []),
+        "signal_score": item.get("signal_score", 0),
+    }
 
 def normalize_model_text(value):
     return value.replace("‑", "-").replace("–", "-").replace("—", "-")
@@ -480,10 +645,17 @@ def tracked_models_html(items):
 def topic_matches(item, topic):
     if topic.get("source") and item["source"] == topic["source"]:
         return True
+    tags = set(item.get("tags", []))
+    if topic["name"] in tags:
+        return True
     if topic.get("category") and item["category"] == topic["category"]:
         return True
     haystack = f'{item["title"]} {item.get("summary","")}'.lower()
-    return any(keyword.lower() in haystack for keyword in topic.get("keywords", []))
+    for keyword in topic.get("keywords", []):
+        key = keyword.lower()
+        if (" " in key and key in haystack) or (" " not in key and re.search(rf"\b{re.escape(key)}\b", haystack)):
+            return True
+    return False
 
 def topic_groups(items):
     result = {}
@@ -498,7 +670,7 @@ def item_topics(item):
 
 def display_date(value):
     d = parse_date(value)
-    return d.strftime("%B %-d, %Y")
+    return d.strftime("%B %-d, %Y") if d is not None else "Unknown date"
 
 def compact_description(item):
     editorial = item.get("editorial") or editorial_units(item)
@@ -547,7 +719,7 @@ def page_footer():
       <p>© <span id="year"></span> SXF</p>
     </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>'''
 
-def page_head(title, description, canonical, schema):
+def page_head(title, description, canonical, schema, page_type="website"):
     safe_description = escape(description[:180], quote=True)
     return f'''<head>
       <meta charset="utf-8" />
@@ -562,7 +734,7 @@ def page_head(title, description, canonical, schema):
       <link rel="alternate" hreflang="en" href="{escape(canonical, quote=True)}" />
       <link rel="alternate" hreflang="x-default" href="{escape(canonical, quote=True)}" />
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      <meta property="og:type" content="article" />
+      <meta property="og:type" content="{escape(page_type, quote=True)}" />
       <meta property="og:site_name" content="SXF / AI" />
       <meta property="og:title" content="{escape(title, quote=True)}" />
       <meta property="og:description" content="{safe_description}" />
@@ -602,24 +774,37 @@ def signal_row(item):
 def signal_page_html(item, items):
     canonical = item["signal_url"]
     description = compact_description(item)
+    modified = item.get("modified_at") or item["published"]
     schema = {
         "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": item["title"],
-        "datePublished": item["published"],
-        "mainEntityOfPage": canonical,
-        "url": canonical,
-        "articleSection": item["category"],
-        "isPartOf": {"@id": "https://sxf.si/#website"},
-        "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
-        "citation": item["url"],
-        "inLanguage": "en",
+        "@graph": [
+            {
+                "@type": "Article",
+                "@id": canonical + "#article",
+                "headline": item["title"],
+                "datePublished": item["published"],
+                "dateModified": modified,
+                "mainEntityOfPage": canonical,
+                "url": canonical,
+                "articleSection": item["category"],
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "citation": item["url"],
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Signals", "item": BASE_URL + "/signals/"},
+                    {"@type": "ListItem", "position": 3, "name": item["category"], "item": BASE_URL + category_path(item["category"])},
+                ],
+            },
+        ],
     }
     topics = item_topics(item)
     models = extract_models(item["title"])
-    lanes = [
-        f'<a href="/{slugify(item["category"])}/">{escape(item["category"])}</a>'
-    ]
     topic_links = "".join(
         f'<a href="/topics/{escape(t["slug"], quote=True)}/">{escape(t["name"])}</a>' for t in topics[:4]
     )
@@ -630,14 +815,14 @@ def signal_page_html(item, items):
     editorial = item.get("editorial") or editorial_units(item)
     summary_label = "Source summary" if item.get("summary") else "SXF signal note"
     return f'''<!doctype html><html lang="en">
-    {page_head(item["title"] + " | SXF / AI", description, canonical, schema)}
+    {page_head(item["title"] + " | SXF / AI", description, canonical, schema, "article")}
     <body class="intel-page signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
       {page_header()}
       <main id="signal-main">
         <section class="intel-hero shell">
-          <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="{escape(category_path(item["category"]), quote=True)}">{escape(item["category"])}</a></nav>
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="{escape(category_path(item["category"]), quote=True)}">{escape(item["category"])}</a></nav>
           <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / {escape(item["category"].upper())}</div>
           <h1>{escape(item["title"])}</h1>
           <div class="signal-meta-strip">
@@ -647,34 +832,23 @@ def signal_page_html(item, items):
             <div><span>SIGNAL SCORE</span><strong>{item.get("signal_score", 0):02d}/100</strong></div>
           </div>
         </section>
-
         <section class="signal-layout shell">
           <article class="signal-brief">
             <p class="eyebrow">{summary_label.upper()}</p>
             <p class="signal-summary">{escape(editorial["what_changed"])}</p>
-            <div class="signal-context">
-              <span>WHY IT MATTERS</span>
-              <p>{escape(editorial["why_it_matters"])}</p>
-            </div>
-            <div class="signal-context">
-              <span>WHAT TO VERIFY</span>
-              <p>{escape(editorial["what_to_verify"])}</p>
-            </div>
+            <div class="signal-context"><span>WHY IT MATTERS</span><p>{escape(editorial["why_it_matters"])}</p></div>
+            <div class="signal-context"><span>WHAT TO VERIFY</span><p>{escape(editorial["what_to_verify"])}</p></div>
           </article>
-
           <aside class="source-card">
-            <span class="source-card-label">SOURCE OF RECORD</span>
-            <strong>{escape(item["source"])}</strong>
+            <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(item["source"])}</strong>
             <p>Read the original publication for the complete context behind this signal.</p>
             <a href="{escape(item["url"], quote=True)}" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
           </aside>
         </section>
-
         <section class="signal-taxonomy shell">
           <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
           <div><span>MODELS</span>{model_links or '<small>No named model detected</small>'}</div>
         </section>
-
         <section class="related-signals shell">
           <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
           <div class="signal-list">{related}</div>
@@ -682,7 +856,6 @@ def signal_page_html(item, items):
       </main>
       {page_footer()}
     </body></html>'''
-
 def signals_index_html(items):
     canonical = f"{BASE_URL}/signals/"
     description = "Latest AI signals tracked by SXF / AI across models, tools, research and open source, with direct links to primary sources."
@@ -701,7 +874,7 @@ def signals_index_html(items):
       <section class="collection-hero shell">
         <p class="eyebrow">SXF SIGNAL INDEX</p><h1>The AI changes<br><span>worth opening.</span></h1>
         <p>Models, tools, research and open-source developments organized as traceable signals with the primary source kept one click away.</p>
-        <div class="collection-stats"><div><strong>{len(items)}</strong><span>current signals</span></div><div><strong>4</strong><span>intelligence layers</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
+        <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>4</strong><span>intelligence layers</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
       </section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST</p><h2>Signal stream.</h2></div><a href="/brief/">Read today’s brief ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
@@ -718,7 +891,7 @@ def topic_page_html(topic, items):
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
       <p class="eyebrow">TOPIC INTELLIGENCE</p><h1>{escape(topic["name"])}<br><span>signal history.</span></h1><p>{escape(topic["description"])}</p>
-      <div class="collection-stats"><div><strong>{len(items)}</strong><span>current signals</span></div><div><strong>Primary</strong><span>source links</span></div><div><strong>Live</strong><span>rolling index</span></div></div></section>
+      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>Primary</strong><span>source links</span></div><div><strong>Live</strong><span>rolling index</span></div></div></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RECENT</p><h2>Latest in {escape(topic["name"])}.</h2></div><a href="/topics/">All topics ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -745,7 +918,7 @@ def model_page_html(name, items):
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
       <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>release signals.</span></h1><p>{escape(description)}</p>
-      <div class="collection-stats"><div><strong>{len(items)}</strong><span>current signals</span></div><div><strong>Primary</strong><span>source trail</span></div><div><strong>Rolling</strong><span>release history</span></div></div></section>
+      <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>Primary</strong><span>source trail</span></div><div><strong>Rolling</strong><span>release history</span></div></div></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -759,7 +932,7 @@ def brief_issue_html(items, issue_date):
     cards = ""
     for i,item in enumerate(selected, 1):
         cards += f'''<article class="brief-signal"><span class="brief-no">{i:02d}</span><div><div class="brief-meta"><strong>{escape(item["source"])}</strong><span>{escape(item["category"])}</span><span>SCORE {item.get("signal_score",0):02d}</span></div><h2><a href="/signals/{escape(item["signal_slug"], quote=True)}/">{escape(item["title"])}</a></h2><p>{escape(compact_description(item))}</p><a class="brief-open" href="/signals/{escape(item["signal_slug"], quote=True)}/">Open signal ↗</a></div></article>'''
-    return f'''<!doctype html><html lang="en">{page_head("SXF Brief — " + pretty, description, canonical, schema)}
+    return f'''<!doctype html><html lang="en">{page_head("SXF Brief — " + pretty, description, canonical, schema, "article")}
     <body class="intel-page brief-page">{page_header("brief")}<main>
       <section class="brief-issue-hero shell"><div><p class="eyebrow">SXF BRIEF / {escape(slug)}</p><h1>Five signals.<br><span>Zero noise.</span></h1></div><p>Five high-priority signals selected by SXF’s internal scoring system, with source and category diversity built into the shortlist. Every item keeps the primary source attached.</p></section>
       <section class="brief-stack shell">{cards}</section>
@@ -786,7 +959,7 @@ def brief_index_html(items, issue_date):
       <section class="brief-archive shell"><p class="eyebrow">ARCHIVE</p><div>{archive_html}</div></section>
     </main>{page_footer()}</body></html>'''
 
-def build_discovery_pages(items):
+def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
     BRIEF_DIR.mkdir(parents=True, exist_ok=True)
@@ -814,91 +987,92 @@ def build_discovery_pages(items):
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
-    (issue_dir / "index.html").write_text(brief_issue_html(items, issue_date), encoding="utf-8")
-    (BRIEF_DIR / "index.html").write_text(brief_index_html(items, issue_date), encoding="utf-8")
-
-def sitemap_entry(url, lastmod, changefreq, priority):
-    return (
-        f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod>"
-        f"<changefreq>{changefreq}</changefreq><priority>{priority}</priority></url>"
-    )
-
+    (issue_dir / "index.html").write_text(brief_issue_html(current_items, issue_date), encoding="utf-8")
+    (BRIEF_DIR / "index.html").write_text(brief_index_html(current_items, issue_date), encoding="utf-8")
+def sitemap_entry(url, lastmod):
+    return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
 
 def update_sitemap(items):
-    latest = parse_date(items[0]["published"]).date().isoformat() if items else datetime.now(timezone.utc).date().isoformat()
+    generated_today = datetime.now(timezone.utc).date().isoformat()
     rows = [
-        sitemap_entry(f"{BASE_URL}/", latest, "hourly", "1.0"),
-        sitemap_entry(f"{BASE_URL}/models/", latest, "hourly", "0.9"),
-        sitemap_entry(f"{BASE_URL}/tools/", latest, "hourly", "0.9"),
-        sitemap_entry(f"{BASE_URL}/research/", latest, "hourly", "0.9"),
-        sitemap_entry(f"{BASE_URL}/open-source/", latest, "hourly", "0.9"),
-        sitemap_entry(f"{BASE_URL}/signals/", latest, "hourly", "0.9"),
-        sitemap_entry(f"{BASE_URL}/topics/", latest, "daily", "0.8"),
-        sitemap_entry(f"{BASE_URL}/brief/", latest, "daily", "0.8"),
-        sitemap_entry(f"{BASE_URL}/about/", latest, "monthly", "0.7"),
+        sitemap_entry(f"{BASE_URL}/", generated_today),
+        sitemap_entry(f"{BASE_URL}/models/", generated_today),
+        sitemap_entry(f"{BASE_URL}/tools/", generated_today),
+        sitemap_entry(f"{BASE_URL}/research/", generated_today),
+        sitemap_entry(f"{BASE_URL}/open-source/", generated_today),
+        sitemap_entry(f"{BASE_URL}/signals/", generated_today),
+        sitemap_entry(f"{BASE_URL}/topics/", generated_today),
+        sitemap_entry(f"{BASE_URL}/brief/", generated_today),
+        sitemap_entry(f"{BASE_URL}/about/", generated_today),
     ]
 
     for item in items:
-        rows.append(sitemap_entry(item["signal_url"], parse_date(item["published"]).date().isoformat(), "weekly", "0.7"))
+        modified = parse_date(item.get("modified_at", "")) or parse_date(item["published"])
+        rows.append(sitemap_entry(item["signal_url"], modified.date().isoformat()))
 
     for slug, (_topic, _matched) in topic_groups(items).items():
-        rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", latest, "daily", "0.7"))
+        rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", generated_today))
 
     for name in model_groups(items):
-        rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", latest, "daily", "0.75"))
+        rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", generated_today))
 
     if BRIEF_DIR.exists():
         for p in sorted(BRIEF_DIR.iterdir()):
             if p.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.name):
-                rows.append(sitemap_entry(f"{BASE_URL}/brief/{p.name}/", p.name, "never", "0.65"))
+                rows.append(sitemap_entry(f"{BASE_URL}/brief/{p.name}/", p.name))
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
-
 def main():
-    items = []
+    incoming = []
     errors = []
     for source, url in SOURCES:
         try:
-            items.extend(parse_feed(source, fetch(url)))
+            incoming.extend(parse_feed(source, fetch(url)))
         except Exception as exc:
             errors.append(f"{source}: {exc}")
 
+    existing = load_items(ARCHIVE_OUT)
+    if not existing:
+        existing = load_items(OUT)
+    existing_by_url = {item.get("url"): item for item in existing if item.get("url")}
+    enriched = enrich_summaries(incoming, existing_by_url)
+
+    archive = merge_archive(existing, incoming)
+    if not archive:
+        raise RuntimeError("No valid signals available after archive merge")
+
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
-    dedup = {}
-    for item in items:
-        if not valid_url(item["url"]):
-            continue
-        dt = parse_date(item["published"])
-        if dt < cutoff:
-            continue
-        key = re.sub(r"\W+", "", item["title"].lower())[:140]
-        current = dedup.get(key)
-        if current is None or dt > parse_date(current["published"]):
-            dedup[key] = item
+    current = [
+        item for item in archive
+        if parse_date(item["published"]) is not None and parse_date(item["published"]) >= cutoff
+    ][:MAX_ITEMS]
+    if not current:
+        current = archive[:MAX_ITEMS]
 
-    final = sorted(dedup.values(), key=lambda x: parse_date(x["published"]), reverse=True)[:MAX_ITEMS]
-    if not final and errors and OUT.exists():
-        try:
-            final = json.loads(OUT.read_text(encoding="utf-8")).get("items", [])
-        except Exception:
-            pass
-
-    final = prepare_items(final)
-    payload = {
-        "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "items": final,
+    now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    ARCHIVE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    ARCHIVE_OUT.write_text(json.dumps({
+        "updated_at": now_iso,
+        "items": archive,
         "feed_errors": errors,
-        "scoring_version": "sxf-signal-score-v1",
-    }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        "scoring_version": "sxf-signal-score-v2",
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    update_index(final)
-    update_section_pages(final)
-    build_discovery_pages(final)
-    update_sitemap(final)
-    print(f"Wrote {len(final)} items, signal pages, topic pages, model pages and daily brief. Errors: {len(errors)}")
+    OUT.write_text(json.dumps({
+        "updated_at": now_iso,
+        "items": [client_item(item) for item in current],
+        "feed_errors": errors,
+        "scoring_version": "sxf-signal-score-v2",
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    update_index(current)
+    update_section_pages(current)
+    build_discovery_pages(archive, current)
+    update_sitemap(archive)
+    print(
+        f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
+        f"enriched {enriched} summaries; source errors: {len(errors)}"
+    )
 if __name__ == "__main__":
     main()
