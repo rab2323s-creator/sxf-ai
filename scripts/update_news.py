@@ -399,10 +399,11 @@ def page_header(active=""):
         ("/brief/", "Brief", "brief"),
         ("/about/", "About", "about"),
     ]
-    nav = "".join(
-        f'<a href="{href}"{" aria-current=\\"page\\"" if key == active else ""}>{label}</a>'
-        for href, label, key in links
-    )
+    nav_parts = []
+    for href, label, key in links:
+        current = ' aria-current="page"' if key == active else ""
+        nav_parts.append(f'<a href="{href}"{current}>{label}</a>')
+    nav = "".join(nav_parts)
     return f'''<header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
       <nav class="top-nav" aria-label="Primary navigation">{nav}</nav>
