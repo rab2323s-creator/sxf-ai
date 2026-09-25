@@ -56,6 +56,21 @@ function cardMarkup(item,index){
     <span class="sr-only">Signal ${n}</span>
   </a>`;
 }
+function updateHeroSignal(item){
+  if(!item)return;
+  const link=document.getElementById('heroSignalLink');
+  const source=document.getElementById('heroSignalSource');
+  const time=document.getElementById('heroSignalTime');
+  const title=document.getElementById('heroSignalTitle');
+  const category=document.getElementById('heroSignalCategory');
+  if(link)link.href=item.url||'#latest';
+  if(link){link.target='_blank';link.rel='noopener noreferrer'}
+  if(source)source.textContent=item.source||'Primary source';
+  if(time)time.textContent=relativeTime(item.published)||'recent';
+  if(title)title.textContent=item.title||'Latest AI signal';
+  if(category)category.textContent=item.category||'Signal';
+}
+
 function render(){
   const visible=filteredItems();
   featured.innerHTML=featuredMarkup(visible[0]);
@@ -77,6 +92,7 @@ fetch('./data/news.json',{cache:'no-store'})
   .then(data=>{
     state.items=Array.isArray(data.items)?data.items:[];
     document.getElementById('lastUpdated').textContent=data.updated_at?relativeTime(data.updated_at):'automatic';
+    updateHeroSignal(state.items[0]);
     render();
   })
   .catch(()=>{
