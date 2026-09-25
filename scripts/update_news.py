@@ -1217,10 +1217,369 @@ def model_page_html(name, items):
 
 
 
+
+def best_ai_coding_tools_html(items):
+    canonical = f"{BASE_URL}/guides/best-ai-coding-tools/"
+    published = "2026-09-25"
+    verified = "2026-09-25"
+    title = "Best AI Coding Tools in 2026: Features, Pricing & Comparison | SXF / AI"
+    description = "Compare Claude Code, OpenAI Codex, GitHub Copilot, Cursor and Windsurf/Devin Desktop in 2026 by agent workflow, pricing, IDE support, autonomy and team fit."
+
+    tools = [
+        {
+            "name": "Claude Code",
+            "best": "Terminal-first autonomous engineering",
+            "surface": "CLI + IDE",
+            "agent": "High",
+            "free": "No",
+            "starting": "$20/mo",
+            "pricing": "Claude Pro is $20/month ($17/month equivalent on annual billing); Max starts at $100/month. Claude Code is included in paid Claude plans.",
+            "source": "https://claude.com/pricing",
+            "internal": "/topics/coding-ai/",
+        },
+        {
+            "name": "OpenAI Codex",
+            "best": "OpenAI / ChatGPT coding workflows",
+            "surface": "Desktop + CLI + IDE + cloud",
+            "agent": "High",
+            "free": "Yes",
+            "starting": "$0",
+            "pricing": "Codex is available across ChatGPT plans. Free access exists for short coding tasks; Plus is $20/month, with higher-capacity Pro plans starting at $100/month. API-key usage is billed separately.",
+            "source": "https://developers.openai.com/docs/pricing",
+            "internal": "/topics/coding-ai/",
+        },
+        {
+            "name": "GitHub Copilot",
+            "best": "GitHub-native teams and broad IDE coverage",
+            "surface": "IDE + GitHub + CLI + cloud",
+            "agent": "High",
+            "free": "Yes",
+            "starting": "$0",
+            "pricing": "Free includes limited usage. Individual paid plans currently start at Pro $10/month, with Pro+ at $39 and Max at $100.",
+            "source": "https://github.com/features/copilot/plans",
+            "internal": "/topics/github-copilot/",
+        },
+        {
+            "name": "Cursor",
+            "best": "AI-native editor with local and cloud agents",
+            "surface": "AI IDE + cloud agents",
+            "agent": "High",
+            "free": "Yes",
+            "starting": "$0",
+            "pricing": "Hobby is free. Cursor Pro is $20/month and Teams starts at $40/user/month. Cloud Agents are billed using the selected model's API pricing.",
+            "source": "https://cursor.com/pricing",
+            "internal": "/topics/coding-ai/",
+        },
+        {
+            "name": "Windsurf / Devin Desktop",
+            "best": "Multi-agent command-center workflows",
+            "surface": "AI IDE + local/cloud agents",
+            "agent": "High",
+            "free": "Yes",
+            "starting": "$0",
+            "pricing": "Windsurf has been renamed Devin Desktop. Current listed plans are Free $0, Pro $20/month and Max $200/month; team pricing is separate.",
+            "source": "https://windsurf.com/editor",
+            "internal": "/topics/coding-ai/",
+        },
+    ]
+
+    rows = "".join(
+        f'''<tr>
+          <th scope="row"><a href="#{escape(slugify(t["name"]), quote=True)}">{escape(t["name"])}</a></th>
+          <td>{escape(t["best"])}</td><td>{escape(t["surface"])}</td><td>{escape(t["agent"])}</td>
+          <td>{escape(t["free"])}</td><td>{escape(t["starting"])}</td>
+        </tr>'''
+        for t in tools
+    )
+
+    toc = [
+        ("quick-comparison", "Quick comparison"),
+        ("how-we-evaluated", "How we evaluated"),
+        ("claude-code", "Claude Code"),
+        ("openai-codex", "OpenAI Codex"),
+        ("github-copilot", "GitHub Copilot"),
+        ("cursor", "Cursor"),
+        ("windsurf-devin-desktop", "Windsurf / Devin Desktop"),
+        ("large-codebases", "Best for large codebases"),
+        ("autonomous-agents", "Best autonomous coding agent"),
+        ("github-workflows", "Best for GitHub workflows"),
+        ("free-tools", "Best free option"),
+        ("claude-code-vs-cursor-vs-copilot", "Claude Code vs Cursor vs Copilot"),
+        ("agent-vs-autocomplete", "AI agent vs autocomplete"),
+        ("pricing", "Pricing explained"),
+        ("faq", "FAQ"),
+    ]
+    toc_html = "".join(f'<a href="#{escape(anchor, quote=True)}">{escape(label)}</a>' for anchor,label in toc)
+
+    source_links = "".join(
+        f'<a href="{escape(t["source"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(t["name"])} official pricing/product page</span><b>↗</b></a>'
+        for t in tools
+    )
+
+    faq = [
+        ("What is the best AI coding tool in 2026?", "There is no universal winner because the products optimize different workflows. Claude Code is strongest as a terminal-first agent, Codex spans local and cloud OpenAI workflows, GitHub Copilot is deeply integrated with GitHub and many IDEs, Cursor is an AI-native editor with cloud agents, and Devin Desktop builds on Windsurf as a multi-agent command center."),
+        ("What is the best AI coding tool for large codebases?", "For large repositories, the critical factors are context retrieval, environment setup, test execution and the ability to keep long tasks coherent. Claude Code, Codex and Cursor Cloud Agents are especially relevant when the task requires multi-file planning and verification rather than just completion."),
+        ("Which AI coding tool is best for GitHub?", "GitHub Copilot has the most native GitHub surface area because it is built directly into GitHub workflows, including code review and cloud-agent features. Codex, Cursor and Claude Code can also work with GitHub repositories, but through different delegation models."),
+        ("Are free AI coding tools good enough?", "Yes for evaluation and light work. GitHub Copilot, Cursor, Codex and Devin Desktop all have free entry points as of the verification date. Heavy agent sessions, premium models and team workflows usually require paid usage."),
+        ("Is an AI coding agent the same as autocomplete?", "No. Autocomplete predicts or generates code around the current edit. An agent can inspect a repository, plan work, edit multiple files, run commands and tests, use tools, and sometimes continue remotely in its own development environment."),
+        ("Should teams use one coding agent for everything?", "Usually not. The better architecture is to standardize security, review and repository rules, then choose the agent surface that fits each workflow. Inline coding, local debugging, cloud delegation and pull-request review have different operational requirements."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "@id": canonical + "#article",
+                "headline": "Best AI Coding Tools in 2026: Features, Pricing & Comparison",
+                "description": description,
+                "url": canonical,
+                "mainEntityOfPage": canonical,
+                "datePublished": published,
+                "dateModified": verified,
+                "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "articleSection": "AI Coding",
+                "keywords": [
+                    "best AI coding tools 2026", "AI coding agents", "Claude Code", "OpenAI Codex",
+                    "GitHub Copilot", "Cursor", "Windsurf", "Devin Desktop"
+                ],
+                "about": [{"@type": "SoftwareApplication", "name": t["name"], "url": t["source"]} for t in tools],
+                "citation": [t["source"] for t in tools],
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Guides", "item": BASE_URL + "/guides/"},
+                    {"@type": "ListItem", "position": 3, "name": "Best AI Coding Tools in 2026", "item": canonical},
+                ],
+            },
+            {
+                "@type": "ItemList",
+                "name": "AI coding tools compared",
+                "numberOfItems": len(tools),
+                "itemListElement": [
+                    {"@type": "ListItem", "position": i + 1, "name": t["name"], "url": t["source"]}
+                    for i,t in enumerate(tools)
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                    for q,a in faq
+                ],
+            },
+        ],
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, page_type="article")}
+    <body class="intel-page guide-article-page">{page_header("guides")}<main>
+      <article>
+        <header class="guide-article-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Coding Tools</span></nav>
+          <p class="eyebrow">SXF GUIDE / AI CODING</p>
+          <h1>Best AI Coding Tools in 2026:<br><span>Features, Pricing & Comparison</span></h1>
+          <p class="guide-deck">Claude Code, Codex, GitHub Copilot, Cursor and Windsurf have converged on the same destination — agentic software development — but they approach the job from very different surfaces. This guide compares the architecture of the workflow, not just the model name in the picker.</p>
+          <div class="guide-byline">
+            <div><span>Published</span><strong>September 25, 2026</strong></div>
+            <div><span>Last verified</span><strong>September 25, 2026</strong></div>
+            <div><span>Reading time</span><strong>18 min</strong></div>
+            <div><span>Research standard</span><strong>Primary-source first</strong></div>
+          </div>
+        </header>
+
+        <section class="guide-answer shell">
+          <div class="guide-answer-label">QUICK ANSWER</div>
+          <div><h2>There is no single “best” AI coding tool. The best choice depends on where you want the agent to work.</h2>
+          <p><strong>Claude Code</strong> is the cleanest terminal-first agent. <strong>Codex</strong> is strongest when you want OpenAI’s coding stack across desktop, CLI, IDE and cloud. <strong>GitHub Copilot</strong> is the natural fit for GitHub-centric organizations. <strong>Cursor</strong> is the most integrated AI-first editor in this group, with local and cloud agents in one product. <strong>Windsurf, now Devin Desktop,</strong> is evolving toward a command center for managing multiple agents while retaining a full IDE.</p></div>
+        </section>
+
+        <div class="guide-reading shell">
+          <aside class="guide-toc"><span>IN THIS GUIDE</span>{toc_html}<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+
+          <div class="guide-prose" id="top">
+            <section id="quick-comparison">
+              <p class="eyebrow">QUICK COMPARISON</p>
+              <h2>Best AI coding tools in 2026 at a glance</h2>
+              <p>The coding-tool market has moved beyond autocomplete. The important distinction in 2026 is whether a product can <em>close the loop</em>: understand the repository, make coordinated edits, execute tools, run tests, inspect failures and keep working until a task is actually verified.</p>
+              <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Tool</th><th>Best fit</th><th>Main surface</th><th>Agentic workflow</th><th>Free entry</th><th>Starts at</th></tr></thead><tbody>{rows}</tbody></table></div>
+              <p class="guide-fact-note">Pricing and product availability verified September 25, 2026. Subscription limits, model availability and usage-based charges can change independently of base plan prices.</p>
+            </section>
+
+            <section id="how-we-evaluated">
+              <p class="eyebrow">METHODOLOGY</p>
+              <h2>How we evaluated the best AI coding tools</h2>
+              <p>A useful coding agent is not just a model wrapped in a chat panel. SXF evaluates the system around the model. We focus on seven things that determine whether an agent survives real engineering work:</p>
+              <div class="guide-criteria">
+                <article><span>01</span><h3>Repository understanding</h3><p>Can it retrieve the right files, symbols and history without flooding the context window?</p></article>
+                <article><span>02</span><h3>Execution loop</h3><p>Can it edit, run commands, test, inspect failures and iterate instead of stopping after code generation?</p></article>
+                <article><span>03</span><h3>Autonomy</h3><p>Can work continue across many steps or in a remote environment without constant human prompting?</p></article>
+                <article><span>04</span><h3>Reviewability</h3><p>Can engineers see diffs, logs, test results and artifacts before accepting changes?</p></article>
+                <article><span>05</span><h3>Workflow fit</h3><p>Does it live where the developer already works: terminal, IDE, GitHub, cloud or all four?</p></article>
+                <article><span>06</span><h3>Cost model</h3><p>Is the economics predictable for daily use, or does heavy agent activity become usage-based?</p></article>
+                <article><span>07</span><h3>Team controls</h3><p>Does it support policy, permissions, secrets, auditability and repeatable engineering instructions?</p></article>
+              </div>
+              <div class="guide-callout"><strong>Expert note</strong><p>We do not rank tools by vendor benchmark charts alone. Coding benchmarks can use different models, harnesses, reasoning settings and evaluation rules. Product architecture matters because the same model can perform very differently when retrieval, tools and verification loops change.</p></div>
+            </section>
+
+            <section class="tool-review" id="claude-code">
+              <div class="tool-review-head"><span>01</span><div><p class="eyebrow">ANTHROPIC</p><h2>Claude Code: best for terminal-first autonomous engineering</h2></div></div>
+              <p>Claude Code is fundamentally different from an editor assistant. Its center of gravity is the terminal and the repository, which makes it feel closer to a software-engineering agent than an AI feature inside an IDE. Anthropic also supports Claude Code in IDEs, but the mental model remains task delegation with tools rather than inline completion.</p>
+              <p>That architecture is particularly effective for work that crosses many files: migrations, debugging, dependency changes, test repair, refactors and implementation tasks where the agent needs to inspect the codebase before it can decide what to change. Anthropic has also expanded the product with agent management, scheduled routines, computer use and multi-agent workflows.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Repo-scale terminal workflows</strong></div><div><span>Primary surface</span><strong>CLI + IDE</strong></div><div><span>Paid access</span><strong>Pro from $20/mo</strong></div><div><span>Workflow style</span><strong>Agent-first</strong></div></div>
+              <h3>Where Claude Code is strongest</h3>
+              <p>Its advantage is not that “Claude writes better code” in every scenario. The advantage is that the product is comfortable operating as a long-running collaborator with direct access to development tools. For engineers who already live in a shell, that reduces interface friction and makes complex tasks feel natural.</p>
+              <h3>What to watch</h3>
+              <p>Usage limits are shared across Claude products on subscription plans, and heavy coding can consume capacity quickly. Teams should also design permission boundaries carefully because terminal agents become more useful as they receive more command, network and credential access.</p>
+              <div class="tool-links"><a href="https://claude.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code official page ↗</a><a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Official pricing ↗</a><a href="/topics/coding-ai/">SXF Coding AI signals ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="openai-codex">
+              <div class="tool-review-head"><span>02</span><div><p class="eyebrow">OPENAI</p><h2>OpenAI Codex: best for OpenAI-native coding across local and cloud workflows</h2></div></div>
+              <p>Codex is no longer one interface. It spans the desktop app, CLI, IDE extension and cloud execution, and OpenAI exposes related automation surfaces such as the Codex SDK, GitHub Action and cloud agent infrastructure. That makes Codex less like a single editor plugin and more like a coding layer across local and remote environments.</p>
+              <p>The important architectural point is delegation. You can work interactively when the problem needs steering, or hand off a task to a cloud environment when you want the agent to keep running, test its changes and return with results. For teams already using ChatGPT and OpenAI models, this lowers the operational cost of introducing a separate coding stack.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>OpenAI / ChatGPT workflows</strong></div><div><span>Primary surface</span><strong>Desktop + CLI + IDE + cloud</strong></div><div><span>Entry</span><strong>Free plan available</strong></div><div><span>Workflow style</span><strong>Local + delegated cloud</strong></div></div>
+              <h3>Where Codex is strongest</h3>
+              <p>Codex makes sense when software work is part of a broader OpenAI workflow rather than an isolated coding feature. The product can move between interactive development, remote execution and automation, and API-key users can also build Codex into CI or shared engineering systems.</p>
+              <h3>What to watch</h3>
+              <p>There are two economics to understand: subscription usage when signing in with ChatGPT, and token/API pricing when using an API key. Those are not interchangeable. Teams should decide which path they are standardizing before they compare headline subscription prices.</p>
+              <div class="tool-links"><a href="https://developers.openai.com/docs/" target="_blank" rel="noopener noreferrer">Codex documentation ↗</a><a href="https://developers.openai.com/docs/pricing" target="_blank" rel="noopener noreferrer">Official pricing ↗</a><a href="/topics/openai/">OpenAI intelligence ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="github-copilot">
+              <div class="tool-review-head"><span>03</span><div><p class="eyebrow">GITHUB</p><h2>GitHub Copilot: best for GitHub-native teams and broad IDE coverage</h2></div></div>
+              <p>Copilot has evolved from completion into a portfolio of coding surfaces: inline suggestions, chat, agent mode, CLI, code review and cloud agents. Its structural advantage is GitHub itself. Repository hosting, pull requests, code review and agent delegation can live inside the same platform that already owns the team’s development workflow.</p>
+              <p>GitHub also offers model choice and access to third-party coding agents on higher plans, so Copilot increasingly acts as an orchestration layer rather than a bet on one model. For organizations with many developers and mixed IDE preferences, that breadth is difficult to ignore.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>GitHub-centric organizations</strong></div><div><span>Primary surface</span><strong>IDE + GitHub + CLI</strong></div><div><span>Entry</span><strong>Free · Pro $10/mo</strong></div><div><span>Workflow style</span><strong>Assist + review + agents</strong></div></div>
+              <h3>Where GitHub Copilot is strongest</h3>
+              <p>The product is strongest when the organization wants one coding layer that follows developers from the editor to pull requests and review. It also has a lower individual paid entry price than several AI-first editors in this comparison.</p>
+              <h3>What to watch</h3>
+              <p>The new AI-credit model means “subscription price” is not the complete cost story for agent-heavy usage. Code completions remain unlimited on paid plans, but chats, agents and other AI features draw from credits depending on model and task complexity.</p>
+              <div class="tool-links"><a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot ↗</a><a href="https://github.com/features/copilot/plans" target="_blank" rel="noopener noreferrer">Official plans ↗</a><a href="/topics/github-copilot/">SXF GitHub Copilot intelligence ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="cursor">
+              <div class="tool-review-head"><span>04</span><div><p class="eyebrow">CURSOR</p><h2>Cursor: best AI coding editor for integrated local and cloud agent workflows</h2></div></div>
+              <p>Cursor’s advantage is product coherence. The editor, agent, model selection, codebase search and cloud agents are designed as one system. That matters because agentic development creates context switching: inspect locally, delegate remotely, review results, continue debugging. Cursor tries to keep those modes inside the same interface and account model.</p>
+              <p>Its Cloud Agents run in isolated development environments with repositories, dependencies, secrets and network access. They can build, test and create pull requests without keeping your laptop online, and can be started from the editor, web, mobile, Slack, GitHub, Linear or API.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>AI-first editor workflows</strong></div><div><span>Primary surface</span><strong>Editor + cloud agents</strong></div><div><span>Entry</span><strong>Free · Pro $20/mo</strong></div><div><span>Cloud agent cost</span><strong>Model API pricing</strong></div></div>
+              <h3>Where Cursor is strongest</h3>
+              <p>Cursor is compelling for developers who want the AI agent to be the editor experience rather than an extension layered on top of an existing IDE. The cloud-agent system also makes parallel work and remote delegation a first-class workflow instead of an add-on.</p>
+              <h3>What to watch</h3>
+              <p>Cloud-agent economics can differ from the base subscription because remote runs are billed at the selected model’s API rate. Teams should measure real token use on their repositories rather than assume the $20 subscription is the ceiling.</p>
+              <div class="tool-links"><a href="https://cursor.com/" target="_blank" rel="noopener noreferrer">Cursor ↗</a><a href="https://cursor.com/pricing" target="_blank" rel="noopener noreferrer">Official pricing ↗</a><a href="https://cursor.com/docs/cloud-agent" target="_blank" rel="noopener noreferrer">Cloud Agents docs ↗</a></div>
+            </section>
+
+            <section class="tool-review" id="windsurf-devin-desktop">
+              <div class="tool-review-head"><span>05</span><div><p class="eyebrow">COGNITION</p><h2>Windsurf / Devin Desktop: best for managing multiple coding agents from one editor</h2></div></div>
+              <p>There is an important naming change in 2026: Windsurf is now called <strong>Devin Desktop</strong>. The underlying IDE experience remains, but the product direction is explicitly moving toward an agent command center where engineers plan, delegate, review and manage local and cloud agents from one surface.</p>
+              <p>This makes it less useful to think of Windsurf as “another AI editor.” The strategic idea is multi-agent supervision: the developer stays in a full IDE while several agents can do implementation work around them. Cognition also highlights Fast Context for codebase retrieval and unlimited access to its SWE-1.7 model on the current product page.</p>
+              <div class="tool-facts"><div><span>Best for</span><strong>Multi-agent supervision</strong></div><div><span>Primary surface</span><strong>IDE + agent command center</strong></div><div><span>Entry</span><strong>Free · Pro $20/mo</strong></div><div><span>Current name</span><strong>Devin Desktop</strong></div></div>
+              <h3>Where Devin Desktop is strongest</h3>
+              <p>The product is interesting for engineers who expect the future workflow to involve several agents rather than one chat session. The IDE stays available for deep inspection while the command-center layer is designed for delegation and review.</p>
+              <h3>What to watch</h3>
+              <p>The rebrand is recent, so search results, documentation and user language still mix “Windsurf” and “Devin Desktop.” For discovery, both names matter. For purchasing decisions, use the current Devin Desktop pricing and documentation rather than older Windsurf plan comparisons.</p>
+              <div class="tool-links"><a href="https://windsurf.com/editor" target="_blank" rel="noopener noreferrer">Devin Desktop / Windsurf official page ↗</a><a href="/topics/coding-ai/">SXF Coding AI signals ↗</a></div>
+            </section>
+
+            <section id="large-codebases">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best AI coding tool for large codebases?</h2>
+              <p>Large repositories expose the weakness of simplistic “context window” comparisons. A coding agent rarely succeeds by loading the entire repository into one prompt. It succeeds by retrieving the right slices of code, preserving task state, running the software and validating its own edits.</p>
+              <p>For that reason, <strong>Claude Code, Codex and Cursor Cloud Agents</strong> are the most relevant tools in this group for repo-scale implementation work. Claude Code is attractive when the terminal and local environment are central. Codex is attractive when you want to move between local interaction and delegated cloud work. Cursor is attractive when the editor itself should coordinate both local and remote agents.</p>
+              <div class="guide-callout"><strong>What to test on your own repository</strong><p>Give each tool the same multi-file bug or migration. Measure files inspected, unnecessary edits, test execution, recovery from a failing test, total review time and how often a human must re-explain repository context. That tells you more than a generic leaderboard.</p></div>
+            </section>
+
+            <section id="autonomous-agents">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>Which AI coding tool is best for autonomous coding agents?</h2>
+              <p>All five products now have agentic capabilities, so “has agent mode” is no longer a meaningful differentiator. The useful question is where the agent runs and what verification loop surrounds it.</p>
+              <p><strong>Cursor</strong> and <strong>Codex</strong> have clear local-to-cloud delegation stories. <strong>Claude Code</strong> is strong when autonomy lives close to the terminal and development environment. <strong>GitHub Copilot</strong> is compelling when delegation should start from issues, pull requests or the GitHub platform. <strong>Devin Desktop</strong> is explicitly designed around supervising multiple agents.</p>
+            </section>
+
+            <section id="github-workflows">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best AI coding tool for GitHub workflows and pull requests?</h2>
+              <p>For a team whose engineering system already revolves around GitHub, <strong>GitHub Copilot</strong> has the structural advantage. Code review, cloud-agent work, repository context and account governance live inside the same platform. That reduces integration work and gives organizations a single control plane.</p>
+              <p>The alternative is not “GitHub or another tool.” Codex, Cursor and Claude Code can all work with GitHub repositories. The tradeoff is whether GitHub should be the agent interface itself or simply the source-control system the agent hands work back to.</p>
+            </section>
+
+            <section id="free-tools">
+              <p class="eyebrow">LONG-TAIL QUESTION</p>
+              <h2>What is the best free AI coding tool in 2026?</h2>
+              <p>If the goal is to evaluate the category before paying, there are multiple credible free entry points. <strong>GitHub Copilot Free</strong> includes limited completions and agent/chat usage. <strong>Cursor Hobby</strong> is free with limited agent requests. <strong>Codex</strong> has a free-plan entry for short coding tasks. <strong>Devin Desktop</strong> lists a free plan. Claude Code, by contrast, is included in paid Claude plans rather than Claude Free.</p>
+              <p>Free tiers are useful for testing interaction design, but they are poor proxies for the economics of daily autonomous work. Agent sessions consume more model inference, tools and execution time than autocomplete, so serious evaluation should include a paid month and a real repository.</p>
+            </section>
+
+            <section id="claude-code-vs-cursor-vs-copilot">
+              <p class="eyebrow">CHOOSING BETWEEN LEADERS</p>
+              <h2>Claude Code vs Cursor vs GitHub Copilot: how should developers choose?</h2>
+              <div class="guide-choice-grid">
+                <article><span>Choose Claude Code when…</span><p>You want the terminal to be the primary interface, you delegate complex multi-file work, and you value an agent that feels close to the development environment.</p></article>
+                <article><span>Choose Cursor when…</span><p>You want an AI-native editor where chat, editing, model selection and cloud agents feel like one integrated product.</p></article>
+                <article><span>Choose GitHub Copilot when…</span><p>Your organization is standardized on GitHub, developers use mixed IDEs, and you want AI assistance, agents and review to share the existing repository platform.</p></article>
+              </div>
+              <p>Many advanced teams will use more than one. The key is to avoid overlapping tools without a reason. Define which tool owns inline assistance, which owns delegated implementation and which owns automated review.</p>
+            </section>
+
+            <section id="agent-vs-autocomplete">
+              <p class="eyebrow">FOUNDATION</p>
+              <h2>AI coding agent vs autocomplete: what changed?</h2>
+              <p>Autocomplete answers a local question: <em>what code probably comes next?</em> An agent answers a systems question: <em>what sequence of actions completes this engineering task?</em></p>
+              <div class="guide-difference">
+                <div><span>AUTOCOMPLETE</span><strong>Predict → suggest → accept</strong><p>Fast, low-friction and ideal for local edits, boilerplate and repetitive code.</p></div>
+                <div><span>CODING AGENT</span><strong>Inspect → plan → edit → run → verify</strong><p>Higher cost and more operational risk, but able to handle tasks that span files, tools and time.</p></div>
+              </div>
+              <p>This distinction explains why pricing is changing across the category. A completion can be measured as a short inference. An agent may use a frontier model repeatedly, search a repository, call tools, create environments and run tests. The product economics increasingly look like compute orchestration rather than a simple IDE subscription.</p>
+            </section>
+
+            <section id="pricing">
+              <p class="eyebrow">PRICING GUIDE</p>
+              <h2>AI coding tool pricing in 2026: why the monthly fee is only part of the cost</h2>
+              <p>The headline subscription price is useful for lightweight interactive coding, but autonomous work introduces a second layer: usage. GitHub uses AI credits for many agent interactions. Cursor Cloud Agents are billed at model API pricing. Codex can run against a ChatGPT allowance or an API key. Claude paid plans share usage across Claude and Claude Code, with optional usage credits. The result is that two developers on the same $20 plan can have very different effective costs.</p>
+              <div class="guide-pricing-list">
+                {"".join(f'<div><strong>{escape(t["name"])}</strong><p>{escape(t["pricing"])}</p><a href="{escape(t["source"], quote=True)}" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>' for t in tools)}
+              </div>
+              <div class="guide-callout"><strong>SXF cost rule</strong><p>For teams, compare cost per accepted engineering task — not cost per seat. Include agent usage, review time, failed runs and the human time required to recover from wrong changes.</p></div>
+            </section>
+
+            <section class="guide-faq-section" id="faq">
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions about AI coding tools</h2>
+              <div class="model-faq">{faq_html}</div>
+            </section>
+
+            <section class="guide-sources">
+              <p class="eyebrow">PRIMARY SOURCES</p>
+              <h2>Official documentation used for this guide</h2>
+              <p>Pricing and product capabilities change quickly. SXF links directly to the vendor pages used for verification so readers can check the current state before purchasing.</p>
+              <div class="model-sources">{source_links}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/best-ai-coding-tools/",
+            "category": "Coding",
+            "categories": ["coding", "agents"],
+            "kicker": "BUYING GUIDE",
+            "title": "Best AI Coding Tools in 2026",
+            "description": "Claude Code, Codex, GitHub Copilot, Cursor and Windsurf/Devin Desktop compared by workflow, pricing, autonomy and team fit.",
+            "meta": "Coding agents · Pricing · Comparison",
+            "updated": "Sep 25, 2026",
+            "read_time": "18 min",
+        },
         {
             "href": f"/compare/{GPT6_COMPARE_SLUG}/",
             "category": "Models",
@@ -1689,6 +2048,9 @@ def build_discovery_pages(items, current_items):
     GUIDES_DIR.mkdir(parents=True, exist_ok=True)
 
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
+    coding_guide_path.mkdir(parents=True, exist_ok=True)
+    (coding_guide_path / "index.html").write_text(best_ai_coding_tools_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -1738,6 +2100,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
         sitemap_entry(f"{BASE_URL}/guides/", generated_today),
+        sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]
