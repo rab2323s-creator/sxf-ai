@@ -323,6 +323,7 @@ TOPICS_DIR = ROOT / "topics"
 BRIEF_DIR = ROOT / "brief"
 COMPARE_DIR = ROOT / "compare"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
+GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 
 TOPICS = [
     {
@@ -1292,6 +1293,163 @@ def gpt6_comparison_html(items):
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST GPT-6 SIGNALS</p><h2>What changed recently.</h2></div><a href="/models/gpt-6/">GPT-6 reference ↗</a></div><div class="signal-list">{signal_rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
+
+def gpt6_sol_vs_claude_opus_html(items):
+    canonical = f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    sol = {
+        "name": "GPT-6 Sol",
+        "provider": "OpenAI",
+        "model_id": "gpt-6-sol",
+        "released": "Sep 22, 2026",
+        "positioning": "Complex coding and agentic workflows",
+        "context": "1,050,000",
+        "max_output": "128,000",
+        "knowledge_cutoff": "Apr 20, 2026",
+        "thinking": "Optional; none through max",
+        "input_price": "$2.00",
+        "cached_price": "$0.20",
+        "cache_write": "$2.50",
+        "output_price": "$10.00",
+        "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+    }
+    claude = {
+        "name": "Claude Opus 5.5",
+        "provider": "Anthropic",
+        "model_id": "claude-opus-5-5",
+        "released": "Sep 22, 2026",
+        "positioning": "Long-running agentic coding and knowledge work",
+        "context": "1,000,000",
+        "max_output": "128,000",
+        "knowledge_cutoff": "Jun 2026",
+        "thinking": "Adaptive; always on",
+        "input_price": "$4.00",
+        "cached_price": "$0.20",
+        "cache_write": "$5.00 / $8.00",
+        "output_price": "$20.00",
+        "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+    }
+
+    rows = "".join([
+        f'''<tr><th scope="row"><a href="/models/gpt-6-sol/">{escape(sol["name"])}</a><small>{escape(sol["model_id"])}</small></th>
+        <td>{escape(sol["provider"])}</td><td>{escape(sol["positioning"])}</td><td>{escape(sol["context"])}</td><td>{escape(sol["max_output"])}</td>
+        <td>{escape(sol["thinking"])}</td><td>{escape(sol["input_price"])}</td><td>{escape(sol["cached_price"])}</td><td>{escape(sol["cache_write"])}</td><td>{escape(sol["output_price"])}</td></tr>''',
+        f'''<tr><th scope="row"><a href="/models/claude-opus-5-5/">{escape(claude["name"])}</a><small>{escape(claude["model_id"])}</small></th>
+        <td>{escape(claude["provider"])}</td><td>{escape(claude["positioning"])}</td><td>{escape(claude["context"])}</td><td>{escape(claude["max_output"])}</td>
+        <td>{escape(claude["thinking"])}</td><td>{escape(claude["input_price"])}</td><td>{escape(claude["cached_price"])}</td><td>{escape(claude["cache_write"])}</td><td>{escape(claude["output_price"])}</td></tr>''',
+    ])
+
+    def cost(input_rate, output_rate, input_m, output_m):
+        value = input_rate * input_m + output_rate * output_m
+        return ("$" + f"{value:,.3f}").rstrip("0").rstrip(".")
+
+    standard_examples = [
+        ("GPT-6 Sol", cost(2, 10, .1, .01)),
+        ("Claude Opus 5.5", cost(4, 20, .1, .01)),
+    ]
+    monthly_examples = [
+        ("GPT-6 Sol", cost(2, 10, 10, 1)),
+        ("Claude Opus 5.5", cost(4, 20, 10, 1)),
+    ]
+    long_examples = [
+        ("GPT-6 Sol", cost(4, 15, .5, .05)),
+        ("Claude Opus 5.5", cost(4, 20, .5, .05)),
+    ]
+    standard_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in standard_examples)
+    monthly_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>10M input + 1M output</small></div>' for n,c in monthly_examples)
+    long_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>500K input + 50K output</small></div>' for n,c in long_examples)
+
+    relevant = [
+        item for item in items
+        if "GPT-6 Sol" in extract_models(item["title"]) or "Claude Opus 5.5" in extract_models(item["title"])
+    ][:10]
+    signal_rows = "".join(signal_row(item) for item in relevant)
+
+    faq_items = [
+        ("How much cheaper is GPT-6 Sol than Claude Opus 5.5 at standard token rates?",
+         "At the official standard rates, GPT-6 Sol is priced at $2 input and $10 output per million tokens, while Claude Opus 5.5 is $4 input and $20 output. The uncached input and output rates are therefore half as high for Sol."),
+        ("Do GPT-6 Sol and Claude Opus 5.5 have the same context window?",
+         "No. OpenAI lists a 1,050,000-token context window for GPT-6 Sol. Anthropic lists 1,000,000 tokens for Claude Opus 5.5. Both list a 128,000-token maximum output."),
+        ("How do long-context prices differ?",
+         "OpenAI states that GPT-6 Sol requests above 272K input tokens use 2x input/cache rates and 1.5x output rates for the full request. Anthropic states that the 1M context window is standard and long-context requests are billed at standard pricing."),
+        ("How does reasoning control differ?",
+         "GPT-6 Sol supports reasoning effort from none through max. Claude Opus 5.5 uses adaptive thinking that is always on, with medium as the default effort."),
+        ("Which model is positioned for coding and agents?",
+         "Both vendors position these models for coding and agentic work. OpenAI describes Sol as built for complex coding and agentic workflows; Anthropic describes Opus 5.5 as built for long-running agentic coding and knowledge work."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
+
+    sources = "".join([
+        '<a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer"><span>OpenAI · GPT-6 Sol model card</span><b>↗</b></a>',
+        '<a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>OpenAI · API pricing</span><b>↗</b></a>',
+        '<a href="https://platform.claude.com/docs/en/models/opus-5-5/overview" target="_blank" rel="noopener noreferrer"><span>Anthropic · Claude Opus 5.5 model card</span><b>↗</b></a>',
+        '<a href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer"><span>Anthropic · Opus 5.5 announcement</span><b>↗</b></a>',
+    ])
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"WebPage","@id":canonical+"#webpage","url":canonical,
+                "name":"GPT-6 Sol vs Claude Opus 5.5: Pricing, Context & API Comparison",
+                "description":"Compare GPT-6 Sol and Claude Opus 5.5 using official pricing, context, output limits, reasoning controls and long-context billing.",
+                "dateModified":verified,"isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":[{"@type":"Thing","name":"GPT-6 Sol"},{"@type":"Thing","name":"Claude Opus 5.5"}],
+                "citation":[sol["source"],"https://developers.openai.com/api/docs/pricing",claude["source"],"https://www.anthropic.com/claude-opus-5-5"],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":3,"name":"GPT-6 Sol vs Claude Opus 5.5","item":canonical}
+            ]},
+            {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]},
+        ]
+    }
+    description = "GPT-6 Sol vs Claude Opus 5.5: official API pricing, 1.05M vs 1M context, 128K output, reasoning controls and long-context costs."
+    return f'''<!doctype html><html lang="en">{page_head("GPT-6 Sol vs Claude Opus 5.5 — Pricing & Context | SXF / AI", description, canonical, schema)}
+    <body class="intel-page comparison-page">{page_header("models")}<main>
+      <section class="comparison-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Sol vs Opus 5.5</span></nav>
+        <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
+        <h1>GPT-6 Sol<br><span>vs Claude Opus 5.5.</span></h1>
+        <p>Two models released on September 22, 2026 and aimed at serious coding and agentic work. This comparison separates official specifications and pricing from vendor performance claims.</p>
+        <div class="hero-actions"><a class="primary-cta" href="#specs">Compare specs <span>↓</span></a><a class="secondary-cta" href="/models/gpt-6-sol/">GPT-6 Sol reference</a></div>
+      </section>
+
+      <section class="decision-grid duel-grid shell">
+        <article><span>OPENAI · GPT-6 SOL</span><h2>Lower standard token rates.</h2><p>OpenAI positions Sol for complex coding and agentic workflows. It supports optional reasoning effort from none through max and a 1.05M context window.</p><strong>$2 input · $10 output / MTok</strong><a href="/models/gpt-6-sol/">Open Sol reference ↗</a></article>
+        <article><span>ANTHROPIC · OPUS 5.5</span><h2>Long-running agentic work.</h2><p>Anthropic positions Opus 5.5 for long-running agentic coding and knowledge work. Adaptive thinking is always on and its 1M context is billed at standard rates.</p><strong>$4 input · $20 output / MTok</strong><a href="/models/claude-opus-5-5/">Open Opus 5.5 signals ↗</a></article>
+      </section>
+
+      <section id="specs" class="comparison-table-section shell">
+        <div class="intel-section-head"><div><p class="eyebrow">OFFICIAL SPECIFICATIONS</p><h2>Side-by-side facts.</h2></div><span>Vendor documentation</span></div>
+        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Provider</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Thinking</th><th>Input</th><th>Cache read</th><th>Cache write</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="reference-note">Prices shown are standard per 1M tokens. Claude cache-write pricing is $5 for a 5-minute cache and $8 for a 1-hour cache. GPT-6 Sol cache write is $2.50 per 1M tokens at the listed standard short-context rate.</p>
+      </section>
+
+      <section class="cost-section shell">
+        <div class="intel-section-head"><div><p class="eyebrow">COST EXAMPLES</p><h2>Same tokens, different billing.</h2></div><span>Direct token charges</span></div>
+        <h3>Short-context request</h3><div class="cost-grid two-up">{standard_cards}</div>
+        <h3>Monthly standard volume</h3><div class="cost-grid two-up">{monthly_cards}</div>
+        <h3>Single long-context request</h3><div class="cost-grid two-up">{long_cards}</div>
+        <p class="reference-note">The 500K + 50K example applies OpenAI’s published long-context uplift to Sol and Anthropic’s standard Opus 5.5 rates. It excludes tool calls, regional processing and service-tier adjustments.</p>
+      </section>
+
+      <section class="comparison-notes shell">
+        <article><p class="eyebrow">CONTEXT ECONOMICS</p><h2>The gap narrows on very long prompts.</h2><p>Sol’s standard uncached token prices are half of Opus 5.5. Above 272K input tokens, however, Sol’s full request moves to higher long-context rates while Anthropic says Opus 5.5 keeps standard pricing across its 1M context window.</p></article>
+        <article><p class="eyebrow">CACHE READS</p><h2>Both list $0.20 / MTok.</h2><p>At standard rates, both vendors list $0.20 per million cached or cache-read input tokens. Their cache-write pricing and long-context billing differ, so agent cost depends on the shape of the workload rather than headline input price alone.</p></article>
+      </section>
+
+      <section class="comparison-notes shell">
+        <article><p class="eyebrow">REASONING CONTROL</p><h2>Optional vs always-on thinking.</h2><p>GPT-6 Sol lets API users select reasoning effort from none to max. Claude Opus 5.5 uses adaptive thinking that cannot be disabled; Anthropic lists medium as its default effort.</p></article>
+        <article><p class="eyebrow">BENCHMARK CAUTION</p><h2>Keep vendor claims attributable.</h2><p>Launch benchmark charts can use different harnesses, effort settings and comparison models. SXF keeps this page centered on directly comparable official specifications rather than declaring a benchmark winner from mismatched tests.</p></article>
+      </section>
+
+      <section class="model-reference-lower shell"><div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{sources}</div><div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div></section>
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Recent Sol and Opus 5.5 updates.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>
+    </main>{page_footer()}</body></html>'''
+
 def brief_issue_html(items, issue_date):
     selected = select_brief_items(items)
     pretty = issue_date.strftime("%B %-d, %Y")
@@ -1359,6 +1517,10 @@ def build_discovery_pages(items, current_items):
     comparison_path.mkdir(parents=True, exist_ok=True)
     (comparison_path / "index.html").write_text(gpt6_comparison_html(items), encoding="utf-8")
 
+    duel_path = COMPARE_DIR / GPT6_SOL_CLAUDE_COMPARE_SLUG
+    duel_path.mkdir(parents=True, exist_ok=True)
+    (duel_path / "index.html").write_text(gpt6_sol_vs_claude_opus_html(items), encoding="utf-8")
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -1380,6 +1542,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]
 
     for item in items:
