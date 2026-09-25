@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
+SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -391,6 +392,17 @@ def slugify(value):
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-")[:82] or "signal"
 
+def load_slug_aliases():
+    if not SLUG_ALIASES_PATH.exists():
+        return {}
+    try:
+        data = json.loads(SLUG_ALIASES_PATH.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+SLUG_ALIASES = load_slug_aliases()
+
 def signal_slug(item):
     digest = hashlib.sha1(item["url"].encode("utf-8")).hexdigest()[:7]
     return f'{slugify(item["title"])[:70]}-{digest}'
@@ -524,7 +536,7 @@ def prepare_items(items):
         row["summary"] = clean_summary(row.get("summary", ""))
         row["category"] = categorize(row["title"], row["source"])
         row["tags"] = classify_tags(row["title"], row["source"], row["category"])
-        row["signal_slug"] = signal_slug(row)
+        row["signal_slug"] = SLUG_ALIASES.get(row["url"]) or row.get("signal_slug") or signal_slug(row)
         row["signal_url"] = f'{BASE_URL}/signals/{row["signal_slug"]}/'
         score, factors = signal_score(row)
         row["signal_score"] = score
@@ -721,7 +733,7 @@ def page_footer():
       <p>© <span id="year"></span> SXF</p>
     </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>'''
 
-def page_head(title, description, canonical, schema, page_type="website"):
+def page_head(title, description, canonical, schema, page_type="website", robots="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"):
     safe_description = escape(description[:180], quote=True)
     return f'''<head>
       <meta charset="utf-8" />
@@ -729,8 +741,8 @@ def page_head(title, description, canonical, schema, page_type="website"):
       <meta name="color-scheme" content="dark" />
       <title>{escape(title)}</title>
       <meta name="description" content="{safe_description}" />
-      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="robots" content="{escape(robots, quote=True)}" />
+      <meta name="googlebot" content="{escape(robots, quote=True)}" />
       <meta name="theme-color" content="#07090d" />
       <link rel="canonical" href="{escape(canonical, quote=True)}" />
       <link rel="alternate" hreflang="en" href="{escape(canonical, quote=True)}" />
@@ -777,6 +789,8 @@ def signal_page_html(item, items):
     canonical = item["signal_url"]
     description = compact_description(item)
     modified = item.get("modified_at") or item["published"]
+    indexable = bool(clean_summary(item.get("summary", "")))
+    robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if indexable else "noindex,follow"
     schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -817,7 +831,7 @@ def signal_page_html(item, items):
     editorial = item.get("editorial") or editorial_units(item)
     summary_label = "Source summary" if item.get("summary") else "SXF signal note"
     return f'''<!doctype html><html lang="en">
-    {page_head(item["title"] + " | SXF / AI", description, canonical, schema, "article")}
+    {page_head(item["title"] + " | SXF / AI", description, canonical, schema, "article", robots)}
     <body class="intel-page signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
@@ -1009,6 +1023,8 @@ def update_sitemap(items):
     ]
 
     for item in items:
+        if not clean_summary(item.get("summary", "")):
+            continue
         modified = parse_date(item.get("modified_at", "")) or parse_date(item["published"])
         rows.append(sitemap_entry(item["signal_url"], modified.date().isoformat()))
 

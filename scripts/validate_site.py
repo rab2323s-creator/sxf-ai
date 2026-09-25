@@ -79,6 +79,7 @@ def main():
 
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
+    aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))
     if not news.get("items"):
         fail("news.json has no items")
     if len(archive.get("items",[])) < len(news["items"]):
@@ -89,6 +90,8 @@ def main():
             fail(f"news item missing fields: {item.get('title')}")
         if "editorial" in item:
             fail("news.json must stay client-light")
+        if item["url"] in aliases and item["signal_url"] != BASE + "/signals/" + aliases[item["url"]] + "/":
+            fail(f"canonical slug drift: {item['title']}")
 
     tree=ET.parse(ROOT/"sitemap.xml")
     ns={"s":"http://www.sitemaps.org/schemas/sitemap/0.9"}
