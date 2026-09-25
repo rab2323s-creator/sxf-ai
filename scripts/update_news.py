@@ -223,7 +223,7 @@ def update_section_pages(items):
             "itemListOrder": "https://schema.org/ItemListOrderDescending",
             "numberOfItems": min(len(filtered), 10),
             "itemListElement": [
-                {"@type": "ListItem", "position": i + 1, "item": {"@type": "Thing", "name": item["title"], "url": item["url"]}}
+                {"@type": "ListItem", "position": i + 1, "item": {"@type": "Thing", "name": item["title"], "url": item.get("signal_url", item["url"])}}
                 for i, item in enumerate(filtered[:10])
             ],
         }
@@ -311,6 +311,117 @@ def signal_slug(item):
     digest = hashlib.sha1(item["url"].encode("utf-8")).hexdigest()[:7]
     return f'{slugify(item["title"])[:70]}-{digest}'
 
+SIGNAL_SCORE_RULES = [
+    (re.compile(r"\bintroducing\b|\blaunch(?:ed|es)?\b|\brelease(?:d|s)?\b|\bnow available\b", re.I), 18, "release"),
+    (re.compile(r"\bGPT[- ]\d|\bClaude\b|\bGemini\b|\bLFM\d|\bmodel\b", re.I), 14, "model"),
+    (re.compile(r"\bagents?\b|\bagentic\b|\bAPI\b|\bCopilot\b|\bdeveloper\b", re.I), 10, "developer"),
+    (re.compile(r"\bresearch\b|\bbenchmark\b|\bevaluation\b|\bstudy\b|\bscience\b", re.I), 12, "research"),
+    (re.compile(r"\bsafety\b|\balignment\b|\bmisalignment\b|\bassessment\b|\bcyber\b", re.I), 10, "safety"),
+    (re.compile(r"\bopen[- ]source\b|\bweights\b|\brepository\b|\bllama\.cpp\b|\bMLX\b", re.I), 10, "open-source"),
+    (re.compile(r"\bexpands?\b|\bnew features?\b|\bimproves?\b|\bfaster\b|\bbetter\b", re.I), 7, "product-change"),
+]
+
+def signal_score(item, now=None):
+    now = now or datetime.now(timezone.utc)
+    title = item["title"]
+    score = 24
+    factors = []
+    for pattern, points, label in SIGNAL_SCORE_RULES:
+        if pattern.search(title):
+            score += points
+            factors.append(label)
+
+    age_hours = max(0.0, (now - parse_date(item["published"])).total_seconds() / 3600)
+    if age_hours <= 12:
+        score += 18
+        factors.append("fresh")
+    elif age_hours <= 24:
+        score += 14
+        factors.append("recent")
+    elif age_hours <= 72:
+        score += 9
+        factors.append("recent")
+    elif age_hours <= 168:
+        score += 4
+
+    if item["category"] == "Models":
+        score += 8
+    elif item["category"] == "Research":
+        score += 7
+    elif item["category"] == "Open Source":
+        score += 6
+    else:
+        score += 4
+
+    # Keep the score useful as an internal prioritization signal, not a claim of objective importance.
+    return min(100, score), factors[:5]
+
+def editorial_units(item):
+    title = item["title"]
+    source = item["source"]
+    category = item["category"]
+    summary = clean_summary(item.get("summary", ""))
+
+    if summary:
+        what_changed = summary
+    elif re.search(r"\bintroducing\b|\blaunch(?:ed|es)?\b|\brelease(?:d|s)?\b", title, re.I):
+        what_changed = f'{source} published a release-focused update titled “{title}.” SXF is tracking it as a {category.lower()} signal and keeps the original publication as the source of record.'
+    elif re.search(r"\bnow available\b|\bavailable\b|\bexpands?\b|\benablement\b", title, re.I):
+        what_changed = f'{source} published an availability or rollout update titled “{title}.” The signal is indexed here so changes in access, rollout scope and related product details can be followed over time.'
+    elif re.search(r"\bbenchmark\b|\bevaluation\b|\bresearch\b|\bstudy\b|\bscience\b", title, re.I):
+        what_changed = f'{source} published a research-oriented update titled “{title}.” SXF places it in the radar as a traceable research signal rather than treating the headline as an independently verified finding.'
+    else:
+        what_changed = f'{source} published an update titled “{title}.” SXF classifies it under {category} and preserves the direct path to the original publication for the complete context.'
+
+    if category == "Models":
+        why = "Model signals can change capability expectations, access patterns or deployment choices. The useful questions are what changed, who can access it, how it compares with prior versions, and which claims are supported by published evaluations."
+    elif category == "Research":
+        why = "Research signals matter when they change the evidence available around capability, evaluation, safety or scientific use. The paper or primary publication should be checked for methodology, scope, limitations and reproducibility."
+    elif category == "Open Source":
+        why = "Open-source signals can affect what developers are able to inspect, run or build on. The practical value depends on the released artifacts, license, hardware requirements, maintenance status and reproducibility."
+    else:
+        why = "Tool and platform changes matter when they alter what users or developers can actually do. The practical impact depends on availability, supported workflows, pricing or limits, and whether the change is generally released or still restricted."
+
+    verify = "Verify the exact claims, benchmarks, pricing, rollout status, safety notes and technical limitations in the original source. SXF adds organization and context; it does not replace the publisher’s documentation."
+    return {
+        "what_changed": clean_summary(what_changed)[:1100],
+        "why_it_matters": why,
+        "what_to_verify": verify,
+    }
+
+def select_brief_items(items, limit=5):
+    ranked = sorted(
+        items,
+        key=lambda item: (item.get("signal_score", 0), parse_date(item["published"])),
+        reverse=True,
+    )
+    selected = []
+    source_counts = {}
+    category_counts = {}
+
+    # First pass: prioritize high score while avoiding a one-source or one-category brief.
+    for item in ranked:
+        source = item["source"]
+        category = item["category"]
+        if source_counts.get(source, 0) >= 2:
+            continue
+        if category_counts.get(category, 0) >= 2 and len(selected) < limit - 1:
+            continue
+        selected.append(item)
+        source_counts[source] = source_counts.get(source, 0) + 1
+        category_counts[category] = category_counts.get(category, 0) + 1
+        if len(selected) == limit:
+            return selected
+
+    # Fill any remaining slots strictly by score.
+    for item in ranked:
+        if item in selected:
+            continue
+        selected.append(item)
+        if len(selected) == limit:
+            break
+    return selected
+
 def prepare_items(items):
     prepared = []
     for item in items:
@@ -318,6 +429,10 @@ def prepare_items(items):
         row["summary"] = clean_summary(row.get("summary", ""))
         row["signal_slug"] = signal_slug(row)
         row["signal_url"] = f'{BASE_URL}/signals/{row["signal_slug"]}/'
+        score, factors = signal_score(row)
+        row["signal_score"] = score
+        row["score_factors"] = factors
+        row["editorial"] = editorial_units(row)
         prepared.append(row)
     return prepared
 
@@ -373,14 +488,8 @@ def display_date(value):
     return d.strftime("%B %-d, %Y")
 
 def compact_description(item):
-    summary = clean_summary(item.get("summary", ""))
-    if summary:
-        return summary
-    return (
-        f'SXF detected this update in {item["source"]}’s primary feed and currently '
-        f'classifies it under {item["category"]}. The original publication remains '
-        f'the source of record for details, claims, availability and limitations.'
-    )
+    editorial = item.get("editorial") or editorial_units(item)
+    return editorial["what_changed"]
 
 def category_context(category):
     return {
@@ -497,7 +606,8 @@ def signal_page_html(item, items):
         f'<a href="/models/{escape(slugify(name), quote=True)}/">{escape(name)}</a>' for name in models[:4]
     )
     related = "".join(signal_row(x) for x in related_items(item, items))
-    summary_label = "Source summary" if item.get("summary") else "Signal note"
+    editorial = item.get("editorial") or editorial_units(item)
+    summary_label = "Source summary" if item.get("summary") else "SXF signal note"
     return f'''<!doctype html><html lang="en">
     {page_head(item["title"] + " | SXF / AI", description, canonical, schema)}
     <body class="intel-page signal-page">
@@ -513,20 +623,21 @@ def signal_page_html(item, items):
             <div><span>SOURCE</span><strong>{escape(item["source"])}</strong></div>
             <div><span>PUBLISHED</span><strong>{escape(display_date(item["published"]))}</strong></div>
             <div><span>LAYER</span><strong>{escape(item["category"])}</strong></div>
+            <div><span>SIGNAL SCORE</span><strong>{item.get("signal_score", 0):02d}/100</strong></div>
           </div>
         </section>
 
         <section class="signal-layout shell">
           <article class="signal-brief">
             <p class="eyebrow">{summary_label.upper()}</p>
-            <p class="signal-summary">{escape(description)}</p>
+            <p class="signal-summary">{escape(editorial["what_changed"])}</p>
             <div class="signal-context">
-              <span>WHY IT IS TRACKED</span>
-              <p>{escape(category_context(item["category"]))}</p>
+              <span>WHY IT MATTERS</span>
+              <p>{escape(editorial["why_it_matters"])}</p>
             </div>
             <div class="signal-context">
-              <span>VERIFICATION</span>
-              <p>SXF preserves the original publication as the source of record. Check it directly for exact claims, benchmarks, pricing, availability, safety notes and implementation details.</p>
+              <span>WHAT TO VERIFY</span>
+              <p>{escape(editorial["what_to_verify"])}</p>
             </div>
           </article>
 
@@ -618,7 +729,7 @@ def model_page_html(name, items):
     </main>{page_footer()}</body></html>'''
 
 def brief_issue_html(items, issue_date):
-    selected = items[:5]
+    selected = select_brief_items(items)
     pretty = issue_date.strftime("%B %-d, %Y")
     slug = issue_date.isoformat()
     canonical = f"{BASE_URL}/brief/{slug}/"
@@ -626,15 +737,16 @@ def brief_issue_html(items, issue_date):
     schema = {"@context":"https://schema.org","@type":"Article","headline":f"SXF Brief — {pretty}","datePublished":issue_date.isoformat(),"mainEntityOfPage":canonical,"isPartOf":{"@id":"https://sxf.si/#website"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"inLanguage":"en"}
     cards = ""
     for i,item in enumerate(selected, 1):
-        cards += f'''<article class="brief-signal"><span class="brief-no">{i:02d}</span><div><div class="brief-meta"><strong>{escape(item["source"])}</strong><span>{escape(item["category"])}</span></div><h2><a href="/signals/{escape(item["signal_slug"], quote=True)}/">{escape(item["title"])}</a></h2><p>{escape(compact_description(item))}</p><a class="brief-open" href="/signals/{escape(item["signal_slug"], quote=True)}/">Open signal ↗</a></div></article>'''
+        cards += f'''<article class="brief-signal"><span class="brief-no">{i:02d}</span><div><div class="brief-meta"><strong>{escape(item["source"])}</strong><span>{escape(item["category"])}</span><span>SCORE {item.get("signal_score",0):02d}</span></div><h2><a href="/signals/{escape(item["signal_slug"], quote=True)}/">{escape(item["title"])}</a></h2><p>{escape(compact_description(item))}</p><a class="brief-open" href="/signals/{escape(item["signal_slug"], quote=True)}/">Open signal ↗</a></div></article>'''
     return f'''<!doctype html><html lang="en">{page_head("SXF Brief — " + pretty, description, canonical, schema)}
     <body class="intel-page brief-page">{page_header("brief")}<main>
-      <section class="brief-issue-hero shell"><div><p class="eyebrow">SXF BRIEF / {escape(slug)}</p><h1>Five signals.<br><span>Zero noise.</span></h1></div><p>A compact daily scan of the AI developments currently at the top of the SXF radar. Every item keeps the primary source attached.</p></section>
+      <section class="brief-issue-hero shell"><div><p class="eyebrow">SXF BRIEF / {escape(slug)}</p><h1>Five signals.<br><span>Zero noise.</span></h1></div><p>Five high-priority signals selected by SXF’s internal scoring system, with source and category diversity built into the shortlist. Every item keeps the primary source attached.</p></section>
       <section class="brief-stack shell">{cards}</section>
       <section class="brief-note shell"><span>METHOD</span><p>The brief is a discovery layer, not a substitute for the source. Open each signal for attribution and the original publication.</p><a href="/about/">Read SXF methodology ↗</a></section>
     </main>{page_footer()}</body></html>'''
 
 def brief_index_html(items, issue_date):
+    selected = select_brief_items(items)
     current = issue_date.isoformat()
     canonical = f"{BASE_URL}/brief/"
     description = "SXF Brief: five primary-source AI signals to scan each day, selected from the live SXF radar."
@@ -649,7 +761,7 @@ def brief_index_html(items, issue_date):
     <body class="intel-page brief-index">{page_header("brief")}<main>
       <section class="collection-hero shell"><p class="eyebrow">DAILY INTELLIGENCE</p><h1>Five signals.<br><span>Zero noise.</span></h1><p>A compact daily read built from SXF’s live primary-source radar.</p><div class="hero-actions"><a class="primary-cta" href="/brief/{current}/">Read latest brief <span>↗</span></a><a class="secondary-cta" href="/signals/">Browse all signals</a></div></section>
       <section class="brief-preview shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST ISSUE</p><h2>{escape(issue_date.strftime("%B %-d, %Y"))}</h2></div><a href="/brief/{current}/">Open full issue ↗</a></div>
-      <div class="brief-preview-grid">{"".join(f'<a href="/signals/{escape(x["signal_slug"], quote=True)}/"><span>{i:02d}</span><strong>{escape(x["title"])}</strong><small>{escape(x["source"])} · {escape(x["category"])}</small></a>' for i,x in enumerate(items[:5],1))}</div></section>
+      <div class="brief-preview-grid">{"".join(f'<a href="/signals/{escape(x["signal_slug"], quote=True)}/"><span>{i:02d}</span><strong>{escape(x["title"])}</strong><small>{escape(x["source"])} · {escape(x["category"])}</small></a>' for i,x in enumerate(selected,1))}</div></section>
       <section class="brief-archive shell"><p class="eyebrow">ARCHIVE</p><div>{archive_html}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -756,6 +868,7 @@ def main():
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "items": final,
         "feed_errors": errors,
+        "scoring_version": "sxf-signal-score-v1",
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
