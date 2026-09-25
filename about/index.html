@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>About SXF / AI — Method, Sources & Project Origin</title>
-  <meta name="description" content="Learn how SXF / AI tracks primary-source AI updates, how signals are selected, and how the project is developed within VMC Labs, part of Viva Media Creative." />
+  <title>About SXF / AI — Method, Sources & Editorial Standards</title>
+  <meta name="description" content="How SXF / AI tracks important AI developments from primary sources, selects signals, handles attribution and corrections, and who develops the project." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta name="theme-color" content="#07090d" />
   <link rel="canonical" href="https://sxf.si/about/" />
   <link rel="alternate" hreflang="en" href="https://sxf.si/about/" />
@@ -17,12 +18,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SXF / AI" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="About SXF / AI — Method, Sources & Project Origin" />
-  <meta property="og:description" content="How SXF / AI tracks AI developments from primary sources, selects signals, and maintains clear project attribution." />
+  <meta property="og:title" content="About SXF / AI — Method, Sources & Editorial Standards" />
+  <meta property="og:description" content="A transparent look at how SXF / AI tracks, filters and presents important AI developments from primary sources." />
   <meta property="og:url" content="https://sxf.si/about/" />
+
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="About SXF / AI" />
-  <meta name="twitter:description" content="Method, source policy, editorial principles and project origin." />
+  <meta name="twitter:description" content="Method, source policy, editorial standards and project attribution." />
 
   <script type="application/ld+json">
   {
@@ -42,11 +44,20 @@
         "parentOrganization":{"@id":"https://vivamediacreative.com/#organization"}
       },
       {
-        "@type":"WebPage",
+        "@type":"WebSite",
+        "@id":"https://sxf.si/#website",
+        "url":"https://sxf.si/",
+        "name":"SXF / AI",
+        "description":"A focused radar for important artificial intelligence models, tools, open-source releases and research.",
+        "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+        "inLanguage":"en"
+      },
+      {
+        "@type":"AboutPage",
         "@id":"https://sxf.si/about/#webpage",
         "url":"https://sxf.si/about/",
-        "name":"About SXF / AI — Method, Sources & Project Origin",
-        "description":"How SXF / AI tracks primary-source AI developments, selects signals and identifies the team behind the project.",
+        "name":"About SXF / AI — Method, Sources & Editorial Standards",
+        "description":"How SXF / AI tracks, filters and presents important AI developments from primary sources.",
         "isPartOf":{"@id":"https://sxf.si/#website"},
         "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
         "about":{"@type":"Thing","name":"SXF / AI"},
@@ -66,8 +77,9 @@
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="./about.css" />
 </head>
+
 <body class="about-page">
-  <a class="skip-link" href="#about-main">Skip to about SXF</a>
+  <a class="skip-link" href="#about-main">Skip to main content</a>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
 
@@ -76,100 +88,237 @@
       <a class="brand" href="/" aria-label="SXF AI home">
         <span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span>
       </a>
+
       <nav class="top-nav" aria-label="Primary navigation">
-        <a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/about/" aria-current="page">About</a>
+        <a href="/models/">Models</a>
+        <a href="/tools/">Tools</a>
+        <a href="/research/">Research</a>
+        <a href="/open-source/">Open Source</a>
+        <a href="/about/" aria-current="page">About</a>
       </nav>
+
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div>
   </header>
 
   <main id="about-main">
     <section class="about-hero shell">
-      <nav class="about-breadcrumbs" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>About</span></nav>
-      <p class="hero-kicker"><span class="pulse-dot"></span> ABOUT SXF / AI</p>
-      <h1>A clearer view of a<br><span>fast-moving field.</span></h1>
-      <p class="about-intro">SXF / AI is an independent AI discovery product for tracking meaningful changes across models, tools, research and open source. It is designed around primary sources, concise context and fast verification.</p>
-      <div class="about-metrics" aria-label="SXF operating principles">
-        <div><strong>Primary</strong><span>source preference</span></div>
-        <div><strong>4</strong><span>intelligence layers</span></div>
-        <div><strong>3h</strong><span>refresh cycle</span></div>
+      <nav class="about-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">SXF</a><span>/</span><span>About</span>
+      </nav>
+
+      <div class="about-hero-grid">
+        <div class="about-hero-main">
+          <p class="hero-kicker"><span class="pulse-dot"></span> ABOUT SXF / AI</p>
+          <h1>A focused AI<br><span>intelligence layer.</span></h1>
+        </div>
+
+        <div class="about-hero-side">
+          <p>SXF / AI tracks meaningful changes across models, tools, research and open source, with a preference for primary sources and direct verification.</p>
+          <div class="about-hero-links">
+            <a href="/">Open the radar <span>↗</span></a>
+            <a href="#method">Read the method <span>↓</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-status" aria-label="SXF operating model">
+        <div><span>01</span><strong>Primary-source first</strong><small>Original publishers stay one click away.</small></div>
+        <div><span>02</span><strong>Four intelligence layers</strong><small>Models, tools, research and open source.</small></div>
+        <div><span>03</span><strong>Frequent refresh</strong><small>The live radar refreshes on a 3-hour cycle.</small></div>
       </div>
     </section>
 
-    <section class="about-section shell">
-      <div class="about-section-head">
-        <div><p class="eyebrow">WHAT SXF IS</p><h2>Discovery before commentary.</h2></div>
-        <p>SXF is built to help readers locate important AI developments quickly and verify them at the source.</p>
+    <section class="positioning shell" aria-labelledby="positioning-title">
+      <div class="section-kicker">
+        <p class="eyebrow">WHAT SXF IS</p>
+        <span>01 / PRODUCT</span>
       </div>
-      <div class="about-copy-grid">
-        <article>
-          <span>01</span>
-          <h3>Signal, not volume</h3>
-          <p>The goal is not to reproduce every AI headline. SXF organizes a smaller stream of changes that are useful to follow across products, models, research and the open stack.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>Primary-source first</h3>
-          <p>Whenever possible, SXF links directly to the organization, project or research publisher responsible for the original announcement.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>Fast verification</h3>
-          <p>Headlines are kept concise and the original source remains one click away so availability, limitations and technical details can be checked directly.</p>
-        </article>
-      </div>
-    </section>
 
-    <section class="method shell">
-      <div class="method-rail"><p class="eyebrow">METHOD</p><h2>How a signal reaches the radar.</h2></div>
-      <div class="method-list">
-        <article><span>01</span><div><h3>Source selection</h3><p>SXF monitors first-party channels and established project sources that publish AI releases, technical updates, research or open-source work.</p></div></article>
-        <article><span>02</span><div><h3>Relevance filtering</h3><p>Updates are selected for practical or technical significance rather than headline intensity. Routine announcements may be excluded when they add little new information.</p></div></article>
-        <article><span>03</span><div><h3>Classification</h3><p>Signals are organized into Models, Tools, Research and Open Source so readers can scan the part of the AI stack that matters to them.</p></div></article>
-        <article><span>04</span><div><h3>Source preservation</h3><p>SXF keeps the original destination attached to each signal. The source, not SXF, remains the authority for the underlying claim or release.</p></div></article>
-      </div>
-    </section>
+      <div class="positioning-grid">
+        <h2 id="positioning-title">Built to reduce search time, not increase screen time.</h2>
 
-    <section class="standards shell">
-      <div class="about-section-head">
-        <div><p class="eyebrow">EDITORIAL STANDARD</p><h2>Clear boundaries.</h2></div>
-        <p>SXF is a discovery layer. It is not a substitute for reading the original release, paper, documentation or repository.</p>
-      </div>
-      <div class="standards-grid">
-        <div><strong>Attribution</strong><p>External organizations are identified as sources, not partners or sponsors unless explicitly stated otherwise.</p></div>
-        <div><strong>Independence</strong><p>Inclusion in the radar does not imply endorsement, affiliation or a commercial relationship with the source.</p></div>
-        <div><strong>Corrections</strong><p>When source information changes, the goal is to update or remove stale signals rather than preserve an outdated summary.</p></div>
-        <div><strong>Scope</strong><p>SXF focuses on AI developments with technical, product, research or ecosystem relevance.</p></div>
-      </div>
-    </section>
-
-    <section class="origin shell" aria-labelledby="origin-title">
-      <div class="origin-card">
-        <div class="origin-mark"><span>VMC</span><b>LABS</b></div>
-        <div class="origin-copy">
-          <p class="eyebrow">PROJECT ORIGIN</p>
-          <h2 id="origin-title">Developed within VMC Labs.</h2>
-          <p>SXF / AI is developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a>. VMC Labs is part of <a href="https://vivamediacreative.com/">Viva Media Creative</a>.</p>
-          <p class="origin-note">This attribution identifies the team behind the product. It does not affect source selection, and SXF / AI is not affiliated with or endorsed by the organizations whose public sources it tracks unless explicitly stated.</p>
+        <div class="positioning-copy">
+          <p>SXF / AI is a discovery product for people who need to keep up with AI without reading every launch post, changelog, research announcement or repository update.</p>
+          <p>It does not attempt to replace the original source. Its role is narrower: identify a useful signal, classify it, keep the context concise, and preserve a direct path back to the publisher.</p>
         </div>
       </div>
     </section>
 
+    <section class="principle-band shell" aria-label="What SXF does and does not do">
+      <div class="principle-column">
+        <p class="eyebrow">SXF DOES</p>
+        <ul>
+          <li><span>01</span><p>Track first-party AI releases, research and technical updates.</p></li>
+          <li><span>02</span><p>Group developments into clear intelligence layers.</p></li>
+          <li><span>03</span><p>Keep the original source attached to every signal.</p></li>
+          <li><span>04</span><p>Favor useful changes over headline volume.</p></li>
+        </ul>
+      </div>
+
+      <div class="principle-column principle-column-muted">
+        <p class="eyebrow">SXF DOES NOT</p>
+        <ul>
+          <li><span>01</span><p>Treat every announcement as equally important.</p></li>
+          <li><span>02</span><p>Present source claims as independent SXF findings.</p></li>
+          <li><span>03</span><p>Imply endorsement or affiliation with tracked companies.</p></li>
+          <li><span>04</span><p>Replace technical documentation, papers or repositories.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="method shell" id="method" aria-labelledby="method-title">
+      <div class="method-intro">
+        <div class="section-kicker">
+          <p class="eyebrow">METHOD</p>
+          <span>02 / PROCESS</span>
+        </div>
+        <h2 id="method-title">How a signal reaches the radar.</h2>
+        <p>A simple editorial pipeline keeps the feed fast to scan while preserving traceability to the original source.</p>
+      </div>
+
+      <ol class="method-steps">
+        <li>
+          <span class="method-number">01</span>
+          <div>
+            <h3>Source monitoring</h3>
+            <p>SXF follows first-party channels and established project sources that publish AI releases, technical changes, research or open-source work.</p>
+          </div>
+          <small>DISCOVER</small>
+        </li>
+        <li>
+          <span class="method-number">02</span>
+          <div>
+            <h3>Relevance filter</h3>
+            <p>Updates are assessed for technical, product, research or ecosystem relevance. Routine announcements may be excluded when they add little new information.</p>
+          </div>
+          <small>FILTER</small>
+        </li>
+        <li>
+          <span class="method-number">03</span>
+          <div>
+            <h3>Classification</h3>
+            <p>Each signal is placed in Models, Tools, Research or Open Source so readers can scan the part of the AI stack that matters to them.</p>
+          </div>
+          <small>ORGANIZE</small>
+        </li>
+        <li>
+          <span class="method-number">04</span>
+          <div>
+            <h3>Source preservation</h3>
+            <p>The original destination remains attached to the signal. Availability, claims, benchmarks and limitations should be verified with the publisher.</p>
+          </div>
+          <small>VERIFY</small>
+        </li>
+      </ol>
+    </section>
+
+    <section class="source-policy shell" aria-labelledby="sources-title">
+      <div class="source-policy-head">
+        <div>
+          <div class="section-kicker">
+            <p class="eyebrow">SOURCE POLICY</p>
+            <span>03 / ATTRIBUTION</span>
+          </div>
+          <h2 id="sources-title">Primary whenever possible.</h2>
+        </div>
+        <p>SXF prefers the organization or project that produced the underlying update. Secondary coverage may be useful for discovery, but the radar is designed around direct source links.</p>
+      </div>
+
+      <div class="source-register" aria-label="Current primary sources">
+        <a href="https://openai.com/news/" target="_blank" rel="noopener noreferrer">
+          <span>01</span><strong>OpenAI</strong><small>Official news & releases</small><b>↗</b>
+        </a>
+        <a href="https://blog.google/technology/ai/" target="_blank" rel="noopener noreferrer">
+          <span>02</span><strong>Google AI</strong><small>AI research & product updates</small><b>↗</b>
+        </a>
+        <a href="https://huggingface.co/blog" target="_blank" rel="noopener noreferrer">
+          <span>03</span><strong>Hugging Face</strong><small>Open ML ecosystem updates</small><b>↗</b>
+        </a>
+        <a href="https://github.blog/changelog/" target="_blank" rel="noopener noreferrer">
+          <span>04</span><strong>GitHub</strong><small>Developer & AI changelog</small><b>↗</b>
+        </a>
+      </div>
+
+      <p class="source-disclaimer">Source inclusion does not imply sponsorship, partnership, endorsement or affiliation. These links identify public sources currently monitored by SXF / AI.</p>
+    </section>
+
+    <section class="standards shell" aria-labelledby="standards-title">
+      <div class="standards-head">
+        <div class="section-kicker">
+          <p class="eyebrow">EDITORIAL STANDARD</p>
+          <span>04 / TRUST</span>
+        </div>
+        <h2 id="standards-title">Clear attribution. Clear limits.</h2>
+      </div>
+
+      <div class="standards-grid">
+        <article>
+          <span>ATTRIBUTION</span>
+          <h3>Source claims stay source claims.</h3>
+          <p>SXF summarizes or labels a development without presenting a publisher's claim as an independently verified SXF finding.</p>
+        </article>
+        <article>
+          <span>INDEPENDENCE</span>
+          <h3>Coverage is not endorsement.</h3>
+          <p>Being listed in the radar does not imply approval of a product, model, company, research result or policy position.</p>
+        </article>
+        <article>
+          <span>CORRECTIONS</span>
+          <h3>Stale information should not linger.</h3>
+          <p>When an underlying source changes materially, the goal is to update, replace or remove the affected signal rather than preserve an outdated summary.</p>
+        </article>
+        <article>
+          <span>SCOPE</span>
+          <h3>SXF is a discovery layer.</h3>
+          <p>For technical decisions, implementation details, safety claims, benchmarks or availability, readers should rely on the original documentation and source material.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="origin shell" aria-labelledby="origin-title">
+      <div class="origin-frame">
+        <div class="origin-label">
+          <p class="eyebrow">PROJECT ATTRIBUTION</p>
+          <span>05 / ORIGIN</span>
+        </div>
+
+        <div class="origin-main">
+          <h2 id="origin-title">SXF / AI is developed within VMC Labs.</h2>
+          <p><a href="https://vivamediacreative.com/labs/">VMC Labs</a> is the product and digital initiatives space within <a href="https://vivamediacreative.com/">Viva Media Creative</a>. The relationship is stated here to identify the team behind SXF / AI and provide clear project provenance.</p>
+        </div>
+
+        <div class="origin-links" aria-label="Project attribution links">
+          <a href="https://vivamediacreative.com/labs/"><span>VMC Labs</span><b>Project origin ↗</b></a>
+          <a href="https://vivamediacreative.com/"><span>Viva Media Creative</span><b>Organization ↗</b></a>
+        </div>
+
+        <p class="origin-disclaimer">This attribution does not influence which public sources appear in SXF and does not imply that the organizations monitored by SXF are affiliated with, sponsored by, or connected to VMC Labs or Viva Media Creative.</p>
+      </div>
+    </section>
+
     <section class="about-end shell">
-      <p class="eyebrow">KEEP EXPLORING</p>
-      <h2>Go back to the signal.</h2>
-      <div class="hero-actions">
-        <a class="primary-cta" href="/">Open the radar <span>↗</span></a>
-        <a class="secondary-cta" href="/research/">Explore research</a>
+      <div>
+        <p class="eyebrow">SXF / AI</p>
+        <h2>Back to the radar.</h2>
+      </div>
+      <div class="about-end-actions">
+        <a class="primary-cta" href="/">Open latest signals <span>↗</span></a>
+        <a class="secondary-cta" href="/models/">Explore models</a>
       </div>
     </section>
   </main>
 
   <footer class="footer shell">
-    <a class="brand footer-brand" href="/"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
-    <p>Independent AI discovery. Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a>.</p>
+    <a class="brand footer-brand" href="/" aria-label="SXF AI home">
+      <span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span>
+    </a>
+    <p>Independent AI discovery · <a href="https://vivamediacreative.com/labs/">Developed within VMC Labs</a></p>
     <p>© <span id="year"></span> SXF</p>
   </footer>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
