@@ -380,3 +380,29 @@
 .security-principles p{margin:0!important;color:#778390!important;font-size:12px!important;line-height:1.65!important}
 @media(max-width:980px){.agent-loop{grid-template-columns:repeat(3,1fr)}.security-principles{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.agent-loop,.agent-criteria,.security-principles{grid-template-columns:1fr}.agent-loop>div{min-height:130px}}
+
+
+/* AI Super Agents reference guide */
+.super-agent-stack{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:30px 0}
+.super-agent-layer{min-height:170px;padding:19px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.super-agent-layer.super-agent-goal{border-color:rgba(200,255,77,.26);background:linear-gradient(145deg,rgba(200,255,77,.055),#0a0e13)}
+.super-agent-layer span{display:block;color:#596572;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.super-agent-layer strong{display:block;margin:34px 0 8px;font-size:18px}
+.super-agent-layer p{margin:0!important;color:#75818e!important;font-size:11px!important;line-height:1.62!important}
+.super-loop{grid-template-columns:repeat(4,1fr)}
+.super-agent-table th:first-child{min-width:190px}
+.super-agent-table td:nth-child(2){min-width:210px}
+.super-agent-table td:nth-child(3){min-width:330px}
+.control-topology,.memory-grid,.economics-grid,.failure-grid{display:grid;gap:10px;margin:28px 0}
+.control-topology{grid-template-columns:repeat(3,1fr)}
+.memory-grid{grid-template-columns:repeat(2,1fr)}
+.economics-grid{grid-template-columns:repeat(2,1fr)}
+.failure-grid{grid-template-columns:repeat(3,1fr)}
+.control-topology article,.memory-grid article,.economics-grid article,.failure-grid article{padding:21px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.control-topology span,.memory-grid span,.economics-grid span,.failure-grid span{display:block;color:var(--accent);font-size:9px;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+.control-topology h3,.economics-grid h3{margin:28px 0 8px;font-size:19px;line-height:1.1}
+.control-topology p,.memory-grid p,.economics-grid p,.failure-grid p{margin:0!important;color:#778390!important;font-size:12px!important;line-height:1.68!important}
+.memory-grid span{color:#a8b3bf}.memory-grid article{min-height:145px}
+.failure-grid span{color:#c2ccd6}
+@media(max-width:980px){.super-agent-stack{grid-template-columns:repeat(3,1fr)}.super-loop{grid-template-columns:repeat(2,1fr)}.control-topology,.failure-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.super-agent-stack,.super-loop,.control-topology,.memory-grid,.economics-grid,.failure-grid{grid-template-columns:1fr}}

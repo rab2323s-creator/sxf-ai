@@ -2650,6 +2650,430 @@ def best_ai_agents_guide_html(items):
       </article>
     </main>{page_footer()}</body></html>'''
 
+
+def ai_super_agents_guide_html(items):
+    canonical = f"{BASE_URL}/guides/ai-super-agents/"
+    published = "2026-09-26"
+    verified = "2026-09-26"
+    title = "AI Super Agents in 2026: What They Are, How They Work, Examples & Risks | SXF / AI"
+    description = "A complete guide to AI super agents in 2026: definitions, architecture, orchestration, multi-agent systems, real examples, enterprise use cases, safety, governance and the difference from AGI."
+
+    examples = [
+        {
+            "name":"Marshall","company":"Salesforce","type":"Business-process orchestrator",
+            "does":"Builds and runs end-to-end supply-chain and finance processes, deploying specialized back-office agents inside each step.",
+            "pattern":"Super agent above specialized agents",
+            "source":"https://www.salesforce.com/blog/regrello/",
+        },
+        {
+            "name":"H2O AI Super Agent","company":"H2O.ai","type":"Enterprise AI orchestration layer",
+            "does":"Plans from a natural-language goal and orchestrates predictive, generative and agentic systems with built-in tools, MCP and agent-to-agent calls.",
+            "pattern":"Orchestrator across models, agents and tools",
+            "source":"https://h2o.ai/platform/overview/",
+        },
+        {
+            "name":"ChipStack AI Super Agent","company":"Cadence","type":"Domain-specific engineering super agent",
+            "does":"Coordinates design, verification, regression, debug and RTL-generation workflows across semiconductor engineering tools and specialized agents.",
+            "pattern":"Domain super agent with EDA execution",
+            "source":"https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2026/cadence-unleashes-chipstack-ai-super-agent-pioneering-a-new.html",
+        },
+        {
+            "name":"AuraStack AI Super Agent","company":"Cadence","type":"Systems-design super agent",
+            "does":"Coordinates domain-specific agents across PCB planning, implementation and multiphysics analysis.",
+            "pattern":"Cross-domain design orchestrator",
+            "source":"https://www.cadence.com/ko_KR/home/company/newsroom/press-releases/pr/2026/cadence-introduces-aurastack-ai-super-agent-the-worlds-first.html",
+        },
+        {
+            "name":"Gupshup Superagent","company":"Gupshup","type":"Customer-experience orchestrator",
+            "does":"Coordinates customer journeys, messaging and voice infrastructure, transactions and optimization from one conversational interface.",
+            "pattern":"Full-stack conversational orchestrator",
+            "source":"https://www.prnewswire.com/news-releases/gupshup-launches-superagent-the-autonomous-ai-agent-for-customer-conversations-at-scale-302742192.html",
+        },
+    ]
+
+    rows = "".join(
+        f'''<tr>
+          <th scope="row"><a href="{escape(e["source"], quote=True)}" target="_blank" rel="noopener noreferrer">{escape(e["name"])}</a><small>{escape(e["company"])}</small></th>
+          <td>{escape(e["type"])}</td><td>{escape(e["does"])}</td><td>{escape(e["pattern"])}</td>
+        </tr>'''
+        for e in examples
+    )
+
+    toc = [
+        ("quick-answer","Quick answer"),
+        ("what-is-a-super-agent","What is an AI super agent?"),
+        ("not-a-standard","Is 'super agent' a technical standard?"),
+        ("architecture","Super agent architecture"),
+        ("examples","Real super agents in 2026"),
+        ("vs-ai-agent","Super agent vs AI agent"),
+        ("vs-multi-agent","Super agent vs multi-agent system"),
+        ("vs-agent-swarm","Super agent vs agent swarm"),
+        ("vs-agi","Super agent vs AGI / superintelligence"),
+        ("orchestration","How orchestration works"),
+        ("memory-context","Memory and context"),
+        ("tools-protocols","Tools, MCP and A2A"),
+        ("enterprise","Enterprise use cases"),
+        ("coding-engineering","Engineering super agents"),
+        ("research","Research and forecasting super agents"),
+        ("economics","Cost and economics"),
+        ("security","Safety and governance"),
+        ("failure-modes","Failure modes"),
+        ("when-to-use","When do you need a super agent?"),
+        ("future","Where super agents are going"),
+        ("faq","FAQ"),
+    ]
+    toc_html = "".join(f'<a href="#{escape(a, quote=True)}">{escape(label)}</a>' for a,label in toc)
+
+    faq = [
+        ("What is an AI super agent?", "AI super agent is an emerging, non-standard term for an agentic system that operates above a broader execution stack than a typical single agent. In current products, it usually means an orchestrator that can decompose a high-level goal, coordinate specialized agents and tools, maintain state across a longer workflow, and govern execution across multiple systems."),
+        ("Is a super agent the same as a multi-agent system?", "No. A multi-agent system describes an architecture with multiple agents. A super agent is usually the higher-level orchestrator or user-facing control layer that decides how those agents, tools and models should be used. Some products called super agents may contain a multi-agent system internally."),
+        ("Is a super agent the same as AGI?", "No. A super agent is a software architecture or product pattern for orchestrating tasks, agents and tools. AGI is a much broader concept about general intelligence across domains. A system can be called a super agent while still depending on narrow tools, fixed permissions, human approvals and current foundation models."),
+        ("Is a super agent the same as superintelligence?", "No. Superintelligence refers to intelligence that exceeds human capability across very broad domains. 'Super agent' currently refers to agent orchestration and autonomy. The similar wording can be misleading, but the concepts are fundamentally different."),
+        ("What companies are building AI super agents in 2026?", "Examples include Salesforce's Marshall for business processes, H2O.ai's H2O AI Super Agent for enterprise orchestration, Cadence's ChipStack and AuraStack for electronic design automation, and Gupshup's Superagent for customer-experience workflows. The term is used differently by each company."),
+        ("What makes a super agent different from an ordinary AI agent?", "The recurring pattern is breadth of orchestration. A normal agent may own one workflow. A super agent typically accepts a higher-level goal, delegates to multiple specialized capabilities, coordinates state and dependencies, and returns one governed outcome."),
+        ("Do super agents need multiple AI models?", "Not necessarily, but many architectures benefit from model routing. A super agent can use a stronger model for planning, smaller models for high-volume steps, predictive models for forecasting, and specialized tools or agents for execution."),
+        ("Are AI super agents safe?", "They can be made safer, but greater autonomy increases the blast radius of mistakes. Production deployments need least-privilege permissions, sandboxing, approval gates, audit logs, tool isolation, prompt-injection defenses, evaluation and rollback paths."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq)
+
+    sources = [
+        ("Salesforce · Marshall super agent","https://www.salesforce.com/blog/regrello/"),
+        ("H2O.ai · AI Platform and Super Agent","https://h2o.ai/platform/overview/"),
+        ("H2O.ai · enterprise deployment at AT&T","https://h2o.ai/company/press-media/2026/h20-ai-super-agent-is-added-by-att-to-power-enterprise-agentic-ai/"),
+        ("H2O.ai · Super Agent architecture documentation","https://docs.h2oai.com/enterprise-h2ogpte/guide/agents"),
+        ("H2O.ai · long-running agents with NVIDIA","https://h2o.ai/blog/2026/deep-long-running-agents-built-on-h2oai-super-agent-with-nvidia-runai-and-aiq/"),
+        ("Cadence · ChipStack AI Super Agent","https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2026/cadence-unleashes-chipstack-ai-super-agent-pioneering-a-new.html"),
+        ("Cadence · ChipStack RTL Generation Agent update","https://newsroom.cadence.com/press-releases/press-release-details/2026/Cadence-Expands-ChipStack-AI-Super-Agent-with-a-New-Agent-for-RTL-Generation-and-Early-PPA-Optimization/default.aspx"),
+        ("Cadence · AuraStack AI Super Agent","https://www.cadence.com/ko_KR/home/company/newsroom/press-releases/pr/2026/cadence-introduces-aurastack-ai-super-agent-the-worlds-first.html"),
+        ("Cadence + Google Cloud · ChipStack with Gemini","https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2026/cadence-and-google-collaborate-to-scale-ai-driven-chip-design.html"),
+        ("Gupshup · Superagent launch","https://www.prnewswire.com/news-releases/gupshup-launches-superagent-the-autonomous-ai-agent-for-customer-conversations-at-scale-302742192.html"),
+    ]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label,url in sources
+    )
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"TechArticle","@id":canonical+"#article","url":canonical,"mainEntityOfPage":canonical,
+                "headline":"AI Super Agents in 2026: What They Are, How They Work, Examples & Risks",
+                "description":description,"datePublished":published,"dateModified":verified,
+                "author":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "articleSection":"AI Agents",
+                "keywords":[
+                    "AI super agents","super agent AI","what is an AI super agent","super agent vs AI agent",
+                    "super agent vs multi agent system","AI agent orchestration","agent swarm vs super agent",
+                    "super agent vs AGI","AI super agents 2026","enterprise super agents"
+                ],
+                "about":[
+                    {"@type":"Thing","name":"AI agents"},
+                    {"@type":"Thing","name":"Multi-agent systems"},
+                    {"@type":"Thing","name":"Agent orchestration"},
+                    {"@type":"Thing","name":"Artificial general intelligence"},
+                    {"@type":"Thing","name":"Artificial superintelligence"}
+                ],
+                "citation":[url for _label,url in sources],
+                "inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Guides","item":BASE_URL+"/guides/"},
+                {"@type":"ListItem","position":3,"name":"AI Super Agents in 2026","item":canonical}
+            ]},
+            {"@type":"ItemList","name":"AI super agent examples in 2026","numberOfItems":len(examples),"itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":e["name"],"url":e["source"]} for i,e in enumerate(examples)
+            ]},
+            {"@type":"FAQPage","mainEntity":[
+                {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq
+            ]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, page_type="article")}
+    <body class="intel-page guide-article-page">{page_header("guides")}<main>
+      <article>
+        <header class="guide-article-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Super Agents</span></nav>
+          <p class="eyebrow">SXF GUIDE / NEXT-GENERATION AGENTS</p>
+          <h1>AI Super Agents in 2026:<br><span>What They Are, How They Work, Examples & Risks</span></h1>
+          <p class="guide-deck">“Super agent” is becoming a real product category before it has become a formal technical standard. Salesforce, H2O.ai, Cadence and other companies are using the term for systems that sit above ordinary agents: accepting broad goals, coordinating specialized workers, routing tools and models, preserving state and governing execution across an entire workflow. This guide explains the emerging architecture without turning marketing language into a fake consensus.</p>
+          <div class="guide-byline">
+            <div><span>Published</span><strong>September 26, 2026</strong></div>
+            <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+            <div><span>Reading time</span><strong>26 min</strong></div>
+            <div><span>Evidence</span><strong>Primary-source examples</strong></div>
+          </div>
+        </header>
+
+        <section class="guide-answer shell" id="quick-answer">
+          <div class="guide-answer-label">QUICK ANSWER</div>
+          <div><h2>An AI super agent is best understood as an orchestration layer above ordinary agents, models and tools—not as a new form of superintelligence.</h2>
+          <p>There is no industry-standard definition yet. But the strongest 2026 examples share a pattern: the super agent receives a high-level objective, decomposes it into sub-tasks, chooses specialized agents or tools, coordinates dependencies, keeps track of progress, adapts when execution changes and returns one governed outcome. Salesforce's Marshall dispatches back-office agents inside business processes; H2O's Super Agent orchestrates predictive, generative and agentic systems; Cadence's Super Agents coordinate specialist engineering agents across chip and system design. The label varies, but <strong>hierarchical orchestration</strong> is the recurring architectural idea.</p></div>
+        </section>
+
+        <div class="guide-reading shell">
+          <aside class="guide-toc"><span>IN THIS GUIDE</span>{toc_html}<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+
+          <div class="guide-prose" id="top">
+            <section id="what-is-a-super-agent">
+              <p class="eyebrow">CORE DEFINITION</p>
+              <h2>What is an AI super agent?</h2>
+              <p>An <strong>AI super agent</strong> is an emerging name for an agentic system whose responsibility is broader than executing one task or workflow. Instead of acting as a single specialist, it typically behaves as a <strong>manager, router and orchestrator</strong>: it accepts an outcome-level goal, decides how the work should be decomposed, calls agents or tools with narrower skills and keeps the overall workflow coherent.</p>
+              <p>The important word is not <em>super</em>. It is <em>scope</em>. A super agent usually owns more of the control plane: planning, delegation, routing, state, error handling, policy and synthesis. That can make the user experience feel like one agent even when the system underneath contains many models, agents, workflows and deterministic services.</p>
+              <div class="super-agent-stack">
+                <div class="super-agent-layer super-agent-goal"><span>01</span><strong>Goal layer</strong><p>One high-level objective from a human or system.</p></div>
+                <div class="super-agent-layer"><span>02</span><strong>Orchestrator</strong><p>Decomposes, routes, schedules and changes the plan.</p></div>
+                <div class="super-agent-layer"><span>03</span><strong>Specialist agents</strong><p>Research, coding, finance, design, forecasting or domain work.</p></div>
+                <div class="super-agent-layer"><span>04</span><strong>Tools & systems</strong><p>APIs, browser, shell, databases, MCP servers and enterprise software.</p></div>
+                <div class="super-agent-layer"><span>05</span><strong>Governance</strong><p>Permissions, approvals, logs, evaluation, cost and rollback.</p></div>
+              </div>
+              <div class="guide-callout"><strong>SXF definition</strong><p>Until a formal standard exists, SXF uses “super agent” to describe a higher-level agentic orchestrator that owns an end-to-end objective and coordinates multiple specialized capabilities under one control loop.</p></div>
+            </section>
+
+            <section id="not-a-standard">
+              <p class="eyebrow">TERMINOLOGY</p>
+              <h2>Is “super agent” a technical standard?</h2>
+              <p><strong>No.</strong> As of September 2026, “AI super agent” is not a standardized architecture, protocol or capability class. Different vendors use the term for related but distinct systems.</p>
+              <div class="guide-matchup-grid">
+                <article><span>SALESFORCE</span><h3>Process orchestrator</h3><p>Marshall creates and runs business processes, routing items and deploying specialized back-office agents inside the workflow.</p></article>
+                <article><span>H2O.AI</span><h3>Enterprise AI control layer</h3><p>The Super Agent sits above predictive, generative and agentic capabilities, choosing tools and agents and keeping an auditable execution trail.</p></article>
+                <article><span>CADENCE</span><h3>Domain engineering orchestrator</h3><p>ChipStack and AuraStack coordinate specialized engineering agents and native EDA tools across complex design stages.</p></article>
+                <article><span>GUPSHUP</span><h3>Customer-experience orchestrator</h3><p>Superagent coordinates campaigns, customer journeys, transactions, messaging infrastructure and optimization from one interface.</p></article>
+              </div>
+              <p>This lack of standardization is not necessarily a problem. New software categories often appear in products before terminology settles. But it means any article claiming “a super agent must have exactly X features” is describing an opinion, not an established specification.</p>
+              <h3>Why the term is appearing now</h3>
+              <p>Single-agent systems are hitting coordination limits. As organizations add more agents, tools and models, somebody—or something—has to decide which capability should run, in what order, under which permissions and how the results should be combined. “Super agent” is one emerging name for that control layer.</p>
+            </section>
+
+            <section id="architecture">
+              <p class="eyebrow">ARCHITECTURE</p>
+              <h2>How does a super agent work?</h2>
+              <p>A mature super-agent architecture usually has two loops running at once: an <strong>execution loop</strong> that gets work done, and a <strong>control loop</strong> that decides whether the execution is still on track.</p>
+              <div class="agent-loop super-loop">
+                <div><span>01</span><strong>Interpret</strong><p>Translate the user goal into constraints, success criteria and required context.</p></div>
+                <div><span>02</span><strong>Decompose</strong><p>Break a broad outcome into tasks, dependencies and parallelizable branches.</p></div>
+                <div><span>03</span><strong>Route</strong><p>Select the right model, specialist agent, deterministic service or tool for each step.</p></div>
+                <div><span>04</span><strong>Execute</strong><p>Run agents and tools, sometimes in parallel and sometimes sequentially.</p></div>
+                <div><span>05</span><strong>Observe</strong><p>Collect tool results, errors, artifacts, costs and environment state.</p></div>
+                <div><span>06</span><strong>Re-plan</strong><p>Retry, switch tools, escalate models, request approval or change the workflow.</p></div>
+                <div><span>07</span><strong>Verify</strong><p>Check success criteria instead of assuming that tool completion equals task completion.</p></div>
+                <div><span>08</span><strong>Synthesize</strong><p>Return one coherent result and preserve the audit trail behind it.</p></div>
+              </div>
+              <h3>The planner should not do everything</h3>
+              <p>A common design mistake is using the strongest model for every step. A better super agent can route: a high-capability model may plan the workflow, a small model may classify hundreds of records, a predictive system may estimate risk, a deterministic rule engine may enforce policy and a specialized agent may execute a domain task. H2O's public architecture explicitly combines generative, predictive and agentic AI in this way.</p>
+            </section>
+
+            <section id="examples">
+              <p class="eyebrow">REAL EXAMPLES / 2026</p>
+              <h2>Which AI super agents exist today?</h2>
+              <p>The category is no longer hypothetical. Multiple companies are shipping systems they explicitly call Super Agents, although their architectures and markets differ substantially.</p>
+              <div class="guide-table-wrap"><table class="guide-table super-agent-table"><thead><tr><th>System</th><th>Type</th><th>What it does</th><th>Architectural pattern</th></tr></thead><tbody>{rows}</tbody></table></div>
+
+              <h3>Salesforce Marshall: the super agent as a business-process manager</h3>
+              <p>Salesforce describes Marshall as a super agent for supply chain and finance. The important architectural detail is that Marshall is not simply another back-office worker. It builds a process from a conversation, runs it, routes items, handles stalls and escalations, then deploys specialized agents inside individual steps. That is a hierarchical manager-worker pattern.</p>
+
+              <h3>H2O AI Super Agent: the super agent as an enterprise AI control plane</h3>
+              <p>H2O's definition is broader. Its Super Agent sits above predictive AI, generative AI, agentic AI and observability. H2O says it can create and orchestrate agents, use 27 built-in tools, connect over MCP and make agent-to-agent calls over A2A. AT&T is using the system in workflows including customer experience, fraud, field operations, security and research. H2O's public architecture is one of the clearest examples of a super agent as a general enterprise orchestration layer.</p>
+
+              <h3>Cadence ChipStack and AuraStack: super agents as domain operating systems</h3>
+              <p>Cadence applies the term to engineering workflows with deep domain structure. ChipStack coordinates front-end chip design and verification; AuraStack spans PCB and advanced-packaging design. These are important examples because they show that a super agent does not have to be general-purpose. It can be narrow in domain yet broad in workflow ownership.</p>
+              <p>Cadence expanded ChipStack on September 22, 2026 with an RTL Generation Agent for spec-to-RTL creation and PPA optimization. That update illustrates how a super-agent architecture can evolve: new specialist agents are added under the existing orchestrator instead of rebuilding the user-facing system.</p>
+            </section>
+
+            <section id="vs-ai-agent">
+              <p class="eyebrow">SUPER AGENT VS AI AGENT</p>
+              <h2>What is the difference between a super agent and a normal AI agent?</h2>
+              <div class="guide-difference">
+                <div><span>AI AGENT</span><strong>Owns a task or bounded workflow.</strong><p>It can reason, use tools and iterate, but its responsibility is usually limited to one domain or execution loop.</p></div>
+                <div><span>SUPER AGENT</span><strong>Owns the outcome and coordinates the system.</strong><p>It decides which agents, models and tools should work, tracks dependencies and manages the end-to-end objective.</p></div>
+              </div>
+              <p>An ordinary agent might “investigate this account.” A super agent might “reduce churn this quarter,” then dispatch research, forecasting, outreach and operations agents, monitor results and escalate exceptions. The difference is not magic intelligence. It is <strong>organizational scope inside the software architecture</strong>.</p>
+            </section>
+
+            <section id="vs-multi-agent">
+              <p class="eyebrow">SUPER AGENT VS MULTI-AGENT SYSTEM</p>
+              <h2>Is a super agent the same as a multi-agent system?</h2>
+              <p>No. <strong>Multi-agent system</strong> describes a system containing multiple autonomous or semi-autonomous agents. <strong>Super agent</strong> usually describes a role in that architecture: the coordinator, supervisor or user-facing orchestrator.</p>
+              <p>You can build a multi-agent system without a super agent—for example, peer agents that negotiate directly. You can also build a product marketed as a super agent that calls tools and deterministic workflows without spawning many independent agents. The terms overlap, but they are not synonyms.</p>
+              <div class="guide-callout"><strong>Architecture test</strong><p>Ask: “Who owns the global plan?” If one agent maintains the high-level objective and delegates work to others, that component is functioning as a super-agent-style orchestrator regardless of what the vendor calls it.</p></div>
+            </section>
+
+            <section id="vs-agent-swarm">
+              <p class="eyebrow">SUPER AGENT VS AGENT SWARM</p>
+              <h2>What is the difference between a super agent and an agent swarm?</h2>
+              <p>An <strong>agent swarm</strong> generally emphasizes many agents coordinating through decentralized or loosely centralized interaction. A super-agent architecture is usually more hierarchical: one control layer holds the objective and assigns or routes work.</p>
+              <p>The two patterns can coexist. A super agent may delegate one branch of a plan to a swarm, then combine the swarm's result with outputs from deterministic tools or other specialist agents. The important distinction is control topology, not the number of model calls.</p>
+              <div class="control-topology">
+                <article><span>HIERARCHY</span><h3>Super-agent pattern</h3><p>Goal → orchestrator → specialists → tools. Clear global owner, easier policy and audit.</p></article>
+                <article><span>PEER NETWORK</span><h3>Swarm pattern</h3><p>Goal → many interacting agents. Potentially flexible and parallel, but harder to govern and debug.</p></article>
+                <article><span>HYBRID</span><h3>Orchestrated swarm</h3><p>A super agent assigns a subproblem to a swarm and remains responsible for the final outcome.</p></article>
+              </div>
+            </section>
+
+            <section id="vs-agi">
+              <p class="eyebrow">SUPER AGENT VS AGI</p>
+              <h2>Is an AI super agent AGI or superintelligence?</h2>
+              <p><strong>No.</strong> The words sound related, but current super agents are software architectures built from today's models, tools, permissions and workflows. They can be highly autonomous inside a bounded environment without possessing human-level general intelligence.</p>
+              <div class="guide-choice-grid">
+                <article><span>Super Agent</span><p>An orchestration pattern: coordinates agents, models and tools around a high-level objective.</p></article>
+                <article><span>AGI</span><p>A debated concept describing broadly general intelligence that can learn and perform across domains at or around human-level breadth.</p></article>
+                <article><span>Superintelligence</span><p>A hypothetical intelligence that substantially exceeds human capability across very broad cognitive domains.</p></article>
+              </div>
+              <p>A super agent may look more capable than its base model because orchestration gives it memory, tools, parallel workers and persistence. That is <strong>system-level capability amplification</strong>, not evidence that the underlying model has become superintelligent.</p>
+            </section>
+
+            <section id="orchestration">
+              <p class="eyebrow">ORCHESTRATION</p>
+              <h2>How do super agents coordinate other AI agents?</h2>
+              <p>There are several orchestration strategies, and robust systems often combine them.</p>
+              <div class="guide-criteria">
+                <article><span>01</span><h3>Hierarchical delegation</h3><p>A supervisor decomposes work and assigns tasks to specialists. This is the clearest super-agent pattern.</p></article>
+                <article><span>02</span><h3>Capability routing</h3><p>The orchestrator chooses a model or agent based on cost, modality, latency, permissions or expertise.</p></article>
+                <article><span>03</span><h3>Parallel execution</h3><p>Independent branches run simultaneously, then the super agent resolves conflicts and synthesizes results.</p></article>
+                <article><span>04</span><h3>Deterministic stages</h3><p>Critical rules remain hard-coded while agents handle ambiguous reasoning inside safe boundaries.</p></article>
+                <article><span>05</span><h3>Escalation</h3><p>A cheap worker can hand difficult cases to a stronger model or request human review.</p></article>
+                <article><span>06</span><h3>Evaluator loops</h3><p>Separate checks score or critique outputs before downstream actions are allowed.</p></article>
+              </div>
+              <p>The architectural goal is not to maximize the number of agents. It is to minimize unnecessary cognitive work while assigning each step to the cheapest reliable capability.</p>
+            </section>
+
+            <section id="memory-context">
+              <p class="eyebrow">MEMORY & CONTEXT</p>
+              <h2>Why memory becomes critical in a super-agent system</h2>
+              <p>A normal agent can sometimes keep a task inside one model context. A super agent may coordinate work that lasts hours or days and produces far more state than any one context window should carry. It therefore needs explicit memory architecture.</p>
+              <div class="memory-grid">
+                <article><span>Working memory</span><p>The current plan, unresolved dependencies and recent observations.</p></article>
+                <article><span>Artifact memory</span><p>Documents, code, reports, datasets and files produced by workers.</p></article>
+                <article><span>Operational state</span><p>Which jobs ran, failed, retried or are waiting for approval.</p></article>
+                <article><span>Long-term memory</span><p>Stable preferences, learned procedures and organization knowledge where policy permits.</p></article>
+              </div>
+              <p>The system should not treat “put everything in the prompt” as memory. Good orchestration retrieves only the state needed for the next decision and keeps authoritative data in external stores where it can be versioned and audited.</p>
+            </section>
+
+            <section id="tools-protocols">
+              <p class="eyebrow">TOOLS & PROTOCOLS</p>
+              <h2>How MCP and agent-to-agent protocols fit into super agents</h2>
+              <p>Super agents become more useful as integrations become standardized. <strong>MCP</strong> gives agents a common pattern for discovering and invoking tools and data sources. <strong>Agent-to-agent communication</strong> allows one agentic system to delegate work to another without pretending that every capability is a simple function.</p>
+              <p>H2O's current platform is a concrete example: its Super Agent exposes built-in tools, MCP connectivity and A2A calls. The important shift is architectural. The super agent no longer has to own every capability—it can orchestrate an ecosystem of services that advertise what they can do.</p>
+              <div class="guide-callout"><strong>Protocol ≠ governance</strong><p>A common tool protocol makes connection easier. It does not decide whether the agent should be allowed to call the tool, whether the data is trusted or whether the action needs approval. Permission and policy layers remain necessary.</p></div>
+            </section>
+
+            <section id="enterprise">
+              <p class="eyebrow">ENTERPRISE USE CASES</p>
+              <h2>What are AI super agents used for in business?</h2>
+              <p>The strongest current use cases have one thing in common: the goal crosses several systems and specialist functions.</p>
+              <div class="guide-decision-table">
+                <div><span>Supply chain & finance</span><strong>End-to-end process orchestration</strong><p>Salesforce's Marshall routes work, chases stalled items, escalates exceptions and deploys back-office agents inside process steps.</p></div>
+                <div><span>Telecommunications</span><strong>Research, fraud, field operations</strong><p>AT&T is using H2O's Super Agent across customer experience, fraud prevention, field operations, security and enterprise research.</p></div>
+                <div><span>Semiconductors</span><strong>Design + verification</strong><p>Cadence coordinates specialist agents across RTL creation, test planning, regressions, debugging and optimization.</p></div>
+                <div><span>Customer experience</span><strong>Journey orchestration</strong><p>Gupshup positions Superagent as a layer that coordinates campaigns, conversations, transactions and infrastructure.</p></div>
+              </div>
+              <h3>Why enterprises need an orchestrator</h3>
+              <p>Large organizations already have models, rules, databases, SaaS products and automation. A useful super agent does not replace all of that. It becomes a goal-driven interface over the existing system, deciding what should be used and preserving governance across the chain.</p>
+            </section>
+
+            <section id="coding-engineering">
+              <p class="eyebrow">ENGINEERING</p>
+              <h2>What does a super agent look like in coding and engineering?</h2>
+              <p>Engineering is where the distinction between agent and super agent becomes easiest to see. A coding agent can implement a feature. An engineering super agent can coordinate specification interpretation, design, implementation, simulation, testing, optimization and review across specialist tools.</p>
+              <p>Cadence's ChipStack is a strong domain example. Its September 2026 RTL Generation Agent expanded the existing super-agent system into spec-to-RTL creation and power/performance/area optimization. Instead of one model trying to imitate every EDA tool, the architecture combines agentic reasoning with native engineering systems.</p>
+              <p>The same pattern is likely to appear in software engineering: a high-level orchestrator coordinating architecture, coding, security, testing, deployment and observability agents while maintaining one objective and one audit trail.</p>
+              <div class="tool-links"><a href="/guides/best-ai-coding-tools/">Best AI Coding Tools in 2026 ↗</a><a href="/guides/best-ai-agents/">Best AI Agents in 2026 ↗</a><a href="/topics/ai-agents/">AI Agents topic ↗</a></div>
+            </section>
+
+            <section id="research">
+              <p class="eyebrow">RESEARCH & FORECASTING</p>
+              <h2>Can super agents improve research and forecasting?</h2>
+              <p>Potentially, because research naturally decomposes into heterogeneous tasks: search, retrieval, source validation, coding, statistical analysis, forecasting, critique and synthesis. H2O's Super Agent is an example of this composition: the company describes a reasoning pipeline with multi-source research, self-critique and predictive modeling rather than search alone.</p>
+              <p>H2O reports strong results on the live FutureX forecasting benchmark, but those scores are vendor-reported evidence about one system, not proof that “super agents” as a category are inherently better forecasters. The transferable architectural lesson is that prediction may benefit from combining language-model reasoning with actual predictive systems instead of asking a language model to guess a probability from prose.</p>
+            </section>
+
+            <section id="economics">
+              <p class="eyebrow">ECONOMICS</p>
+              <h2>Are super agents more expensive than normal AI agents?</h2>
+              <p>They can be—sometimes dramatically—because one user request may trigger many model calls, tools, sandboxes, searches and specialist agents. But orchestration can also reduce cost if it routes each step intelligently.</p>
+              <div class="economics-grid">
+                <article><span>Cost multipliers</span><h3>Parallel agents, retries, long context, browsers and premium models</h3><p>Every autonomous branch consumes compute and often creates additional verification work.</p></article>
+                <article><span>Cost reducers</span><h3>Routing, caching, deterministic tools and small models</h3><p>Use a frontier model only where reasoning justifies it; route routine work to cheaper systems.</p></article>
+              </div>
+              <h3>The right unit is cost per verified outcome</h3>
+              <p>Token cost is insufficient. Measure model inference, tools, infrastructure, external APIs, retries and human review against the value of the completed workflow. H2O explicitly advertises cost attribution per user and task, which is the kind of observability super-agent systems need.</p>
+            </section>
+
+            <section id="security">
+              <p class="eyebrow">SECURITY & GOVERNANCE</p>
+              <h2>Are AI super agents safe?</h2>
+              <p>Super agents amplify both capability and blast radius. If one orchestrator can command many tools and specialist agents, a planning error, poisoned context or compromised credential can propagate through an entire workflow.</p>
+              <div class="security-principles">
+                <article><span>01</span><h3>Least privilege</h3><p>Each worker should receive only the credentials and tools required for its sub-task.</p></article>
+                <article><span>02</span><h3>Approval boundaries</h3><p>Irreversible or externally visible actions should require explicit human or policy approval.</p></article>
+                <article><span>03</span><h3>Agent isolation</h3><p>Run specialists in sandboxes or separated identities so one failure cannot inherit the entire system's permissions.</p></article>
+                <article><span>04</span><h3>Typed delegation</h3><p>Pass structured tasks and expected outputs between agents instead of unrestricted natural-language authority.</p></article>
+                <article><span>05</span><h3>Auditability</h3><p>Record who delegated what, which tool ran, which model made the decision and what changed.</p></article>
+                <article><span>06</span><h3>Cost controls</h3><p>Set budgets, concurrency limits and stop conditions so runaway planning cannot consume unlimited compute.</p></article>
+              </div>
+              <h3>Prompt injection becomes a systems problem</h3>
+              <p>A super agent may read webpages, documents and messages, then pass extracted information to other agents with stronger permissions. That makes context provenance critical. Untrusted text should be treated as data, not as instructions that automatically inherit the orchestrator's authority.</p>
+            </section>
+
+            <section id="failure-modes">
+              <p class="eyebrow">FAILURE MODES</p>
+              <h2>How do AI super agents fail?</h2>
+              <div class="failure-grid">
+                <article><span>Goal drift</span><p>The orchestrator optimizes a proxy and loses the user's actual objective after many delegated steps.</p></article>
+                <article><span>Coordination tax</span><p>Adding agents creates more messages, latency and contradictions than useful specialization.</p></article>
+                <article><span>Authority leakage</span><p>A low-trust worker indirectly causes a high-privilege action through the supervisor.</p></article>
+                <article><span>State divergence</span><p>Parallel agents act on different versions of the world and return mutually inconsistent results.</p></article>
+                <article><span>Verification collapse</span><p>The same family of models generates and judges the work, allowing shared blind spots to pass.</p></article>
+                <article><span>Runaway economics</span><p>Retries, recursive planning or agent spawning consume more compute than the task is worth.</p></article>
+              </div>
+              <p>The best super-agent systems therefore look less like “one brilliant autonomous AI” and more like carefully engineered distributed systems with explicit policies, state and observability.</p>
+            </section>
+
+            <section id="when-to-use">
+              <p class="eyebrow">DECISION FRAMEWORK</p>
+              <h2>When do you actually need a super agent?</h2>
+              <div class="guide-decision-table">
+                <div><span>One bounded task</span><strong>Use one agent</strong><p>Do not add orchestration when a single agent can complete and verify the workflow reliably.</p></div>
+                <div><span>Many deterministic steps</span><strong>Use workflow automation</strong><p>If the branches are known in advance, a workflow engine is easier to test and govern.</p></div>
+                <div><span>Several specialized agents</span><strong>Consider a supervisor</strong><p>A super-agent pattern helps when work requires dynamic delegation and synthesis.</p></div>
+                <div><span>Cross-system outcome</span><strong>Super-agent architecture becomes valuable</strong><p>Especially when the objective spans research, prediction, software, business systems and human approvals.</p></div>
+                <div><span>High-risk environment</span><strong>Governance first</strong><p>Do not increase autonomy until permissions, logging, rollback and evaluation exist.</p></div>
+              </div>
+              <p>The simplest architecture that reliably solves the problem is usually the best one. “Super agent” should describe needed orchestration—not become a reason to turn every workflow into a society of models.</p>
+            </section>
+
+            <section id="future">
+              <p class="eyebrow">WHAT COMES NEXT</p>
+              <h2>Where are AI super agents heading after 2026?</h2>
+              <p>The likely direction is not one giant model controlling everything. It is increasingly compositional: <strong>strong planners + specialist agents + deterministic systems + shared protocols + governance</strong>. Models will continue improving, but production systems will still need routing, memory, permission boundaries and observability.</p>
+              <p>Three changes matter most. First, tool and agent protocols such as MCP and A2A reduce integration friction. Second, model routing makes it economical to mix frontier and smaller models inside one workflow. Third, domain super agents like Cadence's show that high-value autonomy may emerge fastest in industries where the toolchain and success criteria are already well defined.</p>
+              <h3>Will super agents lead to superintelligence?</h3>
+              <p>Super agents can amplify what current models can accomplish by giving them persistence, tools and coordination. That may produce systems that appear dramatically more capable on real tasks. But architectural amplification should not be confused with evidence of AGI or superintelligence. Those are separate scientific and philosophical questions.</p>
+              <div class="guide-inline-cta"><div><span>RELATED SXF GUIDE</span><strong>Best AI Agents in 2026</strong><p>Compare today's deployed work, research, coding and automation agents before looking at the emerging super-agent layer above them.</p></div><a href="/guides/best-ai-agents/">Open guide ↗</a></div>
+            </section>
+
+            <section class="guide-faq-section" id="faq">
+              <p class="eyebrow">FAQ</p>
+              <h2>Frequently asked questions about AI super agents</h2>
+              <div class="model-faq">{faq_html}</div>
+            </section>
+
+            <section class="guide-sources">
+              <p class="eyebrow">PRIMARY SOURCES</p>
+              <h2>Primary sources used for this guide</h2>
+              <p>Because “super agent” is not yet a standard term, this guide grounds the definition in how companies are actually using it in deployed 2026 systems. Vendor productivity and benchmark claims are attributed as vendor evidence, not treated as independent SXF measurements.</p>
+              <div class="model-sources">{source_links}</div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>{page_footer()}</body></html>'''
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -2697,6 +3121,17 @@ def guides_index_html(items, current_items):
             "meta": "Work · Research · Coding · Automation",
             "updated": "Sep 26, 2026",
             "read_time": "25 min",
+        },
+        {
+            "href": "/guides/ai-super-agents/",
+            "category": "Agents · Superintelligence",
+            "categories": ["agents", "research", "superintelligence"],
+            "kicker": "EMERGING AI SYSTEMS",
+            "title": "AI Super Agents in 2026",
+            "description": "What super agents are, how orchestration works, real 2026 examples, multi-agent architecture, safety and the difference from AGI.",
+            "meta": "Orchestration · Multi-agent · Safety · AGI",
+            "updated": "Sep 26, 2026",
+            "read_time": "26 min",
         },
         {
             "href": f"/compare/{GPT6_COMPARE_SLUG}/",
@@ -3178,6 +3613,9 @@ def build_discovery_pages(items, current_items):
     agents_guide_path = GUIDES_DIR / "best-ai-agents"
     agents_guide_path.mkdir(parents=True, exist_ok=True)
     (agents_guide_path / "index.html").write_text(best_ai_agents_guide_html(items), encoding="utf-8")
+    super_agents_guide_path = GUIDES_DIR / "ai-super-agents"
+    super_agents_guide_path.mkdir(parents=True, exist_ok=True)
+    (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
     for item in items:
         path = SIGNALS_DIR / item["signal_slug"]
@@ -3231,6 +3669,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
     ]
