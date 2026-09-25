@@ -646,6 +646,18 @@ def extract_models(title):
                     parent = re.sub(r"gpt", "GPT", base.group(1), flags=re.I)
                     if parent not in found:
                         found.append(parent)
+
+    # Handle grouped family announcements such as "GPT-6 Sol and Luna".
+    grouped = re.search(r"\b(GPT[- ]\d+(?:\.\d+)?)\s+(Astra|Sol|Luna)\s+(?:and|&)\s+(Astra|Sol|Luna)\b", text_value, re.I)
+    if grouped:
+        family = re.sub(r"^GPT\s+(?=\d)", "GPT-", grouped.group(1), flags=re.I)
+        family = re.sub(r"gpt", "GPT", family, flags=re.I)
+        for variant in (grouped.group(2), grouped.group(3)):
+            full = f"{family} {variant.title()}"
+            if full not in found:
+                found.append(full)
+        if family not in found:
+            found.append(family)
     return found
 
 SEO_MIN_SUMMARY_CHARS = 90
@@ -664,6 +676,139 @@ MODEL_CASE_STUDY = re.compile(
     r"\bhelps?\b|\btrusts?\b|\bcuts?\b|\bboost(?:ing|s|ed)?\b|\busing\b|\bwith GPT\b",
     re.I,
 )
+
+MODEL_REFERENCE = {
+    "GPT-6": {
+        "provider": "OpenAI",
+        "summary": "GPT-6 is OpenAI’s current flagship model family, spanning Astra for the hardest end-to-end work, Sol for demanding coding and agentic workflows, and Luna for efficient high-volume tasks.",
+        "pricing_note": "Standard API pricing per 1M text tokens for prompts up to 272K input tokens. Longer prompts use higher rates.",
+        "modalities": "Text and image input · text output",
+        "variants": [
+            {
+                "name": "GPT-6 Astra",
+                "model_id": "gpt-6-astra",
+                "positioning": "Highest capability",
+                "best_for": "Complex reasoning, coding, computer use, research and document creation",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "Apr 30, 2026",
+                "input_price": "$10.00",
+                "cached_price": "$1.00",
+                "output_price": "$50.00",
+                "released": "Sep 3, 2026",
+                "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+            },
+            {
+                "name": "GPT-6 Sol",
+                "model_id": "gpt-6-sol",
+                "positioning": "Capability / cost balance",
+                "best_for": "Complex coding and agentic workflows",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "Apr 20, 2026",
+                "input_price": "$2.00",
+                "cached_price": "$0.20",
+                "output_price": "$10.00",
+                "released": "Sep 22, 2026",
+                "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+            },
+            {
+                "name": "GPT-6 Luna",
+                "model_id": "gpt-6-luna",
+                "positioning": "Efficiency",
+                "best_for": "Focused, high-volume and cost-sensitive workloads",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "May 18, 2026",
+                "input_price": "$0.10",
+                "cached_price": "$0.01",
+                "output_price": "$0.50",
+                "released": "Sep 22, 2026",
+                "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+            },
+        ],
+        "sources": [
+            ("OpenAI model catalog", "https://developers.openai.com/api/docs/models"),
+            ("OpenAI API pricing", "https://developers.openai.com/api/docs/pricing"),
+            ("GPT-6 model guidance", "https://developers.openai.com/api/docs/guides/latest-model"),
+            ("OpenAI API changelog", "https://developers.openai.com/api/docs/changelog"),
+        ],
+        "faq": [
+            ("What models are in the GPT-6 family?", "OpenAI currently lists GPT-6 Astra, GPT-6 Sol and GPT-6 Luna as the flagship GPT-6 family."),
+            ("What is the GPT-6 context window?", "Astra, Sol and Luna each have a 1,050,000-token context window and support up to 128,000 output tokens."),
+            ("How much does GPT-6 cost in the API?", "For Standard API requests up to 272K input tokens, Astra is $10 input / $50 output per 1M tokens, Sol is $2 / $10, and Luna is $0.10 / $0.50. Cached-input rates are lower."),
+            ("What is each GPT-6 model for?", "OpenAI positions Astra for the hardest end-to-end work, Sol for complex coding and agentic workflows, and Luna for efficient high-volume tasks."),
+        ],
+    }
+}
+
+def model_reference(name):
+    if name == "GPT-6" or name.startswith("GPT-6 "):
+        return MODEL_REFERENCE["GPT-6"]
+    return None
+
+def model_reference_html(name):
+    ref = model_reference(name)
+    if not ref:
+        return ""
+
+    variants = ref["variants"]
+    selected = next((v for v in variants if v["name"].lower() == name.lower()), None)
+    focus = selected or None
+    verified = datetime.now(timezone.utc).date().isoformat()
+
+    if focus:
+        facts = f'''<div class="model-fact-grid">
+          <div><span>MODEL ID</span><strong>{escape(focus["model_id"])}</strong></div>
+          <div><span>CONTEXT WINDOW</span><strong>{escape(focus["context"])}</strong><small>tokens</small></div>
+          <div><span>MAX OUTPUT</span><strong>{escape(focus["max_output"])}</strong><small>tokens</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(focus["knowledge_cutoff"])}</strong></div>
+          <div><span>STANDARD INPUT</span><strong>{escape(focus["input_price"])}</strong><small>/ 1M tokens</small></div>
+          <div><span>STANDARD OUTPUT</span><strong>{escape(focus["output_price"])}</strong><small>/ 1M tokens</small></div>
+        </div>'''
+        intro = f'''<div class="model-reference-copy"><p class="eyebrow">MODEL REFERENCE</p><h2>{escape(name)} at a glance.</h2>
+          <p>{escape(focus["best_for"])}. OpenAI lists a {escape(focus["context"])}-token context window, up to {escape(focus["max_output"])} output tokens and a {escape(focus["knowledge_cutoff"])} knowledge cutoff.</p>
+          <p class="reference-note">Released {escape(focus["released"])} · {escape(ref["modalities"])} · Last verified {escape(verified)}</p></div>'''
+    else:
+        facts = '''<div class="model-fact-grid">
+          <div><span>FAMILY</span><strong>3</strong><small>flagship variants</small></div>
+          <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens across family</small></div>
+          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens across family</small></div>
+          <div><span>INPUT</span><strong>Text + image</strong></div>
+          <div><span>OUTPUT</span><strong>Text</strong></div>
+          <div><span>PROVIDER</span><strong>OpenAI</strong></div>
+        </div>'''
+        intro = f'''<div class="model-reference-copy"><p class="eyebrow">MODEL REFERENCE</p><h2>GPT-6 family at a glance.</h2>
+          <p>{escape(ref["summary"])}</p>
+          <p class="reference-note">{escape(ref["modalities"])} · Last verified {escape(verified)}</p></div>'''
+
+    rows = "".join(
+        f'''<tr class="{"is-current" if focus and v["name"] == focus["name"] else ""}">
+          <th scope="row"><a href="/models/{escape(slugify(v["name"]), quote=True)}/">{escape(v["name"])}</a><small>{escape(v["model_id"])}</small></th>
+          <td>{escape(v["positioning"])}</td><td>{escape(v["context"])}</td><td>{escape(v["max_output"])}</td>
+          <td>{escape(v["input_price"])}</td><td>{escape(v["cached_price"])}</td><td>{escape(v["output_price"])}</td>
+        </tr>''' for v in variants
+    )
+    sources = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label, url in ref["sources"]
+    )
+    faq = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in ref["faq"]
+    )
+    return f'''<section class="model-reference shell">
+      <div class="model-reference-intro">{intro}{facts}</div>
+      <div class="model-comparison">
+        <div class="intel-section-head"><div><p class="eyebrow">FAMILY COMPARISON</p><h2>Astra, Sol and Luna.</h2></div><span>Official OpenAI specifications</span></div>
+        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="reference-note">{escape(ref["pricing_note"])}</p>
+      </div>
+      <div class="model-reference-lower">
+        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{sources}</div>
+        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq}</div>
+      </div>
+    </section>'''
 
 def seo_quality(item):
     summary_len = len(clean_summary(item.get("summary", "")))
@@ -1017,20 +1162,48 @@ def topics_index_html(groups):
 def model_page_html(name, items):
     slug = slugify(name)
     canonical = f"{BASE_URL}/models/{slug}/"
-    description = f"Track {name} releases, capability changes and related primary-source signals on SXF / AI."
+    ref = model_reference(name)
+    if ref:
+        description = (
+            f"{name} reference: pricing, context window, API specifications, model family details "
+            f"and the latest primary-source updates tracked by SXF / AI."
+        )
+        title = f"{name} — Pricing, Context Window, API & Updates | SXF / AI" if name != "GPT-6" else "GPT-6 Models — Pricing, Context Window & Updates | SXF / AI"
+    else:
+        description = f"Track {name} releases, capability changes and related primary-source signals on SXF / AI."
+        title = name + " — Releases & Signals | SXF / AI"
     latest = items[0]
     latest_summary = clean_summary(latest.get("summary", "")) or compact_description(latest)
     first_date = display_date(items[-1]["published"])
     latest_date = display_date(latest["published"])
     source_count = len({item["source"] for item in items})
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if model_page_indexable(name, items) else "noindex,follow"
-    schema = {"@context":"https://schema.org","@type":"CollectionPage","name":f"{name} updates | SXF / AI","url":canonical,"description":description,"isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":name},"inLanguage":"en"}
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"CollectionPage","name":f"{name} reference and updates | SXF / AI","url":canonical,
+                "description":description,"isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":{"@type":"Thing","name":name},"inLanguage":"en"
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":[
+                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL + "/"},
+                    {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL + "/models/"},
+                    {"@type":"ListItem","position":3,"name":name,"item":canonical},
+                ]
+            }
+        ]
+    }
     rows = "".join(signal_row(item) for item in items[:30])
-    return f'''<!doctype html><html lang="en">{page_head(name + " — Releases & Signals | SXF / AI", description, canonical, schema, robots=robots)}
+    reference = model_reference_html(name)
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, robots=robots)}
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>release signals.</span></h1><p>{escape(description)}</p>
+      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"reference & signals." if ref else "release signals."}</span></h1><p>{escape(description)}</p>
       <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
+      {reference}
       <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
       <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>{escape(name)}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
