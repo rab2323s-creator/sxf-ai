@@ -1160,7 +1160,11 @@ def topic_page_html(topic, items):
     security_reference = ""
     if topic["slug"] == "ai-security":
         security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>SECURITY REFERENCE</span><strong>AI Agent Security in 2026</strong><p>Prompt injection, MCP, permissions, sandboxing, memory integrity, secrets and production controls.</p></div><b>Read the guide ↗</b></a></section>'''
-    elif topic["slug"] in {"ai-agents", "coding-ai"}:
+    elif topic["slug"] == "github-copilot":
+        security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/github-copilot-alternatives/"><div><span>DEEP COMPARISON</span><strong>Best GitHub Copilot Alternatives in 2026</strong><p>Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop compared by workflow and cost.</p></div><b>Compare alternatives ↗</b></a></section>'''
+    elif topic["slug"] == "coding-ai":
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
+    elif topic["slug"] == "ai-agents":
         security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>RELATED SECURITY GUIDE</span><strong>Secure the agent before expanding its permissions.</strong><p>Identity, tool boundaries, prompt injection, MCP, sandboxing and human approval.</p></div><b>Open security guide ↗</b></a></section>'''
     return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
@@ -3383,6 +3387,17 @@ def guides_index_html(items, current_items):
             "read_time": "30 min",
         },
         {
+            "href": "/guides/github-copilot-alternatives/",
+            "category": "Coding · Copilot",
+            "categories": ["coding", "agents", "open-source"],
+            "kicker": "COPILOT ALTERNATIVES",
+            "title": "Best GitHub Copilot Alternatives in 2026",
+            "description": "Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop compared by workflow, pricing, agents, model choice and team fit.",
+            "meta": "Cursor · Claude Code · Codex · Cline",
+            "updated": "Sep 26, 2026",
+            "read_time": "28 min",
+        },
+        {
             "href": "/guides/best-ai-coding-tools/",
             "category": "Coding",
             "categories": ["coding", "agents"],
@@ -3978,6 +3993,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-security/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
