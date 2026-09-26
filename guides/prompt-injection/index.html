@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Prompt Injection in AI: Direct vs Indirect Attacks & Defenses (2026) | SXF / AI</title>
+  <meta name="description" content="A complete 2026 guide to prompt injection in AI: direct vs indirect attacks, agent hijacking, RAG and browser risks, MCP and tool exposure, defenses, monitoring and production controls." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#07090d" />
+  <link rel="canonical" href="https://sxf.si/guides/prompt-injection/" />
+  <link rel="alternate" hreflang="en" href="https://sxf.si/guides/prompt-injection/" />
+  <link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/prompt-injection/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="SXF / AI" />
+  <meta property="og:title" content="Prompt Injection in AI in 2026: Direct vs Indirect Attacks, Risks & Defenses" />
+  <meta property="og:description" content="A defensive reference for understanding prompt injection, indirect agent hijacking, RAG and browser risks, MCP/tool exposure and layered mitigations." />
+  <meta property="og:url" content="https://sxf.si/guides/prompt-injection/" />
+  <meta property="og:image" content="https://sxf.si/assets/prompt-injection.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prompt Injection in AI in 2026" />
+  <meta name="twitter:description" content="Direct vs indirect prompt injection, risks, agent hijacking and layered defenses." />
+  <meta name="twitter:image" content="https://sxf.si/assets/prompt-injection.webp" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/guides/prompt-injection/#article","url":"https://sxf.si/guides/prompt-injection/","mainEntityOfPage":"https://sxf.si/guides/prompt-injection/","headline":"Prompt Injection in AI in 2026: Direct vs Indirect Attacks, Risks & Defenses","description":"A complete 2026 guide to prompt injection in AI: direct vs indirect attacks, agent hijacking, RAG and browser risks, MCP and tool exposure, defenses, monitoring and production controls.","image":"https://sxf.si/assets/prompt-injection.webp","datePublished":"2026-09-26","dateModified":"2026-09-26","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Security","keywords":["prompt injection","prompt injection AI","prompt injection 2026","indirect prompt injection","direct prompt injection","agent hijacking","AI agent security","RAG prompt injection","MCP security","prompt injection defenses","LLM security"],"citation":["https://openai.com/index/designing-agents-to-resist-prompt-injection/","https://openai.com/safety/prompt-injections/","https://www.anthropic.com/news/prompt-injection-defenses","https://genai.owasp.org/llmrisk/llm01-prompt-injection/","https://csrc.nist.gov/glossary/term/prompt_injection","https://www.nist.gov/blogs/caisi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition","https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/","https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/","https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-ai-prompt-injection-protection"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"Prompt Injection","item":"https://sxf.si/guides/prompt-injection/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is prompt injection in AI?","acceptedAnswer":{"@type":"Answer","text":"Prompt injection is an attack or failure mode in which untrusted input changes an AI system's behavior in ways the application or user did not intend."}},{"@type":"Question","name":"What is indirect prompt injection?","acceptedAnswer":{"@type":"Answer","text":"Indirect prompt injection occurs when the model encounters instructions embedded in external content such as a webpage, email, document, retrieved record or tool output."}},{"@type":"Question","name":"What is the difference between prompt injection and jailbreaking?","acceptedAnswer":{"@type":"Answer","text":"Prompt injection is the broader class of attacks that manipulate model behavior through input. Jailbreaking usually refers to attempts to bypass model safety restrictions directly."}},{"@type":"Question","name":"Can prompt injection be completely prevented?","acceptedAnswer":{"@type":"Answer","text":"No current control should be treated as complete prevention. Strong systems combine model resistance with deterministic boundaries around permissions, tools, data, execution, approvals and monitoring."}},{"@type":"Question","name":"Why is prompt injection more dangerous for AI agents?","acceptedAnswer":{"@type":"Answer","text":"Agents can browse, use tools, access private data and create external side effects. A manipulated model can therefore turn an input problem into an authorization, data exposure or operational problem."}}]}]}</script>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/intelligence.css" />
+</head>
+<body class="intel-page guide-article-page prompt-injection-guide">
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+  <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+  <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+
+<main><article>
+<header class="guide-article-hero shell">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Prompt Injection</span></nav>
+  <p class="eyebrow">SXF SECURITY REFERENCE / PROMPT INJECTION</p>
+  <h1>Prompt Injection in AI in 2026:<br><span>Direct vs Indirect Attacks, Risks & Defenses</span></h1>
+  <p class="guide-deck">Prompt injection is one of the defining security problems of modern AI systems because models process instructions and data through the same natural-language interface. The risk grows sharply when AI can browse, retrieve documents, use tools, call MCP servers or act as an agent. This guide explains the threat model, the difference between direct and indirect injection, why simple filters are not enough, and how to design systems that remain bounded even when a model is manipulated.</p>
+  <div class="guide-byline">
+    <div><span>Published</span><strong>September 26, 2026</strong></div>
+    <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+    <div><span>Reading time</span><strong>26 min</strong></div>
+    <div><span>Research standard</span><strong>Primary-source first</strong></div>
+  </div>
+</header>
+
+<figure class="security-feature shell">
+  <div class="security-feature-frame">
+    <div class="security-feature-fallback" aria-hidden="true"><span>PROMPT INJECTION</span><strong>Trusted intent · untrusted content · bounded action</strong></div>
+    <img src="/assets/prompt-injection.webp" alt="Conceptual AI security diagram showing trusted instructions separated from untrusted web, document and tool inputs before controlled agent actions" width="1672" height="941" loading="eager" decoding="async" onerror="this.style.display='none'" />
+  </div>
+  <figcaption>Prompt injection is not only a model problem. The practical security question is whether untrusted content can influence a model that also has access to sensitive data, tools or consequential actions.</figcaption>
+</figure>
+
+<section class="guide-answer shell" id="quick-answer">
+  <div class="guide-answer-label">QUICK ANSWER</div>
+  <div><h2>Prompt injection happens when untrusted input is interpreted as instruction — and the safest design assumes some injections will get through.</h2>
+  <p><strong>Direct prompt injection</strong> comes from the user or attacker interacting with the model directly. <strong>Indirect prompt injection</strong> is embedded in external content the model reads, such as webpages, email, documents, RAG results or tool output. For agents, the impact can extend beyond a bad answer because the model may also have access to private data and actions. Effective defense therefore combines model-level resistance with deterministic controls: trust separation, least privilege, constrained tools, isolated execution, data boundaries, contextual human approval, monitoring and rapid revocation.</p></div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc"><span>IN THIS GUIDE</span>
+  <a href="#what-is-prompt-injection">What is prompt injection?</a>
+  <a href="#direct-vs-indirect">Direct vs indirect</a>
+  <a href="#prompt-injection-vs-jailbreak">Prompt injection vs jailbreak</a>
+  <a href="#why-agents-make-it-worse">Why agents increase risk</a>
+  <a href="#attack-surface">Where injections enter</a>
+  <a href="#rag">RAG prompt injection</a>
+  <a href="#browser-email-documents">Browser, email & documents</a>
+  <a href="#mcp-tools">MCP & tool risk</a>
+  <a href="#multimodal">Multimodal injection</a>
+  <a href="#impact">Potential impact</a>
+  <a href="#defense-in-depth">Defense in depth</a>
+  <a href="#least-privilege">Least privilege</a>
+  <a href="#provenance">Trust & provenance</a>
+  <a href="#human-approval">Human approval</a>
+  <a href="#monitoring-evals">Monitoring & evals</a>
+  <a href="#enterprise-architecture">Enterprise architecture</a>
+  <a href="#checklist">Production checklist</a>
+  <a href="#faq">FAQ</a>
+  <a href="#sources">Primary sources</a>
+  <a class="guide-toc-top" href="#top">Back to top ↑</a>
+</aside>
+
+<div class="guide-prose" id="top">
+
+<section id="what-is-prompt-injection">
+<p class="eyebrow">DEFINITION</p>
+<h2>What is prompt injection in AI?</h2>
+<p><strong>Prompt injection is a security failure in which untrusted input changes an AI system's behavior in ways the user or application did not intend.</strong> NIST defines prompt injection as an attack that exploits the concatenation of untrusted input with a prompt constructed by a higher-trust party, such as an application designer.</p>
+<p>That definition is useful because it describes the core architectural problem: natural-language AI systems often process <em>instructions</em> and <em>data</em> through the same model context. A sentence retrieved from a trusted policy file and a sentence retrieved from an untrusted webpage may both arrive as tokens the model can reason over. Unless the surrounding system preserves trust boundaries, external content can influence behavior that should have been controlled by higher-trust instructions.</p>
+<p>OWASP lists Prompt Injection as <strong>LLM01</strong> in its current GenAI security guidance and notes that RAG and fine-tuning do not fully remove the vulnerability. OpenAI describes prompt injection as an evolving form of social engineering against AI systems: the model is being persuaded or misled using content placed in its context.</p>
+<div class="guide-inline-cta"><div><span>RELATED SXF REFERENCE</span><strong>Prompt injection is one layer of AI agent security.</strong><p>See how permissions, MCP, sandboxing, memory and approvals change the blast radius.</p></div><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div>
+</section>
+
+<section id="direct-vs-indirect">
+<p class="eyebrow">CORE DISTINCTION</p>
+<h2>Direct vs indirect prompt injection: what is the difference?</h2>
+<p>The most important distinction is where the untrusted instruction enters the model context.</p>
+<div class="guide-difference">
+  <div><span>DIRECT PROMPT INJECTION</span><strong>The attacker talks to the model directly.</strong><p>The user input itself attempts to override, redirect or confuse higher-priority instructions. The application knows where the input came from, even if it cannot reliably determine what the user intends.</p></div>
+  <div><span>INDIRECT PROMPT INJECTION</span><strong>The instruction arrives inside external content.</strong><p>The model encounters attacker-controlled instructions while reading a webpage, email, file, repository, search result, database record or tool response. The end user may never see the malicious content.</p></div>
+</div>
+<p>Indirect injection is especially important for agents because the system may retrieve content automatically. A user can ask an agent to perform an ordinary task while the attacker controls only one of the sources that the agent later reads. NIST often refers to this pattern as <strong>agent hijacking</strong> when the external instruction redirects an agent toward unintended actions.</p>
+<div class="guide-callout"><strong>Key security idea</strong><p>The attacker does not need to control the user's prompt if they can control something the model will later ingest. That is why web browsing, email, RAG and tool output all belong in the prompt-injection threat model.</p></div>
+</section>
+
+<section id="prompt-injection-vs-jailbreak">
+<p class="eyebrow">TERMINOLOGY</p>
+<h2>Prompt injection vs jailbreak: related, but not the same problem</h2>
+<p>The terms are often mixed together, but the distinction matters for engineering. <strong>Prompt injection</strong> is the broader class of attacks that use input to alter model behavior in an unintended way. <strong>Jailbreaking</strong> usually refers to attempts to bypass model-level safety restrictions or content policies directly.</p>
+<div class="guide-decision-table">
+  <div><span>Primary target</span><strong>Prompt injection</strong><p>The application or agent's intended behavior, instruction hierarchy, data boundaries and tool decisions.</p></div>
+  <div><span>Primary target</span><strong>Jailbreaking</strong><p>The model's built-in safety or refusal behavior.</p></div>
+  <div><span>Common source</span><strong>Prompt injection</strong><p>User input or external content such as webpages, files, email, RAG context and tool responses.</p></div>
+  <div><span>Common source</span><strong>Jailbreaking</strong><p>Direct interaction designed to persuade the model to ignore or reinterpret restrictions.</p></div>
+  <div><span>System consequence</span><strong>Prompt injection</strong><p>Can become an authorization or data-security issue when the model controls tools or private context.</p></div>
+  <div><span>System consequence</span><strong>Jailbreaking</strong><p>Often manifests as unsafe or disallowed output, though agents can increase the impact.</p></div>
+</div>
+<p>OWASP explicitly notes the overlap. In practice, security teams should avoid arguing over labels and instead model the trust boundary: what untrusted content can reach the model, and what authority can the resulting model output influence?</p>
+</section>
+
+<section id="why-agents-make-it-worse">
+<p class="eyebrow">AGENTIC RISK</p>
+<h2>Why prompt injection is more dangerous for AI agents</h2>
+<p>A chatbot can be manipulated into producing a bad answer. An agent can be manipulated into choosing an action. That changes the impact profile.</p>
+<p>OpenAI's 2026 security guidance argues that modern attacks increasingly resemble social engineering rather than simple phrases that can be blocked by a filter. Microsoft similarly emphasizes that once AI tools move from <em>reading</em> to <em>acting</em>, prompt injection can cross from content manipulation into real operational impact.</p>
+<div class="security-stack">
+  <article><span>01</span><h3>Private data</h3><p>The agent may read email, documents, repositories, customer records or other sensitive context.</p></article>
+  <article><span>02</span><h3>Tools</h3><p>The agent may call APIs, search internal systems, send messages or modify external state.</p></article>
+  <article><span>03</span><h3>Execution</h3><p>Coding and computer-use agents may run commands, modify files or operate browsers.</p></article>
+  <article><span>04</span><h3>Persistence</h3><p>Memory or long-running workflows can carry the effects of compromised context beyond one turn.</p></article>
+</div>
+<p>NIST's 2026 agent-security red-teaming work describes indirect prompt injection as a central risk for agents that process emails, websites and code repositories. The useful framing is simple: <strong>prompt injection becomes more consequential as the distance between model output and real-world authority shrinks.</strong></p>
+</section>
+
+<section id="attack-surface">
+<p class="eyebrow">ATTACK SURFACE</p>
+<h2>Where prompt injection enters an AI system</h2>
+<p>Prompt injection is not tied to one interface. Any content that reaches the model and can be influenced by a lower-trust party can become part of the attack surface.</p>
+<div class="security-principles">
+  <article><span>WEB</span><h3>Web pages</h3><p>Browser agents and research systems ingest text, metadata and page structure from content they do not control.</p></article>
+  <article><span>MAIL</span><h3>Email & messages</h3><p>Assistants that summarize or act on inbox content may process instructions sent by external parties.</p></article>
+  <article><span>DOC</span><h3>Documents & files</h3><p>PDFs, office documents, tickets, resumes, issue descriptions and attachments can introduce untrusted instructions.</p></article>
+  <article><span>RAG</span><h3>Retrieved knowledge</h3><p>Search indexes, vector stores and knowledge bases can surface content with different trust levels into one context window.</p></article>
+  <article><span>TOOLS</span><h3>Tool output</h3><p>Agents may treat API or MCP responses as factual context even when the upstream service is compromised or simply untrusted.</p></article>
+  <article><span>MEM</span><h3>Memory & summaries</h3><p>Untrusted content can become more dangerous if it is persisted and later treated as durable context.</p></article>
+</div>
+<p>This is why a defensive architecture should track <strong>provenance</strong>. The model should not receive a flat undifferentiated block of text when the application knows which parts came from system policy, the user, an internal database or the public web.</p>
+</section>
+
+<section id="rag">
+<p class="eyebrow">RAG SECURITY</p>
+<h2>RAG prompt injection: why retrieval does not make untrusted content safe</h2>
+<p>Retrieval-augmented generation improves relevance by bringing external information into the model context. It does not automatically establish the trustworthiness of that information. OWASP explicitly notes that RAG does not fully mitigate prompt injection.</p>
+<p>A secure RAG design separates <strong>relevance</strong> from <strong>authority</strong>. A retrieved document can be highly relevant to the user's question and still be untrusted for instruction-following. Search ranking, similarity score or database location should not automatically make retrieved text equivalent to system policy.</p>
+<div class="security-checklist">
+  <div><span>PROVENANCE</span><strong>Preserve source identity and trust level.</strong><p>The application should know whether context came from policy, internal documentation, a customer upload or an external source.</p></div>
+  <div><span>SCOPING</span><strong>Retrieve the minimum necessary context.</strong><p>Smaller, task-specific context reduces unnecessary exposure and makes policy reasoning easier.</p></div>
+  <div><span>STRUCTURE</span><strong>Extract fields when possible.</strong><p>If the task needs a date, status or identifier, structured extraction can be safer than passing a full free-form document into an agent planner.</p></div>
+  <div><span>AUTHORIZATION</span><strong>Do not let retrieval decide permissions.</strong><p>The fact that a document mentions an action should never grant the agent authority to perform it.</p></div>
+</div>
+</section>
+
+<section id="browser-email-documents">
+<p class="eyebrow">REAL-WORLD INPUTS</p>
+<h2>Browser, email and document prompt injection</h2>
+<p>Anthropic's browser-security work highlights a core problem: every webpage an agent visits is potentially adversarial. The same logic applies to email and uploaded documents. A system designed to “read what the user would read” is now also reading content authored by people who may want to influence the agent rather than inform the user.</p>
+<p>For browser agents, the safest architecture minimizes the number of sensitive resources reachable in the same workflow. If a task only requires public research, the agent should not simultaneously have broad access to private enterprise data and write-capable tools. For email, distinguish reading, drafting and sending. For documents, separate extraction and summarization from privileged action.</p>
+<div class="guide-callout"><strong>Design for staged workflows</strong><p>When possible, separate “collect untrusted information” from “act on trusted data.” The fewer sensitive sinks available while the agent is processing adversarial sources, the lower the blast radius of an injection.</p></div>
+</section>
+
+<section id="mcp-tools">
+<p class="eyebrow">TOOLS & MCP</p>
+<h2>Prompt injection, MCP and tool use: where model influence becomes system authority</h2>
+<p>Tools make prompt injection materially more serious because a model output can become an API call. MCP expands this surface by standardizing how agents discover and use tools, resources and prompts from external servers.</p>
+<p>The security rule is not “MCP is dangerous.” It is that every tool connection creates a trust boundary. Tool descriptions, arguments, results and credentials can all influence the agent loop. A compromised or poorly governed integration can therefore amplify a prompt-injection failure.</p>
+<div class="guide-decision-table">
+  <div><span>Tool discovery</span><strong>Curate available capability</strong><p>Do not expose every connected tool to every agent or task.</p></div>
+  <div><span>Tool description</span><strong>Treat metadata as security-sensitive</strong><p>Descriptions enter model context and can influence which actions the model considers appropriate.</p></div>
+  <div><span>Tool arguments</span><strong>Validate deterministically</strong><p>Use schemas and policy checks before turning model-generated parameters into an external action.</p></div>
+  <div><span>Authorization</span><strong>Re-check at execution time</strong><p>The downstream service should enforce identity, resource scope and operation permissions independently.</p></div>
+  <div><span>Tool output</span><strong>Treat results as untrusted input</strong><p>Responses can contain content that attempts to steer the next model decision.</p></div>
+</div>
+<div class="guide-inline-cta"><div><span>DEEPER AGENT SECURITY</span><strong>Prompt injection is only one part of the tool boundary.</strong><p>See MCP security, identity, sandboxing, memory and approvals in the full agent-security reference.</p></div><a href="/guides/ai-agent-security/">Open guide ↗</a></div>
+</section>
+
+<section id="multimodal">
+<p class="eyebrow">MULTIMODAL AI</p>
+<h2>Multimodal prompt injection: instructions do not have to arrive as ordinary visible text</h2>
+<p>OWASP notes that multimodal systems expand the attack surface because models can process combinations of text, images and other content. The important defensive lesson is not a specific hiding technique; it is that <strong>human-visible content and model-parsed content are not always the same thing.</strong></p>
+<p>Applications should therefore treat files and media as untrusted inputs even when a human reviewer sees nothing suspicious at a glance. The same provenance and permission rules should apply regardless of modality: a model interpretation of an image, document or webpage does not inherit authority simply because the content looks benign.</p>
+</section>
+
+<section id="impact">
+<p class="eyebrow">IMPACT</p>
+<h2>What can prompt injection cause?</h2>
+<p>The outcome depends on the system surrounding the model. In a low-authority chatbot, injection may distort output. In a tool-using agent, the same class of manipulation can have much broader consequences.</p>
+<div class="guide-choice-grid">
+  <article><span>Output manipulation</span><p>The model can produce misleading, biased or attacker-influenced summaries and recommendations.</p></article>
+  <article><span>Data exposure</span><p>A manipulated workflow may reveal information the user did not intend to share with the current destination.</p></article>
+  <article><span>Unauthorized tool use</span><p>The model can attempt an action that is outside the user's real task but inside the tool's available capability.</p></article>
+  <article><span>Decision corruption</span><p>Injected context can influence ranking, triage, approval or other model-assisted decisions.</p></article>
+  <article><span>Unsafe execution</span><p>If an agent can run code or commands, model influence can cross into an execution boundary unless the environment is isolated and policy-controlled.</p></article>
+  <article><span>Persistent contamination</span><p>Low-trust content can affect later tasks if it is stored in memory or reused summaries without appropriate validation.</p></article>
+</div>
+<p>Microsoft's 2026 research into agent frameworks illustrates why the surrounding architecture matters: when natural-language decisions connect directly to privileged plugins or code execution, injection can become a route to much more serious system impact. The defensive response is to constrain that transition rather than assume the model will always recognize the attack.</p>
+</section>
+
+<section id="defense-in-depth">
+<p class="eyebrow">DEFENSE IN DEPTH</p>
+<h2>How to defend against prompt injection in AI systems</h2>
+<p>There is no single filter, prompt template or model setting that should be treated as complete protection. OpenAI, Anthropic, OWASP, NIST and Microsoft all point toward layered defenses: improve model resistance, but design the application so a successful manipulation cannot automatically become a high-impact action.</p>
+<div class="agent-security-planes">
+  <article><span>01 / MODEL</span><h3>Increase resistance</h3><p>Use models and training techniques designed to distinguish user intent from adversarial content and to treat suspicious instructions cautiously.</p></article>
+  <article><span>02 / CONTEXT</span><h3>Preserve trust boundaries</h3><p>Label provenance, separate system policy from untrusted content and avoid flattening every source into one undifferentiated prompt.</p></article>
+  <article><span>03 / AUTHORITY</span><h3>Limit permissions</h3><p>Give the agent only the data and actions needed for the current task, for the shortest practical duration.</p></article>
+  <article><span>04 / EXECUTION</span><h3>Constrain tools</h3><p>Validate parameters, use allowlists, sandbox execution and restrict network destinations and resource access.</p></article>
+  <article><span>05 / OVERSIGHT</span><h3>Approve, observe, revoke</h3><p>Require confirmation at consequential boundaries, log the action chain and keep a fast way to disable the agent.</p></article>
+</div>
+<h3>Why input filtering is not enough</h3>
+<p>OpenAI's 2026 guidance describes prompt injection as increasingly similar to social engineering. That is important because social engineering is contextual. An attacker does not need a fixed phrase that a regex or classifier can catch every time. The content can look like a plausible request, warning, instruction or business process.</p>
+<p>Detection remains useful, but it should reduce probability rather than define the only security boundary. The system should remain bounded when detection fails.</p>
+</section>
+
+<section id="least-privilege">
+<p class="eyebrow">BLAST RADIUS</p>
+<h2>Least privilege is the strongest practical defense against prompt-injection impact</h2>
+<p>Prompt injection is a model-influence problem. Least privilege turns it into a bounded system problem. If the agent cannot read a secret, send an external message or modify production state, an injection cannot use those capabilities either.</p>
+<div class="guide-pricing-list">
+  <div><strong>Read-only by default</strong><p>Analysis and research tasks should not automatically inherit write permissions.</p><span>LOWER RISK</span></div>
+  <div><strong>Task-scoped data</strong><p>Expose only the records, files or repositories necessary for the current request.</p><span>MINIMIZE DATA</span></div>
+  <div><strong>Action allowlists</strong><p>Limit the set of operations available to the agent instead of exposing an entire application API.</p><span>BOUND TOOLS</span></div>
+  <div><strong>Short-lived authority</strong><p>Use temporary credentials or delegated permissions that expire when the task ends.</p><span>LIMIT TIME</span></div>
+  <div><strong>No self-escalation</strong><p>An agent should not be able to grant itself broader permissions because external content suggested it.</p><span>CRITICAL</span></div>
+</div>
+<p>NIST's work on agent identity and authorization reinforces the same direction: agents need explicit identity, authorization, auditing and controls designed for their operating context.</p>
+</section>
+
+<section id="provenance">
+<p class="eyebrow">TRUST & PROVENANCE</p>
+<h2>Separate trusted instructions from untrusted content</h2>
+<p>One of the most useful design improvements is to keep source identity visible throughout the system. The application often knows more about trust than the model does. It knows which text came from the developer, the authenticated user, an internal policy database, the public web or a third-party tool.</p>
+<div class="security-checklist">
+  <div><span>HIGH TRUST</span><strong>System policy and deterministic application rules</strong><p>These define what the application allows. They should not be editable through retrieved content.</p></div>
+  <div><span>DELEGATED TRUST</span><strong>Authenticated user intent</strong><p>The user's request matters, but it is still bounded by permissions, organizational policy and safety controls.</p></div>
+  <div><span>CONTEXT</span><strong>Internal documents and application data</strong><p>Useful for reasoning, but not automatically authoritative for changing system behavior.</p></div>
+  <div><span>UNTRUSTED</span><strong>Web, external messages, uploads and third-party output</strong><p>These may contain relevant facts and hostile instructions at the same time.</p></div>
+</div>
+<p>Structured interfaces can help. If an agent only needs a few fields from a source, extracting those fields can reduce the amount of natural-language content that enters the planning context. This is not a complete defense, but it can simplify the trust model.</p>
+</section>
+
+<section id="human-approval">
+<p class="eyebrow">HUMAN CONTROL</p>
+<h2>Human approval: where it helps and where it fails</h2>
+<p>Human approval is one of the most important controls for consequential agent actions, but it is not magic. A manipulated model can also manipulate the explanation shown to the user. Approval design therefore needs to expose the <strong>actual action</strong>, not only the model's natural-language summary of that action.</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Action type</th><th>Recommended default</th><th>Approval design</th></tr></thead>
+<tbody>
+<tr><th>Read public information</th><td data-label="Recommended default">Automatic</td><td data-label="Approval design">Keep access scoped; no need to interrupt the user for ordinary reads.</td></tr>
+<tr><th>Read private data</th><td data-label="Recommended default">Policy-controlled</td><td data-label="Approval design">Authorize by user, tenant and task rather than relying on model intent.</td></tr>
+<tr><th>Create draft or proposed change</th><td data-label="Recommended default">Automatic in bounded workspace</td><td data-label="Approval design">Keep output reviewable before it creates an external side effect.</td></tr>
+<tr><th>Send, publish or share</th><td data-label="Recommended default">Contextual confirmation</td><td data-label="Approval design">Show exact destination, content and identity being used.</td></tr>
+<tr><th>Delete, deploy, pay or change access</th><td data-label="Recommended default">Strong confirmation + policy</td><td data-label="Approval design">Show target and consequences; require fresh authority for high-impact actions.</td></tr>
+</tbody></table></div>
+<p>Approval fatigue is a real security problem. Ask for confirmation at meaningful boundaries rather than every trivial step. The goal is to preserve human control where the consequence changes, not to create an endless stream of prompts users learn to dismiss.</p>
+</section>
+
+<section id="monitoring-evals">
+<p class="eyebrow">ASSURANCE</p>
+<h2>Prompt-injection monitoring, evaluation and red teaming</h2>
+<p>Defenses should be tested against the actual workflow. A model may look robust in a chat-only benchmark and still fail when connected to a browser, a document retriever and write-capable tools.</p>
+<div class="security-log-grid">
+  <article><span>EVAL</span><h3>Test direct and indirect sources</h3><p>Evaluate how the system handles untrusted user input, web content, documents, messages and tool output.</p></article>
+  <article><span>EVAL</span><h3>Test the action boundary</h3><p>Measure whether manipulated context can change tool choice, authorization requests or external side effects.</p></article>
+  <article><span>LOG</span><h3>Record provenance</h3><p>Preserve enough source information to understand which content influenced a decision.</p></article>
+  <article><span>LOG</span><h3>Trace tools and approvals</h3><p>Record proposed action, policy result, human decision, target and resulting side effect.</p></article>
+  <article><span>MONITOR</span><h3>Detect behavior drift</h3><p>Watch for unusual tools, destinations, repeated denials or action sequences that do not fit the task.</p></article>
+  <article><span>RESPOND</span><h3>Contain quickly</h3><p>Revoke tokens, disable connectors, stop active sessions and remove poisoned persistent context when needed.</p></article>
+</div>
+<p>NIST's large-scale agent red-teaming research is useful here because it treats agent hijacking as a measurable system property, not merely a prompt-quality issue. The relevant metric is not only whether the model recognized the attack; it is whether the complete agent remained within the intended task and authority.</p>
+</section>
+
+<section id="enterprise-architecture">
+<p class="eyebrow">ENTERPRISE DESIGN</p>
+<h2>A reference architecture for prompt-injection-resistant AI applications</h2>
+<p>For enterprise systems, the safest pattern is to interpose policy and trust boundaries between the model and every sensitive capability. A practical high-level flow looks like this:</p>
+<div class="security-stack">
+  <article><span>01</span><h3>User intent</h3><p>Authenticate the user and capture the requested task with relevant organizational policy.</p></article>
+  <article><span>02</span><h3>Context broker</h3><p>Retrieve data with source labels, trust level and minimum necessary scope.</p></article>
+  <article><span>03</span><h3>Agent/model</h3><p>Reason over the task while keeping external content distinguishable from application policy.</p></article>
+  <article><span>04</span><h3>Policy gateway</h3><p>Evaluate proposed tools and actions deterministically against identity, target and operation.</p></article>
+</div>
+<div class="security-stack">
+  <article><span>05</span><h3>Tool sandbox</h3><p>Execute bounded operations with restricted filesystem, network and credentials where appropriate.</p></article>
+  <article><span>06</span><h3>Human approval</h3><p>Escalate only actions whose external consequence requires explicit user authority.</p></article>
+  <article><span>07</span><h3>External system</h3><p>Re-authorize at the downstream service rather than trusting the model or orchestrator alone.</p></article>
+  <article><span>08</span><h3>Audit & response</h3><p>Log decisions and outcomes, detect anomalies and maintain a tested revocation path.</p></article>
+</div>
+<p>Microsoft's current enterprise tooling also reflects this layered approach. Its prompt-injection protection scans model traffic, but Microsoft separately emphasizes identity, tool governance and agent security because detection by itself is not sufficient.</p>
+<div class="guide-inline-cta"><div><span>LIVE SECURITY CLUSTER</span><strong>Use the topic page for current AI security signals.</strong><p>This guide is the durable reference; the topic layer tracks vendor, framework and standards changes.</p></div><a href="/topics/ai-security/">AI Security topic ↗</a></div>
+</section>
+
+<section id="checklist">
+<p class="eyebrow">PRODUCTION CHECKLIST</p>
+<h2>Prompt injection defense checklist</h2>
+<div class="production-checklist">
+  <label><span>01</span><strong>Map every source of model context and classify it by trust level.</strong></label>
+  <label><span>02</span><strong>Separate system policy, authenticated user intent and retrieved content.</strong></label>
+  <label><span>03</span><strong>Assume webpages, email, uploads, RAG results and tool output are untrusted.</strong></label>
+  <label><span>04</span><strong>Use the minimum data and context required for the task.</strong></label>
+  <label><span>05</span><strong>Give agents a dedicated identity with least-privilege permissions.</strong></label>
+  <label><span>06</span><strong>Expose only the tools and actions required for the current workflow.</strong></label>
+  <label><span>07</span><strong>Validate tool arguments and re-authorize each sensitive operation.</strong></label>
+  <label><span>08</span><strong>Keep long-lived secrets out of model-visible context.</strong></label>
+  <label><span>09</span><strong>Sandbox code execution and restrict network access where the workflow allows it.</strong></label>
+  <label><span>10</span><strong>Require meaningful approval for external, destructive, financial or privileged actions.</strong></label>
+  <label><span>11</span><strong>Protect persistent memory with provenance, write policy, isolation and expiration.</strong></label>
+  <label><span>12</span><strong>Log context provenance, tool calls, policy results, approvals and side effects.</strong></label>
+  <label><span>13</span><strong>Evaluate indirect prompt injection using the same browsers, tools and data paths used in production.</strong></label>
+  <label><span>14</span><strong>Monitor for unusual tool use, destinations, permission requests and behavior drift.</strong></label>
+  <label><span>15</span><strong>Maintain a rapid path to revoke agents, tokens, connectors and compromised state.</strong></label>
+</div>
+</section>
+
+<section class="guide-faq-section" id="faq">
+<p class="eyebrow">FAQ</p>
+<h2>Frequently asked questions about prompt injection</h2>
+<div class="model-faq">
+<details><summary>What is prompt injection in AI?</summary><p>Prompt injection is an attack or failure mode in which untrusted input changes an AI system's behavior in ways the user or application did not intend. It becomes a security issue when the manipulated model can access sensitive data, tools or consequential actions.</p></details>
+<details><summary>What is indirect prompt injection?</summary><p>Indirect prompt injection occurs when an AI system encounters instructions embedded in external content such as a webpage, email, document, RAG result, repository or tool output. The user may never see the malicious or misleading instruction directly.</p></details>
+<details><summary>What is the difference between direct and indirect prompt injection?</summary><p>Direct injection is delivered through the user's interaction with the model. Indirect injection arrives through content the model retrieves or processes while doing another task.</p></details>
+<details><summary>What is the difference between prompt injection and jailbreaking?</summary><p>Prompt injection is the broader problem of manipulating model behavior through input. Jailbreaking usually refers to directly bypassing a model's built-in safety restrictions. The concepts overlap, but prompt injection is especially important at the application and agent layer.</p></details>
+<details><summary>Can prompt injection be completely prevented?</summary><p>No current technique should be treated as complete prevention. Strong systems combine model resistance with deterministic controls around permissions, tools, data, execution, approvals and monitoring so that successful manipulation has limited impact.</p></details>
+<details><summary>Does RAG prevent prompt injection?</summary><p>No. Retrieval can improve relevance, but retrieved content may still be untrusted or attacker-controlled. RAG systems need provenance, trust separation, minimum necessary retrieval and independent authorization for actions.</p></details>
+<details><summary>Why is prompt injection dangerous for AI agents?</summary><p>Agents can browse, use tools, access private data and create external side effects. A manipulated model can therefore turn an input problem into an authorization, data exposure or operational problem.</p></details>
+<details><summary>How do you defend against indirect prompt injection?</summary><p>Use defense in depth: treat external content as untrusted, preserve provenance, limit permissions, constrain tools, isolate execution, protect secrets, require contextual approval for consequential actions and monitor the full action chain.</p></details>
+<details><summary>Is input filtering enough to stop prompt injection?</summary><p>No. Filtering can reduce exposure, but modern attacks can be contextual and resemble social engineering. The surrounding system should remain bounded even when detection fails.</p></details>
+<details><summary>How should companies test for prompt injection?</summary><p>Test the complete production workflow with representative untrusted sources, tool boundaries and permission levels. Measure whether the agent stays within the intended task and authority, not only whether the model labels an input as malicious.</p></details>
+</div>
+</section>
+
+<section class="guide-sources" id="sources">
+<p class="eyebrow">PRIMARY SOURCES</p>
+<h2>Official sources used for this guide</h2>
+<p>This reference prioritizes standards organizations, security research and first-party product guidance. Vendor material is used to describe threat models and implemented defenses; no vendor's claims are treated as proof that prompt injection is solved.</p>
+<div class="model-sources">
+  <a href="https://openai.com/index/designing-agents-to-resist-prompt-injection/" target="_blank" rel="noopener noreferrer"><span>OpenAI · Designing AI agents to resist prompt injection</span><b>↗</b></a>
+  <a href="https://openai.com/safety/prompt-injections/" target="_blank" rel="noopener noreferrer"><span>OpenAI · Understanding prompt injections</span><b>↗</b></a>
+  <a href="https://www.anthropic.com/news/prompt-injection-defenses" target="_blank" rel="noopener noreferrer"><span>Anthropic · Mitigating prompt injections in browser use</span><b>↗</b></a>
+  <a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/" target="_blank" rel="noopener noreferrer"><span>OWASP · LLM01:2025 Prompt Injection</span><b>↗</b></a>
+  <a href="https://csrc.nist.gov/glossary/term/prompt_injection" target="_blank" rel="noopener noreferrer"><span>NIST CSRC · Prompt injection definition</span><b>↗</b></a>
+  <a href="https://www.nist.gov/blogs/caisi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition" target="_blank" rel="noopener noreferrer"><span>NIST CAISI · AI agent security red-teaming insights</span><b>↗</b></a>
+  <a href="https://www.microsoft.com/en-us/security/blog/2026/05/07/prompts-become-shells-rce-vulnerabilities-ai-agent-frameworks/" target="_blank" rel="noopener noreferrer"><span>Microsoft Security · When prompts become shells</span><b>↗</b></a>
+  <a href="https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/" target="_blank" rel="noopener noreferrer"><span>Microsoft Security · When AI tools move from reading to acting</span><b>↗</b></a>
+  <a href="https://learn.microsoft.com/en-us/entra/global-secure-access/how-to-ai-prompt-injection-protection" target="_blank" rel="noopener noreferrer"><span>Microsoft Learn · Prompt injection protection</span><b>↗</b></a>
+</div>
+</section>
+
+<section class="related-signals">
+<div class="intel-section-head"><div><p class="eyebrow">CONTINUE THROUGH SXF</p><h2>Connect the threat model to the rest of the security cluster.</h2></div><a href="/signals/">All signals ↗</a></div>
+<div class="guide-choice-grid">
+  <article><span>AI Security</span><p>Track prompt injection, agent security, sandboxing and cyber-defense signals from primary sources.</p><div class="tool-links"><a href="/topics/ai-security/">Open topic ↗</a></div></article>
+  <article><span>AI Agent Security</span><p>See how prompt injection connects to identity, MCP, tool permissions, secrets, memory and sandboxing.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open guide ↗</a></div></article>
+  <article><span>AI Agents</span><p>Follow agentic systems and multi-step workflows as the attack surface changes.</p><div class="tool-links"><a href="/topics/ai-agents/">Open topic ↗</a></div></article>
+</div>
+</section>
+
+</div></div>
+</article></main>
+
+<footer class="footer shell">
+  <div class="footer-main">
+    <div class="footer-identity">
+      <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+      <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+      <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+      <div class="footer-nav-group"><p>EXPLORE</p><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+      <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+    </nav>
+  </div>
+  <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body></html>
