@@ -514,7 +514,7 @@ def editorial_units(item):
             why = "This can change what developers are able to run locally or integrate without depending on a hosted API. The practical value depends on whether the release includes usable artifacts, broad hardware or runtime support, and a license that fits real deployment."
             verify = "Check the released code or weights, license, supported quantization or model formats, hardware and memory requirements, runtime compatibility, benchmarks, and reproduction instructions."
     elif re.search(r"\bnow available\b|\bavailable in\b|\bexpands?\b|\benablement\b|\brollout\b|\baccess\b", text_value):
-        target = primary_model or title
+        target = primary_model or "the announced product or capability"
         why = f"The important change is broader access to {target}, which can move a capability from announcement to actual workflow use. The impact depends on who receives access, where it is available, and whether the release is general availability or a limited rollout."
         verify = "Check eligible plans or users, regions, product surfaces, default versus opt-in status, rollout timing, usage limits, and whether any capabilities remain preview-only."
     elif re.search(r"\bintroducing\b|\blaunch(?:ed|es)?\b|\brelease(?:d|s)?\b|\bnew features?\b|\bimprovements?\b", text_value):
