@@ -1,1 +1,389 @@
-<!doctype html><html><head><title>AI Agent Security in 2026 | SXF / AI</title></head><body><main><h1>AI Agent Security in 2026</h1><p>Defensive reference covering prompt injection, MCP security, permissions, sandboxing and governance.</p></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>AI Agent Security in 2026: Prompt Injection, MCP, Permissions & Sandboxing | SXF / AI</title>
+  <meta name="description" content="A complete AI agent security guide for 2026 covering prompt injection, MCP security, permissions, sandboxing, memory integrity, secrets, human approval, monitoring and production controls." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#07090d" />
+  <link rel="canonical" href="https://sxf.si/guides/ai-agent-security/" />
+  <link rel="alternate" hreflang="en" href="https://sxf.si/guides/ai-agent-security/" />
+  <link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/ai-agent-security/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="SXF / AI" />
+  <meta property="og:title" content="AI Agent Security in 2026: Prompt Injection, MCP, Permissions & Sandboxing" />
+  <meta property="og:description" content="A complete production guide to AI agent security: prompt injection, MCP, identity, permissions, sandboxing, memory, approvals, monitoring and governance." />
+  <meta property="og:url" content="https://sxf.si/guides/ai-agent-security/" />
+  <meta property="og:image" content="https://sxf.si/assets/ai-agent-security.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Agent Security in 2026: Prompt Injection, MCP, Permissions & Sandboxing" />
+  <meta name="twitter:description" content="A complete production guide to securing AI agents and agentic systems." />
+  <meta name="twitter:image" content="https://sxf.si/assets/ai-agent-security.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/guides/ai-agent-security/#article","url":"https://sxf.si/guides/ai-agent-security/","mainEntityOfPage":"https://sxf.si/guides/ai-agent-security/","headline":"AI Agent Security in 2026: Prompt Injection, MCP, Permissions & Sandboxing","description":"A complete AI agent security guide for 2026 covering prompt injection, MCP security, permissions, sandboxing, memory integrity, secrets, human approval, monitoring and production controls.","image":"https://sxf.si/assets/ai-agent-security.png","datePublished":"2026-09-26","dateModified":"2026-09-26","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Security","keywords":["AI agent security","AI agent security 2026","agentic AI security","prompt injection AI agents","MCP security","AI agent permissions","AI agent sandboxing","AI agent security best practices","AI agent governance","memory poisoning"],"citation":["https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/","https://genai.owasp.org/initiative_name/agentic-security/","https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai","https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure","https://www.microsoft.com/en-us/security/blog/2026/07/16/least-privilege-for-ai-agents-identity-access-and-tool-binding/","https://www.microsoft.com/en-us/security/blog/2026/05/14/defense-in-depth-autonomous-ai-agents/","https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/","https://www.anthropic.com/news/prompt-injection-defenses","https://help.openai.com/en/articles/11752874-chatgpt-agent","https://blog.modelcontextprotocol.io/posts/2026-07-28/","https://docs.cloud.google.com/bigtable/docs/secure-agent-interactions-mcp","https://docs.cloud.google.com/mcp/ai-security-safety"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"AI Agent Security","item":"https://sxf.si/guides/ai-agent-security/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is AI agent security?","acceptedAnswer":{"@type":"Answer","text":"AI agent security protects systems in which a model can take actions, use tools and access data. It combines identity, authorization, isolation, monitoring and agent-specific controls for untrusted context, tool use, memory and autonomy."}},{"@type":"Question","name":"Can prompt injection be completely prevented?","acceptedAnswer":{"@type":"Answer","text":"No current control should be treated as complete prevention. Secure systems reduce the chance of manipulation and also limit what an influenced agent can access or do."}},{"@type":"Question","name":"Is MCP secure?","acceptedAnswer":{"@type":"Answer","text":"MCP can be deployed securely, but security depends on server trust, authorization, scopes, credential handling, tool behavior and client policy."}},{"@type":"Question","name":"Should an AI agent have its own identity?","acceptedAnswer":{"@type":"Answer","text":"For production systems, a dedicated managed identity improves least privilege, attribution, revocation and auditability."}}]}]}</script>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/intelligence.css" />
+</head>
+<body class="intel-page guide-article-page security-guide-page">
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+  <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+  <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+
+<main><article>
+<header class="guide-article-hero shell">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Agent Security</span></nav>
+  <p class="eyebrow">SXF SECURITY REFERENCE / AGENTIC AI</p>
+  <h1>AI Agent Security in 2026:<br><span>Prompt Injection, MCP, Permissions & Sandboxing</span></h1>
+  <p class="guide-deck">AI agents can read private data, call tools, execute code, browse the web and act across business systems. That makes security a systems problem, not a prompt-writing problem. This living reference explains how to secure the complete agent stack — from untrusted context and MCP tools to identities, secrets, sandboxes, approvals, telemetry and incident response.</p>
+  <div class="guide-byline">
+    <div><span>Published</span><strong>September 26, 2026</strong></div>
+    <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+    <div><span>Reading time</span><strong>30 min</strong></div>
+    <div><span>Research standard</span><strong>Primary-source first</strong></div>
+  </div>
+</header>
+
+<figure class="security-feature shell">
+  <div class="security-feature-frame">
+    <div class="security-feature-fallback" aria-hidden="true"><span>AGENT SECURITY</span><strong>Identity · context · tools · execution · approval</strong></div>
+    <img src="/assets/ai-agent-security.png" alt="AI agent security architecture showing guarded tools, permissions, sandboxing, memory and human approval around an agent core" width="1672" height="941" loading="eager" decoding="async" onerror="this.style.display='none'" />
+  </div>
+  <figcaption>A secure agent is a controlled execution system: untrusted inputs are separated from authority, tools are scoped, execution is isolated and consequential actions are observable and reversible.</figcaption>
+</figure>
+
+<section class="guide-answer shell" id="quick-answer">
+  <div class="guide-answer-label">QUICK ANSWER</div>
+  <div><h2>Secure AI agents by assuming the model can be influenced — then make sure influence does not automatically become authority.</h2>
+  <p>The strongest design is layered: treat web pages, email, documents, RAG results and tool outputs as untrusted; give each agent a managed identity with least-privilege permissions; allow only approved tools and actions; isolate code and browser execution; keep secrets outside the model context; require human approval for high-impact actions; and log every tool call, authorization decision and external side effect. Prompt-injection detection helps, but it is not a substitute for architectural controls.</p></div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc"><span>IN THIS GUIDE</span>
+  <a href="#what-is-ai-agent-security">What is AI agent security?</a>
+  <a href="#why-agent-security-is-different">Why agents change security</a>
+  <a href="#security-architecture">Secure architecture</a>
+  <a href="#owasp-agentic-top-10">OWASP Agentic Top 10</a>
+  <a href="#prompt-injection">Prompt injection</a>
+  <a href="#mcp-security">MCP security</a>
+  <a href="#identity-permissions">Identity & permissions</a>
+  <a href="#sandboxing">Sandboxing</a>
+  <a href="#memory-context">Memory integrity</a>
+  <a href="#supply-chain">Supply chain</a>
+  <a href="#multi-agent">Multi-agent security</a>
+  <a href="#human-approval">Human approval</a>
+  <a href="#logging-monitoring">Logging & monitoring</a>
+  <a href="#red-teaming">Red teaming</a>
+  <a href="#production-checklist">Production checklist</a>
+  <a href="#faq">FAQ</a>
+  <a href="#sources">Primary sources</a>
+  <a class="guide-toc-top" href="#top">Back to top ↑</a>
+</aside>
+
+<div class="guide-prose" id="top">
+<section id="what-is-ai-agent-security">
+<p class="eyebrow">DEFINITION</p>
+<h2>What is AI agent security?</h2>
+<p><strong>AI agent security</strong> is the practice of protecting systems in which a model can do more than generate text. An agent may browse websites, read documents, access databases, call APIs, execute code, use credentials, communicate with other agents or change real-world systems. Security therefore has to cover the complete path from input to action.</p>
+<p>A conventional chatbot can still leak data or produce harmful output, but an agent adds <strong>agency</strong>: the ability to choose and chain actions. The security question changes from “can the model say something unsafe?” to “what can the system read, decide, invoke, modify and persist — and what happens if any part of that loop is manipulated?”</p>
+<p>NIST's 2026 analysis of AI agent security says established cybersecurity practices remain relevant but need adaptation for agent systems, because model outputs are being connected to software capabilities and real-world actions. Agent security is not a replacement for ordinary application security. It is application security plus new control problems created by autonomy, tool use and untrusted context.</p>
+<div class="guide-inline-cta"><div><span>LIVE SXF CONTEXT</span><strong>Follow AI security signals as the threat model changes.</strong><p>The SXF topic page tracks security, sandboxing and cyber-defense updates from primary sources.</p></div><a href="/topics/ai-security/">Open AI Security ↗</a></div>
+</section>
+
+<section id="why-agent-security-is-different">
+<p class="eyebrow">THREAT MODEL</p>
+<h2>Why AI agents change the security model</h2>
+<p>Agents collapse boundaries that traditional software usually keeps separate. The same workflow can ingest untrusted content, reason over private information, choose a tool, acquire authority and create an external side effect. A problem at the context layer can therefore become an authorization problem, a data-loss problem or a production incident.</p>
+<div class="security-stack">
+  <article><span>01</span><h3>Untrusted context</h3><p>Web pages, email, documents, retrieved text and tool output can contain instructions the system should not trust.</p></article>
+  <article><span>02</span><h3>Probabilistic decisions</h3><p>The model interprets intent and context rather than executing a fixed deterministic rule set.</p></article>
+  <article><span>03</span><h3>Real authority</h3><p>Tools, APIs, browsers and credentials can turn an incorrect decision into a real side effect.</p></article>
+  <article><span>04</span><h3>Persistent state</h3><p>Memory, task history and shared context can carry compromised or incorrect information into future runs.</p></article>
+</div>
+<p>The risk is therefore a product of both <strong>influence</strong> and <strong>blast radius</strong>. A model that reads hostile content but has no sensitive permissions presents one class of risk. The same model connected to email, repositories, cloud infrastructure and payment systems presents another.</p>
+</section>
+
+<section id="security-architecture">
+<p class="eyebrow">ARCHITECTURE</p>
+<h2>A secure AI agent architecture: five control planes</h2>
+<p>A strong production design separates what the model <em>sees</em> from what the system <em>allows</em>. Instead of asking the model to police itself, place controls around the model at every transition where data, authority or side effects cross a boundary.</p>
+<div class="agent-security-planes">
+  <article><span>01 / CONTEXT</span><h3>Classify input by trust</h3><p>Keep system instructions, user intent, retrieved data and third-party content distinct. A webpage should never silently become policy.</p></article>
+  <article><span>02 / IDENTITY</span><h3>Know which principal is acting</h3><p>Give the agent a dedicated identity and track whether an action is agent-owned, delegated or temporarily elevated.</p></article>
+  <article><span>03 / TOOLS</span><h3>Expose only approved capabilities</h3><p>Bind the agent to a curated tool set, validate parameters and re-authorize every call in the downstream service.</p></article>
+  <article><span>04 / EXECUTION</span><h3>Contain code and browser activity</h3><p>Use isolated environments, restricted filesystems, network policy and resource quotas to reduce blast radius.</p></article>
+  <article><span>05 / OVERSIGHT</span><h3>Observe, approve and revoke</h3><p>Require confirmation for consequential actions, preserve logs and maintain a tested path to disable identities and roll back changes.</p></article>
+</div>
+<div class="guide-callout"><strong>Least agency</strong><p>Least privilege limits what an agent can access. Least agency also limits how independently it can decide and act. High-risk workflows need both.</p></div>
+</section>
+
+<section id="owasp-agentic-top-10">
+<p class="eyebrow">OWASP 2026</p>
+<h2>OWASP Top 10 for Agentic Applications: the security map</h2>
+<p>OWASP's 2026 framework is useful because it treats agentic security as more than prompt injection. It covers goals, tools, identity, supply chain, execution, memory, inter-agent communication, cascading failures, human trust and rogue behavior.</p>
+<div class="guide-table-wrap"><table class="guide-table security-risk-table">
+<thead><tr><th>Risk</th><th>What it means in practice</th><th>Primary control direction</th></tr></thead>
+<tbody>
+<tr><th><span class="risk-id">ASI01</span><strong>Agent Goal Hijack</strong></th><td>Untrusted instructions can redirect the agent's objective or decision path.</td><td>Separate data from instructions, constrain actions and gate high-impact steps.</td></tr>
+<tr><th><span class="risk-id">ASI02</span><strong>Tool Misuse & Exploitation</strong></th><td>A legitimate tool can be invoked in the wrong context or with unsafe parameters.</td><td>Tool allowlists, schema validation, action policy, rate limits and least privilege.</td></tr>
+<tr><th><span class="risk-id">ASI03</span><strong>Identity & Privilege Abuse</strong></th><td>Agent identities or delegated credentials provide more access than the task needs.</td><td>Dedicated identities, scoped roles, short-lived entitlements and downstream authorization.</td></tr>
+<tr><th><span class="risk-id">ASI04</span><strong>Agentic Supply Chain Vulnerabilities</strong></th><td>Models, packages, skills, MCP servers or tools can introduce untrusted behavior.</td><td>Verify provenance, inventory components, review updates and isolate third-party tools.</td></tr>
+<tr><th><span class="risk-id">ASI05</span><strong>Unexpected Code Execution</strong></th><td>Generated or retrieved code can execute outside the intended boundary.</td><td>Sandboxing, egress controls, ephemeral environments, restricted mounts and quotas.</td></tr>
+<tr><th><span class="risk-id">ASI06</span><strong>Memory & Context Poisoning</strong></th><td>Persistent context can be changed so future decisions rely on compromised state.</td><td>Memory isolation, provenance, write policy, expiry and review of high-trust state.</td></tr>
+<tr><th><span class="risk-id">ASI07</span><strong>Insecure Inter-Agent Communication</strong></th><td>Agents can over-trust messages or capabilities received from other agents.</td><td>Authenticate agents, authorize each hop and propagate tenant and trust boundaries.</td></tr>
+<tr><th><span class="risk-id">ASI08</span><strong>Cascading Failures</strong></th><td>One incorrect result can propagate through a multi-step or multi-agent workflow.</td><td>Bounded retries, independent verification, circuit breakers and transaction limits.</td></tr>
+<tr><th><span class="risk-id">ASI09</span><strong>Human-Agent Trust Exploitation</strong></th><td>Users can over-trust plausible outputs or low-context approval prompts.</td><td>Context-rich approvals, exact targets, provenance and anti-fatigue design.</td></tr>
+<tr><th><span class="risk-id">ASI10</span><strong>Rogue Agents</strong></th><td>An agent can drift outside intended behavior or governance boundaries.</td><td>Runtime policy, monitoring, revocation, kill switches and bounded autonomy.</td></tr>
+</tbody></table></div>
+<p class="guide-fact-note">Risk names follow the OWASP Top 10 for Agentic Applications 2026. The summaries above are SXF implementation notes; use the OWASP source for full definitions and examples.</p>
+</section>
+
+<section id="prompt-injection">
+<p class="eyebrow">PROMPT INJECTION</p>
+<h2>Prompt injection in AI agents: why it becomes an authorization problem</h2>
+<p><strong>Prompt injection</strong> occurs when content processed by a model contains instructions that compete with the user's intent or system policy. In an agent workflow, the content can come from a webpage, document, email, repository issue, retrieval result or tool output.</p>
+<p>The most important distinction for autonomous systems is <strong>indirect prompt injection</strong>: the instruction is embedded in external content the agent encounters while doing legitimate work. Anthropic has described browser use as especially exposed because every page is potentially untrusted, and OpenAI explicitly warns that agents connected to logged-in sites and apps face prompt-injection risk.</p>
+<h3>How to reduce prompt-injection impact</h3>
+<div class="security-principles">
+  <article><span>01</span><h3>Separate instructions from data</h3><p>Preserve provenance and trust labels so retrieved text is treated as evidence, not authority.</p></article>
+  <article><span>02</span><h3>Constrain tool choice</h3><p>A model that can be influenced should not have an unrestricted menu of sensitive actions.</p></article>
+  <article><span>03</span><h3>Validate action intent</h3><p>Compare the proposed action with the user's stated goal and policy before execution.</p></article>
+  <article><span>04</span><h3>Minimize exposed secrets</h3><p>Do not place raw credentials or unnecessary sensitive data in model-visible context.</p></article>
+  <article><span>05</span><h3>Gate irreversible actions</h3><p>Require confirmation for important sends, writes, purchases, access changes and deletions.</p></article>
+  <article><span>06</span><h3>Assume detection can fail</h3><p>Model training and classifiers reduce risk; architecture must still contain a successful injection.</p></article>
+</div>
+</section>
+
+<section id="mcp-security">
+<p class="eyebrow">MODEL CONTEXT PROTOCOL</p>
+<h2>MCP security: tools, authorization and trust boundaries</h2>
+<p>MCP has become an important connector layer for agentic systems, but a protocol connection is also a trust relationship. An MCP server can expose tools, resources and prompts that influence the agent's behavior. Server provenance, authorization and tool governance are therefore security-critical.</p>
+<p>The MCP <strong>2026-07-28</strong> specification added authorization hardening, including issuer validation aligned with RFC 9207 and a shift toward client metadata documents. The revision also exposes method and tool names in HTTP headers, giving gateways a cleaner place to apply routing, metering and authorization policy.</p>
+<div class="security-checklist">
+  <div><span>SERVER TRUST</span><strong>Know who operates the MCP server.</strong><p>Inventory origin, owner, code provenance and update process. Third-party servers should be treated as third-party software with privileges.</p></div>
+  <div><span>AUTHORIZATION</span><strong>Scope access to the task.</strong><p>Use explicit scopes, issuer validation, short-lived credentials and per-resource authorization instead of broad tokens.</p></div>
+  <div><span>TOOL METADATA</span><strong>Treat descriptions as security-sensitive.</strong><p>Tool metadata enters model context. Review changes to critical tool descriptions and capabilities.</p></div>
+  <div><span>CREDENTIALS</span><strong>Keep secrets outside prompts.</strong><p>Attach credentials at the approved execution layer rather than exposing raw secrets to the model.</p></div>
+  <div><span>OUTPUT</span><strong>Do not trust tool results automatically.</strong><p>Tool output is another untrusted input that can affect the next decision in the agent loop.</p></div>
+</div>
+<div class="guide-inline-cta"><div><span>CODING AI</span><strong>Agent security matters inside developer workflows too.</strong><p>Repository access, shells and deployment tools make coding agents a high-value security boundary.</p></div><a href="/topics/coding-ai/">Track Coding AI ↗</a></div>
+</section>
+
+<section id="identity-permissions">
+<p class="eyebrow">IDENTITY & ACCESS</p>
+<h2>AI agent identity, permissions and secrets: apply least privilege at every hop</h2>
+<p>Microsoft's 2026 security guidance recommends treating each agent as a <strong>first-class principal</strong>: a dedicated, lifecycle-managed identity with a named owner, explicit purpose and narrowly scoped roles. This is stronger than sharing a user's token or a generic service account across multiple agents.</p>
+<p>Permissions should be constrained by <strong>resource</strong>, <strong>data</strong> and <strong>operation</strong>. A research agent may need read access to one collection but no export right. A remediation agent may need write access to a specific ticket type but no identity-administration permission. Elevated authority should be temporary and expire automatically.</p>
+<div class="guide-decision-table">
+  <div><span>Identity</span><strong>Dedicated agent principal</strong><p>Make actions attributable and revocable. Record a human owner and purpose for every production agent.</p></div>
+  <div><span>Baseline role</span><strong>Minimum task permissions</strong><p>Design roles around discrete operations instead of giving broad team or administrator access.</p></div>
+  <div><span>Elevation</span><strong>Just-in-time and time-limited</strong><p>Grant temporary higher privileges only when the workflow reaches a justified step.</p></div>
+  <div><span>Secrets</span><strong>Runtime injection, not prompt context</strong><p>Store credentials in a secrets system and bind them to approved actions.</p></div>
+  <div><span>Downstream services</span><strong>Re-authorize every call</strong><p>APIs should validate identity, role and scope independently instead of trusting the orchestrator implicitly.</p></div>
+  <div><span>Revocation</span><strong>Test the kill path</strong><p>Practice disabling the identity, expiring tokens and rolling back common unintended changes.</p></div>
+</div>
+</section>
+
+<section id="sandboxing">
+<p class="eyebrow">EXECUTION SECURITY</p>
+<h2>AI agent sandboxing: contain code, browsers and untrusted files</h2>
+<p>An agent that can execute code or operate a browser should not run with unrestricted access to the host, production network or developer secrets. Sandboxing is a blast-radius control: it assumes code or browser behavior may be wrong and limits what the failure can reach.</p>
+<div class="guide-criteria">
+  <article><span>01</span><h3>Ephemeral execution</h3><p>Create disposable environments for tasks and reset them instead of accumulating state indefinitely.</p></article>
+  <article><span>02</span><h3>Restricted filesystem</h3><p>Mount only required files and keep host credentials outside the execution environment.</p></article>
+  <article><span>03</span><h3>Network egress policy</h3><p>Allow only destinations required for the task where practical.</p></article>
+  <article><span>04</span><h3>Resource quotas</h3><p>Bound CPU, memory, runtime, disk and request volume to contain runaway behavior and cost.</p></article>
+  <article><span>05</span><h3>Separate credentials</h3><p>Use task-scoped, short-lived credentials rather than inheriting the operator's environment.</p></article>
+  <article><span>06</span><h3>Artifact review</h3><p>Inspect diffs, generated files and external side effects before promoting output into production.</p></article>
+</div>
+</section>
+
+<section id="memory-context">
+<p class="eyebrow">MEMORY SECURITY</p>
+<h2>Memory poisoning and context integrity in long-running agents</h2>
+<p>Persistent memory changes the attack window. Incorrect or malicious content can become durable context that influences later tasks. Memory can also create cross-user or cross-tenant exposure if isolation is weak.</p>
+<p>Protect memory like a data store with varying trust levels. Track what wrote each item, which task it came from, whether it contains user-supplied or external content, how long it should live and whether it may influence high-impact decisions.</p>
+<div class="security-checklist">
+  <div><span>PROVENANCE</span><strong>Record the source of durable memory.</strong><p>Future reasoning should distinguish user-approved facts from retrieved or inferred content.</p></div>
+  <div><span>WRITE POLICY</span><strong>Not every observation deserves persistence.</strong><p>Validate or require approval before storing sensitive instructions or identity-related state.</p></div>
+  <div><span>ISOLATION</span><strong>Keep users and tenants separated.</strong><p>Convenience caches should never become a cross-context contamination channel.</p></div>
+  <div><span>EXPIRY</span><strong>Delete stale assumptions.</strong><p>Use lifecycle policy so outdated or compromised state does not become permanent authority.</p></div>
+</div>
+</section>
+
+<section id="supply-chain">
+<p class="eyebrow">SUPPLY CHAIN</p>
+<h2>Secure the agentic supply chain: models, tools, skills, packages and MCP servers</h2>
+<p>Agents depend on a broader supply chain than most applications. One task may involve a model, orchestration framework, skill package, browser environment, MCP server, code dependency, SaaS API and retrieved content. Any of these components can change what the agent sees or what actions are available.</p>
+<p>Maintain an inventory of components with executable or instructional influence. Review changes to tool descriptions, prompts and skills the same way you review code changes. For critical agents, approve dependencies, verify provenance and stage updates before production.</p>
+<div class="guide-callout"><strong>Tool metadata matters</strong><p>Microsoft notes that tool descriptions themselves enter the model's working context. Changes to tool metadata should therefore be treated as security-sensitive changes, not mere documentation edits.</p></div>
+</section>
+
+<section id="multi-agent">
+<p class="eyebrow">MULTI-AGENT SYSTEMS</p>
+<h2>Multi-agent security: do not turn delegation into implicit trust</h2>
+<p>When one agent delegates to another, the receiving agent should not automatically inherit the sender's trust level, permissions or assumptions. Treat each agent-to-agent exchange as a new security boundary.</p>
+<div class="security-principles">
+  <article><span>01</span><h3>Authenticate agents</h3><p>Know which agent produced a message or requested a capability.</p></article>
+  <article><span>02</span><h3>Authorize each hop</h3><p>Delegation should not silently create broader effective permissions.</p></article>
+  <article><span>03</span><h3>Propagate provenance</h3><p>Carry trust labels and source information with shared context and artifacts.</p></article>
+  <article><span>04</span><h3>Bound recursion</h3><p>Limit delegation depth, retries, execution time and cost.</p></article>
+  <article><span>05</span><h3>Verify critical results</h3><p>Use independent checks before one agent's output triggers a high-impact action elsewhere.</p></article>
+  <article><span>06</span><h3>Contain cascading failures</h3><p>Use circuit breakers and transaction boundaries so one error cannot fan out indefinitely.</p></article>
+</div>
+<div class="guide-inline-cta"><div><span>MULTI-AGENT CONTEXT</span><strong>See how super agents coordinate tools and sub-agents.</strong><p>The architecture guide covers orchestration, memory and control topologies.</p></div><a href="/guides/ai-super-agents/">Open Super Agents guide ↗</a></div>
+</section>
+
+<section id="human-approval">
+<p class="eyebrow">HUMAN IN THE LOOP</p>
+<h2>When AI agents should require human approval</h2>
+<p>Approval is most valuable when it sits at a real commitment boundary. Asking a human to approve every low-risk read creates fatigue; skipping approval before a payment or production change creates unacceptable blast radius.</p>
+<div class="guide-pricing-list">
+  <div><strong>Money</strong><p>Purchases, transfers, paid commitments and changes that materially increase spend.</p><span>Require approval</span></div>
+  <div><strong>External communication</strong><p>Sending email, publishing, submitting forms or speaking on behalf of a user or organization.</p><span>Require approval</span></div>
+  <div><strong>Destructive changes</strong><p>Deleting records, revoking access, overwriting data or making difficult-to-reverse modifications.</p><span>Require approval</span></div>
+  <div><strong>Production systems</strong><p>Deployments, infrastructure changes, secret rotation and privileged administration.</p><span>Require approval</span></div>
+  <div><strong>Sensitive disclosure</strong><p>Sharing private information externally or moving data across trust boundaries.</p><span>Require approval</span></div>
+</div>
+<p>A good approval screen should show the exact target, action, relevant parameters and meaningful consequences. A vague “Allow agent to continue?” prompt is not enough context for a high-impact decision.</p>
+</section>
+
+<section id="logging-monitoring">
+<p class="eyebrow">OBSERVABILITY</p>
+<h2>AI agent logging, monitoring and incident response</h2>
+<p>Logging only the final model response is not sufficient. A useful audit trail reconstructs the chain of authority and side effects: which identity acted, on whose behalf, under which role, with what effective scope, what tool was called, what resource changed and what the outcome was.</p>
+<div class="security-log-grid">
+  <article><span>LOG</span><h3>Identity & delegation</h3><p>Agent ID, delegating user or service, role and active entitlements.</p></article>
+  <article><span>LOG</span><h3>Context provenance</h3><p>Source labels for web, files, memory and retrieved records used by the workflow.</p></article>
+  <article><span>LOG</span><h3>Tool calls</h3><p>Tool name, arguments, authorization result, target resource, timestamps and correlation IDs.</p></article>
+  <article><span>LOG</span><h3>Side effects</h3><p>Writes, sends, deployments, purchases, access changes and externally visible actions.</p></article>
+  <article><span>MONITOR</span><h3>Behavior drift</h3><p>New endpoints, unusual parameters, abnormal call volume or unexpected action sequences.</p></article>
+  <article><span>RESPOND</span><h3>Revocation & rollback</h3><p>Disable agent identity, invalidate tokens, stop execution and restore known-good state quickly.</p></article>
+</div>
+</section>
+
+<section id="red-teaming">
+<p class="eyebrow">ASSURANCE</p>
+<h2>How to red-team an AI agent before production</h2>
+<p>Red teaming should exercise the <strong>whole agentic system</strong>, not only the model. The goal is to verify that security layers continue to work when context is untrusted, tools behave unexpectedly, permissions are stressed and workflows run for many steps.</p>
+<div class="agent-redteam-list">
+  <div><span>01</span><strong>Untrusted-content handling</strong><p>Confirm that external pages, files and messages cannot silently redefine system policy.</p></div>
+  <div><span>02</span><strong>Tool policy</strong><p>Verify that disallowed tools and unsafe action combinations remain blocked.</p></div>
+  <div><span>03</span><strong>Permission boundaries</strong><p>Confirm the agent cannot exceed the resource, data or operation scope assigned to its task.</p></div>
+  <div><span>04</span><strong>Data boundaries</strong><p>Verify that sensitive information remains inside approved destinations and trust zones.</p></div>
+  <div><span>05</span><strong>Memory controls</strong><p>Check that low-trust observations cannot become durable high-trust instructions without policy.</p></div>
+  <div><span>06</span><strong>Sandbox controls</strong><p>Validate filesystem, network, runtime and credential isolation around execution environments.</p></div>
+  <div><span>07</span><strong>Supply-chain change control</strong><p>Ensure changes to tools, servers, skills and metadata are visible and reviewed.</p></div>
+  <div><span>08</span><strong>Approval quality</strong><p>Confirm reviewers see the exact target and consequence of a high-impact action.</p></div>
+  <div><span>09</span><strong>Failure containment</strong><p>Verify one incorrect component cannot propagate indefinitely through a multi-agent workflow.</p></div>
+  <div><span>10</span><strong>Cost & loop limits</strong><p>Confirm budgets, retry caps and execution windows prevent runaway tasks.</p></div>
+</div>
+</section>
+
+<section id="production-checklist">
+<p class="eyebrow">DEPLOYMENT CHECKLIST</p>
+<h2>AI agent security checklist for production</h2>
+<div class="production-checklist">
+  <label><span>01</span><strong>Define the agent's purpose, owner and allowed outcomes.</strong></label>
+  <label><span>02</span><strong>Assign a dedicated identity instead of shared administrator credentials.</strong></label>
+  <label><span>03</span><strong>Design least-privilege roles around specific tasks and resources.</strong></label>
+  <label><span>04</span><strong>Keep secrets out of model-visible prompts and memory.</strong></label>
+  <label><span>05</span><strong>Inventory and approve tools, MCP servers, skills and integrations.</strong></label>
+  <label><span>06</span><strong>Treat web, email, documents, RAG and tool output as untrusted input.</strong></label>
+  <label><span>07</span><strong>Validate tool parameters and re-authorize at the downstream API.</strong></label>
+  <label><span>08</span><strong>Sandbox code, browser automation and untrusted files.</strong></label>
+  <label><span>09</span><strong>Restrict network egress and resource consumption where appropriate.</strong></label>
+  <label><span>10</span><strong>Protect persistent memory with provenance, isolation, expiry and write policy.</strong></label>
+  <label><span>11</span><strong>Require contextual human approval at consequential action boundaries.</strong></label>
+  <label><span>12</span><strong>Log identity, scope, tool calls, side effects and correlation IDs end to end.</strong></label>
+  <label><span>13</span><strong>Monitor unusual tools, endpoints, parameters, costs and action sequences.</strong></label>
+  <label><span>14</span><strong>Test revocation, shutdown and rollback before an incident occurs.</strong></label>
+  <label><span>15</span><strong>Red-team the complete system before expanding autonomy.</strong></label>
+</div>
+</section>
+
+<section>
+<p class="eyebrow">RISK BY WORKFLOW</p>
+<h2>AI agent security priorities by use case</h2>
+<div class="guide-decision-table">
+  <div><span>Browser / research agent</span><strong>Prompt injection + data boundaries</strong><p>External pages are untrusted. Limit sensitive apps, logged-in sites, downloads and consequential browser actions.</p></div>
+  <div><span>Coding agent</span><strong>Sandbox + repository scope</strong><p>Protect shell credentials, repository permissions, package installs, network access and deployment paths.</p></div>
+  <div><span>Business automation agent</span><strong>Identity + tool policy</strong><p>Scope connected apps and write actions; require approvals for customer, financial and permission changes.</p></div>
+  <div><span>Customer-support agent</span><strong>Data isolation + identity verification</strong><p>Protect account data and prevent the agent from granting access based only on conversational claims.</p></div>
+  <div><span>Multi-agent system</span><strong>Inter-agent authorization + containment</strong><p>Authenticate every agent, constrain delegation and independently verify high-impact outputs.</p></div>
+  <div><span>High-autonomy agent</span><strong>Runtime governance + revocation</strong><p>Use strict budgets, behavior monitoring, execution windows and a tested shutdown path.</p></div>
+</div>
+<div class="guide-inline-cta"><div><span>AGENT SELECTION</span><strong>Security is one layer of choosing an agent.</strong><p>Compare execution environments, autonomy, pricing and governance in the broader SXF agent guide.</p></div><a href="/guides/best-ai-agents/">Best AI Agents ↗</a></div>
+</section>
+
+<section class="guide-faq-section" id="faq">
+<p class="eyebrow">FAQ</p>
+<h2>Frequently asked questions about AI agent security</h2>
+<div class="model-faq">
+<details><summary>What is AI agent security?</summary><p>AI agent security protects systems in which a model can take actions, use tools and access data. It combines identity, authorization and isolation with agent-specific controls for untrusted context, tool use, memory and autonomy.</p></details>
+<details><summary>What is the biggest security risk for AI agents?</summary><p>The most dangerous pattern is usually a combination: untrusted input influences an agent that has enough authority to cause harm. Prompt injection becomes materially more dangerous when permissions and blast radius are broad.</p></details>
+<details><summary>Can prompt injection be completely prevented?</summary><p>No current control should be treated as complete prevention. Secure systems reduce the chance of manipulation and also limit what an influenced agent can access or do.</p></details>
+<details><summary>Is MCP secure?</summary><p>MCP can be deployed securely, but an MCP server or tool is not trustworthy merely because it uses MCP. Security depends on server provenance, authorization, scopes, credential handling, tool behavior and client policy.</p></details>
+<details><summary>Should an AI agent have its own identity?</summary><p>For production systems, a dedicated managed identity improves least privilege, attribution, revocation and auditability.</p></details>
+<details><summary>When should an AI agent require human approval?</summary><p>Approval is appropriate before difficult-to-reverse or externally consequential actions such as sending, publishing, purchasing, deleting, granting access, changing production systems or exposing sensitive data.</p></details>
+<details><summary>What should be sandboxed in an AI agent?</summary><p>Agents that execute generated code, shell commands, browser automation or untrusted files should use an isolated environment with restricted mounts, network policy, resource limits and separate credentials appropriate to the risk.</p></details>
+<details><summary>What is memory poisoning in AI agents?</summary><p>Memory poisoning occurs when incorrect or malicious content enters persistent memory or reusable context and influences later decisions. Controls include isolation, provenance, write validation, expiration and revocation.</p></details>
+<details><summary>How do you red-team an AI agent?</summary><p>Test the complete system rather than only the model: untrusted content handling, tool policy, permission boundaries, memory, sandboxing, supply-chain changes, approvals, failure containment and cost limits.</p></details>
+<details><summary>What is the difference between AI safety and AI security?</summary><p>AI safety is broader and includes reliability, alignment and harmful behavior. AI security focuses on adversarial and operational threats such as unauthorized access, prompt injection, compromised tools, data exposure, privilege abuse and unsafe execution.</p></details>
+</div>
+</section>
+
+<section class="guide-sources" id="sources">
+<p class="eyebrow">PRIMARY SOURCES</p>
+<h2>Official sources used for this AI agent security guide</h2>
+<p>SXF prioritizes standards bodies, protocol specifications and first-party security documentation. Vendor descriptions of their own safeguards are treated as descriptions of implemented controls, not independent proof that agent compromise is solved.</p>
+<div class="model-sources">
+  <a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" target="_blank" rel="noopener noreferrer"><span>OWASP · Top 10 for Agentic Applications 2026</span><b>↗</b></a>
+  <a href="https://genai.owasp.org/initiative_name/agentic-security/" target="_blank" rel="noopener noreferrer"><span>OWASP · Agentic AI Security Initiative</span><b>↗</b></a>
+  <a href="https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai" target="_blank" rel="noopener noreferrer"><span>NIST · Security Considerations for AI Agents (NIST 800-5)</span><b>↗</b></a>
+  <a href="https://www.nist.gov/news-events/news/2026/02/announcing-ai-agent-standards-initiative-interoperable-and-secure" target="_blank" rel="noopener noreferrer"><span>NIST · AI Agent Standards Initiative</span><b>↗</b></a>
+  <a href="https://www.microsoft.com/en-us/security/blog/2026/07/16/least-privilege-for-ai-agents-identity-access-and-tool-binding/" target="_blank" rel="noopener noreferrer"><span>Microsoft Security · Least privilege for AI agents</span><b>↗</b></a>
+  <a href="https://www.microsoft.com/en-us/security/blog/2026/05/14/defense-in-depth-autonomous-ai-agents/" target="_blank" rel="noopener noreferrer"><span>Microsoft Security · Defense in depth for autonomous AI agents</span><b>↗</b></a>
+  <a href="https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/" target="_blank" rel="noopener noreferrer"><span>Microsoft Security · When AI tools move from reading to acting</span><b>↗</b></a>
+  <a href="https://www.anthropic.com/news/prompt-injection-defenses" target="_blank" rel="noopener noreferrer"><span>Anthropic · Mitigating prompt injections in browser use</span><b>↗</b></a>
+  <a href="https://help.openai.com/en/articles/11752874-chatgpt-agent" target="_blank" rel="noopener noreferrer"><span>OpenAI · ChatGPT agent safety & privacy</span><b>↗</b></a>
+  <a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/" target="_blank" rel="noopener noreferrer"><span>Model Context Protocol · 2026-07-28 specification</span><b>↗</b></a>
+  <a href="https://docs.cloud.google.com/bigtable/docs/secure-agent-interactions-mcp" target="_blank" rel="noopener noreferrer"><span>Google Cloud · Secure agent interactions with MCP</span><b>↗</b></a>
+  <a href="https://docs.cloud.google.com/mcp/ai-security-safety" target="_blank" rel="noopener noreferrer"><span>Google Cloud · AI security and safety for MCP servers</span><b>↗</b></a>
+</div>
+</section>
+
+<section class="related-signals">
+<div class="intel-section-head"><div><p class="eyebrow">KEEP THE CONTEXT CONNECTED</p><h2>Continue through SXF.</h2></div><a href="/signals/">All signals ↗</a></div>
+<div class="guide-choice-grid">
+  <article><span>AI Security</span><p>Track security, sandboxing and cyber-defense signals as vendors and standards evolve.</p><div class="tool-links"><a href="/topics/ai-security/">Open topic ↗</a></div></article>
+  <article><span>AI Agents</span><p>Follow agentic systems, orchestration and multi-step workflows across the live signal layer.</p><div class="tool-links"><a href="/topics/ai-agents/">Open topic ↗</a></div></article>
+  <article><span>Best AI Agents</span><p>Compare leading agent products by execution environment, autonomy and governance.</p><div class="tool-links"><a href="/guides/best-ai-agents/">Open guide ↗</a></div></article>
+</div>
+</section>
+
+</div></div>
+</article></main>
+
+<footer class="footer shell">
+  <div class="footer-main">
+    <div class="footer-identity">
+      <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+      <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+      <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+      <div class="footer-nav-group"><p>EXPLORE</p><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+      <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+    </nav>
+  </div>
+  <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body></html>
