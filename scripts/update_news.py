@@ -331,6 +331,7 @@ GUIDES_DIR = ROOT / "guides"
 SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
+GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
 
 TOPICS = [
     {
@@ -1321,6 +1322,12 @@ def model_reference_html(name):
         f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
         for question, answer in ref["faq"]
     )
+    cross_compare = (
+        '<div class="model-related-links"><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Gemini 3.8 Flash</strong><b>↗</b></a>'
+        '<a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>'
+        '<a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools</strong><b>↗</b></a></div>'
+        if name == "GPT-6 Sol" else ""
+    )
     return f'''<section class="model-reference shell">
       <div class="model-reference-intro">{intro}{facts}</div>
       <div class="model-comparison">
@@ -1328,6 +1335,7 @@ def model_reference_html(name):
         <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
         <p class="reference-note">{escape(ref["pricing_note"])}</p>
       </div>
+      {cross_compare}
       <div class="model-reference-lower">
         <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{sources}</div>
         <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq}</div>
@@ -2242,8 +2250,8 @@ def gemini_38_flash_reference_html(items):
             <article><span>CHOOSE A LIVE MODEL</span><h3>Real-time voice agents</h3><p>Use Gemini 3.8 Live rather than standard 3.8 Flash when native low-latency audio-to-audio interaction is the primary requirement.</p></article>
           </div>
           <div class="model-related-links">
+            <a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Gemini 3.8 Flash</strong><b>↗</b></a>
             <a href="/topics/google-ai/"><span>GOOGLE INTELLIGENCE</span><strong>Google AI signals</strong><b>↗</b></a>
-            <a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools</strong><b>↗</b></a>
             <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
           </div>
         </section>
@@ -4854,6 +4862,219 @@ def gpt6_comparison_html(items):
     </main>{page_footer()}</body></html>'''
 
 
+
+def gpt6_sol_vs_gemini_38_flash_html(items):
+    canonical = f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    title = "GPT-6 Sol vs Gemini 3.8 Flash (2026): Pricing & API | SXF / AI"
+    description = "GPT-6 Sol vs Gemini 3.8 Flash: compare API pricing, 1M+ context, coding and agents, reasoning, multimodal inputs, tools, long-context costs and production fit."
+
+    def money(value):
+        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+
+    short_cards = "".join([
+        f'<div><span>GPT-6 Sol</span><strong>{money(2*.1 + 10*.01)}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+    ])
+    monthly_cards = "".join([
+        f'<div><span>GPT-6 Sol</span><strong>{money(2*10 + 10*1)}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+    ])
+    long_cards = "".join([
+        f'<div><span>GPT-6 Sol</span><strong>{money(4*.5 + 15*.05)}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.5 + 3.75*.05)}</strong><small>500K input + 50K output</small></div>'
+    ])
+    future_cards = "".join([
+        f'<div><span>100K input + 10K output</span><strong>{money(1.5*.1 + 7.5*.01)}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>10M input + 1M output</span><strong>{money(1.5*10 + 7.5*1)}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>500K input + 50K output</span><strong>{money(1.5*.5 + 7.5*.05)}</strong><small>Gemini from Jan 1, 2027</small></div>'
+    ])
+
+    rows = '''<tr>
+      <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>gpt-6-sol</small></th>
+      <td>OpenAI</td><td>Complex coding and agentic workflows</td><td>1,050,000</td><td>128,000</td>
+      <td>none · low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
+      <td>$2.00</td><td>$0.20</td><td>$10.00</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
+      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
+      <td>low · medium · high</td><td>Text + image + video + audio + PDF input · text output</td>
+      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+    </tr>'''
+
+    faq_items = [
+        ("Which is cheaper, GPT-6 Sol or Gemini 3.8 Flash?", "At current Standard paid API rates through December 31, 2026, Gemini 3.8 Flash has lower headline text-token pricing: $0.75 input and $3.75 output per million tokens versus $2 and $10 for GPT-6 Sol. Google states that Gemini 3.8 Flash Standard pricing rises to $1.50 input and $7.50 output on January 1, 2027."),
+        ("Which has the larger context window?", "The nominal context windows are effectively the same size: GPT-6 Sol lists 1,050,000 tokens and Gemini 3.8 Flash lists 1,048,576 input tokens. GPT-6 Sol has the larger maximum output at 128,000 tokens versus 65,536 for Gemini 3.8 Flash."),
+        ("Which model supports more input modalities?", "Gemini 3.8 Flash supports text, image, video, audio and PDF input. GPT-6 Sol supports text and image input on its model card. Both produce text output."),
+        ("How do reasoning controls differ?", "GPT-6 Sol supports reasoning effort levels none, low, medium, high, xhigh and max, with medium as the default. Gemini 3.8 Flash supports low, medium and high thinking levels, also defaulting to medium."),
+        ("Which is better for coding?", "Both vendors explicitly position the models for software engineering. OpenAI describes GPT-6 Sol as built for complex coding and agentic workflows, while Google describes Gemini 3.8 Flash as engineered for long-horizon software engineering and complex multi-file refactoring. A defensible choice requires repository-specific evaluations rather than a universal coding winner."),
+        ("Which is better for AI agents?", "Both models expose serious agent tool stacks. GPT-6 Sol is designed around OpenAI's Responses API. Gemini 3.8 Flash supports function calling, code execution, file search, Search grounding, Maps grounding, URL context and computer use in preview. The better fit depends on the surrounding platform, tools, permissions and cost target."),
+        ("How does long-context pricing differ?", "OpenAI states that GPT-6 Sol prompts above 272K input tokens use 2x input and cache rates and 1.5x output rates for the full request. Google's current Gemini 3.8 Flash pricing page lists its token rates and caching charges without an equivalent 272K long-context multiplier."),
+        ("Does Gemini 3.8 Flash pricing change in 2027?", "Yes. Google's introductory Standard paid pricing of $0.75 input and $3.75 output per million tokens runs through December 31, 2026. Starting January 1, 2027, Google lists $1.50 input and $7.50 output."),
+        ("Does either model support real-time voice?", "The standard Gemini 3.8 Flash model does not support the Live API; Google provides separate Gemini 3.8 Live models. GPT-6 Sol's model page lists text and image as supported model modalities and does not list audio or video as model inputs."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
+
+    sources = [
+        ("OpenAI · GPT-6 Sol model card", "https://developers.openai.com/api/docs/models/gpt-6-sol"),
+        ("OpenAI · GPT-6 model guidance", "https://developers.openai.com/api/docs/guides/latest-model"),
+        ("OpenAI · API pricing", "https://developers.openai.com/api/docs/pricing"),
+        ("OpenAI · API changelog", "https://developers.openai.com/api/docs/changelog"),
+        ("Google AI · Gemini 3.8 Flash model page", "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash/"),
+        ("Google AI · What’s new in Gemini 3.8 Flash", "https://ai.google.dev/gemini-api/docs/latest-model"),
+        ("Google AI · Gemini API pricing", "https://ai.google.dev/gemini-api/docs/pricing"),
+        ("Google AI · Models overview", "https://ai.google.dev/gemini-api/docs/models"),
+    ]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label,url in sources
+    )
+
+    relevant = [item for item in items if "GPT-6 Sol" in extract_models(item["title"]) or item["source"] == "Google AI"][:8]
+    signal_rows = "".join(signal_row(item) for item in relevant)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"WebPage","@id":canonical+"#webpage","url":canonical,
+                "name":"GPT-6 Sol vs Gemini 3.8 Flash: Pricing, Coding, Agents and API",
+                "description":description,"dateModified":verified,
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":[{"@type":"Thing","name":"GPT-6 Sol"},{"@type":"Thing","name":"Gemini 3.8 Flash"}],
+                "citation":[url for _label,url in sources],"inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":3,"name":"GPT-6 Sol vs Gemini 3.8 Flash","item":canonical}
+            ]},
+            {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
+    <body class="intel-page comparison-page">{page_header("models")}<main>
+      <section class="comparison-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Sol vs Gemini 3.8 Flash</span></nav>
+        <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
+        <h1>GPT-6 Sol<br><span>vs Gemini 3.8 Flash.</span></h1>
+        <p>A source-first comparison for developers choosing between OpenAI and Google for coding, agents and production AI. Specs, token economics, long context, multimodal inputs and tool ecosystems are separated from vendor performance claims.</p>
+        <div class="hero-actions"><a class="primary-cta" href="#quick-answer">Quick answer <span>↓</span></a><a class="secondary-cta" href="/models/gemini-3-8-flash/">Gemini reference</a></div>
+      </section>
+
+      <section id="quick-answer" class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">QUICK ANSWER</p><h2>The decision is mostly about economics, output size, modalities and platform fit.</h2>
+        <p>Gemini 3.8 Flash currently has substantially lower headline token prices and accepts a broader set of input modalities. GPT-6 Sol offers roughly the same context capacity but about twice the maximum output, more granular reasoning controls and OpenAI’s Responses API ecosystem. Both vendors explicitly position these models for serious coding and agentic workflows.</p></div>
+        <div class="model-decision-grid">
+          <article><span>GEMINI 3.8 FLASH</span><h3>Cost-sensitive multimodal agents</h3><p>Current introductory Standard pricing is $0.75 input / $3.75 output per million tokens, with text, image, video, audio and PDF input plus Google-native grounding and tools.</p><a href="/models/gemini-3-8-flash/">Open model reference ↗</a></article>
+          <article><span>GPT-6 SOL</span><h3>OpenAI agent workflows</h3><p>Standard short-context pricing is $2 input / $10 output, with 128K maximum output, six reasoning-effort levels and tight integration with the Responses API tool stack.</p><a href="/models/gpt-6-sol/">Open model reference ↗</a></article>
+          <article><span>DO NOT CHOOSE BY BRAND</span><h3>Run task-level evals</h3><p>For coding and agents, total cost is shaped by reasoning tokens, tool calls, retries, context reuse and whether the model completes the workflow—not only price per million tokens.</p></article>
+        </div>
+      </section>
+
+      <section id="specs" class="comparison-table-section shell">
+        <div class="intel-section-head"><div><p class="eyebrow">OFFICIAL SPECIFICATIONS</p><h2>Side-by-side facts.</h2></div><span>* Gemini introductory rates through Dec 31, 2026</span></div>
+        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Provider</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Reasoning</th><th>Modalities</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="reference-note">GPT-6 Sol rates shown are Standard short-context rates. OpenAI applies higher rates above 272K input tokens. Gemini rates marked * are Google's introductory Standard paid prices through December 31, 2026.</p>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Gemini 3.8 Flash is cheaper on headline token rates—especially in 2026.</h2><p>Token price is not task price, but the gap is large enough to matter for routing and high-volume workloads.</p></div>
+        <div class="cost-section"><h3>100K input + 10K output</h3><div class="cost-grid">{short_cards}</div><h3>10M input + 1M output</h3><div class="cost-grid">{monthly_cards}</div><h3>500K input + 50K output</h3><div class="cost-grid">{long_cards}</div></div>
+        <div class="model-caveat"><strong>Why the 500K example changes</strong><p>GPT-6 Sol crosses OpenAI’s 272K long-context threshold, so the full request uses $4 input and $15 output per million tokens. Google’s current 3.8 Flash pricing documentation does not list an equivalent 272K multiplier.</p></div>
+        <div class="model-caveat"><strong>Gemini pricing after 2026</strong><p>Google’s introductory rates expire December 31, 2026. Standard pricing doubles to $1.50 input and $7.50 output per million tokens on January 1, 2027.</p></div>
+        <div class="cost-section"><h3>Gemini 3.8 Flash at 2027 Standard rates</h3><div class="cost-grid">{future_cards}</div></div>
+      </section>
+
+      <section class="model-deep-section model-split shell">
+        <div><p class="eyebrow">CONTEXT & OUTPUT</p><h2>The context windows are practically the same size; the output ceilings are not.</h2>
+        <p>GPT-6 Sol lists a <strong>1,050,000-token context window</strong>. Gemini 3.8 Flash lists <strong>1,048,576 input tokens</strong>. The difference is about 0.14% and is unlikely to determine a real architecture by itself.</p>
+        <p>The more meaningful specification difference is maximum output: GPT-6 Sol supports up to <strong>128,000 output tokens</strong>, while Gemini 3.8 Flash lists <strong>65,536</strong>. Very few ordinary requests need either limit, but the larger ceiling can matter for code generation, long document creation and extended outputs.</p>
+        <p>Context capacity should not be treated as a target. Retrieval, caching, context selection and tool access usually matter more than filling a million-token window on every call.</p></div>
+        <aside class="model-side-note"><span>LONG-CONTEXT RULE</span><strong>Compare economics before capacity.</strong><p>The nominal context sizes are nearly identical. The operational difference is that OpenAI changes Sol’s rates above 272K input, while Google’s current 3.8 Flash pricing page does not list the same threshold.</p></aside>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">CODING</p><h2>Both target real software engineering, but the surrounding workflow differs.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>GPT-6 SOL</span><h3>Complex coding + agents</h3><p>OpenAI explicitly describes Sol as built for complex coding and agentic workflows. GPT-6 guidance also adds async tool calling and mid-turn steering for long-running applications.</p></article>
+          <article><span>GEMINI 3.8 FLASH</span><h3>Long-horizon engineering</h3><p>Google explicitly targets real-world software engineering, complex multi-file refactoring and deterministic tool execution while retaining Flash-level cost positioning.</p></article>
+          <article><span>EVALUATION</span><h3>Repository fit matters more than a generic score</h3><p>Use the same repository, tests, tool permissions and acceptance criteria. Measure accepted patches, retries, token use, latency and human correction rather than selecting from one benchmark.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">AGENTS & TOOLS</p><h2>Both are serious agent models with different platform advantages.</h2></div>
+        <div class="model-api-grid">
+          <div><span>GPT-6 SOL · RESPONSES API</span><strong>OpenAI-native agent stack</strong><p>Use the Responses API for built-in tools and function calling. OpenAI’s current model ecosystem includes web search, file search, computer use and other hosted tools.</p></div>
+          <div><span>GPT-6 SOL · ASYNC TOOLS</span><strong>Continue while tools run</strong><p>GPT-6 guidance supports asynchronous tool calling so the model can continue independent reasoning while application tools execute.</p></div>
+          <div><span>GPT-6 SOL · MID-TURN STEERING</span><strong>Update instructions during work</strong><p>Applications can send new user instructions while GPT-6 is working, useful for correcting or redirecting long agent tasks.</p></div>
+          <div><span>GEMINI · GROUNDING</span><strong>Search + Google Maps</strong><p>Gemini 3.8 Flash supports Google Search grounding and Google Maps grounding for workflows that depend on current web or location evidence.</p></div>
+          <div><span>GEMINI · EXECUTION</span><strong>Code execution + computer use</strong><p>Google lists code execution as supported and computer use as preview, alongside function calling, file search and URL context.</p></div>
+          <div><span>GEMINI · MANAGED AGENTS</span><strong>Default Antigravity model</strong><p>Google’s latest-model guide says Gemini 3.8 Flash is the default for its managed Antigravity agent and SDK.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split shell">
+        <div><p class="eyebrow">REASONING CONTROLS</p><h2>Sol exposes a wider reasoning range; Gemini keeps the control simpler.</h2>
+        <p>GPT-6 Sol supports <strong>none, low, medium, high, xhigh and max</strong> reasoning effort, with medium as the default. That range makes it possible to use one model across low-reasoning and deep-reasoning routes while keeping the same model ID.</p>
+        <p>Gemini 3.8 Flash supports <strong>low, medium and high</strong> thinking levels, also defaulting to medium. Google notes that the model may deliberately use more thinking tokens on difficult long-running work, making smaller reasoning steps and checking results along the way.</p>
+        <p>In both ecosystems, the right setting is the lowest level that reliably clears the task’s quality bar. Reasoning controls directly affect latency and output-token cost.</p></div>
+        <aside class="model-side-note"><span>EVAL STRATEGY</span><strong>Compare medium first.</strong><p>Both default to medium, making it a sensible baseline. Then test lower and higher reasoning settings on the same workload rather than comparing unlike configurations.</p></aside>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">MULTIMODAL</p><h2>Gemini 3.8 Flash accepts more input types.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>GPT-6 SOL</span><h3>Text + image input</h3><p>OpenAI’s model card lists text input/output and image input. It does not list audio or video as supported model modalities for Sol.</p></article>
+          <article><span>GEMINI 3.8 FLASH</span><h3>Text + image + video + audio + PDF</h3><p>Google lists all five input types on one stable model endpoint, which can simplify workflows that reason across media and documents.</p></article>
+          <article><span>VOICE</span><h3>Use dedicated live models</h3><p>Standard Gemini 3.8 Flash does not support the Live API. Google provides separate Gemini 3.8 Live models for low-latency voice experiences.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">API & DEPLOYMENT</p><h2>The platform around the model may decide the choice.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>OPENAI</span><h3>Responses API ecosystem</h3><p>Sol fits naturally when your application already uses OpenAI Responses, hosted tools, OpenAI SDKs, model routing or other GPT-6 family models.</p></article>
+          <article><span>GOOGLE</span><h3>Gemini API + Google Cloud</h3><p>3.8 Flash fits naturally when applications need Google Search/Maps grounding, AI Studio development, Vertex AI deployment or Antigravity managed-agent workflows.</p></article>
+          <article><span>DATA RESIDENCY</span><h3>Check the processing tier</h3><p>OpenAI notes that EU data residency for GPT-6 Sol is available only with Standard processing. Google Cloud and Gemini API data-governance choices depend on the selected product and account terms.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">WHEN TO CHOOSE</p><h2>Route by workload instead of declaring one universal winner.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>GEMINI FIT</span><h3>High-volume agent workloads</h3><p>Its current lower token price is attractive when tasks require real reasoning and tools but traffic volume makes higher token economics difficult.</p></article>
+          <article><span>GEMINI FIT</span><h3>Rich multimodal input</h3><p>Choose it when the same workflow must reason over video, audio, PDFs and images without splitting input processing across separate base models.</p></article>
+          <article><span>GPT-6 SOL FIT</span><h3>OpenAI-native agent architecture</h3><p>Choose Sol when your system depends on Responses API patterns, GPT-6 reasoning controls, mid-turn steering or other OpenAI-native tooling.</p></article>
+          <article><span>GPT-6 SOL FIT</span><h3>Large generated outputs</h3><p>The 128K max-output ceiling can matter for very large code or document-generation tasks where Gemini’s 65,536-token output limit is constraining.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What can make a headline comparison misleading.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Gemini’s 2026 price is promotional.</strong><p>The current gap narrows on January 1, 2027 when Google doubles 3.8 Flash Standard token rates.</p></div>
+          <div><span>02</span><strong>Sol’s long-context rates change after 272K.</strong><p>Cost comparisons using short prompts cannot be extrapolated to 500K–1M-token requests without applying OpenAI’s long-context multiplier.</p></div>
+          <div><span>03</span><strong>Tool costs are not included in token examples.</strong><p>Search, maps, computer use, regional processing and other platform services can change total cost materially.</p></div>
+          <div><span>04</span><strong>Vendor benchmark harnesses differ.</strong><p>Do not compare isolated scores unless the task definition, tools, reasoning settings, scaffolding and evaluation method are aligned.</p></div>
+          <div><span>05</span><strong>Agent security is outside the base model.</strong><p>Regardless of model, tool permissions, sandboxing, approvals, secrets handling and auditability must be enforced by the application.</p></div>
+          <div><span>06</span><strong>Product and API experiences are not identical.</strong><p>A comparison of model APIs does not automatically describe ChatGPT, Gemini app, Workspace, AI Studio or other packaged product behavior.</p></div>
+        </div>
+        <div class="model-related-links">
+          <a href="/models/gpt-6-sol/"><span>OPENAI REFERENCE</span><strong>GPT-6 Sol</strong><b>↗</b></a>
+          <a href="/models/gemini-3-8-flash/"><span>GOOGLE REFERENCE</span><strong>Gemini 3.8 Flash</strong><b>↗</b></a>
+          <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <div class="model-reference-lower shell"><div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div><div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div></div>
+
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>OpenAI and Google AI changes.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>
+    </main>{page_footer()}</body></html>'''
+
 def gpt6_sol_vs_claude_opus_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
@@ -5108,6 +5329,10 @@ def build_discovery_pages(items, current_items):
     duel_path.mkdir(parents=True, exist_ok=True)
     (duel_path / "index.html").write_text(gpt6_sol_vs_claude_opus_html(items), encoding="utf-8")
 
+    sol_gemini_path = COMPARE_DIR / GPT6_SOL_GEMINI_COMPARE_SLUG
+    sol_gemini_path.mkdir(parents=True, exist_ok=True)
+    (sol_gemini_path / "index.html").write_text(gpt6_sol_vs_gemini_38_flash_html(items), encoding="utf-8")
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -5169,6 +5394,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
     ]
 
     for item in items:
