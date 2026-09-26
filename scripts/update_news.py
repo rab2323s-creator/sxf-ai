@@ -861,7 +861,7 @@ MODEL_REFERENCE = {
 }
 
 def model_reference(name):
-    if name == "GPT-5.6" or name.startswith("GPT-5.6 "):
+    if name == "GPT-5.6":
         return MODEL_REFERENCE["GPT-5.6"]
     if name == "GPT-6" or name.startswith("GPT-6 "):
         return MODEL_REFERENCE["GPT-6"]
