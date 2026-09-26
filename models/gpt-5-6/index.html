@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>GPT-5.6 — Releases &amp; Signals | SXF / AI</title>
-      <meta name="description" content="Track GPT-5.6 releases, capability changes and related primary-source signals on SXF / AI." />
+      <title>GPT-5.6 — Models, Pricing, Context Window &amp; API | SXF / AI</title>
+      <meta name="description" content="GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="GPT-5.6 — Releases &amp; Signals | SXF / AI" />
-      <meta property="og:description" content="Track GPT-5.6 releases, capability changes and related primary-source signals on SXF / AI." />
+      <meta property="og:title" content="GPT-5.6 — Models, Pricing, Context Window &amp; API | SXF / AI" />
+      <meta property="og:description" content="GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates." />
       <meta property="og:url" content="https://sxf.si/models/gpt-5-6/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,9 +23,9 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="GPT-5.6 — Releases &amp; Signals | SXF / AI" />
-      <meta name="twitter:description" content="Track GPT-5.6 releases, capability changes and related primary-source signals on SXF / AI." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"GPT-5.6 reference and updates | SXF / AI","url":"https://sxf.si/models/gpt-5-6/","description":"Track GPT-5.6 releases, capability changes and related primary-source signals on SXF / AI.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"GPT-5.6"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"GPT-5.6","item":"https://sxf.si/models/gpt-5-6/"}]}]}</script>
+      <meta name="twitter:title" content="GPT-5.6 — Models, Pricing, Context Window &amp; API | SXF / AI" />
+      <meta name="twitter:description" content="GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"GPT-5.6 reference and updates | SXF / AI","url":"https://sxf.si/models/gpt-5-6/","description":"GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"GPT-5.6"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"GPT-5.6","item":"https://sxf.si/models/gpt-5-6/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is GPT-5.6?","acceptedAnswer":{"@type":"Answer","text":"GPT-5.6 is an OpenAI model family introduced in 2026. It includes Sol for flagship capability, Terra for a balance of intelligence and cost, and Luna for efficient high-volume workloads."}},{"@type":"Question","name":"What does the gpt-5.6 API alias use?","acceptedAnswer":{"@type":"Answer","text":"OpenAI states that the gpt-5.6 alias routes requests to GPT-5.6 Sol."}},{"@type":"Question","name":"What is the GPT-5.6 context window?","acceptedAnswer":{"@type":"Answer","text":"GPT-5.6 Sol, Terra and Luna each list a 1,050,000-token context window and up to 128,000 output tokens."}},{"@type":"Question","name":"How much does GPT-5.6 cost?","acceptedAnswer":{"@type":"Answer","text":"Current Standard API pricing is $4 input / $20 output per 1M tokens for Sol, $2 / $12 for Terra, and $0.20 / $1.20 for Luna. Cached-input rates are lower, and long prompts above 272K input tokens use higher rates."}},{"@type":"Question","name":"Which GPT-5.6 model should I use?","acceptedAnswer":{"@type":"Answer","text":"Use Sol when quality and complex reasoning matter most, Terra when you want a stronger cost-performance balance, and Luna when throughput and cost are primary constraints."}},{"@type":"Question","name":"Does GPT-5.6 support reasoning effort?","acceptedAnswer":{"@type":"Answer","text":"Yes. OpenAI documents none, low, medium, high, xhigh and max reasoning effort for the GPT-5.6 family, with medium as the default."}},{"@type":"Question","name":"Does GPT-5.6 support tools and agents?","acceptedAnswer":{"@type":"Answer","text":"Yes. OpenAI documents tool use through the Responses API, including web search, file search, code interpreter, hosted shell, computer use, MCP and beta multi-agent orchestration."}},{"@type":"Question","name":"Is GPT-5.6 still relevant after GPT-6?","acceptedAnswer":{"@type":"Answer","text":"Yes. GPT-6 is the newer generation, but GPT-5.6 remains an available production family across OpenAI products and the API, with lower-cost Terra and Luna tiers that can be useful for cost-sensitive workloads."}}]},{"@type":"ItemList","name":"GPT-5.6 model family","numberOfItems":3,"itemListElement":[{"@type":"ListItem","position":1,"name":"GPT-5.6 Sol"},{"@type":"ListItem","position":2,"name":"GPT-5.6 Terra"},{"@type":"ListItem","position":3,"name":"GPT-5.6 Luna"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -35,9 +35,176 @@
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-5.6</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>GPT-5.6<br><span>release signals.</span></h1><p>Track GPT-5.6 releases, capability changes and related primary-source signals on SXF / AI.</p>
+      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>GPT-5.6<br><span>model family reference.</span></h1><p>GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates.</p>
       <div class="collection-stats"><div><strong>3</strong><span>tracked signals</span></div><div><strong>1</strong><span>primary sources</span></div><div><strong>September 21, 2026</strong><span>latest tracked</span></div></div></section>
-      
+      <section class="model-reference model-reference-deep shell">
+      <div class="model-reference-intro">
+        <div class="model-reference-copy">
+          <p class="eyebrow">MODEL REFERENCE</p>
+          <h2>GPT-5.6 at a glance.</h2>
+          <p>GPT-5.6 is OpenAI’s 2026 model family for production reasoning, coding, knowledge work and agentic workflows. The family has three durable tiers: Sol for flagship capability, Terra for a balance of intelligence and cost, and Luna for efficient high-volume work.</p>
+          <p>The unsuffixed API alias <code>gpt-5.6</code> routes to <strong>GPT-5.6 Sol</strong>. That distinction matters: “GPT-5.6” can refer to the family in product discussions, while the API alias resolves to the Sol tier.</p>
+          <p class="reference-note">Introduced July 9, 2026 · Text and image input · text output · Last verified 2026-09-26</p>
+        </div>
+        <div class="model-fact-grid">
+          <div><span>FAMILY</span><strong>Sol · Terra · Luna</strong></div>
+          <div><span>API ALIAS</span><strong>gpt-5.6 → Sol</strong></div>
+          <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens across family</small></div>
+          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens across family</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>Feb 16, 2026</strong></div>
+          <div><span>DEFAULT REASONING</span><strong>Medium</strong><small>none → max supported</small></div>
+        </div>
+      </div>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">FAMILY MAP</p><h2>Three GPT-5.6 tiers, three cost profiles.</h2><p>The models share the same large context and output limits, but target different quality, latency and cost envelopes.</p></div>
+        <div class="model-family-grid"><article class="model-family-card">
+          <span>Flagship capability</span>
+          <h3>GPT-5.6 Sol</h3>
+          <p>Complex professional work, coding, research, computer use and demanding agentic workflows.</p>
+          <div class="model-family-spec"><b>gpt-5.6-sol</b><small>1,050,000 context · 128,000 max output</small></div>
+          <div class="model-family-price"><strong>$4.00</strong><small>input</small><strong>$20.00</strong><small>output / 1M</small></div>
+          <a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer">Official model page ↗</a>
+        </article><article class="model-family-card">
+          <span>Intelligence / cost balance</span>
+          <h3>GPT-5.6 Terra</h3>
+          <p>Everyday production workloads that need strong reasoning at a lower unit cost than Sol.</p>
+          <div class="model-family-spec"><b>gpt-5.6-terra</b><small>1,050,000 context · 128,000 max output</small></div>
+          <div class="model-family-price"><strong>$2.00</strong><small>input</small><strong>$12.00</strong><small>output / 1M</small></div>
+          <a href="https://developers.openai.com/api/docs/models/gpt-5.6-terra" target="_blank" rel="noopener noreferrer">Official model page ↗</a>
+        </article><article class="model-family-card">
+          <span>Efficiency / volume</span>
+          <h3>GPT-5.6 Luna</h3>
+          <p>Cost-sensitive, high-volume and latency-conscious workloads.</p>
+          <div class="model-family-spec"><b>gpt-5.6-luna</b><small>1,050,000 context · 128,000 max output</small></div>
+          <div class="model-family-price"><strong>$0.20</strong><small>input</small><strong>$1.20</strong><small>output / 1M</small></div>
+          <a href="https://developers.openai.com/api/docs/models/gpt-5.6-luna" target="_blank" rel="noopener noreferrer">Official model page ↗</a>
+        </article></div>
+        <p class="reference-note">Current Standard API pricing per 1M text tokens. Prompts above 272K input tokens use higher long-context rates. GPT-5.6 Sol is currently on promotional pricing listed by OpenAI through at least November 21, 2026.</p>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">WHAT GPT-5.6 IS</p>
+          <h2>A production reasoning family, not one single model.</h2>
+          <p>OpenAI introduced GPT-5.6 as a family designed to improve performance per dollar across complex work. Sol is the flagship tier and roughly takes the place of the unsuffixed flagship position from earlier GPT-5 families. Terra is the balanced tier, while Luna is optimized for cost-sensitive throughput.</p>
+          <p>For developers, that means model selection can happen inside one generation without changing the overall API architecture. You can reserve Sol for the tasks where additional reasoning materially changes the result, move repeatable production work to Terra, and use Luna where volume and unit economics dominate.</p>
+          <p>GPT-5.6 is no longer OpenAI’s newest generation—GPT-6 now occupies that position—but GPT-5.6 remains a current production family with documented API support and distinct lower-cost tiers.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>MODEL SELECTION RULE</span>
+          <strong>Choose the cheapest tier that passes your real evaluation.</strong>
+          <p>Do not select Sol simply because it is the flagship. Benchmark representative tasks at the reasoning effort you actually plan to use, then compare quality, latency and total token cost.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">CAPABILITIES</p><h2>What GPT-5.6 is designed to do well.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>REASONING</span><h3>Adjustable reasoning effort</h3><p>GPT-5.6 supports none, low, medium, high, xhigh and max reasoning effort. OpenAI recommends medium as a balanced starting point, then measuring whether higher effort creates a real quality gain.</p></article>
+          <article><span>CODING</span><h3>Complex software work</h3><p>OpenAI positions GPT-5.6 for coding and production workflows, with stronger token efficiency and improved frontend design judgment compared with earlier models.</p></article>
+          <article><span>AGENTS</span><h3>Tool-oriented workflows</h3><p>The Responses API supports programmatic tool calling, persisted reasoning and agent workflows. Multi-agent orchestration is available in beta across GPT-5.6 models.</p></article>
+          <article><span>VISION</span><h3>Text + image input</h3><p>The family accepts image input and text input, with text output. Current model pages do not list native audio or video support for these models.</p></article>
+          <article><span>LONG CONTEXT</span><h3>1.05M-token context</h3><p>All three variants list a 1,050,000-token context window and up to 128,000 output tokens, enabling large repositories, document sets and long-running workflows.</p></article>
+          <article><span>EFFICIENCY</span><h3>Tiered price-performance</h3><p>Sol, Terra and Luna let the same application route different task classes to different cost envelopes instead of treating every request as a flagship-model request.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">API & TOOLS</p><h2>GPT-5.6 in the OpenAI API.</h2><p>For reasoning and tool-calling workflows, OpenAI recommends the Responses API rather than treating the model as a simple text-completion endpoint.</p></div>
+        <div class="model-api-grid">
+          <div><span>RESPONSES API</span><strong>Recommended for reasoning + tools</strong><p>Use the Responses API for multi-turn reasoning, function calling and agent workflows.</p></div>
+          <div><span>PROGRAMMATIC TOOL CALLING</span><strong>Model-written coordination logic</strong><p>GPT-5.6 can coordinate eligible tools and intermediate results in a hosted runtime.</p></div>
+          <div><span>MULTI-AGENT</span><strong>Beta across GPT-5.6</strong><p>A root model can delegate parallel work to subagents and synthesize the outputs in one workflow.</p></div>
+          <div><span>TOOLS</span><strong>Web, files, code, shell, computer use, MCP</strong><p>OpenAI’s current Sol model page lists web search, file search, code interpreter, hosted shell, computer use, MCP, tool search and more.</p></div>
+          <div><span>STRUCTURED OUTPUTS</span><strong>Supported</strong><p>Useful for production applications that need machine-readable model results rather than free-form prose.</p></div>
+          <div><span>FINE-TUNING</span><strong>Not currently supported</strong><p>OpenAI’s current GPT-5.6 Sol model page does not list fine-tuning support.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">REASONING MODES</p>
+          <h2>Standard effort, max effort and Pro mode.</h2>
+          <p><strong>Reasoning effort</strong> controls how much reasoning the model applies within a request. GPT-5.6 supports six levels from none through max, and defaults to medium. Lower settings generally favor latency and cost; higher settings are appropriate only when the workload shows a measurable quality benefit.</p>
+          <p><strong>Pro mode</strong> is separate from reasoning effort. Instead of switching to a separate GPT-5.6 Pro model slug, OpenAI documents <code>reasoning.mode: "pro"</code> on the selected GPT-5.6 model. Pro mode performs more model work and is intended for difficult, quality-first tasks that can tolerate higher latency and token usage.</p>
+          <p>GPT-5.6 also changed reasoning persistence: the family can reuse compatible reasoning across turns within the same GPT-5.6 family. That can matter in long, tool-heavy workflows where goals and assumptions remain stable across multiple calls.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>PRACTICAL START</span>
+          <strong>Start at medium, then evaluate one level lower and one higher.</strong>
+          <p>OpenAI’s migration guidance explicitly recommends testing the same reasoning level used on an earlier model and one level lower, because GPT-5.6 can often reach the target quality with fewer tokens.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>GPT-5.6 API pricing.</h2><p>Current Standard text-token rates per 1M tokens. Cached input is substantially cheaper, while very long prompts use higher rates.</p></div>
+        <div class="model-price-grid">
+          <article><span>GPT-5.6 SOL</span><strong>$4</strong><small>input / 1M</small><strong>$0.40</strong><small>cached input</small><strong>$20</strong><small>output / 1M</small></article>
+          <article><span>GPT-5.6 TERRA</span><strong>$2</strong><small>input / 1M</small><strong>$0.20</strong><small>cached input</small><strong>$12</strong><small>output / 1M</small></article>
+          <article><span>GPT-5.6 LUNA</span><strong>$0.20</strong><small>input / 1M</small><strong>$0.02</strong><small>cached input</small><strong>$1.20</strong><small>output / 1M</small></article>
+        </div>
+        <div class="model-caveat"><strong>Long-context pricing</strong><p>OpenAI’s current model pages state that prompts above 272K input tokens are priced at 2× the input rate and 1.5× the output rate for the full request. Cache writes are billed above ordinary uncached input, while cache reads receive a large discount.</p></div>
+        <div class="model-caveat"><strong>Sol promotional pricing</strong><p>OpenAI currently labels GPT-5.6 Sol’s $4 / $20 rates as promotional pricing available at least through November 21, 2026. Recheck the official model page before building a long-term cost model.</p></div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where GPT-5.6 is available.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>OPENAI API</span><h3>Sol, Terra and Luna</h3><p>All three GPT-5.6 tiers are available through the API, with model-specific rate limits and tool support.</p></article>
+          <article><span>CODEX</span><h3>GPT-5.6 across coding workflows</h3><p>OpenAI’s current help documentation lists Terra for Free and Go, with Sol, Terra and Luna available to higher plans in Codex.</p></article>
+          <article><span>CHATGPT WORK</span><h3>Tier choice on paid plans</h3><p>Current help documentation lists Sol, Terra and Luna in Work for Plus, Pro, Business and Enterprise users.</p></article>
+          <article><span>CHAT EXPERIENCE</span><h3>Sol and Luna remain product models</h3><p>OpenAI has continued to update Sol for paid ChatGPT use and Luna for the default Free/Go experience, while availability varies by plan and surface.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">WHICH MODEL?</p><h2>Choose GPT-5.6 by workload, not by name.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CHOOSE SOL</span><h3>Quality-first complex work</h3><p>Use Sol for difficult coding, professional analysis, computer use, research and agentic tasks where additional reasoning changes the outcome enough to justify the higher unit cost.</p></article>
+          <article><span>CHOOSE TERRA</span><h3>Balanced production workloads</h3><p>Use Terra when the application needs strong reasoning but does not consistently benefit from Sol’s extra capability. It is the natural tier to evaluate for everyday production routing.</p></article>
+          <article><span>CHOOSE LUNA</span><h3>High-volume efficiency</h3><p>Use Luna for classification, extraction, focused transformations and other repeatable workloads where throughput and price matter more than maximum reasoning depth.</p></article>
+          <article><span>USE GPT-6 INSTEAD</span><h3>When you need the newer frontier</h3><p>GPT-6 is OpenAI’s newer generation. For new high-capability systems, compare GPT-5.6 against GPT-6 rather than assuming the older family remains the best quality choice.</p><a href="/models/gpt-6/">Open GPT-6 reference ↗</a></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">MIGRATION</p>
+          <h2>Moving from GPT-5.5 or GPT-5.4.</h2>
+          <p>OpenAI recommends beginning with your current reasoning setting rather than automatically raising effort on GPT-5.6. Test the same setting and one level lower on representative workloads, then compare quality, latency and token use.</p>
+          <p>For applications that use tools or multi-step reasoning, migration is also a chance to move toward the Responses API and evaluate persisted reasoning, Programmatic Tool Calling and beta multi-agent orchestration. Do not change model, API architecture and agent permissions all at once unless you can isolate the effect of each change in evaluation.</p>
+          <p>Older GPT-5 and o3 snapshots are also on a published deprecation path, with OpenAI listing GPT-5.6 Sol, Terra and Luna as replacement directions for several older GPT-5 tiers.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>MIGRATION CHECK</span>
+          <strong>Evaluate on production-like tasks.</strong>
+          <p>Compare acceptance rate, token usage, latency, tool errors and human correction—not only a general benchmark score.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to keep in mind.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>GPT-6 is newer.</strong><p>GPT-5.6 remains useful, but “latest” and “highest capability” now refer to the GPT-6 generation for many workloads.</p></div>
+          <div><span>02</span><strong>Long context is not free context.</strong><p>A 1.05M-token window is a capacity limit, not a reason to send unnecessary data. Very long prompts cost more and can increase latency.</p></div>
+          <div><span>03</span><strong>Benchmarks are workload-specific.</strong><p>OpenAI’s launch evaluations are useful evidence, but production routing should still be based on your own task distribution and acceptance criteria.</p></div>
+          <div><span>04</span><strong>Tool access changes the risk model.</strong><p>Agents that can browse, execute code, use MCP or call business systems need permission, sandboxing and approval controls around the model.</p></div>
+          <div><span>05</span><strong>Pricing can change.</strong><p>Sol is explicitly on promotional pricing at the time of verification, so production cost models should reference the current official model page.</p></div>
+          <div><span>06</span><strong>Fine-tuning is not listed.</strong><p>The current Sol model page lists fine-tuning as unsupported; use prompting, tools, retrieval and model routing where appropriate instead of assuming a fine-tuned GPT-5.6 endpoint exists.</p></div>
+        </div>
+        <div class="model-related-links">
+          <a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools in 2026</strong><b>↗</b></a>
+          <a href="/guides/gpt-6-vs-claude/"><span>NEWER FRONTIER</span><strong>GPT-6 vs Claude</strong><b>↗</b></a>
+          <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <div class="model-reference-lower">
+        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p><a href="https://openai.com/index/gpt-5-6/" target="_blank" rel="noopener noreferrer"><span>OpenAI · GPT-5.6 launch</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6" target="_blank" rel="noopener noreferrer"><span>OpenAI API · GPT-5.6 model guidance</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer"><span>OpenAI API · GPT-5.6 Sol</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/models/gpt-5.6-terra" target="_blank" rel="noopener noreferrer"><span>OpenAI API · GPT-5.6 Terra</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/models/gpt-5.6-luna" target="_blank" rel="noopener noreferrer"><span>OpenAI API · GPT-5.6 Luna</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/guides/responses-multi-agent" target="_blank" rel="noopener noreferrer"><span>OpenAI API · Multi-agent</span><b>↗</b></a><a href="https://help.openai.com/en/articles/20001354-gpt-5-6" target="_blank" rel="noopener noreferrer"><span>OpenAI Help · GPT-5.6 availability</span><b>↗</b></a></div>
+        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p><details><summary>What is GPT-5.6?</summary><p>GPT-5.6 is an OpenAI model family introduced in 2026. It includes Sol for flagship capability, Terra for a balance of intelligence and cost, and Luna for efficient high-volume workloads.</p></details><details><summary>What does the gpt-5.6 API alias use?</summary><p>OpenAI states that the gpt-5.6 alias routes requests to GPT-5.6 Sol.</p></details><details><summary>What is the GPT-5.6 context window?</summary><p>GPT-5.6 Sol, Terra and Luna each list a 1,050,000-token context window and up to 128,000 output tokens.</p></details><details><summary>How much does GPT-5.6 cost?</summary><p>Current Standard API pricing is $4 input / $20 output per 1M tokens for Sol, $2 / $12 for Terra, and $0.20 / $1.20 for Luna. Cached-input rates are lower, and long prompts above 272K input tokens use higher rates.</p></details><details><summary>Which GPT-5.6 model should I use?</summary><p>Use Sol when quality and complex reasoning matter most, Terra when you want a stronger cost-performance balance, and Luna when throughput and cost are primary constraints.</p></details><details><summary>Does GPT-5.6 support reasoning effort?</summary><p>Yes. OpenAI documents none, low, medium, high, xhigh and max reasoning effort for the GPT-5.6 family, with medium as the default.</p></details><details><summary>Does GPT-5.6 support tools and agents?</summary><p>Yes. OpenAI documents tool use through the Responses API, including web search, file search, code interpreter, hosted shell, computer use, MCP and beta multi-agent orchestration.</p></details><details><summary>Is GPT-5.6 still relevant after GPT-6?</summary><p>Yes. GPT-6 is the newer generation, but GPT-5.6 remains an available production family across OpenAI products and the API, with lower-cost Terra and Luna tiers that can be useful for cost-sensitive workloads.</p></details></div>
+      </div>
+    </section>
       <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>V7 cuts costs 78% while boosting accuracy with GPT-5.6 Luna</h2><p class="signal-summary">Using GPT-5.6, V7 turns scattered company files into context agents can use to complete complex, source-linked work.</p><a class="brief-open" href="/signals/v7-cuts-costs-78-while-boosting-accuracy-with-gpt-5-6-luna-e2abc5a/">Open latest signal ↗</a></article>
       <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>GPT-5.6</strong><p>Tracked from August 24, 2026 through September 21, 2026 across 1 primary source.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent GPT-5.6 signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/v7-cuts-costs-78-while-boosting-accuracy-with-gpt-5-6-luna-e2abc5a/">
