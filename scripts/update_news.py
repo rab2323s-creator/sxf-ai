@@ -478,6 +478,9 @@ def editorial_units(item):
     source = item["source"]
     category = item["category"]
     summary = clean_summary(item.get("summary", ""))
+    text_value = f"{title} {summary}".lower()
+    models = extract_models(title)
+    primary_model = models[0] if models else ""
 
     if summary:
         what_changed = summary
@@ -490,16 +493,55 @@ def editorial_units(item):
     else:
         what_changed = f'{source} published an update titled “{title}.” SXF classifies it under {category} and preserves the direct path to the original publication for the complete context.'
 
-    if category == "Models":
-        why = "Model signals can change capability expectations, access patterns or deployment choices. The useful questions are what changed, who can access it, how it compares with prior versions, and which claims are supported by published evaluations."
-    elif category == "Research":
-        why = "Research signals matter when they change the evidence available around capability, evaluation, safety or scientific use. The paper or primary publication should be checked for methodology, scope, limitations and reproducibility."
+    if re.search(r"\bno longer available\b|\bdeprecated\b|\bdeprecat(?:e|ed|ion)\b|\bremoved\b|\bend of support\b", text_value):
+        why = "This is an operational change, not just a product update: existing workflows may stop working or require migration. The practical impact depends on which environments are affected, whether an opt-out exists, and how much lead time users have to move."
+        verify = "Check the exact cutoff date, affected runtimes or products, migration path, temporary exceptions, and whether any existing workloads are grandfathered."
+    elif re.search(r"\bpricing\b|\bprice\b|\bcost\b|\bdiscount\b|\bbilling\b", text_value):
+        why = "Cost changes can alter which workloads are economical to run at scale, especially for high-volume or agentic use. The meaningful signal is not the headline price alone but how the new rates interact with caching, long context, tool use, and production volume."
+        verify = "Check the billing unit, context thresholds, cached-input treatment, tool or service charges, regional differences, and the date the new pricing takes effect."
+    elif re.search(r"\bbenchmark\b|\bevaluation\b|\bhalf the time\b|\bhalf the cost\b|\b\d+%\b|\bstate-of-the-art\b|\bsota\b", text_value):
+        model_note = f" for {primary_model}" if primary_model else ""
+        why = f"This update makes a measurable performance claim{model_note}, which is more useful than a generic capability statement if the comparison is reproducible. It can influence model or workflow selection only when the baseline, workload, and evaluation setup are comparable to real use."
+        verify = "Check the baseline, sample size, task mix, model and effort settings, token or tool costs, evaluation harness, and whether the reported result comes from controlled testing or a single customer case study."
+    elif re.search(r"\bsafety\b|\bmisalignment\b|\bsecurity\b|\bcyber\b|\byouth\b|\bteen\b|\bmental health\b|\bmentalhealth\b", text_value):
+        why = "Safety and security updates can change how a system should be evaluated, deployed, or governed even when headline capability is unchanged. The useful signal is whether the work introduces a concrete framework, evidence base, control, or reporting standard that can be applied in practice."
+        verify = "Check the scope of the evaluation or policy, who defined the criteria, the underlying evidence, known limitations, whether results were independently reviewed, and which safeguards are actually deployed versus proposed."
     elif category == "Open Source":
-        why = "Open-source signals can affect what developers are able to inspect, run or build on. The practical value depends on the released artifacts, license, hardware requirements, maintenance status and reproducibility."
+        if re.search(r"\bjoins?\b|\bmaintainer\b|\bcommunity\b", text_value):
+            why = "Maintainer and stewardship changes can matter for open-source projects because roadmap continuity, review capacity, release cadence, and ecosystem support often depend on a small number of contributors."
+            verify = "Check the maintainer’s ongoing role, repository ownership, release plans, governance changes, compatibility commitments, and whether support extends to the broader project or only selected components."
+        else:
+            why = "This can change what developers are able to run locally or integrate without depending on a hosted API. The practical value depends on whether the release includes usable artifacts, broad hardware or runtime support, and a license that fits real deployment."
+            verify = "Check the released code or weights, license, supported quantization or model formats, hardware and memory requirements, runtime compatibility, benchmarks, and reproduction instructions."
+    elif re.search(r"\bnow available\b|\bavailable in\b|\bexpands?\b|\benablement\b|\brollout\b|\baccess\b", text_value):
+        target = primary_model or title
+        why = f"The important change is broader access to {target}, which can move a capability from announcement to actual workflow use. The impact depends on who receives access, where it is available, and whether the release is general availability or a limited rollout."
+        verify = "Check eligible plans or users, regions, product surfaces, default versus opt-in status, rollout timing, usage limits, and whether any capabilities remain preview-only."
+    elif re.search(r"\bintroducing\b|\blaunch(?:ed|es)?\b|\brelease(?:d|s)?\b|\bnew features?\b|\bimprovements?\b", text_value):
+        if category == "Models":
+            model_name = primary_model or "the model"
+            why = f"A new model release such as {model_name} can change capability, latency, cost, or deployment tradeoffs. The practical value comes from what is materially different from the prior generation and which workloads benefit enough to justify switching."
+            verify = "Check model availability, context and output limits, pricing, supported modalities and tools, knowledge cutoff, migration guidance, benchmark methodology, and any stated safety or usage restrictions."
+        elif category == "Research":
+            why = "A new research release matters when it adds evidence, methodology, or reproducible tooling rather than only a headline conclusion. Its value depends on whether others can inspect the setup and test the result outside the original authors’ environment."
+            verify = "Check the research question, dataset, methodology, baselines, statistical or evaluation procedure, limitations, artifacts or code, and whether independent reproduction is possible."
+        else:
+            why = "A product launch or feature release matters when it changes a workflow users can actually perform, not simply the product’s positioning. The impact depends on availability, permissions, integration depth, and whether the feature removes a real operational constraint."
+            verify = "Check release status, supported plans and platforms, required permissions, limits or quotas, integration prerequisites, pricing impact, and whether the feature is generally available or still in preview."
+    elif re.search(r"\bcase study\b|\bhelps?\b|\busing\b|\bwith gpt\b|\btrusts?\b|\bcuts?\b|\bboost(?:ing|s|ed)?\b", text_value):
+        why = "This is primarily a deployment or customer-use signal. It is useful for understanding where the technology is being applied, but the result should not be generalized beyond the described workflow without comparable evidence."
+        verify = "Check the customer’s baseline, workflow scope, measurement period, model configuration, human involvement, cost accounting, and whether the reported outcome was independently evaluated."
+    elif category == "Models":
+        model_name = primary_model or "the model"
+        why = f"This signal may affect how {model_name} is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision."
+        verify = "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
+    elif category == "Research":
+        why = "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced."
+        verify = "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
     else:
-        why = "Tool and platform changes matter when they alter what users or developers can actually do. The practical impact depends on availability, supported workflows, pricing or limits, and whether the change is generally released or still restricted."
+        why = "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone."
+        verify = "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
 
-    verify = "Verify the exact claims, benchmarks, pricing, rollout status, safety notes and technical limitations in the original source. SXF adds organization and context; it does not replace the publisher’s documentation."
     return {
         "what_changed": clean_summary(what_changed)[:1100],
         "why_it_matters": why,
