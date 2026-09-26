@@ -1,4 +1,6 @@
 
+.guide-article-page{overflow-x:clip}
+@supports not (overflow:clip){.guide-article-page{overflow-x:hidden}}
 .intel-page{background:
   radial-gradient(circle at 82% 4%,rgba(200,255,77,.055),transparent 27rem),
   radial-gradient(circle at 12% 42%,rgba(77,124,255,.045),transparent 24rem),
@@ -242,7 +244,9 @@
 .guide-answer h2{max-width:900px;margin:0 0 14px;font-size:clamp(27px,3vw,42px);line-height:1.02;letter-spacing:-.045em}
 .guide-answer p{max-width:940px;margin:0;color:#98a3af;font-size:14px;line-height:1.75}
 
-.guide-reading{display:grid;grid-template-columns:230px minmax(0,800px);gap:70px;justify-content:center;padding-top:70px}
+.guide-reading{display:grid;grid-template-columns:230px minmax(0,800px);gap:70px;justify-content:center;padding-top:70px;min-width:0}
+.guide-reading>*{min-width:0}
+.guide-prose{min-width:0;max-width:100%;overflow-wrap:anywhere}
 .guide-toc{position:sticky;top:94px;align-self:start;display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .guide-toc>span{padding:14px 0;color:#5f6a77;font-size:9px;font-weight:900;letter-spacing:.14em}
 .guide-toc a{padding:8px 0;color:#717d89;font-size:10px;line-height:1.35}.guide-toc a:hover{color:var(--accent)}
@@ -256,7 +260,7 @@
 .guide-prose>section>p:not(.eyebrow),.tool-review>p{margin:0 0 18px;color:#a1abb6;font-size:16px;line-height:1.82;letter-spacing:-.005em}
 .guide-prose em{color:#d8dfe6}.guide-prose strong{color:#e1e7ec}
 
-.guide-table-wrap{margin:28px 0 14px;overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.guide-table-wrap{width:100%;max-width:100%;min-width:0;margin:28px 0 14px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
 .guide-table{width:100%;min-width:900px;border-collapse:collapse}
 .guide-table th,.guide-table td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:11px}
 .guide-table thead th{color:#66717e;background:#080b0f;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
@@ -310,7 +314,16 @@
   .guide-choice-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
-  .guide-article-hero{padding-top:48px}.guide-article-hero h1{font-size:clamp(47px,13vw,70px)}
+  .guide-article-hero{padding-top:48px}.guide-article-hero h1{font-size:clamp(42px,12vw,64px);overflow-wrap:anywhere}
+  .guide-deck,.guide-answer,.guide-reading,.guide-prose,.guide-prose section,.guide-sources,.related-signals{min-width:0;max-width:100%}
+  .guide-table-wrap{max-width:100%;border-radius:14px}
+  .guide-table{min-width:760px}
+  .security-risk-table{min-width:820px}
+  .guide-toc{min-width:0;overflow:hidden}
+  .guide-toc a{min-width:0;overflow-wrap:anywhere}
+  .guide-inline-cta{min-width:0}
+  .guide-inline-cta>div{min-width:0}
+  .guide-inline-cta strong,.guide-inline-cta p{overflow-wrap:anywhere}
   .guide-byline{grid-template-columns:1fr 1fr}.guide-byline>div,.guide-byline>div+div{padding:14px 0;border-right:0;border-bottom:1px solid var(--line)}.guide-byline>div:nth-child(odd){border-right:1px solid var(--line)}.guide-byline>div:nth-child(even){padding-left:14px}.guide-byline>div:nth-last-child(-n+2){border-bottom:0}
   .guide-answer{grid-template-columns:1fr;gap:14px;padding:22px}
   .guide-reading{padding-top:52px}
@@ -525,7 +538,7 @@
 
 
 /* AI Agent Security living reference */
-.security-feature{margin-top:26px}
+.security-feature{margin-top:26px;min-width:0;max-width:100%}
 .security-feature-frame{position:relative;overflow:hidden;aspect-ratio:1672/941;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 50% 45%,rgba(200,255,77,.08),transparent 28rem),linear-gradient(145deg,#0d1218,#080b0f)}
 .security-feature-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .security-feature-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px}
