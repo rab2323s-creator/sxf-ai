@@ -332,6 +332,7 @@ SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
+CLAUDE_OPUS_GEMINI_COMPARE_SLUG = "claude-opus-5-5-vs-gemini-3-8-flash"
 
 TOPICS = [
     {
@@ -1244,9 +1245,9 @@ def claude_opus_55_reference_html():
           <article><span>CHOOSE FABLE 5.1</span><h3>When Opus evals still fail</h3><p>Move up when high-effort Opus 5.5 still misses the quality bar on demanding reasoning, research or long-horizon agentic tasks.</p><a href="/models/claude-fable-5-1/">Open Fable 5.1 reference ↗</a></article>
         </div>
         <div class="model-related-links">
-          <a href="/guides/gpt-6-vs-claude/"><span>FRONTIER COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
+          <a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>Claude Opus 5.5 vs Gemini 3.8 Flash</strong><b>↗</b></a>
           <a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>
-          <a href="/guides/github-copilot-alternatives/"><span>CODING WORKFLOWS</span><strong>GitHub Copilot Alternatives</strong><b>↗</b></a>
+          <a href="/guides/gpt-6-vs-claude/"><span>FRONTIER COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
         </div>
       </section>
 
@@ -2250,8 +2251,8 @@ def gemini_38_flash_reference_html(items):
             <article><span>CHOOSE A LIVE MODEL</span><h3>Real-time voice agents</h3><p>Use Gemini 3.8 Live rather than standard 3.8 Flash when native low-latency audio-to-audio interaction is the primary requirement.</p></article>
           </div>
           <div class="model-related-links">
+            <a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>Claude Opus 5.5 vs Gemini 3.8 Flash</strong><b>↗</b></a>
             <a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Gemini 3.8 Flash</strong><b>↗</b></a>
-            <a href="/topics/google-ai/"><span>GOOGLE INTELLIGENCE</span><strong>Google AI signals</strong><b>↗</b></a>
             <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
           </div>
         </section>
@@ -4863,6 +4864,247 @@ def gpt6_comparison_html(items):
 
 
 
+
+def claude_opus_55_vs_gemini_38_flash_html(items):
+    canonical = f"{BASE_URL}/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    title = "Claude Opus 5.5 vs Gemini 3.8 Flash (2026) | SXF / AI"
+    description = "Claude Opus 5.5 vs Gemini 3.8 Flash: compare pricing, 1M context, coding, agents, reasoning, multimodal inputs, caching, batch, fast inference and production fit."
+
+    def money(value):
+        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+
+    short_cards = "".join([
+        f'<div><span>Claude Opus 5.5</span><strong>{money(4*.1 + 20*.01)}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+    ])
+    monthly_cards = "".join([
+        f'<div><span>Claude Opus 5.5</span><strong>{money(4*10 + 20*1)}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+    ])
+    cache_cards = "".join([
+        f'<div><span>Claude Opus 5.5</span><strong>{money(.20*1 + 20*.1)}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.075*1 + 3.75*.1)}</strong><small>1M cached input + 100K output*</small></div>'
+    ])
+    batch_cards = "".join([
+        f'<div><span>Claude Opus 5.5</span><strong>{money(2*10 + 10*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.375*10 + 1.875*1)}</strong><small>Batch · 10M input + 1M output*</small></div>'
+    ])
+
+    rows = '''<tr>
+      <th scope="row"><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><small>claude-opus-5-5</small></th>
+      <td>Anthropic</td><td>Long-running agentic coding and knowledge work</td><td>1,000,000</td><td>128,000</td>
+      <td>Adaptive thinking · always on · default medium</td><td>Text + image input · text output</td>
+      <td>$4.00</td><td>$0.20</td><td>$20.00</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
+      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
+      <td>low · medium · high · default medium</td><td>Text + image + video + audio + PDF input · text output</td>
+      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+    </tr>'''
+
+    faq_items = [
+        ("Which is cheaper, Claude Opus 5.5 or Gemini 3.8 Flash?",
+         "At current Standard API rates through December 31, 2026, Gemini 3.8 Flash has much lower headline token prices: $0.75 input and $3.75 output per million tokens versus $4 and $20 for Claude Opus 5.5. Google states that Gemini 3.8 Flash Standard pricing doubles to $1.50 input and $7.50 output on January 1, 2027."),
+        ("Which has the larger context window?",
+         "Gemini 3.8 Flash lists 1,048,576 input tokens, while Claude Opus 5.5 lists a 1 million-token context window. The difference is small. Claude Opus 5.5 has the larger standard maximum output at 128,000 tokens versus 65,536 for Gemini 3.8 Flash."),
+        ("Which model supports more input modalities?",
+         "Gemini 3.8 Flash explicitly supports text, image, video, audio and PDF input. Claude Opus 5.5's model specification lists text and image input with text output, while Anthropic's broader platform also supports Files API and PDF workflows."),
+        ("How do thinking controls differ?",
+         "Claude Opus 5.5 uses adaptive thinking that is always on and defaults to medium effort. Gemini 3.8 Flash supports low, medium and high thinking levels and also defaults to medium."),
+        ("Which is better for coding?",
+         "Both are explicitly designed for serious software engineering. Anthropic positions Opus 5.5 for long-running agentic coding; Google positions Gemini 3.8 Flash for long-horizon software engineering and complex multi-file refactoring. A reliable decision requires the same repository, tests, tools and acceptance criteria."),
+        ("Which is better for AI agents?",
+         "Both support multi-step tool workflows. Opus 5.5 is designed for long-running agentic coding and supports server-side and client-side tools through Anthropic's platform. Gemini 3.8 Flash supports function calling, code execution, file search, Search grounding, Maps grounding, URL context and computer use in preview. Platform fit and permissions often matter more than a generic agent benchmark."),
+        ("How do prompt caching costs compare?",
+         "Claude Opus 5.5 cache reads cost $0.20 per million tokens. Gemini 3.8 Flash context cache reads cost $0.075 per million tokens through December 31, 2026 and $0.15 starting January 1, 2027, with a separate cache-storage charge."),
+        ("How does batch pricing compare?",
+         "Anthropic's Batch API provides a 50% discount, making Opus 5.5 batch token rates effectively $2 input and $10 output per million tokens. Gemini 3.8 Flash Batch pricing is $0.375 input and $1.875 output through December 31, 2026, rising to $0.75 and $3.75 on January 1, 2027."),
+        ("Does Claude Opus 5.5 have a faster inference mode?",
+         "Yes. Anthropic offers Fast mode as a research preview on the first-party Claude API. It can deliver up to 2.5x higher output tokens per second and costs $8 input and $40 output per million tokens."),
+        ("Does either model support real-time voice?",
+         "The standard Gemini 3.8 Flash model does not support the Live API; Google provides separate Gemini 3.8 Live models. Claude Opus 5.5's model specification lists text and image input and text output, not native audio-to-audio interaction."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
+
+    sources = [
+        ("Anthropic · Claude Opus 5.5 model page", "https://platform.claude.com/docs/en/models/opus-5-5/overview"),
+        ("Anthropic · What’s new in Claude Opus 5.5", "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5"),
+        ("Anthropic · Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"),
+        ("Anthropic · Fast mode", "https://platform.claude.com/docs/en/build-with-claude/fast-mode"),
+        ("Google AI · Gemini 3.8 Flash model page", "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash/"),
+        ("Google AI · What’s new in Gemini 3.8 Flash", "https://ai.google.dev/gemini-api/docs/latest-model"),
+        ("Google AI · Gemini API pricing", "https://ai.google.dev/gemini-api/docs/pricing"),
+        ("Google AI · Models overview", "https://ai.google.dev/gemini-api/docs/models"),
+    ]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label,url in sources
+    )
+
+    relevant = [
+        item for item in items
+        if "Claude Opus 5.5" in extract_models(item["title"]) or item["source"] == "Google AI"
+    ][:8]
+    signal_rows = "".join(signal_row(item) for item in relevant)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"WebPage","@id":canonical+"#webpage","url":canonical,
+                "name":"Claude Opus 5.5 vs Gemini 3.8 Flash: Pricing, Coding, Agents and API",
+                "description":description,"dateModified":verified,
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":[{"@type":"Thing","name":"Claude Opus 5.5"},{"@type":"Thing","name":"Gemini 3.8 Flash"}],
+                "citation":[url for _label,url in sources],"inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":3,"name":"Claude Opus 5.5 vs Gemini 3.8 Flash","item":canonical}
+            ]},
+            {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
+    <body class="intel-page comparison-page">{page_header("models")}<main>
+      <section class="comparison-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Opus 5.5 vs Gemini 3.8 Flash</span></nav>
+        <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
+        <h1>Claude Opus 5.5<br><span>vs Gemini 3.8 Flash.</span></h1>
+        <p>A source-first comparison for coding, agents and production AI. Official specifications, token economics, caching, batch processing, multimodal inputs and tool ecosystems are separated from vendor performance claims.</p>
+        <div class="hero-actions"><a class="primary-cta" href="#quick-answer">Quick answer <span>↓</span></a><a class="secondary-cta" href="/models/claude-opus-5-5/">Opus 5.5 reference</a></div>
+      </section>
+
+      <section id="quick-answer" class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">QUICK ANSWER</p><h2>This is primarily a capability-depth vs cost-and-multimodality decision.</h2>
+        <p>Claude Opus 5.5 is Anthropic’s current Opus model for long-running agentic coding and knowledge work, with a 128K output ceiling and adaptive thinking always enabled. Gemini 3.8 Flash is Google’s most intelligent stable Flash model, priced far lower in 2026 and accepting a broader mix of text, image, video, audio and PDF inputs. Both are designed for serious software engineering and autonomous workflows.</p></div>
+        <div class="model-decision-grid">
+          <article><span>CLAUDE OPUS 5.5</span><h3>Long-running coding and knowledge work</h3><p>Strong fit when the workload is reasoning-heavy, agentic and text/code centric, and the extra inference cost is justified by task value.</p><a href="/models/claude-opus-5-5/">Open model reference ↗</a></article>
+          <article><span>GEMINI 3.8 FLASH</span><h3>Cost-sensitive multimodal agents</h3><p>Strong fit when workloads need broad media inputs, Google-native tools or significantly lower token economics at production volume.</p><a href="/models/gemini-3-8-flash/">Open model reference ↗</a></article>
+          <article><span>DECISION RULE</span><h3>Benchmark accepted task cost</h3><p>Compare completed-task rate, retries, tool errors, reasoning tokens, cache hits, latency and human correction—not just a benchmark score or price per token.</p></article>
+        </div>
+      </section>
+
+      <section id="specs" class="comparison-table-section shell">
+        <div class="intel-section-head"><div><p class="eyebrow">OFFICIAL SPECIFICATIONS</p><h2>Side-by-side facts.</h2></div><span>* Gemini introductory rates through Dec 31, 2026</span></div>
+        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Provider</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Thinking</th><th>Modalities</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="reference-note">Claude rates are Anthropic’s current Standard API rates. Gemini rates marked * are Google’s introductory Standard paid prices through December 31, 2026; they change January 1, 2027.</p>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>The token-price gap is large.</h2><p>Gemini 3.8 Flash is substantially cheaper on current list pricing, but cost per accepted task can narrow or widen the difference depending on retries, effort, tools and caching.</p></div>
+        <div class="cost-section"><h3>100K input + 10K output</h3><div class="cost-grid">{short_cards}</div><h3>10M input + 1M output</h3><div class="cost-grid">{monthly_cards}</div></div>
+        <div class="model-caveat"><strong>Gemini’s current rates are temporary</strong><p>Google states that Standard pricing rises from $0.75 / $3.75 to $1.50 / $7.50 per million input/output tokens on January 1, 2027. Even at those higher rates, the headline token price remains below Opus 5.5’s current $4 / $20.</p></div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">CACHE ECONOMICS</p><h2>Both reward repeated context; Gemini’s read price is lower.</h2><p>Prompt or context caching matters disproportionately for long-running agents that repeatedly reuse repository context, policy text, tools or large documents.</p></div>
+        <div class="cost-section"><h3>1M cached input + 100K output</h3><div class="cost-grid">{cache_cards}</div></div>
+        <div class="model-caveat"><strong>Claude caching</strong><p>Opus 5.5 cache reads cost $0.20 per million tokens. Five-minute cache writes cost $5 and one-hour writes cost $8 per million tokens. The minimum cacheable prompt length is 512 tokens.</p></div>
+        <div class="model-caveat"><strong>Gemini caching</strong><p>Gemini 3.8 Flash context-cache reads cost $0.075 per million tokens through December 31, 2026 and $0.15 starting January 1, 2027. Google also charges cache storage per token-hour, so persistent-cache economics depend on both read volume and retention time.</p></div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">BATCH & SPEED</p><h2>Asynchronous cost vs premium latency.</h2></div>
+        <div class="cost-section"><h3>Batch · 10M input + 1M output</h3><div class="cost-grid">{batch_cards}</div></div>
+        <div class="model-api-grid">
+          <div><span>CLAUDE BATCH</span><strong>50% token discount</strong><p>Anthropic’s Batch API halves Opus 5.5 input and output token rates, making it useful for asynchronous high-value jobs that do not require interactive latency.</p></div>
+          <div><span>GEMINI BATCH</span><strong>$0.375 / $1.875 in 2026</strong><p>Google’s current Batch rates are half the introductory Standard token rates and rise to $0.75 / $3.75 on January 1, 2027.</p></div>
+          <div><span>CLAUDE FAST MODE</span><strong>Up to 2.5× output speed</strong><p>Fast mode is a first-party Claude API research preview. It uses the same Opus 5.5 model at $8 input / $40 output per million tokens and is not available on partner cloud platforms.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split shell">
+        <div><p class="eyebrow">CONTEXT & OUTPUT</p><h2>Context capacity is similar; maximum output is not.</h2>
+        <p>Gemini 3.8 Flash lists <strong>1,048,576 input tokens</strong>, while Claude Opus 5.5 lists a <strong>1 million-token context window</strong>. That difference is small enough that retrieval strategy, cache reuse and active working-set quality will usually matter more than the nominal capacity.</p>
+        <p>Claude Opus 5.5 supports up to <strong>128,000 standard output tokens</strong>, roughly double Gemini 3.8 Flash’s <strong>65,536</strong>. Anthropic additionally offers up to 300K output in the Batch API under a beta feature. Large output limits can matter for code generation, long reports and artifact-heavy workflows.</p>
+        <p>Neither number should be treated as a target. Sending or generating huge token volumes increases cost and can make agents harder to evaluate and debug.</p></div>
+        <aside class="model-side-note"><span>CONTEXT RULE</span><strong>Optimize the working set, not the window.</strong><p>For both models, retrieval, cache design and tool access usually create more practical leverage than filling the entire context window.</p></aside>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">CODING</p><h2>Both are explicitly designed for serious software engineering.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>CLAUDE OPUS 5.5</span><h3>Long-running agentic coding</h3><p>Anthropic positions Opus 5.5 for multihour coding sessions, large refactors, audits and complex systems work where an agent must stay coherent across many tool calls.</p></article>
+          <article><span>GEMINI 3.8 FLASH</span><h3>Long-horizon software engineering</h3><p>Google positions 3.8 Flash for real-world coding, complex multi-file refactoring and deterministic tool execution while retaining the Flash family’s cost orientation.</p></article>
+          <article><span>EVALUATION</span><h3>Use the same repository and harness</h3><p>Compare accepted patches, test pass rates, retries, human corrections, token use and elapsed time. Vendor launch benchmarks are useful signals but not interchangeable scoreboards.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">AGENTS & TOOLS</p><h2>The ecosystems are powerful in different ways.</h2></div>
+        <div class="model-api-grid">
+          <div><span>CLAUDE · TOOL LOOPS</span><strong>Long-running agent workflows</strong><p>Opus 5.5 supports server-side and client-side tools, task budgets, prompt caching, Files API and agent-oriented conversation controls.</p></div>
+          <div><span>CLAUDE · COMPUTER USE</span><strong>Supported with current toolset</strong><p>Anthropic supports computer-use workflows, with updated tool requirements on Claude API and Google Cloud for Opus 5.5.</p></div>
+          <div><span>CLAUDE · PROGRESS UPDATES</span><strong>Thinking-block display controls</strong><p>Applications can surface progress between tool calls when configured to display the relevant progress-update content instead of leaving long agents silent.</p></div>
+          <div><span>GEMINI · GROUNDING</span><strong>Google Search + Maps</strong><p>3.8 Flash supports Search and Maps grounding for workflows that need current web or location evidence.</p></div>
+          <div><span>GEMINI · EXECUTION</span><strong>Code execution + computer use</strong><p>Google lists code execution, function calling, file search, URL context and computer use in preview on the stable model.</p></div>
+          <div><span>GEMINI · MANAGED AGENTS</span><strong>Default Antigravity model</strong><p>Google’s latest-model guidance says 3.8 Flash is the default model for its managed Antigravity agent and SDK.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split shell">
+        <div><p class="eyebrow">THINKING</p><h2>Both default to medium, but the control model differs.</h2>
+        <p>Claude Opus 5.5 uses <strong>adaptive thinking that is always on</strong>. Developers control depth with the effort parameter, and Anthropic documents medium as the default. Thinking cannot be disabled on this model.</p>
+        <p>Gemini 3.8 Flash supports <strong>low, medium and high</strong> thinking levels, also defaulting to medium. Google notes that difficult long-running tasks may deliberately consume more reasoning tokens as the model takes smaller steps and verifies intermediate results.</p>
+        <p>For both models, benchmark at the lowest setting that reliably clears your quality bar. Thinking tokens contribute to output cost, so higher reasoning can materially affect the economics of long agent workflows.</p></div>
+        <aside class="model-side-note"><span>FAIR TEST</span><strong>Start medium vs medium.</strong><p>Then test higher and lower settings independently. Comparing one model at aggressive reasoning against another at a cheaper setting produces a misleading cost-quality result.</p></aside>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">MULTIMODAL</p><h2>Gemini 3.8 Flash has the broader direct input surface.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CLAUDE OPUS 5.5</span><h3>Text + image at the model layer</h3><p>Anthropic’s model specification lists text and images as inputs and text as output. The broader Claude platform also supports Files API, PDF and vision workflows.</p></article>
+          <article><span>GEMINI 3.8 FLASH</span><h3>Text + image + video + audio + PDF</h3><p>Google explicitly lists all five input types on the stable 3.8 Flash endpoint, which can reduce preprocessing complexity in media-heavy workflows.</p></article>
+          <article><span>REAL-TIME AUDIO</span><h3>Separate model families</h3><p>Standard Gemini 3.8 Flash does not support the Live API; Google provides dedicated 3.8 Live models. Opus 5.5 is not a native audio-to-audio model either.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">DEPLOYMENT</p><h2>Cloud and platform fit can outweigh base-model differences.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CLAUDE PLATFORM</span><h3>Native Anthropic API</h3><p>Opus 5.5 is active on the Claude API and also available through Amazon Bedrock, Google Cloud, Microsoft Foundry and Claude Platform on AWS.</p></article>
+          <article><span>GOOGLE AI</span><h3>Gemini API + AI Studio</h3><p>Gemini 3.8 Flash is a stable GA model in the Gemini API and Google AI Studio with Standard, Batch, Flex and Priority consumption options.</p></article>
+          <article><span>GOOGLE CLOUD</span><h3>Vertex AI and managed agents</h3><p>3.8 Flash fits naturally in Google Cloud environments that want Vertex AI, Search/Maps grounding or Google’s managed agent stack.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">WHEN TO CHOOSE</p><h2>Choose by workload, not by a universal winner.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>OPUS 5.5 FIT</span><h3>High-value long-running coding</h3><p>Consider Opus when sustained reasoning, large output headroom and Anthropic’s agent workflow behavior justify the higher inference cost.</p></article>
+          <article><span>OPUS 5.5 FIT</span><h3>Complex text-heavy knowledge work</h3><p>It is a strong candidate for research, professional analysis and long document workflows where quality per completed task matters more than minimum token price.</p></article>
+          <article><span>GEMINI 3.8 FLASH FIT</span><h3>High-volume production agents</h3><p>Its current token economics are attractive when many agent runs need real reasoning and tools without premium per-token spend.</p></article>
+          <article><span>GEMINI 3.8 FLASH FIT</span><h3>Media-rich workflows</h3><p>Use it when video, audio, PDFs, images and text need to enter the same reasoning workflow directly.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What can make a simple comparison wrong.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Gemini’s 2026 prices are introductory.</strong><p>They double on January 1, 2027, so long-term cost planning should include both periods.</p></div>
+          <div><span>02</span><strong>Opus thinking cannot be disabled.</strong><p>Adaptive thinking is always on, so cost and latency behavior differs from models that allow a true no-thinking route.</p></div>
+          <div><span>03</span><strong>Cache examples exclude storage time.</strong><p>Gemini charges a separate token-hour storage fee for context caching; actual savings depend on reuse frequency and retention duration.</p></div>
+          <div><span>04</span><strong>Fast mode is not free speed.</strong><p>Claude Fast mode doubles standard Opus 5.5 token rates and is available only as a research preview on the first-party Claude API.</p></div>
+          <div><span>05</span><strong>Tool charges and cloud economics differ.</strong><p>Search, Maps, data residency, managed agents and cloud platform pricing can change total workflow cost beyond model tokens.</p></div>
+          <div><span>06</span><strong>Model APIs are not consumer apps.</strong><p>This page compares model/platform capabilities, not the complete Claude app versus Gemini app experience.</p></div>
+        </div>
+        <div class="model-related-links">
+          <a href="/models/claude-opus-5-5/"><span>ANTHROPIC REFERENCE</span><strong>Claude Opus 5.5</strong><b>↗</b></a>
+          <a href="/models/gemini-3-8-flash/"><span>GOOGLE REFERENCE</span><strong>Gemini 3.8 Flash</strong><b>↗</b></a>
+          <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <div class="model-reference-lower shell"><div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div><div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div></div>
+
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Anthropic and Google AI changes.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>
+    </main>{page_footer()}</body></html>'''
+
 def gpt6_sol_vs_gemini_38_flash_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
@@ -5333,6 +5575,10 @@ def build_discovery_pages(items, current_items):
     sol_gemini_path.mkdir(parents=True, exist_ok=True)
     (sol_gemini_path / "index.html").write_text(gpt6_sol_vs_gemini_38_flash_html(items), encoding="utf-8")
 
+    opus_gemini_path = COMPARE_DIR / CLAUDE_OPUS_GEMINI_COMPARE_SLUG
+    opus_gemini_path.mkdir(parents=True, exist_ok=True)
+    (opus_gemini_path / "index.html").write_text(claude_opus_55_vs_gemini_38_flash_html(items), encoding="utf-8")
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -5395,6 +5641,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
+        sitemap_entry(f"{BASE_URL}/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/", generated_today),
     ]
 
     for item in items:
