@@ -230,7 +230,7 @@
 /* Long-form SXF guide article */
 .guide-article-hero{padding:64px 0 24px}
 .guide-article-hero .intel-breadcrumb{margin-bottom:42px}
-.guide-article-hero h1{max-width:1120px;margin:14px 0 26px;font-size:clamp(52px,7.3vw,98px);line-height:.91;letter-spacing:-.068em}
+.guide-article-hero h1{max-width:1120px;margin:14px 0 26px;font-size:clamp(48px,6vw,82px);line-height:.94;letter-spacing:-.058em}
 .guide-article-hero h1 span{color:#707b87}
 .guide-deck{max-width:900px;margin:0;color:#a4aeba;font-size:clamp(17px,1.7vw,22px);line-height:1.65;letter-spacing:-.015em}
 .guide-byline{display:grid;grid-template-columns:repeat(4,1fr);margin-top:46px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -314,7 +314,7 @@
   .guide-choice-grid{grid-template-columns:1fr}
 }
 @media(max-width:720px){
-  .guide-article-hero{padding-top:48px}.guide-article-hero h1{font-size:clamp(42px,12vw,64px);overflow-wrap:anywhere}
+  .guide-article-hero{padding-top:48px}.guide-article-hero h1{font-size:clamp(36px,10vw,52px);line-height:.96;letter-spacing:-.05em;overflow-wrap:anywhere}
   .guide-deck,.guide-answer,.guide-reading,.guide-prose,.guide-prose section,.guide-sources,.related-signals{min-width:0;max-width:100%}
   .guide-table-wrap{max-width:100%;border-radius:14px}
   .guide-table{min-width:760px}
