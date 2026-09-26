@@ -53,6 +53,9 @@ def clean_summary(value):
     value = unescape(value)
     value = re.sub(r"<[^>]+>", " ", value)
     value = re.sub(r"\s+", " ", value).strip()
+    # RSS feeds sometimes append publisher boilerplate that adds no editorial value.
+    value = re.sub(r"\s*The post .+? appeared first on The GitHub Blog\s*\.?$", "", value, flags=re.I)
+    value = re.sub(r"\s+", " ", value).strip()
     return value[:900]
 
 def parse_date(value):
