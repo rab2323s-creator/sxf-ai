@@ -333,6 +333,7 @@ GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
 CLAUDE_OPUS_GEMINI_COMPARE_SLUG = "claude-opus-5-5-vs-gemini-3-8-flash"
+GPT6_ASTRA_FABLE_COMPARE_SLUG = "gpt-6-astra-vs-claude-fable-5-1"
 
 TOPICS = [
     {
@@ -1323,12 +1324,19 @@ def model_reference_html(name):
         f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
         for question, answer in ref["faq"]
     )
-    cross_compare = (
-        '<div class="model-related-links"><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Gemini 3.8 Flash</strong><b>↗</b></a>'
-        '<a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>'
-        '<a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools</strong><b>↗</b></a></div>'
-        if name == "GPT-6 Sol" else ""
-    )
+    cross_compare = ""
+    if name == "GPT-6 Sol":
+        cross_compare = (
+            '<div class="model-related-links"><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Gemini 3.8 Flash</strong><b>↗</b></a>'
+            '<a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>'
+            '<a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools</strong><b>↗</b></a></div>'
+        )
+    elif name == "GPT-6 Astra":
+        cross_compare = (
+            '<div class="model-related-links"><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/"><span>DIRECT COMPARISON</span><strong>GPT-6 Astra vs Claude Fable 5.1</strong><b>↗</b></a>'
+            '<a href="/guides/gpt-6-vs-claude/"><span>FAMILY COMPARISON</span><strong>GPT-6 vs Claude</strong><b>↗</b></a>'
+            '<a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a></div>'
+        )
     return f'''<section class="model-reference shell">
       <div class="model-reference-intro">{intro}{facts}</div>
       <div class="model-comparison">
@@ -2005,9 +2013,9 @@ def claude_fable_51_reference_html(items):
             <article><span>NOT THE DEFAULT</span><h3>Routine production traffic</h3><p>For everyday coding, extraction, standard analysis or high-volume traffic, Opus 5.5, Sonnet 5 or another lower-cost model may deliver better economics.</p></article>
           </div>
           <div class="model-related-links">
+            <a href="/compare/gpt-6-astra-vs-claude-fable-5-1/"><span>DIRECT COMPARISON</span><strong>GPT-6 Astra vs Claude Fable 5.1</strong><b>↗</b></a>
             <a href="/models/claude-opus-5-5/"><span>STARTING POINT</span><strong>Claude Opus 5.5 Reference</strong><b>↗</b></a>
-            <a href="/guides/gpt-6-vs-claude/"><span>FRONTIER COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
-            <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+            <a href="/guides/gpt-6-vs-claude/"><span>FAMILY COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
           </div>
         </section>
 
@@ -2925,7 +2933,7 @@ def gpt6_vs_claude_guide_html(items):
               <h2>GPT-6 and Claude are families, not one-to-one models</h2>
               <p>The first mistake in a GPT-6 vs Claude comparison is treating each brand as one model. OpenAI currently splits GPT-6 into Astra, Sol and Luna. Anthropic's current lineup includes Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5. Those tiers do not map perfectly, but their pricing and positioning reveal useful comparison pairs.</p>
               <div class="guide-matchup-grid">
-                <article><span>TOP-END</span><h3>GPT-6 Astra ↔ Claude Fable 5.1</h3><p>Both list $10 input / $50 output per million tokens and roughly one million tokens of context. OpenAI positions Astra for its hardest end-to-end work; Anthropic reserves Fable for demanding reasoning and long-horizon agents.</p></article>
+                <article><span>TOP-END</span><h3>GPT-6 Astra ↔ Claude Fable 5.1</h3><p>Both list $10 input / $50 output per million tokens and roughly one million tokens of context. OpenAI positions Astra for its hardest end-to-end work; Anthropic reserves Fable for demanding reasoning and long-horizon agents.</p><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/">Open direct comparison ↗</a></article>
                 <article><span>EVERYDAY / BALANCED</span><h3>GPT-6 Sol ↔ Claude Sonnet 5</h3><p>Both list $2 input / $10 output. Sol is positioned around complex coding and agents; Sonnet 5 around speed plus intelligence for everyday coding, agents and enterprise tasks.</p></article>
                 <article><span>AGENTIC CODING</span><h3>GPT-6 Sol ↔ Claude Opus 5.5</h3><p>This is the more interesting coding comparison. Opus 5.5 costs twice Sol at standard token rates, but Anthropic specifically targets long-running agentic coding and keeps standard rates across its 1M context.</p></article>
                 <article><span>EFFICIENCY</span><h3>GPT-6 Luna ↔ Claude Haiku 4.5</h3><p>Both target efficient, high-volume work, but their economics are far apart: Luna lists $0.10/$0.50 while Haiku lists $1/$5, and Luna also has a much larger context window.</p></article>
@@ -4865,6 +4873,262 @@ def gpt6_comparison_html(items):
 
 
 
+
+def gpt6_astra_vs_claude_fable_51_html(items):
+    canonical = f"{BASE_URL}/compare/{GPT6_ASTRA_FABLE_COMPARE_SLUG}/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    title = "GPT-6 Astra vs Claude Fable 5.1 (2026): Cost, Coding & Agents | SXF / AI"
+    description = "GPT-6 Astra vs Claude Fable 5.1: compare pricing, 1M context, coding, reasoning, agents, tools, caching, long-context economics, benchmarks and production fit."
+
+    def money(value):
+        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+
+    short_cards = "".join([
+        f'<div><span>GPT-6 Astra</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>'
+    ])
+    monthly_cards = "".join([
+        f'<div><span>GPT-6 Astra</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>'
+    ])
+    long_cards = "".join([
+        f'<div><span>GPT-6 Astra</span><strong>{money(20*.5 + 75*.05)}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.5 + 50*.05)}</strong><small>500K input + 50K output</small></div>'
+    ])
+    cache_cards = "".join([
+        f'<div><span>GPT-6 Astra</span><strong>{money(1*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{money(.25*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>'
+    ])
+    batch_cards = "".join([
+        f'<div><span>GPT-6 Astra</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>'
+    ])
+
+    rows = '''<tr>
+      <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>gpt-6-astra</small></th>
+      <td>OpenAI</td><td>Hardest end-to-end work</td><td>1,050,000</td><td>128,000</td>
+      <td>low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
+      <td>$10.00</td><td>$1.00</td><td>$50.00</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href="/models/claude-fable-5-1/">Claude Fable 5.1</a><small>claude-fable-5-1</small></th>
+      <td>Anthropic</td><td>Demanding reasoning and long-horizon agentic work</td><td>1,000,000</td><td>128,000</td>
+      <td>Adaptive · always on · low → max · default high</td><td>Text + image input · text output</td>
+      <td>$10.00</td><td>$0.25</td><td>$50.00</td>
+    </tr>'''
+
+    faq_items = [
+        ("Which is cheaper, GPT-6 Astra or Claude Fable 5.1?", "At short-context Standard token rates, neither is cheaper: both list $10 per million input tokens and $50 per million output tokens. The economics diverge with long context and caching. OpenAI prices Astra prompts above 272K input tokens at 2x input/cache rates and 1.5x output for the full request, while Anthropic lists Fable 5.1 at standard token rates across its 1M context window. Fable also lists a lower cache-read rate of $0.25 per million tokens versus $1 for Astra."),
+        ("Which has the larger context window?", "GPT-6 Astra lists a 1,050,000-token context window, while Claude Fable 5.1 lists 1,000,000 tokens. Both support up to 128,000 output tokens. The roughly 5% context difference is usually less important than pricing, retrieval, caching and tool architecture."),
+        ("Which is better for coding?", "Both vendors position these models for frontier software engineering. OpenAI reports Astra ahead of Fable 5.1 on several coding evaluations including Terminal-Bench 4.0 and DeepSWE, while independent Artificial Analysis results vary by task and reasoning configuration. A production choice should be based on the same repository, tools, tests and acceptance criteria rather than a universal coding winner."),
+        ("Which is better for long-running AI agents?", "Both are designed for long-horizon work. GPT-6 Astra adds async tool calling, mid-turn steering, changing reasoning effort mid-conversation, multi-agent orchestration and persisted reasoning in the Responses API. Claude Fable 5.1 adds adaptive thinking, per-message effort beta, turn-scoped system messages beta, readable progress updates and very low cache-read pricing. The better fit depends on your agent architecture and workload economics."),
+        ("How do reasoning controls differ?", "GPT-6 Astra supports low, medium, high, xhigh and max reasoning effort and does not support none. Claude Fable 5.1 uses adaptive thinking that is always on and supports low, medium, high, xhigh and max effort, with high as the API default."),
+        ("How do cached-input prices compare?", "GPT-6 Astra lists $1 per million cached input tokens at short context. Claude Fable 5.1 lists $0.25 per million cache-read tokens. Both have separate cache-write pricing. The value of caching depends on how much context is reused and how often."),
+        ("How does long-context pricing differ?", "OpenAI states that Astra prompts above 272K input tokens use $20 input, $2 cached input, $25 cache writes and $75 output per million tokens for the full request. Anthropic's Fable 5.1 model page lists standard $10 input and $50 output token rates across the model's 1M context window."),
+        ("What do independent benchmarks say?", "Artificial Analysis Intelligence Index v4.3.2 gives GPT-6 Astra at max effort and Claude Fable 5.1 at max effort the same overall Intelligence Index score of 53, while individual benchmark results differ. This is evidence that task mix and reasoning configuration matter more than a single overall ranking."),
+        ("Should I use Claude Opus 5.5 instead of Fable 5.1?", "Anthropic recommends starting with Opus 5.5 for most workloads and moving to Fable 5.1 when higher-effort Opus evaluations still fall short. Fable 5.1 is a premium escalation tier, not Anthropic's default recommendation for every task."),
+        ("Does GPT-6 Astra support Fast mode?", "Yes. OpenAI offers Fast mode for GPT-6 Astra at 2x Standard pricing. OpenAI notes that Fast mode for Astra does not include a latency SLA."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
+
+    sources = [
+        ("OpenAI · GPT-6 Astra model card", "https://developers.openai.com/api/docs/models/gpt-6-astra"),
+        ("OpenAI · GPT-6 model guidance", "https://developers.openai.com/api/docs/guides/latest-model"),
+        ("OpenAI · API pricing", "https://developers.openai.com/api/docs/pricing"),
+        ("OpenAI · GPT-6 Astra launch", "https://openai.com/index/gpt-6-astra/"),
+        ("Anthropic · Claude Fable 5.1 model page", "https://platform.claude.com/docs/en/models/fable-5-1/overview"),
+        ("Anthropic · Fable 5.1 announcement", "https://www.anthropic.com/claude-fable-and-mythos-5-1"),
+        ("Anthropic · Claude pricing", "https://platform.claude.com/docs/en/about-claude/pricing"),
+        ("Artificial Analysis · Astra vs Fable 5.1", "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-vs-claude-fable-5-1"),
+        ("Artificial Analysis · Intelligence Index v4.3", "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"),
+    ]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label,url in sources
+    )
+
+    relevant = [
+        item for item in items
+        if "GPT-6 Astra" in extract_models(item["title"]) or "Claude Fable 5.1" in extract_models(item["title"])
+    ][:8]
+    signal_rows = "".join(signal_row(item) for item in relevant)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"WebPage","@id":canonical+"#webpage","url":canonical,
+                "name":"GPT-6 Astra vs Claude Fable 5.1: Pricing, Coding, Agents and Benchmarks",
+                "description":description,"dateModified":verified,
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "about":[{"@type":"Thing","name":"GPT-6 Astra"},{"@type":"Thing","name":"Claude Fable 5.1"}],
+                "citation":[url for _label,url in sources],"inLanguage":"en"
+            },
+            {"@type":"BreadcrumbList","itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":3,"name":"GPT-6 Astra vs Claude Fable 5.1","item":canonical}
+            ]},
+            {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
+    <body class="intel-page comparison-page">{page_header("models")}<main>
+      <section class="comparison-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Astra vs Fable 5.1</span></nav>
+        <p class="eyebrow">FRONTIER MODEL COMPARISON / VERIFIED {escape(verified)}</p>
+        <h1>GPT-6 Astra<br><span>vs Claude Fable 5.1.</span></h1>
+        <p>Two frontier models with the same $10 / $50 headline token price and nearly the same context capacity. The real differences appear in long-context billing, cache economics, reasoning controls, agent architecture and task-level performance.</p>
+        <div class="hero-actions"><a class="primary-cta" href="#quick-answer">Quick answer <span>↓</span></a><a class="secondary-cta" href="#benchmarks">Benchmark evidence</a></div>
+      </section>
+
+      <section id="quick-answer" class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">QUICK ANSWER</p><h2>Same sticker price. Different operating economics and agent behavior.</h2>
+        <p>GPT-6 Astra and Claude Fable 5.1 both list $10 input and $50 output per million tokens and both support 128K maximum output. Astra has a slightly larger 1.05M context window and a broader set of OpenAI-native agent controls. Fable 5.1 has much cheaper cache reads and avoids Astra's long-context price multiplier above 272K input tokens. Independent evaluations currently show no clean universal capability winner across task types.</p></div>
+        <div class="model-decision-grid">
+          <article><span>GPT-6 ASTRA FIT</span><h3>OpenAI-native frontier agents</h3><p>Strong fit when you need Responses API tooling, async tool calls, mid-turn steering, computer use, or OpenAI’s highest-capability model for end-to-end work.</p><a href="/models/gpt-6-astra/">Open Astra reference ↗</a></article>
+          <article><span>CLAUDE FABLE 5.1 FIT</span><h3>Long-horizon, cache-heavy work</h3><p>Strong fit when long conversations reuse large contexts, demanding reasoning matters, and Anthropic’s long-running agent workflow fits your architecture.</p><a href="/models/claude-fable-5-1/">Open Fable reference ↗</a></article>
+          <article><span>DECISION RULE</span><h3>Evaluate cost per accepted task</h3><p>Measure completion quality, retries, tool errors, reasoning tokens, context reuse, latency and human correction. Identical per-token list prices do not imply identical total bills.</p></article>
+        </div>
+      </section>
+
+      <section id="specs" class="comparison-table-section shell">
+        <div class="intel-section-head"><div><p class="eyebrow">OFFICIAL SPECIFICATIONS</p><h2>Side-by-side facts.</h2></div><span>Standard short-context rates</span></div>
+        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Provider</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Reasoning</th><th>Modalities</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody>{rows}</tbody></table></div>
+        <p class="reference-note">Both models list the same Standard short-context input/output token prices. Astra’s cached-input price is $1 / MTok; Fable 5.1’s cache-read price is $0.25 / MTok. OpenAI applies a long-context multiplier to Astra above 272K input tokens.</p>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Headline pricing is identical. Workload pricing is not.</h2><p>Short prompts make the two models look economically identical. Large contexts and repeated cached prefixes create a different result.</p></div>
+        <div class="cost-section"><h3>100K input + 10K output</h3><div class="cost-grid">{short_cards}</div><h3>10M input + 1M output</h3><div class="cost-grid">{monthly_cards}</div><h3>500K input + 50K output</h3><div class="cost-grid">{long_cards}</div></div>
+        <div class="model-caveat"><strong>The long-context break point</strong><p>For Astra, prompts above 272K input tokens are billed at 2× input/cache and 1.5× output rates for the entire request. In the 500K + 50K example, that changes Astra from a nominal $7.50 short-context calculation to about $13.75. Anthropic lists Fable 5.1 at its standard $10 / $50 rates across the 1M context window, producing about $7.50 for the same token counts.</p></div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">CACHE ECONOMICS</p><h2>Fable 5.1 is cheaper when the same large prefix is reused.</h2><p>Cache economics matter for coding agents, long research sessions and enterprise workflows that repeatedly reuse repository context, policy text, tool schemas or accumulated task state.</p></div>
+        <div class="cost-section"><h3>1M cached input + 100K output</h3><div class="cost-grid">{cache_cards}</div></div>
+        <div class="model-caveat"><strong>GPT-6 Astra</strong><p>Short-context cached input is $1 / MTok and cache writes are $12.50 / MTok. Above the long-context threshold, those rates rise to $2 and $25 respectively.</p></div>
+        <div class="model-caveat"><strong>Claude Fable 5.1</strong><p>Cache reads are $0.25 / MTok, five-minute cache writes are $12.50 / MTok and one-hour writes are $20 / MTok. Anthropic explicitly highlights cheaper cache reads as a major part of Fable 5.1’s improved agent economics.</p></div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">BATCH & FAST INFERENCE</p><h2>Same Batch token economics; different premium-serving options.</h2></div>
+        <div class="cost-section"><h3>Batch · 10M input + 1M output</h3><div class="cost-grid">{batch_cards}</div></div>
+        <div class="model-api-grid">
+          <div><span>OPENAI BATCH / FLEX</span><strong>50% of Standard</strong><p>OpenAI lists Batch and Flex at 50% of Standard rates for GPT-6 models, useful for workloads that can trade immediacy for lower cost.</p></div>
+          <div><span>ANTHROPIC BATCH</span><strong>50% discount</strong><p>Anthropic also lists a 50% input/output discount through the Batch API for Fable 5.1.</p></div>
+          <div><span>ASTRA FAST MODE</span><strong>2× Standard pricing</strong><p>OpenAI offers Fast mode for GPT-6 Astra at twice the applicable Standard token rates. OpenAI notes that Astra Fast mode does not include a latency SLA.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split shell">
+        <div><p class="eyebrow">CONTEXT & OUTPUT</p><h2>1.05M vs 1M context is less important than how the context is billed and reused.</h2>
+        <p>GPT-6 Astra lists a <strong>1,050,000-token context window</strong>; Claude Fable 5.1 lists <strong>1,000,000 tokens</strong>. Both list <strong>128,000 maximum output tokens</strong>.</p>
+        <p>The raw context advantage is about 5%, which is rarely decisive by itself. In production, retrieval quality, context compaction, cache reuse, tool access and how quickly the agent can recover relevant old information matter more than the extra 50K tokens.</p>
+        <p>Cost is the more important long-context difference: Astra changes pricing after 272K input tokens, while Fable 5.1’s published model pricing does not add the same threshold multiplier.</p></div>
+        <aside class="model-side-note"><span>ARCHITECTURE RULE</span><strong>Do not use a million-token window as a dumping ground.</strong><p>Large context can hide poor retrieval design. Keep the active working set intentional, cache stable prefixes and let tools fetch the information the model actually needs.</p></aside>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">REASONING</p><h2>Both support deep effort controls, but they reason differently.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>GPT-6 ASTRA</span><h3>Explicit effort levels</h3><p>Astra supports low, medium, high, xhigh and max. It does not support none. OpenAI also allows changing effort mid-conversation with a configuration update while preserving the cached prompt prefix in compatible workflows.</p></article>
+          <article><span>CLAUDE FABLE 5.1</span><h3>Adaptive thinking, always on</h3><p>Fable decides when and how much to think within the effort envelope. It supports low through max and defaults to high on the API. Thinking cannot be disabled.</p></article>
+          <article><span>FAIR EVALUATION</span><h3>Match effort settings deliberately</h3><p>Independent results change materially with reasoning configuration. Compare representative effort levels, not one model at max against another at a default or cheaper setting.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">CODING</p><h2>Vendor tests and independent tests tell a more nuanced story than a single coding score.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>OPENAI · TERMINAL-BENCH 4.0</span><h3>57.9% vs 55.8%</h3><p>OpenAI reports Astra at 57.9% and Fable 5.1 at 55.8% on Terminal-Bench 4.0 under its launch evaluation setup.</p></article>
+          <article><span>OPENAI · DEEPSWE 1.1</span><h3>74.1% vs 67.4%</h3><p>OpenAI reports a larger Astra lead on DeepSWE in the same launch table. The harness and model settings matter when comparing these numbers to other public runs.</p></article>
+          <article><span>ANTHROPIC · CURSORBENCH 3.2</span><h3>73.4% for Fable 5.1</h3><p>Anthropic reports strong Fable results on CursorBench and positions the model around long-running coding and root-cause work. This is a vendor evaluation, not a direct neutral head-to-head with current Astra under one shared harness.</p></article>
+          <article><span>INDEPENDENT · TERMINAL-BENCH 4.0</span><h3>Task mix changes the picture</h3><p>Artificial Analysis currently reports different results across reasoning settings and benchmark categories, reinforcing that one coding benchmark does not define a universal leader.</p></article>
+          <article><span>PRODUCTION TEST</span><h3>Measure mergeable work</h3><p>Use your repository, test suite, CI, tools and review standards. Track accepted patches, regressions, retry loops and engineer correction time rather than only benchmark accuracy.</p></article>
+          <article><span>LONG-RUN BEHAVIOR</span><h3>Agent coherence matters</h3><p>For large refactors and migrations, staying on-task across many tool calls can be more valuable than a few points on a one-shot benchmark.</p></article>
+        </div>
+      </section>
+
+      <section id="benchmarks" class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">INDEPENDENT BENCHMARK EVIDENCE</p><h2>Artificial Analysis currently shows a tie overall—and different strengths underneath.</h2><p>The independent Intelligence Index v4.3.2 gives GPT-6 Astra at max effort and Claude Fable 5.1 at max effort an overall score of 53. Individual tests split in different directions.</p></div>
+        <div class="model-capability-grid">
+          <article><span>INTELLIGENCE INDEX</span><h3>53 vs 53</h3><p>Artificial Analysis reports an overall tie for Astra max and Fable 5.1 max in its current v4.3.2 index.</p></article>
+          <article><span>AUTOMATIONBENCH-AA</span><h3>68% Astra · 59% Fable</h3><p>In the max-effort comparison, Astra leads this private workflow-automation evaluation.</p></article>
+          <article><span>TERMINAL-BENCH 4.0</span><h3>59% Astra · 52% Fable</h3><p>Artificial Analysis reports an Astra lead in this terminal-oriented agent benchmark at the compared settings.</p></article>
+          <article><span>SCICODE</span><h3>56% Astra · 63% Fable</h3><p>Fable leads the scientific coding evaluation in the same independent max-effort comparison.</p></article>
+          <article><span>HUMANITY'S LAST EXAM</span><h3>55% Astra · 59% Fable</h3><p>Fable leads this reasoning evaluation in the current Artificial Analysis comparison.</p></article>
+          <article><span>AA-LCR v1.1</span><h3>81% Astra · 85% Fable</h3><p>Fable leads the long-context reasoning result under the same independent comparison configuration.</p></article>
+        </div>
+        <div class="model-caveat"><strong>Why benchmark pages disagree</strong><p>Reasoning effort, fallback behavior, harness design, tool access, prompt format and benchmark revisions all change results. OpenAI, Anthropic and independent evaluators do not always run identical configurations. Treat benchmarks as workload signals, then reproduce the most relevant tasks inside your own system.</p></div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">AGENTS & TOOLS</p><h2>The biggest differences may sit outside the base model.</h2></div>
+        <div class="model-api-grid">
+          <div><span>GPT-6 · ASYNC TOOLS</span><strong>Reason while tools run</strong><p>Astra can continue independent reasoning or other work while application-run function/custom tools execute asynchronously.</p></div>
+          <div><span>GPT-6 · MID-TURN STEERING</span><strong>Change direction while running</strong><p>Over Responses WebSocket connections, applications can send additional user requirements during an in-progress response.</p></div>
+          <div><span>GPT-6 · MODEL STACK</span><strong>Responses + computer use + multi-agent</strong><p>OpenAI documents computer use, Structured Outputs, programmatic tools, multi-agent orchestration, persisted reasoning and compaction across GPT-6 workflows.</p></div>
+          <div><span>FABLE · PER-MESSAGE EFFORT</span><strong>Beta reasoning control</strong><p>Anthropic supports changing effort later in a conversation without rewriting the stable prompt prefix in supported beta workflows.</p></div>
+          <div><span>FABLE · TURN-SCOPED SYSTEM MESSAGES</span><strong>Beta local guidance</strong><p>Add temporary system guidance for a turn without rewriting earlier history, helping preserve cache and long-running conversation state.</p></div>
+          <div><span>FABLE · PROGRESS UPDATES</span><strong>User-visible long-task status</strong><p>Anthropic supports readable progress-update content between tool calls when the application opts into the relevant beta display behavior.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">COMPUTER USE & PROFESSIONAL WORK</p><h2>Both target complete workflows, not just chat responses.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>GPT-6 ASTRA</span><h3>Computer and browser workflows</h3><p>OpenAI positions Astra as state-of-the-art across computer use, browsing, software engineering and professional work, and exposes computer-use tooling through its agent stack.</p></article>
+          <article><span>CLAUDE FABLE 5.1</span><h3>Documents, spreadsheets and slides</h3><p>Anthropic specifically highlights complete knowledge-work artifacts and long research/coding workflows, rather than only short reasoning answers.</p></article>
+          <article><span>OPERATIONS</span><h3>Tool boundaries still decide safety</h3><p>Neither model should receive unrestricted credentials or execution rights simply because its benchmark or alignment results improve. Permissions, sandboxing and approvals remain application controls.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">MIGRATION & INTEGRATION</p><h2>The model switch can require application changes.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Astra tool use belongs in Responses.</strong><p>OpenAI recommends Responses for GPT-6 tooling. Chat Completions support is more limited for tool-oriented reasoning workflows.</p></div>
+          <div><span>02</span><strong>Astra does not support none reasoning.</strong><p>If an older route used minimal or no reasoning, start with low and re-evaluate latency and cost.</p></div>
+          <div><span>03</span><strong>Fable forced tool choice changed.</strong><p>Anthropic documents breaking changes around forced tool-use patterns. Use current tool-selection guidance and regression-test long agent loops.</p></div>
+          <div><span>04</span><strong>Fable thinking blocks are conversation state.</strong><p>Earlier Claude models cannot read Fable 5.1 thinking blocks, and editing earlier conversation history can invalidate them.</p></div>
+          <div><span>05</span><strong>Both reward stable prompt prefixes.</strong><p>Design system instructions, tools and reusable context so caching can work instead of continuously mutating the entire prefix.</p></div>
+          <div><span>06</span><strong>Re-run effort sweeps.</strong><p>Do not assume high, xhigh or max is automatically optimal. Compare quality, latency and total token usage on representative tasks.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">WHEN TO CHOOSE</p><h2>Use workload shape to decide, not a universal model ranking.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>ASTRA FIT</span><h3>Tool-rich OpenAI agents</h3><p>Consider Astra when async tools, mid-turn steering, computer use or other GPT-6 Responses features materially improve your workflow.</p></article>
+          <article><span>ASTRA FIT</span><h3>Hard end-to-end professional work</h3><p>OpenAI positions Astra at the top of its stack for complex reasoning, coding, research and full workflow execution.</p></article>
+          <article><span>FABLE FIT</span><h3>Cache-heavy long sessions</h3><p>Fable’s low cache-read price and standard pricing across the 1M context window can matter for long-running context-heavy agents.</p></article>
+          <article><span>FABLE FIT</span><h3>Demanding research and knowledge work</h3><p>Anthropic positions Fable for hard reasoning and long-horizon agentic work when Opus 5.5 at higher effort still fails the required eval bar.</p></article>
+        </div>
+        <div class="model-related-links">
+          <a href="/models/gpt-6-astra/"><span>OPENAI REFERENCE</span><strong>GPT-6 Astra</strong><b>↗</b></a>
+          <a href="/models/claude-fable-5-1/"><span>ANTHROPIC REFERENCE</span><strong>Claude Fable 5.1</strong><b>↗</b></a>
+          <a href="/guides/gpt-6-vs-claude/"><span>FAMILY COMPARISON</span><strong>GPT-6 vs Claude</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <section class="model-deep-section shell">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What can make an apparently simple comparison wrong.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Same token price does not mean same task price.</strong><p>Long-context multipliers, cache reuse, reasoning tokens, tool calls and retries can move the final bill substantially.</p></div>
+          <div><span>02</span><strong>Benchmark configuration matters.</strong><p>Reasoning effort, fallback, harness and tool access can reverse the apparent advantage on individual tests.</p></div>
+          <div><span>03</span><strong>Fable is not Anthropic's default recommendation for most workloads.</strong><p>Anthropic says to start with Opus 5.5 for most tasks and move to Fable when higher-effort Opus evals still fall short.</p></div>
+          <div><span>04</span><strong>Astra long context costs more.</strong><p>Requests beyond 272K input tokens use the higher rates for the full request, not only the tokens above the threshold.</p></div>
+          <div><span>05</span><strong>Safety claims are not authorization controls.</strong><p>Improved alignment or safeguard benchmarks do not replace least privilege, sandboxing, audit logs or human approval for consequential actions.</p></div>
+          <div><span>06</span><strong>Consumer apps and APIs are different products.</strong><p>This page compares model and API characteristics; ChatGPT and Claude app plans add routing, connectors, limits and interface features of their own.</p></div>
+        </div>
+      </section>
+
+      <div class="model-reference-lower shell"><div class="model-sources"><p class="eyebrow">OFFICIAL & INDEPENDENT SOURCES</p>{source_links}</div><div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div></div>
+
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Latest Astra and Claude changes.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>
+    </main>{page_footer()}</body></html>'''
+
 def claude_opus_55_vs_gemini_38_flash_html(items):
     canonical = f"{BASE_URL}/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
@@ -5579,6 +5843,10 @@ def build_discovery_pages(items, current_items):
     opus_gemini_path.mkdir(parents=True, exist_ok=True)
     (opus_gemini_path / "index.html").write_text(claude_opus_55_vs_gemini_38_flash_html(items), encoding="utf-8")
 
+    astra_fable_path = COMPARE_DIR / GPT6_ASTRA_FABLE_COMPARE_SLUG
+    astra_fable_path.mkdir(parents=True, exist_ok=True)
+    (astra_fable_path / "index.html").write_text(gpt6_astra_vs_claude_fable_51_html(items), encoding="utf-8")
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -5642,6 +5910,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/", generated_today),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_ASTRA_FABLE_COMPARE_SLUG}/", generated_today),
     ]
 
     for item in items:
