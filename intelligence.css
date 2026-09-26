@@ -522,3 +522,46 @@
   .si-timeline-list>div{grid-template-columns:1fr;padding-left:4px}.si-timeline-list p{grid-column:1}.si-timeline-list>div:before{top:29px}
   .si-glossary-grid article{grid-template-columns:1fr}.si-glossary-grid p{grid-column:1}
 }
+
+
+/* AI Agent Security living reference */
+.security-feature{margin-top:26px}
+.security-feature-frame{position:relative;overflow:hidden;aspect-ratio:1672/941;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at 50% 45%,rgba(200,255,77,.08),transparent 28rem),linear-gradient(145deg,#0d1218,#080b0f)}
+.security-feature-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.security-feature-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px}
+.security-feature-fallback span{color:var(--accent);font:10px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em}
+.security-feature-fallback strong{margin-top:12px;color:#85919e;font-size:clamp(18px,2.4vw,30px);letter-spacing:-.035em}
+.security-feature figcaption{max-width:900px;margin:12px 2px 0;color:#697582;font-size:11px;line-height:1.65}
+.security-stack{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:28px 0}
+.security-stack article,.agent-security-planes article,.security-log-grid article{padding:20px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.security-stack span,.agent-security-planes span,.security-log-grid span{display:block;color:#65717e;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.11em}
+.security-stack h3,.agent-security-planes h3,.security-log-grid h3{margin:28px 0 8px;font-size:18px}
+.security-stack p,.agent-security-planes p,.security-log-grid p{margin:0!important;color:#778390!important;font-size:12px!important;line-height:1.65!important}
+.agent-security-planes{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:28px 0}
+.agent-security-planes article:first-child{border-color:rgba(200,255,77,.2)}
+.security-risk-table{min-width:980px}
+.security-risk-table th:first-child{min-width:220px}
+.security-risk-table td:nth-child(2){min-width:330px}
+.security-risk-table td:nth-child(3){min-width:360px}
+.security-risk-table tbody th strong{display:block;margin-top:6px}
+.risk-id{display:inline-block;color:var(--accent);font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em}
+.security-checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:28px 0}
+.security-checklist>div{padding:21px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.security-checklist span{display:block;color:var(--accent);font-size:9px;font-weight:850;letter-spacing:.12em}
+.security-checklist strong{display:block;margin:26px 0 8px;font-size:18px}
+.security-checklist p{margin:0!important;color:#788491!important;font-size:12px!important;line-height:1.68!important}
+.security-log-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0}
+.agent-redteam-list{margin:28px 0;border-top:1px solid var(--line)}
+.agent-redteam-list>div{display:grid;grid-template-columns:52px 220px 1fr;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);align-items:start}
+.agent-redteam-list span{color:#596572;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.agent-redteam-list strong{font-size:13px}
+.agent-redteam-list p{margin:0!important;color:#7d8995!important;font-size:12px!important;line-height:1.6!important}
+.production-checklist{margin:28px 0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0a0e13}
+.production-checklist label{display:grid;grid-template-columns:48px 1fr;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);align-items:center}
+.production-checklist label:last-child{border-bottom:0}
+.production-checklist span{color:#66727f;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.production-checklist strong{font-size:13px;line-height:1.45}
+.security-guide-page .guide-sources{padding-bottom:70px!important}
+.security-guide-page .related-signals{padding:8px 0 112px}
+@media(max-width:980px){.agent-security-planes{grid-template-columns:repeat(2,1fr)}.security-stack{grid-template-columns:repeat(2,1fr)}.security-log-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.security-feature-frame{border-radius:18px}.security-stack,.agent-security-planes,.security-checklist,.security-log-grid{grid-template-columns:1fr}.agent-redteam-list>div{grid-template-columns:36px 1fr}.agent-redteam-list p{grid-column:2}.production-checklist label{grid-template-columns:38px 1fr}}
