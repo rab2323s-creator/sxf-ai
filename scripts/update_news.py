@@ -1139,6 +1139,7 @@ def signals_index_html(items):
         <p>Models, tools, research and open-source developments organized as traceable signals with the primary source kept one click away.</p>
         <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>4</strong><span>intelligence layers</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
       </section>
+      <section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>REFERENCE GUIDE</span><strong>AI Agent Security in 2026</strong><p>Understand prompt injection, MCP, permissions and sandboxing behind the security signals in the radar.</p></div><b>Read security guide ↗</b></a></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST</p><h2>Signal stream.</h2></div><a href="/brief/">Read today’s brief ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -1156,6 +1157,11 @@ def topic_page_html(topic, items):
         "description": topic["description"], "isPartOf": {"@id": "https://sxf.si/#website"}, "inLanguage": "en"
     }
     rows = "".join(signal_row(item) for item in items[:30])
+    security_reference = ""
+    if topic["slug"] == "ai-security":
+        security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>SECURITY REFERENCE</span><strong>AI Agent Security in 2026</strong><p>Prompt injection, MCP, permissions, sandboxing, memory integrity, secrets and production controls.</p></div><b>Read the guide ↗</b></a></section>'''
+    elif topic["slug"] in {"ai-agents", "coding-ai"}:
+        security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>RELATED SECURITY GUIDE</span><strong>Secure the agent before expanding its permissions.</strong><p>Identity, tool boundaries, prompt injection, MCP, sandboxing and human approval.</p></div><b>Open security guide ↗</b></a></section>'''
     return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
@@ -1163,6 +1169,7 @@ def topic_page_html(topic, items):
       <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
       <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
       <aside class="source-card"><span class="source-card-label">COVERAGE WINDOW</span><strong>{escape(topic["name"])}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
+      {security_reference}
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RECENT</p><h2>Latest in {escape(topic["name"])}.</h2></div><a href="/topics/">All topics ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
@@ -3365,6 +3372,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-agent-security/",
+            "category": "Security · Agents",
+            "categories": ["security", "agents", "research", "coding"],
+            "kicker": "SECURITY REFERENCE",
+            "title": "AI Agent Security in 2026",
+            "description": "Prompt injection, MCP security, permissions, sandboxing, memory integrity, secrets, human approval and production controls.",
+            "meta": "Prompt injection · MCP · Identity · Sandboxing",
+            "updated": "Sep 26, 2026",
+            "read_time": "30 min",
+        },
+        {
             "href": "/guides/best-ai-coding-tools/",
             "category": "Coding",
             "categories": ["coding", "agents"],
@@ -3516,6 +3534,7 @@ def guides_index_html(items, current_items):
         ("models", "Models"),
         ("coding", "Coding"),
         ("agents", "Agents"),
+        ("security", "Security"),
         ("open-source", "Open Source"),
         ("research", "Research"),
         ("superintelligence", "Superintelligence"),
@@ -3958,6 +3977,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/ai-agent-security/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
