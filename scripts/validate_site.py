@@ -106,6 +106,7 @@ def main():
         target=local_path(loc)
         if not target.exists():
             fail(f"sitemap URL missing file: {loc}")
+        validate_html(target)
         html=target.read_text(encoding="utf-8")
         if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex',html,re.I):
             fail(f"noindex URL in sitemap: {loc}")
