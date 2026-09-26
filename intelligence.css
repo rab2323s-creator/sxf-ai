@@ -578,3 +578,25 @@
 .security-guide-page .related-signals{padding:8px 0 112px}
 @media(max-width:980px){.agent-security-planes{grid-template-columns:repeat(2,1fr)}.security-stack{grid-template-columns:repeat(2,1fr)}.security-log-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.security-feature-frame{border-radius:18px}.security-stack,.agent-security-planes,.security-checklist,.security-log-grid{grid-template-columns:1fr}.agent-redteam-list>div{grid-template-columns:36px 1fr}.agent-redteam-list p{grid-column:2}.production-checklist label{grid-template-columns:38px 1fr}}
+
+
+/* Copilot alternatives mobile cards */
+@media(max-width:720px){
+  .copilot-alternatives-guide .guide-table-wrap{overflow:visible;border:0;background:transparent}
+  .copilot-alternatives-guide .guide-table{display:block;min-width:0;width:100%}
+  .copilot-alternatives-guide .guide-table thead{display:none}
+  .copilot-alternatives-guide .guide-table tbody{display:grid;gap:12px}
+  .copilot-alternatives-guide .guide-table tr{display:block;border:1px solid var(--line);border-radius:16px;background:#0a0e13;overflow:hidden}
+  .copilot-alternatives-guide .guide-table th,.copilot-alternatives-guide .guide-table td{display:block;width:100%;min-width:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:12px}
+  .copilot-alternatives-guide .guide-table th{font-size:14px;background:#080b0f}
+  .copilot-alternatives-guide .guide-table td:last-child{border-bottom:0}
+  .copilot-alternatives-guide .guide-table td[data-label]::before{content:attr(data-label);display:block;margin-bottom:4px;color:#66717e;font-size:9px;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+  .copilot-alternatives-guide .guide-decision-table>div{grid-template-columns:1fr;gap:7px}
+  .copilot-alternatives-guide .guide-choice-grid{grid-template-columns:1fr}
+  .copilot-alternatives-guide .tool-review-head{grid-template-columns:34px 1fr}
+  .copilot-alternatives-guide .tool-review-head>span{margin-top:44px}
+  .copilot-alternatives-guide .guide-pricing-list>div{grid-template-columns:1fr;gap:6px}
+  .copilot-alternatives-guide .guide-pricing-list a{justify-self:start}
+  .copilot-alternatives-guide .guide-inline-cta{grid-template-columns:1fr}
+  .copilot-alternatives-guide .guide-inline-cta>a{justify-self:start}
+}
