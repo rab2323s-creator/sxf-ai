@@ -3985,19 +3985,46 @@ def build_discovery_pages(items, current_items):
 def sitemap_entry(url, lastmod):
     return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
 
+def content_lastmod(items, fallback="2026-09-26"):
+    dates = []
+    for item in items:
+        modified = parse_date(item.get("modified_at", "")) or parse_date(item.get("published", ""))
+        if modified is not None:
+            dates.append(modified)
+    return max(dates).date().isoformat() if dates else fallback
+
 def update_sitemap(items):
     generated_today = datetime.now(timezone.utc).date().isoformat()
+    global_lastmod = content_lastmod(items)
+    category_lastmod = {
+        category: content_lastmod([item for item in items if item["category"] == category], global_lastmod)
+        for category in ("Models", "Tools", "Research", "Open Source")
+    }
+    model_collection_items = [
+        item for item in items
+        if item["category"] == "Models" or extract_models(item["title"])
+    ]
+    guide_lastmod = content_lastmod(items[:6], "2026-09-26")
+    gpt6_compare_items = [
+        item for item in items
+        if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
+    ]
+    sol_opus_items = [
+        item for item in items
+        if {"GPT-6 Sol", "Claude Opus 5.5"}.intersection(extract_models(item["title"]))
+    ]
+
     rows = [
-        sitemap_entry(f"{BASE_URL}/", generated_today),
-        sitemap_entry(f"{BASE_URL}/models/", generated_today),
-        sitemap_entry(f"{BASE_URL}/tools/", generated_today),
-        sitemap_entry(f"{BASE_URL}/research/", generated_today),
-        sitemap_entry(f"{BASE_URL}/open-source/", generated_today),
-        sitemap_entry(f"{BASE_URL}/signals/", generated_today),
-        sitemap_entry(f"{BASE_URL}/topics/", generated_today),
+        sitemap_entry(f"{BASE_URL}/", global_lastmod),
+        sitemap_entry(f"{BASE_URL}/models/", content_lastmod(model_collection_items, category_lastmod["Models"])),
+        sitemap_entry(f"{BASE_URL}/tools/", category_lastmod["Tools"]),
+        sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
+        sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
+        sitemap_entry(f"{BASE_URL}/signals/", global_lastmod),
+        sitemap_entry(f"{BASE_URL}/topics/", global_lastmod),
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
-        sitemap_entry(f"{BASE_URL}/about/", generated_today),
-        sitemap_entry(f"{BASE_URL}/guides/", generated_today),
+        sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
@@ -4007,8 +4034,8 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", generated_today),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", generated_today),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
+        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
     ]
 
     for item in items:
@@ -4019,11 +4046,11 @@ def update_sitemap(items):
 
     for slug, (_topic, matched) in topic_groups(items).items():
         if topic_page_indexable(matched):
-            rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", generated_today))
+            rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", content_lastmod(matched)))
 
     for name, matched in model_groups(items).items():
         if model_page_indexable(name, matched):
-            rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", generated_today))
+            rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", content_lastmod(matched)))
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
