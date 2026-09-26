@@ -1482,6 +1482,7 @@ def category_path(category):
 def page_header(active=""):
     links = [
         ("/models/", "Models", "models"),
+        ("/compare/", "Compare", "compare"),
         ("/tools/", "Tools", "tools"),
         ("/research/", "Research", "research"),
         ("/open-source/", "Open Source", "open-source"),
@@ -1512,7 +1513,7 @@ def page_footer():
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
           <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
-          <div class="footer-nav-group"><p>EXPLORE</p><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
           <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
         </nav>
       </div>
@@ -4790,6 +4791,246 @@ def guides_index_html(items, current_items):
       </section>
     </main>{page_footer()}{library_script}</body></html>'''
 
+
+def compare_index_html(items):
+    canonical = f"{BASE_URL}/compare/"
+    verified = datetime.now(timezone.utc).date().isoformat()
+    title = "Compare AI Models: GPT-6, Claude & Gemini (2026) | SXF / AI"
+    description = "Compare GPT-6, Claude and Gemini models on pricing, context, coding, agents, reasoning, multimodal support, caching and production fit using source-first analysis."
+
+    comparisons = [
+        {
+            "url": f"/compare/{GPT6_ASTRA_FABLE_COMPARE_SLUG}/",
+            "title": "GPT-6 Astra vs Claude Fable 5.1",
+            "providers": "OpenAI · Anthropic",
+            "kicker": "Frontier matchup",
+            "summary": "Same $10/$50 headline price. Compare long-context billing, cache economics, reasoning, coding, agents and independent benchmark evidence.",
+            "facts": "1.05M vs 1M context · 128K output each",
+            "tags": "openai anthropic frontier coding agents pricing benchmarks long-context",
+        },
+        {
+            "url": f"/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/",
+            "title": "GPT-6 Sol vs Gemini 3.8 Flash",
+            "providers": "OpenAI · Google",
+            "kicker": "Coding · agents · multimodal",
+            "summary": "Compare lower-cost production models on token economics, 1M+ context, tools, reasoning controls and broad multimodal input.",
+            "facts": "$2/$10 vs $0.75/$3.75* · 1M+ context",
+            "tags": "openai google coding agents pricing multimodal long-context",
+        },
+        {
+            "url": f"/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/",
+            "title": "Claude Opus 5.5 vs Gemini 3.8 Flash",
+            "providers": "Anthropic · Google",
+            "kicker": "Agentic coding · economics",
+            "summary": "Compare long-running coding, cache economics, Batch and Fast inference, multimodal inputs, tools and deployment fit.",
+            "facts": "1M+ context · cache + batch analysis",
+            "tags": "anthropic google coding agents pricing multimodal caching batch",
+        },
+        {
+            "url": f"/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/",
+            "title": "GPT-6 Sol vs Claude Opus 5.5",
+            "providers": "OpenAI · Anthropic",
+            "kicker": "Agentic coding",
+            "summary": "A direct comparison of two serious coding and agent models, including standard and long-context costs, reasoning controls and tool architecture.",
+            "facts": "$2/$10 vs $4/$20 · 1.05M vs 1M",
+            "tags": "openai anthropic coding agents pricing long-context",
+        },
+        {
+            "url": f"/compare/{GPT6_COMPARE_SLUG}/",
+            "title": "GPT-6 Astra vs Sol vs Luna",
+            "providers": "OpenAI",
+            "kicker": "Within-family decision",
+            "summary": "Choose the right GPT-6 tier by capability, workload and unit economics instead of treating GPT-6 as one model.",
+            "facts": "Same 1.05M context · 100× price spread",
+            "tags": "openai family pricing coding agents",
+        },
+    ]
+
+    featured = comparisons[:2]
+    featured_html = "".join(
+        f'''<a class="compare-feature-card" href="{escape(c["url"], quote=True)}">
+          <div class="compare-feature-meta"><span>{escape(c["kicker"])}</span><small>{escape(c["providers"])}</small></div>
+          <h2>{escape(c["title"])}</h2>
+          <p>{escape(c["summary"])}</p>
+          <div class="compare-feature-foot"><span>{escape(c["facts"])}</span><b>Open comparison ↗</b></div>
+        </a>'''
+        for c in featured
+    )
+    cards_html = "".join(
+        f'''<article class="compare-library-card" data-compare-card data-tags="{escape(c["tags"], quote=True)}" data-search="{escape((c["title"] + " " + c["providers"] + " " + c["summary"] + " " + c["facts"]).lower(), quote=True)}">
+          <a href="{escape(c["url"], quote=True)}">
+            <div class="compare-card-meta"><span>{escape(c["kicker"])}</span><small>{escape(c["providers"])}</small></div>
+            <h3>{escape(c["title"])}</h3>
+            <p>{escape(c["summary"])}</p>
+            <div class="compare-card-foot"><small>{escape(c["facts"])}</small><b>Compare models ↗</b></div>
+          </a>
+        </article>'''
+        for c in comparisons
+    )
+
+    faq_items = [
+        ("What does SXF compare between AI models?", "SXF compares official API pricing, cached-input economics, context and output limits, reasoning controls, modalities, tool support, agent workflows, deployment constraints and workload fit. Independent benchmark evidence is added when a useful comparable source is available."),
+        ("Does SXF choose one best AI model?", "No. Model selection is workload-specific. A model can be stronger for one benchmark or workflow and weaker for another, while pricing, latency, tools and context economics can change the practical decision."),
+        ("How current are the model comparisons?", "The hub and comparison pages show a verification date and are generated from SXF's maintained model intelligence layer. Pricing and availability can change quickly, so the comparison pages link directly to vendor documentation used for verification."),
+        ("How are AI model prices compared?", "Token prices are normalized per million input and output tokens where possible. SXF also uses concrete workload examples and calls out long-context multipliers, caching, Batch or Fast tiers and other charges that can make headline rates misleading."),
+        ("Are benchmark scores directly comparable across vendors?", "Not always. Reasoning effort, prompts, tools, scaffolding, fallback behavior and benchmark versions can differ. SXF distinguishes vendor-reported results from independent evidence and recommends reproducing representative tasks in your own evaluation harness."),
+        ("Which models are covered?", "The current comparison library centers on the models with the strongest SXF reference pages and decision value: GPT-6 Astra, Sol and Luna, Claude Fable 5.1 and Opus 5.5, and Gemini 3.8 Flash. Coverage expands selectively rather than adding thin comparison pages."),
+    ]
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"CollectionPage","@id":canonical+"#webpage","url":canonical,
+                "name":"Compare AI Models","description":description,
+                "isPartOf":{"@id":"https://sxf.si/#website"},"inLanguage":"en",
+                "hasPart":[{"@type":"WebPage","name":c["title"],"url":BASE_URL + c["url"]} for c in comparisons]
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":[
+                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                    {"@type":"ListItem","position":2,"name":"Compare","item":canonical},
+                ]
+            },
+            {
+                "@type":"ItemList","name":"SXF AI model comparisons","numberOfItems":len(comparisons),
+                "itemListElement":[
+                    {"@type":"ListItem","position":i+1,"name":c["title"],"url":BASE_URL+c["url"]}
+                    for i,c in enumerate(comparisons)
+                ]
+            },
+            {
+                "@type":"FAQPage",
+                "mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]
+            }
+        ]
+    }
+
+    filter_script = '''<script>
+    (()=>{const cards=[...document.querySelectorAll("[data-compare-card]")],input=document.getElementById("compare-search"),buttons=[...document.querySelectorAll("[data-compare-filter]")],empty=document.getElementById("compare-empty");let active="all";
+    const apply=()=>{const q=(input?.value||"").trim().toLowerCase();let shown=0;cards.forEach(card=>{const tags=(card.dataset.tags||"").toLowerCase(),search=(card.dataset.search||"").toLowerCase();const okTag=active==="all"||tags.includes(active),okQuery=!q||search.includes(q);card.hidden=!(okTag&&okQuery);if(!card.hidden)shown++;});if(empty)empty.hidden=shown!==0;};
+    buttons.forEach(btn=>btn.addEventListener("click",()=>{active=btn.dataset.compareFilter;buttons.forEach(x=>x.classList.toggle("is-active",x===btn));apply();}));
+    input?.addEventListener("input",apply);apply();})();
+    </script>'''
+
+    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
+    <body class="intel-page compare-hub-page">{page_header("compare")}<main>
+      <section class="compare-hub-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Compare</span></nav>
+        <div class="compare-hub-hero-grid">
+          <div>
+            <p class="eyebrow">AI MODEL COMPARISONS</p>
+            <h1>Compare AI models.<br><span>By workload, not hype.</span></h1>
+          </div>
+          <div class="compare-hub-intro">
+            <p>Decision-oriented comparisons of GPT-6, Claude and Gemini models using official specifications, normalized cost examples and clearly labeled benchmark evidence.</p>
+            <p>Start with the question your application actually needs to answer: capability, coding, agents, long context, multimodal input, cost or platform fit.</p>
+          </div>
+        </div>
+        <div class="compare-hub-stats">
+          <div><strong>{len(comparisons)}</strong><span>deep comparisons</span></div>
+          <div><strong>3</strong><span>major providers</span></div>
+          <div><strong>1M+</strong><span>context class covered</span></div>
+          <div><strong>{escape(verified)}</strong><span>hub verified</span></div>
+        </div>
+      </section>
+
+      <section class="compare-featured shell">
+        <div class="intel-section-head"><div><p class="eyebrow">START HERE</p><h2>High-value model decisions.</h2></div><span>Source-first · workload-specific</span></div>
+        <div class="compare-feature-grid">{featured_html}</div>
+      </section>
+
+      <section class="compare-library shell" id="comparison-library">
+        <div class="compare-library-heading">
+          <div><p class="eyebrow">COMPARISON LIBRARY</p><h2>Find the matchup that answers your question.</h2><p>Every card below is a direct, crawlable link. Search and filters only change what you see; they do not create separate thin URLs or hide the underlying comparison pages from navigation.</p></div>
+          <div class="compare-library-count"><strong>{len(comparisons)}</strong><span>published matchups</span></div>
+        </div>
+        <div class="compare-library-tools">
+          <label class="compare-search"><span class="sr-only">Search model comparisons</span><input id="compare-search" type="search" placeholder="Search GPT-6, Claude, Gemini, pricing, coding…" autocomplete="off"></label>
+          <div class="compare-filters" aria-label="Filter comparisons">
+            <button class="compare-filter is-active" type="button" data-compare-filter="all">All</button>
+            <button class="compare-filter" type="button" data-compare-filter="openai">OpenAI</button>
+            <button class="compare-filter" type="button" data-compare-filter="anthropic">Anthropic</button>
+            <button class="compare-filter" type="button" data-compare-filter="google">Google</button>
+            <button class="compare-filter" type="button" data-compare-filter="frontier">Frontier</button>
+            <button class="compare-filter" type="button" data-compare-filter="coding">Coding</button>
+            <button class="compare-filter" type="button" data-compare-filter="agents">Agents</button>
+            <button class="compare-filter" type="button" data-compare-filter="pricing">Pricing</button>
+            <button class="compare-filter" type="button" data-compare-filter="multimodal">Multimodal</button>
+          </div>
+        </div>
+        <div class="compare-library-grid">{cards_html}</div>
+        <div id="compare-empty" class="compare-empty" hidden>No comparison matches that filter. Try a provider or workload term.</div>
+      </section>
+
+      <section class="compare-paths shell">
+        <div class="intel-section-head"><div><p class="eyebrow">COMPARE BY QUESTION</p><h2>Start from the decision, not the brand.</h2></div><span>Direct paths</span></div>
+        <div class="compare-path-grid">
+          <article><span>01 · FRONTIER</span><h3>Which top-end model fits hardest work?</h3><p>Start with Astra vs Fable when you care about frontier reasoning, long-horizon agents, cache economics and independent benchmark evidence.</p><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/">GPT-6 Astra vs Claude Fable 5.1 ↗</a></article>
+          <article><span>02 · CODING AGENTS</span><h3>Which model should run complex coding loops?</h3><p>Compare Sol vs Opus for OpenAI/Anthropic agent architecture, then add Gemini when multimodality or lower token economics are central.</p><div><a href="/compare/gpt-6-sol-vs-claude-opus-5-5/">Sol vs Opus 5.5 ↗</a><a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/">Opus 5.5 vs Gemini 3.8 Flash ↗</a></div></article>
+          <article><span>03 · COST</span><h3>Which model changes the production bill?</h3><p>Use the pages with normalized workloads, caching and long-context examples—not only headline token rates.</p><div><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/">Sol vs Gemini 3.8 Flash ↗</a><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/">Astra vs Fable 5.1 ↗</a></div></article>
+          <article><span>04 · MULTIMODAL</span><h3>Which model handles richer media input?</h3><p>Gemini 3.8 Flash directly accepts text, images, video, audio and PDFs, making its direct matchups useful for media-heavy workflows.</p><div><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/">Sol vs Gemini ↗</a><a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/">Opus vs Gemini ↗</a></div></article>
+          <article><span>05 · OPENAI FAMILY</span><h3>Which GPT-6 tier should you route to?</h3><p>Compare Astra, Sol and Luna before reaching across providers. The same family spans a 100× price range at listed short-context rates.</p><a href="/compare/gpt-6-astra-vs-sol-vs-luna/">GPT-6 Astra vs Sol vs Luna ↗</a></article>
+        </div>
+      </section>
+
+      <section class="compare-method shell">
+        <div class="compare-method-head"><p class="eyebrow">SXF COMPARISON METHOD</p><h2>What makes a useful AI model comparison.</h2><p>Google's own people-first guidance asks whether a page adds substantial value beyond obvious summaries. SXF comparisons are built around the parts that change a real deployment decision: source quality, normalized economics, architecture and uncertainty.</p></div>
+        <div class="compare-method-grid">
+          <article><span>01</span><h3>Official facts first</h3><p>Context windows, output limits, pricing, modalities, reasoning controls and product availability come from vendor documentation whenever possible.</p></article>
+          <article><span>02</span><h3>Normalize the economics</h3><p>We calculate representative workloads and call out cache reads/writes, Batch or Fast tiers, long-context multipliers and temporary promotional pricing.</p></article>
+          <article><span>03</span><h3>Separate evidence types</h3><p>Vendor benchmark claims are labeled as vendor claims. Independent benchmark data is presented separately with its reasoning settings and methodological caveats.</p></article>
+          <article><span>04</span><h3>No universal winner</h3><p>Model choice depends on task distribution, tools, latency, permissions, cost targets and acceptance criteria. The pages map tradeoffs instead of manufacturing a single score.</p></article>
+        </div>
+      </section>
+
+      <section class="compare-reading shell">
+        <div class="compare-reading-copy">
+          <p class="eyebrow">HOW TO READ MODEL COMPARISONS</p>
+          <h2>Five variables usually matter more than the benchmark headline.</h2>
+        </div>
+        <div class="compare-reading-list">
+          <div><span>01</span><strong>Task acceptance</strong><p>Does the output actually pass your test, review or business criterion?</p></div>
+          <div><span>02</span><strong>Total task cost</strong><p>Include reasoning tokens, retries, cache behavior, tools and human correction—not only list price.</p></div>
+          <div><span>03</span><strong>Agent architecture</strong><p>Tool calling, browser/computer use, async work, state persistence and steering can matter as much as the base model.</p></div>
+          <div><span>04</span><strong>Context behavior</strong><p>Nominal window size is only capacity. Retrieval, compaction, cache reuse and long-context pricing determine whether that capacity is useful.</p></div>
+          <div><span>05</span><strong>Evaluation configuration</strong><p>Reasoning effort, tools, scaffolding and benchmark version can materially change measured performance.</p></div>
+        </div>
+      </section>
+
+      <section class="compare-model-bridge shell">
+        <div class="intel-section-head"><div><p class="eyebrow">MODEL REFERENCES</p><h2>Verify the models before comparing them.</h2></div><a href="/models/">All model intelligence ↗</a></div>
+        <div class="compare-model-grid">
+          <a href="/models/gpt-6-astra/"><span>OPENAI</span><strong>GPT-6 Astra</strong><small>Top-end GPT-6 reference</small></a>
+          <a href="/models/gpt-6-sol/"><span>OPENAI</span><strong>GPT-6 Sol</strong><small>Coding & agent reference</small></a>
+          <a href="/models/claude-fable-5-1/"><span>ANTHROPIC</span><strong>Claude Fable 5.1</strong><small>Frontier Claude reference</small></a>
+          <a href="/models/claude-opus-5-5/"><span>ANTHROPIC</span><strong>Claude Opus 5.5</strong><small>Agentic coding reference</small></a>
+          <a href="/models/gemini-3-8-flash/"><span>GOOGLE</span><strong>Gemini 3.8 Flash</strong><small>Multimodal Flash reference</small></a>
+          <a href="/models/gpt-6/"><span>OPENAI</span><strong>GPT-6 family</strong><small>Astra · Sol · Luna</small></a>
+        </div>
+      </section>
+
+      <section class="compare-guide-bridge shell">
+        <div class="compare-guide-card">
+          <div><p class="eyebrow">DEEP FAMILY GUIDE</p><h2>GPT-6 vs Claude in 2026.</h2><p>Need the full family-level view instead of one model pair? Compare Astra, Sol and Luna with Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5 across pricing, context, coding and agent architecture.</p></div>
+          <a href="/guides/gpt-6-vs-claude/">Open the GPT-6 vs Claude guide ↗</a>
+        </div>
+      </section>
+
+      <section class="model-reference-lower shell compare-hub-faq">
+        <div class="model-sources">
+          <p class="eyebrow">COMPARISON STANDARD</p>
+          <a href="/about/"><span>SXF methodology and editorial approach</span><b>↗</b></a>
+          <a href="/models/"><span>Model Intelligence database</span><b>↗</b></a>
+          <a href="/guides/"><span>Expert AI guides</span><b>↗</b></a>
+          <a href="/signals/"><span>Latest primary-source signals</span><b>↗</b></a>
+        </div>
+        <div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div>
+      </section>
+    </main>{page_footer()}{filter_script}</body></html>'''
+
 def gpt6_comparison_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
@@ -4837,14 +5078,14 @@ def gpt6_comparison_html(items):
         "@context":"https://schema.org",
         "@graph":[
             {"@type":"WebPage","@id":canonical+"#webpage","url":canonical,"name":"GPT-6 Astra vs Sol vs Luna: Pricing, Context & Use Cases","description":"Compare GPT-6 Astra, Sol and Luna on API pricing, context window, output limits and official use-case positioning.","dateModified":verified,"isPartOf":{"@id":"https://sxf.si/#website"},"about":[{"@type":"Thing","name":v["name"]} for v in variants],"citation":[v["source"] for v in variants]+["https://developers.openai.com/api/docs/pricing"],"inLanguage":"en"},
-            {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},{"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},{"@type":"ListItem","position":3,"name":"GPT-6 comparison","item":canonical}]},
+            {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},{"@type":"ListItem","position":2,"name":"Compare","item":BASE_URL+"/compare/"},{"@type":"ListItem","position":3,"name":"GPT-6 comparison","item":canonical}]},
             {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]},
         ],
     }
     description = "GPT-6 Astra vs Sol vs Luna: compare OpenAI API pricing, 1.05M context windows, 128K output limits and official use-case positioning."
     return f'''<!doctype html><html lang="en">{page_head("GPT-6 Astra vs Sol vs Luna — Pricing & Use Cases | SXF / AI", description, canonical, schema)}
-    <body class="intel-page comparison-page">{page_header("models")}<main>
-      <section class="comparison-hero shell"><nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-6 comparison</span></nav>
+    <body class="intel-page comparison-page">{page_header("compare")}<main>
+      <section class="comparison-hero shell"><nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>GPT-6 comparison</span></nav>
       <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p><h1>GPT-6 Astra<br><span>vs Sol vs Luna.</span></h1>
       <p>A decision-oriented comparison built from OpenAI’s official model cards and API pricing. Same 1.05M context window. Very different capability positioning and unit economics.</p>
       <div class="hero-actions"><a class="primary-cta" href="#decision">Choose by workload <span>↓</span></a><a class="secondary-cta" href="/models/gpt-6/">GPT-6 reference</a></div></section>
@@ -4966,7 +5207,7 @@ def gpt6_astra_vs_claude_fable_51_html(items):
             },
             {"@type":"BreadcrumbList","itemListElement":[
                 {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
-                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":2,"name":"Compare","item":BASE_URL+"/compare/"},
                 {"@type":"ListItem","position":3,"name":"GPT-6 Astra vs Claude Fable 5.1","item":canonical}
             ]},
             {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
@@ -4974,9 +5215,9 @@ def gpt6_astra_vs_claude_fable_51_html(items):
     }
 
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
-    <body class="intel-page comparison-page">{page_header("models")}<main>
+    <body class="intel-page comparison-page">{page_header("compare")}<main>
       <section class="comparison-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Astra vs Fable 5.1</span></nav>
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>Astra vs Fable 5.1</span></nav>
         <p class="eyebrow">FRONTIER MODEL COMPARISON / VERIFIED {escape(verified)}</p>
         <h1>GPT-6 Astra<br><span>vs Claude Fable 5.1.</span></h1>
         <p>Two frontier models with the same $10 / $50 headline token price and nearly the same context capacity. The real differences appear in long-context billing, cache economics, reasoning controls, agent architecture and task-level performance.</p>
@@ -5226,7 +5467,7 @@ def claude_opus_55_vs_gemini_38_flash_html(items):
             },
             {"@type":"BreadcrumbList","itemListElement":[
                 {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
-                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":2,"name":"Compare","item":BASE_URL+"/compare/"},
                 {"@type":"ListItem","position":3,"name":"Claude Opus 5.5 vs Gemini 3.8 Flash","item":canonical}
             ]},
             {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
@@ -5234,9 +5475,9 @@ def claude_opus_55_vs_gemini_38_flash_html(items):
     }
 
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
-    <body class="intel-page comparison-page">{page_header("models")}<main>
+    <body class="intel-page comparison-page">{page_header("compare")}<main>
       <section class="comparison-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Opus 5.5 vs Gemini 3.8 Flash</span></nav>
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>Opus 5.5 vs Gemini 3.8 Flash</span></nav>
         <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
         <h1>Claude Opus 5.5<br><span>vs Gemini 3.8 Flash.</span></h1>
         <p>A source-first comparison for coding, agents and production AI. Official specifications, token economics, caching, batch processing, multimodal inputs and tool ecosystems are separated from vendor performance claims.</p>
@@ -5453,7 +5694,7 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
             },
             {"@type":"BreadcrumbList","itemListElement":[
                 {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
-                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":2,"name":"Compare","item":BASE_URL+"/compare/"},
                 {"@type":"ListItem","position":3,"name":"GPT-6 Sol vs Gemini 3.8 Flash","item":canonical}
             ]},
             {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]}
@@ -5461,9 +5702,9 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
     }
 
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
-    <body class="intel-page comparison-page">{page_header("models")}<main>
+    <body class="intel-page comparison-page">{page_header("compare")}<main>
       <section class="comparison-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Sol vs Gemini 3.8 Flash</span></nav>
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>Sol vs Gemini 3.8 Flash</span></nav>
         <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
         <h1>GPT-6 Sol<br><span>vs Gemini 3.8 Flash.</span></h1>
         <p>A source-first comparison for developers choosing between OpenAI and Google for coding, agents and production AI. Specs, token economics, long context, multimodal inputs and tool ecosystems are separated from vendor performance claims.</p>
@@ -5687,7 +5928,7 @@ def gpt6_sol_vs_claude_opus_html(items):
             },
             {"@type":"BreadcrumbList","itemListElement":[
                 {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
-                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL+"/models/"},
+                {"@type":"ListItem","position":2,"name":"Compare","item":BASE_URL+"/compare/"},
                 {"@type":"ListItem","position":3,"name":"GPT-6 Sol vs Claude Opus 5.5","item":canonical}
             ]},
             {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]},
@@ -5695,9 +5936,9 @@ def gpt6_sol_vs_claude_opus_html(items):
     }
     description = "GPT-6 Sol vs Claude Opus 5.5: official API pricing, 1.05M vs 1M context, 128K output, reasoning controls and long-context costs."
     return f'''<!doctype html><html lang="en">{page_head("GPT-6 Sol vs Claude Opus 5.5 — Pricing & Context | SXF / AI", description, canonical, schema)}
-    <body class="intel-page comparison-page">{page_header("models")}<main>
+    <body class="intel-page comparison-page">{page_header("compare")}<main>
       <section class="comparison-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Sol vs Opus 5.5</span></nav>
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>Sol vs Opus 5.5</span></nav>
         <p class="eyebrow">MODEL COMPARISON / VERIFIED {escape(verified)}</p>
         <h1>GPT-6 Sol<br><span>vs Claude Opus 5.5.</span></h1>
         <p>Two models released on September 22, 2026 and aimed at serious coding and agentic work. This comparison separates official specifications and pricing from vendor performance claims.</p>
@@ -5827,6 +6068,8 @@ def build_discovery_pages(items, current_items):
     gemini_path.mkdir(parents=True, exist_ok=True)
     (gemini_path / "index.html").write_text(gemini_38_flash_reference_html(items), encoding="utf-8")
 
+    (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
+
     comparison_path = COMPARE_DIR / GPT6_COMPARE_SLUG
     comparison_path.mkdir(parents=True, exist_ok=True)
     (comparison_path / "index.html").write_text(gpt6_comparison_html(items), encoding="utf-8")
@@ -5896,6 +6139,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/models/claude-fable-5-1/", "2026-09-01"),
         sitemap_entry(f"{BASE_URL}/models/gemini-3-8-flash/", "2026-09-02"),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
