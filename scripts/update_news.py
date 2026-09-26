@@ -730,6 +730,31 @@ MODEL_CASE_STUDY = re.compile(
 )
 
 MODEL_REFERENCE = {
+    "Claude Opus 5.5": {
+        "provider": "Anthropic",
+        "summary": "Claude Opus 5.5 is Anthropic’s current Opus model for long-running agentic coding, complex knowledge work and enterprise workflows.",
+        "modalities": "Text and image input · text output",
+        "sources": [
+            ("Anthropic · Claude Opus 5.5 announcement", "https://www.anthropic.com/claude-opus-5-5"),
+            ("Claude Platform · Opus 5.5 model page", "https://platform.claude.com/docs/en/models/opus-5-5/overview"),
+            ("Claude Platform · Models overview", "https://platform.claude.com/docs/en/models/overview"),
+            ("Claude Platform · What’s new in Opus 5.5", "https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5"),
+            ("Claude Platform · Migration guide", "https://platform.claude.com/docs/en/models/opus-5-5/migration-guide"),
+            ("Claude Platform · Prompting Opus 5.5", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5"),
+            ("Anthropic · Model system cards", "https://www.anthropic.com/system-cards"),
+            ("GitHub · Claude Opus 5.5 in Copilot", "https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot/"),
+        ],
+        "faq": [
+            ("What is Claude Opus 5.5?", "Claude Opus 5.5 is Anthropic’s current Opus model, released September 22, 2026 for long-running agentic coding, complex knowledge work and enterprise tasks."),
+            ("What is the Claude Opus 5.5 context window?", "Claude Opus 5.5 has a 1 million token context window and supports up to 128,000 output tokens in standard API use."),
+            ("How much does Claude Opus 5.5 cost?", "Claude Opus 5.5 costs $4 per million input tokens and $20 per million output tokens. Cache reads cost $0.20 per million tokens; Fast mode costs $8 input and $40 output per million tokens."),
+            ("What is the Claude Opus 5.5 API model ID?", "The Claude API model ID is claude-opus-5-5. Anthropic uses dateless fixed model IDs for current Claude generations."),
+            ("Does Claude Opus 5.5 use adaptive thinking?", "Yes. Adaptive thinking is always on for Claude Opus 5.5. The effort parameter controls thinking depth, and the default effort level is medium."),
+            ("Is Claude Opus 5.5 available in GitHub Copilot?", "Yes. GitHub lists Claude Opus 5.5 for Copilot Pro+, Max, Business and Enterprise users across supported Copilot surfaces, subject to rollout and product policy."),
+            ("What is Claude Opus 5.5 best for?", "Anthropic positions Opus 5.5 for long-running agentic coding and knowledge work. It is a strong starting point for complex coding, enterprise analysis, computer use and multi-step agent workflows."),
+            ("Should I use Claude Fable 5.1 instead of Opus 5.5?", "Anthropic recommends starting with Opus 5.5 for most workloads and moving to Fable 5.1 when higher-effort Opus 5.5 evaluations still fall short on demanding reasoning or long-horizon agentic work."),
+        ],
+    },
     "GPT-5.6": {
         "provider": "OpenAI",
         "summary": "GPT-5.6 is OpenAI’s 2026 production model family, spanning Sol for flagship capability, Terra for balanced intelligence and cost, and Luna for efficient high-volume workloads.",
@@ -861,6 +886,8 @@ MODEL_REFERENCE = {
 }
 
 def model_reference(name):
+    if name == "Claude Opus 5.5":
+        return MODEL_REFERENCE["Claude Opus 5.5"]
     if name == "GPT-5.6":
         return MODEL_REFERENCE["GPT-5.6"]
     if name == "GPT-6" or name.startswith("GPT-6 "):
@@ -1039,7 +1066,210 @@ def gpt56_reference_html():
       </div>
     </section>'''
 
+
+def claude_opus_55_reference_html():
+    ref = MODEL_REFERENCE["Claude Opus 5.5"]
+    verified = datetime.now(timezone.utc).date().isoformat()
+    sources = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label, url in ref["sources"]
+    )
+    faq = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in ref["faq"]
+    )
+    return f'''<section class="model-reference model-reference-deep shell">
+      <div class="model-reference-intro">
+        <div class="model-reference-copy">
+          <p class="eyebrow">MODEL REFERENCE</p>
+          <h2>Claude Opus 5.5 at a glance.</h2>
+          <p>Claude Opus 5.5 is Anthropic’s current Opus model for long-running agentic coding, complex knowledge work and enterprise workflows. It sits below Claude Fable 5.1 in the current capability ladder, but Anthropic recommends Opus 5.5 as the starting point for most demanding workloads because it combines strong capability with materially lower cost.</p>
+          <p>The model uses the fixed API ID <code>claude-opus-5-5</code>. It has a 1 million-token context window, supports up to 128,000 output tokens, accepts text and images, and uses adaptive thinking on every request.</p>
+          <p class="reference-note">Released September 22, 2026 · Active / latest Opus · Retirement not sooner than September 22, 2027 · Last verified {escape(verified)}</p>
+        </div>
+        <div class="model-fact-grid">
+          <div><span>MODEL ID</span><strong>claude-opus-5-5</strong></div>
+          <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
+          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>standard API tokens</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>Jun 2026</strong></div>
+          <div><span>STANDARD INPUT</span><strong>$4</strong><small>/ 1M tokens</small></div>
+          <div><span>STANDARD OUTPUT</span><strong>$20</strong><small>/ 1M tokens</small></div>
+        </div>
+      </div>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">POSITIONING</p><h2>Where Opus 5.5 sits in the current Claude lineup.</h2><p>Anthropic’s current lineup separates maximum capability, complex production work, everyday speed and low-cost throughput more explicitly than earlier Claude generations.</p></div>
+        <div class="model-family-grid">
+          <article class="model-family-card">
+            <span>HIGHEST AVAILABLE CAPABILITY</span><h3>Claude Fable 5.1</h3>
+            <p>Anthropic’s highest-capability generally available model for demanding reasoning and long-horizon agentic work.</p>
+            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></div>
+          </article>
+          <article class="model-family-card">
+            <span>CURRENT OPUS / START HERE</span><h3>Claude Opus 5.5</h3>
+            <p>Built for long-running agentic coding and knowledge work. Anthropic recommends it as the starting point for most complex workloads.</p>
+            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking always on · default effort medium</small></div>
+            <div class="model-family-price"><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></div>
+          </article>
+          <article class="model-family-card">
+            <span>SPEED / CAPABILITY BALANCE</span><h3>Claude Sonnet 5</h3>
+            <p>Designed for everyday coding, agentic and enterprise workloads where latency and unit economics matter more.</p>
+            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>$2</strong><small>input / 1M</small><strong>$10</strong><small>output / 1M</small></div>
+          </article>
+        </div>
+        <p class="reference-note">Claude Haiku 4.5 remains the lower-cost, lower-latency tier at $1 input / $5 output per 1M tokens with a 200K context window.</p>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">WHAT CHANGED</p>
+          <h2>Opus 5.5 is an efficiency-focused upgrade over Opus 5.</h2>
+          <p>Anthropic introduced Opus 5.5 as a major improvement over Opus 5 while lowering the token price. Standard API pricing fell from $5 input / $25 output per million tokens on Opus 5 to $4 / $20 on Opus 5.5. Anthropic also prices cache reads at $0.20 per million tokens, down from $0.50 on Opus 5.</p>
+          <p>The company says typical workloads cost about 40% less to run than Opus 5 once lower per-token pricing and fewer tokens per completed task are considered together. That figure is an Anthropic estimate rather than an independent universal result; actual savings depend on prompt structure, effort level, tool calls and task completion behavior.</p>
+          <p>For developers, the more important change is that Opus 5.5 is not simply “Opus 5 but cheaper.” Its thinking behavior, forced tool-use rules and computer-use integration changed in ways that can break existing API code.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>PRACTICAL POSITION</span>
+          <strong>Start with Opus 5.5 before paying for Fable 5.1.</strong>
+          <p>Anthropic’s current model-selection guidance says most complex workloads should begin with Opus 5.5. Move up only when your own evaluations at higher effort still miss the required quality.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">CAPABILITIES</p><h2>What Claude Opus 5.5 is built for.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>AGENTIC CODING</span><h3>Long-running software work</h3><p>Anthropic positions Opus 5.5 for multihour coding sessions, large refactors, codebase migrations, audits and complex systems engineering where an agent must stay coherent across many steps.</p></article>
+          <article><span>KNOWLEDGE WORK</span><h3>Analysis carried to finished output</h3><p>The model is designed for professional analysis, research, financial and business workflows, and complex tasks that require synthesis rather than a single short answer.</p></article>
+          <article><span>TOOL USE</span><h3>Multi-step agent loops</h3><p>Adaptive thinking is designed to work between tool calls, allowing the model to reason after new evidence arrives instead of planning only once at the beginning.</p></article>
+          <article><span>VISION</span><h3>Text and image input</h3><p>Opus 5.5 accepts text and images and returns text. Anthropic highlights improved reading of charts, diagrams, screenshots and other dense visual inputs.</p></article>
+          <article><span>LONG CONTEXT</span><h3>1M-token context</h3><p>The one-million-token window supports large repositories, long document collections and extended agent histories, although context capacity should not be confused with guaranteed retrieval quality.</p></article>
+          <article><span>COMPUTER USE</span><h3>Updated computer-use stack</h3><p>Opus 5.5 supports computer-use workflows, but Claude API and Google Cloud integrations must use Anthropic’s newer computer toolset rather than the older computer_20251124 tool.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">ADAPTIVE THINKING</p>
+          <h2>Thinking is always on; effort is the control.</h2>
+          <p>Claude Opus 5.5 uses <strong>adaptive thinking on every request</strong>. Unlike Opus 5, thinking cannot be disabled. Anthropic’s API documentation says requests that explicitly try to disable thinking—or that use the older manual token-budget thinking mode—return an invalid-request error.</p>
+          <p>The <strong>effort</strong> parameter controls how much reasoning the model applies. Opus 5.5 defaults to <code>medium</code>, while Opus 5 defaulted to high. That means simply changing the model ID can change both latency and token use even when the rest of the request remains the same.</p>
+          <p>Anthropic recommends re-running an effort sweep during migration. The goal is not to maximize effort; it is to find the lowest setting that consistently clears the quality bar on your production tasks.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>EFFORT RULE</span>
+          <strong>Medium is the starting point, not a quality ceiling.</strong>
+          <p>Evaluate lower settings for cost-sensitive tasks and higher settings for difficult coding, research and long-horizon agent work. Use task-specific evals rather than assuming max effort is always better.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Opus 5.5 API pricing.</h2><p>Anthropic’s current token pricing separates ordinary inference, prompt caching, batch processing and Fast mode.</p></div>
+        <div class="model-price-grid">
+          <article><span>STANDARD</span><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></article>
+          <article><span>PROMPT CACHE</span><strong>$0.20</strong><small>cache read / 1M</small><strong>$5</strong><small>5-minute cache write / 1M</small></article>
+          <article><span>FAST MODE</span><strong>$8</strong><small>input / 1M</small><strong>$40</strong><small>output / 1M</small></article>
+        </div>
+        <div class="model-caveat"><strong>One-hour cache writes</strong><p>The official model page lists 1-hour cache writes at $8 per million tokens. Cache economics can matter significantly for long-running agents that repeatedly reuse a large stable prompt or repository context.</p></div>
+        <div class="model-caveat"><strong>Batch API</strong><p>Anthropic lists a 50% discount on input and output for Batch API workloads. Opus 5.5 also supports a beta 300K maximum output in Batch API, above the normal 128K output limit.</p></div>
+        <div class="model-caveat"><strong>US-only inference</strong><p>Anthropic states that US-only inference is available at 1.1× standard input and output pricing for workloads with that residency requirement.</p></div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">FAST MODE</p><h2>Fast mode trades price for up to 2.5× higher output speed.</h2></div>
+        <div class="model-api-grid">
+          <div><span>WHERE</span><strong>Claude Code + Claude Platform</strong><p>Anthropic currently offers Fast mode for Opus 5.5 in Claude Code and through the Claude Platform.</p></div>
+          <div><span>SPEED</span><strong>Up to 2.5× faster</strong><p>The advertised improvement is output speed, not a separate capability tier. Real end-to-end gains still depend on tools, network latency and task structure.</p></div>
+          <div><span>PRICE</span><strong>$8 input / $40 output</strong><p>Fast mode doubles the standard per-token rates, so it makes the most sense when wall-clock latency is worth more than the extra inference cost.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">MIGRATION</p><h2>Moving from Claude Opus 5 to Opus 5.5.</h2><p>This upgrade has real breaking changes. Treat it as an API migration, not only a model-ID swap.</p></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Thinking cannot be disabled.</strong><p>Remove disabled-thinking configurations and old manual thinking budgets. Opus 5.5 uses adaptive thinking with effort as the control.</p></div>
+          <div><span>02</span><strong>Forced tool choice changed.</strong><p>Requests that force tool use with older tool_choice patterns can error. Anthropic recommends auto tool selection with strict tool use or structured outputs where appropriate.</p></div>
+          <div><span>03</span><strong>Thinking blocks are conversation state.</strong><p>Pass thinking blocks back unchanged in tool-use loops. Routing a live conversation across incompatible models can discard or invalidate that reasoning state.</p></div>
+          <div><span>04</span><strong>Computer-use integration changed.</strong><p>On the Claude API and Google Cloud, the earlier computer_20251124 tool is not accepted. Use the newer computer toolset documented for Opus 5.5.</p></div>
+          <div><span>05</span><strong>Progress-update response shape changed.</strong><p>Text between tool calls can appear inside thinking blocks. Interfaces that previously streamed those text blocks may need an explicit display mode to show user-facing progress.</p></div>
+          <div><span>06</span><strong>Refusals have richer categories.</strong><p>Applications should handle stop_reason refusal and the associated stop_details category instead of assuming every HTTP 200 response contains a normal completion.</p></div>
+        </div>
+        <div class="model-caveat"><strong>Migration practice</strong><p>Update the model ID, re-run effort sweeps, test tool loops and response parsing in development, then re-baseline cost, latency and task acceptance before moving production traffic.</p></div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where Claude Opus 5.5 is available.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CLAUDE</span><h3>Pro, Max, Team & Enterprise</h3><p>Anthropic lists Opus 5.5 for paid Claude users on Pro, Max, Team and Enterprise plans.</p></article>
+          <article><span>CLAUDE PLATFORM</span><h3>Native API access</h3><p>Use the fixed model ID <code>claude-opus-5-5</code> on the Claude API. The model is active and currently marked as the latest Opus release.</p></article>
+          <article><span>CLOUD PLATFORMS</span><h3>AWS, Google Cloud & Microsoft Foundry</h3><p>Anthropic lists Opus 5.5 across Amazon Bedrock, Claude Platform on AWS, Google Cloud and Microsoft Foundry.</p></article>
+          <article><span>GITHUB COPILOT</span><h3>Agentic coding surface</h3><p>GitHub makes Opus 5.5 available to Copilot Pro+, Max, Business and Enterprise users across supported IDE, CLI, coding-agent and GitHub surfaces.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">EVIDENCE</p><h2>How to read the performance claims.</h2><p>Anthropic reports strong gains in coding, agentic work and knowledge work, but benchmark results should be interpreted with their harness and effort settings intact.</p></div>
+        <div class="model-capability-grid">
+          <article><span>FRONTIERCODE</span><h3>54.6% at default effort</h3><p>Anthropic reports Opus 5.5 at 54.6% on FrontierCode v1.1 at medium effort. The comparison uses Anthropic’s stated evaluation setup and should not be treated as a universal coding score.</p></article>
+          <article><span>CURSORBENCH</span><h3>52.5% in Anthropic’s report</h3><p>Anthropic reports a 52.5% result on CursorBench 4.0 and describes fewer tokens and steps than earlier Opus models in several coding workflows.</p></article>
+          <article><span>KNOWLEDGE WORK</span><h3>Efficiency is a central claim</h3><p>Across Anthropic’s launch material and early-customer evaluations, the recurring claim is similar quality or higher task success with fewer tokens and shorter agent trajectories.</p></article>
+        </div>
+        <div class="model-caveat"><strong>SXF interpretation</strong><p>Use vendor benchmarks to identify workloads worth testing, not to select a model automatically. Reproduce representative tasks with your prompts, tools, repository or documents, and measure accepted output, human correction, latency and total cost.</p></div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">SAFETY & OPERATIONS</p>
+          <h2>A stronger model still needs system-level controls.</h2>
+          <p>Anthropic says Opus 5.5 improved its internal alignment and prompt-injection evaluations and ships with additional safeguards for high-capability domains. It also supports zero data retention on eligible API configurations and includes watermarking measures for text output.</p>
+          <p>Those controls do not replace application security. A long-running coding or computer-use agent can still access files, credentials, tools and external systems. Production deployments should constrain permissions, sandbox execution where practical, require approval for consequential actions and preserve enough telemetry to reconstruct what the agent did.</p>
+          <p>For GitHub Copilot specifically, the model inherits GitHub’s product-level policies, supported surfaces and usage-based billing. Treat that as a distinct deployment environment from direct Anthropic API use.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>SECURITY RULE</span>
+          <strong>Model resistance is not authorization.</strong>
+          <p>Even a model with stronger prompt-injection performance should not receive broader data or tool permissions than the task requires.</p>
+          <a href="/guides/ai-agent-security/">AI Agent Security ↗</a>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">WHEN TO USE IT</p><h2>Choose Opus 5.5 by workload.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CHOOSE OPUS 5.5</span><h3>Complex agentic coding</h3><p>Use it when a coding agent must remain coherent across a large repository, many tool calls and long execution windows, but Fable-level pricing is difficult to justify.</p></article>
+          <article><span>CHOOSE OPUS 5.5</span><h3>High-value knowledge work</h3><p>Use it for research, professional analysis, document-heavy work and complex business tasks where the quality of synthesis matters more than minimum latency.</p></article>
+          <article><span>CHOOSE SONNET 5</span><h3>Everyday production work</h3><p>Evaluate Sonnet 5 when speed and cost dominate and the workload does not consistently benefit from Opus 5.5’s additional capability.</p></article>
+          <article><span>CHOOSE FABLE 5.1</span><h3>When Opus evals still fail</h3><p>Move up when high-effort Opus 5.5 still misses the quality bar on demanding reasoning, research or long-horizon agentic tasks.</p></article>
+        </div>
+        <div class="model-related-links">
+          <a href="/guides/gpt-6-vs-claude/"><span>FRONTIER COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
+          <a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT COMPARISON</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>
+          <a href="/guides/github-copilot-alternatives/"><span>CODING WORKFLOWS</span><strong>GitHub Copilot Alternatives</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to keep in mind.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>Fable 5.1 is above it in capability.</strong><p>Opus 5.5 is the current Opus model, but Anthropic positions Fable 5.1 as the higher-capability option for the hardest generally available workloads.</p></div>
+          <div><span>02</span><strong>Always-on thinking changes integration behavior.</strong><p>This is not a drop-in replacement for configurations that depended on disabling thinking or manually budgeting thinking tokens.</p></div>
+          <div><span>03</span><strong>One million tokens is capacity, not an instruction to fill it.</strong><p>Long contexts increase cost and can make retrieval, tool orchestration and debugging harder if applications send unnecessary material.</p></div>
+          <div><span>04</span><strong>Vendor benchmarks are not your production benchmark.</strong><p>Anthropic’s launch results are useful evidence, but cost and success rate can change materially with a different harness, tool set, effort level or repository.</p></div>
+          <div><span>05</span><strong>Safeguard behavior is part of the API contract.</strong><p>Applications should handle refusals and model-specific fallback behavior explicitly rather than treating them as unexpected text-generation failures.</p></div>
+          <div><span>06</span><strong>Cloud and Copilot surfaces differ.</strong><p>Model availability, tool integrations, billing and policy controls depend on whether you use Anthropic directly, a cloud provider or GitHub Copilot.</p></div>
+        </div>
+      </section>
+
+      <div class="model-reference-lower">
+        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{sources}</div>
+        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq}</div>
+      </div>
+    </section>'''
+
 def model_reference_html(name):
+    if name == "Claude Opus 5.5":
+        return claude_opus_55_reference_html()
     if name == "GPT-5.6":
         return gpt56_reference_html()
     ref = model_reference(name)
@@ -1492,7 +1722,10 @@ def model_page_html(name, items):
     canonical = f"{BASE_URL}/models/{slug}/"
     ref = model_reference(name)
     if ref:
-        if name == "GPT-5.6":
+        if name == "Claude Opus 5.5":
+            description = "Claude Opus 5.5 reference: 1M context window, $4/$20 API pricing, adaptive thinking, Fast mode, migration changes, coding and agent capabilities, availability and updates."
+            title = "Claude Opus 5.5 — Pricing, Context Window, API & Coding | SXF / AI"
+        elif name == "GPT-5.6":
             description = "GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates."
             title = "GPT-5.6 — Models, Pricing, Context Window & API | SXF / AI"
         else:
@@ -1547,7 +1780,7 @@ def model_page_html(name, items):
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, robots=robots)}
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"model family reference." if name == "GPT-5.6" else ("reference & signals." if ref else "release signals.")}</span></h1><p>{escape(description)}</p>
+      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"model reference." if name == "Claude Opus 5.5" else ("model family reference." if name == "GPT-5.6" else ("reference & signals." if ref else "release signals."))}</span></h1><p>{escape(description)}</p>
       <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
       {reference}
       <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
