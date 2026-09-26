@@ -600,3 +600,21 @@
   .copilot-alternatives-guide .guide-inline-cta{grid-template-columns:1fr}
   .copilot-alternatives-guide .guide-inline-cta>a{justify-self:start}
 }
+
+
+/* Prompt injection guide mobile table cards */
+@media(max-width:720px){
+  .prompt-injection-guide .guide-table-wrap{overflow:visible;border:0;background:transparent}
+  .prompt-injection-guide .guide-table{display:block;min-width:0;width:100%}
+  .prompt-injection-guide .guide-table thead{display:none}
+  .prompt-injection-guide .guide-table tbody{display:grid;gap:12px}
+  .prompt-injection-guide .guide-table tr{display:block;border:1px solid var(--line);border-radius:16px;background:#0a0e13;overflow:hidden}
+  .prompt-injection-guide .guide-table th,.prompt-injection-guide .guide-table td{display:block;width:100%;min-width:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:12px}
+  .prompt-injection-guide .guide-table th{font-size:14px;background:#080b0f}
+  .prompt-injection-guide .guide-table td:last-child{border-bottom:0}
+  .prompt-injection-guide .guide-table td[data-label]::before{content:attr(data-label);display:block;margin-bottom:4px;color:#66717e;font-size:9px;font-weight:850;letter-spacing:.11em;text-transform:uppercase}
+  .prompt-injection-guide .guide-decision-table>div{grid-template-columns:1fr;gap:7px}
+  .prompt-injection-guide .guide-choice-grid{grid-template-columns:1fr}
+  .prompt-injection-guide .guide-inline-cta{grid-template-columns:1fr}
+  .prompt-injection-guide .guide-inline-cta>a{justify-self:start}
+}
