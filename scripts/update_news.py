@@ -982,6 +982,16 @@ def page_footer():
 
 def page_head(title, description, canonical, schema, page_type="website", robots="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"):
     safe_description = escape(description[:180], quote=True)
+    if page_type == "article":
+        social_image_meta = '<meta name="twitter:card" content="summary" />'
+    else:
+        social_image_meta = '''<meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />'''
     return f'''<head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1000,15 +1010,9 @@ def page_head(title, description, canonical, schema, page_type="website", robots
       <meta property="og:title" content="{escape(title, quote=True)}" />
       <meta property="og:description" content="{safe_description}" />
       <meta property="og:url" content="{escape(canonical, quote=True)}" />
-      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:card" content="summary_large_image" />
+      {social_image_meta}
       <meta name="twitter:title" content="{escape(title, quote=True)}" />
       <meta name="twitter:description" content="{safe_description}" />
-      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
-      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
