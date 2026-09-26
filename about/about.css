@@ -192,7 +192,7 @@
 }
 .origin-main a:hover{color:var(--about-accent)}
 .origin-links{
-  position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
   border-top:1px solid var(--line);padding-top:16px
 }
 .origin-links a{
