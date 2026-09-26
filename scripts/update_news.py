@@ -1000,9 +1000,15 @@ def page_head(title, description, canonical, schema, page_type="website", robots
       <meta property="og:title" content="{escape(title, quote=True)}" />
       <meta property="og:description" content="{safe_description}" />
       <meta property="og:url" content="{escape(canonical, quote=True)}" />
-      <meta name="twitter:card" content="summary" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="{escape(title, quote=True)}" />
       <meta name="twitter:description" content="{safe_description}" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
