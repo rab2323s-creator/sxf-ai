@@ -730,6 +730,72 @@ MODEL_CASE_STUDY = re.compile(
 )
 
 MODEL_REFERENCE = {
+    "GPT-5.6": {
+        "provider": "OpenAI",
+        "summary": "GPT-5.6 is OpenAI’s 2026 production model family, spanning Sol for flagship capability, Terra for balanced intelligence and cost, and Luna for efficient high-volume workloads.",
+        "pricing_note": "Current Standard API pricing per 1M text tokens. Prompts above 272K input tokens use higher long-context rates. GPT-5.6 Sol is currently on promotional pricing listed by OpenAI through at least November 21, 2026.",
+        "modalities": "Text and image input · text output",
+        "variants": [
+            {
+                "name": "GPT-5.6 Sol",
+                "model_id": "gpt-5.6-sol",
+                "positioning": "Flagship capability",
+                "best_for": "Complex professional work, coding, research, computer use and demanding agentic workflows",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "Feb 16, 2026",
+                "input_price": "$4.00",
+                "cached_price": "$0.40",
+                "output_price": "$20.00",
+                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+            },
+            {
+                "name": "GPT-5.6 Terra",
+                "model_id": "gpt-5.6-terra",
+                "positioning": "Intelligence / cost balance",
+                "best_for": "Everyday production workloads that need strong reasoning at a lower unit cost than Sol",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "Feb 16, 2026",
+                "input_price": "$2.00",
+                "cached_price": "$0.20",
+                "output_price": "$12.00",
+                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+            },
+            {
+                "name": "GPT-5.6 Luna",
+                "model_id": "gpt-5.6-luna",
+                "positioning": "Efficiency / volume",
+                "best_for": "Cost-sensitive, high-volume and latency-conscious workloads",
+                "context": "1,050,000",
+                "max_output": "128,000",
+                "knowledge_cutoff": "Feb 16, 2026",
+                "input_price": "$0.20",
+                "cached_price": "$0.02",
+                "output_price": "$1.20",
+                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+            },
+        ],
+        "sources": [
+            ("OpenAI · GPT-5.6 launch", "https://openai.com/index/gpt-5-6/"),
+            ("OpenAI API · GPT-5.6 model guidance", "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6"),
+            ("OpenAI API · GPT-5.6 Sol", "https://developers.openai.com/api/docs/models/gpt-5.6-sol"),
+            ("OpenAI API · GPT-5.6 Terra", "https://developers.openai.com/api/docs/models/gpt-5.6-terra"),
+            ("OpenAI API · GPT-5.6 Luna", "https://developers.openai.com/api/docs/models/gpt-5.6-luna"),
+            ("OpenAI API · Multi-agent", "https://developers.openai.com/api/docs/guides/responses-multi-agent"),
+            ("OpenAI Help · GPT-5.6 availability", "https://help.openai.com/en/articles/20001354-gpt-5-6"),
+        ],
+        "faq": [
+            ("What is GPT-5.6?", "GPT-5.6 is an OpenAI model family introduced in 2026. It includes Sol for flagship capability, Terra for a balance of intelligence and cost, and Luna for efficient high-volume workloads."),
+            ("What does the gpt-5.6 API alias use?", "OpenAI states that the gpt-5.6 alias routes requests to GPT-5.6 Sol."),
+            ("What is the GPT-5.6 context window?", "GPT-5.6 Sol, Terra and Luna each list a 1,050,000-token context window and up to 128,000 output tokens."),
+            ("How much does GPT-5.6 cost?", "Current Standard API pricing is $4 input / $20 output per 1M tokens for Sol, $2 / $12 for Terra, and $0.20 / $1.20 for Luna. Cached-input rates are lower, and long prompts above 272K input tokens use higher rates."),
+            ("Which GPT-5.6 model should I use?", "Use Sol when quality and complex reasoning matter most, Terra when you want a stronger cost-performance balance, and Luna when throughput and cost are primary constraints."),
+            ("Does GPT-5.6 support reasoning effort?", "Yes. OpenAI documents none, low, medium, high, xhigh and max reasoning effort for the GPT-5.6 family, with medium as the default."),
+            ("Does GPT-5.6 support tools and agents?", "Yes. OpenAI documents tool use through the Responses API, including web search, file search, code interpreter, hosted shell, computer use, MCP and beta multi-agent orchestration."),
+            ("Is GPT-5.6 still relevant after GPT-6?", "Yes. GPT-6 is the newer generation, but GPT-5.6 remains an available production family across OpenAI products and the API, with lower-cost Terra and Luna tiers that can be useful for cost-sensitive workloads."),
+        ],
+    },
     "GPT-6": {
         "provider": "OpenAI",
         "summary": "GPT-6 is OpenAI’s current flagship model family, spanning Astra for the hardest end-to-end work, Sol for demanding coding and agentic workflows, and Luna for efficient high-volume tasks.",
@@ -795,11 +861,187 @@ MODEL_REFERENCE = {
 }
 
 def model_reference(name):
+    if name == "GPT-5.6" or name.startswith("GPT-5.6 "):
+        return MODEL_REFERENCE["GPT-5.6"]
     if name == "GPT-6" or name.startswith("GPT-6 "):
         return MODEL_REFERENCE["GPT-6"]
     return None
 
+
+def gpt56_reference_html():
+    ref = MODEL_REFERENCE["GPT-5.6"]
+    verified = datetime.now(timezone.utc).date().isoformat()
+    variants = ref["variants"]
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
+        for label, url in ref["sources"]
+    )
+    faq_html = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in ref["faq"]
+    )
+    cards = "".join(
+        f'''<article class="model-family-card">
+          <span>{escape(v["positioning"])}</span>
+          <h3>{escape(v["name"])}</h3>
+          <p>{escape(v["best_for"])}.</p>
+          <div class="model-family-spec"><b>{escape(v["model_id"])}</b><small>{escape(v["context"])} context · {escape(v["max_output"])} max output</small></div>
+          <div class="model-family-price"><strong>{escape(v["input_price"])}</strong><small>input</small><strong>{escape(v["output_price"])}</strong><small>output / 1M</small></div>
+          <a href="{escape(v["source"], quote=True)}" target="_blank" rel="noopener noreferrer">Official model page ↗</a>
+        </article>'''
+        for v in variants
+    )
+    return f'''<section class="model-reference model-reference-deep shell">
+      <div class="model-reference-intro">
+        <div class="model-reference-copy">
+          <p class="eyebrow">MODEL REFERENCE</p>
+          <h2>GPT-5.6 at a glance.</h2>
+          <p>GPT-5.6 is OpenAI’s 2026 model family for production reasoning, coding, knowledge work and agentic workflows. The family has three durable tiers: Sol for flagship capability, Terra for a balance of intelligence and cost, and Luna for efficient high-volume work.</p>
+          <p>The unsuffixed API alias <code>gpt-5.6</code> routes to <strong>GPT-5.6 Sol</strong>. That distinction matters: “GPT-5.6” can refer to the family in product discussions, while the API alias resolves to the Sol tier.</p>
+          <p class="reference-note">Introduced July 9, 2026 · {escape(ref["modalities"])} · Last verified {escape(verified)}</p>
+        </div>
+        <div class="model-fact-grid">
+          <div><span>FAMILY</span><strong>Sol · Terra · Luna</strong></div>
+          <div><span>API ALIAS</span><strong>gpt-5.6 → Sol</strong></div>
+          <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens across family</small></div>
+          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens across family</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>Feb 16, 2026</strong></div>
+          <div><span>DEFAULT REASONING</span><strong>Medium</strong><small>none → max supported</small></div>
+        </div>
+      </div>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">FAMILY MAP</p><h2>Three GPT-5.6 tiers, three cost profiles.</h2><p>The models share the same large context and output limits, but target different quality, latency and cost envelopes.</p></div>
+        <div class="model-family-grid">{cards}</div>
+        <p class="reference-note">{escape(ref["pricing_note"])}</p>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">WHAT GPT-5.6 IS</p>
+          <h2>A production reasoning family, not one single model.</h2>
+          <p>OpenAI introduced GPT-5.6 as a family designed to improve performance per dollar across complex work. Sol is the flagship tier and roughly takes the place of the unsuffixed flagship position from earlier GPT-5 families. Terra is the balanced tier, while Luna is optimized for cost-sensitive throughput.</p>
+          <p>For developers, that means model selection can happen inside one generation without changing the overall API architecture. You can reserve Sol for the tasks where additional reasoning materially changes the result, move repeatable production work to Terra, and use Luna where volume and unit economics dominate.</p>
+          <p>GPT-5.6 is no longer OpenAI’s newest generation—GPT-6 now occupies that position—but GPT-5.6 remains a current production family with documented API support and distinct lower-cost tiers.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>MODEL SELECTION RULE</span>
+          <strong>Choose the cheapest tier that passes your real evaluation.</strong>
+          <p>Do not select Sol simply because it is the flagship. Benchmark representative tasks at the reasoning effort you actually plan to use, then compare quality, latency and total token cost.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">CAPABILITIES</p><h2>What GPT-5.6 is designed to do well.</h2></div>
+        <div class="model-capability-grid">
+          <article><span>REASONING</span><h3>Adjustable reasoning effort</h3><p>GPT-5.6 supports none, low, medium, high, xhigh and max reasoning effort. OpenAI recommends medium as a balanced starting point, then measuring whether higher effort creates a real quality gain.</p></article>
+          <article><span>CODING</span><h3>Complex software work</h3><p>OpenAI positions GPT-5.6 for coding and production workflows, with stronger token efficiency and improved frontend design judgment compared with earlier models.</p></article>
+          <article><span>AGENTS</span><h3>Tool-oriented workflows</h3><p>The Responses API supports programmatic tool calling, persisted reasoning and agent workflows. Multi-agent orchestration is available in beta across GPT-5.6 models.</p></article>
+          <article><span>VISION</span><h3>Text + image input</h3><p>The family accepts image input and text input, with text output. Current model pages do not list native audio or video support for these models.</p></article>
+          <article><span>LONG CONTEXT</span><h3>1.05M-token context</h3><p>All three variants list a 1,050,000-token context window and up to 128,000 output tokens, enabling large repositories, document sets and long-running workflows.</p></article>
+          <article><span>EFFICIENCY</span><h3>Tiered price-performance</h3><p>Sol, Terra and Luna let the same application route different task classes to different cost envelopes instead of treating every request as a flagship-model request.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">API & TOOLS</p><h2>GPT-5.6 in the OpenAI API.</h2><p>For reasoning and tool-calling workflows, OpenAI recommends the Responses API rather than treating the model as a simple text-completion endpoint.</p></div>
+        <div class="model-api-grid">
+          <div><span>RESPONSES API</span><strong>Recommended for reasoning + tools</strong><p>Use the Responses API for multi-turn reasoning, function calling and agent workflows.</p></div>
+          <div><span>PROGRAMMATIC TOOL CALLING</span><strong>Model-written coordination logic</strong><p>GPT-5.6 can coordinate eligible tools and intermediate results in a hosted runtime.</p></div>
+          <div><span>MULTI-AGENT</span><strong>Beta across GPT-5.6</strong><p>A root model can delegate parallel work to subagents and synthesize the outputs in one workflow.</p></div>
+          <div><span>TOOLS</span><strong>Web, files, code, shell, computer use, MCP</strong><p>OpenAI’s current Sol model page lists web search, file search, code interpreter, hosted shell, computer use, MCP, tool search and more.</p></div>
+          <div><span>STRUCTURED OUTPUTS</span><strong>Supported</strong><p>Useful for production applications that need machine-readable model results rather than free-form prose.</p></div>
+          <div><span>FINE-TUNING</span><strong>Not currently supported</strong><p>OpenAI’s current GPT-5.6 Sol model page does not list fine-tuning support.</p></div>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">REASONING MODES</p>
+          <h2>Standard effort, max effort and Pro mode.</h2>
+          <p><strong>Reasoning effort</strong> controls how much reasoning the model applies within a request. GPT-5.6 supports six levels from none through max, and defaults to medium. Lower settings generally favor latency and cost; higher settings are appropriate only when the workload shows a measurable quality benefit.</p>
+          <p><strong>Pro mode</strong> is separate from reasoning effort. Instead of switching to a separate GPT-5.6 Pro model slug, OpenAI documents <code>reasoning.mode: "pro"</code> on the selected GPT-5.6 model. Pro mode performs more model work and is intended for difficult, quality-first tasks that can tolerate higher latency and token usage.</p>
+          <p>GPT-5.6 also changed reasoning persistence: the family can reuse compatible reasoning across turns within the same GPT-5.6 family. That can matter in long, tool-heavy workflows where goals and assumptions remain stable across multiple calls.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>PRACTICAL START</span>
+          <strong>Start at medium, then evaluate one level lower and one higher.</strong>
+          <p>OpenAI’s migration guidance explicitly recommends testing the same reasoning level used on an earlier model and one level lower, because GPT-5.6 can often reach the target quality with fewer tokens.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>GPT-5.6 API pricing.</h2><p>Current Standard text-token rates per 1M tokens. Cached input is substantially cheaper, while very long prompts use higher rates.</p></div>
+        <div class="model-price-grid">
+          <article><span>GPT-5.6 SOL</span><strong>$4</strong><small>input / 1M</small><strong>$0.40</strong><small>cached input</small><strong>$20</strong><small>output / 1M</small></article>
+          <article><span>GPT-5.6 TERRA</span><strong>$2</strong><small>input / 1M</small><strong>$0.20</strong><small>cached input</small><strong>$12</strong><small>output / 1M</small></article>
+          <article><span>GPT-5.6 LUNA</span><strong>$0.20</strong><small>input / 1M</small><strong>$0.02</strong><small>cached input</small><strong>$1.20</strong><small>output / 1M</small></article>
+        </div>
+        <div class="model-caveat"><strong>Long-context pricing</strong><p>OpenAI’s current model pages state that prompts above 272K input tokens are priced at 2× the input rate and 1.5× the output rate for the full request. Cache writes are billed above ordinary uncached input, while cache reads receive a large discount.</p></div>
+        <div class="model-caveat"><strong>Sol promotional pricing</strong><p>OpenAI currently labels GPT-5.6 Sol’s $4 / $20 rates as promotional pricing available at least through November 21, 2026. Recheck the official model page before building a long-term cost model.</p></div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where GPT-5.6 is available.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>OPENAI API</span><h3>Sol, Terra and Luna</h3><p>All three GPT-5.6 tiers are available through the API, with model-specific rate limits and tool support.</p></article>
+          <article><span>CODEX</span><h3>GPT-5.6 across coding workflows</h3><p>OpenAI’s current help documentation lists Terra for Free and Go, with Sol, Terra and Luna available to higher plans in Codex.</p></article>
+          <article><span>CHATGPT WORK</span><h3>Tier choice on paid plans</h3><p>Current help documentation lists Sol, Terra and Luna in Work for Plus, Pro, Business and Enterprise users.</p></article>
+          <article><span>CHAT EXPERIENCE</span><h3>Sol and Luna remain product models</h3><p>OpenAI has continued to update Sol for paid ChatGPT use and Luna for the default Free/Go experience, while availability varies by plan and surface.</p></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">WHICH MODEL?</p><h2>Choose GPT-5.6 by workload, not by name.</h2></div>
+        <div class="model-decision-grid">
+          <article><span>CHOOSE SOL</span><h3>Quality-first complex work</h3><p>Use Sol for difficult coding, professional analysis, computer use, research and agentic tasks where additional reasoning changes the outcome enough to justify the higher unit cost.</p></article>
+          <article><span>CHOOSE TERRA</span><h3>Balanced production workloads</h3><p>Use Terra when the application needs strong reasoning but does not consistently benefit from Sol’s extra capability. It is the natural tier to evaluate for everyday production routing.</p></article>
+          <article><span>CHOOSE LUNA</span><h3>High-volume efficiency</h3><p>Use Luna for classification, extraction, focused transformations and other repeatable workloads where throughput and price matter more than maximum reasoning depth.</p></article>
+          <article><span>USE GPT-6 INSTEAD</span><h3>When you need the newer frontier</h3><p>GPT-6 is OpenAI’s newer generation. For new high-capability systems, compare GPT-5.6 against GPT-6 rather than assuming the older family remains the best quality choice.</p><a href="/models/gpt-6/">Open GPT-6 reference ↗</a></article>
+        </div>
+      </section>
+
+      <section class="model-deep-section model-split">
+        <div>
+          <p class="eyebrow">MIGRATION</p>
+          <h2>Moving from GPT-5.5 or GPT-5.4.</h2>
+          <p>OpenAI recommends beginning with your current reasoning setting rather than automatically raising effort on GPT-5.6. Test the same setting and one level lower on representative workloads, then compare quality, latency and token use.</p>
+          <p>For applications that use tools or multi-step reasoning, migration is also a chance to move toward the Responses API and evaluate persisted reasoning, Programmatic Tool Calling and beta multi-agent orchestration. Do not change model, API architecture and agent permissions all at once unless you can isolate the effect of each change in evaluation.</p>
+          <p>Older GPT-5 and o3 snapshots are also on a published deprecation path, with OpenAI listing GPT-5.6 Sol, Terra and Luna as replacement directions for several older GPT-5 tiers.</p>
+        </div>
+        <aside class="model-side-note">
+          <span>MIGRATION CHECK</span>
+          <strong>Evaluate on production-like tasks.</strong>
+          <p>Compare acceptance rate, token usage, latency, tool errors and human correction—not only a general benchmark score.</p>
+        </aside>
+      </section>
+
+      <section class="model-deep-section">
+        <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to keep in mind.</h2></div>
+        <div class="model-caveat-list">
+          <div><span>01</span><strong>GPT-6 is newer.</strong><p>GPT-5.6 remains useful, but “latest” and “highest capability” now refer to the GPT-6 generation for many workloads.</p></div>
+          <div><span>02</span><strong>Long context is not free context.</strong><p>A 1.05M-token window is a capacity limit, not a reason to send unnecessary data. Very long prompts cost more and can increase latency.</p></div>
+          <div><span>03</span><strong>Benchmarks are workload-specific.</strong><p>OpenAI’s launch evaluations are useful evidence, but production routing should still be based on your own task distribution and acceptance criteria.</p></div>
+          <div><span>04</span><strong>Tool access changes the risk model.</strong><p>Agents that can browse, execute code, use MCP or call business systems need permission, sandboxing and approval controls around the model.</p></div>
+          <div><span>05</span><strong>Pricing can change.</strong><p>Sol is explicitly on promotional pricing at the time of verification, so production cost models should reference the current official model page.</p></div>
+          <div><span>06</span><strong>Fine-tuning is not listed.</strong><p>The current Sol model page lists fine-tuning as unsupported; use prompting, tools, retrieval and model routing where appropriate instead of assuming a fine-tuned GPT-5.6 endpoint exists.</p></div>
+        </div>
+        <div class="model-related-links">
+          <a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools in 2026</strong><b>↗</b></a>
+          <a href="/guides/gpt-6-vs-claude/"><span>NEWER FRONTIER</span><strong>GPT-6 vs Claude</strong><b>↗</b></a>
+          <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <div class="model-reference-lower">
+        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div>
+        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div>
+      </div>
+    </section>'''
+
 def model_reference_html(name):
+    if name == "GPT-5.6":
+        return gpt56_reference_html()
     ref = model_reference(name)
     if not ref:
         return ""
@@ -1250,11 +1492,15 @@ def model_page_html(name, items):
     canonical = f"{BASE_URL}/models/{slug}/"
     ref = model_reference(name)
     if ref:
-        description = (
-            f"{name} reference: pricing, context window, API specifications, model family details "
-            f"and the latest primary-source updates tracked by SXF / AI."
-        )
-        title = f"{name} — Pricing, Context Window, API & Updates | SXF / AI" if name != "GPT-6" else "GPT-6 Models — Pricing, Context Window & Updates | SXF / AI"
+        if name == "GPT-5.6":
+            description = "GPT-5.6 model family reference: Sol, Terra and Luna pricing, 1.05M context window, API aliases, reasoning modes, tools, availability and current primary-source updates."
+            title = "GPT-5.6 — Models, Pricing, Context Window & API | SXF / AI"
+        else:
+            description = (
+                f"{name} reference: pricing, context window, API specifications, model family details "
+                f"and the latest primary-source updates tracked by SXF / AI."
+            )
+            title = f"{name} — Pricing, Context Window, API & Updates | SXF / AI" if name != "GPT-6" else "GPT-6 Models — Pricing, Context Window & Updates | SXF / AI"
     else:
         description = f"Track {name} releases, capability changes and related primary-source signals on SXF / AI."
         title = name + " — Releases & Signals | SXF / AI"
@@ -1264,30 +1510,44 @@ def model_page_html(name, items):
     latest_date = display_date(latest["published"])
     source_count = len({item["source"] for item in items})
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if model_page_indexable(name, items) else "noindex,follow"
-    schema = {
-        "@context":"https://schema.org",
-        "@graph":[
-            {
-                "@type":"CollectionPage","name":f"{name} reference and updates | SXF / AI","url":canonical,
-                "description":description,"isPartOf":{"@id":"https://sxf.si/#website"},
-                "about":{"@type":"Thing","name":name},"inLanguage":"en"
-            },
-            {
-                "@type":"BreadcrumbList",
-                "itemListElement":[
-                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL + "/"},
-                    {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL + "/models/"},
-                    {"@type":"ListItem","position":3,"name":name,"item":canonical},
-                ]
-            }
-        ]
-    }
+    schema_graph = [
+        {
+            "@type":"CollectionPage","name":f"{name} reference and updates | SXF / AI","url":canonical,
+            "description":description,"isPartOf":{"@id":"https://sxf.si/#website"},
+            "about":{"@type":"Thing","name":name},"inLanguage":"en"
+        },
+        {
+            "@type":"BreadcrumbList",
+            "itemListElement":[
+                {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL + "/"},
+                {"@type":"ListItem","position":2,"name":"Models","item":BASE_URL + "/models/"},
+                {"@type":"ListItem","position":3,"name":name,"item":canonical},
+            ]
+        }
+    ]
+    if ref and ref.get("faq"):
+        schema_graph.append({
+            "@type":"FAQPage",
+            "mainEntity":[
+                {"@type":"Question","name":question,"acceptedAnswer":{"@type":"Answer","text":answer}}
+                for question, answer in ref["faq"]
+            ]
+        })
+    if name == "GPT-5.6":
+        schema_graph.append({
+            "@type":"ItemList","name":"GPT-5.6 model family","numberOfItems":3,
+            "itemListElement":[
+                {"@type":"ListItem","position":i+1,"name":v["name"]}
+                for i, v in enumerate(ref["variants"])
+            ]
+        })
+    schema = {"@context":"https://schema.org","@graph":schema_graph}
     rows = "".join(signal_row(item) for item in items[:30])
     reference = model_reference_html(name)
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, robots=robots)}
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"reference & signals." if ref else "release signals."}</span></h1><p>{escape(description)}</p>
+      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"model family reference." if name == "GPT-5.6" else ("reference & signals." if ref else "release signals.")}</span></h1><p>{escape(description)}</p>
       <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>{source_count}</strong><span>primary sources</span></div><div><strong>{escape(latest_date)}</strong><span>latest tracked</span></div></div></section>
       {reference}
       <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>{escape(latest["title"])}</h2><p class="signal-summary">{escape(latest_summary)}</p><a class="brief-open" href="/signals/{escape(latest["signal_slug"], quote=True)}/">Open latest signal ↗</a></article>
