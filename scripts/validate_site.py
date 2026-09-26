@@ -93,6 +93,21 @@ def main():
         if item["url"] in aliases and item["signal_url"] != BASE + "/signals/" + aliases[item["url"]] + "/":
             fail(f"canonical slug drift: {item['title']}")
 
+    eligible = [item for item in archive.get("items", []) if item.get("seo_eligible")]
+    if eligible:
+        why_values = {item.get("editorial", {}).get("why_it_matters", "").strip() for item in eligible}
+        verify_values = {item.get("editorial", {}).get("what_to_verify", "").strip() for item in eligible}
+        if "" in why_values or "" in verify_values:
+            fail("indexable signals must include Why it matters and What to verify")
+        if len(eligible) >= 12 and len(why_values) < 6:
+            fail(f"signal editorial diversity too low: only {len(why_values)} Why it matters variants for {len(eligible)} indexable signals")
+        if len(eligible) >= 12 and len(verify_values) < 6:
+            fail(f"signal editorial diversity too low: only {len(verify_values)} What to verify variants for {len(eligible)} indexable signals")
+        boilerplate = re.compile(r"The post .+ appeared first on The GitHub Blog", re.I)
+        for item in eligible:
+            if boilerplate.search(item.get("editorial", {}).get("what_changed", "")):
+                fail(f"RSS boilerplate leaked into signal editorial: {item.get('title')}")
+
     tree=ET.parse(ROOT/"sitemap.xml")
     ns={"s":"http://www.sitemaps.org/schemas/sitemap/0.9"}
     seen=set()
