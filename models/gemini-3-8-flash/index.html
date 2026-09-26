@@ -1,0 +1,262 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>Gemini 3.8 Flash — Pricing, Context Window, API &amp; Agents | SXF / AI</title>
+      <meta name="description" content="Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/models/gemini-3-8-flash/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/models/gemini-3-8-flash/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/models/gemini-3-8-flash/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="Gemini 3.8 Flash — Pricing, Context Window, API &amp; Agents | SXF / AI" />
+      <meta property="og:description" content="Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability." />
+      <meta property="og:url" content="https://sxf.si/models/gemini-3-8-flash/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:title" content="Gemini 3.8 Flash — Pricing, Context Window, API &amp; Agents | SXF / AI" />
+      <meta name="twitter:description" content="Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Gemini 3.8 Flash reference | SXF / AI","url":"https://sxf.si/models/gemini-3-8-flash/","description":"Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"Gemini 3.8 Flash"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Gemini 3.8 Flash","item":"https://sxf.si/models/gemini-3-8-flash/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Gemini 3.8 Flash?","acceptedAnswer":{"@type":"Answer","text":"Gemini 3.8 Flash is Google’s most intelligent stable Flash model. Google positions it for long-horizon software engineering, autonomous agents and complex enterprise workflows while retaining the speed and cost profile of the Flash family."}},{"@type":"Question","name":"What is the Gemini 3.8 Flash model ID?","acceptedAnswer":{"@type":"Answer","text":"The stable Gemini API model ID is gemini-3.8-flash."}},{"@type":"Question","name":"What is the Gemini 3.8 Flash context window?","acceptedAnswer":{"@type":"Answer","text":"Gemini 3.8 Flash supports up to 1,048,576 input tokens and up to 65,536 output tokens."}},{"@type":"Question","name":"How much does Gemini 3.8 Flash cost?","acceptedAnswer":{"@type":"Answer","text":"Through December 31, 2026, Standard paid pricing is $0.75 per million input tokens and $3.75 per million output tokens. Starting January 1, 2027, Google lists $1.50 input and $7.50 output per million tokens."}},{"@type":"Question","name":"Does Gemini 3.8 Flash support thinking?","acceptedAnswer":{"@type":"Answer","text":"Yes. It supports low, medium and high thinking levels, with medium as the default. The minimal level is not supported and returns an error."}},{"@type":"Question","name":"What input types does Gemini 3.8 Flash support?","acceptedAnswer":{"@type":"Answer","text":"It accepts text, images, video, audio and PDF input and produces text output."}},{"@type":"Question","name":"Does Gemini 3.8 Flash support tools and agents?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google lists function calling, code execution, file search, Search grounding, Google Maps grounding, URL context, structured outputs and computer use in preview. It is also the default model for Google’s managed Antigravity agent."}},{"@type":"Question","name":"Is Gemini 3.8 Flash production ready?","acceptedAnswer":{"@type":"Answer","text":"Yes. Google released Gemini 3.8 Flash as generally available on September 2, 2026 and lists the stable model ID gemini-3.8-flash for production use."}},{"@type":"Question","name":"Does Gemini 3.8 Flash support the Live API?","acceptedAnswer":{"@type":"Answer","text":"No. The standard Gemini 3.8 Flash model does not support the Live API. Google provides separate Gemini 3.8 Live models for low-latency audio-to-audio experiences."}},{"@type":"Question","name":"Should I migrate from Gemini 3.7 Flash?","acceptedAnswer":{"@type":"Answer","text":"For new projects, Google recommends using its latest models, including Gemini 3.8 Flash. Existing 3.7 Flash users should evaluate the migration because 3.8 changes some generation and conversation parameters and may use more reasoning tokens on difficult multi-step tasks."}}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Gemini 3.8 Flash</span></nav>
+        <p class="eyebrow">MODEL INTELLIGENCE</p>
+        <h1>Gemini 3.8 Flash<br><span>model reference.</span></h1>
+        <p>Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability.</p>
+        <div class="collection-stats">
+          <div><strong>GA</strong><span>production status</span></div>
+          <div><strong>1,048,576</strong><span>input tokens</span></div>
+          <div><strong>September 2, 2026</strong><span>released</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">MODEL REFERENCE</p>
+            <h2>Gemini 3.8 Flash at a glance.</h2>
+            <p>Gemini 3.8 Flash is Google’s most intelligent stable Flash model as of September 2026. Google designed it for long-horizon software engineering, autonomous agents and complex enterprise workflows while keeping the faster, lower-cost positioning associated with the Flash line.</p>
+            <p>The stable model ID is <code>gemini-3.8-flash</code>. It accepts text, image, video, audio and PDF inputs and returns text. The model is generally available, supports a 1,048,576-token input window and up to 65,536 output tokens, and exposes tunable thinking levels plus a broad set of built-in tools.</p>
+            <p class="reference-note">Released September 2, 2026 · Stable GA · Text, image, video, audio and PDF input · text output · Last verified 2026-09-26</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>gemini-3.8-flash</strong></div>
+            <div><span>STATUS</span><strong>Stable / GA</strong></div>
+            <div><span>INPUT LIMIT</span><strong>1,048,576</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>65,536</strong><small>tokens</small></div>
+            <div><span>DEFAULT THINKING</span><strong>Medium</strong><small>low · medium · high</small></div>
+            <div><span>INTRO PRICE</span><strong>$0.75 / $3.75</strong><small>input / output per 1M</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">WHAT IT IS</p>
+            <h2>Google’s stable Flash model for longer, more agentic work.</h2>
+            <p>The key change in Gemini 3.8 Flash is not simply a larger context window or a new version number. Google is explicitly positioning the model for tasks that require sustained planning: multi-file software engineering, autonomous tool use, repeated verification and complex enterprise workflows that would previously have pushed users toward a larger or slower model.</p>
+            <p>“Flash” still signals a price-performance goal. The model is intended to make advanced reasoning and agentic execution practical at higher volume than a premium frontier tier. That makes it relevant for production systems that need more than simple extraction or chat but still have strict latency and unit-cost constraints.</p>
+            <p>Google also made Gemini 3.8 Flash the default model for its managed Antigravity agent and the Antigravity SDK, which is a useful product-level signal: this is not presented as an experimental preview model. It is part of Google’s current production agent stack.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>SXF POSITIONING</span>
+            <strong>Think “agent-capable Flash,” not “cheap chatbot.”</strong>
+            <p>The model makes the most sense when the workload benefits from tools, multimodal context or multi-step reasoning but still needs a lower unit cost than premium frontier models.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITIES</p><h2>What Gemini 3.8 Flash supports.</h2><p>The model combines broad multimodal input support with built-in tools and production inference options.</p></div>
+          <div class="model-capability-grid">
+            <article><span>SOFTWARE ENGINEERING</span><h3>Long-horizon coding</h3><p>Google positions 3.8 Flash for real-world software engineering, complex multi-file refactors and deterministic tool execution rather than only code completion or short snippets.</p></article>
+            <article><span>AUTONOMOUS AGENTS</span><h3>Multi-step planning</h3><p>The model is designed for resilient agent loops that plan, call tools, inspect results and continue over longer tasks with fewer failed loops.</p></article>
+            <article><span>MULTIMODAL</span><h3>Text, image, video, audio and PDF</h3><p>A single model can reason over multiple input modalities while returning text, which is useful for document, media and computer-use workflows.</p></article>
+            <article><span>GROUNDING</span><h3>Google Search and Maps</h3><p>Paid Gemini API workflows can use Search and Maps grounding so applications can incorporate current web or location evidence rather than relying only on model knowledge.</p></article>
+            <article><span>CODE EXECUTION</span><h3>Built-in execution tool</h3><p>Google lists code execution as supported, allowing the model to use executable computation inside supported workflows rather than reasoning only in prose.</p></article>
+            <article><span>COMPUTER USE</span><h3>Preview UI interaction</h3><p>Gemini 3.8 Flash is Google’s recommended model for computer use, with the capability currently marked preview on the model page.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">TOOLS</p><h2>A broad built-in tool surface.</h2><p>Tool support is one of the strongest reasons to treat Gemini 3.8 Flash as an agent model rather than a conventional text model.</p></div>
+          <div class="model-api-grid">
+            <div><span>FUNCTION CALLING</span><strong>Supported</strong><p>Use model-selected functions to connect application logic, APIs and business systems.</p></div>
+            <div><span>FILE SEARCH</span><strong>Supported</strong><p>Useful for retrieval over uploaded or indexed files without building every retrieval primitive from scratch.</p></div>
+            <div><span>SEARCH GROUNDING</span><strong>Supported</strong><p>Ground model responses in Google Search when freshness and web evidence matter.</p></div>
+            <div><span>GOOGLE MAPS</span><strong>Supported</strong><p>Ground location-aware workflows in Google Maps through the paid API tier.</p></div>
+            <div><span>URL CONTEXT</span><strong>Supported</strong><p>Bring web-page context directly into supported Gemini workflows.</p></div>
+            <div><span>STRUCTURED OUTPUTS</span><strong>Supported</strong><p>Constrain responses for production systems that need predictable machine-readable output.</p></div>
+          </div>
+          <div class="model-caveat"><strong>Not a Live API model</strong><p>The standard Gemini 3.8 Flash model does not support the Live API or native audio generation. Google provides separate Gemini 3.8 Live and Gemini 3.8 TTS model families for real-time voice and speech generation.</p></div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">THINKING</p>
+            <h2>Low, medium and high reasoning levels.</h2>
+            <p>Gemini 3.8 Flash supports the <code>thinking_level</code> parameter with <strong>low</strong>, <strong>medium</strong> and <strong>high</strong>. Google sets medium as the default for this model. The levels are relative controls over how much internal reasoning the model is allowed to use, not fixed token budgets.</p>
+            <p>This matters for cost because output pricing includes thinking tokens. Google notes that 3.8 Flash may intentionally use more tokens on difficult, long-running tasks: it can take smaller reasoning steps, call tools repeatedly and verify intermediate work. For simpler workflows, lowering the reasoning level can reduce token consumption and latency.</p>
+            <p>The older <code>thinking_budget</code> pattern should not be carried forward blindly. Gemini 3.8 Flash expects the newer thinking-level control, and <code>minimal</code> is explicitly unsupported.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>PRACTICAL START</span>
+            <strong>Begin at medium, then benchmark low.</strong>
+            <p>If a task is routine or highly constrained, low thinking may preserve quality while reducing cost. Use high only where your own evaluation shows a meaningful gain.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Gemini 3.8 Flash API pricing in 2026.</h2><p>Google is running introductory pricing through December 31, 2026. Standard rates double on January 1, 2027, so long-term cost models should use the post-promotion price unless the workload is short-lived.</p></div>
+          <div class="model-price-grid">
+            <article><span>STANDARD · THROUGH DEC 31</span><strong>$0.75</strong><small>input / 1M</small><strong>$3.75</strong><small>output / 1M</small></article>
+            <article><span>BATCH / FLEX · THROUGH DEC 31</span><strong>$0.375</strong><small>input / 1M</small><strong>$1.875</strong><small>output / 1M</small></article>
+            <article><span>PRIORITY · THROUGH DEC 31</span><strong>$1.35</strong><small>input / 1M</small><strong>$6.75</strong><small>output / 1M</small></article>
+          </div>
+          <div class="model-caveat"><strong>January 1, 2027</strong><p>Google lists Standard pricing rising to $1.50 input and $7.50 output per 1M tokens. Batch and Flex rise to $0.75 / $3.75, while Priority rises to $2.70 / $13.50.</p></div>
+          <div class="model-caveat"><strong>Context caching</strong><p>Standard cache reads are $0.075 per 1M tokens through December 31, 2026 and $0.15 starting January 1, 2027. Google separately charges cache storage per token-hour.</p></div>
+          <div class="model-caveat"><strong>Search and Maps grounding</strong><p>On the paid tier, Google currently includes 5,000 free Search requests per month shared across Gemini 3.x models and then charges $14 per 1,000 requests. Google Maps grounding uses a similar 5,000-prompt free allowance before paid query charges.</p></div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">INFERENCE MODES</p><h2>Standard, Batch, Flex and Priority.</h2><p>Gemini 3.8 Flash can be purchased through several serving modes depending on whether the workload optimizes for price, immediacy or capacity guarantees.</p></div>
+          <div class="model-decision-grid">
+            <article><span>STANDARD</span><h3>Interactive production traffic</h3><p>The default choice for ordinary API calls when applications need predictable interactive behavior without the premium of Priority inference.</p></article>
+            <article><span>BATCH</span><h3>Asynchronous bulk work</h3><p>Batch pricing is 50% below the introductory Standard token rate and suits jobs that do not need immediate responses.</p></article>
+            <article><span>FLEX</span><h3>Lower-cost flexible capacity</h3><p>Flex uses the same introductory token rates as Batch for 3.8 Flash and is intended for workloads that can trade strict latency for cost.</p></article>
+            <article><span>PRIORITY</span><h3>Premium serving priority</h3><p>Priority costs more but is designed for applications that value prioritized serving and production capacity over minimum token cost.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">API MIGRATION</p><h2>Moving to Gemini 3.8 Flash requires more than changing the model string.</h2><p>Google’s migration checklist includes several API behavior changes that can break older Gemini integrations if they are carried forward unchanged.</p></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><strong>Use <code>gemini-3.8-flash</code>.</strong><p>Update the target model ID to the stable 3.8 Flash identifier.</p></div>
+            <div><span>02</span><strong>Remove legacy sampling parameters.</strong><p>Google says to strip <code>temperature</code>, <code>top_p</code> and <code>top_k</code> from generation configs for this migration path.</p></div>
+            <div><span>03</span><strong>Replace thinking budgets.</strong><p>Use the string-based <code>thinking_level</code> control instead of <code>thinking_budget</code>. The <code>minimal</code> level is not accepted by 3.8 Flash.</p></div>
+            <div><span>04</span><strong>Remove <code>candidate_count</code>.</strong><p>Google marks candidate count as unsupported in Gemini 3 and later.</p></div>
+            <div><span>05</span><strong>Standardize conversation state.</strong><p>For multi-turn workflows, Google recommends server-side <code>previous_interaction_id</code> and removing prefilled model turns.</p></div>
+            <div><span>06</span><strong>Audit function responses.</strong><p>When using GenerateContent, function responses should include both <code>call_id</code> and <code>name</code>, and multimodal assets need to be placed correctly in response payloads.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where Gemini 3.8 Flash fits in Google’s stack.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>GEMINI API</span><h3>Stable production endpoint</h3><p>The model is available through the Gemini Developer API with the stable ID <code>gemini-3.8-flash</code>.</p></article>
+            <article><span>GOOGLE AI STUDIO</span><h3>Interactive development</h3><p>Google exposes 3.8 Flash in AI Studio for testing prompts, tools and multimodal workflows before production deployment.</p></article>
+            <article><span>VERTEX AI</span><h3>Google Cloud serving</h3><p>Google Cloud publishes dedicated Gemini 3.8 Flash SKUs across standard, batch, flex, priority and caching modes for enterprise deployments.</p></article>
+            <article><span>MANAGED AGENTS</span><h3>Default Antigravity model</h3><p>Google’s latest-model guide says the managed Antigravity agent and Antigravity SDK now use Gemini 3.8 Flash by default.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">MODEL SELECTION</p><h2>When Gemini 3.8 Flash makes sense.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>CHOOSE 3.8 FLASH</span><h3>Agentic software engineering</h3><p>Use it when the system needs repository-scale context, repeated tool calls and sustained execution but still needs Flash-level unit economics.</p></article>
+            <article><span>CHOOSE 3.8 FLASH</span><h3>Multimodal enterprise workflows</h3><p>It is a strong fit when a single workflow must combine documents, images, video, audio and tools while keeping deployment architecture relatively simple.</p></article>
+            <article><span>CHOOSE FLASH-LITE</span><h3>High-volume simple work</h3><p>For straightforward classification, translation or data processing, Google’s Flash-Lite line may offer a better price profile than paying for 3.8 Flash reasoning capacity.</p></article>
+            <article><span>CHOOSE A LIVE MODEL</span><h3>Real-time voice agents</h3><p>Use Gemini 3.8 Live rather than standard 3.8 Flash when native low-latency audio-to-audio interaction is the primary requirement.</p></article>
+          </div>
+          <div class="model-related-links">
+            <a href="/topics/google-ai/"><span>GOOGLE INTELLIGENCE</span><strong>Google AI signals</strong><b>↗</b></a>
+            <a href="/guides/best-ai-coding-tools/"><span>CODING WORKFLOWS</span><strong>Best AI Coding Tools</strong><b>↗</b></a>
+            <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">SECURITY & DATA</p>
+            <h2>Agent capability increases the importance of system controls.</h2>
+            <p>Gemini 3.8 Flash’s tool surface is powerful: it can call functions, execute code, ground on the web, use URL context and interact with computer interfaces in preview. Those features change the security model because model output can influence external systems rather than only produce text.</p>
+            <p>Google’s pricing documentation also distinguishes data handling by tier: content on the free tier may be used to improve Google products, while paid-tier content is listed as not used for that purpose. Enterprise deployments should still verify the exact Google Cloud and organizational data-governance terms that apply to their account.</p>
+            <p>For agentic deployments, keep tool permissions scoped to the task, validate sensitive actions outside the model, isolate code or browser execution where possible and require human confirmation when a workflow can create consequential external effects.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>SECURITY RULE</span>
+            <strong>A smarter agent should not automatically get broader permissions.</strong>
+            <p>Capability and authorization are separate design decisions. Use least privilege even when the model has stronger planning or prompt-injection resistance.</p>
+            <a href="/guides/prompt-injection/">Prompt Injection guide ↗</a>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to keep in mind.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><strong>Introductory pricing expires.</strong><p>The attractive 2026 token rates double on January 1, 2027. Use the post-promotion numbers for long-range planning.</p></div>
+            <div><span>02</span><strong>Thinking tokens are billable output.</strong><p>High reasoning can materially change output-token cost on complex tasks even when the visible answer is short.</p></div>
+            <div><span>03</span><strong>Computer use is still preview.</strong><p>Treat UI automation as a higher-risk capability and test reliability, approvals and sandboxing before production use.</p></div>
+            <div><span>04</span><strong>It does not generate images or native audio.</strong><p>The model can understand image, video and audio inputs, but use Google’s dedicated image, Live or TTS models when the required output is not text.</p></div>
+            <div><span>05</span><strong>Long context is capacity, not free accuracy.</strong><p>Sending a million tokens can increase cost and complexity. Retrieval, document selection and context quality still matter.</p></div>
+            <div><span>06</span><strong>Migration can be breaking.</strong><p>Sampling controls, thinking configuration, multi-turn state and function-call formatting all deserve regression tests before production traffic moves.</p></div>
+          </div>
+        </section>
+
+        <div class="model-reference-lower">
+          <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash/" target="_blank" rel="noopener noreferrer"><span>Google AI · Gemini 3.8 Flash model page</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer"><span>Google AI · What’s new in Gemini 3.8 Flash</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>Google AI · Gemini Developer API pricing</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/models" target="_blank" rel="noopener noreferrer"><span>Google AI · Models overview</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener noreferrer"><span>Google AI · Gemini API release notes</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/computer-use" target="_blank" rel="noopener noreferrer"><span>Google AI · Computer use</span><b>↗</b></a><a href="https://ai.google.dev/gemini-api/docs/gemini-3" target="_blank" rel="noopener noreferrer"><span>Google AI · Gemini 3 developer guide</span><b>↗</b></a><a href="https://cloud.google.com/skus/sku-groups/gen-ai-gemini-3-8-flash" target="_blank" rel="noopener noreferrer"><span>Google Cloud · Gemini 3.8 Flash SKU group</span><b>↗</b></a></div>
+          <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p><details><summary>What is Gemini 3.8 Flash?</summary><p>Gemini 3.8 Flash is Google’s most intelligent stable Flash model. Google positions it for long-horizon software engineering, autonomous agents and complex enterprise workflows while retaining the speed and cost profile of the Flash family.</p></details><details><summary>What is the Gemini 3.8 Flash model ID?</summary><p>The stable Gemini API model ID is gemini-3.8-flash.</p></details><details><summary>What is the Gemini 3.8 Flash context window?</summary><p>Gemini 3.8 Flash supports up to 1,048,576 input tokens and up to 65,536 output tokens.</p></details><details><summary>How much does Gemini 3.8 Flash cost?</summary><p>Through December 31, 2026, Standard paid pricing is $0.75 per million input tokens and $3.75 per million output tokens. Starting January 1, 2027, Google lists $1.50 input and $7.50 output per million tokens.</p></details><details><summary>Does Gemini 3.8 Flash support thinking?</summary><p>Yes. It supports low, medium and high thinking levels, with medium as the default. The minimal level is not supported and returns an error.</p></details><details><summary>What input types does Gemini 3.8 Flash support?</summary><p>It accepts text, images, video, audio and PDF input and produces text output.</p></details><details><summary>Does Gemini 3.8 Flash support tools and agents?</summary><p>Yes. Google lists function calling, code execution, file search, Search grounding, Google Maps grounding, URL context, structured outputs and computer use in preview. It is also the default model for Google’s managed Antigravity agent.</p></details><details><summary>Is Gemini 3.8 Flash production ready?</summary><p>Yes. Google released Gemini 3.8 Flash as generally available on September 2, 2026 and lists the stable model ID gemini-3.8-flash for production use.</p></details><details><summary>Does Gemini 3.8 Flash support the Live API?</summary><p>No. The standard Gemini 3.8 Flash model does not support the Live API. Google provides separate Gemini 3.8 Live models for low-latency audio-to-audio experiences.</p></details><details><summary>Should I migrate from Gemini 3.7 Flash?</summary><p>For new projects, Google recommends using its latest models, including Gemini 3.8 Flash. Existing 3.7 Flash users should evaluate the migration because 3.8 changes some generation and conversation parameters and may use more reasoning tokens on difficult multi-step tasks.</p></details></div>
+        </div>
+      </section>
+
+      <section class="related-signals shell">
+        <div class="intel-section-head">
+          <div><p class="eyebrow">GOOGLE AI WATCH</p><h2>Latest Google AI signals.</h2></div>
+          <a href="/topics/google-ai/">Google AI topic ↗</a>
+        </div>
+        <div class="signal-list"><a class="signal-row" href="/signals/google-beam-expands-with-new-regions-partners-and-customers-a842098/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-23T18:00:00Z">September 23, 2026</time></div>
+      <h3>Google Beam expands with new regions, partners, and customers</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/new-experts-join-google-s-ai-economy-team-08ddcda/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-18T14:00:00Z">September 18, 2026</time></div>
+      <h3>New experts join Google’s AI &amp; Economy team</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/co-creating-the-future-of-fashion-with-google-0249919/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-18T13:00:00Z">September 18, 2026</time></div>
+      <h3>Co-creating the future of fashion with Google</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/making-global-data-easier-to-explore-20a194a/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-17T20:00:00Z">September 17, 2026</time></div>
+      <h3>Making global data easier to explore</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/ai-for-societal-impact-295422c/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-15T16:00:00Z">September 15, 2026</time></div>
+      <h3>AI for Societal Impact</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/building-ai-to-accelerate-science-and-improve-lives-98f851f/">
+      <div class="signal-row-meta"><span>Google AI</span><time datetime="2026-09-15T16:00:00Z">September 15, 2026</time></div>
+      <h3>Building AI to accelerate science and improve lives</h3>
+      <div class="signal-row-foot"><span>Research</span><b>Open signal ↗</b></div>
+    </a></div>
+      </section>
+    </main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
