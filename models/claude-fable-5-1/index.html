@@ -1,0 +1,289 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>Claude Fable 5.1 — Pricing, Context Window, API &amp; Benchmarks | SXF / AI</title>
+      <meta name="description" content="Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/models/claude-fable-5-1/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/models/claude-fable-5-1/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/models/claude-fable-5-1/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="Claude Fable 5.1 — Pricing, Context Window, API &amp; Benchmarks | SXF / AI" />
+      <meta property="og:description" content="Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability." />
+      <meta property="og:url" content="https://sxf.si/models/claude-fable-5-1/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:title" content="Claude Fable 5.1 — Pricing, Context Window, API &amp; Benchmarks | SXF / AI" />
+      <meta name="twitter:description" content="Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Claude Fable 5.1 reference | SXF / AI","url":"https://sxf.si/models/claude-fable-5-1/","description":"Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"Claude Fable 5.1"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Fable 5.1","item":"https://sxf.si/models/claude-fable-5-1/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Claude Fable 5.1?","acceptedAnswer":{"@type":"Answer","text":"Claude Fable 5.1 is Anthropic’s highest-capability model generally available to all customers. It is designed for demanding reasoning, long-horizon agentic work, coding, research and complex knowledge work."}},{"@type":"Question","name":"What is the Claude Fable 5.1 model ID?","acceptedAnswer":{"@type":"Answer","text":"The Claude API model ID is claude-fable-5-1. Amazon Bedrock uses anthropic.claude-fable-5-1, while Google Cloud, Microsoft Foundry and Claude Platform on AWS use the claude-fable-5-1 name."}},{"@type":"Question","name":"What is the Claude Fable 5.1 context window?","acceptedAnswer":{"@type":"Answer","text":"Claude Fable 5.1 has a 1 million-token context window and supports up to 128,000 output tokens."}},{"@type":"Question","name":"How much does Claude Fable 5.1 cost?","acceptedAnswer":{"@type":"Answer","text":"Claude Fable 5.1 costs $10 per million input tokens and $50 per million output tokens. Five-minute cache writes cost $12.50 per million tokens, one-hour cache writes cost $20, and cache reads cost $0.25."}},{"@type":"Question","name":"Does Claude Fable 5.1 use adaptive thinking?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adaptive thinking is always on. The effort parameter is the primary control for trading off capability, latency and cost. Fable 5.1 supports low, medium, high, xhigh and max effort and defaults to high."}},{"@type":"Question","name":"Is Claude Fable 5.1 better than Claude Opus 5.5?","acceptedAnswer":{"@type":"Answer","text":"Anthropic positions Fable 5.1 as the higher-capability model, but recommends starting with Opus 5.5 for most workloads. Fable 5.1 is intended for demanding reasoning and long-horizon agentic work when Opus 5.5 at higher effort still does not meet the required quality."}},{"@type":"Question","name":"What is Claude Fable 5.1 best for?","acceptedAnswer":{"@type":"Answer","text":"Anthropic positions Fable 5.1 for long-running agentic coding, multistep research, difficult knowledge work, scientific research and complex document, spreadsheet and presentation tasks."}},{"@type":"Question","name":"What is Claude Mythos 5.1?","acceptedAnswer":{"@type":"Answer","text":"Claude Mythos 5.1 uses the same underlying model and specifications as Fable 5.1 but is access-restricted through Project Glasswing and uses different safeguards for approved cybersecurity and life-sciences work."}},{"@type":"Question","name":"Does Claude Fable 5.1 support prompt caching?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cache reads cost $0.25 per million tokens, one quarter of Fable 5’s cache-read price according to Anthropic. This can materially reduce the cost of long-running agents that repeatedly reuse large context."}},{"@type":"Question","name":"What changes when migrating from Claude Fable 5?","acceptedAnswer":{"@type":"Answer","text":"Key changes include unsupported forced tool choice types, stricter handling of thinking blocks and conversation-history edits, lower cache-read pricing, and new beta features such as per-message effort, turn-scoped system messages and readable progress updates."}}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Claude Fable 5.1</span></nav>
+        <p class="eyebrow">MODEL INTELLIGENCE</p>
+        <h1>Claude Fable 5.1<br><span>model reference.</span></h1>
+        <p>Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability.</p>
+        <div class="collection-stats">
+          <div><strong>1,000,000</strong><span>context tokens</span></div>
+          <div><strong>128,000</strong><span>max output</span></div>
+          <div><strong>September 1, 2026</strong><span>released</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">MODEL REFERENCE</p>
+            <h2>Claude Fable 5.1 at a glance.</h2>
+            <p>Claude Fable 5.1 is Anthropic’s highest-capability model generally available to all customers. It is designed for demanding reasoning, long-horizon agentic coding, multistep research and complex knowledge work where a model must remain coherent across many tool calls, documents or hours of execution.</p>
+            <p>The important positioning detail is that Anthropic does <strong>not</strong> recommend Fable 5.1 as the default for every workload. Its current guidance says most applications should start with Claude Opus 5.5, then move to Fable 5.1 when higher-effort Opus evaluations still fall short. That makes Fable 5.1 a quality-first escalation tier rather than a universal replacement for cheaper Claude models.</p>
+            <p class="reference-note">Model ID: claude-fable-5-1 · Released September 1, 2026 · Active / latest Fable · Retirement not sooner than September 1, 2027 · Last verified 2026-09-26</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>claude-fable-5-1</strong></div>
+            <div><span>STATUS</span><strong>Active / latest</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens</small></div>
+            <div><span>STANDARD INPUT</span><strong>$10</strong><small>/ 1M tokens</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>$50</strong><small>/ 1M tokens</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">QUICK DECISION</p><h2>Fable 5.1 vs Opus 5.5: when should you pay more?</h2><p>The most useful way to understand Fable 5.1 is against the model Anthropic recommends for most workloads: Claude Opus 5.5.</p></div>
+          <div class="model-decision-grid">
+            <article><span>START WITH OPUS 5.5</span><h3>Most complex production work</h3><p>Opus 5.5 costs $4 input / $20 output per million tokens and is Anthropic’s recommended starting point for most coding, analysis and agentic workloads.</p><a href="/models/claude-opus-5-5/">Open Opus 5.5 reference ↗</a></article>
+            <article><span>MOVE TO FABLE 5.1</span><h3>When quality still falls short</h3><p>Use Fable when higher-effort Opus 5.5 still misses the acceptance bar on difficult reasoning, long-running coding, multistep research or complex artifact work.</p></article>
+            <article><span>KEEP OPUS</span><h3>When latency and economics matter</h3><p>Fable is slower and 2.5× the headline input/output token price of Opus 5.5. If task success is similar, Opus is usually the more efficient production choice.</p></article>
+            <article><span>USE FABLE</span><h3>When one hard task is worth more than token cost</h3><p>Fable makes sense when solving a difficult issue correctly is materially more valuable than minimizing inference spend—for example root-cause analysis, deep research or high-value engineering work.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CLAUDE LINEUP</p><h2>Where Fable 5.1 sits in the current Claude family.</h2><p>Anthropic separates its current lineup by capability, speed and cost rather than presenting one model for every task.</p></div>
+          <div class="model-family-grid">
+            <article class="model-family-card">
+              <span>HIGHEST AVAILABLE CAPABILITY</span><h3>Claude Fable 5.1</h3>
+              <p>Demanding reasoning and long-horizon agentic work. Use when cheaper Claude tiers fail your evaluations.</p>
+              <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking always on · default effort high</small></div>
+              <div class="model-family-price"><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></div>
+            </article>
+            <article class="model-family-card">
+              <span>RECOMMENDED STARTING POINT</span><h3>Claude Opus 5.5</h3>
+              <p>Long-running agentic coding and knowledge work with a stronger price-performance balance for most complex tasks.</p>
+              <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking always on · default effort medium</small></div>
+              <div class="model-family-price"><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></div>
+              <a href="/models/claude-opus-5-5/">Open reference ↗</a>
+            </article>
+            <article class="model-family-card">
+              <span>SPEED / INTELLIGENCE BALANCE</span><h3>Claude Sonnet 5</h3>
+              <p>Everyday coding, agents, analysis and enterprise workflows where lower latency and cost matter more.</p>
+              <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
+              <div class="model-family-price"><strong>$2</strong><small>input / 1M</small><strong>$10</strong><small>output / 1M</small></div>
+            </article>
+          </div>
+          <p class="reference-note">Claude Haiku 4.5 remains the fastest lower-cost tier at $1 input / $5 output per million tokens with a 200K context window and 64K max output.</p>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">WHAT CHANGED</p>
+            <h2>Fable 5.1 improves capability without raising base token prices.</h2>
+            <p>Anthropic kept Fable 5.1’s standard input and output prices at the same $10 / $50 per million tokens as Fable 5, but cut prompt-cache reads from $1 to <strong>$0.25 per million tokens</strong>. That matters disproportionately for long-running agents because they repeatedly reuse large prefixes such as repository context, tool definitions, instructions and accumulated task state.</p>
+            <p>Anthropic estimates that the new model costs about <strong>25% less than Fable 5 for typical token-billed workloads</strong> and can save up to roughly <strong>45% on highly agentic work</strong>. Those are vendor measurements, not universal savings: actual economics depend on cache hit rate, effort, prompt size, tool loops and how quickly the model completes the task.</p>
+            <p>The capability update also targets a specific failure mode of long-running AI work: models that look strong on short benchmarks but lose coherence over many steps. Anthropic’s release emphasizes long-horizon coding, multistep research, complete document/spreadsheet/slide work and extended unattended tasks.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>COST RULE</span>
+            <strong>Measure cost per accepted task, not price per token alone.</strong>
+            <p>Fable can be more expensive per token while still being economical if it finishes a difficult workflow in fewer retries, fewer tool loops or less human correction. The reverse is also true.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITIES</p><h2>What Claude Fable 5.1 is built to do.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>AGENTIC CODING</span><h3>Hours-long engineering work</h3><p>Anthropic positions Fable 5.1 for demanding software engineering that spans large repositories, repeated tool calls, verification loops and long execution windows.</p></article>
+            <article><span>DEEP RESEARCH</span><h3>Multistep investigation</h3><p>The model is designed to gather evidence, revise hypotheses and continue through research workflows rather than stopping after a shallow first-pass synthesis.</p></article>
+            <article><span>KNOWLEDGE WORK</span><h3>Finished artifacts</h3><p>Anthropic highlights complex documents, spreadsheets and slide decks where the model must carry analysis through to a complete deliverable instead of only generating notes.</p></article>
+            <article><span>SCIENTIFIC WORK</span><h3>Research-oriented problem solving</h3><p>Anthropic reports gains on agentic scientific research and describes experiments in computational analysis, software optimization and multidisciplinary reasoning.</p></article>
+            <article><span>VISION</span><h3>Text and image input</h3><p>Fable 5.1 accepts text and images and returns text, with the same broad Claude vision and tool-use architecture used across current high-end Claude models.</p></article>
+            <article><span>LONG CONTEXT</span><h3>1M-token context</h3><p>The context window supports large repositories and document corpora, but long context remains an engineering budget: retrieval quality, caching and context discipline still affect results and cost.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">ADAPTIVE THINKING</p>
+            <h2>Thinking is always on; effort controls depth.</h2>
+            <p>Claude Fable 5.1 uses adaptive thinking on every request. The model decides when and how much internal reasoning to use, while the <code>effort</code> parameter controls the overall capability, latency and cost tradeoff.</p>
+            <p>Fable 5.1 supports <strong>low, medium, high, xhigh and max</strong> effort. Anthropic recommends starting at <strong>high</strong>, which is also the API default, then evaluating other levels against the workload. For routine or latency-sensitive work, medium or low can reduce cost. For the most capability-sensitive coding and agent tasks, xhigh or max may improve results.</p>
+            <p>One important operational detail is that effort labels are not directly comparable across model generations. Anthropic recommends re-running the effort sweep even if you already optimized Fable 5, because medium on Fable 5.1 can approximately match older Fable performance on some workloads at lower cost.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>EFFORT STRATEGY</span>
+            <strong>Default high. Benchmark medium. Reserve xhigh/max.</strong>
+            <p>Higher effort is not a free quality switch. It can increase thinking tokens, latency and total cost, so treat effort as a routing parameter backed by evals.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Fable 5.1 API pricing.</h2><p>Standard token prices are unchanged from Fable 5, but prompt caching is materially cheaper.</p></div>
+          <div class="model-price-grid">
+            <article><span>STANDARD TOKENS</span><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></article>
+            <article><span>PROMPT CACHE</span><strong>$0.25</strong><small>cache read / 1M</small><strong>$12.50</strong><small>5-minute write / 1M</small></article>
+            <article><span>LONGER CACHE</span><strong>$20</strong><small>1-hour cache write / 1M</small><strong>50%</strong><small>Batch API token discount</small></article>
+          </div>
+          <div class="model-caveat"><strong>Cache economics are unusually important</strong><p>At $0.25 per million tokens, Fable 5.1 cache reads are 2.5% of its standard input price. Long-running agents that reuse stable context can therefore have a very different effective cost profile from one-shot requests that repeatedly pay full input price.</p></div>
+          <div class="model-caveat"><strong>Thinking tokens count as output</strong><p>Always-on adaptive thinking means a difficult task can consume substantial output-token budget even when the visible final answer is short. Set max output high enough for higher effort, then measure total task cost rather than visible-response length.</p></div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">BENCHMARK EVIDENCE</p><h2>Anthropic reports large gains on long-horizon and agentic tasks.</h2><p>These are vendor-reported benchmark results from Anthropic’s Fable 5.1 launch material. They are useful evidence about where to test the model, not a substitute for independent or workload-specific evaluation.</p></div>
+          <div class="model-capability-grid">
+            <article><span>TERMINAL-BENCH SCIENCE 0.1</span><h3>52.6%</h3><p>Anthropic reports 52.6% for agentic scientific research, compared with 24.7% for Fable 5 and 29.0% for Opus 5 in its reproduced setup.</p></article>
+            <article><span>TERMINAL-BENCH 4.0</span><h3>55.8%</h3><p>Anthropic reports 55.8% for Fable 5.1 on agentic terminal coding, with Mythos 5.1 higher in the same table under different safeguards.</p></article>
+            <article><span>CURSORBENCH 3.2</span><h3>73.4%</h3><p>The launch page reports 73.4% for Fable 5.1 versus 70.5% for Fable 5, 70.0% for Opus 5 and 67.2% for GPT-5.6 Sol in Anthropic’s comparison.</p></article>
+            <article><span>AUTOMATIONBENCH</span><h3>31.4%</h3><p>Anthropic reports 31.4% on business workflows, compared with 17.1% for Fable 5 and 26.9% for Opus 5 in the same evaluation table.</p></article>
+            <article><span>HUMANITY'S LAST EXAM</span><h3>65.0% with tools</h3><p>Anthropic reports 60.9% without tools and 65.0% with tools for multidisciplinary reasoning under its evaluation setup.</p></article>
+            <article><span>OSWORLD 2.0</span><h3>77.9% partial</h3><p>Anthropic reports 77.9% partial and 41.7% strict on computer use, with production safeguards enabled and explicit caveats about safeguard interventions.</p></article>
+          </div>
+          <div class="model-caveat"><strong>How to use these numbers</strong><p>Do not turn a benchmark table into a universal ranking. Re-run your own repository, documents, tools and acceptance criteria at the effort levels you can afford. For agent systems, measure task completion, retries, tool errors, latency, human correction and total cost.</p></div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">AGENT OPERATIONS</p><h2>Fable 5.1 adds controls for long-running workflows.</h2><p>Several of the most useful changes are not benchmark features; they are controls for keeping long conversations and tool loops efficient and understandable.</p></div>
+          <div class="model-api-grid">
+            <div><span>PER-MESSAGE EFFORT</span><strong>Beta</strong><p>Change effort later in a conversation without invalidating the prompt cache, useful when only some stages need maximum reasoning.</p></div>
+            <div><span>TURN-SCOPED SYSTEM MESSAGES</span><strong>Beta</strong><p>Add guidance for one turn without rewriting earlier conversation history, helping preserve both cache validity and thinking state.</p></div>
+            <div><span>PROGRESS UPDATES</span><strong>Readable between tool calls</strong><p>With the appropriate beta display mode, applications can surface concise model progress during long tool chains instead of leaving users with a silent agent.</p></div>
+            <div><span>CONTENT PROVENANCE</span><strong>New in 5.1</strong><p>Anthropic lists content provenance among the additive Fable 5.1 changes, supporting stronger traceability in long agent workflows.</p></div>
+            <div><span>PARALLEL TOOLS</span><strong>Prompt for independence</strong><p>Anthropic’s prompting guidance recommends explicitly asking the model to request independent tool inputs together when coding or computer-use loops become unnecessarily serial.</p></div>
+            <div><span>APPEND-ONLY HISTORY</span><strong>Important for thinking state</strong><p>Long conversations should avoid rewriting earlier turns because edits can invalidate cached context and later thinking blocks.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">MIGRATION</p><h2>Moving from Claude Fable 5 to Fable 5.1.</h2><p>The model uses the same Messages API family, but several behavior changes are breaking enough to deserve regression tests.</p></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><strong>Update the model ID.</strong><p>Use <code>claude-fable-5-1</code> on the Claude API. Cloud platform identifiers follow each provider’s documented naming convention.</p></div>
+            <div><span>02</span><strong>Do not force tool use with unsupported tool_choice modes.</strong><p>Anthropic states that <code>tool_choice</code> types <code>any</code> and <code>tool</code> return a 400 error on Fable 5.1. Use auto tool selection plus strict tool use or structured outputs when you need schema-conformant calls.</p></div>
+            <div><span>03</span><strong>Preserve thinking blocks exactly.</strong><p>Earlier Claude models cannot read Fable 5.1 thinking blocks, and editing prior conversation state can invalidate them. Pass live assistant turns back unchanged in tool loops.</p></div>
+            <div><span>04</span><strong>Keep conversation history append-only.</strong><p>Changing the system prompt, tools or earlier messages after thinking blocks were produced can invalidate later thinking state and restart caching.</p></div>
+            <div><span>05</span><strong>Re-run effort evaluations.</strong><p>Fable 5.1’s effort levels do not correspond one-to-one with Fable 5’s internal reasoning behavior. Test medium, high and higher levels against representative work.</p></div>
+            <div><span>06</span><strong>Update UX for long tool chains.</strong><p>If users need visible progress, opt into readable progress-update thinking blocks and render them as status updates rather than exposing internal reasoning.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">FABLE VS MYTHOS</p><h2>Fable 5.1 and Mythos 5.1 share the model, not the access policy.</h2><p>Anthropic describes Fable 5.1 and Mythos 5.1 as the same underlying model with different safeguards and availability.</p></div>
+          <div class="model-decision-grid">
+            <article><span>FABLE 5.1</span><h3>Generally available</h3><p>Designed for general coding, knowledge work and research with production safeguards suitable for broad customer access.</p></article>
+            <article><span>MYTHOS 5.1</span><h3>Trusted access only</h3><p>Available through Project Glasswing for approved organizations whose cybersecurity or life-sciences work requires a different safeguard profile.</p></article>
+            <article><span>SAME CORE SPECS</span><h3>1M context · 128K output</h3><p>Anthropic states that Mythos 5.1 shares Fable 5.1’s underlying capabilities, specifications and token pricing.</p></article>
+            <article><span>DO NOT TREAT THEM AS INTERCHANGEABLE</span><h3>Policy and access differ</h3><p>For production planning, model capability is only one dimension. Eligibility, safeguards and deployment controls differ even when the base model is the same.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where Claude Fable 5.1 is available.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>CLAUDE API</span><h3>claude-fable-5-1</h3><p>Anthropic’s native API uses the fixed model ID <code>claude-fable-5-1</code>.</p></article>
+            <article><span>AMAZON BEDROCK</span><h3>anthropic.claude-fable-5-1</h3><p>Available through Amazon Bedrock with provider-specific identifiers and deployment controls.</p></article>
+            <article><span>GOOGLE CLOUD</span><h3>Claude on Google Cloud</h3><p>Anthropic lists Fable 5.1 as available on Google Cloud with the same core model specification.</p></article>
+            <article><span>MICROSOFT FOUNDRY</span><h3>Enterprise cloud access</h3><p>Anthropic lists Microsoft Foundry among the supported deployment platforms for Fable 5.1.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">SAFETY & ENTERPRISE</p>
+            <h2>Capability and safeguards are both part of the deployment decision.</h2>
+            <p>Anthropic reports that Fable 5.1 uses updated cybersecurity and biology safeguards intended to reduce false positives while retaining restrictions around higher-risk use. The company also reports stronger performance on an external prompt-injection benchmark for the underlying 5.1 model family, while acknowledging that very long-context and multi-agent settings remain areas where evaluation coverage is less complete.</p>
+            <p>For enterprise privacy, Anthropic announced Enterprise Frontier Safeguards, a system intended to let customers retain data in their own cloud infrastructure while enabling misuse detection. The rollout is phased. Organizations with strict retention requirements should verify current eligibility and terms directly with Anthropic or their cloud provider rather than relying on a static model page.</p>
+            <p>For agents, the operational rule remains simple: higher model capability should not automatically grant broader permissions. Tool scopes, credentials, execution environments, approval gates and audit trails belong outside the model.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>AGENT SECURITY</span>
+            <strong>Capability is not authorization.</strong>
+            <p>Use least privilege and deterministic policy controls around long-running agents, especially when they can browse, execute code, edit repositories or interact with external systems.</p>
+            <a href="/guides/ai-agent-security/">AI Agent Security ↗</a>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">WHEN TO USE FABLE 5.1</p><h2>Use it when task value justifies the premium.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>STRONG FIT</span><h3>Long-running coding agents</h3><p>Use Fable when an agent must work across repositories and tools for hours and your Opus 5.5 evaluation shows meaningful quality gaps.</p></article>
+            <article><span>STRONG FIT</span><h3>Deep multistep research</h3><p>Use it when a workflow must gather evidence, revisit assumptions and deliver a complete research artifact rather than a quick summary.</p></article>
+            <article><span>STRONG FIT</span><h3>High-value professional analysis</h3><p>Use it when the cost of an incomplete or incorrect answer is materially higher than the model’s inference premium.</p></article>
+            <article><span>NOT THE DEFAULT</span><h3>Routine production traffic</h3><p>For everyday coding, extraction, standard analysis or high-volume traffic, Opus 5.5, Sonnet 5 or another lower-cost model may deliver better economics.</p></article>
+          </div>
+          <div class="model-related-links">
+            <a href="/models/claude-opus-5-5/"><span>STARTING POINT</span><strong>Claude Opus 5.5 Reference</strong><b>↗</b></a>
+            <a href="/guides/gpt-6-vs-claude/"><span>FRONTIER COMPARISON</span><strong>GPT-6 vs Claude in 2026</strong><b>↗</b></a>
+            <a href="/guides/ai-agent-security/"><span>AGENT CONTROLS</span><strong>AI Agent Security</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to keep in mind.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><strong>It is intentionally expensive.</strong><p>At $10/$50 per million tokens, Fable 5.1 should be routed to tasks where its added capability produces measurable business or engineering value.</p></div>
+            <div><span>02</span><strong>It is slower than Opus 5.5 and Sonnet 5.</strong><p>Anthropic labels Fable 5.1’s comparative latency as slower. Interactive workflows should test whether the quality gain justifies the wait.</p></div>
+            <div><span>03</span><strong>Always-on thinking affects cost.</strong><p>Thinking tokens are part of the output budget. Higher effort and longer tasks can consume significantly more output tokens than the visible answer suggests.</p></div>
+            <div><span>04</span><strong>Long context is not free accuracy.</strong><p>A 1M-token window is capacity, not guaranteed retrieval. Use caching, retrieval and context selection rather than blindly filling the window.</p></div>
+            <div><span>05</span><strong>Vendor benchmarks need local validation.</strong><p>Anthropic’s launch results are informative but use specific harnesses, safeguards and effort settings. Production routing should be based on your own acceptance tests.</p></div>
+            <div><span>06</span><strong>Migration changes can break agent loops.</strong><p>Forced tools, thinking-block preservation and conversation-history rules need regression tests before moving a long-running agent to 5.1.</p></div>
+          </div>
+        </section>
+
+        <div class="model-reference-lower">
+          <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p><a href="https://www.anthropic.com/claude-fable-and-mythos-5-1" target="_blank" rel="noopener noreferrer"><span>Anthropic · Introducing Claude Fable 5.1 and Mythos 5.1</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Fable 5.1 model overview</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/about-claude/models/choosing-a-model" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Choosing the right model</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/build-with-claude/effort" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Effort</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Prompting Fable 5.1</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/about-claude/models/migration-guide" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Migration guides</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages" target="_blank" rel="noopener noreferrer"><span>Claude Platform · Mid-conversation system messages</span><b>↗</b></a><a href="https://www.anthropic.com/system-cards" target="_blank" rel="noopener noreferrer"><span>Anthropic · Model system cards</span><b>↗</b></a></div>
+          <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p><details><summary>What is Claude Fable 5.1?</summary><p>Claude Fable 5.1 is Anthropic’s highest-capability model generally available to all customers. It is designed for demanding reasoning, long-horizon agentic work, coding, research and complex knowledge work.</p></details><details><summary>What is the Claude Fable 5.1 model ID?</summary><p>The Claude API model ID is claude-fable-5-1. Amazon Bedrock uses anthropic.claude-fable-5-1, while Google Cloud, Microsoft Foundry and Claude Platform on AWS use the claude-fable-5-1 name.</p></details><details><summary>What is the Claude Fable 5.1 context window?</summary><p>Claude Fable 5.1 has a 1 million-token context window and supports up to 128,000 output tokens.</p></details><details><summary>How much does Claude Fable 5.1 cost?</summary><p>Claude Fable 5.1 costs $10 per million input tokens and $50 per million output tokens. Five-minute cache writes cost $12.50 per million tokens, one-hour cache writes cost $20, and cache reads cost $0.25.</p></details><details><summary>Does Claude Fable 5.1 use adaptive thinking?</summary><p>Yes. Adaptive thinking is always on. The effort parameter is the primary control for trading off capability, latency and cost. Fable 5.1 supports low, medium, high, xhigh and max effort and defaults to high.</p></details><details><summary>Is Claude Fable 5.1 better than Claude Opus 5.5?</summary><p>Anthropic positions Fable 5.1 as the higher-capability model, but recommends starting with Opus 5.5 for most workloads. Fable 5.1 is intended for demanding reasoning and long-horizon agentic work when Opus 5.5 at higher effort still does not meet the required quality.</p></details><details><summary>What is Claude Fable 5.1 best for?</summary><p>Anthropic positions Fable 5.1 for long-running agentic coding, multistep research, difficult knowledge work, scientific research and complex document, spreadsheet and presentation tasks.</p></details><details><summary>What is Claude Mythos 5.1?</summary><p>Claude Mythos 5.1 uses the same underlying model and specifications as Fable 5.1 but is access-restricted through Project Glasswing and uses different safeguards for approved cybersecurity and life-sciences work.</p></details><details><summary>Does Claude Fable 5.1 support prompt caching?</summary><p>Yes. Cache reads cost $0.25 per million tokens, one quarter of Fable 5’s cache-read price according to Anthropic. This can materially reduce the cost of long-running agents that repeatedly reuse large context.</p></details><details><summary>What changes when migrating from Claude Fable 5?</summary><p>Key changes include unsupported forced tool choice types, stricter handling of thinking blocks and conversation-history edits, lower cache-read pricing, and new beta features such as per-message effort, turn-scoped system messages and readable progress updates.</p></details></div>
+        </div>
+      </section>
+
+      <section class="related-signals shell">
+        <div class="intel-section-head">
+          <div><p class="eyebrow">RELATED SXF INTELLIGENCE</p><h2>Keep the model in context.</h2></div>
+          <a href="/models/">All models ↗</a>
+        </div>
+        <div class="model-related-links">
+          <a href="/models/claude-opus-5-5/"><span>CLAUDE</span><strong>Claude Opus 5.5</strong><b>↗</b></a>
+          <a href="/guides/gpt-6-vs-claude/"><span>COMPARISON</span><strong>GPT-6 vs Claude</strong><b>↗</b></a>
+          <a href="/compare/gpt-6-sol-vs-claude-opus-5-5/"><span>DIRECT MATCHUP</span><strong>GPT-6 Sol vs Claude Opus 5.5</strong><b>↗</b></a>
+        </div>
+      </section>
+    </main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
