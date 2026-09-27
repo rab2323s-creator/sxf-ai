@@ -6,8 +6,198 @@
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main><section class="section-hero shell"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Models</span></nav><p class="hero-kicker"><span class="pulse-dot"></span>MODEL INTELLIGENCE</p><h1>Track capability shifts.<br><span>Not launch hype.</span></h1><p class="section-intro">A focused model intelligence layer for understanding what changed across frontier and applied AI models — without digging through every announcement.</p><div class="section-stats"><div><strong id="sectionCount">11</strong><span>current signals</span></div><div><strong>3h</strong><span>refresh cycle</span></div><div><strong>Primary</strong><span>source links</span></div></div></section><section class="utility shell"><div class="utility-copy"><p class="eyebrow">HOW TO USE THIS PAGE</p><h2>What changed in AI models?</h2><p>Use capability lenses to scan releases by what they enable. Every signal keeps the original announcement one click away.</p></div><div class="lens-panel"><div class="lens-title"><span>SCAN LENSES</span><small>Filter by theme</small></div><div class="lens-row"><button class="lens active" data-keywords="">All</button><button class="lens" data-keywords="reasoning benchmark evaluation math">Reasoning</button><button class="lens" data-keywords="vision multimodal image video voice audio">Multimodal</button><button class="lens" data-keywords="code coding codex developer">Coding</button><button class="lens" data-keywords="enterprise business work financial law">Enterprise</button></div><label class="section-search"><span class="sr-only">Search Models</span><input id="sectionSearch" type="search" placeholder="Search models signals" autocomplete="off"></label></div></section><section class="insight-grid shell" aria-label="Models guide"><article class="insight-card"><span>01</span><h3>Capability shifts</h3><p>Reasoning, multimodal, coding and domain-specific changes are easier to spot when releases are grouped by what they enable.</p></article><article class="insight-card"><span>02</span><h3>Release context</h3><p>Every signal preserves the primary source so details, availability and limitations can be verified directly.</p></article><article class="insight-card"><span>03</span><h3>Less launch noise</h3><p>The interface emphasizes what changed and when, rather than repeating marketing language.</p></article></section><!-- SXF:MODEL_EXPLORER_START -->
 <section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
-  <div class="model-explorer-head"><div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Verified model database loading from the canonical catalog.</h2></div></div>
-</section>
+      <div class="model-explorer-head">
+        <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of Standard API pricing, context windows and output limits from official provider documentation.</p></div>
+        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-09-27</strong><small>11 models · 3 providers</small></div>
+      </div>
+      <div class="model-explorer-toolbar">
+        <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
+        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button></div>
+        <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
+          <option value="default">Catalog order</option>
+          <option value="input-asc">Lowest input price</option>
+          <option value="output-asc">Lowest output price</option>
+          <option value="context-desc">Largest context</option>
+        </select></label>
+      </div>
+      <div class="model-explorer-table-wrap">
+        <table class="model-explorer-table">
+          <caption class="sr-only">Verified AI model pricing and specifications</caption>
+          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Evidence</th></tr></thead>
+          <tbody id="modelExplorerBody"><tr data-model-row
+              data-order="0"
+              data-provider="OpenAI"
+              data-search="gpt-6 astra gpt-6-astra openai gpt-6 highest-capability gpt-6 tier for demanding reasoning, coding, computer use, research, and document creation. text image"
+              data-input="10"
+              data-output="50"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>gpt-6-astra</small></th>
+              <td>OpenAI<small>GPT-6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$10.00</td>
+              <td class="model-price">$1.00</td>
+              <td class="model-price">$50.00</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="1"
+              data-provider="OpenAI"
+              data-search="gpt-6 sol gpt-6-sol openai gpt-6 general-purpose gpt-6 tier for complex coding and agentic workflows with lower unit cost than astra. text image"
+              data-input="2"
+              data-output="10"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>gpt-6-sol</small></th>
+              <td>OpenAI<small>GPT-6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$2.00</td>
+              <td class="model-price">$0.20</td>
+              <td class="model-price">$10.00</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="2"
+              data-provider="OpenAI"
+              data-search="gpt-6 luna gpt-6-luna openai gpt-6 efficiency-focused gpt-6 tier for focused, high-volume, and cost-sensitive workloads. text image"
+              data-input="0.1"
+              data-output="0.5"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-6-luna/">GPT-6 Luna</a><small>gpt-6-luna</small></th>
+              <td>OpenAI<small>GPT-6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$0.10</td>
+              <td class="model-price">$0.01</td>
+              <td class="model-price">$0.50</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="3"
+              data-provider="OpenAI"
+              data-search="gpt-5.6 sol gpt-5.6-sol openai gpt-5.6 flagship gpt-5.6 tier for complex professional work, coding, research, and agentic workflows. text image"
+              data-input="4"
+              data-output="20"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a><small>gpt-5.6-sol</small></th>
+              <td>OpenAI<small>GPT-5.6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$4.00</td>
+              <td class="model-price">$0.40</td>
+              <td class="model-price">$20.00</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="4"
+              data-provider="OpenAI"
+              data-search="gpt-5.6 terra gpt-5.6-terra openai gpt-5.6 gpt-5.6 tier balancing intelligence and cost for production workloads. text image"
+              data-input="2"
+              data-output="12"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-5-6/">GPT-5.6 Terra</a><small>gpt-5.6-terra</small></th>
+              <td>OpenAI<small>GPT-5.6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$2.00</td>
+              <td class="model-price">$0.20</td>
+              <td class="model-price">$12.00</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-5.6-terra" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="5"
+              data-provider="OpenAI"
+              data-search="gpt-5.6 luna gpt-5.6-luna openai gpt-5.6 lowest-cost gpt-5.6 tier for cost-sensitive, high-volume workloads. text image"
+              data-input="0.2"
+              data-output="1.2"
+              data-context="1050000">
+              <th scope="row"><a href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a><small>gpt-5.6-luna</small></th>
+              <td>OpenAI<small>GPT-5.6</small></td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$0.20</td>
+              <td class="model-price">$0.02</td>
+              <td class="model-price">$1.20</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-5.6-luna" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="6"
+              data-provider="Anthropic"
+              data-search="claude fable 5.1 claude-fable-5-1 anthropic claude 5 anthropic&#x27;s highest-capability generally available model for demanding reasoning and long-horizon agentic work. text image"
+              data-input="10"
+              data-output="50"
+              data-context="1000000">
+              <th scope="row"><a href="/models/claude-fable-5-1/">Claude Fable 5.1</a><small>claude-fable-5-1</small></th>
+              <td>Anthropic<small>Claude 5</small></td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$10.00</td>
+              <td class="model-price">$0.25</td>
+              <td class="model-price">$50.00</td>
+              <td><a class="model-verified" href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="7"
+              data-provider="Anthropic"
+              data-search="claude opus 5.5 claude-opus-5-5 anthropic claude 5 current opus model for long-running agentic coding and complex knowledge work. text image"
+              data-input="4"
+              data-output="20"
+              data-context="1000000">
+              <th scope="row"><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><small>claude-opus-5-5</small></th>
+              <td>Anthropic<small>Claude 5</small></td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$4.00</td>
+              <td class="model-price">$0.20</td>
+              <td class="model-price">$20.00</td>
+              <td><a class="model-verified" href="https://platform.claude.com/docs/en/models/opus-5-5/overview" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="8"
+              data-provider="Anthropic"
+              data-search="claude sonnet 5 claude-sonnet-5 anthropic claude 5 balanced claude tier combining speed and intelligence for coding, agents, and production knowledge work. text image"
+              data-input="2"
+              data-output="10"
+              data-context="1000000">
+              <th scope="row"><a href="/guides/gpt-6-vs-claude/">Claude Sonnet 5</a><small>claude-sonnet-5</small></th>
+              <td>Anthropic<small>Claude 5</small></td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td class="model-price">$2.00</td>
+              <td class="model-price">$0.20</td>
+              <td class="model-price">$10.00</td>
+              <td><a class="model-verified" href="https://platform.claude.com/docs/en/models/sonnet-5/overview" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="9"
+              data-provider="Anthropic"
+              data-search="claude haiku 4.5 claude-haiku-4-5-20251001 anthropic claude 4 fastest claude tier for latency-sensitive and high-volume workloads. text image"
+              data-input="1"
+              data-output="5"
+              data-context="200000">
+              <th scope="row"><a href="/guides/gpt-6-vs-claude/">Claude Haiku 4.5</a><small>claude-haiku-4-5-20251001</small></th>
+              <td>Anthropic<small>Claude 4</small></td>
+              <td>200,000<small>tokens</small></td>
+              <td>64,000<small>tokens</small></td>
+              <td class="model-price">$1.00</td>
+              <td class="model-price">$0.10</td>
+              <td class="model-price">$5.00</td>
+              <td><a class="model-verified" href="https://platform.claude.com/docs/en/models/haiku-4-5/overview" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr><tr data-model-row
+              data-order="10"
+              data-provider="Google"
+              data-search="gemini 3.8 flash gemini-3.8-flash google gemini 3 google&#x27;s most intelligent flash model for long-horizon software engineering, autonomous agents, and complex enterprise workflows. text image video audio pdf"
+              data-input="0.75"
+              data-output="3.75"
+              data-context="1048576">
+              <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
+              <td>Google<small>Gemini 3</small></td>
+              <td>1,048,576<small>tokens</small></td>
+              <td>65,536<small>tokens</small></td>
+              <td class="model-price">$0.75</td>
+              <td class="model-price">$0.075</td>
+              <td class="model-price">$3.75</td>
+              <td><a class="model-verified" href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-09-27</small></a></td>
+            </tr></tbody>
+        </table>
+      </div>
+      <div class="model-explorer-foot">
+        <span id="modelExplorerCount">11 models shown</span>
+        <a href="/models/pricing/">Open calculator & pricing methodology ↗</a>
+      </div>
+      <div id="modelExplorerEmpty" class="model-explorer-empty" hidden>No models match this filter.</div>
+    </section>
 <!-- SXF:MODEL_EXPLORER_END --><section class="tracked-models shell" aria-labelledby="tracked-models-title"><div class="section-heading"><div><p class="eyebrow">TRACKED MODELS</p><h2 id="tracked-models-title">Model entities on the radar.</h2></div><p>Jump directly into persistent model pages and follow their release history across signals.</p></div><div class="tracked-model-grid"><!-- SXF:TRACKED_MODELS_START -->
 <a class="tracked-model" href="/models/pricing/"><span>DB</span><strong>Model Pricing</strong><small>API rates & calculator</small><b>↗</b></a><a class="tracked-model" href="/models/claude-fable-5-1/"><span>REF</span><strong>Claude Fable 5.1</strong><small>Model reference</small><b>↗</b></a><a class="tracked-model" href="/models/gemini-3-8-flash/"><span>REF</span><strong>Gemini 3.8 Flash</strong><small>Model reference</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-6/"><span>10</span><strong>GPT-6</strong><small>10 signals</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-6-astra/"><span>08</span><strong>GPT-6 Astra</strong><small>8 signals</small><b>↗</b></a><a class="tracked-model" href="/models/claude-opus-5-5/"><span>01</span><strong>Claude Opus 5.5</strong><small>1 signal</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-5-6/"><span>01</span><strong>GPT-5.6</strong><small>1 signal</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-5-6-luna/"><span>01</span><strong>GPT-5.6 Luna</strong><small>1 signal</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-6-luna/"><span>01</span><strong>GPT-6 Luna</strong><small>1 signal</small><b>↗</b></a><a class="tracked-model" href="/models/gpt-6-sol/"><span>01</span><strong>GPT-6 Sol</strong><small>1 signal</small><b>↗</b></a><a class="tracked-model" href="/models/lfm2-5-vl-dspark/"><span>01</span><strong>LFM2.5-VL-DSpark</strong><small>1 signal</small><b>↗</b></a>
 <!-- SXF:TRACKED_MODELS_END --></div></section><section class="signals shell" id="signals"><div class="section-heading"><div><p class="eyebrow">LIVE SIGNALS</p><h2>Latest models</h2></div><p>Updated from primary sources. Open any signal to verify the original announcement.</p></div><div id="sectionFeed" class="intel-grid"><!-- SXF:SECTION_FEED_START -->
