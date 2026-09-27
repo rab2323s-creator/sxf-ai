@@ -6901,37 +6901,70 @@ def build_discovery_pages(items, current_items):
             continue
         path = ROOT / "models" / slugify(name)
         path.mkdir(parents=True, exist_ok=True)
-        (path / "index.html").write_text(model_page_html(name, matched), encoding="utf-8")
+        page = model_page_html(name, matched)
+        history_ids = catalog_model_ids_for_name(name)
+        page = inject_before_main_end(page, model_history_html(history_ids, f"{name} verified history."))
+        (path / "index.html").write_text(page, encoding="utf-8")
 
     fable_path = ROOT / "models" / "claude-fable-5-1"
     fable_path.mkdir(parents=True, exist_ok=True)
-    (fable_path / "index.html").write_text(claude_fable_51_reference_html(items), encoding="utf-8")
+    fable_page = claude_fable_51_reference_html(items)
+    fable_page = inject_before_main_end(
+        fable_page,
+        model_history_html(["claude-fable-5-1"], "Claude Fable 5.1 verified history.")
+    )
+    (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
 
     gemini_path = ROOT / "models" / "gemini-3-8-flash"
     gemini_path.mkdir(parents=True, exist_ok=True)
-    (gemini_path / "index.html").write_text(gemini_38_flash_reference_html(items), encoding="utf-8")
+    gemini_page = gemini_38_flash_reference_html(items)
+    gemini_page = inject_before_main_end(
+        gemini_page,
+        model_history_html(["gemini-3.8-flash"], "Gemini 3.8 Flash verified history.")
+    )
+    (gemini_path / "index.html").write_text(gemini_page, encoding="utf-8")
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
     comparison_path = COMPARE_DIR / GPT6_COMPARE_SLUG
     comparison_path.mkdir(parents=True, exist_ok=True)
-    (comparison_path / "index.html").write_text(gpt6_comparison_html(items), encoding="utf-8")
+    comparison_page = inject_compare_contract(
+        gpt6_comparison_html(items),
+        ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
+    )
+    (comparison_path / "index.html").write_text(comparison_page, encoding="utf-8")
 
     duel_path = COMPARE_DIR / GPT6_SOL_CLAUDE_COMPARE_SLUG
     duel_path.mkdir(parents=True, exist_ok=True)
-    (duel_path / "index.html").write_text(gpt6_sol_vs_claude_opus_html(items), encoding="utf-8")
+    duel_page = inject_compare_contract(
+        gpt6_sol_vs_claude_opus_html(items),
+        ["gpt-6-sol", "claude-opus-5-5"],
+    )
+    (duel_path / "index.html").write_text(duel_page, encoding="utf-8")
 
     sol_gemini_path = COMPARE_DIR / GPT6_SOL_GEMINI_COMPARE_SLUG
     sol_gemini_path.mkdir(parents=True, exist_ok=True)
-    (sol_gemini_path / "index.html").write_text(gpt6_sol_vs_gemini_38_flash_html(items), encoding="utf-8")
+    sol_gemini_page = inject_compare_contract(
+        gpt6_sol_vs_gemini_38_flash_html(items),
+        ["gpt-6-sol", "gemini-3.8-flash"],
+    )
+    (sol_gemini_path / "index.html").write_text(sol_gemini_page, encoding="utf-8")
 
     opus_gemini_path = COMPARE_DIR / CLAUDE_OPUS_GEMINI_COMPARE_SLUG
     opus_gemini_path.mkdir(parents=True, exist_ok=True)
-    (opus_gemini_path / "index.html").write_text(claude_opus_55_vs_gemini_38_flash_html(items), encoding="utf-8")
+    opus_gemini_page = inject_compare_contract(
+        claude_opus_55_vs_gemini_38_flash_html(items),
+        ["claude-opus-5-5", "gemini-3.8-flash"],
+    )
+    (opus_gemini_path / "index.html").write_text(opus_gemini_page, encoding="utf-8")
 
     astra_fable_path = COMPARE_DIR / GPT6_ASTRA_FABLE_COMPARE_SLUG
     astra_fable_path.mkdir(parents=True, exist_ok=True)
-    (astra_fable_path / "index.html").write_text(gpt6_astra_vs_claude_fable_51_html(items), encoding="utf-8")
+    astra_fable_page = inject_compare_contract(
+        gpt6_astra_vs_claude_fable_51_html(items),
+        ["gpt-6-astra", "claude-fable-5-1"],
+    )
+    (astra_fable_path / "index.html").write_text(astra_fable_page, encoding="utf-8")
 
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
