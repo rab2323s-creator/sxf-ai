@@ -294,6 +294,179 @@ def validate_model_pricing_catalog():
         fail("pricing calculator must apply catalog pricing rules")
 
 
+def validate_topic_relevance(archive):
+    from update_news import (
+        TOPICS,
+        TOPIC_RELEVANCE_VERSION,
+        topic_groups,
+        topic_matches,
+        topic_relevance,
+    )
+
+    topics = {topic["slug"]: topic for topic in TOPICS}
+
+    def item(title, summary="", source="OpenAI", category="Tools"):
+        return {
+            "title": title,
+            "summary": summary,
+            "source": source,
+            "category": category,
+            "tags": [],
+        }
+
+    cases = [
+        (
+            "ai-security",
+            item(
+                "Sam Altman’s remarks at the United Nations Security Council",
+                "OpenAI discusses AI safety, human control, and international cooperation.",
+            ),
+            False,
+            "institutional use of the word Security must not imply AI security",
+        ),
+        (
+            "ai-security",
+            item(
+                "Local sandboxing in the GitHub Copilot app",
+                "The sandbox isolates agent tools and reduces security risk.",
+                source="GitHub",
+            ),
+            True,
+            "sandboxing is direct AI security evidence",
+        ),
+        (
+            "ai-security",
+            item(
+                "Paul Christiano joins OpenAI Foundation Board",
+                "He joins the Safety and Security Committee and has experience in alignment and standards.",
+            ),
+            False,
+            "a board appointment must not enter AI Security from an incidental committee name",
+        ),
+        (
+            "open-source-ai",
+            item(
+                "A product update with no open model change",
+                "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+                source="Hugging Face",
+            ),
+            False,
+            "known Hugging Face boilerplate must not create Open Source relevance",
+        ),
+        (
+            "open-source-ai",
+            item(
+                "Transformers now runs llama.cpp quants",
+                "New local inference support lands in Transformers.",
+                source="Hugging Face",
+                category="Open Source",
+            ),
+            True,
+            "llama.cpp and quants are direct open-source/local-inference evidence",
+        ),
+        (
+            "ai-agents",
+            item(
+                "A general product update",
+                "The release mentions agents once.",
+            ),
+            False,
+            "a single incidental summary mention of agents must not pass",
+        ),
+        (
+            "ai-agents",
+            item(
+                "A general product update",
+                "Agent workflows now execute multi-step tasks with tool calling.",
+            ),
+            True,
+            "multiple independent agent signals in the summary should pass",
+        ),
+        (
+            "coding-ai",
+            item(
+                "Private saved views for repository issues",
+                "Repository administrators can configure saved views.",
+                source="GitHub",
+            ),
+            False,
+            "repository administration alone is not Coding AI",
+        ),
+        (
+            "coding-ai",
+            item(
+                "Codex adds repository-scale code review",
+                "The coding agent reviews pull requests and codebases.",
+            ),
+            True,
+            "Codex plus code-review evidence is directly relevant",
+        ),
+        (
+            "multimodal-ai",
+            item(
+                "AI agents resolve customer calls",
+                "The product can route voice calls to an agent.",
+            ),
+            False,
+            "an incidental voice mention must not make an agent product a multimodal signal",
+        ),
+        (
+            "ai-safety",
+            item(
+                "Priorities for independent model assessments",
+                "The framework sets safety evaluation standards and safeguards for frontier models.",
+                category="Research",
+            ),
+            True,
+            "safety plus evaluation/safeguards is direct AI Safety evidence",
+        ),
+    ]
+
+    for slug, sample, expected, reason in cases:
+        topic = topics[slug]
+        score, evidence = topic_relevance(sample, topic)
+        actual = topic_matches(sample, topic)
+        if actual != expected:
+            fail(
+                f"topic relevance: {slug} -> {actual}, expected {expected}; "
+                f"score={score}, evidence={evidence}; {reason}"
+            )
+
+    openai_topic = topics["openai"]
+    google_topic = topics["google-ai"]
+    openai_sample = item("OpenAI product update", source="OpenAI")
+    if topic_relevance(openai_sample, openai_topic)[0] != 100:
+        fail("source-owned OpenAI topic must score 100 for OpenAI signals")
+    if topic_matches(openai_sample, google_topic):
+        fail("source-owned Google AI topic must not match an OpenAI signal")
+
+    groups = topic_groups(archive.get("items", []))
+    expected_slugs = {topic["slug"] for topic in TOPICS}
+    missing = expected_slugs - set(groups)
+    if missing:
+        fail(f"topic relevance removed all signals from topics: {sorted(missing)}")
+
+    for slug, (topic, matched) in groups.items():
+        if len(matched) < 3:
+            fail(f"{slug}: topic coverage too thin after relevance filtering ({len(matched)} signals)")
+        page = ROOT / "topics" / slug / "index.html"
+        if not page.exists():
+            fail(f"{slug}: generated topic page is missing")
+        html = page.read_text(encoding="utf-8")
+        rendered_rows = html.count('class="signal-row"')
+        if rendered_rows != min(30, len(matched)):
+            fail(
+                f"{slug}: rendered {rendered_rows} topic rows for "
+                f"{len(matched)} relevance-matched signals"
+            )
+
+    if archive.get("topic_relevance_version") != TOPIC_RELEVANCE_VERSION:
+        fail(
+            "archive topic relevance version drift: "
+            f"{archive.get('topic_relevance_version')!r} != {TOPIC_RELEVANCE_VERSION!r}"
+        )
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -317,8 +490,11 @@ def main():
     aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))
     if not news.get("items"):
         fail("news.json has no items")
+    if news.get("topic_relevance_version") != archive.get("topic_relevance_version"):
+        fail("news/archive topic relevance versions must match")
     if len(archive.get("items",[])) < len(news["items"]):
         fail("archive must contain at least current feed items")
+    validate_topic_relevance(archive)
     validate_site_shell()
     validate_section_counts(news)
     for item in news["items"]:
