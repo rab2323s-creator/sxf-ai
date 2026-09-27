@@ -5117,7 +5117,7 @@ def gpt6_comparison_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
     ref = MODEL_REFERENCE["GPT-6"]
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     family_signals = [item for item in items if any(name.startswith("GPT-6") for name in extract_models(item["title"]))][:10]
 
     def money(value):
