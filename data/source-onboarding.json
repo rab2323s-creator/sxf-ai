@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "name": "SXF Source Onboarding",
+  "policy": {
+    "states": [
+      "shadow",
+      "canary",
+      "live",
+      "disabled"
+    ],
+    "shadow": "Fetch and measure candidates only; never publish to archive, current feed, pages, or sitemap.",
+    "canary": "Publish only after validation, with a strict per-source current-signal cap.",
+    "live": "Eligible for normal publishing after validation.",
+    "disabled": "No network request and no publishing."
+  },
+  "sources": [
+    {
+      "name": "Anthropic",
+      "url": "https://www.anthropic.com/sitemap.xml",
+      "adapter": "sitemap",
+      "status": "shadow",
+      "path_allow": [
+        "/news/",
+        "/research/"
+      ],
+      "default_category": "Models",
+      "canary_cap": 3
+    },
+    {
+      "name": "Meta AI",
+      "url": "https://ai.meta.com/sitemap.xml",
+      "adapter": "sitemap",
+      "status": "shadow",
+      "path_allow": [
+        "/blog/"
+      ],
+      "default_category": "Research",
+      "canary_cap": 3
+    },
+    {
+      "name": "xAI",
+      "url": "https://x.ai/sitemap.xml",
+      "adapter": "sitemap",
+      "status": "shadow",
+      "path_allow": [
+        "/news/"
+      ],
+      "default_category": "Models",
+      "canary_cap": 3
+    },
+    {
+      "name": "Microsoft Foundry",
+      "url": "https://devblogs.microsoft.com/foundry/feed/",
+      "adapter": "feed",
+      "status": "shadow",
+      "default_category": "Tools",
+      "canary_cap": 3
+    }
+  ]
+}
