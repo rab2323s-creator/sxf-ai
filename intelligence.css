@@ -798,3 +798,19 @@
   .compare-reading-list>div{grid-template-columns:34px 1fr}.compare-reading-list p{grid-column:2}
   .compare-guide-card{grid-template-columns:1fr;gap:24px}.compare-guide-card>a{justify-self:start}
 }
+
+/* How to Build an AI Super Agent — reserved research visuals */
+.guide-visual-slot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;margin:30px 0;padding:24px;border:1px dashed rgba(200,255,77,.28);border-radius:18px;background:linear-gradient(145deg,rgba(200,255,77,.035),rgba(255,255,255,.012))}
+.guide-visual-slot span{display:block;color:var(--accent);font-size:9px;font-weight:900;letter-spacing:.13em}
+.guide-visual-slot strong{display:block;margin-top:10px;color:#e2e8ed;font-size:19px;letter-spacing:-.025em}
+.guide-visual-slot p{max-width:620px;margin:8px 0 0!important;color:#7d8995!important;font-size:12px!important;line-height:1.65!important}
+.guide-visual-slot small{max-width:250px;color:#596673;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.55;text-align:right;overflow-wrap:anywhere}
+.guide-code{max-width:100%;margin:18px 0 28px;padding:18px 20px;overflow-x:auto;border:1px solid var(--line);border-radius:15px;background:#080b10;color:#c7d0d8;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.how-to-super-agent-guide details{border-top:1px solid var(--line)}
+.how-to-super-agent-guide details:last-of-type{border-bottom:1px solid var(--line)}
+.how-to-super-agent-guide summary{position:relative;padding:19px 40px 19px 0;cursor:pointer;list-style:none;color:#dce3e9;font-size:15px;font-weight:750}
+.how-to-super-agent-guide summary::-webkit-details-marker{display:none}
+.how-to-super-agent-guide summary:after{content:"+";position:absolute;right:6px;top:16px;color:#77838f;font-size:20px}
+.how-to-super-agent-guide details[open] summary:after{content:"−";color:var(--accent)}
+.how-to-super-agent-guide details p{max-width:720px;margin:-3px 0 21px!important;color:#88949f!important;font-size:13px!important;line-height:1.72!important}
+@media(max-width:720px){.guide-visual-slot{grid-template-columns:1fr}.guide-visual-slot small{text-align:left;max-width:none}.guide-code{font-size:11px}}

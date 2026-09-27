@@ -34,6 +34,7 @@ SHELL_PAGES = [
     ROOT / "research" / "index.html",
     ROOT / "open-source" / "index.html",
     ROOT / "guides" / "ai-agent-security" / "index.html",
+    ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html",
     ROOT / "guides" / "prompt-injection" / "index.html",
     ROOT / "guides" / "index.html",
@@ -449,6 +450,36 @@ def validate_model_pricing_catalog():
         fail("pricing calculator must load the canonical model-pricing.json dataset")
     if "effectiveRates" not in pricing_js or "threshold_input_tokens" not in pricing_js:
         fail("pricing calculator must apply catalog pricing rules")
+
+
+
+def validate_how_to_build_super_agent():
+    path = ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html"
+    if not path.exists():
+        fail("How to Build an AI Super Agent guide is missing")
+    text = path.read_text(encoding="utf-8")
+    required = [
+        "<h1>How to Build an AI Super Agent:",
+        'id="orchestrator"', 'id="tools"', 'id="memory"', 'id="verification"',
+        'id="security"', 'id="example"', 'id="checklist"',
+        "/guides/ai-super-agents/", "/guides/ai-agent-security/",
+    ]
+    for marker in required:
+        if marker not in text:
+            fail(f"How-to super-agent guide missing required content: {marker}")
+    if text.count('data-image-slot=') != 4:
+        fail("How-to super-agent guide must reserve exactly four research image slots")
+    blocks = re.findall(r'<script[^>]+type=["\\']application/ld\\+json["\\'][^>]*>(.*?)</script>', text, re.I | re.S)
+    if not blocks:
+        fail("How-to super-agent guide is missing JSON-LD")
+    schema = json.loads(blocks[0])
+    types = {node.get("@type") for node in schema.get("@graph", [])}
+    for expected in {"TechArticle", "HowTo", "FAQPage", "BreadcrumbList", "WebPage"}:
+        if expected not in types:
+            fail(f"How-to super-agent guide schema missing {expected}")
+    guides_html = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    if "/guides/how-to-build-ai-super-agent/" not in guides_html:
+        fail("Guides index must link to How to Build an AI Super Agent")
 
 
 def validate_change_intelligence_regressions():
@@ -1061,6 +1092,7 @@ def main():
 
     validate_model_pricing_catalog()
     validate_model_history()
+    validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))

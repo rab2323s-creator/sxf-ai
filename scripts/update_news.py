@@ -39,6 +39,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "research" / "index.html": "research",
     ROOT / "open-source" / "index.html": "open-source",
     ROOT / "guides" / "ai-agent-security" / "index.html": "guides",
+    ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -7339,6 +7340,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),

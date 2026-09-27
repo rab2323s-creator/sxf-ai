@@ -1,0 +1,443 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>How to Build an AI Super Agent in 2026: Step-by-Step Guide | SXF / AI</title>
+      <meta name="description" content="Learn how to build an AI super agent in 2026 using orchestration, specialist agents, MCP, memory, evaluation, guardrails and production-ready design patterns." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/guides/how-to-build-ai-super-agent/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/guides/how-to-build-ai-super-agent/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/how-to-build-ai-super-agent/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="How to Build an AI Super Agent in 2026: Step-by-Step Guide | SXF / AI" />
+      <meta property="og:description" content="Learn how to build an AI super agent in 2026 using orchestration, specialist agents, MCP, memory, evaluation, guardrails and production-ready design patterns." />
+      <meta property="og:url" content="https://sxf.si/guides/how-to-build-ai-super-agent/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="How to Build an AI Super Agent in 2026: Step-by-Step Guide | SXF / AI" />
+      <meta name="twitter:description" content="Learn how to build an AI super agent in 2026 using orchestration, specialist agents, MCP, memory, evaluation, guardrails and production-ready design patterns." />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#webpage","url":"https://sxf.si/guides/how-to-build-ai-super-agent/","name":"How to Build an AI Super Agent: Architecture, Memory, Tools & Multi-Agent Orchestration","description":"Learn how to build an AI super agent in 2026 using orchestration, specialist agents, MCP, memory, evaluation, guardrails and production-ready design patterns.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#article"},"breadcrumb":{"@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#breadcrumb"},"inLanguage":"en"},{"@type":"TechArticle","@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#article","url":"https://sxf.si/guides/how-to-build-ai-super-agent/","mainEntityOfPage":{"@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#webpage"},"headline":"How to Build an AI Super Agent: Architecture, Memory, Tools & Multi-Agent Orchestration","description":"Learn how to build an AI super agent in 2026 using orchestration, specialist agents, MCP, memory, evaluation, guardrails and production-ready design patterns.","datePublished":"2026-09-28","dateModified":"2026-09-28","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"image":"https://sxf.si/assets/og/sxf-ai-social.webp","articleSection":"AI Agents","keywords":["how to build an AI super agent","AI super agent architecture","multi-agent orchestration","AI agent orchestrator","AI agent memory","MCP agents","AI agent tools","AI agent evaluation","agent guardrails","multi-agent systems"],"about":[{"@type":"Thing","name":"AI agents"},{"@type":"Thing","name":"AI super agents"},{"@type":"Thing","name":"Multi-agent systems"},{"@type":"Thing","name":"Agent orchestration"},{"@type":"Thing","name":"Model Context Protocol"}],"citation":["https://developers.openai.com/api/docs/guides/agents","https://developers.openai.com/api/docs/guides/agents/define-agents","https://developers.openai.com/api/docs/guides/agents/orchestration","https://openai.github.io/openai-agents-js/guides/tools/","https://developers.openai.com/api/docs/guides/prompt-caching","https://developers.openai.com/api/docs/guides/evaluation-best-practices","https://www.anthropic.com/engineering/multi-agent-research-system","https://docs.anthropic.com/en/docs/mcp","https://www.anthropic.com/engineering/code-execution-with-mcp","https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/"],"inLanguage":"en"},{"@type":"HowTo","@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#howto","name":"How to Build an AI Super Agent","description":"A practical architecture process for building an AI super agent with orchestration, specialists, tools, memory, evaluation, permissions and observability.","totalTime":"PT30M","step":[{"@type":"HowToStep","position":1,"name":"Define the outcome and success criteria","text":"Specify the job the system owns, the information it needs, what success looks like and which actions must remain human-controlled."},{"@type":"HowToStep","position":2,"name":"Start with the smallest viable agent","text":"Prove that one model or agent plus tools cannot solve the job reliably before adding multi-agent complexity."},{"@type":"HowToStep","position":3,"name":"Design the orchestrator","text":"Give one control layer responsibility for routing, planning, delegation, completion criteria and escalation."},{"@type":"HowToStep","position":4,"name":"Add specialists selectively","text":"Create narrow specialists only when different prompts, tools, permissions, models or parallel work improve measurable outcomes."},{"@type":"HowToStep","position":5,"name":"Build the tool and MCP layer","text":"Expose only the minimum capabilities each agent needs and use MCP where standardized integrations add value."},{"@type":"HowToStep","position":6,"name":"Structure memory and task state","text":"Separate working state, persistent memory and retrieval so the model receives the right context rather than an ever-growing transcript."},{"@type":"HowToStep","position":7,"name":"Add verification and evaluation","text":"Check outputs with schemas, deterministic tests, datasets, traces and verifier stages before trusting important results."},{"@type":"HowToStep","position":8,"name":"Add approval gates and production controls","text":"Require human approval for high-impact actions and monitor cost, latency, retries, tool use and failures in production."}]},{"@type":"FAQPage","@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#faq","mainEntity":[{"@type":"Question","name":"What is the difference between an AI agent and an AI super agent?","acceptedAnswer":{"@type":"Answer","text":"An AI agent can pursue a multi-step goal and use tools. An AI super agent adds a broader control layer: it can orchestrate specialists, route tools and models, preserve task state, verify work and govern an end-to-end outcome."}},{"@type":"Question","name":"Do I need multiple agents to build a super agent?","acceptedAnswer":{"@type":"Answer","text":"No. A strong design can begin with one orchestrating agent plus tools. Add specialist agents only when narrower instructions, different permissions, parallel work or different models measurably improve the result."}},{"@type":"Question","name":"When should I use MCP in a super agent?","acceptedAnswer":{"@type":"Answer","text":"Use MCP when a standardized connection layer makes tool and data integrations easier to reuse or govern. Small systems with only a few functions may not need MCP at all."}},{"@type":"Question","name":"What should the orchestrator do?","acceptedAnswer":{"@type":"Answer","text":"The orchestrator should interpret the goal, decide whether to answer directly or delegate, select specialists and tools, track task state, evaluate progress, request approvals when needed and decide when the work is complete."}},{"@type":"Question","name":"How do you make a super agent reliable?","acceptedAnswer":{"@type":"Answer","text":"Use narrow specialist roles, structured state, least-privilege tools, explicit success criteria, deterministic validation where possible, evaluation datasets, traces and a verifier or review stage before important outcomes are accepted."}},{"@type":"Question","name":"Are multi-agent systems always better than a single agent?","acceptedAnswer":{"@type":"Answer","text":"No. Multi-agent systems add cost, latency and coordination failure modes. They are most useful when the work can be decomposed into genuinely different or parallel tasks."}},{"@type":"Question","name":"How do you control the cost of a super agent?","acceptedAnswer":{"@type":"Answer","text":"Route simple work to cheaper models, avoid unnecessary agent calls, reuse stable context through caching when supported, parallelize only independent work, cap retries and measure cost per successful outcome rather than cost per prompt."}},{"@type":"Question","name":"What actions should require human approval?","acceptedAnswer":{"@type":"Answer","text":"High-impact or irreversible actions such as payments, destructive changes, production deployment, external communications, permission changes and sensitive data operations should usually remain behind explicit approval gates."}}]},{"@type":"BreadcrumbList","@id":"https://sxf.si/guides/how-to-build-ai-super-agent/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"How to Build an AI Super Agent","item":"https://sxf.si/guides/how-to-build-ai-super-agent/"}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page guide-article-page how-to-super-agent-guide"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+      <article>
+  <header class="guide-article-hero shell">
+    <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Build an AI Super Agent</span></nav>
+    <p class="eyebrow">SXF GUIDE / AGENTIC SYSTEMS</p>
+    <h1>How to Build an AI Super Agent:<br><span>Architecture, Memory, Tools &amp; Multi-Agent Orchestration</span></h1>
+    <p class="guide-deck">A useful super agent is not a swarm of models with a dramatic name. It is a deliberately engineered system that knows what job it owns, when to delegate, which tools each specialist may use, how to preserve state, how to verify the work and when a human must approve the next action. This guide builds that system from first principles and connects the architecture to current OpenAI, Anthropic, MCP and agent-security practice.</p>
+    <div class="guide-byline">
+      <div><span>Published</span><strong>September 28, 2026</strong></div>
+      <div><span>Last verified</span><strong>September 28, 2026</strong></div>
+      <div><span>Reading time</span><strong>30 min</strong></div>
+      <div><span>Research standard</span><strong>Primary-source first</strong></div>
+    </div>
+  </header>
+
+  <section class="guide-answer shell" id="quick-answer">
+    <div class="guide-answer-label">QUICK ANSWER</div>
+    <div>
+      <h2>Build the smallest agent system that can reliably own the outcome—then add orchestration, specialists and autonomy only where they earn their complexity.</h2>
+      <p>A production AI super agent normally needs five layers: a clear <strong>orchestrator</strong>, bounded <strong>specialist agents</strong>, a controlled <strong>tool and integration layer</strong>, intentional <strong>state and memory</strong>, and a <strong>verification/governance layer</strong>. The orchestrator decides whether to solve a step directly, call a specialist, use a tool, ask for approval or stop. Specialists should be narrow. Tools should follow least privilege. Memory should be structured outside the model where possible. And important work should be verified before the system declares success.</p>
+    </div>
+  </section>
+
+  <div class="guide-reading shell">
+    <aside class="guide-toc">
+      <span>IN THIS GUIDE</span>
+      <a href="#quick-answer">Quick answer</a>
+      <a href="#definition">What are we building?</a>
+      <a href="#when-not-to">When not to build one</a>
+      <a href="#requirements">Define the job</a>
+      <a href="#architecture">Reference architecture</a>
+      <a href="#orchestrator">Design the orchestrator</a>
+      <a href="#orchestration-patterns">Handoffs vs manager pattern</a>
+      <a href="#specialists">Specialist agents</a>
+      <a href="#tools">Tools and MCP</a>
+      <a href="#memory">Memory and state</a>
+      <a href="#parallelism">Parallel agents</a>
+      <a href="#verification">Verification and evals</a>
+      <a href="#security">Permissions and approval</a>
+      <a href="#cost">Cost and latency</a>
+      <a href="#example">End-to-end example</a>
+      <a href="#implementation">Implementation blueprint</a>
+      <a href="#failure-modes">Failure modes</a>
+      <a href="#checklist">Production checklist</a>
+      <a href="#faq">FAQ</a>
+      <a href="#sources">Primary sources</a>
+      <a class="guide-toc-top" href="#top">Back to top ↑</a>
+    </aside>
+
+    <div class="guide-prose" id="top">
+      <section id="definition">
+        <p class="eyebrow">SYSTEM DEFINITION</p>
+        <h2>What are we actually building?</h2>
+        <p>An <strong>AI super agent</strong> is best treated as a system architecture, not as a special kind of foundation model. The system accepts an outcome-level goal, chooses how the work should be decomposed, routes tasks to models, agents or deterministic tools, keeps track of the state of the job, checks results and returns one coherent outcome. In other words, the “super” part is usually the <strong>control plane</strong>.</p>
+        <p>That distinction matters because the term is still not a formal standard. Your architecture should therefore be grounded in observable capabilities instead of marketing labels. OpenAI's current agent documentation describes an agent as a package of a model, instructions and optional runtime behavior such as tools, guardrails, MCP servers, handoffs and structured outputs. A super-agent design composes those primitives into a larger governed workflow.</p>
+        <div class="guide-callout"><strong>Design test</strong><p>If the system only sends one prompt and returns one answer, you are not building a super agent. If it can interpret a goal, choose capabilities, observe execution, change strategy and decide when the job is actually complete, you are building an agentic control system.</p></div>
+        <p>This article focuses on that control system. For the terminology, product landscape and difference from AGI, see the existing <a href="/guides/ai-super-agents/">AI Super Agents in 2026</a> reference guide.</p>
+      </section>
+
+      <section id="when-not-to">
+        <p class="eyebrow">COMPLEXITY BUDGET</p>
+        <h2>First question: should this be a super agent at all?</h2>
+        <p>The fastest way to build an unreliable agent is to add autonomy before proving that the task needs it. A deterministic workflow is easier to test. A single model call is cheaper to understand. A single agent with two good tools is easier to secure than six agents that can all call everything.</p>
+        <p>Start by classifying the work. If the sequence is known in advance, keep it deterministic. If the input varies but the correct path can be classified, use routing. If several independent perspectives or searches are useful, use parallelization. Use an orchestrator-worker design when the system has to decide at runtime which subtasks exist and how they should be assigned.</p>
+        <div class="guide-decision-table">
+          <div><span>One model call</span><strong>Use when the task is bounded.</strong><p>Summarization, extraction, rewriting, classification or generation with a clear input/output contract.</p></div>
+          <div><span>Deterministic workflow</span><strong>Use when the path is known.</strong><p>Fixed approvals, ETL-like sequences, repeatable content pipelines and business rules.</p></div>
+          <div><span>Single agent + tools</span><strong>Use when the next action varies.</strong><p>The model needs to choose tools and recover from normal failures, but one control loop is enough.</p></div>
+          <div><span>Multi-agent / super agent</span><strong>Use when delegation itself is part of the problem.</strong><p>Open-ended tasks, multiple specialist domains, parallel exploration, separate permissions or long-running work.</p></div>
+        </div>
+        <p>Anthropic's published multi-agent research system is a useful real-world example of the last category: a lead agent decomposes broad research tasks and creates parallel subagents to explore independent directions. Anthropic reported a 90.2% improvement over a single-agent baseline on one internal breadth-heavy research evaluation; that is an internal result, not a universal benchmark, but it illustrates the kind of task where multi-agent coordination can pay.</p>
+      </section>
+
+      <section id="requirements">
+        <p class="eyebrow">STEP 01 / DEFINE THE JOB</p>
+        <h2>Write the outcome before you write the agents.</h2>
+        <p>“Build a research super agent” is not a requirement. “Given a company and market, gather current primary sources, extract comparable facts, identify uncertainty, produce a sourced briefing and stop when every required field has evidence” is a requirement. The second version gives the system something it can actually complete and gives you something you can evaluate.</p>
+        <h3>Define five things before implementation</h3>
+        <div class="guide-matchup-grid">
+          <article><span>01 · OUTCOME</span><h3>What does done look like?</h3><p>Specify the artifact or real-world state the system must produce—not merely “help the user.”</p></article>
+          <article><span>02 · EVIDENCE</span><h3>What must be true?</h3><p>Define required sources, fields, checks, tolerances or external confirmations.</p></article>
+          <article><span>03 · AUTHORITY</span><h3>What may it change?</h3><p>Separate read access, reversible actions and high-impact actions that require approval.</p></article>
+          <article><span>04 · BOUNDARIES</span><h3>When should it stop?</h3><p>Set time, cost, retry, uncertainty and escalation limits before the first production run.</p></article>
+        </div>
+        <p>Also write down who owns failure. If an agent cannot obtain a source, should it continue with a caveat, use a secondary source, ask the user or stop? If a tool returns contradictory data, who adjudicates? These decisions belong in the product specification, not inside an improvised prompt.</p>
+      </section>
+
+      <section id="architecture">
+        <p class="eyebrow">STEP 02 / ARCHITECTURE</p>
+        <h2>A practical reference architecture for a super agent</h2>
+        <p>A useful architecture separates <strong>control</strong> from <strong>execution</strong>. The orchestrator owns the job. Specialists own bounded subtasks. Tools own side effects. A verifier owns skepticism. Memory and policy sit beside the workflow rather than being hidden inside an ever-growing transcript.</p>
+        <div class="super-agent-stack">
+          <div class="super-agent-layer super-agent-goal"><span>01</span><strong>Goal</strong><p>User intent, constraints, required output and success criteria.</p></div>
+          <div class="super-agent-layer"><span>02</span><strong>Orchestrator</strong><p>Plans, routes, delegates, tracks progress and decides when to stop.</p></div>
+          <div class="super-agent-layer"><span>03</span><strong>Specialists</strong><p>Narrow agents for research, code, data, documents or verification.</p></div>
+          <div class="super-agent-layer"><span>04</span><strong>Tools</strong><p>Search, APIs, files, databases, code, browsers and MCP servers.</p></div>
+          <div class="super-agent-layer"><span>05</span><strong>Governance</strong><p>Permissions, approvals, evals, traces, budgets and rollback paths.</p></div>
+        </div>
+        
+<div class="guide-visual-slot" data-image-slot="1" data-image-path="/guides/how-to-build-ai-super-agent/images/reference-architecture.webp">
+  <div><span>RESEARCH VISUAL 01</span><strong>Reference architecture for an AI super agent</strong><p>A full system diagram showing User → Orchestrator → Router → Specialist agents → Tools / MCP / Retrieval → Verifier → Human approval → Final output, with Memory, Policy and Observability as side planes.</p></div>
+  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/reference-architecture.webp</small>
+</div>
+        <h3>The control loop</h3>
+        <div class="agent-loop super-loop">
+          <div><span>01</span><strong>Interpret</strong><p>Turn the request into a goal, constraints and completion criteria.</p></div>
+          <div><span>02</span><strong>Plan</strong><p>Choose direct execution, delegation, sequence and parallel branches.</p></div>
+          <div><span>03</span><strong>Act</strong><p>Call specialists and tools with scoped context and permissions.</p></div>
+          <div><span>04</span><strong>Observe</strong><p>Read real outputs, errors, state changes and evidence.</p></div>
+          <div><span>05</span><strong>Verify</strong><p>Check whether the result satisfies requirements rather than assuming success.</p></div>
+        </div>
+        <p>Do not collapse these responsibilities into one giant prompt. The architecture becomes much easier to reason about when state transitions are explicit: <em>planned → running → blocked → needs approval → verifying → complete</em>.</p>
+      </section>
+
+      <section id="orchestrator">
+        <p class="eyebrow">STEP 03 / ORCHESTRATOR</p>
+        <h2>Design the orchestrator as a manager, not as the worker who does everything.</h2>
+        <p>The orchestrator should understand enough about the domain to choose the next action, but its main job is coordination. If it also performs every search, reads every document, writes every line of code and checks its own result, you have created a single overloaded agent with a complicated prompt—not a clean multi-agent system.</p>
+        <h3>A good orchestrator owns six decisions</h3>
+        <div class="control-topology">
+          <article><span>ROUTE</span><h3>Who should do this?</h3><p>Choose a specialist, a deterministic tool or a direct answer.</p></article>
+          <article><span>CONTEXT</span><h3>What does that worker need?</h3><p>Send the minimum sufficient state, evidence and constraints.</p></article>
+          <article><span>ORDER</span><h3>What depends on what?</h3><p>Sequence dependent work and parallelize independent branches.</p></article>
+          <article><span>RECOVERY</span><h3>What if it fails?</h3><p>Retry, switch tool, narrow the task, escalate or stop.</p></article>
+          <article><span>QUALITY</span><h3>Is this good enough?</h3><p>Invoke validation or a verifier when acceptance criteria are not yet met.</p></article>
+          <article><span>STOP</span><h3>Are we actually done?</h3><p>End the loop when the outcome—not merely the last agent call—is complete.</p></article>
+        </div>
+        <p>Keep the orchestrator's state structured. At minimum track: the original goal, requirements, current plan, completed tasks, evidence, unresolved issues, cost or time budget, approval state and final completion criteria. This state is more reliable than asking the model to reconstruct the entire job from conversation history every time.</p>
+      </section>
+
+      <section id="orchestration-patterns">
+        <p class="eyebrow">STEP 04 / DELEGATION</p>
+        <h2>Handoffs vs agents-as-tools: decide who owns the answer.</h2>
+        <p>OpenAI's current orchestration guidance describes two useful patterns. With a <strong>handoff</strong>, control moves to a specialist for that branch. With <strong>agents as tools</strong>, a manager remains in control and calls specialist agents as bounded capabilities. That distinction is more important than framework syntax because it defines ownership.</p>
+        <div class="guide-table-wrap"><table class="guide-table">
+          <thead><tr><th>Pattern</th><th>Who owns the user-facing result?</th><th>Best when</th><th>Main risk</th></tr></thead>
+          <tbody>
+            <tr><th>Handoff</th><td data-label="Ownership">Specialist</td><td data-label="Best when">A domain agent should take over a branch deeply and interact directly.</td><td data-label="Risk">Context and policy can drift as ownership moves.</td></tr>
+            <tr><th>Agents as tools</th><td data-label="Ownership">Manager / orchestrator</td><td data-label="Best when">Specialists provide bounded expertise while one controller owns synthesis.</td><td data-label="Risk">The manager can become a bottleneck or context sink.</td></tr>
+            <tr><th>Hybrid</th><td data-label="Ownership">Depends on branch</td><td data-label="Best when">Some work needs direct specialist ownership while other work should stay hidden behind the manager.</td><td data-label="Risk">More state and routing complexity.</td></tr>
+          </tbody>
+        </table></div>
+        
+<div class="guide-visual-slot" data-image-slot="2" data-image-path="/guides/how-to-build-ai-super-agent/images/handoffs-vs-agents-as-tools.webp">
+  <div><span>RESEARCH VISUAL 02</span><strong>Handoffs vs agents-as-tools</strong><p>A two-path diagram: in a handoff the specialist takes ownership; in the manager pattern the orchestrator calls specialists and keeps control of the final response.</p></div>
+  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/handoffs-vs-agents-as-tools.webp</small>
+</div>
+        <p>For a research-and-report system, the manager pattern is often easier to govern because one orchestrator can require every specialist to return structured evidence. For customer support or domain-specific conversational branches, a handoff may be cleaner because the specialist needs to own several turns.</p>
+      </section>
+
+      <section id="specialists">
+        <p class="eyebrow">STEP 05 / SPECIALIZATION</p>
+        <h2>Make specialists narrow enough to evaluate.</h2>
+        <p>A specialist is useful when it has a meaningfully different job, context, tool set, permission set or model. “Research Agent 1” and “Research Agent 2” with identical capabilities are not specialization; they are duplication unless you deliberately want independent exploration or voting.</p>
+        <div class="guide-matchup-grid">
+          <article><span>RESEARCH</span><h3>Evidence specialist</h3><p>Finds sources, separates primary from secondary evidence, extracts dates and returns claims with provenance.</p></article>
+          <article><span>DATA</span><h3>Structured analysis specialist</h3><p>Runs calculations, SQL or code; returns normalized fields and machine-checkable results.</p></article>
+          <article><span>EXECUTION</span><h3>Action specialist</h3><p>Operates approved apps, APIs, files or a browser inside a tightly scoped permission boundary.</p></article>
+          <article><span>VERIFICATION</span><h3>Independent checker</h3><p>Tests whether evidence, output format and acceptance criteria actually match the requested outcome.</p></article>
+        </div>
+        <p>Give each specialist an explicit contract: purpose, allowed inputs, allowed tools, output schema, failure behavior and conditions for escalation. OpenAI's current agent-definition guidance similarly recommends configuring intrinsic specialist decisions—name, instructions, model, tools, handoffs and structured outputs—at the agent level before scaling the workflow.</p>
+        <div class="guide-callout"><strong>Context rule</strong><p>Do not send the full global transcript to every specialist by default. Give each agent the smallest context package that lets it do its job correctly. Smaller context makes behavior easier to inspect and reduces both cost and accidental leakage.</p></div>
+      </section>
+
+      <section id="tools">
+        <p class="eyebrow">STEP 06 / TOOLS & MCP</p>
+        <h2>The tool layer is where an agent becomes operational—and where risk becomes real.</h2>
+        <p>Modern agent frameworks treat tools as first-class capabilities: hosted search and file tools, function calls, local execution, computer use, sandboxes, other agents and MCP servers. The architectural question is not “how many tools can the model call?” It is “which capability should be exposed to which agent, under which identity, with what validation?”</p>
+        <div class="guide-decision-table">
+          <div><span>Read tools</span><strong>Search, retrieval, databases and files.</strong><p>Usually lower risk, but retrieved content can still contain malicious or misleading instructions.</p></div>
+          <div><span>Compute tools</span><strong>Code execution, SQL, parsers and transformations.</strong><p>Use sandboxes, resource limits and explicit input/output contracts.</p></div>
+          <div><span>Write tools</span><strong>Email, CRM updates, tickets, repositories and business systems.</strong><p>Require stricter scopes, idempotency and often human approval.</p></div>
+          <div><span>Coordination tools</span><strong>Spawn agents, enqueue jobs, schedule work and request approval.</strong><p>Treat orchestration capabilities as privileged: they can amplify both good plans and bad plans.</p></div>
+        </div>
+        <h3>Where MCP fits</h3>
+        <p>Anthropic describes the <strong>Model Context Protocol</strong> as an open protocol for standardizing how applications provide context and tools to LLM systems. In a super-agent architecture, MCP is best understood as an <strong>integration boundary</strong>, not as the agent itself. A host connects through MCP clients to servers that expose tools, resources and prompts.</p>
+        <p>MCP becomes especially useful when integrations multiply. Instead of hard-wiring every model or agent to every external system, you can standardize the tool interface. Anthropic's later engineering work on code execution with MCP also highlights <strong>progressive disclosure</strong>: agents can discover and load only the tool definitions they need rather than stuffing every tool schema into the context up front.</p>
+        
+<div class="guide-visual-slot" data-image-slot="3" data-image-path="/guides/how-to-build-ai-super-agent/images/mcp-super-agent-stack.webp">
+  <div><span>RESEARCH VISUAL 03</span><strong>How MCP fits into a super-agent stack</strong><p>A layered diagram showing Host / Orchestrator → MCP clients → scoped MCP servers → business apps, databases, search, code and files, with policy checks at the boundary.</p></div>
+  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/mcp-super-agent-stack.webp</small>
+</div>
+        <p>Do not use MCP just because it is popular. If your application has two stable functions, plain function tools may be simpler. Standardization earns its complexity when connectors need to be reusable, discoverable or governed across several agents and applications.</p>
+      </section>
+
+      <section id="memory">
+        <p class="eyebrow">STEP 07 / MEMORY & STATE</p>
+        <h2>Memory should solve a state problem—not become a transcript landfill.</h2>
+        <p>A long-running agent needs continuity, but “remember everything” is a bad architecture. Separate the state required to finish the current job from durable user or workspace knowledge, and retrieve historical information only when it becomes relevant.</p>
+        <div class="memory-grid">
+          <article><span>WORKING STATE</span><h3>What is happening now?</h3><p>Plan, active tasks, evidence, unresolved questions, budgets, errors and approval state.</p></article>
+          <article><span>PERSISTENT MEMORY</span><h3>What should survive runs?</h3><p>Stable preferences, policies, project facts and approved reusable knowledge.</p></article>
+          <article><span>RETRIEVAL STORE</span><h3>What can be fetched later?</h3><p>Documents, artifacts, logs and indexed knowledge that should not live in every prompt.</p></article>
+          <article><span>TRACE / AUDIT</span><h3>What happened?</h3><p>Tool calls, agent decisions, timings, cost, approvals and state changes for debugging and review.</p></article>
+        </div>
+        <p>Store authoritative state outside the model whenever possible. Let the model reason over a concise view of that state. This prevents a subtle class of bugs where the transcript says one thing while the real external system says another.</p>
+        <h3>Use caching for repeated context, not as a substitute for memory</h3>
+        <p>OpenAI's current prompt-caching guidance shows why stable prompt prefixes matter for agent economics: reused context can reduce input cost and latency on supported models. But prompt caching and application memory are different. A cache reuses model-processing work; your application state must still be explicit, durable and auditable.</p>
+      </section>
+
+      <section id="parallelism">
+        <p class="eyebrow">STEP 08 / PARALLEL WORK</p>
+        <h2>Parallelize independent questions, not dependencies.</h2>
+        <p>Parallel agents are powerful when a task has genuine breadth. Researching five independent markets, inspecting several repositories, or asking separate agents to explore different hypotheses can save wall-clock time and reduce path dependence. Parallelism is much less useful when every step depends on the output of the previous one.</p>
+        <div class="guide-table-wrap"><table class="guide-table">
+          <thead><tr><th>Work shape</th><th>Pattern</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><th>Independent searches</th><td data-label="Pattern">Parallel workers</td><td data-label="Why">Each branch can gather evidence without waiting for another branch.</td></tr>
+            <tr><th>Draft → check → revise</th><td data-label="Pattern">Sequential evaluator loop</td><td data-label="Why">The evaluator needs the draft before it can produce useful feedback.</td></tr>
+            <tr><th>Unknown subtasks</th><td data-label="Pattern">Orchestrator-workers</td><td data-label="Why">The manager discovers and assigns work dynamically.</td></tr>
+            <tr><th>Fixed business process</th><td data-label="Pattern">Deterministic workflow</td><td data-label="Why">Model-driven orchestration adds little value when the dependency graph is already known.</td></tr>
+          </tbody>
+        </table></div>
+        <p>Set concurrency limits. A super agent that can spawn arbitrary workers can also multiply cost, hit rate limits or create cascading tool failures. Give the orchestrator a maximum number of parallel branches and a budget for additional delegation.</p>
+      </section>
+
+      <section id="verification">
+        <p class="eyebrow">STEP 09 / VERIFICATION</p>
+        <h2>Do not let the agent grade success by whether the last call returned 200 OK.</h2>
+        <p>Reliable agent systems separate <strong>execution success</strong> from <strong>task success</strong>. A browser action can succeed while booking the wrong date. A database query can run correctly while answering the wrong question. A research agent can return fluent prose with missing evidence.</p>
+        <h3>Build a verification ladder</h3>
+        <div class="guide-decision-table">
+          <div><span>Level 1</span><strong>Schema and type checks.</strong><p>Required fields, valid JSON, ranges, dates, IDs and output contracts.</p></div>
+          <div><span>Level 2</span><strong>Deterministic business rules.</strong><p>Totals reconcile, permissions match, referenced records exist, required citations are present.</p></div>
+          <div><span>Level 3</span><strong>Environment verification.</strong><p>Read back the actual state after an action instead of trusting the tool's success message.</p></div>
+          <div><span>Level 4</span><strong>Model-based evaluation.</strong><p>Use an independent evaluator when the criterion requires judgment: completeness, contradiction, relevance or instruction adherence.</p></div>
+          <div><span>Level 5</span><strong>Human review.</strong><p>Escalate high-impact, ambiguous or policy-sensitive outcomes before execution or publication.</p></div>
+        </div>
+        <p>OpenAI's evaluation guidance emphasizes that generative systems are variable and need structured evals. For a super agent, evaluate the <strong>whole trajectory</strong>, not only the final answer: Was the correct tool chosen? Did the system recover safely? Did it exceed the budget? Did it invent evidence? Did the final external state match the intended state?</p>
+        <p>Create a test set from real tasks and known failure cases. Every production incident that matters should become a regression case. Over time, your evaluation suite becomes the contract that lets you change models, prompts and orchestration without flying blind.</p>
+      </section>
+
+      <section id="security">
+        <p class="eyebrow">STEP 10 / GOVERNANCE</p>
+        <h2>Autonomy should expand only inside explicit permission boundaries.</h2>
+        <p>Tool-using agents combine probabilistic decisions with real authority. That changes the security problem. Prompt injection, malicious retrieved content, confused identity, over-broad credentials and cascading agent failures can all turn a reasoning mistake into an action mistake. OWASP's Agentic Security Initiative now treats risks such as goal hijacking, tool misuse, identity and privilege abuse, insecure inter-agent communication, memory poisoning and cascading failures as first-class agentic concerns.</p>
+        <p>The practical response is architectural: use least privilege, separate identities where appropriate, sandbox execution, validate tool arguments, isolate secrets, require approval for high-impact actions and keep an audit trail. Our <a href="/guides/ai-agent-security/">AI Agent Security guide</a> covers the security layer in depth.</p>
+        <div class="security-principles">
+          <article><span>01</span><h3>Least privilege</h3><p>Each specialist gets only the tools and data it needs for its job.</p></article>
+          <article><span>02</span><h3>Typed delegation</h3><p>Pass structured tasks and expected outputs instead of unrestricted prose whenever possible.</p></article>
+          <article><span>03</span><h3>Approval gates</h3><p>Pause before irreversible, expensive, external or sensitive actions.</p></article>
+          <article><span>04</span><h3>Sandboxing</h3><p>Contain code, files, browser sessions and network access with narrow resource boundaries.</p></article>
+          <article><span>05</span><h3>Independent verification</h3><p>Do not let the same compromised context both propose and approve a high-impact action.</p></article>
+          <article><span>06</span><h3>Auditability</h3><p>Record the task, agent, tool, identity, decision, result and approval path.</p></article>
+        </div>
+        
+<div class="guide-visual-slot" data-image-slot="4" data-image-path="/guides/how-to-build-ai-super-agent/images/guardrails-approval-boundaries.webp">
+  <div><span>RESEARCH VISUAL 04</span><strong>Guardrails and approval boundaries</strong><p>A risk-tier diagram separating automatic read/analysis actions, controlled reversible actions and human-approved high-impact actions, with sandbox, identity and verification boundaries.</p></div>
+  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/guardrails-approval-boundaries.webp</small>
+</div>
+      </section>
+
+      <section id="cost">
+        <p class="eyebrow">STEP 11 / ECONOMICS</p>
+        <h2>Optimize for cost per verified outcome, not tokens per call.</h2>
+        <p>A multi-agent workflow can spend more tokens than a single agent and still be economically better if it completes a valuable task with fewer human corrections. The opposite is also true: a spectacular orchestration graph can burn money on low-value delegation. Measure the full job.</p>
+        <div class="economics-grid">
+          <article><span>MODEL ROUTING</span><h3>Use expensive intelligence where it changes decisions.</h3><p>Reserve stronger models for planning, difficult reasoning and synthesis. Use cheaper models or deterministic code for classification, extraction and routine transforms when evals show they are sufficient.</p></article>
+          <article><span>CONTEXT</span><h3>Stop resending the world.</h3><p>Keep specialist context narrow, retrieve data on demand and use prompt caching for stable reusable prefixes when the provider supports it.</p></article>
+          <article><span>DELEGATION</span><h3>Give spawning a budget.</h3><p>Cap workers, retries, tool calls and maximum run time. More agents should be a deliberate resource decision.</p></article>
+          <article><span>LATENCY</span><h3>Parallelize the right work.</h3><p>Run independent branches concurrently, but keep dependency-heavy work sequential to avoid reconciliation overhead.</p></article>
+        </div>
+        <p>Track at least: cost per successful run, median and tail latency, number of model calls, number of tool calls, cache utilization, retry rate, human intervention rate and failure class. SXF's <a href="/tools/ai-model-cost-calculator/">AI Model Cost Calculator</a> can help estimate direct token economics; production agent cost also includes tools, compute, storage and external services.</p>
+      </section>
+
+      <section id="example">
+        <p class="eyebrow">END-TO-END EXAMPLE</p>
+        <h2>Example: a research-and-report super agent</h2>
+        <p>Assume the goal is: <em>“Research five competitors, verify current pricing and product capabilities from primary sources, identify contradictions, and produce an executive briefing with a comparison table.”</em></p>
+        <h3>System roles</h3>
+        <div class="guide-table-wrap"><table class="guide-table">
+          <thead><tr><th>Component</th><th>Responsibility</th><th>Allowed capabilities</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><th>Orchestrator</th><td data-label="Responsibility">Owns requirements, plan, routing and final completion.</td><td data-label="Capabilities">Task state, subagent calls, approval service.</td><td data-label="Output">Plan + final briefing.</td></tr>
+            <tr><th>Research agents</th><td data-label="Responsibility">One competitor or question per branch.</td><td data-label="Capabilities">Web search, source fetch.</td><td data-label="Output">Claims + URLs + dates + evidence.</td></tr>
+            <tr><th>Data agent</th><td data-label="Responsibility">Normalize pricing and comparable fields.</td><td data-label="Capabilities">Code / calculation tools.</td><td data-label="Output">Structured comparison rows.</td></tr>
+            <tr><th>Writer</th><td data-label="Responsibility">Turn verified facts into a readable briefing.</td><td data-label="Capabilities">No write access to source systems.</td><td data-label="Output">Draft report.</td></tr>
+            <tr><th>Verifier</th><td data-label="Responsibility">Check every material claim against evidence and requirements.</td><td data-label="Capabilities">Read evidence + draft.</td><td data-label="Output">Pass / issues / missing evidence.</td></tr>
+          </tbody>
+        </table></div>
+        <h3>Execution trace</h3>
+        <div class="guide-decision-table">
+          <div><span>01</span><strong>Orchestrator builds a requirements object.</strong><p>Five companies, pricing date, required fields, primary-source rule, output format and time budget.</p></div>
+          <div><span>02</span><strong>Research branches run in parallel.</strong><p>Each branch returns structured evidence rather than prose that another agent must rediscover.</p></div>
+          <div><span>03</span><strong>Data specialist normalizes only verified fields.</strong><p>Missing or incomparable values remain explicit instead of being guessed.</p></div>
+          <div><span>04</span><strong>Writer creates the first briefing.</strong><p>The writer cannot invent new facts; it works from the evidence package.</p></div>
+          <div><span>05</span><strong>Verifier checks claims and coverage.</strong><p>Unsupported claims trigger targeted research, not a full rerun.</p></div>
+          <div><span>06</span><strong>Orchestrator closes the job.</strong><p>Only when required fields pass, uncertainty is disclosed and the deliverable is complete.</p></div>
+        </div>
+        <p>This architecture is useful because failures stay local. If one company's pricing cannot be verified, you rerun one research branch. If the writing style is wrong, you rerun the writer. If the verifier flags a contradiction, the orchestrator can request a targeted check instead of starting over.</p>
+      </section>
+
+      <section id="implementation">
+        <p class="eyebrow">IMPLEMENTATION BLUEPRINT</p>
+        <h2>Translate the architecture into explicit contracts.</h2>
+        <p>You can implement this pattern with a managed agent runtime, an agents SDK, direct model APIs or a custom orchestration service. Framework choice matters less than preserving the contracts between components.</p>
+        <h3>1. Task envelope</h3>
+        <pre class="guide-code"><code>{
+  "goal": "Produce a verified competitor briefing",
+  "requirements": ["5 companies", "primary sources", "pricing date"],
+  "budget": {"max_minutes": 12, "max_worker_runs": 8},
+  "risk": {"external_write": false},
+  "status": "planned"
+}</code></pre>
+        <h3>2. Specialist contract</h3>
+        <pre class="guide-code"><code>{
+  "role": "pricing_researcher",
+  "input": {"company": "...", "as_of": "2026-09-28"},
+  "tools": ["web_search", "source_fetch"],
+  "output_schema": ["claim", "value", "source_url", "source_date", "confidence"],
+  "on_failure": "return_blocker"
+}</code></pre>
+        <h3>3. Orchestrator loop</h3>
+        <pre class="guide-code"><code>while task is not complete:
+  read authoritative task state
+  choose next bounded action
+  enforce policy and budget
+  execute specialist or tool
+  record observation
+  verify changed state
+  escalate when approval or evidence is missing
+return only after completion criteria pass</code></pre>
+        <p>That pseudocode is intentionally provider-neutral. OpenAI's current documentation recommends the Agents API for new managed agent applications, while direct APIs and SDK approaches remain valid when you need more control over the loop or execution environment. The invariant is the same: keep the state, permissions, tools and completion rules explicit.</p>
+      </section>
+
+      <section id="failure-modes">
+        <p class="eyebrow">FAILURE MODES</p>
+        <h2>The hardest bugs appear between agents, tools and state.</h2>
+        <div class="failure-grid">
+          <article><span>STATE DRIFT</span><h3>Transcript and reality diverge</h3><p>The agent believes an action succeeded but the external system has a different state. Always read back important changes.</p></article>
+          <article><span>CONTEXT BLEED</span><h3>Every specialist sees everything</h3><p>Large shared context increases cost, distraction and accidental data exposure.</p></article>
+          <article><span>DELEGATION LOOP</span><h3>Agents keep handing work around</h3><p>Set ownership rules, hop limits, budgets and explicit terminal states.</p></article>
+          <article><span>SELF-APPROVAL</span><h3>The same context proposes and blesses an action</h3><p>Use independent checks and human gates for important outcomes.</p></article>
+          <article><span>TOOL CONFUSION</span><h3>Too many overlapping capabilities</h3><p>Remove redundant tools, clarify descriptions and scope availability by role.</p></article>
+          <article><span>FALSE COMPLETION</span><h3>The process ended, but the job did not</h3><p>Verify acceptance criteria and environment state before marking a task complete.</p></article>
+        </div>
+        <p>Other failures are economic rather than functional: runaway retries, unnecessary premium-model calls, duplicate searches and sequential work that should have been parallel. Treat cost and latency regressions as reliability bugs because they determine whether the system can remain in production.</p>
+      </section>
+
+      <section id="checklist">
+        <p class="eyebrow">PRODUCTION CHECKLIST</p>
+        <h2>Before you call it a super agent, verify the system—not the label.</h2>
+        <div class="guide-decision-table">
+          <div><span>Outcome</span><strong>The job and completion criteria are explicit.</strong><p>A human can tell exactly what the system owns and what “done” means.</p></div>
+          <div><span>Complexity</span><strong>Multi-agent design has a measurable reason to exist.</strong><p>You have evidence that specialization, parallel work or separate permissions improve the task.</p></div>
+          <div><span>State</span><strong>Authoritative task state lives outside the model.</strong><p>Plans, approvals, evidence and external results can be inspected independently.</p></div>
+          <div><span>Permissions</span><strong>Each component has least-privilege capabilities.</strong><p>Read, write and irreversible actions are intentionally separated.</p></div>
+          <div><span>Verification</span><strong>Important outcomes are checked.</strong><p>Schema validation, deterministic checks, evals and human review cover the relevant risk.</p></div>
+          <div><span>Observability</span><strong>You can reconstruct what happened.</strong><p>Traces include agent calls, tools, state changes, errors, approvals, cost and latency.</p></div>
+          <div><span>Economics</span><strong>Budgets and stopping conditions are enforced.</strong><p>Workers, retries, time and model spend cannot grow without limit.</p></div>
+          <div><span>Regression</span><strong>Real failures become tests.</strong><p>Model or prompt changes are evaluated against recurring production tasks before rollout.</p></div>
+        </div>
+        <div class="guide-callout"><strong>Bottom line</strong><p>The strongest super agent is not the one with the most agents. It is the smallest architecture that can reliably own the outcome, prove what it did and stop safely when it cannot.</p></div>
+      </section>
+
+      <section id="faq">
+        <p class="eyebrow">FAQ</p>
+        <h2>Common questions about building AI super agents</h2>
+        <details><summary>What is the difference between an AI agent and an AI super agent?</summary><p>An AI agent can pursue a multi-step goal and use tools. An AI super agent adds a broader control layer: it can orchestrate specialists, route tools and models, preserve task state, verify work and govern an end-to-end outcome.</p></details><details><summary>Do I need multiple agents to build a super agent?</summary><p>No. A strong design can begin with one orchestrating agent plus tools. Add specialist agents only when narrower instructions, different permissions, parallel work or different models measurably improve the result.</p></details><details><summary>When should I use MCP in a super agent?</summary><p>Use MCP when a standardized connection layer makes tool and data integrations easier to reuse or govern. Small systems with only a few functions may not need MCP at all.</p></details><details><summary>What should the orchestrator do?</summary><p>The orchestrator should interpret the goal, decide whether to answer directly or delegate, select specialists and tools, track task state, evaluate progress, request approvals when needed and decide when the work is complete.</p></details><details><summary>How do you make a super agent reliable?</summary><p>Use narrow specialist roles, structured state, least-privilege tools, explicit success criteria, deterministic validation where possible, evaluation datasets, traces and a verifier or review stage before important outcomes are accepted.</p></details><details><summary>Are multi-agent systems always better than a single agent?</summary><p>No. Multi-agent systems add cost, latency and coordination failure modes. They are most useful when the work can be decomposed into genuinely different or parallel tasks.</p></details><details><summary>How do you control the cost of a super agent?</summary><p>Route simple work to cheaper models, avoid unnecessary agent calls, reuse stable context through caching when supported, parallelize only independent work, cap retries and measure cost per successful outcome rather than cost per prompt.</p></details><details><summary>What actions should require human approval?</summary><p>High-impact or irreversible actions such as payments, destructive changes, production deployment, external communications, permission changes and sensitive data operations should usually remain behind explicit approval gates.</p></details>
+      </section>
+
+      <section id="sources" class="guide-sources">
+        <p class="eyebrow">PRIMARY SOURCES</p>
+        <h2>Research used for this guide</h2>
+        <p>The architecture above is SXF's synthesis. Technical claims and current platform guidance were checked against primary documentation and engineering sources available on September 28, 2026.</p>
+        <div class="model-sources">
+          <a href="https://developers.openai.com/api/docs/guides/agents" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Agents</strong><span>Current starting points for managed agent applications, SDKs and direct API control. ↗</span></a>
+          <a href="https://developers.openai.com/api/docs/guides/agents/define-agents" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Agent definitions</strong><span>Models, instructions, tools, handoffs, guardrails and structured outputs. ↗</span></a>
+          <a href="https://developers.openai.com/api/docs/guides/agents/orchestration" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Orchestration and handoffs</strong><span>Handoffs vs manager-controlled agents-as-tools. ↗</span></a>
+          <a href="https://openai.github.io/openai-agents-js/guides/tools/" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Agent tools</strong><span>Hosted tools, functions, execution, agents-as-tools, MCP and sandbox capabilities. ↗</span></a>
+          <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Prompt caching</strong><span>Current caching behavior, context reuse and cost/latency considerations. ↗</span></a>
+          <a href="https://developers.openai.com/api/docs/guides/evaluation-best-practices" target="_blank" rel="noopener noreferrer"><strong>OpenAI · Evaluation best practices</strong><span>Structured evaluation for variable generative systems. ↗</span></a>
+          <a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener noreferrer"><strong>Anthropic · Multi-agent research system</strong><span>Production orchestrator-worker architecture and engineering lessons. ↗</span></a>
+          <a href="https://docs.anthropic.com/en/docs/mcp" target="_blank" rel="noopener noreferrer"><strong>Anthropic · Model Context Protocol</strong><span>MCP as a standard connection layer for tools and context. ↗</span></a>
+          <a href="https://www.anthropic.com/engineering/code-execution-with-mcp" target="_blank" rel="noopener noreferrer"><strong>Anthropic · Code execution with MCP</strong><span>Progressive tool disclosure and context-efficient integrations. ↗</span></a>
+          <a href="https://genai.owasp.org/2025/12/09/owasp-genai-security-project-releases-top-10-risks-and-mitigations-for-agentic-ai-security/" target="_blank" rel="noopener noreferrer"><strong>OWASP GenAI Security Project</strong><span>Agentic AI risk categories and practical security focus. ↗</span></a>
+        </div>
+      </section>
+
+      <section class="guide-sources">
+        <p class="eyebrow">RELATED SXF GUIDES</p>
+        <h2>Continue through the agent stack.</h2>
+        <div class="model-sources">
+          <a href="/guides/ai-super-agents/"><strong>AI Super Agents in 2026</strong><span>Definition, real systems, terminology and architecture landscape. ↗</span></a>
+          <a href="/guides/ai-agent-security/"><strong>AI Agent Security in 2026</strong><span>Prompt injection, MCP, identity, permissions, sandboxing and production controls. ↗</span></a>
+          <a href="/guides/best-ai-agents/"><strong>Best AI Agents in 2026</strong><span>Compare current agent products by execution environment, automation and economics. ↗</span></a>
+          <a href="/topics/ai-agents/"><strong>AI Agents signal history</strong><span>Live agentic AI developments tracked by the SXF radar. ↗</span></a>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+    </main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
