@@ -486,6 +486,7 @@ def validate_how_to_build_super_agent():
         "/guides/how-to-build-ai-super-agent/images/ai-super-agent-architecture.webp",
         "/guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp",
         "/guides/how-to-build-ai-super-agent/images/mcp-ai-agent-architecture.webp",
+        "/guides/how-to-build-ai-super-agent/images/ai-agent-guardrails-human-approval.webp",
     ]
     for image_path in rendered_images:
         if f'<img src="{image_path}"' not in text:
