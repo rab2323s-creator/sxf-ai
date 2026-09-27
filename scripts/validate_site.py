@@ -578,6 +578,17 @@ def validate_source_expansion(news, archive):
     if categorize("A new method for biological discovery", "Google Research") != "Research":
         fail("Google Research fallback category must be Research")
 
+    from update_news import source_summary_is_substantive
+    if source_summary_is_substantive("Google Research", "Generative AI"):
+        fail("Google Research taxonomy labels must not count as substantive summaries")
+    if not source_summary_is_substantive(
+        "Google Research",
+        "We introduce a unified multi-agent framework for coherent long-form video generation.",
+    ):
+        fail("Google Research substantive source summaries must pass the quality floor")
+    if not source_summary_is_substantive("OpenAI", "Short source summary"):
+        fail("summary quality floor must remain source-specific")
+
 
 def main():
     from update_news import categorize
