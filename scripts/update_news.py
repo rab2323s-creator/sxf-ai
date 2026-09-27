@@ -155,7 +155,7 @@ def catalog_reference_variant(variant):
     }
 
 
-def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, cached_input_tokens=0, on_date=None):
+def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, cached_input_tokens=0, on_date=None, pricing_input_tokens=None):
     uncached_input_tokens = int(uncached_input_tokens)
     cached_input_tokens = int(cached_input_tokens)
     output_tokens = int(output_tokens)
@@ -163,7 +163,10 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
         raise ValueError("Token counts must be non-negative")
 
     total_input_tokens = uncached_input_tokens + cached_input_tokens
-    rates = effective_standard_price(model_id, total_input_tokens, on_date)
+    tier_input_tokens = total_input_tokens if pricing_input_tokens is None else int(pricing_input_tokens)
+    if tier_input_tokens < 0:
+        raise ValueError("pricing_input_tokens must be non-negative")
+    rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
         uncached_input_tokens / 1_000_000 * rates["input"]
         + cached_input_tokens / 1_000_000 * rates["cached_input"]
@@ -5282,7 +5285,7 @@ def gpt6_astra_vs_claude_fable_51_html(items):
         f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0])}</strong><small>10M input + 1M output</small></div>',
         f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
@@ -5801,7 +5804,7 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
         f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0])}</strong><small>10M input + 1M output</small></div>',
         f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
@@ -6028,7 +6031,7 @@ def gpt6_sol_vs_claude_opus_html(items):
         ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0], 3)),
     ]
     monthly_examples = [
-        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000)[0], 3)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0], 3)),
         ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0], 3)),
     ]
     long_examples = [
