@@ -110,6 +110,147 @@ def load_model_pricing_catalog():
 MODEL_PRICING_CATALOG, MODEL_PRICING_BY_ID = load_model_pricing_catalog()
 
 
+def load_model_history():
+    if not MODEL_HISTORY_PATH.exists():
+        raise RuntimeError("model-history.json must exist before rendering model intelligence")
+    data = json.loads(MODEL_HISTORY_PATH.read_text(encoding="utf-8"))
+    if not isinstance(data.get("events"), list) or not isinstance(data.get("state"), dict):
+        raise RuntimeError("model-history.json is missing events/state")
+    return data
+
+
+def catalog_model_ids_for_name(name):
+    exact = [
+        model_id for model_id, model in MODEL_PRICING_BY_ID.items()
+        if model.get("model", "").lower() == name.lower()
+    ]
+    if exact:
+        return exact
+    if name == "GPT-6":
+        return ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]
+    if name == "GPT-5.6":
+        return ["gpt-5.6-sol", "gpt-5.6-terra", "gpt-5.6-luna"]
+    return []
+
+
+def model_history_events(model_ids):
+    history = load_model_history()
+    wanted = set(model_ids)
+    return [event for event in history["events"] if event.get("model_id") in wanted]
+
+
+def model_history_html(model_ids, heading="Verified model history"):
+    if not model_ids:
+        return ""
+    history = load_model_history()
+    events = [event for event in history["events"] if event.get("model_id") in set(model_ids)]
+    if not events:
+        return ""
+
+    rows = []
+    for event in reversed(events[-12:]):
+        model = MODEL_PRICING_BY_ID.get(event["model_id"], {})
+        model_name = model.get("model", event["model_id"])
+        if event["type"] in {"baseline", "model_added"}:
+            snapshot = event.get("snapshot", {})
+            price = (snapshot.get("pricing", {}).get("standard") or [{}])[-1]
+            summary = (
+                f'Baseline verified: {int(snapshot.get("context_window", 0)):,} context · '
+                f'{int(snapshot.get("max_output", 0)):,} max output'
+            )
+            if price.get("input") is not None and price.get("output") is not None:
+                summary += (
+                    f' · {catalog_price_label(price["input"])} input / '
+                    f'{catalog_price_label(price["output"])} output per MTok'
+                )
+            source = event.get("evidence", {}).get("model_identity") or model.get("official_sources", [""])[0]
+            kind = "BASELINE"
+        else:
+            changes = event.get("changes", [])
+            labels = []
+            for change in changes:
+                field = change["field"].replace("_", " ")
+                labels.append(field)
+            summary = "Changed: " + ", ".join(labels)
+            source = changes[0]["source_url"] if changes else model.get("official_sources", [""])[0]
+            kind = "CHANGE"
+
+        rows.append(
+            f'''<article class="model-history-event" data-history-event="{escape(event["event_id"], quote=True)}" data-model-id="{escape(event["model_id"], quote=True)}">
+              <div class="model-history-meta"><span>{kind}</span><time datetime="{escape(event["verified_at"], quote=True)}">{escape(event["verified_at"])}</time></div>
+              <h3>{escape(model_name)}</h3><p>{escape(summary)}</p>
+              <a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article>'''
+        )
+
+    return f'''<section class="model-history shell" data-model-history data-history-models="{escape(",".join(model_ids), quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>{escape(heading)}</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
+      <div class="model-history-grid">{"".join(rows)}</div>
+      <p class="reference-note">Append-only SXF ledger · {len(events)} verified event{"s" if len(events) != 1 else ""} · chain head {escape(history.get("chain_head", "")[:12])}…</p>
+    </section>'''
+
+
+def compare_live_facts_html(model_ids):
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    cards = []
+    for model_id in model_ids:
+        model = model_catalog_entry(model_id)
+        price = active_standard_price(model_id, verified)
+        evidence = model["provenance"]["evidence"]
+        modalities = " + ".join(model.get("modalities", {}).get("input", []))
+        cards.append(
+            f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
+              data-context="{int(model["context_window"])}" data-max-output="{int(model["max_output"])}"
+              data-input="{float(price["input"]):g}" data-cached="{float(price["cached_input"]):g}" data-output="{float(price["output"]):g}">
+              <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
+              <h3>{escape(model["model"])}</h3>
+              <dl>
+                <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
+                <div><dt>Max output</dt><dd>{int(model["max_output"]):,}</dd></div>
+                <div><dt>Input / MTok</dt><dd>{escape(catalog_price_label(price["input"]))}</dd></div>
+                <div><dt>Cached / MTok</dt><dd>{escape(catalog_price_label(price["cached_input"]))}</dd></div>
+                <div><dt>Output / MTok</dt><dd>{escape(catalog_price_label(price["output"]))}</dd></div>
+                <div><dt>Input types</dt><dd>{escape(modalities)}</dd></div>
+              </dl>
+              <div class="compare-live-sources"><a href="{escape(evidence["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer">Specs ↗</a><a href="{escape(evidence["pricing"], quote=True)}" target="_blank" rel="noopener noreferrer">Pricing ↗</a></div>
+            </article>'''
+        )
+    latest = []
+    history = load_model_history()
+    for model_id in model_ids:
+        model_events = [event for event in history["events"] if event.get("model_id") == model_id]
+        if model_events:
+            latest.append(model_events[-1])
+    latest_verified = max((event["verified_at"] for event in latest), default=verified)
+    return f'''<section class="compare-live-facts shell" data-compare-contract data-model-ids="{escape(",".join(model_ids), quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">LIVE VERIFIED FACTS</p><h2>Current facts from the SXF model database.</h2></div><span>Catalog {escape(verified)} · History {escape(latest_verified)}</span></div>
+      <div class="compare-live-grid">{"".join(cards)}</div>
+      <div class="compare-live-foot"><span>Facts are generated from the canonical model catalog, not copied into this comparison.</span><a href="/data/model-pricing.json">Current data ↗</a><a href="/data/model-history.json">Change ledger ↗</a></div>
+    </section>'''
+
+
+def inject_before_main_end(html, fragment):
+    if not fragment:
+        return html
+    marker = "</main>"
+    if marker not in html:
+        raise RuntimeError("Could not inject model intelligence block: </main> missing")
+    return html.replace(marker, fragment + marker, 1)
+
+
+def inject_compare_contract(html, model_ids):
+    fragment = compare_live_facts_html(model_ids)
+    hero_end = "</section>"
+    hero_start = html.find('<section class="comparison-hero')
+    if hero_start < 0:
+        raise RuntimeError("Comparison page is missing comparison-hero")
+    end = html.find(hero_end, hero_start)
+    if end < 0:
+        raise RuntimeError("Comparison hero section is not closed")
+    end += len(hero_end)
+    return html[:end] + fragment + html[end:]
+
+
 def model_catalog_entry(model_id):
     try:
         return MODEL_PRICING_BY_ID[model_id]
