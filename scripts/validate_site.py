@@ -315,7 +315,7 @@ def validate_model_pricing_catalog():
         fail(f"model pricing table has {row_count} rows for {len(models)} catalog models")
     if "/data/model-pricing.json" not in pricing_html:
         fail("model pricing page must link the canonical JSON dataset")
-    if "Primary-source verified" not in pricing_html:
+    if "PRIMARY-SOURCE VERIFIED" not in pricing_html.upper():
         fail("model pricing page must disclose primary-source verification")
     if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
         fail("model pricing page is missing calculator assets")
