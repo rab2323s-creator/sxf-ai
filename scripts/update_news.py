@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
+MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -69,6 +70,159 @@ def clean_summary(value):
     value = re.sub(r"\s*The post .+? appeared first on The GitHub Blog\s*\.?$", "", value, flags=re.I)
     value = re.sub(r"\s+", " ", value).strip()
     return value[:900]
+
+def load_model_pricing_catalog():
+    data = json.loads(MODEL_PRICING_PATH.read_text(encoding="utf-8"))
+    models = data.get("models")
+    if not isinstance(models, list) or not models:
+        raise RuntimeError("model-pricing.json must contain a non-empty models array")
+    by_id = {}
+    for model in models:
+        model_id = model.get("model_id")
+        if not model_id or model_id in by_id:
+            raise RuntimeError(f"Invalid or duplicate model_id in model-pricing.json: {model_id}")
+        by_id[model_id] = model
+    return data, by_id
+
+
+MODEL_PRICING_CATALOG, MODEL_PRICING_BY_ID = load_model_pricing_catalog()
+
+
+def model_catalog_entry(model_id):
+    try:
+        return MODEL_PRICING_BY_ID[model_id]
+    except KeyError as exc:
+        raise KeyError(f"Model is missing from canonical pricing catalog: {model_id}") from exc
+
+
+def active_standard_price(model_id, on_date=None):
+    model = model_catalog_entry(model_id)
+    schedule = model.get("pricing", {}).get("standard", [])
+    target = on_date or datetime.now(timezone.utc).date()
+    if isinstance(target, str):
+        target = datetime.fromisoformat(target).date()
+
+    for period in schedule:
+        start = datetime.fromisoformat(period["start"]).date()
+        end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+        if target >= start and (end is None or target <= end):
+            return period
+    raise RuntimeError(f"No Standard pricing period for {model_id} on {target.isoformat()}")
+
+
+def effective_standard_price(model_id, input_tokens=0, on_date=None):
+    model = model_catalog_entry(model_id)
+    rates = dict(active_standard_price(model_id, on_date))
+    long_context = model.get("pricing", {}).get("long_context")
+    if long_context and input_tokens > int(long_context["threshold_input_tokens"]):
+        multipliers = long_context["multipliers"]
+        for key in ("input", "cached_input", "cache_write", "output"):
+            if key in rates and key in multipliers:
+                rates[key] = rates[key] * multipliers[key]
+        rates["long_context_applied"] = True
+    else:
+        rates["long_context_applied"] = False
+    return rates
+
+
+def catalog_price_label(value):
+    value = float(value)
+    if value >= 1:
+        return f"${value:,.2f}"
+    rendered = f"{value:.4f}".rstrip("0").rstrip(".")
+    if "." not in rendered:
+        rendered += ".00"
+    else:
+        whole, fraction = rendered.split(".", 1)
+        rendered = whole + "." + fraction.ljust(2, "0")
+    return "$" + rendered
+
+
+def catalog_reference_variant(variant):
+    model = model_catalog_entry(variant["model_id"])
+    price = active_standard_price(variant["model_id"])
+    cutoff = model.get("knowledge_cutoff")
+    if cutoff and len(cutoff) == 10:
+        cutoff = datetime.fromisoformat(cutoff).strftime("%b %-d, %Y")
+    elif cutoff and len(cutoff) == 7:
+        cutoff = datetime.fromisoformat(cutoff + "-01").strftime("%b %Y")
+    else:
+        cutoff = cutoff or "Not listed"
+
+    return {
+        **variant,
+        "context": f'{int(model["context_window"]):,}',
+        "max_output": f'{int(model["max_output"]):,}',
+        "knowledge_cutoff": cutoff,
+        "input_price": catalog_price_label(price["input"]),
+        "cached_price": catalog_price_label(price["cached_input"]),
+        "output_price": catalog_price_label(price["output"]),
+        "source": model["official_sources"][0],
+    }
+
+
+def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, cached_input_tokens=0, on_date=None, pricing_input_tokens=None):
+    uncached_input_tokens = int(uncached_input_tokens)
+    cached_input_tokens = int(cached_input_tokens)
+    output_tokens = int(output_tokens)
+    if min(uncached_input_tokens, cached_input_tokens, output_tokens) < 0:
+        raise ValueError("Token counts must be non-negative")
+
+    total_input_tokens = uncached_input_tokens + cached_input_tokens
+    tier_input_tokens = total_input_tokens if pricing_input_tokens is None else int(pricing_input_tokens)
+    if tier_input_tokens < 0:
+        raise ValueError("pricing_input_tokens must be non-negative")
+    rates = effective_standard_price(model_id, tier_input_tokens, on_date)
+    cost = (
+        uncached_input_tokens / 1_000_000 * rates["input"]
+        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + output_tokens / 1_000_000 * rates["output"]
+    )
+    return cost, rates
+
+
+def catalog_money(value, precision=4):
+    rendered = f"{float(value):,.{precision}f}".rstrip("0").rstrip(".")
+    return "$" + (rendered or "0")
+
+
+def catalog_display_model(model_id, **overrides):
+    model = model_catalog_entry(model_id)
+    price = active_standard_price(model_id)
+    cutoff = model.get("knowledge_cutoff")
+    if cutoff and len(cutoff) == 10:
+        cutoff = datetime.fromisoformat(cutoff).strftime("%b %-d, %Y")
+    elif cutoff and len(cutoff) == 7:
+        cutoff = datetime.fromisoformat(cutoff + "-01").strftime("%b %Y")
+    else:
+        cutoff = cutoff or "Not listed"
+
+    cache_write = None
+    if "cache_write" in price:
+        cache_write = catalog_price_label(price["cache_write"])
+    elif "cache_write_5m" in price:
+        one_hour = price.get("cache_write_1h")
+        cache_write = catalog_price_label(price["cache_write_5m"])
+        if one_hour is not None:
+            cache_write += " / " + catalog_price_label(one_hour)
+
+    row = {
+        "name": model["model"],
+        "provider": model["provider"],
+        "model_id": model["model_id"],
+        "positioning": model["positioning"],
+        "context": f'{int(model["context_window"]):,}',
+        "max_output": f'{int(model["max_output"]):,}',
+        "knowledge_cutoff": cutoff,
+        "input_price": catalog_price_label(price["input"]),
+        "cached_price": catalog_price_label(price["cached_input"]),
+        "cache_write": cache_write or "—",
+        "output_price": catalog_price_label(price["output"]),
+        "source": model["official_sources"][0],
+        "sxf_url": model["sxf_url"],
+    }
+    row.update(overrides)
+    return row
 
 def parse_date(value):
     if not value:
@@ -347,6 +501,7 @@ BRIEF_DIR = ROOT / "brief"
 COMPARE_DIR = ROOT / "compare"
 GUIDES_DIR = ROOT / "guides"
 SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
+PRICING_DIR = ROOT / "models" / "pricing"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
@@ -787,39 +942,18 @@ MODEL_REFERENCE = {
                 "model_id": "gpt-5.6-sol",
                 "positioning": "Flagship capability",
                 "best_for": "Complex professional work, coding, research, computer use and demanding agentic workflows",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$4.00",
-                "cached_price": "$0.40",
-                "output_price": "$20.00",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
             },
             {
                 "name": "GPT-5.6 Terra",
                 "model_id": "gpt-5.6-terra",
                 "positioning": "Intelligence / cost balance",
                 "best_for": "Everyday production workloads that need strong reasoning at a lower unit cost than Sol",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$2.00",
-                "cached_price": "$0.20",
-                "output_price": "$12.00",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
             },
             {
                 "name": "GPT-5.6 Luna",
                 "model_id": "gpt-5.6-luna",
                 "positioning": "Efficiency / volume",
                 "best_for": "Cost-sensitive, high-volume and latency-conscious workloads",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$0.20",
-                "cached_price": "$0.02",
-                "output_price": "$1.20",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
             },
         ],
         "sources": [
@@ -853,42 +987,21 @@ MODEL_REFERENCE = {
                 "model_id": "gpt-6-astra",
                 "positioning": "Highest capability",
                 "best_for": "Complex reasoning, coding, computer use, research and document creation",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Apr 30, 2026",
-                "input_price": "$10.00",
-                "cached_price": "$1.00",
-                "output_price": "$50.00",
                 "released": "Sep 3, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
             },
             {
                 "name": "GPT-6 Sol",
                 "model_id": "gpt-6-sol",
                 "positioning": "Capability / cost balance",
                 "best_for": "Complex coding and agentic workflows",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Apr 20, 2026",
-                "input_price": "$2.00",
-                "cached_price": "$0.20",
-                "output_price": "$10.00",
                 "released": "Sep 22, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
             },
             {
                 "name": "GPT-6 Luna",
                 "model_id": "gpt-6-luna",
                 "positioning": "Efficiency",
                 "best_for": "Focused, high-volume and cost-sensitive workloads",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "May 18, 2026",
-                "input_price": "$0.10",
-                "cached_price": "$0.01",
-                "output_price": "$0.50",
                 "released": "Sep 22, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
             },
         ],
         "sources": [
@@ -919,7 +1032,7 @@ def model_reference(name):
 def gpt56_reference_html():
     ref = MODEL_REFERENCE["GPT-5.6"]
     verified = datetime.now(timezone.utc).date().isoformat()
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     source_links = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
         for label, url in ref["sources"]
@@ -1091,6 +1204,11 @@ def gpt56_reference_html():
 def claude_opus_55_reference_html():
     ref = MODEL_REFERENCE["Claude Opus 5.5"]
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("claude-opus-5-5")
+    standard = active_standard_price("claude-opus-5-5")
+    fable = catalog_display_model("claude-fable-5-1")
+    sonnet = catalog_display_model("claude-sonnet-5")
+    haiku = catalog_display_model("claude-haiku-4-5-20251001")
     sources = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
         for label, url in ref["sources"]
@@ -1110,11 +1228,11 @@ def claude_opus_55_reference_html():
         </div>
         <div class="model-fact-grid">
           <div><span>MODEL ID</span><strong>claude-opus-5-5</strong></div>
-          <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
-          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>standard API tokens</small></div>
-          <div><span>KNOWLEDGE CUTOFF</span><strong>Jun 2026</strong></div>
-          <div><span>STANDARD INPUT</span><strong>$4</strong><small>/ 1M tokens</small></div>
-          <div><span>STANDARD OUTPUT</span><strong>$20</strong><small>/ 1M tokens</small></div>
+          <div><span>CONTEXT WINDOW</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+          <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>standard API tokens</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(catalog["knowledge_cutoff"])}</strong></div>
+          <div><span>STANDARD INPUT</span><strong>{escape(catalog["input_price"])}</strong><small>/ 1M tokens</small></div>
+          <div><span>STANDARD OUTPUT</span><strong>{escape(catalog["output_price"])}</strong><small>/ 1M tokens</small></div>
         </div>
       </div>
 
@@ -1124,23 +1242,23 @@ def claude_opus_55_reference_html():
           <article class="model-family-card">
             <span>HIGHEST AVAILABLE CAPABILITY</span><h3>Claude Fable 5.1</h3>
             <p>Anthropic’s highest-capability generally available model for demanding reasoning and long-horizon agentic work.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
-            <div class="model-family-price"><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(fable["context"])} context · {escape(fable["max_output"])} output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>{escape(fable["input_price"])}</strong><small>input / 1M</small><strong>{escape(fable["output_price"])}</strong><small>output / 1M</small></div>
           </article>
           <article class="model-family-card">
             <span>CURRENT OPUS / START HERE</span><h3>Claude Opus 5.5</h3>
             <p>Built for long-running agentic coding and knowledge work. Anthropic recommends it as the starting point for most complex workloads.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking always on · default effort medium</small></div>
-            <div class="model-family-price"><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(catalog["context"])} context · {escape(catalog["max_output"])} output</b><small>Adaptive thinking always on · default effort medium</small></div>
+            <div class="model-family-price"><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></div>
           </article>
           <article class="model-family-card">
             <span>SPEED / CAPABILITY BALANCE</span><h3>Claude Sonnet 5</h3>
             <p>Designed for everyday coding, agentic and enterprise workloads where latency and unit economics matter more.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
-            <div class="model-family-price"><strong>$2</strong><small>input / 1M</small><strong>$10</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(sonnet["context"])} context · {escape(sonnet["max_output"])} output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>{escape(sonnet["input_price"])}</strong><small>input / 1M</small><strong>{escape(sonnet["output_price"])}</strong><small>output / 1M</small></div>
           </article>
         </div>
-        <p class="reference-note">Claude Haiku 4.5 remains the lower-cost, lower-latency tier at $1 input / $5 output per 1M tokens with a 200K context window.</p>
+        <p class="reference-note">Claude Haiku 4.5 remains the lower-cost, lower-latency tier at {escape(haiku["input_price"])} input / {escape(haiku["output_price"])} output per 1M tokens with a {escape(haiku["context"])}-token context window.</p>
       </section>
 
       <section class="model-deep-section model-split">
@@ -1188,11 +1306,11 @@ def claude_opus_55_reference_html():
       <section class="model-deep-section">
         <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Opus 5.5 API pricing.</h2><p>Anthropic’s current token pricing separates ordinary inference, prompt caching, batch processing and Fast mode.</p></div>
         <div class="model-price-grid">
-          <article><span>STANDARD</span><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></article>
-          <article><span>PROMPT CACHE</span><strong>$0.20</strong><small>cache read / 1M</small><strong>$5</strong><small>5-minute cache write / 1M</small></article>
-          <article><span>FAST MODE</span><strong>$8</strong><small>input / 1M</small><strong>$40</strong><small>output / 1M</small></article>
+          <article><span>STANDARD</span><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></article>
+          <article><span>PROMPT CACHE</span><strong>{escape(catalog["cached_price"])}</strong><small>cache read / 1M</small><strong>{escape(catalog_price_label(standard["cache_write_5m"]))}</strong><small>5-minute cache write / 1M</small></article>
+          <article><span>FAST MODE</span><strong>{escape(catalog_price_label(standard["input"] * 2))}</strong><small>input / 1M</small><strong>{escape(catalog_price_label(standard["output"] * 2))}</strong><small>output / 1M</small></article>
         </div>
-        <div class="model-caveat"><strong>One-hour cache writes</strong><p>The official model page lists 1-hour cache writes at $8 per million tokens. Cache economics can matter significantly for long-running agents that repeatedly reuse a large stable prompt or repository context.</p></div>
+        <div class="model-caveat"><strong>One-hour cache writes</strong><p>The official model page lists 1-hour cache writes at {escape(catalog_price_label(standard["cache_write_1h"]))} per million tokens. Cache economics can matter significantly for long-running agents that repeatedly reuse a large stable prompt or repository context.</p></div>
         <div class="model-caveat"><strong>Batch API</strong><p>Anthropic lists a 50% discount on input and output for Batch API workloads. Opus 5.5 also supports a beta 300K maximum output in Batch API, above the normal 128K output limit.</p></div>
         <div class="model-caveat"><strong>US-only inference</strong><p>Anthropic states that US-only inference is available at 1.1× standard input and output pricing for workloads with that residency requirement.</p></div>
       </section>
@@ -1202,7 +1320,7 @@ def claude_opus_55_reference_html():
         <div class="model-api-grid">
           <div><span>WHERE</span><strong>Claude Code + Claude Platform</strong><p>Anthropic currently offers Fast mode for Opus 5.5 in Claude Code and through the Claude Platform.</p></div>
           <div><span>SPEED</span><strong>Up to 2.5× faster</strong><p>The advertised improvement is output speed, not a separate capability tier. Real end-to-end gains still depend on tools, network latency and task structure.</p></div>
-          <div><span>PRICE</span><strong>$8 input / $40 output</strong><p>Fast mode doubles the standard per-token rates, so it makes the most sense when wall-clock latency is worth more than the extra inference cost.</p></div>
+          <div><span>PRICE</span><strong>{escape(catalog_price_label(standard["input"] * 2))} input / {escape(catalog_price_label(standard["output"] * 2))} output</strong><p>Fast mode doubles the standard per-token rates, so it makes the most sense when wall-clock latency is worth more than the extra inference cost.</p></div>
         </div>
       </section>
 
@@ -1297,7 +1415,7 @@ def model_reference_html(name):
     if not ref:
         return ""
 
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     selected = next((v for v in variants if v["name"].lower() == name.lower()), None)
     focus = selected or None
     verified = datetime.now(timezone.utc).date().isoformat()
@@ -1434,6 +1552,7 @@ def model_groups(items):
 def tracked_models_html(items):
     groups = model_groups(items)
     cards = [
+        '<a class="tracked-model" href="/models/pricing/"><span>DB</span><strong>Model Pricing</strong><small>API rates & calculator</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/claude-fable-5-1/"><span>REF</span><strong>Claude Fable 5.1</strong><small>Model reference</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/gemini-3-8-flash/"><span>REF</span><strong>Gemini 3.8 Flash</strong><small>Model reference</small><b>↗</b></a>'
     ]
@@ -1530,7 +1649,7 @@ def page_footer():
           <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
-          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
           <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
           <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
         </nav>
@@ -1786,6 +1905,9 @@ def claude_fable_51_reference_html(items):
     title = "Claude Fable 5.1 — Pricing, Context Window, API & Benchmarks | SXF / AI"
     description = "Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability."
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("claude-fable-5-1")
+    standard = active_standard_price("claude-fable-5-1")
+    cache_share = standard["cached_input"] / standard["input"] * 100
 
     faq_data = [
         ("What is Claude Fable 5.1?", "Claude Fable 5.1 is Anthropic’s highest-capability model generally available to all customers. It is designed for demanding reasoning, long-horizon agentic work, coding, research and complex knowledge work."),
@@ -1857,8 +1979,8 @@ def claude_fable_51_reference_html(items):
         <h1>Claude Fable 5.1<br><span>model reference.</span></h1>
         <p>{escape(description)}</p>
         <div class="collection-stats">
-          <div><strong>1,000,000</strong><span>context tokens</span></div>
-          <div><strong>128,000</strong><span>max output</span></div>
+          <div><strong>{escape(catalog["context"])}</strong><span>context tokens</span></div>
+          <div><strong>{escape(catalog["max_output"])}</strong><span>max output</span></div>
           <div><strong>September 1, 2026</strong><span>released</span></div>
         </div>
       </section>
@@ -1875,10 +1997,10 @@ def claude_fable_51_reference_html(items):
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>claude-fable-5-1</strong></div>
             <div><span>STATUS</span><strong>Active / latest</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens</small></div>
-            <div><span>STANDARD INPUT</span><strong>$10</strong><small>/ 1M tokens</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>$50</strong><small>/ 1M tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>tokens</small></div>
+            <div><span>STANDARD INPUT</span><strong>{escape(catalog["input_price"])}</strong><small>/ 1M tokens</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>{escape(catalog["output_price"])}</strong><small>/ 1M tokens</small></div>
           </div>
         </div>
 
@@ -1963,11 +2085,11 @@ def claude_fable_51_reference_html(items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Fable 5.1 API pricing.</h2><p>Standard token prices are unchanged from Fable 5, but prompt caching is materially cheaper.</p></div>
           <div class="model-price-grid">
-            <article><span>STANDARD TOKENS</span><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></article>
-            <article><span>PROMPT CACHE</span><strong>$0.25</strong><small>cache read / 1M</small><strong>$12.50</strong><small>5-minute write / 1M</small></article>
-            <article><span>LONGER CACHE</span><strong>$20</strong><small>1-hour cache write / 1M</small><strong>50%</strong><small>Batch API token discount</small></article>
+            <article><span>STANDARD TOKENS</span><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></article>
+            <article><span>PROMPT CACHE</span><strong>{escape(catalog["cached_price"])}</strong><small>cache read / 1M</small><strong>{escape(catalog_price_label(standard["cache_write_5m"]))}</strong><small>5-minute write / 1M</small></article>
+            <article><span>LONGER CACHE</span><strong>{escape(catalog_price_label(standard["cache_write_1h"]))}</strong><small>1-hour cache write / 1M</small><strong>50%</strong><small>Batch API token discount</small></article>
           </div>
-          <div class="model-caveat"><strong>Cache economics are unusually important</strong><p>At $0.25 per million tokens, Fable 5.1 cache reads are 2.5% of its standard input price. Long-running agents that reuse stable context can therefore have a very different effective cost profile from one-shot requests that repeatedly pay full input price.</p></div>
+          <div class="model-caveat"><strong>Cache economics are unusually important</strong><p>At {escape(catalog["cached_price"])} per million tokens, Fable 5.1 cache reads are {cache_share:g}% of its standard input price. Long-running agents that reuse stable context can therefore have a very different effective cost profile from one-shot requests that repeatedly pay full input price.</p></div>
           <div class="model-caveat"><strong>Thinking tokens count as output</strong><p>Always-on adaptive thinking means a difficult task can consume substantial output-token budget even when the visible final answer is short. Set max output high enough for higher effort, then measure total task cost rather than visible-response length.</p></div>
         </section>
 
@@ -2095,6 +2217,9 @@ def gemini_38_flash_reference_html(items):
     title = "Gemini 3.8 Flash — Pricing, Context Window, API & Agents | SXF / AI"
     description = "Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability."
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("gemini-3.8-flash")
+    standard_2026 = active_standard_price("gemini-3.8-flash", "2026-09-27")
+    standard_2027 = active_standard_price("gemini-3.8-flash", "2027-01-01")
     google_items = [item for item in items if item["source"] == "Google AI"][:6]
     google_rows = "".join(signal_row(item) for item in google_items)
 
@@ -2167,7 +2292,7 @@ def gemini_38_flash_reference_html(items):
         <p>{escape(description)}</p>
         <div class="collection-stats">
           <div><strong>GA</strong><span>production status</span></div>
-          <div><strong>1,048,576</strong><span>input tokens</span></div>
+          <div><strong>{escape(catalog["context"])}</strong><span>input tokens</span></div>
           <div><strong>September 2, 2026</strong><span>released</span></div>
         </div>
       </section>
@@ -2184,10 +2309,10 @@ def gemini_38_flash_reference_html(items):
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>gemini-3.8-flash</strong></div>
             <div><span>STATUS</span><strong>Stable / GA</strong></div>
-            <div><span>INPUT LIMIT</span><strong>1,048,576</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>65,536</strong><small>tokens</small></div>
+            <div><span>INPUT LIMIT</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>tokens</small></div>
             <div><span>DEFAULT THINKING</span><strong>Medium</strong><small>low · medium · high</small></div>
-            <div><span>INTRO PRICE</span><strong>$0.75 / $3.75</strong><small>input / output per 1M</small></div>
+            <div><span>INTRO PRICE</span><strong>{escape(catalog_price_label(standard_2026["input"]))} / {escape(catalog_price_label(standard_2026["output"]))}</strong><small>input / output per 1M</small></div>
           </div>
         </div>
 
@@ -2249,12 +2374,12 @@ def gemini_38_flash_reference_html(items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Gemini 3.8 Flash API pricing in 2026.</h2><p>Google is running introductory pricing through December 31, 2026. Standard rates double on January 1, 2027, so long-term cost models should use the post-promotion price unless the workload is short-lived.</p></div>
           <div class="model-price-grid">
-            <article><span>STANDARD · THROUGH DEC 31</span><strong>$0.75</strong><small>input / 1M</small><strong>$3.75</strong><small>output / 1M</small></article>
+            <article><span>STANDARD · THROUGH DEC 31</span><strong>{escape(catalog_price_label(standard_2026["input"]))}</strong><small>input / 1M</small><strong>{escape(catalog_price_label(standard_2026["output"]))}</strong><small>output / 1M</small></article>
             <article><span>BATCH / FLEX · THROUGH DEC 31</span><strong>$0.375</strong><small>input / 1M</small><strong>$1.875</strong><small>output / 1M</small></article>
             <article><span>PRIORITY · THROUGH DEC 31</span><strong>$1.35</strong><small>input / 1M</small><strong>$6.75</strong><small>output / 1M</small></article>
           </div>
-          <div class="model-caveat"><strong>January 1, 2027</strong><p>Google lists Standard pricing rising to $1.50 input and $7.50 output per 1M tokens. Batch and Flex rise to $0.75 / $3.75, while Priority rises to $2.70 / $13.50.</p></div>
-          <div class="model-caveat"><strong>Context caching</strong><p>Standard cache reads are $0.075 per 1M tokens through December 31, 2026 and $0.15 starting January 1, 2027. Google separately charges cache storage per token-hour.</p></div>
+          <div class="model-caveat"><strong>January 1, 2027</strong><p>Google lists Standard pricing rising to {escape(catalog_price_label(standard_2027["input"]))} input and {escape(catalog_price_label(standard_2027["output"]))} output per 1M tokens. Batch and Flex rise to $0.75 / $3.75, while Priority rises to $2.70 / $13.50.</p></div>
+          <div class="model-caveat"><strong>Context caching</strong><p>Standard cache reads are {escape(catalog_price_label(standard_2026["cached_input"]))} per 1M tokens through December 31, 2026 and {escape(catalog_price_label(standard_2027["cached_input"]))} starting January 1, 2027. Google separately charges cache storage per token-hour.</p></div>
           <div class="model-caveat"><strong>Search and Maps grounding</strong><p>On the paid tier, Google currently includes 5,000 free Search requests per month shared across Gemini 3.x models and then charges $14 per 1,000 requests. Google Maps grounding uses a similar 5,000-prompt free allowance before paid query charges.</p></div>
         </section>
 
@@ -2777,97 +2902,63 @@ def gpt6_vs_claude_guide_html(items):
     title = "GPT-6 vs Claude in 2026: Models, Pricing, Coding, Context & API Comparison | SXF / AI"
     description = "GPT-6 vs Claude in 2026: compare Astra, Sol and Luna with Claude Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5 on pricing, context, coding, agents and APIs."
 
+    def guide_model(model_id, role, reasoning, best, internal=None):
+        model = catalog_display_model(model_id)
+        return {
+            "name": model["name"],
+            "id": model["model_id"],
+            "provider": model["provider"],
+            "role": role,
+            "context": model["context"],
+            "output": model["max_output"],
+            "input": model["input_price"],
+            "cached": model["cached_price"],
+            "output_price": model["output_price"],
+            "reasoning": reasoning,
+            "best": best,
+            "source": model["source"],
+            "internal": internal,
+        }
+
     openai_models = [
-        {
-            "name":"GPT-6 Astra","id":"gpt-6-astra","role":"Highest capability","context":"1.05M","output":"128K",
-            "input":"$10","cached":"$1","output_price":"$50","reasoning":"Low → Max",
-            "best":"Hardest end-to-end reasoning, coding, research and computer use",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-astra",
-            "internal":"/models/gpt-6-astra/"
-        },
-        {
-            "name":"GPT-6 Sol","id":"gpt-6-sol","role":"Capability / cost balance","context":"1.05M","output":"128K",
-            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"None → Max",
-            "best":"Complex coding and agentic workflows",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-sol",
-            "internal":"/models/gpt-6-sol/"
-        },
-        {
-            "name":"GPT-6 Luna","id":"gpt-6-luna","role":"Efficiency","context":"1.05M","output":"128K",
-            "input":"$0.10","cached":"$0.01","output_price":"$0.50","reasoning":"None → Max",
-            "best":"Focused, high-volume and cost-sensitive work",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-luna",
-            "internal":"/models/gpt-6-luna/"
-        },
+        guide_model("gpt-6-astra", "Highest capability", "Low → Max", "Hardest end-to-end reasoning, coding, research and computer use", "/models/gpt-6-astra/"),
+        guide_model("gpt-6-sol", "Capability / cost balance", "None → Max", "Complex coding and agentic workflows", "/models/gpt-6-sol/"),
+        guide_model("gpt-6-luna", "Efficiency", "None → Max", "Focused, high-volume and cost-sensitive work", "/models/gpt-6-luna/"),
     ]
     claude_models = [
-        {
-            "name":"Claude Fable 5.1","id":"claude-fable-5-1","role":"Demanding reasoning","context":"1M","output":"128K",
-            "input":"$10","cached":"$0.25","output_price":"$50","reasoning":"Adaptive · always on",
-            "best":"Long-horizon agentic work and demanding reasoning",
-            "source":"https://platform.claude.com/docs/en/models/fable-5-1/overview",
-            "internal":"/models/claude-fable-5-1/"
-        },
-        {
-            "name":"Claude Opus 5.5","id":"claude-opus-5-5","role":"Agentic coding / knowledge work","context":"1M","output":"128K",
-            "input":"$4","cached":"$0.20","output_price":"$20","reasoning":"Adaptive · always on",
-            "best":"Long-running agentic coding and knowledge work",
-            "source":"https://platform.claude.com/docs/en/models/opus-5-5/overview",
-            "internal":"/models/claude-opus-5-5/"
-        },
-        {
-            "name":"Claude Sonnet 5","id":"claude-sonnet-5","role":"Speed / intelligence balance","context":"1M","output":"128K",
-            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"Adaptive",
-            "best":"Everyday coding, agents, analysis and enterprise work",
-            "source":"https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5"
-        },
-        {
-            "name":"Claude Haiku 4.5","id":"claude-haiku-4-5","role":"Lowest latency / cost","context":"200K","output":"64K",
-            "input":"$1","cached":"$0.10","output_price":"$5","reasoning":"Extended thinking",
-            "best":"Real-time and high-volume cost-sensitive workloads",
-            "source":"https://platform.claude.com/docs/en/models/haiku-4-5/overview"
-        },
+        guide_model("claude-fable-5-1", "Demanding reasoning", "Adaptive · always on", "Long-horizon agentic work and demanding reasoning", "/models/claude-fable-5-1/"),
+        guide_model("claude-opus-5-5", "Agentic coding / knowledge work", "Adaptive · always on", "Long-running agentic coding and knowledge work", "/models/claude-opus-5-5/"),
+        guide_model("claude-sonnet-5", "Speed / intelligence balance", "Adaptive", "Everyday coding, agents, analysis and enterprise work"),
+        guide_model("claude-haiku-4-5-20251001", "Lowest latency / cost", "Extended thinking", "Real-time and high-volume cost-sensitive workloads"),
     ]
 
     all_models = openai_models + claude_models
     rows = "".join(
         f'''<tr>
           <th scope="row">{f'<a href="{escape(m.get("internal"), quote=True)}">{escape(m["name"])}</a>' if m.get("internal") else escape(m["name"])}<small>{escape(m["id"])}</small></th>
-          <td>{escape("OpenAI" if m in openai_models else "Anthropic")}</td>
+          <td>{escape(m["provider"])}</td>
           <td>{escape(m["role"])}</td><td>{escape(m["context"])}</td><td>{escape(m["output"])}</td>
           <td>{escape(m["reasoning"])}</td><td>{escape(m["input"])}</td><td>{escape(m["cached"])}</td><td>{escape(m["output_price"])}</td>
         </tr>'''
         for m in all_models
     )
 
-    def cost(input_rate, output_rate, in_m, out_m):
-        value = input_rate * in_m + output_rate * out_m
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
-
-    # Standard short-context example: 100K input + 10K output.
+    short_ids = [
+        "gpt-6-astra", "claude-fable-5-1", "gpt-6-sol", "claude-sonnet-5",
+        "claude-opus-5-5", "gpt-6-luna", "claude-haiku-4-5-20251001",
+    ]
     short = [
-        ("GPT-6 Astra", cost(10,50,.1,.01)),
-        ("Claude Fable 5.1", cost(10,50,.1,.01)),
-        ("GPT-6 Sol", cost(2,10,.1,.01)),
-        ("Claude Sonnet 5", cost(2,10,.1,.01)),
-        ("Claude Opus 5.5", cost(4,20,.1,.01)),
-        ("GPT-6 Luna", cost(.1,.5,.1,.01)),
-        ("Claude Haiku 4.5", cost(1,5,.1,.01)),
+        (model_catalog_entry(model_id)["model"], catalog_money(estimate_standard_cost(model_id, 100_000, 10_000)[0]))
+        for model_id in short_ids
     ]
     short_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in short)
 
-    # Long-context example: 500K input + 50K output.
-    # GPT-6 uses 2x input and 1.5x output above 272K input; Claude 1M models keep standard token pricing.
+    long_ids = ["gpt-6-astra", "claude-fable-5-1", "gpt-6-sol", "claude-sonnet-5", "claude-opus-5-5", "gpt-6-luna"]
     long = [
-        ("GPT-6 Astra", cost(20,75,.5,.05)),
-        ("Claude Fable 5.1", cost(10,50,.5,.05)),
-        ("GPT-6 Sol", cost(4,15,.5,.05)),
-        ("Claude Sonnet 5", cost(2,10,.5,.05)),
-        ("Claude Opus 5.5", cost(4,20,.5,.05)),
-        ("GPT-6 Luna", cost(.2,.75,.5,.05)),
+        (model_catalog_entry(model_id)["model"], catalog_money(estimate_standard_cost(model_id, 500_000, 50_000)[0]))
+        for model_id in long_ids
     ]
     long_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>500K input + 50K output</small></div>' for n,c in long)
-
     toc = [
         ("quick-answer","Quick answer"),
         ("family-map","GPT-6 and Claude model map"),
@@ -5074,7 +5165,7 @@ def gpt6_comparison_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
     ref = MODEL_REFERENCE["GPT-6"]
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     family_signals = [item for item in items if any(name.startswith("GPT-6") for name in extract_models(item["title"]))][:10]
 
     def money(value):
@@ -5160,43 +5251,53 @@ def gpt6_astra_vs_claude_fable_51_html(items):
     title = "GPT-6 Astra vs Claude Fable 5.1 (2026): Cost, Coding & Agents | SXF / AI"
     description = "GPT-6 Astra vs Claude Fable 5.1: compare pricing, 1M context, coding, reasoning, agents, tools, caching, long-context economics, benchmarks and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    astra = catalog_display_model(
+        "gpt-6-astra",
+        positioning="Hardest end-to-end work",
+        thinking="low · medium · high · xhigh · max",
+        modalities="Text + image input · text output",
+    )
+    fable = catalog_display_model(
+        "claude-fable-5-1",
+        positioning="Demanding reasoning and long-horizon agentic work",
+        thinking="Adaptive · always on · low → max · default high",
+        modalities="Text + image input · text output",
+    )
+    money = catalog_money
 
     short_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(20*.5 + 75*.05)}</strong><small>500K input + 50K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.5 + 50*.05)}</strong><small>500K input + 50K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>'
     ])
     cache_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(1*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(.25*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>'
     ])
     batch_cards = "".join([
         f'<div><span>GPT-6 Astra</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
         f'<div><span>Claude Fable 5.1</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>gpt-6-astra</small></th>
-      <td>OpenAI</td><td>Hardest end-to-end work</td><td>1,050,000</td><td>128,000</td>
-      <td>low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
-      <td>$10.00</td><td>$1.00</td><td>$50.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(astra["sxf_url"], quote=True)}">{escape(astra["name"])}</a><small>{escape(astra["model_id"])}</small></th>
+      <td>{escape(astra["provider"])}</td><td>{escape(astra["positioning"])}</td><td>{escape(astra["context"])}</td><td>{escape(astra["max_output"])}</td>
+      <td>{escape(astra["thinking"])}</td><td>{escape(astra["modalities"])}</td>
+      <td>{escape(astra["input_price"])}</td><td>{escape(astra["cached_price"])}</td><td>{escape(astra["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/claude-fable-5-1/">Claude Fable 5.1</a><small>claude-fable-5-1</small></th>
-      <td>Anthropic</td><td>Demanding reasoning and long-horizon agentic work</td><td>1,000,000</td><td>128,000</td>
-      <td>Adaptive · always on · low → max · default high</td><td>Text + image input · text output</td>
-      <td>$10.00</td><td>$0.25</td><td>$50.00</td>
+      <th scope="row"><a href="{escape(fable["sxf_url"], quote=True)}">{escape(fable["name"])}</a><small>{escape(fable["model_id"])}</small></th>
+      <td>{escape(fable["provider"])}</td><td>{escape(fable["positioning"])}</td><td>{escape(fable["context"])}</td><td>{escape(fable["max_output"])}</td>
+      <td>{escape(fable["thinking"])}</td><td>{escape(fable["modalities"])}</td>
+      <td>{escape(fable["input_price"])}</td><td>{escape(fable["cached_price"])}</td><td>{escape(fable["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, GPT-6 Astra or Claude Fable 5.1?", "At short-context Standard token rates, neither is cheaper: both list $10 per million input tokens and $50 per million output tokens. The economics diverge with long context and caching. OpenAI prices Astra prompts above 272K input tokens at 2x input/cache rates and 1.5x output for the full request, while Anthropic lists Fable 5.1 at standard token rates across its 1M context window. Fable also lists a lower cache-read rate of $0.25 per million tokens versus $1 for Astra."),
         ("Which has the larger context window?", "GPT-6 Astra lists a 1,050,000-token context window, while Claude Fable 5.1 lists 1,000,000 tokens. Both support up to 128,000 output tokens. The roughly 5% context difference is usually less important than pricing, retrieval, caching and tool architecture."),
@@ -5415,39 +5516,51 @@ def claude_opus_55_vs_gemini_38_flash_html(items):
     title = "Claude Opus 5.5 vs Gemini 3.8 Flash (2026) | SXF / AI"
     description = "Claude Opus 5.5 vs Gemini 3.8 Flash: compare pricing, 1M context, coding, agents, reasoning, multimodal inputs, caching, batch, fast inference and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    opus = catalog_display_model(
+        "claude-opus-5-5",
+        positioning="Long-running agentic coding and knowledge work",
+        thinking="Adaptive thinking · always on · default medium",
+        modalities="Text + image input · text output",
+    )
+    gemini = catalog_display_model(
+        "gemini-3.8-flash",
+        positioning="Long-horizon software engineering, autonomous agents and enterprise workflows",
+        thinking="low · medium · high · default medium",
+        modalities="Text + image + video + audio + PDF input · text output",
+    )
+    gemini["input_price"] += "*"
+    gemini["cached_price"] += "*"
+    gemini["output_price"] += "*"
 
     short_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(4*.1 + 20*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(4*10 + 20*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     cache_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(.20*1 + 20*.1)}</strong><small>1M cached input + 100K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.075*1 + 3.75*.1)}</strong><small>1M cached input + 100K output*</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output*</small></div>'
     ])
     batch_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(2*10 + 10*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.375*10 + 1.875*1)}</strong><small>Batch · 10M input + 1M output*</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0] * 0.5)}</strong><small>Batch · 10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0] * 0.5)}</strong><small>Batch · 10M input + 1M output*</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><small>claude-opus-5-5</small></th>
-      <td>Anthropic</td><td>Long-running agentic coding and knowledge work</td><td>1,000,000</td><td>128,000</td>
-      <td>Adaptive thinking · always on · default medium</td><td>Text + image input · text output</td>
-      <td>$4.00</td><td>$0.20</td><td>$20.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(opus["sxf_url"], quote=True)}">{escape(opus["name"])}</a><small>{escape(opus["model_id"])}</small></th>
+      <td>{escape(opus["provider"])}</td><td>{escape(opus["positioning"])}</td><td>{escape(opus["context"])}</td><td>{escape(opus["max_output"])}</td>
+      <td>{escape(opus["thinking"])}</td><td>{escape(opus["modalities"])}</td>
+      <td>{escape(opus["input_price"])}</td><td>{escape(opus["cached_price"])}</td><td>{escape(opus["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
-      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
-      <td>low · medium · high · default medium</td><td>Text + image + video + audio + PDF input · text output</td>
-      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+      <th scope="row"><a href="{escape(gemini["sxf_url"], quote=True)}">{escape(gemini["name"])}</a><small>{escape(gemini["model_id"])}</small></th>
+      <td>{escape(gemini["provider"])}</td><td>{escape(gemini["positioning"])}</td><td>{escape(gemini["context"])}</td><td>{escape(gemini["max_output"])}</td>
+      <td>{escape(gemini["thinking"])}</td><td>{escape(gemini["modalities"])}</td>
+      <td>{escape(gemini["input_price"])}</td><td>{escape(gemini["cached_price"])}</td><td>{escape(gemini["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, Claude Opus 5.5 or Gemini 3.8 Flash?",
          "At current Standard API rates through December 31, 2026, Gemini 3.8 Flash has much lower headline token prices: $0.75 input and $3.75 output per million tokens versus $4 and $20 for Claude Opus 5.5. Google states that Gemini 3.8 Flash Standard pricing doubles to $1.50 input and $7.50 output on January 1, 2027."),
@@ -5655,40 +5768,52 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
     title = "GPT-6 Sol vs Gemini 3.8 Flash (2026): Pricing & API | SXF / AI"
     description = "GPT-6 Sol vs Gemini 3.8 Flash: compare API pricing, 1M+ context, coding and agents, reasoning, multimodal inputs, tools, long-context costs and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    sol = catalog_display_model(
+        "gpt-6-sol",
+        positioning="Complex coding and agentic workflows",
+        thinking="none · low · medium · high · xhigh · max",
+        modalities="Text + image input · text output",
+    )
+    gemini = catalog_display_model(
+        "gemini-3.8-flash",
+        positioning="Long-horizon software engineering, autonomous agents and enterprise workflows",
+        thinking="low · medium · high",
+        modalities="Text + image + video + audio + PDF input · text output",
+    )
+    gemini["input_price"] += "*"
+    gemini["cached_price"] += "*"
+    gemini["output_price"] += "*"
 
     short_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(2*.1 + 10*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(2*10 + 10*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(4*.5 + 15*.05)}</strong><small>500K input + 50K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.5 + 3.75*.05)}</strong><small>500K input + 50K output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>'
     ])
     future_cards = "".join([
-        f'<div><span>100K input + 10K output</span><strong>{money(1.5*.1 + 7.5*.01)}</strong><small>Gemini from Jan 1, 2027</small></div>',
-        f'<div><span>10M input + 1M output</span><strong>{money(1.5*10 + 7.5*1)}</strong><small>Gemini from Jan 1, 2027</small></div>',
-        f'<div><span>500K input + 50K output</span><strong>{money(1.5*.5 + 7.5*.05)}</strong><small>Gemini from Jan 1, 2027</small></div>'
+        f'<div><span>100K input + 10K output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>10M input + 1M output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>500K input + 50K output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 500_000, 50_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>gpt-6-sol</small></th>
-      <td>OpenAI</td><td>Complex coding and agentic workflows</td><td>1,050,000</td><td>128,000</td>
-      <td>none · low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
-      <td>$2.00</td><td>$0.20</td><td>$10.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(sol["sxf_url"], quote=True)}">{escape(sol["name"])}</a><small>{escape(sol["model_id"])}</small></th>
+      <td>{escape(sol["provider"])}</td><td>{escape(sol["positioning"])}</td><td>{escape(sol["context"])}</td><td>{escape(sol["max_output"])}</td>
+      <td>{escape(sol["thinking"])}</td><td>{escape(sol["modalities"])}</td>
+      <td>{escape(sol["input_price"])}</td><td>{escape(sol["cached_price"])}</td><td>{escape(sol["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
-      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
-      <td>low · medium · high</td><td>Text + image + video + audio + PDF input · text output</td>
-      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+      <th scope="row"><a href="{escape(gemini["sxf_url"], quote=True)}">{escape(gemini["name"])}</a><small>{escape(gemini["model_id"])}</small></th>
+      <td>{escape(gemini["provider"])}</td><td>{escape(gemini["positioning"])}</td><td>{escape(gemini["context"])}</td><td>{escape(gemini["max_output"])}</td>
+      <td>{escape(gemini["thinking"])}</td><td>{escape(gemini["modalities"])}</td>
+      <td>{escape(gemini["input_price"])}</td><td>{escape(gemini["cached_price"])}</td><td>{escape(gemini["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, GPT-6 Sol or Gemini 3.8 Flash?", "At current Standard paid API rates through December 31, 2026, Gemini 3.8 Flash has lower headline text-token pricing: $0.75 input and $3.75 output per million tokens versus $2 and $10 for GPT-6 Sol. Google states that Gemini 3.8 Flash Standard pricing rises to $1.50 input and $7.50 output on January 1, 2027."),
         ("Which has the larger context window?", "The nominal context windows are effectively the same size: GPT-6 Sol lists 1,050,000 tokens and Gemini 3.8 Flash lists 1,048,576 input tokens. GPT-6 Sol has the larger maximum output at 128,000 tokens versus 65,536 for Gemini 3.8 Flash."),
@@ -5864,38 +5989,18 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
 def gpt6_sol_vs_claude_opus_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
-    sol = {
-        "name": "GPT-6 Sol",
-        "provider": "OpenAI",
-        "model_id": "gpt-6-sol",
-        "released": "Sep 22, 2026",
-        "positioning": "Complex coding and agentic workflows",
-        "context": "1,050,000",
-        "max_output": "128,000",
-        "knowledge_cutoff": "Apr 20, 2026",
-        "thinking": "Optional; none through max",
-        "input_price": "$2.00",
-        "cached_price": "$0.20",
-        "cache_write": "$2.50",
-        "output_price": "$10.00",
-        "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-    }
-    claude = {
-        "name": "Claude Opus 5.5",
-        "provider": "Anthropic",
-        "model_id": "claude-opus-5-5",
-        "released": "Sep 22, 2026",
-        "positioning": "Long-running agentic coding and knowledge work",
-        "context": "1,000,000",
-        "max_output": "128,000",
-        "knowledge_cutoff": "Jun 2026",
-        "thinking": "Adaptive; always on",
-        "input_price": "$4.00",
-        "cached_price": "$0.20",
-        "cache_write": "$5.00 / $8.00",
-        "output_price": "$20.00",
-        "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-    }
+    sol = catalog_display_model(
+        "gpt-6-sol",
+        released="Sep 22, 2026",
+        positioning="Complex coding and agentic workflows",
+        thinking="Optional; none through max",
+    )
+    claude = catalog_display_model(
+        "claude-opus-5-5",
+        released="Sep 22, 2026",
+        positioning="Long-running agentic coding and knowledge work",
+        thinking="Adaptive; always on",
+    )
 
     rows = "".join([
         f'''<tr><th scope="row"><a href="/models/gpt-6-sol/">{escape(sol["name"])}</a><small>{escape(sol["model_id"])}</small></th>
@@ -5906,21 +6011,17 @@ def gpt6_sol_vs_claude_opus_html(items):
         <td>{escape(claude["thinking"])}</td><td>{escape(claude["input_price"])}</td><td>{escape(claude["cached_price"])}</td><td>{escape(claude["cache_write"])}</td><td>{escape(claude["output_price"])}</td></tr>''',
     ])
 
-    def cost(input_rate, output_rate, input_m, output_m):
-        value = input_rate * input_m + output_rate * output_m
-        return ("$" + f"{value:,.3f}").rstrip("0").rstrip(".")
-
     standard_examples = [
-        ("GPT-6 Sol", cost(2, 10, .1, .01)),
-        ("Claude Opus 5.5", cost(4, 20, .1, .01)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 100_000, 10_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0], 3)),
     ]
     monthly_examples = [
-        ("GPT-6 Sol", cost(2, 10, 10, 1)),
-        ("Claude Opus 5.5", cost(4, 20, 10, 1)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0], 3)),
     ]
     long_examples = [
-        ("GPT-6 Sol", cost(4, 15, .5, .05)),
-        ("Claude Opus 5.5", cost(4, 20, .5, .05)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 500_000, 50_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 500_000, 50_000)[0], 3)),
     ]
     standard_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in standard_examples)
     monthly_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>10M input + 1M output</small></div>' for n,c in monthly_examples)
@@ -6054,6 +6155,249 @@ def brief_index_html(items, issue_date):
       <section class="brief-archive shell"><p class="eyebrow">ARCHIVE</p><div>{archive_html}</div></section>
     </main>{page_footer()}</body></html>'''
 
+def model_pricing_page_html():
+    canonical = f"{BASE_URL}/models/pricing/"
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    models = MODEL_PRICING_CATALOG["models"]
+    providers = sorted({model["provider"] for model in models})
+
+    def row_html(model):
+        price = active_standard_price(model["model_id"], verified)
+        notes = []
+        long_context = model.get("pricing", {}).get("long_context")
+        if long_context:
+            notes.append(
+                f'Long context &gt; {int(long_context["threshold_input_tokens"]):,}: '
+                f'{long_context["multipliers"]["input"]:g}× input/cache · '
+                f'{long_context["multipliers"]["output"]:g}× output'
+            )
+        schedule = model.get("pricing", {}).get("standard", [])
+        if len(schedule) > 1:
+            next_period = schedule[1]
+            notes.append(
+                f'From {escape(next_period["start"])}: '
+                f'{escape(catalog_price_label(next_period["input"]))} input · '
+                f'{escape(catalog_price_label(next_period["output"]))} output'
+            )
+        for note in model.get("notes", [])[:1]:
+            notes.append(escape(note))
+
+        note_html = "".join(f'<span class="pricing-rule">{note}</span>' for note in notes)
+        search = " ".join([
+            model["model"], model["model_id"], model["provider"], model.get("family", ""),
+            model.get("positioning", ""),
+        ]).lower()
+        source = model["official_sources"][0]
+        return f'''<tr data-pricing-row data-provider="{escape(model["provider"], quote=True)}" data-search="{escape(search, quote=True)}">
+          <th class="pricing-model-cell" scope="row">
+            <a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a>
+            <small>{escape(model["model_id"])}</small>
+            {note_html}
+          </th>
+          <td>{escape(model["provider"])}</td>
+          <td>{int(model["context_window"]):,}<small>tokens</small></td>
+          <td>{int(model["max_output"]):,}<small>tokens</small></td>
+          <td class="price">{escape(catalog_price_label(price["input"]))}</td>
+          <td class="price">{escape(catalog_price_label(price["cached_input"]))}</td>
+          <td class="price">{escape(catalog_price_label(price["output"]))}</td>
+          <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr>'''
+
+    rows = "".join(row_html(model) for model in models)
+    filter_buttons = ['<button class="pricing-filter is-active" type="button" data-pricing-filter="all">All</button>'] + [
+        f'<button class="pricing-filter" type="button" data-pricing-filter="{escape(provider, quote=True)}">{escape(provider)}</button>'
+        for provider in providers
+    ]
+
+    faq = [
+        (
+            "What pricing does the SXF model database use?",
+            "The table normalizes vendor-listed Standard API token pricing in USD per one million tokens. It does not mix Batch, Flex, Fast, Priority, regional, enterprise, or negotiated pricing into the headline rates."
+        ),
+        (
+            "Does the calculator include tool or grounding charges?",
+            "No. The calculator estimates direct text-token charges only. Search, grounding, code execution, tools, cache storage, regional uplifts, and other add-on charges are excluded unless they are explicitly represented as token rates."
+        ),
+        (
+            "How does long-context pricing work for OpenAI models in this database?",
+            "For cataloged OpenAI models with a long-context rule, requests above 272,000 total input tokens use the published higher input, cache, and output rates for the full request. The calculator applies that rule automatically."
+        ),
+        (
+            "Why does Gemini 3.8 Flash show a future price change?",
+            "Google published introductory Standard pricing through December 31, 2026 and higher Standard pricing beginning January 1, 2027. The calculator selects the stored pricing period from the billing date."
+        ),
+    ]
+    faq_html = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in faq
+    )
+
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical + "#webpage",
+                "url": canonical,
+                "name": "AI Model Pricing & API Specs Database | SXF / AI",
+                "description": "Normalized Standard API pricing, context windows and output limits for selected OpenAI, Anthropic and Google AI models, with an interactive token-cost calculator.",
+                "dateModified": verified,
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "about": {"@type": "Thing", "name": "AI model API pricing"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "Dataset",
+                "@id": canonical + "#dataset",
+                "name": MODEL_PRICING_CATALOG["name"],
+                "description": MODEL_PRICING_CATALOG["description"],
+                "dateModified": verified,
+                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "distribution": {
+                    "@type": "DataDownload",
+                    "encodingFormat": "application/json",
+                    "contentUrl": f"{BASE_URL}/data/model-pricing.json",
+                },
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
+                    {"@type": "ListItem", "position": 3, "name": "Pricing", "item": canonical},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                    for question, answer in faq
+                ],
+            },
+        ],
+    }
+
+    description = (
+        "Compare Standard API token pricing, cached-input rates, context windows and output limits "
+        "for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculator."
+    )
+    head = page_head("AI Model Pricing & API Specs Database | SXF / AI", description, canonical, schema)
+    head = head.replace("</head>", '      <link rel="stylesheet" href="/models/pricing/pricing.css" />\n    </head>')
+    return f'''<!doctype html><html lang="en">{head}
+    <body class="intel-page pricing-page">
+      <a class="skip-link" href="#pricing-main">Skip to model pricing</a>
+      {page_header("models")}
+      <main id="pricing-main">
+        <section class="pricing-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Pricing</span></nav>
+          <div class="pricing-hero-grid">
+            <div>
+              <p class="eyebrow">MODEL ECONOMICS / VERIFIED {escape(verified)}</p>
+              <h1>Model pricing.<br><span>Normalized.</span></h1>
+            </div>
+            <div class="pricing-hero-copy">
+              <p>One source-backed view of Standard API token pricing and core limits across selected frontier models. Compare rates, inspect pricing rules and estimate a request without mixing incompatible service tiers.</p>
+              <div class="pricing-hero-actions">
+                <a class="primary-cta" href="#calculator">Calculate cost <span>↓</span></a>
+                <a class="secondary-cta" href="/data/model-pricing.json">Open JSON dataset</a>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-meta-strip">
+            <div><span>MODELS</span><strong>{len(models)}</strong></div>
+            <div><span>PROVIDERS</span><strong>{len(providers)}</strong></div>
+            <div><span>BASELINE</span><strong>Standard API</strong></div>
+            <div><span>UNIT</span><strong>USD / 1M tokens</strong></div>
+          </div>
+        </section>
+
+        <section class="pricing-section shell" aria-labelledby="pricing-table-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">PRICING DATABASE</p><h2 id="pricing-table-title">Compare the published baseline.</h2></div>
+            <p>Rates below reflect the catalog's verified Standard period. Model-specific long-context or scheduled-rate changes are called out in the model row.</p>
+          </div>
+          <div class="pricing-toolbar">
+            <label class="pricing-search"><span class="sr-only">Search models</span><input id="pricingSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
+            <div class="pricing-filters" aria-label="Filter pricing table">{"".join(filter_buttons)}</div>
+          </div>
+          <div class="pricing-table-wrap">
+            <table class="pricing-table">
+              <caption class="sr-only">Standard API token pricing and model limits</caption>
+              <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Source</th></tr></thead>
+              <tbody>{rows}</tbody>
+            </table>
+          </div>
+          <div id="pricingEmpty" class="pricing-empty" hidden>No models match this filter.</div>
+          <div class="pricing-source-note">
+            <span>Catalog verified {escape(verified)}. Promotional or scheduled rates can change; the official vendor documentation remains the final billing authority.</span>
+            <a href="/data/model-pricing.json">Machine-readable JSON ↗</a>
+          </div>
+        </section>
+
+        <section id="calculator" class="pricing-section shell" aria-labelledby="calculator-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">TOKEN COST CALCULATOR</p><h2 id="calculator-title">Estimate one workload.</h2></div>
+            <p>Enter uncached input, cached input and output tokens. The calculator selects the Standard pricing period by date and applies stored long-context rules automatically.</p>
+          </div>
+          <div class="pricing-calculator-shell">
+            <article class="pricing-calculator">
+              <p class="pricing-label">WORKLOAD INPUT</p>
+              <h3>Request assumptions.</h3>
+              <p>Direct token charges only. Tool calls, storage, regional pricing and non-Standard tiers are excluded.</p>
+              <div class="pricing-form">
+                <label class="pricing-field"><span>Model</span><select id="pricingModel" aria-label="Model"></select></label>
+                <label class="pricing-field"><span>Billing date</span><input id="pricingDate" type="date" value="{escape(verified, quote=True)}"></label>
+                <div class="pricing-token-grid">
+                  <label class="pricing-field"><span>Uncached input</span><input id="pricingInput" type="number" min="0" step="1000" value="100000" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Cached input</span><input id="pricingCached" type="number" min="0" step="1000" value="0" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Output</span><input id="pricingOutput" type="number" min="0" step="1000" value="10000" inputmode="numeric"></label>
+                </div>
+                <div class="pricing-presets" aria-label="Calculator presets">
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="500000" data-cached="0" data-output="50000">500K + 50K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="0" data-cached="1000000" data-output="100000">1M cached + 100K</button>
+                </div>
+              </div>
+            </article>
+            <article class="pricing-result" aria-live="polite">
+              <p class="pricing-label">ESTIMATED DIRECT TOKEN COST</p>
+              <h3>Standard API estimate.</h3>
+              <p>Calculated from the same public catalog used to render the table above.</p>
+              <div class="pricing-total"><span>ESTIMATED TOTAL</span><strong id="pricingTotal">—</strong></div>
+              <div class="pricing-breakdown">
+                <div><span>Uncached input</span><strong id="pricingInputCost">—</strong></div>
+                <div><span>Cached input</span><strong id="pricingCachedCost">—</strong></div>
+                <div><span>Output</span><strong id="pricingOutputCost">—</strong></div>
+              </div>
+              <div id="pricingRateProfile" class="pricing-rate-profile">Loading pricing dataset…</div>
+              <div id="pricingWarning" class="pricing-warning" hidden></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="pricing-section shell">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">METHODOLOGY</p><h2>Comparable first. Caveats visible.</h2></div>
+            <p>SXF separates directly comparable Standard token rates from service tiers and add-ons that can change the bill but are not equivalent across providers.</p>
+          </div>
+          <div class="pricing-method-grid">
+            <article><span>01 / NORMALIZE</span><h3>One unit.</h3><p>Headline token rates are normalized to USD per one million tokens. Cached input stays separate from ordinary input.</p></article>
+            <article><span>02 / APPLY RULES</span><h3>Request shape matters.</h3><p>Stored long-context rules and dated pricing schedules are applied from the canonical dataset instead of being retyped into the calculator.</p></article>
+            <article><span>03 / EXCLUDE</span><h3>Do not mix tiers.</h3><p>Batch, Flex, Fast, Priority, tools, grounding, storage, regional uplifts and negotiated pricing remain outside the headline calculator.</p></article>
+          </div>
+        </section>
+
+        <section class="model-faq shell pricing-section">
+          <div class="intel-section-head"><div><p class="eyebrow">PRICING FAQ</p><h2>How to read the database.</h2></div><a href="/models/">All models ↗</a></div>
+          {faq_html}
+        </section>
+      </main>
+      {page_footer()}
+      <script src="/models/pricing/pricing.js" defer></script>
+    </body></html>'''
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -6061,8 +6405,10 @@ def build_discovery_pages(items, current_items):
     COMPARE_DIR.mkdir(parents=True, exist_ok=True)
     GUIDES_DIR.mkdir(parents=True, exist_ok=True)
     SUPERINTELLIGENCE_DIR.mkdir(parents=True, exist_ok=True)
+    PRICING_DIR.mkdir(parents=True, exist_ok=True)
 
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
+    (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
@@ -6169,6 +6515,7 @@ def update_sitemap(items):
     rows = [
         sitemap_entry(f"{BASE_URL}/", global_lastmod),
         sitemap_entry(f"{BASE_URL}/models/", content_lastmod(model_collection_items, category_lastmod["Models"])),
+        sitemap_entry(f"{BASE_URL}/models/pricing/", MODEL_PRICING_CATALOG["source_verified"]),
         sitemap_entry(f"{BASE_URL}/tools/", category_lastmod["Tools"]),
         sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
         sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
