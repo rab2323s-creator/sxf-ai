@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T17:00:52.758565Z",
+  "updated_at": "2026-09-27T17:22:15.799571Z",
   "items": [
     {
       "title": "Enterprise managed settings in-product validator",
@@ -958,8 +958,11 @@
   "scoring_version": "sxf-signal-score-v2",
   "topic_relevance_version": "sxf-topic-relevance-v1",
   "source_expansion_version": "sxf-source-expansion-v1",
+  "source_lifecycle_version": "sxf-source-lifecycle-v1",
   "source_health": {
-    "configured": 5,
+    "configured": 9,
+    "publishing_configured": 5,
+    "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
       "OpenAI": 78,
       "Google AI": 18,
@@ -973,6 +976,140 @@
       "Hugging Face": 9,
       "GitHub": 18,
       "Google Research": 3
+    },
+    "sources": {
+      "OpenAI": {
+        "status": "live",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 1230,
+        "accepted_candidate_count": 1230,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 39,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      },
+      "Google AI": {
+        "status": "live",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 20,
+        "accepted_candidate_count": 20,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 11,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      },
+      "Hugging Face": {
+        "status": "live",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 868,
+        "accepted_candidate_count": 868,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 9,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      },
+      "GitHub": {
+        "status": "live",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 10,
+        "accepted_candidate_count": 10,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 18,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      },
+      "Google Research": {
+        "status": "live",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 100,
+        "accepted_candidate_count": 65,
+        "rejected_candidate_count": 35,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 35,
+        "quality_rejection_count": 0,
+        "publish_count": 3,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      },
+      "Anthropic": {
+        "status": "shadow",
+        "fetch_success": false,
+        "fetch_failure": false,
+        "parsed_candidate_count": 0,
+        "accepted_candidate_count": 0,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 0,
+        "last_successful_fetch": null,
+        "errors": [
+          "No verified automated feed adapter configured"
+        ]
+      },
+      "Meta": {
+        "status": "shadow",
+        "fetch_success": false,
+        "fetch_failure": false,
+        "parsed_candidate_count": 0,
+        "accepted_candidate_count": 0,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 0,
+        "last_successful_fetch": null,
+        "errors": [
+          "No verified automated feed adapter configured"
+        ]
+      },
+      "xAI": {
+        "status": "shadow",
+        "fetch_success": false,
+        "fetch_failure": false,
+        "parsed_candidate_count": 0,
+        "accepted_candidate_count": 0,
+        "rejected_candidate_count": 0,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 0,
+        "quality_rejection_count": 0,
+        "publish_count": 0,
+        "last_successful_fetch": null,
+        "errors": [
+          "No verified automated feed adapter configured"
+        ]
+      },
+      "Microsoft": {
+        "status": "shadow",
+        "fetch_success": true,
+        "fetch_failure": false,
+        "parsed_candidate_count": 10,
+        "accepted_candidate_count": 9,
+        "rejected_candidate_count": 8,
+        "duplicate_count": 0,
+        "relevance_rejection_count": 1,
+        "quality_rejection_count": 7,
+        "publish_count": 0,
+        "last_successful_fetch": "2026-09-27T17:22:13.929512Z",
+        "errors": []
+      }
     },
     "errors": []
   }
