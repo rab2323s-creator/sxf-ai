@@ -2633,7 +2633,7 @@ def topic_page_html(topic, items):
     elif topic["slug"] == "coding-ai":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
     elif topic["slug"] == "ai-agents":
-        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>BUILDING AGENTS</span><p>Design orchestrators, specialist agents, MCP tools, memory, verification and human approval as one production system.</p><div class="tool-links"><a href="/guides/how-to-build-ai-super-agent/">Build a super agent ↗</a></div></article><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
     return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
@@ -4616,6 +4616,7 @@ def best_ai_agents_guide_html(items):
               <p>ChatGPT Work's scheduled and triggered tasks make it capable of recurring work too. The architectural distinction is that Zapier begins with workflow infrastructure and adds agent judgment, while Work begins with a general agent and expands into recurring execution.</p>
               <h3>When should you use a workflow instead of an agent?</h3>
               <p>If every step and branch is known in advance, deterministic automation is easier to test and cheaper to govern. Add an agent where the workflow requires interpretation, tool selection, unstructured data or recovery from variable inputs.</p>
+              <p>The same boundary helps decide whether to buy an existing agent product or build a custom agent system. If your workload needs its own orchestrator, specialist agents, memory, MCP/tool routing and verification logic, use SXF's <a href="/guides/how-to-build-ai-super-agent/">How to Build an AI Super Agent</a> guide as the architecture path; if not, a simpler workflow or one of the products above is usually easier to operate.</p>
             </section>
 
             <section id="coding">
@@ -4922,6 +4923,7 @@ def ai_super_agents_guide_html(items):
               </div>
               <h3>The planner should not do everything</h3>
               <p>A common design mistake is using the strongest model for every step. A better super agent can route: a high-capability model may plan the workflow, a small model may classify hundreds of records, a predictive system may estimate risk, a deterministic rule engine may enforce policy and a specialized agent may execute a domain task. H2O's public architecture explicitly combines generative, predictive and agentic AI in this way.</p>
+              <p>If you are moving from the concept to implementation, the next problem is architectural: how to define the orchestrator, choose between handoffs and manager-controlled specialists, structure memory, expose tools through MCP, and verify the final outcome. SXF's <a href="/guides/how-to-build-ai-super-agent/">How to Build an AI Super Agent</a> guide walks through that production design step by step.</p>
             </section>
 
             <section id="examples">

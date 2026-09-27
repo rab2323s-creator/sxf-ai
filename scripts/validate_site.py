@@ -453,6 +453,19 @@ def validate_model_pricing_catalog():
 
 
 
+def validate_super_agent_internal_links():
+    target = "/guides/how-to-build-ai-super-agent/"
+    pages = [
+        ROOT / "guides" / "ai-super-agents" / "index.html",
+        ROOT / "guides" / "ai-agent-security" / "index.html",
+        ROOT / "guides" / "best-ai-agents" / "index.html",
+        ROOT / "topics" / "ai-agents" / "index.html",
+    ]
+    for path in pages:
+        if target not in path.read_text(encoding="utf-8"):
+            fail(f"Missing contextual internal link to super-agent build guide: {path.relative_to(ROOT)}")
+
+
 def validate_how_to_build_super_agent():
     path = ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html"
     if not path.exists():
@@ -1111,6 +1124,7 @@ def main():
 
     validate_model_pricing_catalog()
     validate_model_history()
+    validate_super_agent_internal_links()
     validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
