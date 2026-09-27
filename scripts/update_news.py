@@ -508,6 +508,8 @@ GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
 CLAUDE_OPUS_GEMINI_COMPARE_SLUG = "claude-opus-5-5-vs-gemini-3-8-flash"
 GPT6_ASTRA_FABLE_COMPARE_SLUG = "gpt-6-astra-vs-claude-fable-5-1"
 
+TOPIC_RELEVANCE_VERSION = "sxf-topic-relevance-v1"
+
 TOPICS = [
     {
         "slug": "openai",
@@ -525,45 +527,175 @@ TOPICS = [
         "slug": "github-copilot",
         "name": "GitHub Copilot",
         "description": "Copilot product, coding workflow and developer tooling changes from GitHub.",
-        "keywords": ["copilot"],
+        "threshold": 55,
+        "strong_patterns": [r"\bcopilot\b"],
+        "source_boost": {"GitHub": 35},
     },
     {
         "slug": "ai-agents",
         "name": "AI Agents",
         "description": "Agent systems, agentic workflows, APIs and products that act across multi-step tasks.",
-        "keywords": ["agent", "agents", "agentic"],
+        "threshold": 55,
+        "strong_patterns": [
+            r"\bagentic\b",
+            r"\bagents?\b",
+        ],
+        "supporting_patterns": [
+            r"\btool (?:use|calling|approval|approvals)\b",
+            r"\bfunction calling\b",
+            r"\bmcp\b",
+            r"\bmulti[- ]step\b",
+            r"\bworkflows?\b",
+            r"\bcomputer use\b",
+            r"\blong[- ]running\b",
+            r"\bagent (?:usage|workflow|system|memory|tool|loop|task)s?\b",
+        ],
+        "category_boost": {"Tools": 5, "Research": 5},
     },
     {
         "slug": "coding-ai",
         "name": "Coding AI",
         "description": "AI coding systems, developer tools, code intelligence and software engineering workflows.",
-        "keywords": ["code", "coding", "codex", "developer", "copilot", "repository"],
+        "threshold": 55,
+        "require_strong": True,
+        "strong_patterns": [
+            r"\bcod(?:e|ing|ex)\b",
+            r"\bcopilot\b",
+            r"\bsoftware engineering\b",
+            r"\bdeveloper tools?\b",
+            r"\bdevin\b",
+        ],
+        "supporting_patterns": [
+            r"\bdeveloper\b",
+            r"\brepositor(?:y|ies)\b",
+            r"\bpull requests?\b",
+            r"\bcodebase\b",
+            r"\bjetbrains\b",
+            r"\bvs code\b",
+            r"\bide\b",
+        ],
+        "source_boost": {"GitHub": 10},
+        "category_boost": {"Tools": 5, "Research": 5, "Models": 5},
     },
     {
         "slug": "multimodal-ai",
         "name": "Multimodal AI",
         "description": "Vision, image, video, voice and multimodal model or product developments.",
-        "keywords": ["multimodal", "vision", "image", "video", "voice", "audio"],
+        "threshold": 55,
+        "strong_patterns": [
+            r"\bmultimodal\b",
+            r"\bvision\b",
+            r"\bimages?\b",
+            r"\bvideos?\b",
+            r"\bvoices?\b",
+            r"\baudio\b",
+        ],
+        "supporting_patterns": [
+            r"\bspeech\b",
+            r"\bvisual\b",
+        ],
+        "category_boost": {"Models": 5, "Tools": 5},
     },
     {
         "slug": "ai-safety",
         "name": "AI Safety",
         "description": "Safety, evaluation, alignment, risk and responsible deployment signals.",
-        "keywords": ["safety", "alignment", "misalignment", "risk", "evaluation", "assessment"],
+        "threshold": 55,
+        "strong_patterns": [
+            r"\bsafety\b",
+            r"\balignment\b",
+            r"\bmisalignment\b",
+        ],
+        "supporting_patterns": [
+            r"\brisks?\b",
+            r"\bevaluations?\b",
+            r"\bassessments?\b",
+            r"\bresponsible ai\b",
+            r"\bsafeguards?\b",
+            r"\bstandards?\b",
+            r"\bgovernance\b",
+            r"\bwell[- ]being\b",
+        ],
+        "source_boost": {"OpenAI": 5, "Google AI": 5},
+        "category_boost": {"Research": 8},
     },
     {
         "slug": "open-source-ai",
         "name": "Open Source AI",
         "description": "Open models, weights, runtimes, frameworks, repositories and local AI tooling.",
+        "threshold": 55,
         "category": "Open Source",
-        "keywords": ["open source", "open-source", "weights", "llama.cpp", "mlx", "repository"],
+        "strong_patterns": [
+            r"\bopen[- ]source\b",
+            r"\bopen weights?\b",
+            r"\bweights?\b",
+            r"\bcheckpoints?\b",
+            r"\bllama\.cpp\b",
+            r"\bmlx\b",
+            r"\bquants?\b",
+            r"\bquantization\b",
+            r"\bgguf\b",
+            r"\blocal ai\b",
+            r"\blora\b",
+            r"\bgradio\b",
+            r"\bautomatic1111\b",
+            r"\bsentence transformers?\b",
+            r"\btokenizers?\b",
+            r"\bopenenv\b",
+            r"\btrl\b",
+        ],
+        "supporting_patterns": [
+            r"\brepositor(?:y|ies)\b",
+            r"\bruntimes?\b",
+            r"\bframeworks?\b",
+            r"\blocal inference\b",
+            r"\bgrpo\b",
+            r"\bleaderboard\b",
+            r"\bfinetun(?:e|ing)\b",
+            r"\bwebgpu\b",
+            r"\btransformers?\b",
+        ],
+        "source_boost": {"Hugging Face": 30},
     },
     {
         "slug": "ai-security",
         "name": "AI Security",
         "description": "Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure.",
-        "keywords": ["security", "cyber", "sandbox", "sandboxing", "proof of presence"],
+        "threshold": 55,
+        "strong_patterns": [
+            r"\bcyber(?:security)?\b",
+            r"\bsandbox(?:ing)?\b",
+            r"\bprompt injection\b",
+            r"\bjailbreak(?:ing)?\b",
+            r"\bai (?:model )?security\b",
+            r"\bmodel security\b",
+            r"\bsecurity incidents?\b",
+            r"\bsecurity vulnerabilit(?:y|ies)\b",
+            r"\bproof of presence\b",
+        ],
+        "supporting_patterns": [
+            r"\bsecurity\b",
+            r"\bdefen[cs]e\b",
+            r"\bprotect(?:ion|ing)?\b",
+            r"\bincidents?\b",
+            r"\bpermissions?\b",
+            r"\bsafeguards?\b",
+            r"\bmonitoring\b",
+            r"\bzero trust\b",
+            r"\bmcp\b",
+        ],
+        "source_boost": {"OpenAI": 5, "GitHub": 5},
+        "category_boost": {"Tools": 5, "Research": 5},
     },
+]
+
+TOPIC_SUMMARY_NOISE_PATTERNS = [
+    re.compile(
+        r"We[’']re on a journey to advance and democratize artificial intelligence "
+        r"through open source and open science\.?",
+        re.I,
+    ),
+    re.compile(r"^A Blog post by .+ on Hugging Face$", re.I),
 ]
 
 MODEL_PATTERNS = [
@@ -1566,20 +1698,85 @@ def tracked_models_html(items):
         )
     return "".join(cards)
 
+def topic_summary_text(item):
+    value = clean_summary(item.get("summary", ""))
+    for pattern in TOPIC_SUMMARY_NOISE_PATTERNS:
+        value = pattern.sub(" ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def topic_pattern_hits(value, patterns):
+    return sum(1 for pattern in patterns if re.search(pattern, value, re.I))
+
+
+def topic_relevance(item, topic):
+    source = item.get("source", "")
+    category = item.get("category", "")
+    title = normalize_model_text(item.get("title", ""))
+    summary = topic_summary_text(item)
+
+    if topic.get("source"):
+        if source == topic["source"]:
+            return 100, ["source-exact"]
+        return 0, []
+
+    score = 0
+    evidence = []
+
+    category_match = bool(topic.get("category") and category == topic["category"])
+    if category_match:
+        score += 80
+        evidence.append("category-exact")
+
+    title_strong = topic_pattern_hits(title, topic.get("strong_patterns", []))
+    title_supporting = topic_pattern_hits(title, topic.get("supporting_patterns", []))
+    summary_strong = topic_pattern_hits(summary, topic.get("strong_patterns", []))
+    summary_supporting = topic_pattern_hits(summary, topic.get("supporting_patterns", []))
+
+    if title_strong:
+        score += 55 + min(15, (title_strong - 1) * 8)
+        evidence.append(f"title-strong:{title_strong}")
+    if title_supporting:
+        score += 25 + min(10, (title_supporting - 1) * 5)
+        evidence.append(f"title-supporting:{title_supporting}")
+    if summary_strong:
+        score += 22 + min(16, (summary_strong - 1) * 8)
+        evidence.append(f"summary-strong:{summary_strong}")
+    if summary_supporting:
+        score += 8 + min(12, (summary_supporting - 1) * 4)
+        evidence.append(f"summary-supporting:{summary_supporting}")
+
+    title_evidence = title_strong + title_supporting
+    summary_evidence = summary_strong + summary_supporting
+
+    if summary_evidence >= 2:
+        score += 20
+        evidence.append("summary-diversity")
+    if title_evidence and summary_evidence:
+        score += 10
+        evidence.append("cross-field")
+
+    if category_match or title_evidence or summary_evidence:
+        source_boost = topic.get("source_boost", {}).get(source, 0)
+        category_boost = topic.get("category_boost", {}).get(category, 0)
+        if source_boost:
+            score += source_boost
+            evidence.append(f"source-context:{source_boost}")
+        if category_boost:
+            score += category_boost
+            evidence.append(f"category-context:{category_boost}")
+
+    strong_evidence = title_strong + summary_strong + (1 if category_match else 0)
+    if topic.get("require_strong") and strong_evidence == 0:
+        return 0, ["strong-evidence-required"]
+
+    return min(100, score), evidence
+
+
 def topic_matches(item, topic):
-    if topic.get("source") and item["source"] == topic["source"]:
-        return True
-    tags = set(item.get("tags", []))
-    if topic["name"] in tags:
-        return True
-    if topic.get("category") and item["category"] == topic["category"]:
-        return True
-    haystack = f'{item["title"]} {item.get("summary","")}'.lower()
-    for keyword in topic.get("keywords", []):
-        key = keyword.lower()
-        if (" " in key and key in haystack) or (" " not in key and re.search(rf"\b{re.escape(key)}\b", haystack)):
-            return True
-    return False
+    score, _ = topic_relevance(item, topic)
+    return score >= int(topic.get("threshold", 55))
+
 
 def topic_groups(items):
     result = {}
@@ -6600,6 +6797,7 @@ def main():
         "items": archive,
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
+        "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
         "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -6608,6 +6806,7 @@ def main():
         "items": [client_item(item) for item in current],
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
+        "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     update_index(current)
