@@ -474,6 +474,20 @@ def validate_compare_contracts_and_model_histories():
             if evidence["model_identity"] not in html or evidence["pricing"] not in html:
                 fail(f"{slug}: official evidence links missing for {model_id}")
 
+    from update_news import compare_pair_fact_line
+    hub_html = (ROOT / "compare" / "index.html").read_text(encoding="utf-8")
+    hub_pairs = [
+        ["gpt-6-astra", "claude-fable-5-1"],
+        ["gpt-6-sol", "gemini-3.8-flash"],
+        ["claude-opus-5-5", "gemini-3.8-flash"],
+        ["gpt-6-sol", "claude-opus-5-5"],
+        ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
+    ]
+    for model_ids in hub_pairs:
+        expected = compare_pair_fact_line(model_ids)
+        if expected not in hub_html:
+            fail(f"compare hub facts drift for {model_ids}")
+
     # Every catalog-backed /models/ URL must surface the latest ledger event for its model.
     events_by_model = {}
     for event in history["events"]:
