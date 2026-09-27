@@ -2104,6 +2104,11 @@ def topic_page_html(topic, items):
         "description": topic["description"], "isPartOf": {"@id": "https://sxf.si/#website"}, "inLanguage": "en"
     }
     rows = "".join(signal_row(item) for item in items[:30])
+    older_indexable = [item for item in items[30:] if item.get("seo_eligible", seo_signal_eligible(item))]
+    older_rows = "".join(signal_row(item) for item in older_indexable[:12])
+    older_section = ""
+    if older_rows:
+        older_section = f'''<section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">INDEXED HISTORY</p><h2>Earlier {escape(topic["name"])} signals worth keeping reachable.</h2></div></div><div class="signal-list">{older_rows}</div></section>'''
     security_reference = ""
     if topic["slug"] == "ai-security":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>AGENT SECURITY</span><p>Permissions, MCP, sandboxing, memory integrity and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Direct vs indirect injection, agent hijacking, RAG, browser and tool defenses.</p><div class="tool-links"><a href="/guides/prompt-injection/">Prompt Injection guide ↗</a></div></article></div></section>'''
@@ -2122,6 +2127,7 @@ def topic_page_html(topic, items):
       <aside class="source-card"><span class="source-card-label">COVERAGE WINDOW</span><strong>{escape(topic["name"])}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       {security_reference}
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RECENT</p><h2>Latest in {escape(topic["name"])}.</h2></div><a href="/topics/">All topics ↗</a></div><div class="signal-list">{rows}</div></section>
+      {older_section}
     </main>{page_footer()}</body></html>'''
 
 def topics_index_html(groups):

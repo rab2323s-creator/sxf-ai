@@ -454,10 +454,12 @@ def validate_topic_relevance(archive):
             fail(f"{slug}: generated topic page is missing")
         html = page.read_text(encoding="utf-8")
         rendered_rows = html.count('class="signal-row"')
-        if rendered_rows != min(30, len(matched)):
+        older_indexable = sum(1 for item in matched[30:] if item.get("seo_eligible"))
+        expected_rows = min(30, len(matched)) + min(12, older_indexable)
+        if rendered_rows != expected_rows:
             fail(
                 f"{slug}: rendered {rendered_rows} topic rows for "
-                f"{len(matched)} relevance-matched signals"
+                f"{len(matched)} relevance-matched signals; expected {expected_rows}"
             )
 
     if archive.get("topic_relevance_version") != TOPIC_RELEVANCE_VERSION:
@@ -587,6 +589,56 @@ def validate_source_expansion(news, archive):
             fail(f"homepage source layer missing active expansion source: {name}")
 
 
+
+def validate_indexable_signal_graph(archive):
+    eligible = [item for item in archive.get("items", []) if item.get("seo_eligible")]
+    if not eligible:
+        return
+
+    noindex = re.compile(
+        r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex',
+        re.I,
+    )
+    indexable_pages = []
+    for path in ROOT.rglob("*.html"):
+        try:
+            html = path.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        if noindex.search(html):
+            continue
+        indexable_pages.append((path.resolve(), html))
+
+    missing = []
+    for item in eligible:
+        slug = item.get("signal_slug")
+        signal_url = item.get("signal_url")
+        if not slug or not signal_url:
+            missing.append(item.get("title", "<untitled>"))
+            continue
+        relative = f"/signals/{slug}/"
+        link_pattern = re.compile(
+            r'href=["\'](?:https://sxf\.si)?' + re.escape(relative) + r'["\']',
+            re.I,
+        )
+        target = local_path(signal_url).resolve()
+        inbound = [
+            path for path, html in indexable_pages
+            if path != target and link_pattern.search(html)
+        ]
+        if not inbound:
+            missing.append(item.get("title", signal_url))
+
+    if missing:
+        fail(
+            "indexable signal(s) lack inbound links from another indexable HTML page: "
+            + " | ".join(missing)
+        )
+
+    open_source_html = (ROOT / "open-source" / "index.html").read_text(encoding="utf-8")
+    if '/guides/open-source-ai-models/' not in open_source_html:
+        fail("Open Source hub must link to the Open Source AI Models guide")
+
 def main():
     from update_news import categorize
     cases = {
@@ -618,6 +670,7 @@ def main():
         fail("archive must contain at least current feed items")
     validate_topic_relevance(archive)
     validate_source_expansion(news, archive)
+    validate_indexable_signal_graph(archive)
     validate_site_shell()
     validate_section_counts(news)
     for item in news["items"]:
