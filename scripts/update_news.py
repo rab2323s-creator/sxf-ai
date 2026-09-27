@@ -47,14 +47,17 @@ SOURCES = [
         "name": "Google DeepMind",
         "url": "https://deepmind.google/blog/rss.xml",
         "wave": "source-expansion-v1",
+        "default_category": "Research",
     },
     {
         "name": "Google Research",
         "url": "https://research.google/blog/rss/",
         "wave": "source-expansion-v1",
         "filter": "google-research-ai",
+        "default_category": "Research",
     },
 ]
+SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
 SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
 SOURCE_EXPANSION_NAMES = {"Google DeepMind", "Google Research"}
 GOOGLE_RESEARCH_AI_PATTERN = re.compile(
@@ -281,7 +284,8 @@ def categorize(title, source):
     if re.search(r"\bgpt[- ]\d+(?:\.\d+)?\b|\bclaude(?:\s+[a-z]+)?\s+\d+(?:\.\d+)?\b|\bgemini(?:\s+\d+(?:\.\d+)?)?\b|\blfm\d+(?:\.\d+)?\b|\bllm\b|\bvision-language model\b|\bmultimodal model\b|\breasoning model\b|\bembedding model\b", t):
         return "Models"
 
-    return "Tools"
+    source_config = SOURCE_BY_NAME.get(source, {})
+    return source_config.get("default_category", "Tools")
 
 def classify_tags(title, source, category):
     t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
@@ -352,7 +356,7 @@ def parse_feed(source, body):
                 rows.append((title, link, published, summary))
 
     output = []
-    source_config = next((config for config in SOURCES if config["name"] == source), {"name": source})
+    source_config = SOURCE_BY_NAME.get(source, {"name": source})
     for title, link, published, summary in rows:
         if not source_accepts_item(source_config, title, summary):
             continue
@@ -6826,6 +6830,21 @@ def main():
         current = archive[:MAX_ITEMS]
 
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    archive_source_counts = {
+        source_config["name"]: sum(1 for item in archive if item.get("source") == source_config["name"])
+        for source_config in SOURCES
+    }
+    current_source_counts = {
+        source_config["name"]: sum(1 for item in current if item.get("source") == source_config["name"])
+        for source_config in SOURCES
+    }
+    source_health = {
+        "configured": len(SOURCES),
+        "archive_counts": archive_source_counts,
+        "current_counts": current_source_counts,
+        "errors": errors,
+    }
+
     ARCHIVE_OUT.parent.mkdir(parents=True, exist_ok=True)
     ARCHIVE_OUT.write_text(json.dumps({
         "updated_at": now_iso,
@@ -6834,6 +6853,7 @@ def main():
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
         "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_health": source_health,
         "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -6844,6 +6864,7 @@ def main():
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
         "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_health": source_health,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     update_index(current)
@@ -6853,7 +6874,8 @@ def main():
     update_sitemap(archive)
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
-        f"enriched {enriched} summaries; source errors: {len(errors)}"
+        f"enriched {enriched} summaries; source errors: {len(errors)}; "
+        f"source counts: {current_source_counts}"
     )
 if __name__ == "__main__":
     main()
