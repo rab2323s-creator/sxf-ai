@@ -4,6 +4,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -136,6 +137,120 @@ def validate_section_counts(news):
             fail(f"{path}: sectionCount {actual} != {expected[category]} current {category} items")
 
 
+def validate_model_pricing_catalog():
+    path = ROOT / "data" / "model-pricing.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    models = data.get("models")
+    if not isinstance(models, list) or not models:
+        fail("model-pricing.json must contain a non-empty models array")
+
+    required_ids = {
+        "gpt-6-astra", "gpt-6-sol", "gpt-6-luna",
+        "gpt-5.6-sol", "gpt-5.6-terra", "gpt-5.6-luna",
+        "claude-fable-5-1", "claude-opus-5-5", "claude-sonnet-5",
+        "claude-haiku-4-5-20251001", "gemini-3.8-flash",
+    }
+    ids = [model.get("model_id") for model in models]
+    if len(ids) != len(set(ids)):
+        fail("model-pricing.json contains duplicate model IDs")
+    missing = required_ids - set(ids)
+    if missing:
+        fail(f"model-pricing.json missing required models: {sorted(missing)}")
+
+    aliases = {}
+    names = set()
+    verified = data.get("source_verified")
+    try:
+        verified_date = datetime.fromisoformat(verified).date()
+    except Exception:
+        fail(f"model-pricing.json has invalid source_verified date: {verified!r}")
+
+    for model in models:
+        model_id = model.get("model_id")
+        name = model.get("model")
+        if not name or name in names:
+            fail(f"model-pricing.json has missing or duplicate model name: {name!r}")
+        names.add(name)
+
+        if not model.get("provider"):
+            fail(f"{model_id}: missing provider")
+        if not isinstance(model.get("context_window"), int) or model["context_window"] <= 0:
+            fail(f"{model_id}: invalid context_window")
+        if not isinstance(model.get("max_output"), int) or model["max_output"] <= 0:
+            fail(f"{model_id}: invalid max_output")
+        if not model.get("sxf_url", "").startswith("/"):
+            fail(f"{model_id}: invalid sxf_url")
+        if not local_path(BASE + model["sxf_url"]).exists():
+            fail(f"{model_id}: sxf_url target does not exist: {model['sxf_url']}")
+
+        sources = model.get("official_sources")
+        if not isinstance(sources, list) or not sources or any(not url.startswith("https://") for url in sources):
+            fail(f"{model_id}: official_sources must contain HTTPS URLs")
+
+        for alias in model.get("aliases", []):
+            if alias in aliases or alias in ids:
+                fail(f"{model_id}: duplicate/colliding model alias: {alias}")
+            aliases[alias] = model_id
+
+        schedule = model.get("pricing", {}).get("standard")
+        if not isinstance(schedule, list) or not schedule:
+            fail(f"{model_id}: missing Standard pricing schedule")
+
+        previous_end = None
+        open_ended_seen = False
+        covers_verified_date = False
+        for index, period in enumerate(schedule):
+            try:
+                start = datetime.fromisoformat(period["start"]).date()
+                end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+            except Exception:
+                fail(f"{model_id}: invalid pricing schedule date")
+
+            if end is not None and end < start:
+                fail(f"{model_id}: pricing period ends before it starts")
+            if previous_end is not None and start <= previous_end:
+                fail(f"{model_id}: overlapping Standard pricing periods")
+            if open_ended_seen:
+                fail(f"{model_id}: pricing period appears after an open-ended period")
+            if end is None:
+                open_ended_seen = True
+            previous_end = end
+
+            for field in ("input", "cached_input", "output"):
+                value = period.get(field)
+                if not isinstance(value, (int, float)) or value < 0:
+                    fail(f"{model_id}: invalid {field} price")
+
+            if start <= verified_date and (end is None or verified_date <= end):
+                covers_verified_date = True
+
+        if not covers_verified_date:
+            fail(f"{model_id}: no Standard pricing period covers source_verified={verified}")
+
+        long_context = model.get("pricing", {}).get("long_context")
+        if long_context:
+            if not isinstance(long_context.get("threshold_input_tokens"), int) or long_context["threshold_input_tokens"] <= 0:
+                fail(f"{model_id}: invalid long-context threshold")
+            if long_context.get("applies_to_entire_request") is not True:
+                fail(f"{model_id}: long-context rule must state that it applies to the entire request")
+            multipliers = long_context.get("multipliers", {})
+            for field in ("input", "cached_input", "output"):
+                value = multipliers.get(field)
+                if not isinstance(value, (int, float)) or value <= 0:
+                    fail(f"{model_id}: invalid long-context {field} multiplier")
+
+    from update_news import MODEL_REFERENCE
+    forbidden_variant_fields = {
+        "context", "max_output", "knowledge_cutoff",
+        "input_price", "cached_price", "output_price", "source",
+    }
+    for family in ("GPT-5.6", "GPT-6"):
+        for variant in MODEL_REFERENCE[family]["variants"]:
+            duplicated = forbidden_variant_fields.intersection(variant)
+            if duplicated:
+                fail(f"{family} variant {variant.get('model_id')}: catalog facts duplicated in MODEL_REFERENCE: {sorted(duplicated)}")
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -153,6 +268,7 @@ def main():
         if actual != expected:
             fail(f"classifier: {title!r} -> {actual}, expected {expected}")
 
+    validate_model_pricing_catalog()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
     aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))
