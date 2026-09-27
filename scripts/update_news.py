@@ -18,6 +18,7 @@ OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
+MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -6904,6 +6905,9 @@ def select_current_items(archive, cutoff):
 
 
 def main():
+    from model_history import sync_model_history_file
+    history_result = sync_model_history_file(MODEL_PRICING_PATH, MODEL_HISTORY_PATH)
+
     incoming = []
     errors = []
     for source_config in SOURCES:
@@ -6980,7 +6984,8 @@ def main():
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
         f"enriched {enriched} summaries; source errors: {len(errors)}; "
-        f"source counts: {current_source_counts}"
+        f"source counts: {current_source_counts}; "
+        f"model history: {history_result['events']} events / +{history_result['events_added']} new"
     )
     for error in errors:
         print(f"Source warning: {error}")
