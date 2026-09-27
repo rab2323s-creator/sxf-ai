@@ -1900,6 +1900,9 @@ def claude_fable_51_reference_html(items):
     title = "Claude Fable 5.1 — Pricing, Context Window, API & Benchmarks | SXF / AI"
     description = "Claude Fable 5.1 reference: 1M context, 128K output, $10/$50 API pricing, adaptive thinking, effort levels, coding and agent capabilities, migration, benchmarks and availability."
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("claude-fable-5-1")
+    standard = active_standard_price("claude-fable-5-1")
+    cache_share = standard["cached_input"] / standard["input"] * 100
 
     faq_data = [
         ("What is Claude Fable 5.1?", "Claude Fable 5.1 is Anthropic’s highest-capability model generally available to all customers. It is designed for demanding reasoning, long-horizon agentic work, coding, research and complex knowledge work."),
@@ -1971,8 +1974,8 @@ def claude_fable_51_reference_html(items):
         <h1>Claude Fable 5.1<br><span>model reference.</span></h1>
         <p>{escape(description)}</p>
         <div class="collection-stats">
-          <div><strong>1,000,000</strong><span>context tokens</span></div>
-          <div><strong>128,000</strong><span>max output</span></div>
+          <div><strong>{escape(catalog["context"])}</strong><span>context tokens</span></div>
+          <div><strong>{escape(catalog["max_output"])}</strong><span>max output</span></div>
           <div><strong>September 1, 2026</strong><span>released</span></div>
         </div>
       </section>
@@ -1989,10 +1992,10 @@ def claude_fable_51_reference_html(items):
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>claude-fable-5-1</strong></div>
             <div><span>STATUS</span><strong>Active / latest</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens</small></div>
-            <div><span>STANDARD INPUT</span><strong>$10</strong><small>/ 1M tokens</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>$50</strong><small>/ 1M tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>tokens</small></div>
+            <div><span>STANDARD INPUT</span><strong>{escape(catalog["input_price"])}</strong><small>/ 1M tokens</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>{escape(catalog["output_price"])}</strong><small>/ 1M tokens</small></div>
           </div>
         </div>
 
@@ -2077,11 +2080,11 @@ def claude_fable_51_reference_html(items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Fable 5.1 API pricing.</h2><p>Standard token prices are unchanged from Fable 5, but prompt caching is materially cheaper.</p></div>
           <div class="model-price-grid">
-            <article><span>STANDARD TOKENS</span><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></article>
-            <article><span>PROMPT CACHE</span><strong>$0.25</strong><small>cache read / 1M</small><strong>$12.50</strong><small>5-minute write / 1M</small></article>
-            <article><span>LONGER CACHE</span><strong>$20</strong><small>1-hour cache write / 1M</small><strong>50%</strong><small>Batch API token discount</small></article>
+            <article><span>STANDARD TOKENS</span><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></article>
+            <article><span>PROMPT CACHE</span><strong>{escape(catalog["cached_price"])}</strong><small>cache read / 1M</small><strong>{escape(catalog_price_label(standard["cache_write_5m"]))}</strong><small>5-minute write / 1M</small></article>
+            <article><span>LONGER CACHE</span><strong>{escape(catalog_price_label(standard["cache_write_1h"]))}</strong><small>1-hour cache write / 1M</small><strong>50%</strong><small>Batch API token discount</small></article>
           </div>
-          <div class="model-caveat"><strong>Cache economics are unusually important</strong><p>At $0.25 per million tokens, Fable 5.1 cache reads are 2.5% of its standard input price. Long-running agents that reuse stable context can therefore have a very different effective cost profile from one-shot requests that repeatedly pay full input price.</p></div>
+          <div class="model-caveat"><strong>Cache economics are unusually important</strong><p>At {escape(catalog["cached_price"])} per million tokens, Fable 5.1 cache reads are {cache_share:g}% of its standard input price. Long-running agents that reuse stable context can therefore have a very different effective cost profile from one-shot requests that repeatedly pay full input price.</p></div>
           <div class="model-caveat"><strong>Thinking tokens count as output</strong><p>Always-on adaptive thinking means a difficult task can consume substantial output-token budget even when the visible final answer is short. Set max output high enough for higher effort, then measure total task cost rather than visible-response length.</p></div>
         </section>
 
@@ -2209,6 +2212,9 @@ def gemini_38_flash_reference_html(items):
     title = "Gemini 3.8 Flash — Pricing, Context Window, API & Agents | SXF / AI"
     description = "Gemini 3.8 Flash reference: 1M context window, 64K output, introductory API pricing, thinking levels, multimodal inputs, tools, computer use, migration and availability."
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("gemini-3.8-flash")
+    standard_2026 = active_standard_price("gemini-3.8-flash", "2026-09-27")
+    standard_2027 = active_standard_price("gemini-3.8-flash", "2027-01-01")
     google_items = [item for item in items if item["source"] == "Google AI"][:6]
     google_rows = "".join(signal_row(item) for item in google_items)
 
@@ -2281,7 +2287,7 @@ def gemini_38_flash_reference_html(items):
         <p>{escape(description)}</p>
         <div class="collection-stats">
           <div><strong>GA</strong><span>production status</span></div>
-          <div><strong>1,048,576</strong><span>input tokens</span></div>
+          <div><strong>{escape(catalog["context"])}</strong><span>input tokens</span></div>
           <div><strong>September 2, 2026</strong><span>released</span></div>
         </div>
       </section>
@@ -2298,10 +2304,10 @@ def gemini_38_flash_reference_html(items):
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>gemini-3.8-flash</strong></div>
             <div><span>STATUS</span><strong>Stable / GA</strong></div>
-            <div><span>INPUT LIMIT</span><strong>1,048,576</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>65,536</strong><small>tokens</small></div>
+            <div><span>INPUT LIMIT</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>tokens</small></div>
             <div><span>DEFAULT THINKING</span><strong>Medium</strong><small>low · medium · high</small></div>
-            <div><span>INTRO PRICE</span><strong>$0.75 / $3.75</strong><small>input / output per 1M</small></div>
+            <div><span>INTRO PRICE</span><strong>{escape(catalog_price_label(standard_2026["input"]))} / {escape(catalog_price_label(standard_2026["output"]))}</strong><small>input / output per 1M</small></div>
           </div>
         </div>
 
@@ -2363,12 +2369,12 @@ def gemini_38_flash_reference_html(items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Gemini 3.8 Flash API pricing in 2026.</h2><p>Google is running introductory pricing through December 31, 2026. Standard rates double on January 1, 2027, so long-term cost models should use the post-promotion price unless the workload is short-lived.</p></div>
           <div class="model-price-grid">
-            <article><span>STANDARD · THROUGH DEC 31</span><strong>$0.75</strong><small>input / 1M</small><strong>$3.75</strong><small>output / 1M</small></article>
+            <article><span>STANDARD · THROUGH DEC 31</span><strong>{escape(catalog_price_label(standard_2026["input"]))}</strong><small>input / 1M</small><strong>{escape(catalog_price_label(standard_2026["output"]))}</strong><small>output / 1M</small></article>
             <article><span>BATCH / FLEX · THROUGH DEC 31</span><strong>$0.375</strong><small>input / 1M</small><strong>$1.875</strong><small>output / 1M</small></article>
             <article><span>PRIORITY · THROUGH DEC 31</span><strong>$1.35</strong><small>input / 1M</small><strong>$6.75</strong><small>output / 1M</small></article>
           </div>
-          <div class="model-caveat"><strong>January 1, 2027</strong><p>Google lists Standard pricing rising to $1.50 input and $7.50 output per 1M tokens. Batch and Flex rise to $0.75 / $3.75, while Priority rises to $2.70 / $13.50.</p></div>
-          <div class="model-caveat"><strong>Context caching</strong><p>Standard cache reads are $0.075 per 1M tokens through December 31, 2026 and $0.15 starting January 1, 2027. Google separately charges cache storage per token-hour.</p></div>
+          <div class="model-caveat"><strong>January 1, 2027</strong><p>Google lists Standard pricing rising to {escape(catalog_price_label(standard_2027["input"]))} input and {escape(catalog_price_label(standard_2027["output"]))} output per 1M tokens. Batch and Flex rise to $0.75 / $3.75, while Priority rises to $2.70 / $13.50.</p></div>
+          <div class="model-caveat"><strong>Context caching</strong><p>Standard cache reads are {escape(catalog_price_label(standard_2026["cached_input"]))} per 1M tokens through December 31, 2026 and {escape(catalog_price_label(standard_2027["cached_input"]))} starting January 1, 2027. Google separately charges cache storage per token-hour.</p></div>
           <div class="model-caveat"><strong>Search and Maps grounding</strong><p>On the paid tier, Google currently includes 5,000 free Search requests per month shared across Gemini 3.x models and then charges $14 per 1,000 requests. Google Maps grounding uses a similar 5,000-prompt free allowance before paid query charges.</p></div>
         </section>
 
