@@ -141,6 +141,13 @@ def validate_section_counts(news):
 def validate_model_pricing_catalog():
     path = ROOT / "data" / "model-pricing.json"
     data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("schema_version") != "1.1":
+        fail(f"model-pricing.json schema_version drift: {data.get('schema_version')!r}")
+
+    policy = data.get("verification_policy")
+    if not isinstance(policy, dict) or policy.get("standard") != "Primary-source verification":
+        fail("model-pricing.json verification policy missing or invalid")
+
     models = data.get("models")
     if not isinstance(models, list) or not models:
         fail("model-pricing.json must contain a non-empty models array")
@@ -187,6 +194,30 @@ def validate_model_pricing_catalog():
         sources = model.get("official_sources")
         if not isinstance(sources, list) or not sources or any(not url.startswith("https://") for url in sources):
             fail(f"{model_id}: official_sources must contain HTTPS URLs")
+
+        provenance = model.get("provenance")
+        if not isinstance(provenance, dict):
+            fail(f"{model_id}: missing provenance")
+        if provenance.get("verification_method") != "manual primary-source verification":
+            fail(f"{model_id}: invalid verification_method")
+        if provenance.get("verified_at") != verified:
+            fail(
+                f"{model_id}: provenance verified_at {provenance.get('verified_at')!r} "
+                f"must match catalog source_verified {verified!r}"
+            )
+        evidence = provenance.get("evidence")
+        required_evidence = {
+            "model_identity", "context_window", "max_output",
+            "knowledge_cutoff", "reasoning", "modalities", "pricing",
+        }
+        if not isinstance(evidence, dict):
+            fail(f"{model_id}: provenance evidence missing")
+        missing_evidence = required_evidence - set(evidence)
+        if missing_evidence:
+            fail(f"{model_id}: missing provenance evidence: {sorted(missing_evidence)}")
+        for field, url in evidence.items():
+            if field in required_evidence and url not in sources:
+                fail(f"{model_id}: evidence for {field} is not an official source: {url!r}")
 
         for alias in model.get("aliases", []):
             if alias in aliases or alias in ids:
@@ -284,6 +315,8 @@ def validate_model_pricing_catalog():
         fail(f"model pricing table has {row_count} rows for {len(models)} catalog models")
     if "/data/model-pricing.json" not in pricing_html:
         fail("model pricing page must link the canonical JSON dataset")
+    if "Primary-source verified" not in pricing_html:
+        fail("model pricing page must disclose primary-source verification")
     if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
         fail("model pricing page is missing calculator assets")
 
