@@ -60,6 +60,8 @@ SOURCES = [
 SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
 SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
 SOURCE_EXPANSION_NAMES = {"Google DeepMind", "Google Research"}
+SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE = 10
+SOURCE_EXPANSION_MAX_CURRENT_TOTAL = 16
 GOOGLE_RESEARCH_AI_PATTERN = re.compile(
     r"\bai\b|\bartificial intelligence\b|\bmachine learning\b|\bml\b|"
     r"\blanguage models?\b|\bllms?\b|\bgenerative\b|\btransformers?\b|"
@@ -6795,6 +6797,32 @@ def update_sitemap(items):
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
+def select_current_items(archive, cutoff):
+    selected = []
+    expansion_counts = {name: 0 for name in SOURCE_EXPANSION_NAMES}
+    expansion_total = 0
+
+    for item in archive:
+        published = parse_date(item.get("published", ""))
+        if published is None or published < cutoff:
+            continue
+
+        source = item.get("source", "")
+        if source in SOURCE_EXPANSION_NAMES:
+            if expansion_counts[source] >= SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
+                continue
+            if expansion_total >= SOURCE_EXPANSION_MAX_CURRENT_TOTAL:
+                continue
+            expansion_counts[source] += 1
+            expansion_total += 1
+
+        selected.append(item)
+        if len(selected) >= MAX_ITEMS:
+            break
+
+    return selected
+
+
 def main():
     incoming = []
     errors = []
@@ -6822,10 +6850,7 @@ def main():
         raise RuntimeError("No valid signals available after archive merge")
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
-    current = [
-        item for item in archive
-        if parse_date(item["published"]) is not None and parse_date(item["published"]) >= cutoff
-    ][:MAX_ITEMS]
+    current = select_current_items(archive, cutoff)
     if not current:
         current = archive[:MAX_ITEMS]
 
