@@ -4,6 +4,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
+import copy
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
@@ -136,6 +137,84 @@ def validate_section_counts(news):
         actual = int(match.group(1))
         if actual != expected[category]:
             fail(f"{path}: sectionCount {actual} != {expected[category]} current {category} items")
+
+
+def validate_model_history():
+    from model_history import (
+        build_initial_history,
+        sync_history,
+        validate_history_against_catalog,
+        validate_history_structure,
+    )
+
+    catalog = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
+    path = ROOT / "data" / "model-history.json"
+    if not path.exists():
+        fail("model-history.json is missing")
+    history = json.loads(path.read_text(encoding="utf-8"))
+
+    try:
+        validate_history_against_catalog(catalog, history)
+    except RuntimeError as exc:
+        fail(f"model history invalid: {exc}")
+
+    baseline_count = sum(1 for event in history["events"] if event.get("type") == "baseline")
+    if baseline_count != len(catalog["models"]):
+        fail(f"model history baseline count {baseline_count} != {len(catalog['models'])} catalog models")
+
+    # Regression: factual changes require a newer verified_at.
+    stale_catalog = copy.deepcopy(catalog)
+    stale_catalog["models"][0]["context_window"] += 1
+    try:
+        sync_history(stale_catalog, history)
+    except RuntimeError as exc:
+        if "require a newer provenance verified_at" not in str(exc):
+            fail(f"model history stale-verification regression raised wrong error: {exc}")
+    else:
+        fail("model history accepted a factual change without a newer verification date")
+
+    # Regression: deleting a tracked model is forbidden.
+    removed_catalog = copy.deepcopy(catalog)
+    removed_catalog["models"] = removed_catalog["models"][1:]
+    try:
+        sync_history(removed_catalog, history)
+    except RuntimeError as exc:
+        if "cannot be deleted" not in str(exc):
+            fail(f"model history deletion regression raised wrong error: {exc}")
+    else:
+        fail("model history accepted deletion of a tracked model")
+
+    # Regression: tampering with an old event must break the hash chain.
+    tampered = copy.deepcopy(history)
+    tampered["events"][0]["snapshot"]["context_window"] = 1
+    try:
+        validate_history_structure(tampered)
+    except RuntimeError as exc:
+        if "hash mismatch" not in str(exc):
+            fail(f"model history tamper regression raised wrong error: {exc}")
+    else:
+        fail("model history accepted a tampered historical event")
+
+    # Regression: a valid newer verified change creates one deterministic event.
+    changed_catalog = copy.deepcopy(catalog)
+    target = changed_catalog["models"][0]
+    target["context_window"] += 1
+    target["provenance"]["verified_at"] = "2026-09-28"
+    changed_catalog["source_verified"] = "2026-09-28"
+    updated, events = sync_history(changed_catalog, history)
+    if len(events) != 1:
+        fail(f"model history change regression created {len(events)} events instead of 1")
+    event = events[0]
+    if event.get("type") != "model_changed" or event.get("model_id") != target["model_id"]:
+        fail("model history change regression created the wrong event")
+    if [change.get("field") for change in event.get("changes", [])] != ["context_window"]:
+        fail("model history change regression did not isolate the changed field")
+    if event["changes"][0].get("change_type") != "context_change":
+        fail("model history change regression classified the field incorrectly")
+    try:
+        validate_history_against_catalog(changed_catalog, updated)
+    except RuntimeError as exc:
+        fail(f"model history valid-change regression did not replay: {exc}")
 
 
 def validate_model_pricing_catalog():
@@ -317,6 +396,8 @@ def validate_model_pricing_catalog():
         fail("model pricing page must link the canonical JSON dataset")
     if "PRIMARY-SOURCE VERIFIED" not in pricing_html.upper():
         fail("model pricing page must disclose primary-source verification")
+    if "/data/model-history.json" not in pricing_html:
+        fail("model pricing page must link the model change ledger")
     if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
         fail("model pricing page is missing calculator assets")
 
@@ -704,6 +785,7 @@ def main():
             fail(f"classifier: {title!r} -> {actual}, expected {expected}")
 
     validate_model_pricing_catalog()
+    validate_model_history()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
     aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))

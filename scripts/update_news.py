@@ -18,6 +18,7 @@ OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
+MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -6615,7 +6616,7 @@ def model_pricing_page_html():
               <p>One source-backed view of Standard API token pricing and core limits across selected frontier models. Compare rates, inspect pricing rules and estimate a request without mixing incompatible service tiers.</p>
               <div class="pricing-hero-actions">
                 <a class="primary-cta" href="#calculator">Calculate cost <span>↓</span></a>
-                <a class="secondary-cta" href="/data/model-pricing.json">Open JSON dataset</a>
+                <a class="secondary-cta" href="/data/model-pricing.json">Open current dataset</a><a class="secondary-cta" href="/data/model-history.json">Open change ledger</a>
               </div>
             </div>
           </div>
@@ -6646,7 +6647,7 @@ def model_pricing_page_html():
           <div id="pricingEmpty" class="pricing-empty" hidden>No models match this filter.</div>
           <div class="pricing-source-note">
             <span>Catalog verified {escape(verified)}. Promotional or scheduled rates can change; the official vendor documentation remains the final billing authority.</span>
-            <a href="/data/model-pricing.json">Machine-readable JSON ↗</a>
+            <span><a href="/data/model-pricing.json">Current dataset ↗</a> · <a href="/data/model-history.json">Append-only change ledger ↗</a></span>
           </div>
         </section>
 
@@ -6904,6 +6905,9 @@ def select_current_items(archive, cutoff):
 
 
 def main():
+    from model_history import sync_model_history_file
+    history_result = sync_model_history_file(MODEL_PRICING_PATH, MODEL_HISTORY_PATH)
+
     incoming = []
     errors = []
     for source_config in SOURCES:
@@ -6980,7 +6984,8 @@ def main():
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
         f"enriched {enriched} summaries; source errors: {len(errors)}; "
-        f"source counts: {current_source_counts}"
+        f"source counts: {current_source_counts}; "
+        f"model history: {history_result['events']} events / +{history_result['events_added']} new"
     )
     for error in errors:
         print(f"Source warning: {error}")
