@@ -583,11 +583,20 @@ def validate_source_expansion(news, archive):
         fail("Google Research taxonomy labels must not count as substantive summaries")
     if not source_summary_is_substantive(
         "Google Research",
-        "We introduce a unified multi-agent framework for coherent long-form video generation.",
+        "We introduce a unified multi-agent framework for coherent long-form video generation with explicit planning, evaluation, and long-horizon consistency.",
     ):
         fail("Google Research substantive source summaries must pass the quality floor")
     if not source_summary_is_substantive("OpenAI", "Short source summary"):
         fail("summary quality floor must remain source-specific")
+
+    from update_news import extract_meta_description
+    meta_fixture = (
+        '<html><head><meta property="og:description" '
+        'content="A source-backed description with an apostrophe like researcher\'s and enough detail '
+        'to exercise robust HTML attribute parsing without regex truncation."></head></html>'
+    )
+    if "researcher's" not in extract_meta_description(meta_fixture):
+        fail("meta description parser must preserve quoted punctuation in content")
 
 
 def main():
