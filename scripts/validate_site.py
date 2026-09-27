@@ -454,10 +454,12 @@ def validate_topic_relevance(archive):
             fail(f"{slug}: generated topic page is missing")
         html = page.read_text(encoding="utf-8")
         rendered_rows = html.count('class="signal-row"')
-        if rendered_rows != min(30, len(matched)):
+        older_indexable = sum(1 for item in matched[30:] if item.get("seo_eligible"))
+        expected_rows = min(30, len(matched)) + min(12, older_indexable)
+        if rendered_rows != expected_rows:
             fail(
                 f"{slug}: rendered {rendered_rows} topic rows for "
-                f"{len(matched)} relevance-matched signals"
+                f"{len(matched)} relevance-matched signals; expected {expected_rows}"
             )
 
     if archive.get("topic_relevance_version") != TOPIC_RELEVANCE_VERSION:
