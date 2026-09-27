@@ -45,12 +45,6 @@ SOURCES = [
     {"name": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml"},
     {"name": "GitHub", "url": "https://github.blog/changelog/feed/"},
     {
-        "name": "Google DeepMind",
-        "url": "https://deepmind.google/blog/rss.xml",
-        "wave": "source-expansion-v1",
-        "default_category": "Research",
-    },
-    {
         "name": "Google Research",
         "url": "https://research.google/blog/rss/",
         "wave": "source-expansion-v1",
@@ -60,7 +54,7 @@ SOURCES = [
 ]
 SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
 SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
-SOURCE_EXPANSION_NAMES = {"Google DeepMind", "Google Research"}
+SOURCE_EXPANSION_NAMES = {"Google Research"}
 SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE = 10
 SOURCE_EXPANSION_MAX_CURRENT_TOTAL = 16
 GOOGLE_RESEARCH_AI_PATTERN = re.compile(
