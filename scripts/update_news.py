@@ -19,6 +19,8 @@ ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
+SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
+SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -40,20 +42,45 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
 
-SOURCES = [
-    {"name": "OpenAI", "url": "https://openai.com/news/rss.xml"},
-    {"name": "Google AI", "url": "https://blog.google/technology/ai/rss/"},
-    {"name": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml"},
-    {"name": "GitHub", "url": "https://github.blog/changelog/feed/"},
-    {
-        "name": "Google Research",
-        "url": "https://research.google/blog/rss/",
-        "wave": "source-expansion-v1",
-        "filter": "google-research-ai",
-        "default_category": "Research",
-    },
-]
-SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
+SOURCE_STATUSES = {"shadow", "canary", "live", "disabled"}
+SHADOW_RETENTION_DAYS = 14
+SHADOW_MAX_ITEMS_PER_SOURCE = 50
+
+def load_source_registry():
+    data = json.loads(SOURCE_CONFIG_PATH.read_text(encoding="utf-8"))
+    statuses = set(data.get("statuses", []))
+    if statuses != SOURCE_STATUSES:
+        raise RuntimeError(f"source-config statuses must be {sorted(SOURCE_STATUSES)}")
+    sources = data.get("sources")
+    if not isinstance(sources, list) or not sources:
+        raise RuntimeError("source-config.json must contain a non-empty sources array")
+
+    names = []
+    for source in sources:
+        name = source.get("name")
+        status = source.get("status")
+        max_current = source.get("max_current")
+        if not name or not isinstance(name, str):
+            raise RuntimeError("Every source must have a name")
+        if status not in SOURCE_STATUSES:
+            raise RuntimeError(f"{name}: invalid source status {status!r}")
+        if not isinstance(max_current, int) or max_current < 0:
+            raise RuntimeError(f"{name}: max_current must be a non-negative integer")
+        if status == "shadow" and max_current != 0:
+            raise RuntimeError(f"{name}: shadow sources must have max_current=0")
+        if status == "disabled" and max_current != 0:
+            raise RuntimeError(f"{name}: disabled sources must have max_current=0")
+        if source.get("adapter") == "rss" and not source.get("url"):
+            raise RuntimeError(f"{name}: rss adapter requires a URL")
+        names.append(name)
+    if len(names) != len(set(names)):
+        raise RuntimeError("source-config.json contains duplicate source names")
+    return data, sources
+
+SOURCE_REGISTRY, SOURCE_CONFIGS = load_source_registry()
+SOURCE_LIFECYCLE_VERSION = SOURCE_REGISTRY["version"]
+SOURCE_BY_NAME = {config["name"]: config for config in SOURCE_CONFIGS}
+SOURCES = [config for config in SOURCE_CONFIGS if config["status"] in {"canary", "live"}]
 SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
 SOURCE_EXPANSION_NAMES = {"Google Research"}
 SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE = 10
@@ -64,6 +91,12 @@ GOOGLE_RESEARCH_AI_PATTERN = re.compile(
     r"\bneural\b|\bmultimodal\b|\bvision\b|\bspeech\b|\bagents?\b|"
     r"\brobotics?\b|\breinforcement learning\b|\bdiffusion\b|\bembeddings?\b|"
     r"\bdeep learning\b|\bfoundation models?\b|\bgemini\b",
+    re.I,
+)
+MICROSOFT_AI_PATTERN = re.compile(
+    r"\bai\b|\bartificial intelligence\b|\bcopilot\b|\bmachine learning\b|"
+    r"\blanguage models?\b|\bllms?\b|\bgenerative\b|\bmodels?\b|\bagents?\b|"
+    r"\bazure ai\b|\bphi[- ]?\d|\bdeep learning\b",
     re.I,
 )
 USER_AGENT = "SXF-AI-Radar/1.1 (+https://sxf.si/)"
@@ -730,10 +763,12 @@ def source_accepts_item(source_config, title, summary):
         return True
     if filter_name == "google-research-ai":
         return bool(GOOGLE_RESEARCH_AI_PATTERN.search(f"{title} {summary}"))
+    if filter_name == "microsoft-ai":
+        return bool(MICROSOFT_AI_PATTERN.search(f"{title} {summary}"))
     raise RuntimeError(f"Unknown source filter: {filter_name}")
 
 
-def parse_feed(source, body):
+def parse_feed_with_metrics(source, body):
     root = ET.fromstring(body)
     rows = []
     for item in root.findall(".//item"):
@@ -760,8 +795,10 @@ def parse_feed(source, body):
 
     output = []
     source_config = SOURCE_BY_NAME.get(source, {"name": source})
+    relevance_rejected = 0
     for title, link, published, summary in rows:
         if not source_accepts_item(source_config, title, summary):
+            relevance_rejected += 1
             continue
         category = categorize(title, source)
         output.append({
@@ -773,7 +810,15 @@ def parse_feed(source, body):
             "tags": classify_tags(title, source, category),
             "summary": summary,
         })
-    return output
+    return output, {
+        "parsed_candidate_count": len(rows),
+        "accepted_candidate_count": len(output),
+        "relevance_rejection_count": relevance_rejected,
+    }
+
+def parse_feed(source, body):
+    items, _metrics = parse_feed_with_metrics(source, body)
+    return items
 
 def fetch_meta_description(url):
     try:
@@ -7327,6 +7372,16 @@ def select_current_items(archive, cutoff):
             continue
 
         source = item.get("source", "")
+        source_config = SOURCE_BY_NAME.get(source, {})
+        status = source_config.get("status", "live")
+        if status in {"shadow", "disabled"}:
+            continue
+
+        max_current = source_config.get("max_current", MAX_ITEMS)
+        source_selected = sum(1 for selected_item in selected if selected_item.get("source") == source)
+        if source_selected >= max_current:
+            continue
+
         if source in SOURCE_EXPANSION_NAMES:
             if expansion_counts[source] >= SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
                 continue
@@ -7348,13 +7403,64 @@ def main():
 
     incoming = []
     errors = []
-    for source_config in SOURCES:
+    source_metrics = {}
+    shadow_candidates = []
+    now = datetime.now(timezone.utc)
+
+    for source_config in SOURCE_CONFIGS:
         source = source_config["name"]
-        url = source_config["url"]
+        status = source_config["status"]
+        metrics = {
+            "status": status,
+            "fetch_success": False,
+            "fetch_failure": False,
+            "parsed_candidate_count": 0,
+            "accepted_candidate_count": 0,
+            "rejected_candidate_count": 0,
+            "duplicate_count": 0,
+            "relevance_rejection_count": 0,
+            "quality_rejection_count": 0,
+            "publish_count": 0,
+            "last_successful_fetch": None,
+            "errors": [],
+        }
+        source_metrics[source] = metrics
+
+        if status == "disabled":
+            continue
+        if source_config.get("adapter") != "rss":
+            metrics["errors"].append("No verified automated feed adapter configured")
+            continue
+
         try:
-            incoming.extend(parse_feed(source, fetch(url)))
+            parsed, parse_metrics = parse_feed_with_metrics(source, fetch(source_config["url"]))
+            metrics.update(parse_metrics)
+            metrics["fetch_success"] = True
+            metrics["last_successful_fetch"] = now.isoformat().replace("+00:00", "Z")
+            metrics["rejected_candidate_count"] = metrics["relevance_rejection_count"]
+
+            seen_urls = set()
+            deduped = []
+            for item in parsed:
+                if item["url"] in seen_urls:
+                    metrics["duplicate_count"] += 1
+                    continue
+                seen_urls.add(item["url"])
+                deduped.append(item)
+
+            if status == "shadow":
+                prepared_shadow = prepare_items(deduped)
+                accepted_shadow = [item for item in prepared_shadow if item.get("seo_eligible")]
+                metrics["quality_rejection_count"] = len(prepared_shadow) - len(accepted_shadow)
+                metrics["rejected_candidate_count"] += metrics["quality_rejection_count"]
+                shadow_candidates.extend(accepted_shadow)
+            else:
+                incoming.extend(deduped)
         except Exception as exc:
-            errors.append(f"{source}: {exc}")
+            message = f"{source}: {exc}"
+            metrics["fetch_failure"] = True
+            metrics["errors"].append(str(exc))
+            errors.append(message)
 
     existing = load_items(ARCHIVE_OUT)
     if not existing:
@@ -7385,14 +7491,49 @@ def main():
         source_config["name"]: sum(1 for item in current if item.get("source") == source_config["name"])
         for source_config in SOURCES
     }
+    for name, count in current_source_counts.items():
+        if name in source_metrics:
+            source_metrics[name]["publish_count"] = count
+
+    shadow_cutoff = now - timedelta(days=SHADOW_RETENTION_DAYS)
+    previous_shadow = load_items(SOURCE_SHADOW_PATH)
+    retained_shadow = [
+        item for item in previous_shadow
+        if parse_date(item.get("published", "")) is not None
+        and parse_date(item["published"]) >= shadow_cutoff
+        and SOURCE_BY_NAME.get(item.get("source"), {}).get("status") == "shadow"
+    ]
+    shadow_by_url = {item["url"]: item for item in retained_shadow if item.get("url")}
+    for item in shadow_candidates:
+        shadow_by_url[item["url"]] = item
+
+    bounded_shadow = []
+    per_source_shadow_counts = {}
+    for item in sorted(shadow_by_url.values(), key=lambda row: parse_date(row["published"]), reverse=True):
+        source = item["source"]
+        if per_source_shadow_counts.get(source, 0) >= SHADOW_MAX_ITEMS_PER_SOURCE:
+            continue
+        bounded_shadow.append(item)
+        per_source_shadow_counts[source] = per_source_shadow_counts.get(source, 0) + 1
+
     source_health = {
-        "configured": len(SOURCES),
+        "configured": len(SOURCE_CONFIGS),
+        "publishing_configured": len(SOURCES),
+        "lifecycle_version": SOURCE_LIFECYCLE_VERSION,
         "archive_counts": archive_source_counts,
         "current_counts": current_source_counts,
+        "sources": source_metrics,
         "errors": errors,
     }
 
     ARCHIVE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    SOURCE_SHADOW_PATH.write_text(json.dumps({
+        "updated_at": now_iso,
+        "retention_days": SHADOW_RETENTION_DAYS,
+        "max_items_per_source": SHADOW_MAX_ITEMS_PER_SOURCE,
+        "items": bounded_shadow,
+        "source_health": source_health,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     ARCHIVE_OUT.write_text(json.dumps({
         "updated_at": now_iso,
         "items": archive,
@@ -7400,6 +7541,7 @@ def main():
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
         "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_lifecycle_version": SOURCE_LIFECYCLE_VERSION,
         "source_health": source_health,
         "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
