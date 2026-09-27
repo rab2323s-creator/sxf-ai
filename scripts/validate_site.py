@@ -779,7 +779,12 @@ def validate_source_resilience_regressions():
 def validate_source_expansion(news, archive):
     from update_news import (
         SOURCES,
+        SOURCE_CONFIGS,
         SOURCE_BY_NAME,
+        SOURCE_STATUSES,
+        SOURCE_LIFECYCLE_VERSION,
+        SOURCE_SHADOW_PATH,
+        SHADOW_MAX_ITEMS_PER_SOURCE,
         SOURCE_EXPANSION_NAMES,
         SOURCE_EXPANSION_VERSION,
         SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE,
@@ -788,12 +793,23 @@ def validate_source_expansion(news, archive):
         source_accepts_item,
     )
 
-    names = [source["name"] for source in SOURCES]
-    urls = [source["url"] for source in SOURCES]
+    names = [source["name"] for source in SOURCE_CONFIGS]
+    urls = [source.get("url") for source in SOURCE_CONFIGS if source.get("url")]
     if len(names) != len(set(names)):
         fail("source registry contains duplicate source names")
     if len(urls) != len(set(urls)):
         fail("source registry contains duplicate feed URLs")
+
+    for source in SOURCE_CONFIGS:
+        name = source["name"]
+        status = source.get("status")
+        max_current = source.get("max_current")
+        if status not in SOURCE_STATUSES:
+            fail(f"{name}: invalid lifecycle status {status!r}")
+        if not isinstance(max_current, int) or max_current < 0:
+            fail(f"{name}: invalid max_current")
+        if status in {"shadow", "disabled"} and max_current != 0:
+            fail(f"{name}: {status} source must have max_current=0")
 
     expected = {
         "Google Research": "https://research.google/blog/rss/",
@@ -815,8 +831,16 @@ def validate_source_expansion(news, archive):
     health = archive.get("source_health")
     if not isinstance(health, dict):
         fail("archive source_health metadata missing")
-    if health.get("configured") != len(SOURCES):
+    if health.get("configured") != len(SOURCE_CONFIGS):
         fail("source_health configured count does not match source registry")
+    if health.get("publishing_configured") != len(SOURCES):
+        fail("source_health publishing_configured count does not match publishing registry")
+    if health.get("lifecycle_version") != SOURCE_LIFECYCLE_VERSION:
+        fail("source_health lifecycle version drift")
+    if archive.get("source_lifecycle_version") != SOURCE_LIFECYCLE_VERSION:
+        fail("archive source lifecycle version drift")
+    if news.get("source_lifecycle_version") != SOURCE_LIFECYCLE_VERSION:
+        fail("news source lifecycle version drift")
 
     archive_counts = health.get("archive_counts", {})
     current_counts = health.get("current_counts", {})
@@ -842,6 +866,29 @@ def validate_source_expansion(news, archive):
             f"{expansion_current} > {SOURCE_EXPANSION_MAX_CURRENT_TOTAL}"
         )
 
+    source_metrics = health.get("sources")
+    if not isinstance(source_metrics, dict):
+        fail("source_health sources metrics missing")
+    for source in SOURCE_CONFIGS:
+        name = source["name"]
+        metrics = source_metrics.get(name)
+        if not isinstance(metrics, dict):
+            fail(f"{name}: source metrics missing")
+        required_metrics = {
+            "status", "fetch_success", "fetch_failure", "parsed_candidate_count",
+            "accepted_candidate_count", "rejected_candidate_count", "duplicate_count",
+            "relevance_rejection_count", "quality_rejection_count", "publish_count",
+            "last_successful_fetch", "errors",
+        }
+        if not required_metrics.issubset(metrics):
+            fail(f"{name}: source metrics shape invalid")
+        if metrics.get("status") != source["status"]:
+            fail(f"{name}: source metrics status drift")
+        if not isinstance(metrics.get("errors"), list):
+            fail(f"{name}: source metrics errors must be a list")
+        if metrics.get("fetch_failure") and not metrics.get("errors"):
+            fail(f"{name}: fetch failure disappeared without a recorded error")
+
     actual_current_counts = {
         name: sum(1 for item in news.get("items", []) if item.get("source") == name)
         for name in names
@@ -852,6 +899,39 @@ def validate_source_expansion(news, archive):
                 f"{name}: source_health current count {current_counts.get(name, 0)} "
                 f"!= actual {count}"
             )
+    for source in SOURCE_CONFIGS:
+        name = source["name"]
+        status = source["status"]
+        current_count = actual_current_counts.get(name, 0)
+        archive_count = sum(1 for item in archive.get("items", []) if item.get("source") == name)
+        if status in {"shadow", "disabled"} and (current_count or archive_count):
+            fail(f"{name}: {status} source leaked into production current/archive")
+        if status in {"canary", "live"} and current_count > source["max_current"]:
+            fail(f"{name}: lifecycle current quota exceeded")
+        if status == "disabled" and source_metrics[name].get("publish_count", 0) != 0:
+            fail(f"{name}: disabled source recorded published signals")
+        if status == "shadow" and source_metrics[name].get("publish_count", 0) != 0:
+            fail(f"{name}: shadow source recorded published signals")
+
+    if not SOURCE_SHADOW_PATH.exists():
+        fail("source-shadow.json missing after build")
+    shadow = json.loads(SOURCE_SHADOW_PATH.read_text(encoding="utf-8"))
+    shadow_items = shadow.get("items")
+    if not isinstance(shadow_items, list):
+        fail("source-shadow items must be a list")
+    shadow_counts = {}
+    production_urls = {item.get("url") for item in archive.get("items", [])}
+    for item in shadow_items:
+        name = item.get("source")
+        config = SOURCE_BY_NAME.get(name)
+        if not config or config.get("status") != "shadow":
+            fail(f"source-shadow contains non-shadow source: {name}")
+        if item.get("url") in production_urls:
+            fail(f"{name}: shadow candidate leaked into production archive")
+        shadow_counts[name] = shadow_counts.get(name, 0) + 1
+    for name, count in shadow_counts.items():
+        if count > SHADOW_MAX_ITEMS_PER_SOURCE:
+            fail(f"{name}: shadow retention cap exceeded")
 
     google_research = SOURCE_BY_NAME["Google Research"]
     if source_accepts_item(

@@ -2,6 +2,8 @@ name: Update AI feed
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     - cron: "17 */3 * * *"
   workflow_dispatch:
@@ -32,6 +34,7 @@ jobs:
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Commit generated changes
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name "sxf-ai-bot"
           git config user.email "actions@users.noreply.github.com"

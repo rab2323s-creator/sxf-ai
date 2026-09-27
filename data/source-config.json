@@ -1,0 +1,81 @@
+{
+  "version": "sxf-source-lifecycle-v1",
+  "statuses": ["shadow", "canary", "live", "disabled"],
+  "sources": [
+    {
+      "name": "OpenAI",
+      "url": "https://openai.com/news/rss.xml",
+      "adapter": "rss",
+      "status": "live",
+      "max_current": 80
+    },
+    {
+      "name": "Google AI",
+      "url": "https://blog.google/technology/ai/rss/",
+      "adapter": "rss",
+      "status": "live",
+      "max_current": 80
+    },
+    {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "adapter": "rss",
+      "status": "live",
+      "max_current": 80
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.blog/changelog/feed/",
+      "adapter": "rss",
+      "status": "live",
+      "max_current": 80
+    },
+    {
+      "name": "Google Research",
+      "url": "https://research.google/blog/rss/",
+      "adapter": "rss",
+      "status": "live",
+      "max_current": 10,
+      "wave": "source-expansion-v1",
+      "filter": "google-research-ai",
+      "default_category": "Research"
+    },
+    {
+      "name": "Anthropic",
+      "url": null,
+      "official_page": "https://www.anthropic.com/news",
+      "adapter": "pending",
+      "status": "shadow",
+      "max_current": 0,
+      "quality_gate": "seo-signal-v1"
+    },
+    {
+      "name": "Meta",
+      "url": null,
+      "official_page": "https://ai.meta.com/blog/",
+      "adapter": "pending",
+      "status": "shadow",
+      "max_current": 0,
+      "quality_gate": "seo-signal-v1"
+    },
+    {
+      "name": "xAI",
+      "url": null,
+      "official_page": "https://x.ai/news",
+      "adapter": "pending",
+      "status": "shadow",
+      "max_current": 0,
+      "quality_gate": "seo-signal-v1"
+    },
+    {
+      "name": "Microsoft",
+      "url": "https://blogs.microsoft.com/feed/",
+      "official_page": "https://blogs.microsoft.com/",
+      "adapter": "rss",
+      "status": "shadow",
+      "max_current": 0,
+      "filter": "microsoft-ai",
+      "quality_gate": "seo-signal-v1"
+    }
+  ]
+}
