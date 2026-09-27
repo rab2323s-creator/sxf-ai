@@ -467,6 +467,95 @@ def validate_topic_relevance(archive):
         )
 
 
+def validate_source_expansion(news, archive):
+    from update_news import (
+        SOURCES,
+        SOURCE_BY_NAME,
+        SOURCE_EXPANSION_NAMES,
+        SOURCE_EXPANSION_VERSION,
+        SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE,
+        SOURCE_EXPANSION_MAX_CURRENT_TOTAL,
+        categorize,
+        source_accepts_item,
+    )
+
+    names = [source["name"] for source in SOURCES]
+    urls = [source["url"] for source in SOURCES]
+    if len(names) != len(set(names)):
+        fail("source registry contains duplicate source names")
+    if len(urls) != len(set(urls)):
+        fail("source registry contains duplicate feed URLs")
+
+    expected = {
+        "Google DeepMind": "https://deepmind.google/blog/rss.xml",
+        "Google Research": "https://research.google/blog/rss/",
+    }
+    for name, url in expected.items():
+        config = SOURCE_BY_NAME.get(name)
+        if not config:
+            fail(f"source expansion missing configured source: {name}")
+        if config.get("url") != url:
+            fail(f"{name}: feed URL drift: {config.get('url')!r}")
+        if config.get("wave") != "source-expansion-v1":
+            fail(f"{name}: source expansion wave marker missing")
+
+    if archive.get("source_expansion_version") != SOURCE_EXPANSION_VERSION:
+        fail("archive source expansion version drift")
+    if news.get("source_expansion_version") != SOURCE_EXPANSION_VERSION:
+        fail("news source expansion version drift")
+
+    health = archive.get("source_health")
+    if not isinstance(health, dict):
+        fail("archive source_health metadata missing")
+    if health.get("configured") != len(SOURCES):
+        fail("source_health configured count does not match source registry")
+
+    archive_counts = health.get("archive_counts", {})
+    current_counts = health.get("current_counts", {})
+    for name in SOURCE_EXPANSION_NAMES:
+        if archive_counts.get(name, 0) < 1:
+            fail(f"{name}: expansion source produced no archived signals")
+        if current_counts.get(name, 0) > SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
+            fail(f"{name}: current-source cap exceeded")
+
+    expansion_current = sum(current_counts.get(name, 0) for name in SOURCE_EXPANSION_NAMES)
+    if expansion_current > SOURCE_EXPANSION_MAX_CURRENT_TOTAL:
+        fail(
+            f"source expansion current share exceeded hard cap: "
+            f"{expansion_current} > {SOURCE_EXPANSION_MAX_CURRENT_TOTAL}"
+        )
+
+    actual_current_counts = {
+        name: sum(1 for item in news.get("items", []) if item.get("source") == name)
+        for name in names
+    }
+    for name, count in actual_current_counts.items():
+        if current_counts.get(name, 0) != count:
+            fail(
+                f"{name}: source_health current count {current_counts.get(name, 0)} "
+                f"!= actual {count}"
+            )
+
+    google_research = SOURCE_BY_NAME["Google Research"]
+    if source_accepts_item(
+        google_research,
+        "Designing faster datacenter networks",
+        "A systems architecture update about datacenter fabrics, routing, and scheduling.",
+    ):
+        fail("Google Research AI filter admitted a non-AI systems article")
+    if not source_accepts_item(
+        google_research,
+        "Scaling multimodal foundation models",
+        "New research on vision-language learning.",
+    ):
+        fail("Google Research AI filter rejected a clearly relevant AI article")
+
+    if categorize("A new method for biological discovery", "Google Research") != "Research":
+        fail("Google Research fallback category must be Research")
+    if categorize("Advancing scientific discovery with new systems", "Google DeepMind") != "Research":
+        fail("Google DeepMind fallback category must be Research")
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -495,6 +584,7 @@ def main():
     if len(archive.get("items",[])) < len(news["items"]):
         fail("archive must contain at least current feed items")
     validate_topic_relevance(archive)
+    validate_source_expansion(news, archive)
     validate_site_shell()
     validate_section_counts(news)
     for item in news["items"]:

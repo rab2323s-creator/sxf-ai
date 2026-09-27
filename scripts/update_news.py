@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import urllib.request
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 from html import escape, unescape
@@ -39,11 +40,37 @@ STATIC_SHELL_PAGES = {
 }
 
 SOURCES = [
-    ("OpenAI", "https://openai.com/news/rss.xml"),
-    ("Google AI", "https://blog.google/technology/ai/rss/"),
-    ("Hugging Face", "https://huggingface.co/blog/feed.xml"),
-    ("GitHub", "https://github.blog/changelog/feed/"),
+    {"name": "OpenAI", "url": "https://openai.com/news/rss.xml"},
+    {"name": "Google AI", "url": "https://blog.google/technology/ai/rss/"},
+    {"name": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml"},
+    {"name": "GitHub", "url": "https://github.blog/changelog/feed/"},
+    {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/blog/rss.xml",
+        "wave": "source-expansion-v1",
+        "default_category": "Research",
+    },
+    {
+        "name": "Google Research",
+        "url": "https://research.google/blog/rss/",
+        "wave": "source-expansion-v1",
+        "filter": "google-research-ai",
+        "default_category": "Research",
+    },
 ]
+SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
+SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
+SOURCE_EXPANSION_NAMES = {"Google DeepMind", "Google Research"}
+SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE = 10
+SOURCE_EXPANSION_MAX_CURRENT_TOTAL = 16
+GOOGLE_RESEARCH_AI_PATTERN = re.compile(
+    r"\bai\b|\bartificial intelligence\b|\bmachine learning\b|\bml\b|"
+    r"\blanguage models?\b|\bllms?\b|\bgenerative\b|\btransformers?\b|"
+    r"\bneural\b|\bmultimodal\b|\bvision\b|\bspeech\b|\bagents?\b|"
+    r"\brobotics?\b|\breinforcement learning\b|\bdiffusion\b|\bembeddings?\b|"
+    r"\bdeep learning\b|\bfoundation models?\b|\bgemini\b",
+    re.I,
+)
 USER_AGENT = "SXF-AI-Radar/1.1 (+https://sxf.si/)"
 MAX_ITEMS = 80
 MAX_AGE_DAYS = 21
@@ -260,7 +287,8 @@ def categorize(title, source):
     if re.search(r"\bgpt[- ]\d+(?:\.\d+)?\b|\bclaude(?:\s+[a-z]+)?\s+\d+(?:\.\d+)?\b|\bgemini(?:\s+\d+(?:\.\d+)?)?\b|\blfm\d+(?:\.\d+)?\b|\bllm\b|\bvision-language model\b|\bmultimodal model\b|\breasoning model\b|\bembedding model\b", t):
         return "Models"
 
-    return "Tools"
+    source_config = SOURCE_BY_NAME.get(source, {})
+    return source_config.get("default_category", "Tools")
 
 def classify_tags(title, source, category):
     t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
@@ -285,16 +313,33 @@ def classify_tags(title, source, category):
         tags.append("Open Source AI")
     return list(dict.fromkeys(tags))
 
-def fetch(url):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return r.read()
+def fetch(url, attempts=3):
+    last_error = None
+    for attempt in range(attempts):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=25) as r:
+                return r.read()
+        except Exception as exc:
+            last_error = exc
+            if attempt + 1 < attempts:
+                time.sleep(1.0 * (2 ** attempt))
+    raise last_error
+
+def source_accepts_item(source_config, title, summary):
+    filter_name = source_config.get("filter")
+    if not filter_name:
+        return True
+    if filter_name == "google-research-ai":
+        return bool(GOOGLE_RESEARCH_AI_PATTERN.search(f"{title} {summary}"))
+    raise RuntimeError(f"Unknown source filter: {filter_name}")
+
 
 def parse_feed(source, body):
     root = ET.fromstring(body)
@@ -322,7 +367,10 @@ def parse_feed(source, body):
                 rows.append((title, link, published, summary))
 
     output = []
+    source_config = SOURCE_BY_NAME.get(source, {"name": source})
     for title, link, published, summary in rows:
+        if not source_accepts_item(source_config, title, summary):
+            continue
         category = categorize(title, source)
         output.append({
             "title": title,
@@ -6758,10 +6806,38 @@ def update_sitemap(items):
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
+def select_current_items(archive, cutoff):
+    selected = []
+    expansion_counts = {name: 0 for name in SOURCE_EXPANSION_NAMES}
+    expansion_total = 0
+
+    for item in archive:
+        published = parse_date(item.get("published", ""))
+        if published is None or published < cutoff:
+            continue
+
+        source = item.get("source", "")
+        if source in SOURCE_EXPANSION_NAMES:
+            if expansion_counts[source] >= SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
+                continue
+            if expansion_total >= SOURCE_EXPANSION_MAX_CURRENT_TOTAL:
+                continue
+            expansion_counts[source] += 1
+            expansion_total += 1
+
+        selected.append(item)
+        if len(selected) >= MAX_ITEMS:
+            break
+
+    return selected
+
+
 def main():
     incoming = []
     errors = []
-    for source, url in SOURCES:
+    for source_config in SOURCES:
+        source = source_config["name"]
+        url = source_config["url"]
         try:
             incoming.extend(parse_feed(source, fetch(url)))
         except Exception as exc:
@@ -6783,14 +6859,26 @@ def main():
         raise RuntimeError("No valid signals available after archive merge")
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
-    current = [
-        item for item in archive
-        if parse_date(item["published"]) is not None and parse_date(item["published"]) >= cutoff
-    ][:MAX_ITEMS]
+    current = select_current_items(archive, cutoff)
     if not current:
         current = archive[:MAX_ITEMS]
 
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    archive_source_counts = {
+        source_config["name"]: sum(1 for item in archive if item.get("source") == source_config["name"])
+        for source_config in SOURCES
+    }
+    current_source_counts = {
+        source_config["name"]: sum(1 for item in current if item.get("source") == source_config["name"])
+        for source_config in SOURCES
+    }
+    source_health = {
+        "configured": len(SOURCES),
+        "archive_counts": archive_source_counts,
+        "current_counts": current_source_counts,
+        "errors": errors,
+    }
+
     ARCHIVE_OUT.parent.mkdir(parents=True, exist_ok=True)
     ARCHIVE_OUT.write_text(json.dumps({
         "updated_at": now_iso,
@@ -6798,6 +6886,8 @@ def main():
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
+        "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_health": source_health,
         "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -6807,6 +6897,8 @@ def main():
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
+        "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_health": source_health,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     update_index(current)
@@ -6816,7 +6908,10 @@ def main():
     update_sitemap(archive)
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
-        f"enriched {enriched} summaries; source errors: {len(errors)}"
+        f"enriched {enriched} summaries; source errors: {len(errors)}; "
+        f"source counts: {current_source_counts}"
     )
+    for error in errors:
+        print(f"Source warning: {error}")
 if __name__ == "__main__":
     main()
