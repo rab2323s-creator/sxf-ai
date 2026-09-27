@@ -5485,6 +5485,17 @@ def guides_index_html(items, current_items):
             "read_time": "25 min",
         },
         {
+            "href": "/guides/how-to-build-ai-super-agent/",
+            "category": "Agents · Architecture",
+            "categories": ["agents", "research", "security", "coding"],
+            "kicker": "AGENT ARCHITECTURE",
+            "title": "How to Build an AI Super Agent",
+            "description": "A practical architecture guide to orchestrators, specialist agents, MCP and tools, memory, evaluation, permissions, cost and production reliability.",
+            "meta": "Orchestration · MCP · Memory · Evals",
+            "updated": "Sep 28, 2026",
+            "read_time": "30 min",
+        },
+        {
             "href": "/guides/ai-super-agents/",
             "category": "Agents · Superintelligence",
             "categories": ["agents", "research", "superintelligence"],
