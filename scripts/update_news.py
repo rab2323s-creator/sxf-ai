@@ -50,6 +50,7 @@ SOURCES = [
         "wave": "source-expansion-v1",
         "filter": "google-research-ai",
         "default_category": "Research",
+        "summary_min_chars": 90,
     },
 ]
 SOURCE_BY_NAME = {config["name"]: config for config in SOURCES}
@@ -399,17 +400,36 @@ def fetch_meta_description(url):
         pass
     return ""
 
+def source_summary_is_substantive(source, summary):
+    value = clean_summary(summary)
+    if not value:
+        return False
+    minimum = int(SOURCE_BY_NAME.get(source, {}).get("summary_min_chars", 1))
+    return len(value) >= minimum
+
+
 def enrich_summaries(items, existing_by_url):
     enriched = 0
     floor = datetime.min.replace(tzinfo=timezone.utc)
     for item in sorted(items, key=lambda x: parse_date(x["published"]) or floor, reverse=True):
-        if enriched >= MAX_META_ENRICH_PER_RUN:
-            break
         previous = existing_by_url.get(item["url"], {})
-        if item.get("summary") or previous.get("summary"):
+        source = item.get("source", "")
+        current_summary = clean_summary(item.get("summary", ""))
+        previous_summary = clean_summary(previous.get("summary", ""))
+
+        if source_summary_is_substantive(source, current_summary):
             continue
+
+        if source_summary_is_substantive(source, previous_summary):
+            item["summary"] = previous_summary
+            item["summary_origin"] = previous.get("summary_origin", "")
+            continue
+
+        if enriched >= MAX_META_ENRICH_PER_RUN:
+            continue
+
         summary = fetch_meta_description(item["url"])
-        if summary:
+        if summary and len(summary) > len(current_summary):
             item["summary"] = summary
             item["summary_origin"] = "source-meta"
             enriched += 1
