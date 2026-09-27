@@ -469,6 +469,8 @@ def validate_how_to_build_super_agent():
             fail(f"How-to super-agent guide missing required content: {marker}")
     if text.count('data-image-slot=') != 4:
         fail("How-to super-agent guide must reserve exactly four research image slots")
+    if '<img src="/guides/how-to-build-ai-super-agent/images/ai-super-agent-architecture.webp"' not in text:
+        fail("How-to super-agent guide must render the first research image")
     required_image_paths = [
         "/guides/how-to-build-ai-super-agent/images/ai-super-agent-architecture.webp",
         "/guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp",
