@@ -239,7 +239,7 @@ def validate_model_pricing_catalog():
                 if not isinstance(value, (int, float)) or value <= 0:
                     fail(f"{model_id}: invalid long-context {field} multiplier")
 
-    from update_news import MODEL_REFERENCE
+    from update_news import MODEL_REFERENCE, active_standard_price, estimate_standard_cost
     forbidden_variant_fields = {
         "context", "max_output", "knowledge_cutoff",
         "input_price", "cached_price", "output_price", "source",
@@ -249,6 +249,30 @@ def validate_model_pricing_catalog():
             duplicated = forbidden_variant_fields.intersection(variant)
             if duplicated:
                 fail(f"{family} variant {variant.get('model_id')}: catalog facts duplicated in MODEL_REFERENCE: {sorted(duplicated)}")
+
+    def expect_cost(label, actual, expected):
+        if abs(actual - expected) > 1e-9:
+            fail(f"{label}: calculated cost {actual} != expected {expected}")
+
+    expect_cost("GPT-6 Sol short request", estimate_standard_cost("gpt-6-sol", 100_000, 10_000)[0], 0.30)
+    expect_cost("GPT-6 Sol long request", estimate_standard_cost("gpt-6-sol", 500_000, 50_000)[0], 2.75)
+    expect_cost(
+        "GPT-6 Sol aggregate short-context volume",
+        estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000, pricing_input_tokens=100_000)[0],
+        30.0,
+    )
+    expect_cost("GPT-6 Astra long request", estimate_standard_cost("gpt-6-astra", 500_000, 50_000)[0], 13.75)
+    expect_cost("Claude Opus 5.5 short request", estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0], 0.60)
+    expect_cost("Claude Fable 5.1 short request", estimate_standard_cost("claude-fable-5-1", 100_000, 10_000)[0], 1.50)
+    expect_cost("Gemini 3.8 Flash 2026 short request", estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2026-09-27")[0], 0.1125)
+    expect_cost("Gemini 3.8 Flash 2027 short request", estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2027-01-01")[0], 0.225)
+
+    gemini_2026 = active_standard_price("gemini-3.8-flash", "2026-12-31")
+    gemini_2027 = active_standard_price("gemini-3.8-flash", "2027-01-01")
+    if (gemini_2026["input"], gemini_2026["output"]) != (0.75, 3.75):
+        fail("Gemini 3.8 Flash 2026 pricing schedule drift")
+    if (gemini_2027["input"], gemini_2027["output"]) != (1.5, 7.5):
+        fail("Gemini 3.8 Flash 2027 pricing schedule drift")
 
 
 def main():
