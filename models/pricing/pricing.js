@@ -145,7 +145,7 @@
       "Cached " + rateMoney(rates.cached_input) + " / MTok",
       "Output " + rateMoney(rates.output) + " / MTok"
     ];
-    rateProfileNode.innerHTML = "<strong>" + profile[0] + "</strong><br>" + profile.slice(1).join(" · ");
+    rateProfileNode.textContent = profile.join(" · ");
 
     const warnings = [];
     if (long) {
