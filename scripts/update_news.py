@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
+MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -69,6 +70,90 @@ def clean_summary(value):
     value = re.sub(r"\s*The post .+? appeared first on The GitHub Blog\s*\.?$", "", value, flags=re.I)
     value = re.sub(r"\s+", " ", value).strip()
     return value[:900]
+
+def load_model_pricing_catalog():
+    data = json.loads(MODEL_PRICING_PATH.read_text(encoding="utf-8"))
+    models = data.get("models")
+    if not isinstance(models, list) or not models:
+        raise RuntimeError("model-pricing.json must contain a non-empty models array")
+    by_id = {}
+    for model in models:
+        model_id = model.get("model_id")
+        if not model_id or model_id in by_id:
+            raise RuntimeError(f"Invalid or duplicate model_id in model-pricing.json: {model_id}")
+        by_id[model_id] = model
+    return data, by_id
+
+
+MODEL_PRICING_CATALOG, MODEL_PRICING_BY_ID = load_model_pricing_catalog()
+
+
+def model_catalog_entry(model_id):
+    try:
+        return MODEL_PRICING_BY_ID[model_id]
+    except KeyError as exc:
+        raise KeyError(f"Model is missing from canonical pricing catalog: {model_id}") from exc
+
+
+def active_standard_price(model_id, on_date=None):
+    model = model_catalog_entry(model_id)
+    schedule = model.get("pricing", {}).get("standard", [])
+    target = on_date or datetime.now(timezone.utc).date()
+    if isinstance(target, str):
+        target = datetime.fromisoformat(target).date()
+
+    for period in schedule:
+        start = datetime.fromisoformat(period["start"]).date()
+        end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+        if target >= start and (end is None or target <= end):
+            return period
+    raise RuntimeError(f"No Standard pricing period for {model_id} on {target.isoformat()}")
+
+
+def effective_standard_price(model_id, input_tokens=0, on_date=None):
+    model = model_catalog_entry(model_id)
+    rates = dict(active_standard_price(model_id, on_date))
+    long_context = model.get("pricing", {}).get("long_context")
+    if long_context and input_tokens > int(long_context["threshold_input_tokens"]):
+        multipliers = long_context["multipliers"]
+        for key in ("input", "cached_input", "cache_write", "output"):
+            if key in rates and key in multipliers:
+                rates[key] = rates[key] * multipliers[key]
+        rates["long_context_applied"] = True
+    else:
+        rates["long_context_applied"] = False
+    return rates
+
+
+def catalog_price_label(value):
+    value = float(value)
+    if value >= 1:
+        return f"${value:,.2f}"
+    return f"${value:.4f}".rstrip("0").rstrip(".")
+
+
+def catalog_reference_variant(variant):
+    model = model_catalog_entry(variant["model_id"])
+    price = active_standard_price(variant["model_id"])
+    cutoff = model.get("knowledge_cutoff")
+    if cutoff and len(cutoff) == 10:
+        cutoff = datetime.fromisoformat(cutoff).strftime("%b %-d, %Y")
+    elif cutoff and len(cutoff) == 7:
+        cutoff = datetime.fromisoformat(cutoff + "-01").strftime("%b %Y")
+    else:
+        cutoff = cutoff or "Not listed"
+
+    return {
+        **variant,
+        "context": f'{int(model["context_window"]):,}',
+        "max_output": f'{int(model["max_output"]):,}',
+        "knowledge_cutoff": cutoff,
+        "input_price": catalog_price_label(price["input"]),
+        "cached_price": catalog_price_label(price["cached_input"]),
+        "output_price": catalog_price_label(price["output"]),
+        "source": model["official_sources"][0],
+    }
+
 
 def parse_date(value):
     if not value:
@@ -787,39 +872,18 @@ MODEL_REFERENCE = {
                 "model_id": "gpt-5.6-sol",
                 "positioning": "Flagship capability",
                 "best_for": "Complex professional work, coding, research, computer use and demanding agentic workflows",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$4.00",
-                "cached_price": "$0.40",
-                "output_price": "$20.00",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
             },
             {
                 "name": "GPT-5.6 Terra",
                 "model_id": "gpt-5.6-terra",
                 "positioning": "Intelligence / cost balance",
                 "best_for": "Everyday production workloads that need strong reasoning at a lower unit cost than Sol",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$2.00",
-                "cached_price": "$0.20",
-                "output_price": "$12.00",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
             },
             {
                 "name": "GPT-5.6 Luna",
                 "model_id": "gpt-5.6-luna",
                 "positioning": "Efficiency / volume",
                 "best_for": "Cost-sensitive, high-volume and latency-conscious workloads",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Feb 16, 2026",
-                "input_price": "$0.20",
-                "cached_price": "$0.02",
-                "output_price": "$1.20",
-                "source": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
             },
         ],
         "sources": [
@@ -853,42 +917,21 @@ MODEL_REFERENCE = {
                 "model_id": "gpt-6-astra",
                 "positioning": "Highest capability",
                 "best_for": "Complex reasoning, coding, computer use, research and document creation",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Apr 30, 2026",
-                "input_price": "$10.00",
-                "cached_price": "$1.00",
-                "output_price": "$50.00",
                 "released": "Sep 3, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
             },
             {
                 "name": "GPT-6 Sol",
                 "model_id": "gpt-6-sol",
                 "positioning": "Capability / cost balance",
                 "best_for": "Complex coding and agentic workflows",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "Apr 20, 2026",
-                "input_price": "$2.00",
-                "cached_price": "$0.20",
-                "output_price": "$10.00",
                 "released": "Sep 22, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
             },
             {
                 "name": "GPT-6 Luna",
                 "model_id": "gpt-6-luna",
                 "positioning": "Efficiency",
                 "best_for": "Focused, high-volume and cost-sensitive workloads",
-                "context": "1,050,000",
-                "max_output": "128,000",
-                "knowledge_cutoff": "May 18, 2026",
-                "input_price": "$0.10",
-                "cached_price": "$0.01",
-                "output_price": "$0.50",
                 "released": "Sep 22, 2026",
-                "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
             },
         ],
         "sources": [
@@ -919,7 +962,7 @@ def model_reference(name):
 def gpt56_reference_html():
     ref = MODEL_REFERENCE["GPT-5.6"]
     verified = datetime.now(timezone.utc).date().isoformat()
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     source_links = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
         for label, url in ref["sources"]
@@ -1297,7 +1340,7 @@ def model_reference_html(name):
     if not ref:
         return ""
 
-    variants = ref["variants"]
+    variants = [catalog_reference_variant(v) for v in ref["variants"]]
     selected = next((v for v in variants if v["name"].lower() == name.lower()), None)
     focus = selected or None
     verified = datetime.now(timezone.utc).date().isoformat()
