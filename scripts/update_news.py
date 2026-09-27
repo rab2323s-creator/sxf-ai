@@ -10,6 +10,7 @@ import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 from html import escape, unescape
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -378,6 +379,34 @@ def parse_feed(source, body):
         })
     return output
 
+class MetaDescriptionParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.values = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != "meta":
+            return
+        values = {str(key).lower(): value for key, value in attrs if key and value}
+        marker = (values.get("name") or values.get("property") or "").lower()
+        content = values.get("content", "")
+        if marker in {"description", "og:description"} and content:
+            self.values.append(content)
+
+
+def extract_meta_description(raw):
+    parser = MetaDescriptionParser()
+    try:
+        parser.feed(raw)
+    except Exception:
+        return ""
+    for candidate in parser.values:
+        value = clean_summary(candidate)
+        if 40 <= len(value) <= 900:
+            return value
+    return ""
+
+
 def fetch_meta_description(url):
     try:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"})
@@ -386,19 +415,9 @@ def fetch_meta_description(url):
             if "html" not in ctype:
                 return ""
             raw = r.read(350000).decode("utf-8", "ignore")
-        patterns = [
-            r'<meta[^>]+(?:name|property)=["\'](?:description|og:description)["\'][^>]+content=["\']([^"\']+)["\']',
-            r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:name|property)=["\'](?:description|og:description)["\']',
-        ]
-        for pattern in patterns:
-            m = re.search(pattern, raw, re.I | re.S)
-            if m:
-                value = clean_summary(m.group(1))
-                if 40 <= len(value) <= 900:
-                    return value
+        return extract_meta_description(raw)
     except Exception:
-        pass
-    return ""
+        return ""
 
 def source_summary_is_substantive(source, summary):
     value = clean_summary(summary)
