@@ -1,0 +1,1335 @@
+{
+  "schema_version": "1.0",
+  "name": "SXF AI Model Change Ledger",
+  "description": "Append-only, hash-chained history of source-backed changes to SXF model facts. Editorial positioning is intentionally excluded.",
+  "baseline_verified_at": "2026-09-27",
+  "tracked_fields": [
+    "provider",
+    "family",
+    "model",
+    "aliases",
+    "context_window",
+    "max_output",
+    "knowledge_cutoff",
+    "reasoning",
+    "modalities",
+    "pricing",
+    "availability",
+    "status"
+  ],
+  "immutability_policy": "Existing ledger events are never rewritten by the sync engine. Models must remain in the catalog; retirement is represented as a sourced status change.",
+  "state": {
+    "claude-fable-5-1": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_34c506eeef836fb553a9",
+      "snapshot_hash": "e1e8a590f6c08bc9be9775315190cf9cbce220839dd288536faaef4bff8b505e",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Fable 5.1",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-01",
+              "end": null,
+              "input": 10,
+              "cached_input": 0.25,
+              "cache_write_5m": 12.5,
+              "cache_write_1h": 20,
+              "output": 50
+            }
+          ]
+        }
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_185a3a58e8ddec32370e",
+      "snapshot_hash": "7b269d98f2357281b97183a8ed24d2c56551cd2ecb1f62f20ab8d315459fe61d",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 4",
+        "model": "Claude Haiku 4.5",
+        "aliases": [
+          "claude-haiku-4-5"
+        ],
+        "context_window": 200000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-02",
+        "reasoning": {
+          "type": "extended thinking",
+          "levels": [
+            "manual budget"
+          ],
+          "default": null,
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-10-15",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.1,
+              "cache_write_5m": 1.25,
+              "cache_write_1h": 2,
+              "output": 5
+            }
+          ]
+        }
+      }
+    },
+    "claude-opus-5-5": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_44e82bc9c664a31fca91",
+      "snapshot_hash": "c00c5727176aa27e60c5c5c0c847ea6b2df2d195a1e6157dd14e03efb885f0dc",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Opus 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "medium",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.2,
+              "cache_write_5m": 5,
+              "cache_write_1h": 8,
+              "output": 20
+            }
+          ]
+        }
+      }
+    },
+    "claude-sonnet-5": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_cb1369c9b57efd387212",
+      "snapshot_hash": "f563a5b09028465ee546706324d569192f2b48e68c4c63b2ff7e0cdb1d181cb8",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Sonnet 5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-01",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-06-30",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            }
+          ]
+        }
+      }
+    },
+    "gemini-3.8-flash": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_0b4c945a350cb3a9ecfe",
+      "snapshot_hash": "97279512124206686db3cc6faf1ea8ff6054c1167f57598d5296114280179c02",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-02",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      }
+    },
+    "gpt-5.6-luna": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_2c7c5b7821a2b51c547e",
+      "snapshot_hash": "5672191599727270ab186468fb0b0698bdf08377b42fd989191537d09f8f7740",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Luna",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-30",
+              "end": null,
+              "input": 0.2,
+              "cached_input": 0.02,
+              "cache_write": 0.25,
+              "output": 1.2
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    },
+    "gpt-5.6-sol": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_7c44878fcb60b82e3adb",
+      "snapshot_hash": "b3c408f260ff093c4fce424cd48759c51afd886d8af85bb3ac71bf55294791cf",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Sol",
+        "aliases": [
+          "gpt-5.6"
+        ],
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-09",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.4,
+              "cache_write": 5,
+              "output": 20
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    },
+    "gpt-5.6-terra": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_d047a80369f9bbfe9a74",
+      "snapshot_hash": "5ecc5409ccb18e29a4108ec8c990bd814c76784d0313b6889652aa99405846f3",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Terra",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-30",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write": 2.5,
+              "output": 12
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    },
+    "gpt-6-astra": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_cd339bfc38a22ab47b70",
+      "snapshot_hash": "82b5fd658ffaacacf43bc02b7af2a5ba2c85d1e4751868f5a222cf3c37b05d27",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Astra",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-04-30",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-03",
+              "end": null,
+              "input": 10,
+              "cached_input": 1,
+              "cache_write": 12.5,
+              "output": 50
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    },
+    "gpt-6-luna": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_feb56ee653729cbc2b74",
+      "snapshot_hash": "36c1796671d83a72bbea0e651b819cc6f370c6370da15cd6f908b28c5eb8968b",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Luna",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-05-18",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "cache_write": 0.125,
+              "output": 0.5
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    },
+    "gpt-6-sol": {
+      "last_event_verified_at": "2026-09-27",
+      "last_event_id": "evt_68d2a047223acf4b1353",
+      "snapshot_hash": "551cdeba498f78a01bf7efedf087885e94ce0708f5554fce5ead6c66f170e75c",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Sol",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-04-20",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write": 2.5,
+              "output": 10
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "sequence": 1,
+      "type": "baseline",
+      "model_id": "claude-fable-5-1",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": null,
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Fable 5.1",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-01",
+              "end": null,
+              "input": 10,
+              "cached_input": 0.25,
+              "cache_write_5m": 12.5,
+              "cache_write_1h": 20,
+              "output": 50
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "family": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "model": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_34c506eeef836fb553a9",
+      "event_hash": "34c506eeef836fb553a94cf1f01d2de03df80d96cc24cc720b1d9bb667580f2a"
+    },
+    {
+      "sequence": 2,
+      "type": "baseline",
+      "model_id": "claude-haiku-4-5-20251001",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "34c506eeef836fb553a94cf1f01d2de03df80d96cc24cc720b1d9bb667580f2a",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 4",
+        "model": "Claude Haiku 4.5",
+        "aliases": [
+          "claude-haiku-4-5"
+        ],
+        "context_window": 200000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-02",
+        "reasoning": {
+          "type": "extended thinking",
+          "levels": [
+            "manual budget"
+          ],
+          "default": null,
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-10-15",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.1,
+              "cache_write_5m": 1.25,
+              "cache_write_1h": 2,
+              "output": 5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "family": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "model": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "aliases": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_185a3a58e8ddec32370e",
+      "event_hash": "185a3a58e8ddec32370ee5f53e890394e3188df210b9ed8b53c3c1990b433037"
+    },
+    {
+      "sequence": 3,
+      "type": "baseline",
+      "model_id": "claude-opus-5-5",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "185a3a58e8ddec32370ee5f53e890394e3188df210b9ed8b53c3c1990b433037",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Opus 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "medium",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.2,
+              "cache_write_5m": 5,
+              "cache_write_1h": 8,
+              "output": 20
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "family": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "model": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_44e82bc9c664a31fca91",
+      "event_hash": "44e82bc9c664a31fca9167acdd360c775680dc73d1dd8a8c7e97e4bc35657057"
+    },
+    {
+      "sequence": 4,
+      "type": "baseline",
+      "model_id": "claude-sonnet-5",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "44e82bc9c664a31fca9167acdd360c775680dc73d1dd8a8c7e97e4bc35657057",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Sonnet 5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-01",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-06-30",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "family": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "model": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_cb1369c9b57efd387212",
+      "event_hash": "cb1369c9b57efd3872123e8fe04bb568236e554ed22b9dd5e8f8aae9f30c96f4"
+    },
+    {
+      "sequence": 5,
+      "type": "baseline",
+      "model_id": "gemini-3.8-flash",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "cb1369c9b57efd3872123e8fe04bb568236e554ed22b9dd5e8f8aae9f30c96f4",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-02",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_0b4c945a350cb3a9ecfe",
+      "event_hash": "0b4c945a350cb3a9ecfe42bcc62f7f34b532fc622a6fbe1c65cfc804861b5612"
+    },
+    {
+      "sequence": 6,
+      "type": "baseline",
+      "model_id": "gpt-5.6-luna",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "0b4c945a350cb3a9ecfe42bcc62f7f34b532fc622a6fbe1c65cfc804861b5612",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Luna",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-30",
+              "end": null,
+              "input": 0.2,
+              "cached_input": 0.02,
+              "cache_write": 0.25,
+              "output": 1.2
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "family": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "model": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_2c7c5b7821a2b51c547e",
+      "event_hash": "2c7c5b7821a2b51c547ef3a61ae749fef3eda7bbb69b1682018240e755cce233"
+    },
+    {
+      "sequence": 7,
+      "type": "baseline",
+      "model_id": "gpt-5.6-sol",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "2c7c5b7821a2b51c547ef3a61ae749fef3eda7bbb69b1682018240e755cce233",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Sol",
+        "aliases": [
+          "gpt-5.6"
+        ],
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-09",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.4,
+              "cache_write": 5,
+              "output": 20
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "family": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "model": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "aliases": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_7c44878fcb60b82e3adb",
+      "event_hash": "7c44878fcb60b82e3adb0e4c456c9144ae1fc2009f4933bad899912d6c91afaf"
+    },
+    {
+      "sequence": 8,
+      "type": "baseline",
+      "model_id": "gpt-5.6-terra",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "7c44878fcb60b82e3adb0e4c456c9144ae1fc2009f4933bad899912d6c91afaf",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Terra",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-30",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write": 2.5,
+              "output": 12
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "family": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "model": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_d047a80369f9bbfe9a74",
+      "event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f"
+    },
+    {
+      "sequence": 9,
+      "type": "baseline",
+      "model_id": "gpt-6-astra",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Astra",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-04-30",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-03",
+              "end": null,
+              "input": 10,
+              "cached_input": 1,
+              "cache_write": 12.5,
+              "output": 50
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_cd339bfc38a22ab47b70",
+      "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
+    },
+    {
+      "sequence": 10,
+      "type": "baseline",
+      "model_id": "gpt-6-luna",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Luna",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-05-18",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "cache_write": 0.125,
+              "output": 0.5
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "family": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "model": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_feb56ee653729cbc2b74",
+      "event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a"
+    },
+    {
+      "sequence": 11,
+      "type": "baseline",
+      "model_id": "gpt-6-sol",
+      "verified_at": "2026-09-27",
+      "previous_event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6 Sol",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-04-20",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write": 2.5,
+              "output": 10
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "family": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "model": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_68d2a047223acf4b1353",
+      "event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
+    }
+  ],
+  "chain_head": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
+}
