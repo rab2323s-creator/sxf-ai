@@ -495,6 +495,7 @@ BRIEF_DIR = ROOT / "brief"
 COMPARE_DIR = ROOT / "compare"
 GUIDES_DIR = ROOT / "guides"
 SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
+PRICING_DIR = ROOT / "models" / "pricing"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
@@ -6170,6 +6171,247 @@ def brief_index_html(items, issue_date):
       <section class="brief-archive shell"><p class="eyebrow">ARCHIVE</p><div>{archive_html}</div></section>
     </main>{page_footer()}</body></html>'''
 
+def model_pricing_page_html():
+    canonical = f"{BASE_URL}/models/pricing/"
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    models = MODEL_PRICING_CATALOG["models"]
+    providers = sorted({model["provider"] for model in models})
+
+    def row_html(model):
+        price = active_standard_price(model["model_id"], verified)
+        notes = []
+        long_context = model.get("pricing", {}).get("long_context")
+        if long_context:
+            notes.append(
+                f'Long context &gt; {int(long_context["threshold_input_tokens"]):,}: '
+                f'{long_context["multipliers"]["input"]:g}× input/cache · '
+                f'{long_context["multipliers"]["output"]:g}× output'
+            )
+        schedule = model.get("pricing", {}).get("standard", [])
+        if len(schedule) > 1:
+            next_period = schedule[1]
+            notes.append(
+                f'From {escape(next_period["start"])}: '
+                f'{escape(catalog_price_label(next_period["input"]))} input · '
+                f'{escape(catalog_price_label(next_period["output"]))} output'
+            )
+        for note in model.get("notes", [])[:1]:
+            notes.append(escape(note))
+
+        note_html = "".join(f'<span class="pricing-rule">{note}</span>' for note in notes)
+        search = " ".join([
+            model["model"], model["model_id"], model["provider"], model.get("family", ""),
+            model.get("positioning", ""),
+        ]).lower()
+        source = model["official_sources"][0]
+        return f'''<tr data-pricing-row data-provider="{escape(model["provider"], quote=True)}" data-search="{escape(search, quote=True)}">
+          <th class="pricing-model-cell" scope="row">
+            <a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a>
+            <small>{escape(model["model_id"])}</small>
+            {note_html}
+          </th>
+          <td>{escape(model["provider"])}</td>
+          <td>{int(model["context_window"]):,}<small>tokens</small></td>
+          <td>{int(model["max_output"]):,}<small>tokens</small></td>
+          <td class="price">{escape(catalog_price_label(price["input"]))}</td>
+          <td class="price">{escape(catalog_price_label(price["cached_input"]))}</td>
+          <td class="price">{escape(catalog_price_label(price["output"]))}</td>
+          <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr>'''
+
+    rows = "".join(row_html(model) for model in models)
+    filter_buttons = ['<button class="pricing-filter is-active" type="button" data-pricing-filter="all">All</button>'] + [
+        f'<button class="pricing-filter" type="button" data-pricing-filter="{escape(provider, quote=True)}">{escape(provider)}</button>'
+        for provider in providers
+    ]
+
+    faq = [
+        (
+            "What pricing does the SXF model database use?",
+            "The table normalizes vendor-listed Standard API token pricing in USD per one million tokens. It does not mix Batch, Flex, Fast, Priority, regional, enterprise, or negotiated pricing into the headline rates."
+        ),
+        (
+            "Does the calculator include tool or grounding charges?",
+            "No. The calculator estimates direct text-token charges only. Search, grounding, code execution, tools, cache storage, regional uplifts, and other add-on charges are excluded unless they are explicitly represented as token rates."
+        ),
+        (
+            "How does long-context pricing work for OpenAI models in this database?",
+            "For cataloged OpenAI models with a long-context rule, requests above 272,000 total input tokens use the published higher input, cache, and output rates for the full request. The calculator applies that rule automatically."
+        ),
+        (
+            "Why does Gemini 3.8 Flash show a future price change?",
+            "Google published introductory Standard pricing through December 31, 2026 and higher Standard pricing beginning January 1, 2027. The calculator selects the stored pricing period from the billing date."
+        ),
+    ]
+    faq_html = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in faq
+    )
+
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical + "#webpage",
+                "url": canonical,
+                "name": "AI Model Pricing & API Specs Database | SXF / AI",
+                "description": "Normalized Standard API pricing, context windows and output limits for selected OpenAI, Anthropic and Google AI models, with an interactive token-cost calculator.",
+                "dateModified": verified,
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "about": {"@type": "Thing", "name": "AI model API pricing"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "Dataset",
+                "@id": canonical + "#dataset",
+                "name": MODEL_PRICING_CATALOG["name"],
+                "description": MODEL_PRICING_CATALOG["description"],
+                "dateModified": verified,
+                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "distribution": {
+                    "@type": "DataDownload",
+                    "encodingFormat": "application/json",
+                    "contentUrl": f"{BASE_URL}/data/model-pricing.json",
+                },
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
+                    {"@type": "ListItem", "position": 3, "name": "Pricing", "item": canonical},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                    for question, answer in faq
+                ],
+            },
+        ],
+    }
+
+    description = (
+        "Compare Standard API token pricing, cached-input rates, context windows and output limits "
+        "for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculator."
+    )
+    return f'''<!doctype html><html lang="en">{page_head("AI Model Pricing & API Specs Database | SXF / AI", description, canonical, schema)}
+    <body class="intel-page pricing-page">
+      <a class="skip-link" href="#pricing-main">Skip to model pricing</a>
+      {page_header("models")}
+      <main id="pricing-main">
+        <section class="pricing-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Pricing</span></nav>
+          <div class="pricing-hero-grid">
+            <div>
+              <p class="eyebrow">MODEL ECONOMICS / VERIFIED {escape(verified)}</p>
+              <h1>Model pricing.<br><span>Normalized.</span></h1>
+            </div>
+            <div class="pricing-hero-copy">
+              <p>One source-backed view of Standard API token pricing and core limits across selected frontier models. Compare rates, inspect pricing rules and estimate a request without mixing incompatible service tiers.</p>
+              <div class="pricing-hero-actions">
+                <a class="primary-cta" href="#calculator">Calculate cost <span>↓</span></a>
+                <a class="secondary-cta" href="/data/model-pricing.json">Open JSON dataset</a>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-meta-strip">
+            <div><span>MODELS</span><strong>{len(models)}</strong></div>
+            <div><span>PROVIDERS</span><strong>{len(providers)}</strong></div>
+            <div><span>BASELINE</span><strong>Standard API</strong></div>
+            <div><span>UNIT</span><strong>USD / 1M tokens</strong></div>
+          </div>
+        </section>
+
+        <section class="pricing-section shell" aria-labelledby="pricing-table-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">PRICING DATABASE</p><h2 id="pricing-table-title">Compare the published baseline.</h2></div>
+            <p>Rates below reflect the catalog's verified Standard period. Model-specific long-context or scheduled-rate changes are called out in the model row.</p>
+          </div>
+          <div class="pricing-toolbar">
+            <label class="pricing-search"><span class="sr-only">Search models</span><input id="pricingSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
+            <div class="pricing-filters" aria-label="Filter pricing table">{"".join(filter_buttons)}</div>
+          </div>
+          <div class="pricing-table-wrap">
+            <table class="pricing-table">
+              <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Source</th></tr></thead>
+              <tbody>{rows}</tbody>
+            </table>
+          </div>
+          <div id="pricingEmpty" class="pricing-empty" hidden>No models match this filter.</div>
+          <div class="pricing-source-note">
+            <span>Catalog verified {escape(verified)}. Promotional or scheduled rates can change; the official vendor documentation remains the final billing authority.</span>
+            <a href="/data/model-pricing.json">Machine-readable JSON ↗</a>
+          </div>
+        </section>
+
+        <section id="calculator" class="pricing-section shell" aria-labelledby="calculator-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">TOKEN COST CALCULATOR</p><h2 id="calculator-title">Estimate one workload.</h2></div>
+            <p>Enter uncached input, cached input and output tokens. The calculator selects the Standard pricing period by date and applies stored long-context rules automatically.</p>
+          </div>
+          <div class="pricing-calculator-shell">
+            <article class="pricing-calculator">
+              <p class="pricing-label">WORKLOAD INPUT</p>
+              <h3>Request assumptions.</h3>
+              <p>Direct token charges only. Tool calls, storage, regional pricing and non-Standard tiers are excluded.</p>
+              <div class="pricing-form">
+                <label class="pricing-field"><span>Model</span><select id="pricingModel" aria-label="Model"></select></label>
+                <label class="pricing-field"><span>Billing date</span><input id="pricingDate" type="date" value="{escape(verified, quote=True)}"></label>
+                <div class="pricing-token-grid">
+                  <label class="pricing-field"><span>Uncached input</span><input id="pricingInput" type="number" min="0" step="1000" value="100000" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Cached input</span><input id="pricingCached" type="number" min="0" step="1000" value="0" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Output</span><input id="pricingOutput" type="number" min="0" step="1000" value="10000" inputmode="numeric"></label>
+                </div>
+                <div class="pricing-presets" aria-label="Calculator presets">
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="500000" data-cached="0" data-output="50000">500K + 50K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="0" data-cached="1000000" data-output="100000">1M cached + 100K</button>
+                </div>
+              </div>
+            </article>
+            <article class="pricing-result" aria-live="polite">
+              <p class="pricing-label">ESTIMATED DIRECT TOKEN COST</p>
+              <h3>Standard API estimate.</h3>
+              <p>Calculated from the same public catalog used to render the table above.</p>
+              <div class="pricing-total"><span>ESTIMATED TOTAL</span><strong id="pricingTotal">—</strong></div>
+              <div class="pricing-breakdown">
+                <div><span>Uncached input</span><strong id="pricingInputCost">—</strong></div>
+                <div><span>Cached input</span><strong id="pricingCachedCost">—</strong></div>
+                <div><span>Output</span><strong id="pricingOutputCost">—</strong></div>
+              </div>
+              <div id="pricingRateProfile" class="pricing-rate-profile">Loading pricing dataset…</div>
+              <div id="pricingWarning" class="pricing-warning" hidden></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="pricing-section shell">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">METHODOLOGY</p><h2>Comparable first. Caveats visible.</h2></div>
+            <p>SXF separates directly comparable Standard token rates from service tiers and add-ons that can change the bill but are not equivalent across providers.</p>
+          </div>
+          <div class="pricing-method-grid">
+            <article><span>01 / NORMALIZE</span><h3>One unit.</h3><p>Headline token rates are normalized to USD per one million tokens. Cached input stays separate from ordinary input.</p></article>
+            <article><span>02 / APPLY RULES</span><h3>Request shape matters.</h3><p>Stored long-context rules and dated pricing schedules are applied from the canonical dataset instead of being retyped into the calculator.</p></article>
+            <article><span>03 / EXCLUDE</span><h3>Do not mix tiers.</h3><p>Batch, Flex, Fast, Priority, tools, grounding, storage, regional uplifts and negotiated pricing remain outside the headline calculator.</p></article>
+          </div>
+        </section>
+
+        <section class="model-faq shell pricing-section">
+          <div class="intel-section-head"><div><p class="eyebrow">PRICING FAQ</p><h2>How to read the database.</h2></div><a href="/models/">All models ↗</a></div>
+          {faq_html}
+        </section>
+      </main>
+      {page_footer()}
+      <link rel="stylesheet" href="/models/pricing/pricing.css" />
+      <script src="/models/pricing/pricing.js" defer></script>
+    </body></html>'''
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -6177,8 +6419,10 @@ def build_discovery_pages(items, current_items):
     COMPARE_DIR.mkdir(parents=True, exist_ok=True)
     GUIDES_DIR.mkdir(parents=True, exist_ok=True)
     SUPERINTELLIGENCE_DIR.mkdir(parents=True, exist_ok=True)
+    PRICING_DIR.mkdir(parents=True, exist_ok=True)
 
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
+    (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
@@ -6285,6 +6529,7 @@ def update_sitemap(items):
     rows = [
         sitemap_entry(f"{BASE_URL}/", global_lastmod),
         sitemap_entry(f"{BASE_URL}/models/", content_lastmod(model_collection_items, category_lastmod["Models"])),
+        sitemap_entry(f"{BASE_URL}/models/pricing/", MODEL_PRICING_CATALOG["source_verified"]),
         sitemap_entry(f"{BASE_URL}/tools/", category_lastmod["Tools"]),
         sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
         sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
