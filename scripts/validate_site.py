@@ -540,7 +540,7 @@ def validate_source_expansion(news, archive):
     if source_accepts_item(
         google_research,
         "Designing faster datacenter networks",
-        "A systems architecture update with no machine learning content.",
+        "A systems architecture update about datacenter fabrics, routing, and scheduling.",
     ):
         fail("Google Research AI filter admitted a non-AI systems article")
     if not source_accepts_item(
