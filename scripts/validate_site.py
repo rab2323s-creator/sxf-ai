@@ -467,6 +467,23 @@ def validate_topic_relevance(archive):
         )
 
 
+def source_has_recorded_error(errors, name):
+    prefix = f"{name}:"
+    return any(isinstance(error, str) and error.startswith(prefix) for error in errors)
+
+
+def expansion_source_presence_valid(name, archive_count, errors):
+    return archive_count >= 1 or source_has_recorded_error(errors, name)
+
+
+def validate_source_resilience_regressions():
+    recorded = ["Google Research: upstream feed unavailable"]
+    if not expansion_source_presence_valid("Google Research", 0, recorded):
+        fail("source resilience regression: recorded outage must allow graceful degradation")
+    if expansion_source_presence_valid("Google Research", 0, []):
+        fail("source resilience regression: silent zero-item source must fail validation")
+
+
 def validate_source_expansion(news, archive):
     from update_news import (
         SOURCES,
@@ -515,12 +532,10 @@ def validate_source_expansion(news, archive):
     if not isinstance(errors, list):
         fail("source_health errors must be a list")
 
-    def source_has_recorded_error(name):
-        prefix = f"{name}:"
-        return any(isinstance(error, str) and error.startswith(prefix) for error in errors)
+    validate_source_resilience_regressions()
 
     for name in SOURCE_EXPANSION_NAMES:
-        if archive_counts.get(name, 0) < 1 and not source_has_recorded_error(name):
+        if not expansion_source_presence_valid(name, archive_counts.get(name, 0), errors):
             fail(
                 f"{name}: expansion source produced no archived signals "
                 "and no source error was recorded"
