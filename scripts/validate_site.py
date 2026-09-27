@@ -209,6 +209,8 @@ def validate_model_history():
         fail("model history change regression created the wrong event")
     if [change.get("field") for change in event.get("changes", [])] != ["context_window"]:
         fail("model history change regression did not isolate the changed field")
+    if event["changes"][0].get("change_type") != "context_change":
+        fail("model history change regression classified the field incorrectly")
     try:
         validate_history_against_catalog(changed_catalog, updated)
     except RuntimeError as exc:
@@ -394,6 +396,8 @@ def validate_model_pricing_catalog():
         fail("model pricing page must link the canonical JSON dataset")
     if "PRIMARY-SOURCE VERIFIED" not in pricing_html.upper():
         fail("model pricing page must disclose primary-source verification")
+    if "/data/model-history.json" not in pricing_html:
+        fail("model pricing page must link the model change ledger")
     if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
         fail("model pricing page is missing calculator assets")
 
