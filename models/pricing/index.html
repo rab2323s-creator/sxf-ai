@@ -1,0 +1,306 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>AI Model Pricing &amp; API Specs Database | SXF / AI</title>
+      <meta name="description" content="Compare Standard API token pricing, cached-input rates, context windows and output limits for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculat" />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/models/pricing/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/models/pricing/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/models/pricing/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="AI Model Pricing &amp; API Specs Database | SXF / AI" />
+      <meta property="og:description" content="Compare Standard API token pricing, cached-input rates, context windows and output limits for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculat" />
+      <meta property="og:url" content="https://sxf.si/models/pricing/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:title" content="AI Model Pricing &amp; API Specs Database | SXF / AI" />
+      <meta name="twitter:description" content="Compare Standard API token pricing, cached-input rates, context windows and output limits for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculat" />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://sxf.si/models/pricing/#webpage","url":"https://sxf.si/models/pricing/","name":"AI Model Pricing & API Specs Database | SXF / AI","description":"Normalized Standard API pricing, context windows and output limits for selected OpenAI, Anthropic and Google AI models, with an interactive token-cost calculator.","dateModified":"2026-09-27","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"AI model API pricing"},"inLanguage":"en"},{"@type":"Dataset","@id":"https://sxf.si/models/pricing/#dataset","name":"SXF AI Model Pricing & Specs Database","description":"Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.","dateModified":"2026-09-27","creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"distribution":{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-pricing.json"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Pricing","item":"https://sxf.si/models/pricing/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What pricing does the SXF model database use?","acceptedAnswer":{"@type":"Answer","text":"The table normalizes vendor-listed Standard API token pricing in USD per one million tokens. It does not mix Batch, Flex, Fast, Priority, regional, enterprise, or negotiated pricing into the headline rates."}},{"@type":"Question","name":"Does the calculator include tool or grounding charges?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator estimates direct text-token charges only. Search, grounding, code execution, tools, cache storage, regional uplifts, and other add-on charges are excluded unless they are explicitly represented as token rates."}},{"@type":"Question","name":"How does long-context pricing work for OpenAI models in this database?","acceptedAnswer":{"@type":"Answer","text":"For cataloged OpenAI models with a long-context rule, requests above 272,000 total input tokens use the published higher input, cache, and output rates for the full request. The calculator applies that rule automatically."}},{"@type":"Question","name":"Why does Gemini 3.8 Flash show a future price change?","acceptedAnswer":{"@type":"Answer","text":"Google published introductory Standard pricing through December 31, 2026 and higher Standard pricing beginning January 1, 2027. The calculator selects the stored pricing period from the billing date."}}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+          <link rel="stylesheet" href="/models/pricing/pricing.css" />
+    </head>
+    <body class="intel-page pricing-page">
+      <a class="skip-link" href="#pricing-main">Skip to model pricing</a>
+      <header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header>
+      <main id="pricing-main">
+        <section class="pricing-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Pricing</span></nav>
+          <div class="pricing-hero-grid">
+            <div>
+              <p class="eyebrow">MODEL ECONOMICS / VERIFIED 2026-09-27</p>
+              <h1>Model pricing.<br><span>Normalized.</span></h1>
+            </div>
+            <div class="pricing-hero-copy">
+              <p>One source-backed view of Standard API token pricing and core limits across selected frontier models. Compare rates, inspect pricing rules and estimate a request without mixing incompatible service tiers.</p>
+              <div class="pricing-hero-actions">
+                <a class="primary-cta" href="#calculator">Calculate cost <span>↓</span></a>
+                <a class="secondary-cta" href="/data/model-pricing.json">Open JSON dataset</a>
+              </div>
+            </div>
+          </div>
+          <div class="pricing-meta-strip">
+            <div><span>MODELS</span><strong>11</strong></div>
+            <div><span>PROVIDERS</span><strong>3</strong></div>
+            <div><span>BASELINE</span><strong>Standard API</strong></div>
+            <div><span>UNIT</span><strong>USD / 1M tokens</strong></div>
+          </div>
+        </section>
+
+        <section class="pricing-section shell" aria-labelledby="pricing-table-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">PRICING DATABASE</p><h2 id="pricing-table-title">Compare the published baseline.</h2></div>
+            <p>Rates below reflect the catalog's verified Standard period. Model-specific long-context or scheduled-rate changes are called out in the model row.</p>
+          </div>
+          <div class="pricing-toolbar">
+            <label class="pricing-search"><span class="sr-only">Search models</span><input id="pricingSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
+            <div class="pricing-filters" aria-label="Filter pricing table"><button class="pricing-filter is-active" type="button" data-pricing-filter="all">All</button><button class="pricing-filter" type="button" data-pricing-filter="Anthropic">Anthropic</button><button class="pricing-filter" type="button" data-pricing-filter="Google">Google</button><button class="pricing-filter" type="button" data-pricing-filter="OpenAI">OpenAI</button></div>
+          </div>
+          <div class="pricing-table-wrap">
+            <table class="pricing-table">
+              <caption class="sr-only">Standard API token pricing and model limits</caption>
+              <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Source</th></tr></thead>
+              <tbody><tr data-pricing-row data-provider="OpenAI" data-search="gpt-6 astra gpt-6-astra openai gpt-6 highest-capability gpt-6 tier for demanding reasoning, coding, computer use, research, and document creation.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-6-astra/">GPT-6 Astra</a>
+            <small>gpt-6-astra</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$10.00</td>
+          <td class="price">$1.00</td>
+          <td class="price">$50.00</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="OpenAI" data-search="gpt-6 sol gpt-6-sol openai gpt-6 general-purpose gpt-6 tier for complex coding and agentic workflows with lower unit cost than astra.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-6-sol/">GPT-6 Sol</a>
+            <small>gpt-6-sol</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$2.00</td>
+          <td class="price">$0.20</td>
+          <td class="price">$10.00</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="OpenAI" data-search="gpt-6 luna gpt-6-luna openai gpt-6 efficiency-focused gpt-6 tier for focused, high-volume, and cost-sensitive workloads.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-6-luna/">GPT-6 Luna</a>
+            <small>gpt-6-luna</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$0.10</td>
+          <td class="price">$0.01</td>
+          <td class="price">$0.50</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="OpenAI" data-search="gpt-5.6 sol gpt-5.6-sol openai gpt-5.6 flagship gpt-5.6 tier for complex professional work, coding, research, and agentic workflows.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a>
+            <small>gpt-5.6-sol</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span><span class="pricing-rule">Current $4/$20 Standard rates are promotional through at least November 21, 2026.</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$4.00</td>
+          <td class="price">$0.40</td>
+          <td class="price">$20.00</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="OpenAI" data-search="gpt-5.6 terra gpt-5.6-terra openai gpt-5.6 gpt-5.6 tier balancing intelligence and cost for production workloads.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-5-6/">GPT-5.6 Terra</a>
+            <small>gpt-5.6-terra</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$2.00</td>
+          <td class="price">$0.20</td>
+          <td class="price">$12.00</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-5.6-terra" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="OpenAI" data-search="gpt-5.6 luna gpt-5.6-luna openai gpt-5.6 lowest-cost gpt-5.6 tier for cost-sensitive, high-volume workloads.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a>
+            <small>gpt-5.6-luna</small>
+            <span class="pricing-rule">Long context &gt; 272,000: 2× input/cache · 1.5× output</span>
+          </th>
+          <td>OpenAI</td>
+          <td>1,050,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$0.20</td>
+          <td class="price">$0.02</td>
+          <td class="price">$1.20</td>
+          <td><a href="https://developers.openai.com/api/docs/models/gpt-5.6-luna" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Anthropic" data-search="claude fable 5.1 claude-fable-5-1 anthropic claude 5 anthropic&#x27;s highest-capability generally available model for demanding reasoning and long-horizon agentic work.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/claude-fable-5-1/">Claude Fable 5.1</a>
+            <small>claude-fable-5-1</small>
+            
+          </th>
+          <td>Anthropic</td>
+          <td>1,000,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$10.00</td>
+          <td class="price">$0.25</td>
+          <td class="price">$50.00</td>
+          <td><a href="https://platform.claude.com/docs/en/models/fable-5-1/overview" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Anthropic" data-search="claude opus 5.5 claude-opus-5-5 anthropic claude 5 current opus model for long-running agentic coding and complex knowledge work.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/claude-opus-5-5/">Claude Opus 5.5</a>
+            <small>claude-opus-5-5</small>
+            
+          </th>
+          <td>Anthropic</td>
+          <td>1,000,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$4.00</td>
+          <td class="price">$0.20</td>
+          <td class="price">$20.00</td>
+          <td><a href="https://platform.claude.com/docs/en/models/opus-5-5/overview" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Anthropic" data-search="claude sonnet 5 claude-sonnet-5 anthropic claude 5 balanced claude tier combining speed and intelligence for coding, agents, and production knowledge work.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/guides/gpt-6-vs-claude/">Claude Sonnet 5</a>
+            <small>claude-sonnet-5</small>
+            
+          </th>
+          <td>Anthropic</td>
+          <td>1,000,000<small>tokens</small></td>
+          <td>128,000<small>tokens</small></td>
+          <td class="price">$2.00</td>
+          <td class="price">$0.20</td>
+          <td class="price">$10.00</td>
+          <td><a href="https://platform.claude.com/docs/en/models/sonnet-5/overview" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Anthropic" data-search="claude haiku 4.5 claude-haiku-4-5-20251001 anthropic claude 4 fastest claude tier for latency-sensitive and high-volume workloads.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/guides/gpt-6-vs-claude/">Claude Haiku 4.5</a>
+            <small>claude-haiku-4-5-20251001</small>
+            
+          </th>
+          <td>Anthropic</td>
+          <td>200,000<small>tokens</small></td>
+          <td>64,000<small>tokens</small></td>
+          <td class="price">$1.00</td>
+          <td class="price">$0.10</td>
+          <td class="price">$5.00</td>
+          <td><a href="https://platform.claude.com/docs/en/models/haiku-4-5/overview" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Google" data-search="gemini 3.8 flash gemini-3.8-flash google gemini 3 google&#x27;s most intelligent flash model for long-horizon software engineering, autonomous agents, and complex enterprise workflows.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a>
+            <small>gemini-3.8-flash</small>
+            <span class="pricing-rule">From 2027-01-01: $1.50 input · $7.50 output</span><span class="pricing-rule">Introductory Standard pricing applies through December 31, 2026; higher Standard pricing starts January 1, 2027.</span>
+          </th>
+          <td>Google</td>
+          <td>1,048,576<small>tokens</small></td>
+          <td>65,536<small>tokens</small></td>
+          <td class="price">$0.75</td>
+          <td class="price">$0.075</td>
+          <td class="price">$3.75</td>
+          <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div id="pricingEmpty" class="pricing-empty" hidden>No models match this filter.</div>
+          <div class="pricing-source-note">
+            <span>Catalog verified 2026-09-27. Promotional or scheduled rates can change; the official vendor documentation remains the final billing authority.</span>
+            <a href="/data/model-pricing.json">Machine-readable JSON ↗</a>
+          </div>
+        </section>
+
+        <section id="calculator" class="pricing-section shell" aria-labelledby="calculator-title">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">TOKEN COST CALCULATOR</p><h2 id="calculator-title">Estimate one workload.</h2></div>
+            <p>Enter uncached input, cached input and output tokens. The calculator selects the Standard pricing period by date and applies stored long-context rules automatically.</p>
+          </div>
+          <div class="pricing-calculator-shell">
+            <article class="pricing-calculator">
+              <p class="pricing-label">WORKLOAD INPUT</p>
+              <h3>Request assumptions.</h3>
+              <p>Direct token charges only. Tool calls, storage, regional pricing and non-Standard tiers are excluded.</p>
+              <div class="pricing-form">
+                <label class="pricing-field"><span>Model</span><select id="pricingModel" aria-label="Model"></select></label>
+                <label class="pricing-field"><span>Billing date</span><input id="pricingDate" type="date" value="2026-09-27"></label>
+                <div class="pricing-token-grid">
+                  <label class="pricing-field"><span>Uncached input</span><input id="pricingInput" type="number" min="0" step="1000" value="100000" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Cached input</span><input id="pricingCached" type="number" min="0" step="1000" value="0" inputmode="numeric"></label>
+                  <label class="pricing-field"><span>Output</span><input id="pricingOutput" type="number" min="0" step="1000" value="10000" inputmode="numeric"></label>
+                </div>
+                <div class="pricing-presets" aria-label="Calculator presets">
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="500000" data-cached="0" data-output="50000">500K + 50K</button>
+                  <button class="pricing-preset" type="button" data-pricing-preset data-input="0" data-cached="1000000" data-output="100000">1M cached + 100K</button>
+                </div>
+              </div>
+            </article>
+            <article class="pricing-result" aria-live="polite">
+              <p class="pricing-label">ESTIMATED DIRECT TOKEN COST</p>
+              <h3>Standard API estimate.</h3>
+              <p>Calculated from the same public catalog used to render the table above.</p>
+              <div class="pricing-total"><span>ESTIMATED TOTAL</span><strong id="pricingTotal">—</strong></div>
+              <div class="pricing-breakdown">
+                <div><span>Uncached input</span><strong id="pricingInputCost">—</strong></div>
+                <div><span>Cached input</span><strong id="pricingCachedCost">—</strong></div>
+                <div><span>Output</span><strong id="pricingOutputCost">—</strong></div>
+              </div>
+              <div id="pricingRateProfile" class="pricing-rate-profile">Loading pricing dataset…</div>
+              <div id="pricingWarning" class="pricing-warning" hidden></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="pricing-section shell">
+          <div class="pricing-section-head">
+            <div><p class="eyebrow">METHODOLOGY</p><h2>Comparable first. Caveats visible.</h2></div>
+            <p>SXF separates directly comparable Standard token rates from service tiers and add-ons that can change the bill but are not equivalent across providers.</p>
+          </div>
+          <div class="pricing-method-grid">
+            <article><span>01 / NORMALIZE</span><h3>One unit.</h3><p>Headline token rates are normalized to USD per one million tokens. Cached input stays separate from ordinary input.</p></article>
+            <article><span>02 / APPLY RULES</span><h3>Request shape matters.</h3><p>Stored long-context rules and dated pricing schedules are applied from the canonical dataset instead of being retyped into the calculator.</p></article>
+            <article><span>03 / EXCLUDE</span><h3>Do not mix tiers.</h3><p>Batch, Flex, Fast, Priority, tools, grounding, storage, regional uplifts and negotiated pricing remain outside the headline calculator.</p></article>
+          </div>
+        </section>
+
+        <section class="model-faq shell pricing-section">
+          <div class="intel-section-head"><div><p class="eyebrow">PRICING FAQ</p><h2>How to read the database.</h2></div><a href="/models/">All models ↗</a></div>
+          <details><summary>What pricing does the SXF model database use?</summary><p>The table normalizes vendor-listed Standard API token pricing in USD per one million tokens. It does not mix Batch, Flex, Fast, Priority, regional, enterprise, or negotiated pricing into the headline rates.</p></details><details><summary>Does the calculator include tool or grounding charges?</summary><p>No. The calculator estimates direct text-token charges only. Search, grounding, code execution, tools, cache storage, regional uplifts, and other add-on charges are excluded unless they are explicitly represented as token rates.</p></details><details><summary>How does long-context pricing work for OpenAI models in this database?</summary><p>For cataloged OpenAI models with a long-context rule, requests above 272,000 total input tokens use the published higher input, cache, and output rates for the full request. The calculator applies that rule automatically.</p></details><details><summary>Why does Gemini 3.8 Flash show a future price change?</summary><p>Google published introductory Standard pricing through December 31, 2026 and higher Standard pricing beginning January 1, 2027. The calculator selects the stored pricing period from the billing date.</p></details>
+        </section>
+      </main>
+      <footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+      <script src="/models/pricing/pricing.js" defer></script>
+    </body></html>
