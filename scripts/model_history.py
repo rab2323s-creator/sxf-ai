@@ -23,6 +23,20 @@ TRACKED_FIELDS = (
 )
 IDENTITY_FIELDS = {"provider", "family", "model", "aliases"}
 OPTIONAL_FIELDS = {"aliases", "availability", "status"}
+CHANGE_TYPES = {
+    "pricing": "pricing_change",
+    "context_window": "context_change",
+    "max_output": "output_limit_change",
+    "knowledge_cutoff": "knowledge_cutoff_change",
+    "reasoning": "reasoning_change",
+    "modalities": "modality_change",
+    "availability": "availability_change",
+    "status": "status_change",
+    "provider": "identity_change",
+    "family": "identity_change",
+    "model": "identity_change",
+    "aliases": "identity_change",
+}
 
 
 def canonical_json(value):
@@ -155,6 +169,7 @@ def diff_snapshot(before, after, model):
             continue
         changes.append({
             "field": field,
+            "change_type": CHANGE_TYPES[field],
             "before": copy.deepcopy(old),
             "after": copy.deepcopy(new),
             "source_url": evidence_for_field(model, field),
@@ -287,6 +302,8 @@ def validate_history_structure(history):
                 field = change.get("field")
                 if field in seen_fields or field not in TRACKED_FIELDS:
                     raise RuntimeError(f"invalid or duplicate changed field {field!r} for {model_id}")
+                if change.get("change_type") != CHANGE_TYPES[field]:
+                    raise RuntimeError(f"invalid change_type for {model_id}.{field}")
                 seen_fields.add(field)
                 if snapshot.get(field) != change.get("before"):
                     raise RuntimeError(f"history replay before-value mismatch for {model_id}.{field}")
