@@ -155,6 +155,66 @@ def catalog_reference_variant(variant):
     }
 
 
+def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, cached_input_tokens=0, on_date=None):
+    uncached_input_tokens = int(uncached_input_tokens)
+    cached_input_tokens = int(cached_input_tokens)
+    output_tokens = int(output_tokens)
+    if min(uncached_input_tokens, cached_input_tokens, output_tokens) < 0:
+        raise ValueError("Token counts must be non-negative")
+
+    total_input_tokens = uncached_input_tokens + cached_input_tokens
+    rates = effective_standard_price(model_id, total_input_tokens, on_date)
+    cost = (
+        uncached_input_tokens / 1_000_000 * rates["input"]
+        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + output_tokens / 1_000_000 * rates["output"]
+    )
+    return cost, rates
+
+
+def catalog_money(value, precision=4):
+    rendered = f"{float(value):,.{precision}f}".rstrip("0").rstrip(".")
+    return "$" + (rendered or "0")
+
+
+def catalog_display_model(model_id, **overrides):
+    model = model_catalog_entry(model_id)
+    price = active_standard_price(model_id)
+    cutoff = model.get("knowledge_cutoff")
+    if cutoff and len(cutoff) == 10:
+        cutoff = datetime.fromisoformat(cutoff).strftime("%b %-d, %Y")
+    elif cutoff and len(cutoff) == 7:
+        cutoff = datetime.fromisoformat(cutoff + "-01").strftime("%b %Y")
+    else:
+        cutoff = cutoff or "Not listed"
+
+    cache_write = None
+    if "cache_write" in price:
+        cache_write = catalog_price_label(price["cache_write"])
+    elif "cache_write_5m" in price:
+        one_hour = price.get("cache_write_1h")
+        cache_write = catalog_price_label(price["cache_write_5m"])
+        if one_hour is not None:
+            cache_write += " / " + catalog_price_label(one_hour)
+
+    row = {
+        "name": model["model"],
+        "provider": model["provider"],
+        "model_id": model["model_id"],
+        "positioning": model["positioning"],
+        "context": f'{int(model["context_window"]):,}',
+        "max_output": f'{int(model["max_output"]):,}',
+        "knowledge_cutoff": cutoff,
+        "input_price": catalog_price_label(price["input"]),
+        "cached_price": catalog_price_label(price["cached_input"]),
+        "cache_write": cache_write or "—",
+        "output_price": catalog_price_label(price["output"]),
+        "source": model["official_sources"][0],
+        "sxf_url": model["sxf_url"],
+    }
+    row.update(overrides)
+    return row
+
 def parse_date(value):
     if not value:
         return None
