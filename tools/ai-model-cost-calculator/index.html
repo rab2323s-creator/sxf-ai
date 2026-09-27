@@ -115,7 +115,17 @@
 
             <div class="field-grid">
               <label class="calc-field"><span>Billing date</span><input id="billingDate" type="date" /></label>
-              <label class="calc-field"><span>Requests per day</span><input id="requestsPerDay" type="number" min="0" max="1000000000" step="1" value="1000" inputmode="numeric" /></label>
+              <div class="volume-control">
+                <div class="volume-mode">
+                  <span>Request volume</span>
+                  <div class="volume-toggle" role="group" aria-label="Request volume period">
+                    <button id="volumeDaily" type="button" class="is-active" aria-pressed="true">Daily</button>
+                    <button id="volumeMonthly" type="button" aria-pressed="false">Monthly</button>
+                  </div>
+                </div>
+                <label id="dailyVolumeField" class="calc-field"><span>Requests per day</span><input id="requestsPerDay" type="number" min="0" max="1000000000" step="1" value="1000" inputmode="numeric" /></label>
+                <label id="monthlyVolumeField" class="calc-field" hidden><span>Requests per month</span><input id="requestsPerMonth" type="number" min="0" max="30000000000" step="1" value="30000" inputmode="numeric" /></label>
+              </div>
             </div>
 
             <div class="token-inputs">
@@ -124,12 +134,26 @@
               <label class="calc-field"><span>Output tokens</span><input id="outputTokens" type="number" min="0" max="10000000000" step="1000" value="10000" inputmode="numeric" /></label>
             </div>
 
+            <div class="workload-presets" aria-label="Realistic workload presets">
+              <div class="workload-preset-head"><span>Workload presets</span><small>Illustrative starting points — every assumption stays editable.</small></div>
+              <div class="workload-row">
+                <button type="button" class="workload-preset" data-workload-preset data-input="2000" data-cached="0" data-output="500" data-monthly="50000">Chatbot</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="3000" data-cached="0" data-output="600" data-monthly="25000">Customer support</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="12000" data-cached="0" data-output="1000" data-monthly="20000">RAG</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="20000" data-cached="0" data-output="3000" data-monthly="15000">Coding assistant</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="4000" data-cached="0" data-output="2000" data-monthly="10000">Content generation</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="50000" data-cached="0" data-output="2000" data-monthly="3000">Document analysis</button>
+                <button type="button" class="workload-preset" data-workload-preset data-input="1000" data-cached="0" data-output="200" data-monthly="1000000">High-volume API</button>
+              </div>
+              <div id="workloadAssumption" class="workload-assumption" hidden></div>
+            </div>
+
             <div class="preset-row" aria-label="Workload presets">
               <span>Presets</span>
-              <button type="button" class="preset is-active" data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
-              <button type="button" class="preset" data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
-              <button type="button" class="preset" data-input="25000" data-cached="75000" data-output="5000">RAG / cached</button>
-              <button type="button" class="preset" data-input="500000" data-cached="0" data-output="50000">Long context</button>
+              <button type="button" class="preset is-active" data-token-preset data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
+              <button type="button" class="preset" data-token-preset data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
+              <button type="button" class="preset" data-token-preset data-input="25000" data-cached="75000" data-output="5000">RAG / cached</button>
+              <button type="button" class="preset" data-token-preset data-input="500000" data-cached="0" data-output="50000">Long context</button>
             </div>
 
             <p class="calculator-note">Direct text-token charges only. Non-Standard service tiers, tools, grounding, search, code execution, storage, regional uplifts and negotiated pricing are excluded.</p>
@@ -158,6 +182,10 @@
 
           <div id="rateProfile" class="rate-profile">Loading pricing dataset…</div>
           <div id="calculatorWarning" class="calculator-warning" hidden></div>
+          <div class="compare-all-action">
+            <button id="compareAllToggle" type="button" aria-expanded="false" aria-controls="allModelsPanel">Compare all models <span>↓</span></button>
+            <small>Same workload and billing date · direct token cost only.</small>
+          </div>
         </div>
       </section>
 
@@ -170,6 +198,25 @@
           <article><span id="comparisonPrimaryProvider">—</span><h3 id="comparisonPrimaryName">—</h3><strong id="comparisonPrimaryCost">—</strong><small>per request</small></article>
           <article><span id="comparisonSecondaryProvider">—</span><h3 id="comparisonSecondaryName">—</h3><strong id="comparisonSecondaryCost">—</strong><small>per request</small></article>
           <article class="comparison-delta"><span>COST DIFFERENCE</span><h3 id="comparisonDeltaLabel">—</h3><strong id="comparisonDelta">—</strong><small id="comparisonMonthlyDelta">—</small></article>
+        </div>
+      </section>
+
+      <section id="allModelsPanel" class="all-models-panel" hidden aria-labelledby="all-models-title">
+        <div class="all-models-heading">
+          <div><p class="panel-kicker">SAME WORKLOAD / ALL CATALOGED MODELS</p><h2 id="all-models-title">Compare all models</h2></div>
+          <p>Sorted by estimated direct token cost only. Capability, latency and output quality are not evaluated.</p>
+        </div>
+        <div class="lowest-cost-summary">
+          <span>LOWEST ESTIMATED TOKEN COST</span>
+          <strong id="lowestCostModel">—</strong>
+          <small id="lowestCostValue">—</small>
+        </div>
+        <div class="all-models-table-wrap">
+          <table class="all-models-table">
+            <caption class="sr-only">Estimated cost of the same workload across all cataloged models</caption>
+            <thead><tr><th>Model</th><th>Provider</th><th>Per request</th><th id="allModelsVolumeHeading">30-day cost</th><th>Status</th></tr></thead>
+            <tbody id="allModelsRows"></tbody>
+          </table>
         </div>
       </section>
 

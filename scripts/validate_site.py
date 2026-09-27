@@ -425,6 +425,20 @@ def validate_model_pricing_catalog():
         fail("AI model cost calculator must load the canonical model-pricing.json dataset")
     if "effectiveRates" not in calculator_js or "threshold_input_tokens" not in calculator_js:
         fail("AI model cost calculator must apply catalog pricing rules")
+    if "<title>AI Model Cost Calculator — GPT, Claude &amp; Gemini API Pricing | SXF / AI</title>" not in calculator_html:
+        fail("AI model cost calculator title must remain unchanged")
+    if 'id="requestsPerMonth"' not in calculator_html or 'id="volumeMonthly"' not in calculator_html:
+        fail("AI model cost calculator is missing monthly workload mode")
+    if calculator_html.count("data-workload-preset") < 7:
+        fail("AI model cost calculator must expose the realistic workload presets")
+    if 'id="allModelsPanel"' not in calculator_html or 'id="allModelsRows"' not in calculator_html:
+        fail("AI model cost calculator is missing compare-all-models UI")
+    if "renderAllModels" not in calculator_js or "lowestCostModel" not in calculator_js:
+        fail("AI model cost calculator is missing compare-all-models behavior")
+    if "volumeMode" not in calculator_js or "requestsPerMonth" not in calculator_js:
+        fail("AI model cost calculator is missing monthly workload behavior")
+    if "best model" in calculator_html.lower() or "best model" in calculator_js.lower():
+        fail("AI model cost calculator must not frame token cost as model quality")
     if "/tools/ai-model-cost-calculator/" not in (ROOT / "tools" / "index.html").read_text(encoding="utf-8"):
         fail("Tools hub must link to AI Model Cost Calculator")
     if "/tools/ai-model-cost-calculator/" not in (ROOT / "models" / "pricing" / "index.html").read_text(encoding="utf-8"):

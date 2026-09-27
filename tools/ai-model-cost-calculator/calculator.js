@@ -9,7 +9,14 @@
   const cachedTokens = document.getElementById("cachedTokens");
   const outputTokens = document.getElementById("outputTokens");
   const requestsPerDay = document.getElementById("requestsPerDay");
-  const presets = [...document.querySelectorAll("[data-input][data-output]")];
+  const requestsPerMonth = document.getElementById("requestsPerMonth");
+  const dailyVolumeField = document.getElementById("dailyVolumeField");
+  const monthlyVolumeField = document.getElementById("monthlyVolumeField");
+  const volumeDaily = document.getElementById("volumeDaily");
+  const volumeMonthly = document.getElementById("volumeMonthly");
+  const tokenPresets = [...document.querySelectorAll("[data-token-preset]")];
+  const workloadPresets = [...document.querySelectorAll("[data-workload-preset]")];
+  const workloadAssumption = document.getElementById("workloadAssumption");
 
   const statusNode = document.getElementById("catalogStatus");
   const resultModelName = document.getElementById("resultModelName");
@@ -37,6 +44,13 @@
   const comparisonDelta = document.getElementById("comparisonDelta");
   const comparisonMonthlyDelta = document.getElementById("comparisonMonthlyDelta");
 
+  const compareAllToggle = document.getElementById("compareAllToggle");
+  const allModelsPanel = document.getElementById("allModelsPanel");
+  const allModelsRows = document.getElementById("allModelsRows");
+  const allModelsVolumeHeading = document.getElementById("allModelsVolumeHeading");
+  const lowestCostModel = document.getElementById("lowestCostModel");
+  const lowestCostValue = document.getElementById("lowestCostValue");
+
   const modelCountNode = document.getElementById("modelCount");
   const providerCountNode = document.getElementById("providerCount");
   const verifiedDateNode = document.getElementById("verifiedDate");
@@ -45,6 +59,7 @@
 
   let catalog = null;
   let byId = new Map();
+  let volumeMode = "daily";
 
   const clampNumber = (value, max) => {
     const parsed = Number(value);
@@ -53,7 +68,7 @@
   };
 
   const tokenValue = input => clampNumber(input?.value, 10_000_000_000);
-  const requestValue = input => clampNumber(input?.value, 1_000_000_000);
+  const requestValue = (input, max = 30_000_000_000) => clampNumber(input?.value, max);
 
   const money = value => {
     if (!Number.isFinite(value)) return "—";
@@ -164,7 +179,38 @@
     return warnings;
   };
 
-  const renderComparison = (primaryModel, primaryEstimate, date, input, cached, output, requests) => {
+  const volume = () => {
+    if (volumeMode === "monthly") {
+      const monthly = requestValue(requestsPerMonth);
+      return {monthly, daily: monthly / 30};
+    }
+    const daily = requestValue(requestsPerDay, 1_000_000_000);
+    return {daily, monthly: daily * 30};
+  };
+
+  const setVolumeMode = (mode, preserveTotal = true) => {
+    if (!["daily", "monthly"].includes(mode) || mode === volumeMode) return;
+    const previous = volume();
+    volumeMode = mode;
+
+    if (preserveTotal) {
+      if (mode === "monthly") {
+        requestsPerMonth.value = String(Math.round(previous.monthly));
+      } else {
+        requestsPerDay.value = String(Math.round(previous.monthly / 30));
+      }
+    }
+
+    dailyVolumeField.hidden = mode !== "daily";
+    monthlyVolumeField.hidden = mode !== "monthly";
+    volumeDaily.classList.toggle("is-active", mode === "daily");
+    volumeMonthly.classList.toggle("is-active", mode === "monthly");
+    volumeDaily.setAttribute("aria-pressed", String(mode === "daily"));
+    volumeMonthly.setAttribute("aria-pressed", String(mode === "monthly"));
+    render();
+  };
+
+  const renderComparison = (primaryModel, primaryEstimate, date, input, cached, output, monthlyRequests) => {
     const secondaryId = compareSelect.value;
     if (!secondaryId) {
       comparisonPanel.hidden = true;
@@ -190,7 +236,7 @@
 
     const difference = secondaryEstimate.total - primaryEstimate.total;
     const absolute = Math.abs(difference);
-    const monthly = absolute * requests * 30;
+    const monthly = absolute * monthlyRequests;
 
     if (Math.abs(difference) < 1e-12) {
       comparisonDeltaLabel.textContent = "Same direct token cost";
@@ -199,12 +245,79 @@
     } else if (difference > 0) {
       comparisonDeltaLabel.textContent = primaryModel.model + " costs less";
       comparisonDelta.textContent = money(absolute) + " / request";
-      comparisonMonthlyDelta.textContent = money(monthly) + " difference over 30 days at this volume.";
+      comparisonMonthlyDelta.textContent = money(monthly) + " difference at this monthly volume.";
     } else {
       comparisonDeltaLabel.textContent = secondaryModel.model + " costs less";
       comparisonDelta.textContent = money(absolute) + " / request";
-      comparisonMonthlyDelta.textContent = money(monthly) + " difference over 30 days at this volume.";
+      comparisonMonthlyDelta.textContent = money(monthly) + " difference at this monthly volume.";
     }
+  };
+
+  const renderAllModels = (date, input, cached, output, monthlyRequests) => {
+    if (!catalog || !allModelsRows) return;
+    const rows = (catalog.models || []).map(model => {
+      const result = estimate(model, date, input, cached, output);
+      const tooMuchInput = input + cached > Number(model.context_window);
+      const tooMuchOutput = output > Number(model.max_output);
+      const eligible = Boolean(result && !tooMuchInput && !tooMuchOutput);
+      let status = "Comparable";
+      if (!result) status = "No rate for date";
+      else if (tooMuchInput && tooMuchOutput) status = "Input + output exceed limits";
+      else if (tooMuchInput) status = "Input exceeds context";
+      else if (tooMuchOutput) status = "Output exceeds max";
+      else if (result.long) status = "Long-context rate";
+      return {model, result, eligible, status};
+    });
+
+    rows.sort((a, b) => {
+      if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
+      if (!a.result && !b.result) return a.model.model.localeCompare(b.model.model);
+      if (!a.result) return 1;
+      if (!b.result) return -1;
+      return a.result.total - b.result.total || a.model.model.localeCompare(b.model.model);
+    });
+
+    allModelsRows.replaceChildren();
+    for (const row of rows) {
+      const tr = document.createElement("tr");
+      if (!row.eligible) tr.classList.add("is-ineligible");
+      if (row.model.model_id === modelSelect.value) tr.classList.add("is-selected");
+
+      const modelCell = document.createElement("th");
+      modelCell.scope = "row";
+      const link = document.createElement("a");
+      link.href = row.model.sxf_url || "/models/";
+      link.textContent = row.model.model;
+      modelCell.appendChild(link);
+
+      const providerCell = document.createElement("td");
+      providerCell.textContent = row.model.provider;
+
+      const perRequestCell = document.createElement("td");
+      perRequestCell.className = "all-model-price";
+      perRequestCell.textContent = row.result ? money(row.result.total) : "—";
+
+      const monthlyCell = document.createElement("td");
+      monthlyCell.className = "all-model-price";
+      monthlyCell.textContent = row.result ? money(row.result.total * monthlyRequests) : "—";
+
+      const statusCell = document.createElement("td");
+      statusCell.className = "all-model-status";
+      statusCell.textContent = row.status;
+
+      tr.append(modelCell, providerCell, perRequestCell, monthlyCell, statusCell);
+      allModelsRows.appendChild(tr);
+    }
+
+    const cheapest = rows.find(row => row.eligible);
+    if (cheapest) {
+      lowestCostModel.textContent = cheapest.model.model;
+      lowestCostValue.textContent = money(cheapest.result.total) + " / request · " + money(cheapest.result.total * monthlyRequests) + " at this monthly volume";
+    } else {
+      lowestCostModel.textContent = "No comparable model";
+      lowestCostValue.textContent = "This workload exceeds the stored limits or has no valid Standard price for the selected date.";
+    }
+    allModelsVolumeHeading.textContent = volumeMode === "monthly" ? "Monthly cost" : "30-day cost";
   };
 
   const render = () => {
@@ -216,7 +329,7 @@
     const input = tokenValue(inputTokens);
     const cached = tokenValue(cachedTokens);
     const output = tokenValue(outputTokens);
-    const requests = requestValue(requestsPerDay);
+    const usage = volume();
     const date = billingDate.value || catalog.source_verified;
     const result = estimate(model, date, input, cached, output);
 
@@ -225,7 +338,9 @@
     officialPricingLink.target = "_blank";
     officialPricingLink.rel = "noopener noreferrer";
     requestShapeNode.textContent = compactNumber(input + cached) + " input · " + compactNumber(output) + " output tokens";
-    dailyRequestsNode.textContent = compactNumber(requests) + " requests / day";
+    dailyRequestsNode.textContent = volumeMode === "monthly"
+      ? compactNumber(usage.monthly) + " requests / month"
+      : compactNumber(usage.daily) + " requests / day";
 
     if (!result) {
       perRequestNode.textContent = "—";
@@ -237,13 +352,14 @@
       outputCostNode.textContent = "—";
       rateProfileNode.textContent = "No Standard pricing period is stored for this model on the selected date.";
       warningNode.hidden = true;
-      renderComparison(model, null, date, input, cached, output, requests);
+      renderComparison(model, null, date, input, cached, output, usage.monthly);
+      renderAllModels(date, input, cached, output, usage.monthly);
       return;
     }
 
     perRequestNode.textContent = money(result.total);
-    perDayNode.textContent = money(result.total * requests);
-    perMonthNode.textContent = money(result.total * requests * 30);
+    perDayNode.textContent = money(result.total * usage.daily);
+    perMonthNode.textContent = money(result.total * usage.monthly);
     perThousandNode.textContent = money(result.total * 1000);
     inputCostNode.textContent = money(result.inputCost);
     cachedCostNode.textContent = money(result.cachedCost);
@@ -261,29 +377,78 @@
     const warnings = warningsFor(model, result, input, cached, output);
     warningNode.hidden = warnings.length === 0;
     warningNode.textContent = warnings.join(" ");
-    renderComparison(model, result, date, input, cached, output, requests);
+    renderComparison(model, result, date, input, cached, output, usage.monthly);
+    renderAllModels(date, input, cached, output, usage.monthly);
   };
 
-  const markCustomPreset = () => presets.forEach(button => button.classList.remove("is-active"));
+  const clearPresetState = () => {
+    tokenPresets.forEach(button => button.classList.remove("is-active"));
+    workloadPresets.forEach(button => button.classList.remove("is-active"));
+    if (workloadAssumption) {
+      workloadAssumption.hidden = true;
+      workloadAssumption.textContent = "";
+    }
+  };
 
-  presets.forEach(button => button.addEventListener("click", () => {
+  tokenPresets.forEach(button => button.addEventListener("click", () => {
     inputTokens.value = button.dataset.input || "0";
     cachedTokens.value = button.dataset.cached || "0";
     outputTokens.value = button.dataset.output || "0";
-    presets.forEach(item => item.classList.toggle("is-active", item === button));
+    clearPresetState();
+    button.classList.add("is-active");
+    render();
+  }));
+
+  workloadPresets.forEach(button => button.addEventListener("click", () => {
+    inputTokens.value = button.dataset.input || "0";
+    cachedTokens.value = button.dataset.cached || "0";
+    outputTokens.value = button.dataset.output || "0";
+    requestsPerMonth.value = button.dataset.monthly || "0";
+    if (volumeMode !== "monthly") {
+      volumeMode = "monthly";
+      dailyVolumeField.hidden = true;
+      monthlyVolumeField.hidden = false;
+      volumeDaily.classList.remove("is-active");
+      volumeMonthly.classList.add("is-active");
+      volumeDaily.setAttribute("aria-pressed", "false");
+      volumeMonthly.setAttribute("aria-pressed", "true");
+    }
+    clearPresetState();
+    button.classList.add("is-active");
+    workloadAssumption.hidden = false;
+    workloadAssumption.textContent =
+      button.textContent.trim() + ": " +
+      compactNumber(Number(button.dataset.input || 0)) + " uncached input · " +
+      compactNumber(Number(button.dataset.cached || 0)) + " cached input · " +
+      compactNumber(Number(button.dataset.output || 0)) + " output · " +
+      compactNumber(Number(button.dataset.monthly || 0)) + " requests / month.";
     render();
   }));
 
   [inputTokens, cachedTokens, outputTokens].forEach(node => {
     node?.addEventListener("input", () => {
-      markCustomPreset();
+      clearPresetState();
       render();
     });
   });
 
-  [modelSelect, compareSelect, billingDate, requestsPerDay].forEach(node => {
+  [modelSelect, compareSelect, billingDate].forEach(node => {
     node?.addEventListener("input", render);
     node?.addEventListener("change", render);
+  });
+
+  requestsPerDay?.addEventListener("input", render);
+  requestsPerMonth?.addEventListener("input", render);
+
+  volumeDaily?.addEventListener("click", () => setVolumeMode("daily"));
+  volumeMonthly?.addEventListener("click", () => setVolumeMode("monthly"));
+
+  compareAllToggle?.addEventListener("click", () => {
+    const willOpen = allModelsPanel.hidden;
+    allModelsPanel.hidden = !willOpen;
+    compareAllToggle.setAttribute("aria-expanded", String(willOpen));
+    compareAllToggle.querySelector("span").textContent = willOpen ? "↑" : "↓";
+    if (willOpen) render();
   });
 
   fetch("/data/model-pricing.json", {cache: "no-cache"})
@@ -312,5 +477,6 @@
       rateProfileNode.textContent = "The pricing dataset could not be loaded. Try the Model Pricing database for the current published rates.";
       warningNode.hidden = false;
       warningNode.textContent = "Calculator unavailable because the canonical pricing dataset did not load.";
+      if (compareAllToggle) compareAllToggle.disabled = true;
     });
 })();
