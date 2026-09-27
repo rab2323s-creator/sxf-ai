@@ -578,6 +578,14 @@ def validate_source_expansion(news, archive):
     if categorize("A new method for biological discovery", "Google Research") != "Research":
         fail("Google Research fallback category must be Research")
 
+    home_html = (ROOT / "index.html").read_text(encoding="utf-8")
+    expected_source_label = f"{len(SOURCES):02d} SOURCES · 04 LAYERS"
+    if expected_source_label not in home_html:
+        fail(f"homepage source count drift: expected {expected_source_label}")
+    for name in SOURCE_EXPANSION_NAMES:
+        if name.upper() not in home_html.upper():
+            fail(f"homepage source layer missing active expansion source: {name}")
+
 
 def main():
     from update_news import categorize
@@ -590,6 +598,8 @@ def main():
         ("Our framework for reporting model misalignment","OpenAI"):"Research",
         ("Introducing GPT-6 Sol and Luna","OpenAI"):"Models",
         ("Transformers now runs llama.cpp quants","Hugging Face"):"Open Source",
+        ("TimesFM-3: A zero-shot foundation model for multivariate forecasting","Google Research"):"Models",
+        ("GlucoFM: Foundation model for continuous glucose monitoring","Google Research"):"Models",
     }
     for (title, source), expected in cases.items():
         actual = categorize(title, source)
