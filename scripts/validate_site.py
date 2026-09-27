@@ -10,6 +10,33 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://sxf.si"
 
+EXPECTED_PRIMARY_NAV = [
+    "/models/",
+    "/compare/",
+    "/tools/",
+    "/research/",
+    "/open-source/",
+    "/guides/",
+    "/superintelligence/",
+    "/brief/",
+    "/about/",
+]
+
+SHELL_PAGES = [
+    ROOT / "index.html",
+    ROOT / "about" / "index.html",
+    ROOT / "models" / "index.html",
+    ROOT / "tools" / "index.html",
+    ROOT / "research" / "index.html",
+    ROOT / "open-source" / "index.html",
+    ROOT / "guides" / "ai-agent-security" / "index.html",
+    ROOT / "guides" / "github-copilot-alternatives" / "index.html",
+    ROOT / "guides" / "prompt-injection" / "index.html",
+    ROOT / "guides" / "index.html",
+    ROOT / "compare" / "index.html",
+    ROOT / "superintelligence" / "index.html",
+]
+
 def fail(message):
     print(f"VALIDATION ERROR: {message}", file=sys.stderr)
     raise SystemExit(1)
@@ -60,6 +87,55 @@ def validate_html(path):
             if not target.exists():
                 fail(f"{path}: broken internal link {href}")
 
+def extract_nav_hrefs(text):
+    match = re.search(r'<nav[^>]+class=["\'][^"\']*top-nav[^"\']*["\'][^>]*>(.*?)</nav>', text, re.I | re.S)
+    if not match:
+        return []
+    return re.findall(r'href=["\']([^"\']+)["\']', match.group(1), re.I)
+
+
+def validate_site_shell():
+    for path in SHELL_PAGES:
+        if not path.exists():
+            fail(f"site shell page missing: {path}")
+
+        text = path.read_text(encoding="utf-8")
+        nav_hrefs = extract_nav_hrefs(text)
+        if nav_hrefs != EXPECTED_PRIMARY_NAV:
+            fail(f"{path}: primary navigation drift: {nav_hrefs}")
+
+        if text.count('<header class="site-header">') != 1:
+            fail(f"{path}: expected exactly one site header")
+        if text.count('<footer class="footer shell">') != 1:
+            fail(f"{path}: expected exactly one site footer")
+        if 'class="footer-main"' not in text:
+            fail(f"{path}: premium footer missing")
+        if "/compare/" not in text:
+            fail(f"{path}: Compare link missing from shared shell")
+
+
+def validate_section_counts(news):
+    expected = {
+        category: sum(1 for item in news["items"] if item.get("category") == category)
+        for category in ("Models", "Tools", "Research", "Open Source")
+    }
+    paths = {
+        "Models": ROOT / "models" / "index.html",
+        "Tools": ROOT / "tools" / "index.html",
+        "Research": ROOT / "research" / "index.html",
+        "Open Source": ROOT / "open-source" / "index.html",
+    }
+
+    for category, path in paths.items():
+        text = path.read_text(encoding="utf-8")
+        match = re.search(r'<strong id=["\']sectionCount["\']>(\d+)</strong>', text, re.I)
+        if not match:
+            fail(f"{path}: missing sectionCount")
+        actual = int(match.group(1))
+        if actual != expected[category]:
+            fail(f"{path}: sectionCount {actual} != {expected[category]} current {category} items")
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -84,6 +160,8 @@ def main():
         fail("news.json has no items")
     if len(archive.get("items",[])) < len(news["items"]):
         fail("archive must contain at least current feed items")
+    validate_site_shell()
+    validate_section_counts(news)
     for item in news["items"]:
         required={"title","url","signal_url","source","published","category"}
         if not required.issubset(item):

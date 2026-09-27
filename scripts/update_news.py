@@ -25,6 +25,18 @@ SECTION_PAGES = {
     "Open Source": ROOT / "open-source" / "index.html",
 }
 
+STATIC_SHELL_PAGES = {
+    INDEX: "",
+    ROOT / "about" / "index.html": "about",
+    ROOT / "models" / "index.html": "models",
+    ROOT / "tools" / "index.html": "tools",
+    ROOT / "research" / "index.html": "research",
+    ROOT / "open-source" / "index.html": "open-source",
+    ROOT / "guides" / "ai-agent-security" / "index.html": "guides",
+    ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
+    ROOT / "guides" / "prompt-injection" / "index.html": "guides",
+}
+
 SOURCES = [
     ("OpenAI", "https://openai.com/news/rss.xml"),
     ("Google AI", "https://blog.google/technology/ai/rss/"),
@@ -301,8 +313,14 @@ def update_section_pages(items):
             continue
         filtered = [item for item in items if item["category"] == category]
         page = path.read_text(encoding="utf-8")
-        page = page.replace('<a href="/open-source/">Open Source</a><a href="/brief/">Brief</a>', '<a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a>')
-        page = page.replace('<a href="/guides/">Guides</a><a href="/brief/">Brief</a>', '<a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a>')
+        page, count_updates = re.subn(
+            r'(<strong id="sectionCount">)\d+(</strong>)',
+            lambda match: f'{match.group(1)}{len(filtered)}{match.group(2)}',
+            page,
+            count=1,
+        )
+        if count_updates != 1:
+            raise RuntimeError(f"Could not update sectionCount in {path}")
         page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
         schema = {
             "@context": "https://schema.org",
@@ -1519,6 +1537,27 @@ def page_footer():
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
     </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>'''
+
+def normalize_static_shells():
+    header_pattern = re.compile(r'<header class="site-header">.*?</header>', re.S)
+    footer_script = re.escape('<script>document.getElementById("year").textContent=new Date().getFullYear();</script>')
+    footer_pattern = re.compile(r'<footer class="footer shell">.*?</footer>(?:' + footer_script + r')?', re.S)
+
+    for path, active in STATIC_SHELL_PAGES.items():
+        if not path.exists():
+            raise RuntimeError(f"Static shell page is missing: {path}")
+
+        page = path.read_text(encoding="utf-8")
+        page, header_updates = header_pattern.subn(lambda _match: page_header(active), page, count=1)
+        page, footer_updates = footer_pattern.subn(lambda _match: page_footer(), page, count=1)
+
+        if header_updates != 1:
+            raise RuntimeError(f"Expected exactly one site header in {path}, found {header_updates}")
+        if footer_updates != 1:
+            raise RuntimeError(f"Expected exactly one site footer in {path}, found {footer_updates}")
+
+        path.write_text(page, encoding="utf-8")
+
 
 def page_head(title, description, canonical, schema, page_type="website", robots="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"):
     safe_description = escape(description[:180], quote=True)
@@ -6227,6 +6266,7 @@ def main():
     update_index(current)
     update_section_pages(current)
     build_discovery_pages(archive, current)
+    normalize_static_shells()
     update_sitemap(archive)
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
