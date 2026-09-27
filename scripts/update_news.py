@@ -5758,40 +5758,52 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
     title = "GPT-6 Sol vs Gemini 3.8 Flash (2026): Pricing & API | SXF / AI"
     description = "GPT-6 Sol vs Gemini 3.8 Flash: compare API pricing, 1M+ context, coding and agents, reasoning, multimodal inputs, tools, long-context costs and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    sol = catalog_display_model(
+        "gpt-6-sol",
+        positioning="Complex coding and agentic workflows",
+        thinking="none · low · medium · high · xhigh · max",
+        modalities="Text + image input · text output",
+    )
+    gemini = catalog_display_model(
+        "gemini-3.8-flash",
+        positioning="Long-horizon software engineering, autonomous agents and enterprise workflows",
+        thinking="low · medium · high",
+        modalities="Text + image + video + audio + PDF input · text output",
+    )
+    gemini["input_price"] += "*"
+    gemini["cached_price"] += "*"
+    gemini["output_price"] += "*"
 
     short_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(2*.1 + 10*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(2*10 + 10*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
-        f'<div><span>GPT-6 Sol</span><strong>{money(4*.5 + 15*.05)}</strong><small>500K input + 50K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.5 + 3.75*.05)}</strong><small>500K input + 50K output</small></div>'
+        f'<div><span>GPT-6 Sol</span><strong>{catalog_money(estimate_standard_cost("gpt-6-sol", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>'
     ])
     future_cards = "".join([
-        f'<div><span>100K input + 10K output</span><strong>{money(1.5*.1 + 7.5*.01)}</strong><small>Gemini from Jan 1, 2027</small></div>',
-        f'<div><span>10M input + 1M output</span><strong>{money(1.5*10 + 7.5*1)}</strong><small>Gemini from Jan 1, 2027</small></div>',
-        f'<div><span>500K input + 50K output</span><strong>{money(1.5*.5 + 7.5*.05)}</strong><small>Gemini from Jan 1, 2027</small></div>'
+        f'<div><span>100K input + 10K output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>10M input + 1M output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>',
+        f'<div><span>500K input + 50K output</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 500_000, 50_000, on_date="2027-01-01")[0])}</strong><small>Gemini from Jan 1, 2027</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>gpt-6-sol</small></th>
-      <td>OpenAI</td><td>Complex coding and agentic workflows</td><td>1,050,000</td><td>128,000</td>
-      <td>none · low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
-      <td>$2.00</td><td>$0.20</td><td>$10.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(sol["sxf_url"], quote=True)}">{escape(sol["name"])}</a><small>{escape(sol["model_id"])}</small></th>
+      <td>{escape(sol["provider"])}</td><td>{escape(sol["positioning"])}</td><td>{escape(sol["context"])}</td><td>{escape(sol["max_output"])}</td>
+      <td>{escape(sol["thinking"])}</td><td>{escape(sol["modalities"])}</td>
+      <td>{escape(sol["input_price"])}</td><td>{escape(sol["cached_price"])}</td><td>{escape(sol["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
-      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
-      <td>low · medium · high</td><td>Text + image + video + audio + PDF input · text output</td>
-      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+      <th scope="row"><a href="{escape(gemini["sxf_url"], quote=True)}">{escape(gemini["name"])}</a><small>{escape(gemini["model_id"])}</small></th>
+      <td>{escape(gemini["provider"])}</td><td>{escape(gemini["positioning"])}</td><td>{escape(gemini["context"])}</td><td>{escape(gemini["max_output"])}</td>
+      <td>{escape(gemini["thinking"])}</td><td>{escape(gemini["modalities"])}</td>
+      <td>{escape(gemini["input_price"])}</td><td>{escape(gemini["cached_price"])}</td><td>{escape(gemini["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, GPT-6 Sol or Gemini 3.8 Flash?", "At current Standard paid API rates through December 31, 2026, Gemini 3.8 Flash has lower headline text-token pricing: $0.75 input and $3.75 output per million tokens versus $2 and $10 for GPT-6 Sol. Google states that Gemini 3.8 Flash Standard pricing rises to $1.50 input and $7.50 output on January 1, 2027."),
         ("Which has the larger context window?", "The nominal context windows are effectively the same size: GPT-6 Sol lists 1,050,000 tokens and Gemini 3.8 Flash lists 1,048,576 input tokens. GPT-6 Sol has the larger maximum output at 128,000 tokens versus 65,536 for Gemini 3.8 Flash."),
