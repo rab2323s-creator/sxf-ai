@@ -7553,6 +7553,7 @@ def main():
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
         "source_expansion_version": SOURCE_EXPANSION_VERSION,
+        "source_lifecycle_version": SOURCE_LIFECYCLE_VERSION,
         "source_health": source_health,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
