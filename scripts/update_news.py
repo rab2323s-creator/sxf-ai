@@ -110,6 +110,191 @@ def load_model_pricing_catalog():
 MODEL_PRICING_CATALOG, MODEL_PRICING_BY_ID = load_model_pricing_catalog()
 
 
+def load_model_history():
+    if not MODEL_HISTORY_PATH.exists():
+        raise RuntimeError("model-history.json must exist before rendering model intelligence")
+    data = json.loads(MODEL_HISTORY_PATH.read_text(encoding="utf-8"))
+    if not isinstance(data.get("events"), list) or not isinstance(data.get("state"), dict):
+        raise RuntimeError("model-history.json is missing events/state")
+    return data
+
+
+def catalog_model_ids_for_name(name):
+    exact = [
+        model_id for model_id, model in MODEL_PRICING_BY_ID.items()
+        if model.get("model", "").lower() == name.lower()
+    ]
+    if exact:
+        return exact
+    if name == "GPT-6":
+        return ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]
+    if name == "GPT-5.6":
+        return ["gpt-5.6-sol", "gpt-5.6-terra", "gpt-5.6-luna"]
+    return []
+
+
+def model_history_events(model_ids):
+    history = load_model_history()
+    wanted = set(model_ids)
+    return [event for event in history["events"] if event.get("model_id") in wanted]
+
+
+def model_history_html(model_ids, heading="Verified model history"):
+    if not model_ids:
+        return ""
+    history = load_model_history()
+    events = [event for event in history["events"] if event.get("model_id") in set(model_ids)]
+    if not events:
+        return ""
+
+    latest_by_model = {}
+    for event in events:
+        latest_by_model[event["model_id"]] = event
+    selected = list(events[-12:])
+    selected_ids = {event["event_id"] for event in selected}
+    for event in latest_by_model.values():
+        if event["event_id"] not in selected_ids:
+            selected.append(event)
+    selected.sort(key=lambda event: event["sequence"], reverse=True)
+
+    rows = []
+    for event in selected:
+        model = MODEL_PRICING_BY_ID.get(event["model_id"], {})
+        model_name = model.get("model", event["model_id"])
+        if event["type"] in {"baseline", "model_added"}:
+            snapshot = event.get("snapshot", {})
+            price = (snapshot.get("pricing", {}).get("standard") or [{}])[-1]
+            summary = (
+                f'Baseline verified: {int(snapshot.get("context_window", 0)):,} context · '
+                f'{int(snapshot.get("max_output", 0)):,} max output'
+            )
+            if price.get("input") is not None and price.get("output") is not None:
+                summary += (
+                    f' · {catalog_price_label(price["input"])} input / '
+                    f'{catalog_price_label(price["output"])} output per MTok'
+                )
+            source = event.get("evidence", {}).get("model_identity") or model.get("official_sources", [""])[0]
+            kind = "BASELINE"
+        else:
+            changes = event.get("changes", [])
+            labels = []
+            for change in changes:
+                field = change["field"].replace("_", " ")
+                labels.append(field)
+            summary = "Changed: " + ", ".join(labels)
+            source = changes[0]["source_url"] if changes else model.get("official_sources", [""])[0]
+            kind = "CHANGE"
+
+        rows.append(
+            f'''<article class="model-history-event" data-history-event="{escape(event["event_id"], quote=True)}" data-model-id="{escape(event["model_id"], quote=True)}">
+              <div class="model-history-meta"><span>{kind}</span><time datetime="{escape(event["verified_at"], quote=True)}">{escape(event["verified_at"])}</time></div>
+              <h3>{escape(model_name)}</h3><p>{escape(summary)}</p>
+              <a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article>'''
+        )
+
+    return f'''<section class="model-history shell" data-model-history data-history-models="{escape(",".join(model_ids), quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>{escape(heading)}</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
+      <div class="model-history-grid">{"".join(rows)}</div>
+      <p class="reference-note">Append-only SXF ledger · {len(events)} verified event{"s" if len(events) != 1 else ""} · chain head {escape(history.get("chain_head", "")[:12])}…</p>
+    </section>'''
+
+
+def compare_live_facts_html(model_ids):
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    cards = []
+    for model_id in model_ids:
+        model = model_catalog_entry(model_id)
+        price = active_standard_price(model_id, verified)
+        evidence = model["provenance"]["evidence"]
+        modalities = " + ".join(model.get("modalities", {}).get("input", []))
+        cards.append(
+            f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
+              data-context="{int(model["context_window"])}" data-max-output="{int(model["max_output"])}"
+              data-input="{float(price["input"]):g}" data-cached="{float(price["cached_input"]):g}" data-output="{float(price["output"]):g}">
+              <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
+              <h3>{escape(model["model"])}</h3>
+              <dl>
+                <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
+                <div><dt>Max output</dt><dd>{int(model["max_output"]):,}</dd></div>
+                <div><dt>Input / MTok</dt><dd>{escape(catalog_price_label(price["input"]))}</dd></div>
+                <div><dt>Cached / MTok</dt><dd>{escape(catalog_price_label(price["cached_input"]))}</dd></div>
+                <div><dt>Output / MTok</dt><dd>{escape(catalog_price_label(price["output"]))}</dd></div>
+                <div><dt>Input types</dt><dd>{escape(modalities)}</dd></div>
+              </dl>
+              <div class="compare-live-sources"><a href="{escape(evidence["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer">Specs ↗</a><a href="{escape(evidence["pricing"], quote=True)}" target="_blank" rel="noopener noreferrer">Pricing ↗</a></div>
+            </article>'''
+        )
+    latest = []
+    history = load_model_history()
+    for model_id in model_ids:
+        model_events = [event for event in history["events"] if event.get("model_id") == model_id]
+        if model_events:
+            latest.append(model_events[-1])
+    latest_verified = max((event["verified_at"] for event in latest), default=verified)
+    return f'''<section class="compare-live-facts shell" data-compare-contract data-model-ids="{escape(",".join(model_ids), quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">LIVE VERIFIED FACTS</p><h2>Current facts from the SXF model database.</h2></div><span>Catalog {escape(verified)} · History {escape(latest_verified)}</span></div>
+      <div class="compare-live-grid">{"".join(cards)}</div>
+      <div class="compare-live-foot"><span>Facts are generated from the canonical model catalog, not copied into this comparison.</span><a href="/data/model-pricing.json">Current data ↗</a><a href="/data/model-history.json">Change ledger ↗</a></div>
+    </section>'''
+
+
+def compare_pair_fact_line(model_ids):
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    parts = []
+    for model_id in model_ids:
+        model = model_catalog_entry(model_id)
+        price = active_standard_price(model_id, verified)
+        context_m = model["context_window"] / 1_000_000
+        context_label = f"{context_m:.2f}".rstrip("0").rstrip(".") + "M"
+        parts.append(
+            f'{model["model"]}: {catalog_price_label(price["input"])}/{catalog_price_label(price["output"])} · {context_label}'
+        )
+    return " | ".join(parts)
+
+
+def ensure_catalog_model_histories():
+    grouped = {}
+    for model_id, model in MODEL_PRICING_BY_ID.items():
+        path = model.get("sxf_url", "")
+        if not path.startswith("/models/") or path == "/models/pricing/":
+            continue
+        grouped.setdefault(path, []).append(model_id)
+
+    for url, model_ids in grouped.items():
+        target = ROOT / url.strip("/") / "index.html"
+        if not target.exists():
+            continue
+        html = target.read_text(encoding="utf-8")
+        if "data-model-history" in html:
+            continue
+        title = " / ".join(MODEL_PRICING_BY_ID[mid]["model"] for mid in model_ids)
+        html = inject_before_main_end(html, model_history_html(model_ids, f"{title} verified history."))
+        target.write_text(html, encoding="utf-8")
+
+
+def inject_before_main_end(html, fragment):
+    if not fragment:
+        return html
+    marker = "</main>"
+    if marker not in html:
+        raise RuntimeError("Could not inject model intelligence block: </main> missing")
+    return html.replace(marker, fragment + marker, 1)
+
+
+def inject_compare_contract(html, model_ids):
+    fragment = compare_live_facts_html(model_ids)
+    hero_end = "</section>"
+    hero_start = html.find('<section class="comparison-hero')
+    if hero_start < 0:
+        raise RuntimeError("Comparison page is missing comparison-hero")
+    end = html.find(hero_end, hero_start)
+    if end < 0:
+        raise RuntimeError("Comparison hero section is not closed")
+    end += len(hero_end)
+    return html[:end] + fragment + html[end:]
+
+
 def model_catalog_entry(model_id):
     try:
         return MODEL_PRICING_BY_ID[model_id]
@@ -5252,7 +5437,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Anthropic",
             "kicker": "Frontier matchup",
             "summary": "Same $10/$50 headline price. Compare long-context billing, cache economics, reasoning, coding, agents and independent benchmark evidence.",
-            "facts": "1.05M vs 1M context · 128K output each",
+            "facts": compare_pair_fact_line(["gpt-6-astra", "claude-fable-5-1"]),
             "tags": "openai anthropic frontier coding agents pricing benchmarks long-context",
         },
         {
@@ -5261,7 +5446,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Google",
             "kicker": "Coding · agents · multimodal",
             "summary": "Compare lower-cost production models on token economics, 1M+ context, tools, reasoning controls and broad multimodal input.",
-            "facts": "$2/$10 vs $0.75/$3.75* · 1M+ context",
+            "facts": compare_pair_fact_line(["gpt-6-sol", "gemini-3.8-flash"]),
             "tags": "openai google coding agents pricing multimodal long-context",
         },
         {
@@ -5270,7 +5455,7 @@ def compare_index_html(items):
             "providers": "Anthropic · Google",
             "kicker": "Agentic coding · economics",
             "summary": "Compare long-running coding, cache economics, Batch and Fast inference, multimodal inputs, tools and deployment fit.",
-            "facts": "1M+ context · cache + batch analysis",
+            "facts": compare_pair_fact_line(["claude-opus-5-5", "gemini-3.8-flash"]),
             "tags": "anthropic google coding agents pricing multimodal caching batch",
         },
         {
@@ -5279,7 +5464,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Anthropic",
             "kicker": "Agentic coding",
             "summary": "A direct comparison of two serious coding and agent models, including standard and long-context costs, reasoning controls and tool architecture.",
-            "facts": "$2/$10 vs $4/$20 · 1.05M vs 1M",
+            "facts": compare_pair_fact_line(["gpt-6-sol", "claude-opus-5-5"]),
             "tags": "openai anthropic coding agents pricing long-context",
         },
         {
@@ -5288,7 +5473,7 @@ def compare_index_html(items):
             "providers": "OpenAI",
             "kicker": "Within-family decision",
             "summary": "Choose the right GPT-6 tier by capability, workload and unit economics instead of treating GPT-6 as one model.",
-            "facts": "Same 1.05M context · 100× price spread",
+            "facts": compare_pair_fact_line(["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]),
             "tags": "openai family pricing coding agents",
         },
     ]
@@ -6760,37 +6945,72 @@ def build_discovery_pages(items, current_items):
             continue
         path = ROOT / "models" / slugify(name)
         path.mkdir(parents=True, exist_ok=True)
-        (path / "index.html").write_text(model_page_html(name, matched), encoding="utf-8")
+        page = model_page_html(name, matched)
+        history_ids = catalog_model_ids_for_name(name)
+        page = inject_before_main_end(page, model_history_html(history_ids, f"{name} verified history."))
+        (path / "index.html").write_text(page, encoding="utf-8")
 
     fable_path = ROOT / "models" / "claude-fable-5-1"
     fable_path.mkdir(parents=True, exist_ok=True)
-    (fable_path / "index.html").write_text(claude_fable_51_reference_html(items), encoding="utf-8")
+    fable_page = claude_fable_51_reference_html(items)
+    fable_page = inject_before_main_end(
+        fable_page,
+        model_history_html(["claude-fable-5-1"], "Claude Fable 5.1 verified history.")
+    )
+    (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
 
     gemini_path = ROOT / "models" / "gemini-3-8-flash"
     gemini_path.mkdir(parents=True, exist_ok=True)
-    (gemini_path / "index.html").write_text(gemini_38_flash_reference_html(items), encoding="utf-8")
+    gemini_page = gemini_38_flash_reference_html(items)
+    gemini_page = inject_before_main_end(
+        gemini_page,
+        model_history_html(["gemini-3.8-flash"], "Gemini 3.8 Flash verified history.")
+    )
+    (gemini_path / "index.html").write_text(gemini_page, encoding="utf-8")
+
+    ensure_catalog_model_histories()
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
     comparison_path = COMPARE_DIR / GPT6_COMPARE_SLUG
     comparison_path.mkdir(parents=True, exist_ok=True)
-    (comparison_path / "index.html").write_text(gpt6_comparison_html(items), encoding="utf-8")
+    comparison_page = inject_compare_contract(
+        gpt6_comparison_html(items),
+        ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
+    )
+    (comparison_path / "index.html").write_text(comparison_page, encoding="utf-8")
 
     duel_path = COMPARE_DIR / GPT6_SOL_CLAUDE_COMPARE_SLUG
     duel_path.mkdir(parents=True, exist_ok=True)
-    (duel_path / "index.html").write_text(gpt6_sol_vs_claude_opus_html(items), encoding="utf-8")
+    duel_page = inject_compare_contract(
+        gpt6_sol_vs_claude_opus_html(items),
+        ["gpt-6-sol", "claude-opus-5-5"],
+    )
+    (duel_path / "index.html").write_text(duel_page, encoding="utf-8")
 
     sol_gemini_path = COMPARE_DIR / GPT6_SOL_GEMINI_COMPARE_SLUG
     sol_gemini_path.mkdir(parents=True, exist_ok=True)
-    (sol_gemini_path / "index.html").write_text(gpt6_sol_vs_gemini_38_flash_html(items), encoding="utf-8")
+    sol_gemini_page = inject_compare_contract(
+        gpt6_sol_vs_gemini_38_flash_html(items),
+        ["gpt-6-sol", "gemini-3.8-flash"],
+    )
+    (sol_gemini_path / "index.html").write_text(sol_gemini_page, encoding="utf-8")
 
     opus_gemini_path = COMPARE_DIR / CLAUDE_OPUS_GEMINI_COMPARE_SLUG
     opus_gemini_path.mkdir(parents=True, exist_ok=True)
-    (opus_gemini_path / "index.html").write_text(claude_opus_55_vs_gemini_38_flash_html(items), encoding="utf-8")
+    opus_gemini_page = inject_compare_contract(
+        claude_opus_55_vs_gemini_38_flash_html(items),
+        ["claude-opus-5-5", "gemini-3.8-flash"],
+    )
+    (opus_gemini_path / "index.html").write_text(opus_gemini_page, encoding="utf-8")
 
     astra_fable_path = COMPARE_DIR / GPT6_ASTRA_FABLE_COMPARE_SLUG
     astra_fable_path.mkdir(parents=True, exist_ok=True)
-    (astra_fable_path / "index.html").write_text(gpt6_astra_vs_claude_fable_51_html(items), encoding="utf-8")
+    astra_fable_page = inject_compare_contract(
+        gpt6_astra_vs_claude_fable_51_html(items),
+        ["gpt-6-astra", "claude-fable-5-1"],
+    )
+    (astra_fable_path / "index.html").write_text(astra_fable_page, encoding="utf-8")
 
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()

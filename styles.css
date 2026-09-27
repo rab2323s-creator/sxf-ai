@@ -564,3 +564,29 @@ button,input{font:inherit}
   .site-header .top-nav a{flex:0 0 auto;padding:4px 0}
   .toolbar{top:119px}
 }
+
+/* SXF VERIFIED MODEL INTELLIGENCE CONTRACTS */
+.compare-live-facts{padding:28px 0 86px}
+.compare-live-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.compare-live-card{border:1px solid var(--line);border-radius:20px;padding:20px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.008))}
+.compare-live-meta{display:flex;justify-content:space-between;gap:14px;color:#75818e;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.compare-live-meta span{color:var(--accent)}
+.compare-live-card h3{margin:20px 0 18px;font-size:24px;letter-spacing:-.04em}
+.compare-live-card dl{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.compare-live-card dl div{background:#0a0e13;padding:12px}
+.compare-live-card dt{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#65717f}
+.compare-live-card dd{margin:5px 0 0;font-size:13px;color:#d9e0e7;font-variant-numeric:tabular-nums}
+.compare-live-sources{display:flex;gap:14px;margin-top:15px;font-size:10px}
+.compare-live-sources a{color:#a8b4c0}
+.compare-live-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:14px;color:#697582;font-size:10px}
+.compare-live-foot a{color:#a8b4c0}
+.model-history{padding:12px 0 92px}
+.model-history-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.model-history-event{min-height:190px;border:1px solid var(--line);border-radius:18px;padding:20px;background:#0a0e13;display:flex;flex-direction:column}
+.model-history-meta{display:flex;justify-content:space-between;gap:10px;color:#687482;font-size:9px;letter-spacing:.1em}
+.model-history-meta span{color:var(--accent);font-weight:800}
+.model-history-event h3{margin:34px 0 8px;font-size:20px;letter-spacing:-.035em}
+.model-history-event p{margin:0;color:#7f8b98;font-size:12px;line-height:1.6}
+.model-history-event a{margin-top:auto;padding-top:18px;color:#a8b4c0;font-size:10px}
+@media(max-width:960px){.compare-live-grid,.model-history-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.compare-live-grid,.model-history-grid{grid-template-columns:1fr}.compare-live-card dl{grid-template-columns:1fr 1fr}}

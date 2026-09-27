@@ -420,6 +420,98 @@ def validate_model_pricing_catalog():
         fail("pricing calculator must apply catalog pricing rules")
 
 
+def validate_compare_contracts_and_model_histories():
+    catalog = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
+    history = json.loads((ROOT / "data" / "model-history.json").read_text(encoding="utf-8"))
+    models = {model["model_id"]: model for model in catalog["models"]}
+
+    comparisons = {
+        "gpt-6-astra-vs-sol-vs-luna": ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
+        "gpt-6-sol-vs-claude-opus-5-5": ["gpt-6-sol", "claude-opus-5-5"],
+        "gpt-6-sol-vs-gemini-3-8-flash": ["gpt-6-sol", "gemini-3.8-flash"],
+        "claude-opus-5-5-vs-gemini-3-8-flash": ["claude-opus-5-5", "gemini-3.8-flash"],
+        "gpt-6-astra-vs-claude-fable-5-1": ["gpt-6-astra", "claude-fable-5-1"],
+    }
+
+    verified = catalog["source_verified"]
+    for slug, model_ids in comparisons.items():
+        path = ROOT / "compare" / slug / "index.html"
+        if not path.exists():
+            fail(f"missing comparison page for contract validation: {slug}")
+        html = path.read_text(encoding="utf-8")
+        if "data-compare-contract" not in html:
+            fail(f"{slug}: missing live compare contract")
+        ids_match = re.search(r'data-model-ids="([^"]+)"', html)
+        if not ids_match or ids_match.group(1).split(",") != model_ids:
+            fail(f"{slug}: compare contract model IDs drift")
+
+        for model_id in model_ids:
+            model = models[model_id]
+            schedule = model["pricing"]["standard"]
+            price = None
+            target = datetime.fromisoformat(verified).date()
+            for period in schedule:
+                start = datetime.fromisoformat(period["start"]).date()
+                end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+                if start <= target and (end is None or target <= end):
+                    price = period
+                    break
+            if price is None:
+                fail(f"{slug}: no active Standard price for {model_id}")
+
+            row_pattern = (
+                rf'<article class="compare-live-card"[^>]+data-compare-model="{re.escape(model_id)}"'
+                rf'[^>]+data-context="{int(model["context_window"])}"'
+                rf'[^>]+data-max-output="{int(model["max_output"])}"'
+                rf'[^>]+data-input="{float(price["input"]):g}"'
+                rf'[^>]+data-cached="{float(price["cached_input"]):g}"'
+                rf'[^>]+data-output="{float(price["output"]):g}"'
+            )
+            if not re.search(row_pattern, html, re.S):
+                fail(f"{slug}: live facts drift for {model_id}")
+
+            evidence = model["provenance"]["evidence"]
+            if evidence["model_identity"] not in html or evidence["pricing"] not in html:
+                fail(f"{slug}: official evidence links missing for {model_id}")
+
+    from update_news import compare_pair_fact_line
+    hub_html = (ROOT / "compare" / "index.html").read_text(encoding="utf-8")
+    hub_pairs = [
+        ["gpt-6-astra", "claude-fable-5-1"],
+        ["gpt-6-sol", "gemini-3.8-flash"],
+        ["claude-opus-5-5", "gemini-3.8-flash"],
+        ["gpt-6-sol", "claude-opus-5-5"],
+        ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
+    ]
+    for model_ids in hub_pairs:
+        expected = compare_pair_fact_line(model_ids)
+        if expected not in hub_html:
+            fail(f"compare hub facts drift for {model_ids}")
+
+    # Every catalog-backed /models/ URL must surface the latest ledger event for its model.
+    events_by_model = {}
+    for event in history["events"]:
+        events_by_model.setdefault(event["model_id"], []).append(event)
+
+    for model_id, model in models.items():
+        url = model.get("sxf_url", "")
+        if not url.startswith("/models/") or url == "/models/pricing/":
+            continue
+        path = local_path(BASE + url)
+        if not path.exists():
+            fail(f"{model_id}: model history target missing: {url}")
+        html = path.read_text(encoding="utf-8")
+        if "data-model-history" not in html:
+            fail(f"{model_id}: model page missing verified history timeline")
+        latest = events_by_model.get(model_id, [])[-1] if events_by_model.get(model_id) else None
+        if latest is None:
+            fail(f"{model_id}: no ledger event available")
+        if latest["event_id"] not in html:
+            fail(f"{model_id}: latest ledger event is not surfaced on model page")
+        if f'data-model-id="{model_id}"' not in html:
+            fail(f"{model_id}: model timeline does not identify the model")
+
+
 def validate_topic_relevance(archive):
     from update_news import (
         TOPICS,
@@ -786,6 +878,7 @@ def main():
 
     validate_model_pricing_catalog()
     validate_model_history()
+    validate_compare_contracts_and_model_histories()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
     aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))
