@@ -27,6 +27,7 @@ SHELL_PAGES = [
     ROOT / "index.html",
     ROOT / "about" / "index.html",
     ROOT / "models" / "index.html",
+    ROOT / "models" / "pricing" / "index.html",
     ROOT / "tools" / "index.html",
     ROOT / "research" / "index.html",
     ROOT / "open-source" / "index.html",
@@ -274,6 +275,24 @@ def validate_model_pricing_catalog():
     if (gemini_2027["input"], gemini_2027["output"]) != (1.5, 7.5):
         fail("Gemini 3.8 Flash 2027 pricing schedule drift")
 
+    pricing_page = ROOT / "models" / "pricing" / "index.html"
+    if not pricing_page.exists():
+        fail("generated model pricing page is missing")
+    pricing_html = pricing_page.read_text(encoding="utf-8")
+    row_count = len(re.findall(r"data-pricing-row(?:\s|>)", pricing_html))
+    if row_count != len(models):
+        fail(f"model pricing table has {row_count} rows for {len(models)} catalog models")
+    if "/data/model-pricing.json" not in pricing_html:
+        fail("model pricing page must link the canonical JSON dataset")
+    if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
+        fail("model pricing page is missing calculator assets")
+
+    pricing_js = (ROOT / "models" / "pricing" / "pricing.js").read_text(encoding="utf-8")
+    if 'fetch("/data/model-pricing.json"' not in pricing_js:
+        fail("pricing calculator must load the canonical model-pricing.json dataset")
+    if "effectiveRates" not in pricing_js or "threshold_input_tokens" not in pricing_js:
+        fail("pricing calculator must apply catalog pricing rules")
+
 
 def main():
     from update_news import categorize
@@ -346,6 +365,7 @@ def main():
 
     core=[ROOT/"index.html",ROOT/"about"/"index.html",ROOT/"signals"/"index.html",ROOT/"topics"/"index.html",ROOT/"brief"/"index.html"]
     core += [ROOT/x/"index.html" for x in ("models","tools","research","open-source")]
+    core.append(ROOT/"models"/"pricing"/"index.html")
     for path in core:
         validate_html(path)
     for item in archive["items"]:
