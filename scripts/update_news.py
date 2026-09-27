@@ -5263,43 +5263,53 @@ def gpt6_astra_vs_claude_fable_51_html(items):
     title = "GPT-6 Astra vs Claude Fable 5.1 (2026): Cost, Coding & Agents | SXF / AI"
     description = "GPT-6 Astra vs Claude Fable 5.1: compare pricing, 1M context, coding, reasoning, agents, tools, caching, long-context economics, benchmarks and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    astra = catalog_display_model(
+        "gpt-6-astra",
+        positioning="Hardest end-to-end work",
+        thinking="low · medium · high · xhigh · max",
+        modalities="Text + image input · text output",
+    )
+    fable = catalog_display_model(
+        "claude-fable-5-1",
+        positioning="Demanding reasoning and long-horizon agentic work",
+        thinking="Adaptive · always on · low → max · default high",
+        modalities="Text + image input · text output",
+    )
+    money = catalog_money
 
     short_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.1 + 50*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*10 + 50*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     long_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(20*.5 + 75*.05)}</strong><small>500K input + 50K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(10*.5 + 50*.05)}</strong><small>500K input + 50K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 500_000, 50_000)[0])}</strong><small>500K input + 50K output</small></div>'
     ])
     cache_cards = "".join([
-        f'<div><span>GPT-6 Astra</span><strong>{money(1*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>',
-        f'<div><span>Claude Fable 5.1</span><strong>{money(.25*1 + 50*.1)}</strong><small>1M cached input + 100K output</small></div>'
+        f'<div><span>GPT-6 Astra</span><strong>{catalog_money(estimate_standard_cost("gpt-6-astra", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Claude Fable 5.1</span><strong>{catalog_money(estimate_standard_cost("claude-fable-5-1", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>'
     ])
     batch_cards = "".join([
         f'<div><span>GPT-6 Astra</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
         f'<div><span>Claude Fable 5.1</span><strong>{money(5*10 + 25*1)}</strong><small>Batch · 10M input + 1M output</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>gpt-6-astra</small></th>
-      <td>OpenAI</td><td>Hardest end-to-end work</td><td>1,050,000</td><td>128,000</td>
-      <td>low · medium · high · xhigh · max</td><td>Text + image input · text output</td>
-      <td>$10.00</td><td>$1.00</td><td>$50.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(astra["sxf_url"], quote=True)}">{escape(astra["name"])}</a><small>{escape(astra["model_id"])}</small></th>
+      <td>{escape(astra["provider"])}</td><td>{escape(astra["positioning"])}</td><td>{escape(astra["context"])}</td><td>{escape(astra["max_output"])}</td>
+      <td>{escape(astra["thinking"])}</td><td>{escape(astra["modalities"])}</td>
+      <td>{escape(astra["input_price"])}</td><td>{escape(astra["cached_price"])}</td><td>{escape(astra["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/claude-fable-5-1/">Claude Fable 5.1</a><small>claude-fable-5-1</small></th>
-      <td>Anthropic</td><td>Demanding reasoning and long-horizon agentic work</td><td>1,000,000</td><td>128,000</td>
-      <td>Adaptive · always on · low → max · default high</td><td>Text + image input · text output</td>
-      <td>$10.00</td><td>$0.25</td><td>$50.00</td>
+      <th scope="row"><a href="{escape(fable["sxf_url"], quote=True)}">{escape(fable["name"])}</a><small>{escape(fable["model_id"])}</small></th>
+      <td>{escape(fable["provider"])}</td><td>{escape(fable["positioning"])}</td><td>{escape(fable["context"])}</td><td>{escape(fable["max_output"])}</td>
+      <td>{escape(fable["thinking"])}</td><td>{escape(fable["modalities"])}</td>
+      <td>{escape(fable["input_price"])}</td><td>{escape(fable["cached_price"])}</td><td>{escape(fable["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, GPT-6 Astra or Claude Fable 5.1?", "At short-context Standard token rates, neither is cheaper: both list $10 per million input tokens and $50 per million output tokens. The economics diverge with long context and caching. OpenAI prices Astra prompts above 272K input tokens at 2x input/cache rates and 1.5x output for the full request, while Anthropic lists Fable 5.1 at standard token rates across its 1M context window. Fable also lists a lower cache-read rate of $0.25 per million tokens versus $1 for Astra."),
         ("Which has the larger context window?", "GPT-6 Astra lists a 1,050,000-token context window, while Claude Fable 5.1 lists 1,000,000 tokens. Both support up to 128,000 output tokens. The roughly 5% context difference is usually less important than pricing, retrieval, caching and tool architecture."),
@@ -5518,39 +5528,51 @@ def claude_opus_55_vs_gemini_38_flash_html(items):
     title = "Claude Opus 5.5 vs Gemini 3.8 Flash (2026) | SXF / AI"
     description = "Claude Opus 5.5 vs Gemini 3.8 Flash: compare pricing, 1M context, coding, agents, reasoning, multimodal inputs, caching, batch, fast inference and production fit."
 
-    def money(value):
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
+    opus = catalog_display_model(
+        "claude-opus-5-5",
+        positioning="Long-running agentic coding and knowledge work",
+        thinking="Adaptive thinking · always on · default medium",
+        modalities="Text + image input · text output",
+    )
+    gemini = catalog_display_model(
+        "gemini-3.8-flash",
+        positioning="Long-horizon software engineering, autonomous agents and enterprise workflows",
+        thinking="low · medium · high · default medium",
+        modalities="Text + image + video + audio + PDF input · text output",
+    )
+    gemini["input_price"] += "*"
+    gemini["cached_price"] += "*"
+    gemini["output_price"] += "*"
 
     short_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(4*.1 + 20*.01)}</strong><small>100K input + 10K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*.1 + 3.75*.01)}</strong><small>100K input + 10K output</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000)[0])}</strong><small>100K input + 10K output</small></div>'
     ])
     monthly_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(4*10 + 20*1)}</strong><small>10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.75*10 + 3.75*1)}</strong><small>10M input + 1M output</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0])}</strong><small>10M input + 1M output</small></div>'
     ])
     cache_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(.20*1 + 20*.1)}</strong><small>1M cached input + 100K output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.075*1 + 3.75*.1)}</strong><small>1M cached input + 100K output*</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 0, 100_000, 1_000_000)[0])}</strong><small>1M cached input + 100K output*</small></div>'
     ])
     batch_cards = "".join([
-        f'<div><span>Claude Opus 5.5</span><strong>{money(2*10 + 10*1)}</strong><small>Batch · 10M input + 1M output</small></div>',
-        f'<div><span>Gemini 3.8 Flash</span><strong>{money(.375*10 + 1.875*1)}</strong><small>Batch · 10M input + 1M output*</small></div>'
+        f'<div><span>Claude Opus 5.5</span><strong>{catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0] * 0.5)}</strong><small>Batch · 10M input + 1M output</small></div>',
+        f'<div><span>Gemini 3.8 Flash</span><strong>{catalog_money(estimate_standard_cost("gemini-3.8-flash", 10_000_000, 1_000_000)[0] * 0.5)}</strong><small>Batch · 10M input + 1M output*</small></div>'
     ])
 
-    rows = '''<tr>
-      <th scope="row"><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><small>claude-opus-5-5</small></th>
-      <td>Anthropic</td><td>Long-running agentic coding and knowledge work</td><td>1,000,000</td><td>128,000</td>
-      <td>Adaptive thinking · always on · default medium</td><td>Text + image input · text output</td>
-      <td>$4.00</td><td>$0.20</td><td>$20.00</td>
+    rows = f'''<tr>
+      <th scope="row"><a href="{escape(opus["sxf_url"], quote=True)}">{escape(opus["name"])}</a><small>{escape(opus["model_id"])}</small></th>
+      <td>{escape(opus["provider"])}</td><td>{escape(opus["positioning"])}</td><td>{escape(opus["context"])}</td><td>{escape(opus["max_output"])}</td>
+      <td>{escape(opus["thinking"])}</td><td>{escape(opus["modalities"])}</td>
+      <td>{escape(opus["input_price"])}</td><td>{escape(opus["cached_price"])}</td><td>{escape(opus["output_price"])}</td>
     </tr>
     <tr>
-      <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>gemini-3.8-flash</small></th>
-      <td>Google</td><td>Long-horizon software engineering, autonomous agents and enterprise workflows</td><td>1,048,576</td><td>65,536</td>
-      <td>low · medium · high · default medium</td><td>Text + image + video + audio + PDF input · text output</td>
-      <td>$0.75*</td><td>$0.075*</td><td>$3.75*</td>
+      <th scope="row"><a href="{escape(gemini["sxf_url"], quote=True)}">{escape(gemini["name"])}</a><small>{escape(gemini["model_id"])}</small></th>
+      <td>{escape(gemini["provider"])}</td><td>{escape(gemini["positioning"])}</td><td>{escape(gemini["context"])}</td><td>{escape(gemini["max_output"])}</td>
+      <td>{escape(gemini["thinking"])}</td><td>{escape(gemini["modalities"])}</td>
+      <td>{escape(gemini["input_price"])}</td><td>{escape(gemini["cached_price"])}</td><td>{escape(gemini["output_price"])}</td>
     </tr>'''
-
     faq_items = [
         ("Which is cheaper, Claude Opus 5.5 or Gemini 3.8 Flash?",
          "At current Standard API rates through December 31, 2026, Gemini 3.8 Flash has much lower headline token prices: $0.75 input and $3.75 output per million tokens versus $4 and $20 for Claude Opus 5.5. Google states that Gemini 3.8 Flash Standard pricing doubles to $1.50 input and $7.50 output on January 1, 2027."),
