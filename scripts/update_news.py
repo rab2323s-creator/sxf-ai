@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import urllib.request
+import time
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 from html import escape, unescape
@@ -312,16 +313,24 @@ def classify_tags(title, source, category):
         tags.append("Open Source AI")
     return list(dict.fromkeys(tags))
 
-def fetch(url):
-    req = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
-        },
-    )
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return r.read()
+def fetch(url, attempts=3):
+    last_error = None
+    for attempt in range(attempts):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=25) as r:
+                return r.read()
+        except Exception as exc:
+            last_error = exc
+            if attempt + 1 < attempts:
+                time.sleep(1.0 * (2 ** attempt))
+    raise last_error
 
 def source_accepts_item(source_config, title, summary):
     filter_name = source_config.get("filter")
@@ -6902,5 +6911,7 @@ def main():
         f"enriched {enriched} summaries; source errors: {len(errors)}; "
         f"source counts: {current_source_counts}"
     )
+    for error in errors:
+        print(f"Source warning: {error}")
 if __name__ == "__main__":
     main()
