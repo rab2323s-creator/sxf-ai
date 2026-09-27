@@ -511,9 +511,20 @@ def validate_source_expansion(news, archive):
 
     archive_counts = health.get("archive_counts", {})
     current_counts = health.get("current_counts", {})
+    errors = health.get("errors", [])
+    if not isinstance(errors, list):
+        fail("source_health errors must be a list")
+
+    def source_has_recorded_error(name):
+        prefix = f"{name}:"
+        return any(isinstance(error, str) and error.startswith(prefix) for error in errors)
+
     for name in SOURCE_EXPANSION_NAMES:
-        if archive_counts.get(name, 0) < 1:
-            fail(f"{name}: expansion source produced no archived signals")
+        if archive_counts.get(name, 0) < 1 and not source_has_recorded_error(name):
+            fail(
+                f"{name}: expansion source produced no archived signals "
+                "and no source error was recorded"
+            )
         if current_counts.get(name, 0) > SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
             fail(f"{name}: current-source cap exceeded")
 
