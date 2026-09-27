@@ -147,8 +147,18 @@ def model_history_html(model_ids, heading="Verified model history"):
     if not events:
         return ""
 
+    latest_by_model = {}
+    for event in events:
+        latest_by_model[event["model_id"]] = event
+    selected = list(events[-12:])
+    selected_ids = {event["event_id"] for event in selected}
+    for event in latest_by_model.values():
+        if event["event_id"] not in selected_ids:
+            selected.append(event)
+    selected.sort(key=lambda event: event["sequence"], reverse=True)
+
     rows = []
-    for event in reversed(events[-12:]):
+    for event in selected:
         model = MODEL_PRICING_BY_ID.get(event["model_id"], {})
         model_name = model.get("model", event["model_id"])
         if event["type"] in {"baseline", "model_added"}:
