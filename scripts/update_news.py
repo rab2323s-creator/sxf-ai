@@ -532,6 +532,7 @@ def update_section_pages(items):
         schema_html = '<script type="application/ld+json" id="section-signals-schema">' + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
         page = replace_block(page, "<!-- SXF:SECTION_SCHEMA_START -->", "<!-- SXF:SECTION_SCHEMA_END -->", schema_html)
         if category == "Models":
+            page = replace_block(page, "<!-- SXF:MODEL_EXPLORER_START -->", "<!-- SXF:MODEL_EXPLORER_END -->", model_explorer_html())
             page = replace_block(page, "<!-- SXF:TRACKED_MODELS_START -->", "<!-- SXF:TRACKED_MODELS_END -->", tracked_models_html(items))
         path.write_text(page, encoding="utf-8")
 
@@ -1739,6 +1740,76 @@ def tracked_models_html(items):
             f'<small>{len(matched)} signal{"s" if len(matched) != 1 else ""}</small><b>↗</b></a>'
         )
     return "".join(cards)
+
+def model_explorer_html():
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    models = MODEL_PRICING_CATALOG["models"]
+    providers = sorted({model["provider"] for model in models})
+
+    rows = []
+    for index, model in enumerate(models):
+        price = active_standard_price(model["model_id"], verified)
+        provenance = model["provenance"]
+        spec_source = provenance["evidence"]["model_identity"]
+        modalities = model.get("modalities", {}).get("input", [])
+        search = " ".join([
+            model["model"], model["model_id"], model["provider"],
+            model.get("family", ""), model.get("positioning", ""),
+            " ".join(modalities),
+        ]).lower()
+        rows.append(
+            f'''<tr data-model-row
+              data-order="{index}"
+              data-provider="{escape(model["provider"], quote=True)}"
+              data-search="{escape(search, quote=True)}"
+              data-input="{float(price["input"]):g}"
+              data-output="{float(price["output"]):g}"
+              data-context="{int(model["context_window"])}">
+              <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["model_id"])}</small></th>
+              <td>{escape(model["provider"])}<small>{escape(model.get("family", ""))}</small></td>
+              <td>{int(model["context_window"]):,}<small>tokens</small></td>
+              <td>{int(model["max_output"]):,}<small>tokens</small></td>
+              <td class="model-price">{escape(catalog_price_label(price["input"]))}</td>
+              <td class="model-price">{escape(catalog_price_label(price["cached_input"]))}</td>
+              <td class="model-price">{escape(catalog_price_label(price["output"]))}</td>
+              <td><a class="model-verified" href="{escape(spec_source, quote=True)}" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>{escape(provenance["verified_at"])}</small></a></td>
+            </tr>'''
+        )
+
+    provider_buttons = ['<button type="button" class="model-filter is-active" data-model-provider="all">All providers</button>']
+    provider_buttons += [
+        f'<button type="button" class="model-filter" data-model-provider="{escape(provider, quote=True)}">{escape(provider)}</button>'
+        for provider in providers
+    ]
+
+    return f'''<section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
+      <div class="model-explorer-head">
+        <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of Standard API pricing, context windows and output limits from official provider documentation.</p></div>
+        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>{escape(verified)}</strong><small>{len(models)} models · {len(providers)} providers</small></div>
+      </div>
+      <div class="model-explorer-toolbar">
+        <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
+        <div class="model-provider-filters" aria-label="Filter models by provider">{"".join(provider_buttons)}</div>
+        <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
+          <option value="default">Catalog order</option>
+          <option value="input-asc">Lowest input price</option>
+          <option value="output-asc">Lowest output price</option>
+          <option value="context-desc">Largest context</option>
+        </select></label>
+      </div>
+      <div class="model-explorer-table-wrap">
+        <table class="model-explorer-table">
+          <caption class="sr-only">Verified AI model pricing and specifications</caption>
+          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Evidence</th></tr></thead>
+          <tbody id="modelExplorerBody">{"".join(rows)}</tbody>
+        </table>
+      </div>
+      <div class="model-explorer-foot">
+        <span id="modelExplorerCount">{len(models)} models shown</span>
+        <a href="/models/pricing/">Open calculator & pricing methodology ↗</a>
+      </div>
+      <div id="modelExplorerEmpty" class="model-explorer-empty" hidden>No models match this filter.</div>
+    </section>'''
 
 def topic_summary_text(item):
     value = clean_summary(item.get("summary", ""))
@@ -6537,7 +6608,7 @@ def model_pricing_page_html():
           <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Pricing</span></nav>
           <div class="pricing-hero-grid">
             <div>
-              <p class="eyebrow">MODEL ECONOMICS / VERIFIED {escape(verified)}</p>
+              <p class="eyebrow">MODEL ECONOMICS / PRIMARY-SOURCE VERIFIED {escape(verified)}</p>
               <h1>Model pricing.<br><span>Normalized.</span></h1>
             </div>
             <div class="pricing-hero-copy">
