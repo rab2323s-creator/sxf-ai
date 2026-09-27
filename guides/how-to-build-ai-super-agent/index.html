@@ -176,10 +176,10 @@
           </tbody>
         </table></div>
         
-<div class="guide-visual-slot" data-image-slot="2" data-image-path="/guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp">
-  <div><span>RESEARCH VISUAL 02</span><strong>Handoffs vs agents-as-tools</strong><p>A two-path diagram: in a handoff the specialist takes ownership; in the manager pattern the orchestrator calls specialists and keeps control of the final response.</p></div>
-  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp</small>
-</div>
+<figure class="guide-research-image" data-image-slot="2" data-image-path="/guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp">
+  <img src="/guides/how-to-build-ai-super-agent/images/ai-agent-orchestration-patterns.webp" width="1672" height="941" loading="lazy" decoding="async" alt="AI agent orchestration patterns comparing a specialist handoff with a central orchestrator controlling multiple agent tools" />
+  <figcaption>AI agent orchestration patterns — specialist handoff versus manager-controlled agents as tools.</figcaption>
+</figure>
         <p>For a research-and-report system, the manager pattern is often easier to govern because one orchestrator can require every specialist to return structured evidence. For customer support or domain-specific conversational branches, a handoff may be cleaner because the specialist needs to own several turns.</p>
       </section>
 
@@ -211,10 +211,10 @@
         <p>Anthropic describes the <strong>Model Context Protocol</strong> as an open protocol for standardizing how applications provide context and tools to LLM systems. In a super-agent architecture, MCP is best understood as an <strong>integration boundary</strong>, not as the agent itself. A host connects through MCP clients to servers that expose tools, resources and prompts.</p>
         <p>MCP becomes especially useful when integrations multiply. Instead of hard-wiring every model or agent to every external system, you can standardize the tool interface. Anthropic's later engineering work on code execution with MCP also highlights <strong>progressive disclosure</strong>: agents can discover and load only the tool definitions they need rather than stuffing every tool schema into the context up front.</p>
         
-<div class="guide-visual-slot" data-image-slot="3" data-image-path="/guides/how-to-build-ai-super-agent/images/mcp-ai-agent-architecture.webp">
-  <div><span>RESEARCH VISUAL 03</span><strong>How MCP fits into a super-agent stack</strong><p>A layered diagram showing Host / Orchestrator → MCP clients → scoped MCP servers → business apps, databases, search, code and files, with policy checks at the boundary.</p></div>
-  <small>Reserved image path · /guides/how-to-build-ai-super-agent/images/mcp-ai-agent-architecture.webp</small>
-</div>
+<figure class="guide-research-image" data-image-slot="3" data-image-path="/guides/how-to-build-ai-super-agent/images/mcp-ai-agent-architecture.webp">
+  <img src="/guides/how-to-build-ai-super-agent/images/mcp-ai-agent-architecture.webp" width="1672" height="941" loading="lazy" decoding="async" alt="MCP AI agent architecture connecting a central orchestrator through a protocol layer to databases, files, search, cloud services, code and business tools" />
+  <figcaption>MCP in an AI agent architecture — a controlled integration layer between the orchestrator and external tools and data.</figcaption>
+</figure>
         <p>Do not use MCP just because it is popular. If your application has two stable functions, plain function tools may be simpler. Standardization earns its complexity when connectors need to be reusable, discoverable or governed across several agents and applications.</p>
       </section>
 
