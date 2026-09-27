@@ -1204,6 +1204,11 @@ def gpt56_reference_html():
 def claude_opus_55_reference_html():
     ref = MODEL_REFERENCE["Claude Opus 5.5"]
     verified = datetime.now(timezone.utc).date().isoformat()
+    catalog = catalog_display_model("claude-opus-5-5")
+    standard = active_standard_price("claude-opus-5-5")
+    fable = catalog_display_model("claude-fable-5-1")
+    sonnet = catalog_display_model("claude-sonnet-5")
+    haiku = catalog_display_model("claude-haiku-4-5-20251001")
     sources = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(label)}</span><b>↗</b></a>'
         for label, url in ref["sources"]
@@ -1223,11 +1228,11 @@ def claude_opus_55_reference_html():
         </div>
         <div class="model-fact-grid">
           <div><span>MODEL ID</span><strong>claude-opus-5-5</strong></div>
-          <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
-          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>standard API tokens</small></div>
-          <div><span>KNOWLEDGE CUTOFF</span><strong>Jun 2026</strong></div>
-          <div><span>STANDARD INPUT</span><strong>$4</strong><small>/ 1M tokens</small></div>
-          <div><span>STANDARD OUTPUT</span><strong>$20</strong><small>/ 1M tokens</small></div>
+          <div><span>CONTEXT WINDOW</span><strong>{escape(catalog["context"])}</strong><small>tokens</small></div>
+          <div><span>MAX OUTPUT</span><strong>{escape(catalog["max_output"])}</strong><small>standard API tokens</small></div>
+          <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(catalog["knowledge_cutoff"])}</strong></div>
+          <div><span>STANDARD INPUT</span><strong>{escape(catalog["input_price"])}</strong><small>/ 1M tokens</small></div>
+          <div><span>STANDARD OUTPUT</span><strong>{escape(catalog["output_price"])}</strong><small>/ 1M tokens</small></div>
         </div>
       </div>
 
@@ -1237,23 +1242,23 @@ def claude_opus_55_reference_html():
           <article class="model-family-card">
             <span>HIGHEST AVAILABLE CAPABILITY</span><h3>Claude Fable 5.1</h3>
             <p>Anthropic’s highest-capability generally available model for demanding reasoning and long-horizon agentic work.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
-            <div class="model-family-price"><strong>$10</strong><small>input / 1M</small><strong>$50</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(fable["context"])} context · {escape(fable["max_output"])} output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>{escape(fable["input_price"])}</strong><small>input / 1M</small><strong>{escape(fable["output_price"])}</strong><small>output / 1M</small></div>
           </article>
           <article class="model-family-card">
             <span>CURRENT OPUS / START HERE</span><h3>Claude Opus 5.5</h3>
             <p>Built for long-running agentic coding and knowledge work. Anthropic recommends it as the starting point for most complex workloads.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking always on · default effort medium</small></div>
-            <div class="model-family-price"><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(catalog["context"])} context · {escape(catalog["max_output"])} output</b><small>Adaptive thinking always on · default effort medium</small></div>
+            <div class="model-family-price"><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></div>
           </article>
           <article class="model-family-card">
             <span>SPEED / CAPABILITY BALANCE</span><h3>Claude Sonnet 5</h3>
             <p>Designed for everyday coding, agentic and enterprise workloads where latency and unit economics matter more.</p>
-            <div class="model-family-spec"><b>1M context · 128K output</b><small>Adaptive thinking · default effort high</small></div>
-            <div class="model-family-price"><strong>$2</strong><small>input / 1M</small><strong>$10</strong><small>output / 1M</small></div>
+            <div class="model-family-spec"><b>{escape(sonnet["context"])} context · {escape(sonnet["max_output"])} output</b><small>Adaptive thinking · default effort high</small></div>
+            <div class="model-family-price"><strong>{escape(sonnet["input_price"])}</strong><small>input / 1M</small><strong>{escape(sonnet["output_price"])}</strong><small>output / 1M</small></div>
           </article>
         </div>
-        <p class="reference-note">Claude Haiku 4.5 remains the lower-cost, lower-latency tier at $1 input / $5 output per 1M tokens with a 200K context window.</p>
+        <p class="reference-note">Claude Haiku 4.5 remains the lower-cost, lower-latency tier at {escape(haiku["input_price"])} input / {escape(haiku["output_price"])} output per 1M tokens with a {escape(haiku["context"])}-token context window.</p>
       </section>
 
       <section class="model-deep-section model-split">
@@ -1301,11 +1306,11 @@ def claude_opus_55_reference_html():
       <section class="model-deep-section">
         <div class="model-section-head"><p class="eyebrow">PRICING</p><h2>Claude Opus 5.5 API pricing.</h2><p>Anthropic’s current token pricing separates ordinary inference, prompt caching, batch processing and Fast mode.</p></div>
         <div class="model-price-grid">
-          <article><span>STANDARD</span><strong>$4</strong><small>input / 1M</small><strong>$20</strong><small>output / 1M</small></article>
-          <article><span>PROMPT CACHE</span><strong>$0.20</strong><small>cache read / 1M</small><strong>$5</strong><small>5-minute cache write / 1M</small></article>
-          <article><span>FAST MODE</span><strong>$8</strong><small>input / 1M</small><strong>$40</strong><small>output / 1M</small></article>
+          <article><span>STANDARD</span><strong>{escape(catalog["input_price"])}</strong><small>input / 1M</small><strong>{escape(catalog["output_price"])}</strong><small>output / 1M</small></article>
+          <article><span>PROMPT CACHE</span><strong>{escape(catalog["cached_price"])}</strong><small>cache read / 1M</small><strong>{escape(catalog_price_label(standard["cache_write_5m"]))}</strong><small>5-minute cache write / 1M</small></article>
+          <article><span>FAST MODE</span><strong>{escape(catalog_price_label(standard["input"] * 2))}</strong><small>input / 1M</small><strong>{escape(catalog_price_label(standard["output"] * 2))}</strong><small>output / 1M</small></article>
         </div>
-        <div class="model-caveat"><strong>One-hour cache writes</strong><p>The official model page lists 1-hour cache writes at $8 per million tokens. Cache economics can matter significantly for long-running agents that repeatedly reuse a large stable prompt or repository context.</p></div>
+        <div class="model-caveat"><strong>One-hour cache writes</strong><p>The official model page lists 1-hour cache writes at {escape(catalog_price_label(standard["cache_write_1h"]))} per million tokens. Cache economics can matter significantly for long-running agents that repeatedly reuse a large stable prompt or repository context.</p></div>
         <div class="model-caveat"><strong>Batch API</strong><p>Anthropic lists a 50% discount on input and output for Batch API workloads. Opus 5.5 also supports a beta 300K maximum output in Batch API, above the normal 128K output limit.</p></div>
         <div class="model-caveat"><strong>US-only inference</strong><p>Anthropic states that US-only inference is available at 1.1× standard input and output pricing for workloads with that residency requirement.</p></div>
       </section>
@@ -1315,7 +1320,7 @@ def claude_opus_55_reference_html():
         <div class="model-api-grid">
           <div><span>WHERE</span><strong>Claude Code + Claude Platform</strong><p>Anthropic currently offers Fast mode for Opus 5.5 in Claude Code and through the Claude Platform.</p></div>
           <div><span>SPEED</span><strong>Up to 2.5× faster</strong><p>The advertised improvement is output speed, not a separate capability tier. Real end-to-end gains still depend on tools, network latency and task structure.</p></div>
-          <div><span>PRICE</span><strong>$8 input / $40 output</strong><p>Fast mode doubles the standard per-token rates, so it makes the most sense when wall-clock latency is worth more than the extra inference cost.</p></div>
+          <div><span>PRICE</span><strong>{escape(catalog_price_label(standard["input"] * 2))} input / {escape(catalog_price_label(standard["output"] * 2))} output</strong><p>Fast mode doubles the standard per-token rates, so it makes the most sense when wall-clock latency is worth more than the extra inference cost.</p></div>
         </div>
       </section>
 
