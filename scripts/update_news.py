@@ -229,6 +229,40 @@ def compare_live_facts_html(model_ids):
     </section>'''
 
 
+def compare_pair_fact_line(model_ids):
+    verified = MODEL_PRICING_CATALOG["source_verified"]
+    parts = []
+    for model_id in model_ids:
+        model = model_catalog_entry(model_id)
+        price = active_standard_price(model_id, verified)
+        context_m = model["context_window"] / 1_000_000
+        context_label = f"{context_m:.2f}".rstrip("0").rstrip(".") + "M"
+        parts.append(
+            f'{model["model"]}: {catalog_price_label(price["input"])}/{catalog_price_label(price["output"])} · {context_label}'
+        )
+    return " | ".join(parts)
+
+
+def ensure_catalog_model_histories():
+    grouped = {}
+    for model_id, model in MODEL_PRICING_BY_ID.items():
+        path = model.get("sxf_url", "")
+        if not path.startswith("/models/") or path == "/models/pricing/":
+            continue
+        grouped.setdefault(path, []).append(model_id)
+
+    for url, model_ids in grouped.items():
+        target = ROOT / url.strip("/") / "index.html"
+        if not target.exists():
+            continue
+        html = target.read_text(encoding="utf-8")
+        if "data-model-history" in html:
+            continue
+        title = " / ".join(MODEL_PRICING_BY_ID[mid]["model"] for mid in model_ids)
+        html = inject_before_main_end(html, model_history_html(model_ids, f"{title} verified history."))
+        target.write_text(html, encoding="utf-8")
+
+
 def inject_before_main_end(html, fragment):
     if not fragment:
         return html
@@ -5393,7 +5427,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Anthropic",
             "kicker": "Frontier matchup",
             "summary": "Same $10/$50 headline price. Compare long-context billing, cache economics, reasoning, coding, agents and independent benchmark evidence.",
-            "facts": "1.05M vs 1M context · 128K output each",
+            "facts": compare_pair_fact_line(["gpt-6-astra", "claude-fable-5-1"]),
             "tags": "openai anthropic frontier coding agents pricing benchmarks long-context",
         },
         {
@@ -5402,7 +5436,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Google",
             "kicker": "Coding · agents · multimodal",
             "summary": "Compare lower-cost production models on token economics, 1M+ context, tools, reasoning controls and broad multimodal input.",
-            "facts": "$2/$10 vs $0.75/$3.75* · 1M+ context",
+            "facts": compare_pair_fact_line(["gpt-6-sol", "gemini-3.8-flash"]),
             "tags": "openai google coding agents pricing multimodal long-context",
         },
         {
@@ -5411,7 +5445,7 @@ def compare_index_html(items):
             "providers": "Anthropic · Google",
             "kicker": "Agentic coding · economics",
             "summary": "Compare long-running coding, cache economics, Batch and Fast inference, multimodal inputs, tools and deployment fit.",
-            "facts": "1M+ context · cache + batch analysis",
+            "facts": compare_pair_fact_line(["claude-opus-5-5", "gemini-3.8-flash"]),
             "tags": "anthropic google coding agents pricing multimodal caching batch",
         },
         {
@@ -5420,7 +5454,7 @@ def compare_index_html(items):
             "providers": "OpenAI · Anthropic",
             "kicker": "Agentic coding",
             "summary": "A direct comparison of two serious coding and agent models, including standard and long-context costs, reasoning controls and tool architecture.",
-            "facts": "$2/$10 vs $4/$20 · 1.05M vs 1M",
+            "facts": compare_pair_fact_line(["gpt-6-sol", "claude-opus-5-5"]),
             "tags": "openai anthropic coding agents pricing long-context",
         },
         {
@@ -5429,7 +5463,7 @@ def compare_index_html(items):
             "providers": "OpenAI",
             "kicker": "Within-family decision",
             "summary": "Choose the right GPT-6 tier by capability, workload and unit economics instead of treating GPT-6 as one model.",
-            "facts": "Same 1.05M context · 100× price spread",
+            "facts": compare_pair_fact_line(["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]),
             "tags": "openai family pricing coding agents",
         },
     ]
@@ -6923,6 +6957,8 @@ def build_discovery_pages(items, current_items):
         model_history_html(["gemini-3.8-flash"], "Gemini 3.8 Flash verified history.")
     )
     (gemini_path / "index.html").write_text(gemini_page, encoding="utf-8")
+
+    ensure_catalog_model_histories()
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
