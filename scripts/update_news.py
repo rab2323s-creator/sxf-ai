@@ -39,11 +39,32 @@ STATIC_SHELL_PAGES = {
 }
 
 SOURCES = [
-    ("OpenAI", "https://openai.com/news/rss.xml"),
-    ("Google AI", "https://blog.google/technology/ai/rss/"),
-    ("Hugging Face", "https://huggingface.co/blog/feed.xml"),
-    ("GitHub", "https://github.blog/changelog/feed/"),
+    {"name": "OpenAI", "url": "https://openai.com/news/rss.xml"},
+    {"name": "Google AI", "url": "https://blog.google/technology/ai/rss/"},
+    {"name": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml"},
+    {"name": "GitHub", "url": "https://github.blog/changelog/feed/"},
+    {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/blog/rss.xml",
+        "wave": "source-expansion-v1",
+    },
+    {
+        "name": "Google Research",
+        "url": "https://research.google/blog/rss/",
+        "wave": "source-expansion-v1",
+        "filter": "google-research-ai",
+    },
 ]
+SOURCE_EXPANSION_VERSION = "sxf-source-expansion-v1"
+SOURCE_EXPANSION_NAMES = {"Google DeepMind", "Google Research"}
+GOOGLE_RESEARCH_AI_PATTERN = re.compile(
+    r"\bai\b|\bartificial intelligence\b|\bmachine learning\b|\bml\b|"
+    r"\blanguage models?\b|\bllms?\b|\bgenerative\b|\btransformers?\b|"
+    r"\bneural\b|\bmultimodal\b|\bvision\b|\bspeech\b|\bagents?\b|"
+    r"\brobotics?\b|\breinforcement learning\b|\bdiffusion\b|\bembeddings?\b|"
+    r"\bdeep learning\b|\bfoundation models?\b|\bgemini\b",
+    re.I,
+)
 USER_AGENT = "SXF-AI-Radar/1.1 (+https://sxf.si/)"
 MAX_ITEMS = 80
 MAX_AGE_DAYS = 21
@@ -296,6 +317,15 @@ def fetch(url):
     with urllib.request.urlopen(req, timeout=25) as r:
         return r.read()
 
+def source_accepts_item(source_config, title, summary):
+    filter_name = source_config.get("filter")
+    if not filter_name:
+        return True
+    if filter_name == "google-research-ai":
+        return bool(GOOGLE_RESEARCH_AI_PATTERN.search(f"{title} {summary}"))
+    raise RuntimeError(f"Unknown source filter: {filter_name}")
+
+
 def parse_feed(source, body):
     root = ET.fromstring(body)
     rows = []
@@ -322,7 +352,10 @@ def parse_feed(source, body):
                 rows.append((title, link, published, summary))
 
     output = []
+    source_config = next((config for config in SOURCES if config["name"] == source), {"name": source})
     for title, link, published, summary in rows:
+        if not source_accepts_item(source_config, title, summary):
+            continue
         category = categorize(title, source)
         output.append({
             "title": title,
@@ -6761,7 +6794,9 @@ def update_sitemap(items):
 def main():
     incoming = []
     errors = []
-    for source, url in SOURCES:
+    for source_config in SOURCES:
+        source = source_config["name"]
+        url = source_config["url"]
         try:
             incoming.extend(parse_feed(source, fetch(url)))
         except Exception as exc:
@@ -6798,6 +6833,7 @@ def main():
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
+        "source_expansion_version": SOURCE_EXPANSION_VERSION,
         "seo_quality_version": "sxf-seo-quality-v1",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
@@ -6807,6 +6843,7 @@ def main():
         "feed_errors": errors,
         "scoring_version": "sxf-signal-score-v2",
         "topic_relevance_version": TOPIC_RELEVANCE_VERSION,
+        "source_expansion_version": SOURCE_EXPANSION_VERSION,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     update_index(current)
