@@ -24,7 +24,7 @@ jobs:
           python-version: "3.12"
       - name: Syntax check
         run: |
-          python -m py_compile scripts/update_news.py scripts/validate_site.py
+          python -m py_compile scripts/update_news.py scripts/validate_site.py scripts/model_history.py
           node --check models/pricing/pricing.js
           node --check models/explorer.js
       - name: Build feed and SEO HTML
