@@ -2891,97 +2891,63 @@ def gpt6_vs_claude_guide_html(items):
     title = "GPT-6 vs Claude in 2026: Models, Pricing, Coding, Context & API Comparison | SXF / AI"
     description = "GPT-6 vs Claude in 2026: compare Astra, Sol and Luna with Claude Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5 on pricing, context, coding, agents and APIs."
 
+    def guide_model(model_id, role, reasoning, best, internal=None):
+        model = catalog_display_model(model_id)
+        return {
+            "name": model["name"],
+            "id": model["model_id"],
+            "provider": model["provider"],
+            "role": role,
+            "context": model["context"],
+            "output": model["max_output"],
+            "input": model["input_price"],
+            "cached": model["cached_price"],
+            "output_price": model["output_price"],
+            "reasoning": reasoning,
+            "best": best,
+            "source": model["source"],
+            "internal": internal,
+        }
+
     openai_models = [
-        {
-            "name":"GPT-6 Astra","id":"gpt-6-astra","role":"Highest capability","context":"1.05M","output":"128K",
-            "input":"$10","cached":"$1","output_price":"$50","reasoning":"Low → Max",
-            "best":"Hardest end-to-end reasoning, coding, research and computer use",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-astra",
-            "internal":"/models/gpt-6-astra/"
-        },
-        {
-            "name":"GPT-6 Sol","id":"gpt-6-sol","role":"Capability / cost balance","context":"1.05M","output":"128K",
-            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"None → Max",
-            "best":"Complex coding and agentic workflows",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-sol",
-            "internal":"/models/gpt-6-sol/"
-        },
-        {
-            "name":"GPT-6 Luna","id":"gpt-6-luna","role":"Efficiency","context":"1.05M","output":"128K",
-            "input":"$0.10","cached":"$0.01","output_price":"$0.50","reasoning":"None → Max",
-            "best":"Focused, high-volume and cost-sensitive work",
-            "source":"https://developers.openai.com/api/docs/models/gpt-6-luna",
-            "internal":"/models/gpt-6-luna/"
-        },
+        guide_model("gpt-6-astra", "Highest capability", "Low → Max", "Hardest end-to-end reasoning, coding, research and computer use", "/models/gpt-6-astra/"),
+        guide_model("gpt-6-sol", "Capability / cost balance", "None → Max", "Complex coding and agentic workflows", "/models/gpt-6-sol/"),
+        guide_model("gpt-6-luna", "Efficiency", "None → Max", "Focused, high-volume and cost-sensitive work", "/models/gpt-6-luna/"),
     ]
     claude_models = [
-        {
-            "name":"Claude Fable 5.1","id":"claude-fable-5-1","role":"Demanding reasoning","context":"1M","output":"128K",
-            "input":"$10","cached":"$0.25","output_price":"$50","reasoning":"Adaptive · always on",
-            "best":"Long-horizon agentic work and demanding reasoning",
-            "source":"https://platform.claude.com/docs/en/models/fable-5-1/overview",
-            "internal":"/models/claude-fable-5-1/"
-        },
-        {
-            "name":"Claude Opus 5.5","id":"claude-opus-5-5","role":"Agentic coding / knowledge work","context":"1M","output":"128K",
-            "input":"$4","cached":"$0.20","output_price":"$20","reasoning":"Adaptive · always on",
-            "best":"Long-running agentic coding and knowledge work",
-            "source":"https://platform.claude.com/docs/en/models/opus-5-5/overview",
-            "internal":"/models/claude-opus-5-5/"
-        },
-        {
-            "name":"Claude Sonnet 5","id":"claude-sonnet-5","role":"Speed / intelligence balance","context":"1M","output":"128K",
-            "input":"$2","cached":"$0.20","output_price":"$10","reasoning":"Adaptive",
-            "best":"Everyday coding, agents, analysis and enterprise work",
-            "source":"https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5"
-        },
-        {
-            "name":"Claude Haiku 4.5","id":"claude-haiku-4-5","role":"Lowest latency / cost","context":"200K","output":"64K",
-            "input":"$1","cached":"$0.10","output_price":"$5","reasoning":"Extended thinking",
-            "best":"Real-time and high-volume cost-sensitive workloads",
-            "source":"https://platform.claude.com/docs/en/models/haiku-4-5/overview"
-        },
+        guide_model("claude-fable-5-1", "Demanding reasoning", "Adaptive · always on", "Long-horizon agentic work and demanding reasoning", "/models/claude-fable-5-1/"),
+        guide_model("claude-opus-5-5", "Agentic coding / knowledge work", "Adaptive · always on", "Long-running agentic coding and knowledge work", "/models/claude-opus-5-5/"),
+        guide_model("claude-sonnet-5", "Speed / intelligence balance", "Adaptive", "Everyday coding, agents, analysis and enterprise work"),
+        guide_model("claude-haiku-4-5-20251001", "Lowest latency / cost", "Extended thinking", "Real-time and high-volume cost-sensitive workloads"),
     ]
 
     all_models = openai_models + claude_models
     rows = "".join(
         f'''<tr>
           <th scope="row">{f'<a href="{escape(m.get("internal"), quote=True)}">{escape(m["name"])}</a>' if m.get("internal") else escape(m["name"])}<small>{escape(m["id"])}</small></th>
-          <td>{escape("OpenAI" if m in openai_models else "Anthropic")}</td>
+          <td>{escape(m["provider"])}</td>
           <td>{escape(m["role"])}</td><td>{escape(m["context"])}</td><td>{escape(m["output"])}</td>
           <td>{escape(m["reasoning"])}</td><td>{escape(m["input"])}</td><td>{escape(m["cached"])}</td><td>{escape(m["output_price"])}</td>
         </tr>'''
         for m in all_models
     )
 
-    def cost(input_rate, output_rate, in_m, out_m):
-        value = input_rate * in_m + output_rate * out_m
-        return ("$" + f"{value:,.4f}").rstrip("0").rstrip(".")
-
-    # Standard short-context example: 100K input + 10K output.
+    short_ids = [
+        "gpt-6-astra", "claude-fable-5-1", "gpt-6-sol", "claude-sonnet-5",
+        "claude-opus-5-5", "gpt-6-luna", "claude-haiku-4-5-20251001",
+    ]
     short = [
-        ("GPT-6 Astra", cost(10,50,.1,.01)),
-        ("Claude Fable 5.1", cost(10,50,.1,.01)),
-        ("GPT-6 Sol", cost(2,10,.1,.01)),
-        ("Claude Sonnet 5", cost(2,10,.1,.01)),
-        ("Claude Opus 5.5", cost(4,20,.1,.01)),
-        ("GPT-6 Luna", cost(.1,.5,.1,.01)),
-        ("Claude Haiku 4.5", cost(1,5,.1,.01)),
+        (model_catalog_entry(model_id)["model"], catalog_money(estimate_standard_cost(model_id, 100_000, 10_000)[0]))
+        for model_id in short_ids
     ]
     short_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in short)
 
-    # Long-context example: 500K input + 50K output.
-    # GPT-6 uses 2x input and 1.5x output above 272K input; Claude 1M models keep standard token pricing.
+    long_ids = ["gpt-6-astra", "claude-fable-5-1", "gpt-6-sol", "claude-sonnet-5", "claude-opus-5-5", "gpt-6-luna"]
     long = [
-        ("GPT-6 Astra", cost(20,75,.5,.05)),
-        ("Claude Fable 5.1", cost(10,50,.5,.05)),
-        ("GPT-6 Sol", cost(4,15,.5,.05)),
-        ("Claude Sonnet 5", cost(2,10,.5,.05)),
-        ("Claude Opus 5.5", cost(4,20,.5,.05)),
-        ("GPT-6 Luna", cost(.2,.75,.5,.05)),
+        (model_catalog_entry(model_id)["model"], catalog_money(estimate_standard_cost(model_id, 500_000, 50_000)[0]))
+        for model_id in long_ids
     ]
     long_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>500K input + 50K output</small></div>' for n,c in long)
-
     toc = [
         ("quick-answer","Quick answer"),
         ("family-map","GPT-6 and Claude model map"),
