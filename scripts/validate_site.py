@@ -30,6 +30,7 @@ SHELL_PAGES = [
     ROOT / "models" / "index.html",
     ROOT / "models" / "pricing" / "index.html",
     ROOT / "tools" / "index.html",
+    ROOT / "tools" / "ai-model-cost-calculator" / "index.html",
     ROOT / "research" / "index.html",
     ROOT / "open-source" / "index.html",
     ROOT / "guides" / "ai-agent-security" / "index.html",
@@ -412,6 +413,22 @@ def validate_model_pricing_catalog():
         fail(f"model explorer has {explorer_rows} rows for {len(models)} catalog models")
     if "PRIMARY-SOURCE VERIFIED" not in models_html:
         fail("model explorer must disclose primary-source verification")
+
+    calculator_page = ROOT / "tools" / "ai-model-cost-calculator" / "index.html"
+    calculator_html = calculator_page.read_text(encoding="utf-8")
+    calculator_js = (ROOT / "tools" / "ai-model-cost-calculator" / "calculator.js").read_text(encoding="utf-8")
+    if "<h1>AI Model Cost Calculator</h1>" not in calculator_html:
+        fail("AI model cost calculator must use the agreed direct H1")
+    if calculator_html.find('id="calculator"') < calculator_html.find("<h1>AI Model Cost Calculator</h1>"):
+        fail("AI model cost calculator must appear after the H1")
+    if 'fetch("/data/model-pricing.json"' not in calculator_js:
+        fail("AI model cost calculator must load the canonical model-pricing.json dataset")
+    if "effectiveRates" not in calculator_js or "threshold_input_tokens" not in calculator_js:
+        fail("AI model cost calculator must apply catalog pricing rules")
+    if "/tools/ai-model-cost-calculator/" not in (ROOT / "tools" / "index.html").read_text(encoding="utf-8"):
+        fail("Tools hub must link to AI Model Cost Calculator")
+    if "/tools/ai-model-cost-calculator/" not in (ROOT / "models" / "pricing" / "index.html").read_text(encoding="utf-8"):
+        fail("Model Pricing must link to the full AI Model Cost Calculator")
 
     pricing_js = (ROOT / "models" / "pricing" / "pricing.js").read_text(encoding="utf-8")
     if 'fetch("/data/model-pricing.json"' not in pricing_js:
@@ -1091,6 +1108,7 @@ def main():
     core=[ROOT/"index.html",ROOT/"about"/"index.html",ROOT/"signals"/"index.html",ROOT/"topics"/"index.html",ROOT/"brief"/"index.html"]
     core += [ROOT/x/"index.html" for x in ("models","tools","research","open-source")]
     core.append(ROOT/"models"/"pricing"/"index.html")
+    core.append(ROOT/"tools"/"ai-model-cost-calculator"/"index.html")
     for path in core:
         validate_html(path)
     for item in archive["items"]:

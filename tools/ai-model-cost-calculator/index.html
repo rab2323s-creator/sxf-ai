@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>AI Model Cost Calculator — GPT, Claude &amp; Gemini API Pricing | SXF / AI</title>
+  <meta name="description" content="Calculate and compare AI API token costs for GPT, Claude and Gemini models. Estimate per-request, daily and 30-day spend using source-verified Standard API pricing." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#07090d" />
+  <link rel="canonical" href="https://sxf.si/tools/ai-model-cost-calculator/" />
+  <link rel="alternate" hreflang="en" href="https://sxf.si/tools/ai-model-cost-calculator/" />
+  <link rel="alternate" hreflang="x-default" href="https://sxf.si/tools/ai-model-cost-calculator/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SXF / AI" />
+  <meta property="og:title" content="AI Model Cost Calculator — GPT, Claude &amp; Gemini API Pricing | SXF / AI" />
+  <meta property="og:description" content="Estimate GPT, Claude and Gemini API token costs per request, per day and per 30 days using source-verified Standard API pricing." />
+  <meta property="og:url" content="https://sxf.si/tools/ai-model-cost-calculator/" />
+  <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Model Cost Calculator — GPT, Claude &amp; Gemini API Pricing | SXF / AI" />
+  <meta name="twitter:description" content="Estimate GPT, Claude and Gemini API costs using source-verified Standard token pricing." />
+  <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+  <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebApplication",
+        "@id":"https://sxf.si/tools/ai-model-cost-calculator/#app",
+        "name":"AI Model Cost Calculator",
+        "url":"https://sxf.si/tools/ai-model-cost-calculator/",
+        "applicationCategory":"DeveloperApplication",
+        "operatingSystem":"Any",
+        "browserRequirements":"Requires JavaScript",
+        "description":"Calculate and compare direct text-token API costs for selected GPT, Claude and Gemini models using source-verified Standard API pricing.",
+        "isAccessibleForFree":true,
+        "inLanguage":"en"
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://sxf.si/tools/ai-model-cost-calculator/#webpage",
+        "url":"https://sxf.si/tools/ai-model-cost-calculator/",
+        "name":"AI Model Cost Calculator — GPT, Claude & Gemini API Pricing",
+        "description":"Calculate and compare AI API token costs per request, per day and per 30 days.",
+        "dateModified":"2026-09-27",
+        "isPartOf":{"@id":"https://sxf.si/#website"},
+        "mainEntity":{"@id":"https://sxf.si/tools/ai-model-cost-calculator/#app"},
+        "inLanguage":"en"
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},
+          {"@type":"ListItem","position":2,"name":"Tools","item":"https://sxf.si/tools/"},
+          {"@type":"ListItem","position":3,"name":"AI Model Cost Calculator","item":"https://sxf.si/tools/ai-model-cost-calculator/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How does the AI model cost calculator work?","acceptedAnswer":{"@type":"Answer","text":"Choose a model and enter uncached input, cached input and output tokens. SXF applies the stored Standard API token rates for the selected billing date and calculates direct token cost per request, per day and for a 30-day period."}},
+          {"@type":"Question","name":"Can I compare GPT, Claude and Gemini API costs?","acceptedAnswer":{"@type":"Answer","text":"Yes. The optional comparison model uses the same workload and billing date so the two direct token-cost estimates are comparable on the same assumptions."}},
+          {"@type":"Question","name":"Does the calculator include cached input pricing?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cached input is calculated separately when the selected model has a cached-input rate in the SXF pricing catalog."}},
+          {"@type":"Question","name":"Does the calculator include tools, search, grounding or storage fees?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator estimates direct text-token charges only. Tool calls, grounding, search, code execution, cache storage, regional uplifts, non-Standard tiers and negotiated discounts are excluded unless represented as token rates in the catalog."}},
+          {"@type":"Question","name":"How are long-context pricing rules handled?","acceptedAnswer":{"@type":"Answer","text":"When the SXF pricing catalog stores a long-context rule for a model, the calculator checks total input tokens and automatically applies the stored multiplier when the threshold is exceeded."}}
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/tools/ai-model-cost-calculator/calculator.css" />
+</head>
+<body class="cost-calculator-page">
+  <a class="skip-link" href="#calculator">Skip to calculator</a>
+
+  <header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/" aria-current="page">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header>
+
+  <main>
+    <section class="calculator-hero shell">
+      <nav class="calculator-breadcrumbs" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/tools/">Tools</a><span>/</span><span>AI Model Cost Calculator</span></nav>
+
+      <div class="calculator-title">
+        <p class="hero-kicker"><span class="pulse-dot"></span> SOURCE-VERIFIED AI API PRICING</p>
+        <h1>AI Model Cost Calculator</h1>
+        <p>Calculate GPT, Claude and Gemini API token costs using the same source-verified pricing catalog that powers SXF Model Pricing.</p>
+      </div>
+
+      <section id="calculator" class="calculator-shell" aria-labelledby="calculator-heading">
+        <div class="calculator-input-panel">
+          <div class="panel-heading">
+            <div><p class="panel-kicker">WORKLOAD</p><h2 id="calculator-heading">Build your estimate.</h2></div>
+            <span id="catalogStatus" class="catalog-status">Loading pricing…</span>
+          </div>
+
+          <div class="calculator-form">
+            <div class="field-grid field-grid-models">
+              <label class="calc-field"><span>Model</span><select id="costModel" aria-label="AI model"></select></label>
+              <label class="calc-field"><span>Compare with <small>optional</small></span><select id="compareModel" aria-label="Comparison model"><option value="">No comparison</option></select></label>
+            </div>
+
+            <div class="field-grid">
+              <label class="calc-field"><span>Billing date</span><input id="billingDate" type="date" /></label>
+              <label class="calc-field"><span>Requests per day</span><input id="requestsPerDay" type="number" min="0" max="1000000000" step="1" value="1000" inputmode="numeric" /></label>
+            </div>
+
+            <div class="token-inputs">
+              <label class="calc-field"><span>Uncached input tokens</span><input id="inputTokens" type="number" min="0" max="10000000000" step="1000" value="100000" inputmode="numeric" /></label>
+              <label class="calc-field"><span>Cached input tokens</span><input id="cachedTokens" type="number" min="0" max="10000000000" step="1000" value="0" inputmode="numeric" /></label>
+              <label class="calc-field"><span>Output tokens</span><input id="outputTokens" type="number" min="0" max="10000000000" step="1000" value="10000" inputmode="numeric" /></label>
+            </div>
+
+            <div class="preset-row" aria-label="Workload presets">
+              <span>Presets</span>
+              <button type="button" class="preset is-active" data-input="100000" data-cached="0" data-output="10000">100K + 10K</button>
+              <button type="button" class="preset" data-input="10000" data-cached="0" data-output="1000">10K + 1K</button>
+              <button type="button" class="preset" data-input="25000" data-cached="75000" data-output="5000">RAG / cached</button>
+              <button type="button" class="preset" data-input="500000" data-cached="0" data-output="50000">Long context</button>
+            </div>
+
+            <p class="calculator-note">Direct text-token charges only. Non-Standard service tiers, tools, grounding, search, code execution, storage, regional uplifts and negotiated pricing are excluded.</p>
+          </div>
+        </div>
+
+        <div class="calculator-result-panel" aria-live="polite">
+          <div class="result-topline">
+            <div><p class="panel-kicker">ESTIMATED COST</p><h2 id="resultModelName">Standard API</h2></div>
+            <a id="officialPricingLink" href="/models/pricing/">Pricing source ↗</a>
+          </div>
+
+          <div class="primary-result"><span>PER REQUEST</span><strong id="costPerRequest">—</strong><small id="requestShape">—</small></div>
+
+          <div class="scale-results">
+            <div><span>PER DAY</span><strong id="costPerDay">—</strong><small id="dailyRequests">—</small></div>
+            <div><span>30 DAYS</span><strong id="costPerMonth">—</strong><small>30-day estimate</small></div>
+            <div><span>1K REQUESTS</span><strong id="costPerThousand">—</strong><small>same workload</small></div>
+          </div>
+
+          <div class="breakdown" aria-label="Per-request cost breakdown">
+            <div><span>Uncached input</span><strong id="inputCost">—</strong></div>
+            <div><span>Cached input</span><strong id="cachedCost">—</strong></div>
+            <div><span>Output</span><strong id="outputCost">—</strong></div>
+          </div>
+
+          <div id="rateProfile" class="rate-profile">Loading pricing dataset…</div>
+          <div id="calculatorWarning" class="calculator-warning" hidden></div>
+        </div>
+      </section>
+
+      <section id="comparisonPanel" class="comparison-panel" hidden aria-live="polite">
+        <div class="comparison-heading">
+          <div><p class="panel-kicker">SAME WORKLOAD / SAME DATE</p><h2>Cost comparison</h2></div>
+          <p>Direct token pricing only. Lower cost here does not measure model quality, latency or workload fit.</p>
+        </div>
+        <div class="comparison-grid">
+          <article><span id="comparisonPrimaryProvider">—</span><h3 id="comparisonPrimaryName">—</h3><strong id="comparisonPrimaryCost">—</strong><small>per request</small></article>
+          <article><span id="comparisonSecondaryProvider">—</span><h3 id="comparisonSecondaryName">—</h3><strong id="comparisonSecondaryCost">—</strong><small>per request</small></article>
+          <article class="comparison-delta"><span>COST DIFFERENCE</span><h3 id="comparisonDeltaLabel">—</h3><strong id="comparisonDelta">—</strong><small id="comparisonMonthlyDelta">—</small></article>
+        </div>
+      </section>
+
+      <div class="calculator-trust-strip" aria-label="Calculator data notes">
+        <div><span>CATALOG</span><strong id="modelCount">—</strong><small>tracked models</small></div>
+        <div><span>PROVIDERS</span><strong id="providerCount">—</strong><small>OpenAI · Anthropic · Google</small></div>
+        <div><span>PRICING</span><strong>Standard API</strong><small>USD / 1M tokens</small></div>
+        <div><span>VERIFIED</span><strong id="verifiedDate">—</strong><small>primary-source catalog</small></div>
+      </div>
+    </section>
+
+    <section class="calculator-content shell">
+      <div class="content-heading">
+        <div><p class="eyebrow">HOW IT WORKS</p><h2>One workload. Comparable token economics.</h2></div>
+        <p>The calculator keeps the assumptions visible so GPT, Claude and Gemini estimates use the same token counts, request volume and billing date.</p>
+      </div>
+      <div class="explain-grid">
+        <article><span>01</span><h3>Choose a model</h3><p>Select a cataloged model from OpenAI, Anthropic or Google. The calculator loads its verified Standard API pricing periods and limits.</p></article>
+        <article><span>02</span><h3>Enter token usage</h3><p>Separate uncached input, cached input and output tokens. Cached input is not blended into ordinary input pricing.</p></article>
+        <article><span>03</span><h3>Scale the request</h3><p>Use requests per day to see per-request, daily, 30-day and 1,000-request estimates from the same workload.</p></article>
+        <article><span>04</span><h3>Apply pricing rules</h3><p>Dated pricing periods and stored long-context multipliers are applied automatically when the catalog defines them.</p></article>
+      </div>
+    </section>
+
+    <section class="calculator-content shell">
+      <div class="content-heading">
+        <div><p class="eyebrow">WHAT IS INCLUDED</p><h2>Token cost, without hidden assumptions.</h2></div>
+        <p>This calculator is intentionally scoped to direct token economics so cross-provider estimates remain understandable.</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card is-included">
+          <p class="scope-label">INCLUDED</p><h3>Direct token charges</h3>
+          <ul><li>Uncached input tokens</li><li>Cached input tokens</li><li>Output tokens</li><li>Stored date-based price schedules</li><li>Stored long-context multipliers</li></ul>
+        </article>
+        <article class="scope-card">
+          <p class="scope-label">EXCLUDED</p><h3>Provider-specific add-ons</h3>
+          <ul><li>Search, grounding and tool calls</li><li>Code execution and storage charges</li><li>Batch, Flex, Fast or Priority tiers</li><li>Regional or data-residency uplifts</li><li>Enterprise or negotiated discounts</li></ul>
+        </article>
+      </div>
+      <div class="source-callout">
+        <div><span>CANONICAL DATA SOURCE</span><strong>SXF AI Model Pricing &amp; Specs Database</strong><p>The calculator reads the same JSON catalog used by the Model Pricing database instead of maintaining a second copy of rates.</p></div>
+        <div class="source-actions"><a class="primary-cta" href="/models/pricing/">View model pricing <span>↗</span></a><a class="secondary-cta" href="/data/model-pricing.json">Open JSON dataset</a></div>
+      </div>
+    </section>
+
+    <section class="calculator-content calculator-faq shell">
+      <div class="content-heading">
+        <div><p class="eyebrow">AI MODEL COST FAQ</p><h2>Common calculator questions.</h2></div>
+        <p>Use the official provider billing documentation as the final authority before production procurement or budgeting.</p>
+      </div>
+      <details><summary>How does the AI model cost calculator work?</summary><p>Choose a model and enter uncached input, cached input and output tokens. SXF selects the stored Standard API pricing period for the billing date, applies any stored long-context rule, and calculates direct token cost per request, per day and for 30 days.</p></details>
+      <details><summary>Can I compare GPT, Claude and Gemini API costs?</summary><p>Yes. Choose a comparison model and both estimates use exactly the same workload and billing date. The comparison is a token-cost comparison only; it does not rank model quality, latency or suitability.</p></details>
+      <details><summary>Does the calculator include cached input pricing?</summary><p>Yes. Cached input has its own field and is priced separately using the cached-input rate stored for the selected model and pricing period.</p></details>
+      <details><summary>What does the 30-day estimate mean?</summary><p>It multiplies the calculated per-request cost by your requests-per-day value and by 30. It is a simple workload projection, not a provider invoice forecast.</p></details>
+      <details><summary>Does it include tools, search, grounding or storage fees?</summary><p>No. Those charges can differ materially across providers and service tiers. The calculator is limited to direct text-token charges represented in the SXF pricing catalog.</p></details>
+      <details><summary>How are long-context pricing rules handled?</summary><p>If a model has a stored long-context rule, the calculator checks total input tokens and applies the cataloged multiplier automatically when the request crosses the stored threshold.</p></details>
+    </section>
+
+    <section class="related-tools shell">
+      <p class="eyebrow">KEEP EXPLORING</p>
+      <div class="related-grid">
+        <a href="/models/pricing/"><span>DATABASE</span><strong>AI Model Pricing</strong><small>Compare published token rates and model limits.</small><b>↗</b></a>
+        <a href="/compare/"><span>COMPARISONS</span><strong>Compare AI Models</strong><small>Review pricing, context, capabilities and workload fit.</small><b>↗</b></a>
+        <a href="/models/"><span>INTELLIGENCE</span><strong>AI Models</strong><small>Browse the maintained SXF model intelligence layer.</small><b>↗</b></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+  <script src="/tools/ai-model-cost-calculator/calculator.js" defer></script>
+</body>
+</html>
