@@ -5967,38 +5967,18 @@ def gpt6_sol_vs_gemini_38_flash_html(items):
 def gpt6_sol_vs_claude_opus_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/"
     verified = datetime.now(timezone.utc).date().isoformat()
-    sol = {
-        "name": "GPT-6 Sol",
-        "provider": "OpenAI",
-        "model_id": "gpt-6-sol",
-        "released": "Sep 22, 2026",
-        "positioning": "Complex coding and agentic workflows",
-        "context": "1,050,000",
-        "max_output": "128,000",
-        "knowledge_cutoff": "Apr 20, 2026",
-        "thinking": "Optional; none through max",
-        "input_price": "$2.00",
-        "cached_price": "$0.20",
-        "cache_write": "$2.50",
-        "output_price": "$10.00",
-        "source": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-    }
-    claude = {
-        "name": "Claude Opus 5.5",
-        "provider": "Anthropic",
-        "model_id": "claude-opus-5-5",
-        "released": "Sep 22, 2026",
-        "positioning": "Long-running agentic coding and knowledge work",
-        "context": "1,000,000",
-        "max_output": "128,000",
-        "knowledge_cutoff": "Jun 2026",
-        "thinking": "Adaptive; always on",
-        "input_price": "$4.00",
-        "cached_price": "$0.20",
-        "cache_write": "$5.00 / $8.00",
-        "output_price": "$20.00",
-        "source": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-    }
+    sol = catalog_display_model(
+        "gpt-6-sol",
+        released="Sep 22, 2026",
+        positioning="Complex coding and agentic workflows",
+        thinking="Optional; none through max",
+    )
+    claude = catalog_display_model(
+        "claude-opus-5-5",
+        released="Sep 22, 2026",
+        positioning="Long-running agentic coding and knowledge work",
+        thinking="Adaptive; always on",
+    )
 
     rows = "".join([
         f'''<tr><th scope="row"><a href="/models/gpt-6-sol/">{escape(sol["name"])}</a><small>{escape(sol["model_id"])}</small></th>
@@ -6009,21 +5989,17 @@ def gpt6_sol_vs_claude_opus_html(items):
         <td>{escape(claude["thinking"])}</td><td>{escape(claude["input_price"])}</td><td>{escape(claude["cached_price"])}</td><td>{escape(claude["cache_write"])}</td><td>{escape(claude["output_price"])}</td></tr>''',
     ])
 
-    def cost(input_rate, output_rate, input_m, output_m):
-        value = input_rate * input_m + output_rate * output_m
-        return ("$" + f"{value:,.3f}").rstrip("0").rstrip(".")
-
     standard_examples = [
-        ("GPT-6 Sol", cost(2, 10, .1, .01)),
-        ("Claude Opus 5.5", cost(4, 20, .1, .01)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 100_000, 10_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 100_000, 10_000)[0], 3)),
     ]
     monthly_examples = [
-        ("GPT-6 Sol", cost(2, 10, 10, 1)),
-        ("Claude Opus 5.5", cost(4, 20, 10, 1)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 10_000_000, 1_000_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 10_000_000, 1_000_000)[0], 3)),
     ]
     long_examples = [
-        ("GPT-6 Sol", cost(4, 15, .5, .05)),
-        ("Claude Opus 5.5", cost(4, 20, .5, .05)),
+        ("GPT-6 Sol", catalog_money(estimate_standard_cost("gpt-6-sol", 500_000, 50_000)[0], 3)),
+        ("Claude Opus 5.5", catalog_money(estimate_standard_cost("claude-opus-5-5", 500_000, 50_000)[0], 3)),
     ]
     standard_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>100K input + 10K output</small></div>' for n,c in standard_examples)
     monthly_cards = "".join(f'<div><span>{escape(n)}</span><strong>{escape(c)}</strong><small>10M input + 1M output</small></div>' for n,c in monthly_examples)
