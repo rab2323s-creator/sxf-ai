@@ -590,3 +590,27 @@ button,input{font:inherit}
 .model-history-event a{margin-top:auto;padding-top:18px;color:#a8b4c0;font-size:10px}
 @media(max-width:960px){.compare-live-grid,.model-history-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.compare-live-grid,.model-history-grid{grid-template-columns:1fr}.compare-live-card dl{grid-template-columns:1fr 1fr}}
+
+/* SXF WHAT-CHANGED INTELLIGENCE */
+.model-change-watch{padding:20px 0 88px}
+.change-watch-empty{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;border:1px solid var(--line);border-radius:22px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.008))}
+.change-watch-empty h2{margin:0;font-size:clamp(28px,3vw,42px);letter-spacing:-.045em}
+.change-watch-empty p:last-child{max-width:720px;color:#7d8996;line-height:1.65}
+.change-watch-status{min-width:220px;border-left:1px solid var(--line);padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.change-watch-status span{font-size:9px;letter-spacing:.11em;color:var(--accent)}
+.change-watch-status strong{font-size:18px}
+.change-watch-status small{color:#6d7986;max-width:220px;line-height:1.5}
+.change-watch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.change-watch-card{border:1px solid var(--line);border-radius:20px;padding:20px;background:#090d12}
+.change-watch-meta{display:flex;justify-content:space-between;gap:14px;color:#687482;font-size:10px}
+.change-watch-meta span{color:#dce4eb;font-weight:800}
+.change-deltas{display:grid;gap:8px;margin-top:18px}
+.change-delta{border-top:1px solid var(--line);padding-top:12px}
+.change-delta>span{display:block;margin-bottom:7px;color:#72808d;font-size:9px;letter-spacing:.09em;text-transform:uppercase}
+.change-delta>div{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.change-delta del{color:#7d8791;text-decoration-thickness:1px}
+.change-delta b{color:#56616d}
+.change-delta ins{color:#e7eef3;text-decoration:none;font-weight:800}
+.change-delta em{font-style:normal;color:var(--accent);font-size:11px;font-weight:800}
+.change-watch-card>a{display:inline-block;margin-top:18px;color:#a9b5c1;font-size:10px}
+@media(max-width:760px){.change-watch-empty{grid-template-columns:1fr}.change-watch-status{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.change-watch-grid{grid-template-columns:1fr}}

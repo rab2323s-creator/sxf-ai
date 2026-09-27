@@ -139,6 +139,217 @@ def model_history_events(model_ids):
     return [event for event in history["events"] if event.get("model_id") in wanted]
 
 
+def compact_token_count(value):
+    value = int(value)
+    if value >= 1_000_000:
+        rendered = f"{value / 1_000_000:.3f}".rstrip("0").rstrip(".")
+        return f"{rendered}M tokens"
+    if value >= 1_000:
+        rendered = f"{value / 1_000:.1f}".rstrip("0").rstrip(".")
+        return f"{rendered}K tokens"
+    return f"{value:,} tokens"
+
+
+def percent_delta(before, after):
+    if not isinstance(before, (int, float)) or not isinstance(after, (int, float)):
+        return None
+    if before == 0:
+        return None
+    return (after - before) / before * 100
+
+
+def percent_delta_label(before, after):
+    delta = percent_delta(before, after)
+    if delta is None:
+        return ""
+    rendered = f"{abs(delta):.1f}".rstrip("0").rstrip(".")
+    sign = "+" if delta > 0 else "−" if delta < 0 else "±"
+    return f"{sign}{rendered}%"
+
+
+def pricing_period_from_snapshot(pricing, on_date):
+    schedule = pricing.get("standard", []) if isinstance(pricing, dict) else []
+    if not schedule:
+        return {}
+    target = datetime.fromisoformat(on_date).date() if isinstance(on_date, str) else on_date
+    for period in schedule:
+        try:
+            start = datetime.fromisoformat(period["start"]).date()
+            end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+        except Exception:
+            continue
+        if target >= start and (end is None or target <= end):
+            return period
+    return schedule[-1]
+
+
+def summarize_collection(value):
+    if isinstance(value, list):
+        return ", ".join(str(item) for item in value) or "none"
+    if isinstance(value, dict):
+        parts = []
+        for key, item in value.items():
+            label = key.replace("_", " ")
+            if isinstance(item, list):
+                parts.append(f"{label}: {', '.join(str(x) for x in item)}")
+            elif isinstance(item, (str, int, float, bool)):
+                parts.append(f"{label}: {item}")
+        return " · ".join(parts[:5]) or "configuration"
+    if value is None:
+        return "not listed"
+    return str(value)
+
+
+def change_delta_items(change, verified_at):
+    field = change.get("field")
+    before = change.get("before")
+    after = change.get("after")
+    items = []
+
+    if field in {"context_window", "max_output"}:
+        label = "Context window" if field == "context_window" else "Max output"
+        delta = percent_delta_label(before, after)
+        items.append({
+            "label": label,
+            "before": compact_token_count(before),
+            "after": compact_token_count(after),
+            "delta": delta,
+        })
+        return items
+
+    if field == "pricing":
+        old_period = pricing_period_from_snapshot(before or {}, verified_at)
+        new_period = pricing_period_from_snapshot(after or {}, verified_at)
+        labels = {
+            "input": "Input / MTok",
+            "cached_input": "Cached input / MTok",
+            "cache_write": "Cache write / MTok",
+            "cache_write_5m": "5m cache write / MTok",
+            "cache_write_1h": "1h cache write / MTok",
+            "output": "Output / MTok",
+        }
+        for key, label in labels.items():
+            old = old_period.get(key)
+            new = new_period.get(key)
+            if old is None and new is None:
+                continue
+            if old == new:
+                continue
+            items.append({
+                "label": label,
+                "before": catalog_price_label(old) if old is not None else "—",
+                "after": catalog_price_label(new) if new is not None else "—",
+                "delta": percent_delta_label(old, new),
+            })
+        if not items:
+            old_schedule = (before or {}).get("standard", [])
+            new_schedule = (after or {}).get("standard", [])
+            old_next = old_schedule[-1].get("start") if old_schedule else "—"
+            new_next = new_schedule[-1].get("start") if new_schedule else "—"
+            items.append({
+                "label": "Pricing schedule",
+                "before": old_next,
+                "after": new_next,
+                "delta": "",
+            })
+        return items
+
+    if field == "knowledge_cutoff":
+        return [{"label": "Knowledge cutoff", "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    if field == "status":
+        return [{"label": "Model status", "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    if field == "availability":
+        return [{"label": "Availability", "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    if field == "modalities":
+        return [{"label": "Modalities", "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    if field == "reasoning":
+        return [{"label": "Reasoning controls", "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    if field in {"provider", "family", "model", "aliases"}:
+        return [{"label": field.replace("_", " ").title(), "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+    return [{"label": field.replace("_", " ").title(), "before": summarize_collection(before), "after": summarize_collection(after), "delta": ""}]
+
+
+def change_event_items(event):
+    result = []
+    for change in event.get("changes", []):
+        for item in change_delta_items(change, event["verified_at"]):
+            result.append({
+                **item,
+                "change_type": change.get("change_type", "model_change"),
+                "source_url": change.get("source_url", ""),
+            })
+    return result
+
+
+def change_event_summary(event):
+    items = change_event_items(event)
+    if not items:
+        return "Verified model facts changed."
+    chunks = []
+    for item in items[:4]:
+        text_value = f'{item["label"]}: {item["before"]} → {item["after"]}'
+        if item.get("delta"):
+            text_value += f' ({item["delta"]})'
+        chunks.append(text_value)
+    if len(items) > 4:
+        chunks.append(f"+{len(items) - 4} more")
+    return " · ".join(chunks)
+
+
+def model_change_watch_html(model_ids, heading="What changed"):
+    history = load_model_history()
+    wanted = set(model_ids)
+    all_events = [event for event in history["events"] if event.get("model_id") in wanted]
+    changes = [event for event in all_events if event.get("type") == "model_changed"]
+    baseline_dates = [event["verified_at"] for event in all_events if event.get("type") in {"baseline", "model_added"}]
+    baseline = min(baseline_dates) if baseline_dates else history.get("baseline_verified_at", MODEL_PRICING_CATALOG["source_verified"])
+
+    if not changes:
+        model_names = [MODEL_PRICING_BY_ID[mid]["model"] for mid in model_ids if mid in MODEL_PRICING_BY_ID]
+        names = ", ".join(model_names)
+        return f'''<section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="{escape(",".join(model_ids), quote=True)}">
+          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>{escape(heading)}</h2><p>No post-baseline factual changes recorded for {escape(names)} since {escape(baseline)}.</p></div>
+          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>{escape(baseline)}</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
+        </section>'''
+
+    cards = []
+    for event in reversed(changes[-6:]):
+        model = MODEL_PRICING_BY_ID.get(event["model_id"], {})
+        items = change_event_items(event)
+        item_html = "".join(
+            f'''<div class="change-delta" data-change-type="{escape(item["change_type"], quote=True)}">
+              <span>{escape(item["label"])}</span>
+              <div><del>{escape(item["before"])}</del><b>→</b><ins>{escape(item["after"])}</ins>{f'<em>{escape(item["delta"])}</em>' if item.get("delta") else ""}</div>
+            </div>'''
+            for item in items
+        )
+        source = next((item.get("source_url") for item in items if item.get("source_url")), model.get("official_sources", [""])[0])
+        cards.append(
+            f'''<article class="change-watch-card" data-change-event="{escape(event["event_id"], quote=True)}" data-model-id="{escape(event["model_id"], quote=True)}">
+              <div class="change-watch-meta"><span>{escape(model.get("model", event["model_id"]))}</span><time datetime="{escape(event["verified_at"], quote=True)}">{escape(event["verified_at"])}</time></div>
+              <div class="change-deltas">{item_html}</div>
+              <a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Verify at official source ↗</a>
+            </article>'''
+        )
+
+    return f'''<section class="model-change-watch shell" data-what-changed data-change-count="{len(changes)}" data-change-models="{escape(",".join(model_ids), quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">WHAT CHANGED</p><h2>{escape(heading)}</h2></div><span>{len(changes)} verified change{"s" if len(changes) != 1 else ""} since {escape(baseline)}</span></div>
+      <div class="change-watch-grid">{"".join(cards)}</div>
+      <div class="compare-live-foot"><span>Only source-backed factual changes enter this view.</span><a href="/data/model-history.json">Open full ledger ↗</a></div>
+    </section>'''
+
+
+def compare_change_watch_html(model_ids):
+    names = [MODEL_PRICING_BY_ID[mid]["model"] for mid in model_ids if mid in MODEL_PRICING_BY_ID]
+    return model_change_watch_html(model_ids, "Changes affecting this comparison.")
+
+
 def model_history_html(model_ids, heading="Verified model history"):
     if not model_ids:
         return ""
@@ -177,11 +388,7 @@ def model_history_html(model_ids, heading="Verified model history"):
             kind = "BASELINE"
         else:
             changes = event.get("changes", [])
-            labels = []
-            for change in changes:
-                field = change["field"].replace("_", " ")
-                labels.append(field)
-            summary = "Changed: " + ", ".join(labels)
+            summary = change_event_summary(event)
             source = changes[0]["source_url"] if changes else model.get("official_sources", [""])[0]
             kind = "CHANGE"
 
@@ -266,10 +473,15 @@ def ensure_catalog_model_histories():
         if not target.exists():
             continue
         html = target.read_text(encoding="utf-8")
-        if "data-model-history" in html:
+        if "data-model-history" in html and "data-what-changed" in html:
             continue
         title = " / ".join(MODEL_PRICING_BY_ID[mid]["model"] for mid in model_ids)
-        html = inject_before_main_end(html, model_history_html(model_ids, f"{title} verified history."))
+        fragment = ""
+        if "data-what-changed" not in html:
+            fragment += model_change_watch_html(model_ids, f"{title}: what changed.")
+        if "data-model-history" not in html:
+            fragment += model_history_html(model_ids, f"{title} verified history.")
+        html = inject_before_main_end(html, fragment)
         target.write_text(html, encoding="utf-8")
 
 
@@ -283,7 +495,7 @@ def inject_before_main_end(html, fragment):
 
 
 def inject_compare_contract(html, model_ids):
-    fragment = compare_live_facts_html(model_ids)
+    fragment = compare_live_facts_html(model_ids) + compare_change_watch_html(model_ids)
     hero_end = "</section>"
     hero_start = html.find('<section class="comparison-hero')
     if hero_start < 0:
@@ -6947,7 +7159,11 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         page = model_page_html(name, matched)
         history_ids = catalog_model_ids_for_name(name)
-        page = inject_before_main_end(page, model_history_html(history_ids, f"{name} verified history."))
+        page = inject_before_main_end(
+            page,
+            model_change_watch_html(history_ids, f"{name}: what changed.") +
+            model_history_html(history_ids, f"{name} verified history.")
+        )
         (path / "index.html").write_text(page, encoding="utf-8")
 
     fable_path = ROOT / "models" / "claude-fable-5-1"
@@ -6955,6 +7171,7 @@ def build_discovery_pages(items, current_items):
     fable_page = claude_fable_51_reference_html(items)
     fable_page = inject_before_main_end(
         fable_page,
+        model_change_watch_html(["claude-fable-5-1"], "Claude Fable 5.1: what changed.") +
         model_history_html(["claude-fable-5-1"], "Claude Fable 5.1 verified history.")
     )
     (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
@@ -6964,6 +7181,7 @@ def build_discovery_pages(items, current_items):
     gemini_page = gemini_38_flash_reference_html(items)
     gemini_page = inject_before_main_end(
         gemini_page,
+        model_change_watch_html(["gemini-3.8-flash"], "Gemini 3.8 Flash: what changed.") +
         model_history_html(["gemini-3.8-flash"], "Gemini 3.8 Flash verified history.")
     )
     (gemini_path / "index.html").write_text(gemini_page, encoding="utf-8")
