@@ -320,6 +320,18 @@ def validate_model_pricing_catalog():
     if "/models/pricing/pricing.js" not in pricing_html or "/models/pricing/pricing.css" not in pricing_html:
         fail("model pricing page is missing calculator assets")
 
+    models_page = ROOT / "models" / "index.html"
+    models_html = models_page.read_text(encoding="utf-8")
+    if 'data-model-explorer' not in models_html:
+        fail("models hub is missing the model explorer")
+    if "/models/explorer.js" not in models_html:
+        fail("models hub is missing model explorer behavior")
+    explorer_rows = len(re.findall(r"data-model-row(?:\s|>)", models_html))
+    if explorer_rows != len(models):
+        fail(f"model explorer has {explorer_rows} rows for {len(models)} catalog models")
+    if "PRIMARY-SOURCE VERIFIED" not in models_html:
+        fail("model explorer must disclose primary-source verification")
+
     pricing_js = (ROOT / "models" / "pricing" / "pricing.js").read_text(encoding="utf-8")
     if 'fetch("/data/model-pricing.json"' not in pricing_js:
         fail("pricing calculator must load the canonical model-pricing.json dataset")
