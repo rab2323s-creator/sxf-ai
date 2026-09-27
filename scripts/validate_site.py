@@ -469,7 +469,7 @@ def validate_how_to_build_super_agent():
             fail(f"How-to super-agent guide missing required content: {marker}")
     if text.count('data-image-slot=') != 4:
         fail("How-to super-agent guide must reserve exactly four research image slots")
-    blocks = re.findall(r'<script[^>]+type=["\\']application/ld\\+json["\\'][^>]*>(.*?)</script>', text, re.I | re.S)
+    blocks = re.findall(r"<script[^>]+type=[\"']application/ld\\+json[\"'][^>]*>(.*?)</script>", text, re.I | re.S)
     if not blocks:
         fail("How-to super-agent guide is missing JSON-LD")
     schema = json.loads(blocks[0])
