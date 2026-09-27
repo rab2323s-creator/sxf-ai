@@ -129,7 +129,13 @@ def catalog_price_label(value):
     value = float(value)
     if value >= 1:
         return f"${value:,.2f}"
-    return f"${value:.4f}".rstrip("0").rstrip(".")
+    rendered = f"{value:.4f}".rstrip("0").rstrip(".")
+    if "." not in rendered:
+        rendered += ".00"
+    else:
+        whole, fraction = rendered.split(".", 1)
+        rendered = whole + "." + fraction.ljust(2, "0")
+    return "$" + rendered
 
 
 def catalog_reference_variant(variant):
@@ -1541,6 +1547,7 @@ def model_groups(items):
 def tracked_models_html(items):
     groups = model_groups(items)
     cards = [
+        '<a class="tracked-model" href="/models/pricing/"><span>DB</span><strong>Model Pricing</strong><small>API rates & calculator</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/claude-fable-5-1/"><span>REF</span><strong>Claude Fable 5.1</strong><small>Model reference</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/gemini-3-8-flash/"><span>REF</span><strong>Gemini 3.8 Flash</strong><small>Model reference</small><b>↗</b></a>'
     ]
@@ -1637,7 +1644,7 @@ def page_footer():
           <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
-          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
           <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
           <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
         </nav>
@@ -6297,7 +6304,9 @@ def model_pricing_page_html():
         "Compare Standard API token pricing, cached-input rates, context windows and output limits "
         "for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculator."
     )
-    return f'''<!doctype html><html lang="en">{page_head("AI Model Pricing & API Specs Database | SXF / AI", description, canonical, schema)}
+    head = page_head("AI Model Pricing & API Specs Database | SXF / AI", description, canonical, schema)
+    head = head.replace("</head>", '      <link rel="stylesheet" href="/models/pricing/pricing.css" />\n    </head>')
+    return f'''<!doctype html><html lang="en">{head}
     <body class="intel-page pricing-page">
       <a class="skip-link" href="#pricing-main">Skip to model pricing</a>
       {page_header("models")}
@@ -6336,6 +6345,7 @@ def model_pricing_page_html():
           </div>
           <div class="pricing-table-wrap">
             <table class="pricing-table">
+              <caption class="sr-only">Standard API token pricing and model limits</caption>
               <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Source</th></tr></thead>
               <tbody>{rows}</tbody>
             </table>
@@ -6407,7 +6417,6 @@ def model_pricing_page_html():
         </section>
       </main>
       {page_footer()}
-      <link rel="stylesheet" href="/models/pricing/pricing.css" />
       <script src="/models/pricing/pricing.js" defer></script>
     </body></html>'''
 
