@@ -420,6 +420,68 @@ def validate_model_pricing_catalog():
         fail("pricing calculator must apply catalog pricing rules")
 
 
+def validate_change_intelligence_regressions():
+    from update_news import (
+        change_delta_items,
+        change_event_items,
+        change_event_summary,
+        percent_delta_label,
+    )
+
+    if percent_delta_label(4, 3) != "−25%":
+        fail("change intelligence pricing percentage regression")
+    if percent_delta_label(1_000_000, 2_000_000) != "+100%":
+        fail("change intelligence context percentage regression")
+
+    context_change = {
+        "field": "context_window",
+        "change_type": "context_change",
+        "before": 1_000_000,
+        "after": 2_000_000,
+        "source_url": "https://example.com/specs",
+    }
+    context_items = change_delta_items(context_change, "2026-09-28")
+    if context_items != [{
+        "label": "Context window",
+        "before": "1M tokens",
+        "after": "2M tokens",
+        "delta": "+100%",
+    }]:
+        fail(f"change intelligence context rendering drift: {context_items}")
+
+    pricing_change = {
+        "field": "pricing",
+        "change_type": "pricing_change",
+        "before": {"standard": [{"start": "2026-01-01", "end": None, "input": 4, "cached_input": 0.4, "output": 20}]},
+        "after": {"standard": [{"start": "2026-09-28", "end": None, "input": 3, "cached_input": 0.3, "output": 15}]},
+        "source_url": "https://example.com/pricing",
+    }
+    pricing_items = change_delta_items(pricing_change, "2026-09-28")
+    expected = {
+        "Input / MTok": ("$4.00", "$3.00", "−25%"),
+        "Cached input / MTok": ("$0.40", "$0.30", "−25%"),
+        "Output / MTok": ("$20.00", "$15.00", "−25%"),
+    }
+    actual = {item["label"]: (item["before"], item["after"], item["delta"]) for item in pricing_items}
+    if actual != expected:
+        fail(f"change intelligence pricing rendering drift: {actual}")
+
+    event = {
+        "type": "model_changed",
+        "model_id": "example-model",
+        "verified_at": "2026-09-28",
+        "changes": [context_change, pricing_change],
+    }
+    event_items = change_event_items(event)
+    if len(event_items) != 4:
+        fail(f"change intelligence event item count drift: {len(event_items)}")
+    summary = change_event_summary(event)
+    if "Context window: 1M tokens → 2M tokens (+100%)" not in summary:
+        fail("change intelligence summary missing context delta")
+    if "Input / MTok: $4.00 → $3.00 (−25%)" not in summary:
+        fail("change intelligence summary missing price delta")
+
+
 def validate_compare_contracts_and_model_histories():
     catalog = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
     history = json.loads((ROOT / "data" / "model-history.json").read_text(encoding="utf-8"))
@@ -441,6 +503,8 @@ def validate_compare_contracts_and_model_histories():
         html = path.read_text(encoding="utf-8")
         if "data-compare-contract" not in html:
             fail(f"{slug}: missing live compare contract")
+        if "data-what-changed" not in html:
+            fail(f"{slug}: missing what-changed intelligence")
         ids_match = re.search(r'data-model-ids="([^"]+)"', html)
         if not ids_match or ids_match.group(1).split(",") != model_ids:
             fail(f"{slug}: compare contract model IDs drift")
@@ -503,6 +567,8 @@ def validate_compare_contracts_and_model_histories():
         html = path.read_text(encoding="utf-8")
         if "data-model-history" not in html:
             fail(f"{model_id}: model page missing verified history timeline")
+        if "data-what-changed" not in html:
+            fail(f"{model_id}: model page missing what-changed intelligence")
         latest = events_by_model.get(model_id, [])[-1] if events_by_model.get(model_id) else None
         if latest is None:
             fail(f"{model_id}: no ledger event available")
@@ -510,6 +576,12 @@ def validate_compare_contracts_and_model_histories():
             fail(f"{model_id}: latest ledger event is not surfaced on model page")
         if f'data-model-id="{model_id}"' not in html:
             fail(f"{model_id}: model timeline does not identify the model")
+        model_changes = [event for event in events_by_model.get(model_id, []) if event.get("type") == "model_changed"]
+        expected_count = len(model_changes)
+        if f'data-change-count="{expected_count}"' not in html:
+            fail(f"{model_id}: what-changed count drift; expected {expected_count}")
+        if expected_count == 0 and "No post-baseline factual changes recorded" not in html:
+            fail(f"{model_id}: baseline-only state must disclose that no factual changes are recorded")
 
 
 def validate_topic_relevance(archive):
@@ -878,6 +950,7 @@ def main():
 
     validate_model_pricing_catalog()
     validate_model_history()
+    validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
