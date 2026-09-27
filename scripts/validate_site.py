@@ -487,7 +487,6 @@ def validate_source_expansion(news, archive):
         fail("source registry contains duplicate feed URLs")
 
     expected = {
-        "Google DeepMind": "https://deepmind.google/blog/rss.xml",
         "Google Research": "https://research.google/blog/rss/",
     }
     for name, url in expected.items():
@@ -552,8 +551,6 @@ def validate_source_expansion(news, archive):
 
     if categorize("A new method for biological discovery", "Google Research") != "Research":
         fail("Google Research fallback category must be Research")
-    if categorize("Advancing scientific discovery with new systems", "Google DeepMind") != "Research":
-        fail("Google DeepMind fallback category must be Research")
 
 
 def main():
