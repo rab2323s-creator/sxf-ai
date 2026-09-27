@@ -25,6 +25,7 @@ jobs:
         run: |
           python -m py_compile scripts/update_news.py scripts/validate_site.py
           node --check models/pricing/pricing.js
+          node --check models/explorer.js
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
       - name: Validate generated site
