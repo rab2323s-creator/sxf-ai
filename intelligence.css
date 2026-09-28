@@ -850,3 +850,42 @@
   .how-to-super-agent-guide .guide-article-hero h1{font-size:clamp(34px,10.5vw,46px)}
   .how-to-super-agent-guide .guide-answer{padding:18px}
 }
+
+/* AI takeover scenario guide */
+.ai-takeover-guide .takeover-scenario{position:relative;margin:26px 0;padding:28px;border:1px solid rgba(200,255,77,.18);border-radius:20px;background:linear-gradient(145deg,rgba(200,255,77,.045),rgba(255,255,255,.012))}
+.ai-takeover-guide .takeover-scenario>span{display:inline-block;margin-bottom:18px;color:var(--accent);font-size:9px;font-weight:900;letter-spacing:.14em}
+.ai-takeover-guide .takeover-scenario p{margin:0 0 14px!important;color:#a5afb9!important;font-size:15px!important;line-height:1.82!important}
+.ai-takeover-guide .takeover-scenario p:last-child{margin-bottom:0!important}
+.ai-takeover-guide .takeover-ending{border-color:rgba(200,255,77,.28);background:linear-gradient(145deg,rgba(200,255,77,.07),rgba(255,255,255,.012))}
+.ai-takeover-guide .takeover-key-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0}
+.ai-takeover-guide .takeover-key-grid article{min-width:0;padding:21px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.ai-takeover-guide .takeover-key-grid span{color:var(--accent);font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.ai-takeover-guide .takeover-key-grid h3{margin:30px 0 8px;font-size:19px}
+.ai-takeover-guide .takeover-key-grid p{margin:0!important;color:#798591!important;font-size:12px!important;line-height:1.68!important}
+.ai-takeover-guide .reality-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:28px 0}
+.ai-takeover-guide .reality-grid article{min-width:0;padding:22px;border:1px solid var(--line);border-radius:17px;background:#0a0e13}
+.ai-takeover-guide .reality-grid span{display:block;color:#72808d;font-size:9px;font-weight:900;letter-spacing:.11em}
+.ai-takeover-guide .reality-grid strong{display:block;margin:26px 0 8px;font-size:17px;line-height:1.2}
+.ai-takeover-guide .reality-grid p{margin:0!important;color:#7d8995!important;font-size:12px!important;line-height:1.68!important}
+.ai-takeover-guide .takeover-timeline{margin:28px 0;border-top:1px solid var(--line)}
+.ai-takeover-guide .takeover-timeline>div{display:grid;grid-template-columns:125px 245px minmax(0,1fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.ai-takeover-guide .takeover-timeline span{color:#63707c;font-size:9px;font-weight:850;letter-spacing:.1em}
+.ai-takeover-guide .takeover-timeline strong{font-size:13px;line-height:1.45}
+.ai-takeover-guide .takeover-timeline p{margin:0!important;color:#788491!important;font-size:12px!important;line-height:1.65!important}
+.ai-takeover-guide .takeover-evidence-list{margin:28px 0;border-top:1px solid var(--line)}
+.ai-takeover-guide .takeover-evidence-list>div{display:grid;grid-template-columns:90px minmax(0,1fr);gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.ai-takeover-guide .takeover-evidence-list span{color:var(--accent);font-size:9px;font-weight:900;letter-spacing:.12em}
+.ai-takeover-guide .takeover-evidence-list strong{font-size:13px;line-height:1.55}
+@media(max-width:900px){
+  .ai-takeover-guide .takeover-key-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-takeover-guide .takeover-timeline>div{grid-template-columns:105px 1fr}
+  .ai-takeover-guide .takeover-timeline p{grid-column:2}
+}
+@media(max-width:720px){
+  .ai-takeover-guide .takeover-key-grid,.ai-takeover-guide .reality-grid{grid-template-columns:1fr}
+  .ai-takeover-guide .takeover-scenario{padding:21px;border-radius:17px}
+  .ai-takeover-guide .takeover-scenario p{font-size:14px!important;line-height:1.75!important}
+  .ai-takeover-guide .takeover-timeline>div{grid-template-columns:1fr;gap:7px}
+  .ai-takeover-guide .takeover-timeline p{grid-column:auto}
+  .ai-takeover-guide .takeover-evidence-list>div{grid-template-columns:1fr;gap:6px}
+}

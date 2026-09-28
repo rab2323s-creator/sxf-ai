@@ -35,6 +35,7 @@ SHELL_PAGES = [
     ROOT / "open-source" / "index.html",
     ROOT / "guides" / "ai-agent-security" / "index.html",
     ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html",
+    ROOT / "guides" / "will-ai-take-over-the-world" / "index.html",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html",
     ROOT / "guides" / "prompt-injection" / "index.html",
     ROOT / "guides" / "index.html",
@@ -464,6 +465,52 @@ def validate_super_agent_internal_links():
     for path in pages:
         if target not in path.read_text(encoding="utf-8"):
             fail(f"Missing contextual internal link to super-agent build guide: {path.relative_to(ROOT)}")
+
+
+def validate_ai_takeover_guide():
+    path = ROOT / "guides" / "will-ai-take-over-the-world" / "index.html"
+    if not path.exists():
+        fail("AI takeover guide is missing")
+    text = path.read_text(encoding="utf-8")
+    required = [
+        "The First 24 Hours of an AI Takeover",
+        'id="hook"',
+        'id="requirements"',
+        'id="reality-2026"',
+        'id="superintelligence"',
+        'id="self-improvement"',
+        'id="controls"',
+        'id="likelihood"',
+        'href="/superintelligence/"',
+        'href="/guides/ai-super-agents/"',
+        'href="/guides/ai-agent-security/"',
+        'href="/guides/how-to-build-ai-super-agent/"',
+        "International AI Safety Report 2026",
+        "recursive self-improvement",
+    ]
+    for marker in required:
+        if marker not in text:
+            fail(f"AI takeover guide missing required marker: {marker}")
+    if text.count('data-image-slot=') != 4:
+        fail("AI takeover guide must reserve exactly four research image slots")
+    match = re.search(r'<script type="application/ld\\+json">(.*?)</script>', text, re.S)
+    if not match:
+        fail("AI takeover guide missing JSON-LD")
+    try:
+        data = json.loads(match.group(1))
+    except json.JSONDecodeError as exc:
+        fail(f"AI takeover guide has invalid JSON-LD: {exc}")
+    graph = data.get("@graph", [])
+    types = {entry.get("@type") for entry in graph if isinstance(entry, dict)}
+    for schema_type in {"WebPage", "TechArticle", "FAQPage", "BreadcrumbList"}:
+        if schema_type not in types:
+            fail(f"AI takeover guide missing schema type: {schema_type}")
+    guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    if '/guides/will-ai-take-over-the-world/' not in guides:
+        fail("Guides index missing AI takeover guide")
+    super_page = (ROOT / "superintelligence" / "index.html").read_text(encoding="utf-8")
+    if '/guides/will-ai-take-over-the-world/' not in super_page:
+        fail("Superintelligence hub missing AI takeover guide")
 
 
 def validate_how_to_build_super_agent():
@@ -1157,6 +1204,7 @@ def main():
     validate_model_pricing_catalog()
     validate_model_history()
     validate_super_agent_internal_links()
+    validate_ai_takeover_guide()
     validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()

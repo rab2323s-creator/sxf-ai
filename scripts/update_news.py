@@ -40,6 +40,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "open-source" / "index.html": "open-source",
     ROOT / "guides" / "ai-agent-security" / "index.html": "guides",
     ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html": "guides",
+    ROOT / "guides" / "will-ai-take-over-the-world" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -4983,6 +4984,7 @@ def ai_super_agents_guide_html(items):
                 <article><span>Superintelligence</span><p>A hypothetical intelligence that substantially exceeds human capability across very broad cognitive domains.</p></article>
               </div>
               <p>A super agent may look more capable than its base model because orchestration gives it memory, tools, parallel workers and persistence. That is <strong>system-level capability amplification</strong>, not evidence that the underlying model has become superintelligent.</p>
+              <p>For the public-facing question of where that trajectory could lead, SXF's <a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World?</a> guide tests the takeover question as a capability-and-control scenario, separating current agents from the much stronger autonomy, access and counter-control a genuine loss-of-control event would require.</p>
             </section>
 
             <section id="orchestration">
@@ -5213,6 +5215,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
+        ("/guides/will-ai-take-over-the-world/","AI TAKEOVER","Will AI Take Over the World?","A first-24-hours thought experiment that separates current AI capability from AGI, superintelligence and genuine loss of control."),
         ("/guides/ai-super-agents/","SUPER AGENTS","AI Super Agents in 2026","How higher-level agent orchestrators differ from ordinary agents, multi-agent systems, AGI and superintelligence."),
         ("/guides/best-ai-agents/","AGENTIC AI","Best AI Agents in 2026","Today's deployed work, research, coding and automation agents—the layer below the ASI question."),
         ("/guides/gpt-6-vs-claude/","FRONTIER MODELS","GPT-6 vs Claude in 2026","Current frontier model families, reasoning, agents, pricing and API architecture."),
@@ -5409,6 +5412,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/will-ai-take-over-the-world/",
+            "category": "Superintelligence · Scenario",
+            "categories": ["superintelligence", "research", "agents", "security"],
+            "kicker": "AI TAKEOVER SCENARIO",
+            "title": "Will AI Take Over the World?",
+            "description": "A cinematic, evidence-based investigation of the first 24 hours of a hypothetical AI takeover—and the real capabilities, permissions and control failures it would require.",
+            "meta": "AGI · Superintelligence · Loss of control",
+            "updated": "Sep 29, 2026",
+            "read_time": "34 min",
+        },
         {
             "href": "/guides/ai-agent-security/",
             "category": "Security · Agents",
@@ -7354,6 +7368,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_entry(f"{BASE_URL}/guides/will-ai-take-over-the-world/", "2026-09-29"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
