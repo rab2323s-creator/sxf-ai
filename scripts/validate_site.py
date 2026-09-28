@@ -494,6 +494,15 @@ def validate_ai_takeover_guide():
             fail(f"AI takeover guide missing required marker: {marker}")
     if text.count('data-image-slot=') != 4:
         fail("AI takeover guide must reserve exactly four research image slots")
+    primary_image = "/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp"
+    if f'<img src="{primary_image}"' not in text:
+        fail("AI takeover guide must render its primary research image")
+    if 'alt="AI takeover capability stack connecting artificial intelligence to global cloud, financial, communications and infrastructure systems"' not in text:
+        fail("AI takeover guide primary image must keep descriptive alt text")
+    if f'<meta property="og:image" content="https://sxf.si{primary_image}"' not in text:
+        fail("AI takeover guide primary image must be the Open Graph image")
+    if f'<meta name="twitter:image" content="https://sxf.si{primary_image}"' not in text:
+        fail("AI takeover guide primary image must be the Twitter image")
     marker = '<script type="application/ld+json">'
     start = text.find(marker)
     end = text.find("</script>", start + len(marker)) if start >= 0 else -1
@@ -505,7 +514,7 @@ def validate_ai_takeover_guide():
         fail(f"AI takeover guide has invalid JSON-LD: {exc}")
     graph = data.get("@graph", [])
     types = {entry.get("@type") for entry in graph if isinstance(entry, dict)}
-    for schema_type in {"WebPage", "TechArticle", "FAQPage", "BreadcrumbList"}:
+    for schema_type in {"WebPage", "TechArticle", "ImageObject", "FAQPage", "BreadcrumbList"}:
         if schema_type not in types:
             fail(f"AI takeover guide missing schema type: {schema_type}")
     guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
@@ -513,6 +522,11 @@ def validate_ai_takeover_guide():
         fail("Guides index missing AI takeover guide")
     if "Will AI Take Over the World? The First 24 Hours of an AI Takeover" not in guides:
         fail("Guides index must use the full AI takeover guide title")
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    if "https://sxf.si/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp" not in sitemap:
+        fail("Sitemap missing AI takeover primary image")
+    if 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' not in sitemap:
+        fail("Sitemap missing Google image namespace")
     super_page = (ROOT / "superintelligence" / "index.html").read_text(encoding="utf-8")
     if '/guides/will-ai-take-over-the-world/' not in super_page:
         fail("Superintelligence hub missing AI takeover guide")

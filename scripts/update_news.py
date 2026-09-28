@@ -7313,6 +7313,12 @@ def build_discovery_pages(items, current_items):
 def sitemap_entry(url, lastmod):
     return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
 
+def sitemap_image_entry(url, lastmod, image_url):
+    return (
+        f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod>"
+        f"<image:image><image:loc>{image_url}</image:loc></image:image></url>"
+    )
+
 def content_lastmod(items, fallback="2026-09-26"):
     dates = []
     for item in items:
@@ -7368,7 +7374,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
-        sitemap_entry(f"{BASE_URL}/guides/will-ai-take-over-the-world/", "2026-09-29"),
+        sitemap_image_entry(f"{BASE_URL}/guides/will-ai-take-over-the-world/", "2026-09-29", f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp"),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
@@ -7392,7 +7398,7 @@ def update_sitemap(items):
         if model_page_indexable(name, matched):
             rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", content_lastmod(matched)))
 
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>\n"
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")
 def select_current_items(archive, cutoff):
     selected = []

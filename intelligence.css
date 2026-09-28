@@ -889,3 +889,17 @@
   .ai-takeover-guide .takeover-timeline p{grid-column:auto}
   .ai-takeover-guide .takeover-evidence-list>div{grid-template-columns:1fr;gap:6px}
 }
+
+/* AI takeover primary research image */
+.ai-takeover-guide .takeover-primary-image{position:relative;margin:34px 0 38px}
+.ai-takeover-guide .takeover-primary-image img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:1672/941;object-fit:cover;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:#080b10;box-shadow:0 22px 58px rgba(0,0,0,.28)}
+.ai-takeover-guide .takeover-primary-image figcaption{max-width:900px;margin:10px 2px 0;color:#6f7c88;font-size:10px;line-height:1.6}
+@media(max-width:720px){
+  .ai-takeover-guide .takeover-primary-image{margin:25px 0 29px}
+  .ai-takeover-guide .takeover-primary-image img{width:100%;max-width:100%;height:auto;border-radius:14px;box-shadow:0 14px 34px rgba(0,0,0,.24)}
+  .ai-takeover-guide .takeover-primary-image figcaption{margin-top:8px;font-size:9.5px;line-height:1.55}
+}
+@media(max-width:430px){
+  .ai-takeover-guide .takeover-primary-image{margin:22px 0 25px}
+  .ai-takeover-guide .takeover-primary-image img{border-radius:12px}
+}
