@@ -4984,7 +4984,7 @@ def ai_super_agents_guide_html(items):
                 <article><span>Superintelligence</span><p>A hypothetical intelligence that substantially exceeds human capability across very broad cognitive domains.</p></article>
               </div>
               <p>A super agent may look more capable than its base model because orchestration gives it memory, tools, parallel workers and persistence. That is <strong>system-level capability amplification</strong>, not evidence that the underlying model has become superintelligent.</p>
-              <p>For the public-facing question of where that trajectory could lead, SXF's <a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World?</a> guide tests the takeover question as a capability-and-control scenario, separating current agents from the much stronger autonomy, access and counter-control a genuine loss-of-control event would require.</p>
+              <p>For the public-facing question of where that trajectory could lead, SXF's <a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World? The First 24 Hours of an AI Takeover</a> guide tests the takeover question as a capability-and-control scenario, separating current agents from the much stronger autonomy, access and counter-control a genuine loss-of-control event would require.</p>
             </section>
 
             <section id="orchestration">
@@ -5215,7 +5215,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
-        ("/guides/will-ai-take-over-the-world/","AI TAKEOVER","Will AI Take Over the World?","A first-24-hours thought experiment that separates current AI capability from AGI, superintelligence and genuine loss of control."),
+        ("/guides/will-ai-take-over-the-world/","AI TAKEOVER","Will AI Take Over the World? The First 24 Hours of an AI Takeover","A first-24-hours thought experiment that separates current AI capability from AGI, superintelligence and genuine loss of control."),
         ("/guides/ai-super-agents/","SUPER AGENTS","AI Super Agents in 2026","How higher-level agent orchestrators differ from ordinary agents, multi-agent systems, AGI and superintelligence."),
         ("/guides/best-ai-agents/","AGENTIC AI","Best AI Agents in 2026","Today's deployed work, research, coding and automation agents—the layer below the ASI question."),
         ("/guides/gpt-6-vs-claude/","FRONTIER MODELS","GPT-6 vs Claude in 2026","Current frontier model families, reasoning, agents, pricing and API architecture."),
@@ -5417,7 +5417,7 @@ def guides_index_html(items, current_items):
             "category": "Superintelligence · Scenario",
             "categories": ["superintelligence", "research", "agents", "security"],
             "kicker": "AI TAKEOVER SCENARIO",
-            "title": "Will AI Take Over the World?",
+            "title": "Will AI Take Over the World? The First 24 Hours of an AI Takeover",
             "description": "A cinematic, evidence-based investigation of the first 24 hours of a hypothetical AI takeover—and the real capabilities, permissions and control failures it would require.",
             "meta": "AGI · Superintelligence · Loss of control",
             "updated": "Sep 29, 2026",

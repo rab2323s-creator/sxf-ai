@@ -511,9 +511,17 @@ def validate_ai_takeover_guide():
     guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     if '/guides/will-ai-take-over-the-world/' not in guides:
         fail("Guides index missing AI takeover guide")
+    if "Will AI Take Over the World? The First 24 Hours of an AI Takeover" not in guides:
+        fail("Guides index must use the full AI takeover guide title")
     super_page = (ROOT / "superintelligence" / "index.html").read_text(encoding="utf-8")
     if '/guides/will-ai-take-over-the-world/' not in super_page:
         fail("Superintelligence hub missing AI takeover guide")
+    if "Will AI Take Over the World? The First 24 Hours of an AI Takeover" not in super_page:
+        fail("Superintelligence hub must use the full AI takeover guide title")
+    super_agents = (ROOT / "guides" / "ai-super-agents" / "index.html").read_text(encoding="utf-8")
+    expected_anchor = '<a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World? The First 24 Hours of an AI Takeover</a>'
+    if expected_anchor not in super_agents:
+        fail("AI Super Agents guide must use the full keyword-rich AI takeover anchor text")
 
 
 def validate_how_to_build_super_agent():
