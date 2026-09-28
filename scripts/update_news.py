@@ -814,7 +814,7 @@ def parse_feed_with_metrics(source, body):
         })
     return output, {
         "parsed_candidate_count": len(rows),
-        "accepted_candidate_count": len(output),
+        "relevance_accepted_count": len(output),
         "relevance_rejection_count": relevance_rejected,
     }
 
@@ -7433,9 +7433,12 @@ def main():
             "fetch_success": False,
             "fetch_failure": False,
             "parsed_candidate_count": 0,
+            "relevance_accepted_count": 0,
+            "quality_accepted_count": 0,
             "accepted_candidate_count": 0,
             "rejected_candidate_count": 0,
             "duplicate_count": 0,
+            "age_rejection_count": 0,
             "relevance_rejection_count": 0,
             "quality_rejection_count": 0,
             "publish_count": 0,
@@ -7455,8 +7458,6 @@ def main():
             metrics.update(parse_metrics)
             metrics["fetch_success"] = True
             metrics["last_successful_fetch"] = now.isoformat().replace("+00:00", "Z")
-            metrics["rejected_candidate_count"] = metrics["relevance_rejection_count"]
-
             seen_urls = set()
             deduped = []
             for item in parsed:
@@ -7466,14 +7467,34 @@ def main():
                 seen_urls.add(item["url"])
                 deduped.append(item)
 
+            candidate_age_days = SHADOW_RETENTION_DAYS if status == "shadow" else INITIAL_ARCHIVE_DAYS
+            candidate_cutoff = now - timedelta(days=candidate_age_days)
+            fresh_candidates = []
+            for item in deduped:
+                published = parse_date(item.get("published", ""))
+                if published is None or published < candidate_cutoff:
+                    metrics["age_rejection_count"] += 1
+                    continue
+                fresh_candidates.append(item)
+
             if status == "shadow":
-                prepared_shadow = prepare_items(deduped)
+                prepared_shadow = prepare_items(fresh_candidates)
                 accepted_shadow = [item for item in prepared_shadow if item.get("seo_eligible")]
                 metrics["quality_rejection_count"] = len(prepared_shadow) - len(accepted_shadow)
-                metrics["rejected_candidate_count"] += metrics["quality_rejection_count"]
+                metrics["quality_accepted_count"] = len(accepted_shadow)
+                metrics["accepted_candidate_count"] = len(accepted_shadow)
                 shadow_candidates.extend(accepted_shadow)
             else:
-                incoming.extend(deduped)
+                metrics["quality_accepted_count"] = len(fresh_candidates)
+                metrics["accepted_candidate_count"] = len(fresh_candidates)
+                incoming.extend(fresh_candidates)
+
+            metrics["rejected_candidate_count"] = (
+                metrics["relevance_rejection_count"]
+                + metrics["duplicate_count"]
+                + metrics["age_rejection_count"]
+                + metrics["quality_rejection_count"]
+            )
         except Exception as exc:
             message = f"{source}: {exc}"
             metrics["fetch_failure"] = True
@@ -7523,6 +7544,9 @@ def main():
     ]
     shadow_by_url = {item["url"]: item for item in retained_shadow if item.get("url")}
     for item in shadow_candidates:
+        published = parse_date(item.get("published", ""))
+        if published is None or published < shadow_cutoff:
+            continue
         shadow_by_url[item["url"]] = item
 
     bounded_shadow = []
