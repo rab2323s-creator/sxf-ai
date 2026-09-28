@@ -473,6 +473,7 @@ def validate_ai_takeover_guide():
         fail("AI takeover guide is missing")
     text = path.read_text(encoding="utf-8")
     required = [
+        "Will AI Take Over the World?",
         "The First 24 Hours of an AI Takeover",
         'id="hook"',
         'id="requirements"',
