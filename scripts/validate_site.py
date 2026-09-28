@@ -5,7 +5,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 import copy
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -971,8 +971,9 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: source metrics missing")
         required_metrics = {
             "status", "fetch_success", "fetch_failure", "parsed_candidate_count",
+            "relevance_accepted_count", "quality_accepted_count",
             "accepted_candidate_count", "rejected_candidate_count", "duplicate_count",
-            "relevance_rejection_count", "quality_rejection_count", "publish_count",
+            "age_rejection_count", "relevance_rejection_count", "quality_rejection_count", "publish_count",
             "last_successful_fetch", "errors",
         }
         if not required_metrics.issubset(metrics):
@@ -983,6 +984,31 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: source metrics errors must be a list")
         if metrics.get("fetch_failure") and not metrics.get("errors"):
             fail(f"{name}: fetch failure disappeared without a recorded error")
+        parsed = metrics.get("parsed_candidate_count")
+        accepted = metrics.get("accepted_candidate_count")
+        rejected = metrics.get("rejected_candidate_count")
+        relevance_accepted = metrics.get("relevance_accepted_count")
+        relevance_rejected = metrics.get("relevance_rejection_count")
+        duplicate_count = metrics.get("duplicate_count")
+        age_rejected = metrics.get("age_rejection_count")
+        quality_accepted = metrics.get("quality_accepted_count")
+        quality_rejected = metrics.get("quality_rejection_count")
+        numeric = [
+            parsed, accepted, rejected, relevance_accepted, relevance_rejected,
+            duplicate_count, age_rejected, quality_accepted, quality_rejected,
+        ]
+        if any(not isinstance(value, int) or value < 0 for value in numeric):
+            fail(f"{name}: source metrics counts must be non-negative integers")
+        if parsed != relevance_accepted + relevance_rejected:
+            fail(f"{name}: parsed/relevance metrics do not balance")
+        if relevance_accepted != duplicate_count + age_rejected + quality_accepted + quality_rejected:
+            fail(f"{name}: post-relevance metrics do not balance")
+        if accepted != quality_accepted:
+            fail(f"{name}: accepted_candidate_count must equal quality_accepted_count")
+        if rejected != relevance_rejected + duplicate_count + age_rejected + quality_rejected:
+            fail(f"{name}: rejected_candidate_count does not match rejection reasons")
+        if parsed != accepted + rejected:
+            fail(f"{name}: parsed candidates must equal accepted + rejected")
 
     actual_current_counts = {
         name: sum(1 for item in news.get("items", []) if item.get("source") == name)
@@ -1014,6 +1040,8 @@ def validate_source_expansion(news, archive):
     shadow_items = shadow.get("items")
     if not isinstance(shadow_items, list):
         fail("source-shadow items must be a list")
+    from update_news import parse_date, SHADOW_RETENTION_DAYS
+    shadow_cutoff = datetime.now(timezone.utc) - timedelta(days=SHADOW_RETENTION_DAYS)
     shadow_counts = {}
     production_urls = {item.get("url") for item in archive.get("items", [])}
     for item in shadow_items:
@@ -1021,6 +1049,9 @@ def validate_source_expansion(news, archive):
         config = SOURCE_BY_NAME.get(name)
         if not config or config.get("status") != "shadow":
             fail(f"source-shadow contains non-shadow source: {name}")
+        published = parse_date(item.get("published", ""))
+        if published is None or published < shadow_cutoff:
+            fail(f"{name}: source-shadow contains item outside retention window")
         if item.get("url") in production_urls:
             fail(f"{name}: shadow candidate leaked into production archive")
         shadow_counts[name] = shadow_counts.get(name, 0) + 1
