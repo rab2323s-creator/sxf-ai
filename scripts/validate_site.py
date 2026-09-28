@@ -494,6 +494,9 @@ def validate_ai_takeover_guide():
             fail(f"AI takeover guide missing required marker: {marker}")
     if text.count('data-image-slot=') != 4:
         fail("AI takeover guide must reserve exactly four research image slots")
+    secondary_image = "/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp"
+    if f'<img src="{secondary_image}"' not in text:
+        fail("AI takeover guide must render its second research image")
     primary_image = "/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp"
     if f'<img src="{primary_image}"' not in text:
         fail("AI takeover guide must render its primary research image")
