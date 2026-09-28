@@ -493,11 +493,13 @@ def validate_ai_takeover_guide():
             fail(f"AI takeover guide missing required marker: {marker}")
     if text.count('data-image-slot=') != 4:
         fail("AI takeover guide must reserve exactly four research image slots")
-    match = re.search(r'<script type="application/ld\\+json">(.*?)</script>', text, re.S)
-    if not match:
+    marker = '<script type="application/ld+json">'
+    start = text.find(marker)
+    end = text.find("</script>", start + len(marker)) if start >= 0 else -1
+    if start < 0 or end < 0:
         fail("AI takeover guide missing JSON-LD")
     try:
-        data = json.loads(match.group(1))
+        data = json.loads(text[start + len(marker):end])
     except json.JSONDecodeError as exc:
         fail(f"AI takeover guide has invalid JSON-LD: {exc}")
     graph = data.get("@graph", [])
