@@ -1,7 +1,8 @@
 {
-  "updated_at": "2026-09-29T22:19:38.862541Z",
+  "updated_at": "2026-09-29T23:05:01.285917Z",
   "retention_days": 14,
   "max_items_per_source": 50,
+  "max_rejected_items_per_source": 20,
   "items": [
     {
       "title": "Introducing the new Copilot with Home, Code and Autopilot",
@@ -33,6 +34,71 @@
         "why_it_matters": "The important change is broader access to the announced product or capability, which can move a capability from announcement to actual workflow use. The impact depends on who receives access, where it is available, and whether the release is general availability or a limited rollout.",
         "what_to_verify": "Check eligible plans or users, regions, product surfaces, default versus opt-in status, rollout timing, usage limits, and whether any capabilities remain preview-only."
       }
+    }
+  ],
+  "rejected_items": [
+    {
+      "title": "New Microsoft data innovations unlock what only your business knows",
+      "url": "https://blogs.microsoft.com/blog/2026/09/28/new-microsoft-data-innovations-unlock-what-only-your-business-knows/",
+      "source": "Microsoft",
+      "published": "2026-09-29T06:30:04Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28,
+      "seo_quality_score": 33,
+      "seo_quality_factors": [
+        "substantive-source-summary"
+      ],
+      "summary_chars": 474,
+      "rejection_stage": "quality",
+      "rejection_reason": "seo_quality_gate",
+      "failed_checks": [
+        "quality_score_below_threshold"
+      ],
+      "first_rejected_at": "2026-09-29T23:04:59.218703Z",
+      "last_rejected_at": "2026-09-29T23:04:59.218703Z"
+    },
+    {
+      "title": "What we’ve learned from Microsoft’s own AI transformation",
+      "url": "https://blogs.microsoft.com/blog/2026/09/17/what-weve-learned-from-microsofts-own-ai-transformation/",
+      "source": "Microsoft",
+      "published": "2026-09-17T14:00:05Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28,
+      "seo_quality_score": 33,
+      "seo_quality_factors": [
+        "substantive-source-summary"
+      ],
+      "summary_chars": 445,
+      "rejection_stage": "quality",
+      "rejection_reason": "seo_quality_gate",
+      "failed_checks": [
+        "quality_score_below_threshold"
+      ],
+      "first_rejected_at": "2026-09-29T23:04:59.218703Z",
+      "last_rejected_at": "2026-09-29T23:04:59.218703Z"
+    },
+    {
+      "title": "Microsoft’s commitment for AI in education: Protecting students, strengthening learning",
+      "url": "https://blogs.microsoft.com/blog/2026/09/16/microsofts-commitment-for-ai-in-education/",
+      "source": "Microsoft",
+      "published": "2026-09-16T18:59:58Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28,
+      "seo_quality_score": 33,
+      "seo_quality_factors": [
+        "substantive-source-summary"
+      ],
+      "summary_chars": 489,
+      "rejection_stage": "quality",
+      "rejection_reason": "seo_quality_gate",
+      "failed_checks": [
+        "quality_score_below_threshold"
+      ],
+      "first_rejected_at": "2026-09-29T23:04:59.218703Z",
+      "last_rejected_at": "2026-09-29T23:04:59.218703Z"
     }
   ],
   "source_health": {
@@ -68,7 +134,7 @@
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 37,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       },
       "Google AI": {
@@ -85,7 +151,7 @@
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 5,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       },
       "Hugging Face": {
@@ -102,7 +168,7 @@
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 11,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       },
       "GitHub": {
@@ -119,7 +185,7 @@
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 23,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       },
       "Google Research": {
@@ -136,7 +202,7 @@
         "relevance_rejection_count": 34,
         "quality_rejection_count": 0,
         "publish_count": 4,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       },
       "Anthropic": {
@@ -210,7 +276,7 @@
         "relevance_rejection_count": 1,
         "quality_rejection_count": 3,
         "publish_count": 0,
-        "last_successful_fetch": "2026-09-29T22:19:37.144407Z",
+        "last_successful_fetch": "2026-09-29T23:04:59.218703Z",
         "errors": []
       }
     },
