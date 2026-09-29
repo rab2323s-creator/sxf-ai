@@ -7313,11 +7313,12 @@ def build_discovery_pages(items, current_items):
 def sitemap_entry(url, lastmod):
     return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
 
-def sitemap_image_entry(url, lastmod, image_url):
-    return (
-        f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod>"
-        f"<image:image><image:loc>{image_url}</image:loc></image:image></url>"
+def sitemap_image_entry(url, lastmod, *image_urls):
+    image_nodes = "".join(
+        f"<image:image><image:loc>{image_url}</image:loc></image:image>"
+        for image_url in image_urls
     )
+    return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod>{image_nodes}</url>"
 
 def content_lastmod(items, fallback="2026-09-26"):
     dates = []
@@ -7374,7 +7375,14 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
-        sitemap_image_entry(f"{BASE_URL}/guides/will-ai-take-over-the-world/", "2026-09-29", f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/will-ai-take-over-the-world/",
+            "2026-09-29",
+            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp",
+            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp",
+            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp",
+            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp"
+        ),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
         sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),

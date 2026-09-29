@@ -497,6 +497,9 @@ def validate_ai_takeover_guide():
     third_image = "/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp"
     if f'<img src="{third_image}"' not in text:
         fail("AI takeover guide must render its third research image")
+    fourth_image = "/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp"
+    if f'<img src="{fourth_image}"' not in text:
+        fail("AI takeover guide must render its fourth research image")
     secondary_image = "/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp"
     if f'<img src="{secondary_image}"' not in text:
         fail("AI takeover guide must render its second research image")
@@ -523,14 +526,33 @@ def validate_ai_takeover_guide():
     for schema_type in {"WebPage", "TechArticle", "ImageObject", "FAQPage", "BreadcrumbList"}:
         if schema_type not in types:
             fail(f"AI takeover guide missing schema type: {schema_type}")
+    image_objects = [entry for entry in graph if isinstance(entry, dict) and entry.get("@type") == "ImageObject"]
+    if len(image_objects) != 4:
+        fail("AI takeover guide schema must contain exactly four ImageObject nodes")
+    schema_blob = json.dumps(data, ensure_ascii=False)
+    for image_path in [
+        "/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp",
+        "/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp",
+        "/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp",
+        "/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp",
+    ]:
+        if f"https://sxf.si{image_path}" not in schema_blob:
+            fail(f"AI takeover guide schema missing image: {image_path}")
+
     guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     if '/guides/will-ai-take-over-the-world/' not in guides:
         fail("Guides index missing AI takeover guide")
     if "Will AI Take Over the World? The First 24 Hours of an AI Takeover" not in guides:
         fail("Guides index must use the full AI takeover guide title")
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
-    if "https://sxf.si/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp" not in sitemap:
-        fail("Sitemap missing AI takeover primary image")
+    for image_path in [
+        "/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp",
+        "/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp",
+        "/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp",
+        "/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp",
+    ]:
+        if f"https://sxf.si{image_path}" not in sitemap:
+            fail(f"Sitemap missing AI takeover image: {image_path}")
     if 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"' not in sitemap:
         fail("Sitemap missing Google image namespace")
     super_page = (ROOT / "superintelligence" / "index.html").read_text(encoding="utf-8")
