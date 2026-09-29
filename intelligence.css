@@ -903,3 +903,56 @@
   .ai-takeover-guide .takeover-primary-image{margin:22px 0 25px}
   .ai-takeover-guide .takeover-primary-image img{border-radius:12px}
 }
+
+/* What Is Agentic AI guide */
+.agentic-ai-guide .agentic-story{margin:26px 0;padding:27px 29px;border:1px solid rgba(200,255,77,.18);border-radius:20px;background:linear-gradient(145deg,rgba(200,255,77,.045),rgba(255,255,255,.012))}
+.agentic-ai-guide .agentic-story p{margin:0 0 14px!important;color:#a5afb9!important;font-size:15px!important;line-height:1.82!important}
+.agentic-ai-guide .agentic-story p:last-child{margin-bottom:0!important}
+.agentic-ai-guide .agentic-equation{margin:25px 0;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:15px;background:#0a0e13;font:600 15px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.agentic-ai-guide .agent-loop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0}
+.agentic-ai-guide .agent-loop article,.agentic-ai-guide .agent-use-grid article,.agentic-ai-guide .agent-future-grid article{min-width:0;padding:21px;border:1px solid var(--line);border-radius:16px;background:#0a0e13}
+.agentic-ai-guide .agent-loop span,.agentic-ai-guide .agent-use-grid span,.agentic-ai-guide .agent-future-grid span{color:var(--accent);font-size:9px;font-weight:900;letter-spacing:.11em}
+.agentic-ai-guide .agent-loop h3,.agentic-ai-guide .agent-use-grid h3,.agentic-ai-guide .agent-future-grid h3{margin:24px 0 8px;font-size:18px}
+.agentic-ai-guide .agent-loop p,.agentic-ai-guide .agent-use-grid p,.agentic-ai-guide .agent-future-grid p{margin:0!important;color:#7d8995!important;font-size:12px!important;line-height:1.68!important}
+.agentic-ai-guide .agent-use-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:28px 0}
+.agentic-ai-guide .agent-use-grid strong{display:block;margin:18px 0 6px;color:#dce4eb;font-size:11px}
+.agentic-ai-guide .agentic-ladder{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:28px 0}
+.agentic-ai-guide .agentic-ladder>div{min-width:0;padding:18px 14px;border:1px solid var(--line);border-radius:14px;background:#0a0e13}
+.agentic-ai-guide .agentic-ladder span{display:block;color:var(--accent);font:9px ui-monospace,SFMono-Regular,Menlo,monospace}
+.agentic-ai-guide .agentic-ladder strong{display:block;margin:28px 0 7px;font-size:13px}
+.agentic-ai-guide .agentic-ladder p{margin:0!important;color:#74808c!important;font-size:10.5px!important;line-height:1.55!important}
+.agentic-ai-guide .agent-limit-list{margin:28px 0;border-top:1px solid var(--line)}
+.agentic-ai-guide .agent-limit-list>div{display:grid;grid-template-columns:55px 240px minmax(0,1fr);gap:18px;padding:17px 0;border-bottom:1px solid var(--line);align-items:start}
+.agentic-ai-guide .agent-limit-list span{color:var(--accent);font:9px ui-monospace,SFMono-Regular,Menlo,monospace}
+.agentic-ai-guide .agent-limit-list strong{font-size:13px;line-height:1.5}
+.agentic-ai-guide .agent-limit-list p{margin:0!important;color:#798591!important;font-size:12px!important;line-height:1.65!important}
+.agentic-ai-guide .agent-future-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:28px 0}
+.agentic-ai-guide .guide-research-image{margin:32px 0}
+.agentic-ai-guide .guide-research-image img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:1672/941;object-fit:cover;border:1px solid rgba(255,255,255,.11);border-radius:18px;background:#080b10}
+.agentic-ai-guide .guide-research-image figcaption{margin-top:9px;color:#65717d;font-size:10px;line-height:1.55}
+@media(max-width:960px){.agentic-ai-guide .agentic-ladder{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:720px){
+  .agentic-ai-guide .agent-loop,.agentic-ai-guide .agent-use-grid,.agentic-ai-guide .agent-future-grid{grid-template-columns:1fr}
+  .agentic-ai-guide .agentic-ladder{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .agentic-ai-guide .agent-limit-list>div{grid-template-columns:44px minmax(0,1fr);gap:9px 14px}
+  .agentic-ai-guide .agent-limit-list p{grid-column:2}
+  .agentic-ai-guide .agentic-story{padding:21px;border-radius:17px}
+  .agentic-ai-guide .agentic-story p{font-size:14px!important;line-height:1.75!important}
+  .agentic-ai-guide .guide-table-wrap{overflow:visible;border:0;background:transparent}
+  .agentic-ai-guide .guide-table{display:block;width:100%;min-width:0}
+  .agentic-ai-guide .guide-table thead{display:none}
+  .agentic-ai-guide .guide-table tbody{display:grid;gap:12px}
+  .agentic-ai-guide .guide-table tr{display:block;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#0a0e13}
+  .agentic-ai-guide .guide-table th,.agentic-ai-guide .guide-table td{display:block;width:100%;min-width:0;padding:12px 14px;border-bottom:1px solid var(--line);font-size:12px;overflow-wrap:anywhere}
+  .agentic-ai-guide .guide-table th{background:#080b0f;font-size:14px}
+  .agentic-ai-guide .guide-table td:last-child{border-bottom:0}
+  .agentic-ai-guide .guide-table td[data-label]::before{content:attr(data-label);display:block;margin-bottom:4px;color:#66717e;font-size:9px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+  .agentic-ai-guide .guide-research-image{margin:24px 0}
+  .agentic-ai-guide .guide-research-image img{border-radius:14px}
+}
+@media(max-width:430px){
+  .agentic-ai-guide .agentic-ladder{grid-template-columns:1fr}
+  .agentic-ai-guide .guide-byline{grid-template-columns:1fr}
+  .agentic-ai-guide .guide-byline>div,.agentic-ai-guide .guide-byline>div+div,.agentic-ai-guide .guide-byline>div:nth-child(even){padding:13px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .agentic-ai-guide .guide-byline>div:last-child{border-bottom:0}
+}

@@ -41,6 +41,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-agent-security" / "index.html": "guides",
     ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html": "guides",
     ROOT / "guides" / "will-ai-take-over-the-world" / "index.html": "guides",
+    ROOT / "guides" / "what-is-agentic-ai" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -2660,7 +2661,7 @@ def topic_page_html(topic, items):
     elif topic["slug"] == "coding-ai":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
     elif topic["slug"] == "ai-agents":
-        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>BUILDING AGENTS</span><p>Design orchestrators, specialist agents, MCP tools, memory, verification and human approval as one production system.</p><div class="tool-links"><a href="/guides/how-to-build-ai-super-agent/">Build a super agent ↗</a></div></article><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>START HERE</span><p>Understand agentic AI, how agents actually work, real use cases, tools, memory, autonomy and the difference from chatbots.</p><div class="tool-links"><a href="/guides/what-is-agentic-ai/">Agentic AI guide ↗</a></div></article><article><span>BUILDING AGENTS</span><p>Design orchestrators, specialist agents, MCP tools, memory, verification and human approval as one production system.</p><div class="tool-links"><a href="/guides/how-to-build-ai-super-agent/">Build a super agent ↗</a></div></article><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
     return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
@@ -4716,6 +4717,7 @@ def best_ai_agents_guide_html(items):
                 <div><span>AI AGENT</span><strong>Goal → actions → observations → outcome</strong><p>Optimized for delegation. The system can continue through multiple steps, use tools and environments, and return after work has been executed.</p></div>
               </div>
               <p>The boundary is not binary. Modern products can behave like a chatbot in one mode and an agent in another. The useful test is how much responsibility the system can take for the execution loop while remaining observable and controllable.</p>
+              <p>For the underlying concept and architecture, read <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? How AI Agents Actually Work</a>: it explains the goal → plan → tool → action → observation loop and when agentic AI is meaningfully different from a chatbot or ordinary generative AI.</p>
             </section>
 
             <section class="guide-faq-section" id="faq">
@@ -5010,6 +5012,7 @@ def ai_super_agents_guide_html(items):
                 <article><span>Superintelligence</span><p>A hypothetical intelligence that substantially exceeds human capability across very broad cognitive domains.</p></article>
               </div>
               <p>A super agent may look more capable than its base model because orchestration gives it memory, tools, parallel workers and persistence. That is <strong>system-level capability amplification</strong>, not evidence that the underlying model has become superintelligent.</p>
+              <p>If the agentic layer itself is new to you, start with <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? How AI Agents Actually Work</a> for the execution loop, tools, memory, autonomy and the difference between an agent, chatbot and generative AI.</p>
               <p>For the public-facing question of where that trajectory could lead, SXF's <a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World? The First 24 Hours of an AI Takeover</a> guide tests the takeover question as a capability-and-control scenario, separating current agents from the much stronger autonomy, access and counter-control a genuine loss-of-control event would require.</p>
             </section>
 
@@ -5438,6 +5441,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/what-is-agentic-ai/",
+            "category": "Agents · Fundamentals",
+            "categories": ["agents", "research", "security"],
+            "kicker": "AGENTIC AI EXPLAINED",
+            "title": "What Is Agentic AI? How AI Agents Actually Work",
+            "description": "How AI agents plan, use tools, act, remember context and complete multi-step work—with real 2026 examples, use cases, limits and safety controls.",
+            "meta": "Agents · Tools · Memory · Autonomy",
+            "updated": "Sep 30, 2026",
+            "read_time": "32 min",
+        },
         {
             "href": "/guides/will-ai-take-over-the-world/",
             "category": "Superintelligence · Scenario",
@@ -7401,6 +7415,12 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/what-is-agentic-ai/",
+            "2026-09-30",
+            f"{BASE_URL}/guides/what-is-agentic-ai/images/how-agentic-ai-works.webp",
+            f"{BASE_URL}/guides/what-is-agentic-ai/images/agentic-ai-vs-chatbot-generative-ai.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/will-ai-take-over-the-world/",
             "2026-09-29",

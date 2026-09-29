@@ -36,6 +36,7 @@ SHELL_PAGES = [
     ROOT / "guides" / "ai-agent-security" / "index.html",
     ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html",
     ROOT / "guides" / "will-ai-take-over-the-world" / "index.html",
+    ROOT / "guides" / "what-is-agentic-ai" / "index.html",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html",
     ROOT / "guides" / "prompt-injection" / "index.html",
     ROOT / "guides" / "index.html",
@@ -465,6 +466,68 @@ def validate_super_agent_internal_links():
     for path in pages:
         if target not in path.read_text(encoding="utf-8"):
             fail(f"Missing contextual internal link to super-agent build guide: {path.relative_to(ROOT)}")
+
+
+def validate_agentic_ai_guide():
+    path = ROOT / "guides" / "what-is-agentic-ai" / "index.html"
+    if not path.exists():
+        fail("Agentic AI guide is missing")
+    text = path.read_text(encoding="utf-8")
+    required = [
+        "<h1>What Is Agentic AI?",
+        "How AI Agents Actually Work",
+        'id="definition"', 'id="how-it-works"', 'id="comparison"',
+        'id="examples"', 'id="use-cases"', 'id="multi-agent"',
+        'id="security"', 'id="evaluation"', 'id="faq"',
+        'href="/guides/best-ai-agents/"',
+        'href="/guides/ai-super-agents/"',
+        'href="/guides/ai-agent-security/"',
+        'href="/guides/how-to-build-ai-super-agent/"',
+        "Agentic AI vs generative AI",
+        "AI agent vs chatbot",
+    ]
+    for marker in required:
+        if marker not in text:
+            fail(f"Agentic AI guide missing required marker: {marker}")
+    if text.count('data-image-slot=') != 2:
+        fail("Agentic AI guide must contain exactly two research image slots")
+    for image_path in [
+        "/guides/what-is-agentic-ai/images/how-agentic-ai-works.webp",
+        "/guides/what-is-agentic-ai/images/agentic-ai-vs-chatbot-generative-ai.webp",
+    ]:
+        if f'<img src="{image_path}"' not in text:
+            fail(f"Agentic AI guide must render research image path: {image_path}")
+    marker = '<script type="application/ld+json">'
+    start = text.find(marker)
+    end = text.find("</script>", start + len(marker)) if start >= 0 else -1
+    if start < 0 or end < 0:
+        fail("Agentic AI guide missing JSON-LD")
+    try:
+        data = json.loads(text[start + len(marker):end])
+    except json.JSONDecodeError as exc:
+        fail(f"Agentic AI guide has invalid JSON-LD: {exc}")
+    graph = data.get("@graph", [])
+    types = {entry.get("@type") for entry in graph if isinstance(entry, dict)}
+    for schema_type in {"WebPage", "TechArticle", "ImageObject", "ItemList", "FAQPage", "BreadcrumbList"}:
+        if schema_type not in types:
+            fail(f"Agentic AI guide missing schema type: {schema_type}")
+    image_objects = [entry for entry in graph if isinstance(entry, dict) and entry.get("@type") == "ImageObject"]
+    if len(image_objects) != 2:
+        fail("Agentic AI guide schema must contain exactly two ImageObject nodes")
+    guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    if '/guides/what-is-agentic-ai/' not in guides or "What Is Agentic AI? How AI Agents Actually Work" not in guides:
+        fail("Guides index missing Agentic AI guide")
+    topic = (ROOT / "topics" / "ai-agents" / "index.html").read_text(encoding="utf-8")
+    if '/guides/what-is-agentic-ai/' not in topic:
+        fail("AI Agents topic page missing Agentic AI guide")
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for image_path in ["/guides/what-is-agentic-ai/images/how-agentic-ai-works.webp", "/guides/what-is-agentic-ai/images/agentic-ai-vs-chatbot-generative-ai.webp"]:
+        if f"https://sxf.si{image_path}" not in sitemap:
+            fail(f"Sitemap missing Agentic AI image: {image_path}")
+    best_agents = (ROOT / "guides" / "best-ai-agents" / "index.html").read_text(encoding="utf-8")
+    super_agents = (ROOT / "guides" / "ai-super-agents" / "index.html").read_text(encoding="utf-8")
+    if '/guides/what-is-agentic-ai/' not in best_agents or '/guides/what-is-agentic-ai/' not in super_agents:
+        fail("Generated agent guides missing contextual links to Agentic AI guide")
 
 
 def validate_ai_takeover_guide():
@@ -1289,6 +1352,7 @@ def main():
     validate_model_pricing_catalog()
     validate_model_history()
     validate_super_agent_internal_links()
+    validate_agentic_ai_guide()
     validate_ai_takeover_guide()
     validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
