@@ -980,6 +980,7 @@ def validate_source_expansion(news, archive):
         SOURCE_LIFECYCLE_VERSION,
         SOURCE_SHADOW_PATH,
         SHADOW_MAX_ITEMS_PER_SOURCE,
+        SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE,
         SOURCE_EXPANSION_NAMES,
         SOURCE_EXPANSION_VERSION,
         SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE,
@@ -1140,6 +1141,11 @@ def validate_source_expansion(news, archive):
     shadow_items = shadow.get("items")
     if not isinstance(shadow_items, list):
         fail("source-shadow items must be a list")
+    rejected_items = shadow.get("rejected_items")
+    if not isinstance(rejected_items, list):
+        fail("source-shadow rejected_items must be a list")
+    if shadow.get("max_rejected_items_per_source") != SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE:
+        fail("source-shadow rejection cap metadata drift")
     from update_news import parse_date, SHADOW_RETENTION_DAYS
     shadow_cutoff = datetime.now(timezone.utc) - timedelta(days=SHADOW_RETENTION_DAYS)
     shadow_counts = {}
@@ -1158,6 +1164,32 @@ def validate_source_expansion(news, archive):
     for name, count in shadow_counts.items():
         if count > SHADOW_MAX_ITEMS_PER_SOURCE:
             fail(f"{name}: shadow retention cap exceeded")
+    accepted_shadow_urls = {item.get("url") for item in shadow_items}
+    rejected_counts = {}
+    for item in rejected_items:
+        name = item.get("source")
+        config = SOURCE_BY_NAME.get(name)
+        if not config or config.get("status") != "shadow":
+            fail(f"source-shadow rejected_items contains non-shadow source: {name}")
+        if item.get("rejection_stage") != "quality" or item.get("rejection_reason") != "seo_quality_gate":
+            fail(f"{name}: shadow rejection audit has invalid rejection metadata")
+        if not isinstance(item.get("failed_checks"), list) or not item["failed_checks"]:
+            fail(f"{name}: shadow rejection audit missing failed_checks")
+        published = parse_date(item.get("published", ""))
+        if published is None or published < shadow_cutoff:
+            fail(f"{name}: rejected shadow item outside retention window")
+        if item.get("url") in production_urls:
+            fail(f"{name}: rejected shadow candidate leaked into production archive")
+        if item.get("url") in accepted_shadow_urls:
+            fail(f"{name}: URL appears in both accepted and rejected shadow sets")
+        if not isinstance(item.get("seo_quality_score"), int):
+            fail(f"{name}: rejected shadow audit missing seo_quality_score")
+        if not isinstance(item.get("summary_chars"), int):
+            fail(f"{name}: rejected shadow audit missing summary_chars")
+        rejected_counts[name] = rejected_counts.get(name, 0) + 1
+    for name, count in rejected_counts.items():
+        if count > SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE:
+            fail(f"{name}: shadow rejection audit cap exceeded")
 
     google_research = SOURCE_BY_NAME["Google Research"]
     if source_accepts_item(
