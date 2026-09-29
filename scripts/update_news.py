@@ -48,6 +48,7 @@ STATIC_SHELL_PAGES = {
 SOURCE_STATUSES = {"shadow", "canary", "live", "disabled"}
 SHADOW_RETENTION_DAYS = 14
 SHADOW_MAX_ITEMS_PER_SOURCE = 50
+SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE = 20
 
 def load_source_registry():
     data = json.loads(SOURCE_CONFIG_PATH.read_text(encoding="utf-8"))
@@ -2145,6 +2146,31 @@ def seo_signal_eligible(item, quality_score=None):
     if quality_score is None:
         quality_score, _ = seo_quality(item)
     return quality_score >= SEO_MIN_QUALITY_SCORE
+
+def shadow_quality_rejection_record(item, observed_at):
+    summary_chars = len(clean_summary(item.get("summary", "")))
+    failed_checks = []
+    if summary_chars < SEO_MIN_SUMMARY_CHARS:
+        failed_checks.append("summary_too_short")
+    if item.get("seo_quality_score", 0) < SEO_MIN_QUALITY_SCORE:
+        failed_checks.append("quality_score_below_threshold")
+    return {
+        "title": item["title"],
+        "url": item["url"],
+        "source": item["source"],
+        "published": item["published"],
+        "category": item["category"],
+        "tags": item.get("tags", []),
+        "signal_score": item.get("signal_score", 0),
+        "seo_quality_score": item.get("seo_quality_score", 0),
+        "seo_quality_factors": item.get("seo_quality_factors", []),
+        "summary_chars": summary_chars,
+        "rejection_stage": "quality",
+        "rejection_reason": "seo_quality_gate",
+        "failed_checks": failed_checks,
+        "first_rejected_at": observed_at,
+        "last_rejected_at": observed_at,
+    }
 
 def model_page_indexable(name, items):
     substantive = [item for item in items if len(clean_summary(item.get("summary", ""))) >= SEO_MIN_SUMMARY_CHARS]
@@ -7452,6 +7478,7 @@ def main():
     errors = []
     source_metrics = {}
     shadow_candidates = []
+    shadow_rejections = []
     now = datetime.now(timezone.utc)
 
     for source_config in SOURCE_CONFIGS:
@@ -7509,10 +7536,15 @@ def main():
             if status == "shadow":
                 prepared_shadow = prepare_items(fresh_candidates)
                 accepted_shadow = [item for item in prepared_shadow if item.get("seo_eligible")]
-                metrics["quality_rejection_count"] = len(prepared_shadow) - len(accepted_shadow)
+                rejected_shadow = [item for item in prepared_shadow if not item.get("seo_eligible")]
+                metrics["quality_rejection_count"] = len(rejected_shadow)
                 metrics["quality_accepted_count"] = len(accepted_shadow)
                 metrics["accepted_candidate_count"] = len(accepted_shadow)
                 shadow_candidates.extend(accepted_shadow)
+                shadow_rejections.extend(
+                    shadow_quality_rejection_record(item, now.isoformat().replace("+00:00", "Z"))
+                    for item in rejected_shadow
+                )
             else:
                 metrics["quality_accepted_count"] = len(fresh_candidates)
                 metrics["accepted_candidate_count"] = len(fresh_candidates)
@@ -7564,7 +7596,14 @@ def main():
             source_metrics[name]["publish_count"] = count
 
     shadow_cutoff = now - timedelta(days=SHADOW_RETENTION_DAYS)
-    previous_shadow = load_items(SOURCE_SHADOW_PATH)
+    previous_shadow_payload = {}
+    if SOURCE_SHADOW_PATH.exists():
+        try:
+            previous_shadow_payload = json.loads(SOURCE_SHADOW_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            previous_shadow_payload = {}
+    previous_shadow = previous_shadow_payload.get("items", []) if isinstance(previous_shadow_payload, dict) else []
+    previous_rejections = previous_shadow_payload.get("rejected_items", []) if isinstance(previous_shadow_payload, dict) else []
     retained_shadow = [
         item for item in previous_shadow
         if parse_date(item.get("published", "")) is not None
@@ -7587,6 +7626,36 @@ def main():
         bounded_shadow.append(item)
         per_source_shadow_counts[source] = per_source_shadow_counts.get(source, 0) + 1
 
+    rejection_by_url = {}
+    for item in previous_rejections:
+        published = parse_date(item.get("published", ""))
+        if published is None or published < shadow_cutoff:
+            continue
+        if SOURCE_BY_NAME.get(item.get("source"), {}).get("status") != "shadow":
+            continue
+        rejection_by_url[item.get("url")] = item
+    for item in shadow_rejections:
+        previous = rejection_by_url.get(item["url"])
+        if previous:
+            item["first_rejected_at"] = previous.get("first_rejected_at", item["first_rejected_at"])
+        rejection_by_url[item["url"]] = item
+
+    accepted_shadow_urls = {item.get("url") for item in bounded_shadow}
+    bounded_rejections = []
+    per_source_rejection_counts = {}
+    for item in sorted(
+        rejection_by_url.values(),
+        key=lambda row: parse_date(row.get("published", "")) or datetime.min.replace(tzinfo=timezone.utc),
+        reverse=True,
+    ):
+        source = item.get("source")
+        if item.get("url") in accepted_shadow_urls:
+            continue
+        if per_source_rejection_counts.get(source, 0) >= SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE:
+            continue
+        bounded_rejections.append(item)
+        per_source_rejection_counts[source] = per_source_rejection_counts.get(source, 0) + 1
+
     source_health = {
         "configured": len(SOURCE_CONFIGS),
         "publishing_configured": len(SOURCES),
@@ -7602,7 +7671,9 @@ def main():
         "updated_at": now_iso,
         "retention_days": SHADOW_RETENTION_DAYS,
         "max_items_per_source": SHADOW_MAX_ITEMS_PER_SOURCE,
+        "max_rejected_items_per_source": SHADOW_REJECTED_MAX_ITEMS_PER_SOURCE,
         "items": bounded_shadow,
+        "rejected_items": bounded_rejections,
         "source_health": source_health,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     ARCHIVE_OUT.write_text(json.dumps({
