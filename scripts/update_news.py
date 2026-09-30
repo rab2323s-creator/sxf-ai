@@ -42,6 +42,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "how-to-build-ai-super-agent" / "index.html": "guides",
     ROOT / "guides" / "will-ai-take-over-the-world" / "index.html": "guides",
     ROOT / "guides" / "what-is-agentic-ai" / "index.html": "guides",
+    ROOT / "guides" / "can-ai-become-conscious" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5167,7 +5168,7 @@ def ai_super_agents_guide_html(items):
 
 def superintelligence_index_html(items, current_items):
     canonical = f"{BASE_URL}/superintelligence/"
-    verified = "2026-09-26"
+    verified = "2026-09-30"
     title = "Superintelligence (ASI): What It Is, AGI vs ASI, Risks & Latest Research | SXF / AI"
     description = "A living guide to artificial superintelligence (ASI): definition, AGI vs ASI, paths to superintelligence, capabilities, recursive self-improvement, risks, control and research."
 
@@ -5244,6 +5245,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
+        ("/guides/can-ai-become-conscious/","AI CONSCIOUSNESS","Can AI Become Conscious? Sentience, Self-Awareness & How We Would Know","A science-first guide to machine consciousness, sentience, self-awareness and the evidence that would distinguish experience from simulation."),
         ("/guides/will-ai-take-over-the-world/","AI TAKEOVER","Will AI Take Over the World? The First 24 Hours of an AI Takeover","A first-24-hours thought experiment that separates current AI capability from AGI, superintelligence and genuine loss of control."),
         ("/guides/ai-super-agents/","SUPER AGENTS","AI Super Agents in 2026","How higher-level agent orchestrators differ from ordinary agents, multi-agent systems, AGI and superintelligence."),
         ("/guides/best-ai-agents/","AGENTIC AI","Best AI Agents in 2026","Today's deployed work, research, coding and automation agents—the layer below the ASI question."),
@@ -5441,6 +5443,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/can-ai-become-conscious/",
+            "category": "Superintelligence · Consciousness",
+            "categories": ["superintelligence", "research"],
+            "kicker": "AI CONSCIOUSNESS",
+            "title": "Can AI Become Conscious? Sentience, Self-Awareness & How We Would Know",
+            "description": "A science-first guide to AI consciousness, sentience, self-awareness, machine consciousness tests, AGI and the evidence that would actually matter.",
+            "meta": "Consciousness · Sentience · AGI · Evidence",
+            "updated": "Sep 30, 2026",
+            "read_time": "29 min",
+        },
         {
             "href": "/guides/what-is-agentic-ai/",
             "category": "Agents · Fundamentals",
@@ -7379,7 +7392,7 @@ def update_sitemap(items):
         item for item in items
         if item["category"] == "Models" or extract_models(item["title"])
     ]
-    guide_lastmod = content_lastmod(items[:6], "2026-09-26")
+    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-09-30")
     gpt6_compare_items = [
         item for item in items
         if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
@@ -7402,7 +7415,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
-        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-26"),
+        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-30"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/models/claude-fable-5-1/", "2026-09-01"),
         sitemap_entry(f"{BASE_URL}/models/gemini-3-8-flash/", "2026-09-02"),
@@ -7415,6 +7428,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/can-ai-become-conscious/",
+            "2026-09-30",
+            f"{BASE_URL}/guides/can-ai-become-conscious/images/ai-consciousness-evidence-ladder.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/what-is-agentic-ai/",
             "2026-09-30",
