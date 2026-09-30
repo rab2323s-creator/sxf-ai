@@ -44,6 +44,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "what-is-agentic-ai" / "index.html": "guides",
     ROOT / "guides" / "can-ai-become-conscious" / "index.html": "guides",
     ROOT / "guides" / "ai-deception-alignment-faking" / "index.html": "guides",
+    ROOT / "guides" / "ai-shutdown-resistance" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5246,6 +5247,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
+        ("/guides/ai-shutdown-resistance/","AI SHUTDOWN","AI Shutdown Resistance: Why Would an AI Resist Being Turned Off?","Self-preservation, power-seeking, instrumental convergence, corrigibility and the strongest evidence from frontier-model shutdown experiments."),
         ("/guides/ai-deception-alignment-faking/","AI DECEPTION","AI Deception & Alignment Faking: Can AI Hide Its True Goals?","Scheming, sandbagging, reward hacking and alignment faking—how to distinguish ordinary model errors from strategic deception."),
         ("/guides/can-ai-become-conscious/","AI CONSCIOUSNESS","Can AI Become Conscious? Sentience, Self-Awareness & How We Would Know","A science-first guide to machine consciousness, sentience, self-awareness and the evidence that would distinguish experience from simulation."),
         ("/guides/will-ai-take-over-the-world/","AI TAKEOVER","Will AI Take Over the World? The First 24 Hours of an AI Takeover","A first-24-hours thought experiment that separates current AI capability from AGI, superintelligence and genuine loss of control."),
@@ -5445,6 +5447,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/ai-shutdown-resistance/",
+            "category": "Superintelligence · Control",
+            "categories": ["superintelligence", "research", "security", "agents"],
+            "kicker": "AI SHUTDOWN RESISTANCE",
+            "title": "AI Shutdown Resistance: Why Would an AI Resist Being Turned Off?",
+            "description": "Why an AI may resist shutdown without fear or consciousness—plus self-preservation, power-seeking, instrumental convergence, corrigibility and 2026 experimental evidence.",
+            "meta": "Shutdown · Self-preservation · Power-seeking · Corrigibility",
+            "updated": "Sep 30, 2026",
+            "read_time": "36 min",
+        },
         {
             "href": "/guides/ai-deception-alignment-faking/",
             "category": "Superintelligence · Alignment",
@@ -7441,6 +7454,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/ai-shutdown-resistance/",
+            "2026-09-30",
+            f"{BASE_URL}/guides/ai-shutdown-resistance/images/ai-shutdown-resistance-instrumental-convergence.webp"
+        ),
         sitemap_entry(
             f"{BASE_URL}/guides/ai-deception-alignment-faking/",
             "2026-09-30"
