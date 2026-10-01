@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">AI Agent Reliability Framework</title>
+<desc id="desc">A dark research infographic showing the path from capability to consistency, robustness, predictability and safety.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06080d"/><stop offset="1" stop-color="#101723"/></linearGradient>
+  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#69f0d1"/><stop offset=".5" stop-color="#85a8ff"/><stop offset="1" stop-color="#d996ff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<g opacity=".18" stroke="#8ba2c7"><path d="M0 115H1600M0 225H1600M0 335H1600M0 445H1600M0 555H1600M0 665H1600M0 775H1600"/><path d="M180 0V900M400 0V900M620 0V900M840 0V900M1060 0V900M1280 0V900M1500 0V900"/></g>
+<text x="105" y="120" fill="#8ff5da" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="700" letter-spacing="5">SXF / AI · RESEARCH FRAMEWORK · 2026</text>
+<text x="105" y="205" fill="#f6f8ff" font-family="Arial,Helvetica,sans-serif" font-size="62" font-weight="800">AI AGENT RELIABILITY</text>
+<text x="105" y="258" fill="#aab6cc" font-family="Arial,Helvetica,sans-serif" font-size="28">A strong benchmark score is capability. Reliability is what happens when the world stops cooperating.</text>
+
+<path d="M155 520 C330 380, 500 640, 685 500 S1030 385, 1245 515 S1425 455, 1490 440" fill="none" stroke="url(#line)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+<g font-family="Arial,Helvetica,sans-serif">
+  <g transform="translate(165 520)"><circle r="54" fill="#0b1620" stroke="#69f0d1" stroke-width="4"/><text y="8" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">01</text><text x="-62" y="105" fill="#f7f9ff" font-size="25" font-weight="800">CAPABILITY</text><text x="-62" y="140" fill="#aab6cc" font-size="18">Can it succeed?</text></g>
+  <g transform="translate(490 505)"><circle r="54" fill="#0d1421" stroke="#76d9ec" stroke-width="4"/><text y="8" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">02</text><text x="-70" y="-95" fill="#f7f9ff" font-size="25" font-weight="800">CONSISTENCY</text><text x="-70" y="-62" fill="#aab6cc" font-size="18">Can it repeat success?</text></g>
+  <g transform="translate(800 470)"><circle r="54" fill="#0d1322" stroke="#85a8ff" stroke-width="4"/><text y="8" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">03</text><text x="-72" y="115" fill="#f7f9ff" font-size="25" font-weight="800">ROBUSTNESS</text><text x="-72" y="150" fill="#aab6cc" font-size="18">Does it survive change?</text></g>
+  <g transform="translate(1115 455)"><circle r="54" fill="#111224" stroke="#ac91ff" stroke-width="4"/><text y="8" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">04</text><text x="-78" y="-105" fill="#f7f9ff" font-size="25" font-weight="800">PREDICTABILITY</text><text x="-78" y="-72" fill="#aab6cc" font-size="18">Can it know when to stop?</text></g>
+  <g transform="translate(1428 460)"><circle r="54" fill="#161124" stroke="#d996ff" stroke-width="4"/><text y="8" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">05</text><text x="-142" y="120" fill="#f7f9ff" font-size="25" font-weight="800">SAFETY</text><text x="-142" y="155" fill="#aab6cc" font-size="18">Are failures bounded?</text></g>
+</g>
+<rect x="105" y="760" width="1390" height="2" fill="url(#line)" opacity=".75"/>
+<text x="105" y="820" fill="#f4f6ff" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700">THE SXF 12-METRIC FIELD GUIDE</text>
+<text x="1495" y="820" text-anchor="end" fill="#8f9bb2" font-family="Arial,Helvetica,sans-serif" font-size="20">Repeat · perturb · break · observe · contain</text>
+</svg>
