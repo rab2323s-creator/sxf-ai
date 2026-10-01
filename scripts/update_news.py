@@ -46,6 +46,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-deception-alignment-faking" / "index.html": "guides",
     ROOT / "guides" / "ai-shutdown-resistance" / "index.html": "guides",
     ROOT / "guides" / "can-ai-replicate-itself" / "index.html": "guides",
+    ROOT / "guides" / "ai-agent-collusion-secret-communication" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5248,6 +5249,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
+        ("/guides/ai-agent-collusion-secret-communication/","AI COLLUSION","Can AI Agents Secretly Communicate? Steganography, Collusion & Covert Channels","A research-first guide to hidden AI-to-AI communication, steganography, covert channels, tool-using agents and multi-agent oversight."),
         ("/guides/can-ai-replicate-itself/","AI SELF-REPLICATION","Can AI Replicate Itself? Autonomous Replication, Self-Exfiltration & Model Escape","A research-first map of model copying, self-exfiltration, escape, persistence and recursive replication across real infrastructure."),
         ("/guides/ai-shutdown-resistance/","AI SHUTDOWN","AI Shutdown Resistance: Why Would an AI Resist Being Turned Off?","Self-preservation, power-seeking, instrumental convergence, corrigibility and the strongest evidence from frontier-model shutdown experiments."),
         ("/guides/ai-deception-alignment-faking/","AI DECEPTION","AI Deception & Alignment Faking: Can AI Hide Its True Goals?","Scheming, sandbagging, reward hacking and alignment faking—how to distinguish ordinary model errors from strategic deception."),
@@ -5449,6 +5451,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/ai-agent-collusion-secret-communication/",
+            "category": "Agents · Security · Research",
+            "categories": ["agents", "security", "research", "superintelligence"],
+            "kicker": "AI AGENT COLLUSION",
+            "title": "Can AI Agents Secretly Communicate? Steganography, Collusion & Covert Channels",
+            "description": "How AI agents can hide information inside ordinary-looking messages—plus steganography, covert channels, tool use, monitoring limits and 2026 research.",
+            "meta": "Collusion · Steganography · Covert channels · Monitoring",
+            "updated": "Oct 1, 2026",
+            "read_time": "37 min",
+        },
         {
             "href": "/guides/can-ai-replicate-itself/",
             "category": "Superintelligence · Frontier Autonomy",
@@ -7467,6 +7480,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/ai-agent-collusion-secret-communication/",
+            "2026-10-01",
+            f"{BASE_URL}/guides/ai-agent-collusion-secret-communication/images/ai-agent-secret-collusion-steganography.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/can-ai-replicate-itself/",
             "2026-10-01",
