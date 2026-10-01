@@ -45,6 +45,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "can-ai-become-conscious" / "index.html": "guides",
     ROOT / "guides" / "ai-deception-alignment-faking" / "index.html": "guides",
     ROOT / "guides" / "ai-shutdown-resistance" / "index.html": "guides",
+    ROOT / "guides" / "can-ai-replicate-itself" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5247,6 +5248,7 @@ def superintelligence_index_html(items, current_items):
     )
 
     deep_guides = [
+        ("/guides/can-ai-replicate-itself/","AI SELF-REPLICATION","Can AI Replicate Itself? Autonomous Replication, Self-Exfiltration & Model Escape","A research-first map of model copying, self-exfiltration, escape, persistence and recursive replication across real infrastructure."),
         ("/guides/ai-shutdown-resistance/","AI SHUTDOWN","AI Shutdown Resistance: Why Would an AI Resist Being Turned Off?","Self-preservation, power-seeking, instrumental convergence, corrigibility and the strongest evidence from frontier-model shutdown experiments."),
         ("/guides/ai-deception-alignment-faking/","AI DECEPTION","AI Deception & Alignment Faking: Can AI Hide Its True Goals?","Scheming, sandbagging, reward hacking and alignment faking—how to distinguish ordinary model errors from strategic deception."),
         ("/guides/can-ai-become-conscious/","AI CONSCIOUSNESS","Can AI Become Conscious? Sentience, Self-Awareness & How We Would Know","A science-first guide to machine consciousness, sentience, self-awareness and the evidence that would distinguish experience from simulation."),
@@ -5447,6 +5449,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/can-ai-replicate-itself/",
+            "category": "Superintelligence · Frontier Autonomy",
+            "categories": ["superintelligence", "research", "security", "agents", "open-source"],
+            "kicker": "AI SELF-REPLICATION",
+            "title": "Can AI Replicate Itself? Autonomous Replication, Self-Exfiltration & Model Escape",
+            "description": "What it actually takes for AI to copy itself: compute, weights, escape, deployment, persistence, recursive chain replication and the strongest 2026 evidence.",
+            "meta": "Self-replication · Model escape · Persistence · ARA",
+            "updated": "Oct 1, 2026",
+            "read_time": "38 min",
+        },
         {
             "href": "/guides/ai-shutdown-resistance/",
             "category": "Superintelligence · Control",
@@ -7418,7 +7431,7 @@ def update_sitemap(items):
         item for item in items
         if item["category"] == "Models" or extract_models(item["title"])
     ]
-    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-09-30")
+    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-01")
     gpt6_compare_items = [
         item for item in items
         if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
@@ -7441,7 +7454,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
-        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-09-30"),
+        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/models/claude-fable-5-1/", "2026-09-01"),
         sitemap_entry(f"{BASE_URL}/models/gemini-3-8-flash/", "2026-09-02"),
@@ -7454,6 +7467,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/can-ai-replicate-itself/",
+            "2026-10-01",
+            f"{BASE_URL}/guides/can-ai-replicate-itself/images/ai-self-replication-model-escape-map.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/ai-shutdown-resistance/",
             "2026-09-30",
