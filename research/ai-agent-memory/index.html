@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>AI Agent Memory in 2026: How Agents Remember, Forget & Act | SXF / AI</title>
+<meta name="description" content="How does AI agent memory work? A research-backed 2026 guide to long-term memory, context vs RAG, episodic and semantic memory, retrieval, forgetting, benchmarks and production design." />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="theme-color" content="#07090d" />
+<link rel="canonical" href="https://sxf.si/research/ai-agent-memory/" />
+<link rel="alternate" hreflang="en" href="https://sxf.si/research/ai-agent-memory/" />
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/research/ai-agent-memory/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="SXF / AI" />
+<meta property="og:title" content="AI Agent Memory in 2026: How Agents Remember, Forget & Act" />
+<meta property="og:description" content="Context is not memory. RAG is not memory by itself. This research guide explains how persistent agent memory is written, retrieved, applied, revised and forgotten." />
+<meta property="og:url" content="https://sxf.si/research/ai-agent-memory/" />
+<meta property="og:image" content="https://sxf.si/research/ai-agent-memory/images/ai-agent-memory-loop.svg" />
+<meta property="og:image:width" content="1672" />
+<meta property="og:image:height" content="941" />
+<meta property="og:image:alt" content="The SXF AI Agent Memory Loop: observe, select, store, consolidate, retrieve, act and forget" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Agent Memory in 2026: How Agents Remember, Forget & Act" />
+<meta name="twitter:description" content="A research-backed field guide to long-term AI agent memory, retrieval, forgetting and memory-driven action." />
+<meta name="twitter:image" content="https://sxf.si/research/ai-agent-memory/images/ai-agent-memory-loop.svg" />
+<meta name="twitter:image:alt" content="The SXF AI Agent Memory Loop" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://sxf.si/research/ai-agent-memory/#webpage","url":"https://sxf.si/research/ai-agent-memory/","name":"AI Agent Memory in 2026: How Agents Remember, Forget & Act","description":"A research-backed guide to long-term AI agent memory, context, RAG, retrieval, forgetting, benchmarks and production design.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/research/ai-agent-memory/#article"},"primaryImageOfPage":{"@id":"https://sxf.si/research/ai-agent-memory/#image"},"breadcrumb":{"@id":"https://sxf.si/research/ai-agent-memory/#breadcrumb"},"inLanguage":"en"},
+{"@type":"TechArticle","@id":"https://sxf.si/research/ai-agent-memory/#article","url":"https://sxf.si/research/ai-agent-memory/","mainEntityOfPage":{"@id":"https://sxf.si/research/ai-agent-memory/#webpage"},"headline":"AI Agent Memory in 2026: How Agents Remember, Forget & Act","alternativeHeadline":"How Does AI Agent Memory Work? Long-Term Memory, Context, RAG and What Agents Forget","description":"A research-backed 2026 guide to long-term AI agent memory, context vs RAG, memory types, retrieval, forgetting, evaluation and production architecture.","image":{"@id":"https://sxf.si/research/ai-agent-memory/#image"},"thumbnailUrl":"https://sxf.si/research/ai-agent-memory/images/ai-agent-memory-loop.svg","datePublished":"2026-10-01","dateModified":"2026-10-01","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Research","keywords":["AI agent memory","long-term memory AI agents","AI memory","agent memory architecture","context window vs memory","RAG vs memory","episodic memory AI","semantic memory AI","procedural memory AI","AI agent memory benchmark","persistent AI agents","agent memory 2026"],"citation":["https://proceedings.mlr.press/v306/zhao26bs.html","https://proceedings.mlr.press/v306/he26am.html","https://aclanthology.org/2026.acl-long.370/","https://aclanthology.org/2026.acl-long.981/","https://aclanthology.org/2026.acl-long.27/","https://aclanthology.org/2026.findings-acl.2069/","https://aclanthology.org/2026.findings-acl.250/","https://proceedings.mlr.press/v306/ai26e.html","https://arxiv.org/abs/2605.12493"],"inLanguage":"en"},
+{"@type":"ImageObject","@id":"https://sxf.si/research/ai-agent-memory/#image","url":"https://sxf.si/research/ai-agent-memory/images/ai-agent-memory-loop.svg","contentUrl":"https://sxf.si/research/ai-agent-memory/images/ai-agent-memory-loop.svg","width":1672,"height":941,"name":"The SXF AI Agent Memory Loop","caption":"Observe, select, store, consolidate, retrieve, act and forget: the seven operations that turn persistent storage into useful agent memory.","representativeOfPage":true,"inLanguage":"en"},
+{"@type":"BreadcrumbList","@id":"https://sxf.si/research/ai-agent-memory/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://sxf.si/research/"},{"@type":"ListItem","position":3,"name":"AI Agent Memory","item":"https://sxf.si/research/ai-agent-memory/"}]},
+{"@type":"FAQPage","@id":"https://sxf.si/research/ai-agent-memory/#faq","mainEntity":[
+{"@type":"Question","name":"What is AI agent memory?","acceptedAnswer":{"@type":"Answer","text":"AI agent memory is the system that preserves useful state across steps, tasks or sessions and makes selected information available when it can improve a later decision or action. It can include recent task state, past experiences, factual knowledge, preferences and learned workflows."}},
+{"@type":"Question","name":"Is a context window the same as AI agent memory?","acceptedAnswer":{"@type":"Answer","text":"No. The context window is the information a model can access during a model call or session. Persistent agent memory is external or managed state that can survive beyond that window and be selectively written, retrieved, revised or deleted."}},
+{"@type":"Question","name":"Is RAG the same as AI agent memory?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. RAG is a retrieval technique that brings relevant external information into context. Agent memory also requires decisions about what to write, how memories evolve, when to retrieve them, how they influence action, and when to revise or forget them."}},
+{"@type":"Question","name":"What are the main types of AI agent memory?","acceptedAnswer":{"@type":"Answer","text":"A useful operational classification is working memory for current task state, episodic memory for past events and trajectories, semantic memory for facts and stable knowledge, and procedural memory for workflows, skills and reusable action patterns."}},
+{"@type":"Question","name":"Why do AI agents need long-term memory if models have large context windows?","acceptedAnswer":{"@type":"Answer","text":"Large context windows help with information available now, but persistent agents still need selective storage across sessions, efficient retrieval from much larger histories, revision of stale information, explicit forgetting and a way to turn prior experience into future behavior without replaying everything."}},
+{"@type":"Question","name":"How do you evaluate AI agent memory?","acceptedAnswer":{"@type":"Answer","text":"Test whether the agent stores the right information, retrieves the right evidence, maintains temporal and causal relationships, applies memory to future actions, handles contradictions and stale state, and remains efficient as memory grows. Benchmarks such as AMA-Bench, MemoryArena, Mem2ActBench and LongMemEval-V2 test different parts of this problem."}},
+{"@type":"Question","name":"Can AI agent memory become harmful?","acceptedAnswer":{"@type":"Answer","text":"Yes. Incorrect, stale, adversarial or over-broad memories can propagate errors into later tasks. Memory systems need provenance, write controls, revision, deletion, privacy boundaries and retrieval policies that do not automatically treat every stored item as trusted instruction."}},
+{"@type":"Question","name":"Should an AI agent remember everything?","acceptedAnswer":{"@type":"Answer","text":"No. Storing everything creates noise, cost, privacy risk and retrieval conflicts. A strong memory system filters what is worth keeping, consolidates repeated information, expires or deletes low-value state, and preserves provenance for important memories."}}
+]}]}
+</script>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/intelligence.css" />
+<style>
+.memory-page .guide-article-hero h1 span{color:#7df2d0}
+.memory-feature{margin-top:34px}.memory-feature-frame{border:1px solid rgba(125,242,208,.25);border-radius:22px;overflow:hidden;background:#090d14;box-shadow:0 30px 80px rgba(0,0,0,.3)}.memory-feature img{display:block;width:100%;height:auto}.memory-feature figcaption{color:#8f9bb2;font-size:.92rem;line-height:1.6;margin-top:12px}
+.memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}.memory-card{border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:20px;background:rgba(255,255,255,.025)}.memory-card span{font-size:.72rem;letter-spacing:.12em;color:#7df2d0}.memory-card h3{margin:8px 0}.memory-card p{margin:0}
+.memory-loop{display:grid;gap:10px;margin:24px 0}.memory-step{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:17px 18px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.022)}.memory-step>span{font-size:1.15rem;color:#7df2d0;font-weight:800}.memory-step h3{margin:0 0 6px}.memory-step p{margin:0}
+.memory-note{padding:18px 20px;border-left:3px solid #7df2d0;background:rgba(125,242,208,.055);border-radius:0 14px 14px 0;margin:24px 0}.memory-note strong{display:block;margin-bottom:6px}
+.memory-compare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}.memory-compare article{border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:18px}.memory-compare span{font-size:.72rem;letter-spacing:.12em;color:#7df2d0}.memory-compare h3{margin:8px 0}
+@media(max-width:820px){.memory-grid,.memory-compare{grid-template-columns:1fr}.memory-step{grid-template-columns:44px 1fr}}
+</style>
+</head>
+<body class="intel-page guide-article-page memory-page">
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/" aria-current="page">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+
+<main><article>
+<header class="guide-article-hero shell">
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/research/">Research</a><span>/</span><span>AI Agent Memory</span></nav>
+<p class="eyebrow">SXF RESEARCH / AGENT MEMORY</p>
+<h1>AI Agent Memory in 2026:<br><span>How Agents Remember, Forget & Act</span></h1>
+<p class="guide-deck">AI agents become genuinely persistent only when they can carry useful state across time. But memory is not “save the chat,” and a million-token context window does not solve the problem. This research guide explains the full memory system: what an agent should remember, how memories are stored and retrieved, how experience changes future actions, why stale memories can make agents worse, and why deliberate forgetting is part of intelligence—not a defect.</p>
+<div class="guide-byline">
+<div><span>Published</span><strong>October 1, 2026</strong></div>
+<div><span>Last verified</span><strong>October 1, 2026</strong></div>
+<div><span>Reading time</span><strong>34 min</strong></div>
+<div><span>Method</span><strong>Research synthesis</strong></div>
+</div>
+</header>
+
+<figure class="memory-feature shell">
+<div class="memory-feature-frame"><img src="/research/ai-agent-memory/images/ai-agent-memory-loop.svg" alt="The SXF AI Agent Memory Loop showing observe, select, store, consolidate, retrieve, act and forget" width="1672" height="941" loading="eager" decoding="async" /></div>
+<figcaption>The SXF AI Agent Memory Loop: useful memory is an active lifecycle. The agent must select what matters, preserve provenance, consolidate experience, retrieve the right state, use it in action—and deliberately revise or forget what no longer belongs.</figcaption>
+</figure>
+
+<section class="guide-answer shell" id="quick-answer">
+<div class="guide-answer-label">QUICK ANSWER</div>
+<div><h2>AI agent memory is not a bigger prompt. It is a managed system for preserving, retrieving, applying, revising and forgetting state across time.</h2>
+<p>A model's context window tells it what it can see <em>now</em>. A persistent agent needs more: a write policy that decides what is worth remembering, stores that preserve facts and experiences beyond one session, retrieval that returns the right memory at the right time, mechanisms that resolve contradiction and staleness, and an action loop that actually uses memory to behave differently. Research in 2026 increasingly evaluates this complete cycle. AMA-Bench tests long-horizon agent trajectories, MemoryArena couples memory to multi-session action, Mem2ActBench asks whether remembered information changes tool use, and LongMemEval-V2 tests whether agents internalize environment-specific experience.</p></div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc"><span>IN THIS RESEARCH GUIDE</span>
+<a href="#what-is-memory">What is agent memory?</a>
+<a href="#context-rag-memory">Context vs RAG vs memory</a>
+<a href="#memory-types">Four memory roles</a>
+<a href="#memory-loop">The SXF Memory Loop</a>
+<a href="#what-to-store">What should agents remember?</a>
+<a href="#consolidation">From storage to experience</a>
+<a href="#retrieval">How retrieval works</a>
+<a href="#memory-to-action">When memory changes action</a>
+<a href="#forgetting">Why agents must forget</a>
+<a href="#failure-modes">Memory failure modes</a>
+<a href="#benchmarks">Agent memory benchmarks</a>
+<a href="#architecture">Production architecture</a>
+<a href="#evaluation">How to evaluate memory</a>
+<a href="#privacy-security">Privacy & security</a>
+<a href="#reliability">Memory and reliability</a>
+<a href="#faq">FAQ</a>
+<a href="#sources">Sources</a>
+<a class="guide-toc-top" href="#top">Back to top ↑</a>
+</aside>
+
+<div class="guide-prose" id="top">
+<section id="what-is-memory">
+<p class="eyebrow">DEFINITION</p>
+<h2>What is AI agent memory?</h2>
+<p><strong>AI agent memory</strong> is the machinery that lets an agent preserve useful state across steps, tasks or sessions and selectively bring that state back when it can improve a later decision or action. The memory can describe a user, a project, an environment, a previous task, a successful procedure, a failure, a constraint or an unresolved goal.</p>
+<p>The important word is <strong>useful</strong>. A transcript is history. A database is storage. A vector index is retrieval infrastructure. They become agent memory only when the system decides what matters, makes it available at the right moment and allows that information to change behavior.</p>
+<p>This distinction matters because long-running agents create enormous amounts of state: user messages, browser pages, files, tool outputs, plans, errors, intermediate results, observations and side effects. Keeping all of it is neither efficient nor safe. Agent memory is therefore a <em>selection problem</em> as much as a storage problem.</p>
+<div class="memory-note"><strong>The SXF rule</strong>A good memory system should remember less than the full history—but preserve more of what matters.</div>
+<p>Memory is also one of the core layers that separates a one-shot assistant from a durable <a href="/guides/what-is-agentic-ai/">agentic AI system</a>. Without persistent state, every new session is forced to reconstruct the world from scratch.</p>
+</section>
+
+<section id="context-rag-memory">
+<p class="eyebrow">THREE DIFFERENT THINGS</p>
+<h2>Context window vs RAG vs AI agent memory</h2>
+<p>These concepts are often treated as synonyms because they all deliver information to a model. Architecturally, they solve different problems.</p>
+<div class="memory-compare">
+<article><span>CONTEXT</span><h3>What the model can see now</h3><p>The context window holds current instructions, conversation, retrieved evidence, tool results and task state for a model call. It is immediate but finite and usually ephemeral.</p></article>
+<article><span>RAG</span><h3>How external information is fetched</h3><p>Retrieval-augmented generation searches an external source and injects selected information into context. It is a retrieval pattern, not a complete memory lifecycle.</p></article>
+<article><span>AGENT MEMORY</span><h3>How state evolves across time</h3><p>Memory adds write policy, persistence, retrieval, consolidation, revision, provenance and forgetting so prior experience can influence future work.</p></article>
+</div>
+<p>A large context window can delay the need for aggressive summarization, but it does not answer the hard memory questions. Which of 500 past actions should survive tomorrow? Which user preference is still valid? Which observation was temporary? Which failed approach should be remembered as a warning rather than repeated as an example?</p>
+<p>Likewise, RAG can retrieve a semantically similar memory and still be wrong for the task. AMA-Bench's 2026 results highlight a key weakness of similarity-heavy memory systems: they can lose <strong>causal</strong> and <strong>objective</strong> information even when the retrieved text looks relevant. Memory must preserve relationships such as “this happened because that action changed the environment,” not only textual resemblance.</p>
+</section>
+
+<section id="memory-types">
+<p class="eyebrow">MEMORY ROLES</p>
+<h2>The four memory types that matter most in agent systems</h2>
+<p>Human-memory labels are useful if they map to concrete engineering roles. For production agents, the following four categories explain most of the design space.</p>
+<div class="memory-grid">
+<article class="memory-card"><span>WORKING MEMORY</span><h3>What is happening right now?</h3><p>Current goal, plan, recent observations, open subtasks, temporary tool outputs and execution state. Usually lives in context, structured runtime state or both.</p></article>
+<article class="memory-card"><span>EPISODIC MEMORY</span><h3>What happened before?</h3><p>Past tasks, trajectories, decisions, failures and outcomes. Useful when a previous experience can guide a similar future task.</p></article>
+<article class="memory-card"><span>SEMANTIC MEMORY</span><h3>What facts remain useful?</h3><p>Stable facts about users, entities, projects, preferences, constraints and the environment. Often stored as structured records, graph facts or retrievable documents.</p></article>
+<article class="memory-card"><span>PROCEDURAL MEMORY</span><h3>How should this kind of task be done?</h3><p>Reusable workflows, runbooks, action patterns, tool sequences and learned procedures. This moves memory from passive recall toward experience.</p></article>
+</div>
+<p>These categories overlap. A successful browser trajectory can begin as episodic memory, be summarized into a reusable procedure, and later contribute facts to semantic memory. That transition—from storing events to extracting reusable experience—is where many of the most interesting 2026 systems are heading.</p>
+</section>
+
+<section id="memory-loop">
+<p class="eyebrow">SXF FRAMEWORK</p>
+<h2>The SXF AI Agent Memory Loop: seven operations, not one database</h2>
+<p>A durable memory layer can be understood as a seven-stage loop. Each stage has a distinct failure mode, which is why “we use a vector database” is not an answer to the memory problem.</p>
+<div class="memory-loop">
+<div class="memory-step"><span>01</span><div><h3>Observe</h3><p>Collect candidate state from the user, tools, files, environment, other agents and the agent's own actions.</p></div></div>
+<div class="memory-step"><span>02</span><div><h3>Select</h3><p>Decide whether the information is worth keeping. Filter transient noise, duplicated facts, low-confidence claims and data that should not persist.</p></div></div>
+<div class="memory-step"><span>03</span><div><h3>Store</h3><p>Write the memory with identity, timestamp, provenance, scope, confidence and links to the task or environment that produced it.</p></div></div>
+<div class="memory-step"><span>04</span><div><h3>Consolidate</h3><p>Merge duplicates, summarize trajectories, connect related facts, resolve contradictions and turn repeated experience into reusable knowledge.</p></div></div>
+<div class="memory-step"><span>05</span><div><h3>Retrieve</h3><p>Search by semantics, entities, time, causal relationships, task state or explicit keys, then rank what should enter the current context.</p></div></div>
+<div class="memory-step"><span>06</span><div><h3>Act</h3><p>Use the memory to change a tool choice, parameter, plan, recommendation, approval path or next action. Recall without behavioral impact is not enough.</p></div></div>
+<div class="memory-step"><span>07</span><div><h3>Forget</h3><p>Expire temporary state, delete sensitive data, supersede stale facts and remove experiences that repeatedly lead the agent in the wrong direction.</p></div></div>
+</div>
+</section>
+
+<section id="what-to-store">
+<p class="eyebrow">WRITE POLICY</p>
+<h2>The hardest memory question is not “where do we store it?” It is “should we store it at all?”</h2>
+<p>Memory quality begins at the write path. If every message and tool result becomes a permanent memory, the system accumulates contradictions, private data, one-off details, accidental instructions and low-quality experiences. Retrieval gets harder as the bank grows, and the agent becomes more likely to pull the wrong precedent.</p>
+<h3>Good candidates for persistent memory</h3>
+<p>Stable user preferences, durable project constraints, verified entity facts, decisions with future consequences, recurring workflow rules, environment-specific gotchas, unresolved commitments, successful procedures and high-value failures can all justify persistence.</p>
+<h3>Poor candidates for persistent memory</h3>
+<p>Transient page contents, temporary IDs, speculative reasoning, unverified third-party claims, secrets without an explicit policy, one-time formatting choices and intermediate tool noise are usually better kept in working state or not stored at all.</p>
+<p>Selective memory is supported by 2026 research. The EMA work at ACL Findings introduces an explicit memory decision module that filters what should enter episodic memory; the authors report lower token consumption while maintaining or improving performance in their tested setups. The broader lesson is simple: <strong>memory quality depends on exclusion as much as inclusion.</strong></p>
+</section>
+
+<section id="consolidation">
+<p class="eyebrow">FROM STORAGE TO EXPERIENCE</p>
+<h2>Long-term memory becomes valuable when events are transformed into experience</h2>
+<p>A 2026 ACL survey frames the evolution of agent memory in three stages: <strong>Storage → Reflection → Experience</strong>. That progression is useful because it separates three very different capabilities.</p>
+<div class="memory-grid">
+<article class="memory-card"><span>STORAGE</span><h3>Preserve the trajectory</h3><p>The system can recall what happened: task, actions, observations and result.</p></article>
+<article class="memory-card"><span>REFLECTION</span><h3>Refine the trajectory</h3><p>The system summarizes, critiques or extracts lessons instead of replaying every raw event.</p></article>
+<article class="memory-card"><span>EXPERIENCE</span><h3>Abstract across trajectories</h3><p>The system learns reusable patterns: which strategy works, what to avoid and how the environment behaves.</p></article>
+<article class="memory-card"><span>CONTINUAL LEARNING</span><h3>Change with evidence</h3><p>Later outcomes can strengthen, revise or delete earlier memories so the memory bank improves rather than only grows.</p></article>
+</div>
+<p>Agentic Memory (AgeMem), published at ACL 2026, pushes this idea further by treating memory operations themselves as agent actions: store, retrieve, update, summarize and discard. Instead of keeping short-term and long-term memory as disconnected modules controlled by fixed heuristics, the system learns when to perform those operations.</p>
+<p>That direction is important because memory management is itself a sequential decision problem. A memory that is useful now can become harmful later; a detail that appears irrelevant can become essential after the environment changes.</p>
+</section>
+
+<section id="retrieval">
+<p class="eyebrow">READ PATH</p>
+<h2>How should an AI agent retrieve memory?</h2>
+<p>Vector similarity is useful, but it should rarely be the entire retrieval policy. A production memory query can combine multiple signals:</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Signal</th><th>What it captures</th><th>Where it helps</th></tr></thead>
+<tbody>
+<tr><th>Semantic similarity</th><td>Meaning close to the current query</td><td>Past tasks, notes, documents, preferences</td></tr>
+<tr><th>Recency</th><td>How recently the memory was valid</td><td>Dynamic state, recent decisions, active projects</td></tr>
+<tr><th>Entity / key match</th><td>Exact user, project, repository, customer or object</td><td>Structured facts and scoped memory</td></tr>
+<tr><th>Temporal validity</th><td>Whether the fact was true at the relevant time</td><td>Preferences, permissions, prices, environment state</td></tr>
+<tr><th>Causal relation</th><td>What action led to what result</td><td>Long-horizon trajectories and failure analysis</td></tr>
+<tr><th>Utility / outcome</th><td>Whether using this memory helped later tasks</td><td>Experience replay and procedural memory</td></tr>
+<tr><th>Trust / provenance</th><td>Where the memory came from and how reliable it is</td><td>Security, conflicting facts, external content</td></tr>
+</tbody></table></div>
+<p>AMA-Bench is especially relevant here. Its authors found that existing systems struggled because agent trajectories contain objectives and causal structure that are easily lost when retrieval is driven mainly by similarity. Their proposed AMA-Agent adds a causality graph and tool-augmented retrieval and reports 57.22% average accuracy on the benchmark, 11.16 percentage points above the strongest baseline in their study.</p>
+</section>
+
+<section id="memory-to-action">
+<p class="eyebrow">MEMORY → ACTION</p>
+<h2>An agent has not truly remembered something until the memory changes what it does</h2>
+<p>Traditional memory benchmarks often ask a question such as “what restaurant did the user prefer?” That tests recall. Agents face a harder requirement: a remembered preference should silently change a future tool call, parameter, plan or decision when relevant.</p>
+<p><strong>Mem2ActBench</strong>, published at ACL 2026, was created specifically for this gap. It evaluates whether long-term memory is proactively applied to tool-based tasks rather than merely retrieved in response to explicit questions. The benchmark contains 400 tool-use tasks derived from 2,029 synthetic multi-turn sessions; human evaluation found 91.3% of those tasks strongly depended on memory. The study reports that seven tested memory frameworks remained inadequate at using memory to ground actions reliably.</p>
+<p>MemoryArena makes a similar move in a different setting. Its tasks are spread across interdependent sessions: earlier interactions create knowledge that later sessions need. An agent can perform well on conventional long-context recall and still perform poorly when memory must guide future navigation, planning, search or reasoning.</p>
+<div class="memory-note"><strong>Operational test</strong>If you remove the retrieved memory and the agent takes the same action, the memory may not be doing useful work.</div>
+</section>
+
+<section id="forgetting">
+<p class="eyebrow">FORGETTING IS A FEATURE</p>
+<h2>Why AI agents need deletion, expiration and revision</h2>
+<p>Persistent memory creates a dangerous asymmetry: writing is easy, but old information can continue influencing decisions long after it is wrong. A mature memory layer therefore needs explicit ways to remove or supersede state.</p>
+<p>ACL 2026 research on memory addition and deletion found an <strong>experience-following</strong> effect: when a current task resembles a stored experience, agents tend to reproduce behavior from that memory. This can help when the experience is good, but it also creates error propagation and misaligned experience replay when the stored precedent is poor.</p>
+<h3>Four forms of forgetting</h3>
+<p><strong>Expiration</strong> removes memories whose value decays with time. <strong>Supersession</strong> marks an old fact as replaced by a newer one while keeping provenance. <strong>Deletion</strong> removes data that should no longer exist, including privacy-driven deletion. <strong>Demotion</strong> keeps the record but lowers retrieval priority after evidence shows that it is unreliable or unhelpful.</p>
+<p>Forgetting also protects context quality. The goal is not maximum recall. The goal is minimum sufficient state for the current decision.</p>
+</section>
+
+<section id="failure-modes">
+<p class="eyebrow">FAILURE MODES</p>
+<h2>How AI agent memory goes wrong</h2>
+<div class="memory-grid">
+<article class="memory-card"><span>MEMORY POLLUTION</span><h3>Too much low-value state</h3><p>Every interaction is stored, making retrieval noisy and expensive.</p></article>
+<article class="memory-card"><span>STALE MEMORY</span><h3>Old truth becomes current error</h3><p>A preference, workflow or environment fact changed but the old memory still ranks highly.</p></article>
+<article class="memory-card"><span>CONTRADICTION</span><h3>Two memories disagree</h3><p>The system lacks temporal validity, source priority or a merge policy.</p></article>
+<article class="memory-card"><span>MEMORY POISONING</span><h3>Untrusted input becomes durable state</h3><p>A webpage, document or malicious instruction is stored and later treated as trusted context.</p></article>
+<article class="memory-card"><span>FALSE EXPERIENCE</span><h3>A bad trajectory becomes a lesson</h3><p>The agent retrieves a superficially similar but actually harmful precedent and repeats it.</p></article>
+<article class="memory-card"><span>OVERSHARING</span><h3>Right memory, wrong scope</h3><p>User-, tenant-, project- or agent-specific state leaks into another context.</p></article>
+<article class="memory-card"><span>RETRIEVAL BLINDNESS</span><h3>The memory exists but is never found</h3><p>Indexing or query generation does not surface the state when it matters.</p></article>
+<article class="memory-card"><span>MEMORY DOMINANCE</span><h3>The past overrides the present</h3><p>Retrieved memories are treated as authoritative even when the current task or user instruction should win.</p></article>
+</div>
+<p>These are not only quality problems. Memory poisoning and cross-scope leakage are also security problems. The <a href="/guides/ai-agent-security/">AI Agent Security</a> guide explains why persistent memory needs the same provenance, authorization and isolation discipline as tools and identities.</p>
+</section>
+
+<section id="benchmarks">
+<p class="eyebrow">BENCHMARK MAP</p>
+<h2>The AI agent memory benchmarks that matter in 2026</h2>
+<p>Memory benchmarks have shifted from “find the fact in a long conversation” toward “use accumulated experience inside an agent loop.” The table below maps the strongest 2026 signals.</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Benchmark</th><th>What it tests</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><th>AMA-Bench</th><td>Long-horizon real and synthetic agent trajectories, including states, actions, observations and tool outputs.</td><td>Tests whether memory captures objectives and causal information beyond dialogue recall.</td></tr>
+<tr><th>MemoryArena</th><td>Interdependent multi-session tasks across web navigation, planning, information search and formal reasoning.</td><td>Couples memory formation and future action inside an agent-environment loop.</td></tr>
+<tr><th>Mem2ActBench</th><td>Long-term memory applied to tool selection and parameter grounding.</td><td>Directly tests whether remembering changes what the agent does.</td></tr>
+<tr><th>LongMemEval-V2</th><td>Experience accumulated from specialized web environments.</td><td>Tests static state, dynamic state, workflows, environment gotchas and premise awareness.</td></tr>
+<tr><th>MemoryBench</th><td>Continual learning from accumulated user feedback across domains, languages and tasks.</td><td>Moves memory evaluation toward learning during service time rather than only reading long inputs.</td></tr>
+</tbody></table></div>
+<p>No benchmark proves that a memory architecture will work in your production environment. Use public benchmarks to understand failure modes, then create a deployment-specific memory test set from real tasks, state transitions, corrections and privacy rules.</p>
+</section>
+
+<section id="architecture">
+<p class="eyebrow">PRODUCTION ARCHITECTURE</p>
+<h2>A practical AI agent memory architecture</h2>
+<p>The safest design separates raw history from curated memory and makes every durable write explicit and inspectable.</p>
+<div class="memory-loop">
+<div class="memory-step"><span>A</span><div><h3>Runtime state</h3><p>Keep the active goal, current plan, tool outputs and temporary state close to the execution loop. This is working memory, not permanent storage.</p></div></div>
+<div class="memory-step"><span>B</span><div><h3>Memory candidate extractor</h3><p>After meaningful events, propose facts, preferences, outcomes, lessons or unresolved state that may deserve persistence.</p></div></div>
+<div class="memory-step"><span>C</span><div><h3>Write policy & validator</h3><p>Check scope, sensitivity, provenance, confidence, duplication and whether the information is stable enough to keep.</p></div></div>
+<div class="memory-step"><span>D</span><div><h3>Multiple stores</h3><p>Use the representation that fits the memory: relational or key-value state for exact facts, vector retrieval for fuzzy similarity, graphs for entities and relationships, object storage for raw artifacts.</p></div></div>
+<div class="memory-step"><span>E</span><div><h3>Retrieval router</h3><p>Combine semantic search with entity, time, scope, causal and utility filters instead of relying on one nearest-neighbor query.</p></div></div>
+<div class="memory-step"><span>F</span><div><h3>Context compiler</h3><p>Convert selected memories into concise context with source labels and explicit precedence relative to system policy and the user's current instruction.</p></div></div>
+<div class="memory-step"><span>G</span><div><h3>Maintenance loop</h3><p>Consolidate duplicates, re-score memories after outcomes, expire temporary state and process user or policy-driven deletion requests.</p></div></div>
+</div>
+<p>This architecture is also compatible with multi-agent systems. Shared memory should not mean unrestricted shared context. Agents need explicit namespaces, ownership, tenant boundaries and policies for what may cross between specialists. The same principle appears in the <a href="/guides/how-to-build-ai-super-agent/">super-agent architecture guide</a>: coordination should not become implicit trust.</p>
+</section>
+
+<section id="evaluation">
+<p class="eyebrow">EVALUATION</p>
+<h2>How to evaluate an AI agent memory system before production</h2>
+<p>Evaluate memory as a pipeline, not only as answer accuracy. A useful test suite should isolate each stage.</p>
+<div class="agent-redteam-list">
+<div><span>01</span><strong>Write precision</strong><p>Of the memories the system stores, how many were actually worth keeping?</p></div>
+<div><span>02</span><strong>Write recall</strong><p>Of the facts, preferences and experiences that matter later, how many were captured?</p></div>
+<div><span>03</span><strong>Retrieval precision</strong><p>Does the system return relevant evidence without flooding context with distractors?</p></div>
+<div><span>04</span><strong>Temporal correctness</strong><p>Can it distinguish what was true before from what is true now?</p></div>
+<div><span>05</span><strong>Contradiction handling</strong><p>Does a new verified fact supersede an old one cleanly, with provenance intact?</p></div>
+<div><span>06</span><strong>Action lift</strong><p>Does the correct memory measurably improve future task success or tool grounding?</p></div>
+<div><span>07</span><strong>Negative transfer</strong><p>How often does a retrieved experience make the current task worse?</p></div>
+<div><span>08</span><strong>Latency & token cost</strong><p>Does memory stay useful as the history grows by orders of magnitude?</p></div>
+<div><span>09</span><strong>Deletion completeness</strong><p>When a memory should be forgotten, is it actually removed from every retrieval path and derivative summary?</p></div>
+<div><span>10</span><strong>Scope isolation</strong><p>Can the evaluator prove that one user, tenant, project or agent cannot retrieve another's private state?</p></div>
+</div>
+<p>Run those tests together with the broader <a href="/research/ai-agent-reliability/">AI Agent Reliability</a> framework. Memory is one of the most important sources of long-horizon variance: the same agent can behave very differently depending on what it writes, retrieves and replays.</p>
+</section>
+
+<section id="privacy-security">
+<p class="eyebrow">PRIVACY & SECURITY</p>
+<h2>Persistent memory turns yesterday's context into tomorrow's attack surface</h2>
+<p>Memory extends the lifetime of information. That improves continuity, but it also increases the duration of mistakes and the value of compromise.</p>
+<p>Every memory should have a scope and provenance. User-provided preferences are not system policy. Web content is not trusted instruction. Tool output can be wrong. A summary generated by the model can introduce errors not present in the source. The storage layer should preserve enough lineage to answer: <em>who or what created this memory, from which evidence, when, for whom, and under which trust level?</em></p>
+<p>Privacy controls also need to reach derivative memories. Deleting the original transcript is not sufficient if a preference, summary, embedding or graph edge derived from it remains retrievable. Memory architectures should therefore model deletion as a state-management operation rather than a cosmetic UI action.</p>
+</section>
+
+<section id="reliability">
+<p class="eyebrow">MEMORY × RELIABILITY</p>
+<h2>Memory can make an agent better over time—or make the same mistake more efficiently</h2>
+<p>This is the central tension of persistent agents. Memory can reduce repeated work, preserve user intent, encode hard-won environment knowledge and improve long-horizon execution. But the same mechanism can amplify stale facts, bad strategies and malicious state.</p>
+<p>The reliability question is therefore not “does this agent have memory?” It is:</p>
+<div class="guide-callout"><strong>Can the system prove that its memory lifecycle improves future decisions more often than it introduces stale, irrelevant, unsafe or misleading state?</strong><p>That requires measuring the complete loop: write quality, retrieval quality, action lift, negative transfer, revision, forgetting and containment.</p></div>
+<p>For the broader measurement framework—consistency, robustness, predictability and safety—continue with <a href="/research/ai-agent-reliability/">Are AI Agents Reliable in 2026?</a>.</p>
+</section>
+
+<section class="guide-faq-section" id="faq">
+<p class="eyebrow">FAQ</p>
+<h2>Frequently asked questions about AI agent memory</h2>
+<div class="model-faq">
+<details><summary>What is AI agent memory?</summary><p>AI agent memory is managed state that survives long enough to influence later decisions or actions. It can include current task state, past experiences, facts, preferences, workflows and lessons learned from prior execution.</p></details>
+<details><summary>Is a context window the same as memory?</summary><p>No. Context is what the model can reference during the current call or session. Long-term agent memory is persistent state outside or above that window that can be selectively written, retrieved, revised and deleted.</p></details>
+<details><summary>Is RAG the same as AI agent memory?</summary><p>RAG is one retrieval mechanism. A complete memory system also needs a write policy, persistence, consolidation, temporal validity, provenance, action integration and forgetting.</p></details>
+<details><summary>What is long-term memory in AI agents?</summary><p>Long-term memory is state that persists beyond the current interaction or task. It may contain durable user preferences, project facts, learned environment behavior, previous trajectories or reusable procedures.</p></details>
+<details><summary>What is episodic memory in an AI agent?</summary><p>Episodic memory stores past events or task trajectories: what the agent tried, what it observed and what happened. It is useful when prior experience can guide a similar future task.</p></details>
+<details><summary>What is semantic memory in an AI agent?</summary><p>Semantic memory stores relatively stable facts and relationships, such as user preferences, entity attributes, project constraints or environment knowledge, independent of one specific event.</p></details>
+<details><summary>What is procedural memory in AI agents?</summary><p>Procedural memory captures reusable ways of doing things: workflows, runbooks, action sequences, tool-use patterns and learned strategies.</p></details>
+<details><summary>Why should an AI agent forget information?</summary><p>Because old state can become wrong, irrelevant, private or misleading. Deliberate expiration, deletion and supersession reduce noise, privacy risk and the chance that stale experiences override the current task.</p></details>
+<details><summary>How do you test AI agent memory?</summary><p>Measure write quality, retrieval precision, temporal correctness, contradiction handling, action improvement, negative transfer, efficiency, deletion completeness and scope isolation. Public benchmarks such as AMA-Bench, MemoryArena, Mem2ActBench and LongMemEval-V2 cover complementary parts of the problem.</p></details>
+<details><summary>Can memory make an AI agent less reliable?</summary><p>Yes. Research shows that agents can follow retrieved experiences closely, which can propagate old errors or replay misleading strategies. Memory needs quality control, provenance, revision and forgetting rather than unrestricted accumulation.</p></details>
+</div>
+</section>
+
+<section class="guide-sources" id="sources">
+<p class="eyebrow">PRIMARY & RESEARCH SOURCES</p>
+<h2>Sources for this AI agent memory guide</h2>
+<p>SXF prioritizes peer-reviewed research, official benchmark repositories and primary technical sources. Benchmark results are reported within their stated evaluation setup and should not be treated as universal claims about every memory system.</p>
+<div class="model-sources">
+<a href="https://proceedings.mlr.press/v306/zhao26bs.html" target="_blank" rel="noopener noreferrer"><span>ICML 2026 · AMA-Bench: Evaluating Long-Horizon Memory for Agentic Applications</span><b>↗</b></a>
+<a href="https://proceedings.mlr.press/v306/he26am.html" target="_blank" rel="noopener noreferrer"><span>ICML 2026 · MemoryArena: Benchmarking Agent Memory in Multi-Session Tasks</span><b>↗</b></a>
+<a href="https://aclanthology.org/2026.acl-long.370/" target="_blank" rel="noopener noreferrer"><span>ACL 2026 · Mem2ActBench: Long-Term Memory Utilization in Autonomous Agents</span><b>↗</b></a>
+<a href="https://aclanthology.org/2026.acl-long.981/" target="_blank" rel="noopener noreferrer"><span>ACL 2026 · Agentic Memory: Unified Long-Term and Short-Term Memory Management</span><b>↗</b></a>
+<a href="https://aclanthology.org/2026.acl-long.27/" target="_blank" rel="noopener noreferrer"><span>ACL 2026 · How Memory Management Impacts LLM Agents</span><b>↗</b></a>
+<a href="https://aclanthology.org/2026.findings-acl.2069/" target="_blank" rel="noopener noreferrer"><span>ACL Findings 2026 · From Storage to Experience: Survey of LLM Agent Memory</span><b>↗</b></a>
+<a href="https://aclanthology.org/2026.findings-acl.250/" target="_blank" rel="noopener noreferrer"><span>ACL Findings 2026 · EMA: Episodic Memory Agent for Selective Memory</span><b>↗</b></a>
+<a href="https://proceedings.mlr.press/v306/ai26e.html" target="_blank" rel="noopener noreferrer"><span>ICML 2026 · MemoryBench: Memory and Continual Learning in LLM Systems</span><b>↗</b></a>
+<a href="https://arxiv.org/abs/2605.12493" target="_blank" rel="noopener noreferrer"><span>LongMemEval-V2 · Long-Term Agent Memory Toward Experienced Colleagues</span><b>↗</b></a>
+<a href="https://github.com/xiaowu0162/LongMemEval-V2/" target="_blank" rel="noopener noreferrer"><span>LongMemEval-V2 · Official benchmark repository</span><b>↗</b></a>
+</div>
+</section>
+
+<section class="related-signals">
+<div class="intel-section-head"><div><p class="eyebrow">KEEP THE CONTEXT CONNECTED</p><h2>Continue through SXF.</h2></div><a href="/research/">All research ↗</a></div>
+<div class="guide-choice-grid">
+<article><span>Agentic AI</span><p>See how memory fits into the complete agent loop of planning, tools, actions and state.</p><div class="tool-links"><a href="/guides/what-is-agentic-ai/">Open guide ↗</a></div></article>
+<article><span>Agent Reliability</span><p>Measure whether memory helps consistently—or introduces new long-horizon failure modes.</p><div class="tool-links"><a href="/research/ai-agent-reliability/">Open research ↗</a></div></article>
+<article><span>AI Agent Security</span><p>Protect persistent memory from poisoning, cross-scope leakage and untrusted context.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open guide ↗</a></div></article>
+</div>
+</section>
+
+</div></div>
+</article></main>
+
+<footer class="footer shell">
+<div class="footer-main">
+<div class="footer-identity">
+<a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+<p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+<a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+</div>
+<nav class="footer-nav" aria-label="Footer navigation">
+<div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+<div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+<div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+</nav>
+</div>
+<div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body></html>
