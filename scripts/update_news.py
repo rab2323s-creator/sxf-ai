@@ -47,6 +47,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-shutdown-resistance" / "index.html": "guides",
     ROOT / "guides" / "can-ai-replicate-itself" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-collusion-secret-communication" / "index.html": "guides",
+    ROOT / "guides" / "ai-negotiation-agents" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5452,6 +5453,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-negotiation-agents/",
+            "category": "Agents · Commerce · Research",
+            "categories": ["agents", "research", "security", "tools"],
+            "kicker": "AI NEGOTIATION AGENTS",
+            "title": "AI Negotiation Agents: Can AI Negotiate Better Than Humans?",
+            "description": "Autonomous bargaining, AI-to-AI deals, procurement, private information, contracts, prompt injection, collusion and how to measure deal quality.",
+            "meta": "Negotiation · Procurement · AI-to-AI · Commerce",
+            "updated": "Oct 2, 2026",
+            "read_time": "39 min",
+        },
+        {
             "href": "/guides/ai-agent-collusion-secret-communication/",
             "category": "Agents · Security · Research",
             "categories": ["agents", "security", "research", "superintelligence"],
@@ -7444,7 +7456,7 @@ def update_sitemap(items):
         item for item in items
         if item["category"] == "Models" or extract_models(item["title"])
     ]
-    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-01")
+    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-02")
     gpt6_compare_items = [
         item for item in items
         if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
@@ -7480,6 +7492,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/ai-negotiation-agents/",
+            "2026-10-02",
+            f"{BASE_URL}/guides/ai-negotiation-agents/images/ai-negotiation-agents-autonomous-bargaining.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/ai-agent-collusion-secret-communication/",
             "2026-10-01",
