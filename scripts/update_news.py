@@ -48,6 +48,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "can-ai-replicate-itself" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-collusion-secret-communication" / "index.html": "guides",
     ROOT / "guides" / "ai-negotiation-agents" / "index.html": "guides",
+    ROOT / "guides" / "ai-agent-authorization" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5453,6 +5454,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-agent-authorization/",
+            "category": "Security · Agents · Identity",
+            "categories": ["security", "agents", "research", "tools"],
+            "kicker": "AI AGENT AUTHORIZATION",
+            "title": "Can AI Agents Prove They’re Authorized? Agent Passports, Delegation Chains & Action Receipts",
+            "description": "AI agent authorization explained: identity, agent passports, delegated authority, permissions, revocation, runtime enforcement and signed action receipts.",
+            "meta": "Authorization · Identity · Delegation · Receipts",
+            "updated": "Oct 2, 2026",
+            "read_time": "42 min",
+        },
+        {
             "href": "/guides/ai-negotiation-agents/",
             "category": "Agents · Commerce · Research",
             "categories": ["agents", "research", "security", "tools"],
@@ -7492,6 +7504,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/ai-agent-authorization/",
+            "2026-10-02",
+            f"{BASE_URL}/guides/ai-agent-authorization/images/ai-agent-authority-chain.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/ai-negotiation-agents/",
             "2026-10-02",
