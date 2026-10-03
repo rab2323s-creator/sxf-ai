@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-03T11:37:12.471084Z",
+  "updated_at": "2026-10-03T11:40:09.633358Z",
   "items": [
     {
       "title": "Stateless GitHub App installation tokens rolled out",
@@ -978,7 +978,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       },
       "Google AI": {
@@ -1001,7 +1001,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       },
       "Hugging Face": {
@@ -1024,7 +1024,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       },
       "GitHub": {
@@ -1047,7 +1047,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       },
       "Google Research": {
@@ -1070,31 +1070,33 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       },
       "Anthropic": {
         "status": "shadow",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 30,
-        "relevance_accepted_count": 30,
-        "quality_accepted_count": 0,
-        "accepted_candidate_count": 0,
-        "rejected_candidate_count": 30,
+        "parsed_candidate_count": 29,
+        "relevance_accepted_count": 29,
+        "quality_accepted_count": 2,
+        "accepted_candidate_count": 2,
+        "rejected_candidate_count": 27,
         "duplicate_count": 0,
-        "age_rejection_count": 27,
+        "age_rejection_count": 24,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 3,
         "publish_count": 0,
         "adapter": "anthropic-sitemap",
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter_discovered_count": 30,
-        "adapter_invalid_count": 3,
+        "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
-        "errors": []
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
+        "errors": [
+          "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
+        ]
       },
       "Meta": {
         "status": "shadow",
@@ -1166,7 +1168,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T11:37:05.211825Z",
+        "last_successful_fetch": "2026-10-03T11:40:01.960141Z",
         "errors": []
       }
     },
