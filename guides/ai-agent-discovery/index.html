@@ -1,0 +1,656 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>AI Agent Discovery: How AI Agents Find Each Other (2026) | SXF / AI</title>
+<meta name="description" content="AI agent discovery explained: A2A Agent Cards, registries, DNS-AID, AINS, capability search, routing, reputation and how agents find trusted agents in 2026." />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="theme-color" content="#07090d" />
+<link rel="canonical" href="https://sxf.si/guides/ai-agent-discovery/" />
+<link rel="alternate" hreflang="en" href="https://sxf.si/guides/ai-agent-discovery/" />
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/ai-agent-discovery/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="SXF / AI" />
+<meta property="og:title" content="AI Agent Discovery: How Will AI Agents Find Each Other?" />
+<meta property="og:description" content="Agent Cards, registries, DNS discovery, capability search, trust, reputation and the emerging search layer for the machine web." />
+<meta property="og:url" content="https://sxf.si/guides/ai-agent-discovery/" />
+<meta property="og:image" content="https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp" />
+<meta property="og:image:width" content="1672" />
+<meta property="og:image:height" content="941" />
+<meta property="og:image:type" content="image/webp" />
+<meta property="og:image:alt" content="AI agent searching a machine web of agents, registries, capability cards and trust signals before routing a task" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Agent Discovery: How Will AI Agents Find Each Other?" />
+<meta name="twitter:description" content="How Agent Cards, registries, DNS, capability search and trust could become the search infrastructure of the agentic web." />
+<meta name="twitter:image" content="https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp" />
+<meta name="twitter:image:alt" content="AI agent searching a machine web of agents, registries, capability cards and trust signals before routing a task" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/guides/ai-agent-discovery/#webpage","url":"https://sxf.si/guides/ai-agent-discovery/","name":"AI Agent Discovery: How Will AI Agents Find Each Other?","description":"A research-first guide to AI agent discovery, A2A Agent Cards, registries, DNS-AID, AINS, capability search, routing, reputation and trust.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/guides/ai-agent-discovery/#article"},"breadcrumb":{"@id":"https://sxf.si/guides/ai-agent-discovery/#breadcrumb"},"primaryImageOfPage":{"@id":"https://sxf.si/guides/ai-agent-discovery/#image-1"},"thumbnailUrl":"https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp","inLanguage":"en"},{"@type":"TechArticle","@id":"https://sxf.si/guides/ai-agent-discovery/#article","url":"https://sxf.si/guides/ai-agent-discovery/","mainEntityOfPage":{"@id":"https://sxf.si/guides/ai-agent-discovery/#webpage"},"headline":"AI Agent Discovery: How Will AI Agents Find Each Other?","alternativeHeadline":"Agent Cards, Registries, DNS-AID, Reputation, Routing & the Machine Web","description":"A research-first guide to AI agent discovery, A2A Agent Cards, registries, DNS-AID, AINS, capability search, routing, reputation and trust.","datePublished":"2026-10-03","dateModified":"2026-10-03","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"image":[{"@id":"https://sxf.si/guides/ai-agent-discovery/#image-1"}],"thumbnailUrl":"https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp","articleSection":"AI Agents","keywords":["AI agent discovery","how AI agents find each other","agent discovery protocol","AI agent registry","AI agent directory","A2A Agent Card","A2A agent discovery","agent card","AI agent DNS","DNS-AID","AInternet Name Service","AINS agent discovery","agent capability discovery","AI agent routing","AI agent reputation","AI agent search engine","AI agent marketplace","agent-to-agent discovery","discover AI agents"],"about":[{"@type":"Thing","name":"AI agent discovery"},{"@type":"Thing","name":"Agent2Agent Protocol"},{"@type":"Thing","name":"Agent Cards"},{"@type":"Thing","name":"AI agent registries"},{"@type":"Thing","name":"DNS-AID"},{"@type":"Thing","name":"AInternet Name Service"},{"@type":"Thing","name":"Agent routing"},{"@type":"Thing","name":"Agent reputation"}],"citation":["https://a2a-protocol.org/dev/topics/agent-discovery/","https://a2a-protocol.org/dev/specification/","https://a2a-protocol.org/latest/blog/2026/08/27/a-new-chapter-for-a2a-joining-the-agentic-ai-foundation/","https://datatracker.ietf.org/doc/draft-mozleywilliams-dnsop-dnsaid/","https://datatracker.ietf.org/doc/draft-pro-adp-agent-discovery/","https://datatracker.ietf.org/doc/draft-vandemeent-ains-discovery/","https://datatracker.ietf.org/doc/draft-sankarshan-agent-registry-protocol/","https://datatracker.ietf.org/doc/html/draft-schemacommons-areg-00","https://datatracker.ietf.org/doc/draft-chandra-agent-registry-corroboration/","https://datatracker.ietf.org/doc/html/draft-stone-atep-02","https://registry.modelcontextprotocol.io/docs","https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/","https://arxiv.org/abs/2606.02314","https://arxiv.org/abs/2608.22695","https://arxiv.org/abs/2609.20095"],"inLanguage":"en"},{"@type":"ImageObject","@id":"https://sxf.si/guides/ai-agent-discovery/#image-1","url":"https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp","contentUrl":"https://sxf.si/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp","width":1672,"height":941,"name":"AI agent discovery routing and trust map","caption":"A discovery pipeline in which an autonomous agent searches registries and network discovery layers, resolves machine-readable Agent Cards, filters candidates by capability and compatibility, verifies identity and evidence, ranks alternatives and routes a task to the selected agent.","representativeOfPage":true,"inLanguage":"en"},{"@type":"FAQPage","@id":"https://sxf.si/guides/ai-agent-discovery/#faq","mainEntity":[{"@type":"Question","name":"What is AI agent discovery?","acceptedAnswer":{"@type":"Answer","text":"AI agent discovery is the process by which software finds autonomous agents, retrieves machine-readable descriptions of their capabilities and interfaces, and selects candidates that may be suitable for a task. Discovery is separate from authentication, authorization and trust: finding an agent does not prove that it is safe or permitted to act."}},{"@type":"Question","name":"How do AI agents find each other?","acceptedAnswer":{"@type":"Answer","text":"Current approaches include direct configuration, well-known URLs such as A2A Agent Cards, registries and catalogs, DNS-based discovery proposals, enterprise directories and semantic search over capability metadata. Different environments may combine several methods."}},{"@type":"Question","name":"What is an A2A Agent Card?","acceptedAnswer":{"@type":"Answer","text":"An A2A Agent Card is a JSON metadata document describing an agent's identity-facing information, supported interfaces, capabilities, skills and security requirements. The A2A specification registers the well-known path /.well-known/agent-card.json for discovery."}},{"@type":"Question","name":"What is the difference between agent discovery and agent authorization?","acceptedAnswer":{"@type":"Answer","text":"Discovery answers which agents exist and which may match a task. Authorization answers whether a particular agent is allowed to perform a particular action. A successfully discovered agent is not automatically authorized."}},{"@type":"Question","name":"What is an AI agent registry?","acceptedAnswer":{"@type":"Answer","text":"An AI agent registry is a service that publishes or indexes machine-readable records about agents so clients can search, resolve or retrieve information such as endpoints, capabilities, versions, operators, lifecycle state or evidence. Registry designs vary widely and are not yet unified under one universal standard."}},{"@type":"Question","name":"What is DNS-AID?","acceptedAnswer":{"@type":"Answer","text":"DNS-AID is the name used by the DNS for AI Discovery Internet-Draft. It proposes publishing discovery information through DNS so agents can locate organization-specific agents or agents offering capabilities without inventing an entirely separate global naming infrastructure."}},{"@type":"Question","name":"What is AINS?","acceptedAnswer":{"@type":"Answer","text":"AINS, or AInternet Name Service, is a 2026 Internet-Draft proposing a logical namespace and HTTPS resolution model for autonomous agents. Its records can carry identity references, capabilities, endpoint and route metadata, and references to cryptographic evidence."}},{"@type":"Question","name":"What is Agent Discovery Protocol (ADP)?","acceptedAnswer":{"@type":"Answer","text":"ADP is a 2026 Internet-Draft that layers AI-agent discovery over DNS-AID, well-known JSON metadata and a real-time interaction layer. It is an experimental proposal and not a finalized Internet standard."}},{"@type":"Question","name":"What is the Agent Registry Protocol (ARPA)?","acceptedAnswer":{"@type":"Answer","text":"The Agent Registry Protocol is a September 2026 Internet-Draft for publishing and resolving agent records, deployments, relationships, authority state and evidence references. Its own specification explicitly separates discovery and resolution from authorization decisions."}},{"@type":"Question","name":"Is MCP Registry the same as an AI agent registry?","acceptedAnswer":{"@type":"Answer","text":"No. The official MCP Registry is primarily a catalog and API for discovering Model Context Protocol servers. MCP connects agents or clients to tools and data, while A2A-style discovery addresses peer agents. In practice, future agent systems may search both tool registries and agent registries."}},{"@type":"Question","name":"Can an Agent Card prove that an AI agent is trustworthy?","acceptedAnswer":{"@type":"Answer","text":"No. An Agent Card can describe capabilities and may be cryptographically signed, which can help verify integrity or publisher identity. But a signed self-description does not prove that the advertised capabilities are accurate, safe or high quality. Trust requires additional evidence, policy and evaluation."}},{"@type":"Question","name":"How should AI agents choose between multiple agents with the same capability?","acceptedAnswer":{"@type":"Answer","text":"A useful selection pipeline can filter for protocol compatibility and hard constraints, retrieve candidates by capability, then rank them using evidence such as task fit, availability, cost, latency, reputation, assurance, policy compatibility and prior performance. The ranking policy depends on the application."}},{"@type":"Question","name":"Why can AI agent discovery become a search problem?","acceptedAnswer":{"@type":"Answer","text":"As registries grow, putting every candidate description into an LLM context becomes expensive and less accurate. A 2026 preprint on capability discovery reported substantial degradation in in-context routing at thousands of candidates and evaluated a retrieve-then-rank architecture as a more scalable alternative."}},{"@type":"Question","name":"What are the security risks of AI agent discovery?","acceptedAnswer":{"@type":"Answer","text":"Risks include fake or spoofed agents, stale records, malicious capability claims, registry poisoning, Sybil identities, endpoint substitution, compromised signing keys, privacy leakage and ranking manipulation. Discovery systems need provenance, freshness, corroboration and local trust policy."}},{"@type":"Question","name":"Do AI agents need reputation scores?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily a single universal score. Reputation can help selection, but one scalar score can hide task-specific differences and be manipulated. Stronger systems may use evidence-backed, multidimensional signals such as verified execution history, domain-specific performance, recency, dispute rates and attestations."}},{"@type":"Question","name":"Will there be a Google for AI agents?","acceptedAnswer":{"@type":"Answer","text":"It is an open architectural question rather than a settled outcome. Central registries, federated indexes, DNS-based discovery, protocol-specific catalogs and private enterprise directories are all developing. The eventual ecosystem may resemble the web: decentralized naming plus multiple search, ranking and trust layers."}}]},{"@type":"BreadcrumbList","@id":"https://sxf.si/guides/ai-agent-discovery/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"AI Agent Discovery","item":"https://sxf.si/guides/ai-agent-discovery/"}]},{"@type":"DefinedTermSet","@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack","name":"SXF AI Agent Discovery Stack","url":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack","description":"A reference model for agent naming, discovery, capability matching, verification, ranking and routing.","hasDefinedTerm":[{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-discovery-term","name":"AI Agent Discovery","description":"The process of finding autonomous agents and resolving machine-readable information needed to determine whether they are candidates for a task.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-card-term","name":"Agent Card","description":"A machine-readable A2A metadata document describing an agent's interfaces, capabilities, skills and security requirements.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-registry-term","name":"AI Agent Registry","description":"A service or data source that publishes, indexes, searches or resolves metadata about autonomous agents.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#capability-discovery-term","name":"Capability Discovery","description":"Finding agents or tools based on the task or capability they can provide rather than a pre-known identifier.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#dns-aid-term","name":"DNS-AID","description":"A DNS for AI Discovery proposal for publishing information that helps clients locate AI agents through DNS.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#ains-term","name":"AINS","description":"A proposed AInternet Name Service for resolving autonomous-agent identifiers to capabilities, endpoints, route posture and evidence references.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-routing-term","name":"Agent Routing","description":"Selecting and directing a task to one candidate after discovery, filtering and ranking.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-reputation-term","name":"Agent Reputation","description":"Evidence or historical signals used to estimate how suitable or trustworthy an agent may be for a specific task or context.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#agent-resolution-term","name":"Agent Resolution","description":"Retrieving current metadata, endpoints or related state for a known agent identifier or registry record.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}},{"@type":"DefinedTerm","@id":"https://sxf.si/guides/ai-agent-discovery/#trust-discovery-term","name":"Trust Discovery","description":"Combining discovery with evidence, provenance and policy to decide which discovered agents are reasonable candidates for reliance.","inDefinedTermSet":{"@id":"https://sxf.si/guides/ai-agent-discovery/#discovery-stack"}}]}]}</script>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/intelligence.css" />
+</head><body class="intel-page guide-article-page ai-agent-discovery-guide"><header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header><main><article>
+
+<header class="guide-article-hero shell">
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Agent Discovery</span></nav>
+<p class="eyebrow">SXF GUIDE / AGENTIC INTERNET</p>
+<h1>AI Agent Discovery:<br><span>How Will AI Agents Find Each Other?</span></h1>
+<p class="guide-deck"><strong>AI agent discovery</strong> is becoming a missing infrastructure layer of the agentic web. A capable autonomous system may know what it wants done without knowing which agent, tool or service can do it. The discovery problem begins with “what exists?” but quickly expands into capability matching, protocol compatibility, identity, freshness, trust, cost, reputation and routing. In 2026, A2A Agent Cards, the official MCP Registry, DNS-AID, ADP, AINS, new registry protocols and capability-search research began attacking different pieces of the same question: <em>how does one machine find the right machine to work with?</em></p>
+<div class="guide-byline">
+<div><span>Published</span><strong>October 3, 2026</strong></div>
+<div><span>Last verified</span><strong>October 3, 2026</strong></div>
+<div><span>Reading time</span><strong>56 min</strong></div>
+<div><span>Research standard</span><strong>Primary protocols + current research</strong></div>
+</div>
+</header>
+
+<section class="guide-answer shell" id="quick-answer">
+<div class="guide-answer-label">QUICK ANSWER</div>
+<div>
+<h2>How will AI agents find each other? Through a discovery stack—not one universal directory.</h2>
+<p>Today, an AI agent can discover another agent through several mechanisms: direct configuration, an <strong>A2A Agent Card</strong> at a well-known URL, a central or federated registry, enterprise catalogs, semantic capability search, and emerging DNS- or name-service-based proposals. A2A now standardizes the machine-readable Agent Card and permanently registers <code>/.well-known/agent-card.json</code>, while multiple 2026 Internet-Drafts explore DNS discovery, agent registries and richer naming systems.</p>
+<p>But discovery is not trust. An agent that advertises “I can book flights” has only made a claim. A production discovery pipeline must still ask: <strong>Is the record fresh? Is the endpoint authentic? Does the agent actually support the task? Is it compatible with my protocol and security requirements? What evidence supports its claims? Is it authorized? And among many candidates, which one should receive the task?</strong></p>
+</div>
+</section>
+
+<div class="guide-reading shell"><aside class="guide-toc">
+<span>IN THIS GUIDE</span>
+<a href="#what-is-discovery">What is AI agent discovery?</a>
+<a href="#why-now">Why discovery becomes infrastructure</a>
+<a href="#discovery-vs-routing">Discovery vs routing vs authorization</a>
+<a href="#what-must-be-discovered">What an agent needs to learn</a>
+<a href="#a2a-agent-card">A2A Agent Cards</a>
+<a href="#well-known">/.well-known/agent-card.json</a>
+<a href="#signed-cards">Signed Agent Cards</a>
+<a href="#discovery-strategies">A2A discovery strategies</a>
+<a href="#registries">AI agent registries</a>
+<a href="#mcp-registry">MCP Registry vs agent registry</a>
+<a href="#dns-aid">DNS-AID</a>
+<a href="#dns-research">The case for DNS at internet scale</a>
+<a href="#adp">Agent Discovery Protocol (ADP)</a>
+<a href="#ains">AInternet Name Service (AINS)</a>
+<a href="#arpa">Agent Registry Protocol (ARPA)</a>
+<a href="#areg">Agent Registry (AREG)</a>
+<a href="#capability-search">Capability discovery at scale</a>
+<a href="#retrieve-rank">Retrieve, filter, rank</a>
+<a href="#trust">Discovery is not trust</a>
+<a href="#reputation">AI agent reputation</a>
+<a href="#corroboration">Multi-source corroboration</a>
+<a href="#security">Discovery attacks</a>
+<a href="#private-discovery">Enterprise/private discovery</a>
+<a href="#cross-protocol">Cross-protocol discovery</a>
+<a href="#discovery-stack">SXF Agent Discovery Stack</a>
+<a href="#image-map">Discovery routing map</a>
+<a href="#architecture">Production architecture</a>
+<a href="#standards">What is actually standardized?</a>
+<a href="#google-for-agents">Who becomes Google for agents?</a>
+<a href="#faq">FAQ</a>
+<a class="guide-toc-top" href="#quick-answer">↑ Back to top</a>
+</aside><div class="guide-prose">
+
+<section id="what-is-discovery">
+<p class="eyebrow">THE PRIMARY KEYWORD / THE CORE PROBLEM</p>
+<h2>What is AI agent discovery?</h2>
+<p><strong>AI agent discovery</strong> is the process of locating autonomous agents and retrieving enough machine-readable information to determine whether they are candidates for a task.</p>
+<p>A basic discovery system can answer:</p>
+<div class="guide-callout"><strong>“Where is the agent?”</strong></div>
+<p>A useful discovery system must answer much more:</p>
+<ul>
+<li>What is the agent called?</li>
+<li>Which organization or operator publishes it?</li>
+<li>What capabilities and skills does it claim?</li>
+<li>Which endpoint and protocol should a client use?</li>
+<li>What authentication does interaction require?</li>
+<li>Which input and output formats are supported?</li>
+<li>Is the record current?</li>
+<li>What evidence supports the claims?</li>
+<li>Can this agent be used in the current policy context?</li>
+<li>If hundreds of agents qualify, which candidate should be selected?</li>
+</ul>
+<p>This makes agent discovery partly a naming problem, partly a service-discovery problem, partly an information-retrieval problem and partly a trust problem.</p>
+</section>
+
+<section id="why-now">
+<p class="eyebrow">FROM KNOWN ENDPOINTS TO AN OPEN AGENT ECOSYSTEM</p>
+<h2>Why agent discovery becomes infrastructure when agents stop being hard-coded</h2>
+<p>Early agent systems are often built around known relationships: a developer configures a model, a fixed set of tools, perhaps a few sub-agents, and every endpoint is known in advance.</p>
+<p>That architecture breaks when the task becomes open-ended:</p>
+<div class="agentic-story">
+<p><strong>“Find a customs-compliance agent that supports EU imports and can return a cited report.”</strong></p>
+<p><strong>“Find a freight agent that can quote Berlin → Shanghai and transact under €2,000.”</strong></p>
+<p><strong>“Find a specialist agent that understands this codebase's framework and can run inside our security policy.”</strong></p>
+</div>
+<p>The calling agent now knows the <em>capability it needs</em>, but not necessarily the provider, endpoint or protocol.</p>
+<p>That is the discovery gap.</p>
+<p>A2A's own documentation states the dependency directly: before agents can collaborate, they must find each other and understand the capabilities being offered. In August 2026, A2A joined the Agentic AI Foundation as a Growth Stage project and described its role as a horizontal layer for agents to discover, delegate and collaborate across framework and vendor boundaries.</p>
+</section>
+
+<section id="discovery-vs-routing">
+<p class="eyebrow">THREE PROBLEMS THAT SHOULD NOT BE COLLAPSED</p>
+<h2>Agent discovery vs agent routing vs agent authorization</h2>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Stage</th><th>Question</th><th>Example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Discovery</th><td data-label="Question">Which agents could perform this task?</td><td data-label="Example">Find agents advertising freight-quote capability.</td></tr>
+<tr><th scope="row">Resolution</th><td data-label="Question">Where is this agent and what is its current metadata?</td><td data-label="Example">Resolve endpoints, interfaces, version and current status.</td></tr>
+<tr><th scope="row">Filtering</th><td data-label="Question">Which candidates meet hard constraints?</td><td data-label="Example">A2A-compatible, EU region, structured JSON output.</td></tr>
+<tr><th scope="row">Ranking</th><td data-label="Question">Which candidate is preferable?</td><td data-label="Example">Rank by task fit, evidence, cost and latency.</td></tr>
+<tr><th scope="row">Routing</th><td data-label="Question">Where should the task be sent?</td><td data-label="Example">Select Agent B and invoke its preferred endpoint.</td></tr>
+<tr><th scope="row">Authorization</th><td data-label="Question">Is this actor allowed to perform the requested action?</td><td data-label="Example">Agent B may quote, but not charge the user's card.</td></tr>
+</tbody></table></div>
+<p>The distinction is critical. The September 2026 Agent Registry Protocol draft explicitly preserves the rule that <strong>discovering an agent does not imply authorization to invoke it</strong>. That is the same separation SXF uses in the <a href="/guides/ai-agent-authorization/">AI Agent Authorization</a> reference.</p>
+</section>
+
+<section id="what-must-be-discovered">
+<p class="eyebrow">THE DISCOVERY RECORD</p>
+<h2>What information does one AI agent need about another?</h2>
+<p>There is no universal record format, but current protocols converge around a common set of fields.</p>
+<div class="guide-choice-grid">
+<article><span>IDENTITY</span><p>Name, provider, stable identifier or verifiable publisher relationship.</p></article>
+<article><span>CAPABILITIES</span><p>What the agent says it can do and which skills or task domains it exposes.</p></article>
+<article><span>ENDPOINTS</span><p>Where the agent can be reached and which interface should be preferred.</p></article>
+<article><span>PROTOCOL</span><p>A2A, proprietary API, messaging mode, versions and extensions.</p></article>
+<article><span>SECURITY</span><p>Authentication schemes and access requirements.</p></article>
+<article><span>FORMATS</span><p>Accepted and returned content types or modalities.</p></article>
+<article><span>LIFECYCLE</span><p>Current version, status, availability and freshness.</p></article>
+<article><span>EVIDENCE</span><p>Signatures, attestations, registry provenance, execution history or other trust signals.</p></article>
+</div>
+<p>Discovery therefore produces a <em>candidate description</em>. It should not be confused with a guarantee that the agent is competent, trustworthy or authorized.</p>
+</section>
+
+<section id="a2a-agent-card">
+<p class="eyebrow">THE MOST CONCRETE DISCOVERY PRIMITIVE TODAY</p>
+<h2>What is an A2A Agent Card?</h2>
+<p>An <strong>A2A Agent Card</strong> is a JSON document that acts as a machine-readable description of a remote A2A agent.</p>
+<p>The current A2A specification includes information such as:</p>
+<ul>
+<li>the agent's name, description and provider-facing metadata;</li>
+<li>supported interfaces and endpoints;</li>
+<li>protocol binding and version;</li>
+<li>capabilities;</li>
+<li>skills;</li>
+<li>supported input and output media types;</li>
+<li>security schemes and requirements;</li>
+<li>and optional signatures.</li>
+</ul>
+<p>That makes the Agent Card closer to a machine-readable service manifest than a marketing profile.</p>
+<p>Another agent can fetch the card, inspect it and decide whether the advertised agent is even structurally compatible before starting a task.</p>
+<div class="guide-callout"><strong>An Agent Card answers “what does this agent claim to offer and how do I talk to it?” It does not, by itself, answer “should I trust it?”</strong></div>
+</section>
+
+<section id="well-known">
+<p class="eyebrow">ONE URL THAT MATTERS</p>
+<h2>A2A permanently registers <code>/.well-known/agent-card.json</code></h2>
+<p>The A2A specification registers the well-known URI suffix <code>agent-card.json</code>. A public A2A agent can therefore expose its card at:</p>
+<div class="guide-callout"><strong>https://agent.example.com/.well-known/agent-card.json</strong></div>
+<p>This is important because it standardizes <em>where to look once a domain is known</em>.</p>
+<p>That solves a narrower problem than global search. If an agent knows the domain of a potential provider, it can retrieve the card without proprietary discovery code.</p>
+<p>It does not solve:</p>
+<ul>
+<li>How do I discover the domain in the first place?</li>
+<li>How do I find every agent capable of task X?</li>
+<li>How do I compare thousands of Agent Cards?</li>
+<li>How do I know a self-declared skill is true?</li>
+</ul>
+<p>Those questions create the need for registries, search indexes, DNS discovery and trust layers.</p>
+</section>
+
+<section id="signed-cards">
+<p class="eyebrow">INTEGRITY IS NOT REPUTATION</p>
+<h2>Signed Agent Cards help prove integrity—but a signature cannot prove capability</h2>
+<p>A2A supports Agent Card signatures using JSON Web Signature (JWS). The specification describes how clients can verify signatures and recommends verifying at least one signature when signatures are present.</p>
+<p>This can help answer:</p>
+<div class="guide-difference">
+<div><span>CRYPTOGRAPHIC QUESTION</span><strong>Was this card altered after the signer produced it?</strong><p>A valid signature can provide useful integrity and publisher evidence.</p></div>
+<div><span>CAPABILITY QUESTION</span><strong>Can this agent really do what the card says?</strong><p>A signature does not independently prove performance, safety or task competence.</p></div>
+</div>
+<p>A malicious or low-quality agent can sign an inaccurate self-description perfectly.</p>
+<p>Discovery systems therefore need to treat signed metadata as one signal in a larger trust decision.</p>
+</section>
+
+<section id="discovery-strategies">
+<p class="eyebrow">A2A DOES NOT REQUIRE ONE GLOBAL DIRECTORY</p>
+<h2>Three practical A2A discovery patterns</h2>
+<p>A2A documentation describes multiple strategies because discovery requirements differ between the open internet and private systems.</p>
+<div class="security-principles">
+<article><span>01</span><h3>Well-known URI</h3><p>Best when the client already knows a domain. Fetch the Agent Card from the standardized URL and evaluate the advertised interfaces and skills.</p></article>
+<article><span>02</span><h3>Registry / catalog discovery</h3><p>Useful when clients need to search a population of agents by capability, provider, policy or other metadata rather than knowing the endpoint in advance.</p></article>
+<article><span>03</span><h3>Direct / private configuration</h3><p>Useful for tightly controlled relationships where clients are configured with known Agent Cards or private discovery endpoints.</p></article>
+</div>
+<p>A mature ecosystem will likely use all three. Private enterprise agents do not need to be globally searchable, while public commerce or specialist agents may benefit from broad discovery.</p>
+</section>
+
+<section id="registries">
+<p class="eyebrow">SEARCH NEEDS AN INDEX</p>
+<h2>What is an AI agent registry?</h2>
+<p>An <strong>AI agent registry</strong> is a service that publishes, indexes or resolves records about agents.</p>
+<p>Depending on the design, a registry may expose:</p>
+<ul>
+<li>agent identifiers;</li>
+<li>versions and deployments;</li>
+<li>capabilities and skills;</li>
+<li>endpoints;</li>
+<li>operators or publishers;</li>
+<li>protocol compatibility;</li>
+<li>lifecycle status;</li>
+<li>authority or relationship references;</li>
+<li>trust evidence;</li>
+<li>and search APIs.</li>
+</ul>
+<p>The key architectural choice is whether the registry is:</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Model</th><th>Strength</th><th>Main risk / tradeoff</th></tr></thead>
+<tbody>
+<tr><th scope="row">Central catalog</th><td data-label="Strength">Easy search, indexing and ranking.</td><td data-label="Tradeoff">Central governance, moderation and availability dependency.</td></tr>
+<tr><th scope="row">Federated registries</th><td data-label="Strength">Multiple operators and specialized trust domains.</td><td data-label="Tradeoff">Conflicting records, duplicate identities and ranking complexity.</td></tr>
+<tr><th scope="row">DNS / domain-based</th><td data-label="Strength">Reuses globally deployed naming infrastructure and domain control.</td><td data-label="Tradeoff">Capability search and rich ranking require additional layers.</td></tr>
+<tr><th scope="row">Enterprise directory</th><td data-label="Strength">Strong local policy and privacy.</td><td data-label="Tradeoff">Poor global discoverability.</td></tr>
+<tr><th scope="row">Marketplace</th><td data-label="Strength">Can combine discovery with price, reviews and transactions.</td><td data-label="Tradeoff">Economic incentives can distort rankings and trust signals.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="mcp-registry">
+<p class="eyebrow">TOOLS AND AGENTS ARE DIFFERENT DISCOVERY TARGETS</p>
+<h2>The official MCP Registry shows what machine-readable discovery already looks like</h2>
+<p>The <strong>official MCP Registry</strong> is a community-driven catalog and API for discovering publicly available Model Context Protocol servers.</p>
+<p>Its original launch described it as a primary source of truth from which public and private sub-registries could derive richer, opinionated catalogs.</p>
+<p>That is relevant to agent discovery even though MCP servers are not synonymous with autonomous agents.</p>
+<div class="guide-difference">
+<div><span>MCP</span><strong>Agent/client → tool or data server</strong><p>Vertical integration: give an agent capabilities, APIs and data.</p></div>
+<div><span>A2A</span><strong>Agent → peer agent</strong><p>Horizontal collaboration: discover another autonomous actor and delegate work.</p></div>
+</div>
+<p>Future orchestrators may need to query both kinds of ecosystem: “Do I need a tool, a specialist agent, or either?”</p>
+</section>
+
+<section id="dns-aid">
+<p class="eyebrow">CAN DNS BECOME AN AGENT DISCOVERY LAYER?</p>
+<h2>DNS-AID: publishing AI agents through the Domain Name System</h2>
+<p>The active <strong>DNS for AI Discovery (DNS-AID)</strong> Internet-Draft proposes using DNS to publish information that helps other agents discover AI services.</p>
+<p>The May 2026 revision describes three increasingly difficult lookup situations:</p>
+<ol>
+<li>the requester knows both the organization and agent;</li>
+<li>the requester knows the organization but not which of its agents offers the required capability;</li>
+<li>the requester knows only the capability and not the organization or agent.</li>
+</ol>
+<p>The draft focuses primarily on the first two. Global capability search is a broader indexing problem.</p>
+<p>The attraction is obvious: DNS already provides globally distributed, cached, administratively delegated naming infrastructure.</p>
+<p>DNS-AID does <strong>not</strong> magically turn DNS into Google for agents. It can provide a scalable route into discovery, while richer capability retrieval and ranking happen above it.</p>
+</section>
+
+<section id="dns-research">
+<p class="eyebrow">RESEARCH / INTERNET-SCALE FEASIBILITY</p>
+<h2>A 2026 study tested the case for DNS using 119,757 real-world service endpoints</h2>
+<p>A June 2026 preprint, <em>Discovering Agents for Discovery: The Case for DNS</em>, frames agent discoverability around three criteria: navigational completeness, lookup complexity and transaction performance.</p>
+<p>The researchers evaluated metadata requirements using <strong>119,757 real-world service endpoints</strong> and multiple agent-tooling ecosystems. Their results argue that the relevant discovery data can fit within the scale of a DNS transaction and that DNS offers a plausible foundation for low-latency discovery.</p>
+<p>This is not proof that DNS-AID will become the winner. It is evidence that internet-scale agent discovery does not necessarily require replacing the internet's naming substrate.</p>
+</section>
+
+<section id="adp">
+<p class="eyebrow">A LAYERED DISCOVERY PROPOSAL</p>
+<h2>Agent Discovery Protocol (ADP): DNS → metadata → interaction</h2>
+<p>The June 2026 <strong>Agent Discovery Protocol (ADP) v1.1</strong> Internet-Draft proposes a layered architecture:</p>
+<div class="agentic-ladder">
+<div><span>01</span><strong>DNS-AID</strong><p>Find the path toward the agent or capability provider.</p></div>
+<div><span>02</span><strong>Well-known JSON metadata</strong><p>Retrieve machine-readable description and identity material.</p></div>
+<div><span>03</span><strong>Agent Gateway Protocol</strong><p>Escalate to a real-time WebSocket interaction layer when needed.</p></div>
+</div>
+<p>The design principle is incremental cost: use lightweight discovery first, then fetch richer metadata and open interactive channels only when the workflow requires them.</p>
+<p>ADP is an Internet-Draft and should be treated as work in progress, not as an established standard.</p>
+</section>
+
+<section id="ains">
+<p class="eyebrow">A NAME SERVICE FOR RICH AGENT OBJECTS</p>
+<h2>AINS: what if agent names resolve to capabilities, routes and evidence?</h2>
+<p>The September 24, 2026 <strong>AINS: AInternet Name Service</strong> draft proposes a transport-independent logical namespace for agents and an HTTPS-based resolution protocol.</p>
+<p>Unlike ordinary DNS name-to-address resolution, AINS records are designed to map agent identifiers to richer metadata including:</p>
+<ul>
+<li>identity information;</li>
+<li>capabilities;</li>
+<li>endpoints;</li>
+<li>route-provider metadata;</li>
+<li>route posture;</li>
+<li>and references to cryptographic evidence.</li>
+</ul>
+<p>This represents a different philosophy from DNS-AID.</p>
+<div class="guide-difference">
+<div><span>DNS-AID</span><strong>Reuse DNS as the discovery substrate.</strong><p>Leverage existing domain administration, caching and network infrastructure.</p></div>
+<div><span>AINS</span><strong>Create a richer logical agent namespace.</strong><p>Resolve agent-centric objects that carry capabilities, routing posture and evidence references.</p></div>
+</div>
+<p>Both are current proposals, not settled internet architecture.</p>
+</section>
+
+<section id="arpa">
+<p class="eyebrow">THE REGISTRY IS STARTING TO ABSORB TRUST CONTEXT</p>
+<h2>Agent Registry Protocol (ARPA): discovery plus relationships, lifecycle and evidence</h2>
+<p>The latest September 2026 revision of the <strong>Agent Registry Protocol</strong> proposes an HTTP/JSON protocol for agent registration and resolution.</p>
+<p>Its scope goes beyond a simple directory. Records may represent:</p>
+<ul>
+<li>persistent agent identifiers and deployment identifiers;</li>
+<li>typed relationships between agents, operators and principals;</li>
+<li>bounded delegated authority;</li>
+<li>capability and assurance references;</li>
+<li>current and historical lifecycle state;</li>
+<li>registry discovery;</li>
+<li>and evidence references.</li>
+</ul>
+<p>The draft also makes an architectural distinction worth preserving across the industry:</p>
+<div class="guide-callout"><strong>Resolution obtains state. Decision evaluates it. Enforcement permits or denies the real action.</strong></div>
+<p>A registry can provide inputs to trust and authorization. It should not silently become the universal policy engine.</p>
+</section>
+
+<section id="areg">
+<p class="eyebrow">ANOTHER REGISTRY MODEL / DIFFERENT SCOPE</p>
+<h2>AREG: publishing and resolving agent definitions</h2>
+<p>The August 2026 <strong>Agent Registry (AREG)</strong> Internet-Draft proposes an open, vendor-neutral registry specification for publishing, discovering and resolving agent definitions.</p>
+<p>An AREG entry can identify:</p>
+<ul>
+<li>where an agent definition can be fetched;</li>
+<li>who published it;</li>
+<li>which version is current;</li>
+<li>and how consumers can verify authenticity.</li>
+</ul>
+<p>Its design illustrates an important point: an “agent registry” does not have one universal meaning yet.</p>
+<p>Some registries index runnable endpoints. Others index definitions. Others add identity, authority, reputation or marketplace data.</p>
+<p>Search engines for agents will need to normalize these differences.</p>
+</section>
+
+<section id="capability-search">
+<p class="eyebrow">THE HARD CASE IS “I KNOW THE TASK, NOT THE AGENT”</p>
+<h2>Capability discovery turns agent selection into information retrieval</h2>
+<p>The easiest discovery query is:</p>
+<div class="guide-callout"><strong>“Resolve Agent X at example.com.”</strong></div>
+<p>The harder and economically more interesting query is:</p>
+<div class="guide-callout"><strong>“Find an agent that can perform task X under constraints Y.”</strong></div>
+<p>Now the system needs semantic retrieval.</p>
+<p>The task description may not use the same words as the agent's skill metadata. A user may ask for “validate this supplier's carbon claims” while an agent advertises “Scope 3 emissions evidence verification.”</p>
+<p>Keyword equality is not enough.</p>
+<p>A scalable discovery engine may need embeddings, enriched capability profiles, taxonomy mapping, filters and learned or policy-driven ranking.</p>
+</section>
+
+<section id="retrieve-rank">
+<p class="eyebrow">2026 RESEARCH / WHY “PUT THE REGISTRY IN THE PROMPT” DOES NOT SCALE</p>
+<h2>At thousands of candidates, capability discovery needs retrieve-then-rank architecture</h2>
+<p>An August 2026 preprint, <em>Enrich-Retrieve-Rank: Scaling Capability Discovery Beyond In-Context Routing</em>, tested discovery across registries of models, agents, tools and skills.</p>
+<p>In the reported experiments, an in-context routing baseline's top-1 matching accuracy fell from <strong>0.85 at 10 candidates to 0.12 at 7,278 candidates</strong>. The proposed retrieve-then-rank pipeline degraded less severely, reaching 0.39 at full scale, and the authors reported a large cost advantage over placing the full registry in context.</p>
+<p>The exact numbers belong to that benchmark, not to every real system. But the architectural lesson is important:</p>
+<div class="guide-callout"><strong>Agent discovery at scale looks more like search-engine retrieval and ranking than like asking an LLM to read an enormous directory.</strong></div>
+<p>The same research describes a production capability-discovery pipeline that enriches sparse metadata offline, retrieves candidates and then reranks a short list.</p>
+</section>
+
+<section id="trust">
+<p class="eyebrow">FINDING IS NOT BELIEVING</p>
+<h2>Discovery is not trust</h2>
+<p>Suppose a registry returns 30 agents that all claim:</p>
+<div class="guide-callout"><strong>“I can perform financial due diligence.”</strong></div>
+<p>Discovery succeeded.</p>
+<p>The difficult work has barely started.</p>
+<p>A relying agent may still need to evaluate:</p>
+<ul>
+<li>publisher authenticity;</li>
+<li>record freshness;</li>
+<li>capability evidence;</li>
+<li>security posture;</li>
+<li>prior execution results;</li>
+<li>task-specific quality;</li>
+<li>price and latency;</li>
+<li>jurisdiction or data residency;</li>
+<li>and whether the agent is authorized for the intended action.</li>
+</ul>
+<p>This is why the future discovery stack will probably separate <strong>self-description</strong> from <strong>independent evidence</strong>.</p>
+</section>
+
+<section id="reputation">
+<p class="eyebrow">THE TEMPTATION AND THE TRAP</p>
+<h2>Does every AI agent need a reputation score?</h2>
+<p>A universal “87/100 trust score” is attractive because it makes ranking easy.</p>
+<p>It is also dangerous.</p>
+<p>An agent can be excellent at one domain and unreliable in another. A five-star travel agent is not automatically a five-star legal-research agent.</p>
+<p>Reputation also creates incentive attacks:</p>
+<ul>
+<li>fake transactions;</li>
+<li>Sybil accounts;</li>
+<li>collusive reviews;</li>
+<li>reputation laundering after version changes;</li>
+<li>and selective publication of successful outcomes.</li>
+</ul>
+<p>A September 2026 Internet-Draft called <strong>Agent Trust &amp; Execution Passport (ATEP)</strong> explores portable, machine-readable execution history and trust metadata derived from append-only logs. It is an early proposal, not an accepted standard.</p>
+<p>The more robust direction is likely multidimensional evidence:</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Signal</th><th>What it may tell a router</th></tr></thead>
+<tbody>
+<tr><th scope="row">Task-domain history</th><td data-label="Meaning">Has the agent succeeded on comparable work?</td></tr>
+<tr><th scope="row">Recency</th><td data-label="Meaning">Are results from the current version or an obsolete build?</td></tr>
+<tr><th scope="row">Verified execution</th><td data-label="Meaning">Can outcomes be linked to evidence rather than self-report?</td></tr>
+<tr><th scope="row">Disputes / failures</th><td data-label="Meaning">How often do transactions fail or get challenged?</td></tr>
+<tr><th scope="row">Security assurance</th><td data-label="Meaning">Which independent controls or attestations apply?</td></tr>
+<tr><th scope="row">Cost / latency</th><td data-label="Meaning">Is the agent operationally suitable for this request?</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="corroboration">
+<p class="eyebrow">DON'T TRUST ONE DIRECTORY JUST BECAUSE IT IS SIGNED</p>
+<h2>Multi-source corroboration: the registry itself can lie, omit or equivocate</h2>
+<p>An August 2026 Internet-Draft on <strong>Multi-Source Corroboration for AI Agent Discovery</strong> starts from an important observation: agents may be represented across independent registries, name services, decentralized identifiers and catalogs.</p>
+<p>A single source can:</p>
+<ul>
+<li>omit a record;</li>
+<li>serve stale data;</li>
+<li>show different answers to different observers;</li>
+<li>or publish a signed but misleading artifact.</li>
+</ul>
+<p>A cryptographic signature does not solve omission or equivocation by the signer.</p>
+<p>For high-impact selection, a discovery engine may therefore compare claims across multiple independent sources before relying on them.</p>
+</section>
+
+<section id="security">
+<p class="eyebrow">THE DISCOVERY LAYER WILL BECOME AN ATTACK SURFACE</p>
+<h2>How AI agent discovery can be attacked</h2>
+<div class="security-principles">
+<article><span>01</span><h3>Agent spoofing</h3><p>An attacker publishes a lookalike identifier, domain or endpoint and hopes routers select the wrong agent.</p></article>
+<article><span>02</span><h3>Capability inflation</h3><p>An agent advertises skills it cannot perform reliably to appear in more discovery queries.</p></article>
+<article><span>03</span><h3>Registry poisoning</h3><p>Malicious or compromised publishers insert false metadata or redirect endpoints.</p></article>
+<article><span>04</span><h3>Sybil agents</h3><p>One operator creates many identities to dominate rankings or manufacture reputation.</p></article>
+<article><span>05</span><h3>Stale metadata</h3><p>A cached card points to an obsolete endpoint, capability, key or security requirement.</p></article>
+<article><span>06</span><h3>Ranking manipulation</h3><p>Providers optimize metadata, payments or review signals to win selection despite weaker task fit.</p></article>
+<article><span>07</span><h3>Privacy leakage</h3><p>Public cards or registries reveal internal agents, sensitive skills, topology or business functions.</p></article>
+<article><span>08</span><h3>Trust transference</h3><p>A router mistakes “listed in a registry” or “signed card” for proof of safety and authority.</p></article>
+</div>
+<p>A2A documentation itself warns that Agent Cards can expose sensitive URLs or skills and recommends authenticated extended cards or protected endpoints for sensitive metadata.</p>
+</section>
+
+<section id="private-discovery">
+<p class="eyebrow">NOT EVERY AGENT SHOULD BE ON THE OPEN WEB</p>
+<h2>Private enterprise discovery may be larger than public agent search</h2>
+<p>Many valuable agents should never be globally indexed:</p>
+<ul>
+<li>finance agents with access to internal ledgers;</li>
+<li>security agents exposing incident-response capabilities;</li>
+<li>HR agents;</li>
+<li>production deployment agents;</li>
+<li>internal research agents;</li>
+<li>agents bound to regulated datasets.</li>
+</ul>
+<p>Enterprise discovery therefore needs the same search primitives with stricter policy:</p>
+<div class="guide-callout"><strong>private registry → authenticated metadata → policy-aware filtering → internal trust evidence → authorized invocation</strong></div>
+<p>The MCP Registry's architecture already anticipates private sub-registries, while A2A supports protected cards and private discovery patterns.</p>
+</section>
+
+<section id="cross-protocol">
+<p class="eyebrow">THE MACHINE WEB WILL NOT HAVE ONE FORMAT</p>
+<h2>Cross-protocol discovery: the best capability may be an agent, a tool or a service</h2>
+<p>An orchestrator starts with a task, not a protocol preference.</p>
+<p>For “convert these invoices into normalized accounting entries,” the best option might be:</p>
+<ul>
+<li>an A2A specialist agent;</li>
+<li>an MCP server exposing deterministic accounting tools;</li>
+<li>a conventional API;</li>
+<li>or an internal workflow.</li>
+</ul>
+<p>A future discovery engine may therefore index heterogeneous capability objects and normalize them into one retrieval layer.</p>
+<p>This creates a broader category:</p>
+<div class="guide-callout"><strong>Machine Capability Discovery = Models + Agents + Tools + Skills + Services</strong></div>
+<p>The 2026 retrieve-rank research explicitly evaluates this broader MATS framing—models, agents, tools and skills—rather than assuming discovery ends at agent directories.</p>
+</section>
+
+<section id="discovery-stack">
+<p class="eyebrow">SXF REFERENCE MODEL / THE FULL SEARCH PIPELINE</p>
+<h2>The SXF AI Agent Discovery Stack</h2>
+<p>Discovery is strongest when treated as a pipeline of separate decisions rather than a single registry lookup.</p>
+<div class="agentic-ladder">
+<div><span>01</span><strong>Name / Intent</strong><p>Do we know a specific agent, a provider, or only the capability required?</p></div>
+<div><span>02</span><strong>Discovery Source</strong><p>Query DNS, a well-known URL, registry, catalog, enterprise directory or federated index.</p></div>
+<div><span>03</span><strong>Resolution</strong><p>Retrieve the current card, record, endpoint, version and protocol metadata.</p></div>
+<div><span>04</span><strong>Capability Match</strong><p>Map the task intent to advertised skills and retrieve plausible candidates.</p></div>
+<div><span>05</span><strong>Compatibility Filter</strong><p>Reject candidates that fail protocol, region, format, security or policy requirements.</p></div>
+<div><span>06</span><strong>Identity &amp; Provenance</strong><p>Verify signatures, publisher relationships and record provenance where available.</p></div>
+<div><span>07</span><strong>Evidence &amp; Trust</strong><p>Evaluate reputation, execution history, attestations, corroboration and freshness.</p></div>
+<div><span>08</span><strong>Authorization Check</strong><p>Determine whether interaction or the eventual action is permitted in the current context.</p></div>
+<div><span>09</span><strong>Ranking</strong><p>Order valid candidates by task fit, quality, price, latency, risk and local policy.</p></div>
+<div><span>10</span><strong>Routing &amp; Feedback</strong><p>Send the task, observe the result and feed verified outcome evidence back into future discovery.</p></div>
+</div>
+<p>The critical insight is that no single component should silently claim the authority of all ten stages.</p>
+</section>
+
+<section id="image-map">
+<p class="eyebrow">ONE IMAGE / THE MACHINE SEARCH LAYER</p>
+<h2>How an AI agent goes from “I need a capability” to “send the task here”</h2>
+<figure class="guide-research-image" data-image-slot="1" data-image-path="/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp">
+<img src="/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp" width="1672" height="941" loading="lazy" decoding="async" alt="AI agent discovery pipeline across DNS, Agent Cards, registries, capability retrieval, trust verification, ranking and task routing" />
+<figcaption>An agent begins with a task, searches one or more discovery layers, retrieves machine-readable capability records, verifies evidence, filters and ranks candidates, then routes the task to a selected agent.</figcaption>
+</figure>
+<p>The image should make one distinction visually unavoidable:</p>
+<div class="guide-callout"><strong>Discovery produces candidates. Verification and ranking produce a selection.</strong></div>
+</section>
+
+<section id="architecture">
+<p class="eyebrow">PRODUCTION DESIGN</p>
+<h2>A production architecture for AI agent discovery</h2>
+<div class="security-principles">
+<article><span>01</span><h3>Separate source adapters from the index.</h3><p>Normalize A2A cards, registries, DNS records, MCP catalogs and enterprise directories into a common internal representation without erasing provenance.</p></article>
+<article><span>02</span><h3>Keep authoritative source links.</h3><p>Every normalized field should retain where it came from, when it was observed and whether it was self-declared or independently verified.</p></article>
+<article><span>03</span><h3>Enrich offline.</h3><p>Generate capability embeddings, taxonomies and searchable profiles before requests arrive instead of making each router reason over raw metadata.</p></article>
+<article><span>04</span><h3>Retrieve before reranking.</h3><p>Use search to reduce thousands of possibilities to a small candidate set, then apply richer model- or policy-based ranking.</p></article>
+<article><span>05</span><h3>Filter hard constraints first.</h3><p>Protocol, geography, security, permissions, data residency and required formats should not be traded away by a relevance score.</p></article>
+<article><span>06</span><h3>Verify fresh identity and endpoints.</h3><p>Do not route solely from stale cached metadata when the action is consequential.</p></article>
+<article><span>07</span><h3>Treat reputation as evidence, not truth.</h3><p>Use task-specific, time-bounded signals and defend against Sybil and collusion attacks.</p></article>
+<article><span>08</span><h3>Keep discovery separate from authorization.</h3><p>A high-ranked agent must still pass the relevant authorization and policy checks before action.</p></article>
+<article><span>09</span><h3>Record selection rationale.</h3><p>For high-impact workflows, log why candidates were retrieved, rejected, ranked and selected.</p></article>
+<article><span>10</span><h3>Feed verified outcomes back carefully.</h3><p>Update future ranking from evidence-backed results rather than raw self-reported success.</p></article>
+</div>
+</section>
+
+<section id="standards">
+<p class="eyebrow">MATURITY MAP / OCTOBER 2026</p>
+<h2>What is actually standardized in AI agent discovery?</h2>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Technology</th><th>Status</th><th>What it solves</th></tr></thead>
+<tbody>
+<tr><th scope="row">A2A Agent Card</th><td data-label="Status">A2A standard</td><td data-label="Role">Machine-readable agent self-description, interfaces, skills and security requirements.</td></tr>
+<tr><th scope="row"><code>/.well-known/agent-card.json</code></th><td data-label="Status">Permanent well-known URI registration in A2A specification</td><td data-label="Role">Predictable location to retrieve an Agent Card when a domain is known.</td></tr>
+<tr><th scope="row">Official MCP Registry</th><td data-label="Status">Operational official MCP project</td><td data-label="Role">Catalog/API for discovering publicly available MCP servers; supports sub-registry architecture.</td></tr>
+<tr><th scope="row">DNS-AID</th><td data-label="Status">Active IETF Internet-Draft</td><td data-label="Role">Publish AI-agent discovery information through DNS.</td></tr>
+<tr><th scope="row">ADP</th><td data-label="Status">Internet-Draft</td><td data-label="Role">Layer DNS-AID, well-known metadata and real-time agent interaction.</td></tr>
+<tr><th scope="row">AINS</th><td data-label="Status">Internet-Draft</td><td data-label="Role">Resolve logical agent names to rich capability, route and evidence metadata.</td></tr>
+<tr><th scope="row">ARPA Agent Registry Protocol</th><td data-label="Status">Active individual Internet-Draft</td><td data-label="Role">Agent records, relationships, lifecycle, authority state and evidence references.</td></tr>
+<tr><th scope="row">AREG</th><td data-label="Status">Internet-Draft</td><td data-label="Role">Vendor-neutral publication, search and resolution of agent definitions.</td></tr>
+<tr><th scope="row">ATEP trust passport</th><td data-label="Status">Internet-Draft</td><td data-label="Role">Portable execution-history and reputation-style metadata.</td></tr>
+</tbody></table></div>
+<p><strong>Internet-Draft does not mean Internet Standard.</strong> Anyone can submit an Internet-Draft, and drafts can change, expire or never progress. They are useful here because they reveal active engineering directions—not because SXF assumes they will win.</p>
+</section>
+
+<section id="google-for-agents">
+<p class="eyebrow">THE BIGGER QUESTION</p>
+<h2>Who becomes Google for AI agents?</h2>
+<p>The analogy is useful but incomplete.</p>
+<p>Human web search ranks documents for attention. Agent discovery may rank <em>actors that can take actions</em>.</p>
+<p>That raises the stakes.</p>
+<p>A search engine for agents may influence:</p>
+<ul>
+<li>which agent receives commercial demand;</li>
+<li>which agent is trusted with data;</li>
+<li>which agent can spend money or negotiate;</li>
+<li>which protocol ecosystems become dominant;</li>
+<li>and which reputation systems determine machine-to-machine trust.</li>
+</ul>
+<p>There are at least four plausible architectural centers:</p>
+<div class="guide-choice-grid">
+<article><span>DNS / NAME LAYER</span><p>Decentralized publication and routing from domains or global agent identifiers.</p></article>
+<article><span>REGISTRY LAYER</span><p>Structured catalogs that resolve agents and current lifecycle metadata.</p></article>
+<article><span>SEARCH / RANKING LAYER</span><p>Cross-registry indexes that retrieve and rank by capability, evidence, price and policy.</p></article>
+<article><span>MARKETPLACE LAYER</span><p>Discovery combined with transaction, reputation and payment.</p></article>
+</div>
+<p>These layers do not need one owner. The mature web split DNS, hosting, search, identity, advertising and commerce across many systems. The agentic web may do the same.</p>
+<p>The crucial future keyword may therefore be bigger than <strong>AI agent discovery</strong>:</p>
+<div class="guide-callout"><strong>Agent Search → Capability Search → Trust-Aware Routing → Machine Discovery</strong></div>
+</section>
+
+<section id="bottom-line">
+<p class="eyebrow">BOTTOM LINE</p>
+<h2>The next web needs a way for machines to find machines</h2>
+<p>The human web became usable because a person could type a name, follow a link or search an index and reach a service.</p>
+<p>Autonomous agents need an equivalent machine path.</p>
+<p>A2A Agent Cards now define a serious self-description primitive. DNS-AID asks whether internet naming can expose agents. ADP and AINS explore discovery layers. ARPA and AREG explore registries. The MCP ecosystem already operates a public registry. New research is treating capability selection as a retrieval-and-ranking problem rather than a giant prompt.</p>
+<p>None of this has converged into one universal system yet.</p>
+<p>That is exactly why the topic matters now.</p>
+<div class="guide-callout"><strong>The agentic internet will not work at scale if every agent must already know the endpoint of every other agent it may ever need.</strong></div>
+<p>Discovery is the layer that turns a closed workflow into an ecosystem.</p>
+</section>
+
+<section id="faq" class="guide-faq-section">
+<p class="eyebrow">FAQ</p><h2>AI agent discovery, Agent Cards, registries, DNS and reputation</h2>
+<details><summary>What is AI agent discovery?</summary><p>AI agent discovery is the process by which software finds autonomous agents, retrieves machine-readable descriptions of their capabilities and interfaces, and selects candidates that may be suitable for a task. Discovery is separate from authentication, authorization and trust: finding an agent does not prove that it is safe or permitted to act.</p></details><details><summary>How do AI agents find each other?</summary><p>Current approaches include direct configuration, well-known URLs such as A2A Agent Cards, registries and catalogs, DNS-based discovery proposals, enterprise directories and semantic search over capability metadata. Different environments may combine several methods.</p></details><details><summary>What is an A2A Agent Card?</summary><p>An A2A Agent Card is a JSON metadata document describing an agent's identity-facing information, supported interfaces, capabilities, skills and security requirements. The A2A specification registers the well-known path /.well-known/agent-card.json for discovery.</p></details><details><summary>What is the difference between agent discovery and agent authorization?</summary><p>Discovery answers which agents exist and which may match a task. Authorization answers whether a particular agent is allowed to perform a particular action. A successfully discovered agent is not automatically authorized.</p></details><details><summary>What is an AI agent registry?</summary><p>An AI agent registry is a service that publishes or indexes machine-readable records about agents so clients can search, resolve or retrieve information such as endpoints, capabilities, versions, operators, lifecycle state or evidence. Registry designs vary widely and are not yet unified under one universal standard.</p></details><details><summary>What is DNS-AID?</summary><p>DNS-AID is the name used by the DNS for AI Discovery Internet-Draft. It proposes publishing discovery information through DNS so agents can locate organization-specific agents or agents offering capabilities without inventing an entirely separate global naming infrastructure.</p></details><details><summary>What is AINS?</summary><p>AINS, or AInternet Name Service, is a 2026 Internet-Draft proposing a logical namespace and HTTPS resolution model for autonomous agents. Its records can carry identity references, capabilities, endpoint and route metadata, and references to cryptographic evidence.</p></details><details><summary>What is Agent Discovery Protocol (ADP)?</summary><p>ADP is a 2026 Internet-Draft that layers AI-agent discovery over DNS-AID, well-known JSON metadata and a real-time interaction layer. It is an experimental proposal and not a finalized Internet standard.</p></details><details><summary>What is the Agent Registry Protocol (ARPA)?</summary><p>The Agent Registry Protocol is a September 2026 Internet-Draft for publishing and resolving agent records, deployments, relationships, authority state and evidence references. Its own specification explicitly separates discovery and resolution from authorization decisions.</p></details><details><summary>Is MCP Registry the same as an AI agent registry?</summary><p>No. The official MCP Registry is primarily a catalog and API for discovering Model Context Protocol servers. MCP connects agents or clients to tools and data, while A2A-style discovery addresses peer agents. In practice, future agent systems may search both tool registries and agent registries.</p></details><details><summary>Can an Agent Card prove that an AI agent is trustworthy?</summary><p>No. An Agent Card can describe capabilities and may be cryptographically signed, which can help verify integrity or publisher identity. But a signed self-description does not prove that the advertised capabilities are accurate, safe or high quality. Trust requires additional evidence, policy and evaluation.</p></details><details><summary>How should AI agents choose between multiple agents with the same capability?</summary><p>A useful selection pipeline can filter for protocol compatibility and hard constraints, retrieve candidates by capability, then rank them using evidence such as task fit, availability, cost, latency, reputation, assurance, policy compatibility and prior performance. The ranking policy depends on the application.</p></details><details><summary>Why can AI agent discovery become a search problem?</summary><p>As registries grow, putting every candidate description into an LLM context becomes expensive and less accurate. A 2026 preprint on capability discovery reported substantial degradation in in-context routing at thousands of candidates and evaluated a retrieve-then-rank architecture as a more scalable alternative.</p></details><details><summary>What are the security risks of AI agent discovery?</summary><p>Risks include fake or spoofed agents, stale records, malicious capability claims, registry poisoning, Sybil identities, endpoint substitution, compromised signing keys, privacy leakage and ranking manipulation. Discovery systems need provenance, freshness, corroboration and local trust policy.</p></details><details><summary>Do AI agents need reputation scores?</summary><p>Not necessarily a single universal score. Reputation can help selection, but one scalar score can hide task-specific differences and be manipulated. Stronger systems may use evidence-backed, multidimensional signals such as verified execution history, domain-specific performance, recency, dispute rates and attestations.</p></details><details><summary>Will there be a Google for AI agents?</summary><p>It is an open architectural question rather than a settled outcome. Central registries, federated indexes, DNS-based discovery, protocol-specific catalogs and private enterprise directories are all developing. The eventual ecosystem may resemble the web: decentralized naming plus multiple search, ranking and trust layers.</p></details>
+</section>
+
+<section id="sources" class="guide-sources">
+<p class="eyebrow">PRIMARY &amp; RESEARCH SOURCES</p>
+<h2>Protocols and research used for this guide</h2>
+<p>SXF distinguishes deployed standards and services from research papers and Internet-Drafts. Drafts are work in progress and are labeled as such.</p>
+<div class="model-sources">
+<a href="https://a2a-protocol.org/dev/topics/agent-discovery/" target="_blank" rel="noopener noreferrer"><strong>A2A Protocol · Agent Discovery</strong><span>Official guidance on Agent Cards, well-known discovery, registries/catalogs, direct configuration and protection of sensitive card metadata. ↗</span></a>
+<a href="https://a2a-protocol.org/dev/specification/" target="_blank" rel="noopener noreferrer"><strong>A2A Protocol Specification</strong><span>Current specification including the permanent <code>agent-card.json</code> well-known URI and JWS Agent Card signatures. ↗</span></a>
+<a href="https://a2a-protocol.org/latest/blog/2026/08/27/a-new-chapter-for-a2a-joining-the-agentic-ai-foundation/" target="_blank" rel="noopener noreferrer"><strong>A2A · Agentic AI Foundation announcement</strong><span>August 2026 description of A2A as an open horizontal layer for agents to discover, delegate and collaborate across frameworks. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/draft-mozleywilliams-dnsop-dnsaid/" target="_blank" rel="noopener noreferrer"><strong>DNS for AI Discovery (DNS-AID)</strong><span>Active 2026 Internet-Draft proposing DNS-based publication and discovery of AI agents. ↗</span></a>
+<a href="https://arxiv.org/abs/2606.02314" target="_blank" rel="noopener noreferrer"><strong>Discovering Agents for Discovery: The Case for DNS</strong><span>June 2026 study evaluating agent-discovery metadata and DNS feasibility using 119,757 real-world service endpoints. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/draft-pro-adp-agent-discovery/" target="_blank" rel="noopener noreferrer"><strong>Agent Discovery Protocol (ADP)</strong><span>June 2026 Internet-Draft combining DNS-AID, well-known metadata, identity and an interaction layer. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/draft-vandemeent-ains-discovery/" target="_blank" rel="noopener noreferrer"><strong>AINS: AInternet Name Service</strong><span>September 2026 Internet-Draft for agent discovery, identification references, route posture and evidence references. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/draft-sankarshan-agent-registry-protocol/" target="_blank" rel="noopener noreferrer"><strong>Agent Registry Protocol (ARPA)</strong><span>Latest September 2026 draft for registration, resolution, relationships, lifecycle, bounded authority and evidence. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/html/draft-schemacommons-areg-00" target="_blank" rel="noopener noreferrer"><strong>Agent Registry (AREG)</strong><span>August 2026 vendor-neutral registry draft for publishing, discovering and resolving agent definitions. ↗</span></a>
+<a href="https://registry.modelcontextprotocol.io/docs" target="_blank" rel="noopener noreferrer"><strong>Official MCP Registry</strong><span>Operational community-driven registry service and API for public MCP servers. ↗</span></a>
+<a href="https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/" target="_blank" rel="noopener noreferrer"><strong>MCP · Introducing the Registry</strong><span>Architecture rationale for an official upstream source with public and private sub-registries. ↗</span></a>
+<a href="https://arxiv.org/abs/2608.22695" target="_blank" rel="noopener noreferrer"><strong>Enrich-Retrieve-Rank</strong><span>August 2026 capability-discovery research on scaling search across thousands of models, agents, tools and skills. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/draft-chandra-agent-registry-corroboration/" target="_blank" rel="noopener noreferrer"><strong>Multi-Source Corroboration for AI Agent Discovery</strong><span>August 2026 Internet-Draft addressing conflicting, missing and equivocated agent claims across multiple discovery sources. ↗</span></a>
+<a href="https://datatracker.ietf.org/doc/html/draft-stone-atep-02" target="_blank" rel="noopener noreferrer"><strong>ATEP: Agent Trust &amp; Execution Passport</strong><span>September 2026 Internet-Draft exploring portable execution-history and trust metadata for agent-to-agent commerce. ↗</span></a>
+<a href="https://arxiv.org/abs/2609.20095" target="_blank" rel="noopener noreferrer"><strong>A Scalable Trust Discovery Architecture for the Internet of Agents</strong><span>September 2026 research prototype for hierarchical registry, resolver and trust-aware discovery architecture. ↗</span></a>
+</div>
+</section>
+
+<section class="guide-sources">
+<p class="eyebrow">CONTINUE THE AGENTIC INTERNET</p>
+<h2>Discovery tells an agent where to look. Other layers decide what it may do next.</h2>
+<div class="model-sources">
+<a href="/guides/ai-agent-authorization/"><strong>AI Agent Authorization</strong><span>Identity, delegated authority, Agent Passports, revocation and action receipts after discovery. ↗</span></a>
+<a href="/guides/what-is-agentic-ai/"><strong>What Is Agentic AI?</strong><span>The planning, tools and action loops behind autonomous systems. ↗</span></a>
+<a href="/guides/ai-agent-security/"><strong>AI Agent Security in 2026</strong><span>Permissions, identity, sandboxing, memory, secrets and production controls. ↗</span></a>
+<a href="/guides/ai-negotiation-agents/"><strong>AI Negotiation Agents</strong><span>What happens after agents discover counterparties and begin machine-to-machine bargaining. ↗</span></a>
+<a href="/guides/ai-agent-collusion-secret-communication/"><strong>Can AI Agents Secretly Communicate?</strong><span>Why multi-agent communication, hidden signaling and coordination complicate open agent ecosystems. ↗</span></a>
+<a href="/guides/best-ai-agents/"><strong>Best AI Agents in 2026</strong><span>Current deployed agent products—the human-curated layer before autonomous machine discovery becomes normal. ↗</span></a>
+</div>
+</section>
+
+</div></div></article></main><footer class="footer shell">
+<div class="footer-main"><div class="footer-identity">
+<a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+<p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+<a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+</div><nav class="footer-nav" aria-label="Footer navigation">
+<div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+<div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+<div class="footer-nav-group"><p>SXF</p><a href="/about/">About &amp; Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+</nav></div>
+<div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+</footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
