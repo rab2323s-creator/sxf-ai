@@ -43,25 +43,26 @@ def normalized(value):
     return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
 
 
-def model_matches(signal, model):
-    haystack = normalized(" ".join([
+def signal_haystack(signal):
+    return normalized(" ".join([
         signal.get("title", ""),
         signal.get("summary", ""),
         " ".join(signal.get("tags", [])),
     ]))
-    candidates = [
-        model.get("model", ""),
-        model.get("model_id", ""),
-        model.get("family", ""),
-    ]
+
+
+def explicit_model_match(signal, model):
+    haystack = signal_haystack(signal)
+    candidates = [model.get("model", ""), model.get("model_id", "")]
     aliases = model.get("aliases") or []
     if isinstance(aliases, list):
         candidates.extend(aliases)
-    for candidate in candidates:
-        token = normalized(candidate)
-        if token and token in haystack:
-            return True
-    return False
+    return any(normalized(candidate) and normalized(candidate) in haystack for candidate in candidates)
+
+
+def family_model_match(signal, model):
+    family = normalized(model.get("family", ""))
+    return bool(family and family in signal_haystack(signal))
 
 
 def active_price(model, on_date):
@@ -121,9 +122,11 @@ def build_evidence_pack(item, pricing, history):
     matched_models = []
     source_urls = [item.get("url")]
 
-    for model in pricing.get("models", []):
-        if not model_matches(item, model):
-            continue
+    all_models = pricing.get("models", [])
+    explicit_models = [model for model in all_models if explicit_model_match(item, model)]
+    evidence_models = explicit_models or [model for model in all_models if family_model_match(item, model)]
+
+    for model in evidence_models:
         price = active_price(model, published_date)
         provenance = model.get("provenance", {})
         evidence = provenance.get("evidence", {})
