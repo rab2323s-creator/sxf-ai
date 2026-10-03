@@ -2184,6 +2184,7 @@ def shadow_quality_rejection_record(item, observed_at):
         "failed_checks": failed_checks,
         "first_rejected_at": observed_at,
         "last_rejected_at": observed_at,
+        "provenance": item.get("provenance"),
     }
 
 def model_page_indexable(name, items):
