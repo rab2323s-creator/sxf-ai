@@ -1,6 +1,18 @@
 {
-  "updated_at": "2026-10-03T22:15:19.192348Z",
+  "updated_at": "2026-10-03T23:50:16.532673Z",
   "items": [
+    {
+      "title": "The Agent Said It Was Done. The Database Disagreed.",
+      "url": "https://huggingface.co/blog/microsoft/thinkingbox",
+      "signal_url": "https://sxf.si/signals/the-agent-said-it-was-done-the-database-disagreed-89764ea/",
+      "source": "Hugging Face",
+      "published": "2026-10-03T22:56:48Z",
+      "category": "Tools",
+      "tags": [
+        "AI Agents"
+      ],
+      "signal_score": 38
+    },
     {
       "title": "Stateless GitHub App installation tokens rolled out",
       "url": "https://github.blog/changelog/2026-10-02-stateless-github-app-installation-tokens-rolled-out",
@@ -920,18 +932,6 @@
         "OpenAI"
       ],
       "signal_score": 46
-    },
-    {
-      "title": "OpenTelemetry in the GitHub Copilot app",
-      "url": "https://github.blog/changelog/2026-09-22-opentelemetry-in-the-github-copilot-app",
-      "signal_url": "https://sxf.si/signals/opentelemetry-in-the-github-copilot-app-e7fd981/",
-      "source": "GitHub",
-      "published": "2026-09-23T02:14:54Z",
-      "category": "Tools",
-      "tags": [
-        "GitHub Copilot"
-      ],
-      "signal_score": 38
     }
   ],
   "feed_errors": [],
@@ -946,15 +946,15 @@
     "archive_counts": {
       "OpenAI": 93,
       "Google AI": 20,
-      "Hugging Face": 28,
+      "Hugging Face": 29,
       "GitHub": 46,
       "Google Research": 9
     },
     "current_counts": {
       "OpenAI": 23,
       "Google AI": 3,
-      "Hugging Face": 9,
-      "GitHub": 43,
+      "Hugging Face": 10,
+      "GitHub": 42,
       "Google Research": 2
     },
     "sources": {
@@ -978,7 +978,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "Google AI": {
@@ -1001,30 +1001,30 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "Hugging Face": {
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 872,
-        "relevance_accepted_count": 872,
-        "quality_accepted_count": 20,
-        "accepted_candidate_count": 20,
+        "parsed_candidate_count": 873,
+        "relevance_accepted_count": 873,
+        "quality_accepted_count": 21,
+        "accepted_candidate_count": 21,
         "rejected_candidate_count": 852,
         "duplicate_count": 0,
         "age_rejection_count": 852,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 9,
+        "publish_count": 10,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "GitHub": {
@@ -1040,14 +1040,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 43,
+        "publish_count": 42,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "Google Research": {
@@ -1070,7 +1070,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "Anthropic": {
@@ -1093,7 +1093,7 @@
         "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -1118,7 +1118,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "xAI": {
@@ -1141,7 +1141,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       },
       "Microsoft": {
@@ -1164,7 +1164,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T22:14:42.817749Z",
+        "last_successful_fetch": "2026-10-03T23:49:45.528715Z",
         "errors": []
       }
     },
