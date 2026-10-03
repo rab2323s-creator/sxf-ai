@@ -98,6 +98,17 @@ def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def sanitize_api_key(value):
+    if value is None:
+        raise RuntimeError("OPENAI_API_KEY is required")
+    key = value.strip()
+    if not key:
+        raise RuntimeError("OPENAI_API_KEY is empty")
+    if any(ch.isspace() for ch in key):
+        raise RuntimeError("OPENAI_API_KEY contains embedded whitespace; recreate the GitHub secret with the key only")
+    return key
+
+
 def extract_output_text(response):
     texts = []
     for item in response.get("output", []):
@@ -196,9 +207,7 @@ def estimate_cost_usd(writer_usage, validator_usage):
 
 
 def main():
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is required")
+    api_key = sanitize_api_key(os.environ.get("OPENAI_API_KEY"))
 
     config = load_json(CONFIG_PATH)
     pilot = config.get("pilot") or {}
