@@ -53,5 +53,25 @@
     "forbid_process_language": true,
     "require_direct_search_intent": true,
     "require_value_beyond_news": true
+  },
+  "auto_publish_trial": {
+    "version": "sxf-hot-news-auto-v1",
+    "enabled": true,
+    "starts_on": "2026-10-03",
+    "ends_on": "2026-10-17",
+    "max_age_hours": 48,
+    "min_priority_score": 175,
+    "max_attempts_per_run": 1,
+    "max_attempts_per_day": 3,
+    "max_published_per_day": 3,
+    "max_published_per_month": 60,
+    "max_monthly_estimated_cost_usd": 5,
+    "max_estimated_cost_per_attempt_usd": 0.1,
+    "min_validator_quality_score": 90,
+    "prompt_version": "sxf-auto-hot-v1",
+    "writer_reasoning_effort": "low",
+    "validator_reasoning_effort": "low",
+    "writer_max_output_tokens": 3800,
+    "validator_max_output_tokens": 1200
   }
 }
