@@ -1,0 +1,43 @@
+name: AI enrichment pilot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sxf-ai-enrichment-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax and pilot safeguards
+        run: |
+          python -m py_compile scripts/run_ai_enrichment_pilot.py tests/test_ai_enrichment_pilot.py
+          python tests/test_ai_enrichment_pilot.py
+      - name: Verify secret is available
+        env:
+          OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}"
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "OPENAI_API_KEY repository secret is missing"
+            exit 1
+          fi
+      - name: Run one-shot enrichment pilot
+        env:
+          OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}"
+        run: python scripts/run_ai_enrichment_pilot.py
+      - name: Upload pilot result
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-enrichment-pilot
+          path: artifacts/ai-enrichment-pilot.json
+          if-no-files-found: error
+          retention-days: 7

@@ -5,7 +5,7 @@
   "candidate_max_age_days": 14,
   "min_seo_quality_score": 50,
   "min_signal_score": 38,
-  "monthly_budget_eur": 5.0,
+  "monthly_budget_eur": 5,
   "monthly_page_limit": 100,
   "per_page_input_token_cap": 8000,
   "per_page_output_token_cap": 1800,
@@ -13,5 +13,25 @@
   "validator_model": "gpt-5.6-luna",
   "publish_mode": "manual-review",
   "required_ai_intent": true,
-  "allowed_categories": ["Models", "Tools", "Research", "Open Source"]
+  "allowed_categories": [
+    "Models",
+    "Tools",
+    "Research",
+    "Open Source"
+  ],
+  "pilot": {
+    "pilot_id": "pilot-2026-10-03-rank2",
+    "run_once": true,
+    "candidate_rank": 2,
+    "max_pages": 1,
+    "prompt_version": "sxf-enrichment-pilot-v1",
+    "max_evidence_chars": 24000,
+    "writer_reasoning_effort": "low",
+    "validator_reasoning_effort": "low",
+    "writer_max_output_tokens": 1800,
+    "validator_max_output_tokens": 900,
+    "max_estimated_cost_usd": 0.1,
+    "publish_allowed": false,
+    "index_decision": "unchanged"
+  }
 }
