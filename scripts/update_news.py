@@ -13,6 +13,8 @@ from html import escape, unescape
 from pathlib import Path
 from urllib.parse import urlparse
 
+from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
@@ -83,8 +85,11 @@ def load_source_registry():
             raise RuntimeError(f"{name}: shadow sources must have max_current=0")
         if status == "disabled" and max_current != 0:
             raise RuntimeError(f"{name}: disabled sources must have max_current=0")
-        if source.get("adapter") == "rss" and not source.get("url"):
-            raise RuntimeError(f"{name}: rss adapter requires a URL")
+        adapter = source.get("adapter")
+        if adapter not in {"rss", "pending", "anthropic-sitemap"}:
+            raise RuntimeError(f"{name}: unsupported adapter {adapter!r}")
+        if adapter in {"rss", "anthropic-sitemap"} and not source.get("url"):
+            raise RuntimeError(f"{name}: {adapter} adapter requires a URL")
         names.append(name)
     if len(names) != len(set(names)):
         raise RuntimeError("source-config.json contains duplicate source names")
@@ -7658,6 +7663,12 @@ def main():
             "relevance_rejection_count": 0,
             "quality_rejection_count": 0,
             "publish_count": 0,
+            "adapter": source_config.get("adapter"),
+            "adapter_contract_version": ADAPTER_CONTRACT_VERSION if source_config.get("adapter") != "rss" else None,
+            "adapter_discovered_count": 0,
+            "adapter_invalid_count": 0,
+            "adapter_fetch_failure_count": 0,
+            "schema_drift": False,
             "last_successful_fetch": None,
             "errors": [],
         }
@@ -7665,12 +7676,42 @@ def main():
 
         if status == "disabled":
             continue
-        if source_config.get("adapter") != "rss":
+        adapter = source_config.get("adapter")
+        if adapter == "pending":
             metrics["errors"].append("No verified automated feed adapter configured")
             continue
 
         try:
-            parsed, parse_metrics = parse_feed_with_metrics(source, fetch(source_config["url"]))
+            if adapter == "rss":
+                parsed, parse_metrics = parse_feed_with_metrics(source, fetch(source_config["url"]))
+            else:
+                raw_items, adapter_diagnostics = run_source_adapter(
+                    source_config,
+                    user_agent=USER_AGENT,
+                    now=now,
+                )
+                metrics["adapter_discovered_count"] = adapter_diagnostics.get("discovered_count", 0)
+                metrics["adapter_invalid_count"] = adapter_diagnostics.get("invalid_count", 0)
+                metrics["adapter_fetch_failure_count"] = adapter_diagnostics.get("fetch_failure_count", 0)
+                metrics["schema_drift"] = bool(adapter_diagnostics.get("schema_drift"))
+                metrics["errors"].extend(adapter_diagnostics.get("errors", []))
+
+                parsed = []
+                relevance_rejected = 0
+                for item in raw_items:
+                    if not source_accepts_item(source_config, item["title"], item.get("summary", "")):
+                        relevance_rejected += 1
+                        continue
+                    row = dict(item)
+                    row["category"] = categorize(row["title"], source)
+                    row["tags"] = classify_tags(row["title"], source, row["category"])
+                    parsed.append(row)
+                parse_metrics = {
+                    "parsed_candidate_count": len(raw_items),
+                    "relevance_accepted_count": len(parsed),
+                    "relevance_rejection_count": relevance_rejected,
+                }
+
             metrics.update(parse_metrics)
             metrics["fetch_success"] = True
             metrics["last_successful_fetch"] = now.isoformat().replace("+00:00", "Z")
@@ -7719,6 +7760,8 @@ def main():
         except Exception as exc:
             message = f"{source}: {exc}"
             metrics["fetch_failure"] = True
+            if adapter != "rss" and "drift" in exc.__class__.__name__.lower():
+                metrics["schema_drift"] = True
             metrics["errors"].append(str(exc))
             errors.append(message)
 
