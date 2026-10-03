@@ -191,6 +191,8 @@ def model_history_events(model_ids):
 
 
 def compact_token_count(value):
+    if value == "unlimited":
+        return "No separate limit"
     value = int(value)
     if value >= 1_000_000:
         rendered = f"{value / 1_000_000:.3f}".rstrip("0").rstrip(".")
@@ -401,6 +403,13 @@ def compare_change_watch_html(model_ids):
     return model_change_watch_html(model_ids, "Changes affecting this comparison.")
 
 
+def model_output_label(model):
+    value = model.get("max_output")
+    if value == "unlimited":
+        return "No separate limit"
+    return f"{int(value):,}"
+
+
 def model_history_html(model_ids, heading="Verified model history"):
     if not model_ids:
         return ""
@@ -428,7 +437,7 @@ def model_history_html(model_ids, heading="Verified model history"):
             price = (snapshot.get("pricing", {}).get("standard") or [{}])[-1]
             summary = (
                 f'Baseline verified: {int(snapshot.get("context_window", 0)):,} context · '
-                f'{int(snapshot.get("max_output", 0)):,} max output'
+                f'{model_output_label(snapshot)} max output'
             )
             if price.get("input") is not None and price.get("output") is not None:
                 summary += (
@@ -468,13 +477,13 @@ def compare_live_facts_html(model_ids):
         modalities = " + ".join(model.get("modalities", {}).get("input", []))
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
-              data-context="{int(model["context_window"])}" data-max-output="{int(model["max_output"])}"
+              data-context="{int(model["context_window"])}" data-max-output="{escape(str(model["max_output"]), quote=True)}"
               data-input="{float(price["input"]):g}" data-cached="{float(price["cached_input"]):g}" data-output="{float(price["output"]):g}">
               <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
               <h3>{escape(model["model"])}</h3>
               <dl>
                 <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
-                <div><dt>Max output</dt><dd>{int(model["max_output"]):,}</dd></div>
+                <div><dt>Max output</dt><dd>{escape(model_output_label(model))}</dd></div>
                 <div><dt>Input / MTok</dt><dd>{escape(catalog_price_label(price["input"]))}</dd></div>
                 <div><dt>Cached / MTok</dt><dd>{escape(catalog_price_label(price["cached_input"]))}</dd></div>
                 <div><dt>Output / MTok</dt><dd>{escape(catalog_price_label(price["output"]))}</dd></div>
@@ -622,7 +631,7 @@ def catalog_reference_variant(variant):
     return {
         **variant,
         "context": f'{int(model["context_window"]):,}',
-        "max_output": f'{int(model["max_output"]):,}',
+        "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
         "cached_price": catalog_price_label(price["cached_input"]),
@@ -682,7 +691,7 @@ def catalog_display_model(model_id, **overrides):
         "model_id": model["model_id"],
         "positioning": model["positioning"],
         "context": f'{int(model["context_window"]):,}',
-        "max_output": f'{int(model["max_output"]):,}',
+        "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
         "cached_price": catalog_price_label(price["cached_input"]),
@@ -2255,7 +2264,7 @@ def model_explorer_html():
               <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["model_id"])}</small></th>
               <td>{escape(model["provider"])}<small>{escape(model.get("family", ""))}</small></td>
               <td>{int(model["context_window"]):,}<small>tokens</small></td>
-              <td>{int(model["max_output"]):,}<small>tokens</small></td>
+              <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
               <td class="model-price">{escape(catalog_price_label(price["input"]))}</td>
               <td class="model-price">{escape(catalog_price_label(price["cached_input"]))}</td>
               <td class="model-price">{escape(catalog_price_label(price["output"]))}</td>
@@ -3349,6 +3358,91 @@ def model_page_html(name, items):
 
 
 
+
+
+
+def grok_47_reference_html():
+    model = model_catalog_entry("grok-4.7")
+    price = active_standard_price("grok-4.7")
+    verified = model["provenance"]["verified_at"]
+    sources = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
+        for url in model["official_sources"]
+    )
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "headline": "Grok 4.7 — Pricing, Context Window, API & Specs",
+                "description": "Primary-source verified reference for xAI Grok 4.7, including pricing, context window, modalities, reasoning controls and knowledge cutoff.",
+                "url": BASE_URL + "/models/grok-4-7/",
+                "dateModified": verified,
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
+                    {"@type": "ListItem", "position": 3, "name": "Grok 4.7", "item": BASE_URL + "/models/grok-4-7/"},
+                ],
+            },
+        ],
+    }
+    return f'''<!doctype html><html lang="en">{page_head(
+        "Grok 4.7 — Pricing, Context Window, API & Specs | SXF / AI",
+        "Grok 4.7 reference with xAI pricing, 500K context window, reasoning controls, modalities, knowledge cutoff and official-source verification.",
+        BASE_URL + "/models/grok-4-7/",
+        schema,
+    )}
+    <body class="intel-page model-page">{page_header("models")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Grok 4.7</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / XAI</p>
+        <h1>Grok 4.7<br><span>verified model reference.</span></h1>
+        <p>{escape(model["positioning"])}</p>
+        <div class="collection-stats">
+          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
+          <div><strong>{escape(model_output_label(model))}</strong><span>text output cap</span></div>
+          <div><strong>{escape(verified)}</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <h2>Grok 4.7 at a glance.</h2>
+            <p>xAI documents a 500,000-token context window, text and image input, text output, reasoning effort controls, and no separate text output limit. The stored Standard API rate is {escape(catalog_price_label(price["input"]))} input, {escape(catalog_price_label(price["cached_input"]))} cached input and {escape(catalog_price_label(price["output"]))} output per million tokens.</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>grok-4.7</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(model_output_label(model))}</strong><small>xAI documentation</small></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(model["knowledge_cutoff"]))}</strong></div>
+            <div><span>STANDARD INPUT</span><strong>{escape(catalog_price_label(price["input"]))}</strong><small>/ 1M tokens</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>{escape(catalog_price_label(price["output"]))}</strong><small>/ 1M tokens</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">REASONING & MODALITIES</p><h2>How Grok 4.7 is configured.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>REASONING</span><h3>low · medium · high · xhigh</h3><p>xAI exposes reasoning effort controls and documents high as the default level.</p></article>
+            <article><span>INPUT</span><h3>Text + image</h3><p>The model accepts text and image input and produces text output.</p></article>
+            <article><span>LONG CONTEXT</span><h3>500K tokens</h3><p>The context window is 500,000 tokens. Requests at or above the documented long-context threshold use higher token rates for the full request.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-sources">{sources}</div>
+        </section>
+      </section>
+      {model_change_watch_html(["grok-4.7"], "Grok 4.7: what changed.")}
+      {model_history_html(["grok-4.7"], "Grok 4.7 verified history.")}
+    </main>{page_footer()}</body></html>'''
 
 def best_ai_coding_tools_html(items):
     canonical = f"{BASE_URL}/guides/best-ai-coding-tools/"
@@ -7131,7 +7225,7 @@ def model_pricing_page_html():
           </th>
           <td>{escape(model["provider"])}</td>
           <td>{int(model["context_window"]):,}<small>tokens</small></td>
-          <td>{int(model["max_output"]):,}<small>tokens</small></td>
+          <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
           <td class="price">{escape(catalog_price_label(price["input"]))}</td>
           <td class="price">{escape(catalog_price_label(price["cached_input"]))}</td>
           <td class="price">{escape(catalog_price_label(price["output"]))}</td>
@@ -7398,6 +7492,10 @@ def build_discovery_pages(items, current_items):
     )
     (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
 
+    grok_path = ROOT / "models" / "grok-4-7"
+    grok_path.mkdir(parents=True, exist_ok=True)
+    (grok_path / "index.html").write_text(grok_47_reference_html(), encoding="utf-8")
+
     gemini_path = ROOT / "models" / "gemini-3-8-flash"
     gemini_path.mkdir(parents=True, exist_ok=True)
     gemini_page = gemini_38_flash_reference_html(items)
@@ -7513,6 +7611,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/models/claude-fable-5-1/", "2026-09-01"),
         sitemap_entry(f"{BASE_URL}/models/gemini-3-8-flash/", "2026-09-02"),
+        sitemap_entry(f"{BASE_URL}/models/grok-4-7/", MODEL_PRICING_BY_ID["grok-4.7"]["provenance"]["verified_at"]),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
