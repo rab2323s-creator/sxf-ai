@@ -193,6 +193,8 @@ def model_history_events(model_ids):
 def compact_token_count(value):
     if value == "unlimited":
         return "No separate limit"
+    if value is None:
+        return "Not published"
     value = int(value)
     if value >= 1_000_000:
         rendered = f"{value / 1_000_000:.3f}".rstrip("0").rstrip(".")
@@ -407,7 +409,29 @@ def model_output_label(model):
     value = model.get("max_output")
     if value == "unlimited":
         return "No separate limit"
+    if value is None:
+        return "Not published"
     return f"{int(value):,}"
+
+
+def model_reasoning_label(model):
+    reasoning = model.get("reasoning")
+    if not isinstance(reasoning, dict):
+        return "Not published"
+    levels = [str(level) for level in reasoning.get("levels", []) if level is not None]
+    label = " · ".join(levels) if levels else str(reasoning.get("type") or "Published")
+    default = reasoning.get("default")
+    if default:
+        label += f" · default {default}"
+    return label
+
+
+def catalog_owns_model_route(name):
+    for model in MODEL_PRICING_CATALOG["models"]:
+        if model.get("model", "").lower() != name.lower():
+            continue
+        return model.get("sxf_url") == f"/models/{slugify(name)}/"
+    return False
 
 
 def model_history_html(model_ids, heading="Verified model history"):
@@ -3385,6 +3409,164 @@ def model_page_html(name, items):
 
 
 
+
+
+CATALOG_GENERIC_REFERENCE_IDS = {
+    "grok-4.6",
+    "grok-4.3",
+    "gemini-3.7-flash",
+    "llama-4-scout",
+    "llama-4-maverick",
+}
+
+
+def catalog_model_reference_html(model_id, items):
+    model = model_catalog_entry(model_id)
+    verified = model["provenance"]["verified_at"]
+    canonical = BASE_URL + model["sxf_url"]
+    priced = model_has_official_paid_pricing(model)
+    price = active_standard_price(model_id, MODEL_PRICING_CATALOG["source_verified"]) if priced else None
+    pricing_status = model_pricing_status(model)
+    pricing_status_label = {
+        "official-paid": "Official paid API",
+        "free-preview": "Free preview",
+        "partner-priced": "Partner-priced",
+        "not-published": "No direct Standard price published",
+        "self-hosted": "Self-hosted",
+    }.get(pricing_status, pricing_status)
+
+    cutoff = model.get("knowledge_cutoff") or "Not published"
+    input_modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
+    output_modalities = " + ".join(model.get("modalities", {}).get("output", [])) or "Not published"
+    reasoning = model_reasoning_label(model)
+    output_label = model_output_label(model)
+
+    if price:
+        pricing_summary = (
+            f'{catalog_price_label(price["input"])} input · '
+            f'{catalog_price_label(price["cached_input"])} cached · '
+            f'{catalog_price_label(price["output"])} output / MTok'
+        )
+        input_price = catalog_price_label(price["input"])
+        output_price = catalog_price_label(price["output"])
+    else:
+        pricing_summary = pricing_status_label
+        input_price = "Not published"
+        output_price = "Not published"
+
+    source_links = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">'
+        f'<span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
+        for url in model["official_sources"]
+    )
+    note_html = "".join(
+        f'<div><span>{index:02d}</span><p>{escape(note)}</p></div>'
+        for index, note in enumerate(model.get("notes", []), 1)
+    )
+
+    related = []
+    model_name_lower = model["model"].lower()
+    family_lower = model.get("family", "").lower()
+    for item in items:
+        haystack = f'{item.get("title", "")} {item.get("summary", "")}'.lower()
+        if model_name_lower in haystack or (family_lower and family_lower in haystack):
+            related.append(item)
+    related_rows = "".join(signal_row(item) for item in related[:8])
+
+    description = (
+        f'{model["model"]} reference: verified context window, output policy, modalities, '
+        f'reasoning controls, knowledge cutoff and pricing availability from official {model["provider"]} sources.'
+    )
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "@id": canonical + "#article",
+                "headline": f'{model["model"]} — API Specs, Context & Pricing',
+                "description": description,
+                "url": canonical,
+                "dateModified": verified,
+                "about": {"@type": "Thing", "name": model["model"]},
+                "citation": model["official_sources"],
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
+                    {"@type": "ListItem", "position": 3, "name": model["model"], "item": canonical},
+                ],
+            },
+        ],
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(
+        f'{model["model"]} — API Specs, Context & Pricing | SXF / AI',
+        description,
+        canonical,
+        schema,
+    )}
+    <body class="intel-page model-page">{page_header("models")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(model["model"])}</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / {escape(model["provider"].upper())}</p>
+        <h1>{escape(model["model"])}<br><span>verified model reference.</span></h1>
+        <p>{escape(model["positioning"])}</p>
+        <div class="collection-stats">
+          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
+          <div><strong>{escape(output_label)}</strong><span>max output</span></div>
+          <div><strong>{escape(verified)}</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <h2>{escape(model["model"])} at a glance.</h2>
+            <p>{escape(model["provider"])} documents a {int(model["context_window"]):,}-token context window. Input modalities: {escape(input_modalities)}. Output: {escape(output_modalities)}. Pricing status: {escape(pricing_status_label)}.</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>{escape(model_id)}</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>{escape(output_label)}</strong></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(cutoff))}</strong></div>
+            <div><span>STANDARD INPUT</span><strong>{escape(input_price)}</strong><small>{escape(pricing_status)}</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>{escape(output_price)}</strong><small>{escape(pricing_status)}</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>REASONING</span><h3>{escape(reasoning)}</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>INPUT</span><h3>{escape(input_modalities)}</h3><p>Input modalities come from the cited official model documentation.</p></article>
+            <article><span>OUTPUT</span><h3>{escape(output_modalities)}</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>{escape(pricing_status_label)}.</h2></div>
+          <div class="model-split">
+            <div><p>{escape(pricing_summary)}.</p><p>Only provider-published Standard paid token rates enter the SXF calculator. Partner hosting prices, negotiated rates and self-hosting costs are not substituted for a missing provider rate.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>{"Eligible" if priced else "Excluded"}</strong><p>{"This model uses a directly comparable provider-published Standard rate." if priced else "No directly comparable provider Standard paid rate is stored for this model."}</p></aside>
+          </div>
+        </section>
+
+        {f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-sources">{source_links}</div>
+        </section>
+      </section>
+
+      {model_change_watch_html([model_id], f'{model["model"]}: what changed.')}
+      {model_history_html([model_id], f'{model["model"]} verified history.')}
+      {f'<section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Recent {escape(model["model"])} signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{related_rows}</div></section>' if related_rows else ""}
+    </main>{page_footer()}</body></html>'''
 
 def grok_47_reference_html():
     model = model_catalog_entry("grok-4.7")
@@ -7498,7 +7680,7 @@ def build_discovery_pages(items, current_items):
         (path / "index.html").write_text(topic_page_html(topic, matched), encoding="utf-8")
 
     for name, matched in model_groups(items).items():
-        if not matched or name == "Gemini 3.8 Flash":
+        if not matched or catalog_owns_model_route(name):
             continue
         path = ROOT / "models" / slugify(name)
         path.mkdir(parents=True, exist_ok=True)
@@ -7520,6 +7702,15 @@ def build_discovery_pages(items, current_items):
         model_history_html(["claude-fable-5-1"], "Claude Fable 5.1 verified history.")
     )
     (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
+
+    for model_id in sorted(CATALOG_GENERIC_REFERENCE_IDS):
+        model = model_catalog_entry(model_id)
+        generic_path = ROOT / model["sxf_url"].strip("/")
+        generic_path.mkdir(parents=True, exist_ok=True)
+        (generic_path / "index.html").write_text(
+            catalog_model_reference_html(model_id, items),
+            encoding="utf-8",
+        )
 
     grok_path = ROOT / "models" / "grok-4-7"
     grok_path.mkdir(parents=True, exist_ok=True)
@@ -7720,8 +7911,15 @@ def update_sitemap(items):
         if topic_page_indexable(matched):
             rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", content_lastmod(matched)))
 
+    for model_id in sorted(CATALOG_GENERIC_REFERENCE_IDS):
+        model = MODEL_PRICING_BY_ID[model_id]
+        rows.append(sitemap_entry(
+            BASE_URL + model["sxf_url"],
+            model["provenance"]["verified_at"],
+        ))
+
     for name, matched in model_groups(items).items():
-        if name == "Gemini 3.8 Flash":
+        if catalog_owns_model_route(name):
             continue
         if model_page_indexable(name, matched):
             rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", content_lastmod(matched)))

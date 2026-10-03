@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.3",
+  "schema_version": "1.4",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
   "source_verified": "2026-10-03",
@@ -854,6 +854,334 @@
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true
+    },
+    {
+      "provider": "xAI",
+      "family": "Grok 4",
+      "model": "Grok 4.6",
+      "model_id": "grok-4.6",
+      "context_window": 500000,
+      "max_output": "unlimited",
+      "knowledge_cutoff": "2026-02-01",
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "xAI frontier reasoning model for coding, agentic work, and long-context knowledge tasks.",
+      "sxf_url": "/models/grok-4-6/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.x.ai/developers/models/grok-4.6",
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/release-notes"
+      ],
+      "notes": [
+        "xAI documents no separate text output limit for Grok 4.6.",
+        "Higher long-context token rates apply when prompt tokens exceed 200,000."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-08-12",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.5,
+            "output": 6
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 200000,
+          "condition": "total input tokens greater than 200000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "output": 2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/models/grok-4.6",
+          "context_window": "https://docs.x.ai/developers/models/grok-4.6",
+          "max_output": "https://docs.x.ai/developers/release-notes",
+          "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.6",
+          "reasoning": "https://docs.x.ai/developers/models/grok-4.6",
+          "modalities": "https://docs.x.ai/developers/models/grok-4.6",
+          "pricing": "https://docs.x.ai/developers/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "provider": "xAI",
+      "family": "Grok 4",
+      "model": "Grok 4.3",
+      "model_id": "grok-4.3",
+      "aliases": [
+        "grok-4.3-latest"
+      ],
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "low"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "xAI long-context Grok model with configurable reasoning and a one-million-token context window.",
+      "sxf_url": "/models/grok-4-3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.x.ai/developers/models/grok-4.3",
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/migration/may-15-retirement"
+      ],
+      "notes": [
+        "xAI does not publish a separate text output cap on the cited model page.",
+        "Knowledge cutoff is left unknown because no verified value is stored in the cited official model documentation.",
+        "The stored Standard pricing start is anchored to xAI's May 15, 2026 migration/pricing-impact date."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-05-15",
+            "end": null,
+            "input": 1.25,
+            "cached_input": 0.2,
+            "output": 2.5
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 200000,
+          "condition": "total input tokens greater than 200000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "output": 2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/models/grok-4.3",
+          "context_window": "https://docs.x.ai/developers/models/grok-4.3",
+          "max_output": "https://docs.x.ai/developers/models/grok-4.3",
+          "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.3",
+          "reasoning": "https://docs.x.ai/developers/models/grok-4.3",
+          "modalities": "https://docs.x.ai/developers/models/grok-4.3",
+          "pricing": "https://docs.x.ai/developers/migration/may-15-retirement"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini 3",
+      "model": "Gemini 3.7 Flash",
+      "model_id": "gemini-3.7-flash",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google general-purpose Flash model for high-throughput multimodal reasoning, coding, and agent workflows.",
+      "sxf_url": "/models/gemini-3-7-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Knowledge cutoff is left unknown because the cited model documentation does not publish one.",
+        "The reasoning default is not inferred when the official model documentation does not state a default."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-08-13",
+            "end": "2026-12-31",
+            "input": 0.75,
+            "cached_input": 0.075,
+            "output": 3.75
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "provider": "Meta",
+      "family": "Llama 4",
+      "model": "Llama 4 Scout",
+      "model_id": "llama-4-scout",
+      "context_window": 10000000,
+      "max_output": null,
+      "knowledge_cutoff": "2024-08",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "code"
+        ]
+      },
+      "positioning": "Meta open-weight multimodal Llama 4 model optimized for very long context and efficient deployment.",
+      "sxf_url": "/models/llama-4-scout/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ],
+      "notes": [
+        "Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.",
+        "No separate output-token cap or configurable reasoning-control contract is inferred."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "pricing": "https://ai.meta.com/llama/get-started/"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false
+    },
+    {
+      "provider": "Meta",
+      "family": "Llama 4",
+      "model": "Llama 4 Maverick",
+      "model_id": "llama-4-maverick",
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": "2024-08",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "code"
+        ]
+      },
+      "positioning": "Meta open-weight multimodal Llama 4 model focused on broad capability with mixture-of-experts efficiency.",
+      "sxf_url": "/models/llama-4-maverick/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ],
+      "notes": [
+        "Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.",
+        "No separate output-token cap or configurable reasoning-control contract is inferred."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "pricing": "https://ai.meta.com/llama/get-started/"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false
     }
   ],
   "verification_policy": {
@@ -862,7 +1190,7 @@
     "editorial_fields": [
       "positioning"
     ],
-    "unknown_policy": "Use null, omit unsupported claims, or use an explicit provider-documented sentinel such as max_output='unlimited'; never infer a value."
+    "unknown_policy": "Use null, omit unsupported claims, or use an explicit provider-documented sentinel such as max_output='unlimited'; never infer a value. Missing official paid pricing must remain outside Standard calculator rates."
   },
   "pricing_statuses": [
     "official-paid",

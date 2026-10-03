@@ -232,7 +232,7 @@ def validate_model_history():
 def validate_model_pricing_catalog():
     path = ROOT / "data" / "model-pricing.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema_version") != "1.3":
+    if data.get("schema_version") != "1.4":
         fail(f"model-pricing.json schema_version drift: {data.get('schema_version')!r}")
 
     policy = data.get("verification_policy")
@@ -261,6 +261,8 @@ def validate_model_pricing_catalog():
         "gpt-5.6-sol", "gpt-5.6-terra", "gpt-5.6-luna",
         "claude-fable-5-1", "claude-opus-5-5", "claude-sonnet-5",
         "claude-haiku-4-5-20251001", "gemini-3.8-flash", "grok-4.7",
+        "grok-4.6", "grok-4.3", "gemini-3.7-flash",
+        "llama-4-scout", "llama-4-maverick",
     }
     ids = [model.get("model_id") for model in models]
     if len(ids) != len(set(ids)):
@@ -289,7 +291,7 @@ def validate_model_pricing_catalog():
         if not isinstance(model.get("context_window"), int) or model["context_window"] <= 0:
             fail(f"{model_id}: invalid context_window")
         max_output = model.get("max_output")
-        if max_output != "unlimited" and (not isinstance(max_output, int) or max_output <= 0):
+        if max_output not in {None, "unlimited"} and (not isinstance(max_output, int) or max_output <= 0):
             fail(f"{model_id}: invalid max_output")
         if not model.get("sxf_url", "").startswith("/"):
             fail(f"{model_id}: invalid sxf_url")
@@ -441,6 +443,18 @@ def validate_model_pricing_catalog():
     expect_cost("Claude Fable 5.1 short request", estimate_standard_cost("claude-fable-5-1", 100_000, 10_000)[0], 1.50)
     expect_cost("Gemini 3.8 Flash 2026 short request", estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2026-09-27")[0], 0.1125)
     expect_cost("Gemini 3.8 Flash 2027 short request", estimate_standard_cost("gemini-3.8-flash", 100_000, 10_000, on_date="2027-01-01")[0], 0.225)
+    expect_cost("Grok 4.6 short request", estimate_standard_cost("grok-4.6", 100_000, 10_000)[0], 0.26)
+    expect_cost("Grok 4.6 long request", estimate_standard_cost("grok-4.6", 500_000, 50_000)[0], 2.60)
+    expect_cost("Grok 4.3 short request", estimate_standard_cost("grok-4.3", 100_000, 10_000)[0], 0.15)
+    expect_cost("Gemini 3.7 Flash 2026 short request", estimate_standard_cost("gemini-3.7-flash", 100_000, 10_000, on_date="2026-10-03")[0], 0.1125)
+
+    try:
+        active_standard_price("llama-4-scout", "2026-10-03")
+    except RuntimeError as exc:
+        if "not calculator-eligible" not in str(exc):
+            fail(f"Llama 4 Scout pricing-state regression raised wrong error: {exc}")
+    else:
+        fail("Llama 4 Scout must not expose synthetic Standard paid pricing")
 
     gemini_2026 = active_standard_price("gemini-3.8-flash", "2026-12-31")
     gemini_2027 = active_standard_price("gemini-3.8-flash", "2027-01-01")
