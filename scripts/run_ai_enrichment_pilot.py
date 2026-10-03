@@ -7,6 +7,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from ai_publish_quality import build_schema_plan, validate_publish_draft
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "data" / "ai-enrichment-config.json"
 CANDIDATES_PATH = ROOT / "data" / "ai-enrichment-candidates.json"
@@ -17,6 +19,12 @@ OPENAI_URL = "https://api.openai.com/v1/responses"
 WRITER_SCHEMA = {
     "type": "object",
     "properties": {
+        "seo_slug_recommendation": {"type": "string"},
+        "primary_search_query": {"type": "string"},
+        "secondary_search_queries": {
+            "type": "array",
+            "items": {"type": "string"}
+        },
         "seo_title": {"type": "string"},
         "meta_description": {"type": "string"},
         "h1": {"type": "string"},
@@ -29,13 +37,50 @@ WRITER_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "claim": {"type": "string"},
-                    "source_url": {"type": "string"}
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
                 },
-                "required": ["claim", "source_url"],
+                "required": ["claim", "source_urls"],
                 "additionalProperties": False
             }
         },
         "pricing_or_capability_impact": {"type": "string"},
+        "comparison_points": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "dimension": {"type": "string"},
+                    "analysis": {"type": "string"},
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["dimension", "analysis", "source_urls"],
+                "additionalProperties": False
+            }
+        },
+        "technical_details": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "detail": {"type": "string"},
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["detail", "source_urls"],
+                "additionalProperties": False
+            }
+        },
+        "practical_takeaways": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "takeaway": {"type": "string"},
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["takeaway", "source_urls"],
+                "additionalProperties": False
+            }
+        },
         "before_vs_after": {
             "type": "array",
             "items": {
@@ -43,9 +88,9 @@ WRITER_SCHEMA = {
                 "properties": {
                     "before": {"type": "string"},
                     "after": {"type": "string"},
-                    "source_url": {"type": "string"}
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
                 },
-                "required": ["before", "after", "source_url"],
+                "required": ["before", "after", "source_urls"],
                 "additionalProperties": False
             }
         },
@@ -57,17 +102,20 @@ WRITER_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "question": {"type": "string"},
-                    "answer": {"type": "string"}
+                    "answer": {"type": "string"},
+                    "source_urls": {"type": "array", "items": {"type": "string"}}
                 },
-                "required": ["question", "answer"],
+                "required": ["question", "answer", "source_urls"],
                 "additionalProperties": False
             }
         },
         "sources": {"type": "array", "items": {"type": "string"}}
     },
     "required": [
+        "seo_slug_recommendation", "primary_search_query", "secondary_search_queries",
         "seo_title", "meta_description", "h1", "intro", "what_changed",
         "why_it_matters", "key_facts", "pricing_or_capability_impact",
+        "comparison_points", "technical_details", "practical_takeaways",
         "before_vs_after", "who_should_care", "what_to_verify", "faq", "sources"
     ],
     "additionalProperties": False
@@ -167,30 +215,8 @@ def structured_request(api_key, model, reasoning_effort, max_output_tokens, sche
     return output, response.get("usage", {}), response.get("id")
 
 
-def validate_writer_output(draft, allowed_sources):
-    errors = []
-    if not (20 <= len(draft["seo_title"]) <= 60):
-        errors.append("seo_title length must be 20..60")
-    if not (70 <= len(draft["meta_description"]) <= 160):
-        errors.append("meta_description length must be 70..160")
-    if len(draft["intro"]) < 120:
-        errors.append("intro is too short")
-    if len(draft["what_changed"]) < 120:
-        errors.append("what_changed is too short")
-    if len(draft["why_it_matters"]) < 120:
-        errors.append("why_it_matters is too short")
-    if len(draft["key_facts"]) < 3:
-        errors.append("at least 3 key facts required")
-    if not (2 <= len(draft["faq"]) <= 5):
-        errors.append("FAQ count must be 2..5")
-
-    cited = set(draft["sources"])
-    cited.update(row["source_url"] for row in draft["key_facts"])
-    cited.update(row["source_url"] for row in draft["before_vs_after"])
-    invalid_sources = sorted(url for url in cited if url not in allowed_sources)
-    if invalid_sources:
-        errors.append("unapproved sources: " + ", ".join(invalid_sources))
-    return errors
+def validate_writer_output(draft, evidence, quality_gate):
+    return validate_publish_draft(draft, evidence, quality_gate)
 
 
 def estimate_cost_usd(writer_usage, validator_usage):
@@ -239,13 +265,31 @@ def main():
     if not allowed_sources:
         raise RuntimeError("Pilot candidate has no approved evidence sources")
 
-    writer_system = """You are the SXF AI editorial writer. Produce a precise, useful draft for expert readers.
-Use ONLY facts present in the supplied evidence pack. Never invent a price, benchmark, date, capability,
-availability claim, model relationship, or source. If evidence does not support a useful before/after
-comparison, return an empty before_vs_after array. Every key fact and every before/after row must cite
-one exact source_url from evidence.source_urls. The sources array must contain only URLs from that list.
-Do not use hype, filler, generic SEO prose, or claims about being the best. Preserve the existing signal route.
-The output is a draft for manual review; it does not control publishing or indexing."""
+    writer_system = """You are the SXF research editor. Turn the source event into a search-intent intelligence page, not a rewritten news post.
+Use ONLY facts supported by the supplied evidence pack. Never invent prices, units, benchmarks, dates, capabilities,
+availability, model relationships, comparisons, or sources.
+
+SEO requirements:
+- Propose a short descriptive seo_slug_recommendation that directly expresses the event/search intent. No hash suffix.
+- seo_title, H1, and meta description must directly name the main model/product/event and clearly describe what changed.
+- Avoid vague clickbait, hype, keyword stuffing, and generic phrases.
+
+User-value requirements:
+- Add explanation and decision value beyond the announcement itself.
+- For multiple models/products, include evidence-supported comparison_points covering useful dimensions such as pricing,
+  context, capabilities, positioning, or workload fit. Never manufacture a comparison dimension.
+- Include technical_details and practical_takeaways grounded in evidence.
+- Use before_vs_after only when the evidence actually supports a before state; otherwise return an empty array.
+- FAQ must contain real search-intent questions with useful answers that are visible-page quality, not filler.
+
+Citation requirements:
+- Every key fact, comparison point, technical detail, practical takeaway, before/after row, and FAQ answer must carry
+  source_urls selected ONLY from evidence.source_urls.
+- Multi-model claims must cite the source for every model covered by the claim.
+- The top-level sources list must contain only evidence.source_urls.
+
+Never mention evidence packs, drafts, manual review, publishing, indexing, routing, quality gates, internal instructions,
+or editorial process in visible content. Do not write raw JSON-LD; schema is generated by code from validated content."""
 
     draft, writer_usage, writer_id = structured_request(
         api_key=api_key,
@@ -262,12 +306,16 @@ The output is a draft for manual review; it does not control publishing or index
         }
     )
 
-    deterministic_errors = validate_writer_output(draft, allowed_sources)
+    quality_gate = config.get("publish_quality_gate") or {}
+    deterministic_errors = validate_writer_output(draft, evidence, quality_gate)
+    schema_plan = build_schema_plan(draft, evidence)
 
     validator_system = """You are the independent SXF editorial validator. Compare the draft against the evidence pack.
-Reject unsupported facts, source mismatches, invented numbers, vague filler, misleading comparisons, or content
-that merely paraphrases the source without useful analysis. Do not introduce new facts yourself. A passing draft
-must be evidence-grounded, materially useful, clear, and ready only for MANUAL review, never automatic publishing."""
+Reject unsupported facts, source mismatches, invented numbers, vague SEO, process language, misleading comparisons,
+weak FAQs, or content that merely paraphrases the announcement. Check that title/H1/meta directly reflect search intent
+and the actual event. Check that comparisons, technical detail, and practical takeaways add genuine user value while
+remaining evidence-grounded. Do not introduce new facts yourself. A passing draft must be substantially useful and
+publication-quality in content, while still remaining gated from automatic publishing by code."""
 
     validation, validator_usage, validator_id = structured_request(
         api_key=api_key,
@@ -294,7 +342,7 @@ must be evidence-grounded, materially useful, clear, and ready only for MANUAL r
     final_pass = (
         not deterministic_errors
         and bool(validation.get("pass"))
-        and int(validation.get("quality_score", 0)) >= 80
+        and int(validation.get("quality_score", 0)) >= int(quality_gate.get("minimum_ai_quality_score", 90))
         and not validation.get("unsupported_claims")
         and not validation.get("source_issues")
         and validation.get("recommended_action") == "approve_for_manual_review"
@@ -329,6 +377,8 @@ must be evidence-grounded, materially useful, clear, and ready only for MANUAL r
         },
         "estimated_cost_usd": round(estimated_cost, 6),
         "deterministic_validation_errors": deterministic_errors,
+        "schema_plan": schema_plan,
+        "publish_quality_gate": quality_gate,
         "ai_validation": validation,
         "pilot_pass": final_pass,
         "draft": draft
