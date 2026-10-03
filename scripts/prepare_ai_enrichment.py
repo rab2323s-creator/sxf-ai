@@ -180,6 +180,11 @@ def build_evidence_pack(item, pricing, history):
         })
 
     evidence = {
+        "pricing_basis": {
+            "currency": pricing.get("currency"),
+            "unit": pricing.get("pricing_unit"),
+            "scope": pricing.get("pricing_scope"),
+        },
         "signal": {
             "title": item.get("title"),
             "url": item.get("url"),
@@ -212,10 +217,21 @@ def proposed_structure(evidence):
     sections += ["who_should_care", "what_to_verify", "faq", "sources"]
     return {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
-        "required_sections": sections,
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": sections + [
+            "primary_search_query",
+            "secondary_search_queries",
+            "comparison_points",
+            "technical_details",
+            "practical_takeaways",
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only",

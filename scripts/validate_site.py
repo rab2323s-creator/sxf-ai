@@ -1400,8 +1400,29 @@ def validate_ai_enrichment_dry_run():
         fail("AI enrichment monthly page limit must be 1..100")
     if not isinstance(input_cap, int) or input_cap <= 0 or input_cap > 8000:
         fail("AI enrichment input token cap must be 1..8000")
-    if not isinstance(output_cap, int) or output_cap <= 0 or output_cap > 1800:
-        fail("AI enrichment output token cap must be 1..1800")
+    if not isinstance(output_cap, int) or output_cap <= 0 or output_cap > 3000:
+        fail("AI enrichment output token cap must be 1..3000")
+
+    quality_gate = config.get("publish_quality_gate")
+    if not isinstance(quality_gate, dict):
+        fail("AI publish quality gate config missing")
+    if quality_gate.get("version") != "sxf-publish-quality-v1":
+        fail("AI publish quality gate version drift")
+    if not isinstance(quality_gate.get("minimum_ai_quality_score"), int) or quality_gate["minimum_ai_quality_score"] < 90:
+        fail("AI publish quality score must be >=90")
+    if quality_gate.get("faq_min", 0) < 3 or quality_gate.get("faq_max", 0) > 6:
+        fail("AI publish FAQ bounds drift")
+    required_schema = quality_gate.get("required_schema_types")
+    if required_schema != ["TechArticle", "BreadcrumbList", "FAQPage"]:
+        fail("AI publish schema requirements drift")
+    if not quality_gate.get("require_item_list_for_comparison"):
+        fail("AI publish comparisons must require ItemList schema")
+    if not quality_gate.get("forbid_process_language"):
+        fail("AI publish gate must forbid process language")
+    if not quality_gate.get("require_direct_search_intent"):
+        fail("AI publish gate must require direct search intent")
+    if not quality_gate.get("require_value_beyond_news"):
+        fail("AI publish gate must require value beyond news")
 
     if payload.get("version") != config.get("version") or payload.get("mode") != "dry-run":
         fail("AI enrichment candidate payload version/mode drift")
@@ -1446,6 +1467,12 @@ def validate_ai_enrichment_dry_run():
         source_urls = evidence.get("source_urls")
         if not isinstance(source_urls, list) or not source_urls:
             fail(f"{slug}: evidence pack has no source URLs")
+        pricing_basis = evidence.get("pricing_basis")
+        if not isinstance(pricing_basis, dict):
+            fail(f"{slug}: pricing basis missing from evidence")
+        if evidence.get("models") and any(model.get("pricing_standard") for model in evidence.get("models", [])):
+            if not pricing_basis.get("currency") or not pricing_basis.get("unit"):
+                fail(f"{slug}: model pricing evidence missing currency/unit")
         if signal.get("url") not in source_urls:
             fail(f"{slug}: primary source missing from evidence source URLs")
         if any(not isinstance(url, str) or not url.startswith("https://") for url in source_urls):
@@ -1455,6 +1482,12 @@ def validate_ai_enrichment_dry_run():
             fail(f"{slug}: requested output must be evidence-only")
         if requested.get("route_policy") != "preserve-existing-signal-route":
             fail(f"{slug}: AI must not control routing")
+        if requested.get("seo_slug_policy") != "propose concise search-intent slug; code decides routing later":
+            fail(f"{slug}: SEO slug policy drift")
+        if "comparison" not in requested.get("value_policy", ""):
+            fail(f"{slug}: enrichment must require comparison/value beyond news")
+        if "FAQPage" not in requested.get("schema_requirement", ""):
+            fail(f"{slug}: schema requirement missing FAQPage")
         if requested.get("unknown_policy") != "use unknown or omit; never infer unsupported facts":
             fail(f"{slug}: unknown policy drift")
         if not isinstance(row.get("evidence_hash"), str) or len(row["evidence_hash"]) != 64:
