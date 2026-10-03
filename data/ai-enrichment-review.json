@@ -1,0 +1,227 @@
+{
+  "version": "sxf-ai-enrichment-review-v1",
+  "mode": "manual-review",
+  "items": [
+    {
+      "signal_slug": "introducing-gpt-6-sol-and-luna-3e2cf5d",
+      "signal_url": "https://sxf.si/signals/introducing-gpt-6-sol-and-luna-3e2cf5d/",
+      "evidence_hash": "57f7d53fb3e5278d7912a785ab69a32bfedcc690d0d9c554fb31e5da2b8ce560",
+      "review_status": "preview",
+      "approved_for_publish": false,
+      "index_decision": "noindex",
+      "validator_quality_score": 95,
+      "schema_types": [
+        "TechArticle",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList"
+      ],
+      "prompt_version": "sxf-enrichment-pilot-v3",
+      "draft": {
+        "seo_slug_recommendation": "gpt-6-sol-and-luna",
+        "primary_search_query": "GPT-6 Sol and GPT-6 Luna",
+        "secondary_search_queries": [
+          "GPT-6 Sol pricing and context window",
+          "GPT-6 Luna pricing and context window",
+          "GPT-6 Sol vs GPT-6 Luna",
+          "OpenAI GPT-6 Sol and Luna API models"
+        ],
+        "seo_title": "GPT-6 Sol and GPT-6 Luna: Models and Pricing",
+        "meta_description": "OpenAI introduced GPT-6 Sol and GPT-6 Luna, with shared 1.05M-token context and different API pricing and workload positioning.",
+        "h1": "GPT-6 Sol and GPT-6 Luna: pricing, context, and fit",
+        "intro": "OpenAI introduced GPT-6 Sol and GPT-6 Luna as two GPT-6 API models with different capability-and-cost positioning. Both support text and image input, text output, a 1.05 million-token context window, and up to 128,000 output tokens; their standard API prices and stated workload fit differ.",
+        "what_changed": "OpenAI introduced GPT-6 Sol and GPT-6 Luna. Sol is positioned for complex coding and agentic workflows at a lower unit cost than Astra, while Luna is positioned for focused, high-volume, and cost-sensitive workloads.",
+        "why_it_matters": "The two-model release creates a documented choice between a general-purpose tier for complex coding and agentic work and an efficiency-focused tier for cost-sensitive volume. Although they share the same stated context window, output limit, reasoning-effort settings, and input/output modalities, their standard token prices differ substantially. Teams can therefore evaluate workload fit and token economics separately from core context and modality requirements.",
+        "key_facts": [
+          {
+            "claim": "GPT-6 Sol and GPT-6 Luna are OpenAI GPT-6 models introduced together by OpenAI.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "claim": "Both models have a 1,050,000-token context window and a maximum output of 128,000 tokens.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "claim": "Both accept text and image input and produce text output.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "claim": "Both models offer reasoning-effort settings of none, low, medium, high, xhigh, and max, with medium as the default.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "claim": "Standard API pricing is $2 input, $0.20 cached input, $2.50 cache write, and $10 output per 1 million tokens for GPT-6 Sol; GPT-6 Luna is $0.10, $0.01, $0.125, and $0.50 respectively.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          }
+        ],
+        "pricing_or_capability_impact": "Under standard API pricing, GPT-6 Luna is priced at $0.10 per 1 million input tokens and $0.50 per 1 million output tokens, versus $2 and $10 for GPT-6 Sol. Both models apply long-context pricing when total input exceeds 272,000 tokens: input, cached input, and cache-write prices are doubled, while output pricing is multiplied by 1.5 for the entire request. This makes request-level input size relevant when estimating costs, even though both models list a 1.05 million-token context window.",
+        "comparison_points": [
+          {
+            "dimension": "Positioning and workload fit",
+            "analysis": "GPT-6 Sol is positioned as a general-purpose GPT-6 tier for complex coding and agentic workflows. GPT-6 Luna is positioned as an efficiency-focused tier for focused, high-volume, and cost-sensitive workloads.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "dimension": "Standard API pricing",
+            "analysis": "Per 1 million tokens, GPT-6 Sol lists $2 input, $0.20 cached input, $2.50 cache write, and $10 output. GPT-6 Luna lists $0.10 input, $0.01 cached input, $0.125 cache write, and $0.50 output.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "dimension": "Context and output limits",
+            "analysis": "Both GPT-6 Sol and GPT-6 Luna list a 1,050,000-token context window and a 128,000-token maximum output. Context capacity and output ceiling therefore do not distinguish the two based on the documented specifications.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "dimension": "Knowledge cutoff",
+            "analysis": "GPT-6 Sol lists a knowledge cutoff of 2026-04-20. GPT-6 Luna lists a knowledge cutoff of 2026-05-18.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "dimension": "Modalities and reasoning controls",
+            "analysis": "Both models accept text and image input, return text output, and offer the same documented reasoning-effort levels from none through max, with medium as default.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "detail": "GPT-6 Sol has a 1,050,000-token context window, 128,000-token maximum output, and a listed knowledge cutoff of 2026-04-20.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol"
+            ]
+          },
+          {
+            "detail": "GPT-6 Luna has a 1,050,000-token context window, 128,000-token maximum output, and a listed knowledge cutoff of 2026-05-18.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "detail": "GPT-6 Sol and GPT-6 Luna accept text and image input, produce text output, and support reasoning effort of none, low, medium, high, xhigh, or max; medium is the documented default.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "detail": "For each model, when total input exceeds 272,000 tokens, long-context pricing applies to the entire request: input, cached input, and cache-write multipliers are 2×, while output is 1.5×.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          }
+        ],
+        "practical_takeaways": [
+          {
+            "takeaway": "Choose GPT-6 Sol when the documented target workload is complex coding or agentic work; choose GPT-6 Luna when the workload is focused, high-volume, or cost-sensitive.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "takeaway": "Do not select between Sol and Luna based on listed context capacity, maximum output, text/image input, or text output: those documented specifications are the same for both models.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "takeaway": "Estimate costs using the appropriate token category—input, cached input, cache write, and output—and account for the long-context rule when total input exceeds 272,000 tokens.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "takeaway": "For volume-sensitive workloads, compare expected input and output mix rather than input pricing alone, because Sol and Luna have separate rates for input, cached input, cache write, and output.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          }
+        ],
+        "before_vs_after": [],
+        "who_should_care": "API teams choosing between an OpenAI model for complex coding or agentic workflows and one for focused, high-volume, or cost-sensitive work should compare GPT-6 Sol and GPT-6 Luna. Teams handling large prompts should also review the documented long-context pricing rule, which applies once total input exceeds 272,000 tokens.",
+        "what_to_verify": [
+          "Confirm the current API model identifiers and availability in the OpenAI documentation before deployment.",
+          "Estimate input, cached-input, cache-write, and output token volumes for the intended workload.",
+          "Check whether requests can exceed 272,000 total input tokens, because long-context pricing applies to the entire request above that threshold.",
+          "Validate the model against the specific coding, agentic, focused, or high-volume task before selecting a production default."
+        ],
+        "faq": [
+          {
+            "question": "What are GPT-6 Sol and GPT-6 Luna?",
+            "answer": "GPT-6 Sol and GPT-6 Luna are OpenAI GPT-6 models introduced together. Sol is positioned for complex coding and agentic workflows, while Luna is positioned for focused, high-volume, and cost-sensitive workloads.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "question": "How does GPT-6 Sol pricing compare with GPT-6 Luna pricing?",
+            "answer": "Under standard API pricing per 1 million tokens, GPT-6 Sol is listed at $2 input and $10 output, while GPT-6 Luna is listed at $0.10 input and $0.50 output. Cached input and cache-write prices also differ: $0.20 and $2.50 for Sol versus $0.01 and $0.125 for Luna.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "question": "Do GPT-6 Sol and GPT-6 Luna have the same context window?",
+            "answer": "Yes. Both models list a 1,050,000-token context window and a 128,000-token maximum output.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          },
+          {
+            "question": "When does long-context pricing apply to GPT-6 Sol and GPT-6 Luna?",
+            "answer": "Long-context pricing applies when total input tokens exceed 272,000. It applies to the entire request: input, cached input, and cache-write pricing are doubled, and output pricing is multiplied by 1.5.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "question": "Which inputs and outputs do GPT-6 Sol and GPT-6 Luna support?",
+            "answer": "Both models accept text and image input and generate text output. Both also list reasoning-effort controls from none through max, with medium as the default.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-luna"
+            ]
+          }
+        ],
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://openai.com/index/introducing-gpt-6-sol-and-luna"
+        ]
+      }
+    }
+  ]
+}
