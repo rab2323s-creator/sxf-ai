@@ -43,24 +43,37 @@ def normalized(value):
     return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
 
 
-def model_matches(signal, model):
-    haystack = normalized(" ".join([
+def signal_haystack(signal):
+    return normalized(" ".join([
         signal.get("title", ""),
         signal.get("summary", ""),
         " ".join(signal.get("tags", [])),
     ]))
-    candidates = [
-        model.get("model", ""),
-        model.get("model_id", ""),
-        model.get("family", ""),
-    ]
+
+
+def explicit_model_match(signal, model):
+    haystack = signal_haystack(signal)
+    candidates = [model.get("model", ""), model.get("model_id", "")]
     aliases = model.get("aliases") or []
     if isinstance(aliases, list):
         candidates.extend(aliases)
-    for candidate in candidates:
-        token = normalized(candidate)
-        if token and token in haystack:
-            return True
+    return any(normalized(candidate) and normalized(candidate) in haystack for candidate in candidates)
+
+
+def family_model_match(signal, model):
+    family_tokens = normalized(model.get("family", "")).split()
+    haystack_tokens = signal_haystack(signal).split()
+    if not family_tokens or len(haystack_tokens) < len(family_tokens):
+        return False
+    width = len(family_tokens)
+    for index in range(len(haystack_tokens) - width + 1):
+        if haystack_tokens[index:index + width] != family_tokens:
+            continue
+        next_index = index + width
+        if next_index < len(haystack_tokens) and haystack_tokens[next_index].isdigit():
+            # "GPT-6" must not match "GPT-6.1"; the latter is a distinct version.
+            continue
+        return True
     return False
 
 
@@ -121,9 +134,11 @@ def build_evidence_pack(item, pricing, history):
     matched_models = []
     source_urls = [item.get("url")]
 
-    for model in pricing.get("models", []):
-        if not model_matches(item, model):
-            continue
+    all_models = pricing.get("models", [])
+    explicit_models = [model for model in all_models if explicit_model_match(item, model)]
+    evidence_models = explicit_models or [model for model in all_models if family_model_match(item, model)]
+
+    for model in evidence_models:
         price = active_price(model, published_date)
         provenance = model.get("provenance", {})
         evidence = provenance.get("evidence", {})

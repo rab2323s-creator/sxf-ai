@@ -132,6 +132,74 @@ def test_evidence_pack_matches_model_data():
     )
 
 
+def test_exact_model_match_beats_family_fallback():
+    pricing = {
+        "models": [
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Astra",
+                "model_id": "gpt-6-astra",
+                "official_sources": ["https://example.com/astra"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 10, "cached_input": 1, "output": 50}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/astra"}},
+            },
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Sol",
+                "model_id": "gpt-6-sol",
+                "official_sources": ["https://example.com/sol"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 2, "cached_input": 0.2, "output": 10}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/sol"}},
+            },
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Luna",
+                "model_id": "gpt-6-luna",
+                "official_sources": ["https://example.com/luna"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 0.1, "cached_input": 0.01, "output": 0.5}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/luna"}},
+            },
+        ]
+    }
+    signal = sample_signal()
+    signal["title"] = "Better prompt caching for GPT-6 Sol"
+    signal["summary"] = "OpenAI updated prompt caching behavior for GPT-6 Sol."
+    evidence = build_evidence_pack(signal, pricing, {"events": []})
+    expect([m["model"] for m in evidence["models"]] == ["GPT-6 Sol"], "exact model must beat family fallback")
+
+
+def test_unknown_variant_does_not_attach_family_models():
+    pricing = {
+        "models": [
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Astra",
+                "model_id": "gpt-6-astra",
+                "official_sources": ["https://example.com/astra"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 10, "cached_input": 1, "output": 50}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/astra"}},
+            },
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Sol",
+                "model_id": "gpt-6-sol",
+                "official_sources": ["https://example.com/sol"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 2, "cached_input": 0.2, "output": 10}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/sol"}},
+            },
+        ]
+    }
+    signal = sample_signal()
+    signal["title"] = "Introducing GPT-6.1 Sol"
+    signal["summary"] = "OpenAI introduced GPT-6.1 Sol."
+    evidence = build_evidence_pack(signal, pricing, {"events": []})
+    expect(evidence["models"] == [], "unknown specific variant must not inherit family model facts")
+
 def test_non_model_signal_does_not_invent_model_data():
     signal = sample_signal()
     signal.update({
@@ -147,5 +215,7 @@ def test_non_model_signal_does_not_invent_model_data():
 if __name__ == "__main__":
     test_selection_prefers_model_release()
     test_evidence_pack_matches_model_data()
+    test_exact_model_match_beats_family_fallback()
+    test_unknown_variant_does_not_attach_family_models()
     test_non_model_signal_does_not_invent_model_data()
     print("AI enrichment dry-run tests passed")
