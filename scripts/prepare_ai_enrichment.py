@@ -223,10 +223,15 @@ def main():
             "index_decision": "unchanged",
         })
 
+    snapshot = {
+        "candidate_slugs": [row["signal_slug"] for row in rows],
+        "evidence_hashes": [row["evidence_hash"] for row in rows],
+        "config_version": config["version"],
+    }
     payload = {
         "version": config["version"],
         "mode": config["mode"],
-        "generated_at": now.isoformat().replace("+00:00", "Z"),
+        "snapshot_hash": sha256_json(snapshot),
         "candidate_count": len(rows),
         "candidate_limit": config["candidate_limit"],
         "budget_guard": {
