@@ -3777,6 +3777,7 @@ def model_comparison_links_html(model_id, limit=4):
     if not matches:
         return ""
     matches.sort(key=lambda comparison: (
+        0 if len({MODEL_PRICING_BY_ID[mid]["provider"] for mid in comparison.get("model_ids", [])}) > 1 else 1,
         0 if comparison.get("template") == "editorial" else 1,
         comparison.get("title", ""),
     ))
