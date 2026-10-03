@@ -957,6 +957,44 @@ def validate_compare_contracts_and_model_histories():
     if "Not published" not in meta_html or "Direct Standard token-cost comparison is unavailable" not in meta_html:
         fail("open-weight comparison must preserve unavailable direct pricing instead of inventing rates")
 
+    comparison_slugs_by_model = {}
+    for comparison in indexable:
+        for model_id in comparison["model_ids"]:
+            comparison_slugs_by_model.setdefault(model_id, []).append(comparison["slug"])
+
+    for model_id, slugs in comparison_slugs_by_model.items():
+        model = models[model_id]
+        url = model.get("sxf_url", "")
+        if not url.startswith("/models/") or url == "/models/pricing/":
+            continue
+        model_path = local_path(BASE + url)
+        if not model_path.exists():
+            fail(f"{model_id}: comparison backlink target missing")
+        model_html = model_path.read_text(encoding="utf-8")
+        if f'data-model-comparisons="{model_id}"' not in model_html:
+            fail(f"{model_id}: model page missing comparison bridge")
+        if not any(f"/compare/{slug}/" in model_html for slug in slugs):
+            fail(f"{model_id}: model page does not link a curated comparison")
+
+    provider_slugs = {}
+    for comparison in indexable:
+        comparison_providers = {
+            models[model_id]["provider"] for model_id in comparison["model_ids"]
+        }
+        for provider in comparison_providers:
+            provider_slugs.setdefault(provider, []).append(comparison["slug"])
+
+    for provider, slugs in provider_slugs.items():
+        provider_slug = re.sub(r"[^a-z0-9]+", "-", provider.lower()).strip("-")
+        provider_path = ROOT / "providers" / provider_slug / "index.html"
+        if not provider_path.exists():
+            fail(f"{provider}: provider comparison backlink target missing")
+        provider_html = provider_path.read_text(encoding="utf-8")
+        if f'data-provider-comparisons="{provider_slug}"' not in provider_html:
+            fail(f"{provider}: provider page missing comparison bridge")
+        if not any(f"/compare/{slug}/" in provider_html for slug in slugs):
+            fail(f"{provider}: provider page does not link a curated comparison")
+
     # Every catalog-backed /models/ URL must surface the latest ledger event for its model.
     events_by_model = {}
     for event in history["events"]:
