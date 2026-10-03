@@ -164,9 +164,15 @@ def validate_model_history():
     except RuntimeError as exc:
         fail(f"model history invalid: {exc}")
 
-    baseline_count = sum(1 for event in history["events"] if event.get("type") == "baseline")
-    if baseline_count != len(catalog["models"]):
-        fail(f"model history baseline count {baseline_count} != {len(catalog['models'])} catalog models")
+    initial_event_count = sum(
+        1 for event in history["events"]
+        if event.get("type") in {"baseline", "model_added"}
+    )
+    if initial_event_count != len(catalog["models"]):
+        fail(
+            f"model history initial-event count {initial_event_count} "
+            f"!= {len(catalog['models'])} catalog models"
+        )
 
     # Regression: factual changes require a newer verified_at.
     stale_catalog = copy.deepcopy(catalog)
