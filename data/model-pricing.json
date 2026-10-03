@@ -892,7 +892,7 @@
       ],
       "notes": [
         "xAI documents no separate text output limit for Grok 4.6.",
-        "Long-context token rates apply at or above 200,000 prompt tokens."
+        "Higher long-context token rates apply when prompt tokens exceed 200,000."
       ],
       "pricing": {
         "standard": [
@@ -906,7 +906,7 @@
         ],
         "long_context": {
           "threshold_input_tokens": 200000,
-          "condition": "total input tokens at or above 200000",
+          "condition": "total input tokens greater than 200000",
           "applies_to_entire_request": true,
           "multipliers": {
             "input": 2,
@@ -967,16 +967,18 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://docs.x.ai/developers/models/grok-4.3",
-        "https://docs.x.ai/developers/pricing"
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/migration/may-15-retirement"
       ],
       "notes": [
         "xAI does not publish a separate text output cap on the cited model page.",
-        "Knowledge cutoff is left unknown because no verified value is stored in the cited official model documentation."
+        "Knowledge cutoff is left unknown because no verified value is stored in the cited official model documentation.",
+        "The stored Standard pricing start is anchored to xAI's May 15, 2026 migration/pricing-impact date."
       ],
       "pricing": {
         "standard": [
           {
-            "start": "2026-01-01",
+            "start": "2026-05-15",
             "end": null,
             "input": 1.25,
             "cached_input": 0.2,
@@ -985,7 +987,7 @@
         ],
         "long_context": {
           "threshold_input_tokens": 200000,
-          "condition": "total input tokens at or above 200000",
+          "condition": "total input tokens greater than 200000",
           "applies_to_entire_request": true,
           "multipliers": {
             "input": 2,
@@ -1004,7 +1006,7 @@
           "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.3",
           "reasoning": "https://docs.x.ai/developers/models/grok-4.3",
           "modalities": "https://docs.x.ai/developers/models/grok-4.3",
-          "pricing": "https://docs.x.ai/developers/pricing"
+          "pricing": "https://docs.x.ai/developers/migration/may-15-retirement"
         }
       },
       "pricing_status": "official-paid",
