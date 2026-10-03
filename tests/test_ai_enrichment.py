@@ -40,6 +40,9 @@ def sample_signal():
 
 def sample_pricing():
     return {
+        "currency": "USD",
+        "pricing_unit": "per 1 million tokens",
+        "pricing_scope": "Standard API token pricing unless a model-specific rule states otherwise",
         "models": [{
             "provider": "OpenAI",
             "family": "GPT-6.1",
@@ -125,6 +128,8 @@ def test_evidence_pack_matches_model_data():
     model = evidence["models"][0]
     expect(model["model_id"] == "gpt-6.1-sol", "model identity drift")
     expect(model["pricing_standard"]["input"] == 2, "active model price missing")
+    expect(evidence["pricing_basis"]["currency"] == "USD", "pricing currency missing from evidence")
+    expect(evidence["pricing_basis"]["unit"] == "per 1 million tokens", "pricing unit missing from evidence")
     expect(len(model["history"]) == 1, "model history evidence missing")
     expect(
         "https://developers.openai.com/api/docs/pricing" in evidence["source_urls"],
