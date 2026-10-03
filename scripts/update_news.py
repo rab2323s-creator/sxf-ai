@@ -1055,6 +1055,7 @@ COMPARE_DIR = ROOT / "compare"
 GUIDES_DIR = ROOT / "guides"
 SUPERINTELLIGENCE_DIR = ROOT / "superintelligence"
 PRICING_DIR = ROOT / "models" / "pricing"
+PROVIDERS_DIR = ROOT / "providers"
 GPT6_COMPARE_SLUG = "gpt-6-astra-vs-sol-vs-luna"
 GPT6_SOL_CLAUDE_COMPARE_SLUG = "gpt-6-sol-vs-claude-opus-5-5"
 GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
@@ -2264,6 +2265,7 @@ def tracked_models_html(items):
     groups = model_groups(items)
     cards = [
         '<a class="tracked-model" href="/models/pricing/"><span>DB</span><strong>Model Pricing</strong><small>API rates & calculator</small><b>↗</b></a>',
+        '<a class="tracked-model" href="/providers/"><span>ORG</span><strong>Providers</strong><small>Verified model portfolios</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/claude-fable-5-1/"><span>REF</span><strong>Claude Fable 5.1</strong><small>Model reference</small><b>↗</b></a>',
         '<a class="tracked-model" href="/models/gemini-3-8-flash/"><span>REF</span><strong>Gemini 3.8 Flash</strong><small>Model reference</small><b>↗</b></a>'
     ]
@@ -3411,13 +3413,18 @@ def model_page_html(name, items):
 
 
 
-CATALOG_GENERIC_REFERENCE_IDS = {
-    "grok-4.6",
-    "grok-4.3",
-    "gemini-3.7-flash",
-    "llama-4-scout",
-    "llama-4-maverick",
-}
+def provider_slug(provider):
+    return slugify(provider)
+
+
+def provider_source_names(provider):
+    return {
+        "OpenAI": {"OpenAI"},
+        "Anthropic": {"Anthropic"},
+        "Google": {"Google AI", "Google Research"},
+        "xAI": {"xAI"},
+        "Meta": {"Meta"},
+    }.get(provider, {provider})
 
 
 def catalog_model_reference_html(model_id, items):
@@ -3558,6 +3565,15 @@ def catalog_model_reference_html(model_id, items):
         {f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
 
         <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
+          <div class="model-related-links">
+            <a href="/providers/{escape(provider_slug(model["provider"]), quote=True)}/"><span>PROVIDER</span><strong>{escape(model["provider"])} model portfolio</strong><b>↗</b></a>
+            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
+            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
           <div class="model-sources">{source_links}</div>
         </section>
@@ -3649,6 +3665,209 @@ def grok_47_reference_html():
       </section>
       {model_change_watch_html(["grok-4.7"], "Grok 4.7: what changed.")}
       {model_history_html(["grok-4.7"], "Grok 4.7 verified history.")}
+    </main>{page_footer()}</body></html>'''
+
+
+def render_catalog_model_page(model_id, items):
+    model = model_catalog_entry(model_id)
+    template = model.get("page_template")
+
+    if template == "editorial-reference":
+        if model_id == "claude-fable-5-1":
+            page = claude_fable_51_reference_html(items)
+        elif model_id == "gemini-3.8-flash":
+            page = gemini_38_flash_reference_html(items)
+        elif model_id == "grok-4.7":
+            page = grok_47_reference_html()
+        else:
+            page = catalog_model_reference_html(model_id, items)
+    elif template == "catalog-reference":
+        page = catalog_model_reference_html(model_id, items)
+    else:
+        return None
+
+    if "data-what-changed" not in page:
+        page = inject_before_main_end(
+            page,
+            model_change_watch_html([model_id], f'{model["model"]}: what changed.')
+        )
+    if "data-model-history" not in page:
+        page = inject_before_main_end(
+            page,
+            model_history_html([model_id], f'{model["model"]} verified history.')
+        )
+    return page
+
+
+def build_catalog_model_pages(items):
+    rendered = 0
+    for model in MODEL_PRICING_CATALOG["models"]:
+        page = render_catalog_model_page(model["model_id"], items)
+        if page is None:
+            continue
+        path = ROOT / model["sxf_url"].strip("/")
+        path.mkdir(parents=True, exist_ok=True)
+        (path / "index.html").write_text(page, encoding="utf-8")
+        rendered += 1
+    return rendered
+
+
+def provider_index_html(items):
+    providers = sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]})
+    cards = []
+    for provider in providers:
+        models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == provider]
+        paid = sum(1 for model in models if model_has_official_paid_pricing(model))
+        verified = max(model["provenance"]["verified_at"] for model in models)
+        cards.append(
+            f'''<a class="tracked-model" href="/providers/{escape(provider_slug(provider), quote=True)}/">
+              <span>{len(models):02d}</span><strong>{escape(provider)}</strong>
+              <small>{len(models)} tracked model{"s" if len(models) != 1 else ""} · {paid} calculator-priced · verified {escape(verified)}</small><b>↗</b>
+            </a>'''
+        )
+
+    canonical = BASE_URL + "/providers/"
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "name": "AI Model Providers | SXF / AI",
+                "url": canonical,
+                "description": "Verified model portfolios, pricing availability, specifications and source-backed change history by AI provider.",
+                "isPartOf": {"@id": BASE_URL + "/#website"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "ItemList",
+                "name": "Tracked AI model providers",
+                "numberOfItems": len(providers),
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": index + 1,
+                        "name": provider,
+                        "url": f'{BASE_URL}/providers/{provider_slug(provider)}/',
+                    }
+                    for index, provider in enumerate(providers)
+                ],
+            },
+        ],
+    }
+    return f'''<!doctype html><html lang="en">{page_head(
+        "AI Model Providers — OpenAI, Anthropic, Google, xAI & Meta | SXF / AI",
+        "Browse verified AI model portfolios by provider, including pricing availability, model specs, official sources and change history.",
+        canonical,
+        schema,
+    )}
+    <body class="intel-page model-page">{page_header("models")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Providers</span></nav>
+        <p class="eyebrow">MODEL INTELLIGENCE / PROVIDERS</p>
+        <h1>AI model providers.<br><span>One verified data layer.</span></h1>
+        <p>Browse provider portfolios without mixing direct API pricing, partner pricing and self-hosted economics. Every model record points back to official evidence.</p>
+        <div class="collection-stats">
+          <div><strong>{len(providers)}</strong><span>providers</span></div>
+          <div><strong>{len(MODEL_PRICING_CATALOG["models"])}</strong><span>tracked models</span></div>
+          <div><strong>{escape(MODEL_PRICING_CATALOG["source_verified"])}</strong><span>catalog verified</span></div>
+        </div>
+      </section>
+      <section class="shell">
+        <div class="intel-section-head"><div><p class="eyebrow">PROVIDER DIRECTORY</p><h2>Choose a model ecosystem.</h2></div><a href="/models/pricing/">Pricing explorer ↗</a></div>
+        <div class="tracked-models">{"".join(cards)}</div>
+      </section>
+    </main>{page_footer()}</body></html>'''
+
+
+def provider_page_html(provider, items):
+    models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == provider]
+    if not models:
+        raise RuntimeError(f"No catalog models for provider {provider}")
+
+    source_names = provider_source_names(provider)
+    signals = [item for item in items if item.get("source") in source_names][:12]
+    verified = max(model["provenance"]["verified_at"] for model in models)
+    paid_count = sum(1 for model in models if model_has_official_paid_pricing(model))
+
+    model_cards = []
+    for model in models:
+        priced = model_has_official_paid_pricing(model)
+        if priced:
+            rate = active_standard_price(model["model_id"], MODEL_PRICING_CATALOG["source_verified"])
+            pricing = f'{catalog_price_label(rate["input"])} in · {catalog_price_label(rate["output"])} out / MTok'
+        else:
+            pricing = model_pricing_status(model)
+        model_cards.append(
+            f'''<article class="model-family-card">
+              <span>{escape(model.get("family", provider))}</span>
+              <h3><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a></h3>
+              <p>{escape(model["positioning"])}</p>
+              <div class="model-family-spec"><b>{int(model["context_window"]):,} context</b><small>{escape(model_output_label(model))} max output</small></div>
+              <div class="model-family-price"><strong>{escape(pricing)}</strong><small>{escape(model_pricing_status(model))}</small></div>
+            </article>'''
+        )
+
+    signal_rows = "".join(signal_row(item) for item in signals)
+    canonical = f'{BASE_URL}/providers/{provider_slug(provider)}/'
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "name": f'{provider} AI models | SXF / AI',
+                "url": canonical,
+                "description": f'Verified {provider} model specifications, pricing availability, official sources and related primary-source signals.',
+                "about": {"@type": "Organization", "name": provider},
+                "isPartOf": {"@id": BASE_URL + "/#website"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "ItemList",
+                "name": f'{provider} models tracked by SXF / AI',
+                "numberOfItems": len(models),
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": index + 1,
+                        "name": model["model"],
+                        "url": BASE_URL + model["sxf_url"],
+                    }
+                    for index, model in enumerate(models)
+                ],
+            },
+        ],
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(
+        f'{provider} AI Models — Specs, Pricing & History | SXF / AI',
+        f'Verified {provider} model portfolio with context windows, output policies, pricing availability, official sources and model history.',
+        canonical,
+        schema,
+    )}
+    <body class="intel-page model-page">{page_header("models")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/providers/">Providers</a><span>/</span><span>{escape(provider)}</span></nav>
+        <p class="eyebrow">PROVIDER INTELLIGENCE</p>
+        <h1>{escape(provider)}.<br><span>Verified model portfolio.</span></h1>
+        <p>Specs, pricing availability and source-backed change history are normalized from the same canonical database used across SXF / AI.</p>
+        <div class="collection-stats">
+          <div><strong>{len(models)}</strong><span>tracked models</span></div>
+          <div><strong>{paid_count}</strong><span>calculator-priced</span></div>
+          <div><strong>{escape(verified)}</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-section-head"><p class="eyebrow">MODEL PORTFOLIO</p><h2>{escape(provider)} models in the canonical DB.</h2></div>
+        <div class="model-family-grid">{"".join(model_cards)}</div>
+        <div class="model-related-links">
+          <a href="/models/pricing/"><span>ECONOMICS</span><strong>Pricing explorer</strong><b>↗</b></a>
+          <a href="/compare/"><span>DECISIONS</span><strong>Comparison hub</strong><b>↗</b></a>
+          <a href="/data/model-history.json"><span>PROVENANCE</span><strong>Open change ledger</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      {f'<section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">PRIMARY-SOURCE WATCH</p><h2>Latest {escape(provider)} signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>' if signal_rows else ""}
     </main>{page_footer()}</body></html>'''
 
 def best_ai_coding_tools_html(items):
@@ -7647,6 +7866,13 @@ def build_discovery_pages(items, current_items):
     GUIDES_DIR.mkdir(parents=True, exist_ok=True)
     SUPERINTELLIGENCE_DIR.mkdir(parents=True, exist_ok=True)
     PRICING_DIR.mkdir(parents=True, exist_ok=True)
+    PROVIDERS_DIR.mkdir(parents=True, exist_ok=True)
+
+    (PROVIDERS_DIR / "index.html").write_text(provider_index_html(items), encoding="utf-8")
+    for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]}):
+        provider_path = PROVIDERS_DIR / provider_slug(provider)
+        provider_path.mkdir(parents=True, exist_ok=True)
+        (provider_path / "index.html").write_text(provider_page_html(provider, items), encoding="utf-8")
 
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
@@ -7693,39 +7919,7 @@ def build_discovery_pages(items, current_items):
         )
         (path / "index.html").write_text(page, encoding="utf-8")
 
-    fable_path = ROOT / "models" / "claude-fable-5-1"
-    fable_path.mkdir(parents=True, exist_ok=True)
-    fable_page = claude_fable_51_reference_html(items)
-    fable_page = inject_before_main_end(
-        fable_page,
-        model_change_watch_html(["claude-fable-5-1"], "Claude Fable 5.1: what changed.") +
-        model_history_html(["claude-fable-5-1"], "Claude Fable 5.1 verified history.")
-    )
-    (fable_path / "index.html").write_text(fable_page, encoding="utf-8")
-
-    for model_id in sorted(CATALOG_GENERIC_REFERENCE_IDS):
-        model = model_catalog_entry(model_id)
-        generic_path = ROOT / model["sxf_url"].strip("/")
-        generic_path.mkdir(parents=True, exist_ok=True)
-        (generic_path / "index.html").write_text(
-            catalog_model_reference_html(model_id, items),
-            encoding="utf-8",
-        )
-
-    grok_path = ROOT / "models" / "grok-4-7"
-    grok_path.mkdir(parents=True, exist_ok=True)
-    (grok_path / "index.html").write_text(grok_47_reference_html(), encoding="utf-8")
-
-    gemini_path = ROOT / "models" / "gemini-3-8-flash"
-    gemini_path.mkdir(parents=True, exist_ok=True)
-    gemini_page = gemini_38_flash_reference_html(items)
-    gemini_page = inject_before_main_end(
-        gemini_page,
-        model_change_watch_html(["gemini-3.8-flash"], "Gemini 3.8 Flash: what changed.") +
-        model_history_html(["gemini-3.8-flash"], "Gemini 3.8 Flash verified history.")
-    )
-    (gemini_path / "index.html").write_text(gemini_page, encoding="utf-8")
-
+    build_catalog_model_pages(items)
     ensure_catalog_model_histories()
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
@@ -7829,9 +8023,6 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
-        sitemap_entry(f"{BASE_URL}/models/claude-fable-5-1/", "2026-09-01"),
-        sitemap_entry(f"{BASE_URL}/models/gemini-3-8-flash/", "2026-09-02"),
-        sitemap_entry(f"{BASE_URL}/models/grok-4-7/", MODEL_PRICING_BY_ID["grok-4.7"]["provenance"]["verified_at"]),
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
@@ -7911,8 +8102,18 @@ def update_sitemap(items):
         if topic_page_indexable(matched):
             rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", content_lastmod(matched)))
 
-    for model_id in sorted(CATALOG_GENERIC_REFERENCE_IDS):
-        model = MODEL_PRICING_BY_ID[model_id]
+    rows.append(sitemap_entry(f"{BASE_URL}/providers/", MODEL_PRICING_CATALOG["source_verified"]))
+    for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]}):
+        provider_models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == provider]
+        provider_verified = max(model["provenance"]["verified_at"] for model in provider_models)
+        rows.append(sitemap_entry(
+            f"{BASE_URL}/providers/{provider_slug(provider)}/",
+            provider_verified,
+        ))
+
+    for model in MODEL_PRICING_CATALOG["models"]:
+        if model.get("page_template") not in {"catalog-reference", "editorial-reference"}:
+            continue
         rows.append(sitemap_entry(
             BASE_URL + model["sxf_url"],
             model["provenance"]["verified_at"],
