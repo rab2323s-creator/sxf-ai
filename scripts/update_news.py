@@ -49,6 +49,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-agent-collusion-secret-communication" / "index.html": "guides",
     ROOT / "guides" / "ai-negotiation-agents" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-authorization" / "index.html": "guides",
+    ROOT / "guides" / "ai-agent-discovery" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -5454,6 +5455,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-agent-discovery/",
+            "category": "Agents · Discovery · Infrastructure",
+            "categories": ["agents", "research", "security", "tools"],
+            "kicker": "AI AGENT DISCOVERY",
+            "title": "AI Agent Discovery: How Will AI Agents Find Each Other?",
+            "description": "A2A Agent Cards, registries, DNS-AID, AINS, capability search, routing, reputation and the emerging search layer for the agentic web.",
+            "meta": "Discovery · Agent Cards · Registries · Routing",
+            "updated": "Oct 3, 2026",
+            "read_time": "56 min",
+        },
+        {
             "href": "/guides/ai-agent-authorization/",
             "category": "Security · Agents · Identity",
             "categories": ["security", "agents", "research", "tools"],
@@ -7504,6 +7516,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/ai-agent-discovery/",
+            "2026-10-03",
+            f"{BASE_URL}/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/ai-agent-authorization/",
             "2026-10-03",
