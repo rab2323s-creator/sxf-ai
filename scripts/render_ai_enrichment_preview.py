@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import copy
+import hashlib
 import json
+import shutil
 from html import escape
 from pathlib import Path
 
@@ -32,6 +35,25 @@ REVIEW_VERSION = "sxf-ai-enrichment-review-v1"
 
 def load_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def canonical_json(value):
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def sha256_json(value):
+    return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+
+
+def evidence_matches_review(review, candidate):
+    if review.get("evidence_hash") == candidate.get("evidence_hash"):
+        return True
+    evidence = copy.deepcopy(candidate.get("evidence") or {})
+    signal = evidence.get("signal") if isinstance(evidence, dict) else None
+    identity_url = review.get("evidence_identity_signal_url")
+    if isinstance(signal, dict) and identity_url:
+        signal["signal_url"] = identity_url
+    return sha256_json(evidence) == review.get("evidence_hash")
 
 
 def citation_links(urls):
@@ -125,7 +147,7 @@ def list_cards(rows, text_key):
     )
 
 
-def research_signal_preview_html(item, all_items, review, evidence):
+def research_signal_preview_html(item, all_items, review, evidence, published=False):
     draft = review["draft"]
     quality_gate = load_json(CONFIG_PATH)["publish_quality_gate"]
     deterministic_errors = validate_publish_draft(draft, evidence, quality_gate)
@@ -180,6 +202,21 @@ def research_signal_preview_html(item, all_items, review, evidence):
         for url in draft["sources"]
     )
 
+    robots = (
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        if published else "noindex,follow,noarchive"
+    )
+    banner = "" if published else (
+        f'<div class="review-banner"><div class="shell"><strong>MANUAL REVIEW PREVIEW</strong>'
+        f'<span>NOINDEX · NOT PUBLISHED · QUALITY {review["validator_quality_score"]}/100</span></div></div>'
+    )
+    review_label = "Published" if published else "Preview"
+    source_note = (
+        "This research signal is grounded in the cited official sources and structured evidence used by SXF."
+        if published else
+        "This preview is grounded only in the approved evidence set and is not yet published as the canonical signal content."
+    )
+
     return f'''<!doctype html><html lang="en">
     {page_head(
         draft["seo_title"] + " | SXF / AI",
@@ -187,13 +224,13 @@ def research_signal_preview_html(item, all_items, review, evidence):
         canonical,
         schema,
         "article",
-        "noindex,follow,noarchive",
+        robots,
     )}
     <body class="intel-page signal-page research-signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
       {page_header()}
-      <div class="review-banner"><div class="shell"><strong>MANUAL REVIEW PREVIEW</strong><span>NOINDEX · NOT PUBLISHED · QUALITY {review["validator_quality_score"]}/100</span></div></div>
+      {banner}
       <main id="signal-main">
         <section class="intel-hero shell research-hero">
           <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="{escape(category_path(item["category"]), quote=True)}">{escape(item["category"])}</a></nav>
@@ -204,7 +241,7 @@ def research_signal_preview_html(item, all_items, review, evidence):
             <div><span>SOURCE</span><strong>{escape(item["source"])}</strong></div>
             <div><span>PUBLISHED</span><strong>{escape(display_date(item["published"]))}</strong></div>
             <div><span>QUALITY</span><strong>{review["validator_quality_score"]}/100</strong></div>
-            <div><span>REVIEW</span><strong>Preview</strong></div>
+            <div><span>STATUS</span><strong>{review_label}</strong></div>
           </div>
         </section>
 
@@ -218,7 +255,7 @@ def research_signal_preview_html(item, all_items, review, evidence):
           </article>
           <aside class="source-card">
             <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(item["source"])}</strong>
-            <p>This preview is grounded only in the approved evidence set and is not yet published as the canonical signal content.</p>
+            <p>{escape(source_note)}</p>
             <a href="{escape(item["url"], quote=True)}" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
           </aside>
         </section>
@@ -281,6 +318,16 @@ def research_signal_preview_html(item, all_items, review, evidence):
     </body></html>'''
 
 
+def legacy_route_html(canonical):
+    return f'''<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="robots" content="noindex,follow" />
+      <link rel="canonical" href="{escape(canonical, quote=True)}" />
+      <meta http-equiv="refresh" content="0; url={escape(canonical, quote=True)}" />
+      <title>Signal moved | SXF / AI</title>
+    </head><body><main><p>This signal has moved to <a href="{escape(canonical, quote=True)}">{escape(canonical)}</a>.</p></main></body></html>'''
+
+
 def main():
     review_payload = load_json(REVIEW_PATH)
     if review_payload.get("version") != REVIEW_VERSION:
@@ -294,44 +341,78 @@ def main():
     archive = load_json(ARCHIVE_PATH)
     items = archive.get("items") or []
 
-    candidate_by_slug = {row["signal_slug"]: row for row in candidates}
-    item_by_slug = {row["signal_slug"]: row for row in items}
+    candidate_by_source = {
+        (row.get("evidence") or {}).get("signal", {}).get("url"): row
+        for row in candidates
+    }
+    item_by_source = {row.get("url"): row for row in items}
 
-    rendered = 0
+    rendered_preview = 0
+    rendered_live = 0
     PREVIEW_ROOT.mkdir(parents=True, exist_ok=True)
 
     for review in review_payload.get("items") or []:
         slug = review.get("signal_slug")
-        if review.get("review_status") != "preview":
-            raise RuntimeError(f"{slug}: only preview review_status is allowed in v1")
-        if review.get("approved_for_publish") is not False:
-            raise RuntimeError(f"{slug}: approved_for_publish must remain false in preview v1")
-        if review.get("index_decision") != "noindex":
-            raise RuntimeError(f"{slug}: preview index_decision must be noindex")
-        if int(review.get("validator_quality_score", 0)) < int(gate["minimum_ai_quality_score"]):
-            raise RuntimeError(f"{slug}: validator quality score below publish gate")
+        status = review.get("review_status")
+        if status not in {"preview", "approved"}:
+            raise RuntimeError(f"{slug}: unsupported review_status {status!r}")
 
-        candidate = candidate_by_slug.get(slug)
-        item = item_by_slug.get(slug)
+        candidate = candidate_by_source.get(review.get("source_url"))
+        item = item_by_source.get(review.get("source_url"))
         if candidate is None or item is None:
             raise RuntimeError(f"{slug}: review target missing from current candidate/archive data")
-        if review.get("signal_url") != item.get("signal_url"):
-            raise RuntimeError(f"{slug}: signal URL drift")
-        if review.get("evidence_hash") != candidate.get("evidence_hash"):
-            raise RuntimeError(f"{slug}: evidence hash changed; regenerate and review before rendering")
+        if item.get("signal_url") != review.get("signal_url"):
+            raise RuntimeError(f"{slug}: promoted signal URL drift")
+        if not evidence_matches_review(review, candidate):
+            raise RuntimeError(f"{slug}: evidence changed; regenerate and review before rendering")
+        if int(review.get("validator_quality_score", 0)) < int(gate["minimum_ai_quality_score"]):
+            raise RuntimeError(f"{slug}: validator quality score below publish gate")
 
         deterministic_errors = validate_publish_draft(review["draft"], candidate["evidence"], gate)
         if deterministic_errors:
             raise RuntimeError(f"{slug}: reviewed draft failed deterministic gate: {' | '.join(deterministic_errors)}")
 
         preview_slug = review["draft"]["seo_slug_recommendation"]
-        out_dir = PREVIEW_ROOT / preview_slug
-        out_dir.mkdir(parents=True, exist_ok=True)
-        html = research_signal_preview_html(item, items, review, candidate["evidence"])
-        (out_dir / "index.html").write_text(html, encoding="utf-8")
-        rendered += 1
+        preview_dir = PREVIEW_ROOT / preview_slug
 
-    print(f"AI enrichment review previews rendered: {rendered}")
+        if status == "preview":
+            if review.get("approved_for_publish") is not False or review.get("index_decision") != "noindex":
+                raise RuntimeError(f"{slug}: preview safety flags invalid")
+            preview_dir.mkdir(parents=True, exist_ok=True)
+            html = research_signal_preview_html(item, items, review, candidate["evidence"], published=False)
+            (preview_dir / "index.html").write_text(html, encoding="utf-8")
+            rendered_preview += 1
+            continue
+
+        if review.get("approved_for_publish") is not True or review.get("index_decision") != "index":
+            raise RuntimeError(f"{slug}: approved review must explicitly allow publish and indexing")
+        if not review.get("approved_at"):
+            raise RuntimeError(f"{slug}: approved review missing approved_at")
+        if slug != preview_slug:
+            raise RuntimeError(f"{slug}: approved route must equal reviewed SEO slug")
+
+        live_dir = ROOT / "signals" / slug
+        live_dir.mkdir(parents=True, exist_ok=True)
+        html = research_signal_preview_html(item, items, review, candidate["evidence"], published=True)
+        (live_dir / "index.html").write_text(html, encoding="utf-8")
+
+        if preview_dir.exists():
+            shutil.rmtree(preview_dir)
+
+        legacy_slug = review.get("legacy_signal_slug")
+        if legacy_slug and legacy_slug != slug:
+            legacy_dir = ROOT / "signals" / legacy_slug
+            legacy_dir.mkdir(parents=True, exist_ok=True)
+            (legacy_dir / "index.html").write_text(
+                legacy_route_html(review["signal_url"]),
+                encoding="utf-8",
+            )
+        rendered_live += 1
+
+    print(
+        f"AI enrichment review rendered: {rendered_live} live / "
+        f"{rendered_preview} preview"
+    )
 
 
 if __name__ == "__main__":
