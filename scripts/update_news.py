@@ -21,6 +21,7 @@ ARCHIVE_OUT = ROOT / "data" / "archive.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
+MODEL_COMPARISONS_PATH = ROOT / "data" / "model-comparisons.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 INDEX = ROOT / "index.html"
@@ -159,6 +160,23 @@ def load_model_pricing_catalog():
 
 
 MODEL_PRICING_CATALOG, MODEL_PRICING_BY_ID = load_model_pricing_catalog()
+
+
+def load_model_comparisons():
+    data = json.loads(MODEL_COMPARISONS_PATH.read_text(encoding="utf-8"))
+    comparisons = data.get("comparisons")
+    if not isinstance(comparisons, list) or not comparisons:
+        raise RuntimeError("model-comparisons.json must contain a non-empty comparisons array")
+    by_slug = {}
+    for comparison in comparisons:
+        slug = comparison.get("slug")
+        if not slug or slug in by_slug:
+            raise RuntimeError(f"Invalid or duplicate comparison slug: {slug}")
+        by_slug[slug] = comparison
+    return data, by_slug
+
+
+MODEL_COMPARISON_CATALOG, MODEL_COMPARISON_BY_SLUG = load_model_comparisons()
 
 
 def load_model_history():
@@ -491,29 +509,47 @@ def model_history_html(model_ids, heading="Verified model history"):
     </section>'''
 
 
+def comparison_price_snapshot(model_id, on_date=None):
+    model = model_catalog_entry(model_id)
+    if not model_has_official_paid_pricing(model):
+        return None
+    return active_standard_price(model_id, on_date or MODEL_PRICING_CATALOG["source_verified"])
+
+
+def comparison_price_text(model_id, on_date=None):
+    model = model_catalog_entry(model_id)
+    price = comparison_price_snapshot(model_id, on_date)
+    if not price:
+        return model_pricing_status(model)
+    return f'{catalog_price_label(price["input"])}/{catalog_price_label(price["output"])}'
+
+
 def compare_live_facts_html(model_ids):
     verified = MODEL_PRICING_CATALOG["source_verified"]
     cards = []
     for model_id in model_ids:
         model = model_catalog_entry(model_id)
-        price = active_standard_price(model_id, verified)
+        price = comparison_price_snapshot(model_id, verified)
         evidence = model["provenance"]["evidence"]
-        modalities = " + ".join(model.get("modalities", {}).get("input", []))
+        modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
+        input_price = catalog_price_label(price["input"]) if price else "Not published"
+        cached_price = catalog_price_label(price["cached_input"]) if price else "—"
+        output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
-              data-context="{int(model["context_window"])}" data-max-output="{escape(str(model["max_output"]), quote=True)}"
-              data-input="{float(price["input"]):g}" data-cached="{float(price["cached_input"]):g}" data-output="{float(price["output"]):g}">
+              data-context="{int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
+              data-pricing-status="{escape(model_pricing_status(model), quote=True)}">
               <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
               <h3>{escape(model["model"])}</h3>
               <dl>
                 <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
                 <div><dt>Max output</dt><dd>{escape(model_output_label(model))}</dd></div>
-                <div><dt>Input / MTok</dt><dd>{escape(catalog_price_label(price["input"]))}</dd></div>
-                <div><dt>Cached / MTok</dt><dd>{escape(catalog_price_label(price["cached_input"]))}</dd></div>
-                <div><dt>Output / MTok</dt><dd>{escape(catalog_price_label(price["output"]))}</dd></div>
+                <div><dt>Input / MTok</dt><dd>{escape(input_price)}</dd></div>
+                <div><dt>Cached / MTok</dt><dd>{escape(cached_price)}</dd></div>
+                <div><dt>Output / MTok</dt><dd>{escape(output_price)}</dd></div>
                 <div><dt>Input types</dt><dd>{escape(modalities)}</dd></div>
               </dl>
-              <div class="compare-live-sources"><a href="{escape(evidence["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer">Specs ↗</a><a href="{escape(evidence["pricing"], quote=True)}" target="_blank" rel="noopener noreferrer">Pricing ↗</a></div>
+              <div class="compare-live-sources"><a href="{escape(evidence["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer">Specs ↗</a><a href="{escape(evidence["pricing"], quote=True)}" target="_blank" rel="noopener noreferrer">Pricing status ↗</a></div>
             </article>'''
         )
     latest = []
@@ -531,17 +567,82 @@ def compare_live_facts_html(model_ids):
 
 
 def compare_pair_fact_line(model_ids):
-    verified = MODEL_PRICING_CATALOG["source_verified"]
     parts = []
     for model_id in model_ids:
         model = model_catalog_entry(model_id)
-        price = active_standard_price(model_id, verified)
         context_m = model["context_window"] / 1_000_000
         context_label = f"{context_m:.2f}".rstrip("0").rstrip(".") + "M"
-        parts.append(
-            f'{model["model"]}: {catalog_price_label(price["input"])}/{catalog_price_label(price["output"])} · {context_label}'
-        )
+        price_text = comparison_price_text(model_id)
+        parts.append(f'{model["model"]}: {price_text} · {context_label}')
     return " | ".join(parts)
+
+
+def compare_workload_cost(model_id, input_tokens=100000, output_tokens=10000, cached_tokens=0):
+    model = model_catalog_entry(model_id)
+    if not model_has_official_paid_pricing(model):
+        return None
+    return estimate_standard_cost(
+        model_id,
+        uncached_input_tokens=input_tokens,
+        output_tokens=output_tokens,
+        cached_input_tokens=cached_tokens,
+        on_date=MODEL_PRICING_CATALOG["source_verified"],
+    )[0]
+
+
+def compare_decision_items(model_ids):
+    models = [model_catalog_entry(model_id) for model_id in model_ids]
+    if len(models) != 2:
+        return []
+    left, right = models
+    items = []
+
+    if left["context_window"] != right["context_window"]:
+        winner = left if left["context_window"] > right["context_window"] else right
+        loser = right if winner is left else left
+        ratio = winner["context_window"] / loser["context_window"]
+        items.append((
+            "Context capacity",
+            f'{winner["model"]} publishes the larger context window: {winner["context_window"]:,} vs {loser["context_window"]:,} tokens ({ratio:.1f}×).'
+        ))
+    else:
+        items.append(("Context capacity", f'Both publish a {left["context_window"]:,}-token context window.'))
+
+    left_inputs = set(left.get("modalities", {}).get("input", []))
+    right_inputs = set(right.get("modalities", {}).get("input", []))
+    if left_inputs != right_inputs:
+        left_only = sorted(left_inputs - right_inputs)
+        right_only = sorted(right_inputs - left_inputs)
+        chunks = []
+        if left_only:
+            chunks.append(f'{left["model"]} additionally lists {", ".join(left_only)}')
+        if right_only:
+            chunks.append(f'{right["model"]} additionally lists {", ".join(right_only)}')
+        items.append(("Input modalities", "; ".join(chunks) + "."))
+    else:
+        items.append(("Input modalities", f'Both list {", ".join(sorted(left_inputs)) or "no published input modalities"} as input types.'))
+
+    left_cost = compare_workload_cost(left["model_id"])
+    right_cost = compare_workload_cost(right["model_id"])
+    if left_cost is not None and right_cost is not None:
+        if abs(left_cost - right_cost) < 1e-12:
+            text = f'For 100K uncached input + 10K output tokens, both calculate to {catalog_money(left_cost)} at the catalog verification date.'
+        else:
+            cheaper = left if left_cost < right_cost else right
+            cheaper_cost = min(left_cost, right_cost)
+            expensive_cost = max(left_cost, right_cost)
+            ratio = expensive_cost / cheaper_cost if cheaper_cost else 0
+            text = f'For 100K uncached input + 10K output tokens, {cheaper["model"]} is lower at {catalog_money(cheaper_cost)} vs {catalog_money(expensive_cost)} ({ratio:.1f}× difference).'
+        items.append(("Direct token cost", text))
+    else:
+        unavailable = [model["model"] for model in models if not model_has_official_paid_pricing(model)]
+        items.append(("Direct token cost", f'Direct Standard token-cost comparison is unavailable because {", ".join(unavailable)} does not have a calculator-eligible provider-published paid rate in the SXF catalog.'))
+
+    left_output = left.get("max_output")
+    right_output = right.get("max_output")
+    if left_output != right_output:
+        items.append(("Output policy", f'{left["model"]}: {model_output_label(left)}. {right["model"]}: {model_output_label(right)}.'))
+    return items
 
 
 def ensure_catalog_model_histories():
@@ -6377,244 +6478,242 @@ def guides_index_html(items, current_items):
     </main>{page_footer()}{library_script}</body></html>'''
 
 
+def comparison_registry_rows():
+    return [comparison for comparison in MODEL_COMPARISON_CATALOG["comparisons"] if comparison.get("indexable") is True]
+
+
+def comparison_registry_entry(slug):
+    try:
+        return MODEL_COMPARISON_BY_SLUG[slug]
+    except KeyError as exc:
+        raise KeyError(f"Comparison is missing from registry: {slug}") from exc
+
+
+def generic_comparison_page_html(comparison):
+    model_ids = comparison["model_ids"]
+    if len(model_ids) != 2:
+        raise RuntimeError(f'{comparison["slug"]}: generic comparison requires exactly two models')
+    left, right = [model_catalog_entry(model_id) for model_id in model_ids]
+    canonical = f'{BASE_URL}/compare/{comparison["slug"]}/'
+    verified = max(left["provenance"]["verified_at"], right["provenance"]["verified_at"], MODEL_COMPARISON_CATALOG["source_verified"])
+    decision_items = compare_decision_items(model_ids)
+    decisions_html = "".join(
+        f'<article><span>{index:02d}</span><h3>{escape(label)}</h3><p>{escape(text)}</p></article>'
+        for index, (label, text) in enumerate(decision_items, 1)
+    )
+    source_links = "".join(
+        f'<a href="{escape(model["provenance"]["evidence"]["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(model["model"])} official specs</span><b>↗</b></a>'
+        for model in (left, right)
+    )
+    related = []
+    for candidate in comparison_registry_rows():
+        if candidate["slug"] == comparison["slug"]:
+            continue
+        overlap = len(set(candidate["model_ids"]).intersection(model_ids))
+        if overlap:
+            related.append((overlap, candidate))
+    related.sort(key=lambda row: (-row[0], row[1]["title"]))
+    related_html = "".join(
+        f'<a href="/compare/{escape(candidate["slug"], quote=True)}/"><span>{escape(candidate["kicker"])}</span><strong>{escape(candidate["title"])}</strong><b>↗</b></a>'
+        for _, candidate in related[:4]
+    )
+
+    faq = [
+        (f'Which has the larger context window: {left["model"]} or {right["model"]}?', compare_decision_items(model_ids)[0][1] if decision_items else "See the verified facts table."),
+        (f'Which is cheaper: {left["model"]} or {right["model"]}?', next((text for label, text in decision_items if label == "Direct token cost"), "A directly comparable paid token rate is not available for both models.")),
+        ("Does SXF declare an overall winner?", "No. This page compares source-backed specifications and economics. Quality, latency and task success require workload-specific evaluation evidence."),
+    ]
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "headline": comparison["title"],
+                "description": comparison["summary"],
+                "url": canonical,
+                "dateModified": verified,
+                "about": [{"@type": "Thing", "name": left["model"]}, {"@type": "Thing", "name": right["model"]}],
+                "citation": list(dict.fromkeys(left["official_sources"] + right["official_sources"])),
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Compare", "item": BASE_URL + "/compare/"},
+                    {"@type": "ListItem", "position": 3, "name": comparison["title"], "item": canonical},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                    for q, a in faq
+                ],
+            },
+        ],
+    }
+    faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q, a in faq)
+
+    return f'''<!doctype html><html lang="en">{page_head(
+        comparison["title"] + " — Specs, Pricing & Differences | SXF / AI",
+        comparison["summary"],
+        canonical,
+        schema,
+    )}
+    <body class="intel-page comparison-page compare-v2-page">{page_header("compare")}<main>
+      <section class="comparison-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/compare/">Compare</a><span>/</span><span>{escape(comparison["title"])}</span></nav>
+        <p class="eyebrow">{escape(comparison["kicker"].upper())} / VERIFIED {escape(verified)}</p>
+        <h1>{escape(left["model"])}<br><span>vs {escape(right["model"])}</span></h1>
+        <p>{escape(comparison["summary"])}</p>
+        <div class="comparison-meta">
+          <div><span>PROVIDERS</span><strong>{escape(left["provider"])} · {escape(right["provider"])}</strong></div>
+          <div><span>CONTEXT</span><strong>{left["context_window"]:,} · {right["context_window"]:,}</strong></div>
+          <div><span>PRICING</span><strong>{escape(comparison_price_text(left["model_id"]))} · {escape(comparison_price_text(right["model_id"]))}</strong></div>
+        </div>
+      </section>
+      {compare_live_facts_html(model_ids)}
+
+      <section class="compare-v2-decisions shell">
+        <div class="intel-section-head"><div><p class="eyebrow">DECISION FACTORS</p><h2>What materially changes the choice.</h2></div><span>No synthetic winner score</span></div>
+        <div class="compare-v2-decision-grid">{decisions_html}</div>
+      </section>
+
+      <section class="compare-v2-workload shell">
+        <div class="compare-method-head"><p class="eyebrow">HOW TO DECIDE</p><h2>Specifications narrow the field. Your workload decides.</h2><p>Context, modalities and direct token economics are comparable from official sources. Coding quality, latency, reliability and agent success should be measured on your own acceptance tests before production routing.</p></div>
+        <div class="compare-method-grid">
+          <article><span>01</span><h3>Replay real tasks</h3><p>Use representative prompts, files, tools and expected outputs from the workload you plan to ship.</p></article>
+          <article><span>02</span><h3>Measure task cost</h3><p>Include retries, cached tokens, long-context rules and tool charges—not only headline input price.</p></article>
+          <article><span>03</span><h3>Track failures</h3><p>Record hallucinations, tool errors, timeout behavior and human corrections alongside pass rate.</p></article>
+          <article><span>04</span><h3>Route by task</h3><p>A portfolio can outperform a one-model policy when different task classes have different cost and capability needs.</p></article>
+        </div>
+      </section>
+
+      {compare_change_watch_html(model_ids)}
+      <section class="model-reference-lower shell">
+        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div>
+        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p>{faq_html}</div>
+      </section>
+      <section class="compare-v2-related shell">
+        <div class="intel-section-head"><div><p class="eyebrow">RELATED MATCHUPS</p><h2>Continue the decision tree.</h2></div><a href="/compare/">All comparisons ↗</a></div>
+        <div class="model-related-links">{related_html}</div>
+      </section>
+    </main>{page_footer()}</body></html>'''
+
+
 def compare_index_html(items):
     canonical = f"{BASE_URL}/compare/"
-    verified = datetime.now(timezone.utc).date().isoformat()
-    title = "Compare AI Models: GPT-6, Claude & Gemini (2026) | SXF / AI"
-    description = "Compare GPT-6, Claude and Gemini models on pricing, context, coding, agents, reasoning, multimodal support, caching and production fit using source-first analysis."
+    verified = MODEL_COMPARISON_CATALOG["source_verified"]
+    comparisons = comparison_registry_rows()
+    providers = sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]})
+    title = "Compare AI Models — Pricing, Context & Specs (2026) | SXF / AI"
+    description = "Compare AI models across verified pricing, context windows, output limits, modalities and reasoning controls. Build any matchup across the SXF model database or open a curated decision page."
 
-    comparisons = [
-        {
-            "url": f"/compare/{GPT6_ASTRA_FABLE_COMPARE_SLUG}/",
-            "title": "GPT-6 Astra vs Claude Fable 5.1",
-            "providers": "OpenAI · Anthropic",
-            "kicker": "Frontier matchup",
-            "summary": "Same $10/$50 headline price. Compare long-context billing, cache economics, reasoning, coding, agents and independent benchmark evidence.",
-            "facts": compare_pair_fact_line(["gpt-6-astra", "claude-fable-5-1"]),
-            "tags": "openai anthropic frontier coding agents pricing benchmarks long-context",
-        },
-        {
-            "url": f"/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/",
-            "title": "GPT-6 Sol vs Gemini 3.8 Flash",
-            "providers": "OpenAI · Google",
-            "kicker": "Coding · agents · multimodal",
-            "summary": "Compare lower-cost production models on token economics, 1M+ context, tools, reasoning controls and broad multimodal input.",
-            "facts": compare_pair_fact_line(["gpt-6-sol", "gemini-3.8-flash"]),
-            "tags": "openai google coding agents pricing multimodal long-context",
-        },
-        {
-            "url": f"/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/",
-            "title": "Claude Opus 5.5 vs Gemini 3.8 Flash",
-            "providers": "Anthropic · Google",
-            "kicker": "Agentic coding · economics",
-            "summary": "Compare long-running coding, cache economics, Batch and Fast inference, multimodal inputs, tools and deployment fit.",
-            "facts": compare_pair_fact_line(["claude-opus-5-5", "gemini-3.8-flash"]),
-            "tags": "anthropic google coding agents pricing multimodal caching batch",
-        },
-        {
-            "url": f"/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/",
-            "title": "GPT-6 Sol vs Claude Opus 5.5",
-            "providers": "OpenAI · Anthropic",
-            "kicker": "Agentic coding",
-            "summary": "A direct comparison of two serious coding and agent models, including standard and long-context costs, reasoning controls and tool architecture.",
-            "facts": compare_pair_fact_line(["gpt-6-sol", "claude-opus-5-5"]),
-            "tags": "openai anthropic coding agents pricing long-context",
-        },
-        {
-            "url": f"/compare/{GPT6_COMPARE_SLUG}/",
-            "title": "GPT-6 Astra vs Sol vs Luna",
-            "providers": "OpenAI",
-            "kicker": "Within-family decision",
-            "summary": "Choose the right GPT-6 tier by capability, workload and unit economics instead of treating GPT-6 as one model.",
-            "facts": compare_pair_fact_line(["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]),
-            "tags": "openai family pricing coding agents",
-        },
-    ]
+    rows = []
+    for comparison in comparisons:
+        models = [model_catalog_entry(model_id) for model_id in comparison["model_ids"]]
+        row = {
+            **comparison,
+            "url": f'/compare/{comparison["slug"]}/',
+            "providers": " · ".join(dict.fromkeys(model["provider"] for model in models)),
+            "facts": compare_pair_fact_line(comparison["model_ids"]),
+            "tags_text": " ".join(comparison.get("tags", [])),
+        }
+        rows.append(row)
 
-    featured = comparisons[:2]
+    featured = rows[:3]
     featured_html = "".join(
         f'''<a class="compare-feature-card" href="{escape(c["url"], quote=True)}">
           <div class="compare-feature-meta"><span>{escape(c["kicker"])}</span><small>{escape(c["providers"])}</small></div>
-          <h2>{escape(c["title"])}</h2>
-          <p>{escape(c["summary"])}</p>
+          <h2>{escape(c["title"])}</h2><p>{escape(c["summary"])}</p>
           <div class="compare-feature-foot"><span>{escape(c["facts"])}</span><b>Open comparison ↗</b></div>
-        </a>'''
-        for c in featured
+        </a>''' for c in featured
     )
     cards_html = "".join(
-        f'''<article class="compare-library-card" data-compare-card data-tags="{escape(c["tags"], quote=True)}" data-search="{escape((c["title"] + " " + c["providers"] + " " + c["summary"] + " " + c["facts"]).lower(), quote=True)}">
-          <a href="{escape(c["url"], quote=True)}">
-            <div class="compare-card-meta"><span>{escape(c["kicker"])}</span><small>{escape(c["providers"])}</small></div>
-            <h3>{escape(c["title"])}</h3>
-            <p>{escape(c["summary"])}</p>
-            <div class="compare-card-foot"><small>{escape(c["facts"])}</small><b>Compare models ↗</b></div>
-          </a>
-        </article>'''
-        for c in comparisons
+        f'''<article class="compare-library-card" data-compare-card data-tags="{escape(c["tags_text"], quote=True)}" data-search="{escape((c["title"]+" "+c["providers"]+" "+c["summary"]+" "+c["facts"]).lower(), quote=True)}">
+          <a href="{escape(c["url"], quote=True)}"><div class="compare-card-meta"><span>{escape(c["kicker"])}</span><small>{escape(c["providers"])}</small></div>
+          <h3>{escape(c["title"])}</h3><p>{escape(c["summary"])}</p>
+          <div class="compare-card-foot"><small>{escape(c["facts"])}</small><b>Compare models ↗</b></div></a>
+        </article>''' for c in rows
+    )
+
+    options = "".join(
+        f'<option value="{escape(model["model_id"], quote=True)}">{escape(model["provider"])} — {escape(model["model"])}</option>'
+        for model in MODEL_PRICING_CATALOG["models"]
+    )
+    provider_filters = "".join(
+        f'<button class="compare-filter" type="button" data-compare-filter="{escape(provider_slug(provider), quote=True)}">{escape(provider)}</button>'
+        for provider in providers
     )
 
     faq_items = [
-        ("What does SXF compare between AI models?", "SXF compares official API pricing, cached-input economics, context and output limits, reasoning controls, modalities, tool support, agent workflows, deployment constraints and workload fit. Independent benchmark evidence is added when a useful comparable source is available."),
-        ("Does SXF choose one best AI model?", "No. Model selection is workload-specific. A model can be stronger for one benchmark or workflow and weaker for another, while pricing, latency, tools and context economics can change the practical decision."),
-        ("How current are the model comparisons?", "The hub and comparison pages show a verification date and are generated from SXF's maintained model intelligence layer. Pricing and availability can change quickly, so the comparison pages link directly to vendor documentation used for verification."),
-        ("How are AI model prices compared?", "Token prices are normalized per million input and output tokens where possible. SXF also uses concrete workload examples and calls out long-context multipliers, caching, Batch or Fast tiers and other charges that can make headline rates misleading."),
-        ("Are benchmark scores directly comparable across vendors?", "Not always. Reasoning effort, prompts, tools, scaffolding, fallback behavior and benchmark versions can differ. SXF distinguishes vendor-reported results from independent evidence and recommends reproducing representative tasks in your own evaluation harness."),
-        ("Which models are covered?", "The current comparison library centers on the models with the strongest SXF reference pages and decision value: GPT-6 Astra, Sol and Luna, Claude Fable 5.1 and Opus 5.5, and Gemini 3.8 Flash. Coverage expands selectively rather than adding thin comparison pages."),
+        ("Can I compare any two models?", "Yes. The interactive builder works across every model in the canonical SXF database. Curated indexable pages are limited to high-intent matchups so the site does not create thin SEO pages."),
+        ("What facts come from official sources?", "Context windows, output policies, modalities, reasoning controls, pricing availability and provider-published Standard token rates come from the model catalog and its official-source provenance."),
+        ("Does SXF rank models by intelligence?", "No synthetic intelligence score is generated from specifications. Benchmark or quality claims require explicit evaluation evidence; the comparison engine focuses on auditable facts and deployment economics."),
+        ("How are missing prices handled?", "If a provider does not publish a directly comparable Standard paid token rate, SXF shows the pricing state as unavailable and excludes that model from direct token-cost arithmetic rather than substituting partner pricing."),
     ]
     faq_html = "".join(f'<details><summary>{escape(q)}</summary><p>{escape(a)}</p></details>' for q,a in faq_items)
-
     schema = {
-        "@context":"https://schema.org",
-        "@graph":[
+        "@context": "https://schema.org",
+        "@graph": [
             {
-                "@type":"CollectionPage","@id":canonical+"#webpage","url":canonical,
-                "name":"Compare AI Models","description":description,
-                "isPartOf":{"@id":"https://sxf.si/#website"},"inLanguage":"en",
-                "hasPart":[{"@type":"WebPage","name":c["title"],"url":BASE_URL + c["url"]} for c in comparisons]
+                "@type": "CollectionPage", "@id": canonical+"#webpage", "url": canonical,
+                "name": "Compare AI Models", "description": description,
+                "isPartOf": {"@id": BASE_URL+"/#website"}, "inLanguage": "en",
+                "hasPart": [{"@type": "WebPage", "name": c["title"], "url": BASE_URL+c["url"]} for c in rows],
             },
             {
-                "@type":"BreadcrumbList",
-                "itemListElement":[
-                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
-                    {"@type":"ListItem","position":2,"name":"Compare","item":canonical},
-                ]
+                "@type": "ItemList", "name": "SXF curated AI model comparisons", "numberOfItems": len(rows),
+                "itemListElement": [{"@type": "ListItem", "position": i+1, "name": c["title"], "url": BASE_URL+c["url"]} for i,c in enumerate(rows)],
             },
             {
-                "@type":"ItemList","name":"SXF AI model comparisons","numberOfItems":len(comparisons),
-                "itemListElement":[
-                    {"@type":"ListItem","position":i+1,"name":c["title"],"url":BASE_URL+c["url"]}
-                    for i,c in enumerate(comparisons)
-                ]
+                "@type": "FAQPage",
+                "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q,a in faq_items],
             },
-            {
-                "@type":"FAQPage",
-                "mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in faq_items]
-            }
-        ]
+        ],
     }
-
-    filter_script = '''<script>
-    (()=>{const cards=[...document.querySelectorAll("[data-compare-card]")],input=document.getElementById("compare-search"),buttons=[...document.querySelectorAll("[data-compare-filter]")],empty=document.getElementById("compare-empty");let active="all";
-    const apply=()=>{const q=(input?.value||"").trim().toLowerCase();let shown=0;cards.forEach(card=>{const tags=(card.dataset.tags||"").toLowerCase(),search=(card.dataset.search||"").toLowerCase();const okTag=active==="all"||tags.includes(active),okQuery=!q||search.includes(q);card.hidden=!(okTag&&okQuery);if(!card.hidden)shown++;});if(empty)empty.hidden=shown!==0;};
-    buttons.forEach(btn=>btn.addEventListener("click",()=>{active=btn.dataset.compareFilter;buttons.forEach(x=>x.classList.toggle("is-active",x===btn));apply();}));
-    input?.addEventListener("input",apply);apply();})();
-    </script>'''
 
     return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema)}
     <body class="intel-page compare-hub-page">{page_header("compare")}<main>
       <section class="compare-hub-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Compare</span></nav>
-        <div class="compare-hub-hero-grid">
-          <div>
-            <p class="eyebrow">AI MODEL COMPARISONS</p>
-            <h1>Compare AI models.<br><span>By workload, not hype.</span></h1>
-          </div>
-          <div class="compare-hub-intro">
-            <p>Decision-oriented comparisons of GPT-6, Claude and Gemini models using official specifications, normalized cost examples and clearly labeled benchmark evidence.</p>
-            <p>Start with the question your application actually needs to answer: capability, coding, agents, long context, multimodal input, cost or platform fit.</p>
-          </div>
-        </div>
-        <div class="compare-hub-stats">
-          <div><strong>{len(comparisons)}</strong><span>deep comparisons</span></div>
-          <div><strong>3</strong><span>major providers</span></div>
-          <div><strong>1M+</strong><span>context class covered</span></div>
-          <div><strong>{escape(verified)}</strong><span>hub verified</span></div>
-        </div>
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><span>Compare</span></nav>
+        <div class="compare-hub-hero-grid"><div><p class="eyebrow">COMPARE ENGINE V2</p><h1>Compare AI models.<br><span>Evidence first.</span></h1></div>
+        <div class="compare-hub-intro"><p>Build any matchup across {len(MODEL_PRICING_CATALOG["models"])} verified models, then open curated deep comparisons where the search intent and decision value justify a dedicated page.</p><p>No synthetic winner score. Missing prices stay missing. Every factual field traces back to the canonical model database.</p></div></div>
+        <div class="compare-hub-stats"><div><strong>{len(rows)}</strong><span>curated comparisons</span></div><div><strong>{len(MODEL_PRICING_CATALOG["models"])}</strong><span>models in builder</span></div><div><strong>{len(providers)}</strong><span>providers</span></div><div><strong>{escape(verified)}</strong><span>registry verified</span></div></div>
       </section>
 
-      <section class="compare-featured shell">
-        <div class="intel-section-head"><div><p class="eyebrow">START HERE</p><h2>High-value model decisions.</h2></div><span>Source-first · workload-specific</span></div>
-        <div class="compare-feature-grid">{featured_html}</div>
+      <section class="compare-builder shell" data-compare-builder data-registry="/data/model-comparisons.json" data-catalog="/data/model-pricing.json">
+        <div class="compare-builder-head"><div><p class="eyebrow">INTERACTIVE BUILDER</p><h2>Put any two models side by side.</h2><p>Choose models and workload assumptions. The browser calculates from the same public catalog used to render SXF pricing pages.</p></div><span>Client-side · no thin URLs</span></div>
+        <div class="compare-builder-controls">
+          <label><span>Model A</span><select id="compareModelA">{options}</select></label>
+          <div class="compare-builder-vs">VS</div>
+          <label><span>Model B</span><select id="compareModelB">{options}</select></label>
+        </div>
+        <div class="compare-builder-workload">
+          <label><span>Uncached input</span><input id="compareInputTokens" type="number" min="0" step="1000" value="100000"></label>
+          <label><span>Cached input</span><input id="compareCachedTokens" type="number" min="0" step="1000" value="0"></label>
+          <label><span>Output</span><input id="compareOutputTokens" type="number" min="0" step="1000" value="10000"></label>
+        </div>
+        <div id="compareBuilderResults" class="compare-builder-results" aria-live="polite"></div>
+        <div id="compareCuratedLink" class="compare-curated-link" hidden></div>
       </section>
+
+      <section class="compare-featured shell"><div class="intel-section-head"><div><p class="eyebrow">START HERE</p><h2>High-value decisions.</h2></div><span>Curated · indexable · source-backed</span></div><div class="compare-feature-grid">{featured_html}</div></section>
 
       <section class="compare-library shell" id="comparison-library">
-        <div class="compare-library-heading">
-          <div><p class="eyebrow">COMPARISON LIBRARY</p><h2>Find the matchup that answers your question.</h2><p>Every card below is a direct, crawlable link. Search and filters only change what you see; they do not create separate thin URLs or hide the underlying comparison pages from navigation.</p></div>
-          <div class="compare-library-count"><strong>{len(comparisons)}</strong><span>published matchups</span></div>
-        </div>
-        <div class="compare-library-tools">
-          <label class="compare-search"><span class="sr-only">Search model comparisons</span><input id="compare-search" type="search" placeholder="Search GPT-6, Claude, Gemini, pricing, coding…" autocomplete="off"></label>
-          <div class="compare-filters" aria-label="Filter comparisons">
-            <button class="compare-filter is-active" type="button" data-compare-filter="all">All</button>
-            <button class="compare-filter" type="button" data-compare-filter="openai">OpenAI</button>
-            <button class="compare-filter" type="button" data-compare-filter="anthropic">Anthropic</button>
-            <button class="compare-filter" type="button" data-compare-filter="google">Google</button>
-            <button class="compare-filter" type="button" data-compare-filter="frontier">Frontier</button>
-            <button class="compare-filter" type="button" data-compare-filter="coding">Coding</button>
-            <button class="compare-filter" type="button" data-compare-filter="agents">Agents</button>
-            <button class="compare-filter" type="button" data-compare-filter="pricing">Pricing</button>
-            <button class="compare-filter" type="button" data-compare-filter="multimodal">Multimodal</button>
-          </div>
-        </div>
-        <div class="compare-library-grid">{cards_html}</div>
-        <div id="compare-empty" class="compare-empty" hidden>No comparison matches that filter. Try a provider or workload term.</div>
+        <div class="compare-library-heading"><div><p class="eyebrow">COMPARISON LIBRARY</p><h2>{len(rows)} decisions worth a dedicated page.</h2><p>These URLs are intentionally curated. The builder above handles the long tail without flooding search engines with near-duplicate pages.</p></div><div class="compare-library-count"><strong>{len(rows)}</strong><span>published matchups</span></div></div>
+        <div class="compare-library-tools"><label class="compare-search"><span class="sr-only">Search comparisons</span><input id="compare-search" type="search" placeholder="Search models, providers, pricing, coding…"></label><div class="compare-filters"><button class="compare-filter is-active" type="button" data-compare-filter="all">All</button>{provider_filters}<button class="compare-filter" type="button" data-compare-filter="pricing">Pricing</button><button class="compare-filter" type="button" data-compare-filter="coding">Coding</button><button class="compare-filter" type="button" data-compare-filter="multimodal">Multimodal</button><button class="compare-filter" type="button" data-compare-filter="open-source">Open weights</button></div></div>
+        <div class="compare-library-grid">{cards_html}</div><div id="compare-empty" class="compare-empty" hidden>No comparison matches that filter.</div>
       </section>
 
-      <section class="compare-paths shell">
-        <div class="intel-section-head"><div><p class="eyebrow">COMPARE BY QUESTION</p><h2>Start from the decision, not the brand.</h2></div><span>Direct paths</span></div>
-        <div class="compare-path-grid">
-          <article><span>01 · FRONTIER</span><h3>Which top-end model fits hardest work?</h3><p>Start with Astra vs Fable when you care about frontier reasoning, long-horizon agents, cache economics and independent benchmark evidence.</p><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/">GPT-6 Astra vs Claude Fable 5.1 ↗</a></article>
-          <article><span>02 · CODING AGENTS</span><h3>Which model should run complex coding loops?</h3><p>Compare Sol vs Opus for OpenAI/Anthropic agent architecture, then add Gemini when multimodality or lower token economics are central.</p><div><a href="/compare/gpt-6-sol-vs-claude-opus-5-5/">Sol vs Opus 5.5 ↗</a><a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/">Opus 5.5 vs Gemini 3.8 Flash ↗</a></div></article>
-          <article><span>03 · COST</span><h3>Which model changes the production bill?</h3><p>Use the pages with normalized workloads, caching and long-context examples—not only headline token rates.</p><div><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/">Sol vs Gemini 3.8 Flash ↗</a><a href="/compare/gpt-6-astra-vs-claude-fable-5-1/">Astra vs Fable 5.1 ↗</a></div></article>
-          <article><span>04 · MULTIMODAL</span><h3>Which model handles richer media input?</h3><p>Gemini 3.8 Flash directly accepts text, images, video, audio and PDFs, making its direct matchups useful for media-heavy workflows.</p><div><a href="/compare/gpt-6-sol-vs-gemini-3-8-flash/">Sol vs Gemini ↗</a><a href="/compare/claude-opus-5-5-vs-gemini-3-8-flash/">Opus vs Gemini ↗</a></div></article>
-          <article><span>05 · OPENAI FAMILY</span><h3>Which GPT-6 tier should you route to?</h3><p>Compare Astra, Sol and Luna before reaching across providers. The same family spans a 100× price range at listed short-context rates.</p><a href="/compare/gpt-6-astra-vs-sol-vs-luna/">GPT-6 Astra vs Sol vs Luna ↗</a></article>
-        </div>
+      <section class="compare-method shell"><div class="compare-method-head"><p class="eyebrow">WHY THIS ENGINE IS DIFFERENT</p><h2>Specifications, economics and history share one source of truth.</h2><p>Many model directories stop at a leaderboard or a price table. SXF connects current provider facts to dated pricing rules and an append-only change ledger, so a comparison can explain what is known, what changed and what remains unverified.</p></div>
+        <div class="compare-method-grid"><article><span>01</span><h3>Primary-source facts</h3><p>Core model fields come from official provider documentation stored with provenance.</p></article><article><span>02</span><h3>Dated economics</h3><p>Scheduled price changes and long-context multipliers are applied from the catalog, not hand-entered into each page.</p></article><article><span>03</span><h3>Explicit unknowns</h3><p>Missing output caps or direct paid prices remain unpublished rather than becoming synthetic zeros.</p></article><article><span>04</span><h3>Change-aware</h3><p>Dedicated comparison pages include the same model change ledger used by reference pages.</p></article></div>
       </section>
 
-      <section class="compare-method shell">
-        <div class="compare-method-head"><p class="eyebrow">SXF COMPARISON METHOD</p><h2>What makes a useful AI model comparison.</h2><p>Google's own people-first guidance asks whether a page adds substantial value beyond obvious summaries. SXF comparisons are built around the parts that change a real deployment decision: source quality, normalized economics, architecture and uncertainty.</p></div>
-        <div class="compare-method-grid">
-          <article><span>01</span><h3>Official facts first</h3><p>Context windows, output limits, pricing, modalities, reasoning controls and product availability come from vendor documentation whenever possible.</p></article>
-          <article><span>02</span><h3>Normalize the economics</h3><p>We calculate representative workloads and call out cache reads/writes, Batch or Fast tiers, long-context multipliers and temporary promotional pricing.</p></article>
-          <article><span>03</span><h3>Separate evidence types</h3><p>Vendor benchmark claims are labeled as vendor claims. Independent benchmark data is presented separately with its reasoning settings and methodological caveats.</p></article>
-          <article><span>04</span><h3>No universal winner</h3><p>Model choice depends on task distribution, tools, latency, permissions, cost targets and acceptance criteria. The pages map tradeoffs instead of manufacturing a single score.</p></article>
-        </div>
-      </section>
+      <section class="model-reference-lower shell compare-hub-faq"><div class="model-sources"><p class="eyebrow">DATA LAYER</p><a href="/data/model-pricing.json"><span>Canonical model database</span><b>↗</b></a><a href="/data/model-comparisons.json"><span>Curated comparison registry</span><b>↗</b></a><a href="/data/model-history.json"><span>Append-only model history</span><b>↗</b></a><a href="/models/pricing/"><span>Pricing database & calculator</span><b>↗</b></a></div><div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div></section>
+    </main>{page_footer()}<script src="/compare/compare.js" defer></script></body></html>'''
 
-      <section class="compare-reading shell">
-        <div class="compare-reading-copy">
-          <p class="eyebrow">HOW TO READ MODEL COMPARISONS</p>
-          <h2>Five variables usually matter more than the benchmark headline.</h2>
-        </div>
-        <div class="compare-reading-list">
-          <div><span>01</span><strong>Task acceptance</strong><p>Does the output actually pass your test, review or business criterion?</p></div>
-          <div><span>02</span><strong>Total task cost</strong><p>Include reasoning tokens, retries, cache behavior, tools and human correction—not only list price.</p></div>
-          <div><span>03</span><strong>Agent architecture</strong><p>Tool calling, browser/computer use, async work, state persistence and steering can matter as much as the base model.</p></div>
-          <div><span>04</span><strong>Context behavior</strong><p>Nominal window size is only capacity. Retrieval, compaction, cache reuse and long-context pricing determine whether that capacity is useful.</p></div>
-          <div><span>05</span><strong>Evaluation configuration</strong><p>Reasoning effort, tools, scaffolding and benchmark version can materially change measured performance.</p></div>
-        </div>
-      </section>
-
-      <section class="compare-model-bridge shell">
-        <div class="intel-section-head"><div><p class="eyebrow">MODEL REFERENCES</p><h2>Verify the models before comparing them.</h2></div><a href="/models/">All model intelligence ↗</a></div>
-        <div class="compare-model-grid">
-          <a href="/models/gpt-6-astra/"><span>OPENAI</span><strong>GPT-6 Astra</strong><small>Top-end GPT-6 reference</small></a>
-          <a href="/models/gpt-6-sol/"><span>OPENAI</span><strong>GPT-6 Sol</strong><small>Coding & agent reference</small></a>
-          <a href="/models/claude-fable-5-1/"><span>ANTHROPIC</span><strong>Claude Fable 5.1</strong><small>Frontier Claude reference</small></a>
-          <a href="/models/claude-opus-5-5/"><span>ANTHROPIC</span><strong>Claude Opus 5.5</strong><small>Agentic coding reference</small></a>
-          <a href="/models/gemini-3-8-flash/"><span>GOOGLE</span><strong>Gemini 3.8 Flash</strong><small>Multimodal Flash reference</small></a>
-          <a href="/models/gpt-6/"><span>OPENAI</span><strong>GPT-6 family</strong><small>Astra · Sol · Luna</small></a>
-        </div>
-      </section>
-
-      <section class="compare-guide-bridge shell">
-        <div class="compare-guide-card">
-          <div><p class="eyebrow">DEEP FAMILY GUIDE</p><h2>GPT-6 vs Claude in 2026.</h2><p>Need the full family-level view instead of one model pair? Compare Astra, Sol and Luna with Fable 5.1, Opus 5.5, Sonnet 5 and Haiku 4.5 across pricing, context, coding and agent architecture.</p></div>
-          <a href="/guides/gpt-6-vs-claude/">Open the GPT-6 vs Claude guide ↗</a>
-        </div>
-      </section>
-
-      <section class="model-reference-lower shell compare-hub-faq">
-        <div class="model-sources">
-          <p class="eyebrow">COMPARISON STANDARD</p>
-          <a href="/about/"><span>SXF methodology and editorial approach</span><b>↗</b></a>
-          <a href="/models/"><span>Model Intelligence database</span><b>↗</b></a>
-          <a href="/guides/"><span>Expert AI guides</span><b>↗</b></a>
-          <a href="/signals/"><span>Latest primary-source signals</span><b>↗</b></a>
-        </div>
-        <div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div>
-      </section>
-    </main>{page_footer()}{filter_script}</body></html>'''
 
 def gpt6_comparison_html(items):
     canonical = f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/"
@@ -7964,6 +8063,16 @@ def build_discovery_pages(items, current_items):
     )
     (astra_fable_path / "index.html").write_text(astra_fable_page, encoding="utf-8")
 
+    for comparison in comparison_registry_rows():
+        if comparison.get("template") != "generic":
+            continue
+        comparison_path = COMPARE_DIR / comparison["slug"]
+        comparison_path.mkdir(parents=True, exist_ok=True)
+        (comparison_path / "index.html").write_text(
+            generic_comparison_page_html(comparison),
+            encoding="utf-8",
+        )
+
     issue_date = datetime.now(timezone.utc).date()
     issue_dir = BRIEF_DIR / issue_date.isoformat()
     issue_dir.mkdir(parents=True, exist_ok=True)
@@ -8085,12 +8194,13 @@ def update_sitemap(items):
             f"{BASE_URL}/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp",
             f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp"
         ),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_COMPARE_SLUG}/", content_lastmod(gpt6_compare_items, "2026-09-26")),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_CLAUDE_COMPARE_SLUG}/", content_lastmod(sol_opus_items, "2026-09-26")),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_SOL_GEMINI_COMPARE_SLUG}/", generated_today),
-        sitemap_entry(f"{BASE_URL}/compare/{CLAUDE_OPUS_GEMINI_COMPARE_SLUG}/", generated_today),
-        sitemap_entry(f"{BASE_URL}/compare/{GPT6_ASTRA_FABLE_COMPARE_SLUG}/", generated_today),
     ]
+
+    for comparison in comparison_registry_rows():
+        rows.append(sitemap_entry(
+            f'{BASE_URL}/compare/{comparison["slug"]}/',
+            MODEL_COMPARISON_CATALOG["source_verified"],
+        ))
 
     for item in items:
         if not item.get("seo_eligible", seo_signal_eligible(item)):
