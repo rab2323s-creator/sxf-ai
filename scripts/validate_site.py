@@ -857,18 +857,64 @@ def validate_change_intelligence_regressions():
 def validate_compare_contracts_and_model_histories():
     catalog = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
     history = json.loads((ROOT / "data" / "model-history.json").read_text(encoding="utf-8"))
+    registry_path = ROOT / "data" / "model-comparisons.json"
+    if not registry_path.exists():
+        fail("model comparison registry is missing")
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    if registry.get("schema_version") != "1.0":
+        fail(f"model-comparisons.json schema drift: {registry.get('schema_version')!r}")
+
     models = {model["model_id"]: model for model in catalog["models"]}
+    comparisons = registry.get("comparisons")
+    if not isinstance(comparisons, list) or not comparisons:
+        fail("model-comparisons.json must contain comparisons")
 
-    comparisons = {
-        "gpt-6-astra-vs-sol-vs-luna": ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
-        "gpt-6-sol-vs-claude-opus-5-5": ["gpt-6-sol", "claude-opus-5-5"],
-        "gpt-6-sol-vs-gemini-3-8-flash": ["gpt-6-sol", "gemini-3.8-flash"],
-        "claude-opus-5-5-vs-gemini-3-8-flash": ["claude-opus-5-5", "gemini-3.8-flash"],
-        "gpt-6-astra-vs-claude-fable-5-1": ["gpt-6-astra", "claude-fable-5-1"],
-    }
+    slugs = [comparison.get("slug") for comparison in comparisons]
+    if len(slugs) != len(set(slugs)) or any(not slug for slug in slugs):
+        fail("model comparison registry contains missing or duplicate slugs")
 
-    verified = catalog["source_verified"]
-    for slug, model_ids in comparisons.items():
+    indexable = [comparison for comparison in comparisons if comparison.get("indexable") is True]
+    if len(indexable) < 12:
+        fail("compare engine v2 must expose at least 12 curated indexable comparisons")
+
+    from update_news import compare_pair_fact_line
+    hub_path = ROOT / "compare" / "index.html"
+    if not hub_path.exists():
+        fail("compare hub is missing")
+    hub_html = hub_path.read_text(encoding="utf-8")
+    compare_js = ROOT / "compare" / "compare.js"
+    if not compare_js.exists():
+        fail("compare builder JavaScript is missing")
+    compare_js_text = compare_js.read_text(encoding="utf-8")
+    for marker_text in (
+        'data-compare-builder',
+        '/data/model-comparisons.json',
+        '/data/model-pricing.json',
+        '<script src="/compare/compare.js" defer></script>',
+    ):
+        if marker_text not in hub_html:
+            fail(f"compare hub missing v2 marker: {marker_text}")
+    if "effectiveRates" not in compare_js_text or "modelCost" not in compare_js_text:
+        fail("compare builder must apply catalog pricing rules")
+    if "best model" in compare_js_text.lower():
+        fail("compare builder must not manufacture a universal best-model claim")
+
+    for comparison in indexable:
+        slug = comparison.get("slug")
+        model_ids = comparison.get("model_ids")
+        template = comparison.get("template")
+        if comparison.get("type") not in {"pair", "family"}:
+            fail(f"{slug}: invalid comparison type")
+        if template not in {"editorial", "generic"}:
+            fail(f"{slug}: invalid comparison template")
+        if not isinstance(model_ids, list) or len(model_ids) < 2 or len(model_ids) > 3:
+            fail(f"{slug}: invalid model_ids")
+        if len(model_ids) != len(set(model_ids)):
+            fail(f"{slug}: duplicate model IDs")
+        unknown = [model_id for model_id in model_ids if model_id not in models]
+        if unknown:
+            fail(f"{slug}: unknown models {unknown}")
+
         path = ROOT / "compare" / slug / "index.html"
         if not path.exists():
             fail(f"missing comparison page for contract validation: {slug}")
@@ -881,48 +927,35 @@ def validate_compare_contracts_and_model_histories():
         if not ids_match or ids_match.group(1).split(",") != model_ids:
             fail(f"{slug}: compare contract model IDs drift")
 
+        expected = compare_pair_fact_line(model_ids)
+        if expected not in hub_html:
+            fail(f"compare hub facts drift for {model_ids}")
+        if f'/compare/{slug}/' not in hub_html:
+            fail(f"compare hub missing curated route {slug}")
+
         for model_id in model_ids:
             model = models[model_id]
-            schedule = model["pricing"]["standard"]
-            price = None
-            target = datetime.fromisoformat(verified).date()
-            for period in schedule:
-                start = datetime.fromisoformat(period["start"]).date()
-                end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
-                if start <= target and (end is None or target <= end):
-                    price = period
-                    break
-            if price is None:
-                fail(f"{slug}: no active Standard price for {model_id}")
-
             row_pattern = (
                 rf'<article class="compare-live-card"[^>]+data-compare-model="{re.escape(model_id)}"'
                 rf'[^>]+data-context="{int(model["context_window"])}"'
-                rf'[^>]+data-max-output="{re.escape(str(model["max_output"]))}"'
-                rf'[^>]+data-input="{float(price["input"]):g}"'
-                rf'[^>]+data-cached="{float(price["cached_input"]):g}"'
-                rf'[^>]+data-output="{float(price["output"]):g}"'
+                rf'[^>]+data-max-output="{re.escape(str(model.get("max_output")))}"'
+                rf'[^>]+data-pricing-status="{re.escape(model.get("pricing_status", "not-published"))}"'
             )
             if not re.search(row_pattern, html, re.S):
                 fail(f"{slug}: live facts drift for {model_id}")
-
             evidence = model["provenance"]["evidence"]
             if evidence["model_identity"] not in html or evidence["pricing"] not in html:
                 fail(f"{slug}: official evidence links missing for {model_id}")
 
-    from update_news import compare_pair_fact_line
-    hub_html = (ROOT / "compare" / "index.html").read_text(encoding="utf-8")
-    hub_pairs = [
-        ["gpt-6-astra", "claude-fable-5-1"],
-        ["gpt-6-sol", "gemini-3.8-flash"],
-        ["claude-opus-5-5", "gemini-3.8-flash"],
-        ["gpt-6-sol", "claude-opus-5-5"],
-        ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"],
-    ]
-    for model_ids in hub_pairs:
-        expected = compare_pair_fact_line(model_ids)
-        if expected not in hub_html:
-            fail(f"compare hub facts drift for {model_ids}")
+        if template == "generic":
+            for marker_text in ("DECISION FACTORS", "No synthetic winner score", "OFFICIAL SOURCES", "RELATED MATCHUPS"):
+                if marker_text not in html:
+                    fail(f"{slug}: generic comparison missing decision marker {marker_text!r}")
+
+    meta_slug = "llama-4-scout-vs-llama-4-maverick"
+    meta_html = (ROOT / "compare" / meta_slug / "index.html").read_text(encoding="utf-8")
+    if "Not published" not in meta_html or "Direct Standard token-cost comparison is unavailable" not in meta_html:
+        fail("open-weight comparison must preserve unavailable direct pricing instead of inventing rates")
 
     # Every catalog-backed /models/ URL must surface the latest ledger event for its model.
     events_by_model = {}
