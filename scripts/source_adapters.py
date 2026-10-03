@@ -94,10 +94,19 @@ def parse_anthropic_sitemap(body, now, discovery_days=45, max_urls=30):
         lastmod = _parse_iso((lastmod_node.text or "").strip()) if lastmod_node is not None else None
         if not loc or not _anthropic_candidate_url(loc):
             continue
+        is_model_announcement = bool(
+            ANTHROPIC_MODEL_ANNOUNCEMENT.match(urlparse(loc).path.rstrip("/") or "/")
+        )
         if lastmod is None:
+            if is_model_announcement:
+                discovered.append((now, loc))
+                continue
             invalid += 1
             continue
-        if lastmod < cutoff or lastmod > now + timedelta(days=1):
+        if not is_model_announcement and (lastmod < cutoff or lastmod > now + timedelta(days=1)):
+            continue
+        if is_model_announcement and lastmod > now + timedelta(days=1):
+            invalid += 1
             continue
         discovered.append((lastmod, loc))
 
