@@ -61,8 +61,20 @@ def explicit_model_match(signal, model):
 
 
 def family_model_match(signal, model):
-    family = normalized(model.get("family", ""))
-    return bool(family and family in signal_haystack(signal))
+    family_tokens = normalized(model.get("family", "")).split()
+    haystack_tokens = signal_haystack(signal).split()
+    if not family_tokens or len(haystack_tokens) < len(family_tokens):
+        return False
+    width = len(family_tokens)
+    for index in range(len(haystack_tokens) - width + 1):
+        if haystack_tokens[index:index + width] != family_tokens:
+            continue
+        next_index = index + width
+        if next_index < len(haystack_tokens) and haystack_tokens[next_index].isdigit():
+            # "GPT-6" must not match "GPT-6.1"; the latter is a distinct version.
+            continue
+        return True
+    return False
 
 
 def active_price(model, on_date):
