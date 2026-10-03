@@ -46,6 +46,7 @@ def evidence():
             "currency": "USD",
             "unit": "per 1 million tokens",
             "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+            "source_urls": [PRICING],
         },
         "signal": {
             "title": "Introducing GPT-6 Sol and Luna",
@@ -128,7 +129,18 @@ def test_publish_gate_requires_multi_model_sources():
     draft = sample_draft()
     draft["key_facts"][2]["source_urls"] = [SOL]
     errors = validate_publish_draft(draft, evidence(), quality_gate())
-    expect(any("multi-model claim" in error for error in errors), "multi-model claim must cite both models")
+    expect(any("multi-model claim" in error for error in errors), "multi-model capability claim must cite both models")
+
+
+def test_publish_gate_accepts_shared_pricing_source():
+    draft = sample_draft()
+    draft["comparison_points"][0] = {
+        "dimension": "Standard API token pricing",
+        "analysis": "Sol lists higher standard token pricing than Luna per 1 million tokens.",
+        "source_urls": [PRICING],
+    }
+    errors = validate_publish_draft(draft, evidence(), quality_gate())
+    expect(not any("comparison_points[1]" in error for error in errors), f"shared pricing source should be accepted: {errors}")
 
 
 def test_publish_gate_requires_comparison_value():
@@ -175,6 +187,7 @@ if __name__ == "__main__":
     test_publish_gate_accepts_research_page()
     test_publish_gate_rejects_process_language()
     test_publish_gate_requires_multi_model_sources()
+    test_publish_gate_accepts_shared_pricing_source()
     test_publish_gate_requires_comparison_value()
     test_publish_gate_rejects_unapproved_faq_source()
     test_schema_plan_contains_faq_and_comparison_schema()
