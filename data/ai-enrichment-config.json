@@ -1,0 +1,17 @@
+{
+  "version": "sxf-ai-enrichment-v1",
+  "mode": "dry-run",
+  "candidate_limit": 10,
+  "candidate_max_age_days": 14,
+  "min_seo_quality_score": 50,
+  "min_signal_score": 38,
+  "monthly_budget_eur": 5.0,
+  "monthly_page_limit": 100,
+  "per_page_input_token_cap": 8000,
+  "per_page_output_token_cap": 1800,
+  "writer_model": "gpt-5.6-terra",
+  "validator_model": "gpt-5.6-luna",
+  "publish_mode": "manual-review",
+  "required_ai_intent": true,
+  "allowed_categories": ["Models", "Tools", "Research", "Open Source"]
+}
