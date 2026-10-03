@@ -1,0 +1,346 @@
+{
+  "schema_version": "1.0",
+  "name": "SXF AI Comparison Registry",
+  "source_verified": "2026-10-04",
+  "strategy": {
+    "index_policy": "Only curated high-intent comparisons are indexable. Arbitrary model selections are available in the interactive compare builder without generating thin crawlable URLs.",
+    "evidence_policy": "Generated comparison facts must come from data/model-pricing.json and data/model-history.json. No benchmark, speed, quality, or winner claim may be inferred from specifications alone.",
+    "pricing_policy": "Direct token-cost comparisons are shown only when both models have calculator-eligible provider-published Standard paid pricing."
+  },
+  "comparisons": [
+    {
+      "slug": "gpt-6-astra-vs-claude-fable-5-1",
+      "type": "pair",
+      "template": "editorial",
+      "model_ids": [
+        "gpt-6-astra",
+        "claude-fable-5-1"
+      ],
+      "title": "GPT-6 Astra vs Claude Fable 5.1",
+      "kicker": "Frontier reasoning",
+      "summary": "Compare two top-end models on verified API economics, long-context rules, reasoning controls, coding and agent workflows.",
+      "tags": [
+        "openai",
+        "anthropic",
+        "frontier",
+        "coding",
+        "agents",
+        "pricing",
+        "long-context"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-sol-vs-gemini-3-8-flash",
+      "type": "pair",
+      "template": "editorial",
+      "model_ids": [
+        "gpt-6-sol",
+        "gemini-3.8-flash"
+      ],
+      "title": "GPT-6 Sol vs Gemini 3.8 Flash",
+      "kicker": "Coding · agents · multimodal",
+      "summary": "Compare production-oriented models on token economics, 1M+ context, reasoning controls and multimodal input.",
+      "tags": [
+        "openai",
+        "google",
+        "coding",
+        "agents",
+        "pricing",
+        "multimodal",
+        "long-context"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "claude-opus-5-5-vs-gemini-3-8-flash",
+      "type": "pair",
+      "template": "editorial",
+      "model_ids": [
+        "claude-opus-5-5",
+        "gemini-3.8-flash"
+      ],
+      "title": "Claude Opus 5.5 vs Gemini 3.8 Flash",
+      "kicker": "Agentic coding · economics",
+      "summary": "Compare verified pricing, cache economics, multimodal inputs, reasoning controls and deployment tradeoffs.",
+      "tags": [
+        "anthropic",
+        "google",
+        "coding",
+        "agents",
+        "pricing",
+        "multimodal",
+        "caching"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-sol-vs-claude-opus-5-5",
+      "type": "pair",
+      "template": "editorial",
+      "model_ids": [
+        "gpt-6-sol",
+        "claude-opus-5-5"
+      ],
+      "title": "GPT-6 Sol vs Claude Opus 5.5",
+      "kicker": "Agentic coding",
+      "summary": "Compare two serious coding and agent models on verified Standard pricing, long-context rules and reasoning controls.",
+      "tags": [
+        "openai",
+        "anthropic",
+        "coding",
+        "agents",
+        "pricing",
+        "long-context"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-astra-vs-sol-vs-luna",
+      "type": "family",
+      "template": "editorial",
+      "model_ids": [
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-6-luna"
+      ],
+      "title": "GPT-6 Astra vs Sol vs Luna",
+      "kicker": "Within-family routing",
+      "summary": "Choose the GPT-6 tier by workload, capability class and unit economics instead of treating GPT-6 as one model.",
+      "tags": [
+        "openai",
+        "family",
+        "pricing",
+        "routing",
+        "coding",
+        "agents"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-sol-vs-grok-4-7",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-6-sol",
+        "grok-4.7"
+      ],
+      "title": "GPT-6 Sol vs Grok 4.7",
+      "kicker": "Coding · agents · cost",
+      "summary": "Compare OpenAI and xAI production models on context, reasoning controls, multimodal input and dated Standard API economics.",
+      "tags": [
+        "openai",
+        "xai",
+        "coding",
+        "agents",
+        "pricing",
+        "long-context"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-astra-vs-grok-4-7",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-6-astra",
+        "grok-4.7"
+      ],
+      "title": "GPT-6 Astra vs Grok 4.7",
+      "kicker": "Frontier systems",
+      "summary": "Compare top-tier OpenAI and xAI model specifications, long-context pricing rules, modalities and reasoning controls.",
+      "tags": [
+        "openai",
+        "xai",
+        "frontier",
+        "pricing",
+        "reasoning",
+        "long-context"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "claude-opus-5-5-vs-grok-4-7",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "claude-opus-5-5",
+        "grok-4.7"
+      ],
+      "title": "Claude Opus 5.5 vs Grok 4.7",
+      "kicker": "Agentic knowledge work",
+      "summary": "Compare Anthropic and xAI on verified context, output policy, reasoning controls, cache economics and Standard token rates.",
+      "tags": [
+        "anthropic",
+        "xai",
+        "agents",
+        "coding",
+        "pricing",
+        "reasoning"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gemini-3-8-flash-vs-grok-4-7",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gemini-3.8-flash",
+        "grok-4.7"
+      ],
+      "title": "Gemini 3.8 Flash vs Grok 4.7",
+      "kicker": "Multimodal · agents",
+      "summary": "Compare Google and xAI on multimodal breadth, context capacity, reasoning controls and current API economics.",
+      "tags": [
+        "google",
+        "xai",
+        "multimodal",
+        "agents",
+        "pricing",
+        "reasoning"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "grok-4-7-vs-grok-4-6",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "grok-4.7",
+        "grok-4.6"
+      ],
+      "title": "Grok 4.7 vs Grok 4.6",
+      "kicker": "xAI upgrade decision",
+      "summary": "Compare adjacent Grok generations on verified context, knowledge cutoff, reasoning controls and Standard pricing rules.",
+      "tags": [
+        "xai",
+        "family",
+        "upgrade",
+        "pricing",
+        "reasoning"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gemini-3-8-flash-vs-gemini-3-7-flash",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gemini-3.8-flash",
+        "gemini-3.7-flash"
+      ],
+      "title": "Gemini 3.8 Flash vs Gemini 3.7 Flash",
+      "kicker": "Google Flash upgrade",
+      "summary": "Compare two Google Flash generations on verified context, output limits, multimodal support and scheduled Standard pricing.",
+      "tags": [
+        "google",
+        "family",
+        "upgrade",
+        "multimodal",
+        "pricing"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "llama-4-scout-vs-llama-4-maverick",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "llama-4-scout",
+        "llama-4-maverick"
+      ],
+      "title": "Llama 4 Scout vs Llama 4 Maverick",
+      "kicker": "Open-weight architecture",
+      "summary": "Compare Meta's Llama 4 models on verified context capacity, modalities and published specification differences without inventing direct API pricing.",
+      "tags": [
+        "meta",
+        "open-source",
+        "family",
+        "context",
+        "multimodal"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "llama-4-maverick-vs-gemini-3-8-flash",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "llama-4-maverick",
+        "gemini-3.8-flash"
+      ],
+      "title": "Llama 4 Maverick vs Gemini 3.8 Flash",
+      "kicker": "Open weights vs managed API",
+      "summary": "Compare Meta's open-weight Maverick with Google's managed Gemini API on context, modalities, output policy and pricing availability.",
+      "tags": [
+        "meta",
+        "google",
+        "open-source",
+        "multimodal",
+        "deployment",
+        "pricing"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-6-luna-vs-gemini-3-7-flash",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-6-luna",
+        "gemini-3.7-flash"
+      ],
+      "title": "GPT-6 Luna vs Gemini 3.7 Flash",
+      "kicker": "High-volume economics",
+      "summary": "Compare lower-cost OpenAI and Google models on Standard token rates, context capacity, output limits and multimodal input.",
+      "tags": [
+        "openai",
+        "google",
+        "pricing",
+        "high-volume",
+        "multimodal"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-5-6-sol-vs-gpt-6-sol",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-5.6-sol",
+        "gpt-6-sol"
+      ],
+      "title": "GPT-5.6 Sol vs GPT-6 Sol",
+      "kicker": "OpenAI upgrade path",
+      "summary": "Compare successive Sol generations on verified context, knowledge cutoff, reasoning controls and Standard API economics.",
+      "tags": [
+        "openai",
+        "family",
+        "upgrade",
+        "pricing",
+        "reasoning"
+      ],
+      "indexable": true
+    },
+    {
+      "slug": "gpt-5-6-luna-vs-gpt-6-luna",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-5.6-luna",
+        "gpt-6-luna"
+      ],
+      "title": "GPT-5.6 Luna vs GPT-6 Luna",
+      "kicker": "Efficiency upgrade",
+      "summary": "Compare successive Luna generations on verified context, reasoning controls and published Standard token pricing.",
+      "tags": [
+        "openai",
+        "family",
+        "upgrade",
+        "pricing",
+        "high-volume"
+      ],
+      "indexable": true
+    }
+  ]
+}
