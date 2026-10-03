@@ -333,6 +333,14 @@ def validate_model_pricing_catalog():
                 fail(f"{model_id}: duplicate/colliding model alias: {alias}")
             aliases[alias] = model_id
 
+        page_template = model.get("page_template")
+        allowed_page_templates = {None, "catalog-reference", "editorial-reference", "family-reference"}
+        if page_template not in allowed_page_templates:
+            fail(f"{model_id}: invalid page_template {page_template!r}")
+        if page_template in {"catalog-reference", "editorial-reference"}:
+            if not model.get("sxf_url", "").startswith("/models/"):
+                fail(f"{model_id}: model reference template requires a /models/ route")
+
         pricing_status = model.get("pricing_status")
         if pricing_status not in expected_pricing_statuses:
             fail(f"{model_id}: invalid pricing_status {pricing_status!r}")
@@ -490,6 +498,38 @@ def validate_model_pricing_catalog():
         fail(f"model explorer has {explorer_rows} rows for {len(models)} catalog models")
     if "PRIMARY-SOURCE VERIFIED" not in models_html:
         fail("model explorer must disclose primary-source verification")
+
+    rendered_models = [
+        model for model in models
+        if model.get("page_template") in {"catalog-reference", "editorial-reference"}
+    ]
+    for model in rendered_models:
+        model_path = local_path(BASE + model["sxf_url"])
+        if not model_path.exists():
+            fail(f"{model['model_id']}: generated model reference page missing")
+        model_html = model_path.read_text(encoding="utf-8")
+        if "data-model-history" not in model_html or "data-what-changed" not in model_html:
+            fail(f"{model['model_id']}: model page missing shared history/change contract")
+        if model["provenance"]["evidence"]["model_identity"] not in model_html:
+            fail(f"{model['model_id']}: model page missing official identity evidence")
+
+    providers = sorted({model["provider"] for model in models})
+    providers_index = ROOT / "providers" / "index.html"
+    if not providers_index.exists():
+        fail("provider directory page is missing")
+    providers_html = providers_index.read_text(encoding="utf-8")
+    for provider in providers:
+        provider_slug = re.sub(r"[^a-z0-9]+", "-", provider.lower()).strip("-")
+        provider_path = ROOT / "providers" / provider_slug / "index.html"
+        if not provider_path.exists():
+            fail(f"{provider}: provider page is missing")
+        provider_html = provider_path.read_text(encoding="utf-8")
+        provider_models = [model for model in models if model["provider"] == provider]
+        for model in provider_models:
+            if model["sxf_url"] not in provider_html:
+                fail(f"{provider}: provider page missing model route {model['sxf_url']}")
+        if f"/providers/{provider_slug}/" not in providers_html:
+            fail(f"provider index missing route for {provider}")
 
     calculator_page = ROOT / "tools" / "ai-model-cost-calculator" / "index.html"
     calculator_html = calculator_page.read_text(encoding="utf-8")
