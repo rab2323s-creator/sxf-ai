@@ -8,10 +8,11 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from html import unescape
 from html.parser import HTMLParser
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 ADAPTER_CONTRACT_VERSION = "sxf-source-adapter-v1"
 ANTHROPIC_HOSTS = {"anthropic.com", "www.anthropic.com"}
+META_HOSTS = {"ai.meta.com"}
 ANTHROPIC_MODEL_ANNOUNCEMENT = re.compile(
     r"^/claude-(?:opus|sonnet|haiku|fable|mythos)-[a-z0-9-]+/?$",
     re.I,
@@ -253,6 +254,191 @@ def parse_anthropic_article(body, url):
     }
 
 
+
+class _LinkParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.hrefs = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != "a":
+            return
+        attrs = {str(key).lower(): (value or "") for key, value in attrs}
+        href = attrs.get("href", "").strip()
+        if href:
+            self.hrefs.append(href)
+
+
+def _meta_candidate_url(url):
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.netloc.lower() not in META_HOSTS:
+        return False
+    path = parsed.path.rstrip("/")
+    return path.startswith("/blog/") and path != "/blog"
+
+
+def parse_meta_blog_index(body, discovery_url, max_urls=30):
+    html = body.decode("utf-8", "ignore") if isinstance(body, (bytes, bytearray)) else str(body)
+    parser = _LinkParser()
+    parser.feed(html)
+
+    urls = []
+    seen = set()
+    for href in parser.hrefs:
+        absolute = urljoin(discovery_url, href)
+        parsed = urlparse(absolute)
+        canonical = parsed._replace(query="", fragment="").geturl()
+        if not _meta_candidate_url(canonical) or canonical in seen:
+            continue
+        seen.add(canonical)
+        urls.append(canonical)
+        if len(urls) >= max_urls:
+            break
+
+    if not urls:
+        raise AdapterDriftError("Meta blog index yielded zero official blog article URLs")
+    return urls
+
+
+def parse_meta_article(body, url):
+    if not _meta_candidate_url(url):
+        raise AdapterDriftError(f"Meta article URL is outside the official blog: {url}")
+
+    html = body.decode("utf-8", "ignore") if isinstance(body, (bytes, bytearray)) else str(body)
+    parser = _ArticleParser()
+    parser.feed(html)
+
+    title = _clean_text(" ".join(parser.h1_parts), 240)
+    if not title:
+        title = _clean_text(parser.meta.get("og:title") or parser.meta.get("twitter:title"), 240)
+    if not title:
+        title = _clean_text(" ".join(parser.title_parts), 240)
+    title = re.sub(r"\s*[\\|·-]\s*(?:AI at Meta|Meta AI)\s*$", "", title, flags=re.I).strip()
+
+    summary = _clean_text(
+        parser.meta.get("description")
+        or parser.meta.get("og:description")
+        or parser.meta.get("twitter:description")
+    )
+    if len(summary) < 60:
+        summary = next((value for value in parser.paragraphs if len(value) >= 60), summary)
+
+    published = None
+    for key in ("article:published_time", "datepublished", "date", "publishdate", "publish_date"):
+        published = _parse_iso(parser.meta.get(key))
+        if published is not None:
+            break
+    if published is None:
+        for value in parser.time_values:
+            published = _parse_iso(value)
+            if published is not None:
+                break
+    if published is None:
+        published = _parse_visible_date(" ".join(parser.visible_parts[:120]))
+
+    missing = []
+    if not title:
+        missing.append("title")
+    if not summary:
+        missing.append("summary")
+    if published is None:
+        missing.append("published")
+    if missing:
+        raise AdapterDriftError(f"Meta article missing required fields {missing}: {url}")
+
+    return {
+        "title": title,
+        "url": url,
+        "published": published.isoformat().replace("+00:00", "Z"),
+        "summary": summary,
+    }
+
+
+def run_meta_blog_adapter(source_config, user_agent, now=None, fetcher=None):
+    now = now or datetime.now(timezone.utc)
+    fetcher = fetcher or (lambda url: _fetch(url, user_agent))
+    discovery_url = source_config["url"]
+    discovery_pages = max(1, int(source_config.get("discovery_pages", 2)))
+    max_discovery = max(1, int(source_config.get("max_discovery", 30)))
+
+    discovered = []
+    seen = set()
+    errors = []
+    fetch_failures = 0
+    invalid_items = 0
+
+    for page in range(1, discovery_pages + 1):
+        page_url = discovery_url if page == 1 else f"{discovery_url}?page={page}"
+        try:
+            page_body = fetcher(page_url)
+            page_urls = parse_meta_blog_index(
+                page_body,
+                discovery_url=discovery_url,
+                max_urls=max_discovery,
+            )
+        except Exception as exc:
+            if isinstance(exc, AdapterDriftError):
+                invalid_items += 1
+                errors.append(str(exc))
+            else:
+                fetch_failures += 1
+                errors.append(f"{page_url}: {exc}")
+            continue
+
+        for url in page_urls:
+            if url in seen:
+                continue
+            seen.add(url)
+            discovered.append(url)
+            if len(discovered) >= max_discovery:
+                break
+        if len(discovered) >= max_discovery:
+            break
+
+    if not discovered:
+        detail = "; ".join(errors[:3]) if errors else "no discoverable articles"
+        raise AdapterDriftError(f"Meta adapter zero-result anomaly: {detail}")
+
+    items = []
+    for url in discovered:
+        try:
+            article = parse_meta_article(fetcher(url), url)
+            item = {
+                **article,
+                "source": source_config["name"],
+                "provenance": {
+                    "adapter_contract_version": ADAPTER_CONTRACT_VERSION,
+                    "adapter": source_config["adapter"],
+                    "discovery_url": discovery_url,
+                    "source_url": url,
+                    "discovered_via": "official-blog-index",
+                },
+            }
+            validate_contract_item(source_config["name"], item, discovery_url)
+            items.append(item)
+        except Exception as exc:
+            invalid_items += 1
+            if isinstance(exc, AdapterDriftError):
+                errors.append(str(exc))
+            else:
+                fetch_failures += 1
+                errors.append(f"{url}: {exc}")
+
+    if not items:
+        detail = "; ".join(errors[:3]) if errors else "no parseable articles"
+        raise AdapterDriftError(f"Meta adapter zero-result anomaly: {detail}")
+
+    diagnostics = {
+        "adapter_contract_version": ADAPTER_CONTRACT_VERSION,
+        "discovered_count": len(discovered),
+        "parsed_count": len(items),
+        "invalid_count": invalid_items,
+        "fetch_failure_count": fetch_failures,
+        "schema_drift": bool(invalid_items and not items),
+        "errors": errors[:10],
+    }
+    return items, diagnostics
+
 def validate_contract_item(source, item, discovery_url):
     required = ("title", "url", "source", "published", "summary", "provenance")
     missing = [key for key in required if not item.get(key)]
@@ -337,6 +523,13 @@ def run_source_adapter(source_config, user_agent, now=None, fetcher=None):
     adapter = source_config.get("adapter")
     if adapter == "anthropic-sitemap":
         return run_anthropic_sitemap_adapter(
+            source_config,
+            user_agent=user_agent,
+            now=now,
+            fetcher=fetcher,
+        )
+    if adapter == "meta-blog":
+        return run_meta_blog_adapter(
             source_config,
             user_agent=user_agent,
             now=now,
