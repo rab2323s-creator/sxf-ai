@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from run_ai_enrichment_pilot import estimate_cost_usd, validate_writer_output
+from run_ai_enrichment_pilot import estimate_cost_usd, sanitize_api_key, validate_writer_output
 
 
 def expect(condition, message):
@@ -54,6 +54,16 @@ def test_writer_validation_rejects_unapproved_source():
     expect(any("unapproved sources" in error for error in errors), "unapproved source must be rejected")
 
 
+def test_secret_sanitization():
+    expect(sanitize_api_key("  sk-test-key\n") == "sk-test-key", "secret trim failed")
+    try:
+        sanitize_api_key("sk-test key")
+    except RuntimeError as exc:
+        expect("embedded whitespace" in str(exc), "embedded whitespace error drift")
+    else:
+        raise AssertionError("embedded whitespace must be rejected")
+
+
 def test_cost_guard_math():
     cost = estimate_cost_usd(
         {"input_tokens": 6000, "output_tokens": 1500},
@@ -65,5 +75,6 @@ def test_cost_guard_math():
 if __name__ == "__main__":
     test_writer_validation_accepts_evidence_only_sources()
     test_writer_validation_rejects_unapproved_source()
+    test_secret_sanitization()
     test_cost_guard_math()
     print("AI enrichment pilot tests passed")
