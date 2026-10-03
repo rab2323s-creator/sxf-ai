@@ -10,7 +10,13 @@
   const filters = [...root.querySelectorAll("[data-model-provider]")];
   let provider = "all";
 
-  const numeric = (row, key) => Number(row.dataset[key] || 0);
+  const numeric = (row, key) => {
+    if ((key === "input" || key === "output") && row.dataset.pricingStatus !== "official-paid") {
+      return Number.POSITIVE_INFINITY;
+    }
+    const value = Number(row.dataset[key] || 0);
+    return Number.isFinite(value) ? value : Number.POSITIVE_INFINITY;
+  };
   const apply = () => {
     const query = (search?.value || "").trim().toLowerCase();
     const mode = sort?.value || "default";
