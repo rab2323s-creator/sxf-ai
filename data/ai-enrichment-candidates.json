@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "cc720459c41a21cd720c71e0f3283da7f0119743c384f4d32568df3b90736633",
+  "snapshot_hash": "55bfd3b9a26b24eb0bf4f0f1c19ed9a694849c92d029faa228ac7d3ed36f56dd",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -22,12 +22,13 @@
       "category": "Models",
       "published": "2026-09-29T10:00:00Z",
       "priority_score": 228,
-      "evidence_hash": "f97fa35e01cec98c61868bb723f4f3962101d8c8bd569b2888e38fd6f268b037",
+      "evidence_hash": "2b1f2729e6c1d4e2c44aecc03e949bec7fa535f0f13cd343f95567bc7ee2719c",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": []
         },
         "signal": {
           "title": "Introducing GPT-6.1 Sol",
@@ -95,12 +96,15 @@
       "category": "Models",
       "published": "2026-09-22T18:00:00Z",
       "priority_score": 228,
-      "evidence_hash": "b63cff05465e74c17592b3213863e7fe74e27762a293fed1f12ad0d916855c81",
+      "evidence_hash": "57f7d53fb3e5278d7912a785ab69a32bfedcc690d0d9c554fb31e5da2b8ce560",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "Introducing GPT-6 Sol and Luna",
@@ -432,12 +436,15 @@
       "category": "Tools",
       "published": "2026-09-22T17:10:23Z",
       "priority_score": 201,
-      "evidence_hash": "268ad261c8690c36f87df892904407f9e3ceeb930ec64e7fe6458f94adec26ea",
+      "evidence_hash": "d8d4437d4666cb00a996460cc2c8d3587c50991cb89a500711221c24cc276a7e",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         "signal": {
           "title": "Claude Opus 5.5 is now available in GitHub Copilot",
@@ -612,12 +619,15 @@
       "category": "Models",
       "published": "2026-09-22T21:00:00Z",
       "priority_score": 194,
-      "evidence_hash": "eb40335eb171903b808e97a0545675be4d577dce2bafa0529ac4194d4cf7d71f",
+      "evidence_hash": "73ab2ff0020ec49ddcdd91f897fceec0d20a3a181ee653c5a557f2acef4954f3",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "Better prompt caching for GPT-6",
@@ -1077,12 +1087,15 @@
       "category": "Models",
       "published": "2026-10-02T16:15:00Z",
       "priority_score": 169,
-      "evidence_hash": "4a2c2e840b6d45b8568c27cd584d6ed005bd7871760b3bed781a809923dfb685",
+      "evidence_hash": "e3ab97806d4cb3f8e1d2ceb4badbfd271369ea2962e34c32d9422bbf1a13941b",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "A model guide for the GPT-6 family",
@@ -1541,12 +1554,15 @@
       "category": "Models",
       "published": "2026-09-23T01:00:00Z",
       "priority_score": 169,
-      "evidence_hash": "3d16e7065e3576dc55f35513c58ce7f5084a32593fca1bd5d863ca4df59272e0",
+      "evidence_hash": "bc1d913d44add507ce62bdc057f7d1dfac54f5f4f480f5e8406d60b2c068147b",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "Airbnb widens access to GPT-6 Astra and OpenAI frontier models",
@@ -1745,12 +1761,15 @@
       "category": "Models",
       "published": "2026-09-21T12:00:00Z",
       "priority_score": 159,
-      "evidence_hash": "04ba5243bc0191519b85b201e60e04ab85b09880ba89a62082911808aba6d26a",
+      "evidence_hash": "62125cfdee101dafc1b6d2ee845bbbff2fb604fa8e2cd0538d325af43762e304",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
@@ -1952,12 +1971,13 @@
       "category": "Tools",
       "published": "2026-10-01T19:09:10Z",
       "priority_score": 149,
-      "evidence_hash": "b77382f93246995fb5c1102cb510c8e6070a9ddb647e2c2446a4a2056a1dace7",
+      "evidence_hash": "1d6b30d932e53c170d8471e03a2b059404c76108270ca7a8257ca46bee82d05c",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": []
         },
         "signal": {
           "title": "GitHub Copilot in VS Code, September 2026 releases",
@@ -2025,12 +2045,13 @@
       "category": "Tools",
       "published": "2026-09-25T16:42:48Z",
       "priority_score": 149,
-      "evidence_hash": "9ca70cbabaa81eb005d378eb4595bd1f99dbfeddb4a121f95d8427718584277d",
+      "evidence_hash": "517f08b64dec1e826b40b79c537f2b788212285b98dcabbac5ca0a6f624baa97",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": []
         },
         "signal": {
           "title": "GitHub Copilot weekly releases — September 21",
@@ -2097,12 +2118,13 @@
       "category": "Tools",
       "published": "2026-09-29T17:02:27Z",
       "priority_score": 142,
-      "evidence_hash": "6651595142eb8512df2a6a46ba298a2cae5b5a265da43c86ed7c8472d81bd135",
+      "evidence_hash": "e5bd777ade6cd2e50fbb186b282eecc2b99708354beee8d20e116520dace5280",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
           "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": []
         },
         "signal": {
           "title": "GPT-6.1 Sol in GitHub Copilot",
