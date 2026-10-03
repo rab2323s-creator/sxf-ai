@@ -165,8 +165,8 @@ def test_secret_sanitization():
 
 def test_cost_guard_math():
     cost = estimate_cost_usd(
-        {"input_tokens": 7000, "output_tokens": 2200},
-        {"input_tokens": 6000, "output_tokens": 800},
+        {"input_tokens": 7000, "output_tokens": 3800},
+        {"input_tokens": 7000, "output_tokens": 1200},
     )
     expect(0 < cost < 0.10, f"pilot cost estimate should stay below configured cap, got {cost}")
 
