@@ -85,6 +85,7 @@
     modelSelect.replaceChildren();
     const groups = new Map();
     for (const model of models) {
+      if (model.pricing_status !== "official-paid" || model.calculator_eligible !== true) continue;
       if (!groups.has(model.provider)) groups.set(model.provider, []);
       groups.get(model.provider).push(model);
     }
@@ -108,6 +109,15 @@
     if (!catalog) return;
     const model = byId.get(modelSelect.value);
     if (!model) return;
+    if (model.pricing_status !== "official-paid" || model.calculator_eligible !== true) {
+      totalNode.textContent = "—";
+      inputCostNode.textContent = "—";
+      cachedCostNode.textContent = "—";
+      outputCostNode.textContent = "—";
+      rateProfileNode.textContent = "This model has no provider-published Standard paid token rate eligible for the calculator.";
+      warningNode.hidden = true;
+      return;
+    }
 
     const input = number(uncachedInput?.value);
     const cached = number(cachedInput?.value);
