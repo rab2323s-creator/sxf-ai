@@ -57,7 +57,23 @@ def explicit_model_match(signal, model):
     aliases = model.get("aliases") or []
     if isinstance(aliases, list):
         candidates.extend(aliases)
-    return any(normalized(candidate) and normalized(candidate) in haystack for candidate in candidates)
+    if any(normalized(candidate) and normalized(candidate) in haystack for candidate in candidates):
+        return True
+
+    # Grouped announcements often spell the family once, e.g. "GPT-6 Sol and Luna".
+    # If the family itself is a valid match, allow a model-specific suffix token to
+    # identify each named variant without leaking across version boundaries.
+    if not family_model_match(signal, model):
+        return False
+    family_tokens = normalized(model.get("family", "")).split()
+    model_tokens = normalized(model.get("model", "")).split()
+    if not family_tokens or model_tokens[:len(family_tokens)] != family_tokens:
+        return False
+    suffix_tokens = model_tokens[len(family_tokens):]
+    if not suffix_tokens:
+        return False
+    haystack_tokens = signal_haystack(signal).split()
+    return all(token in haystack_tokens for token in suffix_tokens)
 
 
 def family_model_match(signal, model):
