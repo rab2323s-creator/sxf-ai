@@ -1400,8 +1400,8 @@ def validate_ai_enrichment_dry_run():
         fail("AI enrichment monthly page limit must be 1..100")
     if not isinstance(input_cap, int) or input_cap <= 0 or input_cap > 8000:
         fail("AI enrichment input token cap must be 1..8000")
-    if not isinstance(output_cap, int) or output_cap <= 0 or output_cap > 3000:
-        fail("AI enrichment output token cap must be 1..3000")
+    if not isinstance(output_cap, int) or output_cap <= 0 or output_cap > 5000:
+        fail("AI enrichment output token cap must be 1..5000")
 
     quality_gate = config.get("publish_quality_gate")
     if not isinstance(quality_gate, dict):
