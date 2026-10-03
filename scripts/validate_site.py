@@ -1277,6 +1277,14 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: rejected shadow candidate leaked into production archive")
         if item.get("url") in accepted_shadow_urls:
             fail(f"{name}: URL appears in both accepted and rejected shadow sets")
+        if name == "Anthropic":
+            provenance = item.get("provenance")
+            if not isinstance(provenance, dict):
+                fail("Anthropic rejected shadow candidate missing provenance")
+            if provenance.get("discovered_via") != "official-sitemap":
+                fail("Anthropic rejected shadow candidate provenance discovery drift")
+            if provenance.get("source_url") != item.get("url"):
+                fail("Anthropic rejected shadow candidate provenance source URL drift")
         if not isinstance(item.get("seo_quality_score"), int):
             fail(f"{name}: rejected shadow audit missing seo_quality_score")
         if not isinstance(item.get("summary_chars"), int):
