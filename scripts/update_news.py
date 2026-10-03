@@ -5461,8 +5461,8 @@ def guides_index_html(items, current_items):
             "title": "Can AI Agents Prove They’re Authorized? Agent Passports, Delegation Chains & Action Receipts",
             "description": "AI agent authorization explained: identity, agent passports, delegated authority, permissions, revocation, runtime enforcement and signed action receipts.",
             "meta": "Authorization · Identity · Delegation · Receipts",
-            "updated": "Oct 2, 2026",
-            "read_time": "42 min",
+            "updated": "Oct 3, 2026",
+            "read_time": "49 min",
         },
         {
             "href": "/guides/ai-negotiation-agents/",
@@ -7468,7 +7468,7 @@ def update_sitemap(items):
         item for item in items
         if item["category"] == "Models" or extract_models(item["title"])
     ]
-    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-02")
+    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-03")
     gpt6_compare_items = [
         item for item in items
         if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
@@ -7506,7 +7506,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
         sitemap_image_entry(
             f"{BASE_URL}/guides/ai-agent-authorization/",
-            "2026-10-02",
+            "2026-10-03",
             f"{BASE_URL}/guides/ai-agent-authorization/images/ai-agent-authority-chain.webp"
         ),
         sitemap_image_entry(
