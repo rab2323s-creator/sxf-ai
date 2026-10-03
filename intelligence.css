@@ -1038,3 +1038,12 @@
   .compare-builder-model dl>div{grid-template-columns:110px 1fr}
   .compare-builder-summary{grid-template-columns:1fr}.compare-builder-summary>span{grid-row:auto}
 }
+
+
+/* Compare Engine internal-link bridges */
+.model-compare-bridge,.provider-compare-bridge{padding:92px 0 0}
+.model-compare-bridge .model-related-links,.provider-compare-bridge .model-related-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:720px){
+  .model-compare-bridge,.provider-compare-bridge{padding-top:72px}
+  .model-compare-bridge .model-related-links,.provider-compare-bridge .model-related-links{grid-template-columns:1fr}
+}

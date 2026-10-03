@@ -3769,6 +3769,31 @@ def grok_47_reference_html():
     </main>{page_footer()}</body></html>'''
 
 
+def model_comparison_links_html(model_id, limit=4):
+    matches = [
+        comparison for comparison in MODEL_COMPARISON_CATALOG["comparisons"]
+        if comparison.get("indexable") is True and model_id in comparison.get("model_ids", [])
+    ]
+    if not matches:
+        return ""
+    matches.sort(key=lambda comparison: (
+        0 if comparison.get("template") == "editorial" else 1,
+        comparison.get("title", ""),
+    ))
+    links = "".join(
+        f'''<a href="/compare/{escape(comparison["slug"], quote=True)}/">
+          <span>{escape(comparison["kicker"])}</span>
+          <strong>{escape(comparison["title"])}</strong><b>↗</b>
+        </a>'''
+        for comparison in matches[:limit]
+    )
+    model = model_catalog_entry(model_id)
+    return f'''<section class="model-compare-bridge shell" data-model-comparisons="{escape(model_id, quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">COMPARE {escape(model["model"].upper())}</p><h2>Put this model in context.</h2></div><a href="/compare/">Open Compare Engine ↗</a></div>
+      <div class="model-related-links">{links}</div>
+    </section>'''
+
+
 def render_catalog_model_page(model_id, items):
     model = model_catalog_entry(model_id)
     template = model.get("page_template")
@@ -3797,6 +3822,8 @@ def render_catalog_model_page(model_id, items):
             page,
             model_history_html([model_id], f'{model["model"]} verified history.')
         )
+    if "data-model-comparisons" not in page:
+        page = inject_before_main_end(page, model_comparison_links_html(model_id))
     return page
 
 
@@ -3909,6 +3936,22 @@ def provider_page_html(provider, items):
         )
 
     signal_rows = "".join(signal_row(item) for item in signals)
+    provider_model_ids = {model["model_id"] for model in models}
+    provider_comparisons = [
+        comparison for comparison in MODEL_COMPARISON_CATALOG["comparisons"]
+        if comparison.get("indexable") is True
+        and provider_model_ids.intersection(comparison.get("model_ids", []))
+    ]
+    provider_comparisons.sort(key=lambda comparison: (
+        -len(provider_model_ids.intersection(comparison.get("model_ids", []))),
+        comparison.get("title", ""),
+    ))
+    provider_compare_links = "".join(
+        f'''<a href="/compare/{escape(comparison["slug"], quote=True)}/">
+          <span>{escape(comparison["kicker"])}</span><strong>{escape(comparison["title"])}</strong><b>↗</b>
+        </a>'''
+        for comparison in provider_comparisons[:6]
+    )
     canonical = f'{BASE_URL}/providers/{provider_slug(provider)}/'
     schema = {
         "@context": "https://schema.org",
@@ -3968,6 +4011,7 @@ def provider_page_html(provider, items):
         </div>
       </section>
 
+      {f'<section class="provider-compare-bridge shell" data-provider-comparisons="{escape(provider_slug(provider), quote=True)}"><div class="intel-section-head"><div><p class="eyebrow">COMPARE {escape(provider.upper())}</p><h2>High-value model matchups.</h2></div><a href="/compare/">Compare Engine ↗</a></div><div class="model-related-links">{provider_compare_links}</div></section>' if provider_compare_links else ""}
       {f'<section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">PRIMARY-SOURCE WATCH</p><h2>Latest {escape(provider)} signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list">{signal_rows}</div></section>' if signal_rows else ""}
     </main>{page_footer()}</body></html>'''
 
