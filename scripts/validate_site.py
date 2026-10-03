@@ -1138,7 +1138,8 @@ def validate_source_expansion(news, archive):
             "relevance_accepted_count", "quality_accepted_count",
             "accepted_candidate_count", "rejected_candidate_count", "duplicate_count",
             "age_rejection_count", "relevance_rejection_count", "quality_rejection_count", "publish_count",
-            "last_successful_fetch", "errors",
+            "adapter", "adapter_contract_version", "adapter_discovered_count", "adapter_invalid_count",
+            "adapter_fetch_failure_count", "schema_drift", "last_successful_fetch", "errors",
         }
         if not required_metrics.issubset(metrics):
             fail(f"{name}: source metrics shape invalid")
@@ -1148,6 +1149,29 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: source metrics errors must be a list")
         if metrics.get("fetch_failure") and not metrics.get("errors"):
             fail(f"{name}: fetch failure disappeared without a recorded error")
+        if metrics.get("adapter") != source.get("adapter"):
+            fail(f"{name}: adapter metrics drift")
+        if source.get("adapter") == "rss":
+            if metrics.get("adapter_contract_version") is not None:
+                fail(f"{name}: RSS source must not report adapter contract version")
+        elif source.get("adapter") == "pending":
+            if metrics.get("fetch_success"):
+                fail(f"{name}: pending adapter unexpectedly fetched")
+        else:
+            from source_adapters import ADAPTER_CONTRACT_VERSION
+            if metrics.get("adapter_contract_version") != ADAPTER_CONTRACT_VERSION:
+                fail(f"{name}: adapter contract version drift")
+            adapter_counts = [
+                metrics.get("adapter_discovered_count"),
+                metrics.get("adapter_invalid_count"),
+                metrics.get("adapter_fetch_failure_count"),
+            ]
+            if any(not isinstance(value, int) or value < 0 for value in adapter_counts):
+                fail(f"{name}: adapter diagnostics counts must be non-negative integers")
+            if not isinstance(metrics.get("schema_drift"), bool):
+                fail(f"{name}: schema_drift must be boolean")
+            if metrics.get("fetch_success") and metrics.get("adapter_discovered_count", 0) <= 0:
+                fail(f"{name}: adapter fetch succeeded with zero discovered candidates")
         parsed = metrics.get("parsed_candidate_count")
         accepted = metrics.get("accepted_candidate_count")
         rejected = metrics.get("rejected_candidate_count")
@@ -1223,6 +1247,14 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: source-shadow contains item outside retention window")
         if item.get("url") in production_urls:
             fail(f"{name}: shadow candidate leaked into production archive")
+        if name == "Anthropic":
+            provenance = item.get("provenance")
+            if not isinstance(provenance, dict):
+                fail("Anthropic shadow candidate missing provenance")
+            if provenance.get("discovered_via") != "official-sitemap":
+                fail("Anthropic shadow candidate provenance discovery drift")
+            if provenance.get("source_url") != item.get("url"):
+                fail("Anthropic shadow candidate provenance source URL drift")
         shadow_counts[name] = shadow_counts.get(name, 0) + 1
     for name, count in shadow_counts.items():
         if count > SHADOW_MAX_ITEMS_PER_SOURCE:
@@ -1245,6 +1277,14 @@ def validate_source_expansion(news, archive):
             fail(f"{name}: rejected shadow candidate leaked into production archive")
         if item.get("url") in accepted_shadow_urls:
             fail(f"{name}: URL appears in both accepted and rejected shadow sets")
+        if name == "Anthropic":
+            provenance = item.get("provenance")
+            if not isinstance(provenance, dict):
+                fail("Anthropic rejected shadow candidate missing provenance")
+            if provenance.get("discovered_via") != "official-sitemap":
+                fail("Anthropic rejected shadow candidate provenance discovery drift")
+            if provenance.get("source_url") != item.get("url"):
+                fail("Anthropic rejected shadow candidate provenance source URL drift")
         if not isinstance(item.get("seo_quality_score"), int):
             fail(f"{name}: rejected shadow audit missing seo_quality_score")
         if not isinstance(item.get("summary_chars"), int):
