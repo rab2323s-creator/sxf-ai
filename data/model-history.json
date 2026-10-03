@@ -589,6 +589,59 @@
           }
         }
       }
+    },
+    "grok-4.7": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_3f23036099532b57109a",
+      "snapshot_hash": "870aa4a62e0b07e21f9f603f6930a7e68fca0c64c0a5d570c2ba8a45c949623e",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.7",
+        "context_window": 500000,
+        "max_output": "unlimited",
+        "knowledge_cutoff": "2026-05",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-21",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.5,
+              "output": 6
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens at or above 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      }
     }
   },
   "events": [
@@ -1329,7 +1382,75 @@
       },
       "event_id": "evt_68d2a047223acf4b1353",
       "event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
+    },
+    {
+      "sequence": 12,
+      "type": "model_added",
+      "model_id": "grok-4.7",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.7",
+        "context_window": 500000,
+        "max_output": "unlimited",
+        "knowledge_cutoff": "2026-05",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-21",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.5,
+              "output": 6
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens at or above 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.x.ai/developers/grok-4-7",
+        "family": "https://docs.x.ai/developers/grok-4-7",
+        "model": "https://docs.x.ai/developers/grok-4-7",
+        "context_window": "https://docs.x.ai/developers/grok-4-7",
+        "max_output": "https://docs.x.ai/developers/grok-4-7",
+        "knowledge_cutoff": "https://docs.x.ai/developers/grok-4-7",
+        "reasoning": "https://docs.x.ai/developers/grok-4-7",
+        "modalities": "https://docs.x.ai/developers/grok-4-7",
+        "pricing": "https://docs.x.ai/developers/release-notes"
+      },
+      "event_id": "evt_3f23036099532b57109a",
+      "event_hash": "3f23036099532b57109aa8efc89291099dab4ccf639d411e873c9137979d74e8"
     }
   ],
-  "chain_head": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
+  "chain_head": "3f23036099532b57109aa8efc89291099dab4ccf639d411e873c9137979d74e8"
 }
