@@ -101,8 +101,19 @@ def parse_anthropic_sitemap(body, now, discovery_days=45, max_urls=30):
             continue
         discovered.append((lastmod, loc))
 
-    discovered.sort(key=lambda row: row[0], reverse=True)
-    urls = [url for _lastmod, url in discovered[:max_urls]]
+    model_rows = [row for row in discovered if ANTHROPIC_MODEL_ANNOUNCEMENT.match(urlparse(row[1]).path.rstrip("/") or "/")]
+    news_rows = [row for row in discovered if row not in model_rows]
+    model_rows.sort(key=lambda row: row[0], reverse=True)
+    news_rows.sort(key=lambda row: row[0], reverse=True)
+
+    reserved_model_slots = min(len(model_rows), max(1, max_urls // 3))
+    selected = model_rows[:reserved_model_slots]
+    selected.extend(news_rows[: max(0, max_urls - len(selected))])
+    if len(selected) < max_urls:
+        selected.extend(model_rows[reserved_model_slots : reserved_model_slots + (max_urls - len(selected))])
+    selected = sorted(selected, key=lambda row: row[0], reverse=True)[:max_urls]
+
+    urls = [url for _lastmod, url in selected]
     if not urls:
         raise AdapterDriftError("Anthropic sitemap yielded zero recent news/model announcement URLs")
     return urls, invalid
