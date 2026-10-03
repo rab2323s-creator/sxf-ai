@@ -149,6 +149,7 @@ def build_evidence_pack(item, pricing, history):
     published_date = published.date().isoformat() if published else datetime.now(timezone.utc).date().isoformat()
     matched_models = []
     source_urls = [item.get("url")]
+    pricing_source_urls = []
 
     all_models = pricing.get("models", [])
     explicit_models = [model for model in all_models if explicit_model_match(item, model)]
@@ -161,6 +162,13 @@ def build_evidence_pack(item, pricing, history):
         official_sources = [url for url in model.get("official_sources", []) if url]
         source_urls.extend(official_sources)
         source_urls.extend([url for url in evidence.values() if isinstance(url, str) and url])
+        pricing_url = evidence.get("pricing") if isinstance(evidence, dict) else None
+        if isinstance(pricing_url, str) and pricing_url:
+            pricing_source_urls.append(pricing_url)
+        pricing_source_urls.extend(
+            url for url in official_sources
+            if isinstance(url, str) and "/pricing" in url
+        )
         matched_models.append({
             "model_id": model.get("model_id"),
             "provider": model.get("provider"),
@@ -184,6 +192,7 @@ def build_evidence_pack(item, pricing, history):
             "currency": pricing.get("currency"),
             "unit": pricing.get("pricing_unit"),
             "scope": pricing.get("pricing_scope"),
+            "source_urls": sorted(set(pricing_source_urls)),
         },
         "signal": {
             "title": item.get("title"),

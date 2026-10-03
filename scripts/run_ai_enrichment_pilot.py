@@ -272,6 +272,8 @@ availability, model relationships, comparisons, or sources.
 SEO requirements:
 - Propose a short descriptive seo_slug_recommendation that directly expresses the event/search intent. No hash suffix.
 - seo_title, H1, and meta description must directly name the main model/product/event and clearly describe what changed.
+- When two named models are central to the event, write each full model name at least once across the SEO title and H1 (for example, "GPT-6 Sol" and "GPT-6 Luna").
+- Return 2 to 5 secondary_search_queries only; consolidate overlapping queries.
 - Avoid vague clickbait, hype, keyword stuffing, and generic phrases.
 
 User-value requirements:

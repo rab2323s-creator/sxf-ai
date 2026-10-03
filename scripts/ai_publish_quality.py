@@ -119,10 +119,10 @@ def validate_publish_draft(draft, evidence, quality_gate):
             errors.append(f"{label} does not directly reflect the source event/entities")
 
     if len(models) <= 2 and models:
-        title_h1 = normalized(title + " " + h1)
+        title_h1_tokens = meaningful_tokens(title + " " + h1)
         for model in models:
-            model_name = normalized(model.get("model", ""))
-            if model_name and model_name not in title_h1:
+            model_tokens = meaningful_tokens(model.get("model", ""))
+            if model_tokens and not model_tokens.issubset(title_h1_tokens):
                 errors.append(f"seo title/H1 must directly name {model.get('model')}")
 
     primary_query = draft.get("primary_search_query", "")
@@ -145,22 +145,37 @@ def validate_publish_draft(draft, evidence, quality_gate):
     _validate_source_rows(errors, key_facts, "claim", allowed_sources, "key_facts")
 
     if len(models) >= 2:
+        shared_pricing_sources = set((evidence.get("pricing_basis") or {}).get("source_urls") or [])
         for index, row in enumerate(key_facts, start=1):
             claim = normalized(row.get("claim", "")) if isinstance(row, dict) else ""
-            if "both models" in claim and len(_row_source_urls(row)) < 2:
+            urls = _row_source_urls(row)
+            pricing_only = bool(set(urls) & shared_pricing_sources) and any(
+                token in claim for token in ("price", "pricing", "cost", "token")
+            )
+            if "both models" in claim and len(urls) < 2 and not pricing_only:
                 errors.append(f"key_facts[{index}] makes a multi-model claim but cites fewer than 2 sources")
 
     comparison = draft.get("comparison_points") or []
     if len(models) >= 2 and len(comparison) < int(quality_gate["min_comparison_points_when_multi_model"]):
         errors.append("multi-model pages require comparison points")
-    _validate_source_rows(
-        errors,
-        comparison,
-        "analysis",
-        allowed_sources,
-        "comparison_points",
-        min_sources=2 if len(models) >= 2 else 1,
-    )
+    shared_pricing_sources = set((evidence.get("pricing_basis") or {}).get("source_urls") or [])
+    for index, row in enumerate(comparison, start=1):
+        min_sources = 1
+        if len(models) >= 2:
+            urls = _row_source_urls(row)
+            analysis = normalized(row.get("analysis", "")) if isinstance(row, dict) else ""
+            pricing_only = bool(set(urls) & shared_pricing_sources) and any(
+                token in analysis for token in ("price", "pricing", "cost", "token")
+            )
+            min_sources = 1 if pricing_only else 2
+        _validate_source_rows(
+            errors,
+            [row],
+            "analysis",
+            allowed_sources,
+            f"comparison_points[{index}]",
+            min_sources=min_sources,
+        )
     for index, row in enumerate(comparison, start=1):
         if not isinstance(row, dict) or len((row.get("dimension") or "").strip()) < 3:
             errors.append(f"comparison_points[{index}] missing dimension")
