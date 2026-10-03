@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>GPT-6 Luna — Pricing, Context Window, API &amp; Updates | SXF / AI</title>
-      <meta name="description" content="GPT-6 Luna reference: pricing, context window, API specifications, model family details and the latest primary-source updates tracked by SXF / AI." />
+      <title>GPT-6 Luna — API Specs, Context &amp; Pricing | SXF / AI</title>
+      <meta name="description" content="GPT-6 Luna reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official OpenAI sources." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="GPT-6 Luna — Pricing, Context Window, API &amp; Updates | SXF / AI" />
-      <meta property="og:description" content="GPT-6 Luna reference: pricing, context window, API specifications, model family details and the latest primary-source updates tracked by SXF / AI." />
+      <meta property="og:title" content="GPT-6 Luna — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta property="og:description" content="GPT-6 Luna reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official OpenAI sources." />
       <meta property="og:url" content="https://sxf.si/models/gpt-6-luna/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,9 +23,9 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="GPT-6 Luna — Pricing, Context Window, API &amp; Updates | SXF / AI" />
-      <meta name="twitter:description" content="GPT-6 Luna reference: pricing, context window, API specifications, model family details and the latest primary-source updates tracked by SXF / AI." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"GPT-6 Luna reference and updates | SXF / AI","url":"https://sxf.si/models/gpt-6-luna/","description":"GPT-6 Luna reference: pricing, context window, API specifications, model family details and the latest primary-source updates tracked by SXF / AI.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"GPT-6 Luna"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"GPT-6 Luna","item":"https://sxf.si/models/gpt-6-luna/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What models are in the GPT-6 family?","acceptedAnswer":{"@type":"Answer","text":"OpenAI currently lists GPT-6 Astra, GPT-6 Sol and GPT-6 Luna as the flagship GPT-6 family."}},{"@type":"Question","name":"What is the GPT-6 context window?","acceptedAnswer":{"@type":"Answer","text":"Astra, Sol and Luna each have a 1,050,000-token context window and support up to 128,000 output tokens."}},{"@type":"Question","name":"How much does GPT-6 cost in the API?","acceptedAnswer":{"@type":"Answer","text":"For Standard API requests up to 272K input tokens, Astra is $10 input / $50 output per 1M tokens, Sol is $2 / $10, and Luna is $0.10 / $0.50. Cached-input rates are lower."}},{"@type":"Question","name":"What is each GPT-6 model for?","acceptedAnswer":{"@type":"Answer","text":"OpenAI positions Astra for the hardest end-to-end work, Sol for complex coding and agentic workflows, and Luna for efficient high-volume tasks."}}]}]}</script>
+      <meta name="twitter:title" content="GPT-6 Luna — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta name="twitter:description" content="GPT-6 Luna reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official OpenAI sources." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gpt-6-luna/#article","headline":"GPT-6 Luna — API Specs, Context & Pricing","description":"GPT-6 Luna reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official OpenAI sources.","url":"https://sxf.si/models/gpt-6-luna/","dateModified":"2026-09-27","about":{"@type":"Thing","name":"GPT-6 Luna"},"citation":["https://developers.openai.com/api/docs/models/gpt-6-luna","https://developers.openai.com/api/docs/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"GPT-6 Luna","item":"https://sxf.si/models/gpt-6-luna/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -34,62 +34,116 @@
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
-      <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-6 Luna</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>GPT-6 Luna<br><span>reference & signals.</span></h1><p>GPT-6 Luna reference: pricing, context window, API specifications, model family details and the latest primary-source updates tracked by SXF / AI.</p>
-      <div class="collection-stats"><div><strong>1</strong><span>tracked signals</span></div><div><strong>1</strong><span>primary sources</span></div><div><strong>September 22, 2026</strong><span>latest tracked</span></div></div></section>
-      <section class="model-reference shell">
-      <div class="model-reference-intro"><div class="model-reference-copy"><p class="eyebrow">MODEL REFERENCE</p><h2>GPT-6 Luna at a glance.</h2>
-          <p>Focused, high-volume and cost-sensitive workloads. OpenAI lists a 1,050,000-token context window, up to 128,000 output tokens and a May 18, 2026 knowledge cutoff.</p>
-          <p class="reference-note">Released Sep 22, 2026 · Text and image input · text output · Last verified 2026-10-03</p></div><div class="model-fact-grid">
-          <div><span>MODEL ID</span><strong>gpt-6-luna</strong></div>
-          <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens</small></div>
-          <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens</small></div>
-          <div><span>KNOWLEDGE CUTOFF</span><strong>May 18, 2026</strong></div>
-          <div><span>STANDARD INPUT</span><strong>$0.10</strong><small>/ 1M tokens</small></div>
-          <div><span>STANDARD OUTPUT</span><strong>$0.50</strong><small>/ 1M tokens</small></div>
-        </div></div>
-      <div class="model-comparison">
-        <div class="intel-section-head"><div><p class="eyebrow">FAMILY COMPARISON</p><h2>Astra, Sol and Luna.</h2></div><a class="comparison-cta" href="/compare/gpt-6-astra-vs-sol-vs-luna/">Full decision guide ↗</a></div>
-        <div class="model-table-wrap"><table><thead><tr><th>Model</th><th>Positioning</th><th>Context</th><th>Max output</th><th>Input</th><th>Cached</th><th>Output</th></tr></thead><tbody><tr class="">
-          <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>gpt-6-astra</small></th>
-          <td>Highest capability</td><td>1,050,000</td><td>128,000</td>
-          <td>$10.00</td><td>$1.00</td><td>$50.00</td>
-        </tr><tr class="">
-          <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>gpt-6-sol</small></th>
-          <td>Capability / cost balance</td><td>1,050,000</td><td>128,000</td>
-          <td>$2.00</td><td>$0.20</td><td>$10.00</td>
-        </tr><tr class="is-current">
-          <th scope="row"><a href="/models/gpt-6-luna/">GPT-6 Luna</a><small>gpt-6-luna</small></th>
-          <td>Efficiency</td><td>1,050,000</td><td>128,000</td>
-          <td>$0.10</td><td>$0.01</td><td>$0.50</td>
-        </tr></tbody></table></div>
-        <p class="reference-note">Standard API pricing per 1M text tokens for prompts up to 272K input tokens. Longer prompts use higher rates.</p>
-      </div>
-      
-      <div class="model-reference-lower">
-        <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p><a href="https://developers.openai.com/api/docs/models" target="_blank" rel="noopener noreferrer"><span>OpenAI model catalog</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>OpenAI API pricing</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer"><span>GPT-6 model guidance</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/changelog" target="_blank" rel="noopener noreferrer"><span>OpenAI API changelog</span><b>↗</b></a></div>
-        <div class="model-faq"><p class="eyebrow">QUICK ANSWERS</p><details><summary>What models are in the GPT-6 family?</summary><p>OpenAI currently lists GPT-6 Astra, GPT-6 Sol and GPT-6 Luna as the flagship GPT-6 family.</p></details><details><summary>What is the GPT-6 context window?</summary><p>Astra, Sol and Luna each have a 1,050,000-token context window and support up to 128,000 output tokens.</p></details><details><summary>How much does GPT-6 cost in the API?</summary><p>For Standard API requests up to 272K input tokens, Astra is $10 input / $50 output per 1M tokens, Sol is $2 / $10, and Luna is $0.10 / $0.50. Cached-input rates are lower.</p></details><details><summary>What is each GPT-6 model for?</summary><p>OpenAI positions Astra for the hardest end-to-end work, Sol for complex coding and agentic workflows, and Luna for efficient high-volume tasks.</p></details></div>
-      </div>
-    </section>
-      <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>Introducing GPT-6 Sol and Luna</h2><p class="signal-summary">Meet GPT-6 Sol and Luna, two models that bring frontier intelligence to everyday work with different balances of capability and cost.</p><a class="brief-open" href="/signals/gpt-6-sol-and-luna/">Open latest signal ↗</a></article>
-      <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>GPT-6 Luna</strong><p>Tracked from September 22, 2026 through September 22, 2026 across 1 primary source.</p></aside></section>
-      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent GPT-6 Luna signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/gpt-6-sol-and-luna/">
-      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-22T18:00:00Z">September 22, 2026</time></div>
-      <h3>Introducing GPT-6 Sol and Luna</h3>
-      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
-    </a></div></section>
-    <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="gpt-6-luna">
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-6 Luna</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / OPENAI</p>
+        <h1>GPT-6 Luna<br><span>verified model reference.</span></h1>
+        <p>Efficiency-focused GPT-6 tier for focused, high-volume, and cost-sensitive workloads.</p>
+        <div class="collection-stats">
+          <div><strong>1,050,000</strong><span>context tokens</span></div>
+          <div><strong>128,000</strong><span>max output</span></div>
+          <div><strong>2026-09-27</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <h2>GPT-6 Luna at a glance.</h2>
+            <p>OpenAI documents a 1,050,000-token context window. Input modalities: text + image. Output: text. Pricing status: Official paid API.</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>gpt-6-luna</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>128,000</strong></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>2026-05-18</strong></div>
+            <div><span>STANDARD INPUT</span><strong>$0.10</strong><small>official-paid</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>$0.50</strong><small>official-paid</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>REASONING</span><h3>none · low · medium · high · xhigh · max · default medium</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
+            <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
+          <div class="model-split">
+            <div><p>$0.10 input · $0.01 cached · $0.50 output / MTok.</p><p>Only provider-published Standard paid token rates enter the SXF calculator. Partner hosting prices, negotiated rates and self-hosting costs are not substituted for a missing provider rate.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>Eligible</strong><p>This model uses a directly comparable provider-published Standard rate.</p></aside>
+          </div>
+        </section>
+
+        
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
+          <div class="model-related-links">
+            <a href="/providers/openai/"><span>PROVIDER</span><strong>OpenAI model portfolio</strong><b>↗</b></a>
+            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
+            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-sources"><a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer"><span>developers.openai.com/api/docs/models/gpt-6-luna</span><b>↗</b></a><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>developers.openai.com/api/docs/pricing</span><b>↗</b></a></div>
+        </section>
+      </section>
+
+      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="gpt-6-luna">
           <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>GPT-6 Luna: what changed.</h2><p>No post-baseline factual changes recorded for GPT-6 Luna since 2026-09-27.</p></div>
           <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-09-27</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
-        </section><section class="model-history shell" data-model-history data-history-models="gpt-6-luna">
+        </section>
+      <section class="model-history shell" data-model-history data-history-models="gpt-6-luna">
       <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>GPT-6 Luna verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
       <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_feb56ee653729cbc2b74" data-model-id="gpt-6-luna">
               <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-09-27">2026-09-27</time></div>
               <h3>GPT-6 Luna</h3><p>Baseline verified: 1,050,000 context · 128,000 max output · $0.10 input / $0.50 output per MTok</p>
               <a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
             </article></div>
-      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 3f2303609953…</p>
-    </section></main><footer class="footer shell">
+      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head c62519fdffa4…</p>
+    </section>
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Recent GPT-6 Luna signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/a-model-guide-for-the-gpt-6-family-8e206c4/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-10-02T16:15:00Z">October 2, 2026</time></div>
+      <h3>A model guide for the GPT-6 family</h3>
+      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/gpt-6-1-sol-in-github-copilot-9be84db/">
+      <div class="signal-row-meta"><span>GitHub</span><time datetime="2026-09-29T17:02:27Z">September 29, 2026</time></div>
+      <h3>GPT-6.1 Sol in GitHub Copilot</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/introducing-gpt-6-1-sol-dd66aca/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-29T10:00:00Z">September 29, 2026</time></div>
+      <h3>Introducing GPT-6.1 Sol</h3>
+      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/devday-2026-recap-19db7cc/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-29T10:00:00Z">September 29, 2026</time></div>
+      <h3>DevDay 2026 Recap</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/basis-completes-a-tax-workbook-2x-faster-with-gpt-6-astra-bf0fe8c/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-28T00:00:00Z">September 28, 2026</time></div>
+      <h3>Basis completes a tax workbook 2x faster with GPT-6 Astra</h3>
+      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/proaction-boosts-sales-60-and-saves-75-hours-with-codex-d2d497e/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-25T19:00:00Z">September 25, 2026</time></div>
+      <h3>Proaction boosts sales 60% and saves 75+ hours with Codex</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/harvey-turns-legal-context-into-stronger-drafts-with-gpt-6-astra-0d70607/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-23T12:00:00Z">September 23, 2026</time></div>
+      <h3>Harvey turns legal context into stronger drafts with GPT-6 Astra</h3>
+      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/airbnb-widens-access-to-gpt-6-astra-and-openai-frontier-models-ea9ea2f/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-23T01:00:00Z">September 23, 2026</time></div>
+      <h3>Airbnb widens access to GPT-6 Astra and OpenAI frontier models</h3>
+      <div class="signal-row-foot"><span>Models</span><b>Open signal ↗</b></div>
+    </a></div></section>
+    </main><footer class="footer shell">
       <div class="footer-main">
         <div class="footer-identity">
           <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
