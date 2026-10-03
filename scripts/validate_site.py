@@ -164,9 +164,15 @@ def validate_model_history():
     except RuntimeError as exc:
         fail(f"model history invalid: {exc}")
 
-    baseline_count = sum(1 for event in history["events"] if event.get("type") == "baseline")
-    if baseline_count != len(catalog["models"]):
-        fail(f"model history baseline count {baseline_count} != {len(catalog['models'])} catalog models")
+    initial_event_count = sum(
+        1 for event in history["events"]
+        if event.get("type") in {"baseline", "model_added"}
+    )
+    if initial_event_count != len(catalog["models"]):
+        fail(
+            f"model history initial-event count {initial_event_count} "
+            f"!= {len(catalog['models'])} catalog models"
+        )
 
     # Regression: factual changes require a newer verified_at.
     stale_catalog = copy.deepcopy(catalog)
@@ -226,7 +232,7 @@ def validate_model_history():
 def validate_model_pricing_catalog():
     path = ROOT / "data" / "model-pricing.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema_version") != "1.1":
+    if data.get("schema_version") != "1.2":
         fail(f"model-pricing.json schema_version drift: {data.get('schema_version')!r}")
 
     policy = data.get("verification_policy")
@@ -241,7 +247,7 @@ def validate_model_pricing_catalog():
         "gpt-6-astra", "gpt-6-sol", "gpt-6-luna",
         "gpt-5.6-sol", "gpt-5.6-terra", "gpt-5.6-luna",
         "claude-fable-5-1", "claude-opus-5-5", "claude-sonnet-5",
-        "claude-haiku-4-5-20251001", "gemini-3.8-flash",
+        "claude-haiku-4-5-20251001", "gemini-3.8-flash", "grok-4.7",
     }
     ids = [model.get("model_id") for model in models]
     if len(ids) != len(set(ids)):
@@ -269,7 +275,8 @@ def validate_model_pricing_catalog():
             fail(f"{model_id}: missing provider")
         if not isinstance(model.get("context_window"), int) or model["context_window"] <= 0:
             fail(f"{model_id}: invalid context_window")
-        if not isinstance(model.get("max_output"), int) or model["max_output"] <= 0:
+        max_output = model.get("max_output")
+        if max_output != "unlimited" and (not isinstance(max_output, int) or max_output <= 0):
             fail(f"{model_id}: invalid max_output")
         if not model.get("sxf_url", "").startswith("/"):
             fail(f"{model_id}: invalid sxf_url")
@@ -285,11 +292,13 @@ def validate_model_pricing_catalog():
             fail(f"{model_id}: missing provenance")
         if provenance.get("verification_method") != "manual primary-source verification":
             fail(f"{model_id}: invalid verification_method")
-        if provenance.get("verified_at") != verified:
-            fail(
-                f"{model_id}: provenance verified_at {provenance.get('verified_at')!r} "
-                f"must match catalog source_verified {verified!r}"
-            )
+        model_verified = provenance.get("verified_at")
+        try:
+            model_verified_date = datetime.fromisoformat(model_verified).date()
+        except Exception:
+            fail(f"{model_id}: invalid provenance verified_at {model_verified!r}")
+        if model_verified_date > verified_date:
+            fail(f"{model_id}: provenance verified_at {model_verified!r} is newer than catalog source_verified {verified!r}")
         evidence = provenance.get("evidence")
         required_evidence = {
             "model_identity", "context_window", "max_output",
@@ -786,7 +795,7 @@ def validate_compare_contracts_and_model_histories():
             row_pattern = (
                 rf'<article class="compare-live-card"[^>]+data-compare-model="{re.escape(model_id)}"'
                 rf'[^>]+data-context="{int(model["context_window"])}"'
-                rf'[^>]+data-max-output="{int(model["max_output"])}"'
+                rf'[^>]+data-max-output="{re.escape(str(model["max_output"]))}"'
                 rf'[^>]+data-input="{float(price["input"]):g}"'
                 rf'[^>]+data-cached="{float(price["cached_input"]):g}"'
                 rf'[^>]+data-output="{float(price["output"]):g}"'

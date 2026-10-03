@@ -157,7 +157,7 @@
       warnings.push("Total input exceeds this model's published context window of " +
         Number(model.context_window).toLocaleString() + " tokens.");
     }
-    if (output > Number(model.max_output)) {
+    if (model.max_output !== "unlimited" && output > Number(model.max_output)) {
       warnings.push("Output tokens exceed this model's published maximum output of " +
         Number(model.max_output).toLocaleString() + " tokens.");
     }
