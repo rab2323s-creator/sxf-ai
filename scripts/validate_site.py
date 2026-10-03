@@ -11,6 +11,8 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://sxf.si"
+AI_ENRICHMENT_CONFIG_PATH = ROOT / "data" / "ai-enrichment-config.json"
+AI_ENRICHMENT_CANDIDATES_PATH = ROOT / "data" / "ai-enrichment-candidates.json"
 
 EXPECTED_PRIMARY_NAV = [
     "/models/",
@@ -1370,6 +1372,99 @@ def validate_indexable_signal_graph(archive):
     if '/guides/open-source-ai-models/' not in open_source_html:
         fail("Open Source hub must link to the Open Source AI Models guide")
 
+def validate_ai_enrichment_dry_run():
+    if not AI_ENRICHMENT_CONFIG_PATH.exists():
+        fail("AI enrichment config missing")
+    if not AI_ENRICHMENT_CANDIDATES_PATH.exists():
+        fail("AI enrichment candidate output missing")
+
+    config = json.loads(AI_ENRICHMENT_CONFIG_PATH.read_text(encoding="utf-8"))
+    payload = json.loads(AI_ENRICHMENT_CANDIDATES_PATH.read_text(encoding="utf-8"))
+
+    if config.get("version") != "sxf-ai-enrichment-v1":
+        fail("AI enrichment config version drift")
+    if config.get("mode") != "dry-run":
+        fail("AI enrichment must remain dry-run in v1")
+    if config.get("publish_mode") != "manual-review":
+        fail("AI enrichment v1 must require manual review")
+    if not config.get("required_ai_intent"):
+        fail("AI enrichment must require explicit enrichment intent")
+
+    budget = config.get("monthly_budget_eur")
+    page_limit = config.get("monthly_page_limit")
+    input_cap = config.get("per_page_input_token_cap")
+    output_cap = config.get("per_page_output_token_cap")
+    if not isinstance(budget, (int, float)) or budget <= 0 or budget > 5:
+        fail("AI enrichment monthly budget must be >0 and <=5 EUR")
+    if not isinstance(page_limit, int) or page_limit <= 0 or page_limit > 100:
+        fail("AI enrichment monthly page limit must be 1..100")
+    if not isinstance(input_cap, int) or input_cap <= 0 or input_cap > 8000:
+        fail("AI enrichment input token cap must be 1..8000")
+    if not isinstance(output_cap, int) or output_cap <= 0 or output_cap > 1800:
+        fail("AI enrichment output token cap must be 1..1800")
+
+    if payload.get("version") != config.get("version") or payload.get("mode") != "dry-run":
+        fail("AI enrichment candidate payload version/mode drift")
+    candidates = payload.get("candidates")
+    if not isinstance(candidates, list):
+        fail("AI enrichment candidates must be a list")
+    if payload.get("candidate_count") != len(candidates):
+        fail("AI enrichment candidate count drift")
+    if len(candidates) > int(config.get("candidate_limit", 0)):
+        fail("AI enrichment candidate limit exceeded")
+
+    budget_guard = payload.get("budget_guard", {})
+    expected_guard = {
+        "monthly_budget_eur": budget,
+        "monthly_page_limit": page_limit,
+        "per_page_input_token_cap": input_cap,
+        "per_page_output_token_cap": output_cap,
+        "writer_model": config.get("writer_model"),
+        "validator_model": config.get("validator_model"),
+    }
+    if budget_guard != expected_guard:
+        fail("AI enrichment budget guard drift")
+
+    slugs = set()
+    for row in candidates:
+        slug = row.get("signal_slug")
+        if not slug or slug in slugs:
+            fail(f"AI enrichment duplicate/invalid signal slug: {slug}")
+        slugs.add(slug)
+        if row.get("generation_status") != "not-called":
+            fail(f"{slug}: AI must not be called in dry-run")
+        if row.get("index_decision") != "unchanged":
+            fail(f"{slug}: dry-run must not change index decision")
+        if not isinstance(row.get("priority_score"), int) or row["priority_score"] < 0:
+            fail(f"{slug}: invalid enrichment priority score")
+        evidence = row.get("evidence")
+        if not isinstance(evidence, dict):
+            fail(f"{slug}: missing evidence pack")
+        signal = evidence.get("signal")
+        if not isinstance(signal, dict) or signal.get("signal_url") != row.get("signal_url"):
+            fail(f"{slug}: evidence signal identity drift")
+        source_urls = evidence.get("source_urls")
+        if not isinstance(source_urls, list) or not source_urls:
+            fail(f"{slug}: evidence pack has no source URLs")
+        if signal.get("url") not in source_urls:
+            fail(f"{slug}: primary source missing from evidence source URLs")
+        if any(not isinstance(url, str) or not url.startswith("https://") for url in source_urls):
+            fail(f"{slug}: evidence source URL must be https")
+        requested = row.get("requested_output")
+        if not isinstance(requested, dict) or requested.get("fact_policy") != "evidence-only":
+            fail(f"{slug}: requested output must be evidence-only")
+        if requested.get("route_policy") != "preserve-existing-signal-route":
+            fail(f"{slug}: AI must not control routing")
+        if requested.get("unknown_policy") != "use unknown or omit; never infer unsupported facts":
+            fail(f"{slug}: unknown policy drift")
+        if not isinstance(row.get("evidence_hash"), str) or len(row["evidence_hash"]) != 64:
+            fail(f"{slug}: invalid evidence hash")
+
+    snapshot_hash = payload.get("snapshot_hash")
+    if not isinstance(snapshot_hash, str) or len(snapshot_hash) != 64:
+        fail("AI enrichment snapshot hash invalid")
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -1397,6 +1492,7 @@ def main():
     validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
+    validate_ai_enrichment_dry_run()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
     aliases = json.loads((ROOT/"data"/"slug_aliases.json").read_text(encoding="utf-8"))
