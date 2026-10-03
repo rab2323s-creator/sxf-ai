@@ -13,6 +13,7 @@ from urllib.parse import urljoin, urlparse
 ADAPTER_CONTRACT_VERSION = "sxf-source-adapter-v1"
 ANTHROPIC_HOSTS = {"anthropic.com", "www.anthropic.com"}
 META_HOSTS = {"ai.meta.com"}
+XAI_HOSTS = {"x.ai", "www.x.ai"}
 ANTHROPIC_MODEL_ANNOUNCEMENT = re.compile(
     r"^/claude-(?:opus|sonnet|haiku|fable|mythos)-[a-z0-9-]+/?$",
     re.I,
@@ -439,6 +440,148 @@ def run_meta_blog_adapter(source_config, user_agent, now=None, fetcher=None):
     }
     return items, diagnostics
 
+
+def _xai_candidate_url(url):
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.netloc.lower() not in XAI_HOSTS:
+        return False
+    path = parsed.path.rstrip("/")
+    return path.startswith("/news/") and path != "/news"
+
+
+def parse_xai_news_index(body, discovery_url, max_urls=20):
+    html = body.decode("utf-8", "ignore") if isinstance(body, (bytes, bytearray)) else str(body)
+    parser = _LinkParser()
+    parser.feed(html)
+
+    urls = []
+    seen = set()
+    for href in parser.hrefs:
+        absolute = urljoin(discovery_url, href)
+        parsed = urlparse(absolute)
+        canonical = parsed._replace(query="", fragment="").geturl()
+        if not _xai_candidate_url(canonical) or canonical in seen:
+            continue
+        seen.add(canonical)
+        urls.append(canonical)
+        if len(urls) >= max_urls:
+            break
+
+    if not urls:
+        raise AdapterDriftError("xAI news index yielded zero official news article URLs")
+    return urls
+
+
+def parse_xai_article(body, url):
+    if not _xai_candidate_url(url):
+        raise AdapterDriftError(f"xAI article URL is outside the official news section: {url}")
+
+    html = body.decode("utf-8", "ignore") if isinstance(body, (bytes, bytearray)) else str(body)
+    parser = _ArticleParser()
+    parser.feed(html)
+
+    title = _clean_text(" ".join(parser.h1_parts), 240)
+    if not title:
+        title = _clean_text(parser.meta.get("og:title") or parser.meta.get("twitter:title"), 240)
+    if not title:
+        title = _clean_text(" ".join(parser.title_parts), 240)
+    title = re.sub(r"\s*[\\|·-]\s*(?:SpaceXAI|xAI)\s*$", "", title, flags=re.I).strip()
+
+    summary = _clean_text(
+        parser.meta.get("description")
+        or parser.meta.get("og:description")
+        or parser.meta.get("twitter:description")
+    )
+    if len(summary) < 60:
+        summary = next((value for value in parser.paragraphs if len(value) >= 60), summary)
+
+    published = None
+    for key in ("article:published_time", "datepublished", "date", "publishdate", "publish_date"):
+        published = _parse_iso(parser.meta.get(key))
+        if published is not None:
+            break
+    if published is None:
+        for value in parser.time_values:
+            published = _parse_iso(value)
+            if published is not None:
+                break
+    if published is None:
+        published = _parse_visible_date(" ".join(parser.visible_parts[:160]))
+
+    missing = []
+    if not title:
+        missing.append("title")
+    if not summary:
+        missing.append("summary")
+    if published is None:
+        missing.append("published")
+    if missing:
+        raise AdapterDriftError(f"xAI article missing required fields {missing}: {url}")
+
+    return {
+        "title": title,
+        "url": url,
+        "published": published.isoformat().replace("+00:00", "Z"),
+        "summary": summary,
+    }
+
+
+def run_xai_news_adapter(source_config, user_agent, now=None, fetcher=None):
+    now = now or datetime.now(timezone.utc)
+    fetcher = fetcher or (lambda url: _fetch(url, user_agent))
+    discovery_url = source_config["url"]
+    max_discovery = max(1, int(source_config.get("max_discovery", 20)))
+
+    index_body = fetcher(discovery_url)
+    urls = parse_xai_news_index(
+        index_body,
+        discovery_url=discovery_url,
+        max_urls=max_discovery,
+    )
+
+    items = []
+    errors = []
+    fetch_failures = 0
+    invalid_items = 0
+    for url in urls:
+        try:
+            article = parse_xai_article(fetcher(url), url)
+            item = {
+                **article,
+                "source": source_config["name"],
+                "provenance": {
+                    "adapter_contract_version": ADAPTER_CONTRACT_VERSION,
+                    "adapter": source_config["adapter"],
+                    "discovery_url": discovery_url,
+                    "source_url": url,
+                    "discovered_via": "official-news-index",
+                },
+            }
+            validate_contract_item(source_config["name"], item, discovery_url)
+            items.append(item)
+        except Exception as exc:
+            invalid_items += 1
+            if isinstance(exc, AdapterDriftError):
+                errors.append(str(exc))
+            else:
+                fetch_failures += 1
+                errors.append(f"{url}: {exc}")
+
+    if not items:
+        detail = "; ".join(errors[:3]) if errors else "no parseable articles"
+        raise AdapterDriftError(f"xAI adapter zero-result anomaly: {detail}")
+
+    diagnostics = {
+        "adapter_contract_version": ADAPTER_CONTRACT_VERSION,
+        "discovered_count": len(urls),
+        "parsed_count": len(items),
+        "invalid_count": invalid_items,
+        "fetch_failure_count": fetch_failures,
+        "schema_drift": bool(invalid_items and not items),
+        "errors": errors[:10],
+    }
+    return items, diagnostics
+
 def validate_contract_item(source, item, discovery_url):
     required = ("title", "url", "source", "published", "summary", "provenance")
     missing = [key for key in required if not item.get(key)]
@@ -530,6 +673,13 @@ def run_source_adapter(source_config, user_agent, now=None, fetcher=None):
         )
     if adapter == "meta-blog":
         return run_meta_blog_adapter(
+            source_config,
+            user_agent=user_agent,
+            now=now,
+            fetcher=fetcher,
+        )
+    if adapter == "xai-news":
+        return run_xai_news_adapter(
             source_config,
             user_agent=user_agent,
             now=now,
