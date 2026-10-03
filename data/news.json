@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-03T21:11:43.938425Z",
+  "updated_at": "2026-10-03T21:24:04.666970Z",
   "items": [
     {
       "title": "Stateless GitHub App installation tokens rolled out",
@@ -978,7 +978,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "Google AI": {
@@ -1001,7 +1001,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "Hugging Face": {
@@ -1024,7 +1024,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "GitHub": {
@@ -1047,7 +1047,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "Google Research": {
@@ -1070,7 +1070,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "Anthropic": {
@@ -1093,7 +1093,7 @@
         "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -1118,33 +1118,31 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       },
       "xAI": {
         "status": "shadow",
-        "fetch_success": false,
+        "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 0,
-        "relevance_accepted_count": 0,
-        "quality_accepted_count": 0,
-        "accepted_candidate_count": 0,
-        "rejected_candidate_count": 0,
+        "parsed_candidate_count": 20,
+        "relevance_accepted_count": 20,
+        "quality_accepted_count": 1,
+        "accepted_candidate_count": 1,
+        "rejected_candidate_count": 19,
         "duplicate_count": 0,
-        "age_rejection_count": 0,
+        "age_rejection_count": 17,
         "relevance_rejection_count": 0,
-        "quality_rejection_count": 0,
+        "quality_rejection_count": 2,
         "publish_count": 0,
-        "adapter": "pending",
+        "adapter": "xai-news",
         "adapter_contract_version": "sxf-source-adapter-v1",
-        "adapter_discovered_count": 0,
+        "adapter_discovered_count": 20,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": null,
-        "errors": [
-          "No verified automated feed adapter configured"
-        ]
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
+        "errors": []
       },
       "Microsoft": {
         "status": "shadow",
@@ -1166,7 +1164,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-03T21:11:17.685673Z",
+        "last_successful_fetch": "2026-10-03T21:23:26.332035Z",
         "errors": []
       }
     },
