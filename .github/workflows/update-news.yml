@@ -34,10 +34,10 @@ jobs:
         run: python tests/test_source_adapters.py
       - name: AI enrichment dry-run tests
         run: python tests/test_ai_enrichment.py
-      - name: Prepare AI enrichment candidates
-        run: python scripts/prepare_ai_enrichment.py
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
+      - name: Prepare AI enrichment candidates
+        run: python scripts/prepare_ai_enrichment.py
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Commit generated changes
