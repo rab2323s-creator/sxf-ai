@@ -61,6 +61,22 @@ def test_model_discovery_reservation():
     )
 
 
+def test_undated_model_discovery():
+    body = b'''<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url><loc>https://www.anthropic.com/claude-opus-5-5</loc></url>
+      <url><loc>https://www.anthropic.com/news/newest-news</loc><lastmod>2026-10-03T08:00:00Z</lastmod></url>
+    </urlset>'''
+    urls, invalid = parse_anthropic_sitemap(
+        body,
+        now=datetime(2026, 10, 3, tzinfo=timezone.utc),
+        discovery_days=45,
+        max_urls=2,
+    )
+    expect("https://www.anthropic.com/claude-opus-5-5" in urls, "undated model page must be discovered")
+    expect(invalid == 0, f"undated model page should not count as invalid: {invalid}")
+
+
 def test_article_parser():
     body = (FIXTURES / "anthropic-sonnet-article.html").read_bytes()
     item = parse_anthropic_article(body, "https://www.anthropic.com/claude-sonnet-5-5")
@@ -127,6 +143,7 @@ def test_zero_result_drift():
 if __name__ == "__main__":
     test_sitemap_discovery()
     test_model_discovery_reservation()
+    test_undated_model_discovery()
     test_article_parser()
     test_adapter_contract()
     test_zero_result_drift()
