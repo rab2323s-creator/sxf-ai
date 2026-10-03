@@ -42,12 +42,14 @@
     },
     {
       "name": "Anthropic",
-      "url": null,
+      "url": "https://www.anthropic.com/sitemap.xml",
       "official_page": "https://www.anthropic.com/news",
-      "adapter": "pending",
+      "adapter": "anthropic-sitemap",
       "status": "shadow",
       "max_current": 0,
-      "quality_gate": "seo-signal-v1"
+      "quality_gate": "seo-signal-v1",
+      "discovery_days": 45,
+      "max_discovery": 30
     },
     {
       "name": "Meta",
