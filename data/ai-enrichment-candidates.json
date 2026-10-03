@@ -1,14 +1,14 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "b2a0f7a76578061f43b79ec1d7ba64ca9a45f6260d62c925784a633283980c2f",
+  "snapshot_hash": "cc720459c41a21cd720c71e0f3283da7f0119743c384f4d32568df3b90736633",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
     "monthly_budget_eur": 5,
     "monthly_page_limit": 100,
     "per_page_input_token_cap": 8000,
-    "per_page_output_token_cap": 1800,
+    "per_page_output_token_cap": 2800,
     "writer_model": "gpt-5.6-terra",
     "validator_model": "gpt-5.6-luna"
   },
@@ -22,8 +22,13 @@
       "category": "Models",
       "published": "2026-09-29T10:00:00Z",
       "priority_score": 228,
-      "evidence_hash": "18f77c75210fbe263b61068b054b61e78df54b10337982cac61bc94a83848edc",
+      "evidence_hash": "f97fa35e01cec98c61868bb723f4f3962101d8c8bd569b2888e38fd6f268b037",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Introducing GPT-6.1 Sol",
           "url": "https://openai.com/index/introducing-gpt-6-1-sol",
@@ -51,9 +56,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -62,8 +68,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -80,8 +95,13 @@
       "category": "Models",
       "published": "2026-09-22T18:00:00Z",
       "priority_score": 228,
-      "evidence_hash": "9f6391689c1445329a6c45fb45c2a6cd691e85d438a563f5699915640b9fe9ea",
+      "evidence_hash": "b63cff05465e74c17592b3213863e7fe74e27762a293fed1f12ad0d916855c81",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Introducing GPT-6 Sol and Luna",
           "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
@@ -371,9 +391,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -384,8 +405,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -402,8 +432,13 @@
       "category": "Tools",
       "published": "2026-09-22T17:10:23Z",
       "priority_score": 201,
-      "evidence_hash": "8a6ae8592dcd0c3d087e216c9e71aeda4045adc419092bb761c0ecb81678542f",
+      "evidence_hash": "268ad261c8690c36f87df892904407f9e3ceeb930ec64e7fe6458f94adec26ea",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Claude Opus 5.5 is now available in GitHub Copilot",
           "url": "https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot",
@@ -536,9 +571,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -549,8 +585,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -567,8 +612,13 @@
       "category": "Models",
       "published": "2026-09-22T21:00:00Z",
       "priority_score": 194,
-      "evidence_hash": "8d247edd8b65ef8a708bae375177a3db88ff9b357c9b7db6ac9136aa085b515b",
+      "evidence_hash": "eb40335eb171903b808e97a0545675be4d577dce2bafa0529ac4194d4cf7d71f",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Better prompt caching for GPT-6",
           "url": "https://openai.com/index/better-prompt-caching-for-gpt-6",
@@ -986,9 +1036,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -999,8 +1050,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1017,8 +1077,13 @@
       "category": "Models",
       "published": "2026-10-02T16:15:00Z",
       "priority_score": 169,
-      "evidence_hash": "6f39c2391cfbfac9419f3876c8986053c54b4479dfdd9912a09c50adacb8c2be",
+      "evidence_hash": "4a2c2e840b6d45b8568c27cd584d6ed005bd7871760b3bed781a809923dfb685",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "A model guide for the GPT-6 family",
           "url": "https://openai.com/index/practical-guide-building-gpt-6",
@@ -1435,9 +1500,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -1448,8 +1514,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1466,8 +1541,13 @@
       "category": "Models",
       "published": "2026-09-23T01:00:00Z",
       "priority_score": 169,
-      "evidence_hash": "3561a6c219f5df825f67ccf985c1bb34a64c1cc1f0fd818cda807754a9cde6ef",
+      "evidence_hash": "3d16e7065e3576dc55f35513c58ce7f5084a32593fca1bd5d863ca4df59272e0",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Airbnb widens access to GPT-6 Astra and OpenAI frontier models",
           "url": "https://openai.com/index/airbnb-gpt-6-astra",
@@ -1624,9 +1704,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -1637,8 +1718,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1655,8 +1745,13 @@
       "category": "Models",
       "published": "2026-09-21T12:00:00Z",
       "priority_score": 159,
-      "evidence_hash": "281da3621ce4f14f3393d92f94e22de057a3e4d5db03bcbed07eba932218568c",
+      "evidence_hash": "04ba5243bc0191519b85b201e60e04ab85b09880ba89a62082911808aba6d26a",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
           "url": "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra",
@@ -1816,9 +1911,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -1829,8 +1925,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1847,8 +1952,13 @@
       "category": "Tools",
       "published": "2026-10-01T19:09:10Z",
       "priority_score": 149,
-      "evidence_hash": "96c6918fd009d17968da0a5f46ba44c43a6d83d3a1523348459c7e70a5046d52",
+      "evidence_hash": "b77382f93246995fb5c1102cb510c8e6070a9ddb647e2c2446a4a2056a1dace7",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "GitHub Copilot in VS Code, September 2026 releases",
           "url": "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
@@ -1876,9 +1986,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -1887,8 +1998,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1905,8 +2025,13 @@
       "category": "Tools",
       "published": "2026-09-25T16:42:48Z",
       "priority_score": 149,
-      "evidence_hash": "3c621bd60b67cfa5998a75485a3cc40187a03e40bc1e5290c6e8d64955aa7ea1",
+      "evidence_hash": "9ca70cbabaa81eb005d378eb4595bd1f99dbfeddb4a121f95d8427718584277d",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "GitHub Copilot weekly releases — September 21",
           "url": "https://github.blog/changelog/2026-09-25-github-copilot-weekly-releases-september-21",
@@ -1933,9 +2058,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -1944,8 +2070,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
@@ -1962,8 +2097,13 @@
       "category": "Tools",
       "published": "2026-09-29T17:02:27Z",
       "priority_score": 142,
-      "evidence_hash": "b822bfaa0643dbaa312ba50df46eabd6cfc0b729b19cd7ccacaecd01da528951",
+      "evidence_hash": "6651595142eb8512df2a6a46ba298a2cae5b5a265da43c86ed7c8472d81bd135",
       "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise"
+        },
         "signal": {
           "title": "GPT-6.1 Sol in GitHub Copilot",
           "url": "https://github.blog/changelog/2026-09-29-gpt-6-1-sol-in-github-copilot",
@@ -1990,9 +2130,10 @@
       },
       "requested_output": {
         "route_policy": "preserve-existing-signal-route",
-        "seo_title_max_chars": 60,
-        "meta_description_max_chars": 160,
-        "h1_policy": "clear-descriptive-no-hype",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
         "required_sections": [
           "intro",
           "what_changed",
@@ -2001,8 +2142,17 @@
           "who_should_care",
           "what_to_verify",
           "faq",
-          "sources"
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
         ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
         "fact_policy": "evidence-only",
         "unknown_policy": "use unknown or omit; never infer unsupported facts",
         "internal_link_policy": "links must come from existing SXF routes only"
