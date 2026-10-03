@@ -171,6 +171,39 @@ def test_exact_model_match_beats_family_fallback():
     expect([m["model"] for m in evidence["models"]] == ["GPT-6 Sol"], "exact model must beat family fallback")
 
 
+def test_grouped_model_variants_attach_each_named_model():
+    pricing = {
+        "models": [
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Sol",
+                "model_id": "gpt-6-sol",
+                "official_sources": ["https://example.com/sol"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 2, "cached_input": 0.2, "output": 10}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/sol"}},
+            },
+            {
+                "provider": "OpenAI",
+                "family": "GPT-6",
+                "model": "GPT-6 Luna",
+                "model_id": "gpt-6-luna",
+                "official_sources": ["https://example.com/luna"],
+                "pricing": {"standard": [{"start": "2026-09-01", "end": None, "input": 0.1, "cached_input": 0.01, "output": 0.5}]},
+                "provenance": {"verified_at": "2026-09-01", "evidence": {"model_identity": "https://example.com/luna"}},
+            },
+        ]
+    }
+    signal = sample_signal()
+    signal["title"] = "Introducing GPT-6 Sol and Luna"
+    signal["summary"] = "OpenAI introduced GPT-6 Sol and Luna for production workloads."
+    evidence = build_evidence_pack(signal, pricing, {"events": []})
+    expect(
+        [m["model"] for m in evidence["models"]] == ["GPT-6 Sol", "GPT-6 Luna"],
+        f"grouped variants drift: {[m['model'] for m in evidence['models']]}",
+    )
+
+
 def test_unknown_variant_does_not_attach_family_models():
     pricing = {
         "models": [
@@ -216,6 +249,7 @@ if __name__ == "__main__":
     test_selection_prefers_model_release()
     test_evidence_pack_matches_model_data()
     test_exact_model_match_beats_family_fallback()
+    test_grouped_model_variants_attach_each_named_model()
     test_unknown_variant_does_not_attach_family_models()
     test_non_model_signal_does_not_invent_model_data()
     print("AI enrichment dry-run tests passed")
