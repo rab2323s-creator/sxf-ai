@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
   "source_verified": "2026-10-03",
@@ -83,7 +83,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "OpenAI",
@@ -155,7 +157,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "OpenAI",
@@ -227,7 +231,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-luna",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "OpenAI",
@@ -305,7 +311,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "OpenAI",
@@ -377,7 +385,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "OpenAI",
@@ -449,7 +459,9 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "pricing": "https://developers.openai.com/api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "Anthropic",
@@ -507,7 +519,9 @@
           "modalities": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "Anthropic",
@@ -565,7 +579,9 @@
           "modalities": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "Anthropic",
@@ -623,7 +639,9 @@
           "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "Anthropic",
@@ -684,7 +702,9 @@
           "modalities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
           "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "Google",
@@ -754,7 +774,9 @@
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     },
     {
       "provider": "xAI",
@@ -829,15 +851,30 @@
           "modalities": "https://docs.x.ai/developers/grok-4-7",
           "pricing": "https://docs.x.ai/developers/release-notes"
         }
-      }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     }
   ],
   "verification_policy": {
     "standard": "Primary-source verification",
-    "rule": "Core factual fields and pricing must cite an official provider source stored in the same model record; each model keeps its own provenance verified_at date.",
+    "rule": "Core factual fields must cite official provider sources. Paid token pricing is normalized only when the provider publishes a directly comparable Standard API rate; unsupported pricing remains explicitly unavailable.",
     "editorial_fields": [
       "positioning"
     ],
     "unknown_policy": "Use null, omit unsupported claims, or use an explicit provider-documented sentinel such as max_output='unlimited'; never infer a value."
+  },
+  "pricing_statuses": [
+    "official-paid",
+    "free-preview",
+    "partner-priced",
+    "not-published",
+    "self-hosted"
+  ],
+  "calculator_policy": {
+    "eligible_statuses": [
+      "official-paid"
+    ],
+    "rule": "Only provider-published Standard paid token rates are calculator-eligible. Preview-only, partner-priced, self-hosted, or unpublished pricing remains visible in the catalog but is excluded from cost calculations."
   }
 }

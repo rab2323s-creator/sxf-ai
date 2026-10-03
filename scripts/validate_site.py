@@ -232,12 +232,25 @@ def validate_model_history():
 def validate_model_pricing_catalog():
     path = ROOT / "data" / "model-pricing.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema_version") != "1.2":
+    if data.get("schema_version") != "1.3":
         fail(f"model-pricing.json schema_version drift: {data.get('schema_version')!r}")
 
     policy = data.get("verification_policy")
     if not isinstance(policy, dict) or policy.get("standard") != "Primary-source verification":
         fail("model-pricing.json verification policy missing or invalid")
+
+    pricing_statuses = set(data.get("pricing_statuses", []))
+    expected_pricing_statuses = {
+        "official-paid", "free-preview", "partner-priced", "not-published", "self-hosted"
+    }
+    if pricing_statuses != expected_pricing_statuses:
+        fail(f"model-pricing.json pricing statuses drift: {sorted(pricing_statuses)}")
+
+    calculator_policy = data.get("calculator_policy")
+    if not isinstance(calculator_policy, dict):
+        fail("model-pricing.json calculator policy missing")
+    if calculator_policy.get("eligible_statuses") != ["official-paid"]:
+        fail("model-pricing.json calculator eligible statuses drift")
 
     models = data.get("models")
     if not isinstance(models, list) or not models:
@@ -318,9 +331,27 @@ def validate_model_pricing_catalog():
                 fail(f"{model_id}: duplicate/colliding model alias: {alias}")
             aliases[alias] = model_id
 
+        pricing_status = model.get("pricing_status")
+        if pricing_status not in expected_pricing_statuses:
+            fail(f"{model_id}: invalid pricing_status {pricing_status!r}")
+        calculator_eligible = model.get("calculator_eligible")
+        if not isinstance(calculator_eligible, bool):
+            fail(f"{model_id}: calculator_eligible must be boolean")
+        expected_eligible = pricing_status == "official-paid"
+        if calculator_eligible != expected_eligible:
+            fail(
+                f"{model_id}: calculator_eligible={calculator_eligible} "
+                f"does not match pricing_status={pricing_status!r}"
+            )
+
         schedule = model.get("pricing", {}).get("standard")
-        if not isinstance(schedule, list) or not schedule:
-            fail(f"{model_id}: missing Standard pricing schedule")
+        if pricing_status == "official-paid":
+            if not isinstance(schedule, list) or not schedule:
+                fail(f"{model_id}: official-paid pricing requires a Standard pricing schedule")
+        elif schedule:
+            fail(f"{model_id}: non-official-paid pricing must not populate Standard calculator rates")
+        else:
+            schedule = []
 
         previous_end = None
         open_ended_seen = False
@@ -350,7 +381,7 @@ def validate_model_pricing_catalog():
             if start <= verified_date and (end is None or verified_date <= end):
                 covers_verified_date = True
 
-        if not covers_verified_date:
+        if pricing_status == "official-paid" and not covers_verified_date:
             fail(f"{model_id}: no Standard pricing period covers source_verified={verified}")
 
         long_context = model.get("pricing", {}).get("long_context")
@@ -365,7 +396,25 @@ def validate_model_pricing_catalog():
                 if not isinstance(value, (int, float)) or value <= 0:
                     fail(f"{model_id}: invalid long-context {field} multiplier")
 
-    from update_news import MODEL_REFERENCE, active_standard_price, estimate_standard_cost
+    from update_news import (
+        MODEL_REFERENCE,
+        active_standard_price,
+        estimate_standard_cost,
+        model_has_official_paid_pricing,
+    )
+
+    if not model_has_official_paid_pricing({
+        "pricing_status": "official-paid",
+        "calculator_eligible": True,
+        "pricing": {"standard": [{"start": "2026-01-01"}]},
+    }):
+        fail("official-paid calculator eligibility regression")
+    if model_has_official_paid_pricing({
+        "pricing_status": "not-published",
+        "calculator_eligible": False,
+        "pricing": {},
+    }):
+        fail("unpublished pricing must not be calculator-eligible")
     forbidden_variant_fields = {
         "context", "max_output", "knowledge_cutoff",
         "input_price", "cached_price", "output_price", "source",
