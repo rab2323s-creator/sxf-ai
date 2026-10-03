@@ -86,9 +86,9 @@ def load_source_registry():
         if status == "disabled" and max_current != 0:
             raise RuntimeError(f"{name}: disabled sources must have max_current=0")
         adapter = source.get("adapter")
-        if adapter not in {"rss", "pending", "anthropic-sitemap"}:
+        if adapter not in {"rss", "pending", "anthropic-sitemap", "meta-blog"}:
             raise RuntimeError(f"{name}: unsupported adapter {adapter!r}")
-        if adapter in {"rss", "anthropic-sitemap"} and not source.get("url"):
+        if adapter in {"rss", "anthropic-sitemap", "meta-blog"} and not source.get("url"):
             raise RuntimeError(f"{name}: {adapter} adapter requires a URL")
         names.append(name)
     if len(names) != len(set(names)):
