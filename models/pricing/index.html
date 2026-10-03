@@ -55,8 +55,8 @@
             </div>
           </div>
           <div class="pricing-meta-strip">
-            <div><span>MODELS</span><strong>12</strong></div>
-            <div><span>PROVIDERS</span><strong>4</strong></div>
+            <div><span>MODELS</span><strong>17</strong></div>
+            <div><span>PROVIDERS</span><strong>5</strong></div>
             <div><span>BASELINE</span><strong>Standard API</strong></div>
             <div><span>UNIT</span><strong>USD / 1M tokens</strong></div>
           </div>
@@ -69,7 +69,7 @@
           </div>
           <div class="pricing-toolbar">
             <label class="pricing-search"><span class="sr-only">Search models</span><input id="pricingSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
-            <div class="pricing-filters" aria-label="Filter pricing table"><button class="pricing-filter is-active" type="button" data-pricing-filter="all">All</button><button class="pricing-filter" type="button" data-pricing-filter="Anthropic">Anthropic</button><button class="pricing-filter" type="button" data-pricing-filter="Google">Google</button><button class="pricing-filter" type="button" data-pricing-filter="OpenAI">OpenAI</button><button class="pricing-filter" type="button" data-pricing-filter="xAI">xAI</button></div>
+            <div class="pricing-filters" aria-label="Filter pricing table"><button class="pricing-filter is-active" type="button" data-pricing-filter="all">All</button><button class="pricing-filter" type="button" data-pricing-filter="Anthropic">Anthropic</button><button class="pricing-filter" type="button" data-pricing-filter="Google">Google</button><button class="pricing-filter" type="button" data-pricing-filter="Meta">Meta</button><button class="pricing-filter" type="button" data-pricing-filter="OpenAI">OpenAI</button><button class="pricing-filter" type="button" data-pricing-filter="xAI">xAI</button></div>
           </div>
           <div class="pricing-table-wrap">
             <table class="pricing-table">
@@ -231,6 +231,71 @@
           <td class="price">$0.50</td>
           <td class="price">$6.00</td>
           <td><a href="https://docs.x.ai/developers/grok-4-7" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="xAI" data-search="grok 4.6 grok-4.6 xai grok 4 xai frontier reasoning model for coding, agentic work, and long-context knowledge tasks.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/grok-4-6/">Grok 4.6</a>
+            <small>grok-4.6</small>
+            <span class="pricing-rule">Long context &gt; 200,000: 2× input/cache · 2× output</span><span class="pricing-rule">xAI documents no separate text output limit for Grok 4.6.</span>
+          </th>
+          <td>xAI</td>
+          <td>500,000<small>tokens</small></td>
+          <td>No separate limit<small>provider-documented</small></td>
+          <td class="price">$2.00</td>
+          <td class="price">$0.50</td>
+          <td class="price">$6.00</td>
+          <td><a href="https://docs.x.ai/developers/models/grok-4.6" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="xAI" data-search="grok 4.3 grok-4.3 xai grok 4 xai long-context grok model with configurable reasoning and a one-million-token context window.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/grok-4-3/">Grok 4.3</a>
+            <small>grok-4.3</small>
+            <span class="pricing-rule">Long context &gt; 200,000: 2× input/cache · 2× output</span><span class="pricing-rule">xAI does not publish a separate text output cap on the cited model page.</span>
+          </th>
+          <td>xAI</td>
+          <td>1,000,000<small>tokens</small></td>
+          <td>Not published<small>tokens</small></td>
+          <td class="price">$1.25</td>
+          <td class="price">$0.20</td>
+          <td class="price">$2.50</td>
+          <td><a href="https://docs.x.ai/developers/models/grok-4.3" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Google" data-search="gemini 3.7 flash gemini-3.7-flash google gemini 3 google general-purpose flash model for high-throughput multimodal reasoning, coding, and agent workflows.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/gemini-3-7-flash/">Gemini 3.7 Flash</a>
+            <small>gemini-3.7-flash</small>
+            <span class="pricing-rule">From 2027-01-01: $1.50 input · $7.50 output</span><span class="pricing-rule">Knowledge cutoff is left unknown because the cited model documentation does not publish one.</span>
+          </th>
+          <td>Google</td>
+          <td>1,048,576<small>tokens</small></td>
+          <td>65,536<small>tokens</small></td>
+          <td class="price">$0.75</td>
+          <td class="price">$0.075</td>
+          <td class="price">$3.75</td>
+          <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Meta" data-search="llama 4 scout llama-4-scout meta llama 4 meta open-weight multimodal llama 4 model optimized for very long context and efficient deployment.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/llama-4-scout/">Llama 4 Scout</a>
+            <small>llama-4-scout</small>
+            <span class="pricing-rule">Pricing status: not-published</span><span class="pricing-rule">Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.</span>
+          </th>
+          <td>Meta</td>
+          <td>10,000,000<small>tokens</small></td>
+          <td>Not published<small>tokens</small></td>
+          <td class="price">Not published</td>
+          <td class="price">—</td>
+          <td class="price">Not published</td>
+          <td><a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
+        </tr><tr data-pricing-row data-provider="Meta" data-search="llama 4 maverick llama-4-maverick meta llama 4 meta open-weight multimodal llama 4 model focused on broad capability with mixture-of-experts efficiency.">
+          <th class="pricing-model-cell" scope="row">
+            <a href="/models/llama-4-maverick/">Llama 4 Maverick</a>
+            <small>llama-4-maverick</small>
+            <span class="pricing-rule">Pricing status: not-published</span><span class="pricing-rule">Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.</span>
+          </th>
+          <td>Meta</td>
+          <td>1,000,000<small>tokens</small></td>
+          <td>Not published<small>tokens</small></td>
+          <td class="price">Not published</td>
+          <td class="price">—</td>
+          <td class="price">Not published</td>
+          <td><a href="https://ai.meta.com/blog/llama-4-multimodal-intelligence/" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
         </tr></tbody>
             </table>
           </div>

@@ -642,6 +642,218 @@
           }
         }
       }
+    },
+    "gemini-3.7-flash": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_0a970ec1e1968aacb2ac",
+      "snapshot_hash": "a254ee0449cf259a4ecf8680e9f64598a8a865dd3c0af5016d4b04bb1c4350d2",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.7 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-13",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      }
+    },
+    "grok-4.3": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_c658c24c246cb2d9576b",
+      "snapshot_hash": "3a34ded3230528e05567d7a340877828a6c27246b4b591b614cccf915f2927ba",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.3",
+        "aliases": [
+          "grok-4.3-latest"
+        ],
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "low"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-05-15",
+              "end": null,
+              "input": 1.25,
+              "cached_input": 0.2,
+              "output": 2.5
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens greater than 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      }
+    },
+    "grok-4.6": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_e2893d47637a48f21c3d",
+      "snapshot_hash": "975b45a79233906fa340402f33012cf50325e4a8117c3d3f05ea1966c8b8449c",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.6",
+        "context_window": 500000,
+        "max_output": "unlimited",
+        "knowledge_cutoff": "2026-02-01",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-12",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.5,
+              "output": 6
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens greater than 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      }
+    },
+    "llama-4-maverick": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_f106fc65efebba9e1f9f",
+      "snapshot_hash": "fa6dd3206ab8423b1efd4b2526b5085d0542b293222bcb400143d43094566517",
+      "snapshot": {
+        "provider": "Meta",
+        "family": "Llama 4",
+        "model": "Llama 4 Maverick",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": "2024-08",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "code"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "llama-4-scout": {
+      "last_event_verified_at": "2026-10-03",
+      "last_event_id": "evt_c62519fdffa48b0d7bb0",
+      "snapshot_hash": "d36fc497edbd30b76c56bc8b27549a34c548e8c05cccb0ecc07118501175d641",
+      "snapshot": {
+        "provider": "Meta",
+        "family": "Llama 4",
+        "model": "Llama 4 Scout",
+        "context_window": 10000000,
+        "max_output": null,
+        "knowledge_cutoff": "2024-08",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "code"
+          ]
+        },
+        "pricing": {}
+      }
     }
   },
   "events": [
@@ -1450,7 +1662,295 @@
       },
       "event_id": "evt_3f23036099532b57109a",
       "event_hash": "3f23036099532b57109aa8efc89291099dab4ccf639d411e873c9137979d74e8"
+    },
+    {
+      "sequence": 13,
+      "type": "model_added",
+      "model_id": "gemini-3.7-flash",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "3f23036099532b57109aa8efc89291099dab4ccf639d411e873c9137979d74e8",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.7 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-13",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_0a970ec1e1968aacb2ac",
+      "event_hash": "0a970ec1e1968aacb2acc9e98ad4b88c1a89daa4a5492be7cc9b9fdc1ce0e929"
+    },
+    {
+      "sequence": 14,
+      "type": "model_added",
+      "model_id": "grok-4.3",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "0a970ec1e1968aacb2acc9e98ad4b88c1a89daa4a5492be7cc9b9fdc1ce0e929",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.3",
+        "aliases": [
+          "grok-4.3-latest"
+        ],
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "low"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-05-15",
+              "end": null,
+              "input": 1.25,
+              "cached_input": 0.2,
+              "output": 2.5
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens greater than 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.x.ai/developers/models/grok-4.3",
+        "family": "https://docs.x.ai/developers/models/grok-4.3",
+        "model": "https://docs.x.ai/developers/models/grok-4.3",
+        "aliases": "https://docs.x.ai/developers/models/grok-4.3",
+        "context_window": "https://docs.x.ai/developers/models/grok-4.3",
+        "max_output": "https://docs.x.ai/developers/models/grok-4.3",
+        "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.3",
+        "reasoning": "https://docs.x.ai/developers/models/grok-4.3",
+        "modalities": "https://docs.x.ai/developers/models/grok-4.3",
+        "pricing": "https://docs.x.ai/developers/migration/may-15-retirement"
+      },
+      "event_id": "evt_c658c24c246cb2d9576b",
+      "event_hash": "c658c24c246cb2d9576ba31cdeb0023720fe27070f4a286f55e6f5182764c0d4"
+    },
+    {
+      "sequence": 15,
+      "type": "model_added",
+      "model_id": "grok-4.6",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "c658c24c246cb2d9576ba31cdeb0023720fe27070f4a286f55e6f5182764c0d4",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok 4",
+        "model": "Grok 4.6",
+        "context_window": 500000,
+        "max_output": "unlimited",
+        "knowledge_cutoff": "2026-02-01",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-12",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.5,
+              "output": 6
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 200000,
+            "condition": "total input tokens greater than 200000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "output": 2
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.x.ai/developers/models/grok-4.6",
+        "family": "https://docs.x.ai/developers/models/grok-4.6",
+        "model": "https://docs.x.ai/developers/models/grok-4.6",
+        "context_window": "https://docs.x.ai/developers/models/grok-4.6",
+        "max_output": "https://docs.x.ai/developers/release-notes",
+        "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.6",
+        "reasoning": "https://docs.x.ai/developers/models/grok-4.6",
+        "modalities": "https://docs.x.ai/developers/models/grok-4.6",
+        "pricing": "https://docs.x.ai/developers/pricing"
+      },
+      "event_id": "evt_e2893d47637a48f21c3d",
+      "event_hash": "e2893d47637a48f21c3d4c0d7b3d3016df7475b4322b6b481d2273f6b38eb10c"
+    },
+    {
+      "sequence": 16,
+      "type": "model_added",
+      "model_id": "llama-4-maverick",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "e2893d47637a48f21c3d4c0d7b3d3016df7475b4322b6b481d2273f6b38eb10c",
+      "snapshot": {
+        "provider": "Meta",
+        "family": "Llama 4",
+        "model": "Llama 4 Maverick",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": "2024-08",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "code"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "family": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "model": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "pricing": "https://ai.meta.com/llama/get-started/"
+      },
+      "event_id": "evt_f106fc65efebba9e1f9f",
+      "event_hash": "f106fc65efebba9e1f9f3d3a99d5b6b0b8a78965f36158557fa6ed790b1607aa"
+    },
+    {
+      "sequence": 17,
+      "type": "model_added",
+      "model_id": "llama-4-scout",
+      "verified_at": "2026-10-03",
+      "previous_event_hash": "f106fc65efebba9e1f9f3d3a99d5b6b0b8a78965f36158557fa6ed790b1607aa",
+      "snapshot": {
+        "provider": "Meta",
+        "family": "Llama 4",
+        "model": "Llama 4 Scout",
+        "context_window": 10000000,
+        "max_output": null,
+        "knowledge_cutoff": "2024-08",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "code"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "family": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "model": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+        "pricing": "https://ai.meta.com/llama/get-started/"
+      },
+      "event_id": "evt_c62519fdffa48b0d7bb0",
+      "event_hash": "c62519fdffa48b0d7bb06dee13cfb7ce65ac444a5a094094b922a6c516802542"
     }
   ],
-  "chain_head": "3f23036099532b57109aa8efc89291099dab4ccf639d411e873c9137979d74e8"
+  "chain_head": "c62519fdffa48b0d7bb06dee13cfb7ce65ac444a5a094094b922a6c516802542"
 }
