@@ -6652,6 +6652,86 @@ def comparison_evidence_html(model_ids):
     </section>'''
 
 
+def benchmark_page_html(benchmark):
+    benchmark_id = benchmark["benchmark_id"]
+    observations = [
+        row for row in MODEL_EVALUATION_OBSERVATIONS
+        if row["benchmark_id"] == benchmark_id
+    ]
+    canonical = f'{BASE_URL}/evaluations/{benchmark_id}/'
+    groups = {}
+    for row in observations:
+        groups.setdefault((row["evidence_type"], row.get("comparable_group")), []).append(row)
+
+    group_sections = []
+    for (evidence_type, comparable_group), rows in sorted(groups.items(), key=lambda item: (item[0][0], str(item[0][1]))):
+        direction = benchmark.get("direction")
+        reverse = direction == "higher-is-better"
+        rows = sorted(rows, key=lambda row: float(row["score"]), reverse=reverse)
+        table_rows = "".join(
+            f'''<tr>
+              <th scope="row"><a href="{escape(model_catalog_entry(row["model_id"])["sxf_url"], quote=True)}">{escape(model_catalog_entry(row["model_id"])["model"])}</a></th>
+              <td>{escape(evaluation_score_label(benchmark, row["score"]))}</td>
+              <td>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))}</td>
+              <td>{escape(str(row.get("model_configuration", {}).get("tools") or "not published"))}</td>
+              <td><a href="{escape(row["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr>'''
+            for row in rows
+        )
+        group_sections.append(
+            f'''<section class="evaluation-group">
+              <div class="evaluation-group-head"><div><span>{escape(evidence_type)}</span><h2>{escape(str(comparable_group or "separate observations"))}</h2></div><small>{len(rows)} observation{"s" if len(rows) != 1 else ""}</small></div>
+              <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Model</th><th>Score</th><th>Reasoning</th><th>Tools</th><th>Source</th></tr></thead><tbody>{table_rows}</tbody></table></div>
+            </section>'''
+        )
+
+    notes_html = "".join(f"<li>{escape(note)}</li>" for note in benchmark.get("notes", []))
+    status_label = benchmark.get("status", "active")
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"Dataset",
+                "name": f'{benchmark["name"]} evaluation observations',
+                "url": canonical,
+                "description": f'{benchmark["name"]} results with evaluator, version, model configuration and comparability groups.',
+                "dateModified": MODEL_EVALUATION_CATALOG["source_verified"],
+                "measurementTechnique": benchmark["methodology_url"],
+                "creator":{"@type":"Organization","name":"SXF / AI"},
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":[
+                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                    {"@type":"ListItem","position":2,"name":"Evaluations","item":BASE_URL+"/evaluations/"},
+                    {"@type":"ListItem","position":3,"name":benchmark["name"],"item":canonical},
+                ]
+            }
+        ]
+    }
+    return f'''<!doctype html><html lang="en">{page_head(
+        f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," "),
+        f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.',
+        canonical,
+        schema,
+    )}
+    <body class="intel-page evaluation-benchmark-page">{page_header("compare")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/evaluations/">Evaluations</a><span>/</span><span>{escape(benchmark["name"])}</span></nav>
+        <p class="eyebrow">BENCHMARK EVIDENCE / {escape(status_label.upper())}</p>
+        <h1>{escape(benchmark["name"])}{f'<br><span>v{escape(str(benchmark["version"]))}</span>' if benchmark.get("version") else ''}</h1>
+        <p>{escape(benchmark["category"].replace("-", " "))}. Metric: {escape(benchmark["metric"])}. Direction: {escape(benchmark["direction"])}. Results below stay separated by evaluator evidence type and comparable group.</p>
+        <div class="collection-stats"><div><strong>{len(observations)}</strong><span>observations</span></div><div><strong>{escape(benchmark["evaluator"])}</strong><span>evaluator</span></div><div><strong>{escape(status_label)}</strong><span>status</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
+      </section>
+      <section class="evaluation-benchmark-method shell">
+        <div class="compare-method-head"><p class="eyebrow">METHOD</p><h2>Read the score with its configuration.</h2><p>Scores from different comparable groups are intentionally not merged into one ranking. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
+        <div class="model-related-links"><a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>METHODOLOGY</span><strong>Open evaluator methodology</strong><b>↗</b></a><a href="/data/model-evaluations.json"><span>DATASET</span><strong>Open raw observations</strong><b>↗</b></a></div>
+        {f'<ul class="evaluation-notes">{notes_html}</ul>' if notes_html else ""}
+      </section>
+      <section class="evaluation-groups shell">{"".join(group_sections) if group_sections else '<p class="evaluation-disclaimer">No observations are stored yet for this benchmark.</p>'}</section>
+    </main>{page_footer()}</body></html>'''
+
+
 def evaluations_index_html():
     canonical = BASE_URL + "/evaluations/"
     benchmarks = MODEL_EVALUATION_CATALOG["benchmarks"]
@@ -6667,7 +6747,7 @@ def evaluations_index_html():
               <h3>{escape(benchmark["name"])}{f' {escape(str(benchmark["version"]))}' if benchmark.get("version") else ''}</h3>
               <p>{escape(benchmark["category"].replace("-", " "))} · {escape(benchmark["metric"])} · {escape(benchmark["direction"])}</p>
               <strong>{count} observations</strong>
-              <a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Methodology ↗</a>
+              <a href="/evaluations/{escape(benchmark["benchmark_id"], quote=True)}/">Open benchmark evidence ↗</a>
             </article>'''
         )
     model_cards = []
@@ -8197,6 +8277,13 @@ def build_discovery_pages(items, current_items):
     evaluations_dir = ROOT / "evaluations"
     evaluations_dir.mkdir(parents=True, exist_ok=True)
     (evaluations_dir / "index.html").write_text(evaluations_index_html(), encoding="utf-8")
+    for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]:
+        benchmark_dir = evaluations_dir / benchmark["benchmark_id"]
+        benchmark_dir.mkdir(parents=True, exist_ok=True)
+        (benchmark_dir / "index.html").write_text(
+            benchmark_page_html(benchmark),
+            encoding="utf-8",
+        )
 
     (PROVIDERS_DIR / "index.html").write_text(provider_index_html(items), encoding="utf-8")
     for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]}):
@@ -8364,6 +8451,13 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/evaluations/", MODEL_EVALUATION_CATALOG["source_verified"]),
+    ] + [
+        sitemap_entry(
+            f'{BASE_URL}/evaluations/{benchmark["benchmark_id"]}/',
+            MODEL_EVALUATION_CATALOG["source_verified"],
+        )
+        for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]
+    ] + [
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
