@@ -1,0 +1,141 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>AI Model Benchmark Explorer — Cost vs Score &amp; Pareto Views | SXF / AI</title>
+      <meta name="description" content="Explore AI model benchmark evidence with comparable-group controls, provider filters, cost-vs-score and context-vs-score Pareto views. No synthetic universal ranking." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/evaluations/explorer/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/evaluations/explorer/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/evaluations/explorer/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="AI Model Benchmark Explorer — Cost vs Score &amp; Pareto Views | SXF / AI" />
+      <meta property="og:description" content="Explore AI model benchmark evidence with comparable-group controls, provider filters, cost-vs-score and context-vs-score Pareto views. No synthetic universal ranking." />
+      <meta property="og:url" content="https://sxf.si/evaluations/explorer/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:title" content="AI Model Benchmark Explorer — Cost vs Score &amp; Pareto Views | SXF / AI" />
+      <meta name="twitter:description" content="Explore AI model benchmark evidence with comparable-group controls, provider filters, cost-vs-score and context-vs-score Pareto views. No synthetic universal ranking." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"SXF AI Evaluation Explorer","url":"https://sxf.si/evaluations/explorer/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Interactive AI model benchmark explorer with methodology-aware comparability, workload economics and Pareto views.","isAccessibleForFree":true},{"@type":"Dataset","name":"SXF AI Evaluation Explorer dataset","url":"https://sxf.si/data/model-evaluations.json","dateModified":"2026-10-04","distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-evaluations.json"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-pricing.json"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Evaluations","item":"https://sxf.si/evaluations/"},{"@type":"ListItem","position":3,"name":"Explorer","item":"https://sxf.si/evaluations/explorer/"}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page evaluation-explorer-page"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/" aria-current="page">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/evaluations/">Evaluations</a><span>/</span><span>Explorer</span></nav>
+        <p class="eyebrow">EVALUATION EXPLORER V1</p>
+        <h1>Benchmark evidence.<br><span>Decision views, not one score.</span></h1>
+        <p>Filter by benchmark, evaluator, provider and comparable group. Switch between ranked evidence, cost-vs-score and context-vs-score views without mixing incompatible runs.</p>
+        <div class="collection-stats"><div><strong>12</strong><span>benchmarks</span></div><div><strong>34</strong><span>observations</span></div><div><strong>6</strong><span>models evaluated</span></div><div><strong>2026-10-04</strong><span>verified</span></div></div>
+      </section>
+
+      <section class="evaluation-explorer shell" data-evaluation-explorer
+        data-evaluations="/data/model-evaluations.json"
+        data-catalog="/data/model-pricing.json">
+        <div class="evaluation-explorer-head">
+          <div><p class="eyebrow">INTERACTIVE ANALYSIS</p><h2>Choose one measurement frame.</h2><p>The explorer only ranks observations inside the selected benchmark and comparable group. Missing coverage stays missing; under-review benchmarks carry a visible warning.</p></div>
+          <a href="/data/model-evaluations.json">Raw evidence ↗</a>
+        </div>
+
+        <div class="evaluation-explorer-controls">
+          <label><span>Benchmark</span><select id="evalBenchmark"><optgroup label="Independent"><option value="aa-intelligence-index-v4.3.2" selected>Artificial Analysis Intelligence Index v4.3.2</option><option value="aa-briefcase-v1.1">AA-Briefcase v1.1</option><option value="gdpval-aa-v2.1">GDPval-AA v2.1</option><option value="automationbench-aa">AutomationBench-AA</option><option value="terminal-bench-4.0-aa">Terminal-Bench v4.0</option><option value="scicode-aa">SciCode</option><option value="humanitys-last-exam-aa">Humanity&#x27;s Last Exam</option><option value="critpt-aa">CritPt</option><option value="aa-lcr-v1.1">AA-LCR v1.1</option></optgroup><optgroup label="Vendor-reported"><option value="openai-automationbench-launch">AutomationBench</option><option value="anthropic-terminal-bench-4.0-launch">Terminal-Bench v4.0</option><option value="anthropic-hle-launch">Humanity&#x27;s Last Exam</option></optgroup></select></label>
+          <label><span>Category</span><select id="evalCategory"><option value="all">All categories</option><option value="agentic-coding">Agentic Coding</option><option value="agentic-knowledge-work">Agentic Knowledge Work</option><option value="business-automation">Business Automation</option><option value="composite-intelligence">Composite Intelligence</option><option value="frontier-science-reasoning">Frontier Science Reasoning</option><option value="long-context-reasoning">Long Context Reasoning</option><option value="multidisciplinary-reasoning">Multidisciplinary Reasoning</option><option value="professional-knowledge-work">Professional Knowledge Work</option><option value="professional-workflows">Professional Workflows</option><option value="scientific-coding">Scientific Coding</option></select></label>
+          <label><span>Provider</span><select id="evalProvider"><option value="all">All providers</option><option value="Anthropic">Anthropic</option><option value="Google">Google</option><option value="Meta">Meta</option><option value="OpenAI">OpenAI</option><option value="xAI">xAI</option></select></label>
+          <label><span>Evidence</span><select id="evalEvidence"><option value="independent">Independent</option><option value="vendor-reported">Vendor-reported</option><option value="all">All</option></select></label>
+          <label><span>Comparable group</span><select id="evalGroup"><option value="auto">Auto</option></select></label>
+        </div>
+
+        <div class="evaluation-view-tabs" role="tablist" aria-label="Evaluation view">
+          <button class="is-active" type="button" data-eval-view="table">Evidence table</button>
+          <button type="button" data-eval-view="cost">Cost vs score</button>
+          <button type="button" data-eval-view="context">Context vs score</button>
+        </div>
+
+        <div id="evaluationExplorerStatus" class="evaluation-explorer-status" aria-live="polite"></div>
+        <div id="evaluationExplorerChart" class="evaluation-explorer-chart" hidden></div>
+        <div id="evaluationExplorerTable" class="evaluation-explorer-table">
+          <div class="guide-table-wrap">
+            <table class="guide-table">
+              <thead><tr><th>Model</th><th>Score</th><th>Context</th><th>Workload cost</th><th>Reasoning</th><th>Evidence</th></tr></thead>
+              <tbody id="evaluationExplorerBody"><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><small>Anthropic</small></th>
+              <td>58</td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>$0.6<small>100K input + 10K output</small></td>
+              <td>max</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/claude-fable-5-1/">Claude Fable 5.1</a><small>Anthropic</small></th>
+              <td>53</td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>$1.5<small>100K input + 10K output</small></td>
+              <td>max</td>
+              <td><a href="https://artificialanalysis.ai/models/claude-fable-5-1" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a><small>OpenAI</small></th>
+              <td>51</td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>$1.5<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/grok-4-7/">Grok 4.7</a><small>xAI</small></th>
+              <td>46</td>
+              <td>500,000<small>tokens</small></td>
+              <td>$0.26<small>100K input + 10K output</small></td>
+              <td>xhigh</td>
+              <td><a href="https://artificialanalysis.ai/models/releases/grok-4-7" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/gpt-6-sol/">GPT-6 Sol</a><small>OpenAI</small></th>
+              <td>42</td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>$0.3<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>Google</small></th>
+              <td>41</td>
+              <td>1,048,576<small>tokens</small></td>
+              <td>$0.1125<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/gemini-3-8-flash" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="evaluationParetoSummary" class="evaluation-pareto-summary"></div>
+      </section>
+
+      <section class="evaluation-explorer-method shell">
+        <div class="compare-method-head"><p class="eyebrow">READING THE VIEWS</p><h2>Pareto means efficient, not universally best.</h2><p>A model is Pareto-efficient when no other visible model is both better on the selected benchmark and better on the second axis. Cost uses the SXF Standard workload assumption of 100K uncached input + 10K output tokens; context uses the provider-published context window.</p></div>
+        <div class="compare-method-grid"><article><span>01</span><h3>Table</h3><p>Ranks only the selected comparable group by the benchmark's declared metric direction.</p></article><article><span>02</span><h3>Cost vs score</h3><p>Highlights models that offer a non-dominated tradeoff between direct token cost and benchmark score.</p></article><article><span>03</span><h3>Context vs score</h3><p>Shows whether a larger context window trades off against the selected evaluation result.</p></article><article><span>04</span><h3>No speed view yet</h3><p>Latency and throughput stay out until SXF has a methodology-pinned speed dataset with matching model configurations.</p></article></div>
+      </section>
+    </main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script src="/evaluations/explorer/explorer.js" defer></script></body></html>
