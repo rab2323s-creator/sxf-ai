@@ -1185,7 +1185,7 @@ GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
 CLAUDE_OPUS_GEMINI_COMPARE_SLUG = "claude-opus-5-5-vs-gemini-3-8-flash"
 GPT6_ASTRA_FABLE_COMPARE_SLUG = "gpt-6-astra-vs-claude-fable-5-1"
 
-TOPIC_RELEVANCE_VERSION = "sxf-topic-relevance-v1"
+TOPIC_RELEVANCE_VERSION = "sxf-topic-relevance-v2"
 
 TOPICS = [
     {
@@ -1339,27 +1339,31 @@ TOPICS = [
         "name": "AI Security",
         "description": "Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure.",
         "threshold": 55,
+        "require_title_strong": True,
+        "title_fallback_tags": ["Security"],
         "strong_patterns": [
+            r"\bsecurity\b",
             r"\bcyber(?:security)?\b",
+            r"\bdefen[cs]e\b",
             r"\bsandbox(?:ing)?\b",
             r"\bprompt injection\b",
             r"\bjailbreak(?:ing)?\b",
+            r"\bmcp\b",
+            r"\bpermissions?\b",
+            r"\bsafeguards?\b",
+            r"\bincidents?\b",
             r"\bai (?:model )?security\b",
             r"\bmodel security\b",
-            r"\bsecurity incidents?\b",
             r"\bsecurity vulnerabilit(?:y|ies)\b",
             r"\bproof of presence\b",
         ],
         "supporting_patterns": [
-            r"\bsecurity\b",
-            r"\bdefen[cs]e\b",
             r"\bprotect(?:ion|ing)?\b",
-            r"\bincidents?\b",
-            r"\bpermissions?\b",
-            r"\bsafeguards?\b",
             r"\bmonitoring\b",
             r"\bzero trust\b",
-            r"\bmcp\b",
+            r"\baccess control\b",
+            r"\bleast privilege\b",
+            r"\bsecrets?\b",
         ],
         "source_boost": {"OpenAI": 5, "GitHub": 5},
         "category_boost": {"Tools": 5, "Research": 5},
@@ -2558,7 +2562,18 @@ def topic_relevance(item, topic):
 
 def topic_matches(item, topic):
     score, _ = topic_relevance(item, topic)
-    return score >= int(topic.get("threshold", 55))
+    if score < int(topic.get("threshold", 55)):
+        return False
+
+    if topic.get("require_title_strong"):
+        title = normalize_model_text(item.get("title", ""))
+        title_strong = topic_pattern_hits(title, topic.get("strong_patterns", []))
+        item_tags = {str(tag).casefold() for tag in item.get("tags", [])}
+        fallback_tags = {str(tag).casefold() for tag in topic.get("title_fallback_tags", [])}
+        if title_strong == 0 and not item_tags.intersection(fallback_tags):
+            return False
+
+    return True
 
 
 def topic_groups(items):
@@ -2837,6 +2852,14 @@ def ai_security_topic_page_html(topic, items):
     rows = "".join(signal_row(item) for item in items[:30])
     source_count = len({item["source"] for item in items})
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if topic_page_indexable(items) else "noindex,follow"
+    citations = [
+        "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+        "https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html",
+        "https://openai.com/index/designing-agents-to-resist-prompt-injection/",
+        "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+        "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+        "https://csrc.nist.gov/pubs/ir/8596/iprd",
+    ]
     schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -2847,6 +2870,7 @@ def ai_security_topic_page_html(topic, items):
                 "name": "AI Security in 2026: Threats, Agent Risks & Defenses",
                 "description": AI_SECURITY_DESCRIPTION,
                 "isPartOf": {"@id": "https://sxf.si/#website"},
+                "mainEntity": {"@id": canonical + "#authority-article"},
                 "about": [
                     {"@type": "Thing", "name": "AI Security"},
                     {"@type": "Thing", "name": "AI Agent Security"},
@@ -2854,6 +2878,30 @@ def ai_security_topic_page_html(topic, items):
                     {"@type": "Thing", "name": "Model Context Protocol Security"},
                 ],
                 "dateModified": content_lastmod(items, fallback="2026-10-04"),
+                "inLanguage": "en",
+            },
+            {
+                "@type": ["Article", "TechArticle"],
+                "@id": canonical + "#authority-article",
+                "headline": "AI Security in 2026: Threats, Agent Risks & Defenses",
+                "description": AI_SECURITY_DESCRIPTION,
+                "url": canonical,
+                "mainEntityOfPage": {"@id": canonical + "#webpage"},
+                "articleSection": "AI Security",
+                "datePublished": "2026-10-04",
+                "dateModified": "2026-10-04",
+                "author": {
+                    "@type": "Organization",
+                    "@id": "https://vivamediacreative.com/labs/#organization",
+                    "name": "VMC Labs",
+                    "url": "https://vivamediacreative.com/labs/",
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "SXF / AI",
+                    "url": BASE_URL + "/",
+                },
+                "citation": citations,
                 "inLanguage": "en",
             },
             {
