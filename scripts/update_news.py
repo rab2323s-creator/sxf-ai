@@ -22,6 +22,7 @@ SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
 MODEL_COMPARISONS_PATH = ROOT / "data" / "model-comparisons.json"
+MODEL_EVALUATIONS_PATH = ROOT / "data" / "model-evaluations.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 INDEX = ROOT / "index.html"
@@ -177,6 +178,26 @@ def load_model_comparisons():
 
 
 MODEL_COMPARISON_CATALOG, MODEL_COMPARISON_BY_SLUG = load_model_comparisons()
+
+
+def load_model_evaluations():
+    data = json.loads(MODEL_EVALUATIONS_PATH.read_text(encoding="utf-8"))
+    benchmarks = data.get("benchmarks")
+    observations = data.get("observations")
+    if not isinstance(benchmarks, list) or not benchmarks:
+        raise RuntimeError("model-evaluations.json must contain benchmarks")
+    if not isinstance(observations, list):
+        raise RuntimeError("model-evaluations.json must contain observations")
+    benchmark_by_id = {}
+    for benchmark in benchmarks:
+        benchmark_id = benchmark.get("benchmark_id")
+        if not benchmark_id or benchmark_id in benchmark_by_id:
+            raise RuntimeError(f"Invalid or duplicate benchmark_id: {benchmark_id}")
+        benchmark_by_id[benchmark_id] = benchmark
+    return data, benchmark_by_id, observations
+
+
+MODEL_EVALUATION_CATALOG, MODEL_BENCHMARK_BY_ID, MODEL_EVALUATION_OBSERVATIONS = load_model_evaluations()
 
 
 def load_model_history():
@@ -680,7 +701,7 @@ def inject_before_main_end(html, fragment):
 
 
 def inject_compare_contract(html, model_ids):
-    fragment = compare_live_facts_html(model_ids) + compare_change_watch_html(model_ids)
+    fragment = compare_live_facts_html(model_ids) + comparison_evidence_html(model_ids) + compare_change_watch_html(model_ids)
     hero_end = "</section>"
     hero_start = html.find('<section class="comparison-hero')
     if hero_start < 0:
@@ -3825,6 +3846,8 @@ def render_catalog_model_page(model_id, items):
         )
     if "data-model-comparisons" not in page:
         page = inject_before_main_end(page, model_comparison_links_html(model_id))
+    if "data-model-evaluations" not in page:
+        page = inject_before_main_end(page, evaluation_model_block_html(model_id))
     return page
 
 
@@ -6534,6 +6557,245 @@ def comparison_registry_entry(slug):
         raise KeyError(f"Comparison is missing from registry: {slug}") from exc
 
 
+def evaluation_observations_for_models(model_ids, evidence_type=None):
+    wanted = set(model_ids)
+    rows = [
+        observation for observation in MODEL_EVALUATION_OBSERVATIONS
+        if observation.get("model_id") in wanted
+        and (evidence_type is None or observation.get("evidence_type") == evidence_type)
+    ]
+    return rows
+
+
+def evaluation_score_label(benchmark, score):
+    unit = benchmark.get("unit")
+    if unit == "percent":
+        return f"{float(score):.1f}%"
+    if unit == "Elo":
+        return f"{int(round(float(score))):,} Elo"
+    rendered = f"{float(score):.1f}".rstrip("0").rstrip(".")
+    return rendered
+
+
+def evaluation_model_block_html(model_id, limit=8):
+    model = model_catalog_entry(model_id)
+    rows = evaluation_observations_for_models([model_id])
+    if not rows:
+        return ""
+    rows.sort(key=lambda row: (
+        0 if row.get("evidence_type") == "independent" else 1,
+        row.get("benchmark_id", ""),
+    ))
+    cards = []
+    for observation in rows[:limit]:
+        benchmark = MODEL_BENCHMARK_BY_ID[observation["benchmark_id"]]
+        warning = ' · under review' if benchmark.get("status") == "under-review" else ""
+        config = observation.get("model_configuration", {})
+        reasoning = config.get("reasoning_effort") or "not published"
+        cards.append(
+            f'''<article>
+              <div><span>{escape(observation["evidence_type"])}</span><small>{escape(benchmark["evaluator"])}{escape(warning)}</small></div>
+              <h3>{escape(benchmark["name"])}{f' {escape(str(benchmark["version"]))}' if benchmark.get("version") else ''}</h3>
+              <strong>{escape(evaluation_score_label(benchmark, observation["score"]))}</strong>
+              <p>{escape(benchmark["category"].replace("-", " "))} · reasoning {escape(str(reasoning))}</p>
+              <a href="{escape(observation["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a>
+            </article>'''
+        )
+    return f'''<section class="evaluation-model-bridge shell" data-model-evaluations="{escape(model_id, quote=True)}">
+      <div class="intel-section-head"><div><p class="eyebrow">EVALUATION EVIDENCE</p><h2>{escape(model["model"])} benchmark observations.</h2></div><a href="/evaluations/">Evaluation methodology ↗</a></div>
+      <div class="evaluation-card-grid">{"".join(cards)}</div>
+      <p class="evaluation-disclaimer">Scores are shown only with their evaluator, benchmark version and model configuration. They are not merged into a universal model score.</p>
+    </section>'''
+
+
+def comparison_evidence_html(model_ids):
+    independent = evaluation_observations_for_models(model_ids, "independent")
+    grouped = {}
+    for observation in independent:
+        benchmark = MODEL_BENCHMARK_BY_ID[observation["benchmark_id"]]
+        key = (observation["benchmark_id"], observation.get("comparable_group"))
+        grouped.setdefault(key, []).append(observation)
+
+    comparable_groups = []
+    for (benchmark_id, comparable_group), rows in grouped.items():
+        present = {row["model_id"] for row in rows}
+        if set(model_ids).issubset(present):
+            comparable_groups.append((MODEL_BENCHMARK_BY_ID[benchmark_id], comparable_group, rows))
+
+    cards = []
+    for benchmark, comparable_group, rows in sorted(comparable_groups, key=lambda item: item[0]["name"])[:8]:
+        ordered = [next(row for row in rows if row["model_id"] == model_id) for model_id in model_ids]
+        score_text = " · ".join(
+            f'{model_catalog_entry(row["model_id"])["model"]}: {evaluation_score_label(benchmark, row["score"])}'
+            for row in ordered
+        )
+        status = "Under review" if benchmark.get("status") == "under-review" else "Comparable"
+        cards.append(
+            f'''<article class="evaluation-compare-card">
+              <div><span>{escape(status)}</span><small>{escape(benchmark["evaluator"])}</small></div>
+              <h3>{escape(benchmark["name"])}{f' {escape(str(benchmark["version"]))}' if benchmark.get("version") else ''}</h3>
+              <p>{escape(score_text)}</p>
+              <small>Group: {escape(str(comparable_group))}</small>
+            </article>'''
+        )
+
+    coverage = len(cards)
+    if not cards:
+        return f'''<section class="evaluation-compare shell" data-evaluation-comparability="none">
+          <div class="intel-section-head"><div><p class="eyebrow">INDEPENDENT EVALUATIONS</p><h2>No directly comparable independent result yet.</h2></div><a href="/evaluations/">Evaluation registry ↗</a></div>
+          <p class="evaluation-disclaimer">SXF does not infer quality from specifications or compare benchmark scores across different evaluator versions/configurations.</p>
+        </section>'''
+    return f'''<section class="evaluation-compare shell" data-evaluation-comparability="{coverage}">
+      <div class="intel-section-head"><div><p class="eyebrow">INDEPENDENT EVALUATIONS</p><h2>Comparable evidence, configuration attached.</h2></div><a href="/evaluations/">Evaluation registry ↗</a></div>
+      <div class="evaluation-compare-grid">{"".join(cards)}</div>
+      <p class="evaluation-disclaimer">A higher score is meaningful only within the exact comparable group shown. Under-review benchmarks are never used alone for a quality conclusion.</p>
+    </section>'''
+
+
+def benchmark_page_html(benchmark):
+    benchmark_id = benchmark["benchmark_id"]
+    observations = [
+        row for row in MODEL_EVALUATION_OBSERVATIONS
+        if row["benchmark_id"] == benchmark_id
+    ]
+    canonical = f'{BASE_URL}/evaluations/{benchmark_id}/'
+    groups = {}
+    for row in observations:
+        groups.setdefault((row["evidence_type"], row.get("comparable_group")), []).append(row)
+
+    group_sections = []
+    for (evidence_type, comparable_group), rows in sorted(groups.items(), key=lambda item: (item[0][0], str(item[0][1]))):
+        direction = benchmark.get("direction")
+        reverse = direction == "higher-is-better"
+        rows = sorted(rows, key=lambda row: float(row["score"]), reverse=reverse)
+        table_rows = "".join(
+            f'''<tr>
+              <th scope="row"><a href="{escape(model_catalog_entry(row["model_id"])["sxf_url"], quote=True)}">{escape(model_catalog_entry(row["model_id"])["model"])}</a></th>
+              <td>{escape(evaluation_score_label(benchmark, row["score"]))}</td>
+              <td>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))}</td>
+              <td>{escape(str(row.get("model_configuration", {}).get("tools") or "not published"))}</td>
+              <td><a href="{escape(row["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr>'''
+            for row in rows
+        )
+        group_sections.append(
+            f'''<section class="evaluation-group">
+              <div class="evaluation-group-head"><div><span>{escape(evidence_type)}</span><h2>{escape(str(comparable_group or "separate observations"))}</h2></div><small>{len(rows)} observation{"s" if len(rows) != 1 else ""}</small></div>
+              <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Model</th><th>Score</th><th>Reasoning</th><th>Tools</th><th>Source</th></tr></thead><tbody>{table_rows}</tbody></table></div>
+            </section>'''
+        )
+
+    notes_html = "".join(f"<li>{escape(note)}</li>" for note in benchmark.get("notes", []))
+    status_label = benchmark.get("status", "active")
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"Dataset",
+                "name": f'{benchmark["name"]} evaluation observations',
+                "url": canonical,
+                "description": f'{benchmark["name"]} results with evaluator, version, model configuration and comparability groups.',
+                "dateModified": MODEL_EVALUATION_CATALOG["source_verified"],
+                "measurementTechnique": benchmark["methodology_url"],
+                "creator":{"@type":"Organization","name":"SXF / AI"},
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":[
+                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                    {"@type":"ListItem","position":2,"name":"Evaluations","item":BASE_URL+"/evaluations/"},
+                    {"@type":"ListItem","position":3,"name":benchmark["name"],"item":canonical},
+                ]
+            }
+        ]
+    }
+    return f'''<!doctype html><html lang="en">{page_head(
+        f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," "),
+        f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.',
+        canonical,
+        schema,
+    )}
+    <body class="intel-page evaluation-benchmark-page">{page_header("compare")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/evaluations/">Evaluations</a><span>/</span><span>{escape(benchmark["name"])}</span></nav>
+        <p class="eyebrow">BENCHMARK EVIDENCE / {escape(status_label.upper())}</p>
+        <h1>{escape(benchmark["name"])}{f'<br><span>v{escape(str(benchmark["version"]))}</span>' if benchmark.get("version") else ''}</h1>
+        <p>{escape(benchmark["category"].replace("-", " "))}. Metric: {escape(benchmark["metric"])}. Direction: {escape(benchmark["direction"])}. Results below stay separated by evaluator evidence type and comparable group.</p>
+        <div class="collection-stats"><div><strong>{len(observations)}</strong><span>observations</span></div><div><strong>{escape(benchmark["evaluator"])}</strong><span>evaluator</span></div><div><strong>{escape(status_label)}</strong><span>status</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
+      </section>
+      <section class="evaluation-benchmark-method shell">
+        <div class="compare-method-head"><p class="eyebrow">METHOD</p><h2>Read the score with its configuration.</h2><p>Scores from different comparable groups are intentionally not merged into one ranking. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
+        <div class="model-related-links"><a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>METHODOLOGY</span><strong>Open evaluator methodology</strong><b>↗</b></a><a href="/data/model-evaluations.json"><span>DATASET</span><strong>Open raw observations</strong><b>↗</b></a></div>
+        {f'<ul class="evaluation-notes">{notes_html}</ul>' if notes_html else ""}
+      </section>
+      <section class="evaluation-groups shell">{"".join(group_sections) if group_sections else '<p class="evaluation-disclaimer">No observations are stored yet for this benchmark.</p>'}</section>
+    </main>{page_footer()}</body></html>'''
+
+
+def evaluations_index_html():
+    canonical = BASE_URL + "/evaluations/"
+    benchmarks = MODEL_EVALUATION_CATALOG["benchmarks"]
+    observations = MODEL_EVALUATION_OBSERVATIONS
+    independent_count = sum(1 for row in observations if row["evidence_type"] == "independent")
+    vendor_count = sum(1 for row in observations if row["evidence_type"] == "vendor-reported")
+    benchmark_cards = []
+    for benchmark in benchmarks:
+        count = sum(1 for row in observations if row["benchmark_id"] == benchmark["benchmark_id"])
+        benchmark_cards.append(
+            f'''<article>
+              <div><span>{escape(benchmark["evidence_type"])}</span><small>{escape(benchmark["status"])}</small></div>
+              <h3>{escape(benchmark["name"])}{f' {escape(str(benchmark["version"]))}' if benchmark.get("version") else ''}</h3>
+              <p>{escape(benchmark["category"].replace("-", " "))} · {escape(benchmark["metric"])} · {escape(benchmark["direction"])}</p>
+              <strong>{count} observations</strong>
+              <a href="/evaluations/{escape(benchmark["benchmark_id"], quote=True)}/">Open benchmark evidence ↗</a>
+            </article>'''
+        )
+    model_cards = []
+    for model in MODEL_PRICING_CATALOG["models"]:
+        rows = evaluation_observations_for_models([model["model_id"]])
+        if not rows:
+            continue
+        model_cards.append(
+            f'''<a href="{escape(model["sxf_url"], quote=True)}"><span>{escape(model["provider"])}</span><strong>{escape(model["model"])}</strong><small>{len(rows)} observations</small><b>↗</b></a>'''
+        )
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"CollectionPage","name":"AI Model Evaluation Intelligence","url":canonical,
+                "description":"Source-backed AI model benchmark observations with evaluator, benchmark version, model configuration and comparability metadata.",
+                "isPartOf":{"@id":BASE_URL+"/#website"},"inLanguage":"en",
+            },
+            {
+                "@type":"Dataset","name":"SXF Evaluation Intelligence","url":BASE_URL+"/data/model-evaluations.json",
+                "dateModified":MODEL_EVALUATION_CATALOG["source_verified"],
+                "description":"Benchmark observations linked to model IDs, evaluator methodology, evidence type and configuration.",
+            }
+        ]
+    }
+    return f'''<!doctype html><html lang="en">{page_head(
+        "AI Model Benchmarks & Evaluations — Methodology-Aware Evidence | SXF / AI",
+        "Compare AI benchmark evidence without mixing evaluator versions or model configurations. Independent and vendor-reported results are separated with methodology links.",
+        canonical,
+        schema,
+    )}
+    <body class="intel-page evaluation-hub-page">{page_header("compare")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><span>Evaluations</span></nav>
+        <p class="eyebrow">EVALUATION INTELLIGENCE</p>
+        <h1>AI benchmarks.<br><span>Configuration attached.</span></h1>
+        <p>Benchmark scores are evidence, not universal truth. SXF stores who ran the evaluation, which version, which model configuration and which results are actually comparable.</p>
+        <div class="collection-stats"><div><strong>{len(benchmarks)}</strong><span>benchmark definitions</span></div><div><strong>{independent_count}</strong><span>independent observations</span></div><div><strong>{vendor_count}</strong><span>vendor-reported</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
+      </section>
+      <section class="evaluation-method shell">
+        <div class="compare-method-head"><p class="eyebrow">COMPARABILITY RULE</p><h2>Same name does not mean same measurement.</h2><p>SXF only treats results as numerically comparable when benchmark identity, version, evaluator methodology and comparable group line up. Tool use, fallback behavior and reasoning effort remain part of the observation.</p></div>
+        <div class="compare-method-grid"><article><span>01</span><h3>Independent first</h3><p>Third-party evaluator results are separated from provider launch claims.</p></article><article><span>02</span><h3>Version pinned</h3><p>Live leaderboards can change methodology. Every snapshot stores its observed date and benchmark version.</p></article><article><span>03</span><h3>Configuration pinned</h3><p>Reasoning effort, tools and fallback behavior stay attached to the score.</p></article><article><span>04</span><h3>No synthetic IQ</h3><p>Different benchmarks are not collapsed into a homemade universal intelligence score.</p></article></div>
+      </section>
+      <section class="evaluation-library shell"><div class="intel-section-head"><div><p class="eyebrow">BENCHMARK REGISTRY</p><h2>What SXF tracks.</h2></div><a href="/data/model-evaluations.json">Open dataset ↗</a></div><div class="evaluation-card-grid">{"".join(benchmark_cards)}</div></section>
+      <section class="evaluation-models shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL COVERAGE</p><h2>Models with evaluation evidence.</h2></div><a href="/models/">Model database ↗</a></div><div class="model-related-links">{"".join(model_cards)}</div></section>
+    </main>{page_footer()}</body></html>'''
+
+
 def generic_comparison_page_html(comparison):
     model_ids = comparison["model_ids"]
     if len(model_ids) != 2:
@@ -6635,6 +6897,7 @@ def generic_comparison_page_html(comparison):
         </div>
       </section>
 
+      {comparison_evidence_html(model_ids)}
       {compare_change_watch_html(model_ids)}
       <section class="model-reference-lower shell">
         <div class="model-sources"><p class="eyebrow">OFFICIAL SOURCES</p>{source_links}</div>
@@ -8011,6 +8274,16 @@ def build_discovery_pages(items, current_items):
     SUPERINTELLIGENCE_DIR.mkdir(parents=True, exist_ok=True)
     PRICING_DIR.mkdir(parents=True, exist_ok=True)
     PROVIDERS_DIR.mkdir(parents=True, exist_ok=True)
+    evaluations_dir = ROOT / "evaluations"
+    evaluations_dir.mkdir(parents=True, exist_ok=True)
+    (evaluations_dir / "index.html").write_text(evaluations_index_html(), encoding="utf-8")
+    for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]:
+        benchmark_dir = evaluations_dir / benchmark["benchmark_id"]
+        benchmark_dir.mkdir(parents=True, exist_ok=True)
+        (benchmark_dir / "index.html").write_text(
+            benchmark_page_html(benchmark),
+            encoding="utf-8",
+        )
 
     (PROVIDERS_DIR / "index.html").write_text(provider_index_html(items), encoding="utf-8")
     for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]}):
@@ -8177,6 +8450,14 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
+        sitemap_entry(f"{BASE_URL}/evaluations/", MODEL_EVALUATION_CATALOG["source_verified"]),
+    ] + [
+        sitemap_entry(
+            f'{BASE_URL}/evaluations/{benchmark["benchmark_id"]}/',
+            MODEL_EVALUATION_CATALOG["source_verified"],
+        )
+        for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]
+    ] + [
         sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
         sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),

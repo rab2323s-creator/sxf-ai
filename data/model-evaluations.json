@@ -1,0 +1,866 @@
+{
+  "schema_version": "1.0",
+  "source_verified": "2026-10-04",
+  "name": "SXF Evaluation Intelligence",
+  "policy": {
+    "evidence_types": {
+      "independent": "Run or published by an evaluator separate from the model provider.",
+      "vendor-reported": "Published by the model provider. May include third-party benchmarks, but the provider controls the reported configuration and presentation."
+    },
+    "score_policy": "Never compare scores across different benchmark versions, evaluator methodologies, harnesses, tool settings, or materially different task releases as if they were the same measurement.",
+    "winner_policy": "No universal winner score is generated. A higher/lower result is described only inside a declared comparable group and only according to that benchmark's metric direction.",
+    "unknown_policy": "Unpublished configuration fields remain null. Missing benchmark coverage is not treated as a zero.",
+    "history_policy": "Evaluation observations are append-only snapshots keyed by observation_id and observed_at. When a live evaluator changes a score or methodology, add a new observation rather than silently rewriting history."
+  },
+  "benchmarks": [
+    {
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "name": "Artificial Analysis Intelligence Index",
+      "version": "4.3.2",
+      "category": "composite-intelligence",
+      "metric": "score",
+      "unit": "points",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/methodology",
+      "source_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
+      "notes": [
+        "Composite index spanning reasoning, coding, science, knowledge work, long context and agentic evaluations.",
+        "Scores are configuration-specific; reasoning effort and fallback behavior must stay attached to each observation."
+      ]
+    },
+    {
+      "benchmark_id": "aa-briefcase-v1.1",
+      "name": "AA-Briefcase",
+      "version": "1.1",
+      "category": "agentic-knowledge-work",
+      "metric": "elo",
+      "unit": "Elo",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations",
+      "source_url": "https://artificialanalysis.ai/evaluations",
+      "notes": [
+        "Agentic knowledge-work evaluation using realistic business workflows and deliverables."
+      ]
+    },
+    {
+      "benchmark_id": "gdpval-aa-v2.1",
+      "name": "GDPval-AA",
+      "version": "2.1",
+      "category": "professional-knowledge-work",
+      "metric": "elo",
+      "unit": "Elo",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations",
+      "source_url": "https://artificialanalysis.ai/evaluations",
+      "notes": [
+        "Artificial Analysis evaluation framework for the GDPval task set."
+      ]
+    },
+    {
+      "benchmark_id": "automationbench-aa",
+      "name": "AutomationBench-AA",
+      "version": null,
+      "category": "business-automation",
+      "metric": "task-success",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations",
+      "source_url": "https://artificialanalysis.ai/evaluations",
+      "notes": [
+        "Used as one component of the current Artificial Analysis Intelligence Index."
+      ]
+    },
+    {
+      "benchmark_id": "terminal-bench-4.0-aa",
+      "name": "Terminal-Bench",
+      "version": "4.0",
+      "category": "agentic-coding",
+      "metric": "task-success",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/methodology/coding-agents-benchmarking/",
+      "source_url": "https://artificialanalysis.ai/methodology/coding-agents-benchmarking/",
+      "notes": [
+        "Terminal-heavy agentic coding tasks. Harness and reasoning configuration materially affect results."
+      ]
+    },
+    {
+      "benchmark_id": "scicode-aa",
+      "name": "SciCode",
+      "version": null,
+      "category": "scientific-coding",
+      "metric": "score",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "under-review",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations/scicode",
+      "source_url": "https://artificialanalysis.ai/evaluations/scicode",
+      "notes": [
+        "Artificial Analysis states this evaluation is under review after an independent audit flagged possible dataset errors.",
+        "SXF displays the observation with a warning and does not use SciCode alone to declare a model superior."
+      ]
+    },
+    {
+      "benchmark_id": "humanitys-last-exam-aa",
+      "name": "Humanity's Last Exam",
+      "version": null,
+      "category": "multidisciplinary-reasoning",
+      "metric": "accuracy",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations",
+      "source_url": "https://artificialanalysis.ai/evaluations",
+      "notes": [
+        "Configuration and tool availability must remain attached to observations."
+      ]
+    },
+    {
+      "benchmark_id": "critpt-aa",
+      "name": "CritPt",
+      "version": null,
+      "category": "frontier-science-reasoning",
+      "metric": "score",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "under-review",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations/critpt",
+      "source_url": "https://artificialanalysis.ai/evaluations/critpt",
+      "notes": [
+        "Artificial Analysis currently labels CritPt under review.",
+        "SXF displays the observation with a warning and never uses CritPt alone for a quality conclusion."
+      ]
+    },
+    {
+      "benchmark_id": "aa-lcr-v1.1",
+      "name": "AA-LCR",
+      "version": "1.1",
+      "category": "long-context-reasoning",
+      "metric": "score",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Artificial Analysis",
+      "evidence_type": "independent",
+      "methodology_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+      "source_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
+      "notes": [
+        "Independent long-context reasoning evaluation."
+      ]
+    },
+    {
+      "benchmark_id": "openai-automationbench-launch",
+      "name": "AutomationBench",
+      "version": null,
+      "category": "professional-workflows",
+      "metric": "task-success",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "OpenAI",
+      "evidence_type": "vendor-reported",
+      "methodology_url": "https://openai.com/index/gpt-6-astra/",
+      "source_url": "https://openai.com/index/gpt-6-astra/",
+      "notes": [
+        "Provider-reported launch evaluation. Do not merge numerically with AutomationBench-AA without a documented equivalence."
+      ]
+    },
+    {
+      "benchmark_id": "anthropic-terminal-bench-4.0-launch",
+      "name": "Terminal-Bench",
+      "version": "4.0",
+      "category": "agentic-coding",
+      "metric": "task-success",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Anthropic",
+      "evidence_type": "vendor-reported",
+      "methodology_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "notes": [
+        "Provider-reported launch evaluation; configuration differs from independent evaluator runs and remains a separate comparable group."
+      ]
+    },
+    {
+      "benchmark_id": "anthropic-hle-launch",
+      "name": "Humanity's Last Exam",
+      "version": null,
+      "category": "multidisciplinary-reasoning",
+      "metric": "accuracy",
+      "unit": "percent",
+      "direction": "higher-is-better",
+      "status": "active",
+      "evaluator": "Anthropic",
+      "evidence_type": "vendor-reported",
+      "methodology_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "notes": [
+        "Provider-reported launch result; tool setting is part of the observation identity."
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "gpt-6-astra--aa-intelligence-index-v4.3.2--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 51,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--aa-briefcase-v1.1--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "aa-briefcase-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 1507,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--gdpval-aa-v2.1--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "gdpval-aa-v2.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 1485,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--automationbench-aa--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "automationbench-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 67,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--terminal-bench-4.0-aa--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "terminal-bench-4.0-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 54,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--scicode-aa--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "scicode-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 55,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--humanitys-last-exam-aa--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "humanitys-last-exam-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 53,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--critpt-aa--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "critpt-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 29,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--aa-lcr-v1.1--2026-10-04--high",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "aa-lcr-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Astra (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 80,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--aa-intelligence-index-v4.3.2--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 42,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--aa-briefcase-v1.1--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "aa-briefcase-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 1268,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--gdpval-aa-v2.1--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "gdpval-aa-v2.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 1396,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--automationbench-aa--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "automationbench-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 60,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--terminal-bench-4.0-aa--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "terminal-bench-4.0-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 26,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--scicode-aa--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "scicode-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 55,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--humanitys-last-exam-aa--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "humanitys-last-exam-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 44,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--critpt-aa--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "critpt-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 25,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-sol--aa-lcr-v1.1--2026-10-04--high",
+      "model_id": "gpt-6-sol",
+      "benchmark_id": "aa-lcr-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "GPT-6 Sol (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low",
+      "observed_at": "2026-10-04",
+      "score": 84,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "claude-opus-5-5--aa-intelligence-index-v4.3.2--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 58,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--aa-briefcase-v1.1--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "aa-briefcase-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 1808,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--gdpval-aa-v2.1--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "gdpval-aa-v2.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 1867,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--automationbench-aa--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "automationbench-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 70,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--terminal-bench-4.0-aa--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "terminal-bench-4.0-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 60,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--scicode-aa--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "scicode-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 67,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--humanitys-last-exam-aa--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "humanitys-last-exam-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 61,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--critpt-aa--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "critpt-aa",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 32,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-opus-5-5--aa-lcr-v1.1--2026-10-04--max",
+      "model_id": "claude-opus-5-5",
+      "benchmark_id": "aa-lcr-v1.1",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Opus 5.5 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-opus-5-5-xhigh",
+      "observed_at": "2026-10-04",
+      "score": 85,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "Default server-side fallback is part of the evaluated configuration."
+      ]
+    },
+    {
+      "observation_id": "claude-fable-5-1--aa-intelligence-index-v4.3.2--2026-10-04--max",
+      "model_id": "claude-fable-5-1",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Claude Fable 5.1 (Max, Default Fallback) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/claude-fable-5-1",
+      "observed_at": "2026-10-04",
+      "score": 53,
+      "model_configuration": {
+        "reasoning_effort": "max",
+        "fallback": "default server-side fallback",
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": [
+        "The current live evaluator score is stored as an observed snapshot; earlier launch-period index versions are not treated as the same measurement."
+      ]
+    },
+    {
+      "observation_id": "gemini-3.8-flash--aa-intelligence-index-v4.3.2--2026-10-04--high",
+      "model_id": "gemini-3.8-flash",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Gemini 3.8 Flash (High) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/gemini-3-8-flash",
+      "observed_at": "2026-10-04",
+      "score": 41,
+      "model_configuration": {
+        "reasoning_effort": "high",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "grok-4.7--aa-intelligence-index-v4.3.2--2026-10-04--xhigh",
+      "model_id": "grok-4.7",
+      "benchmark_id": "aa-intelligence-index-v4.3.2",
+      "evidence_type": "independent",
+      "evaluator": "Artificial Analysis",
+      "source_name": "Grok 4.7 (Xhigh) — Artificial Analysis",
+      "source_url": "https://artificialanalysis.ai/models/releases/grok-4-7",
+      "observed_at": "2026-10-04",
+      "score": 46,
+      "model_configuration": {
+        "reasoning_effort": "xhigh",
+        "fallback": null,
+        "tools": "benchmark-defined"
+      },
+      "comparable_group": "artificial-analysis-v4.3.2",
+      "notes": []
+    },
+    {
+      "observation_id": "gpt-6-astra--openai-automationbench-launch--2026-10-04--provider-report",
+      "model_id": "gpt-6-astra",
+      "benchmark_id": "openai-automationbench-launch",
+      "evidence_type": "vendor-reported",
+      "evaluator": "OpenAI",
+      "source_name": "GPT-6 Astra: A new generation of intelligence",
+      "source_url": "https://openai.com/index/gpt-6-astra/",
+      "observed_at": "2026-10-04",
+      "score": 41.4,
+      "model_configuration": {
+        "reasoning_effort": null,
+        "fallback": null,
+        "tools": "provider-defined"
+      },
+      "comparable_group": "openai-astra-launch-table",
+      "notes": [
+        "Provider-reported result. Configuration details remain provider-defined where not explicitly published."
+      ]
+    },
+    {
+      "observation_id": "claude-fable-5-1--anthropic-terminal-bench-4.0-launch--2026-10-04--provider-report",
+      "model_id": "claude-fable-5-1",
+      "benchmark_id": "anthropic-terminal-bench-4.0-launch",
+      "evidence_type": "vendor-reported",
+      "evaluator": "Anthropic",
+      "source_name": "Claude Fable 5.1 and Claude Mythos 5.1",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "observed_at": "2026-10-04",
+      "score": 55.8,
+      "model_configuration": {
+        "reasoning_effort": null,
+        "fallback": "provider-described safeguards/fallback behavior",
+        "tools": "provider-defined"
+      },
+      "comparable_group": "anthropic-fable-5-1-launch-table",
+      "notes": [
+        "Provider-reported result. Anthropic documents safeguards/fallback behavior and benchmark-specific caveats on the source page."
+      ]
+    },
+    {
+      "observation_id": "claude-fable-5-1--anthropic-hle-launch--2026-10-04--no-tools",
+      "model_id": "claude-fable-5-1",
+      "benchmark_id": "anthropic-hle-launch",
+      "evidence_type": "vendor-reported",
+      "evaluator": "Anthropic",
+      "source_name": "Claude Fable 5.1 and Claude Mythos 5.1",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "observed_at": "2026-10-04",
+      "score": 60.9,
+      "model_configuration": {
+        "reasoning_effort": null,
+        "fallback": "provider-described safeguards/fallback behavior",
+        "tools": "no tools"
+      },
+      "comparable_group": "anthropic-fable-5-1-launch-table",
+      "notes": [
+        "No-tools provider-reported Humanity's Last Exam result."
+      ]
+    },
+    {
+      "observation_id": "claude-fable-5-1--anthropic-hle-launch--2026-10-04--with-tools",
+      "model_id": "claude-fable-5-1",
+      "benchmark_id": "anthropic-hle-launch",
+      "evidence_type": "vendor-reported",
+      "evaluator": "Anthropic",
+      "source_name": "Claude Fable 5.1 and Claude Mythos 5.1",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "observed_at": "2026-10-04",
+      "score": 65,
+      "model_configuration": {
+        "reasoning_effort": null,
+        "fallback": "provider-described safeguards/fallback behavior",
+        "tools": "with tools"
+      },
+      "comparable_group": "anthropic-fable-5-1-launch-table-tools",
+      "notes": [
+        "With-tools provider-reported Humanity's Last Exam result. Kept separate from the no-tools configuration."
+      ]
+    }
+  ]
+}

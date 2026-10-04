@@ -1681,6 +1681,130 @@ def validate_ai_enrichment_dry_run():
         fail("AI enrichment snapshot hash invalid")
 
 
+
+def validate_model_evaluations():
+    path = ROOT / "data" / "model-evaluations.json"
+    if not path.exists():
+        fail("model-evaluations.json is missing")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("schema_version") != "1.0":
+        fail(f"model-evaluations.json schema drift: {data.get('schema_version')!r}")
+
+    pricing = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
+    model_ids = {model["model_id"] for model in pricing["models"]}
+
+    benchmarks = data.get("benchmarks")
+    observations = data.get("observations")
+    if not isinstance(benchmarks, list) or not benchmarks:
+        fail("model-evaluations.json must contain benchmark definitions")
+    if not isinstance(observations, list) or not observations:
+        fail("model-evaluations.json must contain observations")
+
+    benchmark_ids = [benchmark.get("benchmark_id") for benchmark in benchmarks]
+    if any(not benchmark_id for benchmark_id in benchmark_ids) or len(benchmark_ids) != len(set(benchmark_ids)):
+        fail("evaluation benchmark IDs must be present and unique")
+    benchmark_by_id = {benchmark["benchmark_id"]: benchmark for benchmark in benchmarks}
+    for benchmark in benchmarks:
+        if benchmark.get("evidence_type") not in {"independent", "vendor-reported"}:
+            fail(f"{benchmark['benchmark_id']}: invalid evidence type")
+        if benchmark.get("status") not in {"active", "under-review", "deprecated"}:
+            fail(f"{benchmark['benchmark_id']}: invalid benchmark status")
+        if benchmark.get("direction") not in {"higher-is-better", "lower-is-better"}:
+            fail(f"{benchmark['benchmark_id']}: invalid metric direction")
+        if not benchmark.get("methodology_url") or not benchmark.get("source_url"):
+            fail(f"{benchmark['benchmark_id']}: missing methodology/source URL")
+
+    observation_ids = [row.get("observation_id") for row in observations]
+    if any(not observation_id for observation_id in observation_ids) or len(observation_ids) != len(set(observation_ids)):
+        fail("evaluation observation IDs must be present and unique")
+
+    for row in observations:
+        observation_id = row["observation_id"]
+        if row.get("model_id") not in model_ids:
+            fail(f"{observation_id}: unknown model_id {row.get('model_id')!r}")
+        benchmark_id = row.get("benchmark_id")
+        if benchmark_id not in benchmark_by_id:
+            fail(f"{observation_id}: unknown benchmark_id {benchmark_id!r}")
+        benchmark = benchmark_by_id[benchmark_id]
+        if row.get("evidence_type") != benchmark.get("evidence_type"):
+            fail(f"{observation_id}: evidence_type does not match benchmark definition")
+        if not isinstance(row.get("score"), (int, float)):
+            fail(f"{observation_id}: score must be numeric")
+        if not row.get("observed_at"):
+            fail(f"{observation_id}: observed_at is required")
+        try:
+            datetime.fromisoformat(row["observed_at"])
+        except ValueError:
+            fail(f"{observation_id}: invalid observed_at")
+        if not row.get("source_url") or not row.get("source_name"):
+            fail(f"{observation_id}: source provenance missing")
+        if not isinstance(row.get("model_configuration"), dict):
+            fail(f"{observation_id}: model_configuration must be an object")
+        if not row.get("comparable_group"):
+            fail(f"{observation_id}: comparable_group is required")
+
+    under_review = {
+        benchmark["benchmark_id"]
+        for benchmark in benchmarks
+        if benchmark.get("status") == "under-review"
+    }
+    if not {"scicode-aa", "critpt-aa"}.issubset(under_review):
+        fail("current review status drift: SciCode and CritPt must remain explicitly under-review")
+
+    evaluations_index = ROOT / "evaluations" / "index.html"
+    if not evaluations_index.exists():
+        fail("evaluation intelligence hub is missing")
+    hub_html = evaluations_index.read_text(encoding="utf-8")
+    for marker in ("EVALUATION INTELLIGENCE", "Same name does not mean same measurement.", "/data/model-evaluations.json"):
+        if marker not in hub_html:
+            fail(f"evaluation hub missing marker: {marker}")
+
+    for benchmark in benchmarks:
+        benchmark_id = benchmark["benchmark_id"]
+        benchmark_path = ROOT / "evaluations" / benchmark_id / "index.html"
+        if not benchmark_path.exists():
+            fail(f"{benchmark_id}: benchmark evidence page is missing")
+        html = benchmark_path.read_text(encoding="utf-8")
+        if benchmark["methodology_url"] not in html:
+            fail(f"{benchmark_id}: methodology link missing")
+        if benchmark.get("status") == "under-review" and "UNDER-REVIEW" not in html:
+            fail(f"{benchmark_id}: under-review warning is not surfaced")
+
+    observed_models = {row["model_id"] for row in observations}
+    model_catalog = {model["model_id"]: model for model in pricing["models"]}
+    for model_id in observed_models:
+        model = model_catalog[model_id]
+        url = model.get("sxf_url", "")
+        if not url.startswith("/models/") or url == "/models/pricing/":
+            continue
+        model_path = local_path(BASE + url)
+        if not model_path.exists():
+            fail(f"{model_id}: evaluation model target is missing")
+        html = model_path.read_text(encoding="utf-8")
+        if f'data-model-evaluations="{model_id}"' not in html:
+            fail(f"{model_id}: model page missing evaluation evidence block")
+
+    comparison_registry = json.loads((ROOT / "data" / "model-comparisons.json").read_text(encoding="utf-8"))
+    for comparison in comparison_registry["comparisons"]:
+        if comparison.get("indexable") is not True:
+            continue
+        compare_path = ROOT / "compare" / comparison["slug"] / "index.html"
+        if not compare_path.exists():
+            fail(f"{comparison['slug']}: comparison page missing for evaluation check")
+        html = compare_path.read_text(encoding="utf-8")
+        if "INDEPENDENT EVALUATIONS" not in html:
+            fail(f"{comparison['slug']}: comparison page missing evaluation evidence section")
+
+    # A comparable group may represent a multi-benchmark evaluation suite, but it must
+    # not mix independent and vendor-reported evidence inside the same group.
+    group_evidence_types = {}
+    for row in observations:
+        group_evidence_types.setdefault(row["comparable_group"], set()).add(row["evidence_type"])
+    for group, evidence_types in group_evidence_types.items():
+        if len(evidence_types) != 1:
+            fail(f"comparable_group {group!r} mixes evidence types: {sorted(evidence_types)}")
+
+
 def main():
     from update_news import categorize
     cases = {
@@ -1708,6 +1832,7 @@ def main():
     validate_how_to_build_super_agent()
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
+    validate_model_evaluations()
     validate_ai_enrichment_dry_run()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))
