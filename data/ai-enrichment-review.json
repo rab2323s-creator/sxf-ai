@@ -1172,6 +1172,320 @@
       "approved_at": "2026-10-04",
       "approval_origin": "manual-research",
       "preserve_existing_route": true
+    },
+    {
+      "signal_slug": "actions-runner-controller-release-0-15-0-619fccc",
+      "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
+      "evidence_hash": "e591d0e3305157ee2d27189e66b7902e93e560745cc448c442a891e440b8db7b",
+      "evidence_snapshot_hash": "e591d0e3305157ee2d27189e66b7902e93e560745cc448c442a891e440b8db7b",
+      "evidence_snapshot": {
+        "pricing_basis": {
+          "currency": null,
+          "unit": null,
+          "scope": "Not a pricing page",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Actions Runner Controller release 0.15.0",
+          "url": "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0",
+          "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
+          "source": "GitHub",
+          "published": "2026-10-01T13:01:31Z",
+          "category": "Tools",
+          "tags": [],
+          "summary": "GitHub Actions Runner Controller 0.15.0 includes reliability, scalability, and observability improvements for runner scale sets. These updates help you operate larger runner fleets with fewer disruptions during upgrades and Kubernetes…",
+          "signal_score": 46,
+          "seo_quality_score": 60,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://docs.github.com/en/actions/concepts/runners/runner-scale-sets",
+          "https://docs.github.com/en/actions/concepts/runners/support-for-arc",
+          "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets",
+          "https://docs.github.com/en/actions/tutorials/use-actions-runner-controller/troubleshoot",
+          "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+          "https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.15.0"
+        ]
+      },
+      "review_status": "approved",
+      "approved_for_publish": true,
+      "index_decision": "index",
+      "validator_quality_score": 96,
+      "schema_types": [
+        "TechArticle",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList"
+      ],
+      "prompt_version": "manual-research-v1",
+      "draft": {
+        "seo_slug_recommendation": "actions-runner-controller-0-15-0",
+        "primary_search_query": "Actions Runner Controller 0.15.0",
+        "secondary_search_queries": [
+          "ARC 0.15.0 upgrade changes",
+          "Actions Runner Controller 0.15.0 release notes",
+          "ARC runner scale set metrics 0.15.0",
+          "ARC controller concurrency max concurrent reconciles",
+          "GitHub Actions runner scale set Kubernetes performance"
+        ],
+        "seo_title": "Actions Runner Controller 0.15.0: Upgrade & Scale Changes",
+        "meta_description": "ARC 0.15.0 improves in-place upgrades, graceful shutdowns, metrics, Kubernetes API load, concurrency and runner cleanup for scale sets.",
+        "h1": "Actions Runner Controller 0.15.0: reliability, scale and upgrade changes",
+        "intro": "Actions Runner Controller 0.15.0 is a Kubernetes-focused reliability and scalability release for GitHub Actions runner scale sets. Instead of adding a new runner model, it changes how ARC upgrades resources, shuts down controllers, re-registers missing scale sets, reports runner state, talks to the Kubernetes API, controls reconciliation concurrency, and cleans up completed ephemeral runners. Those changes matter most to teams operating larger self-hosted runner fleets.",
+        "what_changed": "GitHub’s 0.15.0 release concentrates on controller behavior under scale and during lifecycle transitions. Patch-version upgrades can update runner-set resources in place, controller shutdown timing can be aligned with Kubernetes termination grace periods, and a scale set can be registered again when ARC’s recorded set no longer exists in the Actions service. The controller also shifts several high-frequency operations away from full object updates and status patches, adds configurable Kubernetes client rate limits and reconciliation concurrency, filters more incoming events, and shortens cleanup for successfully exited ephemeral runners.",
+        "why_it_matters": "ARC is the Kubernetes-based reference implementation GitHub recommends for autoscaling self-hosted runner scale sets, so controller overhead becomes an operational concern as fleets grow. Version 0.15.0 targets the control-plane work that can create disruption or unnecessary Kubernetes API traffic: upgrades, reconciliation loops, listener request rates, status writes, graceful shutdowns, and runner cleanup. For platform teams, the practical value is a controller that can spend less time rewriting state and more predictably handle large numbers of scale sets without changing how workflows target those runners.",
+        "key_facts": [
+          {
+            "claim": "GitHub describes Actions Runner Controller 0.15.0 as a reliability, scalability, and observability release for runner scale sets, with an emphasis on larger fleets and fewer disruptions during upgrades and Kubernetes API updates.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "claim": "Patch-version upgrades can now update resources in place, reducing disruption between AutoscalingRunnerSet and EphemeralRunnerSet resources during upgrades.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.15.0"
+            ]
+          },
+          {
+            "claim": "Controller shutdown behavior can be aligned by configuring terminationGracePeriodSeconds to match the controller manager graceful-shutdown timeout.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "claim": "ARC can re-register a runner scale set when the scale set recorded by the controller no longer exists in the GitHub Actions service.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "claim": "Controller writes now use Kubernetes patch requests instead of full update requests for relevant operations, reducing API payload size.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "claim": "Runner status aggregation for EphemeralRunnerSet and AutoscalingRunnerSet moves to metrics, reducing status patch requests against the Kubernetes API.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "claim": "Listener Kubernetes client QPS and burst limits are configurable, and controller reconciliation concurrency can be configured globally or per controller with max-concurrent-reconciles flags.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "claim": "GitHub only supports the latest Autoscaling Runner Sets version of ARC; legacy community-maintained ARC remains community-supported rather than GitHub-supported.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/concepts/runners/support-for-arc"
+            ]
+          }
+        ],
+        "pricing_or_capability_impact": "ARC 0.15.0 does not introduce a new GitHub Actions price model. Its impact is operational: fewer disruptive resource replacements during applicable upgrades, smaller Kubernetes API writes, fewer status patches, tunable listener request rates, configurable reconciliation parallelism, and faster deletion of successfully exited ephemeral runners. Those controls can matter when runner capacity is already large enough that API pressure, reconcile throughput, shutdown timing, and stale resource state become part of normal platform operations.",
+        "comparison_points": [
+          {
+            "dimension": "Upgrade behavior",
+            "analysis": "Patch-version upgrades can update runner-set resources in place instead of creating avoidable replacement churn between autoscaling and ephemeral runner sets, reducing upgrade disruption.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.15.0"
+            ]
+          },
+          {
+            "dimension": "Controller shutdown",
+            "analysis": "terminationGracePeriodSeconds can be configured so Kubernetes pod termination and the controller manager’s graceful-shutdown timeout are aligned rather than competing timers.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "dimension": "Kubernetes API writes",
+            "analysis": "ARC 0.15.0 uses patch requests instead of full update requests for controller updates and moves runner status aggregation toward metrics, lowering payload size and status-write volume.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "dimension": "Listener API pressure",
+            "analysis": "Kubernetes client QPS and burst settings for listeners are configurable, giving operators a way to tune how aggressively listeners communicate with the Kubernetes API.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "dimension": "Reconcile throughput",
+            "analysis": "Global and per-controller max-concurrent-reconciles settings let operators tune controller concurrency, while event filtering reduces reconciliations triggered by changes that do not require work.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "dimension": "Ephemeral runner cleanup",
+            "analysis": "When a runner pod exits successfully, ARC can delete the ephemeral runner faster because it skips a server-side check for runner removal.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "detail": "ARC runner scale sets are Kubernetes-managed pools of homogeneous GitHub Actions runners that can autoscale with workload demand; workflows target the runner scale set by its configured name or labels.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/concepts/runners/runner-scale-sets",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "detail": "ARC exposes Prometheus-format metrics from controller-manager and listener pods. GitHub’s documentation lists controller metrics for pending, running, and failed ephemeral runners and listener metrics for assigned jobs, running jobs, registered runners, busy runners, desired runners, and job timing.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "detail": "Version 0.15.0 reduces dependence on Kubernetes status patching by moving EphemeralRunnerSet and AutoscalingRunnerSet runner-state aggregation into metrics, which is relevant for clusters where status-write volume contributes to API-server load.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "detail": "The release adds configurable listener Kubernetes-client QPS and burst settings so high-scale deployments can tune request behavior instead of relying only on fixed client defaults.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "detail": "Controller reconciliation can be tuned globally or per controller through max-concurrent-reconciles flags, giving operators a direct control over how many reconciliations can progress concurrently.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "detail": "GitHub recommends retaining logs from the ARC controller, listeners, and ephemeral runners, which becomes especially important when operators tune concurrency, client rates, or lifecycle behavior and need evidence for troubleshooting.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets",
+              "https://docs.github.com/en/actions/tutorials/use-actions-runner-controller/troubleshoot"
+            ]
+          }
+        ],
+        "practical_takeaways": [
+          {
+            "takeaway": "Treat 0.15.0 as an operations-focused upgrade: measure upgrade disruption, Kubernetes API request behavior, reconcile latency, listener health, and runner cleanup before and after rollout instead of judging it only by job throughput.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "takeaway": "If controller pods sometimes terminate before reconciliation work finishes, review terminationGracePeriodSeconds alongside the controller manager graceful-shutdown timeout so Kubernetes and ARC use compatible shutdown windows.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "takeaway": "For large fleets, watch API-server load and ARC metrics before increasing QPS, burst, or max-concurrent-reconciles. Higher concurrency can improve throughput, but it should be tuned against the capacity and rate behavior of the cluster.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "takeaway": "Confirm that observability is enabled before rollout so you can compare runner-state metrics and controller behavior after the move away from frequent status aggregation patches.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "takeaway": "Use the GitHub-supported Autoscaling Runner Sets line for production support expectations and verify the deployed chart version explicitly; GitHub documents support for the latest Autoscaling Runner Sets release rather than legacy ARC.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/concepts/runners/support-for-arc",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          }
+        ],
+        "before_vs_after": [],
+        "who_should_care": "Platform engineering teams operating GitHub Actions on Kubernetes, organizations with many runner scale sets, SRE teams responsible for Kubernetes API health, and developers maintaining internal self-hosted runner platforms should care most. The release is less about visible workflow features and more about reducing control-plane friction as ARC installations become larger, more concurrent, and more sensitive to upgrade and reconciliation behavior.",
+        "what_to_verify": [
+          "Confirm the exact gha-runner-scale-set-controller and gha-runner-scale-set chart versions deployed in each cluster before planning the upgrade.",
+          "Review existing terminationGracePeriodSeconds values and controller shutdown settings so graceful shutdown behavior is intentionally aligned after the upgrade.",
+          "Capture baseline Kubernetes API request rates, ARC controller metrics, listener metrics, reconciliation latency, and runner cleanup behavior before changing QPS, burst, or concurrency settings.",
+          "Test the upgrade on a representative runner scale set and confirm that in-place resource changes do not conflict with custom labels, annotations, sidecars, runner modes, or admission policies used in your cluster.",
+          "Verify that logs from controller, listener, and ephemeral runner pods are retained so failures introduced by scale or lifecycle tuning can be diagnosed after pods are replaced."
+        ],
+        "faq": [
+          {
+            "question": "What changed in Actions Runner Controller 0.15.0?",
+            "answer": "ARC 0.15.0 focuses on reliability and scale: in-place patch-version upgrades, more predictable graceful shutdowns, scale-set re-registration, smaller Kubernetes API writes, metrics-based runner status aggregation, configurable listener rate limits, tunable reconciliation concurrency, event filtering, and faster ephemeral runner cleanup.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "question": "Does ARC 0.15.0 reduce disruption during upgrades?",
+            "answer": "Yes for the upgrade path GitHub describes. Patch-version upgrades can update resources in place, reducing disruption between autoscaling runner sets and ephemeral runner sets compared with replacement-heavy behavior.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.15.0"
+            ]
+          },
+          {
+            "question": "How does ARC 0.15.0 reduce Kubernetes API load?",
+            "answer": "The release uses patch requests instead of full update requests for controller changes, moves runner-status aggregation to metrics for key runner-set resources, filters more incoming events, and lets operators configure listener QPS and burst settings.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets"
+            ]
+          },
+          {
+            "question": "What does max-concurrent-reconciles change in ARC?",
+            "answer": "The new global and per-controller max-concurrent-reconciles controls let operators tune how many reconciliation loops can execute at the same time. This is primarily a controller-throughput and cluster-load tuning mechanism.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/"
+            ]
+          },
+          {
+            "question": "Who should prioritize the ARC 0.15.0 upgrade?",
+            "answer": "Teams running larger Kubernetes-based GitHub Actions runner fleets should evaluate it first, especially if they experience upgrade disruption, heavy Kubernetes API traffic, reconcile bottlenecks, listener pressure, or slow ephemeral-runner cleanup.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+              "https://docs.github.com/en/actions/concepts/runners/runner-scale-sets"
+            ]
+          },
+          {
+            "question": "Is Actions Runner Controller the supported Kubernetes autoscaling option for GitHub Actions?",
+            "answer": "GitHub documents Autoscaling Runner Sets in ARC as its supported Kubernetes-based runner autoscaling line and states that only the latest Autoscaling Runner Sets version is supported by GitHub; legacy ARC remains community-supported.",
+            "source_urls": [
+              "https://docs.github.com/en/actions/concepts/runners/support-for-arc",
+              "https://docs.github.com/en/actions/concepts/runners/runner-scale-sets"
+            ]
+          }
+        ],
+        "sources": [
+          "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0/",
+          "https://github.com/actions/actions-runner-controller/releases/tag/gha-runner-scale-set-0.15.0",
+          "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets",
+          "https://docs.github.com/en/actions/concepts/runners/runner-scale-sets",
+          "https://docs.github.com/en/actions/concepts/runners/support-for-arc",
+          "https://docs.github.com/en/actions/tutorials/use-actions-runner-controller/troubleshoot"
+        ],
+        "comparison_label": "CHANGE MAP",
+        "comparison_heading": "What ARC 0.15.0 changes for large runner fleets."
+      },
+      "source_url": "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0",
+      "approved_at": "2026-10-05",
+      "approval_origin": "manual-research",
+      "preserve_existing_route": true
     }
   ]
 }
