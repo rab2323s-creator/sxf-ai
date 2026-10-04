@@ -123,6 +123,29 @@ def validate_site_shell():
             fail(f"{path}: Compare link missing from shared shell")
 
 
+
+def validate_ai_security_authority_page():
+    path = ROOT / "topics" / "ai-security" / "index.html"
+    if not path.exists():
+        fail("AI Security authority page missing")
+    text = path.read_text(encoding="utf-8")
+
+    required = [
+        'href="#prompt-injection"',
+        'href="#faq"',
+        'Last reviewed: October 2026.',
+        'Based on OWASP, NIST, MCP and primary provider security guidance.',
+        '"TechArticle"',
+        '"citation"',
+    ]
+    for snippet in required:
+        if snippet not in text:
+            fail(f"AI Security authority page missing required marker: {snippet}")
+
+    if "How we will do better for Australia" in text:
+        fail("AI Security feed includes an item without clear security title intent")
+
+
 def validate_section_counts(news):
     expected = {
         category: sum(1 for item in news["items"] if item.get("category") == category)
@@ -1928,6 +1951,7 @@ def main():
     validate_source_expansion(news, archive)
     validate_indexable_signal_graph(archive)
     validate_site_shell()
+    validate_ai_security_authority_page()
     validate_section_counts(news)
     for item in news["items"]:
         required={"title","url","signal_url","source","published","category"}
