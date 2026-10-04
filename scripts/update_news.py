@@ -701,7 +701,7 @@ def inject_before_main_end(html, fragment):
 
 
 def inject_compare_contract(html, model_ids):
-    fragment = compare_live_facts_html(model_ids) + compare_change_watch_html(model_ids)
+    fragment = compare_live_facts_html(model_ids) + comparison_evidence_html(model_ids) + compare_change_watch_html(model_ids)
     hero_end = "</section>"
     hero_start = html.find('<section class="comparison-hero')
     if hero_start < 0:
