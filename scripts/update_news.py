@@ -6249,6 +6249,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/github-copilot-memory/",
+            "category": "Coding · Agents · Security",
+            "categories": ["coding", "agents", "security", "tools"],
+            "kicker": "GITHUB COPILOT MEMORY",
+            "title": "GitHub Copilot Memory: How It Works Across Agents, Repositories & Teams",
+            "description": "Repository facts, user preferences, 28-day retention, just-in-time validation, code review, CLI, agentic autofix and enterprise controls.",
+            "meta": "Memory · Code Review · CLI · Autofix",
+            "updated": "Oct 5, 2026",
+            "read_time": "24 min",
+        },
+        {
             "href": "/guides/ai-agent-discovery/",
             "category": "Agents · Discovery · Infrastructure",
             "categories": ["agents", "research", "security", "tools"],
