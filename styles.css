@@ -107,6 +107,7 @@ button,input{font:inherit}
 
 .sources{padding:110px 0 0}
 .source-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.source-grid-coverage{grid-template-columns:repeat(3,1fr)}
 .source-grid a{min-height:205px;border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;background:#0b0f14;transition:transform .2s ease,border-color .2s ease}
 .source-grid a:hover{transform:translateY(-3px);border-color:rgba(200,255,77,.25)}
 .source-index{font-size:10px;color:#56616e;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
