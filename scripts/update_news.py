@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -2830,7 +2831,56 @@ def signals_index_html(items):
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST</p><h2>Signal stream.</h2></div><a href="/brief/">Read today’s brief ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
 
+def ai_security_topic_page_html(topic, items):
+    canonical = f\"{BASE_URL}/topics/ai-security/\"
+    latest_date = display_date(items[0][\"published\"]) if items else \"No signals yet\"
+    rows = \"\".join(signal_row(item) for item in items[:30])
+    source_count = len({item[\"source\"] for item in items})
+    robots = \"index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1\" if topic_page_indexable(items) else \"noindex,follow\"
+    schema = {
+        \"@context\": \"https://schema.org\",
+        \"@graph\": [
+            {
+                \"@type\": \"CollectionPage\",
+                \"@id\": canonical + \"#webpage\",
+                \"url\": canonical,
+                \"name\": \"AI Security in 2026: Threats, Agent Risks & Defenses\",
+                \"description\": AI_SECURITY_DESCRIPTION,
+                \"isPartOf\": {\"@id\": \"https://sxf.si/#website\"},
+                \"about\": [
+                    {\"@type\": \"Thing\", \"name\": \"AI Security\"},
+                    {\"@type\": \"Thing\", \"name\": \"AI Agent Security\"},
+                    {\"@type\": \"Thing\", \"name\": \"Prompt Injection\"},
+                    {\"@type\": \"Thing\", \"name\": \"Model Context Protocol Security\"},
+                ],
+                \"dateModified\": content_lastmod(items, fallback=\"2026-10-04\"),
+                \"inLanguage\": \"en\",
+            },
+            {
+                \"@type\": \"BreadcrumbList\",
+                \"itemListElement\": [
+                    {\"@type\": \"ListItem\", \"position\": 1, \"name\": \"SXF / AI\", \"item\": \"https://sxf.si/\"},
+                    {\"@type\": \"ListItem\", \"position\": 2, \"name\": \"Topics\", \"item\": \"https://sxf.si/topics/\"},
+                    {\"@type\": \"ListItem\", \"position\": 3, \"name\": \"AI Security\", \"item\": canonical},
+                ],
+            },
+        ],
+    }
+    head = page_head(AI_SECURITY_TITLE, AI_SECURITY_DESCRIPTION, canonical, schema, robots=robots)
+    head = head.replace(\"</head>\", f\"<style>{AI_SECURITY_STYLES}</style></head>\")
+    main = (
+        AI_SECURITY_MAIN_TEMPLATE
+        .replace(\"__TRACKED_SIGNAL_COUNT__\", str(len(items)))
+        .replace(\"__LATEST_DATE__\", escape(latest_date))
+        .replace(\"__LIVE_SIGNAL_ROWS__\", rows)
+        .replace(\"__PRIMARY_SOURCE_COUNT__\", str(source_count))
+    )
+    return f'''<!doctype html><html lang=\"en\">{head}
+    <body class=\"intel-page topic-page\">{page_header()}<main>{main}</main>{page_footer()}</body></html>'''
+
 def topic_page_html(topic, items):
+    if topic["slug"] == "ai-security":
+        return ai_security_topic_page_html(topic, items)
     canonical = f'{BASE_URL}/topics/{topic["slug"]}/'
     latest = items[0]
     latest_summary = clean_summary(latest.get("summary", "")) or compact_description(latest)
