@@ -56,6 +56,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-agent-authorization" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-discovery" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
+    ROOT / "guides" / "github-copilot-memory" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
 
@@ -2951,7 +2952,7 @@ def topic_page_html(topic, items):
     if topic["slug"] == "ai-security":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>AGENT SECURITY</span><p>Permissions, MCP, sandboxing, memory integrity and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Direct vs indirect injection, agent hijacking, RAG, browser and tool defenses.</p><div class="tool-links"><a href="/guides/prompt-injection/">Prompt Injection guide ↗</a></div></article></div></section>'''
     elif topic["slug"] == "github-copilot":
-        security_reference = '''<section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/github-copilot-alternatives/"><div><span>DEEP COMPARISON</span><strong>Best GitHub Copilot Alternatives in 2026</strong><p>Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop compared by workflow and cost.</p></div><b>Compare alternatives ↗</b></a></section>'''
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>COPILOT MEMORY</span><p>Repository facts, user preferences, cross-agent context, 28-day retention, privacy and admin controls.</p><div class="tool-links"><a href="/guides/github-copilot-memory/">Copilot Memory guide ↗</a></div></article><article><span>DEEP COMPARISON</span><p>Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop compared by workflow and cost.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Compare alternatives ↗</a></div></article></div></section>'''
     elif topic["slug"] == "coding-ai":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
     elif topic["slug"] == "ai-agents":
@@ -8683,7 +8684,7 @@ def update_sitemap(items):
         item for item in items
         if item["category"] == "Models" or extract_models(item["title"])
     ]
-    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-03")
+    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-05")
     gpt6_compare_items = [
         item for item in items
         if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
@@ -8723,6 +8724,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-security/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/github-copilot-memory/",
+            "2026-10-05",
+            f"{BASE_URL}/guides/github-copilot-memory/images/github-copilot-memory-map.svg"
+        ),
         sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),

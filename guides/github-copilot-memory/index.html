@@ -1,0 +1,314 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>GitHub Copilot Memory: How It Works & Privacy (2026) | SXF / AI</title>
+<meta name="description" content="GitHub Copilot Memory explained: repository facts, user preferences, 28-day retention, code review, CLI, agentic autofix, privacy, controls and best practices." />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="theme-color" content="#07090d" />
+<link rel="canonical" href="https://sxf.si/guides/github-copilot-memory/" />
+<link rel="alternate" hreflang="en" href="https://sxf.si/guides/github-copilot-memory/" />
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/github-copilot-memory/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="SXF / AI" />
+<meta property="og:title" content="GitHub Copilot Memory: How It Works & Privacy (2026)" />
+<meta property="og:description" content="GitHub Copilot Memory explained: repository facts, user preferences, 28-day retention, code review, CLI, agentic autofix, privacy, controls and best practices." />
+<meta property="og:url" content="https://sxf.si/guides/github-copilot-memory/" />
+<meta property="og:image" content="https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg" />
+<meta property="og:image:width" content="1672" />
+<meta property="og:image:height" content="941" />
+<meta property="og:image:alt" content="Diagram showing repository memory and user preferences flowing into Copilot cloud agent, code review, CLI and agentic autofix" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="GitHub Copilot Memory: How It Works & Privacy (2026)" />
+<meta name="twitter:description" content="GitHub Copilot Memory explained: repository facts, user preferences, 28-day retention, code review, CLI, agentic autofix, privacy, controls and best practices." />
+<meta name="twitter:image" content="https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg" />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/guides/github-copilot-memory/#webpage","url":"https://sxf.si/guides/github-copilot-memory/","name":"GitHub Copilot Memory: How It Works Across Agents, Repositories & Teams","description":"GitHub Copilot Memory explained: repository facts, user preferences, 28-day retention, code review, CLI, agentic autofix, privacy, controls and best practices.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/guides/github-copilot-memory/#article"},"breadcrumb":{"@id":"https://sxf.si/guides/github-copilot-memory/#breadcrumb"},"primaryImageOfPage":{"@id":"https://sxf.si/guides/github-copilot-memory/#image-1"},"thumbnailUrl":"https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg","dateModified":"2026-10-05","inLanguage":"en"},{"@type":["Article","TechArticle"],"@id":"https://sxf.si/guides/github-copilot-memory/#article","url":"https://sxf.si/guides/github-copilot-memory/","mainEntityOfPage":{"@id":"https://sxf.si/guides/github-copilot-memory/#webpage"},"headline":"GitHub Copilot Memory: How It Works Across Agents, Repositories & Teams","alternativeHeadline":"Repository facts, user preferences, 28-day retention, cross-agent reuse, privacy and controls","description":"GitHub Copilot Memory explained: repository facts, user preferences, 28-day retention, code review, CLI, agentic autofix, privacy, controls and best practices.","datePublished":"2026-10-05","dateModified":"2026-10-05","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"isPartOf":{"@id":"https://sxf.si/#website"},"image":{"@id":"https://sxf.si/guides/github-copilot-memory/#image-1"},"thumbnailUrl":"https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg","articleSection":"Coding AI","keywords":["GitHub Copilot Memory","Copilot Memory","GitHub Copilot memory 2026","Copilot repository memory","Copilot user preferences","Copilot agentic memory","Copilot Memory code review","Copilot Memory CLI","agentic autofix memory","Copilot Memory vs custom instructions","Copilot Memory privacy","Copilot Memory retention"],"about":[{"@type":"SoftwareApplication","name":"GitHub Copilot"},{"@type":"Thing","name":"AI agent memory"},{"@type":"Thing","name":"Software engineering"},{"@type":"Thing","name":"Code review"},{"@type":"Thing","name":"Application security"}],"citation":["https://docs.github.com/en/copilot/concepts/agents/copilot-memory","https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-for-yourself","https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator","https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/","https://github.blog/changelog/2026-01-15-agentic-memory-for-github-copilot-is-in-public-preview/","https://github.blog/changelog/2026-03-04-copilot-memory-now-on-by-default-for-pro-and-pro-users-in-public-preview/","https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/","https://github.blog/changelog/2026-06-02-copilot-memory-supports-user-preferences-for-business-enterprise/","https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/","https://docs.github.com/en/copilot/concepts/prompting/response-customization","https://docs.github.com/en/copilot/reference/custom-instructions-support","https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"],"inLanguage":"en"},{"@type":"ImageObject","@id":"https://sxf.si/guides/github-copilot-memory/#image-1","url":"https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg","contentUrl":"https://sxf.si/guides/github-copilot-memory/images/github-copilot-memory-map.svg","width":1672,"height":941,"name":"How GitHub Copilot Memory works across agents","caption":"Repository facts and user preferences can be reused across supported Copilot agents, with repository facts revalidated against current code before use.","representativeOfPage":true,"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://sxf.si/guides/github-copilot-memory/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"GitHub Copilot Memory","item":"https://sxf.si/guides/github-copilot-memory/"}]},{"@type":"ItemList","@id":"https://sxf.si/guides/github-copilot-memory/#surfaces","name":"GitHub Copilot features that use Copilot Memory","numberOfItems":4,"itemListElement":[{"@type":"ListItem","position":1,"name":"Copilot cloud agent"},{"@type":"ListItem","position":2,"name":"Copilot code review"},{"@type":"ListItem","position":3,"name":"Copilot CLI"},{"@type":"ListItem","position":4,"name":"Agentic autofix"}]},{"@type":"DefinedTermSet","@id":"https://sxf.si/guides/github-copilot-memory/#memory-model","name":"GitHub Copilot Memory model","hasDefinedTerm":[{"@type":"DefinedTerm","name":"Repository-level fact","description":"A repository-scoped memory such as a coding convention, architectural decision, build command or project-specific rule."},{"@type":"DefinedTerm","name":"User-level preference","description":"A preference tied to one user, such as communication style, tool stack or Git conventions, that can be used across repositories subject to policy and billing-entity scope."},{"@type":"DefinedTerm","name":"Just-in-time verification","description":"The process of checking a repository memory's supporting code citations against the current branch before using the memory."},{"@type":"DefinedTerm","name":"Memory retention","description":"Stored facts and preferences that go unused are automatically deleted after 28 days; successful validation and reuse can reset the timer."}]},{"@type":"FAQPage","@id":"https://sxf.si/guides/github-copilot-memory/#faq","mainEntity":[{"@type":"Question","name":"What is GitHub Copilot Memory?","acceptedAnswer":{"@type":"Answer","text":"GitHub Copilot Memory is a public-preview system that lets supported Copilot agents retain useful repository facts and user-level preferences across interactions. Repository facts can capture conventions, architecture decisions, build commands and cross-file rules; user preferences capture how an individual prefers to work with Copilot."}},{"@type":"Question","name":"How long does GitHub Copilot Memory last?","acceptedAnswer":{"@type":"Answer","text":"GitHub says a stored fact or preference that goes unused is automatically deleted after 28 days. The timer can reset when Copilot successfully validates and uses the entry again."}},{"@type":"Question","name":"Where does Copilot Memory work?","acceptedAnswer":{"@type":"Answer","text":"GitHub currently documents Copilot Memory across Copilot cloud agent, Copilot code review, Copilot CLI and agentic autofix. Feature-specific behavior differs: code review uses repository facts but not user-level preferences, while CLI can apply both repository facts and the initiating user's preferences."}},{"@type":"Question","name":"Is Copilot Memory the same as copilot-instructions.md?","acceptedAnswer":{"@type":"Answer","text":"No. Custom instructions are explicit, version-controlled rules written by people. Copilot Memory is learned from Copilot activity and can expire after 28 days of disuse. Stable rules that must always apply are better kept in instructions; learned repository details and personal workflow preferences are candidates for memory."}},{"@type":"Question","name":"Can Copilot Memory share repository knowledge across repositories?","acceptedAnswer":{"@type":"Answer","text":"Repository-level facts are scoped to the repository where they were learned and can only be used for work on that repository. User-level preferences can follow the same user across repositories, subject to the active billing entity and applicable policy."}},{"@type":"Question","name":"Can repository owners see and delete Copilot memories?","acceptedAnswer":{"@type":"Answer","text":"Repository owners can review and delete repository-level facts from Repository Settings under Copilot Memory. Users can review and delete their own user-level preferences. Business and Enterprise administrators have additional export and deletion controls for preferences owned by their billing entity."}},{"@type":"Question","name":"Does Copilot validate memory before using it?","acceptedAnswer":{"@type":"Answer","text":"For repository-level facts, GitHub stores citations to supporting code locations. When a fact is relevant, Copilot checks those citations against the current branch before applying the fact. This just-in-time verification is designed to reduce the risk of stale knowledge."}},{"@type":"Question","name":"Does agentic autofix use Copilot Memory?","acceptedAnswer":{"@type":"Answer","text":"Yes, when Copilot Memory is enabled. GitHub says agentic autofix reviews existing memories for context that can help resolve security alerts and can store successful fix patterns as new memories for future security work and other Copilot features."}},{"@type":"Question","name":"Is Copilot Memory on by default?","acceptedAnswer":{"@type":"Answer","text":"For individual paid Copilot users, GitHub documents Memory as enabled by default. For organization- and enterprise-managed Copilot subscriptions, the policy is off by default and an administrator must enable it before users can use the feature; individual users can still opt out."}},{"@type":"Question","name":"Should teams replace documentation with Copilot Memory?","acceptedAnswer":{"@type":"Answer","text":"No. Memory is best treated as an adaptive layer on top of durable documentation and explicit instructions. Architecture rules, security requirements, required test commands and compliance controls should remain documented and version-controlled when they must be deterministic and reviewable."}}]}]}</script>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/intelligence.css" />
+
+<style>
+.copilot-memory-guide .memory-hero-note{margin-top:16px;color:#96a4b8;font-size:13px;line-height:1.6}
+.copilot-memory-guide .memory-hero-note strong{color:#dbe6f3}
+.copilot-memory-guide .memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}
+.copilot-memory-guide .memory-grid article{border:1px solid rgba(142,166,204,.22);background:rgba(11,16,26,.72);border-radius:18px;padding:20px}
+.copilot-memory-guide .memory-grid span{font-size:11px;letter-spacing:.14em;color:#8da2c4}
+.copilot-memory-guide .memory-grid h3{margin:8px 0 8px}
+.copilot-memory-guide .memory-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:24px 0}
+.copilot-memory-guide .memory-flow div{border:1px solid rgba(142,166,204,.22);background:rgba(11,16,26,.72);border-radius:16px;padding:16px}
+.copilot-memory-guide .memory-flow b{display:block;color:#9bbdff;margin-bottom:6px}
+.copilot-memory-guide .memory-callout{border-left:3px solid #6ea8ff;background:linear-gradient(90deg,rgba(64,116,255,.11),rgba(64,116,255,.025));padding:18px 20px;border-radius:0 14px 14px 0;margin:22px 0}
+.copilot-memory-guide .memory-security{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.copilot-memory-guide .memory-security article{border:1px solid rgba(142,166,204,.22);border-radius:16px;padding:18px;background:rgba(9,13,22,.68)}
+.copilot-memory-guide .memory-security strong{display:block;margin-bottom:7px}
+.copilot-memory-guide .memory-checklist{counter-reset:item;display:grid;gap:12px;margin:22px 0}
+.copilot-memory-guide .memory-checklist li{list-style:none;position:relative;padding:16px 18px 16px 54px;border:1px solid rgba(142,166,204,.2);border-radius:14px;background:rgba(10,15,24,.6)}
+.copilot-memory-guide .memory-checklist li:before{counter-increment:item;content:counter(item,decimal-leading-zero);position:absolute;left:17px;top:16px;color:#7fa9ff;font:700 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+.copilot-memory-guide .memory-verdict{border:1px solid rgba(115,220,183,.25);background:rgba(31,122,91,.09);border-radius:18px;padding:22px;margin:24px 0}
+.copilot-memory-guide .memory-verdict strong{color:#9be9ca}
+@media(max-width:850px){.copilot-memory-guide .memory-grid,.copilot-memory-guide .memory-security{grid-template-columns:1fr}.copilot-memory-guide .memory-flow{grid-template-columns:1fr}}
+</style>
+</head><body class="intel-page guide-article-page copilot-memory-guide"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+<article>
+<header class="guide-article-hero shell">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>GitHub Copilot Memory</span></nav>
+  <p class="eyebrow">SXF GUIDE / CODING AI</p>
+  <h1>GitHub Copilot Memory:<br><span>How It Works Across Agents, Repositories & Teams</span></h1>
+  <p class="guide-deck">GitHub Copilot Memory gives supported Copilot agents a way to carry forward useful knowledge instead of starting every task from zero. The important details are in the boundaries: repository facts and personal preferences have different scopes, repository facts are cited and revalidated against current code, unused memories expire after 28 days, and each Copilot surface applies memory differently.</p>
+  <p class="memory-hero-note"><strong>Last reviewed: October 5, 2026.</strong> Based on GitHub Docs, GitHub engineering notes and GitHub Changelog releases. Copilot Memory remains in public preview.</p>
+  <div class="guide-byline">
+    <div><span>Published</span><strong>October 5, 2026</strong></div>
+    <div><span>Primary sources</span><strong>12 GitHub references</strong></div>
+    <div><span>Focus</span><strong>Memory · Agents · Security · Governance</strong></div>
+  </div>
+</header>
+
+<section class="guide-answer shell" id="quick-answer">
+  <div class="guide-answer-label">QUICK ANSWER</div>
+  <div>
+    <h2>Copilot Memory is a shared learning layer for supported GitHub Copilot agents—not a replacement for documentation or instructions.</h2>
+    <p>It stores two kinds of knowledge: <strong>repository-level facts</strong> about how a codebase works and <strong>user-level preferences</strong> about how an individual prefers to work. Repository facts stay inside one repository, carry citations to supporting code and are checked against the current branch before use. User preferences follow the same user across repositories under the applicable Copilot billing and policy scope. GitHub automatically removes unused entries after 28 days.</p>
+  </div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc">
+  <span>IN THIS GUIDE</span>
+  <a href="#what-is-it">What Copilot Memory is</a>
+  <a href="#types">Repository vs user memory</a>
+  <a href="#lifecycle">How memory works</a>
+  <a href="#surfaces">Where memory is used</a>
+  <a href="#autofix">Agentic autofix</a>
+  <a href="#instructions">Memory vs instructions</a>
+  <a href="#security">Privacy & security model</a>
+  <a href="#retention">28-day retention</a>
+  <a href="#controls">User & admin controls</a>
+  <a href="#best-practices">Best practices</a>
+  <a href="#failure-modes">Failure modes</a>
+  <a href="#rollout">Team rollout checklist</a>
+  <a href="#faq">FAQ</a>
+  <a href="#sources">Primary sources</a>
+  <a class="guide-toc-top" href="#quick-answer">↑ Back to top</a>
+</aside>
+
+<div class="guide-prose">
+<section id="what-is-it">
+  <p class="eyebrow">THE CORE IDEA</p>
+  <h2>What is GitHub Copilot Memory?</h2>
+  <p>Most coding assistants are strongest inside the current prompt, chat or task. They can read a repository and infer patterns, but the next session may begin without the conclusions learned last time. Copilot Memory is GitHub's attempt to make that accumulated understanding reusable across supported agent workflows.</p>
+  <p>GitHub describes memories as tightly scoped pieces of information that Copilot discovers while doing real work. A useful memory is not “this repository is a web app.” It is closer to an actionable rule: a database client must be created through a specific factory, two configuration files must remain synchronized, tests use a non-obvious command, or pull requests should follow a particular structure.</p>
+  <p>The system matters because software repositories contain knowledge that is <em>operationally important but unevenly documented</em>. Senior engineers know which files move together, which conventions are historical accidents, which validation step catches a subtle failure and which pattern is safe for one module but not another. Memory gives Copilot a way to retain some of that discovered context and offer it to another supported Copilot agent later.</p>
+  <div class="memory-callout"><strong>The search intent to understand:</strong> Copilot Memory is not simply “chat history.” Its useful unit is reusable knowledge that can affect future coding, review, CLI or security work.</div>
+</section>
+
+<section id="types">
+  <p class="eyebrow">TWO MEMORY TYPES</p>
+  <h2>Repository facts and user preferences are not the same thing.</h2>
+  <div class="memory-grid">
+    <article><span>REPOSITORY-LEVEL FACT</span><h3>Shared knowledge about one codebase</h3><p>Examples include coding conventions, architectural decisions, build commands, cross-file dependencies and project-specific rules. GitHub scopes these facts to one repository, and collaborators with Copilot Memory access can benefit from them when working in that repository.</p><p><strong>Creation boundary:</strong> repository facts are created in response to Copilot activity initiated by users with write access and Memory enabled.</p></article>
+    <article><span>USER-LEVEL PREFERENCE</span><h3>Personal workflow preferences across repositories</h3><p>Examples include communication style, preferred tooling, Git conventions or how a user likes pull requests structured. These preferences belong to the individual interaction context rather than the repository.</p><p><strong>Governance boundary:</strong> on Business and Enterprise, administrators can manage preferences owned by the applicable billing entity.</p></article>
+  </div>
+  <p>This split solves two different problems. Repository memory helps teams preserve local engineering knowledge. User memory helps an individual avoid restating personal preferences everywhere. Mixing the two would be dangerous: one developer's preferred commit style should not silently become a repository-wide rule, while an architectural constraint should not disappear just because a different user opens the task.</p>
+</section>
+
+<section id="lifecycle">
+  <p class="eyebrow">MEMORY LIFECYCLE</p>
+  <h2>How Copilot Memory works: capture, retrieve, verify, use, refresh.</h2>
+  <p>GitHub's engineering description is notable because it avoids treating retrieval as proof. Repository memories are stored with citations to code locations that support the fact. When the memory becomes relevant to new work, Copilot verifies those citations against the current branch before applying the fact.</p>
+  <div class="memory-flow">
+    <div><b>01 · DISCOVER</b><span>An agent encounters a reusable convention, dependency or preference while doing user-initiated work.</span></div>
+    <div><b>02 · STORE</b><span>The agent stores a narrowly scoped memory; repository facts include citations to supporting code.</span></div>
+    <div><b>03 · RETRIEVE</b><span>A later supported Copilot feature receives recent relevant memory as context for a new task.</span></div>
+    <div><b>04 · VERIFY</b><span>Repository facts are checked against cited locations on the current branch before they influence work.</span></div>
+    <div><b>05 · USE / REFRESH</b><span>If still valid and useful, the memory can affect the task and its retention timestamp can be refreshed.</span></div>
+  </div>
+  <p>That <strong>just-in-time verification</strong> is the most important technical distinction in GitHub's design. A branch may never merge. A rule may change. A cited file may disappear. Rather than requiring a central background process to keep every stored conclusion continuously synchronized, GitHub verifies the evidence when the fact is about to matter.</p>
+  <p>GitHub's January engineering write-up reported early internal evaluation gains: code review saw higher precision and recall with memory, coding-agent pull requests had a higher merge rate in the reported A/B test, and code-review comments received slightly more positive feedback. Those are GitHub-reported product experiments, not independent benchmarks, so they are best read as evidence that cross-agent context can be useful—not as a guarantee that every repository will see the same lift.</p>
+  <figure class="guide-research-image" id="memory-image">
+    <img src="/guides/github-copilot-memory/images/github-copilot-memory-map.svg" width="1672" height="941" loading="lazy" decoding="async" alt="Diagram showing repository memory and user preferences feeding Copilot cloud agent, code review, CLI and agentic autofix, with validation before repository facts are reused" />
+    <figcaption>Copilot Memory has two scopes. Repository facts stay tied to one repository and are revalidated against current code; user preferences stay tied to the user and can follow that user across supported Copilot interactions.</figcaption>
+  </figure>
+</section>
+
+<section id="surfaces">
+  <p class="eyebrow">WHERE MEMORY WORKS</p>
+  <h2>Four Copilot surfaces currently share the memory layer.</h2>
+  <p>GitHub's current documentation lists Copilot cloud agent, Copilot code review, Copilot CLI and agentic autofix. The shared store does not mean every feature reads the same information in the same way.</p>
+  <div class="guide-table-wrap"><table class="guide-table">
+    <thead><tr><th>Copilot feature</th><th>Repository facts</th><th>User preferences</th><th>What memory can change</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Cloud agent</th><td>Yes</td><td>Supported under applicable user/policy scope</td><td>Implementation choices, repository conventions, cross-file relationships and task execution.</td></tr>
+      <tr><th scope="row">Code review</th><td>Yes</td><td><strong>No</strong> according to current docs</td><td>Review can recognize repository-specific patterns and flag changes that violate learned facts.</td></tr>
+      <tr><th scope="row">Copilot CLI</th><td>Yes</td><td>Yes, for the initiating user</td><td>Terminal work can carry repository knowledge and personal preferences across sessions.</td></tr>
+      <tr><th scope="row">Agentic autofix</th><td>Yes</td><td>Security workflow centers on repository context</td><td>Autofix can reuse secure fix patterns and add new patterns after resolving alerts.</td></tr>
+    </tbody>
+  </table></div>
+  <p>A concrete cross-agent example is more useful than the phrase “shared memory.” If code review discovers that a schema version in two files must stay synchronized, a later coding-agent task can apply that rule while editing one of those files. Knowledge discovered during review becomes implementation context.</p>
+  <p>Likewise, CLI work can benefit from repository conventions learned elsewhere. The value is not that every agent has a longer chat transcript; it is that supported agents can inherit <strong>validated repository-specific knowledge</strong> without each independently rediscovering it.</p>
+</section>
+
+<section id="autofix">
+  <p class="eyebrow">SECURITY FEEDBACK LOOP</p>
+  <h2>Agentic autofix turns Memory into a repository-specific security loop.</h2>
+  <p>On September 25, 2026, GitHub added Copilot Memory to agentic autofix for customers who have Memory enabled. Before generating a fix, agentic autofix can review existing memories for context that may help resolve the alert. After a successful fix, it can store the fix pattern as a new memory.</p>
+  <p>This matters because secure coding patterns are often repository-specific. One application may require every deserialization call to pass through a wrapper. Another may have a custom authorization helper. A third may need security fixes mirrored across generated files. Generic vulnerability knowledge tells an agent what kind of bug it sees; repository memory can tell it <em>how this codebase normally fixes that class of problem</em>.</p>
+  <div class="memory-verdict"><strong>The compounding effect:</strong> a secure pattern learned while fixing one alert can later help agentic autofix with another alert—and can also inform other Copilot features such as code review and cloud-agent work in the same repository.</div>
+  <p>This is also where governance matters most. A remembered fix pattern is useful only if the repository still supports it. GitHub's citation-and-verification design reduces the chance that an obsolete security workaround silently survives after the architecture changes.</p>
+  <p>For the source event that triggered this search opportunity, see the SXF signal: <a href="/signals/agentic-autofix-now-uses-copilot-memory-925b830/">Agentic autofix now uses Copilot Memory</a>.</p>
+</section>
+
+<section id="instructions">
+  <p class="eyebrow">MEMORY VS INSTRUCTIONS</p>
+  <h2>Copilot Memory is not a replacement for copilot-instructions.md or AGENTS.md.</h2>
+  <p>The strongest Copilot setup uses the right mechanism for the right type of context. Stable rules should not depend on whether an agent happened to learn and retain them. Learned context should not require engineers to manually maintain hundreds of low-level facts in an instructions file.</p>
+  <div class="guide-table-wrap"><table class="guide-table">
+    <thead><tr><th>Mechanism</th><th>Who writes it?</th><th>Persistence</th><th>Best use</th><th>Main tradeoff</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Copilot Memory</th><td>Copilot learns it from supported activity</td><td>Unused entries expire after 28 days</td><td>Learned conventions, repository relationships, recurring patterns and user preferences</td><td>Adaptive, but not deterministic and feature support varies</td></tr>
+      <tr><th scope="row">copilot-instructions.md</th><td>Humans / repository maintainers</td><td>Version-controlled until edited</td><td>Repository-wide rules that should always be present</td><td>Requires explicit maintenance</td></tr>
+      <tr><th scope="row">Path-specific instructions</th><td>Humans / repository maintainers</td><td>Version-controlled until edited</td><td>Rules for particular directories, languages or file types</td><td>Support varies by Copilot surface</td></tr>
+      <tr><th scope="row">AGENTS.md</th><td>Humans / repository maintainers</td><td>Version-controlled until edited</td><td>Standing agent instructions, including cross-tool conventions</td><td>Not every Copilot feature consumes it in the same way</td></tr>
+      <tr><th scope="row">Prompt files / skills</th><td>Humans / teams</td><td>Explicit reusable assets</td><td>Task-specific workflows such as reviews, migrations or release procedures</td><td>Activated for a task rather than learned automatically</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Use instructions for rules that must not drift.</h3>
+  <p>If every pull request must run a particular test suite, if a security control is mandatory, if generated files must never be edited directly, or if the project has a legally required workflow, keep that rule in version-controlled instructions or documentation. Memory can reinforce it, but it should not be the only place the rule exists.</p>
+  <h3>Use memory for knowledge that is useful because it was discovered.</h3>
+  <p>Examples include “these two legacy settings must remain synchronized,” “this repository wraps database connections with helper X,” or “this developer prefers concise pull-request descriptions.” These facts are exactly the kind of context an agent may learn while solving a real task and benefit from later.</p>
+</section>
+
+<section id="security">
+  <p class="eyebrow">PRIVACY & SECURITY</p>
+  <h2>The security model is mostly about scope, authorship and validation.</h2>
+  <div class="memory-security">
+    <article><strong>Repository scope</strong><p>Repository facts learned in one repository can only be used for operations on that same repository. GitHub frames this as keeping repository knowledge inside the repository boundary.</p></article>
+    <article><strong>Write-access capture</strong><p>Repository facts are created only in response to Copilot activity initiated by users with write access and Memory enabled. That reduces the risk of a read-only visitor teaching the shared memory store.</p></article>
+    <article><strong>Current-branch verification</strong><p>Before applying a repository fact, Copilot checks the cited code against the current branch. A fact learned from an abandoned or unmerged branch should not influence work unless the current code still supports it.</p></article>
+  </div>
+  <p>User-level preferences use a different isolation boundary. They are available only to the user who created them. On Business and Enterprise plans, GitHub ties those preferences to the active billing entity that provided the Copilot entitlement; administrators can export or delete preferences owned by their organization or enterprise.</p>
+  <p>That billing-entity model is easy to miss. A developer with multiple Copilot licenses may need a default billing entity before user-level preferences can be created. When Copilot later builds context, it looks at the active billing entity again and only retrieves preferences owned by that entity.</p>
+  <div class="memory-callout"><strong>SXF recommendation:</strong> treat Memory as helpful contextual state, not as the authoritative storage location for secrets, compliance controls, incident records or irreversible architectural decisions. Durable organizational requirements belong in systems that are explicit, reviewable and access-controlled for that purpose.</div>
+</section>
+
+<section id="retention">
+  <p class="eyebrow">FRESHNESS</p>
+  <h2>Why does Copilot Memory expire after 28 days?</h2>
+  <p>GitHub automatically deletes a fact or preference after 28 days of non-use. When an entry is successfully validated and used again, its timer may be refreshed. The policy creates a simple pressure toward recency without forcing every old memory to remain forever.</p>
+  <p>The 28-day expiry solves only one form of staleness. A memory can become wrong tomorrow if the architecture changes. That is why retention and verification work together: expiry removes knowledge that stops proving useful, while citation checks handle code that changes before the expiration date.</p>
+  <p>GitHub specifically notes that memories may be captured during pull requests that are later closed without merging. A naïve memory system could carry those branch-specific conclusions into mainline work. The current design instead asks the agent to verify the cited source against the active branch before using the memory.</p>
+  <p>This is a useful design lesson beyond GitHub Copilot: <strong>persistent AI context needs provenance and invalidation, not just storage.</strong></p>
+</section>
+
+<section id="controls">
+  <p class="eyebrow">MANAGEMENT</p>
+  <h2>How to enable, inspect and delete Copilot Memory.</h2>
+  <h3>Individual users</h3>
+  <p>GitHub's current personal-account documentation says Copilot Memory is enabled by default for paid individual users. A user can disable or re-enable the feature from Copilot settings. Personal Memory settings also expose user-level preferences for review and deletion.</p>
+  <h3>Repository owners</h3>
+  <p>Repository owners can open Repository Settings → Copilot → Memory to inspect stored repository-level facts and delete entries that are misleading, inappropriate or no longer useful. GitHub later added a repository-level off switch: when disabled, repository facts are no longer stored or read for that repository. Existing facts are not automatically deleted by turning the feature off.</p>
+  <h3>Copilot CLI</h3>
+  <p>GitHub added CLI controls including <code>/memory on</code>, <code>/memory off</code> and <code>/memory show</code>. The choice persists across CLI sessions. GitHub also changed the memory-storage permission prompt so it identifies whether an entry is being stored as a repository fact or user-level preference.</p>
+  <h3>Organizations and enterprises</h3>
+  <p>For organization- and enterprise-managed subscriptions, Memory is off by default at the policy layer. An administrator must enable it first; individual users can then opt out. Administrators can export or delete user preferences owned by their billing entity, including bulk operations, which makes Memory reviewable as part of enterprise governance rather than an invisible personal-only feature.</p>
+</section>
+
+<section id="best-practices">
+  <p class="eyebrow">OPERATING MODEL</p>
+  <h2>Six practices for using Copilot Memory without turning it into hidden documentation.</h2>
+  <ol class="memory-checklist">
+    <li><strong>Keep non-negotiable rules in version control.</strong> Security policies, required tests, architecture constraints and release procedures should exist in documentation or instructions even if Memory also learns them.</li>
+    <li><strong>Review repository facts like configuration.</strong> Owners should periodically inspect stored facts, especially after major refactors, migrations or changes in team conventions.</li>
+    <li><strong>Watch the scope label.</strong> A personal preference and a repository-wide fact have different audiences. The CLI storage prompt and repository Memory UI are useful checks before assuming who can benefit from an entry.</li>
+    <li><strong>Let verification do work—but do not outsource judgment.</strong> Citation checks reduce stale repository context, yet a technically true fact may still be irrelevant to a specific task.</li>
+    <li><strong>Use Memory where rediscovery is expensive.</strong> Cross-file invariants, unusual build steps, architectural wrappers and repository-specific secure fix patterns create more value than trivial facts that are obvious from one file.</li>
+    <li><strong>Measure outcomes, not the number of memories.</strong> The useful question is whether reviews become more accurate, agent pull requests need less correction, or repeated tasks require less re-explanation—not how many entries are stored.</li>
+  </ol>
+</section>
+
+<section id="failure-modes">
+  <p class="eyebrow">WHAT CAN GO WRONG?</p>
+  <h2>Memory reduces repeated context work, but it creates new failure modes.</h2>
+  <h3>1. A valid fact becomes irrelevant.</h3>
+  <p>Verification can prove that cited code still exists, yet the fact may not matter for the current task. Retrieval quality remains part of the problem. A memory system must select useful context, not merely true context.</p>
+  <h3>2. A team mistakes learned behavior for policy.</h3>
+  <p>If an agent repeatedly observes one engineer's workaround, teams may begin treating the learned pattern as a standard even though nobody approved it. The defense is explicit ownership: policy goes in instructions and documentation; memory remains contextual assistance.</p>
+  <h3>3. Repository facts conflict with explicit instructions.</h3>
+  <p>When teams refactor conventions, old memory may temporarily overlap with new instructions. The safest path is to update the authoritative instruction first and remove clearly obsolete facts rather than waiting for expiration.</p>
+  <h3>4. Scope is misunderstood.</h3>
+  <p>Repository facts are shared within one repository; user preferences are personal and can cross repositories. Code review currently ignores user preferences. Designing a workflow on the assumption that “all Copilot has the same memory everywhere” will produce inconsistent behavior.</p>
+  <h3>5. A team expects Memory to preserve project history.</h3>
+  <p>The 28-day inactivity expiry deliberately makes Memory a working-context layer, not a permanent engineering archive. Architecture decisions that must survive for years belong in ADRs, documentation, issues or other durable records.</p>
+</section>
+
+<section id="rollout">
+  <p class="eyebrow">TEAM CHECKLIST</p>
+  <h2>A practical rollout plan for engineering teams.</h2>
+  <ol class="memory-checklist">
+    <li><strong>Inventory existing instructions.</strong> Identify what is already defined in <code>.github/copilot-instructions.md</code>, path-specific instruction files, <code>AGENTS.md</code> and team documentation.</li>
+    <li><strong>Define authoritative vs learnable knowledge.</strong> Mark mandatory policies as explicit instructions; allow Memory to handle lower-level learned patterns and personal workflow preferences.</li>
+    <li><strong>Enable Memory deliberately.</strong> For managed subscriptions, set the organization or enterprise policy first, then communicate that users retain an opt-out.</li>
+    <li><strong>Review repository facts after the first real tasks.</strong> Do not evaluate Memory from a demo prompt. Let coding, review or CLI work discover repository-specific facts, then inspect what was retained.</li>
+    <li><strong>Test cross-agent transfer.</strong> Have one feature learn a real repository rule, then check whether another supported feature can apply it correctly after validating the source.</li>
+    <li><strong>Add security autofix only with clear review boundaries.</strong> If agentic autofix is used, monitor which fix patterns become reusable context and keep human review on consequential code changes.</li>
+    <li><strong>Re-review after major refactors.</strong> Remove obviously obsolete facts and confirm that the explicit instructions still describe the current architecture.</li>
+    <li><strong>Track developer outcomes.</strong> Compare correction rate, review usefulness, agent PR acceptance and repeated prompt/context overhead before and after rollout.</li>
+  </ol>
+</section>
+
+<section id="decision">
+  <p class="eyebrow">BOTTOM LINE</p>
+  <h2>When is Copilot Memory actually worth enabling?</h2>
+  <p>Memory has the highest potential value in repositories where the codebase contains important conventions that are discoverable but costly to rediscover: mature monorepos, systems with cross-file invariants, internal frameworks, non-obvious build or test flows, and repositories where coding agents and automated review already perform substantial work.</p>
+  <p>It is less transformative for tiny repositories with obvious conventions or teams that rarely use the supported agent surfaces. In those cases, a concise instructions file may deliver most of the benefit with less governance overhead.</p>
+  <div class="memory-verdict"><strong>Best mental model:</strong> documentation tells Copilot what your team has formally decided; Memory helps Copilot retain what supported agents have learned while doing the work.</div>
+  <p>For broader coding-agent context, see <a href="/topics/github-copilot/">GitHub Copilot signal history</a>, the <a href="/guides/github-copilot-alternatives/">GitHub Copilot alternatives guide</a>, and SXF's research page on the <a href="/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/">September 2026 VS Code agent releases</a>.</p>
+</section>
+
+<section id="faq">
+  <p class="eyebrow">FAQ</p>
+  <h2>GitHub Copilot Memory questions, answered directly.</h2>
+  <details><summary>What is GitHub Copilot Memory?</summary><p>GitHub Copilot Memory is a public-preview system that lets supported Copilot agents retain useful repository facts and user-level preferences across interactions. Repository facts can capture conventions, architecture decisions, build commands and cross-file rules; user preferences capture how an individual prefers to work with Copilot.</p></details><details><summary>How long does GitHub Copilot Memory last?</summary><p>GitHub says a stored fact or preference that goes unused is automatically deleted after 28 days. The timer can reset when Copilot successfully validates and uses the entry again.</p></details><details><summary>Where does Copilot Memory work?</summary><p>GitHub currently documents Copilot Memory across Copilot cloud agent, Copilot code review, Copilot CLI and agentic autofix. Feature-specific behavior differs: code review uses repository facts but not user-level preferences, while CLI can apply both repository facts and the initiating user's preferences.</p></details><details><summary>Is Copilot Memory the same as copilot-instructions.md?</summary><p>No. Custom instructions are explicit, version-controlled rules written by people. Copilot Memory is learned from Copilot activity and can expire after 28 days of disuse. Stable rules that must always apply are better kept in instructions; learned repository details and personal workflow preferences are candidates for memory.</p></details><details><summary>Can Copilot Memory share repository knowledge across repositories?</summary><p>Repository-level facts are scoped to the repository where they were learned and can only be used for work on that repository. User-level preferences can follow the same user across repositories, subject to the active billing entity and applicable policy.</p></details><details><summary>Can repository owners see and delete Copilot memories?</summary><p>Repository owners can review and delete repository-level facts from Repository Settings under Copilot Memory. Users can review and delete their own user-level preferences. Business and Enterprise administrators have additional export and deletion controls for preferences owned by their billing entity.</p></details><details><summary>Does Copilot validate memory before using it?</summary><p>For repository-level facts, GitHub stores citations to supporting code locations. When a fact is relevant, Copilot checks those citations against the current branch before applying the fact. This just-in-time verification is designed to reduce the risk of stale knowledge.</p></details><details><summary>Does agentic autofix use Copilot Memory?</summary><p>Yes, when Copilot Memory is enabled. GitHub says agentic autofix reviews existing memories for context that can help resolve security alerts and can store successful fix patterns as new memories for future security work and other Copilot features.</p></details><details><summary>Is Copilot Memory on by default?</summary><p>For individual paid Copilot users, GitHub documents Memory as enabled by default. For organization- and enterprise-managed Copilot subscriptions, the policy is off by default and an administrator must enable it before users can use the feature; individual users can still opt out.</p></details><details><summary>Should teams replace documentation with Copilot Memory?</summary><p>No. Memory is best treated as an adaptive layer on top of durable documentation and explicit instructions. Architecture rules, security requirements, required test commands and compliance controls should remain documented and version-controlled when they must be deterministic and reviewable.</p></details>
+</section>
+
+<section id="sources">
+  <p class="eyebrow">PRIMARY SOURCES</p>
+  <h2>Where these claims come from.</h2>
+  <p>This guide prioritizes GitHub's own product documentation, engineering explanation and dated changelog releases. Product behavior is public preview and can change, so time-sensitive controls should be rechecked against the linked documentation.</p>
+  <div class="source-list">
+    <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-memory" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · About GitHub Copilot Memory</span><b>↗</b></a>
+    <a href="https://github.blog/ai-and-ml/github-copilot/building-an-agentic-memory-system-for-github-copilot/" target="_blank" rel="noopener noreferrer"><span>GitHub Engineering · Building an agentic memory system for GitHub Copilot</span><b>↗</b></a>
+    <a href="https://github.blog/changelog/2026-09-25-agentic-autofix-now-uses-copilot-memory/" target="_blank" rel="noopener noreferrer"><span>GitHub Changelog · Agentic autofix now uses Copilot Memory</span><b>↗</b></a>
+    <a href="https://github.blog/changelog/2026-05-26-copilot-memory-has-more-controls-for-deletion-scope-and-the-copilot-cli/" target="_blank" rel="noopener noreferrer"><span>GitHub Changelog · Memory controls, repository scope and CLI</span><b>↗</b></a>
+    <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-memory/manage-for-yourself" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · Managing Copilot Memory for your account</span><b>↗</b></a>
+    <a href="https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/copilot-memory/manage-as-administrator" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · Organization and enterprise administration</span><b>↗</b></a>
+    <a href="https://github.blog/changelog/2026-06-02-copilot-memory-supports-user-preferences-for-business-enterprise/" target="_blank" rel="noopener noreferrer"><span>GitHub Changelog · Business and Enterprise user preferences</span><b>↗</b></a>
+    <a href="https://github.blog/changelog/2026-03-04-copilot-memory-now-on-by-default-for-pro-and-pro-users-in-public-preview/" target="_blank" rel="noopener noreferrer"><span>GitHub Changelog · Default availability for individual paid users</span><b>↗</b></a>
+    <a href="https://docs.github.com/en/copilot/concepts/prompting/response-customization" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · Custom instructions and response customization</span><b>↗</b></a>
+    <a href="https://docs.github.com/en/copilot/reference/custom-instructions-support" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · Custom instruction support matrix</span><b>↗</b></a>
+    <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank" rel="noopener noreferrer"><span>GitHub Docs · Copilot CLI customization and Memory</span><b>↗</b></a>
+    <a href="https://github.blog/changelog/2026-01-15-agentic-memory-for-github-copilot-is-in-public-preview/" target="_blank" rel="noopener noreferrer"><span>GitHub Changelog · Public preview launch</span><b>↗</b></a>
+  </div>
+</section>
+</div></div>
+</article>
+</main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>

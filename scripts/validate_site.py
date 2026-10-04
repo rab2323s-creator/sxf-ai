@@ -124,6 +124,35 @@ def validate_site_shell():
 
 
 
+
+def validate_copilot_memory_guide():
+    path = ROOT / "guides" / "github-copilot-memory" / "index.html"
+    image_path = ROOT / "guides" / "github-copilot-memory" / "images" / "github-copilot-memory-map.svg"
+    if not path.exists():
+        fail("GitHub Copilot Memory guide missing")
+    if not image_path.exists():
+        fail("GitHub Copilot Memory guide image missing")
+    text = path.read_text(encoding="utf-8")
+    required = [
+        '<link rel="canonical" href="https://sxf.si/guides/github-copilot-memory/"',
+        'GitHub Copilot Memory: How It Works & Privacy (2026)',
+        'Repository-level fact',
+        'User-level preference',
+        '28 days',
+        'Agentic autofix',
+        'copilot-instructions.md',
+        '"TechArticle"',
+        '"ImageObject"',
+        '"DefinedTermSet"',
+        '"FAQPage"',
+        'github-copilot-memory-map.svg',
+    ]
+    for snippet in required:
+        if snippet not in text:
+            fail(f"Copilot Memory guide missing required marker: {snippet}")
+    if len(text.split()) < 2600:
+        fail("Copilot Memory guide is unexpectedly thin")
+
 def validate_ai_security_authority_page():
     path = ROOT / "topics" / "ai-security" / "index.html"
     if not path.exists():
@@ -1952,6 +1981,7 @@ def main():
     validate_indexable_signal_graph(archive)
     validate_site_shell()
     validate_ai_security_authority_page()
+    validate_copilot_memory_guide()
     validate_section_counts(news)
     for item in news["items"]:
         required={"title","url","signal_url","source","published","category"}
