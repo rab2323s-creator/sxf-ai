@@ -1497,12 +1497,38 @@ def validate_source_expansion(news, archive):
         fail("Google Research fallback category must be Research")
 
     home_html = (ROOT / "index.html").read_text(encoding="utf-8")
-    expected_source_label = f"{len(SOURCES):02d} SOURCES · 04 LAYERS"
+    public_sources = [
+        source for source in SOURCE_CONFIGS
+        if source.get("status") != "disabled"
+    ]
+    live_sources = [
+        source["name"] for source in public_sources
+        if source.get("status") == "live"
+    ]
+    validating_sources = [
+        source["name"] for source in public_sources
+        if source.get("status") in {"shadow", "canary"}
+    ]
+    expected_source_label = (
+        f"{len(public_sources):02d} SOURCES · "
+        f"{len(live_sources):02d} LIVE · "
+        f"{len(validating_sources):02d} VALIDATING"
+    )
     if expected_source_label not in home_html:
-        fail(f"homepage source count drift: expected {expected_source_label}")
-    for name in SOURCE_EXPANSION_NAMES:
-        if name.upper() not in home_html.upper():
-            fail(f"homepage source layer missing active expansion source: {name}")
+        fail(f"homepage source coverage drift: expected {expected_source_label}")
+
+    home_upper = home_html.upper()
+    for source in public_sources:
+        name = source["name"]
+        if name.upper() not in home_upper:
+            fail(f"homepage source layer missing configured source: {name}")
+
+    for name in live_sources:
+        if f"{name.upper()} · LIVE" not in home_upper:
+            fail(f"homepage source lifecycle missing LIVE label: {name}")
+    for name in validating_sources:
+        if f"{name.upper()} · VALIDATING" not in home_upper:
+            fail(f"homepage source lifecycle missing VALIDATING label: {name}")
 
 
 
