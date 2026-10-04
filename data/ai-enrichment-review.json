@@ -1486,6 +1486,390 @@
       "approved_at": "2026-10-05",
       "approval_origin": "manual-research",
       "preserve_existing_route": true
+    },
+    {
+      "signal_slug": "higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64",
+      "signal_url": "https://sxf.si/signals/higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64/",
+      "evidence_hash": "b96a891fa5d61931e37607d7e4a13eb6ac653dbdd787a3c22575d983554fdb73",
+      "evidence_snapshot_hash": "b96a891fa5d61931e37607d7e4a13eb6ac653dbdd787a3c22575d983554fdb73",
+      "evidence_snapshot": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        "signal": {
+          "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
+          "url": "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra",
+          "signal_url": "https://sxf.si/signals/higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64/",
+          "source": "OpenAI",
+          "published": "2026-09-21T12:00:00Z",
+          "category": "Models",
+          "tags": [
+            "Multimodal AI",
+            "OpenAI"
+          ],
+          "summary": "With GPT-6 Astra, Higgsfield AI makes video ad creation easier for small businesses and brings new creative tools to market faster.",
+          "signal_score": 46,
+          "seo_quality_score": 58,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "durable-intelligence-layer",
+            "high-value-topic",
+            "case-study-penalty"
+          ]
+        },
+        "models": [
+          {
+            "model_id": "gpt-6-astra",
+            "provider": "OpenAI",
+            "family": "GPT-6",
+            "model": "GPT-6 Astra",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-04-30",
+            "reasoning": {
+              "type": "reasoning effort",
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "medium"
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
+            "pricing_standard": {
+              "start": "2026-09-03",
+              "end": null,
+              "input": 10,
+              "cached_input": 1,
+              "cache_write": 12.5,
+              "output": 50
+            },
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-10-05",
+            "official_sources": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "history": []
+          }
+        ],
+        "source_urls": [
+          "https://developers.openai.com/api/docs/guides/latest-model",
+          "https://developers.openai.com/api/docs/guides/model-selection",
+          "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://openai.com/index/gpt-6-astra/",
+          "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+        ]
+      },
+      "review_status": "approved",
+      "approved_for_publish": true,
+      "index_decision": "index",
+      "validator_quality_score": 96,
+      "schema_types": [
+        "TechArticle",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList"
+      ],
+      "prompt_version": "manual-research-v1",
+      "draft": {
+        "seo_slug_recommendation": "higgsfield-gpt-6-astra-video-workflow",
+        "primary_search_query": "Higgsfield GPT-6 Astra",
+        "secondary_search_queries": [
+          "Higgsfield GPT-6 Astra video features",
+          "Higgsfield AI GPT-6 Astra case study",
+          "GPT-6 Astra video workflow",
+          "Higgsfield one engineer one day Astra",
+          "GPT-6 Astra video generation"
+        ],
+        "seo_title": "Higgsfield + GPT-6 Astra: Video Features in One Day",
+        "meta_description": "Higgsfield says one engineer shipped new video exploration features in a day with GPT-6 Astra. See the workflow, model role, costs, limits, and lessons.",
+        "h1": "How Higgsfield used GPT-6 Astra to ship video features in a day",
+        "intro": "Higgsfield AI’s GPT-6 Astra case study is useful for two different reasons: it describes a customer-facing workflow that turns an existing video ad into many new creative directions, and an internal engineering workflow where Higgsfield says one engineer delivered new exploration features within a day. The key detail is that Astra is supporting planning, reasoning, and development around a video product—not acting as the video-generation model itself.",
+        "what_changed": "OpenAI says Higgsfield is using GPT-6 Astra on both sides of its product workflow. For customers, a prompt such as taking a top-performing ad and generating 100 new variations can be turned into new creative directions, including localized versions for different countries. Inside Higgsfield, the company says Astra’s long-horizon task planning and ability to plan across multiple steps helped a single engineer bring new exploration features to market within a day, working closely with the creative team.",
+        "why_it_matters": "The case study illustrates a broader pattern for multimodal products: the highest-value language model may sit above the media-generation layer, coordinating intent, planning variations, structuring multi-step work, and helping engineers build product capabilities faster. That is different from claiming the model generates the final video. OpenAI’s own GPT-6 Astra model page lists video input and video output as unsupported, so the evidence points to Astra as a reasoning and workflow component inside Higgsfield’s broader video stack.",
+        "key_facts": [
+          {
+            "claim": "OpenAI published the Higgsfield case study on September 21, 2026 and says GPT-6 Astra supports both customer-facing ad creation and faster feature development inside Higgsfield.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "claim": "Higgsfield’s example customer workflow starts with an instruction such as taking a top-performing ad and generating 100 new variations, with possible creative directions including versions customized for different countries.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "claim": "Higgsfield CEO Alex Mashrabov says GPT-6 Astra helped a single engineer deliver new exploration features within a day.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "claim": "OpenAI attributes the internal development speed in the case study to Astra’s long-horizon task planning, multi-step planning capability, and collaboration between Higgsfield’s creative and engineering teams.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "claim": "GPT-6 Astra’s official model documentation lists text and image input with text output; audio and video input or output are not supported by the model itself.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "claim": "GPT-6 Astra has a 1,050,000-token context window, supports up to 128,000 output tokens, and lists an April 30, 2026 knowledge cutoff.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "claim": "Standard GPT-6 Astra API pricing is $10 per million input tokens, $1 per million cached input tokens, $12.50 per million cache-write tokens, and $50 per million output tokens.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "claim": "OpenAI positions GPT-6 Astra for demanding reasoning, coding, computer use, research, and professional work, with reasoning effort settings from low through max.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/latest-model",
+              "https://developers.openai.com/api/docs/guides/model-selection"
+            ]
+          }
+        ],
+        "pricing_or_capability_impact": "The Higgsfield story does not disclose token usage, reasoning-effort settings, per-feature API cost, engineering hours saved against a measured baseline, or the cost of the video-generation layer. For teams evaluating a similar architecture, Astra’s standard API rates are $10 per million input tokens, $1 cached input, $12.50 cache write, and $50 output. Requests above 272,000 input tokens use higher long-context rates for the full request, so the economics of a large-context creative or coding workflow depend heavily on prompt size, cache reuse, output volume, and how often the workflow runs.",
+        "comparison_points": [
+          {
+            "dimension": "Customer-facing role",
+            "analysis": "The customer workflow uses GPT-6 to turn a high-level ad request into creative directions and variations. The case study gives country customization as an example of how one existing ad can branch into many versions.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "dimension": "Internal engineering role",
+            "analysis": "Higgsfield says GPT-6 Astra helps a single engineer deliver new exploration features within a day, with OpenAI highlighting long-horizon and multi-step planning rather than a narrow code-completion task.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "dimension": "Astra vs video generation",
+            "analysis": "GPT-6 Astra should not be interpreted as Higgsfield’s video-generation engine. OpenAI’s model page lists video input and video output as unsupported, while the case study describes Astra supporting creative-direction and engineering workflows around Higgsfield’s video product.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "dimension": "Evidence behind the one-day claim",
+            "analysis": "The one-day result is a Higgsfield-reported customer outcome quoted in OpenAI’s case study. The page does not provide an independent benchmark, a pre-Astra engineering baseline, task complexity measurements, or a controlled comparison with another model.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "dimension": "Model fit",
+            "analysis": "Astra is positioned by OpenAI for demanding multi-step reasoning, coding, computer use, and professional work, which aligns with the case study’s description of long-horizon planning and feature-development assistance.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/latest-model"
+            ]
+          },
+          {
+            "dimension": "Cost visibility",
+            "analysis": "OpenAI publishes Astra’s API token prices, but the Higgsfield case study does not disclose the number of tokens, tool calls, reasoning effort, cache behavior, or total model spend behind either the ad workflow or the one-day engineering result.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "detail": "GPT-6 Astra’s model ID is gpt-6-astra. Its documented context window is 1.05 million tokens with a maximum output of 128,000 tokens, which can support large project context and multi-step work when the application supplies that context.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "detail": "The model accepts text and image input and returns text output. OpenAI explicitly marks video input and video output as unsupported, which is important when interpreting Astra’s role in a video-production company.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "detail": "Astra supports low, medium, high, xhigh, and max reasoning effort. OpenAI’s model guidance recommends choosing model and reasoning effort based on workload quality, latency, and cost rather than assuming the highest setting is required for every task.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/latest-model",
+              "https://developers.openai.com/api/docs/guides/model-selection"
+            ]
+          },
+          {
+            "detail": "Through the Responses API, GPT-6 Astra supports tools including web search, file search, image generation, code interpreter, hosted shell, apply patch, skills, computer use, MCP, and tool search.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/latest-model"
+            ]
+          },
+          {
+            "detail": "For prompts above 272,000 input tokens, OpenAI documents long-context pricing that doubles input and cache rates and multiplies output pricing by 1.5 for the full request.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/pricing"
+            ]
+          },
+          {
+            "detail": "OpenAI’s GPT-6 guidance describes Astra as capable of multi-step workflows across code, browsers, and professional software, which is consistent with the planning-oriented role described in the Higgsfield case study.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/guides/latest-model",
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          }
+        ],
+        "practical_takeaways": [
+          {
+            "takeaway": "Separate the orchestration model from the media-generation model in your architecture. A strong reasoning model can plan creative variants, analyze inputs, coordinate steps, or help build product features without being the system that renders the final video.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "takeaway": "When evaluating a one-day development claim, reproduce the same feature with a documented baseline: task scope, engineer time, prompts, tool access, review time, failures, and final acceptance criteria should all be measured.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/guides/model-selection"
+            ]
+          },
+          {
+            "takeaway": "For customer-facing creative variation, test whether the model improves useful variation quality and localization rather than merely increasing the number of generated options.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "takeaway": "Track cost per completed creative or engineering task, not only token price. Astra’s per-token rate is high enough that cache reuse, reasoning effort, long-context thresholds, tool calls, and output length can materially change the economics.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/pricing",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/model-selection"
+            ]
+          },
+          {
+            "takeaway": "Keep human creative review in the loop for ad variations and product features. The case study itself credits collaboration between Higgsfield’s creative team and engineers rather than presenting Astra as an autonomous replacement for either group.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          }
+        ],
+        "before_vs_after": [],
+        "who_should_care": "Teams building AI video products, creative automation platforms, ad-generation workflows, multimodal products, and internal developer tools should care most. The case is particularly relevant to product leaders deciding where a frontier reasoning model belongs in a media pipeline: as a planner, coordinator, coding agent, or creative-direction layer rather than automatically assuming it should generate the media asset itself.",
+        "what_to_verify": [
+          "Measure the exact engineering task Higgsfield’s one-day claim is being compared against before using the result as a productivity benchmark for your own team.",
+          "Confirm which model performs each stage of the creative pipeline—planning, copy or concept generation, image work, video generation, editing, evaluation, and final rendering—so Astra’s role is not conflated with the entire stack.",
+          "Track reasoning effort, prompt and context size, cached-input reuse, output tokens, tool calls, retries, and human review time when estimating cost per completed feature or creative asset.",
+          "Run the same representative workflow with GPT-6 Astra and a lower-cost model such as GPT-6.1 Sol to determine whether Astra’s extra capability changes the final outcome enough to justify the cost.",
+          "For ad localization or large-scale variation, define quality and brand-safety checks before increasing the number of generated creative directions."
+        ],
+        "faq": [
+          {
+            "question": "How did Higgsfield use GPT-6 Astra?",
+            "answer": "OpenAI says Higgsfield uses GPT-6 Astra in customer-facing creative workflows and in internal feature development. The customer workflow turns high-level ad requests into new creative directions, while the internal workflow uses Astra’s planning capabilities to help engineers build features faster.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "question": "Did GPT-6 Astra generate Higgsfield’s videos directly?",
+            "answer": "The published evidence does not support that interpretation. OpenAI’s GPT-6 Astra model page lists video input and video output as unsupported. The Higgsfield case study describes Astra supporting creative-direction generation, planning, and feature development around Higgsfield’s video stack.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "question": "What did Higgsfield ship in one day with GPT-6 Astra?",
+            "answer": "Higgsfield CEO Alex Mashrabov says one engineer was able to deliver new exploration features within a day with GPT-6 Astra. The OpenAI story does not provide a detailed feature specification or a controlled before-and-after engineering benchmark.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "question": "What is the example GPT-6 video-ad workflow at Higgsfield?",
+            "answer": "OpenAI gives an example where a user asks Higgsfield to take a top-performing ad and generate 100 new variations. GPT-6 helps turn that request into creative directions, including variations tailored to different countries.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/"
+            ]
+          },
+          {
+            "question": "How much does GPT-6 Astra cost for a workflow like Higgsfield’s?",
+            "answer": "OpenAI lists standard API pricing of $10 per million input tokens, $1 per million cached input tokens, $12.50 per million cache-write tokens, and $50 per million output tokens. Higgsfield’s case study does not disclose its token usage or total cost per feature or ad workflow.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/pricing",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra"
+            ]
+          },
+          {
+            "question": "Why might Astra fit a product-development workflow?",
+            "answer": "OpenAI positions GPT-6 Astra for demanding reasoning, coding, computer use, research, and professional work, and its GPT-6 guidance emphasizes multi-step workflows. Those capabilities align with Higgsfield’s description of using Astra for long-horizon and multi-step planning during feature development.",
+            "source_urls": [
+              "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/guides/latest-model"
+            ]
+          }
+        ],
+        "sources": [
+          "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra/",
+          "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/guides/latest-model",
+          "https://developers.openai.com/api/docs/guides/model-selection",
+          "https://openai.com/index/gpt-6-astra/"
+        ],
+        "comparison_label": "CASE STUDY MAP",
+        "comparison_heading": "What the Higgsfield result actually shows — and what it does not."
+      },
+      "source_url": "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra",
+      "approved_at": "2026-10-05",
+      "approval_origin": "manual-research",
+      "preserve_existing_route": true
     }
   ]
 }
