@@ -135,7 +135,7 @@ def validate_copilot_memory_guide():
     text = path.read_text(encoding="utf-8")
     required = [
         '<link rel="canonical" href="https://sxf.si/guides/github-copilot-memory/"',
-        'GitHub Copilot Memory: How It Works &amp; Privacy (2026)',
+        'GitHub Copilot Memory: How It Works & Privacy (2026)',
         'Repository-level fact',
         'User-level preference',
         '28 days',
