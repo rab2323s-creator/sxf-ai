@@ -527,6 +527,326 @@
       "approved_at": "2026-10-04",
       "approval_origin": "manual-research",
       "preserve_existing_route": true
+    },
+    {
+      "signal_slug": "introducing-gpt-6-1-sol-dd66aca",
+      "signal_url": "https://sxf.si/signals/introducing-gpt-6-1-sol-dd66aca/",
+      "evidence_hash": "2b1f2729e6c1d4e2c44aecc03e949bec7fa535f0f13cd343f95567bc7ee2719c",
+      "evidence_snapshot_hash": "31157efcf1db14abbeadd2cd17670d3ea96657ef5aaf9b8eb58cc45ae8e100a4",
+      "evidence_snapshot": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://openai.com/index/introducing-gpt-6-1-sol"
+          ]
+        },
+        "signal": {
+          "title": "Introducing GPT-6.1 Sol",
+          "url": "https://openai.com/index/introducing-gpt-6-1-sol",
+          "signal_url": "https://sxf.si/signals/introducing-gpt-6-1-sol-dd66aca/",
+          "source": "OpenAI",
+          "published": "2026-09-29T10:00:00Z",
+          "category": "Models",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "Meet GPT-6.1 Sol: near-Astra intelligence for coding, computer use, and professional work at one-fifth of Astra’s standard API input and output token prices.",
+          "signal_score": 64,
+          "seo_quality_score": 89,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "named-model",
+            "durable-intelligence-layer"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
+          "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol",
+          "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+          "https://openai.com/index/introducing-gpt-6-1-sol"
+        ]
+      },
+      "review_status": "approved",
+      "approved_for_publish": true,
+      "index_decision": "index",
+      "validator_quality_score": 96,
+      "schema_types": [
+        "TechArticle",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList"
+      ],
+      "prompt_version": "manual-research-v1",
+      "draft": {
+        "seo_slug_recommendation": "gpt-6-1-sol-pricing-specs-benchmarks",
+        "primary_search_query": "GPT-6.1 Sol",
+        "secondary_search_queries": [
+          "GPT-6.1 Sol pricing",
+          "GPT-6.1 Sol benchmarks",
+          "GPT-6.1 Sol context window",
+          "GPT-6.1 Sol vs GPT-6 Sol",
+          "GPT-6.1 Sol vs GPT-6 Astra"
+        ],
+        "seo_title": "GPT-6.1 Sol: Pricing, Specs, Benchmarks & Availability",
+        "meta_description": "GPT-6.1 Sol brings near-Astra performance at lower cost. See API pricing, 1.05M context, benchmarks, tools, safety, and availability.",
+        "h1": "GPT-6.1 Sol: pricing, specs, benchmarks and availability",
+        "intro": "GPT-6.1 Sol is OpenAI’s upgraded Sol model for complex coding, computer use, professional work, and agentic workflows. It keeps the Sol price tier for standard input and output tokens while cutting cached-input cost, adds stronger benchmark performance across several demanding tasks, and is positioned as the lower-cost alternative when teams want performance closer to GPT-6 Astra without paying Astra’s standard token rates.",
+        "what_changed": "OpenAI introduced GPT-6.1 Sol on September 29, 2026 as an upgrade to GPT-6 Sol. The new model targets the same broad class of demanding coding and agentic work but improves capability across software engineering, professional document tasks, multi-step business workflows, computer use, scientific workflows, factuality, and alignment evaluations. OpenAI also cut cached-input pricing from GPT-6 Sol’s documented $0.20 per million tokens to $0.10 for GPT-6.1 Sol while keeping standard input at $2 and output at $10 per million tokens.",
+        "why_it_matters": "GPT-6.1 Sol changes the model-selection tradeoff inside the GPT-6 family. Teams that previously had to choose between GPT-6 Sol’s lower cost and GPT-6 Astra’s stronger performance now have a model OpenAI says approaches Astra on several complex workloads at materially lower cost. The release is especially relevant for agents that reuse large amounts of context, because cached input is cheaper than on GPT-6 Sol, and for production teams that need tool calling, computer use, code execution, MCP, or long-context work without moving to Astra pricing.",
+        "key_facts": [
+          {
+            "claim": "OpenAI introduced GPT-6.1 Sol on September 29, 2026 as the latest model family update in the GPT-6 series and described it as an upgrade to GPT-6 Sol.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review"
+            ]
+          },
+          {
+            "claim": "GPT-6.1 Sol has a 1,050,000-token context window, supports up to 128,000 output tokens, and lists an April 30, 2026 knowledge cutoff.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "claim": "Standard API pricing is $2 per million input tokens, $0.10 per million cached input tokens, and $10 per million output tokens.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "claim": "Compared with GPT-6 Sol, GPT-6.1 Sol keeps the same documented standard input and output price points while reducing cached-input pricing from $0.20 to $0.10 per million tokens.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-sol"
+            ]
+          },
+          {
+            "claim": "GPT-6.1 Sol supports low, medium, high, xhigh, and max reasoning effort, with medium documented as the default; none and minimal are not supported.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "claim": "OpenAI documents support for web search, file search, image generation, code interpreter, hosted shell, apply patch, skills, computer use, MCP, and tool search through the Responses API tool stack.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "claim": "GPT-6.1 Sol is available through the OpenAI API as gpt-6.1-sol and is also available in ChatGPT Work and Codex for eligible paid-plan users, subject to plan and workspace access.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
+            ]
+          },
+          {
+            "claim": "OpenAI’s deployment safety addendum classifies GPT-6.1 Sol as Critical for cybersecurity capability and High for biological and chemical capability under its Preparedness Framework, and says it uses the same safeguards stack as GPT-6 Astra.",
+            "source_urls": [
+              "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review"
+            ]
+          }
+        ],
+        "pricing_or_capability_impact": "At standard API rates, GPT-6.1 Sol costs $2 per million input tokens and $10 per million output tokens versus $10 and $50 for GPT-6 Astra in OpenAI’s launch comparison. That is one-fifth of Astra’s standard input and output token prices. Cached input is $0.10 per million tokens for GPT-6.1 Sol, compared with $0.20 for GPT-6 Sol and $1.00 for Astra in the same launch material. For agent workflows that repeatedly reuse context, the cached-input reduction can matter independently of the headline input/output rates.",
+        "comparison_points": [
+          {
+            "dimension": "GPT-6.1 Sol vs GPT-6 Sol — coding",
+            "analysis": "On DeepSWE v1.1, OpenAI reports that GPT-6.1 Sol matches GPT-6 Astra at roughly one-fifth of the cost and exceeds GPT-6 Sol’s best score by 6.4 percentage points at a lower reasoning effort and cost.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "dimension": "Professional document work",
+            "analysis": "On GDP.pdf, OpenAI reports that GPT-6.1 Sol approaches GPT-6 Astra’s performance at roughly one-fifth the cost per task and scores above Opus 5.5 with fallbacks across the tested reasoning settings.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "dimension": "Multi-step business workflows",
+            "analysis": "On AutomationBench, GPT-6.1 Sol is reported 4.8 percentage points above GPT-6 Sol at the same medium reasoning setting and 2.2 points above Opus 5.5 at roughly one-third of the cost.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "dimension": "Computer use",
+            "analysis": "On the OSWorld 2.0 offline set, OpenAI reports GPT-6.1 Sol seven percentage points above GPT-6 Sol at maximum reasoning effort, while coming within 2.1 points of Astra at roughly one-seventh the cost per task.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "dimension": "Scientific workflows",
+            "analysis": "On Terminal-Bench Science 0.1, OpenAI reports that GPT-6.1 Sol more than doubles GPT-6 Sol’s score at maximum reasoning effort and costs $5.47 per task on average at that setting, versus $23.80 for Astra; Astra still posts the highest score at 68.1%.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "dimension": "Factuality",
+            "analysis": "In OpenAI’s difficult factuality evaluation, GPT-6.1 Sol reduces the share of responses containing a factual error from 11.4% with GPT-6 Sol to 7.7% at low reasoning effort, while staying within 1.9 percentage points of Astra across tested reasoning settings.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "detail": "Use model ID gpt-6.1-sol in the API. OpenAI recommends the Responses API for tool calling; Chat Completions is supported for requests without tools.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "detail": "The model supports a 1.05 million-token context window and up to 128,000 output tokens, making it suitable for long-document, codebase, and multi-step agent workloads where large working context matters.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "detail": "Reasoning effort can be set to low, medium, high, xhigh, or max. Medium is the documented default, while none and minimal are not supported for GPT-6.1 Sol.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "detail": "The documented tool set includes function calling, web search, file search, image generation, code interpreter, hosted shell, apply patch, skills, computer use, MCP, and tool search when using the supported API path.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "detail": "GPT-6.1 Sol supports structured outputs and streaming but does not support fine-tuning according to the current model documentation.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "detail": "OpenAI documents US and EU data residency for GPT-6.1 Sol, with availability and processing-mode details subject to the data-residency rules described in its API documentation.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          }
+        ],
+        "practical_takeaways": [
+          {
+            "takeaway": "Benchmark GPT-6.1 Sol against Astra on your own complex tasks rather than assuming the cheaper model is always sufficient; OpenAI itself recommends comparing the quality-versus-cost tradeoff on real workloads.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "takeaway": "For agent systems that reuse large prompts, files, or instructions across requests, include cached-input volume in cost estimates because GPT-6.1 Sol’s $0.10 cached-input rate is half GPT-6 Sol’s documented rate.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-sol"
+            ]
+          },
+          {
+            "takeaway": "Use the Responses API when the workflow requires tools such as computer use, web search, hosted shell, code interpreter, MCP, or apply patch; do not design a tool-heavy deployment around Chat Completions for this model.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "takeaway": "Do not migrate from GPT-6 Sol only on benchmark headlines. Validate latency, reasoning-effort settings, tool behavior, factuality, and total cost per completed task under the same prompts and environment your production system uses.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol"
+            ]
+          },
+          {
+            "takeaway": "For Work or Codex deployments, verify plan eligibility and workspace permissions before standardizing GPT-6.1 Sol as a team default, because model availability can depend on rollout access and administrator settings.",
+            "source_urls": [
+              "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
+            ]
+          }
+        ],
+        "before_vs_after": [],
+        "who_should_care": "API teams running coding or agent workflows, developers using computer-use or tool-calling systems, organizations processing complex professional documents, and Work or Codex users choosing between Sol and Astra should care most. GPT-6.1 Sol is particularly relevant when the workload needs more capability than GPT-6 Sol but the cost profile of Astra is difficult to justify at production scale.",
+        "what_to_verify": [
+          "Confirm that gpt-6.1-sol is enabled for the API project, ChatGPT plan, or workspace where you intend to deploy it.",
+          "Benchmark GPT-6.1 Sol against both GPT-6 Sol and GPT-6 Astra using the same prompts, tools, reasoning effort, and acceptance criteria used in production.",
+          "Estimate standard input, cached input, and output separately; repeated-context agent workloads may benefit disproportionately from the lower cached-input price.",
+          "Check whether your workflow requires tool calling, because OpenAI directs GPT-6.1 Sol tool use through the Responses API rather than Chat Completions.",
+          "Review the current model and safety documentation for residency, safeguard, and capability restrictions before deploying high-impact or security-sensitive agent workflows."
+        ],
+        "faq": [
+          {
+            "question": "What is GPT-6.1 Sol?",
+            "answer": "GPT-6.1 Sol is OpenAI’s upgraded Sol model in the GPT-6 family. It is positioned for complex coding, computer use, professional work, and agentic workflows where users want performance closer to GPT-6 Astra at a lower cost.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "question": "How much does GPT-6.1 Sol cost in the API?",
+            "answer": "OpenAI lists standard API pricing of $2 per million input tokens, $0.10 per million cached input tokens, and $10 per million output tokens for GPT-6.1 Sol.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "question": "What is the GPT-6.1 Sol context window?",
+            "answer": "GPT-6.1 Sol has a 1,050,000-token context window and supports a maximum output of 128,000 tokens according to OpenAI’s current model documentation.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          },
+          {
+            "question": "How is GPT-6.1 Sol different from GPT-6 Sol?",
+            "answer": "OpenAI reports stronger results across coding, professional work, computer use, science, factuality, and alignment evaluations. Standard input and output pricing remain at the Sol tier, while cached-input pricing drops from $0.20 to $0.10 per million tokens.",
+            "source_urls": [
+              "https://openai.com/index/introducing-gpt-6-1-sol",
+              "https://developers.openai.com/api/docs/models/gpt-6-sol"
+            ]
+          },
+          {
+            "question": "Is GPT-6.1 Sol available in ChatGPT?",
+            "answer": "OpenAI makes GPT-6.1 Sol available in ChatGPT Work and Codex for eligible paid-plan users, subject to rollout and workspace settings. OpenAI’s help documentation says it is not available in regular ChatGPT conversations.",
+            "source_urls": [
+              "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+              "https://openai.com/index/introducing-gpt-6-1-sol"
+            ]
+          },
+          {
+            "question": "Which tools does GPT-6.1 Sol support?",
+            "answer": "OpenAI documents support for function calling, web search, file search, image generation, code interpreter, hosted shell, apply patch, skills, computer use, MCP, and tool search, with the Responses API used for tool calling.",
+            "source_urls": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+            ]
+          }
+        ],
+        "sources": [
+          "https://openai.com/index/introducing-gpt-6-1-sol",
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol",
+          "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
+          "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+          "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        ],
+        "comparison_label": "BENCHMARK MAP",
+        "comparison_heading": "Where GPT-6.1 Sol improves on Sol and approaches Astra."
+      },
+      "source_url": "https://openai.com/index/introducing-gpt-6-1-sol",
+      "approved_at": "2026-10-04",
+      "approval_origin": "manual-research",
+      "preserve_existing_route": true
     }
   ]
 }
