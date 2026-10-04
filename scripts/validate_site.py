@@ -153,6 +153,10 @@ def validate_copilot_memory_guide():
     if len(text.split()) < 2600:
         fail("Copilot Memory guide is unexpectedly thin")
 
+    guides_index = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    if '/guides/github-copilot-memory/' not in guides_index:
+        fail("Copilot Memory guide missing from generated guides index")
+
 def validate_ai_security_authority_page():
     path = ROOT / "topics" / "ai-security" / "index.html"
     if not path.exists():
