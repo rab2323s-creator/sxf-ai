@@ -63,24 +63,28 @@ def citation_links(urls):
     )
 
 
-def review_schema(item, draft, schema_plan):
+def review_schema(item, draft, schema_plan, review):
     canonical = item["signal_url"]
     faq = draft.get("faq") or []
     comparisons = draft.get("comparison_points") or []
     graph = [
         {
-            "@type": "TechArticle",
+            "@type": ["Article", "TechArticle"],
             "@id": canonical + "#article",
             "headline": draft["h1"],
             "description": draft["meta_description"],
             "datePublished": item["published"],
+            "dateModified": review.get("approved_at") or item.get("modified_at") or item["published"],
             "mainEntityOfPage": canonical,
             "url": canonical,
             "articleSection": item["category"],
             "isPartOf": {"@id": "https://sxf.si/#website"},
             "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
             "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+            "publisher": {"@type": "Organization", "name": "SXF / AI", "url": BASE_URL + "/"},
+            "about": [{"@type": "Thing", "name": tag} for tag in item.get("tags", [])],
             "citation": draft["sources"],
+            "image": BASE_URL + "/assets/og/sxf-ai-social.webp",
             "inLanguage": "en",
         },
         {
@@ -165,7 +169,7 @@ def research_signal_preview_html(item, all_items, review, evidence, published=Fa
         )
 
     canonical = item["signal_url"]
-    schema = review_schema(item, draft, schema_plan)
+    schema = review_schema(item, draft, schema_plan, review)
     related = "".join(signal_row(x) for x in related_items(item, all_items))
     topics = item_topics(item)
     models = extract_models(item["title"])
@@ -186,6 +190,20 @@ def research_signal_preview_html(item, all_items, review, evidence, published=Fa
         </tr>'''
         for row in draft["comparison_points"]
     )
+
+    comparison_section = ""
+    if draft["comparison_points"]:
+        comparison_label = draft.get("comparison_label") or "COMPARISON"
+        comparison_heading = draft.get("comparison_heading") or "Evidence-backed comparison."
+        comparison_section = f"""
+        <section class="research-section shell">
+          <div class="intel-section-head"><div><p class="eyebrow">{escape(comparison_label)}</p><h2>{escape(comparison_heading)}</h2></div><span>{len(draft["comparison_points"])} dimensions</span></div>
+          <div class="model-comparison research-comparison"><div class="model-table-wrap"><table>
+            <thead><tr><th>Dimension</th><th>Analysis</th><th>Evidence</th></tr></thead>
+            <tbody>{comparison_rows}</tbody>
+          </table></div></div>
+        </section>
+        """
 
     faq_html = "".join(
         f'''<details>
@@ -211,6 +229,9 @@ def research_signal_preview_html(item, all_items, review, evidence, published=Fa
         f'<span>NOINDEX · NOT PUBLISHED · QUALITY {review["validator_quality_score"]}/100</span></div></div>'
     )
     review_label = "Published" if published else "Preview"
+    manual_research = review.get("approval_origin") == "manual-research"
+    quality_label = "REVIEWED" if manual_research else "QUALITY"
+    quality_value = (review.get("approved_at") or "Reviewed") if manual_research else f'{review["validator_quality_score"]}/100'
     source_note = (
         "This research signal is grounded in the cited official sources and structured evidence used by SXF."
         if published else
@@ -240,7 +261,7 @@ def research_signal_preview_html(item, all_items, review, evidence, published=Fa
           <div class="signal-meta-strip">
             <div><span>SOURCE</span><strong>{escape(item["source"])}</strong></div>
             <div><span>PUBLISHED</span><strong>{escape(display_date(item["published"]))}</strong></div>
-            <div><span>QUALITY</span><strong>{review["validator_quality_score"]}/100</strong></div>
+            <div><span>{escape(quality_label)}</span><strong>{escape(str(quality_value))}</strong></div>
             <div><span>STATUS</span><strong>{review_label}</strong></div>
           </div>
         </section>
@@ -265,13 +286,7 @@ def research_signal_preview_html(item, all_items, review, evidence, published=Fa
           <div class="research-grid">{list_cards(draft["key_facts"], "claim")}</div>
         </section>
 
-        <section class="research-section shell">
-          <div class="intel-section-head"><div><p class="eyebrow">COMPARISON</p><h2>Where Sol and Luna actually differ.</h2></div><span>{len(draft["comparison_points"])} comparison dimensions</span></div>
-          <div class="model-comparison research-comparison"><div class="model-table-wrap"><table>
-            <thead><tr><th>Dimension</th><th>Analysis</th><th>Evidence</th></tr></thead>
-            <tbody>{comparison_rows}</tbody>
-          </table></div></div>
-        </section>
+        {comparison_section}
 
         <section class="research-section shell">
           <div class="research-two-up">
@@ -359,16 +374,28 @@ def main():
 
         candidate = candidate_by_source.get(review.get("source_url"))
         item = item_by_source.get(review.get("source_url"))
-        if candidate is None or item is None:
-            raise RuntimeError(f"{slug}: review target missing from current candidate/archive data")
+        if item is None:
+            raise RuntimeError(f"{slug}: review target missing from archive data")
         if item.get("signal_url") != review.get("signal_url"):
             raise RuntimeError(f"{slug}: promoted signal URL drift")
-        if not evidence_matches_review(review, candidate):
-            raise RuntimeError(f"{slug}: evidence changed; regenerate and review before rendering")
+
+        evidence_snapshot = review.get("evidence_snapshot")
+        if evidence_snapshot is not None:
+            snapshot_hash = review.get("evidence_snapshot_hash")
+            if not snapshot_hash or sha256_json(evidence_snapshot) != snapshot_hash:
+                raise RuntimeError(f"{slug}: reviewed evidence snapshot integrity check failed")
+            evidence = copy.deepcopy(evidence_snapshot)
+        else:
+            if candidate is None:
+                raise RuntimeError(f"{slug}: review target missing from current candidate data and has no evidence snapshot")
+            if not evidence_matches_review(review, candidate):
+                raise RuntimeError(f"{slug}: evidence changed; regenerate and review before rendering")
+            evidence = candidate["evidence"]
+
         if int(review.get("validator_quality_score", 0)) < int(gate["minimum_ai_quality_score"]):
             raise RuntimeError(f"{slug}: validator quality score below publish gate")
 
-        deterministic_errors = validate_publish_draft(review["draft"], candidate["evidence"], gate)
+        deterministic_errors = validate_publish_draft(review["draft"], evidence, gate)
         if deterministic_errors:
             raise RuntimeError(f"{slug}: reviewed draft failed deterministic gate: {' | '.join(deterministic_errors)}")
 
@@ -379,7 +406,7 @@ def main():
             if review.get("approved_for_publish") is not False or review.get("index_decision") != "noindex":
                 raise RuntimeError(f"{slug}: preview safety flags invalid")
             preview_dir.mkdir(parents=True, exist_ok=True)
-            html = research_signal_preview_html(item, items, review, candidate["evidence"], published=False)
+            html = research_signal_preview_html(item, items, review, evidence, published=False)
             (preview_dir / "index.html").write_text(html, encoding="utf-8")
             rendered_preview += 1
             continue
@@ -388,12 +415,13 @@ def main():
             raise RuntimeError(f"{slug}: approved review must explicitly allow publish and indexing")
         if not review.get("approved_at"):
             raise RuntimeError(f"{slug}: approved review missing approved_at")
-        if slug != preview_slug:
-            raise RuntimeError(f"{slug}: approved route must equal reviewed SEO slug")
+        preserve_existing_route = bool(review.get("preserve_existing_route"))
+        if slug != preview_slug and not preserve_existing_route:
+            raise RuntimeError(f"{slug}: approved route must equal reviewed SEO slug unless the existing indexed route is explicitly preserved")
 
         live_dir = ROOT / "signals" / slug
         live_dir.mkdir(parents=True, exist_ok=True)
-        html = research_signal_preview_html(item, items, review, candidate["evidence"], published=True)
+        html = research_signal_preview_html(item, items, review, evidence, published=True)
         (live_dir / "index.html").write_text(html, encoding="utf-8")
 
         if preview_dir.exists():
