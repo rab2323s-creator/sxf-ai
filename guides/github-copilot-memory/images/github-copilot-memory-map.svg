@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-labelledby="title desc">
+<title id="title">How GitHub Copilot Memory works across agents</title>
+<desc id="desc">Repository facts and user preferences connect to Copilot cloud agent, code review, CLI and agentic autofix. Repository facts are validated against current code before reuse.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07101d"/><stop offset=".55" stop-color="#0a1020"/><stop offset="1" stop-color="#071712"/></linearGradient>
+  <linearGradient id="core" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2e79ff"/><stop offset=".55" stop-color="#7257ff"/><stop offset="1" stop-color="#35d6aa"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <style>
+    .label{font:700 26px ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;fill:#eef5ff}
+    .small{font:500 18px ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;fill:#9db0c9}
+    .tiny{font:700 15px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#78aaff;letter-spacing:1.5px}
+    .card{fill:#0b1423;stroke:#27446d;stroke-width:2}
+  </style>
+</defs>
+<rect width="1672" height="941" rx="36" fill="url(#bg)"/>
+<g opacity=".16" stroke="#5c83b5"><path d="M0 150H1672M0 300H1672M0 450H1672M0 600H1672M0 750H1672"/><path d="M180 0V941M420 0V941M660 0V941M900 0V941M1140 0V941M1380 0V941"/></g>
+
+<g filter="url(#glow)" opacity=".7" fill="none" stroke-width="8">
+  <path d="M836 394 C660 330 520 260 354 220" stroke="#347dff"/>
+  <path d="M836 394 C650 470 500 585 338 660" stroke="#735cff"/>
+  <path d="M836 394 C1020 340 1180 260 1330 220" stroke="#36d3b0"/>
+  <path d="M836 394 C1020 485 1170 600 1334 666" stroke="#8e66ff"/>
+</g>
+
+<g transform="translate(642 250)">
+  <ellipse cx="194" cy="58" rx="150" ry="48" fill="#102543" stroke="#4f85ff" stroke-width="3"/>
+  <rect x="44" y="58" width="300" height="165" fill="#0d1930" stroke="#4f85ff" stroke-width="3"/>
+  <ellipse cx="194" cy="223" rx="150" ry="48" fill="#0b1730" stroke="#765eff" stroke-width="3"/>
+  <ellipse cx="194" cy="58" rx="128" ry="34" fill="url(#core)" opacity=".65"/>
+  <text x="194" y="125" text-anchor="middle" class="tiny">COPILOT MEMORY</text>
+  <text x="194" y="162" text-anchor="middle" class="label">Persistent context</text>
+  <text x="194" y="194" text-anchor="middle" class="small">captured from real work</text>
+</g>
+
+<g transform="translate(96 110)">
+  <rect class="card" width="460" height="220" rx="26"/>
+  <text x="34" y="48" class="tiny">SUPPORTED SURFACE</text><text x="34" y="86" class="label">Cloud agent</text>
+  <text x="34" y="124" class="small">Implements tasks with repository context</text>
+  <text x="34" y="158" class="small">and reuses validated project knowledge.</text>
+  <circle cx="408" cy="58" r="25" fill="#173d7a"/><path d="M394 61h28M408 47v28" stroke="#79a9ff" stroke-width="4"/>
+</g>
+
+<g transform="translate(96 610)">
+  <rect class="card" width="460" height="220" rx="26"/>
+  <text x="34" y="48" class="tiny">SUPPORTED SURFACE</text><text x="34" y="86" class="label">Code review</text>
+  <text x="34" y="124" class="small">Uses repository facts to recognize</text>
+  <text x="34" y="158" class="small">local patterns; not user preferences.</text>
+  <circle cx="408" cy="58" r="25" fill="#342579"/><path d="M394 60l10 10 20-24" fill="none" stroke="#b39cff" stroke-width="4"/>
+</g>
+
+<g transform="translate(1116 110)">
+  <rect class="card" width="460" height="220" rx="26"/>
+  <text x="34" y="48" class="tiny">SUPPORTED SURFACE</text><text x="34" y="86" class="label">Agentic autofix</text>
+  <text x="34" y="124" class="small">Reads useful repository memories and</text>
+  <text x="34" y="158" class="small">can store successful secure fix patterns.</text>
+  <circle cx="408" cy="58" r="25" fill="#164d43"/><path d="M408 39l20 9v15c0 15-11 25-20 30-9-5-20-15-20-30V48z" fill="none" stroke="#6aefcb" stroke-width="4"/>
+</g>
+
+<g transform="translate(1116 610)">
+  <rect class="card" width="460" height="220" rx="26"/>
+  <text x="34" y="48" class="tiny">SUPPORTED SURFACE</text><text x="34" y="86" class="label">Copilot CLI</text>
+  <text x="34" y="124" class="small">Can apply repository facts plus the</text>
+  <text x="34" y="158" class="small">initiating user's preferences.</text>
+  <circle cx="408" cy="58" r="25" fill="#31245f"/><text x="408" y="66" text-anchor="middle" class="label">&gt;_</text>
+</g>
+
+<g transform="translate(552 570)">
+  <rect class="card" width="276" height="232" rx="24"/>
+  <text x="26" y="45" class="tiny">REPOSITORY MEMORY</text>
+  <text x="26" y="82" class="label">Shared facts</text>
+  <text x="26" y="118" class="small">Architecture</text><text x="26" y="148" class="small">Build commands</text>
+  <text x="26" y="178" class="small">Conventions</text><text x="26" y="208" class="small">Cross-file rules</text>
+</g>
+<g transform="translate(844 570)">
+  <rect class="card" width="276" height="232" rx="24"/>
+  <text x="26" y="45" class="tiny" fill="#b08cff">USER MEMORY</text>
+  <text x="26" y="82" class="label">Preferences</text>
+  <text x="26" y="118" class="small">Communication style</text><text x="26" y="148" class="small">Tool preferences</text>
+  <text x="26" y="178" class="small">Git conventions</text><text x="26" y="208" class="small">Workflow habits</text>
+</g>
+<g transform="translate(642 840)">
+  <rect width="388" height="58" rx="18" fill="#0b1c20" stroke="#276b5a" stroke-width="2"/>
+  <text x="194" y="25" text-anchor="middle" class="tiny" fill="#77e3c3">JUST-IN-TIME VERIFICATION</text>
+  <text x="194" y="47" text-anchor="middle" class="small">Repository facts are checked against current code before use.</text>
+</g>
+</svg>
