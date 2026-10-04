@@ -1795,14 +1795,14 @@ def validate_model_evaluations():
         if "INDEPENDENT EVALUATIONS" not in html:
             fail(f"{comparison['slug']}: comparison page missing evaluation evidence section")
 
-    # Comparable groups must never mix benchmark IDs or evidence types.
-    groups = {}
+    # A comparable group may represent a multi-benchmark evaluation suite, but it must
+    # not mix independent and vendor-reported evidence inside the same group.
+    group_evidence_types = {}
     for row in observations:
-        key = row["comparable_group"]
-        groups.setdefault(key, set()).add((row["benchmark_id"], row["evidence_type"]))
-    for group, identities in groups.items():
-        if len(identities) != 1:
-            fail(f"comparable_group {group!r} mixes benchmark/evidence identities: {sorted(identities)}")
+        group_evidence_types.setdefault(row["comparable_group"], set()).add(row["evidence_type"])
+    for group, evidence_types in group_evidence_types.items():
+        if len(evidence_types) != 1:
+            fail(f"comparable_group {group!r} mixes evidence types: {sorted(evidence_types)}")
 
 
 def main():
