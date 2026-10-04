@@ -1682,6 +1682,60 @@ def validate_ai_enrichment_dry_run():
 
 
 
+def validate_evaluation_explorer():
+    explorer_path = ROOT / "evaluations" / "explorer" / "index.html"
+    script_path = ROOT / "evaluations" / "explorer" / "explorer.js"
+    if not explorer_path.exists():
+        fail("evaluation explorer page is missing")
+    if not script_path.exists():
+        fail("evaluation explorer JavaScript is missing")
+
+    html = explorer_path.read_text(encoding="utf-8")
+    js = script_path.read_text(encoding="utf-8")
+    required_html = (
+        "EVALUATION EXPLORER V1",
+        "data-evaluation-explorer",
+        "/data/model-evaluations.json",
+        "/data/model-pricing.json",
+        'data-eval-view="table"',
+        'data-eval-view="cost"',
+        'data-eval-view="context"',
+        '<script src="/evaluations/explorer/explorer.js" defer></script>',
+        "No speed view yet",
+    )
+    for marker in required_html:
+        if marker not in html:
+            fail(f"evaluation explorer missing marker: {marker}")
+
+    required_js = (
+        "comparableRows",
+        "pareto",
+        "workloadCost",
+        "pricing_status",
+        "calculator_eligible",
+        "Multiple comparable groups are present",
+        "Cost view requires calculator-eligible provider Standard pricing.",
+    )
+    for marker in required_js:
+        if marker not in js:
+            fail(f"evaluation explorer JS missing contract marker: {marker}")
+
+    lowered = js.lower()
+    for marker in ("universal intelligence score", "overall winner score", "best model overall"):
+        if marker in lowered:
+            fail(f"evaluation explorer contains banned synthetic-ranking language: {marker}")
+
+    pricing = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
+    model_by_id = {row["model_id"]: row for row in pricing["models"]}
+    for model_id in (
+        "gpt-6-astra", "gpt-6-sol", "claude-opus-5-5",
+        "claude-fable-5-1", "gemini-3.8-flash", "grok-4.7",
+    ):
+        model = model_by_id.get(model_id)
+        if model and model["model"] not in html:
+            fail(f"evaluation explorer fallback missing {model_id}")
+
+
 def validate_model_evaluations():
     path = ROOT / "data" / "model-evaluations.json"
     if not path.exists():
@@ -1833,6 +1887,7 @@ def main():
     validate_change_intelligence_regressions()
     validate_compare_contracts_and_model_histories()
     validate_model_evaluations()
+    validate_evaluation_explorer()
     validate_ai_enrichment_dry_run()
     news = json.loads((ROOT/"data"/"news.json").read_text(encoding="utf-8"))
     archive = json.loads((ROOT/"data"/"archive.json").read_text(encoding="utf-8"))

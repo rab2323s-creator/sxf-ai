@@ -6732,6 +6732,160 @@ def benchmark_page_html(benchmark):
     </main>{page_footer()}</body></html>'''
 
 
+def evaluation_explorer_default_rows():
+    benchmark_id = "aa-intelligence-index-v4.3.2"
+    benchmark = MODEL_BENCHMARK_BY_ID[benchmark_id]
+    rows = [
+        row for row in MODEL_EVALUATION_OBSERVATIONS
+        if row["benchmark_id"] == benchmark_id
+        and row["evidence_type"] == "independent"
+        and row.get("comparable_group") == "artificial-analysis-v4.3.2"
+    ]
+    rows.sort(key=lambda row: float(row["score"]), reverse=benchmark["direction"] == "higher-is-better")
+    return benchmark, rows
+
+
+def evaluation_explorer_html():
+    canonical = BASE_URL + "/evaluations/explorer/"
+    benchmark, rows = evaluation_explorer_default_rows()
+    table_rows = []
+    for row in rows:
+        model = model_catalog_entry(row["model_id"])
+        price = comparison_price_snapshot(model["model_id"])
+        workload_cost = compare_workload_cost(model["model_id"])
+        price_label = catalog_money(workload_cost) if workload_cost is not None else "Not directly comparable"
+        table_rows.append(
+            f'''<tr data-explorer-fallback-row>
+              <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["provider"])}</small></th>
+              <td>{escape(evaluation_score_label(benchmark, row["score"]))}</td>
+              <td>{int(model["context_window"]):,}<small>tokens</small></td>
+              <td>{escape(price_label)}<small>100K input + 10K output</small></td>
+              <td>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))}</td>
+              <td><a href="{escape(row["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr>'''
+        )
+
+    independent_benchmarks = [
+        benchmark for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]
+        if benchmark["evidence_type"] == "independent"
+    ]
+    vendor_benchmarks = [
+        benchmark for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]
+        if benchmark["evidence_type"] == "vendor-reported"
+    ]
+    benchmark_options = "".join(
+        f'<optgroup label="{escape(group_name)}">' +
+        "".join(
+            f'<option value="{escape(item["benchmark_id"], quote=True)}"{" selected" if item["benchmark_id"] == benchmark["benchmark_id"] else ""}>{escape(item["name"])}{f" v{escape(str(item['version']))}" if item.get("version") else ""}</option>'
+            for item in group
+        ) +
+        '</optgroup>'
+        for group_name, group in (
+            ("Independent", independent_benchmarks),
+            ("Vendor-reported", vendor_benchmarks),
+        )
+        if group
+    )
+
+    provider_options = "".join(
+        f'<option value="{escape(provider, quote=True)}">{escape(provider)}</option>'
+        for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]})
+    )
+    category_options = "".join(
+        f'<option value="{escape(category, quote=True)}">{escape(category.replace("-", " ").title())}</option>'
+        for category in sorted({benchmark["category"] for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]})
+    )
+
+    schema = {
+        "@context":"https://schema.org",
+        "@graph":[
+            {
+                "@type":"WebApplication",
+                "name":"SXF AI Evaluation Explorer",
+                "url":canonical,
+                "applicationCategory":"BusinessApplication",
+                "operatingSystem":"Web",
+                "description":"Interactive AI model benchmark explorer with methodology-aware comparability, workload economics and Pareto views.",
+                "isAccessibleForFree":True,
+            },
+            {
+                "@type":"Dataset",
+                "name":"SXF AI Evaluation Explorer dataset",
+                "url":BASE_URL+"/data/model-evaluations.json",
+                "dateModified":MODEL_EVALUATION_CATALOG["source_verified"],
+                "distribution":[
+                    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":BASE_URL+"/data/model-evaluations.json"},
+                    {"@type":"DataDownload","encodingFormat":"application/json","contentUrl":BASE_URL+"/data/model-pricing.json"},
+                ],
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":[
+                    {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
+                    {"@type":"ListItem","position":2,"name":"Evaluations","item":BASE_URL+"/evaluations/"},
+                    {"@type":"ListItem","position":3,"name":"Explorer","item":canonical},
+                ]
+            }
+        ]
+    }
+
+    return f'''<!doctype html><html lang="en">{page_head(
+        "AI Model Benchmark Explorer — Cost vs Score & Pareto Views | SXF / AI",
+        "Explore AI model benchmark evidence with comparable-group controls, provider filters, cost-vs-score and context-vs-score Pareto views. No synthetic universal ranking.",
+        canonical,
+        schema,
+    )}
+    <body class="intel-page evaluation-explorer-page">{page_header("compare")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/evaluations/">Evaluations</a><span>/</span><span>Explorer</span></nav>
+        <p class="eyebrow">EVALUATION EXPLORER V1</p>
+        <h1>Benchmark evidence.<br><span>Decision views, not one score.</span></h1>
+        <p>Filter by benchmark, evaluator, provider and comparable group. Switch between ranked evidence, cost-vs-score and context-vs-score views without mixing incompatible runs.</p>
+        <div class="collection-stats"><div><strong>{len(MODEL_EVALUATION_CATALOG["benchmarks"])}</strong><span>benchmarks</span></div><div><strong>{len(MODEL_EVALUATION_OBSERVATIONS)}</strong><span>observations</span></div><div><strong>{len({row["model_id"] for row in MODEL_EVALUATION_OBSERVATIONS})}</strong><span>models evaluated</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
+      </section>
+
+      <section class="evaluation-explorer shell" data-evaluation-explorer
+        data-evaluations="/data/model-evaluations.json"
+        data-catalog="/data/model-pricing.json">
+        <div class="evaluation-explorer-head">
+          <div><p class="eyebrow">INTERACTIVE ANALYSIS</p><h2>Choose one measurement frame.</h2><p>The explorer only ranks observations inside the selected benchmark and comparable group. Missing coverage stays missing; under-review benchmarks carry a visible warning.</p></div>
+          <a href="/data/model-evaluations.json">Raw evidence ↗</a>
+        </div>
+
+        <div class="evaluation-explorer-controls">
+          <label><span>Benchmark</span><select id="evalBenchmark">{benchmark_options}</select></label>
+          <label><span>Category</span><select id="evalCategory"><option value="all">All categories</option>{category_options}</select></label>
+          <label><span>Provider</span><select id="evalProvider"><option value="all">All providers</option>{provider_options}</select></label>
+          <label><span>Evidence</span><select id="evalEvidence"><option value="independent">Independent</option><option value="vendor-reported">Vendor-reported</option><option value="all">All</option></select></label>
+          <label><span>Comparable group</span><select id="evalGroup"><option value="auto">Auto</option></select></label>
+        </div>
+
+        <div class="evaluation-view-tabs" role="tablist" aria-label="Evaluation view">
+          <button class="is-active" type="button" data-eval-view="table">Evidence table</button>
+          <button type="button" data-eval-view="cost">Cost vs score</button>
+          <button type="button" data-eval-view="context">Context vs score</button>
+        </div>
+
+        <div id="evaluationExplorerStatus" class="evaluation-explorer-status" aria-live="polite"></div>
+        <div id="evaluationExplorerChart" class="evaluation-explorer-chart" hidden></div>
+        <div id="evaluationExplorerTable" class="evaluation-explorer-table">
+          <div class="guide-table-wrap">
+            <table class="guide-table">
+              <thead><tr><th>Model</th><th>Score</th><th>Context</th><th>Workload cost</th><th>Reasoning</th><th>Evidence</th></tr></thead>
+              <tbody id="evaluationExplorerBody">{"".join(table_rows)}</tbody>
+            </table>
+          </div>
+        </div>
+        <div id="evaluationParetoSummary" class="evaluation-pareto-summary"></div>
+      </section>
+
+      <section class="evaluation-explorer-method shell">
+        <div class="compare-method-head"><p class="eyebrow">READING THE VIEWS</p><h2>Pareto means efficient, not universally best.</h2><p>A model is Pareto-efficient when no other visible model is both better on the selected benchmark and better on the second axis. Cost uses the SXF Standard workload assumption of 100K uncached input + 10K output tokens; context uses the provider-published context window.</p></div>
+        <div class="compare-method-grid"><article><span>01</span><h3>Table</h3><p>Ranks only the selected comparable group by the benchmark's declared metric direction.</p></article><article><span>02</span><h3>Cost vs score</h3><p>Highlights models that offer a non-dominated tradeoff between direct token cost and benchmark score.</p></article><article><span>03</span><h3>Context vs score</h3><p>Shows whether a larger context window trades off against the selected evaluation result.</p></article><article><span>04</span><h3>No speed view yet</h3><p>Latency and throughput stay out until SXF has a methodology-pinned speed dataset with matching model configurations.</p></article></div>
+      </section>
+    </main>{page_footer()}<script src="/evaluations/explorer/explorer.js" defer></script></body></html>'''
+
+
 def evaluations_index_html():
     canonical = BASE_URL + "/evaluations/"
     benchmarks = MODEL_EVALUATION_CATALOG["benchmarks"]
@@ -6786,6 +6940,9 @@ def evaluations_index_html():
         <h1>AI benchmarks.<br><span>Configuration attached.</span></h1>
         <p>Benchmark scores are evidence, not universal truth. SXF stores who ran the evaluation, which version, which model configuration and which results are actually comparable.</p>
         <div class="collection-stats"><div><strong>{len(benchmarks)}</strong><span>benchmark definitions</span></div><div><strong>{independent_count}</strong><span>independent observations</span></div><div><strong>{vendor_count}</strong><span>vendor-reported</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
+      </section>
+      <section class="evaluation-explorer-cta shell">
+        <a href="/evaluations/explorer/"><div><span>INTERACTIVE EXPLORER</span><strong>Cost vs score. Context vs score. Comparable groups only.</strong><small>Analyze the current evidence without collapsing benchmarks into one universal ranking.</small></div><b>Open Explorer ↗</b></a>
       </section>
       <section class="evaluation-method shell">
         <div class="compare-method-head"><p class="eyebrow">COMPARABILITY RULE</p><h2>Same name does not mean same measurement.</h2><p>SXF only treats results as numerically comparable when benchmark identity, version, evaluator methodology and comparable group line up. Tool use, fallback behavior and reasoning effort remain part of the observation.</p></div>
@@ -8277,6 +8434,9 @@ def build_discovery_pages(items, current_items):
     evaluations_dir = ROOT / "evaluations"
     evaluations_dir.mkdir(parents=True, exist_ok=True)
     (evaluations_dir / "index.html").write_text(evaluations_index_html(), encoding="utf-8")
+    evaluation_explorer_dir = evaluations_dir / "explorer"
+    evaluation_explorer_dir.mkdir(parents=True, exist_ok=True)
+    (evaluation_explorer_dir / "index.html").write_text(evaluation_explorer_html(), encoding="utf-8")
     for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]:
         benchmark_dir = evaluations_dir / benchmark["benchmark_id"]
         benchmark_dir.mkdir(parents=True, exist_ok=True)
@@ -8451,6 +8611,7 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
         sitemap_entry(f"{BASE_URL}/evaluations/", MODEL_EVALUATION_CATALOG["source_verified"]),
+        sitemap_entry(f"{BASE_URL}/evaluations/explorer/", MODEL_EVALUATION_CATALOG["source_verified"]),
     ] + [
         sitemap_entry(
             f'{BASE_URL}/evaluations/{benchmark["benchmark_id"]}/',
