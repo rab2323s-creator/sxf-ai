@@ -30,10 +30,17 @@ def schema_types(html):
             graph = data.get("@graph") or []
             if isinstance(graph, list):
                 for node in graph:
-                    if isinstance(node, dict) and isinstance(node.get("@type"), str):
-                        found.add(node["@type"])
+                    if not isinstance(node, dict):
+                        continue
+                    node_type = node.get("@type")
+                    if isinstance(node_type, str):
+                        found.add(node_type)
+                    elif isinstance(node_type, list):
+                        found.update(value for value in node_type if isinstance(value, str))
             elif isinstance(data.get("@type"), str):
                 found.add(data["@type"])
+            elif isinstance(data.get("@type"), list):
+                found.update(value for value in data["@type"] if isinstance(value, str))
     return found
 
 
@@ -71,6 +78,8 @@ def main():
         expected_types = set(row.get("schema_types") or [])
         expect(int(row.get("validator_quality_score", 0)) >= 90, f"{slug}: quality score below 90")
         expect(len(row.get("evidence_hash", "")) == 64, f"{slug}: evidence hash invalid")
+        if row.get("evidence_snapshot") is not None:
+            expect(len(row.get("evidence_snapshot_hash", "")) == 64, f"{slug}: evidence snapshot hash invalid")
 
         if row.get("review_status") == "preview":
             expect(row.get("approved_for_publish") is False, f"{slug}: preview cannot be approved")
@@ -87,7 +96,10 @@ def main():
         expect(row.get("approved_for_publish") is True, f"{slug}: approved row must allow publish")
         expect(row.get("index_decision") == "index", f"{slug}: approved row must allow index")
         expect(row.get("approved_at"), f"{slug}: approved_at missing")
-        expect(slug == draft["seo_slug_recommendation"], f"{slug}: live slug must equal reviewed SEO slug")
+        if not row.get("preserve_existing_route"):
+            expect(slug == draft["seo_slug_recommendation"], f"{slug}: live slug must equal reviewed SEO slug")
+        else:
+            expect(slug != draft["seo_slug_recommendation"], f"{slug}: preserved route should keep the existing indexed slug while reviewing a clean SEO slug")
 
         live_path = SIGNALS_ROOT / slug / "index.html"
         expect(live_path.exists(), f"{slug}: promoted live page missing")

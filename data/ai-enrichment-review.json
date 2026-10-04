@@ -227,6 +227,306 @@
       "evidence_identity_signal_url": "https://sxf.si/signals/introducing-gpt-6-sol-and-luna-3e2cf5d/",
       "source_url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
       "approved_at": "2026-10-03"
+    },
+    {
+      "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
+      "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
+      "evidence_hash": "1d6b30d932e53c170d8471e03a2b059404c76108270ca7a8257ca46bee82d05c",
+      "evidence_snapshot_hash": "5deee131b5fb35c1735347dfcad68511ce276eb55ebd1484150fd29b66fcfb6c",
+      "evidence_snapshot": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "GitHub Copilot in VS Code, September 2026 releases",
+          "url": "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+          "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
+          "source": "GitHub",
+          "published": "2026-10-01T19:09:10Z",
+          "category": "Tools",
+          "tags": [
+            "GitHub Copilot",
+            "Coding AI"
+          ],
+          "summary": "This changelog covers VS Code v1.136 through v1.140, shipped throughout September 2026. September’s releases streamline agent-driven development from implementation through pull request merge. Automations handle repeatable tasks, agent merge helps…",
+          "signal_score": 56,
+          "seo_quality_score": 73,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "high-value-topic"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/",
+          "https://github.blog/changelog/2026-09-04-github-copilot-weekly-releases-august-31",
+          "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7",
+          "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/",
+          "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/",
+          "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+        ]
+      },
+      "review_status": "approved",
+      "approved_for_publish": true,
+      "index_decision": "index",
+      "validator_quality_score": 95,
+      "schema_types": [
+        "TechArticle",
+        "BreadcrumbList",
+        "FAQPage",
+        "ItemList"
+      ],
+      "prompt_version": "manual-research-v1",
+      "draft": {
+        "seo_slug_recommendation": "github-copilot-vs-code-september-2026",
+        "primary_search_query": "GitHub Copilot in VS Code September 2026",
+        "secondary_search_queries": [
+          "GitHub Copilot VS Code automations",
+          "GitHub Copilot agent merge VS Code",
+          "HydraFusion VS Code",
+          "GitHub Copilot Dev Container agent sessions",
+          "Codex ChatGPT VS Code conversation"
+        ],
+        "seo_title": "GitHub Copilot in VS Code: September 2026 Updates",
+        "meta_description": "GitHub Copilot’s September 2026 VS Code releases add automations, agent merge, HydraFusion, Dev Containers, GitHub context, and cross-app Codex workflows.",
+        "h1": "GitHub Copilot in VS Code: September 2026 agent updates",
+        "intro": "GitHub’s September 2026 Copilot releases for Visual Studio Code, spanning VS Code 1.136 through 1.140, pushed the Agents window beyond interactive coding toward a fuller agent workflow. The month added scheduled automations, agent-assisted pull request merge work, Dev Container sessions, HydraFusion orchestration, richer GitHub context, and continuity between ChatGPT Codex conversations and VS Code.",
+        "what_changed": "Across VS Code 1.136 through 1.140, GitHub added a sequence of agent-workflow features rather than one isolated Copilot update. Agent Merge entered public preview to handle review feedback, failed checks, merge conflicts, and workflow reruns. Automations added hourly, daily, weekly, and on-demand recurring tasks. Dev Container sessions brought project-configured tools and dependencies into the Agents window, pull requests could be created directly from Copilot, Claude, or Codex sessions, and HydraFusion reached VS Code as a research preview for selecting multi-model workflows.",
+        "why_it_matters": "The September releases move GitHub Copilot closer to an end-to-end development workflow that can keep context across implementation, environment setup, pull request creation, review, checks, and follow-up work. For developers, the important change is not a single model upgrade; it is the growing coordination layer around agents. For engineering leads, that makes preview status, permissions, environment configuration, review policy, and automation scope more important because the agent can participate in more stages of the software delivery loop.",
+        "key_facts": [
+          {
+            "claim": "GitHub’s September 2026 VS Code recap covers versions 1.136 through 1.140 and centers on agent-driven development from implementation through pull request merge.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "claim": "Agent Merge can handle review feedback, failed checks, merge conflicts, and workflow reruns from an active agent session; GitHub labels the feature preview in the September recap.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-04-github-copilot-weekly-releases-august-31"
+            ]
+          },
+          {
+            "claim": "VS Code automations can run recurring agent tasks hourly, daily, or weekly, or run them on demand; the feature was introduced in public preview during the September release sequence.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7"
+            ]
+          },
+          {
+            "claim": "HydraFusion reached VS Code as a research preview and can choose among single, cascade, and critique workflows that coordinate model use within a task.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+            ]
+          },
+          {
+            "claim": "The Agents window can start sessions in Dev Containers using project-configured tools and dependencies, including supported remote scenarios such as SSH, Tunnel, and WSL hosts.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "claim": "Developers can create pull requests from Copilot, Claude, or Codex agent sessions in the Agents window after reviewing and editing the pull request details.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "claim": "VS Code can continue a Codex conversation started in the ChatGPT app, bringing that conversation into the codebase without manually copying context or files.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "claim": "GitHub issues and pull requests can be attached as context to Copilot chats, and active chats are no longer interrupted when another agent message arrives.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          }
+        ],
+        "pricing_or_capability_impact": "This release sequence is primarily a capability and workflow expansion. GitHub is giving Copilot agents more ways to schedule work, operate inside project environments, create and advance pull requests, carry context across sessions and applications, and coordinate model workflows. The practical impact depends on which preview features a user or organization enables and how much authority teams allow agents to exercise around repositories, checks, and pull requests.",
+        "comparison_points": [
+          {
+            "dimension": "VS Code 1.136",
+            "analysis": "Agent Merge entered public preview, giving agent sessions a path to address review feedback, failed checks, and merge conflicts while session organization also improved.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-04-github-copilot-weekly-releases-august-31"
+            ]
+          },
+          {
+            "dimension": "VS Code 1.137",
+            "analysis": "Automations entered public preview for recurring agent tasks on hourly, daily, or weekly schedules, with on-demand execution also available.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7"
+            ]
+          },
+          {
+            "dimension": "VS Code 1.138",
+            "analysis": "The Agents window added local Dev Container sessions and direct pull request creation from agent sessions, extending agents into project environments and delivery workflow.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "dimension": "VS Code 1.140 era",
+            "analysis": "HydraFusion expanded into VS Code as a research preview, adding workflow-level orchestration that can choose single, cascade, or critique execution patterns.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+            ]
+          }
+        ],
+        "technical_details": [
+          {
+            "detail": "Agent Merge monitors the pull request loop: the September recap says it can address review feedback, failed checks, merge conflicts, and rerun workflows from an active session.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "detail": "Automations support hourly, daily, and weekly schedules as well as on-demand runs, allowing recurring prompts to become repeatable agent tasks.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7"
+            ]
+          },
+          {
+            "detail": "HydraFusion is available in VS Code 1.140 or later as a research preview and uses single, cascade, or critique workflows instead of behaving like one fixed model.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+            ]
+          },
+          {
+            "detail": "Dev Container agent sessions use the project’s configured tools and dependencies; GitHub’s weekly release notes say the rollout requires Docker and a supported Dev Container configuration.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "detail": "Codex conversations can move from the ChatGPT app into VS Code, while GitHub issues or pull requests can be attached directly as chat context.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "detail": "GitHub’s account of its Copilot runtime migration describes Agent Merge handling pull request follow-up such as CI failures, review comments, and conflicts while engineers still retained final review judgment.",
+            "source_urls": [
+              "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/"
+            ]
+          }
+        ],
+        "practical_takeaways": [
+          {
+            "takeaway": "Treat the September release as a workflow change, not only a chat feature update: evaluate where Copilot can now enter your implementation, review, CI, and pull request process.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "takeaway": "Separate stable capabilities from preview and research-preview features before standardizing them across a team; Agent Merge, automations, cleanup features, and HydraFusion have different maturity labels.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+            ]
+          },
+          {
+            "takeaway": "Use automations for recurring repository work only after defining the prompt, target repository, cadence, and review expectations clearly, because the task can repeat without a fresh manual start each time.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7"
+            ]
+          },
+          {
+            "takeaway": "For Dev Container sessions, verify that the repository’s container configuration and required tools are suitable for the agent workflow before relying on it as the team default.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "takeaway": "Keep human review boundaries explicit around pull request completion. GitHub’s own runtime-migration write-up describes engineers spot-checking Agent Merge results before final merge decisions.",
+            "source_urls": [
+              "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/"
+            ]
+          }
+        ],
+        "before_vs_after": [],
+        "who_should_care": "VS Code developers using GitHub Copilot agents, engineering leads managing pull request and CI workflows, platform teams maintaining Dev Container environments, and organizations deciding which preview agent capabilities to enable should care most. The release affects how work is scheduled, how agents receive repository context, how sessions move across environments and apps, and how far an agent can participate in the pull request lifecycle.",
+        "what_to_verify": [
+          "Confirm the VS Code version required for the feature you plan to use; HydraFusion specifically requires VS Code 1.140 or later according to GitHub’s release note.",
+          "Check whether preview or research-preview features are enabled for your Copilot plan and whether an organization or enterprise administrator must allow them.",
+          "Validate the repository and permission scope used by automations and Agent Merge before enabling recurring or pull-request-changing workflows.",
+          "For Dev Container sessions, confirm Docker availability and that the repository has a supported Dev Container configuration with the required tools and dependencies.",
+          "Test how your team wants humans to review agent changes, CI fixes, review responses, and final merge decisions before making Agent Merge part of a standard delivery process."
+        ],
+        "faq": [
+          {
+            "question": "What changed in GitHub Copilot for VS Code in September 2026?",
+            "answer": "GitHub’s September recap covers VS Code 1.136 through 1.140 and adds scheduled automations, Agent Merge, pull request creation from agent sessions, Dev Container sessions, HydraFusion, better session organization, GitHub issue and pull request context, and cross-app Codex continuity.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          },
+          {
+            "question": "What are GitHub Copilot automations in VS Code?",
+            "answer": "Automations let agent tasks run on a recurring hourly, daily, or weekly schedule, or on demand. GitHub introduced the VS Code capability in public preview during the September 2026 release sequence.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7"
+            ]
+          },
+          {
+            "question": "What is Agent Merge in GitHub Copilot?",
+            "answer": "Agent Merge is a preview workflow that helps move a pull request toward merge readiness by handling review feedback, failed checks, merge conflicts, and workflow reruns from an agent session. Teams can still keep final review and merge decisions under human control.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/"
+            ]
+          },
+          {
+            "question": "What is HydraFusion in VS Code?",
+            "answer": "HydraFusion is a GitHub Copilot research preview that coordinates model workflows rather than acting as one fixed model. In VS Code 1.140 or later, it can use single, cascade, or critique execution patterns depending on the task.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/"
+            ]
+          },
+          {
+            "question": "Can GitHub Copilot agents run inside Dev Containers?",
+            "answer": "Yes. The September release sequence added agent sessions that use a project’s Dev Container tools and dependencies. GitHub says the rollout requires Docker and a supported Dev Container configuration.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+              "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/"
+            ]
+          },
+          {
+            "question": "Can a Codex conversation move from ChatGPT into VS Code?",
+            "answer": "Yes. GitHub’s September recap says developers can pick up a Codex conversation from the ChatGPT app in VS Code and continue working on the codebase without manually copying the conversation context or files.",
+            "source_urls": [
+              "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
+            ]
+          }
+        ],
+        "sources": [
+          "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+          "https://github.blog/changelog/2026-09-04-github-copilot-weekly-releases-august-31",
+          "https://github.blog/changelog/2026-09-10-github-copilot-weekly-releases-september-7",
+          "https://github.blog/changelog/2026-09-18-github-copilot-weekly-releases-september-14/",
+          "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app/",
+          "https://github.blog/ai-and-ml/generative-ai/migrating-the-github-copilot-runtime-to-rust-using-copilot/"
+        ],
+        "comparison_label": "RELEASE MAP",
+        "comparison_heading": "How VS Code 1.136–1.140 expanded the agent workflow."
+      },
+      "source_url": "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+      "approved_at": "2026-10-04",
+      "approval_origin": "manual-research",
+      "preserve_existing_route": true
     }
   ]
 }
