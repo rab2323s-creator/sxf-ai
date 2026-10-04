@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>AI Security — AI Signals | SXF / AI</title>
-      <meta name="description" content="Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure." />
+      <title>AI Security in 2026: Threats, Agent Risks &amp; Defenses | SXF</title>
+      <meta name="description" content="AI security guide for 2026 covering agent threats, prompt injection, MCP risks, permissions, sandboxing, data exposure and practical defense controls." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="AI Security — AI Signals | SXF / AI" />
-      <meta property="og:description" content="Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure." />
+      <meta property="og:title" content="AI Security in 2026: Threats, Agent Risks &amp; Defenses | SXF" />
+      <meta property="og:description" content="AI security guide for 2026 covering agent threats, prompt injection, MCP risks, permissions, sandboxing, data exposure and practical defense controls." />
       <meta property="og:url" content="https://sxf.si/topics/ai-security/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,24 +23,390 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="AI Security — AI Signals | SXF / AI" />
-      <meta name="twitter:description" content="Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"AI Security AI Signals | SXF / AI","url":"https://sxf.si/topics/ai-security/","description":"Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure.","isPartOf":{"@id":"https://sxf.si/#website"},"inLanguage":"en"}</script>
+      <meta name="twitter:title" content="AI Security in 2026: Threats, Agent Risks &amp; Defenses | SXF" />
+      <meta name="twitter:description" content="AI security guide for 2026 covering agent threats, prompt injection, MCP risks, permissions, sandboxing, data exposure and practical defense controls." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","@id":"https://sxf.si/topics/ai-security/#webpage","url":"https://sxf.si/topics/ai-security/","name":"AI Security in 2026: Threats, Agent Risks & Defenses","description":"AI security guide for 2026 covering agent threats, prompt injection, MCP risks, permissions, sandboxing, data exposure and practical defense controls.","isPartOf":{"@id":"https://sxf.si/#website"},"about":[{"@type":"Thing","name":"AI Security"},{"@type":"Thing","name":"AI Agent Security"},{"@type":"Thing","name":"Prompt Injection"},{"@type":"Thing","name":"Model Context Protocol Security"}],"dateModified":"2026-09-30","inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Topics","item":"https://sxf.si/topics/"},{"@type":"ListItem","position":3,"name":"AI Security","item":"https://sxf.si/topics/ai-security/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
-    </head>
+    <style>
+
+    .security-hero{padding-top:72px;padding-bottom:48px}
+    .security-hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.75fr);gap:48px;align-items:end}
+    .security-hero h1{font-size:clamp(48px,8vw,104px);line-height:.91;letter-spacing:-.055em;margin:18px 0 24px;max-width:1000px}
+    .security-hero h1 span{color:var(--muted,#7c8798)}
+    .security-lead{max-width:840px;font-size:clamp(18px,2vw,24px);line-height:1.55;color:#c8d0dc}
+    .security-hero-note{border-left:1px solid #303846;padding-left:24px;color:#9aa6b6;line-height:1.65}
+    .security-hero-note strong{display:block;color:#f2f5f8;margin-bottom:8px}
+    .security-meta-strip{margin-top:40px;border-top:1px solid #202833;border-bottom:1px solid #202833;display:grid;grid-template-columns:repeat(4,1fr)}
+    .security-meta-strip div{padding:18px 20px;border-right:1px solid #202833}
+    .security-meta-strip div:last-child{border-right:0}
+    .security-meta-strip span{display:block;color:#7f8a99;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+    .security-meta-strip strong{font-size:14px;color:#eef2f6}
+
+    .security-nav{padding:26px 0 20px}
+    .security-nav-inner{display:flex;flex-wrap:wrap;gap:10px}
+    .security-nav a{border:1px solid #2b3441;padding:10px 14px;border-radius:999px;color:#b9c3cf;text-decoration:none;font-size:13px}
+    .security-nav a:hover{border-color:#69788c;color:#fff}
+
+    .authority-section{padding:76px 0;border-top:1px solid #1c232d}
+    .authority-grid{display:grid;grid-template-columns:minmax(220px,.55fr) minmax(0,1.45fr);gap:56px}
+    .section-label{font-size:11px;letter-spacing:.14em;color:#7d8998;text-transform:uppercase;margin:0 0 14px}
+    .authority-section h2{font-size:clamp(34px,5vw,64px);line-height:1;letter-spacing:-.04em;margin:0 0 24px}
+    .authority-copy{font-size:18px;line-height:1.75;color:#bac4cf}
+    .authority-copy p{margin:0 0 20px}
+    .authority-copy strong{color:#f3f6f9}
+
+    .answer-box{margin-top:32px;border:1px solid #2a3441;background:rgba(14,18,24,.72);padding:26px}
+    .answer-box strong{display:block;color:#fff;font-size:16px;margin-bottom:10px}
+    .answer-box p{margin:0;color:#b7c1cd;line-height:1.65}
+
+    .risk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#28313d;border:1px solid #28313d;margin-top:34px}
+    .risk-card{background:#0b0f14;padding:28px;min-height:250px}
+    .risk-number{font-size:11px;color:#6f7b8a;letter-spacing:.12em}
+    .risk-card h3{font-size:23px;margin:34px 0 12px;letter-spacing:-.02em}
+    .risk-card p{color:#aeb8c4;line-height:1.65;margin:0}
+    .risk-card small{display:block;margin-top:18px;color:#748191;line-height:1.5}
+
+    .control-stack{display:grid;gap:12px;margin-top:30px}
+    .control-row{display:grid;grid-template-columns:72px minmax(180px,.55fr) minmax(0,1.45fr);gap:24px;align-items:start;border-top:1px solid #28313d;padding:24px 0}
+    .control-row:last-child{border-bottom:1px solid #28313d}
+    .control-row b{font-size:12px;color:#727f8f;letter-spacing:.1em}
+    .control-row h3{margin:0;font-size:20px}
+    .control-row p{margin:0;color:#aeb8c4;line-height:1.65}
+
+    .security-callout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:30px;border:1px solid #2d3744;padding:32px;margin-top:34px;background:linear-gradient(135deg,rgba(31,41,55,.38),rgba(9,12,16,.7))}
+    .security-callout h3{font-size:30px;margin:0 0 14px}
+    .security-callout p{color:#b6c0cc;line-height:1.7;margin:0 0 18px}
+    .security-callout a{color:#fff}
+    .callout-list{display:grid;gap:10px}
+    .callout-list div{border-top:1px solid #303a47;padding:12px 0;color:#aeb8c4}
+    .callout-list strong{color:#fff}
+
+    .comparison-table{width:100%;border-collapse:collapse;margin-top:28px}
+    .comparison-table th,.comparison-table td{text-align:left;vertical-align:top;padding:18px;border-bottom:1px solid #2b3440}
+    .comparison-table th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7c8795}
+    .comparison-table td{color:#b5bfcb;line-height:1.55}
+    .comparison-table td:first-child{color:#fff;font-weight:700;width:20%}
+
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
+    .check-item{border:1px solid #28323e;padding:20px 22px;display:grid;grid-template-columns:28px 1fr;gap:12px}
+    .check-item span{color:#8995a5}
+    .check-item strong{display:block;margin-bottom:6px;color:#f3f6f8}
+    .check-item p{margin:0;color:#aab5c1;line-height:1.55;font-size:14px}
+
+    .source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
+    .source-link{display:block;border:1px solid #28323e;padding:22px;text-decoration:none}
+    .source-link span{font-size:10px;letter-spacing:.12em;color:#778494}
+    .source-link strong{display:block;color:#fff;font-size:18px;margin:16px 0 8px}
+    .source-link p{margin:0;color:#aab5c0;line-height:1.55;font-size:14px}
+    .source-link:hover{border-color:#566477}
+
+    .signals-intro{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end;margin-bottom:26px}
+    .signals-intro p{color:#9eabb9;line-height:1.65;margin:0}
+    .signal-list.security-signals .signal-row h3{max-width:920px}
+
+    .faq-list{display:grid;gap:1px;background:#28313d;border:1px solid #28313d;margin-top:28px}
+    .faq-item{background:#0b0f14;padding:26px}
+    .faq-item h3{font-size:19px;margin:0 0 10px}
+    .faq-item p{margin:0;color:#aeb8c4;line-height:1.65}
+
+    .editorial-note{margin-top:28px;border-top:1px solid #28313d;padding-top:20px;color:#7f8b9a;font-size:13px;line-height:1.65}
+    .editorial-note a{color:#c9d1db}
+
+    @media (max-width:900px){
+      .security-hero-grid,.authority-grid,.security-callout,.signals-intro{grid-template-columns:1fr}
+      .security-meta-strip{grid-template-columns:1fr 1fr}
+      .security-meta-strip div:nth-child(2){border-right:0}
+      .risk-grid,.checklist,.source-grid{grid-template-columns:1fr}
+      .control-row{grid-template-columns:52px 1fr}
+      .control-row p{grid-column:2}
+    }
+    @media (max-width:560px){
+      .security-meta-strip{grid-template-columns:1fr}
+      .security-meta-strip div{border-right:0}
+      .security-hero{padding-top:44px}
+      .authority-section{padding:56px 0}
+      .control-row{grid-template-columns:42px 1fr}
+    }
+  </style></head>
     <body class="intel-page topic-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
-      <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>AI Security</span></nav>
-      <p class="eyebrow">TOPIC INTELLIGENCE</p><h1>AI Security<br><span>signal history.</span></h1><p>Security controls, sandboxing, cyber defense and deployment safeguards across AI products and infrastructure.</p>
-      <div class="collection-stats"><div><strong>10</strong><span>tracked signals</span></div><div><strong>3</strong><span>primary sources</span></div><div><strong>September 30, 2026</strong><span>latest tracked</span></div></div></section>
-      <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>GitHub Advanced Security trials for GitHub Team</h2><p class="signal-summary">GitHub Team customers can now start self-serve trials of GitHub Advanced Security to evaluate GitHub Code Security and GitHub Secret Protection. Start a trial from your organization’s Overview page, Billing…</p><a class="brief-open" href="/signals/github-advanced-security-trials-for-github-team-6caab1f/">Open latest signal ↗</a></article>
-      <aside class="source-card"><span class="source-card-label">COVERAGE WINDOW</span><strong>AI Security</strong><p>Tracked from August 26, 2026 through September 30, 2026 across 3 primary sources.</p></aside></section>
-      <section class="topic-reference shell"><div class="guide-choice-grid"><article><span>AGENT SECURITY</span><p>Permissions, MCP, sandboxing, memory integrity and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Direct vs indirect injection, agent hijacking, RAG, browser and tool defenses.</p><div class="tool-links"><a href="/guides/prompt-injection/">Prompt Injection guide ↗</a></div></article></div></section>
-      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RECENT</p><h2>Latest in AI Security.</h2></div><a href="/topics/">All topics ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/github-advanced-security-trials-for-github-team-6caab1f/">
+    <section class="security-hero shell">
+      <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>AI Security</span></nav>
+      <div class="security-hero-grid">
+        <div>
+          <p class="eyebrow">AI SECURITY / 2026</p>
+          <h1>AI Security:<br><span>threats, agent risks & defenses.</span></h1>
+          <p class="security-lead">AI security is the discipline of protecting models, agents, data, tools and the systems around them from manipulation, unauthorized action, information leakage and unsafe execution. The highest-risk failures increasingly happen at the boundaries between an AI model and the tools, permissions, memory and external content it can reach.</p>
+        </div>
+        <aside class="security-hero-note">
+          <strong>The practical question</strong>
+          Do not ask only whether the model is “safe.” Ask what can influence it, what it can access, what it can change, what requires approval, and what evidence exists after an action occurs.
+        </aside>
+      </div>
+
+      <div class="security-meta-strip" aria-label="Page facts">
+        <div><span>Reference reviewed</span><strong>October 4, 2026</strong></div>
+        <div><span>Scope</span><strong>Models · Agents · MCP · Cyber</strong></div>
+        <div><span>Primary references</span><strong>OWASP · NIST · MCP · OpenAI</strong></div>
+        <div><span>Live intelligence</span><strong>10 tracked · latest September 30, 2026</strong></div>
+      </div>
+    </section>
+
+    <nav class="security-nav shell" aria-label="On this page">
+      <div class="security-nav-inner">
+        <a href="#what-is-ai-security">What is AI security?</a>
+        <a href="#threat-model">Threat model</a>
+        <a href="#controls">Security controls</a>
+        <a href="#mcp-security">MCP security</a>
+        <a href="#security-vs-safety">Security vs safety</a>
+        <a href="#checklist">Checklist</a>
+        <a href="#latest">Latest developments</a>
+      </div>
+    </nav>
+
+    <section class="authority-section shell" id="what-is-ai-security">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">01 / FOUNDATION</p>
+          <h2>What is AI security?</h2>
+        </div>
+        <div class="authority-copy">
+          <p><strong>AI security protects AI systems from adversarial manipulation and limits the damage when a model behaves incorrectly.</strong> It extends conventional application and cloud security because an AI system can interpret natural language, retrieve untrusted information, decide which tool to call, generate code or commands, and sometimes act with delegated authority.</p>
+          <p>That creates a different trust problem. A web page, document, email, tool description or retrieved record may be both <em>data</em> for the user and <em>instructions</em> to the model. An agent may also hold credentials that let it cross boundaries a normal chatbot cannot: read files, send messages, modify repositories, query databases, browse authenticated sites or execute code.</p>
+          <p>For that reason, the strongest security posture does not depend on the model refusing every malicious instruction. It assumes some manipulation attempts will succeed and uses hard controls around the model: least privilege, isolation, scoped credentials, validation, approval gates, logging and the ability to stop or reverse actions.</p>
+
+          <div class="answer-box">
+            <strong>AI security in one sentence</strong>
+            <p>Treat the model as a powerful but fallible decision component inside a security architecture—not as the security boundary itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="threat-model">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">02 / THREAT MODEL</p>
+          <h2>The attack surface has moved beyond the prompt box.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>The 2026 AI security problem spans the full path from untrusted content to privileged execution. OWASP’s GenAI guidance highlights risks such as prompt injection, sensitive information disclosure, supply-chain weaknesses, improper output handling and excessive agency. Agentic systems make those categories interact: one poisoned input can influence a model, steer a tool call and create a real-world side effect.</p>
+
+          <div class="risk-grid">
+            <article class="risk-card">
+              <span class="risk-number">RISK 01</span>
+              <h3>Prompt injection & goal hijacking</h3>
+              <p>Malicious instructions can arrive directly from a user or indirectly through web pages, documents, emails, RAG results and tool outputs. The goal is to alter the model’s behavior or redirect the agent away from the user’s intent.</p>
+              <small>Primary concern: instruction/data confusion and downstream action.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 02</span>
+              <h3>Excessive agency & permissions</h3>
+              <p>An agent with broad filesystem, SaaS, cloud or admin access has a larger blast radius. A model mistake becomes a security incident when the agent is allowed to perform destructive or sensitive actions without narrow authorization.</p>
+              <small>Primary concern: privilege scope and irreversible action.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 03</span>
+              <h3>MCP & tool-chain abuse</h3>
+              <p>Tool descriptions, schemas, server responses and third-party MCP packages can become injection or supply-chain surfaces. Cross-server data flows can also allow one connected system to influence actions in another.</p>
+              <small>Primary concern: tool poisoning, token scope and cross-origin trust.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 04</span>
+              <h3>Sensitive data exposure</h3>
+              <p>Secrets can leak through prompts, context windows, retrieval systems, tool calls, logs or generated output. Security must cover what enters context, what leaves it and which external destinations the agent can contact.</p>
+              <small>Primary concern: credentials, PII, proprietary data and exfiltration.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 05</span>
+              <h3>Memory, RAG & context poisoning</h3>
+              <p>Persistent memory and retrieved knowledge can preserve attacker-controlled instructions beyond a single interaction. A poisoned record may quietly affect later decisions unless provenance, write access and retrieval paths are constrained.</p>
+              <small>Primary concern: durable manipulation and corrupted context.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 06</span>
+              <h3>Unsafe output & execution</h3>
+              <p>Generated SQL, shell commands, code, URLs and structured tool parameters must be treated as untrusted output. Passing model output directly into privileged systems creates classic injection and SSRF-style risks with an AI decision layer in front.</p>
+              <small>Primary concern: validation before execution.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 07</span>
+              <h3>Model & dependency supply chain</h3>
+              <p>Models, adapters, datasets, packages, plugins and agent servers add dependencies with their own provenance and update risk. A trusted workflow can become unsafe when a dependency changes behavior after approval.</p>
+              <small>Primary concern: provenance, integrity and change detection.</small>
+            </article>
+            <article class="risk-card">
+              <span class="risk-number">RISK 08</span>
+              <h3>Weak observability & accountability</h3>
+              <p>If teams cannot reconstruct which prompt, source, identity, tool, parameters and policy decision produced an action, incident response becomes guesswork. Security requires evidence at the action boundary, not just chat transcripts.</p>
+              <small>Primary concern: auditability, attribution and response.</small>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="controls">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">03 / DEFENSE</p>
+          <h2>Controls that matter more than a perfect system prompt.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>Prompt-level defenses are useful, but they are not enough for high-impact systems. Security should remain effective even when the model misunderstands context or follows a malicious instruction. The control plane around the model should decide what is possible.</p>
+
+          <div class="control-stack">
+            <div class="control-row"><b>01</b><h3>Least privilege</h3><p>Give each agent, tool and MCP server only the data, scopes and actions it needs. Separate read access from write access, and avoid shared credentials across unrelated tools.</p></div>
+            <div class="control-row"><b>02</b><h3>Sandboxing & network boundaries</h3><p>Run code and local tool servers in constrained environments. Limit filesystem paths, outbound network access, process capabilities and access to host credentials.</p></div>
+            <div class="control-row"><b>03</b><h3>Human approval for consequential actions</h3><p>Require explicit confirmation for destructive, financial, externally visible or sensitive operations. Show the actual target and parameters, not only a friendly summary generated by the model.</p></div>
+            <div class="control-row"><b>04</b><h3>Deterministic validation</h3><p>Validate model-produced URLs, file paths, SQL, code, API parameters and output schemas before execution. Use allowlists and policy engines where a hard guarantee is required.</p></div>
+            <div class="control-row"><b>05</b><h3>Credential & identity isolation</h3><p>Use short-lived, scoped tokens tied to the intended resource. Do not let the model handle master credentials or reuse one high-privilege identity across every connected service.</p></div>
+            <div class="control-row"><b>06</b><h3>Monitoring, rate limits & kill paths</h3><p>Record tool invocations, identity, parameters and outcomes. Detect unusual action sequences, enforce quotas, and provide a fast way to revoke tokens, disable tools or stop an agent.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="mcp-security">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">04 / MCP & TOOLS</p>
+          <h2>MCP security is an authorization problem and a content-trust problem.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>The Model Context Protocol makes it easier to connect AI applications to tools and data, but every connection adds a new trust boundary. Tool definitions and returned content can influence model behavior, while OAuth scopes and server-side permissions determine what the resulting action can reach.</p>
+
+          <div class="security-callout">
+            <div>
+              <h3>Four rules for safer MCP deployments</h3>
+              <p><strong>Authenticate the user and authorize the resource.</strong> A connected server should not imply unlimited trust. Tokens should be scoped to the intended server and capability.</p>
+              <p><strong>Treat tool metadata and tool results as untrusted content.</strong> A tool description can contain manipulative instructions just as a web page can.</p>
+              <p><strong>Isolate servers from one another.</strong> Sensitive data retrieved from one tool should not automatically become input to another tool with an external side effect.</p>
+              <p><strong>Make destructive actions explicit.</strong> When a tool can send, delete, purchase, deploy or modify permissions, the host should enforce an approval boundary rather than trusting a model-generated decision alone.</p>
+              <a href="/guides/ai-agent-security/">Read the full AI Agent Security guide →</a>
+            </div>
+            <div class="callout-list">
+              <div><strong>Tool poisoning</strong><br>Hidden or misleading instructions in tool definitions or results.</div>
+              <div><strong>Over-scoped OAuth</strong><br>More access than the specific task requires.</div>
+              <div><strong>Cross-server leakage</strong><br>Data from one trust domain used in another.</div>
+              <div><strong>Local server risk</strong><br>Host filesystem, shell and credential exposure.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="prompt-injection">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">05 / PROMPT INJECTION</p>
+          <h2>Assume some hostile instructions will reach the model.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>Prompt injection is not limited to a user typing “ignore previous instructions.” In agentic systems, an attacker can place instructions in content the model later reads: a website, message, document, code comment, retrieved record or tool response. OpenAI describes modern prompt-injection attacks as increasingly similar to social engineering because the model must reason about potentially manipulative content in context.</p>
+          <p>The defensive objective is therefore broader than detecting bad strings. Separate trusted instructions from untrusted data, minimize what an exposed agent can do, require confirmation where consequences are high, and validate every privileged action outside the model.</p>
+
+          <div class="answer-box">
+            <strong>Can prompt injection be completely eliminated?</strong>
+            <p>No practical production architecture should depend on that assumption. Build containment so a successful injection does not automatically become credential theft, data exfiltration, code execution or an irreversible external action.</p>
+          </div>
+
+          <p style="margin-top:22px"><a href="/guides/prompt-injection/">Open the complete Prompt Injection guide →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="security-vs-safety">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">06 / SCOPE</p>
+          <h2>AI security, AI safety and cybersecurity are related—but not identical.</h2>
+        </div>
+        <div class="authority-copy">
+          <table class="comparison-table">
+            <thead><tr><th>Area</th><th>Main question</th><th>Typical concerns</th></tr></thead>
+            <tbody>
+              <tr><td>AI security</td><td>Can an attacker manipulate the AI system or abuse what it can access?</td><td>Prompt injection, tool abuse, data leakage, model theft, poisoned context, excessive agency, insecure execution.</td></tr>
+              <tr><td>AI safety</td><td>Can the AI system cause harmful outcomes even without a conventional attacker?</td><td>Misalignment, dangerous capability, unintended behavior, reliability, oversight, misuse potential.</td></tr>
+              <tr><td>Cybersecurity</td><td>Can systems, identities, networks and data be compromised?</td><td>Vulnerabilities, malware, credential theft, access control, network security, incident response.</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:22px">Real deployments overlap all three. An AI agent may be manipulated through prompt injection, abuse a cloud credential, then produce an unsafe real-world outcome. Treating these as separate organizational silos creates gaps at exactly the boundaries attackers can exploit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="checklist">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">07 / DEPLOYMENT CHECKLIST</p>
+          <h2>A practical AI security baseline.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>For an AI system that can retrieve private data or take actions, these checks provide a useful minimum baseline before production exposure.</p>
+          <div class="checklist">
+            <div class="check-item"><span>01</span><div><strong>Map every trust boundary</strong><p>Identify users, models, data stores, tools, MCP servers, external content and downstream systems.</p></div></div>
+            <div class="check-item"><span>02</span><div><strong>Classify actions by consequence</strong><p>Separate read-only, reversible, external, destructive and privileged actions.</p></div></div>
+            <div class="check-item"><span>03</span><div><strong>Scope credentials narrowly</strong><p>Use per-tool or per-server identities and short-lived tokens wherever possible.</p></div></div>
+            <div class="check-item"><span>04</span><div><strong>Sandbox execution</strong><p>Constrain file access, processes, network destinations and environment secrets.</p></div></div>
+            <div class="check-item"><span>05</span><div><strong>Validate model output</strong><p>Do not execute generated commands, URLs, SQL or tool parameters without deterministic checks.</p></div></div>
+            <div class="check-item"><span>06</span><div><strong>Gate high-impact actions</strong><p>Require approval that exposes the exact target, scope and effect of the operation.</p></div></div>
+            <div class="check-item"><span>07</span><div><strong>Protect memory & retrieval</strong><p>Control who can write persistent context and retain provenance for retrieved records.</p></div></div>
+            <div class="check-item"><span>08</span><div><strong>Test indirect injection</strong><p>Red-team web pages, emails, documents, RAG sources and tool returns—not just the chat input.</p></div></div>
+            <div class="check-item"><span>09</span><div><strong>Log action evidence</strong><p>Capture identity, model, source context, tool, parameters, policy decisions and result.</p></div></div>
+            <div class="check-item"><span>10</span><div><strong>Prepare containment</strong><p>Make it possible to revoke tokens, disable a tool, stop an agent and preserve evidence quickly.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="references">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">08 / PRIMARY REFERENCES</p>
+          <h2>Security guidance worth checking at the source.</h2>
+        </div>
+        <div class="authority-copy">
+          <p>SXF uses primary and standards-oriented references to define the security model on this page. These sources evolve; implementation details should always be verified against the latest source documentation.</p>
+          <div class="source-grid">
+            <a class="source-link" href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener noreferrer">
+              <span>OWASP / 2026</span><strong>GenAI LLM Top 10</strong><p>Current risk categories for LLM and generative AI applications, including prompt injection, disclosure and agency risks.</p>
+            </a>
+            <a class="source-link" href="https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">
+              <span>OWASP / MCP</span><strong>MCP Security Cheat Sheet</strong><p>Operational guidance for tool poisoning, OAuth scope, sandboxing, validation, isolation and monitoring.</p>
+            </a>
+            <a class="source-link" href="https://openai.com/index/designing-agents-to-resist-prompt-injection/" target="_blank" rel="noopener noreferrer">
+              <span>OPENAI / SECURITY</span><strong>Designing agents to resist prompt injection</strong><p>Why modern prompt injection resembles social engineering and why containment matters alongside model resistance.</p>
+            </a>
+            <a class="source-link" href="https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence" target="_blank" rel="noopener noreferrer">
+              <span>NIST / AI RMF</span><strong>Generative AI Profile</strong><p>Cross-sector guidance for governing, mapping, measuring and managing generative-AI risk.</p>
+            </a>
+            <a class="source-link" href="https://blog.modelcontextprotocol.io/posts/2026-07-28/" target="_blank" rel="noopener noreferrer">
+              <span>MCP / 2026 SPEC</span><strong>Model Context Protocol 2026-07-28</strong><p>Current protocol revision with authorization hardening, stateless requests and updated deployment guidance.</p>
+            </a>
+            <a class="source-link" href="https://csrc.nist.gov/pubs/ir/8596/iprd" target="_blank" rel="noopener noreferrer">
+              <span>NIST / CYBER AI</span><strong>Cyber AI Profile work</strong><p>NIST work on managing cybersecurity risk related to AI systems and AI-enabled cyber capabilities.</p>
+            </a>
+          </div>
+          <div class="editorial-note">Editorial method: this overview synthesizes primary security guidance into a practical threat-and-control model. It does not replace product documentation, a formal security assessment or organization-specific risk analysis. See <a href="/about/">SXF / AI methodology and source policy</a>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section shell" id="latest">
+      <div class="signals-intro">
+        <div>
+          <p class="section-label">09 / LIVE INTELLIGENCE</p>
+          <h2 style="margin:0">Latest AI security developments.</h2>
+        </div>
+        <p>The reference layer above changes slowly. This feed tracks concrete security controls, cyber-defense releases and safety-relevant system changes from primary sources so the page stays connected to what is changing now.</p>
+      </div>
+
+      <div class="signal-list security-signals"><a class="signal-row" href="/signals/github-advanced-security-trials-for-github-team-6caab1f/">
       <div class="signal-row-meta"><span>GitHub</span><time datetime="2026-09-30T16:48:24Z">September 30, 2026</time></div>
       <h3>GitHub Advanced Security trials for GitHub Team</h3>
       <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
@@ -80,9 +446,28 @@
       <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-08-26T00:00:00Z">August 26, 2026</time></div>
       <h3>The Hugging Face incident and the road ahead</h3>
       <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a></div></section>
-      
-    </main><footer class="footer shell">
+    </a></div>
+    </section>
+
+    <section class="authority-section shell" id="faq">
+      <div class="authority-grid">
+        <div>
+          <p class="section-label">10 / QUICK ANSWERS</p>
+          <h2>AI security FAQ.</h2>
+        </div>
+        <div class="authority-copy">
+          <div class="faq-list">
+            <div class="faq-item"><h3>What is the biggest security risk with AI agents?</h3><p>There is no single universal risk, but the most dangerous combination is untrusted input plus excessive permissions. Prompt injection becomes materially worse when the affected agent can access secrets, execute code or take external actions without independent controls.</p></div>
+            <div class="faq-item"><h3>Is prompt injection the same as jailbreaks?</h3><p>No. A jailbreak generally tries to bypass model behavior restrictions through direct interaction. Prompt injection targets an application or agent by placing instructions in inputs or external content so the model follows attacker-controlled directions.</p></div>
+            <div class="faq-item"><h3>Is MCP safe to use?</h3><p>MCP can be deployed safely, but a connection should not be treated as inherently trusted. Security depends on server provenance, narrow authorization, sandboxing, tool isolation, input/output validation, approval policies and monitoring.</p></div>
+            <div class="faq-item"><h3>Should AI agents have production credentials?</h3><p>Only when necessary, and then with the narrowest practical scope. Prefer task-specific or per-tool identities, short-lived tokens, resource restrictions and approval for high-impact operations rather than broad standing credentials.</p></div>
+            <div class="faq-item"><h3>Can a system prompt prevent AI security incidents?</h3><p>No. System prompts are one layer of defense, not a hard security boundary. High-impact systems need deterministic controls outside the model so a bad decision cannot directly become an unauthorized action.</p></div>
+            <div class="faq-item"><h3>How should teams test AI security?</h3><p>Test the entire workflow: direct and indirect prompt injection, poisoned retrieval, malicious tool output, permission abuse, credential exposure, unsafe generated parameters, cross-tool data flow, approval bypass and incident containment.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><footer class="footer shell">
       <div class="footer-main">
         <div class="footer-identity">
           <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
