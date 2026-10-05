@@ -56,8 +56,8 @@ These models should be verified and added first.
 
 | Priority | Candidate | Why | Gate before inclusion |
 | --- | --- | --- | --- |
-| P1 | Cohere Command A+ | Enterprise RAG/agent/reasoning ecosystem, vision input, distinct deployment story | Confirm current self-serve token price vs Model Vault pricing and choose one normalized access contract |
-| P1 | Amazon Nova 2 Lite | Adds AWS-native multimodal/reasoning ecosystem with 1M context and 65,536 output | Normalize current Bedrock on-demand pricing and region semantics before calculator eligibility |
+| DONE | Cohere Command A+ | Added 2026-10-06: 128K context, 64K output, vision + reasoning, free API access within rate limits; Model Vault remains instance-priced | Verified |
+| DONE | Amazon Nova 2 Lite | Added 2026-10-06: AWS-native multimodal model, 1M context, 64K output, extended thinking, Standard pay-per-token pricing | Verified |
 | P2 | Amazon Nova 2 Sonic | Adds native speech-to-speech coverage | Requires a separate non-token pricing representation; do not force into text-token calculator |
 | P2 | NVIDIA NIM-selected model | Important deployment ecosystem | Keep outside Standard token-price comparison unless a directly comparable provider token rate exists |
 
