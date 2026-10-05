@@ -33,7 +33,7 @@ button,input{font:inherit}
 .hero{padding:110px 0 58px}
 .hero-kicker,.eyebrow{color:var(--accent);font-size:11px;font-weight:900;letter-spacing:.17em;text-transform:uppercase}
 .hero-kicker{display:flex;align-items:center;gap:11px;margin-bottom:28px}
-.hero h1{margin:0;max-width:1080px;font-size:clamp(58px,9.2vw,126px);line-height:.86;letter-spacing:-.075em;font-weight:850}
+.hero h1{margin:0;max-width:1080px;font-size:clamp(46px,7vw,96px);line-height:.9;letter-spacing:-.065em;font-weight:850}
 .hero h1 span{display:inline-block;color:#667180}
 .hero-copy{max-width:710px;margin:35px 0 0;color:#a0abb8;font-size:clamp(17px,2vw,21px);line-height:1.55;letter-spacing:-.015em}
 .hero-actions{display:flex;gap:12px;align-items:center;margin-top:34px}
@@ -204,7 +204,7 @@ button,input{font:inherit}
 @media(max-width:720px){
   .shell,.header-inner{width:min(calc(100% - 28px),var(--max))}
   .header-inner{grid-template-columns:1fr auto}.top-nav{display:none}.site-header{position:sticky}
-  .hero{padding:74px 0 42px}.hero h1{font-size:clamp(54px,17vw,82px);line-height:.89}.hero-copy{font-size:17px}
+  .hero{padding:74px 0 42px}.hero h1{font-size:clamp(40px,12vw,64px);line-height:.94}.hero-copy{font-size:17px}
   .hero-actions{align-items:stretch}.primary-cta,.secondary-cta{padding-inline:15px}
   .signal-strip{grid-template-columns:1fr 1fr;margin-top:52px}.signal-strip>div{border-bottom:1px solid var(--line)}.signal-strip>div:nth-child(2){border-right:0}.signal-strip>div:nth-last-child(-n+2){border-bottom:0}
   .radar,.sources{padding-top:72px}.section-heading{display:block}.section-heading>p{margin-top:16px}
@@ -250,9 +250,9 @@ button,input{font:inherit}
 .hero-premium .hero-kicker{margin-bottom:24px}
 .hero-premium h1{
   max-width:590px;
-  font-size:clamp(48px,5.6vw,78px);
-  line-height:.92;
-  letter-spacing:-.065em;
+  font-size:clamp(40px,4.8vw,66px);
+  line-height:.96;
+  letter-spacing:-.055em;
 }
 .hero-premium h1 span{color:#6c7785}
 .hero-premium .hero-copy{
@@ -537,7 +537,7 @@ button,input{font:inherit}
   .hero-premium{padding:34px 0 38px}
   .hero-identity{padding-top:20px}
   .hero-premium h1{
-    font-size:clamp(42px,13vw,66px);
+    font-size:clamp(36px,10vw,52px);
     max-width:540px;
   }
   .hero-premium .hero-copy{font-size:15px}
