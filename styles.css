@@ -551,6 +551,20 @@ button,input{font:inherit}
 .discovery-gateway strong{display:block;font-size:28px;letter-spacing:-.045em}
 .discovery-gateway p{max-width:520px;margin:8px 0 22px;color:#7e8997;font-size:13px;line-height:1.65}
 .discovery-gateway b{color:var(--accent);font-size:11px;font-weight:800}
+
+/* SXF ESSENTIAL INTELLIGENCE */
+.essential-intelligence{padding:108px 0 86px}
+.essential-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.essential-card{position:relative;min-height:260px;border:1px solid var(--line);border-radius:20px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.008));display:flex;flex-direction:column;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.essential-card:hover{transform:translateY(-3px);border-color:rgba(200,255,77,.26);background:linear-gradient(180deg,rgba(200,255,77,.035),rgba(255,255,255,.008))}
+.essential-meta{color:#697583;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em}
+.essential-card h3{margin:42px 0 10px;font-size:clamp(24px,2.2vw,32px);line-height:1.02;letter-spacing:-.045em}
+.essential-card p{max-width:420px;margin:0 0 28px;color:#7e8997;font-size:13px;line-height:1.65}
+.essential-link{margin-top:auto;color:#aeb8c3;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.05em}
+.essential-link b{margin-left:7px;color:var(--accent);font-weight:500}
+@media(max-width:980px){.essential-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.essential-intelligence{padding:78px 0 66px}.essential-grid{grid-template-columns:1fr}.essential-card{min-height:210px}.essential-card h3{margin-top:32px}}
+
 @media(max-width:720px){.discovery-gateways{grid-template-columns:1fr}.discovery-gateway{min-height:180px}}
 
 
