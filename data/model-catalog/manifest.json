@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.4",
+  "name": "SXF AI Model Pricing & Specs Database",
+  "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
+  "source_verified": "2026-10-03",
+  "currency": "USD",
+  "pricing_unit": "per 1 million tokens",
+  "pricing_scope": "Standard API token pricing unless a model-specific rule states otherwise",
+  "calculator_excludes": [
+    "Batch, Flex, Fast, Priority, or other non-Standard service tiers",
+    "Prompt-cache write and cache-storage charges",
+    "Tool, grounding, search, code execution, and other add-on charges",
+    "Regional or data-residency uplifts",
+    "Enterprise, volume, committed-use, or negotiated discounts"
+  ],
+  "catalog_sources": {
+    "providers": [
+      "providers/openai.json",
+      "providers/anthropic.json",
+      "providers/google.json",
+      "providers/xai.json",
+      "providers/meta.json"
+    ],
+    "model_order": [
+      "gpt-6-astra",
+      "gpt-6-sol",
+      "gpt-6-luna",
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna",
+      "claude-fable-5-1",
+      "claude-opus-5-5",
+      "claude-sonnet-5",
+      "claude-haiku-4-5-20251001",
+      "gemini-3.8-flash",
+      "grok-4.7",
+      "grok-4.6",
+      "grok-4.3",
+      "gemini-3.7-flash",
+      "llama-4-scout",
+      "llama-4-maverick"
+    ]
+  },
+  "verification_policy": {
+    "standard": "Primary-source verification",
+    "rule": "Core factual fields must cite official provider sources. Paid token pricing is normalized only when the provider publishes a directly comparable Standard API rate; unsupported pricing remains explicitly unavailable.",
+    "editorial_fields": [
+      "positioning"
+    ],
+    "unknown_policy": "Use null, omit unsupported claims, or use an explicit provider-documented sentinel such as max_output='unlimited'; never infer a value. Missing official paid pricing must remain outside Standard calculator rates."
+  },
+  "pricing_statuses": [
+    "official-paid",
+    "free-preview",
+    "partner-priced",
+    "not-published",
+    "self-hosted"
+  ],
+  "calculator_policy": {
+    "eligible_statuses": [
+      "official-paid"
+    ],
+    "rule": "Only provider-published Standard paid token rates are calculator-eligible. Preview-only, partner-priced, self-hosted, or unpublished pricing remains visible in the catalog but is excluded from cost calculations."
+  }
+}

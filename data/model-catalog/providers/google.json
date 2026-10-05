@@ -1,0 +1,151 @@
+{
+  "provider": "Google",
+  "models": [
+    {
+      "family": "Gemini 3",
+      "model": "Gemini 3.8 Flash",
+      "model_id": "gemini-3.8-flash",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google's most intelligent Flash model for long-horizon software engineering, autonomous agents, and complex enterprise workflows.",
+      "sxf_url": "/models/gemini-3-8-flash/",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "notes": [
+        "Introductory Standard pricing applies through December 31, 2026; higher Standard pricing starts January 1, 2027."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-02",
+            "end": "2026-12-31",
+            "input": 0.75,
+            "cached_input": 0.075,
+            "output": 3.75
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-09-27",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "editorial-reference"
+    },
+    {
+      "family": "Gemini 3",
+      "model": "Gemini 3.7 Flash",
+      "model_id": "gemini-3.7-flash",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google general-purpose Flash model for high-throughput multimodal reasoning, coding, and agent workflows.",
+      "sxf_url": "/models/gemini-3-7-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Knowledge cutoff is left unknown because the cited model documentation does not publish one.",
+        "The reasoning default is not inferred when the official model documentation does not state a default."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-08-13",
+            "end": "2026-12-31",
+            "input": 0.75,
+            "cached_input": 0.075,
+            "output": 3.75
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sxf.si/schemas/model-catalog.schema.json",
+  "title": "SXF AI model catalog source",
+  "type": "object",
+  "required": ["provider", "models"],
+  "additionalProperties": false,
+  "properties": {
+    "provider": {"type": "string", "minLength": 1},
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "family", "model", "model_id", "context_window", "max_output",
+          "knowledge_cutoff", "reasoning", "modalities", "positioning",
+          "sxf_url", "official_sources", "pricing", "provenance",
+          "pricing_status", "calculator_eligible"
+        ],
+        "properties": {
+          "family": {"type": "string", "minLength": 1},
+          "model": {"type": "string", "minLength": 1},
+          "model_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "aliases": {"type": "array", "items": {"type": "string"}},
+          "context_window": {"type": "integer", "minimum": 1},
+          "max_output": {"anyOf": [{"type": "integer", "minimum": 1}, {"type": "string", "enum": ["unlimited"]}, {"type": "null"}]},
+          "knowledge_cutoff": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+          "reasoning": {"anyOf": [{"type": "object"}, {"type": "null"}]},
+          "modalities": {
+            "type": "object",
+            "required": ["input", "output"],
+            "properties": {
+              "input": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+              "output": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+            }
+          },
+          "positioning": {"type": "string", "minLength": 1},
+          "sxf_url": {"type": "string", "pattern": "^/"},
+          "page_template": {"type": "string"},
+          "official_sources": {"type": "array", "items": {"type": "string", "pattern": "^https://"}, "minItems": 1},
+          "notes": {"type": "array", "items": {"type": "string"}},
+          "pricing": {"type": "object"},
+          "provenance": {
+            "type": "object",
+            "required": ["verified_at", "verification_method", "evidence"],
+            "properties": {
+              "verified_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+              "verification_method": {"type": "string", "minLength": 1},
+              "evidence": {"type": "object", "minProperties": 1}
+            }
+          },
+          "pricing_status": {
+            "type": "string",
+            "enum": ["official-paid", "free-preview", "partner-priced", "not-published", "self-hosted"]
+          },
+          "calculator_eligible": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}
