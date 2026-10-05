@@ -1,0 +1,84 @@
+{
+  "provider": "DeepSeek",
+  "models": [
+    {
+      "family": "DeepSeek V4",
+      "model": "DeepSeek V4.1 Flash",
+      "model_id": "deepseek-flash",
+      "aliases": [
+        "deepseek-v4-flash",
+        "deepseek-v4-flash-vision-exp"
+      ],
+      "context_window": 1048576,
+      "max_output": 393216,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode / reasoning effort",
+        "levels": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "DeepSeek efficiency-focused multimodal reasoning model for high-throughput agentic, coding, and general API workloads.",
+      "sxf_url": "/models/deepseek-v4-1-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing/",
+        "https://api-docs.deepseek.com/api/list-models/",
+        "https://api-docs.deepseek.com/guides/thinking_mode/",
+        "https://api-docs.deepseek.com/updates/"
+      ],
+      "notes": [
+        "DeepSeek publishes time-variable peak and off-peak USD token rates rather than one fixed Standard rate.",
+        "Peak hours are 01:00–04:00 and 06:00–10:00 UTC, Monday through Friday, excluding Chinese public holidays; all other times are off-peak.",
+        "The model is excluded from the SXF fixed-rate calculator until time-variable pricing is represented explicitly in calculator UX.",
+        "Knowledge cutoff remains unknown because the cited official documentation does not publish a verified cutoff."
+      ],
+      "pricing": {
+        "variable": {
+          "start": "2026-09-10",
+          "unit": "per 1 million tokens",
+          "currency": "USD",
+          "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+          "off_peak": {
+            "input": 0.15,
+            "cached_input": 0.003,
+            "output": 0.6
+          },
+          "peak": {
+            "input": 0.3,
+            "cached_input": 0.006,
+            "output": 1.2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api-docs.deepseek.com/api/list-models/",
+          "context_window": "https://api-docs.deepseek.com/api/list-models/",
+          "max_output": "https://api-docs.deepseek.com/api/list-models/",
+          "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
+          "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
+          "modalities": "https://api-docs.deepseek.com/api/list-models/",
+          "pricing": "https://api-docs.deepseek.com/quick_start/pricing/"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false
+    }
+  ]
+}
