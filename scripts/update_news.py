@@ -7292,6 +7292,7 @@ def benchmark_page_html(benchmark):
     ]
     canonical = f'{BASE_URL}/evaluations/{benchmark_id}/'
     is_aa_briefcase = benchmark_id == "aa-briefcase-v1.1"
+    is_aa_intelligence = benchmark_id == "aa-intelligence-index-v4.3.2"
     page_title = f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," ")
     page_description = f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.'
     page_h1 = benchmark["name"] + (f' v{benchmark["version"]}' if benchmark.get("version") else "")
@@ -7299,6 +7300,10 @@ def benchmark_page_html(benchmark):
         page_title = "AA-Briefcase v1.1 Benchmark — AI Agent Knowledge Work Results | SXF / AI"
         page_description = "AA-Briefcase v1.1 benchmark explained: compare SXF-tracked AI agent knowledge-work results, Elo scores, methodology, model configurations and limitations."
         page_h1 = "AA-Briefcase v1.1 Benchmark: AI Agent Knowledge Work Results"
+    elif is_aa_intelligence:
+        page_title = "Artificial Analysis Intelligence Index — AI Model Rankings & Results | SXF / AI"
+        page_description = "Artificial Analysis Intelligence Index explained: compare SXF-tracked AI model rankings, scores, benchmark components, configurations, methodology and limitations."
+        page_h1 = "Artificial Analysis Intelligence Index: AI Model Rankings & Benchmark Results"
     groups = {}
     for row in observations:
         groups.setdefault((row["evidence_type"], row.get("comparable_group")), []).append(row)
@@ -7351,6 +7356,29 @@ def benchmark_page_html(benchmark):
                 "Reasoning effort, fallback behavior and tool settings can materially change an agent's benchmark result. SXF keeps configuration attached to each observation instead of treating a model name as a single universal score."
             ),
         ]
+    elif is_aa_intelligence:
+        faq = [
+            (
+                "What is the Artificial Analysis Intelligence Index?",
+                "The Artificial Analysis Intelligence Index is a composite benchmark that combines multiple capability evaluations into one score to summarize frontier AI model performance across reasoning, coding, science, knowledge work, long context and agentic tasks."
+            ),
+            (
+                "What does the Intelligence Index score mean?",
+                "The score is a composite benchmark result. Higher is better within the same Artificial Analysis index version and comparable configuration, but it should not be treated as a universal measure of every model capability."
+            ),
+            (
+                "Is the SXF ranking the complete Artificial Analysis leaderboard?",
+                "No. SXF displays the comparable observations currently stored in its evaluation dataset. The official Artificial Analysis leaderboard is broader and can update independently."
+            ),
+            (
+                "Can score gaps be treated as percentage differences in intelligence?",
+                "No. A gap such as 58 versus 51 is a difference in composite index points, not a statement that one model is a specific percentage more intelligent."
+            ),
+            (
+                "Why does model configuration matter?",
+                "Reasoning effort, fallback behavior and benchmark-defined tools can materially affect results. SXF keeps those settings attached to each observation."
+            ),
+        ]
 
     schema = {
         "@context":"https://schema.org",
@@ -7368,12 +7396,21 @@ def benchmark_page_html(benchmark):
                 "publishingPrinciples":"https://sxf.si/about/#method",
                 "breadcrumb":{"@id":canonical+"#breadcrumb"},
                 "mainEntity":{"@id":canonical+"#dataset"},
-                "about":[
-                    {"@type":"Thing","name":"AA-Briefcase"},
-                    {"@type":"Thing","name":"AI agent benchmarks"},
-                    {"@type":"Thing","name":"Agentic knowledge work"},
-                    {"@type":"Thing","name":"AI model evaluation"},
-                ] if is_aa_briefcase else {"@type":"Thing","name":benchmark["name"]},
+                "about":(
+                    [
+                        {"@type":"Thing","name":"AA-Briefcase"},
+                        {"@type":"Thing","name":"AI agent benchmarks"},
+                        {"@type":"Thing","name":"Agentic knowledge work"},
+                        {"@type":"Thing","name":"AI model evaluation"},
+                    ] if is_aa_briefcase else
+                    [
+                        {"@type":"Thing","name":"Artificial Analysis Intelligence Index"},
+                        {"@type":"Thing","name":"AI model rankings"},
+                        {"@type":"Thing","name":"AI benchmark scores"},
+                        {"@type":"Thing","name":"Composite AI evaluation"},
+                    ] if is_aa_intelligence else
+                    {"@type":"Thing","name":benchmark["name"]}
+                ),
                 "inLanguage":"en",
             },
             {
@@ -7390,22 +7427,44 @@ def benchmark_page_html(benchmark):
                 "publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},
                 "isAccessibleForFree":True,
                 "citation":[benchmark["source_url"], benchmark["methodology_url"]],
-                "keywords":[
-                    "AA-Briefcase benchmark",
-                    "AA-Briefcase v1.1",
-                    "AI agent benchmark",
-                    "agentic knowledge work",
-                    "AI model evaluation",
-                    "AI benchmark Elo",
-                ] if is_aa_briefcase else [benchmark["name"], benchmark["category"]],
-                "variableMeasured":[
-                    "AA-Briefcase Elo",
-                    "Model configuration",
-                    "Reasoning effort",
-                    "Tool configuration",
-                    "Evaluator evidence type",
-                    "Comparable group",
-                ] if is_aa_briefcase else [benchmark["metric"]],
+                "keywords":(
+                    [
+                        "AA-Briefcase benchmark",
+                        "AA-Briefcase v1.1",
+                        "AI agent benchmark",
+                        "agentic knowledge work",
+                        "AI model evaluation",
+                        "AI benchmark Elo",
+                    ] if is_aa_briefcase else
+                    [
+                        "Artificial Analysis Intelligence Index",
+                        "AI model rankings",
+                        "AI benchmark results",
+                        "AI intelligence benchmark",
+                        "AI model evaluation",
+                        "composite AI benchmark",
+                    ] if is_aa_intelligence else
+                    [benchmark["name"], benchmark["category"]]
+                ),
+                "variableMeasured":(
+                    [
+                        "AA-Briefcase Elo",
+                        "Model configuration",
+                        "Reasoning effort",
+                        "Tool configuration",
+                        "Evaluator evidence type",
+                        "Comparable group",
+                    ] if is_aa_briefcase else
+                    [
+                        "Artificial Analysis Intelligence Index score",
+                        "Model configuration",
+                        "Reasoning effort",
+                        "Fallback behavior",
+                        "Tool configuration",
+                        "Comparable group",
+                    ] if is_aa_intelligence else
+                    [benchmark["metric"]]
+                ),
                 "distribution":{
                     "@type":"DataDownload",
                     "encodingFormat":"application/json",
@@ -7568,6 +7627,157 @@ def benchmark_page_html(benchmark):
         </div>
       </section>'''
 
+    intelligence_deep_dive = ""
+    if is_aa_intelligence:
+        tracked_rows = sorted(
+            observations,
+            key=lambda row: float(row["score"]),
+            reverse=benchmark.get("direction") == "higher-is-better",
+        )
+        leader = tracked_rows[0] if tracked_rows else None
+        runner = tracked_rows[1] if len(tracked_rows) > 1 else None
+        leader_model = model_catalog_entry(leader["model_id"]) if leader else None
+        gap = float(leader["score"]) - float(runner["score"]) if leader and runner else None
+        quick_answer = (
+            f'Within the comparable SXF snapshot verified {MODEL_EVALUATION_CATALOG["source_verified"]}, '
+            f'{leader_model["model"]} leads the {len(tracked_rows)} tracked Artificial Analysis Intelligence Index observations '
+            f'with a score of {evaluation_score_label(benchmark, leader["score"])}'
+            + (f', {evaluation_score_label(benchmark, gap)} ahead of the next tracked result.' if gap is not None else '.')
+        ) if leader else "SXF does not currently store a comparable Intelligence Index observation."
+
+        tracked_cards = "".join(
+            f'''<a class="benchmark-rank-card" href="{escape(model_catalog_entry(row["model_id"])["sxf_url"], quote=True)}">
+              <span>#{index}</span>
+              <strong>{escape(model_catalog_entry(row["model_id"])["model"])}</strong>
+              <b>{escape(evaluation_score_label(benchmark, row["score"]))}</b>
+              <small>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))} reasoning · {escape(str(row.get("model_configuration", {}).get("tools") or "not published"))}</small>
+            </a>'''
+            for index, row in enumerate(tracked_rows, start=1)
+        )
+
+        faq_html = "".join(
+            f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+            for question, answer in faq
+        )
+
+        intelligence_deep_dive = f'''
+      <section class="benchmark-answer shell" aria-labelledby="intelligence-answer-title">
+        <div class="benchmark-answer-card">
+          <p class="eyebrow">QUICK ANSWER</p>
+          <h2 id="intelligence-answer-title">What does the current SXF snapshot show?</h2>
+          <p>{escape(quick_answer)}</p>
+          <small>This is the comparable subset stored by SXF, not the complete live Artificial Analysis leaderboard.</small>
+        </div>
+      </section>
+
+      <section class="benchmark-authority shell" aria-labelledby="intelligence-what-is">
+        <div class="benchmark-copy">
+          <p class="eyebrow">BENCHMARK EXPLAINED</p>
+          <h2 id="intelligence-what-is">What is the Artificial Analysis Intelligence Index?</h2>
+          <p>The Artificial Analysis Intelligence Index is a composite benchmark designed to summarize broad frontier-model capability in one score. Instead of relying on a single task family, it combines evidence across reasoning, coding, science, knowledge work, long-context and agentic evaluations.</p>
+          <p>That makes the index useful as a high-level comparison layer: it can show how strong a model configuration looks across several capability domains at once. The tradeoff is that a composite score compresses many different behaviors into one number, so it should be read alongside benchmark composition, configuration and workload-specific evidence.</p>
+        </div>
+        <aside class="benchmark-definition">
+          <span>INTELLIGENCE INDEX v4.3.2</span>
+          <dl>
+            <div><dt>Evaluator</dt><dd>Artificial Analysis</dd></div>
+            <div><dt>Category</dt><dd>Composite intelligence</dd></div>
+            <div><dt>Metric</dt><dd>Index points</dd></div>
+            <div><dt>Direction</dt><dd>Higher is better</dd></div>
+            <div><dt>SXF snapshot</dt><dd>{len(tracked_rows)} comparable observations</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="benchmark-rankings shell" aria-labelledby="intelligence-rankings-title">
+        <div class="intel-section-head"><div><p class="eyebrow">SXF TRACKED RANKINGS</p><h2 id="intelligence-rankings-title">Comparable Intelligence Index results.</h2></div><a href="/evaluations/explorer/">Open evaluation explorer ↗</a></div>
+        <div class="benchmark-rank-grid">{tracked_cards}</div>
+        <p class="evaluation-disclaimer">This ranks only observations in the same SXF comparable group and version. It is not presented as the complete live Artificial Analysis leaderboard.</p>
+      </section>
+
+      <section class="benchmark-authority shell benchmark-score-explainer" aria-labelledby="intelligence-score-title">
+        <div class="benchmark-copy">
+          <p class="eyebrow">HOW TO READ THE SCORE</p>
+          <h2 id="intelligence-score-title">What does the Intelligence Index score measure?</h2>
+          <p>The score is a composite signal, not a percentage and not a direct unit of “intelligence.” It aggregates performance from multiple evaluation families into a single index intended to make broad model comparisons easier.</p>
+          <p>A higher score means stronger performance under the index methodology and tested configuration. It does not mean a model is proportionally more intelligent, nor does it guarantee that the higher-scoring model wins on every coding, research, agent or long-context workload.</p>
+        </div>
+        <div class="benchmark-measure-grid">
+          <article><span>01</span><strong>Reasoning & science</strong><p>Evaluations that test structured reasoning, difficult problem solving and scientific capability.</p></article>
+          <article><span>02</span><strong>Coding & knowledge work</strong><p>Tasks that test software capability and practical professional work rather than only short-form QA.</p></article>
+          <article><span>03</span><strong>Long context & agents</strong><p>Evidence from long-context and agentic evaluations that test multi-step behavior and broader task execution.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-components shell" aria-labelledby="intelligence-components-title">
+        <div class="intel-section-head"><div><p class="eyebrow">COMPOSITE DESIGN</p><h2 id="intelligence-components-title">What feeds the composite index?</h2></div></div>
+        <div class="benchmark-interpret-grid">
+          <article><span>REASONING</span><h3>General problem solving.</h3><p>The index incorporates reasoning-oriented evidence so broad analytical capability contributes to the composite result.</p></article>
+          <article><span>CODING</span><h3>Software capability.</h3><p>Coding evaluations help distinguish models that can reason about and produce software from models that mainly excel at language tasks.</p></article>
+          <article><span>SCIENCE & KNOWLEDGE</span><h3>Technical understanding.</h3><p>Scientific and knowledge-heavy evaluations contribute evidence about technical depth and domain reasoning.</p></article>
+          <article><span>AGENTS & LONG CONTEXT</span><h3>Operational capability.</h3><p>Agentic and long-context tasks add evidence about multi-step execution and working across larger information environments.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-interpretation shell" aria-labelledby="intelligence-compare-title">
+        <div class="intel-section-head"><div><p class="eyebrow">MODEL INTERPRETATION</p><h2 id="intelligence-compare-title">Claude Opus 5.5 vs GPT-6 Astra vs Grok 4.7.</h2></div></div>
+        <div class="benchmark-interpret-grid">
+          <article><span>CLAUDE OPUS 5.5</span><h3>58 points in the SXF snapshot.</h3><p>Claude Opus 5.5 leads the stored comparable observations. Its max reasoning setting and default server-side fallback are part of the evaluated configuration and should stay attached to the score.</p></article>
+          <article><span>GPT-6 ASTRA</span><h3>51 points, seven behind the tracked leader.</h3><p>GPT-6 Astra is evaluated at high reasoning effort. The seven-point gap is an index difference—not a claim that Opus is a fixed percentage more capable.</p></article>
+          <article><span>GROK 4.7</span><h3>46 points at xhigh reasoning.</h3><p>Grok 4.7 sits below Astra in this stored comparable group. That result is evidence for this composite index, not a universal ranking across every workload.</p></article>
+          <article><span>WHY CONFIGURATION MATTERS</span><h3>Model names alone are not enough.</h3><p>Reasoning effort, fallback behavior, tool policy and evaluator version can move results. SXF therefore stores the tested configuration next to every observation.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-authority shell" aria-labelledby="intelligence-gaps-title">
+        <div class="benchmark-copy">
+          <p class="eyebrow">SCORE GAPS</p>
+          <h2 id="intelligence-gaps-title">How should you interpret differences between scores?</h2>
+          <p>Read score gaps as differences within the same index version and comparable group. A model at 58 has stronger composite evidence than one at 51 under this methodology, but the seven-point gap should not be converted into a percentage claim about intelligence.</p>
+          <p>For decisions, use the index as a first-pass ranking signal, then inspect the benchmark families and production factors that matter to your workload: coding quality, agent reliability, context limits, latency and API cost.</p>
+        </div>
+        <div class="benchmark-use-links">
+          <a href="/evaluations/aa-briefcase-v1.1/"><span>AGENTIC WORK</span><strong>See AA-Briefcase knowledge-work evidence</strong><b>↗</b></a>
+          <a href="/research/ai-agent-reliability/"><span>RELIABILITY</span><strong>Measure whether strong benchmark performance repeats</strong><b>↗</b></a>
+          <a href="/models/pricing/"><span>ECONOMICS</span><strong>Compare API pricing and context limits</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <section class="benchmark-interpretation shell" aria-labelledby="intelligence-useful-title">
+        <div class="intel-section-head"><div><p class="eyebrow">WHY COMPOSITES HELP</p><h2 id="intelligence-useful-title">Why composite benchmarks are useful.</h2></div></div>
+        <div class="benchmark-interpret-grid">
+          <article><span>BROAD COVERAGE</span><h3>One view across several capability families.</h3><p>A composite index is useful when you need a fast, broad comparison instead of optimizing for one narrow benchmark.</p></article>
+          <article><span>LESS SINGLE-BENCHMARK BIAS</span><h3>One outlier test has less control over the story.</h3><p>Combining multiple evaluation families can reduce the risk of treating one unusually strong or weak benchmark as the whole model.</p></article>
+          <article><span>DECISION STARTING POINT</span><h3>Useful for shortlisting models.</h3><p>The index can narrow the field before deeper workload-specific testing, pricing analysis and reliability evaluation.</p></article>
+          <article><span>NOT A FINAL VERDICT</span><h3>Compression always loses detail.</h3><p>A single score cannot tell you why a model is strong or whether that strength matches your production workload.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-limitations shell" aria-labelledby="intelligence-limits-title">
+        <div class="intel-section-head"><div><p class="eyebrow">LIMITATIONS</p><h2 id="intelligence-limits-title">What a composite ranking cannot prove.</h2></div></div>
+        <ul>
+          <li><strong>It is not a universal intelligence scale.</strong> Index points only have meaning inside the Artificial Analysis methodology and version.</li>
+          <li><strong>Benchmark composition matters.</strong> Changing the included evaluations or their weighting can change the composite ranking.</li>
+          <li><strong>Configuration matters.</strong> Reasoning effort, fallback behavior and tool settings can materially change a model's observed result.</li>
+          <li><strong>Production factors are separate.</strong> Price, latency, uptime, safety and reliability are not automatically captured by a composite capability score.</li>
+          <li><strong>Coverage changes over time.</strong> The official leaderboard can add models or update results; SXF stores a dated evidence snapshot.</li>
+        </ul>
+      </section>
+
+      <section class="benchmark-faq shell" aria-labelledby="intelligence-faq-title">
+        <div class="intel-section-head"><div><p class="eyebrow">FAQ</p><h2 id="intelligence-faq-title">Artificial Analysis Intelligence Index questions.</h2></div></div>
+        <div class="benchmark-faq-list">{faq_html}</div>
+      </section>
+
+      <section class="benchmark-sources shell" aria-labelledby="intelligence-sources-title">
+        <div class="intel-section-head"><div><p class="eyebrow">PRIMARY SOURCES</p><h2 id="intelligence-sources-title">Methodology and live benchmark evidence.</h2></div></div>
+        <div class="benchmark-source-links">
+          <a href="{escape(benchmark["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><strong>Artificial Analysis — Intelligence Index</strong><span>Official benchmark and live results ↗</span></a>
+          <a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><strong>Artificial Analysis — Methodology</strong><span>Benchmark design and evaluation methodology ↗</span></a>
+          <a href="/data/model-evaluations.json"><strong>SXF Evaluation Intelligence dataset</strong><span>Stored observations and configurations ↗</span></a>
+        </div>
+      </section>'''
+
     return f'''<!doctype html><html lang="en">{page_head(
         page_title,
         page_description,
@@ -7583,6 +7793,7 @@ def benchmark_page_html(benchmark):
         <div class="collection-stats"><div><strong>{len(observations)}</strong><span>observations</span></div><div><strong>{escape(benchmark["evaluator"])}</strong><span>evaluator</span></div><div><strong>{escape(status_label)}</strong><span>status</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
       </section>
       {briefcase_deep_dive}
+      {intelligence_deep_dive}
       <section class="evaluation-benchmark-method shell">
         <div class="compare-method-head"><p class="eyebrow">SXF DATA METHOD</p><h2>Read every score with its configuration.</h2><p>SXF does not merge scores from incompatible benchmark versions or comparable groups. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
         <div class="model-related-links"><a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>METHODOLOGY</span><strong>Open evaluator methodology</strong><b>↗</b></a><a href="/data/model-evaluations.json"><span>DATASET</span><strong>Open raw observations</strong><b>↗</b></a></div>
