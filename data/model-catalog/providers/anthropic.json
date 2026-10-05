@@ -1,0 +1,246 @@
+{
+  "provider": "Anthropic",
+  "models": [
+    {
+      "family": "Claude 5",
+      "model": "Claude Fable 5.1",
+      "model_id": "claude-fable-5-1",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "high",
+        "always_on": true
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Anthropic's highest-capability generally available model for demanding reasoning and long-horizon agentic work.",
+      "sxf_url": "/models/claude-fable-5-1/",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-01",
+            "end": null,
+            "input": 10,
+            "cached_input": 0.25,
+            "cache_write_5m": 12.5,
+            "cache_write_1h": 20,
+            "output": 50
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-09-27",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "editorial-reference"
+    },
+    {
+      "family": "Claude 5",
+      "model": "Claude Opus 5.5",
+      "model_id": "claude-opus-5-5",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "medium",
+        "always_on": true
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Current Opus model for long-running agentic coding and complex knowledge work.",
+      "sxf_url": "/models/claude-opus-5-5/",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-22",
+            "end": null,
+            "input": 4,
+            "cached_input": 0.2,
+            "cache_write_5m": 5,
+            "cache_write_1h": 8,
+            "output": 20
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-09-27",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference"
+    },
+    {
+      "family": "Claude 5",
+      "model": "Claude Sonnet 5",
+      "model_id": "claude-sonnet-5",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-01",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "high",
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Balanced Claude tier combining speed and intelligence for coding, agents, and production knowledge work.",
+      "sxf_url": "/guides/gpt-6-vs-claude/",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-06-30",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.2,
+            "cache_write_5m": 2.5,
+            "cache_write_1h": 4,
+            "output": 10
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-09-27",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "family": "Claude 4",
+      "model": "Claude Haiku 4.5",
+      "model_id": "claude-haiku-4-5-20251001",
+      "aliases": [
+        "claude-haiku-4-5"
+      ],
+      "context_window": 200000,
+      "max_output": 64000,
+      "knowledge_cutoff": "2025-02",
+      "reasoning": {
+        "type": "extended thinking",
+        "levels": [
+          "manual budget"
+        ],
+        "default": null,
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Fastest Claude tier for latency-sensitive and high-volume workloads.",
+      "sxf_url": "/guides/gpt-6-vs-claude/",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2025-10-15",
+            "end": null,
+            "input": 1,
+            "cached_input": 0.1,
+            "cache_write_5m": 1.25,
+            "cache_write_1h": 2,
+            "output": 5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-09-27",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    }
+  ]
+}
