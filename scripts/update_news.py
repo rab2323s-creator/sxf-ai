@@ -8214,7 +8214,7 @@ def compare_index_html(items):
     <body class="intel-page compare-hub-page">{page_header("compare")}<main>
       <section class="compare-hub-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><span>Compare</span></nav>
-        <div class="compare-hub-hero-grid"><div><p class="eyebrow">COMPARE ENGINE V2</p><h1>Compare AI models.<br><span>Evidence first.</span></h1></div>
+        <div class="compare-hub-hero-grid"><div><p class="eyebrow">COMPARE ENGINE V2</p><h1>Compare AI Models: Pricing, Context, Specs &amp; Capabilities</h1></div>
         <div class="compare-hub-intro"><p>Build any matchup across {len(MODEL_PRICING_CATALOG["models"])} verified models, then open curated deep comparisons where the search intent and decision value justify a dedicated page.</p><p>No synthetic winner score. Missing prices stay missing. Every factual field traces back to the canonical model database.</p></div></div>
         <div class="compare-hub-stats"><div><strong>{len(rows)}</strong><span>curated comparisons</span></div><div><strong>{len(MODEL_PRICING_CATALOG["models"])}</strong><span>models in builder</span></div><div><strong>{len(providers)}</strong><span>providers</span></div><div><strong>{escape(verified)}</strong><span>registry verified</span></div></div>
       </section>
