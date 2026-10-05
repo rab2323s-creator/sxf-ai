@@ -1283,3 +1283,18 @@
 .benchmark-source-links a:hover span{color:var(--accent)}
 @media(max-width:900px){.benchmark-authority{grid-template-columns:1fr}.benchmark-rank-grid{grid-template-columns:1fr 1fr}.benchmark-interpret-grid{grid-template-columns:1fr}}
 @media(max-width:620px){.benchmark-answer{padding-top:52px}.benchmark-authority,.benchmark-rankings,.benchmark-interpretation,.benchmark-limitations,.benchmark-faq,.benchmark-sources{padding-top:68px}.benchmark-rank-grid{grid-template-columns:1fr}.benchmark-source-links a{flex-direction:column;gap:7px}.benchmark-source-links span{text-align:left}}
+
+/* Benchmark hero scale */
+
+.evaluation-benchmark-page .collection-hero h1{
+  max-width:1050px;
+  font-size:clamp(44px,6.2vw,82px);
+  line-height:.92;
+  letter-spacing:-.058em;
+}
+@media(max-width:640px){
+  .evaluation-benchmark-page .collection-hero h1{
+    font-size:clamp(38px,11vw,56px);
+    line-height:.96;
+  }
+}
