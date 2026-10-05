@@ -3265,6 +3265,7 @@ def ai_security_topic_page_html(topic, items):
             },
             {
                 "@type": "BreadcrumbList",
+                "@id": canonical + "#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": "https://sxf.si/"},
                     {"@type": "ListItem", "position": 2, "name": "Topics", "item": "https://sxf.si/topics/"},
@@ -4655,6 +4656,8 @@ def best_ai_coding_tools_html(items):
             },
             {
                 "@type": "FAQPage",
+                "@id": canonical + "#faq",
+                "mainEntityOfPage": {"@id": canonical + "#webpage"},
                 "mainEntity": [
                     {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
                     for q,a in faq
@@ -8749,11 +8752,21 @@ def model_pricing_page_html():
                 "@type": "CollectionPage",
                 "@id": canonical + "#webpage",
                 "url": canonical,
-                "name": "AI Model Pricing & API Specs Database | SXF / AI",
-                "description": "Primary-source model specifications with normalized provider-published Standard API pricing where available, plus an interactive token-cost calculator for eligible models.",
+                "name": "AI Model Pricing Comparison — API Costs, Context & Specs | SXF / AI",
+                "description": description,
                 "dateModified": verified,
                 "isPartOf": {"@id": "https://sxf.si/#website"},
-                "about": {"@type": "Thing", "name": "AI model API pricing"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
+                "breadcrumb": {"@id": canonical + "#breadcrumb"},
+                "mainEntity": {"@id": canonical + "#dataset"},
+                "about": [
+                    {"@type": "Thing", "name": "AI model pricing"},
+                    {"@type": "Thing", "name": "AI API pricing"},
+                    {"@type": "Thing", "name": "AI model context windows"},
+                    {"@type": "Thing", "name": "AI model specifications"},
+                ],
                 "inLanguage": "en",
             },
             {
@@ -8761,10 +8774,32 @@ def model_pricing_page_html():
                 "@id": canonical + "#dataset",
                 "name": MODEL_PRICING_CATALOG["name"],
                 "description": MODEL_PRICING_CATALOG["description"],
+                "url": canonical,
+                "mainEntityOfPage": {"@id": canonical + "#webpage"},
                 "dateModified": verified,
+                "version": MODEL_PRICING_CATALOG.get("schema_version"),
                 "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "isAccessibleForFree": True,
+                "keywords": [
+                    "AI model pricing",
+                    "AI API pricing",
+                    "API costs",
+                    "token pricing",
+                    "context windows",
+                    "AI model specifications",
+                ],
+                "variableMeasured": [
+                    "Input token price per million tokens",
+                    "Cached input token price per million tokens",
+                    "Output token price per million tokens",
+                    "Context window",
+                    "Maximum output",
+                    "Provider",
+                ],
                 "distribution": {
                     "@type": "DataDownload",
+                    "name": "SXF AI model pricing dataset (JSON)",
                     "encodingFormat": "application/json",
                     "contentUrl": f"{BASE_URL}/data/model-pricing.json",
                 },
@@ -8787,11 +8822,8 @@ def model_pricing_page_html():
         ],
     }
 
-    description = (
-        "Compare Standard API token pricing, cached-input rates, context windows and output limits "
-        "for selected OpenAI, Anthropic and Google AI models. Includes an interactive cost calculator."
-    )
-    head = page_head("AI Model Pricing & API Specs Database | SXF / AI", description, canonical, schema)
+    description = "Compare AI model pricing and API costs across OpenAI, Anthropic, Google, xAI and Meta. See input, cached and output rates, context windows and specs."
+    head = page_head("AI Model Pricing Comparison — API Costs, Context & Specs | SXF / AI", description, canonical, schema)
     head = head.replace("</head>", '      <link rel="stylesheet" href="/models/pricing/pricing.css" />\n    </head>')
     return f'''<!doctype html><html lang="en">{head}
     <body class="intel-page pricing-page">
@@ -8803,7 +8835,7 @@ def model_pricing_page_html():
           <div class="pricing-hero-grid">
             <div>
               <p class="eyebrow">MODEL ECONOMICS / PRIMARY-SOURCE VERIFIED {escape(verified)}</p>
-              <h1>Model pricing.<br><span>Normalized.</span></h1>
+              <h1>AI Model Pricing &amp; API Cost Comparison</h1>
             </div>
             <div class="pricing-hero-copy">
               <p>One source-backed view of Standard API token pricing and core limits across selected frontier models. Compare rates, inspect pricing rules and estimate a request without mixing incompatible service tiers.</p>
