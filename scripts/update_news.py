@@ -56,6 +56,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-agent-authorization" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-discovery" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-alternatives" / "index.html": "guides",
+    ROOT / "guides" / "model-context-protocol-mcp" / "index.html": "guides",
     ROOT / "guides" / "github-copilot-memory" / "index.html": "guides",
     ROOT / "guides" / "prompt-injection" / "index.html": "guides",
 }
@@ -2954,9 +2955,9 @@ def topic_page_html(topic, items):
     elif topic["slug"] == "github-copilot":
         security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>COPILOT MEMORY</span><p>Repository facts, user preferences, cross-agent context, 28-day retention, privacy and admin controls.</p><div class="tool-links"><a href="/guides/github-copilot-memory/">Copilot Memory guide ↗</a></div></article><article><span>DEEP COMPARISON</span><p>Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop compared by workflow and cost.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Compare alternatives ↗</a></div></article></div></section>'''
     elif topic["slug"] == "coding-ai":
-        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>MCP REFERENCE</span><p>Connect coding agents and IDE assistants to tools and context with MCP, including transports, OAuth and production security.</p><div class="tool-links"><a href="/guides/model-context-protocol-mcp/">Model Context Protocol guide ↗</a></div></article><article><span>SECURITY GUIDE</span><p>Prompt injection, MCP, permissions, sandboxing and production controls.</p><div class="tool-links"><a href="/guides/ai-agent-security/">AI Agent Security ↗</a></div></article><article><span>COPILOT ALTERNATIVES</span><p>Compare Cursor, Claude Code, Codex, Cline, JetBrains AI, OpenCode and Devin Desktop.</p><div class="tool-links"><a href="/guides/github-copilot-alternatives/">Open comparison ↗</a></div></article></div></section>'''
     elif topic["slug"] == "ai-agents":
-        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>START HERE</span><p>Understand agentic AI, how agents actually work, real use cases, tools, memory, autonomy and the difference from chatbots.</p><div class="tool-links"><a href="/guides/what-is-agentic-ai/">Agentic AI guide ↗</a></div></article><article><span>BUILDING AGENTS</span><p>Design orchestrators, specialist agents, MCP tools, memory, verification and human approval as one production system.</p><div class="tool-links"><a href="/guides/how-to-build-ai-super-agent/">Build a super agent ↗</a></div></article><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
+        security_reference = '''<section class="topic-reference shell"><div class="guide-choice-grid"><article><span>MCP REFERENCE</span><p>Understand Model Context Protocol architecture, tools, resources, prompts, OAuth, security and production deployment.</p><div class="tool-links"><a href="/guides/model-context-protocol-mcp/">Model Context Protocol guide ↗</a></div></article><article><span>START HERE</span><p>Understand agentic AI, how agents actually work, real use cases, tools, memory, autonomy and the difference from chatbots.</p><div class="tool-links"><a href="/guides/what-is-agentic-ai/">Agentic AI guide ↗</a></div></article><article><span>BUILDING AGENTS</span><p>Design orchestrators, specialist agents, MCP tools, memory, verification and human approval as one production system.</p><div class="tool-links"><a href="/guides/how-to-build-ai-super-agent/">Build a super agent ↗</a></div></article><article><span>AGENT SECURITY</span><p>Identity, tool boundaries, MCP, sandboxing and human approval.</p><div class="tool-links"><a href="/guides/ai-agent-security/">Open security guide ↗</a></div></article><article><span>PROMPT INJECTION</span><p>Understand direct and indirect injection before expanding agent autonomy.</p><div class="tool-links"><a href="/guides/prompt-injection/">Open prompt injection guide ↗</a></div></article></div></section>'''
     return f'''<!doctype html><html lang="en">{page_head(topic["name"] + " — AI Signals | SXF / AI", topic["description"], canonical, schema, robots=robots)}
     <body class="intel-page topic-page">{page_header()}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/topics/">Topics</a><span>/</span><span>{escape(topic["name"])}</span></nav>
@@ -6249,6 +6250,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/model-context-protocol-mcp/",
+            "category": "Agents · Infrastructure",
+            "categories": ["agents", "coding", "security", "tools"],
+            "kicker": "MODEL CONTEXT PROTOCOL",
+            "title": "What Is MCP? How Model Context Protocol Connects AI Agents to Tools & Data",
+            "description": "Model Context Protocol architecture, tools, resources, prompts, transports, OAuth, security, production deployment and the 2026-07-28 specification.",
+            "meta": "MCP · Tools · OAuth · Protocol",
+            "updated": "Oct 5, 2026",
+            "read_time": "34 min",
+        },
+        {
             "href": "/guides/github-copilot-memory/",
             "category": "Coding · Agents · Security",
             "categories": ["coding", "agents", "security", "tools"],
@@ -8735,6 +8747,11 @@ def update_sitemap(items):
         sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-security/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/model-context-protocol-mcp/",
+            "2026-10-05",
+            f"{BASE_URL}/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg"
+        ),
         sitemap_image_entry(
             f"{BASE_URL}/guides/github-copilot-memory/",
             "2026-10-05",
