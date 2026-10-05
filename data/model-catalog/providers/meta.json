@@ -1,0 +1,99 @@
+{
+  "provider": "Meta",
+  "models": [
+    {
+      "family": "Llama 4",
+      "model": "Llama 4 Scout",
+      "model_id": "llama-4-scout",
+      "context_window": 10000000,
+      "max_output": null,
+      "knowledge_cutoff": "2024-08",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "code"
+        ]
+      },
+      "positioning": "Meta open-weight multimodal Llama 4 model optimized for very long context and efficient deployment.",
+      "sxf_url": "/models/llama-4-scout/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ],
+      "notes": [
+        "Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.",
+        "No separate output-token cap or configurable reasoning-control contract is inferred."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "pricing": "https://ai.meta.com/llama/get-started/"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false
+    },
+    {
+      "family": "Llama 4",
+      "model": "Llama 4 Maverick",
+      "model_id": "llama-4-maverick",
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": "2024-08",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "code"
+        ]
+      },
+      "positioning": "Meta open-weight multimodal Llama 4 model focused on broad capability with mixture-of-experts efficiency.",
+      "sxf_url": "/models/llama-4-maverick/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ],
+      "notes": [
+        "Meta publishes model specifications and open-weight access, but no directly comparable provider Standard paid token rate is stored in this catalog.",
+        "No separate output-token cap or configurable reasoning-control contract is inferred."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "context_window": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "max_output": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "pricing": "https://ai.meta.com/llama/get-started/"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false
+    }
+  ]
+}
