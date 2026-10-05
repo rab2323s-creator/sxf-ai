@@ -9248,6 +9248,7 @@ def brief_index_html(items, issue_date):
 def model_pricing_page_html():
     canonical = f"{BASE_URL}/models/pricing/"
     verified = MODEL_PRICING_CATALOG["source_verified"]
+    description = "Compare AI model pricing and API costs across OpenAI, Anthropic, Google, xAI and Meta. See input, cached and output rates, context windows and specs."
     models = MODEL_PRICING_CATALOG["models"]
     providers = sorted({model["provider"] for model in models})
 
