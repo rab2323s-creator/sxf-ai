@@ -1314,11 +1314,15 @@ def update_section_pages(items):
         if count_updates != 1:
             raise RuntimeError(f"Could not update sectionCount in {path}")
         page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
+        section_path = category_path(category)
+        section_url = BASE_URL + section_path
         schema = {
             "@context": "https://schema.org",
             "@type": "ItemList",
+            "@id": section_url + "#latest-signals",
             "name": f"Latest {category} AI signals",
             "itemListOrder": "https://schema.org/ItemListOrderDescending",
+            "mainEntityOfPage": section_url,
             "numberOfItems": min(len(filtered), 10),
             "itemListElement": [
                 {"@type": "ListItem", "position": i + 1, "item": {"@type": "Thing", "name": item["title"], "url": item.get("signal_url", item["url"])}}
@@ -2908,22 +2912,38 @@ def signal_page_html(item, items):
         "@context": "https://schema.org",
         "@graph": [
             {
+                "@type": "WebPage",
+                "@id": canonical + "#webpage",
+                "url": canonical,
+                "name": item["title"] + " | SXF / AI",
+                "description": description,
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "mainEntity": {"@id": canonical + "#article"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
+                "inLanguage": "en",
+            },
+            {
                 "@type": "Article",
                 "@id": canonical + "#article",
                 "headline": item["title"],
+                "description": description,
                 "datePublished": item["published"],
                 "dateModified": modified,
-                "mainEntityOfPage": canonical,
+                "mainEntityOfPage": {"@id": canonical + "#webpage"},
                 "url": canonical,
                 "articleSection": item["category"],
                 "isPartOf": {"@id": "https://sxf.si/#website"},
                 "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
                 "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
                 "citation": item["url"],
                 "inLanguage": "en",
             },
             {
                 "@type": "BreadcrumbList",
+                "@id": canonical + "#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
                     {"@type": "ListItem", "position": 2, "name": "Signals", "item": BASE_URL + "/signals/"},
@@ -2990,11 +3010,50 @@ def signals_index_html(items):
     description = "Latest AI signals tracked by SXF / AI across models, tools, research and open source, with direct links to primary sources."
     schema = {
         "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "name": "AI Signals | SXF / AI",
-        "url": canonical,
-        "isPartOf": {"@id": "https://sxf.si/#website"},
-        "inLanguage": "en",
+        "@graph": [
+            {
+                "@type": "CollectionPage",
+                "@id": canonical + "#webpage",
+                "name": "AI Signals | SXF / AI",
+                "url": canonical,
+                "description": description,
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
+                "mainEntity": {"@id": canonical + "#signal-list"},
+                "about": {"@type": "Thing", "name": "Artificial intelligence updates"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "ItemList",
+                "@id": canonical + "#signal-list",
+                "name": "Latest AI signals",
+                "itemListOrder": "https://schema.org/ItemListOrderDescending",
+                "numberOfItems": min(len(items), 40),
+                "mainEntityOfPage": {"@id": canonical + "#webpage"},
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": i + 1,
+                        "item": {
+                            "@type": "Article",
+                            "@id": item["signal_url"] + "#article",
+                            "name": item["title"],
+                            "url": item["signal_url"],
+                        },
+                    }
+                    for i, item in enumerate(items[:40])
+                ],
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": canonical + "#breadcrumb",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Signals", "item": canonical},
+                ],
+            },
+        ],
     }
     rows = "".join(signal_row(item) for item in items[:40])
     return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Primary-Source AI Updates | SXF / AI", description, canonical, schema)}
@@ -3033,6 +3092,8 @@ def ai_security_topic_page_html(topic, items):
                 "name": "AI Security in 2026: Threats, Agent Risks & Defenses",
                 "description": AI_SECURITY_DESCRIPTION,
                 "isPartOf": {"@id": "https://sxf.si/#website"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
                 "mainEntity": {"@id": canonical + "#authority-article"},
                 "about": [
                     {"@type": "Thing", "name": "AI Security"},
@@ -3059,11 +3120,8 @@ def ai_security_topic_page_html(topic, items):
                     "name": "VMC Labs",
                     "url": "https://vivamediacreative.com/labs/",
                 },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "SXF / AI",
-                    "url": BASE_URL + "/",
-                },
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
                 "citation": citations,
                 "inLanguage": "en",
             },
@@ -3100,9 +3158,17 @@ def topic_page_html(topic, items):
     source_count = len({item["source"] for item in items})
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if topic_page_indexable(items) else "noindex,follow"
     schema = {
-        "@context": "https://schema.org", "@type": "CollectionPage",
-        "name": f'{topic["name"]} AI Signals | SXF / AI', "url": canonical,
-        "description": topic["description"], "isPartOf": {"@id": "https://sxf.si/#website"}, "inLanguage": "en"
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": canonical + "#webpage",
+        "name": f'{topic["name"]} AI Signals | SXF / AI',
+        "url": canonical,
+        "description": topic["description"],
+        "isPartOf": {"@id": "https://sxf.si/#website"},
+        "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+        "publishingPrinciples": "https://sxf.si/about/#method",
+        "about": {"@type": "Thing", "name": topic["name"]},
+        "inLanguage": "en"
     }
     rows = "".join(signal_row(item) for item in items[:30])
     older_indexable = [item for item in items[30:] if item.get("seo_eligible", seo_signal_eligible(item))]
