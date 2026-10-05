@@ -1,0 +1,75 @@
+{
+  "provider": "Alibaba Cloud",
+  "models": [
+    {
+      "family": "Qwen 3.8",
+      "model": "Qwen3.8 Max",
+      "model_id": "qwen3.8-max",
+      "aliases": [
+        "qwen3.8-max-0902",
+        "qwen3.8-max-2026-09-02"
+      ],
+      "context_window": 1000000,
+      "max_output": 131072,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode",
+        "levels": [
+          "none",
+          "thinking"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Alibaba Cloud flagship Qwen model for long-horizon coding, professional knowledge work, multimodal understanding and agentic workflows.",
+      "sxf_url": "/models/qwen3-8-max/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing",
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/newly-released-models"
+      ],
+      "notes": [
+        "SXF stores the Global list price; Alibaba Cloud publishes separate pricing for some regional scopes.",
+        "The official model page lists a 1,000,000-token context window and 131,072-token maximum output.",
+        "The current stable alias supports both non-thinking and thinking modes.",
+        "Knowledge cutoff remains unknown because the cited official documentation does not publish one."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-02",
+            "end": null,
+            "input": 1.65,
+            "cached_input": 0.206,
+            "output": 4.951
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "context_window": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "max_output": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "knowledge_cutoff": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "reasoning": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "modalities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    }
+  ]
+}

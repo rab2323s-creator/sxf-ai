@@ -40,7 +40,7 @@ These models should be verified and added first.
 | DONE | DeepSeek V4.1 Flash | Added 2026-10-06: DeepSeek provider, 1M context, multimodal input, reasoning, official variable API pricing | Verified |
 | DONE | Mistral Small 4 | Added 2026-10-06: Mistral provider, open weights, reasoning/coding, official Standard API pricing | Verified |
 | DONE | Mistral Medium 3.5 | Added 2026-10-06: frontier multimodal/agentic Mistral tier, open weights, official Standard API pricing | Verified |
-| P0 | Qwen3.8 Max | Adds Alibaba/Qwen, 1M context, 131K max output, thinking mode, global paid API | Excellent |
+| DONE | Qwen3.8 Max | Added 2026-10-06: Alibaba/Qwen provider, 1M context, 131K max output, thinking mode, Global Standard API pricing | Verified |
 | P1 | Mistral Large 3 | Adds Mistral's large general-purpose tier at a low published Standard token price | Strong |
 
 ### Official source anchors
@@ -70,6 +70,6 @@ These models should be verified and added first.
 
 ## Target after Batch A
 
-20 -> 22 models, 7 -> 8 providers.
+21 -> 22 models, 8 providers achieved.
 
 This first increase is intentionally small. It tests the new provider-source architecture with three new ecosystems and multiple pricing shapes before scaling to 30+ models.
