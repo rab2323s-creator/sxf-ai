@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "ad75a390e2303e122369546ac9abd43d31fc6e5f6df689bf4e536342fd5cdeec",
+  "snapshot_hash": "5c04ec8fc671427867be1270658f6f8733cf48f7ac3b77f526fd3113655dfce1",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1754,216 +1754,6 @@
     },
     {
       "rank": 7,
-      "signal_slug": "higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64",
-      "signal_url": "https://sxf.si/signals/higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64/",
-      "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
-      "source": "OpenAI",
-      "category": "Models",
-      "published": "2026-09-21T12:00:00Z",
-      "priority_score": 159,
-      "evidence_hash": "62125cfdee101dafc1b6d2ee845bbbff2fb604fa8e2cd0538d325af43762e304",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
-        },
-        "signal": {
-          "title": "Higgsfield AI ships new video features in a day with GPT-6 Astra",
-          "url": "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra",
-          "signal_url": "https://sxf.si/signals/higgsfield-ai-ships-new-video-features-in-a-day-with-gpt-6-astra-94b7f64/",
-          "source": "OpenAI",
-          "published": "2026-09-21T12:00:00Z",
-          "category": "Models",
-          "tags": [
-            "Multimodal AI",
-            "OpenAI"
-          ],
-          "summary": "With GPT-6 Astra, Higgsfield AI makes video ad creation easier for small businesses and brings new creative tools to market faster.",
-          "signal_score": 46,
-          "seo_quality_score": 58,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "named-model",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "case-study-penalty"
-          ]
-        },
-        "models": [
-          {
-            "model_id": "gpt-6-astra",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Astra",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-30",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
-            "pricing_standard": {
-              "start": "2026-09-03",
-              "end": null,
-              "input": 10,
-              "cached_input": 1,
-              "cache_write": 12.5,
-              "output": 50
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-09-27",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-astra",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 9,
-                "type": "baseline",
-                "model_id": "gpt-6-astra",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Astra",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-30",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-03",
-                        "end": null,
-                        "input": 10,
-                        "cached_input": 1,
-                        "cache_write": 12.5,
-                        "output": 50
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_cd339bfc38a22ab47b70",
-                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
-              }
-            ]
-          }
-        ],
-        "source_urls": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra",
-          "https://developers.openai.com/api/docs/pricing",
-          "https://openai.com/index/higgsfield-from-prompt-to-production-with-astra"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 8,
       "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
       "title": "GitHub Copilot in VS Code, September 2026 releases",
@@ -2037,7 +1827,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "signal_slug": "github-copilot-weekly-releases-september-21-6edfaac",
       "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-september-21-6edfaac/",
       "title": "GitHub Copilot weekly releases — September 21",
@@ -2110,7 +1900,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "gpt-6-1-sol-in-github-copilot-9be84db",
       "signal_url": "https://sxf.si/signals/gpt-6-1-sol-in-github-copilot-9be84db/",
       "title": "GPT-6.1 Sol in GitHub Copilot",
@@ -2161,6 +1951,188 @@
           "what_changed",
           "why_it_matters",
           "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "claude-sonnet-5-5-in-github-copilot-c579283",
+      "signal_url": "https://sxf.si/signals/claude-sonnet-5-5-in-github-copilot-c579283/",
+      "title": "Claude Sonnet 5.5 in GitHub Copilot",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-09-28T18:03:57Z",
+      "priority_score": 142,
+      "evidence_hash": "310ce707243cf4fcca5e476497b3e043ae3f4da34dd1f5d32876ec3c3e630f2d",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        },
+        "signal": {
+          "title": "Claude Sonnet 5.5 in GitHub Copilot",
+          "url": "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+          "signal_url": "https://sxf.si/signals/claude-sonnet-5-5-in-github-copilot-c579283/",
+          "source": "GitHub",
+          "published": "2026-09-28T18:03:57Z",
+          "category": "Tools",
+          "tags": [
+            "GitHub Copilot"
+          ],
+          "summary": "Claude Sonnet 5.5, Anthropic’s newest Sonnet model, is now generally available in GitHub Copilot. It is designed for well-scoped everyday work like building features and fixing bugs. In our early…",
+          "signal_score": 52,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "high-value-topic"
+          ]
+        },
+        "models": [
+          {
+            "model_id": "claude-sonnet-5",
+            "provider": "Anthropic",
+            "family": "Claude 5",
+            "model": "Claude Sonnet 5",
+            "context_window": 1000000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-01",
+            "reasoning": {
+              "type": "adaptive thinking",
+              "levels": [
+                "effort controlled"
+              ],
+              "default": "high",
+              "always_on": false
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "Balanced Claude tier combining speed and intelligence for coding, agents, and production knowledge work.",
+            "pricing_standard": {
+              "start": "2026-06-30",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            },
+            "pricing_long_context": null,
+            "verified_at": "2026-09-27",
+            "official_sources": [
+              "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+              "https://platform.claude.com/docs/en/about-claude/pricing"
+            ],
+            "history": [
+              {
+                "sequence": 4,
+                "type": "baseline",
+                "model_id": "claude-sonnet-5",
+                "verified_at": "2026-09-27",
+                "previous_event_hash": "44e82bc9c664a31fca9167acdd360c775680dc73d1dd8a8c7e97e4bc35657057",
+                "snapshot": {
+                  "provider": "Anthropic",
+                  "family": "Claude 5",
+                  "model": "Claude Sonnet 5",
+                  "context_window": 1000000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-01",
+                  "reasoning": {
+                    "type": "adaptive thinking",
+                    "levels": [
+                      "effort controlled"
+                    ],
+                    "default": "high",
+                    "always_on": false
+                  },
+                  "modalities": {
+                    "input": [
+                      "text",
+                      "image"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-06-30",
+                        "end": null,
+                        "input": 2,
+                        "cached_input": 0.2,
+                        "cache_write_5m": 2.5,
+                        "cache_write_1h": 4,
+                        "output": 10
+                      }
+                    ]
+                  }
+                },
+                "evidence": {
+                  "provider": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "family": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "model": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "context_window": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "max_output": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+                  "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+                },
+                "event_id": "evt_cb1369c9b57efd387212",
+                "event_hash": "cb1369c9b57efd3872123e8fe04bb568236e554ed22b9dd5e8f8aae9f30c96f4"
+              }
+            ]
+          }
+        ],
+        "source_urls": [
+          "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "https://platform.claude.com/docs/en/models/sonnet-5/overview"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "pricing_or_capability_impact",
+          "before_vs_after",
           "who_should_care",
           "what_to_verify",
           "faq",
