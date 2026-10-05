@@ -1129,3 +1129,55 @@
   .evaluation-point{min-width:62px;max-width:94px}.evaluation-point span{font-size:8px}
   .evaluation-explorer-cta>a{align-items:flex-start;flex-direction:column}
 }
+
+
+/* Signals intelligence index */
+.signals-page .signals-hero{padding-bottom:12px}
+.signals-page .signals-hero h1{max-width:1080px}
+.signals-page .signals-hero>p:not(.eyebrow){max-width:790px}
+.signals-snapshot{padding:76px 0 12px}
+.signals-snapshot-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.signals-snapshot-card{min-height:220px;border:1px solid var(--line);border-radius:20px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.024),rgba(255,255,255,.008));display:flex;flex-direction:column;transition:transform .2s ease,border-color .2s ease}
+.signals-snapshot-card:hover{transform:translateY(-3px);border-color:rgba(200,255,77,.28)}
+.signals-snapshot-card>div{display:flex;justify-content:space-between;gap:14px;align-items:center}
+.signals-snapshot-card>div span{color:var(--accent);font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;font-weight:900}
+.signals-snapshot-card>div small{color:#687482;font-size:10px}
+.signals-snapshot-card h3{margin:34px 0 10px;font-size:22px;line-height:1.14;letter-spacing:-.035em}
+.signals-snapshot-card p{margin:0;color:#6f7a87;font-size:10px}
+.signals-snapshot-card b{margin-top:auto;padding-top:22px;color:#aeb8c3;font-size:11px;font-weight:700}
+.signals-snapshot-card:hover b{color:var(--accent)}
+
+.signals-explorer{padding:96px 0 20px}
+.signals-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,370px);gap:16px;align-items:center;margin:0 0 14px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.012)}
+.signals-filters{display:flex;flex-wrap:wrap;gap:8px}
+.signals-filter{appearance:none;border:1px solid rgba(255,255,255,.08);background:transparent;color:#87929f;border-radius:999px;padding:9px 13px;font:700 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;cursor:pointer;transition:.2s ease}
+.signals-filter:hover,.signals-filter.active{color:#080b10;background:var(--accent);border-color:var(--accent)}
+.signals-search input{width:100%;min-height:42px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#0b0f14;color:var(--text);padding:0 14px;outline:none;font:500 12px/1.2 Inter,system-ui,sans-serif}
+.signals-search input:focus{border-color:rgba(200,255,77,.45);box-shadow:0 0 0 3px rgba(200,255,77,.06)}
+.signals-search input::placeholder{color:#56616e}
+.signals-result-meta{margin:0 0 18px;color:#5f6b78;font-size:10px;letter-spacing:.02em}
+.signals-empty{padding:38px 0;color:#788491;border-top:1px solid var(--line);font-size:13px}
+
+.signals-gateways{padding:90px 0 118px}
+.signals-gateway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.signals-gateway-grid>a{min-height:210px;border:1px solid var(--line);border-radius:20px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,.007));display:flex;flex-direction:column;transition:transform .2s ease,border-color .2s ease}
+.signals-gateway-grid>a:hover{transform:translateY(-3px);border-color:rgba(200,255,77,.26)}
+.signals-gateway-grid span{color:#61707d;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;font-weight:900}
+.signals-gateway-grid strong{margin-top:28px;font-size:24px;letter-spacing:-.04em}
+.signals-gateway-grid p{margin:9px 0 0;color:#75818e;font-size:12px;line-height:1.6}
+.signals-gateway-grid b{margin-top:auto;padding-top:20px;color:#aeb8c3;font-size:11px}
+.signals-gateway-grid>a:hover b{color:var(--accent)}
+
+@media(max-width:980px){
+  .signals-snapshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signals-toolbar{grid-template-columns:1fr}
+  .signals-gateway-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .signals-snapshot{padding-top:58px}
+  .signals-snapshot-grid,.signals-gateway-grid{grid-template-columns:1fr}
+  .signals-toolbar{padding:10px}
+  .signals-filter{padding:9px 11px}
+  .signals-explorer{padding-top:72px}
+  .signals-gateways{padding-top:74px}
+}
