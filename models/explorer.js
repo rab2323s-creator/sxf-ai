@@ -110,7 +110,7 @@
     if (verificationFilter && validValues(verificationFilter).has(params.get("verified"))) verificationFilter.value = params.get("verified");
   };
 
-  const writeUrlState = () => {
+  const writeUrlState = (historyMode = "replace") => {
     const params = new URLSearchParams();
     const caps = activeCapabilities();
     const query = search?.value.trim() || "";
@@ -130,7 +130,10 @@
     if (query) params.set("q", query);
 
     const next = window.location.pathname + (params.toString() ? "?" + params.toString() : "") + window.location.hash;
-    window.history.replaceState({modelExplorer: true}, "", next);
+    const current = window.location.pathname + window.location.search + window.location.hash;
+    if (next === current) return;
+    const method = historyMode === "push" ? "pushState" : "replaceState";
+    window.history[method]({modelExplorer: true}, "", next);
   };
 
   const modelForRow = row => modelByRow.get(row) || null;
@@ -218,7 +221,7 @@
     });
   };
 
-  const apply = (syncUrl = true) => {
+  const apply = (historyMode = "replace") => {
     const query = normalize(search?.value);
     const mode = sort?.value || "default";
     const caps = activeCapabilities();
@@ -257,33 +260,33 @@
     root.classList.toggle("has-active-filters",
       provider !== "all" || Boolean(query) || caps.size > 0 || minContext > 0 || access !== "all" || maxAge != null
     );
-    if (syncUrl) writeUrlState();
+    if (historyMode) writeUrlState(historyMode);
   };
 
   readUrlState();
 
   window.addEventListener("popstate", () => {
     readUrlState();
-    apply(false);
+    apply(null);
   });
 
   providerButtons.forEach(button => button.addEventListener("click", () => {
     providerButtons.forEach(item => item.classList.remove("is-active"));
     button.classList.add("is-active");
     provider = button.dataset.modelProvider || "all";
-    apply();
+    apply("push");
   }));
   capabilityButtons.forEach(button => button.addEventListener("click", () => {
     const next = button.getAttribute("aria-pressed") !== "true";
     button.setAttribute("aria-pressed", String(next));
     button.classList.toggle("is-active", next);
-    apply();
+    apply("push");
   }));
-  search?.addEventListener("input", apply);
-  sort?.addEventListener("change", apply);
-  contextFilter?.addEventListener("change", apply);
-  accessFilter?.addEventListener("change", apply);
-  verificationFilter?.addEventListener("change", apply);
+  search?.addEventListener("input", () => apply("replace"));
+  sort?.addEventListener("change", () => apply("push"));
+  contextFilter?.addEventListener("change", () => apply("push"));
+  accessFilter?.addEventListener("change", () => apply("push"));
+  verificationFilter?.addEventListener("change", () => apply("push"));
 
   resetButton?.addEventListener("click", () => {
     provider = "all";
@@ -297,7 +300,7 @@
     if (contextFilter) contextFilter.value = "0";
     if (accessFilter) accessFilter.value = "all";
     if (verificationFilter) verificationFilter.value = "all";
-    apply();
+    apply("push");
   });
 
   compareClear?.addEventListener("click", () => {
@@ -370,10 +373,10 @@
       if (metricContextModel && largestContextModel) metricContextModel.textContent = largestContextModel.model;
       if (metricPrice && lowestInput) metricPrice.textContent = "$" + lowestInput.input.toLocaleString(undefined, {maximumFractionDigits: 4});
       if (metricPriceModel && lowestInput) metricPriceModel.textContent = lowestInput.model + " / MTok";
-      apply();
+      apply(null);
     })
     .catch(() => {
       root.classList.add("catalog-fallback");
-      apply();
+      apply(null);
     });
 })();
