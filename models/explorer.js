@@ -104,10 +104,10 @@
     });
 
     if (search) search.value = params.get("q") || "";
-    if (sort && validValues(sort).has(params.get("sort"))) sort.value = params.get("sort");
-    if (contextFilter && validValues(contextFilter).has(params.get("context"))) contextFilter.value = params.get("context");
-    if (accessFilter && validValues(accessFilter).has(params.get("access"))) accessFilter.value = params.get("access");
-    if (verificationFilter && validValues(verificationFilter).has(params.get("verified"))) verificationFilter.value = params.get("verified");
+    if (sort) sort.value = validValues(sort).has(params.get("sort")) ? params.get("sort") : "default";
+    if (contextFilter) contextFilter.value = validValues(contextFilter).has(params.get("context")) ? params.get("context") : "0";
+    if (accessFilter) accessFilter.value = validValues(accessFilter).has(params.get("access")) ? params.get("access") : "all";
+    if (verificationFilter) verificationFilter.value = validValues(verificationFilter).has(params.get("verified")) ? params.get("verified") : "all";
   };
 
   const writeUrlState = (historyMode = "replace") => {
