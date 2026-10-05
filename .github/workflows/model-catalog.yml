@@ -42,3 +42,5 @@ jobs:
         run: python tests/test_model_catalog.py
       - name: Generate coverage report
         run: python scripts/catalog_coverage.py
+      - name: Generate coverage quality review
+        run: python scripts/catalog_quality.py
