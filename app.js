@@ -1,6 +1,18 @@
-const state={items:[],filter:'All',query:''};
+const state={items:[],totalCount:0,filter:'All',query:''};
 const feed=document.getElementById('feed');
 const featured=document.getElementById('featured');
+
+function canonicalKey(url=''){
+  try{
+    const u=new URL(url,window.location.origin);
+    return u.pathname.replace(/\/+$/,'')||'/';
+  }catch{
+    return String(url||'').replace(/\/+$/,'');
+  }
+}
+const curatedKeys=[
+  ...document.querySelectorAll('#featured a.featured-story,#feed a.story-card')
+].map(a=>canonicalKey(a.getAttribute('href'))).filter(Boolean);
 const empty=document.getElementById('emptyState');
 const search=document.getElementById('searchInput');
 const filters=[...document.querySelectorAll('.filter')];
@@ -77,7 +89,7 @@ function render(){
   feed.innerHTML=visible.slice(1).map(cardMarkup).join('');
   empty.hidden=visible.length!==0;
   featured.hidden=visible.length===0;
-  document.getElementById('storyCount').textContent=state.items.length||'0';
+  document.getElementById('storyCount').textContent=state.totalCount||state.items.length||'0';
 }
 filters.forEach(btn=>btn.addEventListener('click',()=>{
   filters.forEach(b=>b.classList.remove('active'));
@@ -90,7 +102,21 @@ search.addEventListener('input',e=>{state.query=e.target.value;render()});
 fetch('./data/news.json',{cache:'no-cache'})
   .then(r=>{if(!r.ok)throw new Error('Could not load news');return r.json()})
   .then(data=>{
-    state.items=Array.isArray(data.items)?data.items:[];
+    const allItems=Array.isArray(data.items)?data.items:[];
+    state.totalCount=allItems.length;
+
+    const byKey=new Map();
+    allItems.forEach(item=>{
+      [item.signal_url,item.url].filter(Boolean).forEach(url=>byKey.set(canonicalKey(url),item));
+    });
+
+    state.items=curatedKeys.map(key=>byKey.get(key)).filter(Boolean);
+
+    // Keep the server-curated homepage intact even if a feed item is temporarily missing.
+    if(!state.items.length){
+      state.items=allItems.slice(0,8);
+    }
+
     document.getElementById('lastUpdated').textContent=data.updated_at?relativeTime(data.updated_at):'automatic';
     updateHeroSignal(state.items[0]);
     render();
