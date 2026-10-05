@@ -1,0 +1,58 @@
+{
+  "provider": "Cohere",
+  "models": [
+    {
+      "family": "Command A",
+      "model": "Command A+",
+      "model_id": "command-a-plus-05-2026",
+      "context_window": 128000,
+      "max_output": 64000,
+      "knowledge_cutoff": "2025-04-01",
+      "reasoning": {
+        "type": "reasoning capability",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Cohere's strongest Command-family agentic model, combining reasoning, vision, multilingual support, tool use and enterprise deployment efficiency.",
+      "sxf_url": "/models/command-a-plus/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/command-a-plus",
+        "https://docs.cohere.com/v2/changelog",
+        "https://docs.cohere.com/docs/model-vault/standard/pricing"
+      ],
+      "notes": [
+        "Cohere documents Command A+ as free through standard API rate limits for both trial and production keys.",
+        "Production deployment through Model Vault uses instance/hour pricing rather than directly comparable per-token Standard API pricing.",
+        "Command A+ is released under Apache 2.0 according to Cohere's release notes."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/command-a-plus",
+          "context_window": "https://docs.cohere.com/docs/command-a-plus",
+          "max_output": "https://docs.cohere.com/docs/command-a-plus",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-plus",
+          "reasoning": "https://docs.cohere.com/docs/command-a-plus",
+          "modalities": "https://docs.cohere.com/docs/command-a-plus",
+          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false
+    }
+  ]
+}
