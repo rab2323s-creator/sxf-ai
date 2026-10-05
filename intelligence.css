@@ -1181,3 +1181,48 @@
   .signals-explorer{padding-top:72px}
   .signals-gateways{padding-top:74px}
 }
+
+
+/* Expanded technical signal deep dives */
+.signal-deep-dive{padding:84px 0 24px}
+.signal-deep-dive .intel-section-head>span{color:#66727e;font-size:10px}
+.deep-dive-lead{max-width:880px;margin:0 0 28px}
+.deep-dive-lead p{margin:0;color:#aeb8c3;font-size:18px;line-height:1.72;letter-spacing:-.015em}
+.deep-dive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.deep-dive-grid article{min-height:230px;border:1px solid var(--line);border-radius:20px;padding:24px;background:linear-gradient(180deg,rgba(255,255,255,.023),rgba(255,255,255,.007))}
+.deep-dive-grid article>span{color:var(--accent);font:9px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;font-weight:900}
+.deep-dive-grid h3{margin:34px 0 10px;font-size:23px;line-height:1.08;letter-spacing:-.04em}
+.deep-dive-grid p,.deep-dive-section>p{margin:0;color:#7e8a96;font-size:13px;line-height:1.72}
+.deep-dive-grid code,.deep-dive-section code{padding:.08em .35em;border:1px solid rgba(255,255,255,.08);border-radius:6px;background:#0b0f14;color:#cfd7de;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.deep-dive-section{padding:66px 0 0}
+.deep-dive-section h2{max-width:880px;margin:0 0 24px;font-size:clamp(32px,4vw,50px);line-height:1;letter-spacing:-.05em}
+.deep-dive-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px}
+.deep-dive-table{width:100%;border-collapse:collapse;min-width:720px}
+.deep-dive-table th,.deep-dive-table td{padding:17px 18px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.deep-dive-table thead th{color:#65717e;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.deep-dive-table tbody th{width:180px;color:#c8d0d7;font-size:12px}
+.deep-dive-table td{color:#828e9b;font-size:12px;line-height:1.55}
+.deep-dive-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.deep-dive-facts>div{border:1px solid var(--line);border-radius:16px;padding:20px;background:rgba(255,255,255,.01)}
+.deep-dive-facts strong{display:block;color:#d1d8df;font-size:13px}
+.deep-dive-facts p{margin:8px 0 0;color:#75818d;font-size:12px;line-height:1.65}
+.deep-dive-status-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.deep-dive-status-grid article{border:1px solid var(--line);border-radius:16px;padding:18px;background:#090d12}
+.deep-dive-status-grid strong{color:var(--accent);font:800 18px ui-monospace,SFMono-Regular,Menlo,monospace}
+.deep-dive-status-grid p{margin:8px 0 0;color:#76828e;font-size:11px;line-height:1.55}
+.deep-dive-note{margin-top:18px!important;padding:18px 20px;border-left:2px solid rgba(200,255,77,.55);background:rgba(200,255,77,.025);color:#909ca8!important}
+.deep-dive-checklist{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.deep-dive-checklist li{padding:17px 0;border-bottom:1px solid var(--line);color:#7d8995;font-size:13px;line-height:1.65}
+.deep-dive-checklist strong{color:#cbd3da}
+.deep-dive-faq details{border-top:1px solid var(--line);padding:17px 0}
+.deep-dive-faq details:last-child{border-bottom:1px solid var(--line)}
+.deep-dive-faq summary{cursor:pointer;color:#cbd3da;font-weight:750;font-size:14px}
+.deep-dive-faq details p{margin:10px 0 0;color:#788591;font-size:12px;line-height:1.65}
+.deep-dive-sources{padding:66px 0 12px}
+.deep-dive-sources h2{margin:0 0 20px;font-size:34px;letter-spacing:-.045em}
+.deep-dive-sources a{display:flex;justify-content:space-between;gap:24px;padding:17px 0;border-top:1px solid var(--line);font-size:12px}
+.deep-dive-sources a:last-child{border-bottom:1px solid var(--line)}
+.deep-dive-sources strong{color:#cdd5dc}.deep-dive-sources span{color:#77838f;text-align:right}
+.deep-dive-sources a:hover span{color:var(--accent)}
+@media(max-width:900px){.deep-dive-grid{grid-template-columns:1fr}.deep-dive-status-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.signal-deep-dive{padding-top:64px}.deep-dive-facts,.deep-dive-status-grid{grid-template-columns:1fr}.deep-dive-sources a{flex-direction:column;gap:7px}.deep-dive-sources span{text-align:left}}
