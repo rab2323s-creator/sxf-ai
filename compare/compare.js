@@ -195,8 +195,13 @@
     catalog = catalogData;
     registry = registryData;
     byId = new Map((catalog.models || []).map(model => [model.model_id, model]));
-    if (byId.has("gpt-6-sol")) modelA.value = "gpt-6-sol";
-    if (byId.has("grok-4.7")) modelB.value = "grok-4.7";
+    const params = new URLSearchParams(window.location.search);
+    const requestedA = params.get("a");
+    const requestedB = params.get("b");
+    if (requestedA && byId.has(requestedA)) modelA.value = requestedA;
+    else if (byId.has("gpt-6-sol")) modelA.value = "gpt-6-sol";
+    if (requestedB && byId.has(requestedB) && requestedB !== modelA.value) modelB.value = requestedB;
+    else if (byId.has("grok-4.7") && modelA.value !== "grok-4.7") modelB.value = "grok-4.7";
     render();
   }).catch(() => {
     results.innerHTML = '<div class="compare-builder-error">The comparison datasets could not be loaded.</div>';
