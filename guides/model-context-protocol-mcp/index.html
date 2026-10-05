@@ -414,20 +414,20 @@
 </div>
 </section>
 
-<section id="sources">
+<section id="sources" class="guide-sources">
 <p class="eyebrow">PRIMARY SOURCES</p>
 <h2>Primary sources and further reading</h2>
-<ul class="guide-source-list">
-<li><a href="https://modelcontextprotocol.io/specification/2026-07-28" rel="noopener">Model Context Protocol — 2026-07-28 Specification</a></li>
-<li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/" rel="noopener">MCP maintainers — The 2026-07-28 Specification</a></li>
-<li><a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/transports" rel="noopener">MCP — Transport specification</a></li>
-<li><a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization" rel="noopener">MCP — Authorization specification</a></li>
-<li><a href="https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices" rel="noopener">MCP — Security best practices</a></li>
-<li><a href="https://developers.openai.com/api/docs/guides/tools-connectors-mcp" rel="noopener">OpenAI — MCP servers and connectors</a></li>
-<li><a href="https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/extend-copilot-chat-with-mcp" rel="noopener">GitHub — Extend Copilot Chat with MCP servers</a></li>
-<li><a href="https://www.anthropic.com/news/model-context-protocol" rel="noopener">Anthropic — Introducing the Model Context Protocol</a></li>
-<li><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation" rel="noopener">Linux Foundation — Agentic AI Foundation formation</a></li>
-</ul>
+<div class="model-sources">
+<a href="https://modelcontextprotocol.io/specification/2026-07-28" target="_blank" rel="noopener noreferrer"><strong>Model Context Protocol · 2026-07-28 Specification</strong><span>Current protocol architecture and core primitives. ↗</span></a>
+<a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/" target="_blank" rel="noopener noreferrer"><strong>MCP maintainers · July 2026 release</strong><span>Stateless core, discovery, MRTR, routing, caching, extensions and deprecations. ↗</span></a>
+<a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/transports" target="_blank" rel="noopener noreferrer"><strong>MCP · Transports</strong><span>stdio and Streamable HTTP requirements. ↗</span></a>
+<a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization" target="_blank" rel="noopener noreferrer"><strong>MCP · Authorization</strong><span>OAuth 2.1, protected resource metadata, resource indicators and token validation. ↗</span></a>
+<a href="https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices" target="_blank" rel="noopener noreferrer"><strong>MCP · Security best practices</strong><span>Security guidance for clients, servers and authorization flows. ↗</span></a>
+<a href="https://developers.openai.com/api/docs/guides/tools-connectors-mcp" target="_blank" rel="noopener noreferrer"><strong>OpenAI · MCP servers and connectors</strong><span>Current OpenAI support for remote MCP tools. ↗</span></a>
+<a href="https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/extend-copilot-chat-with-mcp" target="_blank" rel="noopener noreferrer"><strong>GitHub · Copilot and MCP</strong><span>Extending Copilot Chat with MCP tools and context. ↗</span></a>
+<a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer"><strong>Anthropic · Introducing MCP</strong><span>The original open-standard announcement and motivation. ↗</span></a>
+<a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation" target="_blank" rel="noopener noreferrer"><strong>Linux Foundation · Agentic AI Foundation</strong><span>AAIF formation and MCP's role in open agent infrastructure. ↗</span></a>
+</div>
 <p>This guide prioritizes protocol maintainers and primary vendor documentation. Product support can change faster than the protocol specification, so implementation teams should verify host-specific documentation before deployment.</p>
 </section>
 
@@ -436,8 +436,19 @@
 </div></div>
 </article></main>
 
-<footer class="site-footer"><div class="footer-inner">
-<div class="footer-brand"><a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a><p>Independent AI intelligence, technical references and primary-source research.</p></div>
-<nav class="footer-links" aria-label="Footer"><a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/guides/">Guides</a><a href="/about/">About</a></nav>
-</div></footer>
-</body></html>
+<footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
