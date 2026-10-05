@@ -8,11 +8,11 @@
 <section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
       <div class="model-explorer-head">
         <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of Standard API pricing, context windows and output limits from official provider documentation.</p></div>
-        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-06</strong><small>21 models · 8 providers</small></div>
+        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-06</strong><small>23 models · 10 providers</small></div>
       </div>
       <div class="model-explorer-toolbar">
         <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
-        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Qwen / Alibaba</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
+        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Amazon">Amazon</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Cohere">Cohere</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Qwen / Alibaba</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
         <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
           <option value="default">Catalog order</option>
           <option value="input-asc">Lowest input price</option>
@@ -358,7 +358,24 @@
               <td class="model-price">$0.206</td>
               <td class="model-price">$4.951</td>
               <td><a class="model-verified" href="https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
-            </tr></tbody>
+            </tr><tr data-model-row
+data-order="21" data-provider="Cohere"
+data-search="command a plus command-a-plus-05-2026 cohere agentic reasoning vision multilingual text image free-preview"
+data-pricing-status="free-preview" data-context="128000">
+<th scope="row"><a href="/models/command-a-plus/">Command A+</a><small>command-a-plus-05-2026</small></th>
+<td>Cohere<small>Command A</small></td><td>128,000<small>tokens</small></td><td>64,000<small>tokens</small></td>
+<td class="model-price">Free<small>within rate limits</small></td><td class="model-price">—</td><td class="model-price">—</td>
+<td><a class="model-verified" href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+</tr>
+<tr data-model-row
+data-order="22" data-provider="Amazon"
+data-search="amazon nova 2 lite amazon.nova-2-lite-v1:0 amazon multimodal extended thinking text image video official-paid"
+data-pricing-status="official-paid" data-input="0.3" data-output="2.5" data-context="1000000">
+<th scope="row"><a href="/models/amazon-nova-2-lite/">Amazon Nova 2 Lite</a><small>amazon.nova-2-lite-v1:0</small></th>
+<td>Amazon<small>Nova 2</small></td><td>1,000,000<small>tokens</small></td><td>64,000<small>tokens</small></td>
+<td class="model-price">$0.30<small>official-paid</small></td><td class="model-price">—</td><td class="model-price">$2.50</td>
+<td><a class="model-verified" href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+</tr></tbody>
         </table>
       </div>
       <div class="model-explorer-foot">
