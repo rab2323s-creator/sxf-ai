@@ -87,6 +87,55 @@
       .map(button => button.dataset.capability)
   );
 
+  const validValues = (select) => new Set([...select.options].map(option => option.value));
+  const validProviders = new Map(providerButtons.map(button => [normalize(button.dataset.modelProvider), button.dataset.modelProvider || "all"]));
+
+  const readUrlState = () => {
+    const params = new URLSearchParams(window.location.search);
+    const urlProvider = normalize(params.get("provider") || "all");
+    provider = validProviders.get(urlProvider) || "all";
+    providerButtons.forEach(button => button.classList.toggle("is-active", button.dataset.modelProvider === provider));
+
+    capabilityButtons.forEach(button => {
+      const key = button.dataset.capability === "audio-video" ? "av" : button.dataset.capability;
+      const active = params.get(key) === "1";
+      button.setAttribute("aria-pressed", String(active));
+      button.classList.toggle("is-active", active);
+    });
+
+    if (search) search.value = params.get("q") || "";
+    if (sort) sort.value = validValues(sort).has(params.get("sort")) ? params.get("sort") : "default";
+    if (contextFilter) contextFilter.value = validValues(contextFilter).has(params.get("context")) ? params.get("context") : "0";
+    if (accessFilter) accessFilter.value = validValues(accessFilter).has(params.get("access")) ? params.get("access") : "all";
+    if (verificationFilter) verificationFilter.value = validValues(verificationFilter).has(params.get("verified")) ? params.get("verified") : "all";
+  };
+
+  const writeUrlState = (historyMode = "replace") => {
+    const params = new URLSearchParams();
+    const caps = activeCapabilities();
+    const query = search?.value.trim() || "";
+    const mode = sort?.value || "default";
+    const context = contextFilter?.value || "0";
+    const access = accessFilter?.value || "all";
+    const verified = verificationFilter?.value || "all";
+
+    if (provider !== "all") params.set("provider", normalize(provider));
+    if (caps.has("reasoning")) params.set("reasoning", "1");
+    if (caps.has("image")) params.set("image", "1");
+    if (caps.has("audio-video")) params.set("av", "1");
+    if (context !== "0") params.set("context", context);
+    if (access !== "all") params.set("access", access);
+    if (verified !== "all") params.set("verified", verified);
+    if (mode !== "default") params.set("sort", mode);
+    if (query) params.set("q", query);
+
+    const next = window.location.pathname + (params.toString() ? "?" + params.toString() : "") + window.location.hash;
+    const current = window.location.pathname + window.location.search + window.location.hash;
+    if (next === current) return;
+    const method = historyMode === "push" ? "pushState" : "replaceState";
+    window.history[method]({modelExplorer: true}, "", next);
+  };
+
   const modelForRow = row => modelByRow.get(row) || null;
   const supports = (model, capability) => {
     if (!model) return false;
@@ -172,7 +221,7 @@
     });
   };
 
-  const apply = () => {
+  const apply = (historyMode = "replace") => {
     const query = normalize(search?.value);
     const mode = sort?.value || "default";
     const caps = activeCapabilities();
@@ -211,25 +260,33 @@
     root.classList.toggle("has-active-filters",
       provider !== "all" || Boolean(query) || caps.size > 0 || minContext > 0 || access !== "all" || maxAge != null
     );
+    if (historyMode) writeUrlState(historyMode);
   };
+
+  readUrlState();
+
+  window.addEventListener("popstate", () => {
+    readUrlState();
+    apply(null);
+  });
 
   providerButtons.forEach(button => button.addEventListener("click", () => {
     providerButtons.forEach(item => item.classList.remove("is-active"));
     button.classList.add("is-active");
     provider = button.dataset.modelProvider || "all";
-    apply();
+    apply("push");
   }));
   capabilityButtons.forEach(button => button.addEventListener("click", () => {
     const next = button.getAttribute("aria-pressed") !== "true";
     button.setAttribute("aria-pressed", String(next));
     button.classList.toggle("is-active", next);
-    apply();
+    apply("push");
   }));
-  search?.addEventListener("input", apply);
-  sort?.addEventListener("change", apply);
-  contextFilter?.addEventListener("change", apply);
-  accessFilter?.addEventListener("change", apply);
-  verificationFilter?.addEventListener("change", apply);
+  search?.addEventListener("input", () => apply("replace"));
+  sort?.addEventListener("change", () => apply("push"));
+  contextFilter?.addEventListener("change", () => apply("push"));
+  accessFilter?.addEventListener("change", () => apply("push"));
+  verificationFilter?.addEventListener("change", () => apply("push"));
 
   resetButton?.addEventListener("click", () => {
     provider = "all";
@@ -243,7 +300,7 @@
     if (contextFilter) contextFilter.value = "0";
     if (accessFilter) accessFilter.value = "all";
     if (verificationFilter) verificationFilter.value = "all";
-    apply();
+    apply("push");
   });
 
   compareClear?.addEventListener("click", () => {
@@ -316,10 +373,10 @@
       if (metricContextModel && largestContextModel) metricContextModel.textContent = largestContextModel.model;
       if (metricPrice && lowestInput) metricPrice.textContent = "$" + lowestInput.input.toLocaleString(undefined, {maximumFractionDigits: 4});
       if (metricPriceModel && lowestInput) metricPriceModel.textContent = lowestInput.model + " / MTok";
-      apply();
+      apply(null);
     })
     .catch(() => {
       root.classList.add("catalog-fallback");
-      apply();
+      apply(null);
     });
 })();
