@@ -20,7 +20,7 @@
         "properties": {
           "family": {"type": "string", "minLength": 1},
           "model": {"type": "string", "minLength": 1},
-          "model_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "model_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
           "aliases": {"type": "array", "items": {"type": "string"}},
           "context_window": {"type": "integer", "minimum": 1},
           "max_output": {"anyOf": [{"type": "integer", "minimum": 1}, {"type": "string", "enum": ["unlimited"]}, {"type": "null"}]},
