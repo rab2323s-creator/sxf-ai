@@ -84,6 +84,7 @@ def validate_pricing(model: dict, label: str):
     require(isinstance(schedules, list), f"{label}.pricing.standard must be an array")
 
     previous_end = None
+    previous_was_open = False
     for index, period in enumerate(schedules):
         p = f"{label}.pricing.standard[{index}]"
         require(isinstance(period, dict), f"{p} must be an object")
@@ -91,11 +92,13 @@ def validate_pricing(model: dict, label: str):
         validate_iso_date(period.get("end"), f"{p}.end", allow_null=True)
         start = period["start"]
         end = period.get("end")
+        require(not previous_was_open, f"{label} has a pricing period after an open-ended period")
         if end is not None:
             require(start <= end, f"{p} ends before it starts")
         if previous_end is not None:
             require(start > previous_end, f"{label} has overlapping Standard pricing periods")
         previous_end = end
+        previous_was_open = end is None
         for key in ("input", "output"):
             require(isinstance(period.get(key), (int, float)) and period[key] >= 0, f"{p}.{key} must be a non-negative number")
         for key in ("cached_input", "cache_write", "cache_write_5m", "cache_write_1h"):
