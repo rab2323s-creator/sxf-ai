@@ -1271,6 +1271,144 @@
       },
       "pricing_status": "official-paid",
       "calculator_eligible": false
+    },
+    {
+      "provider": "Mistral AI",
+      "family": "Mistral Small",
+      "model": "Mistral Small 4",
+      "model_id": "mistral-small-2603",
+      "aliases": [
+        "mistral-small-latest"
+      ],
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning_effort",
+        "levels": [
+          "none",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Efficient open-weight multimodal Mistral model combining instruct, reasoning and coding capabilities for production and agentic workloads.",
+      "sxf_url": "/models/mistral-small-4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/studio/conversations/reasoning",
+        "https://docs.mistral.ai/resources/changelogs"
+      ],
+      "notes": [
+        "Mistral publishes the context window as 256k tokens; SXF stores this as 256,000 for normalized numeric filtering.",
+        "No separate max-output token cap or knowledge cutoff is published in the cited model card, so those fields remain unknown.",
+        "Mistral Small 4 is GA and released under Apache 2.0 as open weights."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-03-16",
+            "end": null,
+            "input": 0.15,
+            "cached_input": 0.015,
+            "output": 0.6
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "context_window": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "max_output": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
+          "modalities": "https://docs.mistral.ai/resources/changelogs",
+          "pricing": "https://docs.mistral.ai/inference/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "provider": "Mistral AI",
+      "family": "Mistral Medium",
+      "model": "Mistral Medium 3.5",
+      "model_id": "mistral-medium-3-5",
+      "aliases": [
+        "mistral-medium-3-5-2604"
+      ],
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning_effort",
+        "levels": [
+          "none",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Frontier-class open-weight multimodal Mistral model optimized for agentic and coding workloads with adjustable reasoning.",
+      "sxf_url": "/models/mistral-medium-3-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/studio/conversations/reasoning",
+        "https://docs.mistral.ai/resources/changelogs"
+      ],
+      "notes": [
+        "Mistral publishes the context window as 256k tokens; SXF stores this as 256,000 for normalized numeric filtering.",
+        "No separate max-output token cap or knowledge cutoff is published in the cited model card, so those fields remain unknown.",
+        "Mistral Medium 3.5 is GA and released as open weights under a Modified MIT license."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-04-28",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "context_window": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "max_output": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
+          "modalities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "pricing": "https://docs.mistral.ai/inference/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
     }
   ],
   "verification_policy": {
