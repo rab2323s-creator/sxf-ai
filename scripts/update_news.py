@@ -7291,6 +7291,14 @@ def benchmark_page_html(benchmark):
         if row["benchmark_id"] == benchmark_id
     ]
     canonical = f'{BASE_URL}/evaluations/{benchmark_id}/'
+    is_aa_briefcase = benchmark_id == "aa-briefcase-v1.1"
+    page_title = f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," ")
+    page_description = f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.'
+    page_h1 = benchmark["name"] + (f' v{benchmark["version"]}' if benchmark.get("version") else "")
+    if is_aa_briefcase:
+        page_title = "AA-Briefcase v1.1 Benchmark — AI Agent Knowledge Work Results | SXF / AI"
+        page_description = "AA-Briefcase v1.1 benchmark explained: compare SXF-tracked AI agent knowledge-work results, Elo scores, methodology, model configurations and limitations."
+        page_h1 = "AA-Briefcase v1.1 Benchmark: AI Agent Knowledge Work Results"
     groups = {}
     for row in observations:
         groups.setdefault((row["evidence_type"], row.get("comparable_group")), []).append(row)
@@ -7319,31 +7327,250 @@ def benchmark_page_html(benchmark):
 
     notes_html = "".join(f"<li>{escape(note)}</li>" for note in benchmark.get("notes", []))
     status_label = benchmark.get("status", "active")
+    faq = []
+    if is_aa_briefcase:
+        faq = [
+            (
+                "What is AA-Briefcase v1.1?",
+                "AA-Briefcase v1.1 is an Artificial Analysis benchmark for long-horizon agentic knowledge work. It evaluates realistic professional workflows that produce deliverables such as spreadsheets, presentations and memos."
+            ),
+            (
+                "What does the AA-Briefcase Elo score measure?",
+                "AA-Briefcase Elo combines analytical-quality Elo, presentation Elo and rubric performance converted into synthetic head-to-head comparisons. Higher is better within the benchmark's comparable methodology."
+            ),
+            (
+                "Is the SXF table the complete AA-Briefcase leaderboard?",
+                "No. SXF displays the comparable observations currently stored in its evaluation dataset. The official Artificial Analysis leaderboard is broader and can update independently."
+            ),
+            (
+                "Can AA-Briefcase scores be compared with other benchmarks?",
+                "Not as if they were the same measurement. AA-Briefcase evaluates agentic knowledge work under its own methodology, so SXF keeps its results separate from benchmarks with different tasks, graders, versions or tool settings."
+            ),
+            (
+                "Why does model configuration matter for AA-Briefcase?",
+                "Reasoning effort, fallback behavior and tool settings can materially change an agent's benchmark result. SXF keeps configuration attached to each observation instead of treating a model name as a single universal score."
+            ),
+        ]
+
     schema = {
         "@context":"https://schema.org",
         "@graph":[
             {
+                "@type":"WebPage",
+                "@id":canonical+"#webpage",
+                "url":canonical,
+                "name":page_title,
+                "description":page_description,
+                "dateModified":MODEL_EVALUATION_CATALOG["source_verified"],
+                "isPartOf":{"@id":"https://sxf.si/#website"},
+                "publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples":"https://sxf.si/about/#method",
+                "breadcrumb":{"@id":canonical+"#breadcrumb"},
+                "mainEntity":{"@id":canonical+"#dataset"},
+                "about":[
+                    {"@type":"Thing","name":"AA-Briefcase"},
+                    {"@type":"Thing","name":"AI agent benchmarks"},
+                    {"@type":"Thing","name":"Agentic knowledge work"},
+                    {"@type":"Thing","name":"AI model evaluation"},
+                ] if is_aa_briefcase else {"@type":"Thing","name":benchmark["name"]},
+                "inLanguage":"en",
+            },
+            {
                 "@type":"Dataset",
-                "name": f'{benchmark["name"]} evaluation observations',
-                "url": canonical,
-                "description": f'{benchmark["name"]} results with evaluator, version, model configuration and comparability groups.',
-                "dateModified": MODEL_EVALUATION_CATALOG["source_verified"],
-                "measurementTechnique": benchmark["methodology_url"],
-                "creator":{"@type":"Organization","name":"SXF / AI"},
+                "@id":canonical+"#dataset",
+                "name":f'{benchmark["name"]} {benchmark.get("version") or ""} evaluation observations'.replace("  "," "),
+                "url":canonical,
+                "description":page_description,
+                "dateModified":MODEL_EVALUATION_CATALOG["source_verified"],
+                "version":benchmark.get("version"),
+                "measurementTechnique":benchmark["methodology_url"],
+                "mainEntityOfPage":{"@id":canonical+"#webpage"},
+                "creator":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},
+                "isAccessibleForFree":True,
+                "citation":[benchmark["source_url"], benchmark["methodology_url"]],
+                "keywords":[
+                    "AA-Briefcase benchmark",
+                    "AA-Briefcase v1.1",
+                    "AI agent benchmark",
+                    "agentic knowledge work",
+                    "AI model evaluation",
+                    "AI benchmark Elo",
+                ] if is_aa_briefcase else [benchmark["name"], benchmark["category"]],
+                "variableMeasured":[
+                    "AA-Briefcase Elo",
+                    "Model configuration",
+                    "Reasoning effort",
+                    "Tool configuration",
+                    "Evaluator evidence type",
+                    "Comparable group",
+                ] if is_aa_briefcase else [benchmark["metric"]],
+                "distribution":{
+                    "@type":"DataDownload",
+                    "encodingFormat":"application/json",
+                    "contentUrl":BASE_URL+"/data/model-evaluations.json",
+                },
             },
             {
                 "@type":"BreadcrumbList",
+                "@id":canonical+"#breadcrumb",
                 "itemListElement":[
                     {"@type":"ListItem","position":1,"name":"SXF / AI","item":BASE_URL+"/"},
                     {"@type":"ListItem","position":2,"name":"Evaluations","item":BASE_URL+"/evaluations/"},
                     {"@type":"ListItem","position":3,"name":benchmark["name"],"item":canonical},
                 ]
-            }
+            },
+            *([{
+                "@type":"FAQPage",
+                "@id":canonical+"#faq",
+                "mainEntityOfPage":{"@id":canonical+"#webpage"},
+                "mainEntity":[
+                    {"@type":"Question","name":question,"acceptedAnswer":{"@type":"Answer","text":answer}}
+                    for question, answer in faq
+                ],
+            }] if faq else []),
         ]
     }
+
+    briefcase_deep_dive = ""
+    if is_aa_briefcase:
+        tracked_rows = sorted(
+            observations,
+            key=lambda row: float(row["score"]),
+            reverse=benchmark.get("direction") == "higher-is-better",
+        )
+        leader = tracked_rows[0] if tracked_rows else None
+        leader_model = model_catalog_entry(leader["model_id"]) if leader else None
+        runner = tracked_rows[1] if len(tracked_rows) > 1 else None
+        gap = float(leader["score"]) - float(runner["score"]) if leader and runner else None
+        quick_answer = (
+            f'Within the comparable SXF snapshot verified {MODEL_EVALUATION_CATALOG["source_verified"]}, '
+            f'{leader_model["model"]} leads the {len(tracked_rows)} tracked AA-Briefcase v1.1 observations '
+            f'at {evaluation_score_label(benchmark, leader["score"])}'
+            + (f', {evaluation_score_label(benchmark, gap)} ahead of the next tracked result.' if gap is not None else '.')
+        ) if leader else "SXF does not currently store a comparable AA-Briefcase observation."
+
+        tracked_cards = "".join(
+            f'''<a class="benchmark-rank-card" href="{escape(model_catalog_entry(row["model_id"])["sxf_url"], quote=True)}">
+              <span>#{index}</span>
+              <strong>{escape(model_catalog_entry(row["model_id"])["model"])}</strong>
+              <b>{escape(evaluation_score_label(benchmark, row["score"]))}</b>
+              <small>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))} reasoning · {escape(str(row.get("model_configuration", {}).get("tools") or "not published"))}</small>
+            </a>'''
+            for index, row in enumerate(tracked_rows, start=1)
+        )
+
+        faq_html = "".join(
+            f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+            for question, answer in faq
+        )
+
+        briefcase_deep_dive = f'''
+      <section class="benchmark-answer shell" aria-labelledby="briefcase-answer-title">
+        <div class="benchmark-answer-card">
+          <p class="eyebrow">QUICK ANSWER</p>
+          <h2 id="briefcase-answer-title">What does the current SXF snapshot show?</h2>
+          <p>{escape(quick_answer)}</p>
+          <small>This is the comparable subset stored by SXF, not the complete live Artificial Analysis leaderboard.</small>
+        </div>
+      </section>
+
+      <section class="benchmark-authority shell" aria-labelledby="briefcase-what-is">
+        <div class="benchmark-copy">
+          <p class="eyebrow">BENCHMARK EXPLAINED</p>
+          <h2 id="briefcase-what-is">What is AA-Briefcase v1.1?</h2>
+          <p>AA-Briefcase is an Artificial Analysis benchmark designed to test frontier AI agents on realistic, long-horizon knowledge work rather than short question-answer tasks. The benchmark spans multi-week professional projects, linked tasks and large collections of source files. Deliverables include work products such as spreadsheets, presentations and written briefs.</p>
+          <p>Artificial Analysis says the official benchmark contains four private multi-week projects with 91 tasks in total. Each task is run independently, even when tasks share scenario context. That design makes AA-Briefcase useful for measuring whether an agent can gather evidence, reason across files, follow detailed requirements and produce a professional deliverable under a consistent evaluation setup.</p>
+        </div>
+        <aside class="benchmark-definition">
+          <span>AA-BRIEFCASE v1.1</span>
+          <dl>
+            <div><dt>Evaluator</dt><dd>Artificial Analysis</dd></div>
+            <div><dt>Category</dt><dd>Agentic knowledge work</dd></div>
+            <div><dt>Primary metric</dt><dd>AA-Briefcase Elo</dd></div>
+            <div><dt>Direction</dt><dd>Higher is better</dd></div>
+            <div><dt>Official task count</dt><dd>91</dd></div>
+            <div><dt>SXF snapshot</dt><dd>{len(tracked_rows)} comparable observations</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="benchmark-rankings shell" aria-labelledby="briefcase-tracked-title">
+        <div class="intel-section-head">
+          <div><p class="eyebrow">SXF TRACKED RESULTS</p><h2 id="briefcase-tracked-title">Comparable AA-Briefcase observations.</h2></div>
+          <a href="/evaluations/explorer/">Open evaluation explorer ↗</a>
+        </div>
+        <div class="benchmark-rank-grid">{tracked_cards}</div>
+        <p class="evaluation-disclaimer">These cards rank only observations in the same SXF comparable group. They are not presented as the complete official AA-Briefcase leaderboard.</p>
+      </section>
+
+      <section class="benchmark-authority shell benchmark-score-explainer" aria-labelledby="briefcase-elo-title">
+        <div class="benchmark-copy">
+          <p class="eyebrow">HOW TO READ THE SCORE</p>
+          <h2 id="briefcase-elo-title">What does AA-Briefcase Elo measure?</h2>
+          <p>AA-Briefcase Elo is not a simple accuracy percentage. Artificial Analysis combines three views of performance: rubric pass rate, analytical-quality pairwise comparisons and presentation-quality pairwise comparisons. Rubric performance is converted into synthetic head-to-head matches before the components are fit into the combined Elo measure.</p>
+          <p>A higher Elo therefore means stronger benchmark performance under this evaluation framework, but the number should stay attached to the model configuration. A model run at high reasoning effort is not automatically interchangeable with the same model at another effort level or with a different fallback and tool configuration.</p>
+        </div>
+        <div class="benchmark-measure-grid">
+          <article><span>01</span><strong>Rubric success</strong><p>Did the deliverable satisfy explicit requirements, use the right evidence and resolve the task correctly?</p></article>
+          <article><span>02</span><strong>Analytical quality</strong><p>How rigorous, thorough and well-supported is the work compared with another model submission?</p></article>
+          <article><span>03</span><strong>Presentation quality</strong><p>How professionally is the final deliverable structured and presented relative to competing submissions?</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-interpretation shell" aria-labelledby="briefcase-interpret-title">
+        <div class="intel-section-head"><div><p class="eyebrow">INTERPRETATION</p><h2 id="briefcase-interpret-title">What the tracked results do — and do not — prove.</h2></div></div>
+        <div class="benchmark-interpret-grid">
+          <article><span>THE RESULT CAN SAY</span><h3>How these configurations performed on AA-Briefcase.</h3><p>Within the same benchmark version, evaluator setup and comparable group, the score is useful evidence about relative agentic knowledge-work performance.</p></article>
+          <article><span>THE RESULT CANNOT SAY</span><h3>Which model is universally “best.”</h3><p>AA-Briefcase does not measure every workload. Coding agents, latency-sensitive tasks, factual QA, safety and price efficiency require separate evidence.</p></article>
+          <article><span>CONFIGURATION MATTERS</span><h3>Reasoning effort stays part of the observation.</h3><p>SXF preserves effort and tool settings because benchmark performance can change materially when the run configuration changes.</p></article>
+          <article><span>COVERAGE MATTERS</span><h3>SXF's table is a curated snapshot.</h3><p>The official Artificial Analysis benchmark covers more models and can update independently. SXF does not convert missing model coverage into a zero or an inferred rank.</p></article>
+        </div>
+      </section>
+
+      <section class="benchmark-authority shell" aria-labelledby="briefcase-why-title">
+        <div class="benchmark-copy">
+          <p class="eyebrow">WHY IT MATTERS</p>
+          <h2 id="briefcase-why-title">Why AA-Briefcase is useful for evaluating AI agents.</h2>
+          <p>Many model benchmarks compress capability into short, self-contained questions. Real knowledge work is different: the agent has to inspect files, identify relevant evidence, reconcile conflicting information, make decisions, and produce a deliverable that another person can actually use. AA-Briefcase is designed around that longer operational loop.</p>
+          <p>That makes the benchmark particularly relevant when evaluating models for research, analysis, business operations, document production and other workflows where the output is judged not only by whether an answer exists, but by whether the work is complete, defensible and professionally presented.</p>
+        </div>
+        <div class="benchmark-use-links">
+          <a href="/research/ai-agent-reliability/"><span>RELIABILITY</span><strong>How to test whether agent performance repeats in production</strong><b>↗</b></a>
+          <a href="/research/ai-agent-memory/"><span>MEMORY</span><strong>How memory changes long-running agent behavior</strong><b>↗</b></a>
+          <a href="/compare/"><span>COMPARE</span><strong>Compare model pricing, context and specifications</strong><b>↗</b></a>
+        </div>
+      </section>
+
+      <section class="benchmark-limitations shell" aria-labelledby="briefcase-limits-title">
+        <div class="intel-section-head"><div><p class="eyebrow">LIMITATIONS</p><h2 id="briefcase-limits-title">Use the benchmark as evidence, not a universal ranking.</h2></div></div>
+        <ul>
+          <li><strong>Private evaluation data.</strong> The official benchmark uses private projects; Artificial Analysis provides a separate public illustrative scenario that does not contribute to official scores.</li>
+          <li><strong>Independent task runs.</strong> Tasks in a scenario can share context, but the evaluated model currently completes each task in a fresh run rather than carrying its own prior submission forward.</li>
+          <li><strong>Elo is benchmark-specific.</strong> An AA-Briefcase Elo value should not be numerically merged with Elo ratings from unrelated evaluations.</li>
+          <li><strong>Model configuration is part of the result.</strong> Reasoning effort, tools and fallback behavior can change performance and must remain attached to the score.</li>
+          <li><strong>Leaderboard coverage changes.</strong> Artificial Analysis can add models or update official results; SXF's stored observations are a dated evidence snapshot.</li>
+        </ul>
+      </section>
+
+      <section class="benchmark-faq shell" aria-labelledby="briefcase-faq-title">
+        <div class="intel-section-head"><div><p class="eyebrow">FAQ</p><h2 id="briefcase-faq-title">AA-Briefcase benchmark questions.</h2></div></div>
+        <div class="benchmark-faq-list">{faq_html}</div>
+      </section>
+
+      <section class="benchmark-sources shell" aria-labelledby="briefcase-sources-title">
+        <div class="intel-section-head"><div><p class="eyebrow">PRIMARY SOURCES</p><h2 id="briefcase-sources-title">Methodology and live benchmark evidence.</h2></div></div>
+        <div class="benchmark-source-links">
+          <a href="{escape(benchmark["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><strong>Artificial Analysis — AA-Briefcase v1.1</strong><span>Live benchmark, results and leaderboard ↗</span></a>
+          <a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><strong>Artificial Analysis — Intelligence Benchmarking Methodology</strong><span>Evaluation design and scoring methodology ↗</span></a>
+          <a href="/data/model-evaluations.json"><strong>SXF Evaluation Intelligence dataset</strong><span>Stored observations and configurations ↗</span></a>
+        </div>
+      </section>'''
+
     return f'''<!doctype html><html lang="en">{page_head(
-        f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," "),
-        f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.',
+        page_title,
+        page_description,
         canonical,
         schema,
     )}
@@ -7351,12 +7578,13 @@ def benchmark_page_html(benchmark):
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/evaluations/">Evaluations</a><span>/</span><span>{escape(benchmark["name"])}</span></nav>
         <p class="eyebrow">BENCHMARK EVIDENCE / {escape(status_label.upper())}</p>
-        <h1>{escape(benchmark["name"])}{f'<br><span>v{escape(str(benchmark["version"]))}</span>' if benchmark.get("version") else ''}</h1>
-        <p>{escape(benchmark["category"].replace("-", " "))}. Metric: {escape(benchmark["metric"])}. Direction: {escape(benchmark["direction"])}. Results below stay separated by evaluator evidence type and comparable group.</p>
+        <h1>{escape(page_h1)}</h1>
+        <p>{'A research-backed guide to what AA-Briefcase measures, how its Elo score works, and how to interpret the comparable AI-agent results stored by SXF.' if is_aa_briefcase else escape(benchmark["category"].replace("-", " ")) + '. Metric: ' + escape(benchmark["metric"]) + '. Direction: ' + escape(benchmark["direction"]) + '. Results below stay separated by evaluator evidence type and comparable group.'}</p>
         <div class="collection-stats"><div><strong>{len(observations)}</strong><span>observations</span></div><div><strong>{escape(benchmark["evaluator"])}</strong><span>evaluator</span></div><div><strong>{escape(status_label)}</strong><span>status</span></div><div><strong>{escape(MODEL_EVALUATION_CATALOG["source_verified"])}</strong><span>verified</span></div></div>
       </section>
+      {briefcase_deep_dive}
       <section class="evaluation-benchmark-method shell">
-        <div class="compare-method-head"><p class="eyebrow">METHOD</p><h2>Read the score with its configuration.</h2><p>Scores from different comparable groups are intentionally not merged into one ranking. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
+        <div class="compare-method-head"><p class="eyebrow">SXF DATA METHOD</p><h2>Read every score with its configuration.</h2><p>SXF does not merge scores from incompatible benchmark versions or comparable groups. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
         <div class="model-related-links"><a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>METHODOLOGY</span><strong>Open evaluator methodology</strong><b>↗</b></a><a href="/data/model-evaluations.json"><span>DATASET</span><strong>Open raw observations</strong><b>↗</b></a></div>
         {f'<ul class="evaluation-notes">{notes_html}</ul>' if notes_html else ""}
       </section>
