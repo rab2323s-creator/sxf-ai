@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>What Is MCP? Model Context Protocol Explained for AI Agents | SXF</title>
+<meta name="description" content="Model Context Protocol (MCP) explained: architecture, servers, clients, tools, resources, prompts, security, OAuth, MCP vs API and how AI agents use it." />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="theme-color" content="#07090d" />
+<link rel="canonical" href="https://sxf.si/guides/model-context-protocol-mcp/" />
+<link rel="alternate" hreflang="en" href="https://sxf.si/guides/model-context-protocol-mcp/" />
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/guides/model-context-protocol-mcp/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="SXF / AI" />
+<meta property="og:title" content="What Is MCP? Model Context Protocol Explained for AI Agents" />
+<meta property="og:description" content="A primary-source guide to MCP architecture, transports, tools, resources, prompts, OAuth, security, production deployment and the 2026-07-28 specification." />
+<meta property="og:url" content="https://sxf.si/guides/model-context-protocol-mcp/" />
+<meta property="og:image" content="https://sxf.si/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg" />
+<meta property="og:image:type" content="image/svg+xml" />
+<meta property="og:image:alt" content="MCP architecture map showing AI hosts, MCP clients, MCP servers, tools, resources, prompts and underlying APIs, databases, files and SaaS systems" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="What Is MCP? Model Context Protocol Explained for AI Agents" />
+<meta name="twitter:description" content="Architecture, transports, OAuth, security, production deployment and the latest MCP specification." />
+<meta name="twitter:image" content="https://sxf.si/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg" />
+<script type="application/ld+json">{
+"@context":"https://schema.org",
+"@graph":[
+{"@type":"WebPage","@id":"https://sxf.si/guides/model-context-protocol-mcp/#webpage","url":"https://sxf.si/guides/model-context-protocol-mcp/","name":"What Is MCP? How Model Context Protocol Connects AI Agents to Tools & Data","description":"Model Context Protocol (MCP) explained: architecture, servers, clients, tools, resources, prompts, security, OAuth, MCP vs API and how AI agents use it.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/guides/model-context-protocol-mcp/#article"},"breadcrumb":{"@id":"https://sxf.si/guides/model-context-protocol-mcp/#breadcrumb"},"primaryImageOfPage":{"@id":"https://sxf.si/guides/model-context-protocol-mcp/#image"},"inLanguage":"en"},
+{"@type":["Article","TechArticle"],"@id":"https://sxf.si/guides/model-context-protocol-mcp/#article","url":"https://sxf.si/guides/model-context-protocol-mcp/","mainEntityOfPage":{"@id":"https://sxf.si/guides/model-context-protocol-mcp/#webpage"},"headline":"What Is MCP? How Model Context Protocol Connects AI Agents to Tools & Data","description":"A research-first guide to Model Context Protocol architecture, transports, capabilities, authorization, security and production deployment.","datePublished":"2026-10-05","dateModified":"2026-10-05","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Agents","image":{"@id":"https://sxf.si/guides/model-context-protocol-mcp/#image"},"keywords":["Model Context Protocol","MCP","MCP server","MCP client","MCP host","MCP tools","MCP resources","MCP prompts","MCP security","MCP OAuth","MCP 2026-07-28","MCP vs API","AI agents"],"citation":["https://modelcontextprotocol.io/specification/2026-07-28","https://blog.modelcontextprotocol.io/posts/2026-07-28/","https://modelcontextprotocol.io/specification/2026-07-28/basic/transports","https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization","https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices","https://developers.openai.com/api/docs/guides/tools-connectors-mcp","https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/extend-copilot-chat-with-mcp","https://www.anthropic.com/news/model-context-protocol","https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation"],"inLanguage":"en"},
+{"@type":"ImageObject","@id":"https://sxf.si/guides/model-context-protocol-mcp/#image","url":"https://sxf.si/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg","contentUrl":"https://sxf.si/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg","width":1600,"height":900,"name":"Model Context Protocol architecture map","caption":"AI Host → MCP Clients → MCP Servers → Tools, Resources and Prompts → APIs, databases, files and SaaS.","representativeOfPage":true,"inLanguage":"en"},
+{"@type":"BreadcrumbList","@id":"https://sxf.si/guides/model-context-protocol-mcp/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"Model Context Protocol","item":"https://sxf.si/guides/model-context-protocol-mcp/"}]},
+{"@type":"ItemList","@id":"https://sxf.si/guides/model-context-protocol-mcp/#production-checklist","name":"Production-grade MCP server checklist","numberOfItems":10,"itemListElement":[{"@type":"ListItem","position":1,"name":"Define a narrow capability boundary"},{"@type":"ListItem","position":2,"name":"Use least-privilege authorization"},{"@type":"ListItem","position":3,"name":"Validate every tool input"},{"@type":"ListItem","position":4,"name":"Keep credentials server-side"},{"@type":"ListItem","position":5,"name":"Protect outbound network access"},{"@type":"ListItem","position":6,"name":"Design for retries and idempotency"},{"@type":"ListItem","position":7,"name":"Log tool calls and policy decisions"},{"@type":"ListItem","position":8,"name":"Rate-limit expensive or destructive operations"},{"@type":"ListItem","position":9,"name":"Test malicious content and server behavior"},{"@type":"ListItem","position":10,"name":"Version and monitor the protocol contract"}]},
+{"@type":"DefinedTermSet","@id":"https://sxf.si/guides/model-context-protocol-mcp/#glossary","name":"Model Context Protocol glossary","hasDefinedTerm":[{"@type":"DefinedTerm","name":"MCP Host","description":"The LLM application that initiates MCP connections and manages user-facing policy and consent."},{"@type":"DefinedTerm","name":"MCP Client","description":"A connector inside the host that communicates with one MCP server."},{"@type":"DefinedTerm","name":"MCP Server","description":"A service that exposes context or capabilities through MCP."},{"@type":"DefinedTerm","name":"Tool","description":"A callable function that allows the model to perform an operation."},{"@type":"DefinedTerm","name":"Resource","description":"Context or data exposed for the host, user or model to read."},{"@type":"DefinedTerm","name":"Prompt","description":"A reusable templated message or workflow exposed by an MCP server."},{"@type":"DefinedTerm","name":"Streamable HTTP","description":"The standard HTTP transport where each MCP message is sent to one endpoint and replies are JSON or a request-scoped SSE stream."}]},
+{"@type":"FAQPage","@id":"https://sxf.si/guides/model-context-protocol-mcp/#faq","mainEntity":[
+{"@type":"Question","name":"What is MCP in AI?","acceptedAnswer":{"@type":"Answer","text":"Model Context Protocol is an open protocol that standardizes how AI applications connect to external tools, data sources and reusable prompts."}},
+{"@type":"Question","name":"Is MCP an API?","acceptedAnswer":{"@type":"Answer","text":"MCP is a protocol for exposing capabilities to AI applications. An MCP server often wraps existing APIs, databases or files rather than replacing them."}},
+{"@type":"Question","name":"What is the difference between an MCP host, client and server?","acceptedAnswer":{"@type":"Answer","text":"The host is the AI application, a client is the host-side connector for one server, and the server exposes tools, resources or prompts."}},
+{"@type":"Question","name":"What is the latest MCP specification?","acceptedAnswer":{"@type":"Answer","text":"As of October 5, 2026, the current final MCP specification is dated July 28, 2026. It introduced a stateless protocol core, optional server/discover, Multi Round-Trip Requests, header-based routing, cacheable list results, authorization hardening and a formal extension framework."}},
+{"@type":"Question","name":"Does MCP require OAuth?","acceptedAnswer":{"@type":"Answer","text":"No. Authorization is optional. For HTTP-based transports, implementations that support authorization should follow the MCP authorization specification based on OAuth 2.1 and related standards. stdio deployments normally obtain credentials from the environment instead."}},
+{"@type":"Question","name":"Is MCP secure?","acceptedAnswer":{"@type":"Answer","text":"MCP can be deployed securely, but the protocol does not make a server trustworthy. Hosts must still enforce consent, least privilege, token audience validation, network controls, tool validation, logging and defenses against malicious content and servers."}},
+{"@type":"Question","name":"What is MCP vs function calling?","acceptedAnswer":{"@type":"Answer","text":"Function calling is a model-to-application mechanism for selecting structured functions. MCP standardizes how an application discovers and communicates with external capability providers. MCP tools can ultimately be surfaced to a model through function or tool calling."}},
+{"@type":"Question","name":"What are MCP Tasks and MCP Apps?","acceptedAnswer":{"@type":"Answer","text":"Tasks and MCP Apps are optional extensions. Tasks support long-running asynchronous work with durable handles; MCP Apps support interactive UI elements rendered inside compatible hosts."}}
+]}]}</script>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/intelligence.css" />
+</head>
+<body class="intel-page guide-article-page">
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+
+<main><article>
+<header class="guide-article-hero shell">
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Model Context Protocol</span></nav>
+<p class="eyebrow">SXF TECHNICAL REFERENCE / AI AGENTS</p>
+<h1>What Is MCP?<br><span>How Model Context Protocol Connects AI Agents to Tools & Data</span></h1>
+<p class="guide-deck">Model Context Protocol gives AI applications a common way to discover and use external capabilities. Instead of writing a bespoke integration for every model, agent, database, SaaS API or local tool, developers can expose a consistent MCP interface. This research-first guide explains the architecture, the July 28, 2026 specification, transports, authorization, security boundaries, production design and where MCP fits relative to APIs, function calling, RAG, plugins and agent-to-agent protocols.</p>
+<div class="guide-byline">
+<div><span>Published</span><strong>October 5, 2026</strong></div>
+<div><span>Last verified</span><strong>October 5, 2026</strong></div>
+<div><span>Reading time</span><strong>34 min</strong></div>
+<div><span>Research standard</span><strong>Primary-source first</strong></div>
+</div>
+</header>
+
+<figure class="security-feature shell">
+<div class="security-feature-frame">
+<img src="/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg" alt="MCP architecture map showing an AI Host connecting through MCP Clients to MCP Servers that expose Tools, Resources and Prompts backed by APIs, databases, files and SaaS systems" width="1600" height="900" loading="eager" decoding="async" />
+</div>
+<figcaption>MCP standardizes the boundary between an AI application and external capabilities. It does not replace the underlying APIs, databases, files or SaaS systems.</figcaption>
+</figure>
+
+<section class="guide-answer shell" id="quick-answer">
+<div class="guide-answer-label">QUICK ANSWER</div>
+<div><h2>MCP is a standard interface for connecting AI applications to tools and data.</h2>
+<p><strong>Model Context Protocol (MCP)</strong> is an open protocol for communication between an AI host and external services that provide context or capabilities. MCP uses JSON-RPC messages and defines three core server features: <strong>tools</strong> the model can execute, <strong>resources</strong> that expose context or data, and <strong>prompts</strong> that package reusable message templates or workflows. The host owns the user experience and policy boundary; an MCP client inside that host communicates with an MCP server. The current final specification, <strong>2026-07-28</strong>, makes the core stateless and self-contained per request.</p></div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc"><span>IN THIS GUIDE</span>
+<a href="#what-is-mcp">What is MCP?</a>
+<a href="#problem">The problem MCP solves</a>
+<a href="#architecture">Host vs client vs server</a>
+<a href="#capabilities">Tools vs resources vs prompts</a>
+<a href="#call-flow">How an MCP call works</a>
+<a href="#transports">stdio vs Streamable HTTP</a>
+<a href="#spec-2026">2026-07-28 specification</a>
+<a href="#comparisons">MCP vs API, RAG & more</a>
+<a href="#authorization">OAuth & authorization</a>
+<a href="#security">MCP security</a>
+<a href="#when-to-use">When to use MCP</a>
+<a href="#production">Production-grade server</a>
+<a href="#failure-modes">Failure modes</a>
+<a href="#openai-github">OpenAI & GitHub support</a>
+<a href="#tasks-apps">Tasks & MCP Apps</a>
+<a href="#future">Future & AAIF</a>
+<a href="#checklist">Deployment checklist</a>
+<a href="#faq">FAQ</a>
+<a href="#glossary">Glossary</a>
+<a href="#sources">Primary sources</a>
+<a class="guide-toc-top" href="#top">Back to top ↑</a>
+</aside>
+
+<div class="guide-prose" id="top">
+
+<section id="what-is-mcp">
+<p class="eyebrow">DEFINITION</p>
+<h2>What is Model Context Protocol?</h2>
+<p><strong>Model Context Protocol is an open protocol that standardizes how LLM applications connect to external data sources and tools.</strong> The official specification describes hosts as the LLM applications that initiate connections, clients as connectors inside those hosts, and servers as services that provide context and capabilities. Communication uses JSON-RPC 2.0.</p>
+<p>The easiest analogy is the Language Server Protocol. Before LSP, every code editor needed custom integration logic for every programming language. LSP introduced a shared contract between editors and language servers. MCP applies a similar idea to AI: a host can speak one protocol to many capability providers, and a server can expose one MCP interface to multiple compatible hosts.</p>
+<p>That does <em>not</em> mean MCP is “the USB-C of AI” in every technical sense, and it does not make integrations interchangeable without policy. The useful part of the analogy is standardization: a common envelope for discovery, structured calls, context, capability metadata and authorization.</p>
+<div class="guide-callout"><strong>MCP is infrastructure, not intelligence.</strong><p>It does not make a model reason better. It gives an AI application a consistent way to reach capabilities outside the model.</p></div>
+</section>
+
+<section id="problem">
+<p class="eyebrow">WHY MCP EXISTS</p>
+<h2>The integration problem MCP is trying to solve</h2>
+<p>AI agents become useful when they can act on real systems: search a knowledge base, query a database, read a repository, create a ticket, inspect logs, send a message, edit a design or run a deployment check. Without a shared protocol, every host-to-service combination needs bespoke glue.</p>
+<p>Imagine five AI hosts and twenty internal services. A direct-integration approach can turn into dozens of separate adapters, each with its own schemas, authentication assumptions, error handling and discovery mechanism. MCP changes the topology. Services expose an MCP server or gateway; hosts implement MCP clients. The application still needs product-specific policy and each service still needs domain logic, but the connection contract is standardized.</p>
+<div class="guide-decision-table">
+<div><span>Without MCP</span><strong>Integration logic multiplies.</strong><p>Each AI application must learn how every data source or action API works, including discovery, schemas, errors and credentials.</p></div>
+<div><span>With MCP</span><strong>Capability access has a common protocol.</strong><p>The host can discover tools, resources and prompts and invoke them using a shared message model.</p></div>
+<div><span>Still required</span><strong>Business APIs and data systems remain.</strong><p>MCP usually sits in front of existing APIs, databases, files, SaaS products or internal services.</p></div>
+<div><span>Still required</span><strong>Security policy remains application-specific.</strong><p>A standard protocol cannot decide whether a particular user should be allowed to delete production data.</p></div>
+</div>
+<p>This matters most in agentic systems, where the set of useful capabilities is broader and changes faster than in a conventional chatbot. See <a href="/guides/what-is-agentic-ai/">What Is Agentic AI?</a> for the wider execution-loop architecture.</p>
+</section>
+
+<section id="architecture">
+<p class="eyebrow">ARCHITECTURE</p>
+<h2>MCP Host vs Client vs Server</h2>
+<p>MCP terminology is simple once the responsibilities are separated.</p>
+<div class="guide-matchup-grid">
+<article><span>HOST</span><h3>The AI application</h3><p>The host is the user-facing LLM application: an IDE, assistant, desktop app, agent runtime or custom product. It owns the conversation, model access, trust policy, consent UX and lifecycle of MCP connections.</p></article>
+<article><span>CLIENT</span><h3>The per-server connector</h3><p>An MCP client lives inside the host and communicates with one MCP server. It handles protocol messages, transport details, capability metadata and—in remote deployments—authorization flow mechanics.</p></article>
+<article><span>SERVER</span><h3>The capability provider</h3><p>An MCP server exposes tools, resources or prompts. It can be a local subprocess, a remote service, a wrapper around an API, a database gateway or an enterprise integration layer.</p></article>
+<article><span>BACKEND</span><h3>The real system of record</h3><p>The MCP server usually talks to something underneath it: GitHub, Salesforce, PostgreSQL, a filesystem, a proprietary API or another internal service.</p></article>
+</div>
+<p>A host can maintain many MCP clients simultaneously. The key boundary is that each client-server relationship can have its own trust, credentials and capability set. That makes it possible to connect a coding agent to a repository server, an issue tracker server and an observability server without pretending those systems share one security domain.</p>
+</section>
+
+<section id="capabilities">
+<p class="eyebrow">SERVER FEATURES</p>
+<h2>Tools vs Resources vs Prompts</h2>
+<p>The official specification separates three server-side concepts because “context” and “action” are not the same thing.</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Capability</th><th>What it represents</th><th>Typical control</th><th>Example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Tools</th><td data-label="Represents">Callable functions and actions</td><td data-label="Control">Usually model-selected, bounded by host policy</td><td data-label="Example"><code>create_issue</code>, <code>search_logs</code>, <code>run_query</code></td></tr>
+<tr><th scope="row">Resources</th><td data-label="Represents">Readable context or data</td><td data-label="Control">Application/user/model consumption depending on host design</td><td data-label="Example">A file, schema, document, repository tree or database record</td></tr>
+<tr><th scope="row">Prompts</th><td data-label="Represents">Reusable templated messages or workflows</td><td data-label="Control">Typically surfaced as user- or host-invoked workflows</td><td data-label="Example">“Review this pull request” with structured arguments</td></tr>
+</tbody></table></div>
+<p><strong>Tools</strong> deserve the most caution because they can create side effects. The specification explicitly warns that tools can represent arbitrary code execution paths and that tool descriptions should be treated as untrusted unless they come from a trusted server. A friendly description is not an authorization control.</p>
+<p><strong>Resources</strong> are useful for context that can be named and read. They can reduce the temptation to turn every data lookup into an action-like tool. <strong>Prompts</strong> are useful for packaging repeatable interaction patterns without hard-coding them into every host.</p>
+</section>
+
+<section id="call-flow">
+<p class="eyebrow">REQUEST LIFECYCLE</p>
+<h2>How an MCP call works, step by step</h2>
+<p>Under the 2026-07-28 specification, the core protocol is stateless. Every request carries the information required to interpret it, rather than relying on a hidden protocol session.</p>
+<div class="agent-loop">
+<article><span>01</span><h3>Configure or discover the server</h3><p>The host knows an MCP endpoint or launches a local server. A client may optionally call <code>server/discover</code> to learn capabilities before doing other work.</p></article>
+<article><span>02</span><h3>Authorize if required</h3><p>For protected remote HTTP servers, the client obtains a token for the MCP server as the intended resource. Local stdio servers normally receive credentials from their environment instead.</p></article>
+<article><span>03</span><h3>List capabilities</h3><p>The client can request tool, resource or prompt catalogs. In the current spec, list responses can include cache hints so the client does not repeatedly fetch unchanged catalogs.</p></article>
+<article><span>04</span><h3>The model or host selects an operation</h3><p>The model may decide to call a tool, while the application can also read a resource or surface a prompt. Host policy can block, filter or require approval.</p></article>
+<article><span>05</span><h3>Send a JSON-RPC request</h3><p>The request identifies the protocol version and client capabilities. With Streamable HTTP, method and tool names are also carried in routing-friendly headers.</p></article>
+<article><span>06</span><h3>The server executes domain logic</h3><p>The server validates arguments, checks authorization, calls its backend and returns structured content or an error.</p></article>
+<article><span>07</span><h3>The host feeds the result back into the agent loop</h3><p>The model observes the result and can continue, retry, choose another tool, ask for missing information or stop.</p></article>
+</div>
+<p>Some operations need additional information in the middle of a call. The 2026-07-28 release introduced <strong>Multi Round-Trip Requests (MRTR)</strong> so a server can indicate that input is required and the client can retry the original operation with the answers attached—without requiring a continuously open bidirectional protocol session.</p>
+</section>
+
+<section id="transports">
+<p class="eyebrow">TRANSPORTS</p>
+<h2>stdio vs Streamable HTTP</h2>
+<p>The protocol semantics are the same across transports; the transport only determines how MCP messages are framed and delivered.</p>
+<div class="guide-difference">
+<div><span>STDIO</span><strong>Best for local, client-launched servers.</strong><p>The host launches a subprocess and exchanges newline-delimited JSON-RPC messages over standard input and output. It is simple for local developer tools and can inherit credentials or environment configuration from the launching process.</p></div>
+<div><span>STREAMABLE HTTP</span><strong>Best for remote, shared and scalable servers.</strong><p>Each message is an HTTP POST to a single MCP endpoint. The response is either a JSON object or a request-scoped SSE stream. Standard web infrastructure can front the service.</p></div>
+</div>
+<p>Streamable HTTP is the modern remote transport. The legacy HTTP+SSE transport is deprecated in the July 2026 release with a migration window. For new remote deployments, build against the current Streamable HTTP binding rather than designing around the older stateful transport.</p>
+<p>The practical choice is architectural: if the capability is a local process tightly coupled to the host, stdio is usually easier. If many users, hosts or workers need to reach the same capability service, HTTP is usually the production path.</p>
+</section>
+
+<section id="spec-2026">
+<p class="eyebrow">CURRENT SPECIFICATION</p>
+<h2>What changed in MCP 2026-07-28?</h2>
+<p>As of October 5, 2026, <strong>2026-07-28 is the current final MCP specification</strong>. It is a major architectural revision, not a cosmetic version bump.</p>
+<div class="guide-decision-table">
+<div><span>Stateless core</span><strong>No required initialize handshake or protocol session.</strong><p>The previous <code>initialize</code>/<code>initialized</code> exchange and <code>Mcp-Session-Id</code> are retired for this revision. Each request is self-describing.</p></div>
+<div><span><code>server/discover</code></span><strong>Optional capability discovery.</strong><p>A client can learn server capabilities up front, but it is not required before making ordinary requests.</p></div>
+<div><span>MRTR</span><strong>Mid-call input without a permanent stream.</strong><p>Multi Round-Trip Requests let a server return an input-required state and let the client retry with responses attached.</p></div>
+<div><span>Header routing</span><strong>Gateways can see method and name.</strong><p>Streamable HTTP uses <code>Mcp-Method</code> and <code>Mcp-Name</code> headers so routers, WAFs and rate limiters do not need to parse the JSON body.</p></div>
+<div><span>Cacheable lists</span><strong>Capability catalogs can be cached.</strong><p>Tool, prompt and resource list/read responses carry cache hints and deterministic ordering, reducing refetches and stabilizing prompt caches.</p></div>
+<div><span>Authorization hardening</span><strong>Issuer validation and audience binding improve.</strong><p>The revision adds stronger OAuth guidance, moves toward Client ID Metadata Documents and formally deprecates Dynamic Client Registration for the future.</p></div>
+<div><span>Extensions framework</span><strong>Optional features are separated from the core.</strong><p>Tasks, MCP Apps and enterprise-oriented extensions can evolve without bloating the base protocol.</p></div>
+<div><span>Deprecation policy</span><strong>Implementers get a migration window.</strong><p>The project formalized a minimum deprecation window; Roots, Sampling and Logging are deprecated in this revision for new implementations.</p></div>
+</div>
+<p>The stateless change is especially important for production. A request can land on any compatible server instance behind an ordinary load balancer without shared protocol-session state. Applications can still be stateful when the workflow requires it; the state becomes explicit application data or a durable handle instead of invisible transport state.</p>
+</section>
+
+<section id="comparisons">
+<p class="eyebrow">POSITIONING</p>
+<h2>MCP vs API, function calling, RAG, plugins and A2A</h2>
+<p>MCP is easiest to understand by separating layers rather than treating every integration technology as a competitor.</p>
+<div class="guide-table-wrap"><table class="guide-table">
+<thead><tr><th>Technology</th><th>Primary job</th><th>How it relates to MCP</th></tr></thead>
+<tbody>
+<tr><th scope="row">API</th><td data-label="Job">Expose application or service operations/data</td><td data-label="Relation">An MCP server often wraps one or more APIs. MCP standardizes the AI-facing integration contract; the API remains the backend contract.</td></tr>
+<tr><th scope="row">Function calling</th><td data-label="Job">Let a model select structured functions defined by the host</td><td data-label="Relation">MCP can supply externally discovered tools that the host then exposes through its model tool/function-calling mechanism.</td></tr>
+<tr><th scope="row">RAG</th><td data-label="Job">Retrieve relevant knowledge and place it into model context</td><td data-label="Relation">RAG is a retrieval pattern. MCP resources or tools can provide the retrieval interface, but MCP does not define ranking, embeddings or retrieval quality.</td></tr>
+<tr><th scope="row">Connectors / plugins</th><td data-label="Job">Product-specific integrations</td><td data-label="Relation">A connector can be implemented on top of MCP, and a host can present MCP servers as connectors. “Plugin” is a packaging/product concept; MCP is a protocol.</td></tr>
+<tr><th scope="row">A2A</th><td data-label="Job">Agent-to-agent communication and task collaboration</td><td data-label="Relation">A2A addresses interactions between agents; MCP addresses an application's access to tools and context. A multi-agent system can use both.</td></tr>
+</tbody></table></div>
+<h3>MCP vs API</h3>
+<p>An API is usually the canonical interface for a service. MCP should not force you to throw that away. A production MCP server often becomes an adapter over existing domain APIs, adding AI-oriented capability metadata, structured tool schemas and MCP-compatible authorization behavior.</p>
+<h3>MCP vs function calling</h3>
+<p>Function calling answers: “How does this model ask the application to invoke a structured function?” MCP answers: “How does the application discover and communicate with an external capability provider?” They fit together. The host can discover tools from MCP servers, apply policy and expose approved tools to the model.</p>
+<h3>MCP vs RAG</h3>
+<p>RAG is about retrieval. MCP is about interoperability. A RAG system can use MCP to reach document stores, search services or database tools, but MCP does not decide which chunks are relevant or whether retrieved content is trustworthy. Prompt injection remains a separate security problem; see <a href="/guides/prompt-injection/">Prompt Injection in AI</a>.</p>
+<h3>MCP vs connectors and plugins</h3>
+<p>Connectors and plugins are product surfaces. They may use proprietary interfaces, MCP, or both. MCP's value is portability: the same server can potentially serve more than one compatible host, subject to authentication and host policy.</p>
+<h3>MCP vs A2A</h3>
+<p>Agent-to-Agent protocols target peer communication, delegation and task coordination between agents. MCP targets capabilities available to an AI application. A supervisor agent might use A2A to delegate to another agent while both agents separately use MCP servers to access databases and tools.</p>
+</section>
+
+<section id="authorization">
+<p class="eyebrow">IDENTITY & AUTHORIZATION</p>
+<h2>How OAuth works with MCP</h2>
+<p>Authorization is optional in MCP, but protected remote servers need a serious authorization model. The current HTTP authorization specification is based on OAuth 2.1 and related standards such as Bearer Token Usage, Protected Resource Metadata and Resource Indicators.</p>
+<p>The roles map cleanly: the <strong>MCP server is an OAuth resource server</strong>, the <strong>MCP client is an OAuth client</strong>, and an authorization server authenticates the resource owner and issues access tokens. A crucial rule is audience binding: clients request a token for the canonical MCP server resource, and servers must only accept tokens intended for themselves.</p>
+<div class="guide-callout"><strong>Do not treat “has a token” as sufficient.</strong><p>The server must validate issuer, audience/resource, expiry and scopes. The client must not forward unrelated tokens to an MCP server.</p></div>
+<p>The 2026-07-28 authorization work also emphasizes least-privilege scopes and step-up authorization. A server can challenge with the minimum scope needed for an operation; a client can request additional permission only when that action becomes necessary.</p>
+<p>For <strong>stdio</strong>, the authorization specification says not to use the HTTP OAuth flow. Local servers normally obtain credentials from the environment or another local credential mechanism. That does not make them automatically safe: process spawning, filesystem access and environment variables still need host-level controls.</p>
+</section>
+
+<section id="security">
+<p class="eyebrow">SECURITY</p>
+<h2>MCP security: where the real risks are</h2>
+<p>MCP standardizes communication, not trust. A malicious server can advertise deceptive tools, return hostile content or abuse credentials. A legitimate server can still have ordinary API vulnerabilities. A safe architecture assumes every external boundary can fail.</p>
+
+<h3>Prompt injection</h3>
+<p>An MCP tool or resource can return text that contains instructions aimed at the model. Those instructions are data from a lower-trust source, even if they are syntactically valid MCP content. The host should preserve provenance, limit what returned content can authorize, and avoid giving one model both broad untrusted context and broad irreversible authority. For the full threat model, see <a href="/guides/prompt-injection/">Prompt Injection in AI</a>.</p>
+
+<h3>Confused deputy</h3>
+<p>A confused-deputy failure happens when a more privileged component is tricked into using its authority for someone else's purpose. In MCP deployments, this can appear when a client or proxy holds credentials and an attacker causes it to send those credentials to the wrong service or perform an operation outside the user's intended resource. OAuth resource binding, issuer validation, redirect validation and exact server identity checks exist to reduce this class of error.</p>
+
+<h3>Token passthrough</h3>
+<p>A dangerous shortcut is accepting a token from a client and passing it directly to an upstream API even when the token was not issued for that MCP server. The current authorization specification explicitly requires MCP servers to accept only tokens valid for their own resources and not to accept or transit other tokens. Use proper token exchange or backend-specific credentials when the server must call another protected system.</p>
+
+<h3>SSRF</h3>
+<p>Remote servers often call URLs, webhooks, storage endpoints or APIs. If a tool accepts arbitrary URLs, an attacker may try to make the server reach internal metadata services, private networks or loopback endpoints. Treat outbound network access as a permission: validate destinations, block private address ranges where appropriate, use egress proxies or allowlists, and resolve DNS safely.</p>
+
+<h3>Malicious MCP servers</h3>
+<p>Installing an MCP server is equivalent to expanding an agent's supply chain. A local stdio server may execute code with the user's OS permissions. A remote server may receive sensitive query content and OAuth-granted access. Server names, README files and tool descriptions are not trust proofs. Pin packages where possible, review publishers, verify source, inspect permissions, and make server enablement an explicit administrative decision in enterprise environments.</p>
+
+<h3>Tool descriptions are not policy</h3>
+<p>The protocol itself warns hosts to consider tool descriptions untrusted unless the server is trusted. A description that says “read-only” is metadata, not enforcement. The server should implement read-only behavior, the backend credential should lack write permission, and the host should independently classify risky actions when feasible.</p>
+
+<p>These controls sit inside the wider discipline of <a href="/guides/ai-agent-security/">AI Agent Security</a>: identity, least privilege, sandboxing, approval gates, monitoring, provenance and revocation all matter once a model can act.</p>
+</section>
+
+<section id="when-to-use">
+<p class="eyebrow">ARCHITECTURE DECISION</p>
+<h2>When should you use MCP—and when should you not?</h2>
+<div class="guide-choice-grid">
+<article><span>USE MCP</span><h3>Many AI hosts need the same capability</h3><p>A standardized server is valuable when multiple assistants, IDEs or agent runtimes should reuse one integration.</p></article>
+<article><span>USE MCP</span><h3>Your capability catalog changes over time</h3><p>Discovery lets clients learn tools or resources instead of hard-coding every integration at build time.</p></article>
+<article><span>USE MCP</span><h3>You want a clean policy boundary</h3><p>An MCP gateway can centralize schemas, authorization, rate limits, logging and domain-specific validation around existing backend APIs.</p></article>
+<article><span>USE MCP</span><h3>You need local developer tooling</h3><p>stdio makes it straightforward to expose local repositories, CLIs or files to a compatible desktop or IDE host.</p></article>
+<article><span>SKIP MCP</span><h3>One application calls one stable API</h3><p>If the integration is tiny, private and unlikely to be reused, a direct typed client may be simpler and easier to operate.</p></article>
+<article><span>SKIP MCP</span><h3>The workflow is fully deterministic</h3><p>If every step is known and no model needs to choose capabilities, a normal service or job queue may be the better abstraction.</p></article>
+<article><span>SKIP MCP</span><h3>You cannot define a safe tool boundary</h3><p>Do not expose a high-privilege general shell or database credential merely because MCP makes it easy to call.</p></article>
+<article><span>SKIP MCP</span><h3>Protocol support adds more complexity than value</h3><p>MCP is not a requirement for “being agentic.” Use it when interoperability pays for the extra operational surface.</p></article>
+</div>
+</section>
+
+<section id="production">
+<p class="eyebrow">BUILDING FOR PRODUCTION</p>
+<h2>How to build a production-grade MCP server</h2>
+<p>A production MCP server should look like a mature API service with additional agent-facing constraints—not a thin script that blindly executes whatever the model asks.</p>
+
+<h3>1. Design narrow tools around outcomes</h3>
+<p>Prefer <code>create_invoice_draft</code> over <code>run_arbitrary_sql</code>. Narrow tools reduce ambiguity, constrain parameters and make authorization understandable. If an operation has materially different risk levels, split it into separate tools so the host can apply different approval policies.</p>
+
+<h3>2. Validate inputs twice</h3>
+<p>Use schema validation at the MCP boundary and domain validation inside the service. Check IDs, enums, lengths, ranges, ownership and business preconditions. Never assume that “the model generated it” makes an argument safe.</p>
+
+<h3>3. Make side effects idempotent</h3>
+<p>Agents retry. Networks fail after a server commits but before the client receives the response. Destructive or financial tools should accept idempotency keys or otherwise make duplicate execution safe.</p>
+
+<h3>4. Keep secrets out of model context</h3>
+<p>The server—not the model—should hold API keys and service credentials. Return the minimum result needed for the task. Do not echo authorization headers, refresh tokens or internal connection strings into tool output.</p>
+
+<h3>5. Separate identity from authority</h3>
+<p>Knowing which user initiated a request is not enough. Evaluate what that identity may do to the specific resource. Enforce scopes, tenancy and object-level permissions server-side.</p>
+
+<h3>6. Control outbound network access</h3>
+<p>If tools can fetch URLs or call third-party systems, use an egress policy. Block internal address ranges where appropriate and avoid unrestricted redirects. SSRF prevention belongs at the network and application layers.</p>
+
+<h3>7. Emit operational telemetry</h3>
+<p>Log request IDs, authenticated subject, tool name, policy decision, latency, backend status and a redacted summary of arguments/results. Keep sensitive payloads out of logs unless retention is explicitly justified.</p>
+
+<h3>8. Rate-limit by capability</h3>
+<p>Not all tools cost the same. Apply stricter limits to expensive searches, write operations, deployments and bulk exports. With current Streamable HTTP, method/name headers give gateways a convenient routing and metering signal.</p>
+
+<h3>9. Design explicit error contracts</h3>
+<p>Agents need to know whether to retry, repair input, request permission or stop. Return structured, stable errors instead of vague prose. Distinguish authorization failures, validation errors, transient backend failures and permanent domain conflicts.</p>
+
+<h3>10. Test adversarially</h3>
+<p>Include malformed schemas, prompt-injected resource content, hostile tool output, repeated calls, stale tokens, insufficient scopes, cross-tenant identifiers, large payloads and partial backend failures in your test suite. The security boundary is the whole server, not only the JSON parser.</p>
+</section>
+
+<section id="failure-modes">
+<p class="eyebrow">FAILURE MODES</p>
+<h2>Common MCP deployment failures</h2>
+<div class="agent-limit-list">
+<div><span>01</span><strong>Tool explosion</strong><p>Hundreds of overlapping tools make model selection unreliable and inflate context. Curate capabilities and use clear names and schemas.</p></div>
+<div><span>02</span><strong>Over-broad tools</strong><p>A generic shell, SQL executor or HTTP client gives the model more authority than the business task requires.</p></div>
+<div><span>03</span><strong>Hidden state</strong><p>Servers that secretly depend on one instance's memory fight the stateless architecture and fail unpredictably behind load balancers.</p></div>
+<div><span>04</span><strong>Credential confusion</strong><p>Tokens are reused across resources or forwarded upstream without audience validation.</p></div>
+<div><span>05</span><strong>No idempotency</strong><p>Retries create duplicate tickets, payments, deployments or messages.</p></div>
+<div><span>06</span><strong>Trusting descriptions</strong><p>The host assumes a tool is read-only because its metadata says so rather than enforcing policy elsewhere.</p></div>
+<div><span>07</span><strong>Returning too much data</strong><p>Tool responses leak secrets, internal metadata or entire records when the agent only needed one field.</p></div>
+<div><span>08</span><strong>Ignoring cancellation and timeouts</strong><p>Long-running backend work keeps consuming resources after the user or client has abandoned the request.</p></div>
+<div><span>09</span><strong>Mixing protocol and business state</strong><p>Workflow state is hidden inside transport sessions instead of represented explicitly with durable IDs or task handles.</p></div>
+<div><span>10</span><strong>No compatibility strategy</strong><p>A server upgrades spec behavior without testing older hosts or following the protocol's version/deprecation rules.</p></div>
+</div>
+</section>
+
+<section id="openai-github">
+<p class="eyebrow">ECOSYSTEM SUPPORT</p>
+<h2>OpenAI MCP support and GitHub Copilot MCP support</h2>
+<h3>OpenAI</h3>
+<p>OpenAI's API documentation supports <strong>remote MCP servers</strong> as a tool integration path. Developers can configure MCP servers so models can discover and call exposed tools through OpenAI's tool framework. OpenAI also distinguishes first-party connectors from arbitrary remote MCP servers and advises developers to review what data is shared and what actions a server can perform.</p>
+<p>The architectural point is important: MCP does not bypass OpenAI's tool policy layer. The application still decides which server is connected, which tools are approved and when user confirmation is required.</p>
+<h3>GitHub Copilot</h3>
+<p>GitHub documents MCP support for extending Copilot Chat with external tools and context. In supported IDE configurations, users or administrators can configure MCP servers and expose their capabilities to Copilot. That makes MCP directly relevant to developer workflows: repository tools, issue systems, documentation servers, databases and internal engineering services can be made available through one standardized interface.</p>
+<p>Because developer environments often contain source code and credentials, local MCP configuration deserves the same supply-chain discipline as editor extensions and CLI packages.</p>
+</section>
+
+<section id="tasks-apps">
+<p class="eyebrow">EXTENSIONS</p>
+<h2>MCP Tasks and MCP Apps</h2>
+<p>The July 2026 specification formalized an extensions framework so optional capabilities can evolve without complicating the core protocol.</p>
+<div class="guide-difference">
+<div><span>MCP TASKS</span><strong>Long-running asynchronous operations.</strong><p>Tasks provide durable handles for work that cannot finish inside one normal request. The extension includes polling through <code>tasks/get</code> and update behavior, making it suitable for jobs such as large imports, code analysis or lengthy generation.</p></div>
+<div><span>MCP APPS</span><strong>Interactive user interfaces inside compatible hosts.</strong><p>MCP Apps let servers supply interactive UI elements such as forms, charts or media experiences, moving beyond plain text tool results while keeping the integration attached to the MCP capability model.</p></div>
+</div>
+<p>These are extensions, not requirements for every MCP deployment. A simple database lookup server should stay simple. Use Tasks when the job lifecycle is genuinely asynchronous and Apps when interaction materially improves the workflow.</p>
+</section>
+
+<section id="future">
+<p class="eyebrow">GOVERNANCE & FUTURE</p>
+<h2>MCP, the Agentic AI Foundation and the future of agent infrastructure</h2>
+<p>Anthropic originally introduced MCP in November 2024 as an open standard for connecting AI assistants to data systems. Its governance has since broadened. The Linux Foundation announced the <strong>Agentic AI Foundation (AAIF)</strong> with MCP as one of its anchor project contributions alongside other agent infrastructure projects.</p>
+<p>That governance shift matters because interoperability standards become more useful when no single application vendor controls their evolution. It also does not guarantee universal adoption. Enterprises will continue to use direct APIs, proprietary connectors and internal gateways where those abstractions fit better.</p>
+<p>The direction is clearer than the final shape: agent systems need standardized capability discovery, identity, authorization, long-running work, UI surfaces and policy enforcement. MCP is becoming one of the core protocols in that stack. Its 2026 move toward stateless, cacheable, routable HTTP infrastructure shows the project optimizing for real production deployment rather than only local demos.</p>
+</section>
+
+<section id="checklist">
+<p class="eyebrow">DEPLOYMENT CHECKLIST</p>
+<h2>Production MCP server checklist</h2>
+<div class="security-principles">
+<article><span>01</span><h3>Narrow capability boundary</h3><p>Expose task-shaped tools, not generic root access.</p></article>
+<article><span>02</span><h3>Least privilege</h3><p>Use minimal scopes and backend credentials.</p></article>
+<article><span>03</span><h3>Strict validation</h3><p>Validate schemas, tenancy and domain rules.</p></article>
+<article><span>04</span><h3>Secret isolation</h3><p>Keep credentials out of model context and responses.</p></article>
+<article><span>05</span><h3>Egress controls</h3><p>Protect against SSRF and uncontrolled third-party calls.</p></article>
+<article><span>06</span><h3>Idempotency</h3><p>Make retries safe for side-effecting operations.</p></article>
+<article><span>07</span><h3>Audit trail</h3><p>Record identity, capability, policy result and outcome.</p></article>
+<article><span>08</span><h3>Rate limits</h3><p>Meter expensive and destructive capabilities separately.</p></article>
+<article><span>09</span><h3>Adversarial testing</h3><p>Test injected content, malicious servers and cross-tenant access.</p></article>
+<article><span>10</span><h3>Version discipline</h3><p>Track spec versions, SDK updates and deprecations.</p></article>
+</div>
+<p>If the server can affect production systems, combine these controls with the broader practices in <a href="/guides/ai-agent-security/">AI Agent Security</a>. If you are assembling several agents and tools into one control plane, see <a href="/guides/how-to-build-ai-super-agent/">How to Build an AI Super Agent</a>.</p>
+</section>
+
+<section id="faq">
+<p class="eyebrow">FAQ</p>
+<h2>Model Context Protocol FAQ</h2>
+<h3>What is MCP in AI?</h3><p>MCP is an open protocol that standardizes how AI applications connect to external tools, data sources and reusable prompts.</p>
+<h3>Who created MCP?</h3><p>Anthropic introduced Model Context Protocol in November 2024. The project later moved into broader open governance and became an anchor contribution to the Linux Foundation's Agentic AI Foundation.</p>
+<h3>Is MCP an API?</h3><p>Not exactly. MCP is a protocol for AI-facing capability integration. An MCP server frequently wraps ordinary APIs, databases or files.</p>
+<h3>What is the difference between an MCP host, client and server?</h3><p>The host is the AI application. A client is the connector inside that host that communicates with one server. The server exposes tools, resources or prompts.</p>
+<h3>What is the latest MCP specification?</h3><p>As of October 5, 2026, the current final specification is <strong>2026-07-28</strong>.</p>
+<h3>Is MCP stateful?</h3><p>The current protocol core is stateless. Applications can still maintain explicit workflow state through their own databases, task handles or tool-returned identifiers.</p>
+<h3>Does MCP require OAuth?</h3><p>No. Authorization is optional. HTTP deployments that use authorization should follow the MCP OAuth-based authorization specification. stdio servers normally receive credentials from their environment.</p>
+<h3>Is MCP secure?</h3><p>MCP provides security-oriented protocol rules, but it cannot make a server or tool trustworthy. Secure deployment requires consent, authorization, token validation, least privilege, input validation, egress controls, logging and supply-chain review.</p>
+<h3>What is MCP vs function calling?</h3><p>Function calling is a model interaction mechanism. MCP is an integration protocol between the host application and external capability providers. Hosts often connect the two.</p>
+<h3>What are MCP Tasks?</h3><p>Tasks are an optional extension for long-running asynchronous operations with durable handles and polling.</p>
+<h3>What are MCP Apps?</h3><p>MCP Apps are an optional extension for interactive UI elements rendered inside compatible hosts.</p>
+</section>
+
+<section id="glossary">
+<p class="eyebrow">GLOSSARY</p>
+<h2>MCP glossary</h2>
+<div class="guide-decision-table">
+<div><span>MCP Host</span><strong>The AI application.</strong><p>Owns the model experience, policies, consent and client connections.</p></div>
+<div><span>MCP Client</span><strong>A host-side connector.</strong><p>Communicates with one MCP server using the negotiated transport and protocol version.</p></div>
+<div><span>MCP Server</span><strong>A capability provider.</strong><p>Exposes tools, resources or prompts backed by local or remote systems.</p></div>
+<div><span>Tool</span><strong>A callable operation.</strong><p>Usually presented to the model as an action it may select.</p></div>
+<div><span>Resource</span><strong>Readable context or data.</strong><p>A named information object such as a file, document or structured record.</p></div>
+<div><span>Prompt</span><strong>A reusable message template.</strong><p>Packages a repeatable interaction pattern or workflow.</p></div>
+<div><span>stdio</span><strong>Local process transport.</strong><p>Newline-delimited JSON-RPC over a subprocess's standard streams.</p></div>
+<div><span>Streamable HTTP</span><strong>Remote HTTP transport.</strong><p>POST requests to one endpoint with JSON or request-scoped SSE responses.</p></div>
+<div><span>MRTR</span><strong>Multi Round-Trip Requests.</strong><p>A pattern for gathering additional input during an operation without a permanent bidirectional stream.</p></div>
+<div><span>Resource Indicator</span><strong>OAuth audience targeting.</strong><p>Identifies the MCP server for which an access token is being requested.</p></div>
+</div>
+</section>
+
+<section id="sources">
+<p class="eyebrow">PRIMARY SOURCES</p>
+<h2>Primary sources and further reading</h2>
+<ul class="guide-source-list">
+<li><a href="https://modelcontextprotocol.io/specification/2026-07-28" rel="noopener">Model Context Protocol — 2026-07-28 Specification</a></li>
+<li><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/" rel="noopener">MCP maintainers — The 2026-07-28 Specification</a></li>
+<li><a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/transports" rel="noopener">MCP — Transport specification</a></li>
+<li><a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization" rel="noopener">MCP — Authorization specification</a></li>
+<li><a href="https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices" rel="noopener">MCP — Security best practices</a></li>
+<li><a href="https://developers.openai.com/api/docs/guides/tools-connectors-mcp" rel="noopener">OpenAI — MCP servers and connectors</a></li>
+<li><a href="https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/extend-copilot-chat-with-mcp" rel="noopener">GitHub — Extend Copilot Chat with MCP servers</a></li>
+<li><a href="https://www.anthropic.com/news/model-context-protocol" rel="noopener">Anthropic — Introducing the Model Context Protocol</a></li>
+<li><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation" rel="noopener">Linux Foundation — Agentic AI Foundation formation</a></li>
+</ul>
+<p>This guide prioritizes protocol maintainers and primary vendor documentation. Product support can change faster than the protocol specification, so implementation teams should verify host-specific documentation before deployment.</p>
+</section>
+
+<div class="guide-inline-cta"><div><span>RELATED SXF GUIDES</span><strong>MCP is one layer of the agent stack.</strong><p>Continue with architecture, security and prompt-injection threat modeling.</p></div><div class="tool-links"><a href="/guides/what-is-agentic-ai/">What Is Agentic AI? ↗</a><a href="/guides/ai-agent-security/">AI Agent Security ↗</a><a href="/guides/how-to-build-ai-super-agent/">Build a Super Agent ↗</a></div></div>
+
+</div></div>
+</article></main>
+
+<footer class="site-footer"><div class="footer-inner">
+<div class="footer-brand"><a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a><p>Independent AI intelligence, technical references and primary-source research.</p></div>
+<nav class="footer-links" aria-label="Footer"><a href="/models/">Models</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/guides/">Guides</a><a href="/about/">About</a></nav>
+</div></footer>
+</body></html>
