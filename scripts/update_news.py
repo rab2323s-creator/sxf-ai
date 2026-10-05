@@ -1254,6 +1254,74 @@ def select_homepage_signals(items, limit=HOMEPAGE_SIGNAL_LIMIT):
     )
     return selected[:limit]
 
+
+def homepage_change_cards(limit=3):
+    history = load_model_history()
+    candidates = [event for event in history["events"] if event.get("type") != "baseline"]
+    candidates.sort(key=lambda event: (event.get("verified_at", ""), event.get("sequence", 0)), reverse=True)
+
+    selected = []
+    providers = set()
+    for event in candidates:
+        model = MODEL_PRICING_BY_ID.get(event.get("model_id"), {})
+        provider = model.get("provider") or event.get("snapshot", {}).get("provider") or "Primary source"
+        if provider in providers:
+            continue
+        selected.append(event)
+        providers.add(provider)
+        if len(selected) >= limit:
+            break
+
+    if len(selected) < limit:
+        used = {event.get("event_id") for event in selected}
+        for event in candidates:
+            if event.get("event_id") in used:
+                continue
+            selected.append(event)
+            if len(selected) >= limit:
+                break
+
+    cards = []
+    for event in selected:
+        model_id = event.get("model_id", "")
+        snapshot = event.get("snapshot", {})
+        model = MODEL_PRICING_BY_ID.get(model_id, {})
+        name = model.get("model") or snapshot.get("model") or model_id
+        provider = model.get("provider") or snapshot.get("provider") or "Primary source"
+        href = model.get("sxf_url") or f"/models/{slugify(name)}/"
+        context = snapshot.get("context_window", model.get("context_window"))
+        context_text = compact_token_count(context) if context is not None else "Not published"
+        pricing = snapshot.get("pricing", {}).get("standard") or model.get("pricing", {}).get("standard") or []
+        active = pricing[-1] if pricing else {}
+        input_price = active.get("input")
+        output_price = active.get("output")
+        price_text = "Pricing not published"
+        if input_price is not None and output_price is not None:
+            price_text = f'{catalog_price_label(input_price)} in · {catalog_price_label(output_price)} out / MTok'
+        evidence = event.get("evidence", {})
+        source = evidence.get("model") or evidence.get("provider") or evidence.get("pricing") or (model.get("official_sources") or [""])[0]
+        verified = event.get("verified_at", "")
+        event_type = event.get("type", "change")
+        if event_type == "model_added":
+            label = "NEW MODEL"
+            change_text = "Added to the verified SXF model index"
+        else:
+            label = "VERIFIED CHANGE"
+            change_text = "Verified model facts changed"
+
+        cards.append(f'''<article class="change-card">
+          <div class="change-card-top"><span>{escape(label)}</span><small>{escape(provider)}</small></div>
+          <h3><a href="{escape(href, quote=True)}">{escape(name)}</a></h3>
+          <p class="change-summary">{escape(change_text)}</p>
+          <dl class="change-facts">
+            <div><dt>Context</dt><dd>{escape(context_text)}</dd></div>
+            <div><dt>API pricing</dt><dd>{escape(price_text)}</dd></div>
+          </dl>
+          <div class="change-card-foot"><span>Verified {escape(verified)}</span>{f'<a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Source ↗</a>' if source else ''}</div>
+        </article>''')
+
+    return "\n".join(cards)
+
 def update_index(items):
     if not INDEX.exists() or not items:
         return
@@ -1263,6 +1331,7 @@ def update_index(items):
         return
 
     page = INDEX.read_text(encoding="utf-8")
+    page = replace_block(page, "<!-- SXF:WHAT_CHANGED_START -->", "<!-- SXF:WHAT_CHANGED_END -->", homepage_change_cards())
     page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", featured_html(homepage_items[0]))
     page = replace_block(page, "<!-- SXF:FEED_START -->", "<!-- SXF:FEED_END -->", cards_html(homepage_items[1:]))
     item_list = {
