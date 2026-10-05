@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Model Context Protocol architecture map</title>
+<desc id="desc">AI Host connects through MCP Clients to MCP Servers, which expose Tools, Resources and Prompts backed by APIs, databases, files and SaaS systems.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07090d"/><stop offset="1" stop-color="#101621"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#73f7ff"/><stop offset="1" stop-color="#79a8ff"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#73f7ff"/></marker>
+  <style>
+    .label{font:700 24px Inter,Arial,sans-serif;fill:#f5f7fb}.sub{font:500 16px Inter,Arial,sans-serif;fill:#aab7c8}.tiny{font:600 14px Inter,Arial,sans-serif;fill:#8fa2ba;letter-spacing:.08em}.box{fill:#111925;stroke:#2a3a50;stroke-width:2}.accent{stroke:#73f7ff}.line{stroke:#73f7ff;stroke-width:3;fill:none;marker-end:url(#arrow);opacity:.9}.dash{stroke:#52657d;stroke-width:2;stroke-dasharray:8 10;fill:none}
+  </style>
+</defs>
+<rect width="1600" height="900" rx="34" fill="url(#bg)"/>
+<text x="90" y="82" class="tiny">MODEL CONTEXT PROTOCOL · ARCHITECTURE</text>
+<text x="90" y="125" class="label" font-size="36">From an AI host to real tools and data</text>
+<rect x="90" y="185" width="260" height="150" rx="22" class="box accent"/>
+<text x="220" y="245" text-anchor="middle" class="tiny">APPLICATION</text><text x="220" y="285" text-anchor="middle" class="label">AI Host</text><text x="220" y="313" text-anchor="middle" class="sub">Claude · Copilot · custom agent</text>
+
+<rect x="455" y="185" width="260" height="150" rx="22" class="box"/>
+<text x="585" y="245" text-anchor="middle" class="tiny">PER-SERVER CONNECTION</text><text x="585" y="285" text-anchor="middle" class="label">MCP Clients</text><text x="585" y="313" text-anchor="middle" class="sub">Protocol + transport + auth</text>
+
+<rect x="820" y="185" width="260" height="150" rx="22" class="box"/>
+<text x="950" y="245" text-anchor="middle" class="tiny">INTEGRATION BOUNDARY</text><text x="950" y="285" text-anchor="middle" class="label">MCP Servers</text><text x="950" y="313" text-anchor="middle" class="sub">Expose capabilities safely</text>
+
+<path d="M350 260 H455" class="line"/><path d="M715 260 H820" class="line"/>
+
+<rect x="1190" y="125" width="300" height="125" rx="20" class="box"/>
+<text x="1340" y="178" text-anchor="middle" class="tiny">MODEL-CONTROLLED</text><text x="1340" y="215" text-anchor="middle" class="label">Tools</text>
+<rect x="1190" y="290" width="300" height="125" rx="20" class="box"/>
+<text x="1340" y="343" text-anchor="middle" class="tiny">APPLICATION-CONTROLLED</text><text x="1340" y="380" text-anchor="middle" class="label">Resources</text>
+<rect x="1190" y="455" width="300" height="125" rx="20" class="box"/>
+<text x="1340" y="508" text-anchor="middle" class="tiny">USER / HOST-CONTROLLED</text><text x="1340" y="545" text-anchor="middle" class="label">Prompts</text>
+
+<path d="M1080 230 C1125 230 1140 187 1190 187" class="line"/><path d="M1080 260 H1140 C1160 260 1160 352 1190 352" class="line"/><path d="M1080 290 C1130 290 1145 517 1190 517" class="line"/>
+
+<rect x="160" y="625" width="1280" height="170" rx="26" class="box"/>
+<text x="800" y="670" text-anchor="middle" class="tiny">UNDERLYING SYSTEMS</text>
+<g>
+  <rect x="230" y="705" width="240" height="58" rx="14" fill="#0d131d" stroke="#31445c"/><text x="350" y="742" text-anchor="middle" class="label" font-size="21">APIs</text>
+  <rect x="520" y="705" width="240" height="58" rx="14" fill="#0d131d" stroke="#31445c"/><text x="640" y="742" text-anchor="middle" class="label" font-size="21">Databases</text>
+  <rect x="810" y="705" width="240" height="58" rx="14" fill="#0d131d" stroke="#31445c"/><text x="930" y="742" text-anchor="middle" class="label" font-size="21">Files</text>
+  <rect x="1100" y="705" width="240" height="58" rx="14" fill="#0d131d" stroke="#31445c"/><text x="1220" y="742" text-anchor="middle" class="label" font-size="21">SaaS</text>
+</g>
+<path d="M1340 580 V625" class="dash"/>
+<text x="90" y="852" class="sub">MCP standardizes the interface between the AI application and external capabilities; it does not replace the underlying APIs, databases, files or authorization systems.</text>
+</svg>
