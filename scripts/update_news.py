@@ -3077,6 +3077,7 @@ def signal_page_html(item, items):
 def signals_index_html(items):
     canonical = f"{BASE_URL}/signals/"
     description = "Track verified AI model releases, agent updates, research, benchmarks, tools and open-source changes from primary sources with the SXF AI signal index."
+    page_modified = max((item.get("modified_at") or item.get("published") or "" for item in items), default="")
     agent_pattern = re.compile(r"\\bagent(?:s|ic)?\\b|\\bmcp\\b|computer use|tool calling|multi[- ]step|long[- ]running", re.I)
 
     def latest_matching(predicate):
@@ -3111,7 +3112,9 @@ def signals_index_html(items):
                 "isPartOf": {"@id": "https://sxf.si/#website"},
                 "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
                 "publishingPrinciples": "https://sxf.si/about/#method",
+                "breadcrumb": {"@id": canonical + "#breadcrumb"},
                 "mainEntity": {"@id": canonical + "#signal-list"},
+                **({"dateModified": page_modified} if page_modified else {}),
                 "about": [
                     {"@type": "Thing", "name": "AI models"},
                     {"@type": "Thing", "name": "AI agents"},
@@ -3138,6 +3141,8 @@ def signals_index_html(items):
                             "@id": item["signal_url"] + "#article",
                             "name": item["title"],
                             "url": item["signal_url"],
+                            "mainEntityOfPage": {"@id": item["signal_url"] + "#webpage"},
+                            "isPartOf": {"@id": "https://sxf.si/#website"},
                         },
                     }
                     for i, item in enumerate(items[:40])
