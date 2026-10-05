@@ -3076,27 +3076,56 @@ def signal_page_html(item, items):
     </body></html>'''
 def signals_index_html(items):
     canonical = f"{BASE_URL}/signals/"
-    description = "Latest AI signals tracked by SXF / AI across models, tools, research and open source, with direct links to primary sources."
+    description = "Track verified AI model releases, agent updates, research, benchmarks, tools and open-source changes from primary sources with the SXF AI signal index."
+    agent_pattern = re.compile(r"\\bagent(?:s|ic)?\\b|\\bmcp\\b|computer use|tool calling|multi[- ]step|long[- ]running", re.I)
+
+    def latest_matching(predicate):
+        return next((item for item in items if predicate(item)), None)
+
+    snapshot_items = [
+        ("MODEL", latest_matching(lambda item: item["category"] == "Models")),
+        ("AGENT", latest_matching(lambda item: bool(agent_pattern.search(" ".join([item.get("title", ""), item.get("summary", "")]))))),
+        ("RESEARCH", latest_matching(lambda item: item["category"] == "Research")),
+        ("TOOLS", latest_matching(lambda item: item["category"] == "Tools")),
+    ]
+    snapshot_cards = []
+    for label, item in snapshot_items:
+        if not item:
+            continue
+        snapshot_cards.append(f'''<a class="signals-snapshot-card" href="{escape(item.get("signal_url", item["url"]), quote=True)}">
+          <div><span>{escape(label)}</span><small>{escape(item["source"])}</small></div>
+          <h3>{escape(item["title"])}</h3>
+          <p>{escape(relative_time(item["published"]))} · Primary source linked</p>
+          <b>Open signal ↗</b>
+        </a>''')
+
     schema = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "CollectionPage",
                 "@id": canonical + "#webpage",
-                "name": "AI Signals | SXF / AI",
+                "name": "AI Signals — Latest Models, Agents & Research Updates | SXF / AI",
                 "url": canonical,
                 "description": description,
                 "isPartOf": {"@id": "https://sxf.si/#website"},
                 "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
                 "publishingPrinciples": "https://sxf.si/about/#method",
                 "mainEntity": {"@id": canonical + "#signal-list"},
-                "about": {"@type": "Thing", "name": "Artificial intelligence updates"},
+                "about": [
+                    {"@type": "Thing", "name": "AI models"},
+                    {"@type": "Thing", "name": "AI agents"},
+                    {"@type": "Thing", "name": "Artificial intelligence research"},
+                    {"@type": "Thing", "name": "AI developer tools"},
+                    {"@type": "Thing", "name": "Open source artificial intelligence"},
+                ],
                 "inLanguage": "en",
             },
             {
                 "@type": "ItemList",
                 "@id": canonical + "#signal-list",
-                "name": "Latest AI signals",
+                "name": "Latest verified AI signals",
+                "description": "Latest primary-source AI model, agent, research, tool and open-source updates tracked by SXF / AI.",
                 "itemListOrder": "https://schema.org/ItemListOrderDescending",
                 "numberOfItems": min(len(items), 40),
                 "mainEntityOfPage": {"@id": canonical + "#webpage"},
@@ -3119,23 +3148,58 @@ def signals_index_html(items):
                 "@id": canonical + "#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
-                    {"@type": "ListItem", "position": 2, "name": "Signals", "item": canonical},
+                    {"@type": "ListItem", "position": 2, "name": "AI Signals", "item": canonical},
                 ],
             },
         ],
     }
     rows = "".join(signal_row(item) for item in items[:40])
-    return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Primary-Source AI Updates | SXF / AI", description, canonical, schema)}
-    <body class="intel-page collection-page"><a class="skip-link" href="#signals-main">Skip to signals</a>
+    return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Models, Agents & Research Updates | SXF / AI", description, canonical, schema)}
+    <body class="intel-page collection-page signals-page"><a class="skip-link" href="#signals-main">Skip to signals</a>
     {page_header()}<main id="signals-main">
-      <section class="collection-hero shell">
-        <p class="eyebrow">SXF SIGNAL INDEX</p><h1>The AI changes<br><span>worth opening.</span></h1>
-        <p>Models, tools, research and open-source developments organized as traceable signals with the primary source kept one click away.</p>
-        <div class="collection-stats"><div><strong>{len(items)}</strong><span>tracked signals</span></div><div><strong>4</strong><span>intelligence layers</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
+      <section class="collection-hero signals-hero shell">
+        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Signals</span></nav>
+        <p class="eyebrow">SXF AI SIGNAL INDEX</p>
+        <h1>AI Signals:<br><span>Models, Agents & Research Updates</span></h1>
+        <p>Track verified AI model releases, agent developments, research, benchmarks, developer tools and open-source changes. Every signal keeps the primary source attached so you can move from what changed to the evidence behind it.</p>
+        <div class="collection-stats"><div><strong id="signalsCount">{len(items)}</strong><span>tracked signals</span></div><div><strong>Models · Agents · Research</strong><span>core intelligence</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
       </section>
-      <section class="topic-reference shell"><a class="guide-inline-cta" href="/guides/ai-agent-security/"><div><span>REFERENCE GUIDE</span><strong>AI Agent Security in 2026</strong><p>Understand prompt injection, MCP, permissions and sandboxing behind the security signals in the radar.</p></div><b>Read security guide ↗</b></a></section>
-      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">LATEST</p><h2>Signal stream.</h2></div><a href="/brief/">Read today’s brief ↗</a></div><div class="signal-list">{rows}</div></section>
-    </main>{page_footer()}</body></html>'''
+
+      <section class="signals-snapshot shell" aria-labelledby="signals-snapshot-title">
+        <div class="intel-section-head"><div><p class="eyebrow">INTELLIGENCE SNAPSHOT</p><h2 id="signals-snapshot-title">What matters right now.</h2></div><a href="/about/#method">How SXF verifies signals ↗</a></div>
+        <div class="signals-snapshot-grid">{"".join(snapshot_cards)}</div>
+      </section>
+
+      <section class="signals-explorer shell" aria-labelledby="signals-stream-title">
+        <div class="intel-section-head"><div><p class="eyebrow">LIVE INDEX</p><h2 id="signals-stream-title">Latest verified AI signals.</h2></div><a href="/brief/">Read SXF Brief ↗</a></div>
+        <div class="signals-toolbar" role="group" aria-label="Filter AI signals">
+          <div class="signals-filters">
+            <button class="signals-filter active" type="button" data-signal-filter="All">All</button>
+            <button class="signals-filter" type="button" data-signal-filter="Models">Models</button>
+            <button class="signals-filter" type="button" data-signal-filter="Agents">Agents</button>
+            <button class="signals-filter" type="button" data-signal-filter="Research">Research</button>
+            <button class="signals-filter" type="button" data-signal-filter="Tools">Tools</button>
+            <button class="signals-filter" type="button" data-signal-filter="Open Source">Open Source</button>
+          </div>
+          <label class="signals-search"><span class="sr-only">Search all AI signals</span><input id="signalsSearch" type="search" placeholder="Search all signals — GPT-6, agents, Copilot…" autocomplete="off"></label>
+        </div>
+        <p class="signals-result-meta" id="signalsResultMeta">Showing the latest 40 signals. Filters and search use the full current SXF feed.</p>
+        <div class="signal-list" id="signalsFeed">{rows}</div>
+        <div class="signals-empty" id="signalsEmpty" hidden>No signals match this filter yet.</div>
+      </section>
+
+      <section class="signals-gateways shell" aria-labelledby="signals-gateways-title">
+        <div class="intel-section-head"><div><p class="eyebrow">EXPLORE BY INTENT</p><h2 id="signals-gateways-title">Move from updates to deeper intelligence.</h2></div></div>
+        <div class="signals-gateway-grid">
+          <a href="/models/"><span>MODELS</span><strong>AI Model Intelligence</strong><p>Releases, capabilities, context, limits and model pages.</p><b>Explore models ↗</b></a>
+          <a href="/topics/ai-agents/"><span>AGENTS</span><strong>AI Agent Intelligence</strong><p>Agent systems, memory, reliability, security and workflows.</p><b>Explore agents ↗</b></a>
+          <a href="/research/"><span>RESEARCH</span><strong>AI Research</strong><p>Benchmarks, evaluations, safety and research context.</p><b>Explore research ↗</b></a>
+          <a href="/compare/"><span>COMPARE</span><strong>Compare AI Models</strong><p>Pricing, context windows, specifications and workload fit.</p><b>Compare models ↗</b></a>
+          <a href="/models/pricing/"><span>PRICING</span><strong>AI Model Pricing</strong><p>Normalized API pricing and model specifications from primary sources.</p><b>Compare pricing ↗</b></a>
+          <a href="/topics/ai-security/"><span>SECURITY</span><strong>AI Security Signals</strong><p>Prompt injection, agent risk, permissions, MCP and defenses.</p><b>Explore security ↗</b></a>
+        </div>
+      </section>
+    </main>{page_footer()}<script src="/signals.js" defer></script></body></html>'''
 
 def ai_security_topic_page_html(topic, items):
     canonical = f"{BASE_URL}/topics/ai-security/"
