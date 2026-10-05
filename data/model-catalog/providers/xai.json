@@ -1,0 +1,236 @@
+{
+  "provider": "xAI",
+  "models": [
+    {
+      "family": "Grok 4",
+      "model": "Grok 4.7",
+      "model_id": "grok-4.7",
+      "context_window": 500000,
+      "max_output": "unlimited",
+      "knowledge_cutoff": "2026-05",
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "xAI frontier model for coding, agentic tasks, and knowledge work.",
+      "sxf_url": "/models/grok-4-7/",
+      "page_template": "editorial-reference",
+      "official_sources": [
+        "https://docs.x.ai/developers/grok-4-7",
+        "https://docs.x.ai/developers/models/grok-4.7",
+        "https://docs.x.ai/developers/release-notes",
+        "https://x.ai/news/grok-4-7"
+      ],
+      "notes": [
+        "xAI documents no separate text output limit for Grok 4.7.",
+        "Requests at or above the long-context threshold use higher token rates; regional endpoints can add a separate uplift outside this catalog's Standard pricing scope."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-21",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.5,
+            "output": 6
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 200000,
+          "condition": "total input tokens at or above 200000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "output": 2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/grok-4-7",
+          "context_window": "https://docs.x.ai/developers/grok-4-7",
+          "max_output": "https://docs.x.ai/developers/grok-4-7",
+          "knowledge_cutoff": "https://docs.x.ai/developers/grok-4-7",
+          "reasoning": "https://docs.x.ai/developers/grok-4-7",
+          "modalities": "https://docs.x.ai/developers/grok-4-7",
+          "pricing": "https://docs.x.ai/developers/release-notes"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "family": "Grok 4",
+      "model": "Grok 4.6",
+      "model_id": "grok-4.6",
+      "context_window": 500000,
+      "max_output": "unlimited",
+      "knowledge_cutoff": "2026-02-01",
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "xAI frontier reasoning model for coding, agentic work, and long-context knowledge tasks.",
+      "sxf_url": "/models/grok-4-6/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.x.ai/developers/models/grok-4.6",
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/release-notes"
+      ],
+      "notes": [
+        "xAI documents no separate text output limit for Grok 4.6.",
+        "Higher long-context token rates apply when prompt tokens exceed 200,000."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-08-12",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.5,
+            "output": 6
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 200000,
+          "condition": "total input tokens greater than 200000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "output": 2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/models/grok-4.6",
+          "context_window": "https://docs.x.ai/developers/models/grok-4.6",
+          "max_output": "https://docs.x.ai/developers/release-notes",
+          "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.6",
+          "reasoning": "https://docs.x.ai/developers/models/grok-4.6",
+          "modalities": "https://docs.x.ai/developers/models/grok-4.6",
+          "pricing": "https://docs.x.ai/developers/pricing"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    },
+    {
+      "family": "Grok 4",
+      "model": "Grok 4.3",
+      "model_id": "grok-4.3",
+      "aliases": [
+        "grok-4.3-latest"
+      ],
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "low"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "xAI long-context Grok model with configurable reasoning and a one-million-token context window.",
+      "sxf_url": "/models/grok-4-3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.x.ai/developers/models/grok-4.3",
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/migration/may-15-retirement"
+      ],
+      "notes": [
+        "xAI does not publish a separate text output cap on the cited model page.",
+        "Knowledge cutoff is left unknown because no verified value is stored in the cited official model documentation.",
+        "The stored Standard pricing start is anchored to xAI's May 15, 2026 migration/pricing-impact date."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-05-15",
+            "end": null,
+            "input": 1.25,
+            "cached_input": 0.2,
+            "output": 2.5
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 200000,
+          "condition": "total input tokens greater than 200000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "output": 2
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-03",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/models/grok-4.3",
+          "context_window": "https://docs.x.ai/developers/models/grok-4.3",
+          "max_output": "https://docs.x.ai/developers/models/grok-4.3",
+          "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.3",
+          "reasoning": "https://docs.x.ai/developers/models/grok-4.3",
+          "modalities": "https://docs.x.ai/developers/models/grok-4.3",
+          "pricing": "https://docs.x.ai/developers/migration/may-15-retirement"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true
+    }
+  ]
+}
