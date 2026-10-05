@@ -273,10 +273,49 @@
       const badge = root.querySelector(".model-verification-badge strong");
       const meta = root.querySelector(".model-verification-badge small");
       if (badge && data.source_verified) badge.textContent = data.source_verified;
+      const models = data.models || [];
+      const providers = new Set(models.map(model => model.provider));
       if (meta) {
-        const providers = new Set((data.models || []).map(model => model.provider));
-        meta.textContent = (data.models || []).length + " models · " + providers.size + " providers";
+        meta.textContent = models.length + " models · " + providers.size + " providers";
       }
+
+      const metricModels = document.getElementById("metricModels");
+      const metricProviders = document.getElementById("metricProviders");
+      const metricContext = document.getElementById("metricContext");
+      const metricContextModel = document.getElementById("metricContextModel");
+      const metricPrice = document.getElementById("metricPrice");
+      const metricPriceModel = document.getElementById("metricPriceModel");
+
+      const formatContext = value => {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return "—";
+        if (n >= 1000000) return (n / 1000000).toLocaleString(undefined, {maximumFractionDigits: 2}) + "M";
+        if (n >= 1000) return (n / 1000).toLocaleString(undefined, {maximumFractionDigits: 0}) + "K";
+        return n.toLocaleString();
+      };
+      const verifiedRates = models.map(model => {
+        const periods = model?.pricing?.standard || [];
+        const current = periods.find(period =>
+          data.source_verified >= period.start && (!period.end || data.source_verified <= period.end)
+        );
+        return current && model.pricing_status === "official-paid" && model.calculator_eligible === true
+          ? {model, input: Number(current.input)}
+          : null;
+      }).filter(item => item && Number.isFinite(item.input));
+
+      const largestContextModel = models.reduce((best, model) =>
+        Number(model.context_window || 0) > Number(best?.context_window || 0) ? model : best, null
+      );
+      const lowestInput = verifiedRates.reduce((best, item) =>
+        !best || item.input < best.input ? item : best, null
+      );
+
+      if (metricModels) metricModels.textContent = models.length.toLocaleString();
+      if (metricProviders) metricProviders.textContent = providers.size.toLocaleString();
+      if (metricContext && largestContextModel) metricContext.textContent = formatContext(largestContextModel.context_window);
+      if (metricContextModel && largestContextModel) metricContextModel.textContent = largestContextModel.model;
+      if (metricPrice && lowestInput) metricPrice.textContent = "$" + lowestInput.input.toLocaleString(undefined, {maximumFractionDigits: 4});
+      if (metricPriceModel && lowestInput) metricPriceModel.textContent = lowestInput.model + " / MTok";
       apply();
     })
     .catch(() => {

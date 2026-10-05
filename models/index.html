@@ -10,6 +10,12 @@
         <div><p class="eyebrow">MODEL EXPLORER</p><h2 id="model-explorer-title">Find the right AI model for your workload.</h2><p>Filter verified models by capability, context, modality, access and API cost — then compare the best-fit options side by side.</p></div>
         <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-03</strong><small>17 models · 5 providers</small></div>
       </div>
+      <div class="model-live-metrics" id="modelLiveMetrics" aria-label="Model catalog snapshot">
+        <div class="model-live-metric"><span>MODELS TRACKED</span><strong id="metricModels">—</strong><small>verified catalog</small></div>
+        <div class="model-live-metric"><span>PROVIDERS</span><strong id="metricProviders">—</strong><small>covered sources</small></div>
+        <div class="model-live-metric"><span>LARGEST CONTEXT</span><strong id="metricContext">—</strong><small id="metricContextModel">across tracked models</small></div>
+        <div class="model-live-metric"><span>LOWEST API INPUT</span><strong id="metricPrice">—</strong><small id="metricPriceModel">provider-published Standard rate</small></div>
+      </div>
       <div class="model-explorer-toolbar">
         <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
         <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
