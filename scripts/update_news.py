@@ -1101,25 +1101,182 @@ def replace_block(source, start, end, body):
     replacement = f"{start}\n{body}\n{end}"
     return pattern.sub(lambda _m: replacement, source, count=1)
 
+HOMEPAGE_SIGNAL_LIMIT = 8
+HOMEPAGE_SOURCE_LIMIT = 2
+
+HOMEPAGE_AGENT_PATTERN = re.compile(
+    r"\\bagents?\\b|\\bagentic\\b|multi-agent|computer use|tool use|"
+    r"agent memory|agent reliability|agent security|autonomous agent",
+    re.I,
+)
+HOMEPAGE_MODEL_PATTERN = re.compile(
+    r"\\bmodels?\\b|gpt[- .]?\\d|claude|gemini|grok|llama|"
+    r"reasoning model|context window|token pricing|multimodal model",
+    re.I,
+)
+HOMEPAGE_RESEARCH_PATTERN = re.compile(
+    r"\\bresearch\\b|benchmark|evaluation|evals?|safety|alignment|"
+    r"paper|study|science|methodology|reproducib",
+    re.I,
+)
+HOMEPAGE_HIGH_IMPACT_PATTERN = re.compile(
+    r"introduc|launch|release|generally available|new generation|"
+    r"pricing|price|context window|capabilit|reasoning|multimodal|"
+    r"benchmark|evaluation|safety|security|memory|reliability|"
+    r"open[- ]sourc|frontier",
+    re.I,
+)
+HOMEPAGE_LOW_IMPACT_PATTERN = re.compile(
+    r"retention|saved views?|new fields?|runner image|node \\d+|"
+    r"permissions?|comments? api|dashboard|default enablement|"
+    r"minor|maintenance|deprecat(?:e|ed|ion)",
+    re.I,
+)
+
+def homepage_signal_text(item):
+    return " ".join(
+        str(item.get(key, "") or "")
+        for key in ("title", "summary", "category", "source")
+    )
+
+def homepage_signal_bucket(item):
+    text = homepage_signal_text(item)
+    if HOMEPAGE_AGENT_PATTERN.search(text):
+        return "Agents"
+    if item.get("category") == "Models" or HOMEPAGE_MODEL_PATTERN.search(text):
+        return "Models"
+    if item.get("category") == "Research" or HOMEPAGE_RESEARCH_PATTERN.search(text):
+        return "Research"
+    return "Other"
+
+def homepage_signal_score(item, now=None):
+    now = now or datetime.now(timezone.utc)
+    text = homepage_signal_text(item)
+    bucket = homepage_signal_bucket(item)
+    score = {"Models": 34, "Agents": 36, "Research": 32, "Other": 8}[bucket]
+
+    published = parse_date(item.get("published", ""))
+    if published:
+        age_hours = max(0.0, (now - published).total_seconds() / 3600)
+        if age_hours <= 12:
+            score += 18
+        elif age_hours <= 24:
+            score += 15
+        elif age_hours <= 72:
+            score += 10
+        elif age_hours <= 168:
+            score += 5
+        elif age_hours > 336:
+            score -= 8
+
+    if HOMEPAGE_HIGH_IMPACT_PATTERN.search(text):
+        score += 16
+    if HOMEPAGE_LOW_IMPACT_PATTERN.search(text):
+        score -= 18
+
+    source = (item.get("source") or "").strip()
+    if source in {"OpenAI", "Anthropic", "Google AI", "Google Research", "Meta", "xAI", "Hugging Face"}:
+        score += 6
+    elif source == "GitHub":
+        score += 2
+
+    if item.get("signal_url"):
+        score += 2
+    if item.get("summary"):
+        score += 2
+    return score
+
+def select_homepage_signals(items, limit=HOMEPAGE_SIGNAL_LIMIT):
+    if not items:
+        return []
+
+    now = datetime.now(timezone.utc)
+    ranked = sorted(
+        items,
+        key=lambda item: (
+            homepage_signal_score(item, now),
+            parse_date(item.get("published", "")) or datetime.min.replace(tzinfo=timezone.utc),
+        ),
+        reverse=True,
+    )
+
+    # Target mix: 3 Models, 2 Agents, 2 Research, 1 flexible.
+    targets = {"Models": 3, "Agents": 2, "Research": 2}
+    selected = []
+    selected_urls = set()
+    source_counts = {}
+
+    def can_add(item):
+        url = item.get("signal_url", item.get("url", ""))
+        source = item.get("source", "")
+        return (
+            bool(url)
+            and url not in selected_urls
+            and source_counts.get(source, 0) < HOMEPAGE_SOURCE_LIMIT
+        )
+
+    def add(item):
+        url = item.get("signal_url", item.get("url", ""))
+        source = item.get("source", "")
+        selected.append(item)
+        selected_urls.add(url)
+        source_counts[source] = source_counts.get(source, 0) + 1
+
+    for bucket, target in targets.items():
+        for item in ranked:
+            if len([x for x in selected if homepage_signal_bucket(x) == bucket]) >= target:
+                break
+            if homepage_signal_bucket(item) == bucket and can_add(item):
+                add(item)
+
+    # Fill remaining slots by score while preserving source diversity.
+    for item in ranked:
+        if len(selected) >= limit:
+            break
+        if can_add(item):
+            add(item)
+
+    # If strict source diversity leaves gaps, relax it only as a last resort.
+    if len(selected) < limit:
+        for item in ranked:
+            if len(selected) >= limit:
+                break
+            url = item.get("signal_url", item.get("url", ""))
+            if url and url not in selected_urls:
+                add(item)
+
+    selected.sort(
+        key=lambda item: (
+            homepage_signal_score(item, now),
+            parse_date(item.get("published", "")) or datetime.min.replace(tzinfo=timezone.utc),
+        ),
+        reverse=True,
+    )
+    return selected[:limit]
+
 def update_index(items):
     if not INDEX.exists() or not items:
         return
+
+    homepage_items = select_homepage_signals(items)
+    if not homepage_items:
+        return
+
     page = INDEX.read_text(encoding="utf-8")
-    page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", featured_html(items[0]))
-    page = replace_block(page, "<!-- SXF:FEED_START -->", "<!-- SXF:FEED_END -->", cards_html(items[1:13]))
+    page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", featured_html(homepage_items[0]))
+    page = replace_block(page, "<!-- SXF:FEED_START -->", "<!-- SXF:FEED_END -->", cards_html(homepage_items[1:]))
     item_list = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Latest AI signals",
-        "itemListOrder": "https://schema.org/ItemListOrderDescending",
-        "numberOfItems": min(len(items), 10),
+        "name": "Featured AI model, agent and research signals",
+        "numberOfItems": len(homepage_items),
         "itemListElement": [
             {
                 "@type": "ListItem",
                 "position": i + 1,
                 "item": {"@type": "Thing", "name": item["title"], "url": item.get("signal_url", item["url"])},
             }
-            for i, item in enumerate(items[:10])
+            for i, item in enumerate(homepage_items)
         ],
     }
     schema = '<script type="application/ld+json" id="latest-signals-schema">' + json.dumps(item_list, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
