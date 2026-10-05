@@ -13177,7 +13177,7 @@ def signal_page_html(item, items):
             <p>GitHub's asynchronous merge endpoint changes the integration pattern from “request a merge and wait for the final result” to “submit work, receive a request identifier, then check the result.” That matters most in busy repositories, merge-queue workflows and stacked pull-request systems where a merge can involve checks, rules, retries or multiple dependent pull requests.</p>
           </div>
           <div class="deep-dive-grid">
-            <article><span>01 / SUBMIT</span><h3>Send the merge request.</h3><p>Use <code>PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge-async</code>. For a new background request GitHub can return <code>202 Accepted</code> plus a UUID.</p></article>
+            <article><span>01 / SUBMIT</span><h3>Send the merge request.</h3><p>Use <code>PUT /repos/{{owner}}/{{repo}}/pulls/{{pull_number}}/merge-async</code>. For a new background request GitHub can return <code>202 Accepted</code> plus a UUID.</p></article>
             <article><span>02 / PROCESS</span><h3>GitHub handles the merge asynchronously.</h3><p>Background processing lets GitHub retry certain failures and reduces timeout risk for complex merges. The request can merge directly or use a merge queue.</p></article>
             <article><span>03 / POLL</span><h3>Fetch the result by UUID.</h3><p>Poll the result endpoint until the request reports <code>merged</code>, <code>enqueued</code> or <code>failed</code>. An <code>enqueued</code> result means the PR entered the queue; it does not mean the PR has merged yet.</p></article>
           </div>
