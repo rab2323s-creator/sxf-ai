@@ -1,0 +1,42 @@
+name: Validate model catalog
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "data/model-catalog/**"
+      - "data/model-pricing.json"
+      - "scripts/build_model_catalog.py"
+      - "tests/test_model_catalog.py"
+      - ".github/workflows/model-catalog.yml"
+  push:
+    branches: [main]
+    paths:
+      - "data/model-catalog/**"
+      - "data/model-pricing.json"
+      - "scripts/build_model_catalog.py"
+      - "tests/test_model_catalog.py"
+      - ".github/workflows/model-catalog.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: model-catalog-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Syntax check
+        run: python -m py_compile scripts/build_model_catalog.py tests/test_model_catalog.py
+      - name: Validate sources and generated artifact
+        run: python scripts/build_model_catalog.py --check
+      - name: Catalog regression tests
+        run: python tests/test_model_catalog.py
