@@ -1268,7 +1268,11 @@ def update_index(items):
     item_list = {
         "@context": "https://schema.org",
         "@type": "ItemList",
+        "@id": "https://sxf.si/#latest-signals",
         "name": "Featured AI model, agent and research signals",
+        "description": "A curated list of current AI model, agent and research signals tracked by SXF / AI.",
+        "itemListOrder": "https://schema.org/ItemListOrderDescending",
+        "mainEntityOfPage": {"@id": "https://sxf.si/#webpage"},
         "numberOfItems": len(homepage_items),
         "itemListElement": [
             {
