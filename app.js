@@ -1,4 +1,4 @@
-const state={items:[],totalCount:0,filter:'All',query:''};
+const state={items:[],allItems:[],totalCount:0,filter:'All'};
 const feed=document.getElementById('feed');
 const featured=document.getElementById('featured');
 
@@ -14,7 +14,6 @@ const curatedKeys=[
   ...document.querySelectorAll('#featured a.featured-story,#feed a.story-card')
 ].map(a=>canonicalKey(a.getAttribute('href'))).filter(Boolean);
 const empty=document.getElementById('emptyState');
-const search=document.getElementById('searchInput');
 const filters=[...document.querySelectorAll('.filter')];
 
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -36,12 +35,8 @@ function relativeTime(dateStr){
   return d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
 }
 function filteredItems(){
-  const q=state.query.trim().toLowerCase();
-  return state.items.filter(item=>{
-    const categoryMatch=state.filter==='All'||item.category===state.filter;
-    const haystack=(item.title+' '+item.source+' '+item.category).toLowerCase();
-    return categoryMatch&&(!q||haystack.includes(q));
-  });
+  if(state.filter==='All') return state.items;
+  return state.allItems.filter(item=>item.category===state.filter);
 }
 function featuredMarkup(item){
   if(!item)return '';
@@ -97,12 +92,11 @@ filters.forEach(btn=>btn.addEventListener('click',()=>{
   state.filter=btn.dataset.filter;
   render();
 }));
-search.addEventListener('input',e=>{state.query=e.target.value;render()});
-
 fetch('./data/news.json',{cache:'no-cache'})
   .then(r=>{if(!r.ok)throw new Error('Could not load news');return r.json()})
   .then(data=>{
     const allItems=Array.isArray(data.items)?data.items:[];
+    state.allItems=allItems;
     state.totalCount=allItems.length;
 
     const byKey=new Map();
