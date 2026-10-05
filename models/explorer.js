@@ -87,6 +87,52 @@
       .map(button => button.dataset.capability)
   );
 
+  const validValues = (select) => new Set([...select.options].map(option => option.value));
+  const validProviders = new Map(providerButtons.map(button => [normalize(button.dataset.modelProvider), button.dataset.modelProvider || "all"]));
+
+  const readUrlState = () => {
+    const params = new URLSearchParams(window.location.search);
+    const urlProvider = normalize(params.get("provider") || "all");
+    provider = validProviders.get(urlProvider) || "all";
+    providerButtons.forEach(button => button.classList.toggle("is-active", button.dataset.modelProvider === provider));
+
+    capabilityButtons.forEach(button => {
+      const key = button.dataset.capability === "audio-video" ? "av" : button.dataset.capability;
+      const active = params.get(key) === "1";
+      button.setAttribute("aria-pressed", String(active));
+      button.classList.toggle("is-active", active);
+    });
+
+    if (search) search.value = params.get("q") || "";
+    if (sort && validValues(sort).has(params.get("sort"))) sort.value = params.get("sort");
+    if (contextFilter && validValues(contextFilter).has(params.get("context"))) contextFilter.value = params.get("context");
+    if (accessFilter && validValues(accessFilter).has(params.get("access"))) accessFilter.value = params.get("access");
+    if (verificationFilter && validValues(verificationFilter).has(params.get("verified"))) verificationFilter.value = params.get("verified");
+  };
+
+  const writeUrlState = () => {
+    const params = new URLSearchParams();
+    const caps = activeCapabilities();
+    const query = search?.value.trim() || "";
+    const mode = sort?.value || "default";
+    const context = contextFilter?.value || "0";
+    const access = accessFilter?.value || "all";
+    const verified = verificationFilter?.value || "all";
+
+    if (provider !== "all") params.set("provider", normalize(provider));
+    if (caps.has("reasoning")) params.set("reasoning", "1");
+    if (caps.has("image")) params.set("image", "1");
+    if (caps.has("audio-video")) params.set("av", "1");
+    if (context !== "0") params.set("context", context);
+    if (access !== "all") params.set("access", access);
+    if (verified !== "all") params.set("verified", verified);
+    if (mode !== "default") params.set("sort", mode);
+    if (query) params.set("q", query);
+
+    const next = window.location.pathname + (params.toString() ? "?" + params.toString() : "") + window.location.hash;
+    window.history.replaceState({modelExplorer: true}, "", next);
+  };
+
   const modelForRow = row => modelByRow.get(row) || null;
   const supports = (model, capability) => {
     if (!model) return false;
@@ -172,7 +218,7 @@
     });
   };
 
-  const apply = () => {
+  const apply = (syncUrl = true) => {
     const query = normalize(search?.value);
     const mode = sort?.value || "default";
     const caps = activeCapabilities();
@@ -211,7 +257,15 @@
     root.classList.toggle("has-active-filters",
       provider !== "all" || Boolean(query) || caps.size > 0 || minContext > 0 || access !== "all" || maxAge != null
     );
+    if (syncUrl) writeUrlState();
   };
+
+  readUrlState();
+
+  window.addEventListener("popstate", () => {
+    readUrlState();
+    apply(false);
+  });
 
   providerButtons.forEach(button => button.addEventListener("click", () => {
     providerButtons.forEach(item => item.classList.remove("is-active"));
