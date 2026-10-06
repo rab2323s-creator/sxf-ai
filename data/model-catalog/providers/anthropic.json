@@ -353,6 +353,95 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Claude 5",
+      "model": "Claude Sonnet 5.5",
+      "model_id": "claude-sonnet-5-5",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "high",
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Current Sonnet model combining fast latency with frontier intelligence for production knowledge work and agentic workflows.",
+      "sxf_url": "/models/claude-sonnet-5-5/",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-28",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.2,
+            "cache_write_5m": 2.5,
+            "cache_write_1h": 4,
+            "output": 10
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
