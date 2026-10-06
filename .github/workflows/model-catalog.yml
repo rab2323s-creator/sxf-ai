@@ -8,10 +8,14 @@ on:
       - "data/model-identity/**"
       - "data/model-candidates/**"
       - "data/model-pricing.json"
+      - "data/model-index.json"
+      - "data/model-index.schema.json"
       - "scripts/build_model_catalog.py"
+      - "scripts/build_model_index.py"
       - "scripts/validate_model_identity.py"
       - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
+      - "tests/test_model_index.py"
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
@@ -23,10 +27,14 @@ on:
       - "data/model-identity/**"
       - "data/model-candidates/**"
       - "data/model-pricing.json"
+      - "data/model-index.json"
+      - "data/model-index.schema.json"
       - "scripts/build_model_catalog.py"
+      - "scripts/build_model_index.py"
       - "scripts/validate_model_identity.py"
       - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
+      - "tests/test_model_index.py"
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
@@ -49,9 +57,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Syntax check
-        run: python -m py_compile scripts/build_model_catalog.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
+        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
       - name: Validate sources and generated artifact
         run: python scripts/build_model_catalog.py --check
+      - name: Validate lightweight model index
+        run: python scripts/build_model_index.py --check
       - name: Identity and candidate validation
         run: |
           python scripts/validate_model_identity.py
@@ -59,6 +69,7 @@ jobs:
       - name: Catalog regression tests
         run: |
           python tests/test_model_catalog.py
+          python tests/test_model_index.py
           python tests/test_model_identity.py
           python tests/test_model_candidates.py
           python tests/test_generalized_pricing.py
