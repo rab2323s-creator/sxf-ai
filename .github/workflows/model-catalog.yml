@@ -57,7 +57,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Syntax check
-        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
+        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_index.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
       - name: Validate sources and generated artifact
         run: python scripts/build_model_catalog.py --check
       - name: Validate lightweight model index
