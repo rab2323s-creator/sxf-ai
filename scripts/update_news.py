@@ -2651,26 +2651,56 @@ def model_explorer_html():
     verified = MODEL_PRICING_CATALOG["source_verified"]
     models = MODEL_PRICING_CATALOG["models"]
     providers = sorted({model["provider"] for model in models})
-    calculator_models = [model for model in models if model_has_official_paid_pricing(model)]
+
+    def period_for_model(model):
+        schedule = model.get("pricing", {}).get("standard", [])
+        for period in schedule:
+            if verified >= period["start"] and (not period.get("end") or verified <= period["end"]):
+                return period
+        return None
 
     rows = []
     for index, model in enumerate(models):
-        priced = model_has_official_paid_pricing(model)
-        price = active_standard_price(model["model_id"], verified) if priced else None
         provenance = model["provenance"]
         spec_source = provenance["evidence"]["model_identity"]
         modalities = model.get("modalities", {}).get("input", [])
         pricing_status = model_pricing_status(model)
+        basis = model.get("pricing_basis", {})
+        meter = basis.get("meter")
+        period = period_for_model(model)
+        capabilities = model.get("capabilities", [])
         search = " ".join([
             model["model"], model["model_id"], model["provider"],
             model.get("family", ""), model.get("positioning", ""),
-            " ".join(modalities), pricing_status,
+            " ".join(modalities), " ".join(capabilities), pricing_status, str(meter or ""),
         ]).lower()
-        input_value = float(price["input"]) if price else float("inf")
-        output_value = float(price["output"]) if price else float("inf")
-        input_label = catalog_price_label(price["input"]) if price else "Not published"
-        cached_label = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
-        output_label = catalog_price_label(price["output"]) if price else "Not published"
+
+        input_value = float("inf")
+        output_value = float("inf")
+        input_label = "Not published"
+        cached_label = "—"
+        output_label = "—"
+
+        if pricing_status == "official-paid" and period:
+            if meter == "tokens":
+                if period.get("input") is not None:
+                    input_value = float(period["input"])
+                    input_label = catalog_price_label(period["input"]) + " " + basis.get("display_unit", "")
+                if period.get("cached_input") is not None:
+                    cached_label = catalog_price_label(period["cached_input"]) + " " + basis.get("display_unit", "")
+                if period.get("output") is not None:
+                    output_value = float(period["output"])
+                    output_label = catalog_price_label(period["output"]) + " " + basis.get("display_unit", "")
+            else:
+                dimensions = basis.get("dimensions", [])
+                rates = period.get("rates", {})
+                if dimensions and rates.get(dimensions[0]) is not None:
+                    input_label = catalog_price_label(rates[dimensions[0]]) + " " + basis.get("display_unit", "")
+
+        context = model.get("context_window")
+        context_value = "" if context is None else str(int(context))
+        context_label = "Not published" if context is None else f"{int(context):,}<small>tokens</small>"
+        output_unit = "tokens" if isinstance(model.get("max_output"), int) else ""
         rows.append(
             f'''<tr data-model-row
               data-order="{index}"
@@ -2679,11 +2709,11 @@ def model_explorer_html():
               data-pricing-status="{escape(pricing_status, quote=True)}"
               data-input="{input_value:g}"
               data-output="{output_value:g}"
-              data-context="{int(model["context_window"])}">
+              data-context="{escape(context_value, quote=True)}">
               <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["model_id"])}</small></th>
               <td>{escape(model["provider"])}<small>{escape(model.get("family", ""))}</small></td>
-              <td>{int(model["context_window"]):,}<small>tokens</small></td>
-              <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
+              <td>{context_label}</td>
+              <td>{escape(model_output_label(model))}{f"<small>{output_unit}</small>" if output_unit else ""}</td>
               <td class="model-price">{escape(input_label)}<small>{escape(pricing_status)}</small></td>
               <td class="model-price">{escape(cached_label)}</td>
               <td class="model-price">{escape(output_label)}</td>
@@ -2699,7 +2729,7 @@ def model_explorer_html():
 
     return f'''<section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
       <div class="model-explorer-head">
-        <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of Standard API pricing, context windows and output limits from official provider documentation.</p></div>
+        <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of provider-published Standard pricing, native billing units, context windows and output limits.</p></div>
         <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>{escape(verified)}</strong><small>{len(models)} models · {len(providers)} providers</small></div>
       </div>
       <div class="model-explorer-toolbar">
@@ -2707,15 +2737,15 @@ def model_explorer_html():
         <div class="model-provider-filters" aria-label="Filter models by provider">{"".join(provider_buttons)}</div>
         <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
           <option value="default">Catalog order</option>
-          <option value="input-asc">Lowest input price</option>
-          <option value="output-asc">Lowest output price</option>
+          <option value="input-asc">Lowest token input price</option>
+          <option value="output-asc">Lowest token output price</option>
           <option value="context-desc">Largest context</option>
         </select></label>
       </div>
       <div class="model-explorer-table-wrap">
         <table class="model-explorer-table">
           <caption class="sr-only">Verified AI model pricing and specifications</caption>
-          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Evidence</th></tr></thead>
+          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Primary rate</th><th>Cached rate</th><th>Output rate</th><th>Evidence</th></tr></thead>
           <tbody id="modelExplorerBody">{"".join(rows)}</tbody>
         </table>
       </div>
