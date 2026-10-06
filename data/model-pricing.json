@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.4",
+  "schema_version": "1.5",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
   "source_verified": "2026-10-06",
@@ -81,12 +81,30 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-6-astra"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding"
+      ]
     },
     {
       "provider": "OpenAI",
@@ -156,12 +174,31 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-sol",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-sol",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-6-sol"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "OpenAI",
@@ -231,12 +268,29 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-luna",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-luna",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-6-luna",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-6-luna"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "OpenAI",
@@ -312,12 +366,31 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "OpenAI",
@@ -387,12 +460,29 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "family-reference"
+      "page_template": "family-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "OpenAI",
@@ -462,12 +552,29 @@
           "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
           "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
-          "pricing": "https://developers.openai.com/api/docs/pricing"
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "Anthropic",
@@ -523,12 +630,30 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "modalities": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/fable-5-1/overview"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "editorial-reference"
+      "page_template": "editorial-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ]
     },
     {
       "provider": "Anthropic",
@@ -584,12 +709,31 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Anthropic",
@@ -645,11 +789,30 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/sonnet-5/overview"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Anthropic",
@@ -708,11 +871,27 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision"
+      ]
     },
     {
       "provider": "Google",
@@ -780,12 +959,33 @@
           "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
-          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "editorial-reference"
+      "page_template": "editorial-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "xAI",
@@ -858,11 +1058,30 @@
           "knowledge_cutoff": "https://docs.x.ai/developers/grok-4-7",
           "reasoning": "https://docs.x.ai/developers/grok-4-7",
           "modalities": "https://docs.x.ai/developers/grok-4-7",
-          "pricing": "https://docs.x.ai/developers/release-notes"
+          "pricing": "https://docs.x.ai/developers/release-notes",
+          "access": "https://docs.x.ai/developers/grok-4-7",
+          "lifecycle": "https://docs.x.ai/developers/grok-4-7",
+          "capabilities": "https://docs.x.ai/developers/grok-4-7"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "xAI",
@@ -934,11 +1153,30 @@
           "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.6",
           "reasoning": "https://docs.x.ai/developers/models/grok-4.6",
           "modalities": "https://docs.x.ai/developers/models/grok-4.6",
-          "pricing": "https://docs.x.ai/developers/pricing"
+          "pricing": "https://docs.x.ai/developers/pricing",
+          "access": "https://docs.x.ai/developers/models/grok-4.6",
+          "lifecycle": "https://docs.x.ai/developers/models/grok-4.6",
+          "capabilities": "https://docs.x.ai/developers/models/grok-4.6"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "xAI",
@@ -1015,11 +1253,28 @@
           "knowledge_cutoff": "https://docs.x.ai/developers/models/grok-4.3",
           "reasoning": "https://docs.x.ai/developers/models/grok-4.3",
           "modalities": "https://docs.x.ai/developers/models/grok-4.3",
-          "pricing": "https://docs.x.ai/developers/migration/may-15-retirement"
+          "pricing": "https://docs.x.ai/developers/migration/may-15-retirement",
+          "access": "https://docs.x.ai/developers/models/grok-4.3",
+          "lifecycle": "https://docs.x.ai/developers/models/grok-4.3",
+          "capabilities": "https://docs.x.ai/developers/models/grok-4.3"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "Google",
@@ -1090,11 +1345,32 @@
           "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
-          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Meta",
@@ -1138,11 +1414,27 @@
           "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
           "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
           "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
-          "pricing": "https://ai.meta.com/llama/get-started/"
+          "pricing": "https://ai.meta.com/llama/get-started/",
+          "access": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "lifecycle": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "capabilities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
         }
       },
       "pricing_status": "not-published",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "Meta",
@@ -1186,11 +1478,27 @@
           "knowledge_cutoff": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
           "reasoning": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
           "modalities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
-          "pricing": "https://ai.meta.com/llama/get-started/"
+          "pricing": "https://ai.meta.com/llama/get-started/",
+          "access": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "lifecycle": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "capabilities": "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
         }
       },
       "pricing_status": "not-published",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "provider": "DeepSeek",
@@ -1266,11 +1574,30 @@
           "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
           "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
           "modalities": "https://api-docs.deepseek.com/api/list-models/",
-          "pricing": "https://api-docs.deepseek.com/quick_start/pricing/"
+          "pricing": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "access": "https://api-docs.deepseek.com/api/list-models/",
+          "lifecycle": "https://api-docs.deepseek.com/api/list-models/",
+          "capabilities": "https://api-docs.deepseek.com/api/list-models/"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Mistral AI",
@@ -1335,11 +1662,29 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
           "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
           "modalities": "https://docs.mistral.ai/resources/changelogs",
-          "pricing": "https://docs.mistral.ai/inference/pricing"
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "capabilities": "https://docs.mistral.ai/models/mistral-small-4-0-26-03"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Mistral AI",
@@ -1404,11 +1749,29 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
           "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
           "modalities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
-          "pricing": "https://docs.mistral.ai/inference/pricing"
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "capabilities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Alibaba Cloud",
@@ -1475,11 +1838,31 @@
           "knowledge_cutoff": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
           "reasoning": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
           "modalities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
-          "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing"
+          "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing",
+          "access": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "lifecycle": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "capabilities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "provider": "Cohere",
@@ -1529,11 +1912,29 @@
           "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-plus",
           "reasoning": "https://docs.cohere.com/docs/command-a-plus",
           "modalities": "https://docs.cohere.com/docs/command-a-plus",
-          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing"
+          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing",
+          "access": "https://docs.cohere.com/docs/command-a-plus",
+          "lifecycle": "https://docs.cohere.com/docs/command-a-plus",
+          "capabilities": "https://docs.cohere.com/docs/command-a-plus"
         }
       },
       "pricing_status": "free-preview",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "agents",
+        "tool-use"
+      ]
     },
     {
       "provider": "Amazon",
@@ -1602,11 +2003,31 @@
           "knowledge_cutoff": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
           "reasoning": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/extended-thinking.html",
           "modalities": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
-          "pricing": "https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/"
+          "pricing": "https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/",
+          "access": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+          "lifecycle": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+          "capabilities": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     }
   ],
   "verification_policy": {
@@ -1629,5 +2050,37 @@
       "official-paid"
     ],
     "rule": "Only provider-published Standard paid token rates are calculator-eligible. Preview-only, partner-priced, self-hosted, or unpublished pricing remains visible in the catalog but is excluded from cost calculations."
+  },
+  "taxonomy_policy": {
+    "access_fields": [
+      "official_api",
+      "open_weight",
+      "self_hostable"
+    ],
+    "lifecycle_statuses": [
+      "current",
+      "preview",
+      "legacy",
+      "deprecated"
+    ],
+    "capability_vocabulary": [
+      "general",
+      "reasoning",
+      "coding",
+      "agents",
+      "tool-use",
+      "vision",
+      "video",
+      "audio",
+      "speech-to-speech",
+      "transcription",
+      "tts",
+      "ocr",
+      "embeddings",
+      "rerank",
+      "moderation",
+      "long-context"
+    ],
+    "rule": "Taxonomy fields are factual, provider-source-backed classification. Editorial recommendations do not belong in canonical capabilities."
   }
 }

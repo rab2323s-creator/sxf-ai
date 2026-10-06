@@ -48,11 +48,29 @@
           "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-plus",
           "reasoning": "https://docs.cohere.com/docs/command-a-plus",
           "modalities": "https://docs.cohere.com/docs/command-a-plus",
-          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing"
+          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing",
+          "access": "https://docs.cohere.com/docs/command-a-plus",
+          "lifecycle": "https://docs.cohere.com/docs/command-a-plus",
+          "capabilities": "https://docs.cohere.com/docs/command-a-plus"
         }
       },
       "pricing_status": "free-preview",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "agents",
+        "tool-use"
+      ]
     }
   ]
 }

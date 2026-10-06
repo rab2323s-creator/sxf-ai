@@ -66,12 +66,33 @@
           "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
-          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "editorial-reference"
+      "page_template": "editorial-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Gemini 3",
@@ -141,11 +162,32 @@
           "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
-          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     }
   ]
 }

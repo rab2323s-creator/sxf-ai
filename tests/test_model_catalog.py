@@ -19,6 +19,11 @@ assert catalog == published, "Generated catalog differs from published data/mode
 assert len(catalog["models"]) == len({m["model_id"] for m in catalog["models"]}), "Duplicate model IDs"
 assert all(m["official_sources"] for m in catalog["models"]), "Every model must retain official sources"
 assert all(m["provenance"]["evidence"] for m in catalog["models"]), "Every model must retain field evidence"
+assert catalog["schema_version"] == "1.5", "Structured taxonomy requires schema v1.5"
+assert all(set(m["access"]) == {"official_api", "open_weight", "self_hostable"} for m in catalog["models"]), "Every model must have explicit access taxonomy"
+assert all(m["lifecycle"]["status"] in {"current", "preview", "legacy", "deprecated"} for m in catalog["models"]), "Every model must have lifecycle status"
+assert all(m["capabilities"] for m in catalog["models"]), "Every model must have structured capabilities"
+assert all((m["access"]["self_hostable"] is False) or m["access"]["open_weight"] is True for m in catalog["models"]), "Self-hostable models must be open-weight"
 assert all(
     (not m["calculator_eligible"]) or (m["pricing_status"] == "official-paid" and m["pricing"].get("standard"))
     for m in catalog["models"]

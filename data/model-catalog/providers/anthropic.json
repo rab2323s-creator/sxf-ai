@@ -54,12 +54,30 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "modalities": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/fable-5-1/overview"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "editorial-reference"
+      "page_template": "editorial-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ]
     },
     {
       "family": "Claude 5",
@@ -114,12 +132,31 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/opus-5-5/overview"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Claude 5",
@@ -174,11 +211,30 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/sonnet-5/overview"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Claude 4",
@@ -236,11 +292,27 @@
           "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
           "reasoning": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
           "modalities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
-          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "access": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/haiku-4-5/overview"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision"
+      ]
     }
   ]
 }

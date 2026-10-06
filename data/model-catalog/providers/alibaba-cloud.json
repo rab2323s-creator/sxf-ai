@@ -65,11 +65,31 @@
           "knowledge_cutoff": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
           "reasoning": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
           "modalities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
-          "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing"
+          "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing",
+          "access": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "lifecycle": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+          "capabilities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     }
   ]
 }

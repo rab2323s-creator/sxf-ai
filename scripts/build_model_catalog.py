@@ -33,6 +33,12 @@ ALLOWED_PRICING_STATUSES = {
     "not-published",
     "self-hosted",
 }
+ALLOWED_LIFECYCLE_STATUSES = {"current", "preview", "legacy", "deprecated"}
+ALLOWED_CAPABILITIES = {
+    "general", "reasoning", "coding", "agents", "tool-use", "vision", "video", "audio",
+    "speech-to-speech", "transcription", "tts", "ocr", "embeddings", "rerank",
+    "moderation", "long-context",
+}
 REQUIRED_EVIDENCE = {
     "model_identity",
     "context_window",
@@ -41,6 +47,9 @@ REQUIRED_EVIDENCE = {
     "reasoning",
     "modalities",
     "pricing",
+    "access",
+    "lifecycle",
+    "capabilities",
 }
 
 
@@ -157,6 +166,36 @@ def validate_model(model: dict, provider: str, seen_ids: set[str], seen_aliases:
     require(isinstance(sources, list) and sources, f"{label}.official_sources must be non-empty")
     for source in sources:
         require(isinstance(source, str) and valid_https(source), f"{label} has invalid official source URL: {source!r}")
+
+    access = model.get("access")
+    require(isinstance(access, dict), f"{label}.access must be an object")
+    require(set(access) == {"official_api", "open_weight", "self_hostable"},
+            f"{label}.access must contain only official_api, open_weight, self_hostable")
+    for key in ("official_api", "open_weight", "self_hostable"):
+        require(isinstance(access.get(key), bool), f"{label}.access.{key} must be boolean")
+    require(not access["self_hostable"] or access["open_weight"],
+            f"{label}: self_hostable=true requires open_weight=true")
+
+    lifecycle = model.get("lifecycle")
+    require(isinstance(lifecycle, dict), f"{label}.lifecycle must be an object")
+    require(set(lifecycle) == {"status"}, f"{label}.lifecycle must contain only status")
+    require(lifecycle.get("status") in ALLOWED_LIFECYCLE_STATUSES,
+            f"{label}.lifecycle.status is unsupported: {lifecycle.get('status')!r}")
+
+    capabilities = model.get("capabilities")
+    require(isinstance(capabilities, list) and capabilities, f"{label}.capabilities must be a non-empty array")
+    require(len(capabilities) == len(set(capabilities)), f"{label}.capabilities contains duplicates")
+    unknown_capabilities = set(capabilities) - ALLOWED_CAPABILITIES
+    require(not unknown_capabilities,
+            f"{label}.capabilities contains unsupported values: {', '.join(sorted(unknown_capabilities))}")
+    require(("reasoning" in capabilities) == bool(model.get("reasoning")),
+            f"{label}: reasoning capability must match the reasoning contract")
+    input_modalities = {str(value).lower() for value in model.get("modalities", {}).get("input", [])}
+    for capability, modality in (("vision", "image"), ("video", "video"), ("audio", "audio")):
+        require((capability in capabilities) == (modality in input_modalities),
+                f"{label}: {capability} capability must match input modality {modality}")
+    require(("long-context" in capabilities) == (model.get("context_window", 0) >= 500000),
+            f"{label}: long-context requires context_window >= 500000")
 
     status = model.get("pricing_status")
     require(status in ALLOWED_PRICING_STATUSES, f"{label}.pricing_status is unsupported: {status!r}")

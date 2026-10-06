@@ -63,11 +63,29 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
           "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
           "modalities": "https://docs.mistral.ai/resources/changelogs",
-          "pricing": "https://docs.mistral.ai/inference/pricing"
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "capabilities": "https://docs.mistral.ai/models/mistral-small-4-0-26-03"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Mistral Medium",
@@ -131,11 +149,29 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
           "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
           "modalities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
-          "pricing": "https://docs.mistral.ai/inference/pricing"
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "capabilities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04"
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ]
     }
   ]
 }
