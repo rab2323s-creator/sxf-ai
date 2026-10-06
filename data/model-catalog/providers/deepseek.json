@@ -78,7 +78,23 @@
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     }
   ]
 }
