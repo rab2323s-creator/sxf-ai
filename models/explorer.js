@@ -429,7 +429,6 @@
         accessMatch && lifecycleMatch && verificationMatch;
     });
 
-    const matchedRows = new Set(matches);
     const renderedRows = new Set(matches.slice(0, visibleLimit));
 
     ordered.forEach(row => {
