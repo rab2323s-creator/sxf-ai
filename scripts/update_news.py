@@ -799,7 +799,7 @@ def catalog_reference_variant(variant):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
     }
@@ -819,7 +819,7 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
         uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
         + output_tokens / 1_000_000 * rates["output"]
     )
     return cost, rates
@@ -859,7 +859,7 @@ def catalog_display_model(model_id, **overrides):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "cache_write": cache_write or "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
@@ -4179,9 +4179,13 @@ def catalog_model_reference_html(model_id, items):
     output_label = model_output_label(model)
 
     if price:
+        cached_summary = (
+            f'{catalog_price_label(price["cached_input"])} cached · '
+            if price.get("cached_input") is not None else ""
+        )
         pricing_summary = (
             f'{catalog_price_label(price["input"])} input · '
-            f'{catalog_price_label(price["cached_input"])} cached · '
+            f'{cached_summary}'
             f'{catalog_price_label(price["output"])} output / MTok'
         )
         input_price = catalog_price_label(price["input"])
@@ -10886,7 +10890,7 @@ def catalog_reference_variant(variant):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
     }
@@ -10906,7 +10910,7 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
         uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
         + output_tokens / 1_000_000 * rates["output"]
     )
     return cost, rates
@@ -10946,7 +10950,7 @@ def catalog_display_model(model_id, **overrides):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "cache_write": cache_write or "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
@@ -14266,9 +14270,13 @@ def catalog_model_reference_html(model_id, items):
     output_label = model_output_label(model)
 
     if price:
+        cached_summary = (
+            f'{catalog_price_label(price["cached_input"])} cached · '
+            if price.get("cached_input") is not None else ""
+        )
         pricing_summary = (
             f'{catalog_price_label(price["input"])} input · '
-            f'{catalog_price_label(price["cached_input"])} cached · '
+            f'{cached_summary}'
             f'{catalog_price_label(price["output"])} output / MTok'
         )
         input_price = catalog_price_label(price["input"])
