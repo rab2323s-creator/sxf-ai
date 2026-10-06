@@ -92,7 +92,17 @@
         "long-context",
         "coding",
         "agents"
-      ]
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     },
     {
       "family": "Gemini 3",
@@ -187,7 +197,17 @@
         "long-context",
         "coding",
         "agents"
-      ]
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
