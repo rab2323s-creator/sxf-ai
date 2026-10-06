@@ -15,6 +15,8 @@
   let catalog = null;
   let modelByRow = new Map();
   let selected = new Set();
+  const PAGE_SIZE = 25;
+  let visibleLimit = PAGE_SIZE;
 
   const normalize = value => String(value || "").trim().toLowerCase();
   const numeric = (row, key) => {
@@ -152,6 +154,17 @@
   const compareNames = dock.querySelector("#modelCompareNames");
   const compareLaunch = dock.querySelector("#modelCompareLaunch");
   const compareClear = dock.querySelector("#modelCompareClear");
+
+  const resultsControl = document.createElement("div");
+  resultsControl.className = "model-results-control";
+  resultsControl.hidden = true;
+  resultsControl.innerHTML = `
+    <button type="button" class="model-show-more" id="modelShowMore">
+      Show 25 more
+    </button>
+  `;
+  root.querySelector(".model-explorer-foot")?.before(resultsControl);
+  const showMoreButton = resultsControl.querySelector("#modelShowMore");
 
   const activeCapabilities = () => new Set(
     capabilityButtons.filter(button => button.getAttribute("aria-pressed") === "true")
@@ -377,7 +390,9 @@
     });
   };
 
-  const apply = (historyMode = "replace") => {
+  const apply = (historyMode = "replace", resetWindow = true) => {
+    if (resetWindow) visibleLimit = PAGE_SIZE;
+
     const query = normalize(search?.value);
     const mode = sort?.value || "default";
     const caps = activeCapabilities();
@@ -393,10 +408,8 @@
       if (mode === "context-desc") return numeric(b, "context") - numeric(a, "context");
       return numeric(a, "order") - numeric(b, "order");
     });
-    ordered.forEach(row => body?.appendChild(row));
 
-    let visible = 0;
-    ordered.forEach(row => {
+    const matches = ordered.filter(row => {
       const model = modelForRow(row);
       const providerMatch = provider === "all" || row.dataset.provider === provider;
       const queryMatch = !query || (row.dataset.search || "").includes(query);
@@ -412,13 +425,38 @@
         (access === "self-hostable" && model?.access?.self_hostable === true);
       const lifecycleMatch = lifecycle === "all" || model?.lifecycle?.status === lifecycle;
       const verificationMatch = maxAge == null || verificationAge(model) <= maxAge;
-      const show = providerMatch && queryMatch && capabilityMatch && taskMatch && contextMatch && accessMatch && lifecycleMatch && verificationMatch;
-      row.hidden = !show;
-      if (show) visible += 1;
+      return providerMatch && queryMatch && capabilityMatch && taskMatch && contextMatch &&
+        accessMatch && lifecycleMatch && verificationMatch;
     });
 
-    if (count) count.textContent = visible + (visible === 1 ? " model shown" : " models shown");
-    if (empty) empty.hidden = visible !== 0;
+    const matchedRows = new Set(matches);
+    const renderedRows = new Set(matches.slice(0, visibleLimit));
+
+    ordered.forEach(row => {
+      body?.appendChild(row);
+      row.hidden = !renderedRows.has(row);
+    });
+
+    const totalMatches = matches.length;
+    const shown = Math.min(visibleLimit, totalMatches);
+    if (count) {
+      count.textContent = shown < totalMatches
+        ? shown + " of " + totalMatches + " models shown"
+        : totalMatches + (totalMatches === 1 ? " model shown" : " models shown");
+    }
+    if (empty) empty.hidden = totalMatches !== 0;
+    if (resultsControl) resultsControl.hidden = shown >= totalMatches;
+    if (showMoreButton) {
+      const remaining = Math.max(0, totalMatches - shown);
+      const increment = Math.min(PAGE_SIZE, remaining);
+      showMoreButton.textContent = increment ? "Show " + increment + " more" : "All models shown";
+      showMoreButton.setAttribute("aria-label", increment
+        ? "Show " + increment + " more of " + totalMatches + " matching models"
+        : "All matching models shown");
+    }
+
+    root.dataset.matchCount = String(totalMatches);
+    root.dataset.renderedCount = String(shown);
     root.classList.toggle("has-active-filters",
       provider !== "all" || Boolean(query) || caps.size > 0 || task !== "all" || minContext > 0 ||
       access !== "all" || lifecycle !== "all" || maxAge != null
@@ -431,7 +469,7 @@
 
   window.addEventListener("popstate", () => {
     readUrlState();
-    apply(null);
+    apply(null, true);
   });
 
   const setProvider = nextProvider => {
@@ -508,7 +546,14 @@
     }
   });
 
-  search?.addEventListener("input", () => apply("replace"));
+  let searchFrame = null;
+  search?.addEventListener("input", () => {
+    if (searchFrame) window.cancelAnimationFrame(searchFrame);
+    searchFrame = window.requestAnimationFrame(() => {
+      searchFrame = null;
+      apply("replace", true);
+    });
+  });
   sort?.addEventListener("change", () => apply("push"));
   taskFilter?.addEventListener("change", () => apply("push"));
   contextFilter?.addEventListener("change", () => {
@@ -541,6 +586,11 @@
     if (verificationFilter) verificationFilter.value = "all";
     setSecondaryOpen(false);
     apply("push");
+  });
+
+  showMoreButton?.addEventListener("click", () => {
+    visibleLimit += PAGE_SIZE;
+    apply(null, false);
   });
 
   compareClear?.addEventListener("click", () => {
@@ -609,10 +659,10 @@
       if (metricContextModel && largestContextModel) metricContextModel.textContent = largestContextModel.model;
       if (metricPrice && lowestInput) metricPrice.textContent = "$" + lowestInput.input.toLocaleString(undefined, {maximumFractionDigits: 4});
       if (metricPriceModel && lowestInput) metricPriceModel.textContent = lowestInput.model + " / MTok";
-      apply(null);
+      apply(null, true);
     })
     .catch(() => {
       root.classList.add("catalog-fallback");
-      apply(null);
+      apply(null, true);
     });
 })();
