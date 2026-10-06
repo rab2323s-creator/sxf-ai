@@ -937,6 +937,273 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "GPT-6",
+      "model": "GPT-6.1 Sol",
+      "model_id": "gpt-6.1-sol",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-04-30",
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Near-Astra GPT-6 tier for complex coding, computer use and professional work at lower cost.",
+      "sxf_url": "/models/gpt-6-1-sol/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/changelog"
+      ],
+      "notes": [
+        "Released September 29, 2026 as the newer Sol model.",
+        "Prompts above 272K input tokens use higher long-context multipliers across the full request."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-29",
+            "end": null,
+            "input": 2,
+            "cached_input": 0.1,
+            "cache_write": 2.5,
+            "output": 10
+          }
+        ],
+        "long_context": {
+          "threshold_input_tokens": 272000,
+          "condition": "total input tokens greater than 272000",
+          "applies_to_entire_request": true,
+          "multipliers": {
+            "input": 2,
+            "cached_input": 2,
+            "cache_write": 2,
+            "output": 1.5
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "lifecycle": "https://developers.openai.com/api/docs/changelog",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "GPT Realtime",
+      "model": "GPT-Realtime-Translate",
+      "model_id": "gpt-realtime-translate",
+      "context_window": 16000,
+      "max_output": 2000,
+      "knowledge_cutoff": "2024-09-30",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "audio",
+          "text"
+        ]
+      },
+      "positioning": "Streaming speech-to-speech translation model for live multilingual interpretation with transcript deltas.",
+      "sxf_url": "/models/gpt-realtime-translate/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/changelog",
+        "https://developers.openai.com/api/docs/guides/realtime-translation"
+      ],
+      "notes": [
+        "Released May 7, 2026.",
+        "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-05-07",
+            "end": null,
+            "rates": {
+              "minute": 0.034
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/guides/realtime-translation",
+          "lifecycle": "https://developers.openai.com/api/docs/changelog",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-translate"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "speech-to-speech"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
+    },
+    {
+      "family": "GPT Realtime",
+      "model": "GPT-Realtime-Whisper",
+      "model_id": "gpt-realtime-whisper",
+      "context_window": 16000,
+      "max_output": 2000,
+      "knowledge_cutoff": "2024-09-30",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Streaming speech-to-text model for low-latency realtime transcription with tunable latency and accuracy.",
+      "sxf_url": "/models/gpt-realtime-whisper/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/changelog"
+      ],
+      "notes": [
+        "Released May 7, 2026.",
+        "Priced directly by realtime audio duration at $0.017 per minute and excluded from token calculators."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-05-07",
+            "end": null,
+            "rates": {
+              "minute": 0.017
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "lifecycle": "https://developers.openai.com/api/docs/changelog",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
     }
   ]
 }
