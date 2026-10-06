@@ -4196,9 +4196,17 @@ def catalog_model_reference_html(model_id, items):
     model = model_catalog_entry(model_id)
     verified = model["provenance"]["verified_at"]
     canonical = BASE_URL + model["sxf_url"]
-    priced = model_has_official_paid_pricing(model)
-    price = active_standard_price(model_id, MODEL_PRICING_CATALOG["source_verified"]) if priced else None
+    calculator_eligible = model_has_official_paid_pricing(model)
     pricing_status = model_pricing_status(model)
+    basis = model.get("pricing_basis", {})
+    meter = basis.get("meter")
+    display_unit = basis.get("display_unit", "")
+    schedule = model.get("pricing", {}).get("standard", [])
+    price = next((
+        candidate for candidate in schedule
+        if MODEL_PRICING_CATALOG["source_verified"] >= candidate["start"]
+        and (not candidate.get("end") or MODEL_PRICING_CATALOG["source_verified"] <= candidate["end"])
+    ), None)
     pricing_status_label = {
         "official-paid": "Official paid API",
         "free-preview": "Free preview",
@@ -4213,23 +4221,43 @@ def catalog_model_reference_html(model_id, items):
     reasoning = model_reasoning_label(model)
     output_label = model_output_label(model)
 
-    if price:
-        cached_summary = (
-            f'{catalog_price_label(price["cached_input"])} cached · '
-            if price.get("cached_input") is not None else ""
-        )
-        pricing_summary = (
-            f'{catalog_price_label(price["input"])} input · '
-            f'{cached_summary}'
-            f'{catalog_price_label(price["output"])} output / MTok'
-        )
-        input_price = catalog_price_label(price["input"])
-        output_price = catalog_price_label(price["output"])
-    else:
-        pricing_summary = pricing_status_label
-        input_price = "Not published"
-        output_price = "Not published"
-
+    context = model.get("context_window")
+    context_label = "Not published" if context is None else f"{int(context):,}"
+    context_sentence = (
+        "does not publish a token context window for this service"
+        if context is None
+        else f"documents a {int(context):,}-token context window"
+    )
+    pricing_summary = pricing_status_label
+    primary_price = "Not published"
+    output_price = "—"
+    primary_label = "STANDARD RATE"
+    output_fact_label = "OUTPUT RATE"
+    if pricing_status == "official-paid" and price:
+        if meter == "tokens":
+            parts = []
+            if price.get("input") is not None:
+                primary_price = catalog_price_label(price["input"])
+                parts.append(f"{primary_price} input")
+            if price.get("cached_input") is not None:
+                parts.append(f'{catalog_price_label(price["cached_input"])} cached')
+            if price.get("output") is not None:
+                output_price = catalog_price_label(price["output"])
+                parts.append(f"{output_price} output")
+            pricing_summary = " · ".join(parts)
+            if display_unit:
+                pricing_summary += f" {display_unit}"
+            primary_label = "STANDARD INPUT"
+            output_fact_label = "STANDARD OUTPUT"
+        else:
+            dimensions = basis.get("dimensions", [])
+            rates = price.get("rates", {})
+            if dimensions and rates.get(dimensions[0]) is not None:
+                primary_price = catalog_price_label(rates[dimensions[0]])
+                pricing_summary = f"{primary_price} {display_unit}".strip()
+                primary_label = "STANDARD RATE"
+                output_price = "—"
+                output_fact_label = "OUTPUT RATE"
     source_links = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">'
         f'<span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
@@ -4291,7 +4319,7 @@ def catalog_model_reference_html(model_id, items):
         <h1>{escape(model["model"])}<br><span>verified model reference.</span></h1>
         <p>{escape(model["positioning"])}</p>
         <div class="collection-stats">
-          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
+          <div><strong>{escape(context_label)}</strong><span>{"context tokens" if context is not None else "context not published"}</span></div>
           <div><strong>{escape(output_label)}</strong><span>max output</span></div>
           <div><strong>{escape(verified)}</strong><span>last verified</span></div>
         </div>
@@ -4302,15 +4330,15 @@ def catalog_model_reference_html(model_id, items):
           <div class="model-reference-copy">
             <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
             <h2>{escape(model["model"])} at a glance.</h2>
-            <p>{escape(model["provider"])} documents a {int(model["context_window"]):,}-token context window. Input modalities: {escape(input_modalities)}. Output: {escape(output_modalities)}. Pricing status: {escape(pricing_status_label)}.</p>
+            <p>{escape(model["provider"])} {escape(context_sentence)}. Input modalities: {escape(input_modalities)}. Output: {escape(output_modalities)}. Pricing status: {escape(pricing_status_label)}.</p>
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>{escape(model_id)}</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>{escape(context_label)}</strong>{f"<small>tokens</small>" if context is not None else ""}</div>
             <div><span>MAX OUTPUT</span><strong>{escape(output_label)}</strong></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(cutoff))}</strong></div>
-            <div><span>STANDARD INPUT</span><strong>{escape(input_price)}</strong><small>{escape(pricing_status)}</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>{escape(output_price)}</strong><small>{escape(pricing_status)}</small></div>
+            <div><span>{escape(primary_label)}</span><strong>{escape(primary_price)}</strong><small>{escape(display_unit or pricing_status)}</small></div>
+            <div><span>{escape(output_fact_label)}</span><strong>{escape(output_price)}</strong><small>{escape(display_unit if meter == "tokens" else pricing_status)}</small></div>
           </div>
         </div>
 
@@ -4326,8 +4354,8 @@ def catalog_model_reference_html(model_id, items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>{escape(pricing_status_label)}.</h2></div>
           <div class="model-split">
-            <div><p>{escape(pricing_summary)}.</p><p>Only provider-published Standard paid token rates enter the SXF calculator. Partner hosting prices, negotiated rates and self-hosting costs are not substituted for a missing provider rate.</p></div>
-            <aside class="model-side-note"><span>CALCULATOR</span><strong>{"Eligible" if priced else "Excluded"}</strong><p>{"This model uses a directly comparable provider-published Standard rate." if priced else "No directly comparable provider Standard paid rate is stored for this model."}</p></aside>
+            <div><p>{escape(pricing_summary)}.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>{"Eligible" if calculator_eligible else "Excluded"}</strong><p>{"This model has calculator-compatible generative token input/output rates." if calculator_eligible else "This model is intentionally excluded from generative token-cost arithmetic."}</p></aside>
           </div>
         </section>
 
@@ -14372,9 +14400,17 @@ def catalog_model_reference_html(model_id, items):
     model = model_catalog_entry(model_id)
     verified = model["provenance"]["verified_at"]
     canonical = BASE_URL + model["sxf_url"]
-    priced = model_has_official_paid_pricing(model)
-    price = active_standard_price(model_id, MODEL_PRICING_CATALOG["source_verified"]) if priced else None
+    calculator_eligible = model_has_official_paid_pricing(model)
     pricing_status = model_pricing_status(model)
+    basis = model.get("pricing_basis", {})
+    meter = basis.get("meter")
+    display_unit = basis.get("display_unit", "")
+    schedule = model.get("pricing", {}).get("standard", [])
+    price = next((
+        candidate for candidate in schedule
+        if MODEL_PRICING_CATALOG["source_verified"] >= candidate["start"]
+        and (not candidate.get("end") or MODEL_PRICING_CATALOG["source_verified"] <= candidate["end"])
+    ), None)
     pricing_status_label = {
         "official-paid": "Official paid API",
         "free-preview": "Free preview",
@@ -14389,23 +14425,43 @@ def catalog_model_reference_html(model_id, items):
     reasoning = model_reasoning_label(model)
     output_label = model_output_label(model)
 
-    if price:
-        cached_summary = (
-            f'{catalog_price_label(price["cached_input"])} cached · '
-            if price.get("cached_input") is not None else ""
-        )
-        pricing_summary = (
-            f'{catalog_price_label(price["input"])} input · '
-            f'{cached_summary}'
-            f'{catalog_price_label(price["output"])} output / MTok'
-        )
-        input_price = catalog_price_label(price["input"])
-        output_price = catalog_price_label(price["output"])
-    else:
-        pricing_summary = pricing_status_label
-        input_price = "Not published"
-        output_price = "Not published"
-
+    context = model.get("context_window")
+    context_label = "Not published" if context is None else f"{int(context):,}"
+    context_sentence = (
+        "does not publish a token context window for this service"
+        if context is None
+        else f"documents a {int(context):,}-token context window"
+    )
+    pricing_summary = pricing_status_label
+    primary_price = "Not published"
+    output_price = "—"
+    primary_label = "STANDARD RATE"
+    output_fact_label = "OUTPUT RATE"
+    if pricing_status == "official-paid" and price:
+        if meter == "tokens":
+            parts = []
+            if price.get("input") is not None:
+                primary_price = catalog_price_label(price["input"])
+                parts.append(f"{primary_price} input")
+            if price.get("cached_input") is not None:
+                parts.append(f'{catalog_price_label(price["cached_input"])} cached')
+            if price.get("output") is not None:
+                output_price = catalog_price_label(price["output"])
+                parts.append(f"{output_price} output")
+            pricing_summary = " · ".join(parts)
+            if display_unit:
+                pricing_summary += f" {display_unit}"
+            primary_label = "STANDARD INPUT"
+            output_fact_label = "STANDARD OUTPUT"
+        else:
+            dimensions = basis.get("dimensions", [])
+            rates = price.get("rates", {})
+            if dimensions and rates.get(dimensions[0]) is not None:
+                primary_price = catalog_price_label(rates[dimensions[0]])
+                pricing_summary = f"{primary_price} {display_unit}".strip()
+                primary_label = "STANDARD RATE"
+                output_price = "—"
+                output_fact_label = "OUTPUT RATE"
     source_links = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">'
         f'<span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
@@ -14467,7 +14523,7 @@ def catalog_model_reference_html(model_id, items):
         <h1>{escape(model["model"])}<br><span>verified model reference.</span></h1>
         <p>{escape(model["positioning"])}</p>
         <div class="collection-stats">
-          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
+          <div><strong>{escape(context_label)}</strong><span>{"context tokens" if context is not None else "context not published"}</span></div>
           <div><strong>{escape(output_label)}</strong><span>max output</span></div>
           <div><strong>{escape(verified)}</strong><span>last verified</span></div>
         </div>
@@ -14478,15 +14534,15 @@ def catalog_model_reference_html(model_id, items):
           <div class="model-reference-copy">
             <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
             <h2>{escape(model["model"])} at a glance.</h2>
-            <p>{escape(model["provider"])} documents a {int(model["context_window"]):,}-token context window. Input modalities: {escape(input_modalities)}. Output: {escape(output_modalities)}. Pricing status: {escape(pricing_status_label)}.</p>
+            <p>{escape(model["provider"])} {escape(context_sentence)}. Input modalities: {escape(input_modalities)}. Output: {escape(output_modalities)}. Pricing status: {escape(pricing_status_label)}.</p>
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>{escape(model_id)}</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>{escape(context_label)}</strong>{f"<small>tokens</small>" if context is not None else ""}</div>
             <div><span>MAX OUTPUT</span><strong>{escape(output_label)}</strong></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(cutoff))}</strong></div>
-            <div><span>STANDARD INPUT</span><strong>{escape(input_price)}</strong><small>{escape(pricing_status)}</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>{escape(output_price)}</strong><small>{escape(pricing_status)}</small></div>
+            <div><span>{escape(primary_label)}</span><strong>{escape(primary_price)}</strong><small>{escape(display_unit or pricing_status)}</small></div>
+            <div><span>{escape(output_fact_label)}</span><strong>{escape(output_price)}</strong><small>{escape(display_unit if meter == "tokens" else pricing_status)}</small></div>
           </div>
         </div>
 
@@ -14502,8 +14558,8 @@ def catalog_model_reference_html(model_id, items):
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>{escape(pricing_status_label)}.</h2></div>
           <div class="model-split">
-            <div><p>{escape(pricing_summary)}.</p><p>Only provider-published Standard paid token rates enter the SXF calculator. Partner hosting prices, negotiated rates and self-hosting costs are not substituted for a missing provider rate.</p></div>
-            <aside class="model-side-note"><span>CALCULATOR</span><strong>{"Eligible" if priced else "Excluded"}</strong><p>{"This model uses a directly comparable provider-published Standard rate." if priced else "No directly comparable provider Standard paid rate is stored for this model."}</p></aside>
+            <div><p>{escape(pricing_summary)}.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>{"Eligible" if calculator_eligible else "Excluded"}</strong><p>{"This model has calculator-compatible generative token input/output rates." if calculator_eligible else "This model is intentionally excluded from generative token-cost arithmetic."}</p></aside>
           </div>
         </section>
 
