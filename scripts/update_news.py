@@ -2664,7 +2664,7 @@ def model_explorer_html():
         input_value = float(price["input"]) if price else float("inf")
         output_value = float(price["output"]) if price else float("inf")
         input_label = catalog_price_label(price["input"]) if price else "Not published"
-        cached_label = catalog_price_label(price["cached_input"]) if price else "—"
+        cached_label = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
         output_label = catalog_price_label(price["output"]) if price else "Not published"
         rows.append(
             f'''<tr data-model-row
