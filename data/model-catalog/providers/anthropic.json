@@ -59,7 +59,22 @@
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "editorial-reference"
+      "page_template": "editorial-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ]
     },
     {
       "family": "Claude 5",
@@ -119,7 +134,23 @@
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
-      "page_template": "catalog-reference"
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Claude 5",
@@ -178,7 +209,23 @@
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ]
     },
     {
       "family": "Claude 4",
@@ -240,7 +287,20 @@
         }
       },
       "pricing_status": "official-paid",
-      "calculator_eligible": true
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision"
+      ]
     }
   ]
 }
