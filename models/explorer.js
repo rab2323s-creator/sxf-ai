@@ -26,50 +26,58 @@
   };
 
   const filters = document.createElement("div");
-  filters.className = "model-explorer-advanced";
+  filters.className = "model-explorer-facets";
   filters.innerHTML = `
-    <div class="model-filter-group" aria-label="Capabilities">
-      <span class="model-filter-label">Capabilities</span>
-      <div class="model-capability-filters">
-        <button type="button" class="model-filter-chip" data-capability="reasoning" aria-pressed="false">Reasoning</button>
-        <button type="button" class="model-filter-chip" data-capability="vision" aria-pressed="false">Image</button>
-        <button type="button" class="model-filter-chip" data-capability="video" aria-pressed="false">Video</button>
-        <button type="button" class="model-filter-chip" data-capability="audio" aria-pressed="false">Audio</button>
+    <div class="model-facet-primary">
+      <div class="model-filter-group" aria-label="Capabilities">
+        <span class="model-filter-label">Capabilities</span>
+        <div class="model-capability-filters">
+          <button type="button" class="model-filter-chip" data-capability="reasoning" aria-pressed="false">Reasoning</button>
+          <button type="button" class="model-filter-chip" data-capability="vision" aria-pressed="false">Image</button>
+          <button type="button" class="model-filter-chip" data-capability="video" aria-pressed="false">Video</button>
+          <button type="button" class="model-filter-chip" data-capability="audio" aria-pressed="false">Audio</button>
+        </div>
       </div>
+      <label class="model-advanced-select"><span>Task</span><select id="modelTaskFilter">
+        <option value="all">Any task</option>
+        <option value="coding">Coding</option>
+        <option value="agents">Agents</option>
+        <option value="tool-use">Tool use</option>
+      </select></label>
+      <label class="model-advanced-select"><span>Access</span><select id="modelAccessFilter">
+        <option value="all">Any access</option>
+        <option value="paid-api">Paid API</option>
+        <option value="free-api">Free API</option>
+        <option value="open-weight">Open weights</option>
+        <option value="self-hostable">Self-hostable</option>
+        <option value="calculator">Calculator eligible</option>
+      </select></label>
+      <button type="button" class="model-more-filters" id="modelMoreFilters" aria-expanded="false" aria-controls="modelSecondaryFilters">
+        More filters <span id="modelMoreFilterCount" aria-hidden="true"></span>
+      </button>
     </div>
-    <label class="model-advanced-select"><span>Task</span><select id="modelTaskFilter">
-      <option value="all">Any task</option>
-      <option value="coding">Coding</option>
-      <option value="agents">Agents</option>
-      <option value="tool-use">Tool use</option>
-    </select></label>
-    <label class="model-advanced-select"><span>Context</span><select id="modelContextFilter">
-      <option value="0">Any context</option>
-      <option value="500000">500K+</option>
-      <option value="1000000">1M+</option>
-      <option value="2000000">2M+</option>
-    </select></label>
-    <label class="model-advanced-select"><span>Access</span><select id="modelAccessFilter">
-      <option value="all">Any access</option>
-      <option value="paid-api">Paid API</option>
-      <option value="free-api">Free API</option>
-      <option value="open-weight">Open weights</option>
-      <option value="self-hostable">Self-hostable</option>
-      <option value="calculator">Calculator eligible</option>
-    </select></label>
-    <label class="model-advanced-select"><span>Lifecycle</span><select id="modelLifecycleFilter">
-      <option value="all">Any lifecycle</option>
-      <option value="current">Current</option>
-      <option value="preview">Preview</option>
-      <option value="legacy">Legacy</option>
-      <option value="deprecated">Deprecated</option>
-    </select></label>
-    <label class="model-advanced-select"><span>Verification</span><select id="modelVerificationFilter">
-      <option value="all">Any verification date</option>
-      <option value="14">Verified ≤14d</option>
-      <option value="30">Verified ≤30d</option>
-    </select></label>
-    <button type="button" class="model-filter-reset" id="modelFilterReset">Reset filters</button>
+    <div class="model-facet-secondary" id="modelSecondaryFilters" hidden>
+      <label class="model-advanced-select"><span>Context</span><select id="modelContextFilter">
+        <option value="0">Any context</option>
+        <option value="500000">500K+</option>
+        <option value="1000000">1M+</option>
+        <option value="2000000">2M+</option>
+      </select></label>
+      <label class="model-advanced-select"><span>Lifecycle</span><select id="modelLifecycleFilter">
+        <option value="all">Any lifecycle</option>
+        <option value="current">Current</option>
+        <option value="preview">Preview</option>
+        <option value="legacy">Legacy</option>
+        <option value="deprecated">Deprecated</option>
+      </select></label>
+      <label class="model-advanced-select"><span>Verification</span><select id="modelVerificationFilter">
+        <option value="all">Any verification date</option>
+        <option value="14">Verified ≤14d</option>
+        <option value="30">Verified ≤30d</option>
+      </select></label>
+      <button type="button" class="model-filter-reset" id="modelFilterReset">Clear filters</button>
+    </div>
+    <div class="model-active-filters" id="modelActiveFilters" aria-live="polite" hidden></div>
   `;
   toolbar?.appendChild(filters);
 
@@ -79,8 +87,49 @@
   const lifecycleFilter = filters.querySelector("#modelLifecycleFilter");
   const verificationFilter = filters.querySelector("#modelVerificationFilter");
   const resetButton = filters.querySelector("#modelFilterReset");
+  const moreFiltersButton = filters.querySelector("#modelMoreFilters");
+  const moreFilterCount = filters.querySelector("#modelMoreFilterCount");
+  const secondaryFilters = filters.querySelector("#modelSecondaryFilters");
+  const activeFilters = filters.querySelector("#modelActiveFilters");
   const capabilityButtons = [...filters.querySelectorAll("[data-capability]")];
 
+  const quickProviderNames = new Set(["all", "OpenAI", "Anthropic", "Google", "xAI"]);
+  const providerWrap = root.querySelector(".model-provider-filters");
+  const providerMoreButton = document.createElement("button");
+  providerMoreButton.type = "button";
+  providerMoreButton.className = "model-filter model-provider-more";
+  providerMoreButton.setAttribute("aria-expanded", "false");
+  providerMoreButton.setAttribute("aria-controls", "modelProviderPicker");
+  providerMoreButton.textContent = "More providers";
+
+  const providerPicker = document.createElement("div");
+  providerPicker.className = "model-provider-picker";
+  providerPicker.id = "modelProviderPicker";
+  providerPicker.hidden = true;
+  providerPicker.innerHTML = `
+    <label class="model-provider-search">
+      <span class="sr-only">Search providers</span>
+      <input type="search" id="modelProviderSearch" placeholder="Search providers…" autocomplete="off">
+    </label>
+    <div class="model-provider-options" role="listbox" aria-label="All model providers"></div>
+  `;
+  providerWrap?.appendChild(providerMoreButton);
+  providerWrap?.appendChild(providerPicker);
+  const providerSearch = providerPicker.querySelector("#modelProviderSearch");
+  const providerOptions = providerPicker.querySelector(".model-provider-options");
+
+  providerButtons.forEach(button => {
+    if (!quickProviderNames.has(button.dataset.modelProvider || "")) button.hidden = true;
+    if ((button.dataset.modelProvider || "") !== "all") {
+      const option = document.createElement("button");
+      option.type = "button";
+      option.className = "model-provider-option";
+      option.dataset.providerOption = button.dataset.modelProvider || "";
+      option.setAttribute("role", "option");
+      option.textContent = button.textContent?.trim() || button.dataset.modelProvider || "";
+      providerOptions?.appendChild(option);
+    }
+  });
   const dock = document.createElement("div");
   dock.className = "model-compare-dock";
   dock.hidden = true;
@@ -108,6 +157,73 @@
   const validValues = (select) => new Set([...select.options].map(option => option.value));
   const validProviders = new Map(providerButtons.map(button => [normalize(button.dataset.modelProvider), button.dataset.modelProvider || "all"]));
 
+  const secondaryFilterCount = () => {
+    let total = 0;
+    if ((contextFilter?.value || "0") !== "0") total += 1;
+    if ((lifecycleFilter?.value || "all") !== "all") total += 1;
+    if ((verificationFilter?.value || "all") !== "all") total += 1;
+    return total;
+  };
+
+  const setSecondaryOpen = open => {
+    if (!secondaryFilters || !moreFiltersButton) return;
+    secondaryFilters.hidden = !open;
+    moreFiltersButton.setAttribute("aria-expanded", String(open));
+  };
+
+  const syncProviderUi = () => {
+    syncProviderUi();
+    providerOptions?.querySelectorAll("[data-provider-option]").forEach(button => {
+      const active = button.dataset.providerOption === provider;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-selected", String(active));
+    });
+    const hiddenProviderActive = provider !== "all" && !quickProviderNames.has(provider);
+    providerMoreButton.classList.toggle("is-active", hiddenProviderActive);
+    providerMoreButton.textContent = hiddenProviderActive ? provider : "More providers";
+  };
+
+  const closeProviderPicker = () => {
+    providerPicker.hidden = true;
+    providerMoreButton.setAttribute("aria-expanded", "false");
+  };
+
+  const filterProviderOptions = () => {
+    const query = normalize(providerSearch?.value);
+    providerOptions?.querySelectorAll("[data-provider-option]").forEach(button => {
+      button.hidden = Boolean(query) && !normalize(button.textContent).includes(query);
+    });
+  };
+
+  const activeFilterEntries = () => {
+    const entries = [];
+    if (provider !== "all") entries.push({key: "provider", label: provider});
+    activeCapabilities().forEach(capability => {
+      const labels = {reasoning: "Reasoning", vision: "Image", video: "Video", audio: "Audio"};
+      entries.push({key: "capability:" + capability, label: labels[capability] || capability});
+    });
+    if ((taskFilter?.value || "all") !== "all") entries.push({key: "task", label: taskFilter.options[taskFilter.selectedIndex]?.text || taskFilter.value});
+    if ((accessFilter?.value || "all") !== "all") entries.push({key: "access", label: accessFilter.options[accessFilter.selectedIndex]?.text || accessFilter.value});
+    if ((contextFilter?.value || "0") !== "0") entries.push({key: "context", label: contextFilter.options[contextFilter.selectedIndex]?.text || contextFilter.value});
+    if ((lifecycleFilter?.value || "all") !== "all") entries.push({key: "lifecycle", label: lifecycleFilter.options[lifecycleFilter.selectedIndex]?.text || lifecycleFilter.value});
+    if ((verificationFilter?.value || "all") !== "all") entries.push({key: "verified", label: verificationFilter.options[verificationFilter.selectedIndex]?.text || verificationFilter.value});
+    return entries;
+  };
+
+  const renderActiveFilters = () => {
+    if (!activeFilters) return;
+    const entries = activeFilterEntries();
+    activeFilters.hidden = entries.length === 0;
+    activeFilters.innerHTML = entries.map(entry =>
+      '<button type="button" class="model-active-filter" data-remove-filter="' + entry.key + '">' +
+      entry.label + ' <span aria-hidden="true">×</span></button>'
+    ).join("") + (entries.length > 1 ? '<button type="button" class="model-active-clear" data-clear-all>Clear all</button>' : "");
+    if (moreFilterCount) {
+      const total = secondaryFilterCount();
+      moreFilterCount.textContent = total ? String(total) : "";
+    }
+  };
+
   const readUrlState = () => {
     const params = new URLSearchParams(window.location.search);
     const urlProvider = normalize(params.get("provider") || "all");
@@ -133,6 +249,8 @@
     }
     if (lifecycleFilter) lifecycleFilter.value = validValues(lifecycleFilter).has(params.get("lifecycle")) ? params.get("lifecycle") : "all";
     if (verificationFilter) verificationFilter.value = validValues(verificationFilter).has(params.get("verified")) ? params.get("verified") : "all";
+    setSecondaryOpen(secondaryFilterCount() > 0);
+    renderActiveFilters();
   };
 
   const writeUrlState = (historyMode = "replace") => {
@@ -293,6 +411,7 @@
       provider !== "all" || Boolean(query) || caps.size > 0 || task !== "all" || minContext > 0 ||
       access !== "all" || lifecycle !== "all" || maxAge != null
     );
+    renderActiveFilters();
     if (historyMode) writeUrlState(historyMode);
   };
 
@@ -303,29 +422,100 @@
     apply(null);
   });
 
-  providerButtons.forEach(button => button.addEventListener("click", () => {
-    providerButtons.forEach(item => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    provider = button.dataset.modelProvider || "all";
+  const setProvider = nextProvider => {
+    provider = nextProvider || "all";
+    syncProviderUi();
+    closeProviderPicker();
     apply("push");
+  };
+
+  providerButtons.forEach(button => button.addEventListener("click", () => {
+    setProvider(button.dataset.modelProvider || "all");
   }));
+  providerOptions?.addEventListener("click", event => {
+    const button = event.target.closest("[data-provider-option]");
+    if (!button) return;
+    setProvider(button.dataset.providerOption || "all");
+  });
+  providerMoreButton.addEventListener("click", () => {
+    const open = providerPicker.hidden;
+    providerPicker.hidden = !open;
+    providerMoreButton.setAttribute("aria-expanded", String(open));
+    if (open) {
+      if (providerSearch) providerSearch.value = "";
+      filterProviderOptions();
+      providerSearch?.focus();
+    }
+  });
+  providerSearch?.addEventListener("input", filterProviderOptions);
   capabilityButtons.forEach(button => button.addEventListener("click", () => {
     const next = button.getAttribute("aria-pressed") !== "true";
     button.setAttribute("aria-pressed", String(next));
     button.classList.toggle("is-active", next);
     apply("push");
   }));
+  moreFiltersButton?.addEventListener("click", () => {
+    setSecondaryOpen(secondaryFilters?.hidden === true);
+  });
+
+  activeFilters?.addEventListener("click", event => {
+    const clearAll = event.target.closest("[data-clear-all]");
+    if (clearAll) {
+      resetButton?.click();
+      return;
+    }
+    const button = event.target.closest("[data-remove-filter]");
+    if (!button) return;
+    const key = button.dataset.removeFilter || "";
+    if (key === "provider") provider = "all";
+    else if (key.startsWith("capability:")) {
+      const capability = key.split(":")[1];
+      const target = capabilityButtons.find(item => item.dataset.capability === capability);
+      if (target) {
+        target.setAttribute("aria-pressed", "false");
+        target.classList.remove("is-active");
+      }
+    } else if (key === "task" && taskFilter) taskFilter.value = "all";
+    else if (key === "access" && accessFilter) accessFilter.value = "all";
+    else if (key === "context" && contextFilter) contextFilter.value = "0";
+    else if (key === "lifecycle" && lifecycleFilter) lifecycleFilter.value = "all";
+    else if (key === "verified" && verificationFilter) verificationFilter.value = "all";
+    syncProviderUi();
+    apply("push");
+  });
+
+  document.addEventListener("click", event => {
+    if (!providerPicker.hidden && !providerPicker.contains(event.target) && event.target !== providerMoreButton) {
+      closeProviderPicker();
+    }
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closeProviderPicker();
+      if (!secondaryFilters?.hidden && secondaryFilterCount() === 0) setSecondaryOpen(false);
+    }
+  });
+
   search?.addEventListener("input", () => apply("replace"));
   sort?.addEventListener("change", () => apply("push"));
   taskFilter?.addEventListener("change", () => apply("push"));
-  contextFilter?.addEventListener("change", () => apply("push"));
+  contextFilter?.addEventListener("change", () => {
+    if (contextFilter.value !== "0") setSecondaryOpen(true);
+    apply("push");
+  });
   accessFilter?.addEventListener("change", () => apply("push"));
-  lifecycleFilter?.addEventListener("change", () => apply("push"));
-  verificationFilter?.addEventListener("change", () => apply("push"));
+  lifecycleFilter?.addEventListener("change", () => {
+    if (lifecycleFilter.value !== "all") setSecondaryOpen(true);
+    apply("push");
+  });
+  verificationFilter?.addEventListener("change", () => {
+    if (verificationFilter.value !== "all") setSecondaryOpen(true);
+    apply("push");
+  });
 
   resetButton?.addEventListener("click", () => {
     provider = "all";
-    providerButtons.forEach(button => button.classList.toggle("is-active", button.dataset.modelProvider === "all"));
+    syncProviderUi();
     capabilityButtons.forEach(button => {
       button.setAttribute("aria-pressed", "false");
       button.classList.remove("is-active");
@@ -337,6 +527,7 @@
     if (accessFilter) accessFilter.value = "all";
     if (lifecycleFilter) lifecycleFilter.value = "all";
     if (verificationFilter) verificationFilter.value = "all";
+    setSecondaryOpen(false);
     apply("push");
   });
 
