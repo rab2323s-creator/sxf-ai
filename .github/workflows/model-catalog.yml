@@ -5,18 +5,30 @@ on:
     branches: [main]
     paths:
       - "data/model-catalog/**"
+      - "data/model-identity/**"
+      - "data/model-candidates/**"
       - "data/model-pricing.json"
       - "scripts/build_model_catalog.py"
+      - "scripts/validate_model_identity.py"
+      - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
+      - "tests/test_model_identity.py"
+      - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
       - ".github/workflows/model-catalog.yml"
   push:
     branches: [main]
     paths:
       - "data/model-catalog/**"
+      - "data/model-identity/**"
+      - "data/model-candidates/**"
       - "data/model-pricing.json"
       - "scripts/build_model_catalog.py"
+      - "scripts/validate_model_identity.py"
+      - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
+      - "tests/test_model_identity.py"
+      - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
       - ".github/workflows/model-catalog.yml"
   workflow_dispatch:
@@ -37,12 +49,18 @@ jobs:
         with:
           python-version: "3.12"
       - name: Syntax check
-        run: python -m py_compile scripts/build_model_catalog.py tests/test_model_catalog.py tests/test_generalized_pricing.py
+        run: python -m py_compile scripts/build_model_catalog.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
       - name: Validate sources and generated artifact
         run: python scripts/build_model_catalog.py --check
+      - name: Identity and candidate validation
+        run: |
+          python scripts/validate_model_identity.py
+          python scripts/validate_model_candidates.py
       - name: Catalog regression tests
         run: |
           python tests/test_model_catalog.py
+          python tests/test_model_identity.py
+          python tests/test_model_candidates.py
           python tests/test_generalized_pricing.py
       - name: Generate coverage report
         run: python scripts/catalog_coverage.py
