@@ -8,6 +8,7 @@
     "detected_at",
     "provider",
     "change_type",
+    "observed_identity",
     "identity_resolution",
     "evidence",
     "validation",
@@ -191,6 +192,26 @@
             "null"
           ],
           "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "observed_identity": {
+      "type": "object",
+      "required": [
+        "provider_native_id",
+        "display_name"
+      ],
+      "properties": {
+        "provider_native_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "additionalProperties": false
