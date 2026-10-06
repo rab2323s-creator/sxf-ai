@@ -670,3 +670,13 @@ button,input{font:inherit}
 .change-delta em{font-style:normal;color:var(--accent);font-size:11px;font-weight:800}
 .change-watch-card>a{display:inline-block;margin-top:18px;color:#a9b5c1;font-size:10px}
 @media(max-width:760px){.change-watch-empty{grid-template-columns:1fr}.change-watch-status{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.change-watch-grid{grid-template-columns:1fr}}
+
+
+/* SXF SIGNAL ARCHIVE DIRECTORY */
+.signals-directory{padding-top:54px}
+.signals-directory-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--line)}
+.signals-directory-list a{min-width:0;padding:15px 17px;background:#0a0e13;display:flex;align-items:center;justify-content:space-between;gap:18px;text-decoration:none}
+.signals-directory-list a:hover{background:rgba(255,255,255,.025)}
+.signals-directory-list span{min-width:0;color:#cfd7de;font-size:12px;line-height:1.35}
+.signals-directory-list small{flex:0 0 auto;color:#66727f;font-size:9px;white-space:nowrap}
+@media(max-width:720px){.signals-directory{padding-top:38px}.signals-directory-list{grid-template-columns:1fr}.signals-directory-list a{align-items:flex-start;flex-direction:column;gap:6px}.signals-directory-list small{white-space:normal}}
