@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sxf.si/schemas/model-reverification-v1.json",
+  "title": "SXF Model Reverification Queue",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "as_of",
+    "policy",
+    "summary",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "policy": {
+      "type": "object"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total",
+        "fresh",
+        "due",
+        "overdue",
+        "critical",
+        "high"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "provider",
+          "model",
+          "lifecycle_status",
+          "pricing_status",
+          "verified_at",
+          "age_days",
+          "policy",
+          "review_interval_days",
+          "due_at",
+          "status",
+          "priority",
+          "overdue_days",
+          "review_scope",
+          "source_urls"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
