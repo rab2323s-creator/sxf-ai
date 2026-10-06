@@ -22,4 +22,13 @@ assert 'syncProviderUi();\n\n    capabilityButtons.forEach' in source, (
     "URL hydration must synchronize provider picker state"
 )
 
-print("Model Explorer filter runtime contract passed")
+assert "const PAGE_SIZE = 25;" in source, "Explorer must cap initial visible results"
+assert 'visibleLimit += PAGE_SIZE;' in source, "Explorer must support progressive result expansion"
+assert '" of " + totalMatches + " models shown"' in source, "Explorer count must distinguish shown from matching results"
+assert 'window.requestAnimationFrame' in source, "Search filtering should coalesce rapid input events"
+assert 'root.dataset.renderedCount' in source and 'root.dataset.matchCount' in source, (
+    "Explorer must expose rendered/matched counts for runtime diagnostics"
+)
+assert 'fetch("/data/model-index.json"' in source, "Explorer must use the lightweight index"
+
+print("Model Explorer filter/runtime scale contract passed")
