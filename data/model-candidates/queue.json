@@ -331,9 +331,85 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "gemini-3.5-transcribe",
+        "provider": "Google",
+        "family": "Gemini 3.5",
         "model": "Gemini 3.5 Transcribe",
-        "provider": "Google"
+        "model_id": "gemini-3.5-transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Google's generally available speech-to-text model for high-accuracy non-streaming transcription with language detection, diarization, word-level timestamps, and vocabulary biasing.",
+        "sxf_url": "/models/gemini-3-5-transcribe/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "https://ai.google.dev/gemini-api/docs/deprecations"
+        ],
+        "notes": [
+          "Google announced Gemini 3.5 Transcribe as generally available on August 26, 2026, with no shutdown date currently announced.",
+          "The model accepts audio and returns text/word annotations; Google documents up to one hour of audio per request, or up to 30 minutes when diarization or word-level timestamps are enabled.",
+          "Standard pricing is $2 per 1M audio input tokens and $12 per 1M text output tokens. The model is excluded from the generic text-token calculator because the input token dimension is audio-specific."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-26",
+              "end": null,
+              "input": 2,
+              "output": 12
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+            "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+            "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
+            "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "transcription"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
       },
       "diff": {
         "model_id": {
@@ -343,22 +419,30 @@
       },
       "evidence": [
         {
-          "url": "https://ai.google.dev/gemini-api/docs/deprecations/",
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
           "source_type": "official_model_doc",
-          "retrieved_at": "2026-10-06T12:30:00Z"
+          "retrieved_at": "2026-10-06T12:50:02Z"
         },
         {
           "url": "https://ai.google.dev/gemini-api/docs/pricing",
           "source_type": "official_pricing",
-          "retrieved_at": "2026-10-06T12:30:00Z"
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/deprecations",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:50:02Z"
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -515,6 +599,262 @@
         "warnings": [
           "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
         ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_embed_v5_pro",
+      "detected_at": "2026-10-06T12:50:02Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "embed-v5.0-pro",
+        "display_name": "Embed 5 Pro"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Pro",
+        "model_id": "embed-v5.0-pro",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "positioning": "Cohere's highest-quality Embed 5 model for multimodal enterprise retrieval, offline indexing, and quality-critical search.",
+        "sxf_url": "/models/embed-v5-0-pro/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/cohere-embed",
+          "https://docs.cohere.com/changelog/embed-v5",
+          "https://docs.cohere.com/v1/reference/embed",
+          "https://cohere.com/pricing"
+        ],
+        "notes": [
+          "Cohere released Embed 5 Pro on September 30, 2026 and currently lists it as available through the Embed API.",
+          "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
+          "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/cohere-embed",
+            "context_window": "https://docs.cohere.com/docs/cohere-embed",
+            "max_output": "https://docs.cohere.com/docs/cohere-embed",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+            "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+            "modalities": "https://docs.cohere.com/docs/cohere-embed",
+            "pricing": "https://cohere.com/pricing",
+            "access": "https://docs.cohere.com/v1/reference/embed",
+            "lifecycle": "https://docs.cohere.com/changelog/embed-v5",
+            "capabilities": "https://docs.cohere.com/docs/cohere-embed"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "embeddings",
+          "vision"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "embed-v5.0-pro"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/cohere-embed",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/embed-v5",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://docs.cohere.com/v1/reference/embed",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://cohere.com/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_embed_v5_fast",
+      "detected_at": "2026-10-06T12:50:02Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "embed-v5.0-fast",
+        "display_name": "Embed 5 Fast"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Fast",
+        "model_id": "embed-v5.0-fast",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "positioning": "Cohere's low-latency, high-throughput Embed 5 model for interactive search, agent loops, and high-volume retrieval.",
+        "sxf_url": "/models/embed-v5-0-fast/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/cohere-embed",
+          "https://docs.cohere.com/changelog/embed-v5",
+          "https://docs.cohere.com/v1/reference/embed",
+          "https://cohere.com/pricing"
+        ],
+        "notes": [
+          "Cohere released Embed 5 Fast on September 30, 2026 and currently lists it as available through the Embed API.",
+          "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
+          "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/cohere-embed",
+            "context_window": "https://docs.cohere.com/docs/cohere-embed",
+            "max_output": "https://docs.cohere.com/docs/cohere-embed",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+            "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+            "modalities": "https://docs.cohere.com/docs/cohere-embed",
+            "pricing": "https://cohere.com/pricing",
+            "access": "https://docs.cohere.com/v1/reference/embed",
+            "lifecycle": "https://docs.cohere.com/changelog/embed-v5",
+            "capabilities": "https://docs.cohere.com/docs/cohere-embed"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "embeddings",
+          "vision"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "embed-v5.0-fast"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/cohere-embed",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/embed-v5",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://docs.cohere.com/v1/reference/embed",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        },
+        {
+          "url": "https://cohere.com/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:50:02Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
       },
       "review": {
         "status": "pending",
