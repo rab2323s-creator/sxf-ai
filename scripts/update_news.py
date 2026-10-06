@@ -2715,6 +2715,7 @@ def model_explorer_html():
         output_unit = "tokens" if isinstance(model.get("max_output"), int) else ""
         rows.append(
             f'''<tr data-model-row
+              data-model-id="{escape(model["model_id"], quote=True)}"
               data-order="{index}"
               data-provider="{escape(model["provider"], quote=True)}"
               data-search="{escape(search, quote=True)}"
@@ -12931,6 +12932,7 @@ def model_explorer_html():
         output_unit = "tokens" if isinstance(model.get("max_output"), int) else ""
         rows.append(
             f'''<tr data-model-row
+              data-model-id="{escape(model["model_id"], quote=True)}"
               data-order="{index}"
               data-provider="{escape(model["provider"], quote=True)}"
               data-search="{escape(search, quote=True)}"
