@@ -9,6 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
+from validate_model_identity import resolve_identity
+
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE_PATH = ROOT / "data" / "model-candidates" / "queue.json"
 REGISTRY_PATH = ROOT / "data" / "model-identity" / "registry.json"
@@ -87,13 +89,20 @@ def classify_change(identity_status: str, diff: dict) -> set[str]:
     return classes
 
 
-def validate_candidate(candidate: dict, registry_ids: set[str]):
+def validate_candidate(candidate: dict, registry_ids: set[str], registry: dict | None = None):
     require(isinstance(candidate, dict), "candidate must be an object")
     cid = candidate.get("candidate_id")
     require(isinstance(cid, str) and cid.startswith("cand_") and len(cid) > 5, "candidate_id must start with cand_")
     require(valid_datetime(candidate.get("detected_at")), f"{cid}: detected_at must be ISO date-time")
     require(isinstance(candidate.get("provider"), str) and candidate["provider"].strip(), f"{cid}: provider required")
     require(candidate.get("change_type") in CHANGE_TYPES, f"{cid}: invalid change_type")
+
+    observed = candidate.get("observed_identity")
+    require(isinstance(observed, dict), f"{cid}: observed_identity required")
+    native_id = observed.get("provider_native_id")
+    display_name = observed.get("display_name")
+    require(native_id is None or (isinstance(native_id, str) and native_id.strip()), f"{cid}: observed provider_native_id must be null or non-empty")
+    require(isinstance(display_name, str) and display_name.strip(), f"{cid}: observed display_name required")
 
     identity = candidate.get("identity_resolution")
     require(isinstance(identity, dict), f"{cid}: identity_resolution required")
@@ -113,6 +122,15 @@ def validate_candidate(candidate: dict, registry_ids: set[str]):
         require(bool(duplicates), f"{cid}: possible_duplicate requires candidates")
     if identity["status"] == "ambiguous":
         require(identity["confidence"] != "high", f"{cid}: ambiguous identity cannot be high confidence")
+
+    if registry is not None:
+        resolved = resolve_identity(registry, candidate["provider"], native_id, display_name)
+        require(identity.get("status") == resolved["status"],
+                f"{cid}: identity status drift; expected {resolved['status']} from registry")
+        require(identity.get("matched_model_id") == resolved["matched_model_id"],
+                f"{cid}: matched_model_id drift from registry resolution")
+        require(sorted(identity.get("possible_duplicates", [])) == sorted(resolved["possible_duplicates"]),
+                f"{cid}: possible_duplicates drift from registry resolution")
 
     canonical_id = candidate.get("canonical_model_id")
     require(canonical_id is None or isinstance(canonical_id, str), f"{cid}: canonical_model_id must be string or null")
@@ -169,7 +187,7 @@ def validate_queue(queue: dict, registry: dict):
     registry_ids = {entry["canonical_model_id"] for entry in registry.get("models", [])}
     seen = set()
     for candidate in candidates:
-        validate_candidate(candidate, registry_ids)
+        validate_candidate(candidate, registry_ids, registry)
         cid = candidate["candidate_id"]
         require(cid not in seen, f"duplicate candidate_id: {cid}")
         seen.add(cid)
