@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sxf.si/schemas/model-candidate-v1.json",
+  "title": "SXF Model Candidate",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "detected_at",
+    "provider",
+    "change_type",
+    "identity_resolution",
+    "evidence",
+    "validation",
+    "review"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^cand_[a-z0-9][a-z0-9_-]+$"
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_model_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "change_type": {
+      "enum": [
+        "new_model",
+        "identity_change",
+        "price_change",
+        "context_change",
+        "capability_change",
+        "lifecycle_change",
+        "access_change",
+        "source_issue",
+        "metadata_correction"
+      ]
+    },
+    "identity_resolution": {
+      "type": "object",
+      "required": [
+        "status",
+        "matched_model_id",
+        "confidence",
+        "possible_duplicates"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "exact",
+            "alias",
+            "renamed",
+            "successor",
+            "new",
+            "possible_duplicate",
+            "ambiguous"
+          ]
+        },
+        "matched_model_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "possible_duplicates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "proposed_record": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "diff": {
+      "type": "object"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "source_type",
+          "retrieved_at"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "source_type": {
+            "enum": [
+              "official_model_doc",
+              "official_pricing",
+              "official_api_reference",
+              "official_changelog",
+              "official_model_card",
+              "official_repository",
+              "partner_pricing",
+              "other_official"
+            ]
+          },
+          "retrieved_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "status",
+        "errors",
+        "warnings"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "passed",
+            "failed"
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "status",
+        "reviewed_by",
+        "reviewed_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "needs_changes"
+          ]
+        },
+        "reviewed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
