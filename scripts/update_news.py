@@ -4590,19 +4590,41 @@ def provider_page_html(provider, items):
 
     model_cards = []
     for model in models:
-        priced = model_has_official_paid_pricing(model)
-        if priced:
-            rate = active_standard_price(model["model_id"], MODEL_PRICING_CATALOG["source_verified"])
-            pricing = f'{catalog_price_label(rate["input"])} in · {catalog_price_label(rate["output"])} out / MTok'
-        else:
-            pricing = model_pricing_status(model)
+        pricing_status = model_pricing_status(model)
+        basis = model.get("pricing_basis", {})
+        meter = basis.get("meter")
+        display_unit = basis.get("display_unit", "")
+        schedule = model.get("pricing", {}).get("standard", [])
+        period = next((
+            candidate for candidate in schedule
+            if MODEL_PRICING_CATALOG["source_verified"] >= candidate["start"]
+            and (not candidate.get("end") or MODEL_PRICING_CATALOG["source_verified"] <= candidate["end"])
+        ), None)
+        pricing = pricing_status
+        if pricing_status == "official-paid" and period:
+            if meter == "tokens":
+                parts = []
+                if period.get("input") is not None:
+                    parts.append(f'{catalog_price_label(period["input"])} input')
+                if period.get("output") is not None:
+                    parts.append(f'{catalog_price_label(period["output"])} output')
+                pricing = " · ".join(parts)
+                if pricing and display_unit:
+                    pricing += f" {display_unit}"
+            else:
+                dimensions = basis.get("dimensions", [])
+                rates = period.get("rates", {})
+                if dimensions and rates.get(dimensions[0]) is not None:
+                    pricing = f'{catalog_price_label(rates[dimensions[0]])} {display_unit}'.strip()
+        context = model.get("context_window")
+        context_label = "Not published" if context is None else f"{int(context):,}"
         model_cards.append(
             f'''<article class="model-family-card">
               <span>{escape(model.get("family", provider))}</span>
               <h3><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a></h3>
               <p>{escape(model["positioning"])}</p>
-              <div class="model-family-spec"><b>{int(model["context_window"]):,} context</b><small>{escape(model_output_label(model))} max output</small></div>
-              <div class="model-family-price"><strong>{escape(pricing)}</strong><small>{escape(model_pricing_status(model))}</small></div>
+              <div class="model-family-spec"><b>{escape(context_label)} context</b><small>{escape(model_output_label(model))} max output</small></div>
+              <div class="model-family-price"><strong>{escape(pricing)}</strong><small>{escape(pricing_status)}</small></div>
             </article>'''
         )
 
@@ -14744,19 +14766,41 @@ def provider_page_html(provider, items):
 
     model_cards = []
     for model in models:
-        priced = model_has_official_paid_pricing(model)
-        if priced:
-            rate = active_standard_price(model["model_id"], MODEL_PRICING_CATALOG["source_verified"])
-            pricing = f'{catalog_price_label(rate["input"])} in · {catalog_price_label(rate["output"])} out / MTok'
-        else:
-            pricing = model_pricing_status(model)
+        pricing_status = model_pricing_status(model)
+        basis = model.get("pricing_basis", {})
+        meter = basis.get("meter")
+        display_unit = basis.get("display_unit", "")
+        schedule = model.get("pricing", {}).get("standard", [])
+        period = next((
+            candidate for candidate in schedule
+            if MODEL_PRICING_CATALOG["source_verified"] >= candidate["start"]
+            and (not candidate.get("end") or MODEL_PRICING_CATALOG["source_verified"] <= candidate["end"])
+        ), None)
+        pricing = pricing_status
+        if pricing_status == "official-paid" and period:
+            if meter == "tokens":
+                parts = []
+                if period.get("input") is not None:
+                    parts.append(f'{catalog_price_label(period["input"])} input')
+                if period.get("output") is not None:
+                    parts.append(f'{catalog_price_label(period["output"])} output')
+                pricing = " · ".join(parts)
+                if pricing and display_unit:
+                    pricing += f" {display_unit}"
+            else:
+                dimensions = basis.get("dimensions", [])
+                rates = period.get("rates", {})
+                if dimensions and rates.get(dimensions[0]) is not None:
+                    pricing = f'{catalog_price_label(rates[dimensions[0]])} {display_unit}'.strip()
+        context = model.get("context_window")
+        context_label = "Not published" if context is None else f"{int(context):,}"
         model_cards.append(
             f'''<article class="model-family-card">
               <span>{escape(model.get("family", provider))}</span>
               <h3><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a></h3>
               <p>{escape(model["positioning"])}</p>
-              <div class="model-family-spec"><b>{int(model["context_window"]):,} context</b><small>{escape(model_output_label(model))} max output</small></div>
-              <div class="model-family-price"><strong>{escape(pricing)}</strong><small>{escape(model_pricing_status(model))}</small></div>
+              <div class="model-family-spec"><b>{escape(context_label)} context</b><small>{escape(model_output_label(model))} max output</small></div>
+              <div class="model-family-price"><strong>{escape(pricing)}</strong><small>{escape(pricing_status)}</small></div>
             </article>'''
         )
 
