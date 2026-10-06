@@ -13471,6 +13471,26 @@ def signal_page_html(item, items):
         </section>'''
 
     related = "".join(signal_row(x) for x in related_items(item, items))
+    eligible_items = [row for row in items if row.get("seo_eligible", seo_signal_eligible(row))]
+    archive_navigation = ""
+    if indexable and item in eligible_items and len(eligible_items) > 1:
+        archive_index = eligible_items.index(item)
+        prev_item = eligible_items[archive_index - 1] if archive_index > 0 else None
+        next_item = eligible_items[archive_index + 1] if archive_index + 1 < len(eligible_items) else None
+        nav_links = []
+        if prev_item:
+            nav_links.append(
+                f'<a rel="prev" href="/signals/{escape(prev_item["signal_slug"], quote=True)}/"><span>Previous signal</span><strong>{escape(prev_item["title"])}</strong></a>'
+            )
+        if next_item:
+            nav_links.append(
+                f'<a rel="next" href="/signals/{escape(next_item["signal_slug"], quote=True)}/"><span>Next signal</span><strong>{escape(next_item["title"])}</strong></a>'
+            )
+        archive_navigation = (
+            '<nav class="signal-archive-navigation shell" aria-label="Signal archive navigation">'
+            + "".join(nav_links)
+            + "</nav>"
+        )
     editorial = item.get("editorial") or editorial_units(item)
     summary_label = "Source summary" if item.get("summary") else "SXF signal note"
     return f'''<!doctype html><html lang="en">
@@ -13509,6 +13529,7 @@ def signal_page_html(item, items):
           <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
           <div><span>MODELS</span>{model_links or '<small>No named model detected</small>'}</div>
         </section>
+        {archive_navigation}
         <section class="related-signals shell">
           <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
           <div class="signal-list">{related}</div>
@@ -13601,6 +13622,18 @@ def signals_index_html(items):
         ],
     }
     rows = "".join(signal_row(item) for item in items[:40])
+    archive_items = [item for item in items[40:] if item.get("seo_eligible")]
+    archive_links = "".join(
+        f'<a href="{escape(item.get("signal_url", item["url"]), quote=True)}"><span>{escape(item["title"])}</span><small>{escape(item["source"])} · {escape(display_date(item["published"]))}</small></a>'
+        for item in archive_items
+    )
+    archive_directory = (
+        f'''<section class="signals-directory shell" aria-labelledby="signals-directory-title">
+          <div class="intel-section-head"><div><p class="eyebrow">VERIFIED ARCHIVE</p><h2 id="signals-directory-title">More verified AI signals.</h2></div><span>{len(archive_items)} indexed signals</span></div>
+          <div class="signals-directory-list">{archive_links}</div>
+        </section>'''
+        if archive_items else ""
+    )
     return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Models, Agents & Research Updates | SXF / AI", description, canonical, schema)}
     <body class="intel-page collection-page signals-page"><a class="skip-link" href="#signals-main">Skip to signals</a>
     {page_header()}<main id="signals-main">
@@ -13634,6 +13667,8 @@ def signals_index_html(items):
         <div class="signal-list" id="signalsFeed">{rows}</div>
         <div class="signals-empty" id="signalsEmpty" hidden>No signals match this filter yet.</div>
       </section>
+
+      {archive_directory}
 
       <section class="signals-gateways shell" aria-labelledby="signals-gateways-title">
         <div class="intel-section-head"><div><p class="eyebrow">EXPLORE BY INTENT</p><h2 id="signals-gateways-title">Move from updates to deeper intelligence.</h2></div></div>
