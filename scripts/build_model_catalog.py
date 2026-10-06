@@ -148,10 +148,12 @@ def validate_pricing(model: dict, label: str):
         previous_was_open = end is None
 
         if meter == "tokens":
-            for key in dimensions:
-                require(isinstance(period.get(key), (int, float)) and period[key] >= 0,
-                        f"{p}.{key} must be a non-negative number")
-            for key in ("cached_input", "output", "cache_write", "cache_write_5m", "cache_write_1h"):
+            require(isinstance(period.get("input"), (int, float)) and period["input"] >= 0,
+                    f"{p}.input must be a non-negative number")
+            if "output" in dimensions:
+                require(isinstance(period.get("output"), (int, float)) and period["output"] >= 0,
+                        f"{p}.output must be a non-negative number")
+            for key in ("cached_input", "cache_write", "cache_write_5m", "cache_write_1h"):
                 if key in period:
                     require(isinstance(period[key], (int, float)) and period[key] >= 0,
                             f"{p}.{key} must be a non-negative number")
