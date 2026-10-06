@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 28,
-    "fresh": 28,
+    "total": 36,
+    "fresh": 36,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -444,6 +444,31 @@
       ]
     },
     {
+      "model_id": "claude-sonnet-5-5",
+      "provider": "Anthropic",
+      "model": "Claude Sonnet 5.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      ]
+    },
+    {
       "model_id": "deepseek-flash",
       "provider": "DeepSeek",
       "model": "DeepSeek V4.1 Flash",
@@ -520,6 +545,106 @@
         "https://docs.mistral.ai/models",
         "https://docs.mistral.ai/models/codestral-embed-25-05",
         "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings"
+      ]
+    },
+    {
+      "model_id": "ministral-14b-2512",
+      "provider": "Mistral AI",
+      "model": "Ministral 3 14B",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-14b-25-12"
+      ]
+    },
+    {
+      "model_id": "ministral-3b-2512",
+      "provider": "Mistral AI",
+      "model": "Ministral 3 3B",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-3b-25-12"
+      ]
+    },
+    {
+      "model_id": "ministral-8b-2512",
+      "provider": "Mistral AI",
+      "model": "Ministral 3 8B",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-8b-25-12"
+      ]
+    },
+    {
+      "model_id": "mistral-large-2512",
+      "provider": "Mistral AI",
+      "model": "Mistral Large 3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/mistral-large-3-25-12"
       ]
     },
     {
@@ -623,6 +748,81 @@
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/models",
         "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+      ]
+    },
+    {
+      "model_id": "gpt-live-1",
+      "provider": "OpenAI",
+      "model": "GPT-Live 1",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-live-transcribe",
+      "provider": "OpenAI",
+      "model": "GPT-Live-Transcribe",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-transcribe",
+      "provider": "OpenAI",
+      "model": "GPT-Transcribe",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "https://developers.openai.com/api/docs/pricing"
       ]
     },
     {
