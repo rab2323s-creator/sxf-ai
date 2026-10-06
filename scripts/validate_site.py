@@ -492,10 +492,16 @@ def validate_model_pricing_catalog():
             previous_end = end
 
             if meter == "tokens":
-                for field in dimensions:
-                    value = period.get(field)
-                    if not isinstance(value, (int, float)) or value < 0:
-                        fail(f"{model_id}: invalid {field} price")
+                input_value = period.get("input")
+                if not isinstance(input_value, (int, float)) or input_value < 0:
+                    fail(f"{model_id}: invalid input price")
+                if "output" in dimensions:
+                    output_value = period.get("output")
+                    if not isinstance(output_value, (int, float)) or output_value < 0:
+                        fail(f"{model_id}: invalid output price")
+                cached_input = period.get("cached_input")
+                if cached_input is not None and (not isinstance(cached_input, (int, float)) or cached_input < 0):
+                    fail(f"{model_id}: invalid cached_input price")
                 if "rates" in period:
                     fail(f"{model_id}: token pricing must not use generic rates")
             else:
