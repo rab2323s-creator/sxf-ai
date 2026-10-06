@@ -680,3 +680,12 @@ button,input{font:inherit}
 .signals-directory-list span{min-width:0;color:#cfd7de;font-size:12px;line-height:1.35}
 .signals-directory-list small{flex:0 0 auto;color:#66727f;font-size:9px;white-space:nowrap}
 @media(max-width:720px){.signals-directory{padding-top:38px}.signals-directory-list{grid-template-columns:1fr}.signals-directory-list a{align-items:flex-start;flex-direction:column;gap:6px}.signals-directory-list small{white-space:normal}}
+
+
+/* SXF SIGNAL ARCHIVE NAVIGATION */
+.signal-archive-navigation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:26px}
+.signal-archive-navigation a{min-width:0;border:1px solid var(--line);border-radius:16px;padding:16px 18px;background:#0a0e13;text-decoration:none}
+.signal-archive-navigation a:hover{border-color:rgba(200,255,77,.28)}
+.signal-archive-navigation span{display:block;margin-bottom:7px;color:#66727f;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.signal-archive-navigation strong{display:block;color:#dce3e9;font-size:13px;line-height:1.35}
+@media(max-width:720px){.signal-archive-navigation{grid-template-columns:1fr}}
