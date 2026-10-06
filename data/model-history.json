@@ -1283,6 +1283,288 @@
           ]
         }
       }
+    },
+    "claude-sonnet-5-5": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_4dfd60fb6593193adad5",
+      "snapshot_hash": "1406d09e16d5897b39d8df3afed375959d8ec2efeeceb8f5f5898f0bde1205a4",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Sonnet 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-28",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            }
+          ]
+        }
+      }
+    },
+    "gpt-live-1": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_109e8760884c7dbaca2e",
+      "snapshot_hash": "7e9c9b116687378fe585616176e3414d89f373b6d5b91ce0eef3e7627e6561aa",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-Live",
+        "model": "GPT-Live 1",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": "2025-07-31",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.05
+              }
+            }
+          ]
+        }
+      }
+    },
+    "gpt-live-transcribe": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_0a47d32f7685b38f92b9",
+      "snapshot_hash": "e74308139417ea83a79e7cb63a5615d8b493f02e855ae16749e606445f8d4de2",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
+        "model": "GPT-Live-Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.017
+              }
+            }
+          ]
+        }
+      }
+    },
+    "gpt-transcribe": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_7ecc026602882ee18b28",
+      "snapshot_hash": "a21b7effb5dfe823f0e0e482de2c437f31455552d7e700eacbd513687b69bea3",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
+        "model": "GPT-Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.0045
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ministral-14b-2512": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_79fa4341e453c73013e0",
+      "snapshot_hash": "dfc30e22de5b53057e846df00e59bcfb1dde028dfe0db4bc8d96c2e10f330a4c",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 14B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.2,
+              "cached_input": 0.02,
+              "output": 0.2
+            }
+          ]
+        }
+      }
+    },
+    "ministral-3b-2512": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_86bad358b1ba5039e45e",
+      "snapshot_hash": "14dc9e6f3e0bb7215344a46cd15c22347bb6b78e394b03f2bc6df459a1ae09d5",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 3B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "output": 0.1
+            }
+          ]
+        }
+      }
+    },
+    "ministral-8b-2512": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_8173bf33cd649186d1ca",
+      "snapshot_hash": "4f11502c096bd30873d90b1dc42c58d7b4ac1773280c7169198ad5a8d758df68",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 8B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015,
+              "output": 0.15
+            }
+          ]
+        }
+      }
+    },
+    "mistral-large-2512": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_af50abcf102498f73ce7",
+      "snapshot_hash": "e9cf54531144dc5fd1bd71d66bfe0355e9b746c2a35379e90622a6cfbbd454a3",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Large",
+        "model": "Mistral Large 3",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.5,
+              "cached_input": 0.05,
+              "output": 1.5
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -2981,7 +3263,409 @@
       },
       "event_id": "evt_be6b9a930393d364d0ba",
       "event_hash": "be6b9a930393d364d0ba39c457b7cd3dc403219ed1ba4623919cd106265f4f75"
+    },
+    {
+      "sequence": 29,
+      "type": "model_added",
+      "model_id": "claude-sonnet-5-5",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "be6b9a930393d364d0ba39c457b7cd3dc403219ed1ba4623919cd106265f4f75",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Sonnet 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-28",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "family": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "model": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_4dfd60fb6593193adad5",
+      "event_hash": "4dfd60fb6593193adad5d7ffd8664215e4d1b9b8724c3367d053b3836c60e400"
+    },
+    {
+      "sequence": 30,
+      "type": "model_added",
+      "model_id": "gpt-live-1",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "4dfd60fb6593193adad5d7ffd8664215e4d1b9b8724c3367d053b3836c60e400",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-Live",
+        "model": "GPT-Live 1",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": "2025-07-31",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.05
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "family": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "model": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_109e8760884c7dbaca2e",
+      "event_hash": "109e8760884c7dbaca2e49786a482952ef012ed03aaaf2c106aabc850c2f6526"
+    },
+    {
+      "sequence": 31,
+      "type": "model_added",
+      "model_id": "gpt-live-transcribe",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "109e8760884c7dbaca2e49786a482952ef012ed03aaaf2c106aabc850c2f6526",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
+        "model": "GPT-Live-Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.017
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "family": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "model": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_0a47d32f7685b38f92b9",
+      "event_hash": "0a47d32f7685b38f92b9d60639db8fae392223f90455cd951618ba2d4c6a85da"
+    },
+    {
+      "sequence": 32,
+      "type": "model_added",
+      "model_id": "gpt-transcribe",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "0a47d32f7685b38f92b9d60639db8fae392223f90455cd951618ba2d4c6a85da",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
+        "model": "GPT-Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.0045
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "family": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "model": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_7ecc026602882ee18b28",
+      "event_hash": "7ecc026602882ee18b28d5cb26537e51130d735b0ca5ead9f2966496fea95ad5"
+    },
+    {
+      "sequence": 33,
+      "type": "model_added",
+      "model_id": "ministral-14b-2512",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "7ecc026602882ee18b28d5cb26537e51130d735b0ca5ead9f2966496fea95ad5",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 14B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.2,
+              "cached_input": 0.02,
+              "output": 0.2
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "family": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "model": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "context_window": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "max_output": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "reasoning": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "modalities": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_79fa4341e453c73013e0",
+      "event_hash": "79fa4341e453c73013e0fabf07a627c8bec9b51d35eb2e609678f8e53da547ea"
+    },
+    {
+      "sequence": 34,
+      "type": "model_added",
+      "model_id": "ministral-3b-2512",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "79fa4341e453c73013e0fabf07a627c8bec9b51d35eb2e609678f8e53da547ea",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 3B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "output": 0.1
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "family": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "model": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "context_window": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "max_output": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "reasoning": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "modalities": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_86bad358b1ba5039e45e",
+      "event_hash": "86bad358b1ba5039e45eda514e8ff356284ba5afbef47dc045e6bff5a7e648e5"
+    },
+    {
+      "sequence": 35,
+      "type": "model_added",
+      "model_id": "ministral-8b-2512",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "86bad358b1ba5039e45eda514e8ff356284ba5afbef47dc045e6bff5a7e648e5",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
+        "model": "Ministral 3 8B",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015,
+              "output": 0.15
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "family": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "model": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "context_window": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "max_output": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "reasoning": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "modalities": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_8173bf33cd649186d1ca",
+      "event_hash": "8173bf33cd649186d1ca1aa61d552288f35e647c32837d66aafd1e595bd97c8b"
+    },
+    {
+      "sequence": 36,
+      "type": "model_added",
+      "model_id": "mistral-large-2512",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "8173bf33cd649186d1ca1aa61d552288f35e647c32837d66aafd1e595bd97c8b",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Large",
+        "model": "Mistral Large 3",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.5,
+              "cached_input": 0.05,
+              "output": 1.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "family": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "model": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "context_window": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "max_output": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "reasoning": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "modalities": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_af50abcf102498f73ce7",
+      "event_hash": "af50abcf102498f73ce768fdd42e27390b07bb5aa97559bd98ef239362ee40bc"
     }
   ],
-  "chain_head": "be6b9a930393d364d0ba39c457b7cd3dc403219ed1ba4623919cd106265f4f75"
+  "chain_head": "af50abcf102498f73ce768fdd42e27390b07bb5aa97559bd98ef239362ee40bc"
 }
