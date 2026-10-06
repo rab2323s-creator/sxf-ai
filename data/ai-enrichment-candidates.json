@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "5c04ec8fc671427867be1270658f6f8733cf48f7ac3b77f526fd3113655dfce1",
+  "snapshot_hash": "452a8f67a419a1618e9f998cce9d19c31437eabfebf98446a1e9b7b648ae4814",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -22,12 +22,12 @@
       "category": "Models",
       "published": "2026-09-29T10:00:00Z",
       "priority_score": 228,
-      "evidence_hash": "2b1f2729e6c1d4e2c44aecc03e949bec7fa535f0f13cd343f95567bc7ee2719c",
+      "evidence_hash": "0822fa8e2fbdc9e08d4a93c23e1a5041bb8364c91b9f6fcf4bdc14880d8d7c8b",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
           "source_urls": []
         },
         "signal": {
@@ -1761,12 +1761,12 @@
       "category": "Tools",
       "published": "2026-10-01T19:09:10Z",
       "priority_score": 149,
-      "evidence_hash": "1d6b30d932e53c170d8471e03a2b059404c76108270ca7a8257ca46bee82d05c",
+      "evidence_hash": "93251ff3551fbe082f531287c85e4bd33581f3751616cbae9e627f0c10eaf605",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
           "source_urls": []
         },
         "signal": {
@@ -1835,12 +1835,12 @@
       "category": "Tools",
       "published": "2026-09-25T16:42:48Z",
       "priority_score": 149,
-      "evidence_hash": "517f08b64dec1e826b40b79c537f2b788212285b98dcabbac5ca0a6f624baa97",
+      "evidence_hash": "c96eb11022b996b5d4ddd46cef673b369d2c33fabbe62a8af94ad7c1a07b08f1",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
           "source_urls": []
         },
         "signal": {
@@ -1908,12 +1908,12 @@
       "category": "Tools",
       "published": "2026-09-29T17:02:27Z",
       "priority_score": 142,
-      "evidence_hash": "e5bd777ade6cd2e50fbb186b282eecc2b99708354beee8d20e116520dace5280",
+      "evidence_hash": "e2947403c277a763b9f56e5f86e959d803bd6241f55f4557b9be483095bfdad2",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
           "source_urls": []
         },
         "signal": {
