@@ -302,6 +302,150 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Embed 5",
+      "model": "Embed 5 Pro",
+      "model_id": "embed-v5.0-pro",
+      "context_window": 128000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "PDF"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Cohere's highest-quality Embed 5 model for multimodal enterprise retrieval, offline indexing, and quality-critical search.",
+      "sxf_url": "/models/embed-v5-0-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/cohere-embed",
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://docs.cohere.com/v1/reference/embed",
+        "https://cohere.com/pricing"
+      ],
+      "notes": [
+        "Cohere released Embed 5 Pro on September 30, 2026 and currently lists it as available through the Embed API.",
+        "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
+        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/cohere-embed",
+          "context_window": "https://docs.cohere.com/docs/cohere-embed",
+          "max_output": "https://docs.cohere.com/docs/cohere-embed",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+          "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+          "modalities": "https://docs.cohere.com/docs/cohere-embed",
+          "pricing": "https://cohere.com/pricing",
+          "access": "https://docs.cohere.com/v1/reference/embed",
+          "lifecycle": "https://docs.cohere.com/changelog/embed-v5",
+          "capabilities": "https://docs.cohere.com/docs/cohere-embed"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Embed 5",
+      "model": "Embed 5 Fast",
+      "model_id": "embed-v5.0-fast",
+      "context_window": 128000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "PDF"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Cohere's low-latency, high-throughput Embed 5 model for interactive search, agent loops, and high-volume retrieval.",
+      "sxf_url": "/models/embed-v5-0-fast/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/cohere-embed",
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://docs.cohere.com/v1/reference/embed",
+        "https://cohere.com/pricing"
+      ],
+      "notes": [
+        "Cohere released Embed 5 Fast on September 30, 2026 and currently lists it as available through the Embed API.",
+        "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
+        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/cohere-embed",
+          "context_window": "https://docs.cohere.com/docs/cohere-embed",
+          "max_output": "https://docs.cohere.com/docs/cohere-embed",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+          "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+          "modalities": "https://docs.cohere.com/docs/cohere-embed",
+          "pricing": "https://cohere.com/pricing",
+          "access": "https://docs.cohere.com/v1/reference/embed",
+          "lifecycle": "https://docs.cohere.com/changelog/embed-v5",
+          "capabilities": "https://docs.cohere.com/docs/cohere-embed"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
