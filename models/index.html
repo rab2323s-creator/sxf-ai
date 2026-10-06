@@ -12,7 +12,7 @@
       </div>
       <div class="model-explorer-toolbar">
         <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
-        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Amazon">Amazon</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Cohere">Cohere</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Qwen / Alibaba</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
+        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Alibaba Cloud</button><button type="button" class="model-filter" data-model-provider="Amazon">Amazon</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Cohere">Cohere</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral AI</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
         <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
           <option value="default">Catalog order</option>
           <option value="input-asc">Lowest input price</option>
@@ -299,21 +299,23 @@
             </tr><tr data-model-row
               data-order="17"
               data-provider="DeepSeek"
-              data-search="deepseek v4.1 flash deepseek-flash deepseek deepseek v4 efficiency-focused multimodal reasoning model for high-throughput agentic coding and general api workloads. text image official-paid"
-              data-pricing-status="variable-paid"
+              data-search="deepseek v4.1 flash deepseek-flash deepseek deepseek v4 deepseek efficiency-focused multimodal reasoning model for high-throughput agentic, coding, and general api workloads. text image official-paid"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
               data-context="1048576">
               <th scope="row"><a href="/models/deepseek-v4-1-flash/">DeepSeek V4.1 Flash</a><small>deepseek-flash</small></th>
               <td>DeepSeek<small>DeepSeek V4</small></td>
               <td>1,048,576<small>tokens</small></td>
               <td>393,216<small>tokens</small></td>
-              <td class="model-price">Variable<small>$0.15–$0.30</small></td>
-              <td class="model-price">$0.003–$0.006</td>
-              <td class="model-price">$0.60–$1.20</td>
-              <td><a class="model-verified" href="https://api-docs.deepseek.com/quick_start/pricing/" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+              <td class="model-price">Not published<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">Not published</td>
+              <td><a class="model-verified" href="https://api-docs.deepseek.com/api/list-models/" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
             </tr><tr data-model-row
               data-order="18"
               data-provider="Mistral AI"
-              data-search="mistral small 4 mistral-small-2603 mistral ai mistral small open-weight multimodal reasoning coding text image official-paid"
+              data-search="mistral small 4 mistral-small-2603 mistral ai mistral small efficient open-weight multimodal mistral model combining instruct, reasoning and coding capabilities for production and agentic workloads. text image official-paid"
               data-pricing-status="official-paid"
               data-input="0.15"
               data-output="0.6"
@@ -321,7 +323,7 @@
               <th scope="row"><a href="/models/mistral-small-4/">Mistral Small 4</a><small>mistral-small-2603</small></th>
               <td>Mistral AI<small>Mistral Small</small></td>
               <td>256,000<small>tokens</small></td>
-              <td>Not published<small>official docs</small></td>
+              <td>Not published<small>tokens</small></td>
               <td class="model-price">$0.15<small>official-paid</small></td>
               <td class="model-price">$0.015</td>
               <td class="model-price">$0.60</td>
@@ -329,7 +331,7 @@
             </tr><tr data-model-row
               data-order="19"
               data-provider="Mistral AI"
-              data-search="mistral medium 3.5 mistral-medium-3-5 mistral ai mistral medium frontier open-weight multimodal agentic coding text image official-paid"
+              data-search="mistral medium 3.5 mistral-medium-3-5 mistral ai mistral medium frontier-class open-weight multimodal mistral model optimized for agentic and coding workloads with adjustable reasoning. text image official-paid"
               data-pricing-status="official-paid"
               data-input="1.5"
               data-output="7.5"
@@ -337,7 +339,7 @@
               <th scope="row"><a href="/models/mistral-medium-3-5/">Mistral Medium 3.5</a><small>mistral-medium-3-5</small></th>
               <td>Mistral AI<small>Mistral Medium</small></td>
               <td>256,000<small>tokens</small></td>
-              <td>Not published<small>official docs</small></td>
+              <td>Not published<small>tokens</small></td>
               <td class="model-price">$1.50<small>official-paid</small></td>
               <td class="model-price">$0.15</td>
               <td class="model-price">$7.50</td>
@@ -345,7 +347,7 @@
             </tr><tr data-model-row
               data-order="20"
               data-provider="Alibaba Cloud"
-              data-search="qwen3.8 max qwen3.8-max alibaba cloud qwen 3.8 flagship long-context multimodal thinking coding agentic text image video official-paid"
+              data-search="qwen3.8 max qwen3.8-max alibaba cloud qwen 3.8 alibaba cloud flagship qwen model for long-horizon coding, professional knowledge work, multimodal understanding and agentic workflows. text image video official-paid"
               data-pricing-status="official-paid"
               data-input="1.65"
               data-output="4.951"
@@ -356,30 +358,45 @@
               <td>131,072<small>tokens</small></td>
               <td class="model-price">$1.65<small>official-paid</small></td>
               <td class="model-price">$0.206</td>
-              <td class="model-price">$4.951</td>
+              <td class="model-price">$4.95</td>
               <td><a class="model-verified" href="https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
             </tr><tr data-model-row
-data-order="21" data-provider="Cohere"
-data-search="command a plus command-a-plus-05-2026 cohere agentic reasoning vision multilingual text image free-preview"
-data-pricing-status="free-preview" data-context="128000">
-<th scope="row"><a href="/models/command-a-plus/">Command A+</a><small>command-a-plus-05-2026</small></th>
-<td>Cohere<small>Command A</small></td><td>128,000<small>tokens</small></td><td>64,000<small>tokens</small></td>
-<td class="model-price">Free<small>within rate limits</small></td><td class="model-price">—</td><td class="model-price">—</td>
-<td><a class="model-verified" href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
-</tr>
-<tr data-model-row
-data-order="22" data-provider="Amazon"
-data-search="amazon nova 2 lite amazon.nova-2-lite-v1:0 amazon multimodal extended thinking text image video official-paid"
-data-pricing-status="official-paid" data-input="0.3" data-output="2.5" data-context="1000000">
-<th scope="row"><a href="/models/amazon-nova-2-lite/">Amazon Nova 2 Lite</a><small>amazon.nova-2-lite-v1:0</small></th>
-<td>Amazon<small>Nova 2</small></td><td>1,000,000<small>tokens</small></td><td>64,000<small>tokens</small></td>
-<td class="model-price">$0.30<small>official-paid</small></td><td class="model-price">—</td><td class="model-price">$2.50</td>
-<td><a class="model-verified" href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
-</tr></tbody>
+              data-order="21"
+              data-provider="Cohere"
+              data-search="command a+ command-a-plus-05-2026 cohere command a cohere&#x27;s strongest command-family agentic model, combining reasoning, vision, multilingual support, tool use and enterprise deployment efficiency. text image free-preview"
+              data-pricing-status="free-preview"
+              data-input="inf"
+              data-output="inf"
+              data-context="128000">
+              <th scope="row"><a href="/models/command-a-plus/">Command A+</a><small>command-a-plus-05-2026</small></th>
+              <td>Cohere<small>Command A</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td>64,000<small>tokens</small></td>
+              <td class="model-price">Not published<small>free-preview</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">Not published</td>
+              <td><a class="model-verified" href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="22"
+              data-provider="Amazon"
+              data-search="amazon nova 2 lite amazon.nova-2-lite-v1:0 amazon nova 2 amazon&#x27;s cost-efficient multimodal nova 2 model for automation, document processing, video understanding, coding and agentic workflows. text image video official-paid"
+              data-pricing-status="official-paid"
+              data-input="0.3"
+              data-output="2.5"
+              data-context="1000000">
+              <th scope="row"><a href="/models/amazon-nova-2-lite/">Amazon Nova 2 Lite</a><small>amazon.nova-2-lite-v1:0</small></th>
+              <td>Amazon<small>Nova 2</small></td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>64,000<small>tokens</small></td>
+              <td class="model-price">$0.30<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">$2.50</td>
+              <td><a class="model-verified" href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr></tbody>
         </table>
       </div>
       <div class="model-explorer-foot">
-        <span id="modelExplorerCount">17 models shown</span>
+        <span id="modelExplorerCount">23 models shown</span>
         <a href="/models/pricing/">Open calculator & pricing methodology ↗</a>
       </div>
       <div id="modelExplorerEmpty" class="model-explorer-empty" hidden>No models match this filter.</div>

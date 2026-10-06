@@ -854,6 +854,271 @@
         },
         "pricing": {}
       }
+    },
+    "amazon.nova-2-lite-v1:0": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_ca472ba25878fe609bec",
+      "snapshot_hash": "488726429dcdfdadafd1677c600e6a37182ce655d4653829a504920717e81512",
+      "snapshot": {
+        "provider": "Amazon",
+        "family": "Nova 2",
+        "model": "Amazon Nova 2 Lite",
+        "aliases": [
+          "global.amazon.nova-2-lite-v1:0",
+          "us.amazon.nova-2-lite-v1:0",
+          "eu.amazon.nova-2-lite-v1:0"
+        ],
+        "context_window": 1000000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-10",
+        "reasoning": {
+          "type": "extended thinking",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-12-02",
+              "end": null,
+              "input": 0.3,
+              "output": 2.5
+            }
+          ]
+        }
+      }
+    },
+    "command-a-plus-05-2026": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_bd0263e781b7671282dd",
+      "snapshot_hash": "9cdcf05f937836f57d5f10343df903e410c96c47edcf3223e3ca260451b7f0a7",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Command A",
+        "model": "Command A+",
+        "context_window": 128000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-04-01",
+        "reasoning": {
+          "type": "reasoning capability",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "deepseek-flash": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_6716a3410908cbd01196",
+      "snapshot_hash": "deeefe61ef58e39d52187d3c40c63845d9e33a69b54d4e1ff212bc1bc606c409",
+      "snapshot": {
+        "provider": "DeepSeek",
+        "family": "DeepSeek V4",
+        "model": "DeepSeek V4.1 Flash",
+        "aliases": [
+          "deepseek-v4-flash",
+          "deepseek-v4-flash-vision-exp"
+        ],
+        "context_window": 1048576,
+        "max_output": 393216,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode / reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "variable": {
+            "start": "2026-09-10",
+            "unit": "per 1 million tokens",
+            "currency": "USD",
+            "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+            "off_peak": {
+              "input": 0.15,
+              "cached_input": 0.003,
+              "output": 0.6
+            },
+            "peak": {
+              "input": 0.3,
+              "cached_input": 0.006,
+              "output": 1.2
+            }
+          }
+        }
+      }
+    },
+    "mistral-medium-3-5": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_12749393fc7b4a1819bf",
+      "snapshot_hash": "904d82e44da85eca3c2e31a1ff5a8d3756458baaa6d388efd0bf4481ec2c272d",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Medium",
+        "model": "Mistral Medium 3.5",
+        "aliases": [
+          "mistral-medium-3-5-2604"
+        ],
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning_effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-04-28",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      }
+    },
+    "mistral-small-2603": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_c46e34e7558348cea91a",
+      "snapshot_hash": "3d04f9e534300cfb360de203d7eb756ac91e8ffe92de6af8b2748abb423144bb",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Small",
+        "model": "Mistral Small 4",
+        "aliases": [
+          "mistral-small-latest"
+        ],
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning_effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-03-16",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015,
+              "output": 0.6
+            }
+          ]
+        }
+      }
+    },
+    "qwen3.8-max": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_2ea333e862b9c02e69d5",
+      "snapshot_hash": "213bf53c57769564ce6ec58418dc0949587688465ad5b9d3f00cd1509bf45c69",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen 3.8",
+        "model": "Qwen3.8 Max",
+        "aliases": [
+          "qwen3.8-max-0902",
+          "qwen3.8-max-2026-09-02"
+        ],
+        "context_window": 1000000,
+        "max_output": 131072,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "none",
+            "thinking"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-02",
+              "end": null,
+              "input": 1.65,
+              "cached_input": 0.206,
+              "output": 4.951
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -1950,7 +2215,367 @@
       },
       "event_id": "evt_c62519fdffa48b0d7bb0",
       "event_hash": "c62519fdffa48b0d7bb06dee13cfb7ce65ac444a5a094094b922a6c516802542"
+    },
+    {
+      "sequence": 18,
+      "type": "model_added",
+      "model_id": "amazon.nova-2-lite-v1:0",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "c62519fdffa48b0d7bb06dee13cfb7ce65ac444a5a094094b922a6c516802542",
+      "snapshot": {
+        "provider": "Amazon",
+        "family": "Nova 2",
+        "model": "Amazon Nova 2 Lite",
+        "aliases": [
+          "global.amazon.nova-2-lite-v1:0",
+          "us.amazon.nova-2-lite-v1:0",
+          "eu.amazon.nova-2-lite-v1:0"
+        ],
+        "context_window": 1000000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-10",
+        "reasoning": {
+          "type": "extended thinking",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-12-02",
+              "end": null,
+              "input": 0.3,
+              "output": 2.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "family": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "model": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "aliases": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "context_window": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "max_output": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "knowledge_cutoff": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "reasoning": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/extended-thinking.html",
+        "modalities": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html",
+        "pricing": "https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/"
+      },
+      "event_id": "evt_ca472ba25878fe609bec",
+      "event_hash": "ca472ba25878fe609beca0e1e629b7acd725898ca330a85a49d1166a9d7ee518"
+    },
+    {
+      "sequence": 19,
+      "type": "model_added",
+      "model_id": "command-a-plus-05-2026",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "ca472ba25878fe609beca0e1e629b7acd725898ca330a85a49d1166a9d7ee518",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Command A",
+        "model": "Command A+",
+        "context_window": 128000,
+        "max_output": 64000,
+        "knowledge_cutoff": "2025-04-01",
+        "reasoning": {
+          "type": "reasoning capability",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/docs/command-a-plus",
+        "family": "https://docs.cohere.com/docs/command-a-plus",
+        "model": "https://docs.cohere.com/docs/command-a-plus",
+        "context_window": "https://docs.cohere.com/docs/command-a-plus",
+        "max_output": "https://docs.cohere.com/docs/command-a-plus",
+        "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-plus",
+        "reasoning": "https://docs.cohere.com/docs/command-a-plus",
+        "modalities": "https://docs.cohere.com/docs/command-a-plus",
+        "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing"
+      },
+      "event_id": "evt_bd0263e781b7671282dd",
+      "event_hash": "bd0263e781b7671282dd4b6725c27738f863f0cfc882e676a47fd4c55abf08c7"
+    },
+    {
+      "sequence": 20,
+      "type": "model_added",
+      "model_id": "deepseek-flash",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "bd0263e781b7671282dd4b6725c27738f863f0cfc882e676a47fd4c55abf08c7",
+      "snapshot": {
+        "provider": "DeepSeek",
+        "family": "DeepSeek V4",
+        "model": "DeepSeek V4.1 Flash",
+        "aliases": [
+          "deepseek-v4-flash",
+          "deepseek-v4-flash-vision-exp"
+        ],
+        "context_window": 1048576,
+        "max_output": 393216,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode / reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "variable": {
+            "start": "2026-09-10",
+            "unit": "per 1 million tokens",
+            "currency": "USD",
+            "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+            "off_peak": {
+              "input": 0.15,
+              "cached_input": 0.003,
+              "output": 0.6
+            },
+            "peak": {
+              "input": 0.3,
+              "cached_input": 0.006,
+              "output": 1.2
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://api-docs.deepseek.com/api/list-models/",
+        "family": "https://api-docs.deepseek.com/api/list-models/",
+        "model": "https://api-docs.deepseek.com/api/list-models/",
+        "aliases": "https://api-docs.deepseek.com/api/list-models/",
+        "context_window": "https://api-docs.deepseek.com/api/list-models/",
+        "max_output": "https://api-docs.deepseek.com/api/list-models/",
+        "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
+        "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
+        "modalities": "https://api-docs.deepseek.com/api/list-models/",
+        "pricing": "https://api-docs.deepseek.com/quick_start/pricing/"
+      },
+      "event_id": "evt_6716a3410908cbd01196",
+      "event_hash": "6716a3410908cbd01196d90541b1c4c2adcad4f3cd4993fe9e197e2560df5664"
+    },
+    {
+      "sequence": 21,
+      "type": "model_added",
+      "model_id": "mistral-medium-3-5",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "6716a3410908cbd01196d90541b1c4c2adcad4f3cd4993fe9e197e2560df5664",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Medium",
+        "model": "Mistral Medium 3.5",
+        "aliases": [
+          "mistral-medium-3-5-2604"
+        ],
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning_effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-04-28",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "family": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "model": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "aliases": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "context_window": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "max_output": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
+        "modalities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_12749393fc7b4a1819bf",
+      "event_hash": "12749393fc7b4a1819bf628a0a24544225918e45415ca0c5e2925cab6da91364"
+    },
+    {
+      "sequence": 22,
+      "type": "model_added",
+      "model_id": "mistral-small-2603",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "12749393fc7b4a1819bf628a0a24544225918e45415ca0c5e2925cab6da91364",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Small",
+        "model": "Mistral Small 4",
+        "aliases": [
+          "mistral-small-latest"
+        ],
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning_effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-03-16",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015,
+              "output": 0.6
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "family": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "model": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "aliases": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "context_window": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "max_output": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+        "reasoning": "https://docs.mistral.ai/studio/conversations/reasoning",
+        "modalities": "https://docs.mistral.ai/resources/changelogs",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_c46e34e7558348cea91a",
+      "event_hash": "c46e34e7558348cea91ac21bbbcb37e52d716b169a5a7a7a1aabe558b0c9fc20"
+    },
+    {
+      "sequence": 23,
+      "type": "model_added",
+      "model_id": "qwen3.8-max",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "c46e34e7558348cea91ac21bbbcb37e52d716b169a5a7a7a1aabe558b0c9fc20",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen 3.8",
+        "model": "Qwen3.8 Max",
+        "aliases": [
+          "qwen3.8-max-0902",
+          "qwen3.8-max-2026-09-02"
+        ],
+        "context_window": 1000000,
+        "max_output": 131072,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "none",
+            "thinking"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-02",
+              "end": null,
+              "input": 1.65,
+              "cached_input": 0.206,
+              "output": 4.951
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "family": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "model": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "aliases": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "context_window": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "max_output": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "knowledge_cutoff": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "reasoning": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "modalities": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max",
+        "pricing": "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing"
+      },
+      "event_id": "evt_2ea333e862b9c02e69d5",
+      "event_hash": "2ea333e862b9c02e69d59af938763ef253ecd8a82ac00d37b1704ba8c3904b67"
     }
   ],
-  "chain_head": "c62519fdffa48b0d7bb06dee13cfb7ce65ac444a5a094094b922a6c516802542"
+  "chain_head": "2ea333e862b9c02e69d59af938763ef253ecd8a82ac00d37b1704ba8c3904b67"
 }
