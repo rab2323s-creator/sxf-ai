@@ -81,6 +81,77 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Rerank 4",
+      "model": "Rerank 4 Pro",
+      "model_id": "rerank-v4.0-pro",
+      "context_window": 32768,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "ranking"
+        ]
+      },
+      "positioning": "Cohere's current high-quality Rerank 4 variant for complex multilingual retrieval and semi-structured data ranking.",
+      "sxf_url": "/models/rerank-4-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/rerank",
+        "https://docs.cohere.com/docs/reranking-best-practices",
+        "https://docs.cohere.com/reference/rerank",
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+        "https://docs.cohere.com/changelog/rerank-v4.0"
+      ],
+      "notes": [
+        "Cohere lists rerank-v4.0-pro as a latest Rerank model and recommends it for state-of-the-art quality and complex use cases.",
+        "Cohere documents a 32,768-token context length for Rerank 4.0.",
+        "The API reports billed search_units and Cohere states Rerank is priced by quantity of searches.",
+        "No current public PAYG numeric rate for Rerank 4 Pro was verified in the cited official pricing documentation, so pricing remains not-published rather than inheriting an older Rerank price."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/rerank",
+          "context_window": "https://docs.cohere.com/docs/reranking-best-practices",
+          "max_output": "https://docs.cohere.com/docs/rerank",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/rerank",
+          "reasoning": "https://docs.cohere.com/docs/rerank",
+          "modalities": "https://docs.cohere.com/docs/rerank",
+          "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+          "access": "https://docs.cohere.com/reference/rerank",
+          "lifecycle": "https://docs.cohere.com/docs/rerank",
+          "capabilities": "https://docs.cohere.com/docs/rerank"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "rerank"
+      ],
+      "pricing_basis": {
+        "meter": "search_units",
+        "quantity": 1,
+        "dimensions": [
+          "search_unit"
+        ],
+        "display_unit": "per search unit"
+      }
     }
   ]
 }
