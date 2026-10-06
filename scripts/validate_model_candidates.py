@@ -13,6 +13,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 from validate_model_identity import resolve_identity
+from build_model_catalog import CatalogError, validate_model
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE_PATH = ROOT / "data" / "model-candidates" / "queue.json"
@@ -176,11 +177,21 @@ def validate_candidate(candidate: dict, registry_ids: set[str], registry: dict |
         require(isinstance(reviewed_by, str) and reviewed_by.strip(), f"{cid}: reviewed candidate requires reviewed_by")
         require(valid_datetime(reviewed_at), f"{cid}: reviewed candidate requires reviewed_at")
 
+    proposed = candidate.get("proposed_record")
+    if validation["status"] == "passed" and candidate["change_type"] == "new_model":
+        require(isinstance(proposed, dict), f"{cid}: passed new_model validation requires a canonical proposed_record")
+        require(proposed.get("provider") == candidate["provider"], f"{cid}: proposed_record provider drift")
+        require(proposed.get("model_id") == native_id, f"{cid}: proposed_record model_id must match observed provider-native ID")
+        try:
+            validate_model(proposed, candidate["provider"], set(), set())
+        except CatalogError as exc:
+            raise CandidateError(f"{cid}: proposed_record fails canonical catalog validation: {exc}") from exc
+
     if review["status"] == "approved":
         require(validation["status"] == "passed", f"{cid}: approval requires passed validation")
         require(identity["status"] not in {"ambiguous", "possible_duplicate"}, f"{cid}: unresolved identity cannot be approved")
         if candidate["change_type"] != "source_issue":
-            require(isinstance(candidate.get("proposed_record"), dict), f"{cid}: approved change requires proposed_record")
+            require(isinstance(proposed, dict), f"{cid}: approved change requires proposed_record")
 
 
 def validate_queue(queue: dict, registry: dict):

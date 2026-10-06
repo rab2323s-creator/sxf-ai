@@ -123,9 +123,84 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "gpt-live-1",
+        "provider": "OpenAI",
+        "family": "GPT-Live",
         "model": "GPT-Live 1",
-        "provider": "OpenAI"
+        "model_id": "gpt-live-1",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": "2025-07-31",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "positioning": "Full-duplex voice model for natural real-time conversations with simultaneous listening and speaking plus backend-agent delegation.",
+        "sxf_url": "/models/gpt-live-1/",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "notes": [
+          "Voice sessions are billed per second at the published per-minute rate; backend model and tool usage is billed separately."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.05
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "lifecycle": "https://developers.openai.com/api/docs/models/gpt-live-1",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-live-1"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "speech-to-speech",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
       },
       "diff": {
         "model_id": {
@@ -146,11 +221,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -175,9 +248,79 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "gpt-live-transcribe",
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
         "model": "GPT-Live-Transcribe",
-        "provider": "OpenAI"
+        "model_id": "gpt-live-transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Low-latency streaming speech-to-text model for live audio transcription with tunable latency and transcript deltas.",
+        "sxf_url": "/models/gpt-live-transcribe/",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.017
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "lifecycle": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-live-transcribe"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "transcription"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
       },
       "diff": {
         "model_id": {
@@ -198,11 +341,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -227,9 +368,79 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "gpt-transcribe",
+        "provider": "OpenAI",
+        "family": "GPT Transcription",
         "model": "GPT-Transcribe",
-        "provider": "OpenAI"
+        "model_id": "gpt-transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "High-accuracy speech-to-text model for completed audio files, streamed file transcripts, and committed Realtime turns.",
+        "sxf_url": "/models/gpt-transcribe/",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "rates": {
+                "minute": 0.0045
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "lifecycle": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-transcribe"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "transcription"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
       },
       "diff": {
         "model_id": {
@@ -250,11 +461,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -893,9 +1102,83 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "mistral-large-2512",
+        "provider": "Mistral AI",
+        "family": "Mistral Large",
         "model": "Mistral Large 3",
-        "provider": "Mistral AI"
+        "model_id": "mistral-large-2512",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "State-of-the-art open-weight general-purpose multimodal Mixture-of-Experts model.",
+        "sxf_url": "/models/mistral-large-2512/",
+        "official_sources": [
+          "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "https://docs.mistral.ai/inference/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.5,
+              "cached_input": 0.05,
+              "output": 1.5
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "context_window": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "max_output": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "reasoning": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "modalities": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "pricing": "https://docs.mistral.ai/inference/pricing",
+            "access": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "lifecycle": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+            "capabilities": "https://docs.mistral.ai/models/mistral-large-3-25-12"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "vision",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
       },
       "diff": {
         "model_id": {
@@ -911,11 +1194,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -940,9 +1221,82 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "ministral-14b-2512",
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
         "model": "Ministral 3 14B",
-        "provider": "Mistral AI"
+        "model_id": "ministral-14b-2512",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Largest Ministral 3 open-weight model, optimized for capable local and edge deployment.",
+        "sxf_url": "/models/ministral-14b-2512/",
+        "official_sources": [
+          "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "https://docs.mistral.ai/inference/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.2,
+              "cached_input": 0.02,
+              "output": 0.2
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "context_window": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "max_output": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "reasoning": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "modalities": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "pricing": "https://docs.mistral.ai/inference/pricing",
+            "access": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "lifecycle": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+            "capabilities": "https://docs.mistral.ai/models/ministral-3-14b-25-12"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "vision",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
       },
       "diff": {
         "model_id": {
@@ -958,11 +1312,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -987,9 +1339,82 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "ministral-8b-2512",
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
         "model": "Ministral 3 8B",
-        "provider": "Mistral AI"
+        "model_id": "ministral-8b-2512",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Efficient Ministral 3 open-weight model with text and vision capabilities for local deployment.",
+        "sxf_url": "/models/ministral-8b-2512/",
+        "official_sources": [
+          "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "https://docs.mistral.ai/inference/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015,
+              "output": 0.15
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "context_window": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "max_output": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "reasoning": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "modalities": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "pricing": "https://docs.mistral.ai/inference/pricing",
+            "access": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "lifecycle": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+            "capabilities": "https://docs.mistral.ai/models/ministral-3-8b-25-12"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "vision",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
       },
       "diff": {
         "model_id": {
@@ -1005,11 +1430,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -1034,9 +1457,82 @@
         "possible_duplicates": []
       },
       "proposed_record": {
-        "model_id": "ministral-3b-2512",
+        "provider": "Mistral AI",
+        "family": "Ministral 3",
         "model": "Ministral 3 3B",
-        "provider": "Mistral AI"
+        "model_id": "ministral-3b-2512",
+        "context_window": 256000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Smallest Ministral 3 open-weight model, designed for efficient language and vision workloads at the edge.",
+        "sxf_url": "/models/ministral-3b-2512/",
+        "official_sources": [
+          "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "https://docs.mistral.ai/inference/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "output": 0.1
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "context_window": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "max_output": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "reasoning": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "modalities": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "pricing": "https://docs.mistral.ai/inference/pricing",
+            "access": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "lifecycle": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+            "capabilities": "https://docs.mistral.ai/models/ministral-3-3b-25-12"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "vision",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
       },
       "diff": {
         "model_id": {
@@ -1052,11 +1548,9 @@
         }
       ],
       "validation": {
-        "status": "pending",
+        "status": "passed",
         "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
+        "warnings": []
       },
       "review": {
         "status": "pending",
@@ -1109,6 +1603,141 @@
         "warnings": [
           "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
         ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_anthropic_claude_sonnet_5_5",
+      "detected_at": "2026-10-06T12:45:00Z",
+      "provider": "Anthropic",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "claude-sonnet-5-5",
+        "display_name": "Claude Sonnet 5.5"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Sonnet 5.5",
+        "model_id": "claude-sonnet-5-5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Current Sonnet model combining fast latency with frontier intelligence for production knowledge work and agentic workflows.",
+        "sxf_url": "/models/claude-sonnet-5-5/",
+        "official_sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-28",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-06",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "context_window": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "max_output": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "knowledge_cutoff": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "reasoning": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "modalities": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+            "access": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "lifecycle": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+            "capabilities": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "page_template": "catalog-reference",
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "vision",
+          "long-context",
+          "coding",
+          "agents"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "claude-sonnet-5-5"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:45:00Z"
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:45:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
       },
       "review": {
         "status": "pending",

@@ -28,7 +28,57 @@ candidate = {
         "confidence": "high",
         "possible_duplicates": []
     },
-    "proposed_record": {"model_id": "example-model"},
+    "proposed_record": {
+        "provider": "Example Provider",
+        "family": "Example",
+        "model": "Example Model",
+        "model_id": "example-model",
+        "context_window": None,
+        "max_output": None,
+        "knowledge_cutoff": None,
+        "reasoning": None,
+        "modalities": {"input": ["audio"], "output": ["text"]},
+        "positioning": "Example specialist model used for candidate validation tests.",
+        "sxf_url": "/models/example-model/",
+        "official_sources": ["https://example.com/models/example-model"],
+        "pricing": {
+            "standard": [
+                {
+                    "start": "2026-10-06",
+                    "end": None,
+                    "rates": {"minute": 0.01}
+                }
+            ]
+        },
+        "provenance": {
+            "verified_at": "2026-10-06",
+            "verification_method": "test fixture",
+            "evidence": {
+                "model_identity": "https://example.com/models/example-model",
+                "context_window": "https://example.com/models/example-model",
+                "max_output": "https://example.com/models/example-model",
+                "knowledge_cutoff": "https://example.com/models/example-model",
+                "reasoning": "https://example.com/models/example-model",
+                "modalities": "https://example.com/models/example-model",
+                "pricing": "https://example.com/models/example-model",
+                "access": "https://example.com/models/example-model",
+                "lifecycle": "https://example.com/models/example-model",
+                "capabilities": "https://example.com/models/example-model"
+            }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": False,
+        "page_template": "catalog-reference",
+        "access": {"official_api": True, "open_weight": False, "self_hostable": False},
+        "lifecycle": {"status": "current"},
+        "capabilities": ["audio", "transcription"],
+        "pricing_basis": {
+            "meter": "minutes",
+            "quantity": 1,
+            "dimensions": ["minute"],
+            "display_unit": "per minute"
+        }
+    },
     "diff": {"model_id": {"before": None, "after": "example-model"}},
     "evidence": [{
         "url": "https://example.com/models/example-model",
