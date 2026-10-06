@@ -351,7 +351,8 @@ def validate_model_pricing_catalog():
 
         if not model.get("provider"):
             fail(f"{model_id}: missing provider")
-        if not isinstance(model.get("context_window"), int) or model["context_window"] <= 0:
+        context_window = model.get("context_window")
+        if context_window is not None and (not isinstance(context_window, int) or context_window <= 0):
             fail(f"{model_id}: invalid context_window")
         max_output = model.get("max_output")
         if max_output not in {None, "unlimited"} and (not isinstance(max_output, int) or max_output <= 0):
@@ -447,8 +448,10 @@ def validate_model_pricing_catalog():
         if not isinstance(pricing_basis.get("display_unit"), str) or not pricing_basis["display_unit"].strip():
             fail(f"{model_id}: pricing_basis display_unit is required")
         if meter == "tokens":
-            if not {"input", "output"}.issubset(dimensions):
-                fail(f"{model_id}: token pricing requires input/output dimensions")
+            if "input" not in dimensions:
+                fail(f"{model_id}: token pricing requires an input dimension")
+            if calculator_eligible and "output" not in dimensions:
+                fail(f"{model_id}: calculator-eligible token pricing requires an output dimension")
         elif {"input", "cached_input", "output"} & set(dimensions):
             fail(f"{model_id}: non-token pricing must not use token dimensions")
 
@@ -489,13 +492,10 @@ def validate_model_pricing_catalog():
             previous_end = end
 
             if meter == "tokens":
-                for field in ("input", "output"):
+                for field in dimensions:
                     value = period.get(field)
                     if not isinstance(value, (int, float)) or value < 0:
                         fail(f"{model_id}: invalid {field} price")
-                cached_input = period.get("cached_input")
-                if cached_input is not None and (not isinstance(cached_input, (int, float)) or cached_input < 0):
-                    fail(f"{model_id}: invalid cached_input price")
                 if "rates" in period:
                     fail(f"{model_id}: token pricing must not use generic rates")
             else:
