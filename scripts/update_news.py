@@ -501,15 +501,27 @@ def model_history_html(model_ids, heading="Verified model history"):
         if event["type"] in {"baseline", "model_added"}:
             snapshot = event.get("snapshot", {})
             price = (snapshot.get("pricing", {}).get("standard") or [{}])[-1]
-            summary = (
-                f'Baseline verified: {int(snapshot.get("context_window", 0)):,} context · '
-                f'{model_output_label(snapshot)} max output'
-            )
-            if price.get("input") is not None and price.get("output") is not None:
-                summary += (
-                    f' · {catalog_price_label(price["input"])} input / '
-                    f'{catalog_price_label(price["output"])} output per MTok'
-                )
+            context = snapshot.get("context_window")
+            context_label = "context not published" if context is None else f"{int(context):,} context"
+            summary = f'Baseline verified: {context_label} · {model_output_label(snapshot)} max output'
+            basis = model.get("pricing_basis", {})
+            meter = basis.get("meter")
+            display_unit = basis.get("display_unit", "")
+            if meter == "tokens":
+                token_parts = []
+                if price.get("input") is not None:
+                    token_parts.append(f'{catalog_price_label(price["input"])} input')
+                if price.get("cached_input") is not None:
+                    token_parts.append(f'{catalog_price_label(price["cached_input"])} cached')
+                if price.get("output") is not None:
+                    token_parts.append(f'{catalog_price_label(price["output"])} output')
+                if token_parts:
+                    summary += f' · {" / ".join(token_parts)} {display_unit}'.rstrip()
+            else:
+                dimensions = basis.get("dimensions", [])
+                rates = price.get("rates", {})
+                if dimensions and rates.get(dimensions[0]) is not None:
+                    summary += f' · {catalog_price_label(rates[dimensions[0]])} {display_unit}'.rstrip()
             source = event.get("evidence", {}).get("model_identity") or model.get("official_sources", [""])[0]
             kind = "BASELINE"
         else:
@@ -10705,15 +10717,27 @@ def model_history_html(model_ids, heading="Verified model history"):
         if event["type"] in {"baseline", "model_added"}:
             snapshot = event.get("snapshot", {})
             price = (snapshot.get("pricing", {}).get("standard") or [{}])[-1]
-            summary = (
-                f'Baseline verified: {int(snapshot.get("context_window", 0)):,} context · '
-                f'{model_output_label(snapshot)} max output'
-            )
-            if price.get("input") is not None and price.get("output") is not None:
-                summary += (
-                    f' · {catalog_price_label(price["input"])} input / '
-                    f'{catalog_price_label(price["output"])} output per MTok'
-                )
+            context = snapshot.get("context_window")
+            context_label = "context not published" if context is None else f"{int(context):,} context"
+            summary = f'Baseline verified: {context_label} · {model_output_label(snapshot)} max output'
+            basis = model.get("pricing_basis", {})
+            meter = basis.get("meter")
+            display_unit = basis.get("display_unit", "")
+            if meter == "tokens":
+                token_parts = []
+                if price.get("input") is not None:
+                    token_parts.append(f'{catalog_price_label(price["input"])} input')
+                if price.get("cached_input") is not None:
+                    token_parts.append(f'{catalog_price_label(price["cached_input"])} cached')
+                if price.get("output") is not None:
+                    token_parts.append(f'{catalog_price_label(price["output"])} output')
+                if token_parts:
+                    summary += f' · {" / ".join(token_parts)} {display_unit}'.rstrip()
+            else:
+                dimensions = basis.get("dimensions", [])
+                rates = price.get("rates", {})
+                if dimensions and rates.get(dimensions[0]) is not None:
+                    summary += f' · {catalog_price_label(rates[dimensions[0]])} {display_unit}'.rstrip()
             source = event.get("evidence", {}).get("model_identity") or model.get("official_sources", [""])[0]
             kind = "BASELINE"
         else:
