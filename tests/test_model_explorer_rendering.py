@@ -29,4 +29,12 @@ assert '<td class="model-price">—</td>' in nova_fragment, (
     "Models without cached-input pricing must render an em dash instead of raising"
 )
 
-print("Model Explorer rendering regression test passed")
+pricing_html = module.model_pricing_page_html()
+assert "Amazon Nova 2 Lite" in pricing_html, "Pricing page must render Nova 2 Lite"
+nova_pricing_start = pricing_html.index("Amazon Nova 2 Lite")
+nova_pricing_fragment = pricing_html[nova_pricing_start:nova_pricing_start + 2200]
+assert "—" in nova_pricing_fragment, (
+    "Pricing page must tolerate models without cached-input pricing"
+)
+
+print("Model Explorer and pricing rendering regression tests passed")

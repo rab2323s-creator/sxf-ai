@@ -557,7 +557,7 @@ def compare_live_facts_html(model_ids):
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
         input_price = catalog_price_label(price["input"]) if price else "Not published"
-        cached_price = catalog_price_label(price["cached_input"]) if price else "—"
+        cached_price = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
@@ -799,7 +799,7 @@ def catalog_reference_variant(variant):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
     }
@@ -819,7 +819,7 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
         uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
         + output_tokens / 1_000_000 * rates["output"]
     )
     return cost, rates
@@ -859,7 +859,7 @@ def catalog_display_model(model_id, **overrides):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "cache_write": cache_write or "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
@@ -4179,9 +4179,13 @@ def catalog_model_reference_html(model_id, items):
     output_label = model_output_label(model)
 
     if price:
+        cached_summary = (
+            f'{catalog_price_label(price["cached_input"])} cached · '
+            if price.get("cached_input") is not None else ""
+        )
         pricing_summary = (
             f'{catalog_price_label(price["input"])} input · '
-            f'{catalog_price_label(price["cached_input"])} cached · '
+            f'{cached_summary}'
             f'{catalog_price_label(price["output"])} output / MTok'
         )
         input_price = catalog_price_label(price["input"])
@@ -9293,7 +9297,7 @@ def model_pricing_page_html():
           <td>{int(model["context_window"]):,}<small>tokens</small></td>
           <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
           <td class="price">{escape(catalog_price_label(price["input"]) if price else "Not published")}</td>
-          <td class="price">{escape(catalog_price_label(price["cached_input"]) if price else "—")}</td>
+          <td class="price">{escape(catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—")}</td>
           <td class="price">{escape(catalog_price_label(price["output"]) if price else "Not published")}</td>
           <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
         </tr>'''
@@ -10644,7 +10648,7 @@ def compare_live_facts_html(model_ids):
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
         input_price = catalog_price_label(price["input"]) if price else "Not published"
-        cached_price = catalog_price_label(price["cached_input"]) if price else "—"
+        cached_price = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
@@ -10886,7 +10890,7 @@ def catalog_reference_variant(variant):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
     }
@@ -10906,7 +10910,7 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
         uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates["cached_input"]
+        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
         + output_tokens / 1_000_000 * rates["output"]
     )
     return cost, rates
@@ -10946,7 +10950,7 @@ def catalog_display_model(model_id, **overrides):
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
-        "cached_price": catalog_price_label(price["cached_input"]),
+        "cached_price": catalog_price_label(price["cached_input"]) if price.get("cached_input") is not None else "—",
         "cache_write": cache_write or "—",
         "output_price": catalog_price_label(price["output"]),
         "source": model["official_sources"][0],
@@ -14266,9 +14270,13 @@ def catalog_model_reference_html(model_id, items):
     output_label = model_output_label(model)
 
     if price:
+        cached_summary = (
+            f'{catalog_price_label(price["cached_input"])} cached · '
+            if price.get("cached_input") is not None else ""
+        )
         pricing_summary = (
             f'{catalog_price_label(price["input"])} input · '
-            f'{catalog_price_label(price["cached_input"])} cached · '
+            f'{cached_summary}'
             f'{catalog_price_label(price["output"])} output / MTok'
         )
         input_price = catalog_price_label(price["input"])
@@ -19380,7 +19388,7 @@ def model_pricing_page_html():
           <td>{int(model["context_window"]):,}<small>tokens</small></td>
           <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
           <td class="price">{escape(catalog_price_label(price["input"]) if price else "Not published")}</td>
-          <td class="price">{escape(catalog_price_label(price["cached_input"]) if price else "—")}</td>
+          <td class="price">{escape(catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—")}</td>
           <td class="price">{escape(catalog_price_label(price["output"]) if price else "Not published")}</td>
           <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
         </tr>'''
