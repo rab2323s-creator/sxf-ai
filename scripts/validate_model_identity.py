@@ -35,6 +35,47 @@ def valid_https(value: str) -> bool:
     parsed = urlparse(value)
     return parsed.scheme == "https" and bool(parsed.netloc)
 
+def normalize_identity_token(value: str) -> str:
+    return "".join(ch.lower() for ch in (value or "") if ch.isalnum())
+
+
+def build_identity_lookup(registry: dict) -> dict:
+    exact = {}
+    normalized_names = {}
+    for entry in registry.get("models", []):
+        provider = entry["provider"]
+        cid = entry["canonical_model_id"]
+        bucket = exact.setdefault(provider, {})
+        bucket[cid] = ("exact", cid)
+        for token in entry.get("provider_native_ids", []):
+            bucket[token] = ("exact", cid)
+        for token in entry.get("aliases", []):
+            bucket[token] = ("alias", cid)
+        for token in entry.get("renamed_from", []):
+            bucket[token] = ("renamed", cid)
+
+        normalized = normalize_identity_token(entry.get("display_name", ""))
+        if normalized:
+            normalized_names.setdefault(provider, {}).setdefault(normalized, set()).add(cid)
+    return {"exact": exact, "normalized_names": normalized_names}
+
+
+def resolve_identity(registry: dict, provider: str, provider_native_id: str | None, display_name: str | None) -> dict:
+    lookup = build_identity_lookup(registry)
+    exact_bucket = lookup["exact"].get(provider, {})
+    if provider_native_id and provider_native_id in exact_bucket:
+        status, cid = exact_bucket[provider_native_id]
+        return {"status": status, "matched_model_id": cid, "confidence": "high", "possible_duplicates": []}
+
+    normalized = normalize_identity_token(display_name or "")
+    matches = sorted(lookup["normalized_names"].get(provider, {}).get(normalized, set())) if normalized else []
+    if len(matches) == 1:
+        return {"status": "possible_duplicate", "matched_model_id": None, "confidence": "medium", "possible_duplicates": matches}
+    if len(matches) > 1:
+        return {"status": "ambiguous", "matched_model_id": None, "confidence": "low", "possible_duplicates": matches}
+    return {"status": "new", "matched_model_id": None, "confidence": "high", "possible_duplicates": []}
+
+
 
 def validate_registry(registry: dict, catalog: dict) -> dict:
     require(registry.get("schema_version") == "1.0", "identity registry schema_version must be 1.0")
