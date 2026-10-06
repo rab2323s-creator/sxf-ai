@@ -1565,6 +1565,190 @@
           ]
         }
       }
+    },
+    "command-a-reasoning-08-2025": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_6928690ee105212017b6",
+      "snapshot_hash": "4f5611022b6d986edff8ff55f9696bc7f38585c2f6087df029784fb87381b48f",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Command A",
+        "model": "Command A Reasoning",
+        "context_window": 256000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-06-01",
+        "reasoning": {
+          "type": "thinking budget",
+          "levels": [
+            "configurable"
+          ],
+          "default": null,
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "deepseek-v4-pro": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_8820487d932a93802d0e",
+      "snapshot_hash": "86fd45449da29b8f0bc04e3a1c27b7fcd2d24acc2c29b538c20044bf99330acd",
+      "snapshot": {
+        "provider": "DeepSeek",
+        "family": "DeepSeek V4",
+        "model": "DeepSeek V4 Pro",
+        "context_window": 1048576,
+        "max_output": 393216,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode / reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "variable": {
+            "start": "2026-08-16",
+            "unit": "per 1 million tokens",
+            "currency": "USD",
+            "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+            "off_peak": {
+              "input": 0.66,
+              "cached_input": 0.022,
+              "output": 1.98
+            },
+            "peak": {
+              "input": 1.32,
+              "cached_input": 0.044,
+              "output": 3.96
+            }
+          }
+        }
+      }
+    },
+    "embed-v4.0": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_a61ef22fac18de713a23",
+      "snapshot_hash": "b8f69060ff1668a466f51ff4303a5795846cb3929cde842e5d7f8681cf87c2ea",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed",
+        "model": "Embed v4.0",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "gemini-3.8-flash-lite-tts": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_d932457153cfa45b3c80",
+      "snapshot_hash": "599a18588c76266ffcc9fdaea8ac73104d46f2080995a78d06b75cfe248c8be3",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash-Lite TTS",
+        "context_window": 8192,
+        "max_output": 16384,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": "2026-12-31",
+              "input": 0.5,
+              "cached_input": 0.125,
+              "output": 6
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.25,
+              "output": 12
+            }
+          ]
+        }
+      }
+    },
+    "gemini-3.8-flash-tts": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_2fedf630e7576b3d8130",
+      "snapshot_hash": "ee7bdc23e646c79dfa76102c71ac8c8fa144f6cb4d36d33568f25c9d9436c22e",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash TTS",
+        "context_window": 8192,
+        "max_output": 16384,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": "2026-12-31",
+              "input": 0.5,
+              "cached_input": 0.125,
+              "output": 9
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.25,
+              "output": 18
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -3665,7 +3849,266 @@
       },
       "event_id": "evt_af50abcf102498f73ce7",
       "event_hash": "af50abcf102498f73ce768fdd42e27390b07bb5aa97559bd98ef239362ee40bc"
+    },
+    {
+      "sequence": 37,
+      "type": "model_added",
+      "model_id": "command-a-reasoning-08-2025",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "af50abcf102498f73ce768fdd42e27390b07bb5aa97559bd98ef239362ee40bc",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Command A",
+        "model": "Command A Reasoning",
+        "context_window": 256000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-06-01",
+        "reasoning": {
+          "type": "thinking budget",
+          "levels": [
+            "configurable"
+          ],
+          "default": null,
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/docs/command-a-reasoning",
+        "family": "https://docs.cohere.com/docs/command-a-reasoning",
+        "model": "https://docs.cohere.com/docs/command-a-reasoning",
+        "context_window": "https://docs.cohere.com/docs/command-a-reasoning",
+        "max_output": "https://docs.cohere.com/docs/command-a-reasoning",
+        "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-reasoning",
+        "reasoning": "https://docs.cohere.com/docs/command-a-reasoning",
+        "modalities": "https://docs.cohere.com/v1/docs/models",
+        "pricing": "https://docs.cohere.com/docs/command-a-reasoning"
+      },
+      "event_id": "evt_6928690ee105212017b6",
+      "event_hash": "6928690ee105212017b68b4695f566591fc126040e1fa417129bc99509cfc8a5"
+    },
+    {
+      "sequence": 38,
+      "type": "model_added",
+      "model_id": "deepseek-v4-pro",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "6928690ee105212017b68b4695f566591fc126040e1fa417129bc99509cfc8a5",
+      "snapshot": {
+        "provider": "DeepSeek",
+        "family": "DeepSeek V4",
+        "model": "DeepSeek V4 Pro",
+        "context_window": 1048576,
+        "max_output": 393216,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode / reasoning effort",
+          "levels": [
+            "none",
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "variable": {
+            "start": "2026-08-16",
+            "unit": "per 1 million tokens",
+            "currency": "USD",
+            "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+            "off_peak": {
+              "input": 0.66,
+              "cached_input": 0.022,
+              "output": 1.98
+            },
+            "peak": {
+              "input": 1.32,
+              "cached_input": 0.044,
+              "output": 3.96
+            }
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://api-docs.deepseek.com/api/list-models/",
+        "family": "https://api-docs.deepseek.com/api/list-models/",
+        "model": "https://api-docs.deepseek.com/api/list-models/",
+        "context_window": "https://api-docs.deepseek.com/api/list-models/",
+        "max_output": "https://api-docs.deepseek.com/api/list-models/",
+        "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
+        "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
+        "modalities": "https://api-docs.deepseek.com/quick_start/pricing/",
+        "pricing": "https://api-docs.deepseek.com/quick_start/pricing/"
+      },
+      "event_id": "evt_8820487d932a93802d0e",
+      "event_hash": "8820487d932a93802d0e05aaae4dc465d7454cb2713c76e6b10a38a04445bb9c"
+    },
+    {
+      "sequence": 39,
+      "type": "model_added",
+      "model_id": "embed-v4.0",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "8820487d932a93802d0e05aaae4dc465d7454cb2713c76e6b10a38a04445bb9c",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed",
+        "model": "Embed v4.0",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/v1/docs/models",
+        "family": "https://docs.cohere.com/v1/docs/models",
+        "model": "https://docs.cohere.com/v1/docs/models",
+        "context_window": "https://docs.cohere.com/v1/docs/models",
+        "max_output": "https://docs.cohere.com/v1/docs/models",
+        "knowledge_cutoff": "https://docs.cohere.com/v1/docs/models",
+        "reasoning": "https://docs.cohere.com/v1/docs/models",
+        "modalities": "https://docs.cohere.com/v1/docs/models",
+        "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+      },
+      "event_id": "evt_a61ef22fac18de713a23",
+      "event_hash": "a61ef22fac18de713a233464668543fe1136e8dca5bbcb6518c19c049ebe7a8b"
+    },
+    {
+      "sequence": 40,
+      "type": "model_added",
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "a61ef22fac18de713a233464668543fe1136e8dca5bbcb6518c19c049ebe7a8b",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash-Lite TTS",
+        "context_window": 8192,
+        "max_output": 16384,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": "2026-12-31",
+              "input": 0.5,
+              "cached_input": 0.125,
+              "output": 6
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.25,
+              "output": 12
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_d932457153cfa45b3c80",
+      "event_hash": "d932457153cfa45b3c80f889eb3e7c7174c204b814598ba3625d8863290c74fe"
+    },
+    {
+      "sequence": 41,
+      "type": "model_added",
+      "model_id": "gemini-3.8-flash-tts",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "d932457153cfa45b3c80f889eb3e7c7174c204b814598ba3625d8863290c74fe",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.8 Flash TTS",
+        "context_window": 8192,
+        "max_output": 16384,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-22",
+              "end": "2026-12-31",
+              "input": 0.5,
+              "cached_input": 0.125,
+              "output": 9
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1,
+              "cached_input": 0.25,
+              "output": 18
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_2fedf630e7576b3d8130",
+      "event_hash": "2fedf630e7576b3d8130b0e21f8d78b27ac8f20ac7de6d343791fd036dee7b7f"
     }
   ],
-  "chain_head": "af50abcf102498f73ce768fdd42e27390b07bb5aa97559bd98ef239362ee40bc"
+  "chain_head": "2fedf630e7576b3d8130b0e21f8d78b27ac8f20ac7de6d343791fd036dee7b7f"
 }
