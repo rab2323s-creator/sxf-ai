@@ -136,6 +136,8 @@
   const activeFilters = filters.querySelector("#modelActiveFilters");
   const capabilityButtons = [...filters.querySelectorAll("[data-capability]")];
   const mobileFilterButton = mobileBar.querySelector("#modelMobileFilterButton");
+  const mobileFilterButtonSlot = document.createComment("model-mobile-filter-button-slot");
+  mobileFilterButton?.after(mobileFilterButtonSlot);
   const mobileFilterCount = mobileBar.querySelector("#modelMobileFilterCount");
   const mobileCount = mobileBar.querySelector("#modelMobileCount");
   const mobileFilterClose = filters.querySelector("#modelMobileFilterClose");
@@ -741,6 +743,10 @@
   const mobileQuery = window.matchMedia("(max-width: 680px)");
   const syncMobileMode = () => {
     if (mobileQuery.matches) {
+      const searchWrap = search?.closest(".model-search");
+      if (mobileFilterButton && searchWrap?.parentElement === toolbar && mobileFilterButton.parentElement !== toolbar) {
+        searchWrap.after(mobileFilterButton);
+      }
       if (providerWrap && providerWrap.parentElement !== filters) {
         filters.querySelector(".model-mobile-sheet-head")?.after(providerWrap);
       }
@@ -749,6 +755,9 @@
       }
     } else {
       setMobileFiltersOpen(false);
+      if (mobileFilterButton && mobileFilterButtonSlot.parentNode) {
+        mobileFilterButtonSlot.parentNode.insertBefore(mobileFilterButton, mobileFilterButtonSlot);
+      }
       if (providerWrap && providerSlot.parentNode) providerSlot.parentNode.insertBefore(providerWrap, providerSlot);
       if (sortWrap && sortSlot.parentNode) sortSlot.parentNode.insertBefore(sortWrap, sortSlot);
     }
