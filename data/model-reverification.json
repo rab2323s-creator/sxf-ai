@@ -1,0 +1,731 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-10-06",
+  "policy": {
+    "preview_days": 7,
+    "current_official_paid_days": 30,
+    "current_other_days": 45,
+    "legacy_days": 90,
+    "deprecated_days": 180,
+    "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
+  },
+  "summary": {
+    "total": 28,
+    "fresh": 28,
+    "due": 0,
+    "overdue": 0,
+    "critical": 0,
+    "high": 0
+  },
+  "items": [
+    {
+      "model_id": "claude-fable-5-1",
+      "provider": "Anthropic",
+      "model": "Claude Fable 5.1",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+      ]
+    },
+    {
+      "model_id": "claude-haiku-4-5-20251001",
+      "provider": "Anthropic",
+      "model": "Claude Haiku 4.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/haiku-4-5/overview"
+      ]
+    },
+    {
+      "model_id": "claude-opus-5-5",
+      "provider": "Anthropic",
+      "model": "Claude Opus 5.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+      ]
+    },
+    {
+      "model_id": "claude-sonnet-5",
+      "provider": "Anthropic",
+      "model": "Claude Sonnet 5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/sonnet-5/overview"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-flash",
+      "provider": "Google",
+      "model": "Gemini 3.8 Flash",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-5.6-luna",
+      "provider": "OpenAI",
+      "model": "GPT-5.6 Luna",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI",
+      "model": "GPT-5.6 Sol",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "provider": "OpenAI",
+      "model": "GPT-5.6 Terra",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-6-astra",
+      "provider": "OpenAI",
+      "model": "GPT-6 Astra",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-6-luna",
+      "provider": "OpenAI",
+      "model": "GPT-6 Luna",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-6-sol",
+      "provider": "OpenAI",
+      "model": "GPT-6 Sol",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-09-27",
+      "age_days": 9,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-10-27",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "provider": "Google",
+      "model": "Gemini 3.7 Flash",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-02",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "grok-4.3",
+      "provider": "xAI",
+      "model": "Grok 4.3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-02",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.x.ai/developers/migration/may-15-retirement",
+        "https://docs.x.ai/developers/models/grok-4.3"
+      ]
+    },
+    {
+      "model_id": "grok-4.6",
+      "provider": "xAI",
+      "model": "Grok 4.6",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-02",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.x.ai/developers/models/grok-4.6",
+        "https://docs.x.ai/developers/pricing"
+      ]
+    },
+    {
+      "model_id": "grok-4.7",
+      "provider": "xAI",
+      "model": "Grok 4.7",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-02",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.x.ai/developers/grok-4-7",
+        "https://docs.x.ai/developers/release-notes"
+      ]
+    },
+    {
+      "model_id": "qwen3.8-max",
+      "provider": "Alibaba Cloud",
+      "model": "Qwen3.8 Max",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/model-pricing",
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max"
+      ]
+    },
+    {
+      "model_id": "amazon.nova-2-lite-v1:0",
+      "provider": "Amazon",
+      "model": "Amazon Nova 2 Lite",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html"
+      ]
+    },
+    {
+      "model_id": "deepseek-flash",
+      "provider": "DeepSeek",
+      "model": "DeepSeek V4.1 Flash",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://api-docs.deepseek.com/api/list-models/",
+        "https://api-docs.deepseek.com/quick_start/pricing/"
+      ]
+    },
+    {
+      "model_id": "codestral-2508",
+      "provider": "Mistral AI",
+      "model": "Codestral",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/codestral-25-08",
+        "https://docs.mistral.ai/resources/known-limitations"
+      ]
+    },
+    {
+      "model_id": "codestral-embed-2505",
+      "provider": "Mistral AI",
+      "model": "Codestral Embed",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings"
+      ]
+    },
+    {
+      "model_id": "mistral-medium-3-5",
+      "provider": "Mistral AI",
+      "model": "Mistral Medium 3.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/mistral-medium-3-5-26-04"
+      ]
+    },
+    {
+      "model_id": "mistral-ocr-4-1",
+      "provider": "Mistral AI",
+      "model": "OCR 4.1",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/ocr-4-1",
+        "https://docs.mistral.ai/studio/document-processing/basic_ocr"
+      ]
+    },
+    {
+      "model_id": "mistral-small-2603",
+      "provider": "Mistral AI",
+      "model": "Mistral Small 4",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/mistral-small-4-0-26-03"
+      ]
+    },
+    {
+      "model_id": "voxtral-mini-2602",
+      "provider": "Mistral AI",
+      "model": "Voxtral Mini Transcribe 2",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+      ]
+    },
+    {
+      "model_id": "llama-4-maverick",
+      "provider": "Meta",
+      "model": "Llama 4 Maverick",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-17",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ]
+    },
+    {
+      "model_id": "llama-4-scout",
+      "provider": "Meta",
+      "model": "Llama 4 Scout",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-03",
+      "age_days": 3,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-17",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.meta.com/llama/get-started/",
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ]
+    },
+    {
+      "model_id": "command-a-plus-05-2026",
+      "provider": "Cohere",
+      "model": "Command A+",
+      "lifecycle_status": "current",
+      "pricing_status": "free-preview",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.cohere.com/docs/command-a-plus",
+        "https://docs.cohere.com/docs/model-vault/standard/pricing"
+      ]
+    },
+    {
+      "model_id": "rerank-v4.0-pro",
+      "provider": "Cohere",
+      "model": "Rerank 4 Pro",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+        "https://docs.cohere.com/docs/rerank",
+        "https://docs.cohere.com/docs/reranking-best-practices",
+        "https://docs.cohere.com/reference/rerank"
+      ]
+    }
+  ]
+}
