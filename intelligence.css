@@ -1328,3 +1328,10 @@
     line-height:1.02;
   }
 }
+
+
+/* Model Explorer progressive result window */
+.model-results-control{display:flex;justify-content:center;padding:18px 0 4px}
+.model-show-more{appearance:none;min-width:180px;border:1px solid rgba(200,255,77,.24);border-radius:999px;background:rgba(200,255,77,.035);color:#bdc7d1;padding:11px 18px;font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease}
+.model-show-more:hover,.model-show-more:focus-visible{border-color:rgba(200,255,77,.55);background:rgba(200,255,77,.07);color:var(--accent);outline:none}
+@media(max-width:640px){.model-results-control{padding-top:14px}.model-show-more{width:100%}}
