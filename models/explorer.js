@@ -10,6 +10,38 @@
   const empty = document.getElementById("modelExplorerEmpty");
   const providerButtons = [...root.querySelectorAll("[data-model-provider]")];
   const toolbar = root.querySelector(".model-explorer-toolbar");
+  const tableWrap = root.querySelector(".model-explorer-table-wrap");
+  const cardByRow = new Map();
+
+  const mobileBar = document.createElement("div");
+  mobileBar.className = "model-mobile-bar";
+  mobileBar.innerHTML = `
+    <div class="model-mobile-summary">
+      <span>MODEL CATALOG</span>
+      <strong id="modelMobileCount">Loading models…</strong>
+    </div>
+    <button type="button" class="model-mobile-filter-button" id="modelMobileFilterButton" aria-expanded="false" aria-controls="modelExplorerFacets">
+      Filters <span id="modelMobileFilterCount" aria-hidden="true"></span>
+    </button>
+  `;
+  toolbar?.before(mobileBar);
+
+  const mobileActiveFilters = document.createElement("div");
+  mobileActiveFilters.className = "model-mobile-active-filters";
+  mobileActiveFilters.hidden = true;
+  mobileBar.after(mobileActiveFilters);
+
+  const mobileCards = document.createElement("div");
+  mobileCards.className = "model-mobile-cards";
+  mobileCards.setAttribute("aria-label", "AI model results");
+  tableWrap?.after(mobileCards);
+
+  const mobileBackdrop = document.createElement("button");
+  mobileBackdrop.type = "button";
+  mobileBackdrop.className = "model-filter-backdrop";
+  mobileBackdrop.setAttribute("aria-label", "Close filters");
+  mobileBackdrop.hidden = true;
+  root.appendChild(mobileBackdrop);
 
   let provider = "all";
   let catalog = null;
@@ -29,7 +61,15 @@
 
   const filters = document.createElement("div");
   filters.className = "model-explorer-facets";
+  filters.id = "modelExplorerFacets";
+  filters.setAttribute("role", "dialog");
+  filters.setAttribute("aria-modal", "true");
+  filters.setAttribute("aria-label", "Model filters");
   filters.innerHTML = `
+    <div class="model-mobile-sheet-head">
+      <div><span>FILTER MODELS</span><strong>Refine the catalog</strong></div>
+      <button type="button" id="modelMobileFilterClose" aria-label="Close filters">×</button>
+    </div>
     <div class="model-facet-primary">
       <div class="model-filter-group" aria-label="Capabilities">
         <span class="model-filter-label">Capabilities</span>
@@ -98,9 +138,32 @@
   const secondaryFilters = filters.querySelector("#modelSecondaryFilters");
   const activeFilters = filters.querySelector("#modelActiveFilters");
   const capabilityButtons = [...filters.querySelectorAll("[data-capability]")];
+  const mobileFilterButton = mobileBar.querySelector("#modelMobileFilterButton");
+  const mobileFilterButtonSlot = document.createComment("model-mobile-filter-button-slot");
+  mobileFilterButton?.after(mobileFilterButtonSlot);
+  const mobileFilterCount = mobileBar.querySelector("#modelMobileFilterCount");
+  const mobileCount = mobileBar.querySelector("#modelMobileCount");
+  const mobileFilterClose = filters.querySelector("#modelMobileFilterClose");
+
+  const setMobileFiltersOpen = open => {
+    root.classList.toggle("mobile-filters-open", open);
+    mobileBackdrop.hidden = !open;
+    mobileFilterButton?.setAttribute("aria-expanded", String(open));
+    if (open) {
+      document.documentElement.classList.add("model-filters-lock");
+      window.setTimeout(() => filters.querySelector("button,select,input")?.focus(), 0);
+    } else {
+      document.documentElement.classList.remove("model-filters-lock");
+    }
+  };
 
   const quickProviderNames = new Set(["all", "OpenAI", "Anthropic", "Google", "xAI"]);
   const providerWrap = root.querySelector(".model-provider-filters");
+  const sortWrap = sort?.closest(".model-sort") || null;
+  const providerSlot = document.createComment("model-provider-slot");
+  const sortSlot = document.createComment("model-sort-slot");
+  providerWrap?.after(providerSlot);
+  sortWrap?.after(sortSlot);
   const providerMoreButton = document.createElement("button");
   providerMoreButton.type = "button";
   providerMoreButton.className = "model-filter model-provider-more";
@@ -234,11 +297,16 @@
   const renderActiveFilters = () => {
     if (!activeFilters) return;
     const entries = activeFilterEntries();
-    activeFilters.hidden = entries.length === 0;
-    activeFilters.innerHTML = entries.map(entry =>
+    const markup = entries.map(entry =>
       '<button type="button" class="model-active-filter" data-remove-filter="' + entry.key + '">' +
       entry.label + ' <span aria-hidden="true">×</span></button>'
     ).join("") + (entries.length > 1 ? '<button type="button" class="model-active-clear" data-clear-all>Clear all</button>' : "");
+    activeFilters.hidden = entries.length === 0;
+    activeFilters.innerHTML = markup;
+    mobileActiveFilters.hidden = entries.length === 0;
+    mobileActiveFilters.innerHTML = markup;
+    const totalActive = entries.length;
+    if (mobileFilterCount) mobileFilterCount.textContent = totalActive ? String(totalActive) : "";
     if (moreFilterCount) {
       const total = secondaryFilterCount();
       moreFilterCount.textContent = total ? String(total) : "";
@@ -327,6 +395,16 @@
       : "/compare/";
   };
 
+  const syncSelectionUi = (row, checked) => {
+    row.classList.toggle("is-selected", checked);
+    const rowInput = row.querySelector(".model-compare-check");
+    if (rowInput) rowInput.checked = checked;
+    const card = cardByRow.get(row);
+    card?.classList.toggle("is-selected", checked);
+    const cardInput = card?.querySelector(".model-card-compare-check");
+    if (cardInput) cardInput.checked = checked;
+  };
+
   const setSelected = (row, checked) => {
     const model = modelForRow(row);
     if (!model) return;
@@ -334,13 +412,11 @@
       const first = selected.values().next().value;
       selected.delete(first);
       const previous = rows.find(item => modelForRow(item)?.model_id === first);
-      previous?.querySelector(".model-compare-check")?.removeAttribute("checked");
-      const previousInput = previous?.querySelector(".model-compare-check");
-      if (previousInput) previousInput.checked = false;
+      if (previous) syncSelectionUi(previous, false);
     }
     if (checked) selected.add(model.model_id);
     else selected.delete(model.model_id);
-    row.classList.toggle("is-selected", selected.has(model.model_id));
+    syncSelectionUi(row, selected.has(model.model_id));
     updateDock();
   };
 
@@ -387,7 +463,60 @@
         line.textContent = tags.slice(0, 4).join(" · ");
         modelCell.appendChild(line);
       }
+
+      if (!cardByRow.has(row)) {
+        const priceCells = [...row.querySelectorAll("td.model-price")];
+        const primaryRate = priceCells[0]?.childNodes[0]?.textContent?.trim() || "Not published";
+        const outputRate = priceCells[2]?.textContent?.trim() || "—";
+        const context = model.context_window
+          ? Number(model.context_window).toLocaleString() + " tokens"
+          : "Not published";
+        const caps = capabilitySet(model);
+        const tags = [];
+        if (caps.has("reasoning")) tags.push("Reasoning");
+        if (caps.has("vision")) tags.push("Image");
+        if (caps.has("video")) tags.push("Video");
+        if (caps.has("audio")) tags.push("Audio");
+        if (caps.has("coding")) tags.push("Coding");
+        if (caps.has("agents")) tags.push("Agents");
+        if (caps.has("embeddings")) tags.push("Embeddings");
+        if (caps.has("transcription")) tags.push("Transcription");
+        if (caps.has("ocr")) tags.push("OCR");
+        if (isOpenWeight(model)) tags.push("Open weights");
+
+        const card = document.createElement("article");
+        card.className = "model-mobile-card";
+        card.dataset.modelCard = model.model_id;
+        card.innerHTML = `
+          <div class="model-card-topline">
+            <div class="model-card-provider"><span>${model.provider}</span><small>${model.family || ""}</small></div>
+            <label class="model-card-compare">
+              <input type="checkbox" class="model-card-compare-check" aria-label="Select ${model.model} for comparison">
+              <span>Compare</span>
+            </label>
+          </div>
+          <a class="model-card-title" href="${row.querySelector("th[scope='row'] a")?.getAttribute("href") || "#"}">
+            <strong>${model.model}</strong>
+            <small>${model.model_id}</small>
+          </a>
+          <div class="model-card-facts">
+            <div><span>Context</span><strong>${context}</strong></div>
+            <div><span>Input</span><strong>${primaryRate}</strong></div>
+            <div><span>Output</span><strong>${outputRate}</strong></div>
+          </div>
+          <div class="model-card-tags">${tags.slice(0, 4).map(tag => "<span>" + tag + "</span>").join("")}</div>
+          <div class="model-card-actions">
+            <a href="${row.querySelector("th[scope='row'] a")?.getAttribute("href") || "#"}">View model <b>↗</b></a>
+            <span>Verified ${model.verified_at || ""}</span>
+          </div>
+        `;
+        const cardInput = card.querySelector(".model-card-compare-check");
+        cardInput?.addEventListener("change", () => setSelected(row, cardInput.checked));
+        cardByRow.set(row, card);
+        mobileCards.appendChild(card);
+      }
     });
+    if (cardByRow.size) root.classList.add("mobile-cards-ready");
   };
 
   const apply = (historyMode = "replace", resetWindow = true) => {
@@ -434,15 +563,20 @@
     ordered.forEach(row => {
       body?.appendChild(row);
       row.hidden = !renderedRows.has(row);
+      const card = cardByRow.get(row);
+      if (card) {
+        mobileCards.appendChild(card);
+        card.hidden = !renderedRows.has(row);
+      }
     });
 
     const totalMatches = matches.length;
     const shown = Math.min(visibleLimit, totalMatches);
-    if (count) {
-      count.textContent = shown < totalMatches
-        ? shown + " of " + totalMatches + " models shown"
-        : totalMatches + (totalMatches === 1 ? " model shown" : " models shown");
-    }
+    const countText = shown < totalMatches
+      ? shown + " of " + totalMatches + " models shown"
+      : totalMatches + (totalMatches === 1 ? " model shown" : " models shown");
+    if (count) count.textContent = countText;
+    if (mobileCount) mobileCount.textContent = countText;
     if (empty) empty.hidden = totalMatches !== 0;
     if (resultsControl) resultsControl.hidden = shown >= totalMatches;
     if (showMoreButton) {
@@ -507,7 +641,7 @@
     setSecondaryOpen(secondaryFilters?.hidden === true);
   });
 
-  activeFilters?.addEventListener("click", event => {
+  const handleActiveFilterClick = event => {
     const clearAll = event.target.closest("[data-clear-all]");
     if (clearAll) {
       resetButton?.click();
@@ -531,7 +665,13 @@
     else if (key === "verified" && verificationFilter) verificationFilter.value = "all";
     syncProviderUi();
     apply("push");
-  });
+  };
+  activeFilters?.addEventListener("click", handleActiveFilterClick);
+  mobileActiveFilters.addEventListener("click", handleActiveFilterClick);
+
+  mobileFilterButton?.addEventListener("click", () => setMobileFiltersOpen(true));
+  mobileFilterClose?.addEventListener("click", () => setMobileFiltersOpen(false));
+  mobileBackdrop.addEventListener("click", () => setMobileFiltersOpen(false));
 
   document.addEventListener("click", event => {
     if (!providerPicker.hidden && !providerPicker.contains(event.target) && event.target !== providerMoreButton) {
@@ -540,6 +680,7 @@
   });
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") {
+      setMobileFiltersOpen(false);
       closeProviderPicker();
       if (!secondaryFilters?.hidden && secondaryFilterCount() === 0) setSecondaryOpen(false);
     }
@@ -594,13 +735,38 @@
 
   compareClear?.addEventListener("click", () => {
     selected.clear();
-    rows.forEach(row => {
-      row.classList.remove("is-selected");
-      const input = row.querySelector(".model-compare-check");
-      if (input) input.checked = false;
-    });
+    rows.forEach(row => syncSelectionUi(row, false));
     updateDock();
   });
+
+  const mobileQuery = window.matchMedia("(max-width: 680px)");
+  const syncMobileMode = () => {
+    if (mobileQuery.matches) {
+      providerButtons.forEach(button => { button.hidden = false; });
+      const searchWrap = search?.closest(".model-search");
+      if (mobileFilterButton && searchWrap?.parentElement === toolbar && mobileFilterButton.parentElement !== toolbar) {
+        searchWrap.after(mobileFilterButton);
+      }
+      if (providerWrap && providerWrap.parentElement !== filters) {
+        filters.querySelector(".model-mobile-sheet-head")?.after(providerWrap);
+      }
+      if (sortWrap && sortWrap.parentElement !== filters) {
+        providerWrap?.after(sortWrap);
+      }
+    } else {
+      setMobileFiltersOpen(false);
+      providerButtons.forEach(button => {
+        button.hidden = !quickProviderNames.has(button.dataset.modelProvider || "");
+      });
+      if (mobileFilterButton && mobileFilterButtonSlot.parentNode) {
+        mobileFilterButtonSlot.parentNode.insertBefore(mobileFilterButton, mobileFilterButtonSlot);
+      }
+      if (providerWrap && providerSlot.parentNode) providerSlot.parentNode.insertBefore(providerWrap, providerSlot);
+      if (sortWrap && sortSlot.parentNode) sortSlot.parentNode.insertBefore(sortWrap, sortSlot);
+    }
+  };
+  mobileQuery.addEventListener?.("change", syncMobileMode);
+  syncMobileMode();
 
   fetch("/data/model-index.json", {cache: "no-cache"})
     .then(response => {
