@@ -10,6 +10,10 @@ on:
       - "data/model-pricing.json"
       - "data/model-index.json"
       - "data/model-index.schema.json"
+      - "models/explorer.js"
+      - "models/index.html"
+      - "intelligence.css"
+      - "scripts/update_news.py"
       - "data/model-reverification.json"
       - "data/model-reverification.schema.json"
       - "scripts/build_model_catalog.py"
@@ -25,6 +29,9 @@ on:
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
+      - "tests/test_model_explorer_filters.py"
+      - "tests/test_model_explorer_rendering.py"
+      - "tests/test_model_explorer_100.py"
       - ".github/workflows/model-catalog.yml"
   push:
     branches: [main]
@@ -35,6 +42,10 @@ on:
       - "data/model-pricing.json"
       - "data/model-index.json"
       - "data/model-index.schema.json"
+      - "models/explorer.js"
+      - "models/index.html"
+      - "intelligence.css"
+      - "scripts/update_news.py"
       - "data/model-reverification.json"
       - "data/model-reverification.schema.json"
       - "scripts/build_model_catalog.py"
@@ -50,6 +61,9 @@ on:
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
+      - "tests/test_model_explorer_filters.py"
+      - "tests/test_model_explorer_rendering.py"
+      - "tests/test_model_explorer_100.py"
       - ".github/workflows/model-catalog.yml"
   workflow_dispatch:
 
@@ -68,8 +82,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: JavaScript syntax check
+        run: node --check models/explorer.js
       - name: Syntax check
-        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/build_reverification_queue.py scripts/validate_catalog_scale.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_index.py tests/test_model_reverification.py tests/test_catalog_scale.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
+        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/build_reverification_queue.py scripts/validate_catalog_scale.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_index.py tests/test_model_reverification.py tests/test_catalog_scale.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py tests/test_model_explorer_filters.py tests/test_model_explorer_rendering.py tests/test_model_explorer_100.py
       - name: Validate sources and generated artifact
         run: python scripts/build_model_catalog.py --check
       - name: Validate lightweight model index
@@ -91,6 +107,9 @@ jobs:
           python tests/test_model_identity.py
           python tests/test_model_candidates.py
           python tests/test_generalized_pricing.py
+          python tests/test_model_explorer_filters.py
+          python tests/test_model_explorer_rendering.py
+          python tests/test_model_explorer_100.py
       - name: Generate coverage report
         run: python scripts/catalog_coverage.py
       - name: Generate coverage quality review
