@@ -172,7 +172,11 @@
   };
 
   const syncProviderUi = () => {
-    syncProviderUi();
+    providerButtons.forEach(button => {
+      const active = button.dataset.modelProvider === provider;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
     providerOptions?.querySelectorAll("[data-provider-option]").forEach(button => {
       const active = button.dataset.providerOption === provider;
       button.classList.toggle("is-active", active);
@@ -228,7 +232,7 @@
     const params = new URLSearchParams(window.location.search);
     const urlProvider = normalize(params.get("provider") || "all");
     provider = validProviders.get(urlProvider) || "all";
-    providerButtons.forEach(button => button.classList.toggle("is-active", button.dataset.modelProvider === provider));
+    syncProviderUi();
 
     capabilityButtons.forEach(button => {
       const key = button.dataset.capability;
