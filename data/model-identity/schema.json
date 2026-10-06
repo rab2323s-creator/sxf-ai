@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sxf.si/schemas/model-identity-registry-v1.json",
+  "title": "SXF Model Identity Registry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_role",
+    "bootstrapped_from",
+    "identity_policy",
+    "models"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "identity_policy": {
+      "type": "object"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "canonical_model_id",
+          "provider",
+          "provider_native_ids",
+          "aliases",
+          "family",
+          "version",
+          "display_name",
+          "predecessor",
+          "successor",
+          "renamed_from",
+          "lifecycle_status",
+          "identity_sources"
+        ],
+        "properties": {
+          "canonical_model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provider": {
+            "type": "string",
+            "minLength": 1
+          },
+          "provider_native_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "family": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "predecessor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "successor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "renamed_from": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "lifecycle_status": {
+            "enum": [
+              "current",
+              "preview",
+              "legacy",
+              "deprecated"
+            ]
+          },
+          "identity_sources": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^https://"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "registry_role": {
+      "const": "canonical identity layer"
+    },
+    "bootstrapped_from": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

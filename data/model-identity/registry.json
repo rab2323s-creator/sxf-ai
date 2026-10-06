@@ -1,0 +1,542 @@
+{
+  "schema_version": "1.0",
+  "identity_policy": {
+    "canonical_id_stability": "canonical_model_id is stable across marketing renames; provider-native IDs and aliases may evolve",
+    "namespace": "provider-scoped native IDs and aliases; canonical_model_id is globally unique",
+    "unresolved_relationships": "Unknown version, predecessor, successor, and rename relationships remain null or empty until primary-source verified"
+  },
+  "models": [
+    {
+      "canonical_model_id": "gpt-6-astra",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-6-astra"
+      ],
+      "aliases": [],
+      "family": "GPT-6",
+      "version": null,
+      "display_name": "GPT-6 Astra",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra"
+      ]
+    },
+    {
+      "canonical_model_id": "gpt-6-sol",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-6-sol"
+      ],
+      "aliases": [],
+      "family": "GPT-6",
+      "version": null,
+      "display_name": "GPT-6 Sol",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-sol"
+      ]
+    },
+    {
+      "canonical_model_id": "gpt-6-luna",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-6-luna"
+      ],
+      "aliases": [],
+      "family": "GPT-6",
+      "version": null,
+      "display_name": "GPT-6 Luna",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ]
+    },
+    {
+      "canonical_model_id": "gpt-5.6-sol",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-5.6-sol"
+      ],
+      "aliases": [
+        "gpt-5.6"
+      ],
+      "family": "GPT-5.6",
+      "version": null,
+      "display_name": "GPT-5.6 Sol",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+      ]
+    },
+    {
+      "canonical_model_id": "gpt-5.6-terra",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-5.6-terra"
+      ],
+      "aliases": [],
+      "family": "GPT-5.6",
+      "version": null,
+      "display_name": "GPT-5.6 Terra",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+      ]
+    },
+    {
+      "canonical_model_id": "gpt-5.6-luna",
+      "provider": "OpenAI",
+      "provider_native_ids": [
+        "gpt-5.6-luna"
+      ],
+      "aliases": [],
+      "family": "GPT-5.6",
+      "version": null,
+      "display_name": "GPT-5.6 Luna",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+      ]
+    },
+    {
+      "canonical_model_id": "claude-fable-5-1",
+      "provider": "Anthropic",
+      "provider_native_ids": [
+        "claude-fable-5-1"
+      ],
+      "aliases": [],
+      "family": "Claude 5",
+      "version": null,
+      "display_name": "Claude Fable 5.1",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+      ]
+    },
+    {
+      "canonical_model_id": "claude-opus-5-5",
+      "provider": "Anthropic",
+      "provider_native_ids": [
+        "claude-opus-5-5"
+      ],
+      "aliases": [],
+      "family": "Claude 5",
+      "version": null,
+      "display_name": "Claude Opus 5.5",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+      ]
+    },
+    {
+      "canonical_model_id": "claude-sonnet-5",
+      "provider": "Anthropic",
+      "provider_native_ids": [
+        "claude-sonnet-5"
+      ],
+      "aliases": [],
+      "family": "Claude 5",
+      "version": null,
+      "display_name": "Claude Sonnet 5",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://platform.claude.com/docs/en/models/sonnet-5/overview"
+      ]
+    },
+    {
+      "canonical_model_id": "claude-haiku-4-5-20251001",
+      "provider": "Anthropic",
+      "provider_native_ids": [
+        "claude-haiku-4-5-20251001"
+      ],
+      "aliases": [
+        "claude-haiku-4-5"
+      ],
+      "family": "Claude 4",
+      "version": null,
+      "display_name": "Claude Haiku 4.5",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://platform.claude.com/docs/en/models/haiku-4-5/overview"
+      ]
+    },
+    {
+      "canonical_model_id": "gemini-3.8-flash",
+      "provider": "Google",
+      "provider_native_ids": [
+        "gemini-3.8-flash"
+      ],
+      "aliases": [],
+      "family": "Gemini 3",
+      "version": null,
+      "display_name": "Gemini 3.8 Flash",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ]
+    },
+    {
+      "canonical_model_id": "grok-4.7",
+      "provider": "xAI",
+      "provider_native_ids": [
+        "grok-4.7"
+      ],
+      "aliases": [],
+      "family": "Grok 4",
+      "version": null,
+      "display_name": "Grok 4.7",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.x.ai/developers/grok-4-7"
+      ]
+    },
+    {
+      "canonical_model_id": "grok-4.6",
+      "provider": "xAI",
+      "provider_native_ids": [
+        "grok-4.6"
+      ],
+      "aliases": [],
+      "family": "Grok 4",
+      "version": null,
+      "display_name": "Grok 4.6",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.x.ai/developers/models/grok-4.6"
+      ]
+    },
+    {
+      "canonical_model_id": "grok-4.3",
+      "provider": "xAI",
+      "provider_native_ids": [
+        "grok-4.3"
+      ],
+      "aliases": [
+        "grok-4.3-latest"
+      ],
+      "family": "Grok 4",
+      "version": null,
+      "display_name": "Grok 4.3",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.x.ai/developers/models/grok-4.3"
+      ]
+    },
+    {
+      "canonical_model_id": "gemini-3.7-flash",
+      "provider": "Google",
+      "provider_native_ids": [
+        "gemini-3.7-flash"
+      ],
+      "aliases": [],
+      "family": "Gemini 3",
+      "version": null,
+      "display_name": "Gemini 3.7 Flash",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash"
+      ]
+    },
+    {
+      "canonical_model_id": "llama-4-scout",
+      "provider": "Meta",
+      "provider_native_ids": [
+        "llama-4-scout"
+      ],
+      "aliases": [],
+      "family": "Llama 4",
+      "version": null,
+      "display_name": "Llama 4 Scout",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ]
+    },
+    {
+      "canonical_model_id": "llama-4-maverick",
+      "provider": "Meta",
+      "provider_native_ids": [
+        "llama-4-maverick"
+      ],
+      "aliases": [],
+      "family": "Llama 4",
+      "version": null,
+      "display_name": "Llama 4 Maverick",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md"
+      ]
+    },
+    {
+      "canonical_model_id": "deepseek-flash",
+      "provider": "DeepSeek",
+      "provider_native_ids": [
+        "deepseek-flash"
+      ],
+      "aliases": [
+        "deepseek-v4-flash",
+        "deepseek-v4-flash-vision-exp"
+      ],
+      "family": "DeepSeek V4",
+      "version": null,
+      "display_name": "DeepSeek V4.1 Flash",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://api-docs.deepseek.com/api/list-models/"
+      ]
+    },
+    {
+      "canonical_model_id": "mistral-small-2603",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "mistral-small-2603"
+      ],
+      "aliases": [
+        "mistral-small-latest"
+      ],
+      "family": "Mistral Small",
+      "version": null,
+      "display_name": "Mistral Small 4",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/mistral-small-4-0-26-03"
+      ]
+    },
+    {
+      "canonical_model_id": "mistral-medium-3-5",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "mistral-medium-3-5"
+      ],
+      "aliases": [
+        "mistral-medium-3-5-2604"
+      ],
+      "family": "Mistral Medium",
+      "version": null,
+      "display_name": "Mistral Medium 3.5",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/mistral-medium-3-5-26-04"
+      ]
+    },
+    {
+      "canonical_model_id": "qwen3.8-max",
+      "provider": "Alibaba Cloud",
+      "provider_native_ids": [
+        "qwen3.8-max"
+      ],
+      "aliases": [
+        "qwen3.8-max-0902",
+        "qwen3.8-max-2026-09-02"
+      ],
+      "family": "Qwen 3.8",
+      "version": null,
+      "display_name": "Qwen3.8 Max",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.modelstudio.console.alibabacloud.com/en/model-studio/qwen3-8-max"
+      ]
+    },
+    {
+      "canonical_model_id": "command-a-plus-05-2026",
+      "provider": "Cohere",
+      "provider_native_ids": [
+        "command-a-plus-05-2026"
+      ],
+      "aliases": [],
+      "family": "Command A",
+      "version": null,
+      "display_name": "Command A+",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.cohere.com/docs/command-a-plus"
+      ]
+    },
+    {
+      "canonical_model_id": "amazon.nova-2-lite-v1:0",
+      "provider": "Amazon",
+      "provider_native_ids": [
+        "amazon.nova-2-lite-v1:0"
+      ],
+      "aliases": [
+        "global.amazon.nova-2-lite-v1:0",
+        "us.amazon.nova-2-lite-v1:0",
+        "eu.amazon.nova-2-lite-v1:0"
+      ],
+      "family": "Nova 2",
+      "version": null,
+      "display_name": "Amazon Nova 2 Lite",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html"
+      ]
+    },
+    {
+      "canonical_model_id": "mistral-ocr-4-1",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "mistral-ocr-4-1"
+      ],
+      "aliases": [
+        "mistral-ocr-latest"
+      ],
+      "family": "Mistral OCR",
+      "version": null,
+      "display_name": "OCR 4.1",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/ocr-4-1"
+      ]
+    },
+    {
+      "canonical_model_id": "voxtral-mini-2602",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "voxtral-mini-2602"
+      ],
+      "aliases": [],
+      "family": "Voxtral",
+      "version": null,
+      "display_name": "Voxtral Mini Transcribe 2",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+      ]
+    },
+    {
+      "canonical_model_id": "rerank-v4.0-pro",
+      "provider": "Cohere",
+      "provider_native_ids": [
+        "rerank-v4.0-pro"
+      ],
+      "aliases": [],
+      "family": "Rerank 4",
+      "version": null,
+      "display_name": "Rerank 4 Pro",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.cohere.com/docs/rerank"
+      ]
+    },
+    {
+      "canonical_model_id": "codestral-2508",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "codestral-2508"
+      ],
+      "aliases": [
+        "codestral-latest"
+      ],
+      "family": "Codestral",
+      "version": null,
+      "display_name": "Codestral",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/codestral-25-08"
+      ]
+    },
+    {
+      "canonical_model_id": "codestral-embed-2505",
+      "provider": "Mistral AI",
+      "provider_native_ids": [
+        "codestral-embed-2505"
+      ],
+      "aliases": [
+        "codestral-embed"
+      ],
+      "family": "Codestral",
+      "version": null,
+      "display_name": "Codestral Embed",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.mistral.ai/models/codestral-embed-25-05"
+      ]
+    }
+  ],
+  "registry_role": "canonical identity layer",
+  "bootstrapped_from": "data/model-pricing.json@2026-10-06"
+}
