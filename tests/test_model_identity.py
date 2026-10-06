@@ -28,6 +28,11 @@ assert resolved["status"] == "possible_duplicate" and resolved["possible_duplica
 resolved = module.resolve_identity(registry, "Example Provider", "example-native-id", "Example Model")
 assert resolved["status"] == "new"
 
+renamed_registry = copy.deepcopy(registry)
+renamed_registry["models"][0]["renamed_from"].append("gpt-6-ultra-old-name")
+resolved = module.resolve_identity(renamed_registry, "OpenAI", "gpt-6-ultra-old-name", "GPT-6 Astra")
+assert resolved["status"] == "renamed" and resolved["matched_model_id"] == "gpt-6-astra"
+
 bad = copy.deepcopy(registry)
 bad["models"][1]["aliases"].append(bad["models"][0]["provider_native_ids"][0])
 try:
