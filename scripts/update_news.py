@@ -731,6 +731,7 @@ def model_has_official_paid_pricing(model):
     return (
         model_pricing_status(model) == "official-paid"
         and model.get("calculator_eligible") is True
+        and model.get("pricing_basis", {}).get("meter") == "tokens"
         and bool(model.get("pricing", {}).get("standard"))
     )
 
@@ -816,11 +817,15 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     tier_input_tokens = total_input_tokens if pricing_input_tokens is None else int(pricing_input_tokens)
     if tier_input_tokens < 0:
         raise ValueError("pricing_input_tokens must be non-negative")
+    model = model_catalog_entry(model_id)
+    quantity = float(model.get("pricing_basis", {}).get("quantity", 1_000_000))
+    if model.get("pricing_basis", {}).get("meter") != "tokens" or quantity <= 0:
+        raise RuntimeError(f"{model_id} does not use calculator-compatible token pricing")
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
-        uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
-        + output_tokens / 1_000_000 * rates["output"]
+        uncached_input_tokens / quantity * rates["input"]
+        + cached_input_tokens / quantity * rates.get("cached_input", rates["input"])
+        + output_tokens / quantity * rates["output"]
     )
     return cost, rates
 
@@ -10822,6 +10827,7 @@ def model_has_official_paid_pricing(model):
     return (
         model_pricing_status(model) == "official-paid"
         and model.get("calculator_eligible") is True
+        and model.get("pricing_basis", {}).get("meter") == "tokens"
         and bool(model.get("pricing", {}).get("standard"))
     )
 
@@ -10907,11 +10913,15 @@ def estimate_standard_cost(model_id, uncached_input_tokens=0, output_tokens=0, c
     tier_input_tokens = total_input_tokens if pricing_input_tokens is None else int(pricing_input_tokens)
     if tier_input_tokens < 0:
         raise ValueError("pricing_input_tokens must be non-negative")
+    model = model_catalog_entry(model_id)
+    quantity = float(model.get("pricing_basis", {}).get("quantity", 1_000_000))
+    if model.get("pricing_basis", {}).get("meter") != "tokens" or quantity <= 0:
+        raise RuntimeError(f"{model_id} does not use calculator-compatible token pricing")
     rates = effective_standard_price(model_id, tier_input_tokens, on_date)
     cost = (
-        uncached_input_tokens / 1_000_000 * rates["input"]
-        + cached_input_tokens / 1_000_000 * rates.get("cached_input", rates["input"])
-        + output_tokens / 1_000_000 * rates["output"]
+        uncached_input_tokens / quantity * rates["input"]
+        + cached_input_tokens / quantity * rates.get("cached_input", rates["input"])
+        + output_tokens / quantity * rates["output"]
     )
     return cost, rates
 
