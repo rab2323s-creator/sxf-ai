@@ -35,7 +35,8 @@
           "calculator_eligible",
           "access",
           "lifecycle",
-          "capabilities"
+          "capabilities",
+          "pricing_basis"
         ],
         "properties": {
           "family": {
@@ -245,6 +246,59 @@
                 "moderation",
                 "long-context"
               ]
+            }
+          },
+          "pricing_basis": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "meter",
+              "quantity",
+              "dimensions",
+              "display_unit"
+            ],
+            "properties": {
+              "meter": {
+                "type": "string",
+                "enum": [
+                  "tokens",
+                  "pages",
+                  "minutes",
+                  "characters",
+                  "images",
+                  "requests",
+                  "search_units",
+                  "instance_hours"
+                ]
+              },
+              "quantity": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "dimensions": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "input",
+                    "cached_input",
+                    "output",
+                    "page",
+                    "minute",
+                    "character",
+                    "image",
+                    "request",
+                    "search_unit",
+                    "instance_hour"
+                  ]
+                }
+              },
+              "display_unit": {
+                "type": "string",
+                "minLength": 1
+              }
             }
           }
         }
