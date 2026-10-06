@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sxf.si/schemas/model-index-v1.json",
+  "title": "SXF Lightweight Model Index",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_catalog_schema",
+    "source_verified",
+    "model_count",
+    "provider_count",
+    "models"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "source_catalog_schema": {
+      "type": "string"
+    },
+    "source_verified": {
+      "type": "string",
+      "format": "date"
+    },
+    "model_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "provider_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "model",
+          "provider",
+          "family",
+          "sxf_url",
+          "context_window",
+          "max_output",
+          "capabilities",
+          "access",
+          "lifecycle",
+          "pricing_status",
+          "calculator_eligible",
+          "pricing_basis",
+          "verified_at",
+          "standard_rate"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

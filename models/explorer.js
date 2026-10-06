@@ -296,9 +296,9 @@
   const supports = (model, capability) => capabilitySet(model).has(capability);
   const isOpenWeight = model => model?.access?.open_weight === true;
   const verificationAge = model => {
-    if (!catalog?.source_verified || !model?.provenance?.verified_at) return Number.POSITIVE_INFINITY;
+    if (!catalog?.source_verified || !model?.verified_at) return Number.POSITIVE_INFINITY;
     const anchor = new Date(catalog.source_verified + "T00:00:00Z");
-    const verified = new Date(model.provenance.verified_at + "T00:00:00Z");
+    const verified = new Date(model.verified_at + "T00:00:00Z");
     return Math.max(0, Math.round((anchor - verified) / 86400000));
   };
 
@@ -553,17 +553,16 @@
     updateDock();
   });
 
-  fetch("/data/model-pricing.json", {cache: "no-cache"})
+  fetch("/data/model-index.json", {cache: "no-cache"})
     .then(response => {
-      if (!response.ok) throw new Error("catalog");
+      if (!response.ok) throw new Error("model-index");
       return response.json();
     })
     .then(data => {
       catalog = data;
-      const byName = new Map((data.models || []).map(model => [normalize(model.model), model]));
+      const byId = new Map((data.models || []).map(model => [model.model_id, model]));
       rows.forEach(row => {
-        const name = row.querySelector("th[scope='row'] > a")?.textContent;
-        const model = byName.get(normalize(name));
+        const model = byId.get(row.dataset.modelId || "");
         if (model) modelByRow.set(row, model);
       });
       enhanceRows();
@@ -591,14 +590,11 @@
         return n.toLocaleString();
       };
       const verifiedRates = models.map(model => {
-        const periods = model?.pricing?.standard || [];
-        const current = periods.find(period =>
-          data.source_verified >= period.start && (!period.end || data.source_verified <= period.end)
-        );
-        return current && model.pricing_status === "official-paid" && model.calculator_eligible === true
-          ? {model, input: Number(current.input)}
+        const input = Number(model?.standard_rate?.input);
+        return model.pricing_status === "official-paid" && model.calculator_eligible === true && Number.isFinite(input)
+          ? {model, input}
           : null;
-      }).filter(item => item && Number.isFinite(item.input));
+      }).filter(Boolean);
 
       const largestContextModel = models.reduce((best, model) =>
         Number(model.context_window || 0) > Number(best?.context_window || 0) ? model : best, null
