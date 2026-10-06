@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-06",
-  "model_count": 36,
+  "model_count": 41,
   "provider_count": 10,
   "models": [
     {
@@ -1244,6 +1244,163 @@
         "cached_input": 0.2,
         "output": 10
       }
+    },
+    {
+      "model_id": "gemini-3.8-flash-tts",
+      "model": "Gemini 3.8 Flash TTS",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-8-flash-tts/",
+      "context_window": 8192,
+      "max_output": 16384,
+      "capabilities": [
+        "tts"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.5,
+        "cached_input": 0.125,
+        "output": 9
+      }
+    },
+    {
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-8-flash-lite-tts/",
+      "context_window": 8192,
+      "max_output": 16384,
+      "capabilities": [
+        "tts"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.5,
+        "cached_input": 0.125,
+        "output": 6
+      }
+    },
+    {
+      "model_id": "embed-v4.0",
+      "model": "Embed v4.0",
+      "provider": "Cohere",
+      "family": "Embed",
+      "sxf_url": "/models/embed-v4-0/",
+      "context_window": 128000,
+      "max_output": null,
+      "capabilities": [
+        "embeddings",
+        "vision"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
+    },
+    {
+      "model_id": "command-a-reasoning-08-2025",
+      "model": "Command A Reasoning",
+      "provider": "Cohere",
+      "family": "Command A",
+      "sxf_url": "/models/command-a-reasoning/",
+      "context_window": 256000,
+      "max_output": 32000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "model": "DeepSeek V4 Pro",
+      "provider": "DeepSeek",
+      "family": "DeepSeek V4",
+      "sxf_url": "/models/deepseek-v4-pro/",
+      "context_window": 1048576,
+      "max_output": 393216,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "long-context",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
     }
   ]
 }

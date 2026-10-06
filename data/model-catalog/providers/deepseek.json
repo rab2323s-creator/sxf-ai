@@ -108,6 +108,109 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "DeepSeek V4",
+      "model": "DeepSeek V4 Pro",
+      "model_id": "deepseek-v4-pro",
+      "context_window": 1048576,
+      "max_output": 393216,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode / reasoning effort",
+        "levels": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "DeepSeek's higher-capability V4 API model for long-context reasoning, coding and agentic text workloads.",
+      "sxf_url": "/models/deepseek-v4-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing/",
+        "https://api-docs.deepseek.com/api/list-models/",
+        "https://api-docs.deepseek.com/guides/thinking_mode/",
+        "https://api-docs.deepseek.com/updates/"
+      ],
+      "notes": [
+        "DeepSeek currently continues API service for DeepSeek V4 Pro; current official documentation supersedes the earlier September 2026 phase-out notice.",
+        "DeepSeek publishes time-variable peak and off-peak token rates, so the model is excluded from the fixed-rate calculator.",
+        "The current API documentation describes V4 Pro as text-only; no vision capability is asserted.",
+        "Knowledge cutoff remains unknown because the cited current official documentation does not publish one."
+      ],
+      "pricing": {
+        "variable": {
+          "start": "2026-08-16",
+          "unit": "per 1 million tokens",
+          "currency": "USD",
+          "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+          "off_peak": {
+            "input": 0.66,
+            "cached_input": 0.022,
+            "output": 1.98
+          },
+          "peak": {
+            "input": 1.32,
+            "cached_input": 0.044,
+            "output": 3.96
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api-docs.deepseek.com/api/list-models/",
+          "context_window": "https://api-docs.deepseek.com/api/list-models/",
+          "max_output": "https://api-docs.deepseek.com/api/list-models/",
+          "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
+          "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
+          "modalities": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "pricing": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "access": "https://api-docs.deepseek.com/api/list-models/",
+          "lifecycle": "https://api-docs.deepseek.com/updates/",
+          "capabilities": "https://api-docs.deepseek.com/api/list-models/"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "long-context",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

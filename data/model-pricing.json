@@ -3298,6 +3298,438 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini 3",
+      "model": "Gemini 3.8 Flash TTS",
+      "model_id": "gemini-3.8-flash-tts",
+      "context_window": 8192,
+      "max_output": 16384,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "Google's flagship production text-to-speech model for high-fidelity, expressive long-form and multi-speaker audio generation.",
+      "sxf_url": "/models/gemini-3-8-flash-tts/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Google lists Gemini 3.8 Flash TTS as generally available as of September 22, 2026.",
+        "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-22",
+            "end": "2026-12-31",
+            "input": 0.5,
+            "cached_input": 0.125,
+            "output": 9
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1,
+            "cached_input": 0.25,
+            "output": 18
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini 3",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "context_window": 8192,
+      "max_output": 16384,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "Google's production text-to-speech model optimized for high-throughput, low-latency and cost-efficient speech generation.",
+      "sxf_url": "/models/gemini-3-8-flash-lite-tts/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Google lists Gemini 3.8 Flash-Lite TTS as generally available as of September 22, 2026 and as the production replacement for gemini-3.1-flash-tts-preview.",
+        "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-22",
+            "end": "2026-12-31",
+            "input": 0.5,
+            "cached_input": 0.125,
+            "output": 6
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1,
+            "cached_input": 0.25,
+            "output": 12
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "provider": "Cohere",
+      "family": "Embed",
+      "model": "Embed v4.0",
+      "model_id": "embed-v4.0",
+      "context_window": 128000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "PDF"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Cohere multimodal embedding model for text, image and mixed text-image document retrieval, classification and clustering.",
+      "sxf_url": "/models/embed-v4-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/v1/docs/models",
+        "https://docs.cohere.com/docs/multimodal-embeddings",
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+      ],
+      "notes": [
+        "Cohere continues to list embed-v4.0 in the current model catalog with text, image and mixed text/image (PDF) inputs and a 128K context length.",
+        "Cohere now lists Embed v5 variants as newer embedding models, but embed-v4.0 is not marked deprecated in the current official model table.",
+        "No current public numeric PAYG API token rate for embed-v4.0 was verified, so pricing remains not-published rather than inheriting a rate from another Embed generation."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/v1/docs/models",
+          "context_window": "https://docs.cohere.com/v1/docs/models",
+          "max_output": "https://docs.cohere.com/v1/docs/models",
+          "knowledge_cutoff": "https://docs.cohere.com/v1/docs/models",
+          "reasoning": "https://docs.cohere.com/v1/docs/models",
+          "modalities": "https://docs.cohere.com/v1/docs/models",
+          "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+          "access": "https://docs.cohere.com/v1/docs/models",
+          "lifecycle": "https://docs.cohere.com/v1/docs/models",
+          "capabilities": "https://docs.cohere.com/v1/docs/models"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "provider": "Cohere",
+      "family": "Command A",
+      "model": "Command A Reasoning",
+      "model_id": "command-a-reasoning-08-2025",
+      "context_window": 256000,
+      "max_output": 32000,
+      "knowledge_cutoff": "2024-06-01",
+      "reasoning": {
+        "type": "thinking budget",
+        "levels": [
+          "configurable"
+        ],
+        "default": null,
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Cohere reasoning model for multilingual enterprise problem solving, tool use, RAG and agentic workflows.",
+      "sxf_url": "/models/command-a-reasoning/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/command-a-reasoning",
+        "https://docs.cohere.com/v1/docs/models",
+        "https://docs.cohere.com/changelog/2025-08-21-command-a-reasoning"
+      ],
+      "notes": [
+        "Cohere currently lists command-a-reasoning-08-2025 as Live with a 256K context window and 32K maximum output.",
+        "Cohere states that both trial and production API keys are free until rate limits are reached; no numeric pay-as-you-go token rate is asserted.",
+        "The model is excluded from the calculator because no paid Standard token rate is published for the Cohere API."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/command-a-reasoning",
+          "context_window": "https://docs.cohere.com/docs/command-a-reasoning",
+          "max_output": "https://docs.cohere.com/docs/command-a-reasoning",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-reasoning",
+          "reasoning": "https://docs.cohere.com/docs/command-a-reasoning",
+          "modalities": "https://docs.cohere.com/v1/docs/models",
+          "pricing": "https://docs.cohere.com/docs/command-a-reasoning",
+          "access": "https://docs.cohere.com/docs/command-a-reasoning",
+          "lifecycle": "https://docs.cohere.com/v1/docs/models",
+          "capabilities": "https://docs.cohere.com/docs/command-a-reasoning"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "provider": "DeepSeek",
+      "family": "DeepSeek V4",
+      "model": "DeepSeek V4 Pro",
+      "model_id": "deepseek-v4-pro",
+      "context_window": 1048576,
+      "max_output": 393216,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode / reasoning effort",
+        "levels": [
+          "none",
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "DeepSeek's higher-capability V4 API model for long-context reasoning, coding and agentic text workloads.",
+      "sxf_url": "/models/deepseek-v4-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing/",
+        "https://api-docs.deepseek.com/api/list-models/",
+        "https://api-docs.deepseek.com/guides/thinking_mode/",
+        "https://api-docs.deepseek.com/updates/"
+      ],
+      "notes": [
+        "DeepSeek currently continues API service for DeepSeek V4 Pro; current official documentation supersedes the earlier September 2026 phase-out notice.",
+        "DeepSeek publishes time-variable peak and off-peak token rates, so the model is excluded from the fixed-rate calculator.",
+        "The current API documentation describes V4 Pro as text-only; no vision capability is asserted.",
+        "Knowledge cutoff remains unknown because the cited current official documentation does not publish one."
+      ],
+      "pricing": {
+        "variable": {
+          "start": "2026-08-16",
+          "unit": "per 1 million tokens",
+          "currency": "USD",
+          "schedule": "Peak hours are 01:00–04:00 and 06:00–10:00 UTC Monday–Friday, excluding Chinese public holidays; otherwise off-peak.",
+          "off_peak": {
+            "input": 0.66,
+            "cached_input": 0.022,
+            "output": 1.98
+          },
+          "peak": {
+            "input": 1.32,
+            "cached_input": 0.044,
+            "output": 3.96
+          }
+        }
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api-docs.deepseek.com/api/list-models/",
+          "context_window": "https://api-docs.deepseek.com/api/list-models/",
+          "max_output": "https://api-docs.deepseek.com/api/list-models/",
+          "knowledge_cutoff": "https://api-docs.deepseek.com/api/list-models/",
+          "reasoning": "https://api-docs.deepseek.com/guides/thinking_mode/",
+          "modalities": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "pricing": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "access": "https://api-docs.deepseek.com/api/list-models/",
+          "lifecycle": "https://api-docs.deepseek.com/updates/",
+          "capabilities": "https://api-docs.deepseek.com/api/list-models/"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "long-context",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ],
   "verification_policy": {

@@ -208,6 +208,180 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Gemini 3",
+      "model": "Gemini 3.8 Flash TTS",
+      "model_id": "gemini-3.8-flash-tts",
+      "context_window": 8192,
+      "max_output": 16384,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "Google's flagship production text-to-speech model for high-fidelity, expressive long-form and multi-speaker audio generation.",
+      "sxf_url": "/models/gemini-3-8-flash-tts/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Google lists Gemini 3.8 Flash TTS as generally available as of September 22, 2026.",
+        "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-22",
+            "end": "2026-12-31",
+            "input": 0.5,
+            "cached_input": 0.125,
+            "output": 9
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1,
+            "cached_input": 0.25,
+            "output": 18
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Gemini 3",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "context_window": 8192,
+      "max_output": 16384,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "Google's production text-to-speech model optimized for high-throughput, low-latency and cost-efficient speech generation.",
+      "sxf_url": "/models/gemini-3-8-flash-lite-tts/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog"
+      ],
+      "notes": [
+        "Google lists Gemini 3.8 Flash-Lite TTS as generally available as of September 22, 2026 and as the production replacement for gemini-3.1-flash-tts-preview.",
+        "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-22",
+            "end": "2026-12-31",
+            "input": 0.5,
+            "cached_input": 0.125,
+            "output": 6
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1,
+            "cached_input": 0.25,
+            "output": 12
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
