@@ -1,0 +1,981 @@
+{
+  "schema_version": "1.0",
+  "source_catalog_schema": "1.6",
+  "source_verified": "2026-10-06",
+  "model_count": 28,
+  "provider_count": 10,
+  "models": [
+    {
+      "model_id": "gpt-6-astra",
+      "model": "GPT-6 Astra",
+      "provider": "OpenAI",
+      "family": "GPT-6",
+      "sxf_url": "/models/gpt-6-astra/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 10,
+        "cached_input": 1,
+        "output": 50
+      }
+    },
+    {
+      "model_id": "gpt-6-sol",
+      "model": "GPT-6 Sol",
+      "provider": "OpenAI",
+      "family": "GPT-6",
+      "sxf_url": "/models/gpt-6-sol/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.2,
+        "output": 10
+      }
+    },
+    {
+      "model_id": "gpt-6-luna",
+      "model": "GPT-6 Luna",
+      "provider": "OpenAI",
+      "family": "GPT-6",
+      "sxf_url": "/models/gpt-6-luna/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 0.1,
+        "cached_input": 0.01,
+        "output": 0.5
+      }
+    },
+    {
+      "model_id": "gpt-5.6-sol",
+      "model": "GPT-5.6 Sol",
+      "provider": "OpenAI",
+      "family": "GPT-5.6",
+      "sxf_url": "/models/gpt-5-6-sol/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 4,
+        "cached_input": 0.4,
+        "output": 20
+      }
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "model": "GPT-5.6 Terra",
+      "provider": "OpenAI",
+      "family": "GPT-5.6",
+      "sxf_url": "/models/gpt-5-6/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.2,
+        "output": 12
+      }
+    },
+    {
+      "model_id": "gpt-5.6-luna",
+      "model": "GPT-5.6 Luna",
+      "provider": "OpenAI",
+      "family": "GPT-5.6",
+      "sxf_url": "/models/gpt-5-6-luna/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 0.2,
+        "cached_input": 0.02,
+        "output": 1.2
+      }
+    },
+    {
+      "model_id": "claude-fable-5-1",
+      "model": "Claude Fable 5.1",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/models/claude-fable-5-1/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 10,
+        "cached_input": 0.25,
+        "output": 50
+      }
+    },
+    {
+      "model_id": "claude-opus-5-5",
+      "model": "Claude Opus 5.5",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/models/claude-opus-5-5/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 4,
+        "cached_input": 0.2,
+        "output": 20
+      }
+    },
+    {
+      "model_id": "claude-sonnet-5",
+      "model": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/guides/gpt-6-vs-claude/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.2,
+        "output": 10
+      }
+    },
+    {
+      "model_id": "claude-haiku-4-5-20251001",
+      "model": "Claude Haiku 4.5",
+      "provider": "Anthropic",
+      "family": "Claude 4",
+      "sxf_url": "/guides/gpt-6-vs-claude/",
+      "context_window": 200000,
+      "max_output": 64000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 1,
+        "cached_input": 0.1,
+        "output": 5
+      }
+    },
+    {
+      "model_id": "gemini-3.8-flash",
+      "model": "Gemini 3.8 Flash",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-8-flash/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-09-27",
+      "standard_rate": {
+        "input": 0.75,
+        "cached_input": 0.075,
+        "output": 3.75
+      }
+    },
+    {
+      "model_id": "grok-4.7",
+      "model": "Grok 4.7",
+      "provider": "xAI",
+      "family": "Grok 4",
+      "sxf_url": "/models/grok-4-7/",
+      "context_window": 500000,
+      "max_output": "unlimited",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.5,
+        "output": 6
+      }
+    },
+    {
+      "model_id": "grok-4.6",
+      "model": "Grok 4.6",
+      "provider": "xAI",
+      "family": "Grok 4",
+      "sxf_url": "/models/grok-4-6/",
+      "context_window": 500000,
+      "max_output": "unlimited",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.5,
+        "output": 6
+      }
+    },
+    {
+      "model_id": "grok-4.3",
+      "model": "Grok 4.3",
+      "provider": "xAI",
+      "family": "Grok 4",
+      "sxf_url": "/models/grok-4-3/",
+      "context_window": 1000000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": {
+        "input": 1.25,
+        "cached_input": 0.2,
+        "output": 2.5
+      }
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "model": "Gemini 3.7 Flash",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-7-flash/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": {
+        "input": 0.75,
+        "cached_input": 0.075,
+        "output": 3.75
+      }
+    },
+    {
+      "model_id": "llama-4-scout",
+      "model": "Llama 4 Scout",
+      "provider": "Meta",
+      "family": "Llama 4",
+      "sxf_url": "/models/llama-4-scout/",
+      "context_window": 10000000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": null
+    },
+    {
+      "model_id": "llama-4-maverick",
+      "model": "Llama 4 Maverick",
+      "provider": "Meta",
+      "family": "Llama 4",
+      "sxf_url": "/models/llama-4-maverick/",
+      "context_window": 1000000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-03",
+      "standard_rate": null
+    },
+    {
+      "model_id": "deepseek-flash",
+      "model": "DeepSeek V4.1 Flash",
+      "provider": "DeepSeek",
+      "family": "DeepSeek V4",
+      "sxf_url": "/models/deepseek-v4-1-flash/",
+      "context_window": 1048576,
+      "max_output": 393216,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
+    },
+    {
+      "model_id": "mistral-small-2603",
+      "model": "Mistral Small 4",
+      "provider": "Mistral AI",
+      "family": "Mistral Small",
+      "sxf_url": "/models/mistral-small-4/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.15,
+        "cached_input": 0.015,
+        "output": 0.6
+      }
+    },
+    {
+      "model_id": "mistral-medium-3-5",
+      "model": "Mistral Medium 3.5",
+      "provider": "Mistral AI",
+      "family": "Mistral Medium",
+      "sxf_url": "/models/mistral-medium-3-5/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 1.5,
+        "cached_input": 0.15,
+        "output": 7.5
+      }
+    },
+    {
+      "model_id": "qwen3.8-max",
+      "model": "Qwen3.8 Max",
+      "provider": "Alibaba Cloud",
+      "family": "Qwen 3.8",
+      "sxf_url": "/models/qwen3-8-max/",
+      "context_window": 1000000,
+      "max_output": 131072,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 1.65,
+        "cached_input": 0.206,
+        "output": 4.951
+      }
+    },
+    {
+      "model_id": "command-a-plus-05-2026",
+      "model": "Command A+",
+      "provider": "Cohere",
+      "family": "Command A",
+      "sxf_url": "/models/command-a-plus/",
+      "context_window": 128000,
+      "max_output": 64000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
+    },
+    {
+      "model_id": "amazon.nova-2-lite-v1:0",
+      "model": "Amazon Nova 2 Lite",
+      "provider": "Amazon",
+      "family": "Nova 2",
+      "sxf_url": "/models/amazon-nova-2-lite/",
+      "context_window": 1000000,
+      "max_output": 64000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.3,
+        "output": 2.5
+      }
+    },
+    {
+      "model_id": "mistral-ocr-4-1",
+      "model": "OCR 4.1",
+      "provider": "Mistral AI",
+      "family": "Mistral OCR",
+      "sxf_url": "/models/mistral-ocr-4-1/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "ocr"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "pages",
+        "display_unit": "per page"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "page": 0.004
+      }
+    },
+    {
+      "model_id": "voxtral-mini-2602",
+      "model": "Voxtral Mini Transcribe 2",
+      "provider": "Mistral AI",
+      "family": "Voxtral",
+      "sxf_url": "/models/voxtral-mini-transcribe-2/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "minute": 0.003
+      }
+    },
+    {
+      "model_id": "rerank-v4.0-pro",
+      "model": "Rerank 4 Pro",
+      "provider": "Cohere",
+      "family": "Rerank 4",
+      "sxf_url": "/models/rerank-4-pro/",
+      "context_window": 32768,
+      "max_output": null,
+      "capabilities": [
+        "rerank"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "search_units",
+        "display_unit": "per search unit"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": null
+    },
+    {
+      "model_id": "codestral-2508",
+      "model": "Codestral",
+      "provider": "Mistral AI",
+      "family": "Codestral",
+      "sxf_url": "/models/codestral/",
+      "context_window": 128000,
+      "max_output": null,
+      "capabilities": [
+        "coding",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.3,
+        "cached_input": 0.03,
+        "output": 0.9
+      }
+    },
+    {
+      "model_id": "codestral-embed-2505",
+      "model": "Codestral Embed",
+      "provider": "Mistral AI",
+      "family": "Codestral",
+      "sxf_url": "/models/codestral-embed/",
+      "context_window": 8000,
+      "max_output": null,
+      "capabilities": [
+        "embeddings"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.15,
+        "cached_input": 0.015
+      }
+    }
+  ]
+}
