@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 44,
-    "fresh": 44,
+    "total": 50,
+    "fresh": 50,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -520,6 +520,32 @@
       ]
     },
     {
+      "model_id": "gemini-3.5-flash-lite",
+      "provider": "Google",
+      "model": "Gemini 3.5 Flash-Lite",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/deprecations",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
       "model_id": "gemini-3.5-transcribe",
       "provider": "Google",
       "model": "Gemini 3.5 Transcribe",
@@ -542,6 +568,32 @@
       "source_urls": [
         "https://ai.google.dev/gemini-api/docs/deprecations",
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-3.6-flash",
+      "provider": "Google",
+      "model": "Gemini 3.6 Flash",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/deprecations",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
         "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
@@ -594,6 +646,31 @@
       "source_urls": [
         "https://ai.google.dev/gemini-api/docs/changelog",
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-embedding-001",
+      "provider": "Google",
+      "model": "Gemini Embedding 001",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/embeddings",
         "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
@@ -727,6 +804,32 @@
       ]
     },
     {
+      "model_id": "mistral-embed-2312",
+      "provider": "Mistral AI",
+      "model": "Mistral Embed",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/api/endpoint/embeddings",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/mistral-embed-23-12"
+      ]
+    },
+    {
       "model_id": "mistral-large-2512",
       "provider": "Mistral AI",
       "model": "Mistral Large 3",
@@ -852,6 +955,58 @@
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/models",
         "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+      ]
+    },
+    {
+      "model_id": "voxtral-mini-transcribe-realtime-2602",
+      "provider": "Mistral AI",
+      "model": "Voxtral Mini Transcribe Realtime",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription"
+      ]
+    },
+    {
+      "model_id": "gpt-5.6-cyber",
+      "provider": "OpenAI",
+      "model": "GPT-5.6 Cyber",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/changelog",
+        "https://developers.openai.com/api/docs/guides/daybreak",
+        "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "https://developers.openai.com/api/docs/pricing"
       ]
     },
     {

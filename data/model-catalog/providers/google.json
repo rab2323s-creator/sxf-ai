@@ -462,6 +462,290 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Gemini 3",
+      "model": "Gemini 3.6 Flash",
+      "model_id": "gemini-3.6-flash",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google stable Flash model balancing speed, multimodal capability, coding, and agentic execution for production workloads.",
+      "sxf_url": "/models/gemini-3-6-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/thinking",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
+      ],
+      "notes": [
+        "Google lists gemini-3.6-flash as a stable model with no shutdown date announced.",
+        "Introductory Standard pricing applies through December 31, 2026; higher Standard pricing starts January 1, 2027.",
+        "Knowledge cutoff remains null because the cited current model documentation does not publish one."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-07-21",
+            "end": "2026-12-31",
+            "input": 0.75,
+            "cached_input": 0.075,
+            "output": 3.75
+          },
+          {
+            "start": "2027-01-01",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/thinking",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Gemini 3.5",
+      "model": "Gemini 3.5 Flash-Lite",
+      "model_id": "gemini-3.5-flash-lite",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "minimal"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google stable low-latency Flash-Lite model optimized for high-volume agentic tasks, document parsing, extraction, and cost-sensitive multimodal workloads.",
+      "sxf_url": "/models/gemini-3-5-flash-lite/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/thinking",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
+      ],
+      "notes": [
+        "Google lists gemini-3.5-flash-lite as stable with no shutdown date announced.",
+        "Standard paid pricing is $0.30 input, $0.03 cached input, and $2.50 output per 1M tokens.",
+        "Knowledge cutoff remains null because the cited current model documentation does not publish one."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-07-21",
+            "end": null,
+            "input": 0.3,
+            "cached_input": 0.03,
+            "output": 2.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/thinking",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Gemini Embedding",
+      "model": "Gemini Embedding 001",
+      "model_id": "gemini-embedding-001",
+      "context_window": 2048,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Google stable text-only embedding model for semantic search, retrieval, clustering, classification, and similarity workflows.",
+      "sxf_url": "/models/gemini-embedding-001/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/embeddings",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "notes": [
+        "Google explicitly states gemini-embedding-001 remains available for text-only embedding use cases alongside the newer multimodal Gemini Embedding 2.",
+        "Standard pricing is $0.15 per 1M text input tokens; embeddings have no generative output-token price.",
+        "The model is excluded from the generative token calculator because it is input-only embedding inference."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2025-06-01",
+            "end": null,
+            "input": 0.15
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "context_window": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "max_output": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "modalities": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/embeddings"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

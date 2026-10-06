@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-06",
-  "model_count": 44,
+  "model_count": 50,
   "provider_count": 10,
   "models": [
     {
@@ -1491,6 +1491,209 @@
       },
       "verified_at": "2026-10-06",
       "standard_rate": null
+    },
+    {
+      "model_id": "gpt-5.6-cyber",
+      "model": "GPT-5.6 Cyber",
+      "provider": "OpenAI",
+      "family": "GPT-5.6",
+      "sxf_url": "/models/gpt-5-6-cyber/",
+      "context_window": 400000,
+      "max_output": 128000,
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "coding"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 12.5,
+        "cached_input": 1.25,
+        "output": 75
+      }
+    },
+    {
+      "model_id": "gemini-3.6-flash",
+      "model": "Gemini 3.6 Flash",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-6-flash/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.75,
+        "cached_input": 0.075,
+        "output": 3.75
+      }
+    },
+    {
+      "model_id": "gemini-3.5-flash-lite",
+      "model": "Gemini 3.5 Flash-Lite",
+      "provider": "Google",
+      "family": "Gemini 3.5",
+      "sxf_url": "/models/gemini-3-5-flash-lite/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.3,
+        "cached_input": 0.03,
+        "output": 2.5
+      }
+    },
+    {
+      "model_id": "gemini-embedding-001",
+      "model": "Gemini Embedding 001",
+      "provider": "Google",
+      "family": "Gemini Embedding",
+      "sxf_url": "/models/gemini-embedding-001/",
+      "context_window": 2048,
+      "max_output": null,
+      "capabilities": [
+        "embeddings"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.15
+      }
+    },
+    {
+      "model_id": "voxtral-mini-transcribe-realtime-2602",
+      "model": "Voxtral Mini Transcribe Realtime",
+      "provider": "Mistral AI",
+      "family": "Voxtral",
+      "sxf_url": "/models/voxtral-mini-transcribe-realtime/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "minute": 0.006
+      }
+    },
+    {
+      "model_id": "mistral-embed-2312",
+      "model": "Mistral Embed",
+      "provider": "Mistral AI",
+      "family": "Mistral Embed",
+      "sxf_url": "/models/mistral-embed/",
+      "context_window": 8000,
+      "max_output": null,
+      "capabilities": [
+        "embeddings"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.1
+      }
     }
   ]
 }

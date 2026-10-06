@@ -832,6 +832,164 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Voxtral",
+      "model": "Voxtral Mini Transcribe Realtime",
+      "model_id": "voxtral-mini-transcribe-realtime-2602",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Mistral GA audio specialist optimized exclusively for low-latency live transcription over realtime WebSocket sessions.",
+      "sxf_url": "/models/voxtral-mini-transcribe-realtime/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Mistral lists Voxtral Mini Transcribe Realtime as GA v26.02 and optimized for live transcription only.",
+        "The official model card publishes $0.006 per minute pricing and does not publish a context-window value.",
+        "The realtime transcription endpoint uses WebSockets and is excluded from the token calculator."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-02-04",
+            "end": null,
+            "rates": {
+              "minute": 0.006
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "context_window": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "max_output": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "reasoning": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "pricing": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "access": "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription",
+          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "capabilities": "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
+    },
+    {
+      "family": "Mistral Embed",
+      "model": "Mistral Embed",
+      "model_id": "mistral-embed-2312",
+      "aliases": [
+        "mistral-embed"
+      ],
+      "context_window": 8000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Mistral GA text embedding model for retrieval, semantic search, clustering, classification, and similarity workflows.",
+      "sxf_url": "/models/mistral-embed/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "https://docs.mistral.ai/api/endpoint/embeddings",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Mistral lists Mistral Embed as a current GA Premier embedding model with an 8k context window.",
+        "The official model card publishes $0.10 per 1M input tokens.",
+        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2023-12-11",
+            "end": null,
+            "input": 0.1
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "context_window": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "max_output": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "reasoning": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "modalities": "https://docs.mistral.ai/api/endpoint/embeddings",
+          "pricing": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "access": "https://docs.mistral.ai/api/endpoint/embeddings",
+          "lifecycle": "https://docs.mistral.ai/models",
+          "capabilities": "https://docs.mistral.ai/api/endpoint/embeddings"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
