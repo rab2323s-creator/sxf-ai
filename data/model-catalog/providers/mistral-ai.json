@@ -990,6 +990,167 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Mistral Large",
+      "model": "Mistral Large 4",
+      "model_id": "mistral-large-4",
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Public-preview multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture.",
+      "sxf_url": "/models/mistral-large-4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/mistral-large-4",
+        "https://docs.mistral.ai/resources/changelogs",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      "notes": [
+        "Released October 6, 2026 in Public Preview.",
+        "Launch pricing is 50% off for two weeks; the catalog stores the promotional and post-launch Standard periods separately.",
+        "Open weights were announced but downloadable weight access is not asserted until directly verified."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": "2026-10-19",
+            "input": 0.68,
+            "cached_input": 0.07,
+            "output": 2.09
+          },
+          {
+            "start": "2026-10-20",
+            "end": null,
+            "input": 1.36,
+            "cached_input": 0.14,
+            "output": 4.18
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/mistral-large-4",
+          "context_window": "https://docs.mistral.ai/models/mistral-large-4",
+          "max_output": "https://docs.mistral.ai/models/mistral-large-4",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-4",
+          "reasoning": "https://docs.mistral.ai/models/mistral-large-4",
+          "modalities": "https://docs.mistral.ai/models/mistral-large-4",
+          "pricing": "https://docs.mistral.ai/models/mistral-large-4",
+          "access": "https://docs.mistral.ai/models/mistral-large-4",
+          "lifecycle": "https://docs.mistral.ai/resources/changelogs",
+          "capabilities": "https://docs.mistral.ai/models/mistral-large-4"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "preview"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Shieldstral",
+      "model": "Shieldstral 1.0",
+      "model_id": "shieldstral-1.0",
+      "context_window": 32768,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "classification"
+        ]
+      },
+      "positioning": "Compact multimodal moderation model for prompt/response safety classification, refusal detection and policy filtering.",
+      "sxf_url": "/models/shieldstral-1-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/shieldstral-1-0",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Public Preview model released August 4, 2026 under Apache 2.0.",
+        "No directly comparable hosted Standard inference rate is asserted."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "context_window": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "max_output": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "reasoning": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "modalities": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "pricing": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "access": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "lifecycle": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "capabilities": "https://docs.mistral.ai/models/shieldstral-1-0"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "preview"
+      },
+      "capabilities": [
+        "vision",
+        "moderation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
