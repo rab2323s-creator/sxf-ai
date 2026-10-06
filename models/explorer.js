@@ -62,6 +62,9 @@
   const filters = document.createElement("div");
   filters.className = "model-explorer-facets";
   filters.id = "modelExplorerFacets";
+  filters.setAttribute("role", "dialog");
+  filters.setAttribute("aria-modal", "true");
+  filters.setAttribute("aria-label", "Model filters");
   filters.innerHTML = `
     <div class="model-mobile-sheet-head">
       <div><span>FILTER MODELS</span><strong>Refine the catalog</strong></div>
@@ -732,17 +735,14 @@
 
   compareClear?.addEventListener("click", () => {
     selected.clear();
-    rows.forEach(row => {
-      row.classList.remove("is-selected");
-      const input = row.querySelector(".model-compare-check");
-      if (input) input.checked = false;
-    });
+    rows.forEach(row => syncSelectionUi(row, false));
     updateDock();
   });
 
   const mobileQuery = window.matchMedia("(max-width: 680px)");
   const syncMobileMode = () => {
     if (mobileQuery.matches) {
+      providerButtons.forEach(button => { button.hidden = false; });
       const searchWrap = search?.closest(".model-search");
       if (mobileFilterButton && searchWrap?.parentElement === toolbar && mobileFilterButton.parentElement !== toolbar) {
         searchWrap.after(mobileFilterButton);
@@ -755,6 +755,9 @@
       }
     } else {
       setMobileFiltersOpen(false);
+      providerButtons.forEach(button => {
+        button.hidden = !quickProviderNames.has(button.dataset.modelProvider || "");
+      });
       if (mobileFilterButton && mobileFilterButtonSlot.parentNode) {
         mobileFilterButtonSlot.parentNode.insertBefore(mobileFilterButton, mobileFilterButtonSlot);
       }
