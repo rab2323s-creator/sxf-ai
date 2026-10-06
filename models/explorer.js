@@ -154,6 +154,11 @@
 
   const quickProviderNames = new Set(["all", "OpenAI", "Anthropic", "Google", "xAI"]);
   const providerWrap = root.querySelector(".model-provider-filters");
+  const sortWrap = sort?.closest(".model-sort") || null;
+  const providerSlot = document.createComment("model-provider-slot");
+  const sortSlot = document.createComment("model-sort-slot");
+  providerWrap?.after(providerSlot);
+  sortWrap?.after(sortSlot);
   const providerMoreButton = document.createElement("button");
   providerMoreButton.type = "button";
   providerMoreButton.className = "model-filter model-provider-more";
@@ -735,7 +740,18 @@
 
   const mobileQuery = window.matchMedia("(max-width: 680px)");
   const syncMobileMode = () => {
-    if (!mobileQuery.matches) setMobileFiltersOpen(false);
+    if (mobileQuery.matches) {
+      if (providerWrap && providerWrap.parentElement !== filters) {
+        filters.querySelector(".model-mobile-sheet-head")?.after(providerWrap);
+      }
+      if (sortWrap && sortWrap.parentElement !== filters) {
+        providerWrap?.after(sortWrap);
+      }
+    } else {
+      setMobileFiltersOpen(false);
+      if (providerWrap && providerSlot.parentNode) providerSlot.parentNode.insertBefore(providerWrap, providerSlot);
+      if (sortWrap && sortSlot.parentNode) sortSlot.parentNode.insertBefore(sortWrap, sortSlot);
+    }
   };
   mobileQuery.addEventListener?.("change", syncMobileMode);
   syncMobileMode();
