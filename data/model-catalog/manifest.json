@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.5",
+  "schema_version": "1.6",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
   "source_verified": "2026-10-06",
@@ -104,5 +104,20 @@
       "long-context"
     ],
     "rule": "Taxonomy fields are factual, provider-source-backed classification. Editorial recommendations do not belong in canonical capabilities."
+  },
+  "pricing_unit_policy": {
+    "supported_meters": [
+      "tokens",
+      "pages",
+      "minutes",
+      "characters",
+      "images",
+      "requests",
+      "search_units",
+      "instance_hours"
+    ],
+    "token_compatibility": "Existing token calculators only operate on pricing_basis.meter='tokens' and calculator_eligible=true.",
+    "specialist_rule": "Non-token models use pricing.standard[].rates keyed by pricing_basis.dimensions. They must not be forced into input/output token fields.",
+    "display_rule": "pricing_basis.display_unit is the human-readable unit label; pricing_basis.quantity is the denominator used for arithmetic."
   }
 }
