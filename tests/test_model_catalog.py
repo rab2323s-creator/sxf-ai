@@ -23,8 +23,17 @@ assert catalog["schema_version"] == "1.6", "Generalized pricing units require sc
 assert all(set(m["access"]) == {"official_api", "open_weight", "self_hostable"} for m in catalog["models"]), "Every model must have explicit access taxonomy"
 assert all(m["lifecycle"]["status"] in {"current", "preview", "legacy", "deprecated"} for m in catalog["models"]), "Every model must have lifecycle status"
 assert all(m["capabilities"] for m in catalog["models"]), "Every model must have structured capabilities"
-assert all(m["pricing_basis"]["meter"] == "tokens" for m in catalog["models"]), "Current general-model catalog should remain token-metered"
-assert all(m["pricing_basis"]["quantity"] == 1_000_000 for m in catalog["models"]), "Current token rates must preserve per-million arithmetic"
+meters = {m["pricing_basis"]["meter"] for m in catalog["models"]}
+assert {"tokens", "pages", "minutes", "search_units"}.issubset(meters), "Specialist batch must exercise multiple pricing meters"
+assert all(
+    m["pricing_basis"]["quantity"] == 1_000_000
+    for m in catalog["models"]
+    if m["pricing_basis"]["meter"] == "tokens"
+), "Token rates must preserve per-million arithmetic"
+assert any("ocr" in m["capabilities"] for m in catalog["models"]), "OCR specialist coverage missing"
+assert any("transcription" in m["capabilities"] for m in catalog["models"]), "Transcription specialist coverage missing"
+assert any("rerank" in m["capabilities"] for m in catalog["models"]), "Rerank specialist coverage missing"
+assert any("embeddings" in m["capabilities"] for m in catalog["models"]), "Embeddings specialist coverage missing"
 assert all((m["access"]["self_hostable"] is False) or m["access"]["open_weight"] is True for m in catalog["models"]), "Self-hostable models must be open-weight"
 assert all(
     (not m["calculator_eligible"]) or (m["pricing_status"] == "official-paid" and m["pricing"].get("standard"))
