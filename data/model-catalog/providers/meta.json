@@ -46,7 +46,20 @@
         }
       },
       "pricing_status": "not-published",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ]
     },
     {
       "family": "Llama 4",
@@ -93,7 +106,20 @@
         }
       },
       "pricing_status": "not-published",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context"
+      ]
     }
   ]
 }
