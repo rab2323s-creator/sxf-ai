@@ -103,6 +103,11 @@
     };
   };
 
+  const contextLabel = model => {
+    if (!Number.isFinite(Number(model.context_window)) || model.context_window == null) return "Not published";
+    return Number(model.context_window).toLocaleString() + " tokens";
+  };
+
   const outputLabel = model => {
     if (model.max_output === "unlimited") return "No separate limit";
     if (model.max_output == null) return "Not published";
@@ -111,10 +116,21 @@
 
   const pricingLabel = model => {
     const p = periodForDate(model, catalog.source_verified);
-    if (!p || !isTokenCalculatorModel(model)) {
-      return model.pricing_status || "not-published";
+    if (!p) return model.pricing_status || "not-published";
+    const basis = model.pricing_basis || {};
+    if (basis.meter !== "tokens") {
+      const rates = p.rates || {};
+      const parts = (basis.dimensions || []).map(key => {
+        const label = key.replaceAll("_", " ");
+        return Number.isFinite(Number(rates[key])) ? rate(rates[key]) + " " + label : null;
+      }).filter(Boolean);
+      return parts.length ? parts.join(" · ") + " " + (basis.display_unit || "") : (model.pricing_status || "not-published");
     }
-    return rate(p.input) + " input · " + rate(p.output) + " output " + pricingDisplayUnit(model);
+    const parts = [];
+    if (Number.isFinite(Number(p.input))) parts.push(rate(p.input) + " input");
+    if (Number.isFinite(Number(p.cached_input))) parts.push(rate(p.cached_input) + " cached");
+    if (Number.isFinite(Number(p.output))) parts.push(rate(p.output) + " output");
+    return parts.length ? parts.join(" · ") + " " + pricingDisplayUnit(model) : (model.pricing_status || "not-published");
   };
 
   const reasoningLabel = model => {
@@ -131,7 +147,7 @@
       <div class="compare-builder-model-meta"><span>${model.provider}</span><small>${model.pricing_status}</small></div>
       <h3>${model.model}</h3>
       <dl>
-        <div><dt>Context</dt><dd>${Number(model.context_window).toLocaleString()} tokens</dd></div>
+        <div><dt>Context</dt><dd>${contextLabel(model)}</dd></div>
         <div><dt>Max output</dt><dd>${outputLabel(model)}</dd></div>
         <div><dt>Inputs</dt><dd>${inputs}</dd></div>
         <div><dt>Reasoning</dt><dd>${reasoningLabel(model)}</dd></div>
