@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.4",
+  "schema_version": "1.5",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier AI models tracked by SXF / AI.",
   "source_verified": "2026-10-06",
@@ -1981,5 +1981,37 @@
       "official-paid"
     ],
     "rule": "Only provider-published Standard paid token rates are calculator-eligible. Preview-only, partner-priced, self-hosted, or unpublished pricing remains visible in the catalog but is excluded from cost calculations."
+  },
+  "taxonomy_policy": {
+    "access_fields": [
+      "official_api",
+      "open_weight",
+      "self_hostable"
+    ],
+    "lifecycle_statuses": [
+      "current",
+      "preview",
+      "legacy",
+      "deprecated"
+    ],
+    "capability_vocabulary": [
+      "general",
+      "reasoning",
+      "coding",
+      "agents",
+      "tool-use",
+      "vision",
+      "video",
+      "audio",
+      "speech-to-speech",
+      "transcription",
+      "tts",
+      "ocr",
+      "embeddings",
+      "rerank",
+      "moderation",
+      "long-context"
+    ],
+    "rule": "Taxonomy fields are factual, provider-source-backed classification. Editorial recommendations do not belong in canonical capabilities."
   }
 }
