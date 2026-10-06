@@ -1749,6 +1749,88 @@
           ]
         }
       }
+    },
+    "embed-v5.0-fast": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_df366d5b08b28ee08cfc",
+      "snapshot_hash": "510df06f625fb6ff536f6b530220d9a10a79af980549d68613c574191b2d5097",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Fast",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "embed-v5.0-pro": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_a069e00cb5c6dc040e9d",
+      "snapshot_hash": "7acd804a6b083ddf7264dafcac762d75776bf0192a4ede4639c3ac42691bd41a",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Pro",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "gemini-3.5-transcribe": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_c70e6cd5a8093e89c05c",
+      "snapshot_hash": "8f430e330cd83d6a66b37a92842284434c428a967b49f95de66859717655a9ee",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.5",
+        "model": "Gemini 3.5 Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-26",
+              "end": null,
+              "input": 2,
+              "output": 12
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -4108,7 +4190,134 @@
       },
       "event_id": "evt_2fedf630e7576b3d8130",
       "event_hash": "2fedf630e7576b3d8130b0e21f8d78b27ac8f20ac7de6d343791fd036dee7b7f"
+    },
+    {
+      "sequence": 42,
+      "type": "model_added",
+      "model_id": "embed-v5.0-fast",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "2fedf630e7576b3d8130b0e21f8d78b27ac8f20ac7de6d343791fd036dee7b7f",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Fast",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/docs/cohere-embed",
+        "family": "https://docs.cohere.com/docs/cohere-embed",
+        "model": "https://docs.cohere.com/docs/cohere-embed",
+        "context_window": "https://docs.cohere.com/docs/cohere-embed",
+        "max_output": "https://docs.cohere.com/docs/cohere-embed",
+        "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+        "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+        "modalities": "https://docs.cohere.com/docs/cohere-embed",
+        "pricing": "https://cohere.com/pricing"
+      },
+      "event_id": "evt_df366d5b08b28ee08cfc",
+      "event_hash": "df366d5b08b28ee08cfc22346ab370ed3a7b8450134a5f21b041bca8b789e400"
+    },
+    {
+      "sequence": 43,
+      "type": "model_added",
+      "model_id": "embed-v5.0-pro",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "df366d5b08b28ee08cfc22346ab370ed3a7b8450134a5f21b041bca8b789e400",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Embed 5",
+        "model": "Embed 5 Pro",
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/docs/cohere-embed",
+        "family": "https://docs.cohere.com/docs/cohere-embed",
+        "model": "https://docs.cohere.com/docs/cohere-embed",
+        "context_window": "https://docs.cohere.com/docs/cohere-embed",
+        "max_output": "https://docs.cohere.com/docs/cohere-embed",
+        "knowledge_cutoff": "https://docs.cohere.com/docs/cohere-embed",
+        "reasoning": "https://docs.cohere.com/docs/cohere-embed",
+        "modalities": "https://docs.cohere.com/docs/cohere-embed",
+        "pricing": "https://cohere.com/pricing"
+      },
+      "event_id": "evt_a069e00cb5c6dc040e9d",
+      "event_hash": "a069e00cb5c6dc040e9da3926eb3fd8f0fa9a9bef2bf19c7ad94fa57ec159bd0"
+    },
+    {
+      "sequence": 44,
+      "type": "model_added",
+      "model_id": "gemini-3.5-transcribe",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "a069e00cb5c6dc040e9da3926eb3fd8f0fa9a9bef2bf19c7ad94fa57ec159bd0",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.5",
+        "model": "Gemini 3.5 Transcribe",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-26",
+              "end": null,
+              "input": 2,
+              "output": 12
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_c70e6cd5a8093e89c05c",
+      "event_hash": "c70e6cd5a8093e89c05cd5f20b0a8a0d520e141c8c462b2c13e4359e63aebba2"
     }
   ],
-  "chain_head": "2fedf630e7576b3d8130b0e21f8d78b27ac8f20ac7de6d343791fd036dee7b7f"
+  "chain_head": "c70e6cd5a8093e89c05cd5f20b0a8a0d520e141c8c462b2c13e4359e63aebba2"
 }
