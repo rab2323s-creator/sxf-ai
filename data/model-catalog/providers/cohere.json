@@ -152,6 +152,156 @@
         ],
         "display_unit": "per search unit"
       }
+    },
+    {
+      "family": "Embed",
+      "model": "Embed v4.0",
+      "model_id": "embed-v4.0",
+      "context_window": 128000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "PDF"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Cohere multimodal embedding model for text, image and mixed text-image document retrieval, classification and clustering.",
+      "sxf_url": "/models/embed-v4-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/v1/docs/models",
+        "https://docs.cohere.com/docs/multimodal-embeddings",
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+      ],
+      "notes": [
+        "Cohere continues to list embed-v4.0 in the current model catalog with text, image and mixed text/image (PDF) inputs and a 128K context length.",
+        "Cohere now lists Embed v5 variants as newer embedding models, but embed-v4.0 is not marked deprecated in the current official model table.",
+        "No current public numeric PAYG API token rate for embed-v4.0 was verified, so pricing remains not-published rather than inheriting a rate from another Embed generation."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/v1/docs/models",
+          "context_window": "https://docs.cohere.com/v1/docs/models",
+          "max_output": "https://docs.cohere.com/v1/docs/models",
+          "knowledge_cutoff": "https://docs.cohere.com/v1/docs/models",
+          "reasoning": "https://docs.cohere.com/v1/docs/models",
+          "modalities": "https://docs.cohere.com/v1/docs/models",
+          "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+          "access": "https://docs.cohere.com/v1/docs/models",
+          "lifecycle": "https://docs.cohere.com/v1/docs/models",
+          "capabilities": "https://docs.cohere.com/v1/docs/models"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Command A",
+      "model": "Command A Reasoning",
+      "model_id": "command-a-reasoning-08-2025",
+      "context_window": 256000,
+      "max_output": 32000,
+      "knowledge_cutoff": "2024-06-01",
+      "reasoning": {
+        "type": "thinking budget",
+        "levels": [
+          "configurable"
+        ],
+        "default": null,
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Cohere reasoning model for multilingual enterprise problem solving, tool use, RAG and agentic workflows.",
+      "sxf_url": "/models/command-a-reasoning/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/command-a-reasoning",
+        "https://docs.cohere.com/v1/docs/models",
+        "https://docs.cohere.com/changelog/2025-08-21-command-a-reasoning"
+      ],
+      "notes": [
+        "Cohere currently lists command-a-reasoning-08-2025 as Live with a 256K context window and 32K maximum output.",
+        "Cohere states that both trial and production API keys are free until rate limits are reached; no numeric pay-as-you-go token rate is asserted.",
+        "The model is excluded from the calculator because no paid Standard token rate is published for the Cohere API."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/command-a-reasoning",
+          "context_window": "https://docs.cohere.com/docs/command-a-reasoning",
+          "max_output": "https://docs.cohere.com/docs/command-a-reasoning",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/command-a-reasoning",
+          "reasoning": "https://docs.cohere.com/docs/command-a-reasoning",
+          "modalities": "https://docs.cohere.com/v1/docs/models",
+          "pricing": "https://docs.cohere.com/docs/command-a-reasoning",
+          "access": "https://docs.cohere.com/docs/command-a-reasoning",
+          "lifecycle": "https://docs.cohere.com/v1/docs/models",
+          "capabilities": "https://docs.cohere.com/docs/command-a-reasoning"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
