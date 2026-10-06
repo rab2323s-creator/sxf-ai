@@ -187,11 +187,23 @@ def build_evidence_pack(item, pricing, history):
             "history": history_for_model(model.get("model_id"), history),
         })
 
+    matched_pricing_bases = [model.get("pricing_basis", {}) for model in evidence_models]
+    token_only_evidence = bool(matched_pricing_bases) and all(
+        basis.get("meter") == "tokens" and basis.get("quantity") == 1_000_000
+        for basis in matched_pricing_bases
+    )
+    evidence_unit = "per 1 million tokens" if token_only_evidence else pricing.get("pricing_unit")
+    evidence_scope = (
+        "Standard API token pricing unless a model-specific rule states otherwise"
+        if token_only_evidence
+        else pricing.get("pricing_scope")
+    )
+
     evidence = {
         "pricing_basis": {
             "currency": pricing.get("currency"),
-            "unit": pricing.get("pricing_unit"),
-            "scope": pricing.get("pricing_scope"),
+            "unit": evidence_unit,
+            "scope": evidence_scope,
             "source_urls": sorted(set(pricing_source_urls)),
         },
         "signal": {
