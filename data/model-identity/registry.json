@@ -769,6 +769,60 @@
       "identity_sources": [
         "https://api-docs.deepseek.com/api/list-models/"
       ]
+    },
+    {
+      "canonical_model_id": "gemini-3.5-transcribe",
+      "provider": "Google",
+      "provider_native_ids": [
+        "gemini-3.5-transcribe"
+      ],
+      "aliases": [],
+      "family": "Gemini 3.5",
+      "version": null,
+      "display_name": "Gemini 3.5 Transcribe",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe"
+      ]
+    },
+    {
+      "canonical_model_id": "embed-v5.0-pro",
+      "provider": "Cohere",
+      "provider_native_ids": [
+        "embed-v5.0-pro"
+      ],
+      "aliases": [],
+      "family": "Embed 5",
+      "version": null,
+      "display_name": "Embed 5 Pro",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.cohere.com/docs/cohere-embed"
+      ]
+    },
+    {
+      "canonical_model_id": "embed-v5.0-fast",
+      "provider": "Cohere",
+      "provider_native_ids": [
+        "embed-v5.0-fast"
+      ],
+      "aliases": [],
+      "family": "Embed 5",
+      "version": null,
+      "display_name": "Embed 5 Fast",
+      "predecessor": null,
+      "successor": null,
+      "renamed_from": [],
+      "lifecycle_status": "current",
+      "identity_sources": [
+        "https://docs.cohere.com/docs/cohere-embed"
+      ]
     }
   ],
   "registry_role": "canonical identity layer",

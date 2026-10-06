@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 41,
-    "fresh": 41,
+    "total": 44,
+    "fresh": 44,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -517,6 +517,32 @@
         "https://api-docs.deepseek.com/api/list-models/",
         "https://api-docs.deepseek.com/quick_start/pricing/",
         "https://api-docs.deepseek.com/updates/"
+      ]
+    },
+    {
+      "model_id": "gemini-3.5-transcribe",
+      "provider": "Google",
+      "model": "Gemini 3.5 Transcribe",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/deprecations",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe",
+        "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
     {
@@ -1026,6 +1052,60 @@
       "source_urls": [
         "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
         "https://docs.cohere.com/v1/docs/models"
+      ]
+    },
+    {
+      "model_id": "embed-v5.0-fast",
+      "provider": "Cohere",
+      "model": "Embed 5 Fast",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://cohere.com/pricing",
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://docs.cohere.com/docs/cohere-embed",
+        "https://docs.cohere.com/v1/reference/embed"
+      ]
+    },
+    {
+      "model_id": "embed-v5.0-pro",
+      "provider": "Cohere",
+      "model": "Embed 5 Pro",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://cohere.com/pricing",
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://docs.cohere.com/docs/cohere-embed",
+        "https://docs.cohere.com/v1/reference/embed"
       ]
     },
     {
