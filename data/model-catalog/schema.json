@@ -58,8 +58,15 @@
             }
           },
           "context_window": {
-            "type": "integer",
-            "minimum": 1
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "max_output": {
             "anyOf": [
