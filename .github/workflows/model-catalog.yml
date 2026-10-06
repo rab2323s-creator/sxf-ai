@@ -17,6 +17,7 @@ on:
       - "data/model-pricing.json"
       - "scripts/build_model_catalog.py"
       - "tests/test_model_catalog.py"
+      - "tests/test_generalized_pricing.py"
       - ".github/workflows/model-catalog.yml"
   workflow_dispatch:
 
