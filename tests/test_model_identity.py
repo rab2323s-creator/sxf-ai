@@ -16,7 +16,7 @@ registry = json.loads((ROOT / "data/model-identity/registry.json").read_text(enc
 catalog = json.loads((ROOT / "data/model-pricing.json").read_text(encoding="utf-8"))
 entries = module.validate_registry(registry, catalog)
 
-assert len(entries) == len(catalog["models"]) == 28
+assert len(entries) == len(catalog["models"])
 assert set(entries) == {m["model_id"] for m in catalog["models"]}
 assert all(entry["provider_native_ids"] for entry in entries.values())
 assert all(entry["identity_sources"] for entry in entries.values())

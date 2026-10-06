@@ -523,6 +523,315 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Mistral Large",
+      "model": "Mistral Large 3",
+      "model_id": "mistral-large-2512",
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "State-of-the-art open-weight general-purpose multimodal Mixture-of-Experts model.",
+      "sxf_url": "/models/mistral-large-2512/",
+      "official_sources": [
+        "https://docs.mistral.ai/models/mistral-large-3-25-12",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "input": 0.5,
+            "cached_input": 0.05,
+            "output": 1.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "context_window": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "max_output": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "reasoning": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "modalities": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "capabilities": "https://docs.mistral.ai/models/mistral-large-3-25-12"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Ministral 3",
+      "model": "Ministral 3 14B",
+      "model_id": "ministral-14b-2512",
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Largest Ministral 3 open-weight model, optimized for capable local and edge deployment.",
+      "sxf_url": "/models/ministral-14b-2512/",
+      "official_sources": [
+        "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "input": 0.2,
+            "cached_input": 0.02,
+            "output": 0.2
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "context_window": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "max_output": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "reasoning": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "modalities": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "lifecycle": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
+          "capabilities": "https://docs.mistral.ai/models/ministral-3-14b-25-12"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Ministral 3",
+      "model": "Ministral 3 8B",
+      "model_id": "ministral-8b-2512",
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Efficient Ministral 3 open-weight model with text and vision capabilities for local deployment.",
+      "sxf_url": "/models/ministral-8b-2512/",
+      "official_sources": [
+        "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "input": 0.15,
+            "cached_input": 0.015,
+            "output": 0.15
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "context_window": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "max_output": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "reasoning": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "modalities": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "lifecycle": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
+          "capabilities": "https://docs.mistral.ai/models/ministral-3-8b-25-12"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Ministral 3",
+      "model": "Ministral 3 3B",
+      "model_id": "ministral-3b-2512",
+      "context_window": 256000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Smallest Ministral 3 open-weight model, designed for efficient language and vision workloads at the edge.",
+      "sxf_url": "/models/ministral-3b-2512/",
+      "official_sources": [
+        "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+        "https://docs.mistral.ai/inference/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "input": 0.1,
+            "cached_input": 0.01,
+            "output": 0.1
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "context_window": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "max_output": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "reasoning": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "modalities": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "lifecycle": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
+          "capabilities": "https://docs.mistral.ai/models/ministral-3-3b-25-12"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

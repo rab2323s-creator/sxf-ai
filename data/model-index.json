@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-06",
-  "model_count": 28,
+  "model_count": 36,
   "provider_count": 10,
   "models": [
     {
@@ -975,6 +975,274 @@
       "standard_rate": {
         "input": 0.15,
         "cached_input": 0.015
+      }
+    },
+    {
+      "model_id": "gpt-live-1",
+      "model": "GPT-Live 1",
+      "provider": "OpenAI",
+      "family": "GPT-Live",
+      "sxf_url": "/models/gpt-live-1/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "audio",
+        "speech-to-speech",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "minute": 0.05
+      }
+    },
+    {
+      "model_id": "gpt-live-transcribe",
+      "model": "GPT-Live-Transcribe",
+      "provider": "OpenAI",
+      "family": "GPT Transcription",
+      "sxf_url": "/models/gpt-live-transcribe/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "minute": 0.017
+      }
+    },
+    {
+      "model_id": "gpt-transcribe",
+      "model": "GPT-Transcribe",
+      "provider": "OpenAI",
+      "family": "GPT Transcription",
+      "sxf_url": "/models/gpt-transcribe/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "minute": 0.0045
+      }
+    },
+    {
+      "model_id": "mistral-large-2512",
+      "model": "Mistral Large 3",
+      "provider": "Mistral AI",
+      "family": "Mistral Large",
+      "sxf_url": "/models/mistral-large-2512/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.5,
+        "cached_input": 0.05,
+        "output": 1.5
+      }
+    },
+    {
+      "model_id": "ministral-14b-2512",
+      "model": "Ministral 3 14B",
+      "provider": "Mistral AI",
+      "family": "Ministral 3",
+      "sxf_url": "/models/ministral-14b-2512/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.2,
+        "cached_input": 0.02,
+        "output": 0.2
+      }
+    },
+    {
+      "model_id": "ministral-8b-2512",
+      "model": "Ministral 3 8B",
+      "provider": "Mistral AI",
+      "family": "Ministral 3",
+      "sxf_url": "/models/ministral-8b-2512/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.15,
+        "cached_input": 0.015,
+        "output": 0.15
+      }
+    },
+    {
+      "model_id": "ministral-3b-2512",
+      "model": "Ministral 3 3B",
+      "provider": "Mistral AI",
+      "family": "Ministral 3",
+      "sxf_url": "/models/ministral-3b-2512/",
+      "context_window": 256000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 0.1,
+        "cached_input": 0.01,
+        "output": 0.1
+      }
+    },
+    {
+      "model_id": "claude-sonnet-5-5",
+      "model": "Claude Sonnet 5.5",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/models/claude-sonnet-5-5/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-06",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.2,
+        "output": 10
       }
     }
   ]
