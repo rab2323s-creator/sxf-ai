@@ -10,12 +10,18 @@ on:
       - "data/model-pricing.json"
       - "data/model-index.json"
       - "data/model-index.schema.json"
+      - "data/model-reverification.json"
+      - "data/model-reverification.schema.json"
       - "scripts/build_model_catalog.py"
       - "scripts/build_model_index.py"
+      - "scripts/build_reverification_queue.py"
+      - "scripts/validate_catalog_scale.py"
       - "scripts/validate_model_identity.py"
       - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
       - "tests/test_model_index.py"
+      - "tests/test_model_reverification.py"
+      - "tests/test_catalog_scale.py"
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
@@ -29,12 +35,18 @@ on:
       - "data/model-pricing.json"
       - "data/model-index.json"
       - "data/model-index.schema.json"
+      - "data/model-reverification.json"
+      - "data/model-reverification.schema.json"
       - "scripts/build_model_catalog.py"
       - "scripts/build_model_index.py"
+      - "scripts/build_reverification_queue.py"
+      - "scripts/validate_catalog_scale.py"
       - "scripts/validate_model_identity.py"
       - "scripts/validate_model_candidates.py"
       - "tests/test_model_catalog.py"
       - "tests/test_model_index.py"
+      - "tests/test_model_reverification.py"
+      - "tests/test_catalog_scale.py"
       - "tests/test_model_identity.py"
       - "tests/test_model_candidates.py"
       - "tests/test_generalized_pricing.py"
@@ -57,11 +69,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Syntax check
-        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_index.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
+        run: python -m py_compile scripts/build_model_catalog.py scripts/build_model_index.py scripts/build_reverification_queue.py scripts/validate_catalog_scale.py scripts/validate_model_identity.py scripts/validate_model_candidates.py tests/test_model_catalog.py tests/test_model_index.py tests/test_model_reverification.py tests/test_catalog_scale.py tests/test_model_identity.py tests/test_model_candidates.py tests/test_generalized_pricing.py
       - name: Validate sources and generated artifact
         run: python scripts/build_model_catalog.py --check
       - name: Validate lightweight model index
         run: python scripts/build_model_index.py --check
+      - name: Validate reverification queue
+        run: python scripts/build_reverification_queue.py --check
+      - name: Validate scale readiness
+        run: python scripts/validate_catalog_scale.py
       - name: Identity and candidate validation
         run: |
           python scripts/validate_model_identity.py
@@ -70,6 +86,8 @@ jobs:
         run: |
           python tests/test_model_catalog.py
           python tests/test_model_index.py
+          python tests/test_model_reverification.py
+          python tests/test_catalog_scale.py
           python tests/test_model_identity.py
           python tests/test_model_candidates.py
           python tests/test_generalized_pricing.py
