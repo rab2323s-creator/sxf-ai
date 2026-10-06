@@ -116,7 +116,8 @@
 
     capabilityButtons.forEach(button => {
       const key = button.dataset.capability;
-      const active = params.get(key) === "1";
+      const legacyKey = key === "vision" ? "image" : key;
+      const active = params.get(key) === "1" || params.get(legacyKey) === "1";
       button.setAttribute("aria-pressed", String(active));
       button.classList.toggle("is-active", active);
     });
@@ -125,7 +126,11 @@
     if (sort) sort.value = validValues(sort).has(params.get("sort")) ? params.get("sort") : "default";
     if (taskFilter) taskFilter.value = validValues(taskFilter).has(params.get("task")) ? params.get("task") : "all";
     if (contextFilter) contextFilter.value = validValues(contextFilter).has(params.get("context")) ? params.get("context") : "0";
-    if (accessFilter) accessFilter.value = validValues(accessFilter).has(params.get("access")) ? params.get("access") : "all";
+    if (accessFilter) {
+      const rawAccess = params.get("access");
+      const accessAlias = rawAccess === "official-paid" ? "paid-api" : rawAccess;
+      accessFilter.value = validValues(accessFilter).has(accessAlias) ? accessAlias : "all";
+    }
     if (lifecycleFilter) lifecycleFilter.value = validValues(lifecycleFilter).has(params.get("lifecycle")) ? params.get("lifecycle") : "all";
     if (verificationFilter) verificationFilter.value = validValues(verificationFilter).has(params.get("verified")) ? params.get("verified") : "all";
   };
