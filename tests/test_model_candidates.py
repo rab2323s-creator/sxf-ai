@@ -21,6 +21,7 @@ candidate = {
     "provider": "Example Provider",
     "canonical_model_id": None,
     "change_type": "new_model",
+    "observed_identity": {"provider_native_id": "example-model", "display_name": "Example Model"},
     "identity_resolution": {
         "status": "new",
         "matched_model_id": None,
@@ -37,7 +38,7 @@ candidate = {
     "validation": {"status": "passed", "errors": [], "warnings": []},
     "review": {"status": "approved", "reviewed_by": "human-reviewer", "reviewed_at": "2026-10-06T12:05:00Z"}
 }
-module.validate_candidate(candidate, registry_ids)
+module.validate_candidate(candidate, registry_ids, registry)
 
 assert module.classify_change("new", candidate["diff"]) == {"new_model"}
 assert "price_change" in module.classify_change("exact", {"pricing": {"before": 1, "after": 2}})
@@ -50,7 +51,7 @@ bad["identity_resolution"]["confidence"] = "low"
 bad["change_type"] = "metadata_correction"
 bad["review"]["status"] = "approved"
 try:
-    module.validate_candidate(bad, registry_ids)
+    module.validate_candidate(bad, registry_ids, registry)
 except module.CandidateError:
     pass
 else:
@@ -59,7 +60,7 @@ else:
 bad = copy.deepcopy(candidate)
 bad["validation"] = {"status": "failed", "errors": ["bad source"], "warnings": []}
 try:
-    module.validate_candidate(bad, registry_ids)
+    module.validate_candidate(bad, registry_ids, registry)
 except module.CandidateError:
     pass
 else:
