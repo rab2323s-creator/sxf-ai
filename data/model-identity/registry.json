@@ -1,6 +1,5 @@
 {
   "schema_version": "1.0",
-  "generated_from": "data/model-pricing.json",
   "identity_policy": {
     "canonical_id_stability": "canonical_model_id is stable across marketing renames; provider-native IDs and aliases may evolve",
     "namespace": "provider-scoped native IDs and aliases; canonical_model_id is globally unique",
@@ -537,5 +536,7 @@
         "https://docs.mistral.ai/models/codestral-embed-25-05"
       ]
     }
-  ]
+  ],
+  "registry_role": "canonical identity layer",
+  "bootstrapped_from": "data/model-pricing.json@2026-10-06"
 }
