@@ -226,7 +226,304 @@
       "legacy_signal_url": "https://sxf.si/signals/introducing-gpt-6-sol-and-luna-3e2cf5d/",
       "evidence_identity_signal_url": "https://sxf.si/signals/introducing-gpt-6-sol-and-luna-3e2cf5d/",
       "source_url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
-      "approved_at": "2026-10-03"
+      "approved_at": "2026-10-03",
+      "evidence_snapshot": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        "signal": {
+          "title": "Introducing GPT-6 Sol and Luna",
+          "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+          "signal_url": "https://sxf.si/signals/introducing-gpt-6-sol-and-luna-3e2cf5d/",
+          "source": "OpenAI",
+          "published": "2026-09-22T18:00:00Z",
+          "category": "Models",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "Meet GPT-6 Sol and Luna, two models that bring frontier intelligence to everyday work with different balances of capability and cost.",
+          "signal_score": 64,
+          "seo_quality_score": 89,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "named-model",
+            "durable-intelligence-layer"
+          ]
+        },
+        "models": [
+          {
+            "model_id": "gpt-6-sol",
+            "provider": "OpenAI",
+            "family": "GPT-6",
+            "model": "GPT-6 Sol",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-04-20",
+            "reasoning": {
+              "type": "reasoning effort",
+              "levels": [
+                "none",
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "medium"
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "General-purpose GPT-6 tier for complex coding and agentic workflows with lower unit cost than Astra.",
+            "pricing_standard": {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.2,
+              "cache_write": 2.5,
+              "output": 10
+            },
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-09-27",
+            "official_sources": [
+              "https://developers.openai.com/api/docs/models/gpt-6-sol",
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "history": [
+              {
+                "sequence": 11,
+                "type": "baseline",
+                "model_id": "gpt-6-sol",
+                "verified_at": "2026-09-27",
+                "previous_event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a",
+                "snapshot": {
+                  "provider": "OpenAI",
+                  "family": "GPT-6",
+                  "model": "GPT-6 Sol",
+                  "context_window": 1050000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-04-20",
+                  "reasoning": {
+                    "type": "reasoning effort",
+                    "levels": [
+                      "none",
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max"
+                    ],
+                    "default": "medium"
+                  },
+                  "modalities": {
+                    "input": [
+                      "text",
+                      "image"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-09-22",
+                        "end": null,
+                        "input": 2,
+                        "cached_input": 0.2,
+                        "cache_write": 2.5,
+                        "output": 10
+                      }
+                    ],
+                    "long_context": {
+                      "threshold_input_tokens": 272000,
+                      "condition": "total input tokens greater than 272000",
+                      "applies_to_entire_request": true,
+                      "multipliers": {
+                        "input": 2,
+                        "cached_input": 2,
+                        "cache_write": 2,
+                        "output": 1.5
+                      }
+                    }
+                  }
+                },
+                "evidence": {
+                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "family": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "model": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+                  "pricing": "https://developers.openai.com/api/docs/pricing"
+                },
+                "event_id": "evt_68d2a047223acf4b1353",
+                "event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
+              }
+            ]
+          },
+          {
+            "model_id": "gpt-6-luna",
+            "provider": "OpenAI",
+            "family": "GPT-6",
+            "model": "GPT-6 Luna",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-05-18",
+            "reasoning": {
+              "type": "reasoning effort",
+              "levels": [
+                "none",
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "medium"
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "Efficiency-focused GPT-6 tier for focused, high-volume, and cost-sensitive workloads.",
+            "pricing_standard": {
+              "start": "2026-09-22",
+              "end": null,
+              "input": 0.1,
+              "cached_input": 0.01,
+              "cache_write": 0.125,
+              "output": 0.5
+            },
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-09-27",
+            "official_sources": [
+              "https://developers.openai.com/api/docs/models/gpt-6-luna",
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "history": [
+              {
+                "sequence": 10,
+                "type": "baseline",
+                "model_id": "gpt-6-luna",
+                "verified_at": "2026-09-27",
+                "previous_event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392",
+                "snapshot": {
+                  "provider": "OpenAI",
+                  "family": "GPT-6",
+                  "model": "GPT-6 Luna",
+                  "context_window": 1050000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-05-18",
+                  "reasoning": {
+                    "type": "reasoning effort",
+                    "levels": [
+                      "none",
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max"
+                    ],
+                    "default": "medium"
+                  },
+                  "modalities": {
+                    "input": [
+                      "text",
+                      "image"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-09-22",
+                        "end": null,
+                        "input": 0.1,
+                        "cached_input": 0.01,
+                        "cache_write": 0.125,
+                        "output": 0.5
+                      }
+                    ],
+                    "long_context": {
+                      "threshold_input_tokens": 272000,
+                      "condition": "total input tokens greater than 272000",
+                      "applies_to_entire_request": true,
+                      "multipliers": {
+                        "input": 2,
+                        "cached_input": 2,
+                        "cache_write": 2,
+                        "output": 1.5
+                      }
+                    }
+                  }
+                },
+                "evidence": {
+                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "family": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "model": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+                  "pricing": "https://developers.openai.com/api/docs/pricing"
+                },
+                "event_id": "evt_feb56ee653729cbc2b74",
+                "event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a"
+              }
+            ]
+          }
+        ],
+        "source_urls": [
+          "https://developers.openai.com/api/docs/models/gpt-6-luna",
+          "https://developers.openai.com/api/docs/models/gpt-6-sol",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://openai.com/index/introducing-gpt-6-sol-and-luna"
+        ]
+      },
+      "evidence_snapshot_hash": "57f7d53fb3e5278d7912a785ab69a32bfedcc690d0d9c554fb31e5da2b8ce560"
     },
     {
       "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
