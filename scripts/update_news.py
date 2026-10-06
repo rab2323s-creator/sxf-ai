@@ -557,7 +557,7 @@ def compare_live_facts_html(model_ids):
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
         input_price = catalog_price_label(price["input"]) if price else "Not published"
-        cached_price = catalog_price_label(price["cached_input"]) if price else "—"
+        cached_price = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
@@ -9293,7 +9293,7 @@ def model_pricing_page_html():
           <td>{int(model["context_window"]):,}<small>tokens</small></td>
           <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
           <td class="price">{escape(catalog_price_label(price["input"]) if price else "Not published")}</td>
-          <td class="price">{escape(catalog_price_label(price["cached_input"]) if price else "—")}</td>
+          <td class="price">{escape(catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—")}</td>
           <td class="price">{escape(catalog_price_label(price["output"]) if price else "Not published")}</td>
           <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
         </tr>'''
@@ -10644,7 +10644,7 @@ def compare_live_facts_html(model_ids):
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
         input_price = catalog_price_label(price["input"]) if price else "Not published"
-        cached_price = catalog_price_label(price["cached_input"]) if price else "—"
+        cached_price = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
@@ -19380,7 +19380,7 @@ def model_pricing_page_html():
           <td>{int(model["context_window"]):,}<small>tokens</small></td>
           <td>{escape(model_output_label(model))}<small>{"tokens" if model.get("max_output") != "unlimited" else "provider-documented"}</small></td>
           <td class="price">{escape(catalog_price_label(price["input"]) if price else "Not published")}</td>
-          <td class="price">{escape(catalog_price_label(price["cached_input"]) if price else "—")}</td>
+          <td class="price">{escape(catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—")}</td>
           <td class="price">{escape(catalog_price_label(price["output"]) if price else "Not published")}</td>
           <td><a href="{escape(source, quote=True)}" target="_blank" rel="noopener noreferrer">Official ↗</a></td>
         </tr>'''
