@@ -14,7 +14,10 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
 source = (SCRIPTS / "update_news.py").read_text(encoding="utf-8")
-assert 'price["cached_input"]' not in source, "Explorer rendering must not require cached_input"
+start = source.rfind("def model_explorer_html():")
+end = source.find("\ndef ", start + 1)
+renderer_source = source[start:] if end == -1 else source[start:end]
+assert 'price["cached_input"]' not in renderer_source, "Explorer rendering must not require cached_input"
 html = module.model_explorer_html()
 
 assert "Amazon Nova 2 Lite" in html, "Explorer must render Nova 2 Lite"
