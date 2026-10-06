@@ -21,6 +21,13 @@ assert set(entries) == {m["model_id"] for m in catalog["models"]}
 assert all(entry["provider_native_ids"] for entry in entries.values())
 assert all(entry["identity_sources"] for entry in entries.values())
 
+resolved = module.resolve_identity(registry, "OpenAI", "gpt-5.6", "GPT-5.6 Sol")
+assert resolved["status"] == "alias" and resolved["matched_model_id"] == "gpt-5.6-sol"
+resolved = module.resolve_identity(registry, "Mistral AI", None, "Codestral")
+assert resolved["status"] == "possible_duplicate" and resolved["possible_duplicates"] == ["codestral-2508"]
+resolved = module.resolve_identity(registry, "Example Provider", "example-native-id", "Example Model")
+assert resolved["status"] == "new"
+
 bad = copy.deepcopy(registry)
 bad["models"][1]["aliases"].append(bad["models"][0]["provider_native_ids"][0])
 try:
