@@ -3349,6 +3349,18 @@ def signals_index_html(items):
         ],
     }
     rows = "".join(signal_row(item) for item in items[:40])
+    archive_items = [item for item in items[40:] if item.get("seo_eligible")]
+    archive_links = "".join(
+        f'<a href="{escape(item.get("signal_url", item["url"]), quote=True)}"><span>{escape(item["title"])}</span><small>{escape(item["source"])} · {escape(display_date(item["published"]))}</small></a>'
+        for item in archive_items
+    )
+    archive_directory = (
+        f'''<section class="signals-directory shell" aria-labelledby="signals-directory-title">
+          <div class="intel-section-head"><div><p class="eyebrow">VERIFIED ARCHIVE</p><h2 id="signals-directory-title">More verified AI signals.</h2></div><span>{len(archive_items)} indexed signals</span></div>
+          <div class="signals-directory-list">{archive_links}</div>
+        </section>'''
+        if archive_items else ""
+    )
     return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Models, Agents & Research Updates | SXF / AI", description, canonical, schema)}
     <body class="intel-page collection-page signals-page"><a class="skip-link" href="#signals-main">Skip to signals</a>
     {page_header()}<main id="signals-main">
@@ -3382,6 +3394,8 @@ def signals_index_html(items):
         <div class="signal-list" id="signalsFeed">{rows}</div>
         <div class="signals-empty" id="signalsEmpty" hidden>No signals match this filter yet.</div>
       </section>
+
+      {archive_directory}
 
       <section class="signals-gateways shell" aria-labelledby="signals-gateways-title">
         <div class="intel-section-head"><div><p class="eyebrow">EXPLORE BY INTENT</p><h2 id="signals-gateways-title">Move from updates to deeper intelligence.</h2></div></div>
