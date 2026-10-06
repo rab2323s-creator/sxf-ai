@@ -52,7 +52,22 @@
         }
       },
       "pricing_status": "free-preview",
-      "calculator_eligible": false
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "agents",
+        "tool-use"
+      ]
     }
   ]
 }
