@@ -47,6 +47,9 @@ REQUIRED_EVIDENCE = {
     "reasoning",
     "modalities",
     "pricing",
+    "access",
+    "lifecycle",
+    "capabilities",
 }
 
 
