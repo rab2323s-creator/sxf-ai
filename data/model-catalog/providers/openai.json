@@ -616,6 +616,233 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "GPT-Live",
+      "model": "GPT-Live 1",
+      "model_id": "gpt-live-1",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": "2025-07-31",
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "positioning": "Full-duplex voice model for natural real-time conversations with simultaneous listening and speaking plus backend-agent delegation.",
+      "sxf_url": "/models/gpt-live-1/",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-live-1",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "notes": [
+        "Voice sessions are billed per second at the published per-minute rate; backend model and tool usage is billed separately."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "rates": {
+              "minute": 0.05
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-live-1"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "speech-to-speech",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
+    },
+    {
+      "family": "GPT Transcription",
+      "model": "GPT-Live-Transcribe",
+      "model_id": "gpt-live-transcribe",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Low-latency streaming speech-to-text model for live audio transcription with tunable latency and transcript deltas.",
+      "sxf_url": "/models/gpt-live-transcribe/",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "rates": {
+              "minute": 0.017
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-live-transcribe"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
+    },
+    {
+      "family": "GPT Transcription",
+      "model": "GPT-Transcribe",
+      "model_id": "gpt-transcribe",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "High-accuracy speech-to-text model for completed audio files, streamed file transcripts, and committed Realtime turns.",
+      "sxf_url": "/models/gpt-transcribe/",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-06",
+            "end": null,
+            "rates": {
+              "minute": 0.0045
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-transcribe"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "page_template": "catalog-reference",
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
     }
   ]
 }
