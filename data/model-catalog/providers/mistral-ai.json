@@ -85,7 +85,17 @@
         "vision",
         "coding",
         "agents"
-      ]
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     },
     {
       "family": "Mistral Medium",
@@ -171,7 +181,17 @@
         "vision",
         "coding",
         "agents"
-      ]
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

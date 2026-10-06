@@ -26,9 +26,49 @@ Run:
 ```bash
 python scripts/build_model_catalog.py --check
 python tests/test_model_catalog.py
+python tests/test_generalized_pricing.py
 ```
 
 Validation rejects duplicate IDs/aliases, malformed dates and URLs, overlapping pricing periods, unsupported pricing statuses, missing provenance, and calculator-eligible models without official Standard pricing.
+
+## Pricing units
+
+Every model declares a `pricing_basis` contract:
+
+```json
+{
+  "meter": "tokens",
+  "quantity": 1000000,
+  "dimensions": ["input", "cached_input", "output"],
+  "display_unit": "per 1 million tokens"
+}
+```
+
+Supported meters are `tokens`, `pages`, `minutes`, `characters`, `images`, `requests`, `search_units`, and `instance_hours`.
+
+Token-priced models preserve the existing Standard schedule shape with `input`, optional `cached_input`, and `output`. Non-token models use a generic `rates` object whose keys must exactly match `pricing_basis.dimensions`:
+
+```json
+{
+  "pricing_basis": {
+    "meter": "pages",
+    "quantity": 1,
+    "dimensions": ["page"],
+    "display_unit": "per page"
+  },
+  "pricing": {
+    "standard": [
+      {
+        "start": "2026-01-01",
+        "end": null,
+        "rates": {"page": 0.002}
+      }
+    ]
+  }
+}
+```
+
+The existing token calculators only admit models with `pricing_basis.meter = "tokens"` and `calculator_eligible = true`. Specialist pricing is therefore represented accurately without being forced into token arithmetic.
 
 ## Adding a model
 

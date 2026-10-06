@@ -295,7 +295,7 @@ def validate_model_pricing_catalog():
             f"model-pricing.json schema_version drift: {data.get('schema_version')!r} "
             f"!= manifest {expected_schema_version!r}"
         )
-    if expected_schema_version != "1.5":
+    if expected_schema_version != "1.6":
         fail(f"unsupported model catalog schema version: {expected_schema_version!r}")
 
     policy = data.get("verification_policy")
@@ -428,6 +428,30 @@ def validate_model_pricing_catalog():
         if not isinstance(capabilities, list) or not capabilities or len(capabilities) != len(set(capabilities)):
             fail(f"{model_id}: invalid capabilities taxonomy")
 
+        pricing_basis = model.get("pricing_basis")
+        supported_meters = {"tokens", "pages", "minutes", "characters", "images", "requests", "search_units", "instance_hours"}
+        supported_dimensions = {"input", "cached_input", "output", "page", "minute", "character", "image", "request", "search_unit", "instance_hour"}
+        if not isinstance(pricing_basis, dict) or set(pricing_basis) != {"meter", "quantity", "dimensions", "display_unit"}:
+            fail(f"{model_id}: invalid pricing_basis contract")
+        meter = pricing_basis.get("meter")
+        quantity = pricing_basis.get("quantity")
+        dimensions = pricing_basis.get("dimensions")
+        if meter not in supported_meters:
+            fail(f"{model_id}: unsupported pricing meter {meter!r}")
+        if not isinstance(quantity, (int, float)) or quantity <= 0:
+            fail(f"{model_id}: pricing_basis quantity must be positive")
+        if not isinstance(dimensions, list) or not dimensions or len(dimensions) != len(set(dimensions)):
+            fail(f"{model_id}: invalid pricing dimensions")
+        if set(dimensions) - supported_dimensions:
+            fail(f"{model_id}: unsupported pricing dimensions")
+        if not isinstance(pricing_basis.get("display_unit"), str) or not pricing_basis["display_unit"].strip():
+            fail(f"{model_id}: pricing_basis display_unit is required")
+        if meter == "tokens":
+            if not {"input", "output"}.issubset(dimensions):
+                fail(f"{model_id}: token pricing requires input/output dimensions")
+        elif {"input", "cached_input", "output"} & set(dimensions):
+            fail(f"{model_id}: non-token pricing must not use token dimensions")
+
         schedule = model.get("pricing", {}).get("standard")
         if schedule is None:
             schedule = []
@@ -437,6 +461,8 @@ def validate_model_pricing_catalog():
         if calculator_eligible:
             if pricing_status != "official-paid":
                 fail(f"{model_id}: calculator eligibility requires official-paid status")
+            if meter != "tokens":
+                fail(f"{model_id}: current calculator eligibility requires token pricing")
             if not schedule:
                 fail(f"{model_id}: calculator eligibility requires Standard pricing")
         elif pricing_status != "official-paid" and schedule:
@@ -462,13 +488,25 @@ def validate_model_pricing_catalog():
                 open_ended_seen = True
             previous_end = end
 
-            for field in ("input", "output"):
-                value = period.get(field)
-                if not isinstance(value, (int, float)) or value < 0:
-                    fail(f"{model_id}: invalid {field} price")
-            cached_input = period.get("cached_input")
-            if cached_input is not None and (not isinstance(cached_input, (int, float)) or cached_input < 0):
-                fail(f"{model_id}: invalid cached_input price")
+            if meter == "tokens":
+                for field in ("input", "output"):
+                    value = period.get(field)
+                    if not isinstance(value, (int, float)) or value < 0:
+                        fail(f"{model_id}: invalid {field} price")
+                cached_input = period.get("cached_input")
+                if cached_input is not None and (not isinstance(cached_input, (int, float)) or cached_input < 0):
+                    fail(f"{model_id}: invalid cached_input price")
+                if "rates" in period:
+                    fail(f"{model_id}: token pricing must not use generic rates")
+            else:
+                rates = period.get("rates")
+                if not isinstance(rates, dict) or set(rates) != set(dimensions):
+                    fail(f"{model_id}: non-token rates must match pricing dimensions")
+                for field, value in rates.items():
+                    if not isinstance(value, (int, float)) or value < 0:
+                        fail(f"{model_id}: invalid {field} rate")
+                if any(field in period for field in ("input", "cached_input", "output")):
+                    fail(f"{model_id}: non-token pricing must not use token price fields")
 
             if start <= verified_date and (end is None or verified_date <= end):
                 covers_verified_date = True
@@ -478,6 +516,8 @@ def validate_model_pricing_catalog():
 
         long_context = model.get("pricing", {}).get("long_context")
         if long_context:
+            if meter != "tokens":
+                fail(f"{model_id}: long-context pricing is only valid for token meters")
             if not isinstance(long_context.get("threshold_input_tokens"), int) or long_context["threshold_input_tokens"] <= 0:
                 fail(f"{model_id}: invalid long-context threshold")
             if long_context.get("applies_to_entire_request") is not True:
@@ -498,6 +538,12 @@ def validate_model_pricing_catalog():
     if not model_has_official_paid_pricing({
         "pricing_status": "official-paid",
         "calculator_eligible": True,
+        "pricing_basis": {
+            "meter": "tokens",
+            "quantity": 1_000_000,
+            "dimensions": ["input", "cached_input", "output"],
+            "display_unit": "per 1 million tokens",
+        },
         "pricing": {"standard": [{"start": "2026-01-01"}]},
     }):
         fail("official-paid calculator eligibility regression")

@@ -87,6 +87,14 @@
 
   const compactNumber = value => Number(value).toLocaleString(undefined, {maximumFractionDigits: 0});
 
+  const isTokenCalculatorModel = model =>
+    model?.pricing_basis?.meter === "tokens" &&
+    model?.pricing_status === "official-paid" &&
+    model?.calculator_eligible === true;
+
+  const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
+  const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
+
   const periodForDate = (model, date) => {
     const schedule = model?.pricing?.standard || [];
     return schedule.find(period => {
@@ -116,12 +124,14 @@
     const effective = effectiveRates(model, date, input + cached);
     if (!effective) return null;
     const {rates, long, longRule} = effective;
+    if (!isTokenCalculatorModel(model)) return null;
+    const quantity = pricingQuantity(model);
     const inputRate = Number(rates.input || 0);
-    const cachedRate = Number(rates.cached_input || 0);
+    const cachedRate = Number(rates.cached_input ?? rates.input ?? 0);
     const outputRate = Number(rates.output || 0);
-    const inputCost = input / 1_000_000 * inputRate;
-    const cachedCost = cached / 1_000_000 * cachedRate;
-    const outputCost = output / 1_000_000 * outputRate;
+    const inputCost = input / quantity * inputRate;
+    const cachedCost = cached / quantity * cachedRate;
+    const outputCost = output / quantity * outputRate;
     return {rates, long, longRule, inputCost, cachedCost, outputCost, total: inputCost + cachedCost + outputCost};
   };
 
@@ -135,6 +145,7 @@
     }
     const groups = new Map();
     for (const model of catalog.models || []) {
+      if (!isTokenCalculatorModel(model)) continue;
       if (!groups.has(model.provider)) groups.set(model.provider, []);
       groups.get(model.provider).push(model);
     }
@@ -369,9 +380,9 @@
     rateProfileNode.textContent = [
       result.long ? "Long-context Standard" : "Standard API",
       periodLabel,
-      "Input " + rateMoney(result.rates.input) + " / MTok",
-      "Cached " + rateMoney(result.rates.cached_input) + " / MTok",
-      "Output " + rateMoney(result.rates.output) + " / MTok"
+      "Input " + rateMoney(result.rates.input) + " " + pricingDisplayUnit(model),
+      "Cached " + rateMoney(result.rates.cached_input ?? result.rates.input) + " " + pricingDisplayUnit(model),
+      "Output " + rateMoney(result.rates.output) + " " + pricingDisplayUnit(model)
     ].join(" · ");
 
     const warnings = warningsFor(model, result, input, cached, output);

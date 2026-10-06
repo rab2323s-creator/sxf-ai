@@ -41,6 +41,14 @@
     maximumFractionDigits: 4
   });
 
+  const isTokenCalculatorModel = model =>
+    model?.pricing_basis?.meter === "tokens" &&
+    model?.pricing_status === "official-paid" &&
+    model?.calculator_eligible === true;
+
+  const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
+  const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
+
   const periodForDate = (model, date) => {
     const schedule = model?.pricing?.standard || [];
     return schedule.find(period => {
@@ -85,7 +93,7 @@
     modelSelect.replaceChildren();
     const groups = new Map();
     for (const model of models) {
-      if (model.pricing_status !== "official-paid" || model.calculator_eligible !== true) continue;
+      if (!isTokenCalculatorModel(model)) continue;
       if (!groups.has(model.provider)) groups.set(model.provider, []);
       groups.get(model.provider).push(model);
     }
@@ -109,7 +117,7 @@
     if (!catalog) return;
     const model = byId.get(modelSelect.value);
     if (!model) return;
-    if (model.pricing_status !== "official-paid" || model.calculator_eligible !== true) {
+    if (!isTokenCalculatorModel(model)) {
       totalNode.textContent = "—";
       inputCostNode.textContent = "—";
       cachedCostNode.textContent = "—";
@@ -137,9 +145,11 @@
     }
 
     const {rates, long, longRule} = effective;
-    const inputCost = input / 1_000_000 * rates.input;
-    const cachedCost = cached / 1_000_000 * rates.cached_input;
-    const outputCost = output / 1_000_000 * rates.output;
+    const quantity = pricingQuantity(model);
+    const cachedRate = rates.cached_input ?? rates.input;
+    const inputCost = input / quantity * rates.input;
+    const cachedCost = cached / quantity * cachedRate;
+    const outputCost = output / quantity * rates.output;
     const total = inputCost + cachedCost + outputCost;
 
     totalNode.textContent = money(total);
@@ -151,9 +161,9 @@
     const profile = [
       long ? "Long-context Standard" : "Standard",
       periodLabel,
-      "Input " + rateMoney(rates.input) + " / MTok",
-      "Cached " + rateMoney(rates.cached_input) + " / MTok",
-      "Output " + rateMoney(rates.output) + " / MTok"
+      "Input " + rateMoney(rates.input) + " " + pricingDisplayUnit(model),
+      "Cached " + rateMoney(rates.cached_input ?? rates.input) + " " + pricingDisplayUnit(model),
+      "Output " + rateMoney(rates.output) + " " + pricingDisplayUnit(model)
     ];
     rateProfileNode.textContent = profile.join(" · ");
 

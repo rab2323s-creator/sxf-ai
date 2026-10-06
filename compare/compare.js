@@ -59,13 +59,21 @@
     return "$" + Number(value).toLocaleString(undefined, {maximumFractionDigits: 4});
   };
 
+  const isTokenCalculatorModel = model =>
+    model?.pricing_basis?.meter === "tokens" &&
+    model?.pricing_status === "official-paid" &&
+    model?.calculator_eligible === true;
+
+  const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
+  const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
+
   const periodForDate = (model, date) => {
     const schedule = model?.pricing?.standard || [];
     return schedule.find(period => date >= period.start && (!period.end || date <= period.end)) || null;
   };
 
   const effectiveRates = (model, totalInput) => {
-    if (model?.pricing_status !== "official-paid" || model?.calculator_eligible !== true) return null;
+    if (!isTokenCalculatorModel(model)) return null;
     const period = periodForDate(model, catalog.source_verified);
     if (!period) return null;
     const rates = {...period};
@@ -85,10 +93,12 @@
     const effective = effectiveRates(model, input + cached);
     if (!effective) return null;
     const r = effective.rates;
+    const quantity = pricingQuantity(model);
+    const cachedRate = r.cached_input ?? r.input;
     return {
-      total: input / 1_000_000 * r.input +
-        cached / 1_000_000 * r.cached_input +
-        output / 1_000_000 * r.output,
+      total: input / quantity * r.input +
+        cached / quantity * cachedRate +
+        output / quantity * r.output,
       effective
     };
   };
@@ -101,10 +111,10 @@
 
   const pricingLabel = model => {
     const p = periodForDate(model, catalog.source_verified);
-    if (!p || model.pricing_status !== "official-paid" || model.calculator_eligible !== true) {
+    if (!p || !isTokenCalculatorModel(model)) {
       return model.pricing_status || "not-published";
     }
-    return rate(p.input) + " input · " + rate(p.output) + " output / MTok";
+    return rate(p.input) + " input · " + rate(p.output) + " output " + pricingDisplayUnit(model);
   };
 
   const reasoningLabel = model => {

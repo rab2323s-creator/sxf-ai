@@ -39,6 +39,14 @@ ALLOWED_CAPABILITIES = {
     "speech-to-speech", "transcription", "tts", "ocr", "embeddings", "rerank",
     "moderation", "long-context",
 }
+ALLOWED_PRICING_METERS = {
+    "tokens", "pages", "minutes", "characters", "images", "requests",
+    "search_units", "instance_hours",
+}
+ALLOWED_PRICING_DIMENSIONS = {
+    "input", "cached_input", "output", "page", "minute", "character",
+    "image", "request", "search_unit", "instance_hour",
+}
 REQUIRED_EVIDENCE = {
     "model_identity",
     "context_window",
@@ -89,6 +97,33 @@ def validate_iso_date(value, label: str, allow_null: bool = False):
 def validate_pricing(model: dict, label: str):
     pricing = model.get("pricing")
     require(isinstance(pricing, dict), f"{label}.pricing must be an object")
+
+    basis = model.get("pricing_basis")
+    require(isinstance(basis, dict), f"{label}.pricing_basis must be an object")
+    require(set(basis) == {"meter", "quantity", "dimensions", "display_unit"},
+            f"{label}.pricing_basis must contain only meter, quantity, dimensions, display_unit")
+    meter = basis.get("meter")
+    quantity = basis.get("quantity")
+    dimensions = basis.get("dimensions")
+    display_unit = basis.get("display_unit")
+    require(meter in ALLOWED_PRICING_METERS, f"{label}.pricing_basis.meter is unsupported: {meter!r}")
+    require(isinstance(quantity, (int, float)) and quantity > 0,
+            f"{label}.pricing_basis.quantity must be a positive number")
+    require(isinstance(dimensions, list) and dimensions and len(dimensions) == len(set(dimensions)),
+            f"{label}.pricing_basis.dimensions must be a non-empty unique array")
+    unknown_dimensions = set(dimensions) - ALLOWED_PRICING_DIMENSIONS
+    require(not unknown_dimensions,
+            f"{label}.pricing_basis.dimensions contains unsupported values: {', '.join(sorted(unknown_dimensions))}")
+    require(isinstance(display_unit, str) and display_unit.strip(),
+            f"{label}.pricing_basis.display_unit must be a non-empty string")
+
+    if meter == "tokens":
+        require("input" in dimensions and "output" in dimensions,
+                f"{label}: token pricing requires input and output dimensions")
+    else:
+        require(not ({"input", "cached_input", "output"} & set(dimensions)),
+                f"{label}: non-token pricing must not use token dimensions")
+
     schedules = pricing.get("standard", [])
     require(isinstance(schedules, list), f"{label}.pricing.standard must be an array")
 
@@ -108,25 +143,45 @@ def validate_pricing(model: dict, label: str):
             require(start > previous_end, f"{label} has overlapping Standard pricing periods")
         previous_end = end
         previous_was_open = end is None
-        for key in ("input", "output"):
-            require(isinstance(period.get(key), (int, float)) and period[key] >= 0, f"{p}.{key} must be a non-negative number")
-        for key in ("cached_input", "cache_write", "cache_write_5m", "cache_write_1h"):
-            if key in period:
-                require(isinstance(period[key], (int, float)) and period[key] >= 0, f"{p}.{key} must be a non-negative number")
+
+        if meter == "tokens":
+            for key in ("input", "output"):
+                require(isinstance(period.get(key), (int, float)) and period[key] >= 0,
+                        f"{p}.{key} must be a non-negative number")
+            for key in ("cached_input", "cache_write", "cache_write_5m", "cache_write_1h"):
+                if key in period:
+                    require(isinstance(period[key], (int, float)) and period[key] >= 0,
+                            f"{p}.{key} must be a non-negative number")
+            require("rates" not in period, f"{p}.rates is reserved for non-token pricing")
+        else:
+            rates = period.get("rates")
+            require(isinstance(rates, dict) and rates, f"{p}.rates must be a non-empty object")
+            require(set(rates) == set(dimensions),
+                    f"{p}.rates keys must exactly match pricing_basis.dimensions")
+            for key, value in rates.items():
+                require(isinstance(value, (int, float)) and value >= 0,
+                        f"{p}.rates.{key} must be a non-negative number")
+            for token_key in ("input", "cached_input", "output", "cache_write", "cache_write_5m", "cache_write_1h"):
+                require(token_key not in period, f"{p}.{token_key} is not valid for {meter} pricing")
 
     long_context = pricing.get("long_context")
     if long_context is not None:
+        require(meter == "tokens", f"{label}.pricing.long_context is only valid for token pricing")
         require(isinstance(long_context, dict), f"{label}.pricing.long_context must be an object")
         require(isinstance(long_context.get("threshold_input_tokens"), int) and long_context["threshold_input_tokens"] > 0,
                 f"{label}.pricing.long_context.threshold_input_tokens must be a positive integer")
         multipliers = long_context.get("multipliers")
-        require(isinstance(multipliers, dict) and multipliers, f"{label}.pricing.long_context.multipliers must be a non-empty object")
+        require(isinstance(multipliers, dict) and multipliers,
+                f"{label}.pricing.long_context.multipliers must be a non-empty object")
         for key, value in multipliers.items():
-            require(isinstance(value, (int, float)) and value > 0, f"{label}.pricing.long_context.multipliers.{key} must be positive")
+            require(isinstance(value, (int, float)) and value > 0,
+                    f"{label}.pricing.long_context.multipliers.{key} must be positive")
 
     if model.get("calculator_eligible") is True:
         require(model.get("pricing_status") == "official-paid",
                 f"{label}: calculator_eligible=true requires pricing_status=official-paid")
+        require(meter == "tokens",
+                f"{label}: current calculator eligibility requires token pricing")
         require(bool(schedules), f"{label}: calculator_eligible=true requires Standard pricing")
 
 
