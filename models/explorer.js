@@ -32,10 +32,17 @@
       <span class="model-filter-label">Capabilities</span>
       <div class="model-capability-filters">
         <button type="button" class="model-filter-chip" data-capability="reasoning" aria-pressed="false">Reasoning</button>
-        <button type="button" class="model-filter-chip" data-capability="image" aria-pressed="false">Image</button>
-        <button type="button" class="model-filter-chip" data-capability="audio-video" aria-pressed="false">Audio / video</button>
+        <button type="button" class="model-filter-chip" data-capability="vision" aria-pressed="false">Image</button>
+        <button type="button" class="model-filter-chip" data-capability="video" aria-pressed="false">Video</button>
+        <button type="button" class="model-filter-chip" data-capability="audio" aria-pressed="false">Audio</button>
       </div>
     </div>
+    <label class="model-advanced-select"><span>Task</span><select id="modelTaskFilter">
+      <option value="all">Any task</option>
+      <option value="coding">Coding</option>
+      <option value="agents">Agents</option>
+      <option value="tool-use">Tool use</option>
+    </select></label>
     <label class="model-advanced-select"><span>Context</span><select id="modelContextFilter">
       <option value="0">Any context</option>
       <option value="500000">500K+</option>
@@ -44,9 +51,18 @@
     </select></label>
     <label class="model-advanced-select"><span>Access</span><select id="modelAccessFilter">
       <option value="all">Any access</option>
-      <option value="official-paid">Official paid API</option>
+      <option value="paid-api">Paid API</option>
+      <option value="free-api">Free API</option>
       <option value="open-weight">Open weights</option>
+      <option value="self-hostable">Self-hostable</option>
       <option value="calculator">Calculator eligible</option>
+    </select></label>
+    <label class="model-advanced-select"><span>Lifecycle</span><select id="modelLifecycleFilter">
+      <option value="all">Any lifecycle</option>
+      <option value="current">Current</option>
+      <option value="preview">Preview</option>
+      <option value="legacy">Legacy</option>
+      <option value="deprecated">Deprecated</option>
     </select></label>
     <label class="model-advanced-select"><span>Verification</span><select id="modelVerificationFilter">
       <option value="all">Any verification date</option>
@@ -57,8 +73,10 @@
   `;
   toolbar?.appendChild(filters);
 
+  const taskFilter = filters.querySelector("#modelTaskFilter");
   const contextFilter = filters.querySelector("#modelContextFilter");
   const accessFilter = filters.querySelector("#modelAccessFilter");
+  const lifecycleFilter = filters.querySelector("#modelLifecycleFilter");
   const verificationFilter = filters.querySelector("#modelVerificationFilter");
   const resetButton = filters.querySelector("#modelFilterReset");
   const capabilityButtons = [...filters.querySelectorAll("[data-capability]")];
@@ -97,7 +115,7 @@
     providerButtons.forEach(button => button.classList.toggle("is-active", button.dataset.modelProvider === provider));
 
     capabilityButtons.forEach(button => {
-      const key = button.dataset.capability === "audio-video" ? "av" : button.dataset.capability;
+      const key = button.dataset.capability;
       const active = params.get(key) === "1";
       button.setAttribute("aria-pressed", String(active));
       button.classList.toggle("is-active", active);
@@ -105,8 +123,10 @@
 
     if (search) search.value = params.get("q") || "";
     if (sort) sort.value = validValues(sort).has(params.get("sort")) ? params.get("sort") : "default";
+    if (taskFilter) taskFilter.value = validValues(taskFilter).has(params.get("task")) ? params.get("task") : "all";
     if (contextFilter) contextFilter.value = validValues(contextFilter).has(params.get("context")) ? params.get("context") : "0";
     if (accessFilter) accessFilter.value = validValues(accessFilter).has(params.get("access")) ? params.get("access") : "all";
+    if (lifecycleFilter) lifecycleFilter.value = validValues(lifecycleFilter).has(params.get("lifecycle")) ? params.get("lifecycle") : "all";
     if (verificationFilter) verificationFilter.value = validValues(verificationFilter).has(params.get("verified")) ? params.get("verified") : "all";
   };
 
@@ -115,16 +135,20 @@
     const caps = activeCapabilities();
     const query = search?.value.trim() || "";
     const mode = sort?.value || "default";
+    const task = taskFilter?.value || "all";
     const context = contextFilter?.value || "0";
     const access = accessFilter?.value || "all";
+    const lifecycle = lifecycleFilter?.value || "all";
     const verified = verificationFilter?.value || "all";
 
     if (provider !== "all") params.set("provider", normalize(provider));
-    if (caps.has("reasoning")) params.set("reasoning", "1");
-    if (caps.has("image")) params.set("image", "1");
-    if (caps.has("audio-video")) params.set("av", "1");
+    capabilityButtons.forEach(button => {
+      if (caps.has(button.dataset.capability)) params.set(button.dataset.capability, "1");
+    });
+    if (task !== "all") params.set("task", task);
     if (context !== "0") params.set("context", context);
     if (access !== "all") params.set("access", access);
+    if (lifecycle !== "all") params.set("lifecycle", lifecycle);
     if (verified !== "all") params.set("verified", verified);
     if (mode !== "default") params.set("sort", mode);
     if (query) params.set("q", query);
@@ -137,15 +161,9 @@
   };
 
   const modelForRow = row => modelByRow.get(row) || null;
-  const supports = (model, capability) => {
-    if (!model) return false;
-    const inputs = (model.modalities?.input || []).map(normalize);
-    if (capability === "reasoning") return Boolean(model.reasoning);
-    if (capability === "image") return inputs.includes("image");
-    if (capability === "audio-video") return inputs.includes("audio") || inputs.includes("video");
-    return true;
-  };
-  const isOpenWeight = model => /open[- ]weight/i.test(model?.positioning || "") || model?.provider === "Meta";
+  const capabilitySet = model => new Set((model?.capabilities || []).map(normalize));
+  const supports = (model, capability) => capabilitySet(model).has(capability);
+  const isOpenWeight = model => model?.access?.open_weight === true;
   const verificationAge = model => {
     if (!catalog?.source_verified || !model?.provenance?.verified_at) return Number.POSITIVE_INFINITY;
     const anchor = new Date(catalog.source_verified + "T00:00:00Z");
@@ -210,12 +228,15 @@
         const line = document.createElement("span");
         line.className = "model-capability-line";
         const tags = [];
-        if (model.reasoning) tags.push("Reasoning");
-        const inputs = (model.modalities?.input || []).map(normalize);
-        if (inputs.includes("image")) tags.push("Image");
-        if (inputs.includes("audio") || inputs.includes("video")) tags.push("A/V");
+        const caps = capabilitySet(model);
+        if (caps.has("reasoning")) tags.push("Reasoning");
+        if (caps.has("vision")) tags.push("Image");
+        if (caps.has("video")) tags.push("Video");
+        if (caps.has("audio")) tags.push("Audio");
+        if (caps.has("coding")) tags.push("Coding");
+        if (caps.has("agents")) tags.push("Agents");
         if (isOpenWeight(model)) tags.push("Open weights");
-        line.textContent = tags.join(" · ");
+        line.textContent = tags.slice(0, 4).join(" · ");
         modelCell.appendChild(line);
       }
     });
@@ -225,8 +246,10 @@
     const query = normalize(search?.value);
     const mode = sort?.value || "default";
     const caps = activeCapabilities();
+    const task = taskFilter?.value || "all";
     const minContext = Number(contextFilter?.value || 0);
     const access = accessFilter?.value || "all";
+    const lifecycle = lifecycleFilter?.value || "all";
     const maxAge = verificationFilter?.value === "all" ? null : Number(verificationFilter?.value);
 
     const ordered = [...rows].sort((a, b) => {
@@ -243,14 +266,18 @@
       const providerMatch = provider === "all" || row.dataset.provider === provider;
       const queryMatch = !query || (row.dataset.search || "").includes(query);
       const capabilityMatch = [...caps].every(capability => supports(model, capability));
+      const taskMatch = task === "all" || supports(model, task);
       const contextMatch = Number(model?.context_window || row.dataset.context || 0) >= minContext;
       const accessMatch =
         access === "all" ||
-        (access === "official-paid" && model?.pricing_status === "official-paid") ||
+        (access === "paid-api" && model?.access?.official_api === true && model?.pricing_status === "official-paid") ||
+        (access === "free-api" && model?.access?.official_api === true && model?.pricing_status === "free-preview") ||
         (access === "calculator" && model?.calculator_eligible === true) ||
-        (access === "open-weight" && isOpenWeight(model));
+        (access === "open-weight" && model?.access?.open_weight === true) ||
+        (access === "self-hostable" && model?.access?.self_hostable === true);
+      const lifecycleMatch = lifecycle === "all" || model?.lifecycle?.status === lifecycle;
       const verificationMatch = maxAge == null || verificationAge(model) <= maxAge;
-      const show = providerMatch && queryMatch && capabilityMatch && contextMatch && accessMatch && verificationMatch;
+      const show = providerMatch && queryMatch && capabilityMatch && taskMatch && contextMatch && accessMatch && lifecycleMatch && verificationMatch;
       row.hidden = !show;
       if (show) visible += 1;
     });
@@ -258,7 +285,8 @@
     if (count) count.textContent = visible + (visible === 1 ? " model shown" : " models shown");
     if (empty) empty.hidden = visible !== 0;
     root.classList.toggle("has-active-filters",
-      provider !== "all" || Boolean(query) || caps.size > 0 || minContext > 0 || access !== "all" || maxAge != null
+      provider !== "all" || Boolean(query) || caps.size > 0 || task !== "all" || minContext > 0 ||
+      access !== "all" || lifecycle !== "all" || maxAge != null
     );
     if (historyMode) writeUrlState(historyMode);
   };
@@ -284,8 +312,10 @@
   }));
   search?.addEventListener("input", () => apply("replace"));
   sort?.addEventListener("change", () => apply("push"));
+  taskFilter?.addEventListener("change", () => apply("push"));
   contextFilter?.addEventListener("change", () => apply("push"));
   accessFilter?.addEventListener("change", () => apply("push"));
+  lifecycleFilter?.addEventListener("change", () => apply("push"));
   verificationFilter?.addEventListener("change", () => apply("push"));
 
   resetButton?.addEventListener("click", () => {
@@ -297,8 +327,10 @@
     });
     if (search) search.value = "";
     if (sort) sort.value = "default";
+    if (taskFilter) taskFilter.value = "all";
     if (contextFilter) contextFilter.value = "0";
     if (accessFilter) accessFilter.value = "all";
+    if (lifecycleFilter) lifecycleFilter.value = "all";
     if (verificationFilter) verificationFilter.value = "all";
     apply("push");
   });
