@@ -67,6 +67,10 @@ else:
     raise AssertionError("Failed validation must never be approvable")
 
 queue = json.loads((ROOT / "data/model-candidates/queue.json").read_text(encoding="utf-8"))
-assert module.validate_queue(queue, registry) == []
+validated = module.validate_queue(queue, registry)
+assert validated == queue["candidates"]
+assert len({candidate["candidate_id"] for candidate in validated}) == len(validated)
+assert all(candidate["review"]["status"] in module.REVIEW_STATUSES for candidate in validated)
+assert all(candidate["validation"]["status"] in module.VALIDATION_STATUSES for candidate in validated)
 
-print("Candidate/review contract regression tests OK")
+print(f"Candidate/review contract regression tests OK: {len(validated)} queued candidates")

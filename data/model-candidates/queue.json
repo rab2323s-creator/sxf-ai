@@ -1,5 +1,1120 @@
 {
   "schema_version": "1.0",
   "policy": "Candidates never publish directly; approval produces a canonical source patch that must pass normal catalog validation.",
-  "candidates": []
+  "candidates": [
+    {
+      "candidate_id": "cand_openai_gpt_image_2_5_sunburst",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-image-2.5-sunburst",
+        "display_name": "GPT-Image-2.5 Sunburst"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-image-2.5-sunburst",
+        "model": "GPT-Image-2.5 Sunburst",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-image-2.5-sunburst"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_image_2_5_flare",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-image-2.5-flare",
+        "display_name": "GPT-Image-2.5 Flare"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-image-2.5-flare",
+        "model": "GPT-Image-2.5 Flare",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-image-2.5-flare"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_live_1",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-live-1",
+        "display_name": "GPT-Live 1"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-live-1",
+        "model": "GPT-Live 1",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-live-1"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_live_transcribe",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-live-transcribe",
+        "display_name": "GPT-Live-Transcribe"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-live-transcribe",
+        "model": "GPT-Live-Transcribe",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-live-transcribe"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_transcribe",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-transcribe",
+        "display_name": "GPT-Transcribe"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-transcribe",
+        "model": "GPT-Transcribe",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-transcribe"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_realtime_2_1",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-realtime-2.1",
+        "display_name": "GPT-Realtime-2.1"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-realtime-2.1",
+        "model": "GPT-Realtime-2.1",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-realtime-2.1"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_realtime_2_1_mini",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-realtime-2.1-mini",
+        "display_name": "GPT-Realtime-2.1 Mini"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gpt-realtime-2.1-mini",
+        "model": "GPT-Realtime-2.1 Mini",
+        "provider": "OpenAI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-realtime-2.1-mini"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_8_live",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-live",
+        "display_name": "Gemini 3.8 Live"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-3.8-live",
+        "model": "Gemini 3.8 Live",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-live"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_8_live_extended",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-live-extended-thinking",
+        "display_name": "Gemini 3.8 Live Extended Thinking"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-3.8-live-extended-thinking",
+        "model": "Gemini 3.8 Live Extended Thinking",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-live-extended-thinking"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_8_flash_tts",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-flash-tts",
+        "display_name": "Gemini 3.8 Flash TTS"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-3.8-flash-tts",
+        "model": "Gemini 3.8 Flash TTS",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-flash-tts"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_8_flash_lite_tts",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-flash-lite-tts",
+        "display_name": "Gemini 3.8 Flash-Lite TTS"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-3.8-flash-lite-tts",
+        "model": "Gemini 3.8 Flash-Lite TTS",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-flash-lite-tts"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_5_transcribe",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.5-transcribe",
+        "display_name": "Gemini 3.5 Transcribe"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-3.5-transcribe",
+        "model": "Gemini 3.5 Transcribe",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.5-transcribe"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/deprecations/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_embedding_2",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-embedding-2",
+        "display_name": "Gemini Embedding 2"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "gemini-embedding-2",
+        "model": "Gemini Embedding 2",
+        "provider": "Google"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-embedding-2"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/embeddings",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_amazon_nova_2_sonic",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Amazon",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "global.amazon.nova-2-sonic-v1:0",
+        "display_name": "Amazon Nova 2 Sonic"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "global.amazon.nova-2-sonic-v1:0",
+        "model": "Amazon Nova 2 Sonic",
+        "provider": "Amazon"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "global.amazon.nova-2-sonic-v1:0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/core-inference.html",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_amazon_nova_multimodal_embeddings",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Amazon",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "amazon.nova-2-multimodal-embeddings-v1:0",
+        "display_name": "Amazon Nova Multimodal Embeddings"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "amazon.nova-2-multimodal-embeddings-v1:0",
+        "model": "Amazon Nova Multimodal Embeddings",
+        "provider": "Amazon"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "amazon.nova-2-multimodal-embeddings-v1:0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/nova/latest/nova2-userguide/core-inference.html",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_embed_v4",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "embed-v4.0",
+        "display_name": "Embed v4.0"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "embed-v4.0",
+        "model": "Embed v4.0",
+        "provider": "Cohere"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "embed-v4.0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/v1/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_command_a_reasoning",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "command-a-reasoning-08-2025",
+        "display_name": "Command A Reasoning"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "command-a-reasoning-08-2025",
+        "model": "Command A Reasoning",
+        "provider": "Cohere"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "command-a-reasoning-08-2025"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/command-a-reasoning",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_large_3",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "mistral-large-2512",
+        "display_name": "Mistral Large 3"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "mistral-large-2512",
+        "model": "Mistral Large 3",
+        "provider": "Mistral AI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "mistral-large-2512"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_ministral_14b",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "ministral-14b-2512",
+        "display_name": "Ministral 3 14B"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "ministral-14b-2512",
+        "model": "Ministral 3 14B",
+        "provider": "Mistral AI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "ministral-14b-2512"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_ministral_8b",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "ministral-8b-2512",
+        "display_name": "Ministral 3 8B"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "ministral-8b-2512",
+        "model": "Ministral 3 8B",
+        "provider": "Mistral AI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "ministral-8b-2512"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_ministral_3b",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "ministral-3b-2512",
+        "display_name": "Ministral 3 3B"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "ministral-3b-2512",
+        "model": "Ministral 3 3B",
+        "provider": "Mistral AI"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "ministral-3b-2512"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_deepseek_v4_pro",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "DeepSeek",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "deepseek-v4-pro",
+        "display_name": "DeepSeek-V4-Pro"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "model_id": "deepseek-v4-pro",
+        "model": "DeepSeek-V4-Pro",
+        "provider": "DeepSeek"
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "deepseek-v4-pro"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://api-docs.deepseek.com/api/list-models/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "pending",
+        "errors": [],
+        "warnings": [
+          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
+        ]
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    }
+  ]
 }
