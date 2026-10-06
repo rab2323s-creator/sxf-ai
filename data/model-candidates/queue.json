@@ -469,6 +469,1297 @@
         "reviewed_by": null,
         "reviewed_at": null
       }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_6_1_sol",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-6.1-sol",
+        "display_name": "GPT-6.1 Sol"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "OpenAI",
+        "family": "GPT-6",
+        "model": "GPT-6.1 Sol",
+        "model_id": "gpt-6.1-sol",
+        "context_window": 1050000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-04-30",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            "max"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Near-Astra GPT-6 tier for complex coding, computer use and professional work at lower cost.",
+        "sxf_url": "/models/gpt-6-1-sol/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/changelog"
+        ],
+        "notes": [
+          "Released September 29, 2026 as the newer Sol model.",
+          "Prompts above 272K input tokens use higher long-context multipliers across the full request."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-29",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10
+            }
+          ],
+          "long_context": {
+            "threshold_input_tokens": 272000,
+            "condition": "total input tokens greater than 272000",
+            "applies_to_entire_request": true,
+            "multipliers": {
+              "input": 2,
+              "cached_input": 2,
+              "cache_write": 2,
+              "output": 1.5
+            }
+          }
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+            "lifecycle": "https://developers.openai.com/api/docs/changelog",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "vision",
+          "long-context",
+          "coding",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-6.1-sol"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_realtime_translate",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-realtime-translate",
+        "display_name": "GPT-Realtime-Translate"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-Translate",
+        "model_id": "gpt-realtime-translate",
+        "context_window": 16000,
+        "max_output": 2000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "audio",
+            "text"
+          ]
+        },
+        "positioning": "Streaming speech-to-speech translation model for live multilingual interpretation with transcript deltas.",
+        "sxf_url": "/models/gpt-realtime-translate/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/changelog",
+          "https://developers.openai.com/api/docs/guides/realtime-translation"
+        ],
+        "notes": [
+          "Released May 7, 2026.",
+          "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-05-07",
+              "end": null,
+              "rates": {
+                "minute": 0.034
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/guides/realtime-translation",
+            "lifecycle": "https://developers.openai.com/api/docs/changelog",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-translate"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "speech-to-speech"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-realtime-translate"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/realtime-translation",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_realtime_whisper",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-realtime-whisper",
+        "display_name": "GPT-Realtime-Whisper"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-Whisper",
+        "model_id": "gpt-realtime-whisper",
+        "context_window": 16000,
+        "max_output": 2000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Streaming speech-to-text model for low-latency realtime transcription with tunable latency and accuracy.",
+        "sxf_url": "/models/gpt-realtime-whisper/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/changelog"
+        ],
+        "notes": [
+          "Released May 7, 2026.",
+          "Priced directly by realtime audio duration at $0.017 per minute and excluded from token calculators."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-05-07",
+              "end": null,
+              "rates": {
+                "minute": 0.017
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+            "lifecycle": "https://developers.openai.com/api/docs/changelog",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "audio",
+          "transcription"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-realtime-whisper"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_anthropic_claude_mythos_5_1",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Anthropic",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "claude-mythos-5-1",
+        "display_name": "Claude Mythos 5.1"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Mythos 5.1",
+        "model_id": "claude-mythos-5-1",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "high",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Invite-only Project Glasswing counterpart to Claude Fable 5.1 for approved cybersecurity and biology research programs.",
+        "sxf_url": "/models/claude-mythos-5-1/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "notes": [
+          "Active invite-only model released September 1, 2026; retirement not sooner than September 1, 2027."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-01",
+              "end": null,
+              "input": 10,
+              "cached_input": 0.25,
+              "cache_write_5m": 12.5,
+              "cache_write_1h": 20,
+              "output": 50
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "context_window": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "max_output": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "knowledge_cutoff": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "reasoning": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "modalities": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "pricing": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "access": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "lifecycle": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+            "capabilities": "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "vision",
+          "long-context",
+          "agents"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "claude-mythos-5-1"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_large_4",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "mistral-large-4",
+        "display_name": "Mistral Large 4"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Mistral AI",
+        "family": "Mistral Large",
+        "model": "Mistral Large 4",
+        "model_id": "mistral-large-4",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Public-preview multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture.",
+        "sxf_url": "/models/mistral-large-4/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.mistral.ai/models/mistral-large-4",
+          "https://docs.mistral.ai/resources/changelogs",
+          "https://docs.mistral.ai/inference/pricing"
+        ],
+        "notes": [
+          "Released October 6, 2026 in Public Preview.",
+          "Launch pricing is 50% off for two weeks; the catalog stores the promotional and post-launch Standard periods separately.",
+          "Open weights were announced but downloadable weight access is not asserted until directly verified."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-19",
+              "input": 0.68,
+              "cached_input": 0.07,
+              "output": 2.09
+            },
+            {
+              "start": "2026-10-20",
+              "end": null,
+              "input": 1.36,
+              "cached_input": 0.14,
+              "output": 4.18
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/mistral-large-4",
+            "context_window": "https://docs.mistral.ai/models/mistral-large-4",
+            "max_output": "https://docs.mistral.ai/models/mistral-large-4",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-4",
+            "reasoning": "https://docs.mistral.ai/models/mistral-large-4",
+            "modalities": "https://docs.mistral.ai/models/mistral-large-4",
+            "pricing": "https://docs.mistral.ai/models/mistral-large-4",
+            "access": "https://docs.mistral.ai/models/mistral-large-4",
+            "lifecycle": "https://docs.mistral.ai/resources/changelogs",
+            "capabilities": "https://docs.mistral.ai/models/mistral-large-4"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "preview"
+        },
+        "capabilities": [
+          "general",
+          "vision",
+          "long-context",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "mistral-large-4"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models/mistral-large-4",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.mistral.ai/resources/changelogs",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.mistral.ai/inference/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_mistral_shieldstral_1_0",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Mistral AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "shieldstral-1.0",
+        "display_name": "Shieldstral 1.0"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Mistral AI",
+        "family": "Shieldstral",
+        "model": "Shieldstral 1.0",
+        "model_id": "shieldstral-1.0",
+        "context_window": 32768,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "classification"
+          ]
+        },
+        "positioning": "Compact multimodal moderation model for prompt/response safety classification, refusal detection and policy filtering.",
+        "sxf_url": "/models/shieldstral-1-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.mistral.ai/models/shieldstral-1-0",
+          "https://docs.mistral.ai/models"
+        ],
+        "notes": [
+          "Public Preview model released August 4, 2026 under Apache 2.0.",
+          "No directly comparable hosted Standard inference rate is asserted."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "context_window": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "max_output": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "knowledge_cutoff": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "reasoning": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "modalities": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "pricing": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "access": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "lifecycle": "https://docs.mistral.ai/models/shieldstral-1-0",
+            "capabilities": "https://docs.mistral.ai/models/shieldstral-1-0"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": false,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "preview"
+        },
+        "capabilities": [
+          "vision",
+          "moderation"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "shieldstral-1.0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_parse_v5",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "parse-v5.0",
+        "display_name": "Parse 5"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "Parse 5",
+        "model": "Parse 5",
+        "model_id": "parse-v5.0",
+        "context_window": 8192,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "image",
+            "PDF",
+            "PPT"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Cohere vision parser for converting enterprise documents into structured Markdown, tables, forms and layout-aware content.",
+        "sxf_url": "/models/parse-v5-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/parse",
+          "https://docs.cohere.com/v2/reference/parse",
+          "https://docs.cohere.com/changelog/parse"
+        ],
+        "notes": [
+          "Released August 27, 2026.",
+          "The API reports billed pages, but no public numeric PAYG per-page rate was verified; Model Vault instance pricing is not reused."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/parse",
+            "context_window": "https://docs.cohere.com/docs/parse",
+            "max_output": "https://docs.cohere.com/v2/reference/parse",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/parse",
+            "reasoning": "https://docs.cohere.com/docs/parse",
+            "modalities": "https://docs.cohere.com/docs/parse",
+            "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing",
+            "access": "https://docs.cohere.com/v2/reference/parse",
+            "lifecycle": "https://docs.cohere.com/changelog/parse",
+            "capabilities": "https://docs.cohere.com/docs/parse"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "ocr",
+          "vision"
+        ],
+        "pricing_basis": {
+          "meter": "pages",
+          "quantity": 1,
+          "dimensions": [
+            "page"
+          ],
+          "display_unit": "per page"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "parse-v5.0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/parse",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/v2/reference/parse",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/parse",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_north_mini_code_1_0",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "north-mini-code-1-0",
+        "display_name": "North Mini Code"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "North",
+        "model": "North Mini Code",
+        "model_id": "north-mini-code-1-0",
+        "context_window": 256000,
+        "max_output": 64000,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Open-weight Cohere agentic coding model for repo-level software engineering, terminal agents and local deployment.",
+        "sxf_url": "/models/north-mini-code-1-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "https://docs.cohere.com/changelog/north-mini-code-1-0"
+        ],
+        "notes": [
+          "Available through Chat V2 API and as Apache 2.0 open weights.",
+          "API evaluation access is free until rate limits; paid production Model Vault rates are a separate instance meter."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "context_window": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "max_output": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "reasoning": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "modalities": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "pricing": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "access": "https://docs.cohere.com/docs/north-mini-code-1.0",
+            "lifecycle": "https://docs.cohere.com/changelog/north-mini-code-1-0",
+            "capabilities": "https://docs.cohere.com/docs/north-mini-code-1.0"
+          }
+        },
+        "pricing_status": "free-preview",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "north-mini-code-1-0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/north-mini-code-1-0",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_north_small_translate_1_0",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "north-small-translate-1-0",
+        "display_name": "North Small Translate"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "North",
+        "model": "North Small Translate",
+        "model_id": "north-small-translate-1-0",
+        "context_window": 16000,
+        "max_output": 16000,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Purpose-built open-weight machine translation model covering more than 50 languages and locale variants.",
+        "sxf_url": "/models/north-small-translate-1-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "https://docs.cohere.com/changelog/north-small-translate-1-0"
+        ],
+        "notes": [
+          "Released September 9, 2026.",
+          "Available on Cohere's free-tier Chat V2 API and as open weights under CC BY-NC 4.0 for non-commercial use."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "context_window": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "max_output": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "reasoning": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "modalities": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "pricing": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "access": "https://docs.cohere.com/docs/north-small-translate-1.0",
+            "lifecycle": "https://docs.cohere.com/changelog/north-small-translate-1-0",
+            "capabilities": "https://docs.cohere.com/docs/north-small-translate-1.0"
+          }
+        },
+        "pricing_status": "free-preview",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "reasoning"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "north-small-translate-1-0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/north-small-translate-1-0",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "candidate_id": "cand_cohere_rerank_v4_fast",
+      "detected_at": "2026-10-06T23:03:48Z",
+      "provider": "Cohere",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "rerank-v4.0-fast",
+        "display_name": "Rerank 4 Fast"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Cohere",
+        "family": "Rerank 4",
+        "model": "Rerank 4 Fast",
+        "model_id": "rerank-v4.0-fast",
+        "context_window": 32768,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "ranking"
+          ]
+        },
+        "positioning": "Low-latency Rerank 4 variant for high-throughput multilingual retrieval and semi-structured data ranking.",
+        "sxf_url": "/models/rerank-4-fast/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cohere.com/docs/rerank",
+          "https://docs.cohere.com/docs/reranking-best-practices",
+          "https://docs.cohere.com/v2/reference/rerank",
+          "https://docs.cohere.com/changelog/rerank-v4.0"
+        ],
+        "notes": [
+          "Cohere lists rerank-v4.0-fast as a latest Rerank model with 32,768-token context.",
+          "The API bills in search_units; no current public numeric PAYG search-unit rate was verified."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cohere.com/docs/rerank",
+            "context_window": "https://docs.cohere.com/docs/reranking-best-practices",
+            "max_output": "https://docs.cohere.com/docs/rerank",
+            "knowledge_cutoff": "https://docs.cohere.com/docs/rerank",
+            "reasoning": "https://docs.cohere.com/docs/rerank",
+            "modalities": "https://docs.cohere.com/docs/rerank",
+            "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+            "access": "https://docs.cohere.com/v2/reference/rerank",
+            "lifecycle": "https://docs.cohere.com/changelog/rerank-v4.0",
+            "capabilities": "https://docs.cohere.com/docs/rerank"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "rerank"
+        ],
+        "pricing_basis": {
+          "meter": "search_units",
+          "quantity": 1,
+          "dimensions": [
+            "search_unit"
+          ],
+          "display_unit": "per search unit"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "rerank-v4.0-fast"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cohere.com/docs/rerank",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/v2/reference/rerank",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        },
+        {
+          "url": "https://docs.cohere.com/changelog/rerank-v4.0",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-06T23:03:48Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "pending",
+        "reviewed_by": null,
+        "reviewed_at": null
+      }
     }
   ]
 }
