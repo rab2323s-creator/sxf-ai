@@ -538,6 +538,12 @@ def validate_model_pricing_catalog():
     if not model_has_official_paid_pricing({
         "pricing_status": "official-paid",
         "calculator_eligible": True,
+        "pricing_basis": {
+            "meter": "tokens",
+            "quantity": 1_000_000,
+            "dimensions": ["input", "cached_input", "output"],
+            "display_unit": "per 1 million tokens",
+        },
         "pricing": {"standard": [{"start": "2026-01-01"}]},
     }):
         fail("official-paid calculator eligibility regression")
