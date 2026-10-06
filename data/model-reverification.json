@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 36,
-    "fresh": 36,
+    "total": 41,
+    "fresh": 41,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -494,6 +494,84 @@
       ]
     },
     {
+      "model_id": "deepseek-v4-pro",
+      "provider": "DeepSeek",
+      "model": "DeepSeek V4 Pro",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://api-docs.deepseek.com/api/list-models/",
+        "https://api-docs.deepseek.com/quick_start/pricing/",
+        "https://api-docs.deepseek.com/updates/"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "provider": "Google",
+      "model": "Gemini 3.8 Flash-Lite TTS",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-flash-tts",
+      "provider": "Google",
+      "model": "Gemini 3.8 Flash TTS",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-05",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
       "model_id": "codestral-2508",
       "provider": "Mistral AI",
       "model": "Codestral",
@@ -898,6 +976,56 @@
       "source_urls": [
         "https://docs.cohere.com/docs/command-a-plus",
         "https://docs.cohere.com/docs/model-vault/standard/pricing"
+      ]
+    },
+    {
+      "model_id": "command-a-reasoning-08-2025",
+      "provider": "Cohere",
+      "model": "Command A Reasoning",
+      "lifecycle_status": "current",
+      "pricing_status": "free-preview",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.cohere.com/docs/command-a-reasoning",
+        "https://docs.cohere.com/v1/docs/models"
+      ]
+    },
+    {
+      "model_id": "embed-v4.0",
+      "provider": "Cohere",
+      "model": "Embed v4.0",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-06",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-20",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+        "https://docs.cohere.com/v1/docs/models"
       ]
     },
     {
