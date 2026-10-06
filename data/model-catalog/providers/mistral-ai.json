@@ -192,6 +192,337 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Mistral OCR",
+      "model": "OCR 4.1",
+      "model_id": "mistral-ocr-4-1",
+      "aliases": [
+        "mistral-ocr-latest"
+      ],
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "document",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Latest GA Mistral Document AI OCR service for text and structured-content extraction from documents and images.",
+      "sxf_url": "/models/mistral-ocr-4-1/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/ocr-4-1",
+        "https://docs.mistral.ai/studio/document-processing/basic_ocr",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Mistral documents OCR 4.1 as GA Premier and the latest OCR service in its Document AI stack.",
+        "The OCR processor accepts document and image inputs and returns extracted text plus document-structure metadata.",
+        "Standard OCR processing is normalized from $4 per 1,000 pages to $0.004 per page. Annotated-page pricing and batch pricing are outside this base Standard rate.",
+        "No token context window, max-output token cap, or knowledge cutoff is published for this OCR service, so those fields remain unknown."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-07-16",
+            "end": null,
+            "rates": {
+              "page": 0.004
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/ocr-4-1",
+          "context_window": "https://docs.mistral.ai/models/ocr-4-1",
+          "max_output": "https://docs.mistral.ai/models/ocr-4-1",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/ocr-4-1",
+          "reasoning": "https://docs.mistral.ai/models/ocr-4-1",
+          "modalities": "https://docs.mistral.ai/studio/document-processing/basic_ocr",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models",
+          "lifecycle": "https://docs.mistral.ai/models/ocr-4-1",
+          "capabilities": "https://docs.mistral.ai/studio/document-processing/basic_ocr"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "vision",
+        "ocr"
+      ],
+      "pricing_basis": {
+        "meter": "pages",
+        "quantity": 1,
+        "dimensions": [
+          "page"
+        ],
+        "display_unit": "per page"
+      }
+    },
+    {
+      "family": "Voxtral",
+      "model": "Voxtral Mini Transcribe 2",
+      "model_id": "voxtral-mini-2602",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "GA Mistral audio specialist optimized exclusively for transcription with timestamp support.",
+      "sxf_url": "/models/voxtral-mini-transcribe-2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Mistral documents the model as GA Premier v26.02 and optimized for transcription purposes only.",
+        "The official model card displays no context value, so context_window remains null rather than inferred.",
+        "Standard transcription pricing is $0.003 per minute; the lower batch rate is intentionally excluded."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-02-04",
+            "end": null,
+            "rates": {
+              "minute": 0.003
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "context_window": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "max_output": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "reasoning": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models",
+          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "capabilities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
+    },
+    {
+      "family": "Codestral",
+      "model": "Codestral",
+      "model_id": "codestral-2508",
+      "aliases": [
+        "codestral-latest"
+      ],
+      "context_window": 128000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "GA code-completion specialist optimized for low-latency, high-frequency FIM and code generation.",
+      "sxf_url": "/models/codestral/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/codestral-25-08",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/resources/known-limitations",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Codestral v25.08 is the current GA Premier code-completion model; the older v25.01 model is retired.",
+        "Mistral publishes a 128k context window and Standard rates of $0.30 input, $0.03 cached input, and $0.90 output per million tokens.",
+        "No separate max-output limit or knowledge cutoff is published in the cited model card."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2025-07-30",
+            "end": null,
+            "input": 0.3,
+            "cached_input": 0.03,
+            "output": 0.9
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/codestral-25-08",
+          "context_window": "https://docs.mistral.ai/resources/known-limitations",
+          "max_output": "https://docs.mistral.ai/models/codestral-25-08",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/codestral-25-08",
+          "reasoning": "https://docs.mistral.ai/models/codestral-25-08",
+          "modalities": "https://docs.mistral.ai/models/codestral-25-08",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models",
+          "lifecycle": "https://docs.mistral.ai/models/codestral-25-08",
+          "capabilities": "https://docs.mistral.ai/models/codestral-25-08"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "coding",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Codestral",
+      "model": "Codestral Embed",
+      "model_id": "codestral-embed-2505",
+      "aliases": [
+        "codestral-embed"
+      ],
+      "context_window": 8000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "GA code-embedding specialist for semantic representations used in code retrieval, search, clustering and similarity workflows.",
+      "sxf_url": "/models/codestral-embed/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings",
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models"
+      ],
+      "notes": [
+        "Codestral Embed is GA Premier v25.05 with an 8k context window and an embeddings API endpoint.",
+        "Mistral publishes $0.15 per million input tokens and $0.015 per million cached input tokens with no output-token rate.",
+        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2025-05-28",
+            "end": null,
+            "input": 0.15,
+            "cached_input": 0.015
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-06",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "context_window": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "max_output": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "reasoning": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "modalities": "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://docs.mistral.ai/models",
+          "lifecycle": "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "capabilities": "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "embeddings"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

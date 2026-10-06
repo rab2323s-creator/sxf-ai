@@ -173,11 +173,13 @@
         Number(longRule.threshold_input_tokens).toLocaleString() +
         " tokens. The published multiplier applies to the entire request.");
     }
-    if (totalInput > Number(model.context_window)) {
+    if (Number.isFinite(Number(model.context_window)) && model.context_window != null &&
+        totalInput > Number(model.context_window)) {
       warnings.push("Total input exceeds this model's published context window of " +
         Number(model.context_window).toLocaleString() + " tokens.");
     }
-    if (model.max_output !== "unlimited" && output > Number(model.max_output)) {
+    if (Number.isFinite(Number(model.max_output)) && model.max_output != null &&
+        model.max_output !== "unlimited" && output > Number(model.max_output)) {
       warnings.push("Output tokens exceed this model's published maximum output of " +
         Number(model.max_output).toLocaleString() + " tokens.");
     }

@@ -118,8 +118,11 @@ def validate_pricing(model: dict, label: str):
             f"{label}.pricing_basis.display_unit must be a non-empty string")
 
     if meter == "tokens":
-        require("input" in dimensions and "output" in dimensions,
-                f"{label}: token pricing requires input and output dimensions")
+        require("input" in dimensions,
+                f"{label}: token pricing requires an input dimension")
+        if model.get("calculator_eligible") is True:
+            require("output" in dimensions,
+                    f"{label}: calculator-eligible token pricing requires an output dimension")
     else:
         require(not ({"input", "cached_input", "output"} & set(dimensions)),
                 f"{label}: non-token pricing must not use token dimensions")
@@ -145,9 +148,11 @@ def validate_pricing(model: dict, label: str):
         previous_was_open = end is None
 
         if meter == "tokens":
-            for key in ("input", "output"):
-                require(isinstance(period.get(key), (int, float)) and period[key] >= 0,
-                        f"{p}.{key} must be a non-negative number")
+            require(isinstance(period.get("input"), (int, float)) and period["input"] >= 0,
+                    f"{p}.input must be a non-negative number")
+            if "output" in dimensions:
+                require(isinstance(period.get("output"), (int, float)) and period["output"] >= 0,
+                        f"{p}.output must be a non-negative number")
             for key in ("cached_input", "cache_write", "cache_write_5m", "cache_write_1h"):
                 if key in period:
                     require(isinstance(period[key], (int, float)) and period[key] >= 0,
@@ -204,8 +209,9 @@ def validate_model(model: dict, provider: str, seen_ids: set[str], seen_aliases:
         require(alias not in seen_ids and alias not in seen_aliases, f"Duplicate/conflicting alias: {alias}")
         seen_aliases.add(alias)
 
-    require(isinstance(model.get("context_window"), int) and model["context_window"] > 0,
-            f"{label}.context_window must be a positive integer")
+    context_window = model.get("context_window")
+    require(context_window is None or (isinstance(context_window, int) and context_window > 0),
+            f"{label}.context_window must be a positive integer or null")
     max_output = model.get("max_output")
     require(max_output is None or max_output == "unlimited" or (isinstance(max_output, int) and max_output > 0),
             f"{label}.max_output must be positive, null, or 'unlimited'")
@@ -249,7 +255,7 @@ def validate_model(model: dict, provider: str, seen_ids: set[str], seen_aliases:
     for capability, modality in (("vision", "image"), ("video", "video"), ("audio", "audio")):
         require((capability in capabilities) == (modality in input_modalities),
                 f"{label}: {capability} capability must match input modality {modality}")
-    require(("long-context" in capabilities) == (model.get("context_window", 0) >= 500000),
+    require(("long-context" in capabilities) == (isinstance(model.get("context_window"), int) and model["context_window"] >= 500000),
             f"{label}: long-context requires context_window >= 500000")
 
     status = model.get("pricing_status")

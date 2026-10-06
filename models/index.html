@@ -8,7 +8,7 @@
 <section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
       <div class="model-explorer-head">
         <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of Standard API pricing, context windows and output limits from official provider documentation.</p></div>
-        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-06</strong><small>23 models · 10 providers</small></div>
+        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-06</strong><small>28 models · 10 providers</small></div>
       </div>
       <div class="model-explorer-toolbar">
         <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
@@ -23,7 +23,7 @@
       <div class="model-explorer-table-wrap">
         <table class="model-explorer-table">
           <caption class="sr-only">Verified AI model pricing and specifications</caption>
-          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Input / MTok</th><th>Cached / MTok</th><th>Output / MTok</th><th>Evidence</th></tr></thead>
+          <thead><tr><th>Model</th><th>Provider</th><th>Context</th><th>Max output</th><th>Primary rate</th><th>Cached rate</th><th>Output rate</th><th>Evidence</th></tr></thead>
           <tbody id="modelExplorerBody"><tr data-model-row
               data-order="0"
               data-provider="OpenAI"
@@ -392,11 +392,91 @@
               <td class="model-price">—</td>
               <td class="model-price">$2.50</td>
               <td><a class="model-verified" href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="23"
+              data-provider="Mistral AI"
+              data-search="ocr 4.1 mistral-ocr-4-1 mistral ai mistral ocr latest ga mistral document ai ocr service for text and structured-content extraction from documents and images. vision ocr pages"
+              data-pricing-status="official-paid"
+              data-input=""
+              data-output=""
+              data-context="">
+              <th scope="row"><a href="/models/mistral-ocr-4-1/">OCR 4.1</a><small>mistral-ocr-4-1</small></th>
+              <td>Mistral AI<small>Mistral OCR</small></td>
+              <td>Not published</td>
+              <td>Not published</td>
+              <td class="model-price">$0.004<small>per page</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://docs.mistral.ai/models/ocr-4-1" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="24"
+              data-provider="Mistral AI"
+              data-search="voxtral mini transcribe 2 voxtral-mini-2602 mistral ai voxtral ga mistral audio specialist optimized exclusively for transcription with timestamp support. audio transcription minutes"
+              data-pricing-status="official-paid"
+              data-input=""
+              data-output=""
+              data-context="">
+              <th scope="row"><a href="/models/voxtral-mini-transcribe-2/">Voxtral Mini Transcribe 2</a><small>voxtral-mini-2602</small></th>
+              <td>Mistral AI<small>Voxtral</small></td>
+              <td>Not published</td>
+              <td>Not published</td>
+              <td class="model-price">$0.003<small>per minute</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="25"
+              data-provider="Cohere"
+              data-search="rerank 4 pro rerank-v4.0-pro cohere rerank 4 cohere&#x27;s current high-quality rerank 4 variant for complex multilingual retrieval and semi-structured data ranking. rerank search_units"
+              data-pricing-status="not-published"
+              data-input=""
+              data-output=""
+              data-context="32768">
+              <th scope="row"><a href="/models/rerank-4-pro/">Rerank 4 Pro</a><small>rerank-v4.0-pro</small></th>
+              <td>Cohere<small>Rerank 4</small></td>
+              <td>32,768<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">Not published<small>per search unit</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://docs.cohere.com/docs/rerank" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="26"
+              data-provider="Mistral AI"
+              data-search="codestral codestral-2508 mistral ai codestral ga code-completion specialist optimized for low-latency, high-frequency fim and code generation. coding tool-use tokens"
+              data-pricing-status="official-paid"
+              data-input="0.3"
+              data-output="0.9"
+              data-context="128000">
+              <th scope="row"><a href="/models/codestral/">Codestral</a><small>codestral-2508</small></th>
+              <td>Mistral AI<small>Codestral</small></td>
+              <td>128,000<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">$0.30<small>per 1 million tokens</small></td>
+              <td class="model-price">$0.03</td>
+              <td class="model-price">$0.90</td>
+              <td><a class="model-verified" href="https://docs.mistral.ai/models/codestral-25-08" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
+            </tr><tr data-model-row
+              data-order="27"
+              data-provider="Mistral AI"
+              data-search="codestral embed codestral-embed-2505 mistral ai codestral ga code-embedding specialist for semantic representations used in code retrieval, search, clustering and similarity workflows. embeddings tokens"
+              data-pricing-status="official-paid"
+              data-input="0.15"
+              data-output=""
+              data-context="8000">
+              <th scope="row"><a href="/models/codestral-embed/">Codestral Embed</a><small>codestral-embed-2505</small></th>
+              <td>Mistral AI<small>Codestral</small></td>
+              <td>8,000<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">$0.15<small>per 1 million tokens</small></td>
+              <td class="model-price">$0.015</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://docs.mistral.ai/models/codestral-embed-25-05" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-06</small></a></td>
             </tr></tbody>
         </table>
       </div>
       <div class="model-explorer-foot">
-        <span id="modelExplorerCount">23 models shown</span>
+        <span id="modelExplorerCount">28 models shown</span>
         <a href="/models/pricing/">Open calculator & pricing methodology ↗</a>
       </div>
       <div id="modelExplorerEmpty" class="model-explorer-empty" hidden>No models match this filter.</div>

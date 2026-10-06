@@ -1119,6 +1119,170 @@
           ]
         }
       }
+    },
+    "codestral-2508": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_c23b7b71c58f8dc974b9",
+      "snapshot_hash": "b652aae8dc8e7aae7880b4ebe625c435149ed6810a2b6603fd1253477c260619",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Codestral",
+        "model": "Codestral",
+        "aliases": [
+          "codestral-latest"
+        ],
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-07-30",
+              "end": null,
+              "input": 0.3,
+              "cached_input": 0.03,
+              "output": 0.9
+            }
+          ]
+        }
+      }
+    },
+    "codestral-embed-2505": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_82a3456a647ba6693dda",
+      "snapshot_hash": "2e5e2a725ae0041fadf364efd3d8753d4f28e753be31a1ecbd18957a2d7798ac",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Codestral",
+        "model": "Codestral Embed",
+        "aliases": [
+          "codestral-embed"
+        ],
+        "context_window": 8000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-05-28",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015
+            }
+          ]
+        }
+      }
+    },
+    "mistral-ocr-4-1": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_d22a6aaf8731f652ae22",
+      "snapshot_hash": "fb1bd1bdbc217b42ec75b6c3250cdc530d1126d99e9d99bdfdc9312dd722faaa",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral OCR",
+        "model": "OCR 4.1",
+        "aliases": [
+          "mistral-ocr-latest"
+        ],
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "document",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-16",
+              "end": null,
+              "rates": {
+                "page": 0.004
+              }
+            }
+          ]
+        }
+      }
+    },
+    "rerank-v4.0-pro": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_c513270fa55b534e51d7",
+      "snapshot_hash": "fdd6b7cc17c606598e43e66fd197d67b829230cdfa81dcdcce42acf1a92e93d0",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Rerank 4",
+        "model": "Rerank 4 Pro",
+        "context_window": 32768,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "ranking"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "voxtral-mini-2602": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_be6b9a930393d364d0ba",
+      "snapshot_hash": "ef346b41ff4d6977a01a3a45f12ee601c364ae6856e97655d57166c865076c7b",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Voxtral",
+        "model": "Voxtral Mini Transcribe 2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-02-04",
+              "end": null,
+              "rates": {
+                "minute": 0.003
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -2575,7 +2739,249 @@
       },
       "event_id": "evt_2ea333e862b9c02e69d5",
       "event_hash": "2ea333e862b9c02e69d59af938763ef253ecd8a82ac00d37b1704ba8c3904b67"
+    },
+    {
+      "sequence": 24,
+      "type": "model_added",
+      "model_id": "codestral-2508",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "2ea333e862b9c02e69d59af938763ef253ecd8a82ac00d37b1704ba8c3904b67",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Codestral",
+        "model": "Codestral",
+        "aliases": [
+          "codestral-latest"
+        ],
+        "context_window": 128000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-07-30",
+              "end": null,
+              "input": 0.3,
+              "cached_input": 0.03,
+              "output": 0.9
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/codestral-25-08",
+        "family": "https://docs.mistral.ai/models/codestral-25-08",
+        "model": "https://docs.mistral.ai/models/codestral-25-08",
+        "aliases": "https://docs.mistral.ai/models/codestral-25-08",
+        "context_window": "https://docs.mistral.ai/resources/known-limitations",
+        "max_output": "https://docs.mistral.ai/models/codestral-25-08",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/codestral-25-08",
+        "reasoning": "https://docs.mistral.ai/models/codestral-25-08",
+        "modalities": "https://docs.mistral.ai/models/codestral-25-08",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_c23b7b71c58f8dc974b9",
+      "event_hash": "c23b7b71c58f8dc974b929dbc86110896c009b201dc5e3b515af8922662d4934"
+    },
+    {
+      "sequence": 25,
+      "type": "model_added",
+      "model_id": "codestral-embed-2505",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "c23b7b71c58f8dc974b929dbc86110896c009b201dc5e3b515af8922662d4934",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Codestral",
+        "model": "Codestral Embed",
+        "aliases": [
+          "codestral-embed"
+        ],
+        "context_window": 8000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-05-28",
+              "end": null,
+              "input": 0.15,
+              "cached_input": 0.015
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "family": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "model": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "aliases": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "context_window": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "max_output": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "reasoning": "https://docs.mistral.ai/models/codestral-embed-25-05",
+        "modalities": "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_82a3456a647ba6693dda",
+      "event_hash": "82a3456a647ba6693dda8fdaa2a66d0ab27bd710b4bdf6bc2ef05f9aaf35ef3b"
+    },
+    {
+      "sequence": 26,
+      "type": "model_added",
+      "model_id": "mistral-ocr-4-1",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "82a3456a647ba6693dda8fdaa2a66d0ab27bd710b4bdf6bc2ef05f9aaf35ef3b",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral OCR",
+        "model": "OCR 4.1",
+        "aliases": [
+          "mistral-ocr-latest"
+        ],
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "document",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-16",
+              "end": null,
+              "rates": {
+                "page": 0.004
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/ocr-4-1",
+        "family": "https://docs.mistral.ai/models/ocr-4-1",
+        "model": "https://docs.mistral.ai/models/ocr-4-1",
+        "aliases": "https://docs.mistral.ai/models/ocr-4-1",
+        "context_window": "https://docs.mistral.ai/models/ocr-4-1",
+        "max_output": "https://docs.mistral.ai/models/ocr-4-1",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/ocr-4-1",
+        "reasoning": "https://docs.mistral.ai/models/ocr-4-1",
+        "modalities": "https://docs.mistral.ai/studio/document-processing/basic_ocr",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_d22a6aaf8731f652ae22",
+      "event_hash": "d22a6aaf8731f652ae22308ccfc7924cad6e9019aac1d736af87d467829f1d92"
+    },
+    {
+      "sequence": 27,
+      "type": "model_added",
+      "model_id": "rerank-v4.0-pro",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "d22a6aaf8731f652ae22308ccfc7924cad6e9019aac1d736af87d467829f1d92",
+      "snapshot": {
+        "provider": "Cohere",
+        "family": "Rerank 4",
+        "model": "Rerank 4 Pro",
+        "context_window": 32768,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "ranking"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://docs.cohere.com/docs/rerank",
+        "family": "https://docs.cohere.com/docs/rerank",
+        "model": "https://docs.cohere.com/docs/rerank",
+        "context_window": "https://docs.cohere.com/docs/reranking-best-practices",
+        "max_output": "https://docs.cohere.com/docs/rerank",
+        "knowledge_cutoff": "https://docs.cohere.com/docs/rerank",
+        "reasoning": "https://docs.cohere.com/docs/rerank",
+        "modalities": "https://docs.cohere.com/docs/rerank",
+        "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+      },
+      "event_id": "evt_c513270fa55b534e51d7",
+      "event_hash": "c513270fa55b534e51d76846b601f1de309237fd5e34fc6f07f6e184a9ffe5c4"
+    },
+    {
+      "sequence": 28,
+      "type": "model_added",
+      "model_id": "voxtral-mini-2602",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "c513270fa55b534e51d76846b601f1de309237fd5e34fc6f07f6e184a9ffe5c4",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Voxtral",
+        "model": "Voxtral Mini Transcribe 2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-02-04",
+              "end": null,
+              "rates": {
+                "minute": 0.003
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "family": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "model": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "context_window": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "max_output": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "reasoning": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+        "pricing": "https://docs.mistral.ai/inference/pricing"
+      },
+      "event_id": "evt_be6b9a930393d364d0ba",
+      "event_hash": "be6b9a930393d364d0ba39c457b7cd3dc403219ed1ba4623919cd106265f4f75"
     }
   ],
-  "chain_head": "2ea333e862b9c02e69d59af938763ef253ecd8a82ac00d37b1704ba8c3904b67"
+  "chain_head": "be6b9a930393d364d0ba39c457b7cd3dc403219ed1ba4623919cd106265f4f75"
 }

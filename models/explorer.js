@@ -43,6 +43,10 @@
         <option value="coding">Coding</option>
         <option value="agents">Agents</option>
         <option value="tool-use">Tool use</option>
+        <option value="ocr">OCR</option>
+        <option value="transcription">Transcription</option>
+        <option value="rerank">Reranking</option>
+        <option value="embeddings">Embeddings</option>
       </select></label>
       <label class="model-advanced-select"><span>Access</span><select id="modelAccessFilter">
         <option value="all">Any access</option>
@@ -362,6 +366,10 @@
         if (caps.has("audio")) tags.push("Audio");
         if (caps.has("coding")) tags.push("Coding");
         if (caps.has("agents")) tags.push("Agents");
+        if (caps.has("ocr")) tags.push("OCR");
+        if (caps.has("transcription")) tags.push("Transcription");
+        if (caps.has("rerank")) tags.push("Rerank");
+        if (caps.has("embeddings")) tags.push("Embeddings");
         if (isOpenWeight(model)) tags.push("Open weights");
         line.textContent = tags.slice(0, 4).join(" · ");
         modelCell.appendChild(line);
