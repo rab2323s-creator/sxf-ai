@@ -288,8 +288,15 @@ def validate_model_history():
 def validate_model_pricing_catalog():
     path = ROOT / "data" / "model-pricing.json"
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("schema_version") != "1.4":
-        fail(f"model-pricing.json schema_version drift: {data.get('schema_version')!r}")
+    manifest = json.loads((ROOT / "data" / "model-catalog" / "manifest.json").read_text(encoding="utf-8"))
+    expected_schema_version = manifest.get("schema_version")
+    if data.get("schema_version") != expected_schema_version:
+        fail(
+            f"model-pricing.json schema_version drift: {data.get('schema_version')!r} "
+            f"!= manifest {expected_schema_version!r}"
+        )
+    if expected_schema_version != "1.5":
+        fail(f"unsupported model catalog schema version: {expected_schema_version!r}")
 
     policy = data.get("verification_policy")
     if not isinstance(policy, dict) or policy.get("standard") != "Primary-source verification":
@@ -374,6 +381,7 @@ def validate_model_pricing_catalog():
         required_evidence = {
             "model_identity", "context_window", "max_output",
             "knowledge_cutoff", "reasoning", "modalities", "pricing",
+            "access", "lifecycle", "capabilities",
         }
         if not isinstance(evidence, dict):
             fail(f"{model_id}: provenance evidence missing")
@@ -403,21 +411,36 @@ def validate_model_pricing_catalog():
         calculator_eligible = model.get("calculator_eligible")
         if not isinstance(calculator_eligible, bool):
             fail(f"{model_id}: calculator_eligible must be boolean")
-        expected_eligible = pricing_status == "official-paid"
-        if calculator_eligible != expected_eligible:
-            fail(
-                f"{model_id}: calculator_eligible={calculator_eligible} "
-                f"does not match pricing_status={pricing_status!r}"
-            )
+
+        access = model.get("access")
+        if not isinstance(access, dict) or set(access) != {"official_api", "open_weight", "self_hostable"}:
+            fail(f"{model_id}: invalid access taxonomy")
+        if any(not isinstance(access.get(key), bool) for key in access):
+            fail(f"{model_id}: access taxonomy values must be boolean")
+        if access["self_hostable"] and not access["open_weight"]:
+            fail(f"{model_id}: self_hostable=true requires open_weight=true")
+
+        lifecycle = model.get("lifecycle")
+        if not isinstance(lifecycle, dict) or lifecycle.get("status") not in {"current", "preview", "legacy", "deprecated"}:
+            fail(f"{model_id}: invalid lifecycle taxonomy")
+
+        capabilities = model.get("capabilities")
+        if not isinstance(capabilities, list) or not capabilities or len(capabilities) != len(set(capabilities)):
+            fail(f"{model_id}: invalid capabilities taxonomy")
 
         schedule = model.get("pricing", {}).get("standard")
-        if pricing_status == "official-paid":
-            if not isinstance(schedule, list) or not schedule:
-                fail(f"{model_id}: official-paid pricing requires a Standard pricing schedule")
-        elif schedule:
-            fail(f"{model_id}: non-official-paid pricing must not populate Standard calculator rates")
-        else:
+        if schedule is None:
             schedule = []
+        elif not isinstance(schedule, list):
+            fail(f"{model_id}: Standard pricing schedule must be an array")
+
+        if calculator_eligible:
+            if pricing_status != "official-paid":
+                fail(f"{model_id}: calculator eligibility requires official-paid status")
+            if not schedule:
+                fail(f"{model_id}: calculator eligibility requires Standard pricing")
+        elif pricing_status != "official-paid" and schedule:
+            fail(f"{model_id}: non-official-paid pricing must not populate Standard calculator rates")
 
         previous_end = None
         open_ended_seen = False
@@ -439,15 +462,18 @@ def validate_model_pricing_catalog():
                 open_ended_seen = True
             previous_end = end
 
-            for field in ("input", "cached_input", "output"):
+            for field in ("input", "output"):
                 value = period.get(field)
                 if not isinstance(value, (int, float)) or value < 0:
                     fail(f"{model_id}: invalid {field} price")
+            cached_input = period.get("cached_input")
+            if cached_input is not None and (not isinstance(cached_input, (int, float)) or cached_input < 0):
+                fail(f"{model_id}: invalid cached_input price")
 
             if start <= verified_date and (end is None or verified_date <= end):
                 covers_verified_date = True
 
-        if pricing_status == "official-paid" and not covers_verified_date:
+        if calculator_eligible and not covers_verified_date:
             fail(f"{model_id}: no Standard pricing period covers source_verified={verified}")
 
         long_context = model.get("pricing", {}).get("long_context")
