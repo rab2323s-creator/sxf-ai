@@ -1831,6 +1831,247 @@
           ]
         }
       }
+    },
+    "gemini-3.5-flash-lite": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_bec441aa9e46fbfe5761",
+      "snapshot_hash": "1aaff2f81be36e6308dd68cc132ff478a98f0b9fdd2b81d39def4fa56014b881",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.5",
+        "model": "Gemini 3.5 Flash-Lite",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "minimal"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-21",
+              "end": null,
+              "input": 0.3,
+              "cached_input": 0.03,
+              "output": 2.5
+            }
+          ]
+        }
+      }
+    },
+    "gemini-3.6-flash": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_4a32c449eb48b7ffde84",
+      "snapshot_hash": "c8a3d8e45e558cd6922bfc1510553807ccf12a521ddc191e086a0f23cd21241d",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.6 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-21",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      }
+    },
+    "gemini-embedding-001": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_2814318a881ae5bc7ebc",
+      "snapshot_hash": "8ccd36882bfdc4b12e09258d2217d754f7e72bdd22ce9527cb55c516d18e7780",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Embedding",
+        "model": "Gemini Embedding 001",
+        "context_window": 2048,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-06-01",
+              "end": null,
+              "input": 0.15
+            }
+          ]
+        }
+      }
+    },
+    "gpt-5.6-cyber": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_068a9ffb572d38bb0ccc",
+      "snapshot_hash": "41bc37176d7786a1eb4595be935a4131a9f6c2d6fd3d6d57db71ccbb0bf254ea",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Cyber",
+        "aliases": [
+          "gpt-daybreak-red-latest"
+        ],
+        "context_window": 400000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning token support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-07",
+              "end": null,
+              "input": 12.5,
+              "cached_input": 1.25,
+              "cache_write": 15.625,
+              "output": 75
+            }
+          ]
+        }
+      }
+    },
+    "mistral-embed-2312": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_7615c7f00baf86299c8b",
+      "snapshot_hash": "20696e1b1c775abaeb51008bb15e823a2384dd48509d5caeca74ffa99adf573f",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Embed",
+        "model": "Mistral Embed",
+        "aliases": [
+          "mistral-embed"
+        ],
+        "context_window": 8000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2023-12-11",
+              "end": null,
+              "input": 0.1
+            }
+          ]
+        }
+      }
+    },
+    "voxtral-mini-transcribe-realtime-2602": {
+      "last_event_verified_at": "2026-10-06",
+      "last_event_id": "evt_a81376cb9fe2bf761c54",
+      "snapshot_hash": "e3bbad1db793b2647fa391d1c3dbeb446f07ef1a0a4e397df9f15003eac92558",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Voxtral",
+        "model": "Voxtral Mini Transcribe Realtime",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-02-04",
+              "end": null,
+              "rates": {
+                "minute": 0.006
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -4317,7 +4558,340 @@
       },
       "event_id": "evt_c70e6cd5a8093e89c05c",
       "event_hash": "c70e6cd5a8093e89c05cd5f20b0a8a0d520e141c8c462b2c13e4359e63aebba2"
+    },
+    {
+      "sequence": 45,
+      "type": "model_added",
+      "model_id": "gemini-3.5-flash-lite",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "c70e6cd5a8093e89c05cd5f20b0a8a0d520e141c8c462b2c13e4359e63aebba2",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.5",
+        "model": "Gemini 3.5 Flash-Lite",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "minimal"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-21",
+              "end": null,
+              "input": 0.3,
+              "cached_input": 0.03,
+              "output": 2.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/thinking",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_bec441aa9e46fbfe5761",
+      "event_hash": "bec441aa9e46fbfe57618438c5bd80f11f09d4a2c881ffa155f381556537f3ec"
+    },
+    {
+      "sequence": 46,
+      "type": "model_added",
+      "model_id": "gemini-3.6-flash",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "bec441aa9e46fbfe57618438c5bd80f11f09d4a2c881ffa155f381556537f3ec",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.6 Flash",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-21",
+              "end": "2026-12-31",
+              "input": 0.75,
+              "cached_input": 0.075,
+              "output": 3.75
+            },
+            {
+              "start": "2027-01-01",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/thinking",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_4a32c449eb48b7ffde84",
+      "event_hash": "4a32c449eb48b7ffde845add7cdccd31690cc5e68f6e7fb571c406f69942f7c7"
+    },
+    {
+      "sequence": 47,
+      "type": "model_added",
+      "model_id": "gemini-embedding-001",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "4a32c449eb48b7ffde845add7cdccd31690cc5e68f6e7fb571c406f69942f7c7",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Embedding",
+        "model": "Gemini Embedding 001",
+        "context_window": 2048,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2025-06-01",
+              "end": null,
+              "input": 0.15
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "family": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "model": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "context_window": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "max_output": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "modalities": "https://ai.google.dev/gemini-api/docs/embeddings",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_2814318a881ae5bc7ebc",
+      "event_hash": "2814318a881ae5bc7ebcf331e9adaba88fc180d3606f8cbe74812400fbcb6706"
+    },
+    {
+      "sequence": 48,
+      "type": "model_added",
+      "model_id": "gpt-5.6-cyber",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "2814318a881ae5bc7ebcf331e9adaba88fc180d3606f8cbe74812400fbcb6706",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-5.6",
+        "model": "GPT-5.6 Cyber",
+        "aliases": [
+          "gpt-daybreak-red-latest"
+        ],
+        "context_window": 400000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-02-16",
+        "reasoning": {
+          "type": "reasoning token support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-08-07",
+              "end": null,
+              "input": 12.5,
+              "cached_input": 1.25,
+              "cache_write": 15.625,
+              "output": 75
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "family": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "model": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "aliases": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-cyber",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_068a9ffb572d38bb0ccc",
+      "event_hash": "068a9ffb572d38bb0cccbd74f783f9801cd5611f74abaeec38ae29ce43d5389d"
+    },
+    {
+      "sequence": 49,
+      "type": "model_added",
+      "model_id": "mistral-embed-2312",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "068a9ffb572d38bb0cccbd74f783f9801cd5611f74abaeec38ae29ce43d5389d",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Mistral Embed",
+        "model": "Mistral Embed",
+        "aliases": [
+          "mistral-embed"
+        ],
+        "context_window": 8000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2023-12-11",
+              "end": null,
+              "input": 0.1
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "family": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "model": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "aliases": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "context_window": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "max_output": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "reasoning": "https://docs.mistral.ai/models/mistral-embed-23-12",
+        "modalities": "https://docs.mistral.ai/api/endpoint/embeddings",
+        "pricing": "https://docs.mistral.ai/models/mistral-embed-23-12"
+      },
+      "event_id": "evt_7615c7f00baf86299c8b",
+      "event_hash": "7615c7f00baf86299c8bfad4abcae320f493cf05f8a0ec7d59dc27fb179f827d"
+    },
+    {
+      "sequence": 50,
+      "type": "model_added",
+      "model_id": "voxtral-mini-transcribe-realtime-2602",
+      "verified_at": "2026-10-06",
+      "previous_event_hash": "7615c7f00baf86299c8bfad4abcae320f493cf05f8a0ec7d59dc27fb179f827d",
+      "snapshot": {
+        "provider": "Mistral AI",
+        "family": "Voxtral",
+        "model": "Voxtral Mini Transcribe Realtime",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-02-04",
+              "end": null,
+              "rates": {
+                "minute": 0.006
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "family": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "model": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "context_window": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "max_output": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "knowledge_cutoff": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "reasoning": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "pricing": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02"
+      },
+      "event_id": "evt_a81376cb9fe2bf761c54",
+      "event_hash": "a81376cb9fe2bf761c54ce8f7f6b9f302780821e32f2718d486b440672717043"
     }
   ],
-  "chain_head": "c70e6cd5a8093e89c05cd5f20b0a8a0d520e141c8c462b2c13e4359e63aebba2"
+  "chain_head": "a81376cb9fe2bf761c54ce8f7f6b9f302780821e32f2718d486b440672717043"
 }
