@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
-  "source_verified": "2026-10-06",
-  "model_count": 50,
+  "source_verified": "2026-10-07",
+  "model_count": 60,
   "provider_count": 10,
   "models": [
     {
@@ -1694,6 +1694,323 @@
       "standard_rate": {
         "input": 0.1
       }
+    },
+    {
+      "model_id": "gpt-6.1-sol",
+      "model": "GPT-6.1 Sol",
+      "provider": "OpenAI",
+      "family": "GPT-6",
+      "sxf_url": "/models/gpt-6-1-sol/",
+      "context_window": 1050000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "input": 2,
+        "cached_input": 0.1,
+        "output": 10
+      }
+    },
+    {
+      "model_id": "gpt-realtime-translate",
+      "model": "GPT-Realtime-Translate",
+      "provider": "OpenAI",
+      "family": "GPT Realtime",
+      "sxf_url": "/models/gpt-realtime-translate/",
+      "context_window": 16000,
+      "max_output": 2000,
+      "capabilities": [
+        "audio",
+        "speech-to-speech"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "minute": 0.034
+      }
+    },
+    {
+      "model_id": "gpt-realtime-whisper",
+      "model": "GPT-Realtime-Whisper",
+      "provider": "OpenAI",
+      "family": "GPT Realtime",
+      "sxf_url": "/models/gpt-realtime-whisper/",
+      "context_window": 16000,
+      "max_output": 2000,
+      "capabilities": [
+        "audio",
+        "transcription"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "minute": 0.017
+      }
+    },
+    {
+      "model_id": "claude-mythos-5-1",
+      "model": "Claude Mythos 5.1",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/models/claude-mythos-5-1/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "input": 10,
+        "cached_input": 0.25,
+        "output": 50
+      }
+    },
+    {
+      "model_id": "mistral-large-4",
+      "model": "Mistral Large 4",
+      "provider": "Mistral AI",
+      "family": "Mistral Large",
+      "sxf_url": "/models/mistral-large-4/",
+      "context_window": 1000000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "vision",
+        "long-context",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "preview"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "input": 0.68,
+        "cached_input": 0.07,
+        "output": 2.09
+      }
+    },
+    {
+      "model_id": "shieldstral-1.0",
+      "model": "Shieldstral 1.0",
+      "provider": "Mistral AI",
+      "family": "Shieldstral",
+      "sxf_url": "/models/shieldstral-1-0/",
+      "context_window": 32768,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "moderation"
+      ],
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "preview"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "parse-v5.0",
+      "model": "Parse 5",
+      "provider": "Cohere",
+      "family": "Parse 5",
+      "sxf_url": "/models/parse-v5-0/",
+      "context_window": 8192,
+      "max_output": null,
+      "capabilities": [
+        "ocr",
+        "vision"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "pages",
+        "display_unit": "per page"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "north-mini-code-1-0",
+      "model": "North Mini Code",
+      "provider": "Cohere",
+      "family": "North",
+      "sxf_url": "/models/north-mini-code-1-0/",
+      "context_window": 256000,
+      "max_output": 64000,
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "north-small-translate-1-0",
+      "model": "North Small Translate",
+      "provider": "Cohere",
+      "family": "North",
+      "sxf_url": "/models/north-small-translate-1-0/",
+      "context_window": 16000,
+      "max_output": 16000,
+      "capabilities": [
+        "reasoning"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "rerank-v4.0-fast",
+      "model": "Rerank 4 Fast",
+      "provider": "Cohere",
+      "family": "Rerank 4",
+      "sxf_url": "/models/rerank-4-fast/",
+      "context_window": 32768,
+      "max_output": null,
+      "capabilities": [
+        "rerank"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "search_units",
+        "display_unit": "per search unit"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
     }
   ]
 }

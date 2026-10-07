@@ -442,6 +442,97 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Claude 5",
+      "model": "Claude Mythos 5.1",
+      "model_id": "claude-mythos-5-1",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "high",
+        "always_on": true
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Invite-only Project Glasswing counterpart to Claude Fable 5.1 for approved cybersecurity and biology research programs.",
+      "sxf_url": "/models/claude-mythos-5-1/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "notes": [
+        "Active invite-only model released September 1, 2026; retirement not sooner than September 1, 2027."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-01",
+            "end": null,
+            "input": 10,
+            "cached_input": 0.25,
+            "cache_write_5m": 12.5,
+            "cache_write_1h": 20,
+            "output": 50
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "pricing": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "access": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "long-context",
+        "agents"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }

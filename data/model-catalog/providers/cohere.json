@@ -446,6 +446,295 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Parse 5",
+      "model": "Parse 5",
+      "model_id": "parse-v5.0",
+      "context_window": 8192,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "image",
+          "PDF",
+          "PPT"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Cohere vision parser for converting enterprise documents into structured Markdown, tables, forms and layout-aware content.",
+      "sxf_url": "/models/parse-v5-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/parse",
+        "https://docs.cohere.com/v2/reference/parse",
+        "https://docs.cohere.com/changelog/parse",
+        "https://docs.cohere.com/docs/model-vault/standard/pricing"
+      ],
+      "notes": [
+        "Released August 27, 2026.",
+        "The API reports billed pages, but no public numeric PAYG per-page rate was verified; Model Vault instance pricing is not reused."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/parse",
+          "context_window": "https://docs.cohere.com/docs/parse",
+          "max_output": "https://docs.cohere.com/v2/reference/parse",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/parse",
+          "reasoning": "https://docs.cohere.com/docs/parse",
+          "modalities": "https://docs.cohere.com/docs/parse",
+          "pricing": "https://docs.cohere.com/docs/model-vault/standard/pricing",
+          "access": "https://docs.cohere.com/v2/reference/parse",
+          "lifecycle": "https://docs.cohere.com/changelog/parse",
+          "capabilities": "https://docs.cohere.com/docs/parse"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "ocr",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "pages",
+        "quantity": 1,
+        "dimensions": [
+          "page"
+        ],
+        "display_unit": "per page"
+      }
+    },
+    {
+      "family": "North",
+      "model": "North Mini Code",
+      "model_id": "north-mini-code-1-0",
+      "context_window": 256000,
+      "max_output": 64000,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning support",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Open-weight Cohere agentic coding model for repo-level software engineering, terminal agents and local deployment.",
+      "sxf_url": "/models/north-mini-code-1-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/north-mini-code-1.0",
+        "https://docs.cohere.com/changelog/north-mini-code-1-0"
+      ],
+      "notes": [
+        "Available through Chat V2 API and as Apache 2.0 open weights.",
+        "API evaluation access is free until rate limits; paid production Model Vault rates are a separate instance meter."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "context_window": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "max_output": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "reasoning": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "modalities": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "pricing": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "access": "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "lifecycle": "https://docs.cohere.com/changelog/north-mini-code-1-0",
+          "capabilities": "https://docs.cohere.com/docs/north-mini-code-1.0"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "North",
+      "model": "North Small Translate",
+      "model_id": "north-small-translate-1-0",
+      "context_window": 16000,
+      "max_output": 16000,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning support",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Purpose-built open-weight machine translation model covering more than 50 languages and locale variants.",
+      "sxf_url": "/models/north-small-translate-1-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/north-small-translate-1.0",
+        "https://docs.cohere.com/changelog/north-small-translate-1-0"
+      ],
+      "notes": [
+        "Released September 9, 2026.",
+        "Available on Cohere's free-tier Chat V2 API and as open weights under CC BY-NC 4.0 for non-commercial use."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "context_window": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "max_output": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "reasoning": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "modalities": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "pricing": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "access": "https://docs.cohere.com/docs/north-small-translate-1.0",
+          "lifecycle": "https://docs.cohere.com/changelog/north-small-translate-1-0",
+          "capabilities": "https://docs.cohere.com/docs/north-small-translate-1.0"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "reasoning"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Rerank 4",
+      "model": "Rerank 4 Fast",
+      "model_id": "rerank-v4.0-fast",
+      "context_window": 32768,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "ranking"
+        ]
+      },
+      "positioning": "Low-latency Rerank 4 variant for high-throughput multilingual retrieval and semi-structured data ranking.",
+      "sxf_url": "/models/rerank-4-fast/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cohere.com/docs/rerank",
+        "https://docs.cohere.com/docs/reranking-best-practices",
+        "https://docs.cohere.com/v2/reference/rerank",
+        "https://docs.cohere.com/changelog/rerank-v4.0",
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+      ],
+      "notes": [
+        "Cohere lists rerank-v4.0-fast as a latest Rerank model with 32,768-token context.",
+        "The API bills in search_units; no current public numeric PAYG search-unit rate was verified."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cohere.com/docs/rerank",
+          "context_window": "https://docs.cohere.com/docs/reranking-best-practices",
+          "max_output": "https://docs.cohere.com/docs/rerank",
+          "knowledge_cutoff": "https://docs.cohere.com/docs/rerank",
+          "reasoning": "https://docs.cohere.com/docs/rerank",
+          "modalities": "https://docs.cohere.com/docs/rerank",
+          "pricing": "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+          "access": "https://docs.cohere.com/v2/reference/rerank",
+          "lifecycle": "https://docs.cohere.com/changelog/rerank-v4.0",
+          "capabilities": "https://docs.cohere.com/docs/rerank"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "rerank"
+      ],
+      "pricing_basis": {
+        "meter": "search_units",
+        "quantity": 1,
+        "dimensions": [
+          "search_unit"
+        ],
+        "display_unit": "per search unit"
+      }
     }
   ]
 }
