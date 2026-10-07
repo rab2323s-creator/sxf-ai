@@ -746,6 +746,181 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Gemma 4",
+      "model": "Gemma 4 31B IT",
+      "model_id": "gemma-4-31b-it",
+      "context_window": 262144,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google DeepMind open-weight Gemma 4 instruction model for reasoning, coding, agentic workflows and multimodal understanding.",
+      "sxf_url": "/models/gemma-4-31b-it/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json"
+      ],
+      "notes": [
+        "Gemini Developer API provides hosted access to gemma-4-31b-it.",
+        "Gemma 4 is free of charge on the Gemini Developer API free tier and has no paid tier published."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+          "context_window": "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json",
+          "max_output": "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "knowledge_cutoff": "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "reasoning": "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "modalities": "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+          "capabilities": "https://ai.google.dev/gemma/docs/core/model_card_4"
+        }
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Gemini 3.8",
+      "model": "Gemini 3.8 Flash Cyber",
+      "model_id": "gemini-3.8-flash-cyber",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Gemini 3.8 Flash post-training variant for approved cybersecurity use cases with multimodal input and long context.",
+      "sxf_url": "/models/gemini-3-8-flash-cyber/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+      ],
+      "notes": [
+        "Generally available behind an allowlist; access requires Google team or Fairwind approval.",
+        "Global Standard token pricing is represented; non-global and Flex/Batch rates remain separate service tiers."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-09-16",
+            "end": null,
+            "input": 1.5,
+            "cached_input": 0.15,
+            "output": 7.5
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "context_window": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "max_output": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "knowledge_cutoff": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "reasoning": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "modalities": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "pricing": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "access": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "lifecycle": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+          "capabilities": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
