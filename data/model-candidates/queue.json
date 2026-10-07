@@ -469,6 +469,1357 @@
         "reviewed_by": null,
         "reviewed_at": null
       }
+    },
+    {
+      "candidate_id": "cand_moonshot_kimi_k3",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Moonshot AI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "kimi-k3",
+        "display_name": "Kimi K3"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Moonshot AI",
+        "family": "Kimi K3",
+        "model": "Kimi K3",
+        "model_id": "kimi-k3",
+        "context_window": 1048576,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Open-weight multimodal agentic model for long-horizon coding, knowledge work and reasoning with a 1M-token context window.",
+        "sxf_url": "/models/kimi-k3/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://www.kimi.com/en/blog/kimi-k3",
+          "https://github.com/MoonshotAI/Kimi-K3",
+          "https://www.kimi.com/en/help/kimi-api/api-pricing"
+        ],
+        "notes": [
+          "Official API rates are verified but no historical effective-from date is inferred for the canonical schedule.",
+          "Official model weights and local deployment resources are published by Moonshot AI."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://www.kimi.com/en/blog/kimi-k3",
+            "context_window": "https://github.com/MoonshotAI/Kimi-K3",
+            "max_output": "https://github.com/MoonshotAI/Kimi-K3",
+            "knowledge_cutoff": "https://github.com/MoonshotAI/Kimi-K3",
+            "reasoning": "https://www.kimi.com/en/blog/kimi-k3",
+            "modalities": "https://github.com/MoonshotAI/Kimi-K3",
+            "pricing": "https://www.kimi.com/en/help/kimi-api/api-pricing",
+            "access": "https://github.com/MoonshotAI/Kimi-K3",
+            "lifecycle": "https://www.kimi.com/en/blog/kimi-k3",
+            "capabilities": "https://github.com/MoonshotAI/Kimi-K3"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use",
+          "vision",
+          "long-context"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "kimi-k3"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://www.kimi.com/en/blog/kimi-k3",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://github.com/MoonshotAI/Kimi-K3",
+          "source_type": "official_repository",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://www.kimi.com/en/help/kimi-api/api-pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": [
+          "Current API rates are source-verified but intentionally not converted into a dated schedule without a published effective-from date."
+        ]
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemma_4_31b_it",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemma-4-31b-it",
+        "display_name": "Gemma 4 31B IT"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Google",
+        "family": "Gemma 4",
+        "model": "Gemma 4 31B IT",
+        "model_id": "gemma-4-31b-it",
+        "context_window": 262144,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Google DeepMind open-weight Gemma 4 instruction model for reasoning, coding, agentic workflows and multimodal understanding.",
+        "sxf_url": "/models/gemma-4-31b-it/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json"
+        ],
+        "notes": [
+          "Gemini Developer API provides hosted access to gemma-4-31b-it.",
+          "Gemma 4 is free of charge on the Gemini Developer API free tier and has no paid tier published."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+            "context_window": "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json",
+            "max_output": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "knowledge_cutoff": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "reasoning": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "modalities": "https://ai.google.dev/gemma/docs/core/model_card_4",
+            "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+            "access": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+            "lifecycle": "https://ai.google.dev/gemini-api/docs/changelog",
+            "capabilities": "https://ai.google.dev/gemma/docs/core/model_card_4"
+          }
+        },
+        "pricing_status": "free-preview",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use",
+          "vision"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemma-4-31b-it"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemma/docs/core/model_card_4",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/changelog",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json",
+          "source_type": "official_model_card",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_zai_glm_5_3",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Z.ai",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "glm-5.3",
+        "display_name": "GLM-5.3"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Z.ai",
+        "family": "GLM-5",
+        "model": "GLM-5.3",
+        "model_id": "glm-5.3",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "max",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Z.ai open-weight flagship model for complex coding, long-horizon agentic tasks and cybersecurity reasoning.",
+        "sxf_url": "/models/glm-5-3/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://z.ai/blog/glm-5.3",
+          "https://huggingface.co/zai-org/GLM-5.3",
+          "https://z.ai/model-api"
+        ],
+        "notes": [
+          "The official release documents low, high and max reasoning effort with thinking always enabled.",
+          "Current publisher weights are available from Z.ai's official Hugging Face organization for local serving."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://z.ai/blog/glm-5.3",
+            "context_window": "https://z.ai/blog/glm-5.3",
+            "max_output": "https://z.ai/blog/glm-5.3",
+            "knowledge_cutoff": "https://z.ai/blog/glm-5.3",
+            "reasoning": "https://z.ai/blog/glm-5.3",
+            "modalities": "https://huggingface.co/zai-org/GLM-5.3",
+            "pricing": "https://z.ai/model-api",
+            "access": "https://huggingface.co/zai-org/GLM-5.3",
+            "lifecycle": "https://z.ai/blog/glm-5.3",
+            "capabilities": "https://z.ai/blog/glm-5.3"
+          }
+        },
+        "pricing_status": "not-published",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "glm-5.3"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://z.ai/blog/glm-5.3",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://huggingface.co/zai-org/GLM-5.3",
+          "source_type": "official_model_card",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://z.ai/model-api",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": [
+          "No directly comparable public numeric Standard API token rate was verified, so pricing remains not-published."
+        ]
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_minimax_m3",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "MiniMax",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "MiniMax-M3",
+        "display_name": "MiniMax M3"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "MiniMax",
+        "family": "MiniMax M3",
+        "model": "MiniMax M3",
+        "model_id": "MiniMax-M3",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "enabled",
+            "adaptive",
+            "disabled"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "MiniMax multimodal model for coding and agentic workflows with a 1M-token context window and local deployment support.",
+        "sxf_url": "/models/minimax-m3/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://www.minimax.io/models/text/m3",
+          "https://www.minimax.io/blog/minimax-m3",
+          "https://github.com/MiniMax-AI/MiniMax-M3",
+          "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise"
+        ],
+        "notes": [
+          "MiniMax publishes separate PAYG bands for input up to 512K and 512K–1M.",
+          "Numeric rates are not flattened or assigned an inferred historical effective date."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://www.minimax.io/models/text/m3",
+            "context_window": "https://www.minimax.io/models/text/m3",
+            "max_output": "https://www.minimax.io/models/text/m3",
+            "knowledge_cutoff": "https://www.minimax.io/models/text/m3",
+            "reasoning": "https://github.com/MiniMax-AI/MiniMax-M3",
+            "modalities": "https://www.minimax.io/models/text/m3",
+            "pricing": "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise",
+            "access": "https://github.com/MiniMax-AI/MiniMax-M3",
+            "lifecycle": "https://www.minimax.io/blog/minimax-m3",
+            "capabilities": "https://www.minimax.io/models/text/m3"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use",
+          "vision",
+          "video",
+          "long-context"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "MiniMax-M3"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://www.minimax.io/models/text/m3",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://www.minimax.io/blog/minimax-m3",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://github.com/MiniMax-AI/MiniMax-M3",
+          "source_type": "official_repository",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": [
+          "Current two-band rates are verified but withheld from the dated Standard schedule because the effective-from date is not published."
+        ]
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_alibaba_qwen3_coder_next",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Alibaba Cloud",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "qwen3-coder-next",
+        "display_name": "Qwen3-Coder-Next"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3 Coder",
+        "model": "Qwen3-Coder-Next",
+        "model_id": "qwen3-coder-next",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Qwen code-generation model optimized for repository-level understanding, multi-turn tool interactions and agentic coding compatibility.",
+        "sxf_url": "/models/qwen3-coder-next/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+        ],
+        "notes": [
+          "Alibaba Cloud publishes three input-length pricing bands for EU and international endpoints.",
+          "Schema 1.6 cannot losslessly encode all three bands with the current long-context contract."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "pricing": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "access": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "lifecycle": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+            "capabilities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "coding",
+          "agents"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "qwen3-coder-next"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": [
+          "Official three-band regional pricing is intentionally not flattened into the generic token calculator."
+        ]
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_google_gemini_3_8_flash_cyber",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Google",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-flash-cyber",
+        "display_name": "Gemini 3.8 Flash Cyber"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Flash Cyber",
+        "model_id": "gemini-3.8-flash-cyber",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Gemini 3.8 Flash post-training variant for approved cybersecurity use cases with multimodal input and long context.",
+        "sxf_url": "/models/gemini-3-8-flash-cyber/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+        ],
+        "notes": [
+          "Generally available behind an allowlist; access requires Google team or Fairwind approval.",
+          "Global Standard token pricing is represented; non-global and Flex/Batch rates remain separate service tiers."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-16",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "context_window": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "max_output": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "knowledge_cutoff": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "reasoning": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "modalities": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "pricing": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+            "access": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+            "lifecycle": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+            "capabilities": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "vision",
+          "video",
+          "audio",
+          "long-context"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-flash-cyber"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_rosalind_research",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-rosalind-research",
+        "display_name": "GPT-Rosalind Research"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "OpenAI",
+        "family": "GPT-Rosalind",
+        "model": "GPT-Rosalind Research",
+        "model_id": "gpt-rosalind-research",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "specialized reasoning",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "OpenAI specialized reasoning model for approved life-sciences research workflows and scientific tool use.",
+        "sxf_url": "/models/gpt-rosalind-research/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://openai.com/gpt-rosalind/",
+          "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+          "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "notes": [
+          "API access is limited to eligible organizations and approved internal research through OpenAI's trusted-access program.",
+          "Published API billing begins October 5, 2026."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-05",
+              "end": null,
+              "input": 5,
+              "cached_input": 0.5,
+              "output": 25
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/pricing",
+            "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+            "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "pricing": "https://developers.openai.com/api/docs/pricing",
+            "access": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "lifecycle": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+            "capabilities": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": true,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "reasoning",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "cached_input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-rosalind-research"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://openai.com/gpt-rosalind/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_xai_grok_voice_think_fast_2_0",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "xAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "grok-voice-think-fast-2.0",
+        "display_name": "Grok Voice Think Fast 2.0"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "xAI",
+        "family": "Grok Voice",
+        "model": "Grok Voice Think Fast 2.0",
+        "model_id": "grok-voice-think-fast-2.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "positioning": "xAI speech-to-speech voice model with integrated reasoning and tool-use support for realtime conversational agents.",
+        "sxf_url": "/models/grok-voice-think-fast-2-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://x.ai/news/grok-voice-think-fast-2",
+          "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech"
+        ],
+        "notes": [
+          "The versioned model is billed at $0.08 per minute of audio and is excluded from the token calculator.",
+          "grok-voice-latest currently points to this version, while the pinned ID is used canonically for stability."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-29",
+              "end": null,
+              "rates": {
+                "minute": 0.08
+              }
+            }
+          ]
+        },
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "context_window": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "max_output": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "knowledge_cutoff": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "reasoning": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "modalities": "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech",
+            "pricing": "https://x.ai/news/grok-voice-think-fast-2",
+            "access": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+            "lifecycle": "https://x.ai/news/grok-voice-think-fast-2",
+            "capabilities": "https://x.ai/news/grok-voice-think-fast-2"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "reasoning",
+          "audio",
+          "speech-to-speech",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "minutes",
+          "quantity": 1,
+          "dimensions": [
+            "minute"
+          ],
+          "display_unit": "per minute"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "grok-voice-think-fast-2.0"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://x.ai/news/grok-voice-think-fast-2",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "source_type": "official_api_reference",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_openai_gpt_oss_120b",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "OpenAI",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gpt-oss-120b",
+        "display_name": "gpt-oss-120b"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "OpenAI",
+        "family": "gpt-oss",
+        "model": "gpt-oss-120b",
+        "model_id": "gpt-oss-120b",
+        "context_window": 131072,
+        "max_output": 131072,
+        "knowledge_cutoff": "2024-06-01",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "OpenAI open-weight reasoning model for self-hosted deployment with function calling and agentic capabilities.",
+        "sxf_url": "/models/gpt-oss-120b/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss"
+        ],
+        "notes": [
+          "OpenAI explicitly states that gpt-oss models are not served through the OpenAI API and have no OpenAI API pricing.",
+          "The model is distributed under Apache 2.0 and can run on self-managed infrastructure or third-party hosting providers."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "context_window": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "max_output": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "reasoning": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "modalities": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "pricing": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+            "access": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+            "lifecycle": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+            "capabilities": "https://developers.openai.com/api/docs/models/gpt-oss-120b"
+          }
+        },
+        "pricing_status": "self-hosted",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": false,
+          "open_weight": true,
+          "self_hostable": true
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gpt-oss-120b"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
+    },
+    {
+      "candidate_id": "cand_alibaba_qwen3_5_397b_a17b",
+      "detected_at": "2026-10-07T00:10:00Z",
+      "provider": "Alibaba Cloud",
+      "canonical_model_id": null,
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "qwen3.5-397b-a17b",
+        "display_name": "Qwen3.5-397B-A17B"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3.5",
+        "model": "Qwen3.5-397B-A17B",
+        "model_id": "qwen3.5-397b-a17b",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "positioning": "Alibaba Cloud Qwen3.5 native vision-language model for reasoning, coding, agentic tasks and image/video understanding.",
+        "sxf_url": "/models/qwen3-5-397b-a17b/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "notes": [
+          "Alibaba Cloud publishes distinct rates for prompts up to 128K and above 128K through 256K.",
+          "Numeric rates are source-verified but no historical effective-from date is inferred for the canonical schedule."
+        ],
+        "pricing": {},
+        "provenance": {
+          "verified_at": "2026-10-07",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "pricing": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+            "access": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "lifecycle": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+            "capabilities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b"
+          }
+        },
+        "pricing_status": "official-paid",
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        },
+        "capabilities": [
+          "general",
+          "reasoning",
+          "coding",
+          "agents",
+          "tool-use",
+          "vision",
+          "video"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "qwen3.5-397b-a17b"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+          "source_type": "official_changelog",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        },
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-07T00:10:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": [
+          "Current two-band regional pricing is intentionally omitted from the dated Standard schedule because no effective-from date is inferred."
+        ]
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "rab2323s-creator",
+        "reviewed_at": "2026-10-07T00:46:31Z"
+      }
     }
   ]
 }
