@@ -2410,6 +2410,337 @@
         },
         "pricing": {}
       }
+    },
+    "MiniMax-M3": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_8ed6a1a4b937fa2b602b",
+      "snapshot_hash": "32323e5387988e609bc78f5214a871dea95fb67ff1e5e4696fd016fc3be8e38c",
+      "snapshot": {
+        "provider": "MiniMax",
+        "family": "MiniMax M3",
+        "model": "MiniMax M3",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "enabled",
+            "adaptive",
+            "disabled"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "gemini-3.8-flash-cyber": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_df824737d4b83c1c7ce3",
+      "snapshot_hash": "250e2ddf868d1d3f338e12917ce20ec501428b653c45cbe0b332bde3b93e26ef",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Flash Cyber",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-16",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      }
+    },
+    "gemma-4-31b-it": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_cc1e4c421ce7f82af48b",
+      "snapshot_hash": "565504b9d6de4bf18cc94a4d22a2260ac0562046ff8bb904434de132d07ed639",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemma 4",
+        "model": "Gemma 4 31B IT",
+        "context_window": 262144,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "glm-5.3": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_3161cc63bb0c5f267f70",
+      "snapshot_hash": "53908623ab8aee68d51b0a6430f3bdae2de536fab430ed01b27db8a871ff3ce1",
+      "snapshot": {
+        "provider": "Z.ai",
+        "family": "GLM-5",
+        "model": "GLM-5.3",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "max",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "gpt-oss-120b": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_467461da2aadc5385c11",
+      "snapshot_hash": "4532bcd692b22bd2ac88249de295a0f519d553031a5cde59206950e34743d7e7",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "gpt-oss",
+        "model": "gpt-oss-120b",
+        "context_window": 131072,
+        "max_output": 131072,
+        "knowledge_cutoff": "2024-06-01",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "gpt-rosalind-research": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_cc9f559b418146fb12e3",
+      "snapshot_hash": "a1b3c37bd490b5ea7c030bcfa7193c29a5e3a82c65920faef56a6ce3f81f5bc3",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-Rosalind",
+        "model": "GPT-Rosalind Research",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "specialized reasoning",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-05",
+              "end": null,
+              "input": 5,
+              "cached_input": 0.5,
+              "output": 25
+            }
+          ]
+        }
+      }
+    },
+    "grok-voice-think-fast-2.0": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_a4ddacc8f5e05da66233",
+      "snapshot_hash": "dba590c825f4cb9073c9d4b01f245578c24b686d5dca8ce0e5e4b571aeec3c10",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok Voice",
+        "model": "Grok Voice Think Fast 2.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-29",
+              "end": null,
+              "rates": {
+                "minute": 0.08
+              }
+            }
+          ]
+        }
+      }
+    },
+    "kimi-k3": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_debe265bbe765db84239",
+      "snapshot_hash": "8cdb9fbff304d255c2e80191e02f5e707d42876059f0657e109ba37ec5e0e780",
+      "snapshot": {
+        "provider": "Moonshot AI",
+        "family": "Kimi K3",
+        "model": "Kimi K3",
+        "context_window": 1048576,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "qwen3-coder-next": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_e18f733cad6aacb8fecc",
+      "snapshot_hash": "92484203c19073953181babb1c38fa3dca7be18332c77f1fdc9fc38f10a2ab51",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3 Coder",
+        "model": "Qwen3-Coder-Next",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "qwen3.5-397b-a17b": {
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_8e73a9cb15ea4b44e377",
+      "snapshot_hash": "61b6f1c28daf46d89e488f20864fbd38c40d2519dd007e220f2f1d9e28fd8733",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3.5",
+        "model": "Qwen3.5-397B-A17B",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      }
     }
   },
   "events": [
@@ -5717,7 +6048,488 @@
       },
       "event_id": "evt_98799b7e80ef2901b051",
       "event_hash": "98799b7e80ef2901b0511ee03396210246d3a2717e1c456edc9f997066c16f8a"
+    },
+    {
+      "sequence": 61,
+      "type": "model_added",
+      "model_id": "MiniMax-M3",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "98799b7e80ef2901b0511ee03396210246d3a2717e1c456edc9f997066c16f8a",
+      "snapshot": {
+        "provider": "MiniMax",
+        "family": "MiniMax M3",
+        "model": "MiniMax M3",
+        "context_window": 1000000,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "enabled",
+            "adaptive",
+            "disabled"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://www.minimax.io/models/text/m3",
+        "family": "https://www.minimax.io/models/text/m3",
+        "model": "https://www.minimax.io/models/text/m3",
+        "context_window": "https://www.minimax.io/models/text/m3",
+        "max_output": "https://www.minimax.io/models/text/m3",
+        "knowledge_cutoff": "https://www.minimax.io/models/text/m3",
+        "reasoning": "https://github.com/MiniMax-AI/MiniMax-M3",
+        "modalities": "https://www.minimax.io/models/text/m3",
+        "pricing": "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise"
+      },
+      "event_id": "evt_8ed6a1a4b937fa2b602b",
+      "event_hash": "8ed6a1a4b937fa2b602bc4f9a1c73fd9cb6507102a96a4019107d52f51d2ece4"
+    },
+    {
+      "sequence": 62,
+      "type": "model_added",
+      "model_id": "gemini-3.8-flash-cyber",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "8ed6a1a4b937fa2b602bc4f9a1c73fd9cb6507102a96a4019107d52f51d2ece4",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Flash Cyber",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-09-16",
+              "end": null,
+              "input": 1.5,
+              "cached_input": 0.15,
+              "output": 7.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "family": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "model": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "context_window": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "max_output": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "knowledge_cutoff": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "reasoning": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "modalities": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "pricing": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing"
+      },
+      "event_id": "evt_df824737d4b83c1c7ce3",
+      "event_hash": "df824737d4b83c1c7ce3b7a8ab0cfbcc2a0ae603cf1d7e073b9f44818d209d0c"
+    },
+    {
+      "sequence": 63,
+      "type": "model_added",
+      "model_id": "gemma-4-31b-it",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "df824737d4b83c1c7ce3b7a8ab0cfbcc2a0ae603cf1d7e073b9f44818d209d0c",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemma 4",
+        "model": "Gemma 4 31B IT",
+        "context_window": 262144,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "family": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "model": "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "context_window": "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json",
+        "max_output": "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "knowledge_cutoff": "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "reasoning": "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "modalities": "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_cc1e4c421ce7f82af48b",
+      "event_hash": "cc1e4c421ce7f82af48b5d04a358306ed03377b55e0d1a9523f05dcf77895576"
+    },
+    {
+      "sequence": 64,
+      "type": "model_added",
+      "model_id": "glm-5.3",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "cc1e4c421ce7f82af48b5d04a358306ed03377b55e0d1a9523f05dcf77895576",
+      "snapshot": {
+        "provider": "Z.ai",
+        "family": "GLM-5",
+        "model": "GLM-5.3",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "high",
+            "max"
+          ],
+          "default": "max",
+          "always_on": true
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://z.ai/blog/glm-5.3",
+        "family": "https://z.ai/blog/glm-5.3",
+        "model": "https://z.ai/blog/glm-5.3",
+        "context_window": "https://z.ai/blog/glm-5.3",
+        "max_output": "https://z.ai/blog/glm-5.3",
+        "knowledge_cutoff": "https://z.ai/blog/glm-5.3",
+        "reasoning": "https://z.ai/blog/glm-5.3",
+        "modalities": "https://huggingface.co/zai-org/GLM-5.3",
+        "pricing": "https://z.ai/model-api"
+      },
+      "event_id": "evt_3161cc63bb0c5f267f70",
+      "event_hash": "3161cc63bb0c5f267f705dd18eb8bc21a6e45b7796a175eb74eca1490c8dd22e"
+    },
+    {
+      "sequence": 65,
+      "type": "model_added",
+      "model_id": "gpt-oss-120b",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "3161cc63bb0c5f267f705dd18eb8bc21a6e45b7796a175eb74eca1490c8dd22e",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "gpt-oss",
+        "model": "gpt-oss-120b",
+        "context_window": 131072,
+        "max_output": 131072,
+        "knowledge_cutoff": "2024-06-01",
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "family": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "model": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "pricing": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss"
+      },
+      "event_id": "evt_467461da2aadc5385c11",
+      "event_hash": "467461da2aadc5385c11c91bfe282c3d9be09a92529ccbd49d0fac92f529ccbf"
+    },
+    {
+      "sequence": 66,
+      "type": "model_added",
+      "model_id": "gpt-rosalind-research",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "467461da2aadc5385c11c91bfe282c3d9be09a92529ccbd49d0fac92f529ccbf",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT-Rosalind",
+        "model": "GPT-Rosalind Research",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "specialized reasoning",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-05",
+              "end": null,
+              "input": 5,
+              "cached_input": 0.5,
+              "output": 25
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/pricing",
+        "family": "https://developers.openai.com/api/docs/pricing",
+        "model": "https://developers.openai.com/api/docs/pricing",
+        "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+        "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_cc9f559b418146fb12e3",
+      "event_hash": "cc9f559b418146fb12e372e285e4711298f9d9716beb9d4ce37f8d127cebbc24"
+    },
+    {
+      "sequence": 67,
+      "type": "model_added",
+      "model_id": "grok-voice-think-fast-2.0",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "cc9f559b418146fb12e372e285e4711298f9d9716beb9d4ce37f8d127cebbc24",
+      "snapshot": {
+        "provider": "xAI",
+        "family": "Grok Voice",
+        "model": "Grok Voice Think Fast 2.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning effort",
+          "levels": [
+            "none",
+            "high"
+          ],
+          "default": "high"
+        },
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-07-29",
+              "end": null,
+              "rates": {
+                "minute": 0.08
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "family": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "model": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "context_window": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "max_output": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "knowledge_cutoff": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "reasoning": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "modalities": "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech",
+        "pricing": "https://x.ai/news/grok-voice-think-fast-2"
+      },
+      "event_id": "evt_a4ddacc8f5e05da66233",
+      "event_hash": "a4ddacc8f5e05da662335de7d41f07e4647c9c95be474359348b91237dda65d7"
+    },
+    {
+      "sequence": 68,
+      "type": "model_added",
+      "model_id": "kimi-k3",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "a4ddacc8f5e05da662335de7d41f07e4647c9c95be474359348b91237dda65d7",
+      "snapshot": {
+        "provider": "Moonshot AI",
+        "family": "Kimi K3",
+        "model": "Kimi K3",
+        "context_window": 1048576,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "reasoning support",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://www.kimi.com/en/blog/kimi-k3",
+        "family": "https://www.kimi.com/en/blog/kimi-k3",
+        "model": "https://www.kimi.com/en/blog/kimi-k3",
+        "context_window": "https://github.com/MoonshotAI/Kimi-K3",
+        "max_output": "https://github.com/MoonshotAI/Kimi-K3",
+        "knowledge_cutoff": "https://github.com/MoonshotAI/Kimi-K3",
+        "reasoning": "https://www.kimi.com/en/blog/kimi-k3",
+        "modalities": "https://github.com/MoonshotAI/Kimi-K3",
+        "pricing": "https://www.kimi.com/en/help/kimi-api/api-pricing"
+      },
+      "event_id": "evt_debe265bbe765db84239",
+      "event_hash": "debe265bbe765db84239d65d4e7c0693db58302fe188083ff942d40828c9d018"
+    },
+    {
+      "sequence": 69,
+      "type": "model_added",
+      "model_id": "qwen3-coder-next",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "debe265bbe765db84239d65d4e7c0693db58302fe188083ff942d40828c9d018",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3 Coder",
+        "model": "Qwen3-Coder-Next",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "family": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "model": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+        "pricing": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+      },
+      "event_id": "evt_e18f733cad6aacb8fecc",
+      "event_hash": "e18f733cad6aacb8fecc5abe0720548a7dc826aec8e095a31bac7983e5223e21"
+    },
+    {
+      "sequence": 70,
+      "type": "model_added",
+      "model_id": "qwen3.5-397b-a17b",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "e18f733cad6aacb8fecc5abe0720548a7dc826aec8e095a31bac7983e5223e21",
+      "snapshot": {
+        "provider": "Alibaba Cloud",
+        "family": "Qwen3.5",
+        "model": "Qwen3.5-397B-A17B",
+        "context_window": 262144,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking mode",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "family": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "model": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "pricing": "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      },
+      "event_id": "evt_8e73a9cb15ea4b44e377",
+      "event_hash": "8e73a9cb15ea4b44e37762859d227833c667102bdf80ad4c8603e5d3d37ae14a"
     }
   ],
-  "chain_head": "98799b7e80ef2901b0511ee03396210246d3a2717e1c456edc9f997066c16f8a"
+  "chain_head": "8e73a9cb15ea4b44e37762859d227833c667102bdf80ad4c8603e5d3d37ae14a"
 }

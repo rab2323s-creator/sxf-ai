@@ -8,11 +8,11 @@
 <section class="model-explorer shell" data-model-explorer aria-labelledby="model-explorer-title">
       <div class="model-explorer-head">
         <div><p class="eyebrow">SXF MODEL DATABASE</p><h2 id="model-explorer-title">Compare verified model economics and limits.</h2><p>One normalized view of provider-published Standard pricing, native billing units, context windows and output limits.</p></div>
-        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-07</strong><small>60 models · 10 providers</small></div>
+        <div class="model-verification-badge"><span>PRIMARY-SOURCE VERIFIED</span><strong>2026-10-07</strong><small>70 models · 13 providers</small></div>
       </div>
       <div class="model-explorer-toolbar">
         <label class="model-search"><span class="sr-only">Search model database</span><input id="modelExplorerSearch" type="search" placeholder="Search model, provider or family…" autocomplete="off"></label>
-        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Alibaba Cloud</button><button type="button" class="model-filter" data-model-provider="Amazon">Amazon</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Cohere">Cohere</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral AI</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
+        <div class="model-provider-filters" aria-label="Filter models by provider"><button type="button" class="model-filter is-active" data-model-provider="all">All providers</button><button type="button" class="model-filter" data-model-provider="Alibaba Cloud">Alibaba Cloud</button><button type="button" class="model-filter" data-model-provider="Amazon">Amazon</button><button type="button" class="model-filter" data-model-provider="Anthropic">Anthropic</button><button type="button" class="model-filter" data-model-provider="Cohere">Cohere</button><button type="button" class="model-filter" data-model-provider="DeepSeek">DeepSeek</button><button type="button" class="model-filter" data-model-provider="Google">Google</button><button type="button" class="model-filter" data-model-provider="Meta">Meta</button><button type="button" class="model-filter" data-model-provider="MiniMax">MiniMax</button><button type="button" class="model-filter" data-model-provider="Mistral AI">Mistral AI</button><button type="button" class="model-filter" data-model-provider="Moonshot AI">Moonshot AI</button><button type="button" class="model-filter" data-model-provider="OpenAI">OpenAI</button><button type="button" class="model-filter" data-model-provider="Z.ai">Z.ai</button><button type="button" class="model-filter" data-model-provider="xAI">xAI</button></div>
         <label class="model-sort"><span>Sort</span><select id="modelExplorerSort">
           <option value="default">Catalog order</option>
           <option value="input-asc">Lowest token input price</option>
@@ -1044,11 +1044,181 @@
               <td class="model-price">—</td>
               <td class="model-price">—</td>
               <td><a class="model-verified" href="https://docs.cohere.com/docs/rerank" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="kimi-k3"
+              data-order="60"
+              data-provider="Moonshot AI"
+              data-search="kimi k3 kimi-k3 moonshot ai kimi k3 open-weight multimodal agentic model for long-horizon coding, knowledge work and reasoning with a 1m-token context window. text image general reasoning coding agents tool-use vision long-context official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
+              data-context="1048576">
+              <th scope="row"><a href="/models/kimi-k3/">Kimi K3</a><small>kimi-k3</small></th>
+              <td>Moonshot AI<small>Kimi K3</small></td>
+              <td>1,048,576<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">Not published<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://www.kimi.com/en/blog/kimi-k3" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="gemma-4-31b-it"
+              data-order="61"
+              data-provider="Google"
+              data-search="gemma 4 31b it gemma-4-31b-it google gemma 4 google deepmind open-weight gemma 4 instruction model for reasoning, coding, agentic workflows and multimodal understanding. text image general reasoning coding agents tool-use vision free-preview tokens"
+              data-pricing-status="free-preview"
+              data-input="inf"
+              data-output="inf"
+              data-context="262144">
+              <th scope="row"><a href="/models/gemma-4-31b-it/">Gemma 4 31B IT</a><small>gemma-4-31b-it</small></th>
+              <td>Google<small>Gemma 4</small></td>
+              <td>262,144<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">Not published<small>free-preview</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="glm-5.3"
+              data-order="62"
+              data-provider="Z.ai"
+              data-search="glm-5.3 glm-5.3 z.ai glm-5 z.ai open-weight flagship model for complex coding, long-horizon agentic tasks and cybersecurity reasoning. text general reasoning coding agents tool-use not-published tokens"
+              data-pricing-status="not-published"
+              data-input="inf"
+              data-output="inf"
+              data-context="">
+              <th scope="row"><a href="/models/glm-5-3/">GLM-5.3</a><small>glm-5.3</small></th>
+              <td>Z.ai<small>GLM-5</small></td>
+              <td>Not published</td>
+              <td>Not published</td>
+              <td class="model-price">Not published<small>not-published</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://z.ai/blog/glm-5.3" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="MiniMax-M3"
+              data-order="63"
+              data-provider="MiniMax"
+              data-search="minimax m3 minimax-m3 minimax minimax m3 minimax multimodal model for coding and agentic workflows with a 1m-token context window and local deployment support. text image video general reasoning coding agents tool-use vision video long-context official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
+              data-context="1000000">
+              <th scope="row"><a href="/models/minimax-m3/">MiniMax M3</a><small>MiniMax-M3</small></th>
+              <td>MiniMax<small>MiniMax M3</small></td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>Not published</td>
+              <td class="model-price">Not published<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://www.minimax.io/models/text/m3" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="qwen3-coder-next"
+              data-order="64"
+              data-provider="Alibaba Cloud"
+              data-search="qwen3-coder-next qwen3-coder-next alibaba cloud qwen3 coder qwen code-generation model optimized for repository-level understanding, multi-turn tool interactions and agentic coding compatibility. text coding agents official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
+              data-context="262144">
+              <th scope="row"><a href="/models/qwen3-coder-next/">Qwen3-Coder-Next</a><small>qwen3-coder-next</small></th>
+              <td>Alibaba Cloud<small>Qwen3 Coder</small></td>
+              <td>262,144<small>tokens</small></td>
+              <td>65,536<small>tokens</small></td>
+              <td class="model-price">Not published<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="gemini-3.8-flash-cyber"
+              data-order="65"
+              data-provider="Google"
+              data-search="gemini 3.8 flash cyber gemini-3.8-flash-cyber google gemini 3.8 gemini 3.8 flash post-training variant for approved cybersecurity use cases with multimodal input and long context. text image audio video general reasoning vision video audio long-context official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="1.5"
+              data-output="7.5"
+              data-context="1048576">
+              <th scope="row"><a href="/models/gemini-3-8-flash-cyber/">Gemini 3.8 Flash Cyber</a><small>gemini-3.8-flash-cyber</small></th>
+              <td>Google<small>Gemini 3.8</small></td>
+              <td>1,048,576<small>tokens</small></td>
+              <td>65,536<small>tokens</small></td>
+              <td class="model-price">$1.50 per 1 million tokens<small>official-paid</small></td>
+              <td class="model-price">$0.15 per 1 million tokens</td>
+              <td class="model-price">$7.50 per 1 million tokens</td>
+              <td><a class="model-verified" href="https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="gpt-rosalind-research"
+              data-order="66"
+              data-provider="OpenAI"
+              data-search="gpt-rosalind research gpt-rosalind-research openai gpt-rosalind openai specialized reasoning model for approved life-sciences research workflows and scientific tool use. text reasoning tool-use official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="5"
+              data-output="25"
+              data-context="">
+              <th scope="row"><a href="/models/gpt-rosalind-research/">GPT-Rosalind Research</a><small>gpt-rosalind-research</small></th>
+              <td>OpenAI<small>GPT-Rosalind</small></td>
+              <td>Not published</td>
+              <td>Not published</td>
+              <td class="model-price">$5.00 per 1 million tokens<small>official-paid</small></td>
+              <td class="model-price">$0.50 per 1 million tokens</td>
+              <td class="model-price">$25.00 per 1 million tokens</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="grok-voice-think-fast-2.0"
+              data-order="67"
+              data-provider="xAI"
+              data-search="grok voice think fast 2.0 grok-voice-think-fast-2.0 xai grok voice xai speech-to-speech voice model with integrated reasoning and tool-use support for realtime conversational agents. audio reasoning audio speech-to-speech tool-use official-paid minutes"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
+              data-context="">
+              <th scope="row"><a href="/models/grok-voice-think-fast-2-0/">Grok Voice Think Fast 2.0</a><small>grok-voice-think-fast-2.0</small></th>
+              <td>xAI<small>Grok Voice</small></td>
+              <td>Not published</td>
+              <td>Not published</td>
+              <td class="model-price">$0.08 per minute<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://docs.x.ai/developers/rest-api-reference/inference/voice" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="gpt-oss-120b"
+              data-order="68"
+              data-provider="OpenAI"
+              data-search="gpt-oss-120b gpt-oss-120b openai gpt-oss openai open-weight reasoning model for self-hosted deployment with function calling and agentic capabilities. text general reasoning agents tool-use self-hosted tokens"
+              data-pricing-status="self-hosted"
+              data-input="inf"
+              data-output="inf"
+              data-context="131072">
+              <th scope="row"><a href="/models/gpt-oss-120b/">gpt-oss-120b</a><small>gpt-oss-120b</small></th>
+              <td>OpenAI<small>gpt-oss</small></td>
+              <td>131,072<small>tokens</small></td>
+              <td>131,072<small>tokens</small></td>
+              <td class="model-price">Not published<small>self-hosted</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://developers.openai.com/api/docs/models/gpt-oss-120b" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
+            </tr><tr data-model-row
+              data-model-id="qwen3.5-397b-a17b"
+              data-order="69"
+              data-provider="Alibaba Cloud"
+              data-search="qwen3.5-397b-a17b qwen3.5-397b-a17b alibaba cloud qwen3.5 alibaba cloud qwen3.5 native vision-language model for reasoning, coding, agentic tasks and image/video understanding. text image video general reasoning coding agents tool-use vision video official-paid tokens"
+              data-pricing-status="official-paid"
+              data-input="inf"
+              data-output="inf"
+              data-context="262144">
+              <th scope="row"><a href="/models/qwen3-5-397b-a17b/">Qwen3.5-397B-A17B</a><small>qwen3.5-397b-a17b</small></th>
+              <td>Alibaba Cloud<small>Qwen3.5</small></td>
+              <td>262,144<small>tokens</small></td>
+              <td>65,536<small>tokens</small></td>
+              <td class="model-price">Not published<small>official-paid</small></td>
+              <td class="model-price">—</td>
+              <td class="model-price">—</td>
+              <td><a class="model-verified" href="https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer"><span>Verified</span><small>2026-10-07</small></a></td>
             </tr></tbody>
         </table>
       </div>
       <div class="model-explorer-foot">
-        <span id="modelExplorerCount">60 models shown</span>
+        <span id="modelExplorerCount">70 models shown</span>
         <a href="/models/pricing/">Open calculator & pricing methodology ↗</a>
       </div>
       <div id="modelExplorerEmpty" class="model-explorer-empty" hidden>No models match this filter.</div>
