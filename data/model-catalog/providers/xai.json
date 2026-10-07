@@ -316,6 +316,93 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Grok Voice",
+      "model": "Grok Voice Think Fast 2.0",
+      "model_id": "grok-voice-think-fast-2.0",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "none",
+          "high"
+        ],
+        "default": "high"
+      },
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "xAI speech-to-speech voice model with integrated reasoning and tool-use support for realtime conversational agents.",
+      "sxf_url": "/models/grok-voice-think-fast-2-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://x.ai/news/grok-voice-think-fast-2",
+        "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech"
+      ],
+      "notes": [
+        "The versioned model is billed at $0.08 per minute of audio and is excluded from the token calculator.",
+        "grok-voice-latest currently points to this version, while the pinned ID is used canonically for stability."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-07-29",
+            "end": null,
+            "rates": {
+              "minute": 0.08
+            }
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "context_window": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "max_output": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "knowledge_cutoff": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "reasoning": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "modalities": "https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech",
+          "pricing": "https://x.ai/news/grok-voice-think-fast-2",
+          "access": "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+          "lifecycle": "https://x.ai/news/grok-voice-think-fast-2",
+          "capabilities": "https://x.ai/news/grok-voice-think-fast-2"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "reasoning",
+        "audio",
+        "speech-to-speech",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per minute"
+      }
     }
   ]
 }
