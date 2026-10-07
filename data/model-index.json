@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-07",
-  "model_count": 60,
-  "provider_count": 10,
+  "model_count": 70,
+  "provider_count": 13,
   "models": [
     {
       "model_id": "gpt-6-astra",
@@ -2008,6 +2008,337 @@
       "pricing_basis": {
         "meter": "search_units",
         "display_unit": "per search unit"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "kimi-k3",
+      "model": "Kimi K3",
+      "provider": "Moonshot AI",
+      "family": "Kimi K3",
+      "sxf_url": "/models/kimi-k3/",
+      "context_window": 1048576,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "gemma-4-31b-it",
+      "model": "Gemma 4 31B IT",
+      "provider": "Google",
+      "family": "Gemma 4",
+      "sxf_url": "/models/gemma-4-31b-it/",
+      "context_window": 262144,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "free-preview",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "glm-5.3",
+      "model": "GLM-5.3",
+      "provider": "Z.ai",
+      "family": "GLM-5",
+      "sxf_url": "/models/glm-5-3/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "MiniMax-M3",
+      "model": "MiniMax M3",
+      "provider": "MiniMax",
+      "family": "MiniMax M3",
+      "sxf_url": "/models/minimax-m3/",
+      "context_window": 1000000,
+      "max_output": null,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "qwen3-coder-next",
+      "model": "Qwen3-Coder-Next",
+      "provider": "Alibaba Cloud",
+      "family": "Qwen3 Coder",
+      "sxf_url": "/models/qwen3-coder-next/",
+      "context_window": 262144,
+      "max_output": 65536,
+      "capabilities": [
+        "coding",
+        "agents"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "gemini-3.8-flash-cyber",
+      "model": "Gemini 3.8 Flash Cyber",
+      "provider": "Google",
+      "family": "Gemini 3.8",
+      "sxf_url": "/models/gemini-3-8-flash-cyber/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "input": 1.5,
+        "cached_input": 0.15,
+        "output": 7.5
+      }
+    },
+    {
+      "model_id": "gpt-rosalind-research",
+      "model": "GPT-Rosalind Research",
+      "provider": "OpenAI",
+      "family": "GPT-Rosalind",
+      "sxf_url": "/models/gpt-rosalind-research/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "reasoning",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "input": 5,
+        "cached_input": 0.5,
+        "output": 25
+      }
+    },
+    {
+      "model_id": "grok-voice-think-fast-2.0",
+      "model": "Grok Voice Think Fast 2.0",
+      "provider": "xAI",
+      "family": "Grok Voice",
+      "sxf_url": "/models/grok-voice-think-fast-2-0/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "reasoning",
+        "audio",
+        "speech-to-speech",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per minute"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": {
+        "minute": 0.08
+      }
+    },
+    {
+      "model_id": "gpt-oss-120b",
+      "model": "gpt-oss-120b",
+      "provider": "OpenAI",
+      "family": "gpt-oss",
+      "sxf_url": "/models/gpt-oss-120b/",
+      "context_window": 131072,
+      "max_output": 131072,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "self-hosted",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
+      },
+      "verified_at": "2026-10-07",
+      "standard_rate": null
+    },
+    {
+      "model_id": "qwen3.5-397b-a17b",
+      "model": "Qwen3.5-397B-A17B",
+      "provider": "Alibaba Cloud",
+      "family": "Qwen3.5",
+      "sxf_url": "/models/qwen3-5-397b-a17b/",
+      "context_window": 262144,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million tokens"
       },
       "verified_at": "2026-10-07",
       "standard_rate": null

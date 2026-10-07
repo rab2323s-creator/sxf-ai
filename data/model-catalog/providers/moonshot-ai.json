@@ -1,0 +1,87 @@
+{
+  "provider": "Moonshot AI",
+  "models": [
+    {
+      "family": "Kimi K3",
+      "model": "Kimi K3",
+      "model_id": "kimi-k3",
+      "context_window": 1048576,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning support",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Open-weight multimodal agentic model for long-horizon coding, knowledge work and reasoning with a 1M-token context window.",
+      "sxf_url": "/models/kimi-k3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://www.kimi.com/en/blog/kimi-k3",
+        "https://github.com/MoonshotAI/Kimi-K3",
+        "https://www.kimi.com/en/help/kimi-api/api-pricing"
+      ],
+      "notes": [
+        "Official API rates are verified but no historical effective-from date is inferred for the canonical schedule.",
+        "Official model weights and local deployment resources are published by Moonshot AI."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://www.kimi.com/en/blog/kimi-k3",
+          "context_window": "https://github.com/MoonshotAI/Kimi-K3",
+          "max_output": "https://github.com/MoonshotAI/Kimi-K3",
+          "knowledge_cutoff": "https://github.com/MoonshotAI/Kimi-K3",
+          "reasoning": "https://www.kimi.com/en/blog/kimi-k3",
+          "modalities": "https://github.com/MoonshotAI/Kimi-K3",
+          "pricing": "https://www.kimi.com/en/help/kimi-api/api-pricing",
+          "access": "https://github.com/MoonshotAI/Kimi-K3",
+          "lifecycle": "https://www.kimi.com/en/blog/kimi-k3",
+          "capabilities": "https://github.com/MoonshotAI/Kimi-K3"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    }
+  ]
+}

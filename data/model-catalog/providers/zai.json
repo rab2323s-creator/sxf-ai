@@ -1,0 +1,86 @@
+{
+  "provider": "Z.ai",
+  "models": [
+    {
+      "family": "GLM-5",
+      "model": "GLM-5.3",
+      "model_id": "glm-5.3",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "always_on": true
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Z.ai open-weight flagship model for complex coding, long-horizon agentic tasks and cybersecurity reasoning.",
+      "sxf_url": "/models/glm-5-3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://z.ai/blog/glm-5.3",
+        "https://huggingface.co/zai-org/GLM-5.3",
+        "https://z.ai/model-api"
+      ],
+      "notes": [
+        "The official release documents low, high and max reasoning effort with thinking always enabled.",
+        "Current publisher weights are available from Z.ai's official Hugging Face organization for local serving."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://z.ai/blog/glm-5.3",
+          "context_window": "https://z.ai/blog/glm-5.3",
+          "max_output": "https://z.ai/blog/glm-5.3",
+          "knowledge_cutoff": "https://z.ai/blog/glm-5.3",
+          "reasoning": "https://z.ai/blog/glm-5.3",
+          "modalities": "https://huggingface.co/zai-org/GLM-5.3",
+          "pricing": "https://z.ai/model-api",
+          "access": "https://huggingface.co/zai-org/GLM-5.3",
+          "lifecycle": "https://z.ai/blog/glm-5.3",
+          "capabilities": "https://z.ai/blog/glm-5.3"
+        }
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    }
+  ]
+}
