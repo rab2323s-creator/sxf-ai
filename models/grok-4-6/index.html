@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="Grok 4.6 — API Specs, Context &amp; Pricing | SXF / AI" />
       <meta name="twitter:description" content="Grok 4.6 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official xAI sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/grok-4-6/#article","headline":"Grok 4.6 — API Specs, Context & Pricing","description":"Grok 4.6 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official xAI sources.","url":"https://sxf.si/models/grok-4-6/","dateModified":"2026-10-03","about":{"@type":"Thing","name":"Grok 4.6"},"citation":["https://docs.x.ai/developers/models/grok-4.6","https://docs.x.ai/developers/pricing","https://docs.x.ai/developers/release-notes"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Grok 4.6","item":"https://sxf.si/models/grok-4-6/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/grok-4-6/#article","headline":"Grok 4.6 — API Specs, Context & Pricing","description":"Grok 4.6 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official xAI sources.","url":"https://sxf.si/models/grok-4-6/","dateModified":"2026-10-07","about":{"@type":"Thing","name":"Grok 4.6"},"citation":["https://docs.x.ai/developers/models/grok-4.6","https://docs.x.ai/developers/pricing","https://docs.x.ai/developers/release-notes","https://x.ai/news/grok-4-6"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Grok 4.6","item":"https://sxf.si/models/grok-4-6/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -42,7 +42,7 @@
         <div class="collection-stats">
           <div><strong>500,000</strong><span>context tokens</span></div>
           <div><strong>No separate limit</strong><span>max output</span></div>
-          <div><strong>2026-10-03</strong><span>last verified</span></div>
+          <div><strong>2026-10-07</strong><span>last verified</span></div>
         </div>
       </section>
 
@@ -80,7 +80,7 @@
           </div>
         </section>
 
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>xAI documents no separate text output limit for Grok 4.6.</p></div><div><span>02</span><p>Higher long-context token rates apply when prompt tokens exceed 200,000.</p></div></div></section>
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>xAI documents no separate text output limit for Grok 4.6.</p></div><div><span>02</span><p>Long-context token rates apply to the entire request once the prompt reaches the 200,000-token threshold.</p></div><div><span>03</span><p>xAI documents function calling and structured outputs, with 150 requests/second and 50,000,000 tokens/minute on the current model page; Batch API is not supported.</p></div></div></section>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
@@ -93,22 +93,34 @@
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
-          <div class="model-sources"><a href="https://docs.x.ai/developers/models/grok-4.6" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/models/grok-4.6</span><b>↗</b></a><a href="https://docs.x.ai/developers/pricing" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/pricing</span><b>↗</b></a><a href="https://docs.x.ai/developers/release-notes" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/release-notes</span><b>↗</b></a></div>
+          <div class="model-sources"><a href="https://docs.x.ai/developers/models/grok-4.6" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/models/grok-4.6</span><b>↗</b></a><a href="https://docs.x.ai/developers/pricing" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/pricing</span><b>↗</b></a><a href="https://docs.x.ai/developers/release-notes" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/release-notes</span><b>↗</b></a><a href="https://x.ai/news/grok-4-6" target="_blank" rel="noopener noreferrer"><span>x.ai/news/grok-4-6</span><b>↗</b></a></div>
         </section>
       </section>
 
-      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="grok-4.6">
-          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Grok 4.6: what changed.</h2><p>No post-baseline factual changes recorded for Grok 4.6 since 2026-10-03.</p></div>
-          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-10-03</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
-        </section>
+      <section class="model-change-watch shell" data-what-changed data-change-count="1" data-change-models="grok-4.6">
+      <div class="intel-section-head"><div><p class="eyebrow">WHAT CHANGED</p><h2>Grok 4.6: what changed.</h2></div><span>1 verified change since 2026-10-03</span></div>
+      <div class="change-watch-grid"><article class="change-watch-card" data-change-event="evt_bcf9497a12948460c474" data-model-id="grok-4.6">
+              <div class="change-watch-meta"><span>Grok 4.6</span><time datetime="2026-10-07">2026-10-07</time></div>
+              <div class="change-deltas"><div class="change-delta" data-change-type="pricing_change">
+              <span>Pricing schedule</span>
+              <div><del>2026-08-12</del><b>→</b><ins>2026-08-12</ins></div>
+            </div></div>
+              <a href="https://docs.x.ai/developers/pricing" target="_blank" rel="noopener noreferrer">Verify at official source ↗</a>
+            </article></div>
+      <div class="compare-live-foot"><span>Only source-backed factual changes enter this view.</span><a href="/data/model-history.json">Open full ledger ↗</a></div>
+    </section>
       <section class="model-history shell" data-model-history data-history-models="grok-4.6">
       <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>Grok 4.6 verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
-      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_e2893d47637a48f21c3d" data-model-id="grok-4.6">
+      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_bcf9497a12948460c474" data-model-id="grok-4.6">
+              <div class="model-history-meta"><span>CHANGE</span><time datetime="2026-10-07">2026-10-07</time></div>
+              <h3>Grok 4.6</h3><p>Pricing schedule: 2026-08-12 → 2026-08-12</p>
+              <a href="https://docs.x.ai/developers/pricing" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article><article class="model-history-event" data-history-event="evt_e2893d47637a48f21c3d" data-model-id="grok-4.6">
               <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-10-03">2026-10-03</time></div>
               <h3>Grok 4.6</h3><p>Baseline verified: 500,000 context · No separate limit max output · $2.00 input / $0.50 cached / $6.00 output per 1 million tokens</p>
               <a href="https://docs.x.ai/developers/models/grok-4.6" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
             </article></div>
-      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 8e73a9cb15ea…</p>
+      <p class="reference-note">Append-only SXF ledger · 2 verified events · chain head bcf9497a1294…</p>
     </section>
       
     <section class="model-compare-bridge shell" data-model-comparisons="grok-4.6">
