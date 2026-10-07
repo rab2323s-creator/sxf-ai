@@ -100,6 +100,155 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Qwen3 Coder",
+      "model": "Qwen3-Coder-Next",
+      "model_id": "qwen3-coder-next",
+      "context_window": 262144,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Qwen code-generation model optimized for repository-level understanding, multi-turn tool interactions and agentic coding compatibility.",
+      "sxf_url": "/models/qwen3-coder-next/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+      ],
+      "notes": [
+        "Alibaba Cloud publishes three input-length pricing bands for EU and international endpoints.",
+        "Schema 1.6 cannot losslessly encode all three bands with the current long-context contract."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "pricing": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "access": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "lifecycle": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next",
+          "capabilities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "coding",
+        "agents"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "Qwen3.5",
+      "model": "Qwen3.5-397B-A17B",
+      "model_id": "qwen3.5-397b-a17b",
+      "context_window": 262144,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Alibaba Cloud Qwen3.5 native vision-language model for reasoning, coding, agentic tasks and image/video understanding.",
+      "sxf_url": "/models/qwen3-5-397b-a17b/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+        "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      ],
+      "notes": [
+        "Alibaba Cloud publishes distinct rates for prompts up to 128K and above 128K through 256K.",
+        "Numeric rates are source-verified but no historical effective-from date is inferred for the canonical schedule."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "context_window": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "max_output": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "pricing": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "access": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "lifecycle": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+          "capabilities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
