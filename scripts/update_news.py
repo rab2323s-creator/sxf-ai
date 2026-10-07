@@ -14938,34 +14938,81 @@ def grok_47_reference_html():
     model = model_catalog_entry("grok-4.7")
     price = active_standard_price("grok-4.7")
     verified = model["provenance"]["verified_at"]
+    long_context = model.get("pricing", {}).get("long_context", {})
+    threshold = int(long_context.get("threshold_input_tokens", 200000))
+    multipliers = long_context.get("multipliers", {})
+    long_input = float(price["input"]) * float(multipliers.get("input", 2))
+    long_cached = float(price["cached_input"]) * float(multipliers.get("cached_input", 2))
+    long_output = float(price["output"]) * float(multipliers.get("output", 2))
     sources = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
         for url in model["official_sources"]
     )
+    faq = [
+        ("What is Grok 4.7?", "Grok 4.7 is xAI's September 2026 frontier model for coding, agentic tasks and knowledge work. xAI says it uses a larger base model than Grok 4.6 and was trained with a longer reinforcement-learning run on harder, multi-hour tasks."),
+        ("What is the Grok 4.7 context window?", "xAI documents a 500,000-token context window for Grok 4.7. The model accepts text and image input and returns text output."),
+        ("How much does Grok 4.7 cost?", "Below 200,000 prompt tokens, the published xAI API rates are $2 per million input tokens, $0.50 per million cached input tokens and $6 per million output tokens. At 200,000 prompt tokens and above, the published rates are $4, $1 and $12 respectively, and the higher rates apply to the entire request."),
+        ("Does Grok 4.7 have an output token limit?", "xAI documents no separate text output limit for Grok 4.7. That does not mean generation is infinite: the model still operates inside its finite 500,000-token context budget and normal API constraints."),
+        ("What reasoning levels does Grok 4.7 support?", "Grok 4.7 supports low, medium, high and xhigh reasoning effort. xAI documents high as the default."),
+        ("Does Grok 4.7 support function calling and structured outputs?", "Yes. xAI lists function calling and structured outputs as supported capabilities, alongside reasoning. Its Grok 4.7 guide also documents web search, X search and code execution for tool-using workflows."),
+        ("What are the Grok 4.7 API rate limits?", "The xAI model page currently lists 150 requests per second and 50,000,000 tokens per minute for Grok 4.7. Actual limits available to a team can depend on its API tier."),
+        ("Does Grok 4.7 support the Batch API?", "No. xAI currently lists Batch API support as unavailable for Grok 4.7."),
+        ("What is Grok 4.7 Fast?", "Grok 4.7 Fast is the same model served on faster infrastructure. xAI says it costs 2x standard token rates for short-context requests and 1.5x the normal long-context rates. It is available in Cursor and Grok Build, not through the public xAI API."),
+        ("Is Grok 4.7 better than Grok 4.6?", "xAI reports higher Grok 4.7 results than Grok 4.6 across its launch benchmark table, including CursorBench 4.0, DeepSWE v1.1, EEBench, AA Briefcase, Terminal-Bench 4.0, Harvey Legal Agent Benchmark and HealthBench Professional. Your own production evaluation should still decide whether the upgrade is worthwhile."),
+        ("Does Grok 4.7 support prompt caching?", "Yes. xAI recommends using prompt_cache_key on the Responses API or x-grok-conv-id with Chat Completions so related turns are routed consistently and are more likely to hit prompt cache."),
+        ("What happens to reasoning in multi-turn Responses API calls?", "For Grok 4.7, xAI says Responses API outputs include reasoning.encrypted_content even when it is not explicitly requested. Pass those reasoning items back unchanged on later turns to preserve compatible reasoning context."),
+    ]
     schema = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "TechArticle",
-                "headline": "Grok 4.7 — Pricing, Context Window, API & Specs",
-                "description": "Primary-source verified reference for xAI Grok 4.7, including pricing, context window, modalities, reasoning controls and knowledge cutoff.",
+                "@id": BASE_URL + "/models/grok-4-7/#article",
+                "headline": "Grok 4.7 — Pricing, 500K Context, Benchmarks & API",
+                "description": "Grok 4.7 reference with xAI API pricing, 500K context, long-context rates, benchmarks, reasoning, tools, rate limits, Fast variant and Grok 4.6 comparison.",
                 "url": BASE_URL + "/models/grok-4-7/",
+                "mainEntityOfPage": BASE_URL + "/models/grok-4-7/",
+                "datePublished": "2026-09-21",
                 "dateModified": verified,
+                "about": {
+                    "@type": "Thing",
+                    "name": "Grok 4.7",
+                    "sameAs": "https://docs.x.ai/developers/grok-4-7",
+                },
+                "citation": model["official_sources"],
+                "isPartOf": {"@id": BASE_URL + "/#website"},
                 "inLanguage": "en",
             },
             {
                 "@type": "BreadcrumbList",
+                "@id": BASE_URL + "/models/grok-4-7/#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
                     {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
                     {"@type": "ListItem", "position": 3, "name": "Grok 4.7", "item": BASE_URL + "/models/grok-4-7/"},
                 ],
             },
+            {
+                "@type": "FAQPage",
+                "@id": BASE_URL + "/models/grok-4-7/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": question,
+                        "acceptedAnswer": {"@type": "Answer", "text": answer},
+                    }
+                    for question, answer in faq
+                ],
+            },
         ],
     }
+    faq_html = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in faq
+    )
     return f'''<!doctype html><html lang="en">{page_head(
-        "Grok 4.7 — Pricing, Context Window, API & Specs | SXF / AI",
-        "Grok 4.7 reference with xAI pricing, 500K context window, reasoning controls, modalities, knowledge cutoff and official-source verification.",
+        "Grok 4.7: Pricing, 500K Context, Benchmarks & API | SXF / AI",
+        "Grok 4.7 API pricing, 500K context, long-context rates, benchmarks, reasoning, tools, rate limits, Fast variant and Grok 4.6 comparison.",
         BASE_URL + "/models/grok-4-7/",
         schema,
     )}
@@ -14973,11 +15020,11 @@ def grok_47_reference_html():
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Grok 4.7</span></nav>
         <p class="eyebrow">MODEL REFERENCE / XAI</p>
-        <h1>Grok 4.7<br><span>verified model reference.</span></h1>
-        <p>{escape(model["positioning"])}</p>
+        <h1>Grok 4.7<br><span>pricing, benchmarks & API reference.</span></h1>
+        <p>xAI's frontier model for coding, agentic tasks and knowledge work — with verified pricing, long-context economics, API behavior and launch benchmarks separated from interpretation.</p>
         <div class="collection-stats">
-          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
-          <div><strong>{escape(model_output_label(model))}</strong><span>text output cap</span></div>
+          <div><strong>500,000</strong><span>context tokens</span></div>
+          <div><strong>$2 / $6</strong><span>input / output per 1M</span></div>
           <div><strong>{escape(verified)}</strong><span>last verified</span></div>
         </div>
       </section>
@@ -14985,38 +15032,232 @@ def grok_47_reference_html():
       <section class="model-reference model-reference-deep shell">
         <div class="model-reference-intro">
           <div class="model-reference-copy">
-            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <p class="eyebrow">QUICK ANSWER</p>
             <h2>Grok 4.7 at a glance.</h2>
-            <p>xAI documents a 500,000-token context window, text and image input, text output, reasoning effort controls, and no separate text output limit. The stored Standard API rate is {escape(catalog_price_label(price["input"]))} input, {escape(catalog_price_label(price["cached_input"]))} cached input and {escape(catalog_price_label(price["output"]))} output per million tokens.</p>
+            <p><strong>Grok 4.7</strong> is xAI's September 2026 frontier model for coding, long-running agents and professional knowledge work. It accepts text and images, has a 500K-token context window, supports low through xhigh reasoning, function calling and structured outputs, and has no separately documented text-output cap.</p>
+            <p>For prompts below 200K input tokens, the xAI API lists {escape(catalog_price_label(price["input"]))} input, {escape(catalog_price_label(price["cached_input"]))} cached input and {escape(catalog_price_label(price["output"]))} output per million tokens. Once a prompt reaches the long-context threshold, the request moves to the higher price band.</p>
+            <p class="reference-note">Released September 21, 2026 · Model ID <code>grok-4.7</code> · Knowledge cutoff May 2026 · Last SXF verification {escape(verified)}</p>
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>grok-4.7</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>{escape(model_output_label(model))}</strong><small>xAI documentation</small></div>
-            <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(model["knowledge_cutoff"]))}</strong></div>
-            <div><span>STANDARD INPUT</span><strong>{escape(catalog_price_label(price["input"]))}</strong><small>/ 1M tokens</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>{escape(catalog_price_label(price["output"]))}</strong><small>/ 1M tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>500,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>No separate limit</strong><small>xAI documentation</small></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>May 2026</strong></div>
+            <div><span>REASONING</span><strong>low · medium · high · xhigh</strong><small>default: high</small></div>
+            <div><span>MODALITIES</span><strong>Text + image → text</strong></div>
           </div>
         </div>
 
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">REASONING & MODALITIES</p><h2>How Grok 4.7 is configured.</h2></div>
-          <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>low · medium · high · xhigh</h3><p>xAI exposes reasoning effort controls and documents high as the default level.</p></article>
-            <article><span>INPUT</span><h3>Text + image</h3><p>The model accepts text and image input and produces text output.</p></article>
-            <article><span>LONG CONTEXT</span><h3>500K tokens</h3><p>The context window is 500,000 tokens. Requests at or above the documented long-context threshold use higher token rates for the full request.</p></article>
+        <section class="model-deep-section" aria-labelledby="grok47-navigation">
+          <div class="model-section-head"><p class="eyebrow">ON THIS PAGE</p><h2 id="grok47-navigation">Grok 4.7 reference map.</h2><p>Jump directly to the part of the model decision you need.</p></div>
+          <div class="model-related-links">
+            <a href="#pricing"><span>ECONOMICS</span><strong>API pricing & long context</strong><b>↓</b></a>
+            <a href="#api"><span>DEVELOPERS</span><strong>API, tools & reasoning</strong><b>↓</b></a>
+            <a href="#benchmarks"><span>EVALUATION</span><strong>Official benchmark table</strong><b>↓</b></a>
+            <a href="#grok-4-7-vs-4-6"><span>UPGRADE</span><strong>Grok 4.7 vs 4.6</strong><b>↓</b></a>
+            <a href="#fast"><span>LATENCY</span><strong>Grok 4.7 Fast</strong><b>↓</b></a>
+            <a href="#faq"><span>ANSWERS</span><strong>Grok 4.7 FAQ</strong><b>↓</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">WHAT CHANGED</p>
+            <h2>A larger base model trained for harder, longer work.</h2>
+            <p>xAI says Grok 4.7 uses a new, larger base model than Grok 4.6 and received a longer reinforcement-learning run over a harder mix of tasks weighted toward work that can take hours to complete. The release emphasizes better self-verification, longer-context management and stronger performance in coding and knowledge work.</p>
+            <p>xAI also says the model was trained to understand the Grok Bot harness natively. That matters for conversational and agentic workflows where the model needs to plan, use tools, preserve state and keep working through multi-step tasks rather than stop after one answer.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>POSITIONING</span>
+            <strong>xAI's current flagship for code and agentic work.</strong>
+            <p>For new xAI deployments, Grok 4.7 is the generation to evaluate first. Grok 4.6 remains useful as a regression and migration baseline.</p>
+            <a href="/compare/grok-4-7-vs-grok-4-6/">Full Grok 4.7 vs 4.6 comparison ↗</a>
+          </aside>
+        </section>
+
+        <section class="model-deep-section" id="pricing">
+          <div class="model-section-head"><p class="eyebrow">API PRICING</p><h2>Grok 4.7 pricing, including the 200K long-context threshold.</h2><p>The price cliff is important: when prompt input reaches the documented threshold, xAI applies the higher rates to the entire request rather than only the tokens beyond 200K.</p></div>
+          <div class="model-table-wrap"><table>
+            <thead><tr><th>Prompt size</th><th>Input / 1M</th><th>Cached input / 1M</th><th>Output / 1M</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Below {threshold:,} prompt tokens</th><td>{escape(catalog_price_label(price["input"]))}</td><td>{escape(catalog_price_label(price["cached_input"]))}</td><td>{escape(catalog_price_label(price["output"]))}</td></tr>
+              <tr><th scope="row">At / above {threshold:,} prompt tokens</th><td>{escape(catalog_price_label(long_input))}</td><td>{escape(catalog_price_label(long_cached))}</td><td>{escape(catalog_price_label(long_output))}</td></tr>
+            </tbody>
+          </table></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>Long-context billing:</strong> crossing 200K prompt tokens reprices all applicable tokens in that request at the long-context rates.</p></div>
+            <div><span>02</span><p><strong>Priority processing:</strong> xAI documents a 2× premium over standard token rates when a request is actually served at the priority tier.</p></div>
+            <div><span>03</span><p><strong>Regional processing:</strong> xAI's Grok 4.7 guide documents a US regional endpoint with a 10% token-price premium; availability can depend on account and model support.</p></div>
+            <div><span>04</span><p><strong>Tool costs:</strong> server-side tools can add separate usage charges, so token prices alone are not always the full cost of an agentic request.</p></div>
           </div>
         </section>
 
         <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-section-head"><p class="eyebrow">COST EXAMPLES</p><h2>What Grok 4.7 requests cost at list rates.</h2><p>Examples use the published global Standard token rates and exclude optional tool charges, regional premiums and priority processing.</p></div>
+          <div class="model-decision-grid">
+            <article><span>10K IN + 1K OUT</span><h3>$0.026</h3><p>10,000 input tokens cost $0.020 and 1,000 output tokens cost $0.006.</p></article>
+            <article><span>100K IN + 10K OUT</span><h3>$0.26</h3><p>100,000 input tokens cost $0.20 and 10,000 output tokens cost $0.06.</p></article>
+            <article><span>80K CACHED OF 100K + 10K OUT</span><h3>$0.14</h3><p>20K uncached input is $0.04, 80K cached input is $0.04, and 10K output is $0.06.</p></article>
+            <article><span>250K IN + 10K OUT</span><h3>$1.12</h3><p>The request is in the long-context tier: 250K input costs $1.00 and 10K output costs $0.12.</p></article>
+          </div>
+          <div class="model-caveat"><strong>Exact cost tracking</strong><p>xAI API responses expose per-request billed cost through <code>usage.cost_in_usd_ticks</code>. One US dollar equals 10 billion ticks, so production systems can log actual billed request cost instead of relying only on estimates.</p></div>
+        </section>
+
+        <section class="model-deep-section" id="api">
+          <div class="model-section-head"><p class="eyebrow">API & CAPABILITIES</p><h2>What Grok 4.7 supports for production systems.</h2><p>The model is designed for more than plain text completion: xAI documents structured outputs, external tools, configurable reasoning and long-running agent workflows.</p></div>
+          <div class="model-api-grid">
+            <div><span>RESPONSES API</span><strong>Supported</strong><p>xAI documents Grok 4.7 on the Responses API, including multi-turn reasoning behavior.</p></div>
+            <div><span>FUNCTION CALLING</span><strong>Supported</strong><p>Connect the model to application functions, external systems and custom actions.</p></div>
+            <div><span>STRUCTURED OUTPUTS</span><strong>Supported</strong><p>Constrain responses into predictable machine-readable structures for production workflows.</p></div>
+            <div><span>WEB & X SEARCH</span><strong>Documented tools</strong><p>xAI's Grok 4.7 guide lists web search and X search for information-retrieval workflows.</p></div>
+            <div><span>CODE EXECUTION</span><strong>Documented tool</strong><p>Use code execution when a workflow benefits from computation, transformation or verification.</p></div>
+            <div><span>REASONING</span><strong>low · medium · high · xhigh</strong><p>High is the documented default. Reasoning cannot be treated as a free extra because reasoning tokens contribute to usage.</p></div>
+            <div><span>RATE LIMIT</span><strong>150 requests / second</strong><p>The current model page lists 150 RPS; team-level limits can vary with API tier.</p></div>
+            <div><span>THROUGHPUT LIMIT</span><strong>50M tokens / minute</strong><p>The current model page lists 50,000,000 TPM.</p></div>
+            <div><span>BATCH API</span><strong>Not supported</strong><p>xAI currently marks Grok 4.7 as unsupported by Batch API.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">MULTI-TURN REASONING</p>
+            <h2>Responses API returns encrypted reasoning automatically.</h2>
+            <p>xAI documents a Grok 4.7-specific behavior on the Responses API: responses include <code>reasoning.encrypted_content</code> even when the request does not explicitly ask to include it. For compatible multi-turn reasoning, xAI instructs developers to pass those reasoning items back unchanged in the next request's input.</p>
+            <p>Chat Completions does not adopt that automatic encrypted-reasoning behavior. This distinction matters when migrating an agent loop between API surfaces: preserve the response items the Responses API returns rather than flattening every turn into plain visible text.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>IMPLEMENTATION RULE</span>
+            <strong>Preserve returned reasoning items unchanged.</strong>
+            <p>Do not parse, rewrite or synthesize encrypted reasoning content. Treat it as opaque state passed back to the model when continuing the conversation.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PROMPT CACHING</p><h2>Stable routing can materially change Grok 4.7 economics.</h2></div>
+          <div class="model-split">
+            <div>
+              <p>xAI recommends a stable conversation-routing key so repeat turns are more likely to reach the same server and reuse cached prompt prefixes. On the Responses API that means <code>prompt_cache_key</code>; with Chat Completions, xAI documents the <code>x-grok-conv-id</code> header.</p>
+              <p>For long-running coding or agent workflows, large repeated prefixes can include system instructions, repository context and tool definitions. If those prefixes repeatedly miss cache, the application can pay the full input rate even though the visible workload has barely changed.</p>
+            </div>
+            <aside class="model-side-note">
+              <span>CACHE RATE</span>
+              <strong>$0.50 / 1M cached tokens below 200K.</strong>
+              <p>At the standard tier, cached input is 75% cheaper than uncached input. At the long-context tier, the stored rate is $1 per 1M cached tokens.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="fast">
+          <div class="model-section-head"><p class="eyebrow">GROK 4.7 FAST</p><h2>Same model, faster serving, different economics.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>MODEL</span><h3>Same Grok 4.7</h3><p>xAI describes Fast as the same model served on faster infrastructure rather than a separately trained capability tier.</p></article>
+            <article><span>SHORT CONTEXT</span><h3>2× token rates</h3><p>xAI says Fast costs twice the normal token rates for standard short-context requests.</p></article>
+            <article><span>LONG CONTEXT</span><h3>1.5× normal long-context rates</h3><p>The Fast multiplier is lower for long-context requests than for the standard short-context price band.</p></article>
+            <article><span>AVAILABILITY</span><h3>Cursor + Grok Build</h3><p>Fast is not available through the public xAI API. xAI documents it for Cursor and Grok Build, billed through those product plans.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="benchmarks">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL BENCHMARKS</p><h2>Grok 4.7 benchmark results reported by xAI.</h2><p>These are xAI's launch-time figures, not SXF-run tests. Competitor values shown here reproduce the comparison table published by xAI; treat vendor benchmarks as one signal, then validate against your own workload.</p></div>
+          <div class="model-table-wrap"><table>
+            <thead><tr><th>Evaluation</th><th>Grok 4.7 xHigh</th><th>Grok 4.6 High</th><th>GPT-5.6 Sol Max</th><th>Fable 5.1 Max</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">CursorBench 4.0</th><td><strong>46.3%</strong></td><td>40.4%</td><td>41.7%</td><td>51.8%</td></tr>
+              <tr><th scope="row">DeepSWE v1.1</th><td><strong>71.0%*</strong></td><td>65.2%</td><td>72.7%</td><td>70.0%</td></tr>
+              <tr><th scope="row">EEBench</th><td><strong>64.0%</strong></td><td>53.0%</td><td>39.4%</td><td>56.4%</td></tr>
+              <tr><th scope="row">AA Briefcase v1.1</th><td><strong>1,657</strong></td><td>1,546</td><td>1,487</td><td>1,678</td></tr>
+              <tr><th scope="row">Terminal-Bench 4.0</th><td><strong>37.6%</strong></td><td>20.3%</td><td>37.3%</td><td>57.9%</td></tr>
+              <tr><th scope="row">Harvey Legal Agent Benchmark</th><td><strong>19.6%</strong></td><td>15.8%</td><td>2.5%</td><td>6.7%</td></tr>
+              <tr><th scope="row">HealthBench Professional</th><td><strong>56.7%</strong></td><td>48.5%</td><td>60.5%</td><td>62.1%</td></tr>
+            </tbody>
+          </table></div>
+          <p class="reference-note">* xAI marks the Grok 4.7 DeepSWE score as high-effort rather than xhigh in the launch table.</p>
+        </section>
+
+        <section class="model-deep-section" id="grok-4-7-vs-4-6">
+          <div class="model-section-head"><p class="eyebrow">GROK 4.7 VS GROK 4.6</p><h2>Same headline price and context, different capability target.</h2><p>The upgrade decision is not driven by context size or Standard token list price: both models are documented at 500K context with the same $2 input / $0.50 cached / $6 output short-context rates.</p></div>
+          <div class="model-table-wrap"><table>
+            <thead><tr><th>Attribute</th><th>Grok 4.7</th><th>Grok 4.6</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Release</th><td>Sep 21, 2026</td><td>Aug 12, 2026</td></tr>
+              <tr><th scope="row">Context</th><td>500K</td><td>500K</td></tr>
+              <tr><th scope="row">Short input / output</th><td>$2 / $6</td><td>$2 / $6</td></tr>
+              <tr><th scope="row">Reasoning</th><td>low → xhigh</td><td>low → xhigh</td></tr>
+              <tr><th scope="row">Base model</th><td>New, larger base model</td><td>Previous generation</td></tr>
+              <tr><th scope="row">Training emphasis</th><td>Harder multi-hour tasks, self-verification, long-context management</td><td>Long-running agents, interactive and visual work</td></tr>
+              <tr><th scope="row">CursorBench 4.0</th><td>46.3%</td><td>40.4%</td></tr>
+              <tr><th scope="row">Terminal-Bench 4.0</th><td>37.6%</td><td>20.3%</td></tr>
+            </tbody>
+          </table></div>
+          <div class="model-related-links">
+            <a href="/models/grok-4-6/"><span>MODEL REFERENCE</span><strong>Open Grok 4.6</strong><b>↗</b></a>
+            <a href="/compare/grok-4-7-vs-grok-4-6/"><span>FULL COMPARISON</span><strong>Grok 4.7 vs Grok 4.6</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">BEST-FIT WORKLOADS</p><h2>Where Grok 4.7 is designed to be evaluated.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>CODING AGENTS</span><h3>Longer software-engineering trajectories</h3><p>xAI's release emphasizes difficult coding tasks that require sustained progress, verification and multiple steps rather than single-turn code generation.</p></article>
+            <article><span>KNOWLEDGE WORK</span><h3>Research, documents and professional workflows</h3><p>xAI highlights stronger document and presentation work and evaluates the model on multi-hour professional tasks.</p></article>
+            <article><span>TOOL-USING AGENTS</span><h3>Search, code and application actions</h3><p>Function calling plus xAI-hosted search and code tools make Grok 4.7 relevant when the workflow must gather evidence or act through external systems.</p></article>
+            <article><span>LONG CONTEXT</span><h3>Large repositories and document sets</h3><p>500K context supports large working sets, but long-context billing and cache behavior make prompt architecture economically important.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">SAFETY & CYBERSECURITY</p><h2>xAI also changed the safeguard stack in Grok 4.7.</h2><p>The following numbers are vendor-reported launch metrics and should be read as xAI's evaluation claims rather than independent SXF measurements.</p></div>
+          <div class="model-decision-grid">
+            <article><span>BIOSAFETY</span><h3>62.4%</h3><p>xAI reports a 62.4% result on LatchBio's biosafety benchmark and describes Grok 4.7 as stronger at balancing benign utility with refusal of dangerous biological requests.</p></article>
+            <article><span>HACKERBENCH v0.3</span><h3>3.3% risky prompts allowed</h3><p>xAI reports that 3.3% of risky dual-use prompts were allowed on its HackerBench v0.3 evaluation while aiming to keep false refusals on legitimate security work low.</p></article>
+            <article><span>SAFEGUARDS</span><h3>New stack</h3><p>xAI describes Grok 4.7 as using a new safeguard stack and reports stronger refusal and jailbreak-resistance behavior than its earlier models.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">AVAILABILITY</p><h2>Where Grok 4.7 runs.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>XAI API</span><h3>Public API model</h3><p>Use model ID <code>grok-4.7</code> through xAI's API for metered production inference.</p></article>
+            <article><span>GROK BUILD</span><h3>Default coding-agent model</h3><p>xAI documents Grok 4.7 as the default model in Grok Build.</p></article>
+            <article><span>CURSOR</span><h3>Available across plans</h3><p>xAI's model guide documents Grok 4.7 in Cursor, with the Fast serving variant also available there.</p></article>
+            <article><span>MODEL GATEWAYS</span><h3>OpenRouter · Vercel · Cloudflare</h3><p>xAI lists these gateways as places where Grok 4.7 can be accessed through third-party routing layers.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">DECISION GUIDE</p><h2>When to choose Grok 4.7.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>CHOOSE 4.7</span><h3>New xAI coding or agent systems</h3><p>Start with 4.7 when you want xAI's current frontier generation and your workload benefits from multi-step coding, tools or professional knowledge work.</p></article>
+            <article><span>CHOOSE 4.7</span><h3>Self-verification matters</h3><p>The release specifically targets longer tasks where checking intermediate work can improve final quality.</p></article>
+            <article><span>TEST FAST</span><h3>Latency is worth a premium</h3><p>Where Fast is available, evaluate it for user-facing coding or agent interactions where output speed matters more than minimum token cost.</p></article>
+            <article><span>KEEP 4.6</span><h3>Regression stability beats novelty</h3><p>Existing systems should migrate only after representative evaluation of quality, latency, tools and total token usage.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What a model spec sheet can hide.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>No separate output limit is not infinite output.</strong> Generation still shares a finite context budget and remains subject to runtime, account and API constraints.</p></div>
+            <div><span>02</span><p><strong>500K context can become expensive.</strong> Reaching the long-context threshold changes the rate applied across the whole request.</p></div>
+            <div><span>03</span><p><strong>Reasoning tokens affect real cost.</strong> Higher effort can improve difficult tasks but can also increase usage and latency. Benchmark at the effort level you intend to deploy.</p></div>
+            <div><span>04</span><p><strong>Vendor benchmarks are not your benchmark.</strong> The launch table is valuable evidence of positioning, but production acceptance rate, tool reliability and cost per successful task matter more.</p></div>
+            <div><span>05</span><p><strong>Knowledge cutoff is May 2026.</strong> Later facts require current context or a search/retrieval tool rather than relying on model memory.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="faq">
+          <div class="model-section-head"><p class="eyebrow">FAQ</p><h2>Grok 4.7 questions, answered.</h2></div>
+          <div class="model-faq">{faq_html}</div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Primary-source verification.</h2><p>Core claims on this page are tied to xAI's model guide, model detail page, release notes and Grok 4.7 launch announcement.</p></div>
           <div class="model-sources">{sources}</div>
         </section>
       </section>
       {model_change_watch_html(["grok-4.7"], "Grok 4.7: what changed.")}
       {model_history_html(["grok-4.7"], "Grok 4.7 verified history.")}
     </main>{page_footer()}</body></html>'''
-
 
 def model_comparison_links_html(model_id, limit=4):
     matches = [
