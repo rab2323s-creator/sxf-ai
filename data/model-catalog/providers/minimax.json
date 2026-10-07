@@ -1,0 +1,92 @@
+{
+  "provider": "MiniMax",
+  "models": [
+    {
+      "family": "MiniMax M3",
+      "model": "MiniMax M3",
+      "model_id": "MiniMax-M3",
+      "context_window": 1000000,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking mode",
+        "levels": [
+          "enabled",
+          "adaptive",
+          "disabled"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "MiniMax multimodal model for coding and agentic workflows with a 1M-token context window and local deployment support.",
+      "sxf_url": "/models/minimax-m3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://www.minimax.io/models/text/m3",
+        "https://www.minimax.io/blog/minimax-m3",
+        "https://github.com/MiniMax-AI/MiniMax-M3",
+        "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise"
+      ],
+      "notes": [
+        "MiniMax publishes separate PAYG bands for input up to 512K and 512K–1M.",
+        "Numeric rates are not flattened or assigned an inferred historical effective date."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://www.minimax.io/models/text/m3",
+          "context_window": "https://www.minimax.io/models/text/m3",
+          "max_output": "https://www.minimax.io/models/text/m3",
+          "knowledge_cutoff": "https://www.minimax.io/models/text/m3",
+          "reasoning": "https://github.com/MiniMax-AI/MiniMax-M3",
+          "modalities": "https://www.minimax.io/models/text/m3",
+          "pricing": "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise",
+          "access": "https://github.com/MiniMax-AI/MiniMax-M3",
+          "lifecycle": "https://www.minimax.io/blog/minimax-m3",
+          "capabilities": "https://www.minimax.io/models/text/m3"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    }
+  ]
+}
