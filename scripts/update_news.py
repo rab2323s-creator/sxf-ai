@@ -15053,6 +15053,8 @@ def render_catalog_model_page(model_id, items):
             page = claude_fable_51_reference_html(items)
         elif model_id == "gemini-3.8-flash":
             page = gemini_38_flash_reference_html(items)
+        elif model_id == "grok-4.6":
+            page = grok_46_reference_html()
         elif model_id == "grok-4.7":
             page = grok_47_reference_html()
         else:
