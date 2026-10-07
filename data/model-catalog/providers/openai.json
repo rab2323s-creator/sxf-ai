@@ -1204,6 +1204,171 @@
         ],
         "display_unit": "per minute"
       }
+    },
+    {
+      "family": "GPT-Rosalind",
+      "model": "GPT-Rosalind Research",
+      "model_id": "gpt-rosalind-research",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "specialized reasoning",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "OpenAI specialized reasoning model for approved life-sciences research workflows and scientific tool use.",
+      "sxf_url": "/models/gpt-rosalind-research/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://openai.com/gpt-rosalind/",
+        "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+        "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "notes": [
+        "API access is limited to eligible organizations and approved internal research through OpenAI's trusted-access program.",
+        "Published API billing begins October 5, 2026."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-05",
+            "end": null,
+            "input": 5,
+            "cached_input": 0.5,
+            "output": 25
+          }
+        ]
+      },
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/pricing",
+          "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+          "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "lifecycle": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "capabilities": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": true,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "reasoning",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
+    },
+    {
+      "family": "gpt-oss",
+      "model": "gpt-oss-120b",
+      "model_id": "gpt-oss-120b",
+      "context_window": 131072,
+      "max_output": 131072,
+      "knowledge_cutoff": "2024-06-01",
+      "reasoning": {
+        "type": "reasoning effort",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "OpenAI open-weight reasoning model for self-hosted deployment with function calling and agentic capabilities.",
+      "sxf_url": "/models/gpt-oss-120b/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss"
+      ],
+      "notes": [
+        "OpenAI explicitly states that gpt-oss models are not served through the OpenAI API and have no OpenAI API pricing.",
+        "The model is distributed under Apache 2.0 and can run on self-managed infrastructure or third-party hosting providers."
+      ],
+      "pricing": {},
+      "provenance": {
+        "verified_at": "2026-10-07",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "pricing": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+          "access": "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-oss-120b"
+        }
+      },
+      "pricing_status": "self-hosted",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": false,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens"
+      }
     }
   ]
 }
