@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 60,
-    "fresh": 60,
+    "total": 70,
+    "fresh": 70,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -1085,6 +1085,56 @@
       ]
     },
     {
+      "model_id": "qwen3-coder-next",
+      "provider": "Alibaba Cloud",
+      "model": "Qwen3-Coder-Next",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-coder-next"
+      ]
+    },
+    {
+      "model_id": "qwen3.5-397b-a17b",
+      "provider": "Alibaba Cloud",
+      "model": "Qwen3.5-397B-A17B",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b"
+      ]
+    },
+    {
       "model_id": "claude-mythos-5-1",
       "provider": "Anthropic",
       "model": "Claude Mythos 5.1",
@@ -1106,6 +1156,85 @@
       ],
       "source_urls": [
         "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-flash-cyber",
+      "provider": "Google",
+      "model": "Gemini 3.8 Flash Cyber",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber",
+        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/model-versions"
+      ]
+    },
+    {
+      "model_id": "MiniMax-M3",
+      "provider": "MiniMax",
+      "model": "MiniMax M3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://github.com/MiniMax-AI/MiniMax-M3",
+        "https://platform.minimax.io/subscribe/token-plan?tab=api-enterprise",
+        "https://www.minimax.io/blog/minimax-m3",
+        "https://www.minimax.io/models/text/m3"
+      ]
+    },
+    {
+      "model_id": "kimi-k3",
+      "provider": "Moonshot AI",
+      "model": "Kimi K3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://github.com/MoonshotAI/Kimi-K3",
+        "https://www.kimi.com/en/blog/kimi-k3",
+        "https://www.kimi.com/en/help/kimi-api/api-pricing"
       ]
     },
     {
@@ -1185,6 +1314,57 @@
         "https://developers.openai.com/api/docs/changelog",
         "https://developers.openai.com/api/docs/models/gpt-realtime-whisper",
         "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-rosalind-research",
+      "provider": "OpenAI",
+      "model": "GPT-Rosalind Research",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+        "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
+      ]
+    },
+    {
+      "model_id": "grok-voice-think-fast-2.0",
+      "provider": "xAI",
+      "model": "Grok Voice Think Fast 2.0",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-06",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.x.ai/developers/rest-api-reference/inference/voice",
+        "https://x.ai/news/grok-voice-think-fast-2"
       ]
     },
     {
@@ -1496,6 +1676,85 @@
         "https://docs.cohere.com/docs/rerank",
         "https://docs.cohere.com/docs/reranking-best-practices",
         "https://docs.cohere.com/v2/reference/rerank"
+      ]
+    },
+    {
+      "model_id": "gemma-4-31b-it",
+      "provider": "Google",
+      "model": "Gemma 4 31B IT",
+      "lifecycle_status": "current",
+      "pricing_status": "free-preview",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-21",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemma/docs/core/gemma_on_gemini_api",
+        "https://ai.google.dev/gemma/docs/core/model_card_4",
+        "https://huggingface.co/google/gemma-4-31B-it/blob/main/config.json"
+      ]
+    },
+    {
+      "model_id": "gpt-oss-120b",
+      "provider": "OpenAI",
+      "model": "gpt-oss-120b",
+      "lifecycle_status": "current",
+      "pricing_status": "self-hosted",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-21",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+        "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss"
+      ]
+    },
+    {
+      "model_id": "glm-5.3",
+      "provider": "Z.ai",
+      "model": "GLM-5.3",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-07",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-21",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://huggingface.co/zai-org/GLM-5.3",
+        "https://z.ai/blog/glm-5.3",
+        "https://z.ai/model-api"
       ]
     },
     {
