@@ -1232,15 +1232,17 @@
       },
       "positioning": "xAI frontier reasoning model for coding, agentic work, and long-context knowledge tasks.",
       "sxf_url": "/models/grok-4-6/",
-      "page_template": "catalog-reference",
+      "page_template": "editorial-reference",
       "official_sources": [
         "https://docs.x.ai/developers/models/grok-4.6",
         "https://docs.x.ai/developers/pricing",
-        "https://docs.x.ai/developers/release-notes"
+        "https://docs.x.ai/developers/release-notes",
+        "https://x.ai/news/grok-4-6"
       ],
       "notes": [
         "xAI documents no separate text output limit for Grok 4.6.",
-        "Higher long-context token rates apply when prompt tokens exceed 200,000."
+        "Long-context token rates apply to the entire request once the prompt reaches the 200,000-token threshold.",
+        "xAI documents function calling and structured outputs, with 150 requests/second and 50,000,000 tokens/minute on the current model page; Batch API is not supported."
       ],
       "pricing": {
         "standard": [
@@ -1254,7 +1256,7 @@
         ],
         "long_context": {
           "threshold_input_tokens": 200000,
-          "condition": "total input tokens greater than 200000",
+          "condition": "total input tokens at or above 200000",
           "applies_to_entire_request": true,
           "multipliers": {
             "input": 2,
@@ -1264,7 +1266,7 @@
         }
       },
       "provenance": {
-        "verified_at": "2026-10-03",
+        "verified_at": "2026-10-07",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.x.ai/developers/models/grok-4.6",
@@ -1295,7 +1297,8 @@
         "vision",
         "long-context",
         "coding",
-        "agents"
+        "agents",
+        "tool-use"
       ],
       "pricing_basis": {
         "meter": "tokens",
