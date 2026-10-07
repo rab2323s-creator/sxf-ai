@@ -72,11 +72,16 @@ The existing token calculators only admit models with `pricing_basis.meter = "to
 
 ## Adding a model
 
-1. Add the record to the correct provider file. Create a new provider file when necessary.
-2. Add its `model_id` to `catalog_sources.model_order` in `manifest.json`.
-3. Run the generator.
-4. Run catalog validation/tests.
-5. Review the generated diff in `data/model-pricing.json`.
+Publication follows the candidate review chain; a validated candidate is not publishable until its human review is explicitly recorded as `approved` with reviewer identity and timestamp.
+
+1. Normalize the candidate and pass identity/candidate validation while it remains `review: pending`.
+2. After explicit human approval, record `review.status = "approved"`, `reviewed_by`, and `reviewed_at` on that candidate before publication or queue retirement.
+3. Add the approved record to the correct canonical provider file. Create a new provider file when necessary.
+4. Add its `model_id` to `catalog_sources.model_order` in `manifest.json` and update the identity registry.
+5. Run the generators and history sync.
+6. Run identity, candidate, catalog, generalized-pricing, Explorer, scale, site, and feed validation.
+7. Retire the published candidate from the active queue only after the approval metadata has been recorded and the canonical publication is ready for review.
+8. Review all generated diffs, including `data/model-pricing.json`, before merge.
 
 Do not edit `data/model-pricing.json` directly.
 
