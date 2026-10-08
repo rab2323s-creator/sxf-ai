@@ -6,6 +6,8 @@ This script owns only the Compare V2 progressive enhancement slots. Run it
 immediately after each update_news.py call and before validation/deployment.
 """
 from __future__ import annotations
+import json
+import re
 import sys
 from pathlib import Path
 
@@ -67,6 +69,36 @@ def before(html: str, identifier: str, anchor: str, insert: str) -> str:
         raise ValueError(f"Compare generator contract changed; missing/duplicated anchor: {anchor[:100]}")
     return html.replace(anchor, insert + anchor, 1)
 
+def independent_coverage() -> int:
+    """Count catalog models supported by at least one independent observation."""
+    evaluations = json.loads((ROOT / "data" / "model-evaluations.json").read_text(encoding="utf-8"))
+    catalog = json.loads((ROOT / "data" / "model-pricing.json").read_text(encoding="utf-8"))
+    ids = {model["model_id"] for model in catalog["models"]}
+    return len({
+        obs["model_id"]
+        for obs in evaluations["observations"]
+        if obs["evidence_type"] == "independent" and obs["model_id"] in ids
+    })
+
+
+def coverage_stat() -> str:
+    return (f'<div><strong>{independent_coverage()}</strong>'
+            '<span>independently evaluated models</span></div>')
+
+
+def restore_coverage_stat(html: str) -> str:
+    """Keep the curated-page count distinct from independent model coverage."""
+    pattern = re.compile(
+        r'<div><strong>[^<]*</strong><span>'
+        r'(?:registry verified|independently evaluated models)'
+        r'</span></div>'
+    )
+    updated, count = pattern.subn(lambda _: coverage_stat(), html)
+    if count != 1:
+        raise ValueError(f"Compare stats contract changed; expected one evidence metric slot, got {count}")
+    return updated
+
+
 def restore(html: str) -> str:
     if 'data-compare-builder' not in html:
         raise ValueError("Generated page lost the Compare builder entirely.")
@@ -88,10 +120,14 @@ def restore(html: str) -> str:
                   '<script src="/compare/decision-engine.js" defer></script>')
     html = before(html, '/compare/decision-cockpit.js', script,
                   '<script src="/compare/decision-cockpit.js" defer></script>')
+    html = restore_coverage_stat(html)
     validate(html)
     return html
 
 def validate(html: str) -> None:
+    metric = coverage_stat()
+    if html.count(metric) != 1:
+        raise ValueError(f"Compare must display the current independent benchmark coverage: {metric}")
     for marker in REQUIRED:
         if html.count(marker) != 1:
             raise ValueError(f"Compare V2 requires exactly one {marker!r}; found {html.count(marker)}")
