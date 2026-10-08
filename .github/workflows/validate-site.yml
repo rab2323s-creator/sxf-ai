@@ -47,6 +47,7 @@ jobs:
         run: |
           python scripts/ensure_compare_v2.py
           python scripts/ensure_compare_v2.py --check
+          python tests/test_compare_regeneration.py
       - name: Prepare AI enrichment candidates
         run: python scripts/prepare_ai_enrichment.py
       - name: Render reviewed AI preview
