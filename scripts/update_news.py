@@ -19240,6 +19240,9 @@ def benchmark_page_html(benchmark):
         </div>
       </section>'''
 
+    if is_aa_lcr:
+        schema["@graph"].append({"@type": "FAQPage", "@id": canonical + "#faq", "mainEntity": lcr_faq})
+
     return f'''<!doctype html><html lang="en">{page_head(
         page_title,
         page_description,
