@@ -1,0 +1,396 @@
+{
+  "schema_version": "2.0",
+  "verified_on": "2026-10-08",
+  "evaluator": "Artificial Analysis",
+  "source_methodology": "https://artificialanalysis.ai/methodology",
+  "index_version": "v4.3.2",
+  "policy": "Transcribed as-rendered comparison benchmark tables. Raw cells preserve %, blanks and estimated asterisks. Only measured, nonblank, non-estimated cells can generate observations. observed_at denotes source check date, not model-run date. SciCode and CritPt remain marked under review. Variant reasoning levels retained. No inference from cost, speed or another model.",
+  "source_tables": [
+    {
+      "id": "gpt56-luna-terra",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-5-6-luna-xhigh-vs-gpt-5-6-terra",
+      "model_variants": [
+        "GPT-5.6 Luna (Xhigh)",
+        "GPT-5.6 Terra (Max)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "35",
+          "42"
+        ],
+        "aa-briefcase-v1.1": [
+          "1267",
+          "1333"
+        ],
+        "gdpval-aa-v2.1": [
+          "1403",
+          "1453"
+        ],
+        "automationbench-aa": [
+          "43%",
+          "60%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "4%",
+          "35%"
+        ],
+        "scicode-aa": [
+          "50%",
+          "55%"
+        ],
+        "humanitys-last-exam-aa": [
+          "37%",
+          "43%"
+        ],
+        "critpt-aa": [
+          "21%",
+          "30%"
+        ],
+        "aa-lcr-v1.1": [
+          "82%",
+          "83%"
+        ]
+      }
+    },
+    {
+      "id": "haiku45",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/claude-4-5-haiku-reasoning-vs-claude-4-5-haiku",
+      "model_variants": [
+        "Claude 4.5 Haiku (Reasoning)",
+        "Claude 4.5 Haiku (Non-reasoning)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "17",
+          "15*"
+        ],
+        "aa-briefcase-v1.1": [
+          "614",
+          ""
+        ],
+        "gdpval-aa-v2.1": [
+          "735",
+          ""
+        ],
+        "automationbench-aa": [
+          "3%",
+          ""
+        ],
+        "terminal-bench-4.0-aa": [
+          "0%",
+          ""
+        ],
+        "scicode-aa": [
+          "42%",
+          ""
+        ],
+        "humanitys-last-exam-aa": [
+          "10%",
+          "4%"
+        ],
+        "critpt-aa": [
+          "0%",
+          "0%"
+        ],
+        "aa-lcr-v1.1": [
+          "74%",
+          "50%"
+        ]
+      }
+    },
+    {
+      "id": "gpt61-sol",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-sol-high",
+      "model_variants": [
+        "GPT-6.1 Sol (High)",
+        "GPT-6 Sol (High)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "50",
+          "42"
+        ],
+        "aa-briefcase-v1.1": [
+          "1471",
+          "1268"
+        ],
+        "gdpval-aa-v2.1": [
+          "1486",
+          "1396"
+        ],
+        "automationbench-aa": [
+          "64%",
+          "60%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "52%",
+          "26%"
+        ],
+        "scicode-aa": [
+          "56%",
+          "55%"
+        ],
+        "humanitys-last-exam-aa": [
+          "51%",
+          "44%"
+        ],
+        "critpt-aa": [
+          "30%",
+          "25%"
+        ],
+        "aa-lcr-v1.1": [
+          "82%",
+          "84%"
+        ]
+      }
+    },
+    {
+      "id": "mistral4",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/mistral-large-4-vs-claude-opus-5-5",
+      "model_variants": [
+        "Mistral Large 4 Preview",
+        "Claude Opus 5.5 (Max, Default Fallback)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "38",
+          "58"
+        ],
+        "aa-briefcase-v1.1": [
+          "1393",
+          "1807"
+        ],
+        "gdpval-aa-v2.1": [
+          "1424",
+          "1866"
+        ],
+        "automationbench-aa": [
+          "60%",
+          "70%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "27%",
+          "60%"
+        ],
+        "scicode-aa": [
+          "54%",
+          "67%"
+        ],
+        "humanitys-last-exam-aa": [
+          "35%",
+          "61%"
+        ],
+        "critpt-aa": [
+          "11%",
+          "32%"
+        ],
+        "aa-lcr-v1.1": [
+          "81%",
+          "85%"
+        ]
+      }
+    },
+    {
+      "id": "ministral14-large3",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/ministral-3-14b-vs-mistral-large-3",
+      "model_variants": [
+        "Ministral 3 14B",
+        "Mistral Large 3"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "6",
+          "9"
+        ],
+        "aa-briefcase-v1.1": [
+          "131",
+          "224"
+        ],
+        "gdpval-aa-v2.1": [
+          "251",
+          "423"
+        ],
+        "automationbench-aa": [
+          "1%",
+          "1%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "0%",
+          "0%"
+        ],
+        "scicode-aa": [
+          "24%",
+          "37%"
+        ],
+        "humanitys-last-exam-aa": [
+          "5%",
+          "4%"
+        ],
+        "critpt-aa": [
+          "0%",
+          "0%"
+        ],
+        "aa-lcr-v1.1": [
+          "26%",
+          "36%"
+        ]
+      }
+    },
+    {
+      "id": "gemma4-gptoss",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gemma-4-31b-vs-gpt-oss-120b",
+      "model_variants": [
+        "Gemma 4 31B (Reasoning)",
+        "gpt-oss-120b (High)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "15",
+          "12"
+        ],
+        "aa-briefcase-v1.1": [
+          "365",
+          "0"
+        ],
+        "gdpval-aa-v2.1": [
+          "623",
+          "611"
+        ],
+        "automationbench-aa": [
+          "5%",
+          "0%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "0%",
+          "0%"
+        ],
+        "scicode-aa": [
+          "45%",
+          "34%"
+        ],
+        "humanitys-last-exam-aa": [
+          "24%",
+          "20%"
+        ],
+        "critpt-aa": [
+          "1%",
+          "1%"
+        ],
+        "aa-lcr-v1.1": [
+          "70%",
+          "52%"
+        ]
+      }
+    },
+    {
+      "id": "qwen35",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gemma-4-26b-a4b-vs-qwen3-5-397b-a17b",
+      "model_variants": [
+        "Gemma 4 26B A4B (Reasoning)",
+        "Qwen3.5 397B A17B (Reasoning)"
+      ],
+      "scores": {
+        "aa-intelligence-index-v4.3.2": [
+          "17*",
+          "18"
+        ],
+        "aa-briefcase-v1.1": [
+          "",
+          "561"
+        ],
+        "gdpval-aa-v2.1": [
+          "553",
+          "780"
+        ],
+        "automationbench-aa": [
+          "",
+          "7%"
+        ],
+        "terminal-bench-4.0-aa": [
+          "",
+          "0%"
+        ],
+        "scicode-aa": [
+          "40%",
+          "45%"
+        ],
+        "humanitys-last-exam-aa": [
+          "19%",
+          "29%"
+        ],
+        "critpt-aa": [
+          "0%",
+          "2%"
+        ],
+        "aa-lcr-v1.1": [
+          "66%",
+          "77%"
+        ]
+      }
+    }
+  ],
+  "entries": [
+    {
+      "model_id": "gpt-5.6-luna",
+      "table": "gpt56-luna-terra",
+      "column": 0,
+      "reasoning_effort": "xhigh"
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "table": "gpt56-luna-terra",
+      "column": 1,
+      "reasoning_effort": "max"
+    },
+    {
+      "model_id": "claude-haiku-4-5-20251001",
+      "table": "haiku45",
+      "column": 0,
+      "reasoning_effort": "reasoning"
+    },
+    {
+      "model_id": "gpt-6.1-sol",
+      "table": "gpt61-sol",
+      "column": 0,
+      "reasoning_effort": "high"
+    },
+    {
+      "model_id": "mistral-large-4",
+      "table": "mistral4",
+      "column": 0,
+      "reasoning_effort": "preview - source default; configuration undisclosed",
+      "note": "The catalog explicitly identifies Mistral Large 4 as its October 2026 public-preview release. Measurements apply to the Preview configuration."
+    },
+    {
+      "model_id": "ministral-14b-2512",
+      "table": "ministral14-large3",
+      "column": 0,
+      "reasoning_effort": "non-reasoning"
+    },
+    {
+      "model_id": "mistral-large-2512",
+      "table": "ministral14-large3",
+      "column": 1,
+      "reasoning_effort": "non-reasoning"
+    },
+    {
+      "model_id": "gemma-4-31b-it",
+      "table": "gemma4-gptoss",
+      "column": 0,
+      "reasoning_effort": "reasoning"
+    },
+    {
+      "model_id": "gpt-oss-120b",
+      "table": "gemma4-gptoss",
+      "column": 1,
+      "reasoning_effort": "high",
+      "note": "Measured through Artificial Analysis provider median; not OpenAI-hosted API pricing."
+    },
+    {
+      "model_id": "qwen3.5-397b-a17b",
+      "table": "qwen35",
+      "column": 1,
+      "reasoning_effort": "reasoning"
+    }
+  ]
+}
