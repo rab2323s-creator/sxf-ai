@@ -10364,6 +10364,7 @@ def model_pricing_page_html():
             },
             {
                 "@type": "BreadcrumbList",
+                "@id": canonical + "#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
                     {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
@@ -20882,6 +20883,7 @@ def model_pricing_page_html():
             },
             {
                 "@type": "BreadcrumbList",
+                "@id": canonical + "#breadcrumb",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
                     {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
