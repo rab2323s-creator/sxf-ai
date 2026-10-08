@@ -11128,8 +11128,7 @@ def main():
     )
     for error in errors:
         print(f"Source warning: {error}")
-if __name__ == "__main__":
-    main()
+# Entrypoint intentionally lives at the end, after all definitions.
 def load_source_registry():
     data = json.loads(SOURCE_CONFIG_PATH.read_text(encoding="utf-8"))
     statuses = set(data.get("statuses", []))
