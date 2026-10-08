@@ -32,7 +32,7 @@ def main():
   <div class="featured-main">
     <div>
       <div class="featured-topline"><strong>A&amp;B</strong><i></i><span>2h ago</span></div>
-      <h3 class="featured-title">&lt;Model &amp; "AI"&gt;</h3>
+      <h3 class="featured-title">&lt;Model &amp; &quot;AI&quot;&gt;</h3>
     </div>
     <div class="featured-footer"><span class="category-pill">Models &amp; Tools</span><span class="open-label">Read signal <b>↗</b></span></div>
   </div>
@@ -40,12 +40,12 @@ def main():
 </a>'''
     story_expected = f'''<a class="story-card" href="{href}">
   <div class="story-card-top"><span class="story-source">A&amp;B</span><span class="story-time">2h ago</span></div>
-  <h3 class="story-title">&lt;Model &amp; "AI"&gt;</h3>
+  <h3 class="story-title">&lt;Model &amp; &quot;AI&quot;&gt;</h3>
   <div class="story-card-bottom"><span class="category-pill">Models &amp; Tools</span><span class="story-arrow" aria-hidden="true">↗</span></div>
 </a>'''
     section_expected = f'''<a class="intel-card" href="{href}">
   <div class="intel-meta"><strong>A&amp;B</strong><span>2h ago</span></div>
-  <h3>&lt;Model &amp; "AI"&gt;</h3>
+  <h3>&lt;Model &amp; &quot;AI&quot;&gt;</h3>
   <div class="intel-foot"><span>Models &amp; Tools</span><b>↗</b></div>
 </a>'''
 
