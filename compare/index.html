@@ -61,8 +61,8 @@
           <label><span>Output</span><input id="compareOutputTokens" type="number" min="0" step="1000" value="10000"></label>
         </div>
         <div class="compare-builder-volume"><label for="compareMonthlyRequests">Monthly requests</label><input id="compareMonthlyRequests" type="number" min="1" max="100000000" step="100" value="1000"><small>Estimates exclude taxes, tool calls and platform fees.</small></div>
-        <div id="compareBuilderResults" class="compare-builder-results" aria-live="polite"></div>
-        <div id="compareCuratedLink" class="compare-curated-link" hidden></div>
+        <div id="compareBuilderError" class="compare-builder-error" role="alert" hidden></div><div id="compareBuilderResults" class="compare-builder-results" aria-live="polite"></div>
+        <section id="compareEvidence" class="compare-evidence" aria-live="polite"></section><div id="compareCuratedLink" class="compare-curated-link" hidden></div>
       </section>
 
       <section class="compare-featured shell"><div class="intel-section-head"><div><p class="eyebrow">START HERE</p><h2>High-value decisions.</h2></div><span>Curated · indexable · source-backed</span></div><div class="compare-feature-grid"><a class="compare-feature-card" href="/compare/gpt-6-astra-vs-claude-fable-5-1/">
@@ -169,4 +169,4 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><link rel="stylesheet" href="/compare/compare-enhancements.css"><script src="/compare/compare.js" defer></script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><link rel="stylesheet" href="/compare/compare-enhancements.css"><script src="/compare/decision-engine.js" defer></script><script src="/compare/compare.js" defer></script></body></html>
