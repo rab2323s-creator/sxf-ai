@@ -29,6 +29,7 @@ jobs:
           node --check models/explorer.js
           node --check compare/compare.js
           node --check compare/decision-engine.js
+          node --check compare/decision-cockpit.js
           node --check tests/test_compare_engine.cjs
           node tests/test_compare_engine.cjs
           node --check evaluations/explorer/explorer.js
