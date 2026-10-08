@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Single generator entrypoint regression
+        run: python tests/test_single_entrypoint.py
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_model_evaluation_sections.py
