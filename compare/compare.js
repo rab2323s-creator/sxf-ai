@@ -36,6 +36,13 @@
   const inputTokens = document.getElementById("compareInputTokens");
   const cachedTokens = document.getElementById("compareCachedTokens");
   const outputTokens = document.getElementById("compareOutputTokens");
+  const monthlyRequests = document.getElementById("compareMonthlyRequests");
+  const presetButtons = [...document.querySelectorAll("[data-compare-preset]")];
+  const presets = Object.freeze({
+    chat: {input: 2000, cached: 0, output: 600},
+    coding: {input: 20000, cached: 10000, output: 4000},
+    research: {input: 120000, cached: 30000, output: 8000}
+  });
   const results = document.getElementById("compareBuilderResults");
   const curatedLink = document.getElementById("compareCuratedLink");
 
@@ -191,7 +198,12 @@
       verdict = "A direct paid-token cost winner is not shown because at least one model lacks a calculator-eligible provider Standard rate.";
     }
 
-    results.innerHTML = `<div class="compare-builder-summary"><span>WORKLOAD RESULT</span><strong>${verdict}</strong><small>Pricing is not a quality score. Compare acceptance rate, latency and tool reliability on your own workload.</small></div>
+    const volume = Math.max(1, Math.min(100000000, number(monthlyRequests?.value) || 1));
+    const monthlyNote = leftCost && rightCost
+      ? "At " + volume.toLocaleString() + " requests/month: " + left.model + " " + money(leftCost.total * volume) + " vs " + right.model + " " + money(rightCost.total * volume) + ". Direct token costs only."
+      : "Monthly cost comparison unavailable without comparable official paid-token rates.";
+
+    results.innerHTML = `<div class="compare-builder-summary"><span>WORKLOAD RESULT</span><strong>${verdict}</strong><small>Pricing is not a quality score. Compare acceptance rate, latency and tool reliability on your own workload.</small><small>${monthlyNote}</small></div>
       <div class="compare-builder-grid">${card(left, leftCost)}${card(right, rightCost)}</div>`;
 
     const pair = (registry.comparisons || []).find(entry => {
@@ -233,7 +245,19 @@
     results.innerHTML = '<div class="compare-builder-error">The comparison datasets could not be loaded.</div>';
   });
 
-  [modelA, modelB, inputTokens, cachedTokens, outputTokens].forEach(node => {
+  presetButtons.forEach(button => button.addEventListener("click", () => {
+    const preset = presets[button.dataset.comparePreset];
+    if (!preset) return;
+    inputTokens.value = String(preset.input);
+    cachedTokens.value = String(preset.cached);
+    outputTokens.value = String(preset.output);
+    presetButtons.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+    render();
+  }));
+  [inputTokens, cachedTokens, outputTokens].forEach(node => node?.addEventListener("input", () => {
+    presetButtons.forEach(item => item.setAttribute("aria-pressed", "false"));
+  }));
+  [modelA, modelB, inputTokens, cachedTokens, outputTokens, monthlyRequests].forEach(node => {
     node?.addEventListener("input", render);
     node?.addEventListener("change", render);
   });
