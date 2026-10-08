@@ -29,7 +29,14 @@ with sync_playwright() as p:
         page.on("pageerror", lambda e: errors.append(str(e)))
         page.goto(url, wait_until="domcontentloaded", timeout=30000)
         check(page, f"initial rendering at {width}")
-        page.locator("#compareDecisionCockpit .compare-decision-cell").first.wait_for(timeout=15000)
+        try:
+            page.locator("#compareDecisionCockpit .compare-decision-cell").first.wait_for(timeout=15000)
+        except Exception:
+            print("DIAGNOSTIC panel:", repr(page.locator("#compareDecisionCockpit").inner_text()), flush=True)
+            print("DIAGNOSTIC models:", repr(page.locator("#compareModelA").input_value()), repr(page.locator("#compareModelB").input_value()), flush=True)
+            print("DIAGNOSTIC engine:", page.evaluate("typeof window.SxfCompareEngine"), flush=True)
+            print("DIAGNOSTIC page errors:", errors, flush=True)
+            raise
         page.locator("#compareDecisionGoal").select_option("coding")
         assert "coding" in page.locator("#compareDecisionCockpit").inner_text().lower()
         page.locator("#compareDecisionEvidenceOnly").check()

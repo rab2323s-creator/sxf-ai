@@ -95,6 +95,7 @@
   }
   goal.addEventListener("change",render);
   evidenceOnly.addEventListener("change",render);
+  root.addEventListener("compare:ready",render);
   root.addEventListener("change",render);
   root.addEventListener("input",render);
   share.addEventListener("click",async ()=>{

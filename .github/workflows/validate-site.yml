@@ -34,6 +34,8 @@ jobs:
           node --check tests/test_compare_engine.cjs
           node tests/test_compare_engine.cjs
           node --check evaluations/explorer/explorer.js
+      - name: Verify priority independent evaluation evidence
+        run: python tests/test_priority_evaluations.py
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
       - name: AI enrichment dry-run tests
