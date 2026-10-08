@@ -272,6 +272,8 @@
     if (requestedB && byId.has(requestedB) && requestedB !== modelA.value) modelB.value = requestedB;
     else if (byId.has("grok-4.7") && modelA.value !== "grok-4.7") modelB.value = "grok-4.7";
     render();
+    // Model selections are assigned programmatically: notify optional enhancements.
+    root.dispatchEvent(new Event("compare:ready"));
   }).catch(() => {
     results.innerHTML = '<div class="compare-builder-error">The comparison datasets could not be loaded.</div>';
   });
