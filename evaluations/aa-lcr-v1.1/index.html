@@ -39,7 +39,7 @@
         <p class="eyebrow">BENCHMARK EVIDENCE / ACTIVE</p>
         <h1>AA-LCR v1.1: Long Context Reasoning Benchmark &amp; Results</h1>
         <p>long context reasoning. Metric: score. Direction: higher-is-better. Results below stay separated by evaluator evidence type and comparable group.</p>
-        <div class="collection-stats"><div><strong>22</strong><span>observations</span></div><div><strong>Artificial Analysis</strong><span>evaluator</span></div><div><strong>active</strong><span>status</span></div><div><strong>2026-10-08</strong><span>verified</span></div></div>
+        <div class="collection-stats"><div><strong>32</strong><span>observations</span></div><div><strong>Artificial Analysis</strong><span>evaluator</span></div><div><strong>active</strong><span>status</span></div><div><strong>2026-10-08</strong><span>verified</span></div></div>
       </section>
       
       
@@ -61,7 +61,7 @@
       <tr><th scope="row">Repeats</th><td>3 per question, aggregated for the published score</td></tr>
       <tr><th scope="row">Grading</th><td>LLM equality checker: GPT-5.6 Luna, medium effort, in v1.1</td></tr>
       <tr><th scope="row">Tools</th><td>No tools in the official benchmark configuration</td></tr>
-      <tr><th scope="row">SXF coverage</th><td>22 stored observations, source verified 2026-10-08; not the full official leaderboard</td></tr>
+      <tr><th scope="row">SXF coverage</th><td>32 stored observations, source verified 2026-10-08; not the full official leaderboard</td></tr>
       </tbody></table></div>
       <h3>What makes long-context reasoning difficult?</h3><p>A model must use information scattered across long reports, contracts, company documents, government consultations, academic material and other real documents. The challenge is to retain relevant evidence, reconcile details across documents, follow precise question constraints and produce a correct answer. A million-token window alone does not guarantee correctness.</p>
       <h3>Document categories and dataset access</h3><p>The seven published source categories include company documents, industry reports, government consultations, academia, legal, marketing and survey reports. Company documents account for most questions. The dataset is publicly accessible on Hugging Face, but underlying document rights are distinct from the benchmark's question-set license. <a href="https://huggingface.co/datasets/ArtificialAnalysis/AA-LCR" target="_blank" rel="noopener noreferrer">Open public dataset ↗</a></p>
@@ -108,7 +108,7 @@
               <td><a href="https://artificialanalysis.ai/models/comparisons/llama-4-scout-vs-llama-4-maverick" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr></tbody></table></div>
             </section><section class="evaluation-group">
-              <div class="evaluation-group-head"><div><span>independent</span><h2>artificial-analysis-v4.3.2</h2></div><small>20 observations</small></div>
+              <div class="evaluation-group-head"><div><span>independent</span><h2>artificial-analysis-v4.3.2</h2></div><small>30 observations</small></div>
               <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Model</th><th>Score</th><th>Reasoning</th><th>Tools</th><th>Source</th></tr></thead><tbody><tr>
               <th scope="row"><a href="/models/kimi-k3/">Kimi K3</a></th>
               <td>89.0%</td>
@@ -140,6 +140,12 @@
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/deepseek-v4-pro-vs-minimax-m3" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr>
+              <th scope="row"><a href="/models/gpt-5-6/">GPT-5.6 Terra</a></th>
+              <td>83.0%</td>
+              <td>max</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-5-6-luna-xhigh-vs-gpt-5-6-terra" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
               <th scope="row"><a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a></th>
               <td>82.0%</td>
               <td>high</td>
@@ -151,6 +157,24 @@
               <td>high</td>
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/gemini-3-7-flash-vs-gemini-3-6-flash" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/gpt-5-6-luna/">GPT-5.6 Luna</a></th>
+              <td>82.0%</td>
+              <td>xhigh</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-5-6-luna-xhigh-vs-gpt-5-6-terra" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a></th>
+              <td>82.0%</td>
+              <td>high</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-1-sol-high-vs-gpt-6-sol-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/mistral-large-4/">Mistral Large 4</a></th>
+              <td>81.0%</td>
+              <td>preview - source default; configuration undisclosed</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/mistral-large-4-vs-claude-opus-5-5" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr>
               <th scope="row"><a href="/models/gpt-6-astra/">GPT-6 Astra</a></th>
               <td>80.0%</td>
@@ -206,6 +230,12 @@
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr>
+              <th scope="row"><a href="/models/qwen3-5-397b-a17b/">Qwen3.5-397B-A17B</a></th>
+              <td>77.0%</td>
+              <td>reasoning</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gemma-4-26b-a4b-vs-qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
               <th scope="row"><a href="/models/gemini-3-5-flash-lite/">Gemini 3.5 Flash-Lite</a></th>
               <td>76.0%</td>
               <td>not specified for this variant</td>
@@ -218,17 +248,47 @@
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr>
+              <th scope="row"><a href="/guides/gpt-6-vs-claude/">Claude Haiku 4.5</a></th>
+              <td>74.0%</td>
+              <td>reasoning</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/claude-4-5-haiku-reasoning-vs-claude-4-5-haiku" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/gemma-4-31b-it/">Gemma 4 31B IT</a></th>
+              <td>70.0%</td>
+              <td>reasoning</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gemma-4-31b-vs-gpt-oss-120b" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
               <th scope="row"><a href="/models/mistral-medium-3-5/">Mistral Medium 3.5</a></th>
               <td>69.0%</td>
               <td>not published — Mistral Medium 3.5</td>
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-mistral-small-4" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr>
+              <th scope="row"><a href="/models/gpt-oss-120b/">gpt-oss-120b</a></th>
+              <td>52.0%</td>
+              <td>high</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gemma-4-31b-vs-gpt-oss-120b" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
               <th scope="row"><a href="/models/mistral-small-4/">Mistral Small 4</a></th>
               <td>50.0%</td>
               <td>reasoning</td>
               <td>benchmark-defined</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-mistral-small-4" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/mistral-large-2512/">Mistral Large 3</a></th>
+              <td>36.0%</td>
+              <td>non-reasoning</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/ministral-3-14b-vs-mistral-large-3" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr>
+              <th scope="row"><a href="/models/ministral-14b-2512/">Ministral 3 14B</a></th>
+              <td>26.0%</td>
+              <td>non-reasoning</td>
+              <td>benchmark-defined</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/ministral-3-14b-vs-mistral-large-3" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr></tbody></table></div>
             </section></section>
     </main><footer class="footer shell">
