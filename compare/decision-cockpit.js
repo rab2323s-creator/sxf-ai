@@ -42,6 +42,7 @@
     const relevant=pairs.filter(p=>chosen.categories.includes(p.benchmark.category));
     const comparable=relevant.filter(p=>!p.configurationDiffers);
     const useful=relevant.filter(p=>!evidenceOnly.checked||!p.configurationDiffers);
+    const evidenceLabel = comparable.length >= 3 ? "Multi-test evidence" : comparable.length ? "Limited evidence" : "Insufficient comparable evidence";
     let title="",desc="";
     if(goal.value==="budget"){
       if(priced.every(p=>p.available)){
@@ -69,10 +70,17 @@
         escapeHtml(p.left.score)+" vs "+escapeHtml(p.right.score)+" "+escapeHtml(p.benchmark.unit||""),
         escapeHtml(condition)+" · <a href='"+escapeHtml(p.left.source_url)+"' target='_blank' rel='noopener noreferrer'>Source A ↗</a> · <a href='"+escapeHtml(p.right.source_url)+"' target='_blank' rel='noopener noreferrer'>Source B ↗</a>");
     }).join("");
+    const capabilityComparison = cell("Documented features",
+      escapeHtml(left.model)+" / "+escapeHtml(right.model),
+      "Input: "+escapeHtml((left.modalities?.input||[]).join(", ") || "Not published")+" vs "+escapeHtml((right.modalities?.input||[]).join(", ") || "Not published")+
+      " · Context: "+escapeHtml(left.context_window?.toLocaleString?.() || "Unknown")+" vs "+escapeHtml(right.context_window?.toLocaleString?.() || "Unknown")+" tokens");
+    const evidenceCoverage = cell("Task evidence confidence",evidenceLabel,
+      comparable.length+" matched-configuration independent observations for "+escapeHtml(chosen.label)+
+      "; "+(relevant.length-comparable.length)+" with differing configurations. Benchmark categories without matched evidence are excluded.");
     const factCards=cell("Price evidence",priced.every(p=>p.available)?"Both available":"Incomplete","Catalog dated "+escapeHtml(catalog.source_verified||"unknown"))+
       cell("Independent measurements",String(pairs.length)+" shared","Only same benchmark and evaluation group are paired")+
       cell("Matching configurations",String(cfgMatches.length)+" observations","Different reasoning effort / fallback is kept separate");
-    output(title,desc,priceCard(left,0)+priceCard(right,1)+factCards+
+    output(title,desc,priceCard(left,0)+priceCard(right,1)+factCards+capabilityComparison+evidenceCoverage+
       (goal.value==="budget"?"":evidenceCards), 
       "Not a universal ranking. "+pairs.length+" paired independent benchmark observations; "+cfgMatches.length+" recorded with the same configuration. "+
       "Quality, latency and reliability on your workloads remain untested. "+
