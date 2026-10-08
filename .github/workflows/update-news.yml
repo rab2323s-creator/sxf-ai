@@ -45,6 +45,10 @@ jobs:
           python tests/test_ai_auto_enrichment.py
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
+      - name: Restore Compare V2 after feed generation
+        run: |
+          python scripts/ensure_compare_v2.py
+          python scripts/ensure_compare_v2.py --check
       - name: Prepare AI enrichment candidates
         run: python scripts/prepare_ai_enrichment.py
       - name: Run guarded hot-news AI enrichment
@@ -57,6 +61,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           python scripts/update_news.py
+          python scripts/ensure_compare_v2.py
           python scripts/prepare_ai_enrichment.py
       - name: Render reviewed AI preview
         run: python scripts/render_ai_enrichment_preview.py
