@@ -21,6 +21,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Single generator entrypoint regression
+        run: python tests/test_single_entrypoint.py
+      - name: Generator definition regression
+        run: python tests/test_generator_definitions.py
+      - name: Offline snapshot rendering unit tests
+        run: python tests/test_snapshot_rendering.py
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_compare_v2.py
@@ -52,6 +58,12 @@ jobs:
         run: python scripts/patch_nullable_evaluation_context.py
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
+      - name: Verify offline HTML/SEO rebuild parity
+        run: python tests/test_snapshot_rendering.py --parity
+      - name: Compare output against legacy renderer
+        run: |
+          git fetch --no-tags origin main
+          python tests/test_generator_equivalence.py --baseline origin/main
       - name: Restore and verify Compare V2 after regeneration
         run: |
           python scripts/ensure_compare_v2.py
