@@ -60,6 +60,10 @@ jobs:
         run: python scripts/update_news.py
       - name: Verify offline HTML/SEO rebuild parity
         run: python tests/test_snapshot_rendering.py --parity
+      - name: Compare output against legacy renderer
+        run: |
+          git fetch --no-tags origin main
+          python tests/test_generator_equivalence.py --baseline origin/main
       - name: Restore and verify Compare V2 after regeneration
         run: |
           python scripts/ensure_compare_v2.py
