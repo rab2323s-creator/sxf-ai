@@ -11111,7 +11111,116 @@ def select_current_items(archive, cutoff):
     return selected
 
 
+def render_site(archive, current):
+    """Rebuild HTML, JSON-LD and sitemap from in-memory prepared signal records."""
+    update_index(current)
+    update_section_pages(current)
+    build_discovery_pages(archive, current)
+    normalize_static_shells()
+    update_sitemap(archive)
+
+
+def render_from_snapshots(*, sync_aliases=False):
+    """Rebuild pages from persisted feed snapshots without fetching external sources.
+
+    When slug aliases have been approved after a feed run, sync_aliases updates
+    only affected signal URLs in the stored snapshots, preserving other fields
+    and the original ingestion timestamps.
+    """
+    for path in (ARCHIVE_OUT, OUT):
+        if not path.is_file():
+            raise RuntimeError(f"Missing feed snapshot: {path}")
+
+    archive_payload = json.loads(ARCHIVE_OUT.read_text(encoding="utf-8"))
+    current_payload = json.loads(OUT.read_text(encoding="utf-8"))
+    if not isinstance(archive_payload, dict) or not isinstance(archive_payload.get("items"), list):
+        raise RuntimeError("Invalid archive.json snapshot")
+    if not isinstance(current_payload, dict) or not isinstance(current_payload.get("items"), list):
+        raise RuntimeError("Invalid news.json snapshot")
+
+    archive = archive_payload["items"]
+    current_refs = current_payload["items"]
+    if not archive or not current_refs:
+        raise RuntimeError("Refusing to render an empty archive or current feed snapshot")
+
+    archive_by_url = {}
+    changed_archive = False
+    for item in archive:
+        if not isinstance(item, dict) or not item.get("url"):
+            raise RuntimeError("Archive item is missing its source URL")
+        source_url = item["url"]
+        if source_url in archive_by_url:
+            raise RuntimeError(f"Duplicate archive source URL: {source_url}")
+        archive_by_url[source_url] = item
+
+        if sync_aliases:
+            slug = SLUG_ALIASES.get(source_url)
+            if slug and slug != item.get("signal_slug"):
+                if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+                    raise RuntimeError(f"Invalid signal alias for {source_url}: {slug!r}")
+                item["signal_slug"] = slug
+                item["signal_url"] = f"{BASE_URL}/signals/{slug}/"
+                changed_archive = True
+
+    current = []
+    seen_urls = set()
+    changed_current = False
+    for ref in current_refs:
+        if not isinstance(ref, dict) or not ref.get("url"):
+            raise RuntimeError("Current feed item is missing its source URL")
+        source_url = ref["url"]
+        if source_url in seen_urls:
+            raise RuntimeError(f"Duplicate current feed URL: {source_url}")
+        seen_urls.add(source_url)
+        item = archive_by_url.get(source_url)
+        if item is None:
+            raise RuntimeError(f"Current signal absent from archive: {source_url}")
+
+        if ref.get("signal_url") != item.get("signal_url"):
+            if not sync_aliases:
+                raise RuntimeError(
+                    f"Feed URL does not match archive: {source_url}; use --sync-aliases"
+                )
+            ref["signal_url"] = item["signal_url"]
+            changed_current = True
+        current.append(item)
+
+    render_site(archive, current)
+
+    if changed_archive:
+        ARCHIVE_OUT.write_text(
+            json.dumps(archive_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+    if changed_current:
+        OUT.write_text(
+            json.dumps(current_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+
+    print(
+        f"Rendered {len(current)} current signals from {len(archive)} archived signals "
+        f"without source fetching; alias snapshots updated: {changed_archive or changed_current}"
+    )
+
+
 def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Update SXF AI feed and generated site")
+    parser.add_argument(
+        "--render-only", action="store_true",
+        help="Rebuild HTML and sitemap from saved news/archive snapshots without source fetching",
+    )
+    parser.add_argument(
+        "--sync-aliases", action="store_true",
+        help="With --render-only, synchronize approved slug aliases without source fetching",
+    )
+    args = parser.parse_args()
+    if args.sync_aliases and not args.render_only:
+        parser.error("--sync-aliases requires --render-only")
+    if args.render_only:
+        render_from_snapshots(sync_aliases=args.sync_aliases)
+        return
+
     from model_history import sync_model_history_file
     history_result = sync_model_history_file(MODEL_PRICING_PATH, MODEL_HISTORY_PATH)
 
@@ -11378,11 +11487,7 @@ def main():
         "source_health": source_health,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    update_index(current)
-    update_section_pages(current)
-    build_discovery_pages(archive, current)
-    normalize_static_shells()
-    update_sitemap(archive)
+    render_site(archive, current)
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
         f"enriched {enriched} summaries; source errors: {len(errors)}; "
