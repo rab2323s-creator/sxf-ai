@@ -573,12 +573,12 @@ def compare_live_facts_html(model_ids):
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
-              data-context="{int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
+              data-context="{"unknown" if model.get("context_window") is None else int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
               data-pricing-status="{escape(model_pricing_status(model), quote=True)}">
               <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
               <h3>{escape(model["model"])}</h3>
               <dl>
-                <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
+                <div><dt>Context</dt><dd>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}</dd></div>
                 <div><dt>Max output</dt><dd>{escape(model_output_label(model))}</dd></div>
                 <div><dt>Input / MTok</dt><dd>{escape(input_price)}</dd></div>
                 <div><dt>Cached / MTok</dt><dd>{escape(cached_price)}</dd></div>
@@ -808,7 +808,7 @@ def catalog_reference_variant(variant):
 
     return {
         **variant,
-        "context": f'{int(model["context_window"]):,}',
+        "context": f'{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}',
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
@@ -872,7 +872,7 @@ def catalog_display_model(model_id, **overrides):
         "provider": model["provider"],
         "model_id": model["model_id"],
         "positioning": model["positioning"],
-        "context": f'{int(model["context_window"]):,}',
+        "context": f'{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}',
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
@@ -5280,7 +5280,7 @@ def grok_47_reference_html():
         <h1>Grok 4.7<br><span>verified model reference.</span></h1>
         <p>{escape(model["positioning"])}</p>
         <div class="collection-stats">
-          <div><strong>{int(model["context_window"]):,}</strong><span>context tokens</span></div>
+          <div><strong>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}</strong><span>context tokens</span></div>
           <div><strong>{escape(model_output_label(model))}</strong><span>text output cap</span></div>
           <div><strong>{escape(verified)}</strong><span>last verified</span></div>
         </div>
@@ -5295,7 +5295,7 @@ def grok_47_reference_html():
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>grok-4.7</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>{int(model["context_window"]):,}</strong><small>tokens</small></div>
+            <div><span>CONTEXT WINDOW</span><strong>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}</strong><small>tokens</small></div>
             <div><span>MAX OUTPUT</span><strong>{escape(model_output_label(model))}</strong><small>xAI documentation</small></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>{escape(str(model["knowledge_cutoff"]))}</strong></div>
             <div><span>STANDARD INPUT</span><strong>{escape(catalog_price_label(price["input"]))}</strong><small>/ 1M tokens</small></div>
@@ -8777,7 +8777,7 @@ def evaluation_explorer_html():
             f'''<tr data-explorer-fallback-row>
               <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["provider"])}</small></th>
               <td>{escape(evaluation_score_label(benchmark, row["score"]))}</td>
-              <td>{int(model["context_window"]):,}<small>tokens</small></td>
+              <td>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}<small>tokens</small></td>
               <td>{escape(price_label)}<small>100K input + 10K output</small></td>
               <td>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))}</td>
               <td><a href="{escape(row["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
@@ -11636,12 +11636,12 @@ def compare_live_facts_html(model_ids):
         output_price = catalog_price_label(price["output"]) if price else "Not published"
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
-              data-context="{int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
+              data-context="{"unknown" if model.get("context_window") is None else int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
               data-pricing-status="{escape(model_pricing_status(model), quote=True)}">
               <div class="compare-live-meta"><span>{escape(model["provider"])}</span><small>Verified {escape(model["provenance"]["verified_at"])}</small></div>
               <h3>{escape(model["model"])}</h3>
               <dl>
-                <div><dt>Context</dt><dd>{int(model["context_window"]):,}</dd></div>
+                <div><dt>Context</dt><dd>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}</dd></div>
                 <div><dt>Max output</dt><dd>{escape(model_output_label(model))}</dd></div>
                 <div><dt>Input / MTok</dt><dd>{escape(input_price)}</dd></div>
                 <div><dt>Cached / MTok</dt><dd>{escape(cached_price)}</dd></div>
@@ -11871,7 +11871,7 @@ def catalog_reference_variant(variant):
 
     return {
         **variant,
-        "context": f'{int(model["context_window"]):,}',
+        "context": f'{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}',
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
@@ -11935,7 +11935,7 @@ def catalog_display_model(model_id, **overrides):
         "provider": model["provider"],
         "model_id": model["model_id"],
         "positioning": model["positioning"],
-        "context": f'{int(model["context_window"]):,}',
+        "context": f'{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}',
         "max_output": model_output_label(model),
         "knowledge_cutoff": cutoff,
         "input_price": catalog_price_label(price["input"]),
@@ -19295,7 +19295,7 @@ def evaluation_explorer_html():
             f'''<tr data-explorer-fallback-row>
               <th scope="row"><a href="{escape(model["sxf_url"], quote=True)}">{escape(model["model"])}</a><small>{escape(model["provider"])}</small></th>
               <td>{escape(evaluation_score_label(benchmark, row["score"]))}</td>
-              <td>{int(model["context_window"]):,}<small>tokens</small></td>
+              <td>{"Not published" if model.get("context_window") is None else format(int(model["context_window"]), ",")}<small>tokens</small></td>
               <td>{escape(price_label)}<small>100K input + 10K output</small></td>
               <td>{escape(str(row.get("model_configuration", {}).get("reasoning_effort") or "not published"))}</td>
               <td><a href="{escape(row["source_url"], quote=True)}" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
