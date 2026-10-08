@@ -4430,6 +4430,272 @@ def catalog_model_reference_html(model_id, items):
     </main>{page_footer()}</body></html>'''
 
 
+
+def gpt_61_sol_reference_html():
+    model = model_catalog_entry("gpt-6.1-sol")
+    price = active_standard_price("gpt-6.1-sol")
+    verified = model["provenance"]["verified_at"]
+    long_context = model.get("pricing", {}).get("long_context", {})
+    threshold = int(long_context.get("threshold_input_tokens", 272000))
+    multipliers = long_context.get("multipliers", {})
+    long_input = float(price["input"]) * float(multipliers.get("input", 2))
+    long_cached = float(price["cached_input"]) * float(multipliers.get("cached_input", 2))
+    long_output = float(price["output"]) * float(multipliers.get("output", 1.5))
+    cache_write = price.get("cache_write")
+    long_cache_write = (float(cache_write) * float(multipliers.get("cache_write", 2))) if cache_write is not None else None
+    sources = "".join(
+        f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
+        for url in model["official_sources"]
+    )
+    faq = [
+        ("What is GPT-6.1 Sol?", "GPT-6.1 Sol is OpenAI's September 2026 near-Astra model for complex coding, computer use, agentic workflows and professional knowledge work at materially lower cost than GPT-6 Astra."),
+        ("What is the GPT-6.1 Sol context window?", "OpenAI documents a 1,050,000-token context window for GPT-6.1 Sol, with up to 128,000 output tokens."),
+        ("How much does GPT-6.1 Sol cost?", "At standard context lengths, GPT-6.1 Sol is priced at $2 per million input tokens, $0.10 per million cached input tokens and $10 per million output tokens. Prompts above 272,000 input tokens use higher rates across the full request."),
+        ("What happens above 272K input tokens?", "OpenAI documents long-context multipliers above 272,000 input tokens: input, cached input and cache write double, while output is billed at 1.5x the standard rate. The higher pricing applies to the full request."),
+        ("Does GPT-6.1 Sol support reasoning controls?", "Yes. OpenAI documents low, medium, high, xhigh and max reasoning effort levels, with medium as the default."),
+        ("Does GPT-6.1 Sol support images?", "Yes. GPT-6.1 Sol accepts text and image input and produces text output."),
+        ("Can GPT-6.1 Sol call tools?", "Yes, but OpenAI documents tool calling for GPT-6.1 Sol through the Responses API. Chat Completions is supported without tool calling."),
+        ("What is the GPT-6.1 Sol maximum output?", "OpenAI documents a maximum output of 128,000 tokens."),
+        ("What is the GPT-6.1 Sol knowledge cutoff?", "OpenAI documents a knowledge cutoff of April 30, 2026."),
+        ("Is GPT-6.1 Sol cheaper than GPT-6 Astra?", "Yes. SXF's verified OpenAI catalog lists GPT-6.1 Sol at $2 input and $10 output per million tokens versus $10 input and $50 output for GPT-6 Astra at standard context lengths."),
+        ("When should I use GPT-6.1 Sol instead of Astra?", "Use GPT-6.1 Sol when you want near-frontier reasoning, coding, computer-use and agent performance but Astra's higher token cost is difficult to justify. Use your own evaluations to decide whether Astra's incremental quality is worth the premium."),
+        ("Does GPT-6.1 Sol support EU data residency?", "OpenAI documents US and EU data residency for GPT-6.1 Sol. Its Fast mode is not available with EU data residency."),
+    ]
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "TechArticle",
+                "@id": BASE_URL + "/models/gpt-6-1-sol/#article",
+                "headline": "GPT-6.1 Sol — Pricing, 1.05M Context, API & Specs",
+                "description": "GPT-6.1 Sol reference with OpenAI API pricing, 1.05M context, 128K output, reasoning levels, long-context pricing, tool calling, availability and comparisons.",
+                "url": BASE_URL + "/models/gpt-6-1-sol/",
+                "mainEntityOfPage": BASE_URL + "/models/gpt-6-1-sol/",
+                "datePublished": "2026-09-29",
+                "dateModified": verified,
+                "about": {
+                    "@type": "Thing",
+                    "name": "GPT-6.1 Sol",
+                    "sameAs": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                },
+                "citation": model["official_sources"],
+                "isPartOf": {"@id": BASE_URL + "/#website"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": BASE_URL + "/models/gpt-6-1-sol/#breadcrumb",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": BASE_URL + "/models/"},
+                    {"@type": "ListItem", "position": 3, "name": "GPT-6.1 Sol", "item": BASE_URL + "/models/gpt-6-1-sol/"},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "@id": BASE_URL + "/models/gpt-6-1-sol/#faq",
+                "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                    for q, a in faq
+                ],
+            },
+        ],
+    }
+    faq_html = "".join(
+        f'<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>'
+        for question, answer in faq
+    )
+    return f'''<!doctype html><html lang="en">{page_head(
+        "GPT-6.1 Sol: Pricing, 1.05M Context, API & Specs | SXF / AI",
+        "GPT-6.1 Sol API pricing, 1.05M context window, 128K output, reasoning levels, long-context rates, tool calling and verified OpenAI sources.",
+        BASE_URL + "/models/gpt-6-1-sol/",
+        schema,
+    )}
+    <body class="intel-page model-page">{page_header("models")}<main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-6.1 Sol</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / OPENAI</p>
+        <h1>GPT-6.1 Sol<br><span>pricing, context & API reference.</span></h1>
+        <p>OpenAI's near-Astra GPT-6 tier for complex coding, computer use, agentic workflows and professional knowledge work — verified against primary OpenAI sources.</p>
+        <div class="collection-stats">
+          <div><strong>1,050,000</strong><span>context tokens</span></div>
+          <div><strong>128,000</strong><span>max output tokens</span></div>
+          <div><strong>$2 / $10</strong><span>input / output per 1M</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">QUICK ANSWER</p>
+            <h2>GPT-6.1 Sol at a glance.</h2>
+            <p><strong>GPT-6.1 Sol</strong> is OpenAI's newer Sol-tier model, released September 29, 2026. It targets difficult coding, computer-use, agentic and professional tasks while sitting below Astra on price. It accepts text and images, supports configurable reasoning, has a 1.05M-token context window and can return up to 128K output tokens.</p>
+            <p>At standard context lengths, OpenAI lists {escape(catalog_price_label(price["input"]))} input, {escape(catalog_price_label(price["cached_input"]))} cached input and {escape(catalog_price_label(price["output"]))} output per million tokens. Long-context pricing begins only once total input exceeds {threshold:,} tokens.</p>
+            <p class="reference-note">Released September 29, 2026 · Model ID <code>gpt-6.1-sol</code> · Knowledge cutoff April 30, 2026 · Last SXF verification {escape(verified)}</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>gpt-6.1-sol</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>1,050,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>128,000</strong><small>tokens</small></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>2026-04-30</strong></div>
+            <div><span>REASONING</span><strong>low · medium · high · xhigh · max</strong><small>default: medium</small></div>
+            <div><span>MODALITIES</span><strong>Text + image → text</strong></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section" aria-labelledby="gpt61-navigation">
+          <div class="model-section-head"><p class="eyebrow">ON THIS PAGE</p><h2 id="gpt61-navigation">GPT-6.1 Sol reference map.</h2><p>Jump directly to the specification or decision you need.</p></div>
+          <div class="model-related-links">
+            <a href="#pricing"><span>ECONOMICS</span><strong>Pricing & long context</strong><b>↓</b></a>
+            <a href="#api"><span>DEVELOPERS</span><strong>API, tools & reasoning</strong><b>↓</b></a>
+            <a href="#sol-vs-astra"><span>MODEL CHOICE</span><strong>Sol vs Astra</strong><b>↓</b></a>
+            <a href="#use-cases"><span>WORKLOADS</span><strong>Best-fit use cases</strong><b>↓</b></a>
+            <a href="#faq"><span>ANSWERS</span><strong>GPT-6.1 Sol FAQ</strong><b>↓</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">POSITIONING</p>
+            <h2>Near-Astra capability at a much lower token price.</h2>
+            <p>OpenAI positions GPT-6.1 Sol for demanding coding, computer-use and professional work where a high-end model is justified but Astra's price is not. In SXF's verified catalog, Sol's standard input and output rates are one-fifth of GPT-6 Astra's headline rates.</p>
+            <p>That makes Sol especially interesting for agent loops that may consume many tool calls, retries or long contexts. The correct comparison is not only raw quality: it is quality per successful task, latency, reasoning effort and total token consumption.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>BEST DEFAULT</span>
+            <strong>Evaluate Sol first when Astra is too expensive.</strong>
+            <p>Move to Astra only when your own workload shows that the incremental quality or reliability justifies the price premium.</p>
+            <a href="/models/gpt-6-astra/">Open GPT-6 Astra ↗</a>
+          </aside>
+        </section>
+
+        <section class="model-deep-section" id="pricing">
+          <div class="model-section-head"><p class="eyebrow">API PRICING</p><h2>GPT-6.1 Sol pricing, including long-context rates.</h2><p>OpenAI documents a pricing threshold above {threshold:,} input tokens. Once crossed, the higher multipliers apply across the full request.</p></div>
+          <div class="model-table-wrap"><table>
+            <thead><tr><th>Prompt size</th><th>Input / 1M</th><th>Cached input / 1M</th><th>Cache write / 1M</th><th>Output / 1M</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Up to {threshold:,} input tokens</th><td>{escape(catalog_price_label(price["input"]))}</td><td>{escape(catalog_price_label(price["cached_input"]))}</td><td>{escape(catalog_price_label(cache_write) if cache_write is not None else "—")}</td><td>{escape(catalog_price_label(price["output"]))}</td></tr>
+              <tr><th scope="row">Above {threshold:,} input tokens</th><td>{escape(catalog_price_label(long_input))}</td><td>{escape(catalog_price_label(long_cached))}</td><td>{escape(catalog_price_label(long_cache_write) if long_cache_write is not None else "—")}</td><td>{escape(catalog_price_label(long_output))}</td></tr>
+            </tbody>
+          </table></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>Long-context rule:</strong> input, cached input and cache-write rates double above the threshold, while output moves to 1.5× its standard rate.</p></div>
+            <div><span>02</span><p><strong>Applies to the full request:</strong> OpenAI's long-context rule is not a marginal surcharge on only the tokens beyond 272K.</p></div>
+            <div><span>03</span><p><strong>Cache economics matter:</strong> standard cached input is only {escape(catalog_price_label(price["cached_input"]))} per million tokens, so stable reusable prefixes can materially reduce large agent-loop costs.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">COST EXAMPLES</p><h2>Example GPT-6.1 Sol request costs.</h2><p>These examples use the verified standard token rates and exclude optional product-specific fees.</p></div>
+          <div class="model-decision-grid">
+            <article><span>10K IN + 2K OUT</span><h3>$0.04</h3><p>10K input is $0.02 and 2K output is $0.02.</p></article>
+            <article><span>100K IN + 10K OUT</span><h3>$0.30</h3><p>100K input is $0.20 and 10K output is $0.10.</p></article>
+            <article><span>80K CACHED + 20K NEW + 10K OUT</span><h3>$0.148</h3><p>20K uncached input is $0.04, 80K cached input is $0.008 and 10K output is $0.10.</p></article>
+            <article><span>300K IN + 20K OUT</span><h3>$1.50</h3><p>Because input exceeds 272K, 300K input is billed at $4/M ($1.20) and 20K output at $15/M ($0.30).</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="api">
+          <div class="model-section-head"><p class="eyebrow">API & CAPABILITIES</p><h2>How GPT-6.1 Sol behaves in production.</h2></div>
+          <div class="model-api-grid">
+            <div><span>RESPONSES API</span><strong>Primary tool-capable surface</strong><p>OpenAI documents tool calling for GPT-6.1 Sol through the Responses API.</p></div>
+            <div><span>CHAT COMPLETIONS</span><strong>Supported without tool calling</strong><p>Use Chat Completions for compatible text/image workflows that do not require tools.</p></div>
+            <div><span>REASONING</span><strong>low → max</strong><p>Reasoning effort supports low, medium, high, xhigh and max; medium is the documented default.</p></div>
+            <div><span>VISION</span><strong>Text + image input</strong><p>GPT-6.1 Sol accepts image input alongside text and produces text output.</p></div>
+            <div><span>LONG CONTEXT</span><strong>1.05M tokens</strong><p>The model supports one of the largest context windows in the current OpenAI catalog.</p></div>
+            <div><span>OUTPUT</span><strong>128K tokens</strong><p>OpenAI documents a 128,000-token maximum output.</p></div>
+            <div><span>TOOL USE</span><strong>Supported via Responses</strong><p>Useful for coding agents, computer-use loops and other workflows that need external actions.</p></div>
+            <div><span>DATA RESIDENCY</span><strong>US + EU</strong><p>OpenAI documents US and EU data residency for this model.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section model-split">
+          <div>
+            <p class="eyebrow">WHY RESPONSES API MATTERS</p>
+            <h2>Tool use is not interchangeable across API surfaces.</h2>
+            <p>For GPT-6.1 Sol, OpenAI explicitly documents tool calling on the Responses API. Chat Completions remains supported, but without tool calling. That distinction should be visible before a developer starts an integration, because choosing the wrong API surface can force a later migration.</p>
+            <p>For new agentic systems, prefer Responses when the workflow will use tools, computer interaction or multi-step orchestration. Keep Chat Completions for simpler compatibility paths where tools are unnecessary.</p>
+          </div>
+          <aside class="model-side-note">
+            <span>DEVELOPER RULE</span>
+            <strong>Need tools? Start with Responses API.</strong>
+            <p>Do not design a tool-heavy workflow around Chat Completions for this model and assume parity later.</p>
+          </aside>
+        </section>
+
+        <section class="model-deep-section" id="sol-vs-astra">
+          <div class="model-section-head"><p class="eyebrow">GPT-6.1 SOL VS GPT-6 ASTRA</p><h2>Cost is the clearest structural difference.</h2><p>Both models target hard reasoning, coding and agent work, but their standard token economics are very different.</p></div>
+          <div class="model-table-wrap"><table>
+            <thead><tr><th>Attribute</th><th>GPT-6.1 Sol</th><th>GPT-6 Astra</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Context</th><td>1.05M</td><td>1.05M</td></tr>
+              <tr><th scope="row">Max output</th><td>128K</td><td>128K</td></tr>
+              <tr><th scope="row">Standard input / 1M</th><td>$2</td><td>$10</td></tr>
+              <tr><th scope="row">Standard cached input / 1M</th><td>$0.10</td><td>$1</td></tr>
+              <tr><th scope="row">Standard output / 1M</th><td>$10</td><td>$50</td></tr>
+              <tr><th scope="row">Positioning</th><td>Near-Astra value tier</td><td>Top GPT-6 frontier tier</td></tr>
+            </tbody>
+          </table></div>
+          <div class="model-related-links">
+            <a href="/models/gpt-6-astra/"><span>MODEL REFERENCE</span><strong>Open GPT-6 Astra</strong><b>↗</b></a>
+            <a href="/models/gpt-6/"><span>FAMILY</span><strong>Explore GPT-6 models</strong><b>↗</b></a>
+            <a href="/compare/"><span>COMPARE</span><strong>Open Compare Engine</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="use-cases">
+          <div class="model-section-head"><p class="eyebrow">BEST-FIT WORKLOADS</p><h2>Where GPT-6.1 Sol makes the strongest economic case.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>CODING AGENTS</span><h3>Large codebases and multi-step changes</h3><p>1.05M context, 128K output and tool support make Sol a strong candidate for repository-scale coding and iterative engineering workflows.</p></article>
+            <article><span>COMPUTER USE</span><h3>Longer interaction loops</h3><p>OpenAI positions Sol for computer-use workloads where many steps can amplify both latency and token cost.</p></article>
+            <article><span>PROFESSIONAL WORK</span><h3>Complex documents and analysis</h3><p>The model targets demanding knowledge work where stronger reasoning is valuable but Astra's price may be difficult to justify at scale.</p></article>
+            <article><span>AGENTIC SYSTEMS</span><h3>Tools, retries and orchestration</h3><p>Sol's price profile becomes especially relevant when one user task fans out into multiple model calls or tool interactions.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">REASONING STRATEGY</p><h2>Do not default every request to max reasoning.</h2></div>
+          <div class="model-decision-grid">
+            <article><span>LOW / MEDIUM</span><h3>Routine production work</h3><p>Start lower for straightforward extraction, transformation or ordinary coding where latency and cost matter.</p></article>
+            <article><span>HIGH / XHIGH</span><h3>Difficult multi-step work</h3><p>Increase effort when the workload needs more planning, verification or deep reasoning and the quality gain is measurable.</p></article>
+            <article><span>MAX</span><h3>Use selectively</h3><p>Reserve the highest effort for cases where your evaluation shows it materially changes success rate; otherwise it can become an expensive default.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">DATA RESIDENCY & FAST MODE</p><h2>Deployment geography can change your serving options.</h2></div>
+          <div class="model-split">
+            <div><p>OpenAI documents US and EU data residency for GPT-6.1 Sol. This matters for organizations that need regional processing controls alongside frontier model access.</p><p>OpenAI also documents that Fast mode is not available when EU data residency is required. Teams should therefore test both latency and compliance requirements before assuming the same serving profile is available in every region.</p></div>
+            <aside class="model-side-note"><span>EU RESIDENCY</span><strong>Supported.</strong><p>Fast mode: unavailable with EU data residency.</p></aside>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">LIMITS & CAVEATS</p><h2>What to account for before standardizing on Sol.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>Long context has a price cliff.</strong> Crossing 272K input tokens reprices the full request, so prompt design can matter more than headline context capacity.</p></div>
+            <div><span>02</span><p><strong>Tool calling requires Responses API.</strong> Chat Completions support should not be mistaken for feature parity.</p></div>
+            <div><span>03</span><p><strong>Max reasoning is not automatically optimal.</strong> Higher effort can increase latency and usage; benchmark the lowest effort that meets your acceptance target.</p></div>
+            <div><span>04</span><p><strong>Knowledge cutoff is April 30, 2026.</strong> Later facts need retrieval, tools or supplied context.</p></div>
+            <div><span>05</span><p><strong>Astra can still win difficult tasks.</strong> Sol's strongest proposition is value, not a guarantee of equal capability on every workload.</p></div>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="faq">
+          <div class="model-section-head"><p class="eyebrow">FAQ</p><h2>GPT-6.1 Sol questions, answered.</h2></div>
+          <div class="model-faq">{faq_html}</div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Primary-source verification.</h2><p>Core model, pricing, lifecycle, product and safety claims are tied to OpenAI's official documentation and release material.</p></div>
+          <div class="model-sources">{sources}</div>
+        </section>
+      </section>
+      {model_change_watch_html(["gpt-6.1-sol"], "GPT-6.1 Sol: what changed.")}
+      {model_history_html(["gpt-6.1-sol"], "GPT-6.1 Sol verified history.")}
+    </main>{page_footer()}</body></html>'''
+
+
 def grok_46_reference_html():
     model = model_catalog_entry("grok-4.6")
     price = active_standard_price("grok-4.6")
@@ -15290,7 +15556,9 @@ def render_catalog_model_page(model_id, items):
     template = model.get("page_template")
 
     if template == "editorial-reference":
-        if model_id == "claude-fable-5-1":
+        if model_id == "gpt-6.1-sol":
+            page = gpt_61_sol_reference_html()
+        elif model_id == "claude-fable-5-1":
             page = claude_fable_51_reference_html(items)
         elif model_id == "gemini-3.8-flash":
             page = gemini_38_flash_reference_html(items)
