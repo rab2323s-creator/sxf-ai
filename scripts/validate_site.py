@@ -62,9 +62,24 @@ def validate_jsonld(path, text):
     blocks = re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', text, re.I | re.S)
     for raw in blocks:
         try:
-            json.loads(raw)
+            data = json.loads(raw)
         except Exception as exc:
             fail(f"{path}: invalid JSON-LD: {exc}")
+        if path == ROOT / "models" / "pricing" / "index.html":
+            graph = data.get("@graph", [])
+            pages = [node for node in graph if node.get("@type") == "CollectionPage"]
+            breadcrumbs = [node for node in graph if node.get("@type") == "BreadcrumbList"]
+            if len(pages) != 1 or len(breadcrumbs) != 1:
+                fail(f"{path}: expected one CollectionPage and BreadcrumbList")
+            target = pages[0].get("breadcrumb", {}).get("@id")
+            breadcrumb = breadcrumbs[0]
+            items = breadcrumb.get("itemListElement", [])
+            if not target or breadcrumb.get("@id") != target or len(items) < 2:
+                fail(f"{path}: unresolved or incomplete breadcrumb JSON-LD")
+            if any(item.get("@type") != "ListItem" or item.get("position") != index
+                   or not item.get("name") or not item.get("item")
+                   for index, item in enumerate(items, 1)):
+                fail(f"{path}: invalid breadcrumb list items")
 
 def validate_html(path):
     text = path.read_text(encoding="utf-8")
