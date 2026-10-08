@@ -61,6 +61,10 @@
           <label><span>Output</span><input id="compareOutputTokens" type="number" min="0" step="1000" value="10000"></label>
         </div>
         <div class="compare-builder-volume"><label for="compareMonthlyRequests">Monthly requests</label><input id="compareMonthlyRequests" type="number" min="1" max="100000000" step="100" value="1000"><small>Estimates exclude taxes, tool calls and platform fees.</small></div>
+        <section class="compare-decision-shell" aria-label="Decision assistant">
+          <div class="compare-decision-toolbar"><label for="compareDecisionGoal">Your priority <select id="compareDecisionGoal"><option value="budget">Lowest direct cost</option><option value="coding">Coding &amp; agents</option><option value="research">Research &amp; science</option><option value="business">Business &amp; knowledge</option></select></label><label class="compare-decision-check"><input type="checkbox" id="compareDecisionEvidenceOnly"> Only same-configuration evaluations</label><button type="button" id="compareDecisionShare">Copy scenario link ↗</button><span id="compareDecisionShareStatus" role="status"></span></div>
+          <div id="compareDecisionCockpit" class="compare-decision-cockpit" aria-live="polite"><p>Loading verified decision data…</p></div>
+        </section>
         <div id="compareBuilderError" class="compare-builder-error" role="alert" hidden></div><div id="compareBuilderResults" class="compare-builder-results" aria-live="polite"></div>
         <section id="compareEvidence" class="compare-evidence" aria-live="polite"></section><div id="compareCuratedLink" class="compare-curated-link" hidden></div>
       </section>
@@ -169,4 +173,4 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><link rel="stylesheet" href="/compare/compare-enhancements.css"><script src="/compare/decision-engine.js" defer></script><script src="/compare/compare.js" defer></script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><link rel="stylesheet" href="/compare/compare-enhancements.css"><script src="/compare/decision-engine.js" defer></script><script src="/compare/compare.js" defer></script><script src="/compare/decision-cockpit.js" defer></script></body></html>
