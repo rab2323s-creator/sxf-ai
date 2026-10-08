@@ -18742,11 +18742,16 @@ def benchmark_page_html(benchmark):
         if row["benchmark_id"] == benchmark_id
     ]
     canonical = f'{BASE_URL}/evaluations/{benchmark_id}/'
+    is_aa_lcr = benchmark_id == "aa-lcr-v1.1"
     is_aa_briefcase = benchmark_id == "aa-briefcase-v1.1"
     is_aa_intelligence = benchmark_id == "aa-intelligence-index-v4.3.2"
     page_title = f'{benchmark["name"]} {benchmark.get("version") or ""} — AI Model Results | SXF / AI'.replace("  "," ")
     page_description = f'{benchmark["name"]} benchmark observations with evaluator provenance, model configuration and comparability groups.'
     page_h1 = benchmark["name"] + (f' v{benchmark["version"]}' if benchmark.get("version") else "")
+    if is_aa_lcr:
+        page_title = "AA-LCR v1.1 Benchmark: Long Context Reasoning Scores | SXF / AI"
+        page_description = "AA-LCR v1.1 explained: Artificial Analysis long-context reasoning scores, pass@1, model results, methodology, v1.0 changes and dataset limitations."
+        page_h1 = "AA-LCR v1.1: Long Context Reasoning Benchmark & Results"
     if is_aa_briefcase:
         page_title = "AA-Briefcase v1.1 Benchmark — AI Agent Knowledge Work Results | SXF / AI"
         page_description = "AA-Briefcase v1.1 benchmark explained: compare SXF-tracked AI agent knowledge-work results, Elo scores, methodology, model configurations and limitations."
@@ -18830,6 +18835,12 @@ def benchmark_page_html(benchmark):
                 "Reasoning effort, fallback behavior and benchmark-defined tools can materially affect results. SXF keeps those settings attached to each observation."
             ),
         ]
+
+    lcr_deep_dive = ""
+    lcr_faq = []
+    if is_aa_lcr:
+        from aa_lcr_reference import render_aa_lcr_reference
+        lcr_deep_dive, lcr_faq = render_aa_lcr_reference(benchmark, observations, MODEL_EVALUATION_CATALOG["source_verified"], BASE_URL)
 
     schema = {
         "@context":"https://schema.org",
@@ -19245,6 +19256,7 @@ def benchmark_page_html(benchmark):
       </section>
       {briefcase_deep_dive}
       {intelligence_deep_dive}
+      {lcr_deep_dive}
       <section class="evaluation-benchmark-method shell">
         <div class="compare-method-head"><p class="eyebrow">SXF DATA METHOD</p><h2>Read every score with its configuration.</h2><p>SXF does not merge scores from incompatible benchmark versions or comparable groups. Reasoning effort, tools, fallback behavior, evaluator and benchmark version stay attached to every observation.</p></div>
         <div class="model-related-links"><a href="{escape(benchmark["methodology_url"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>METHODOLOGY</span><strong>Open evaluator methodology</strong><b>↗</b></a><a href="/data/model-evaluations.json"><span>DATASET</span><strong>Open raw observations</strong><b>↗</b></a></div>
