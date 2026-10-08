@@ -10,3 +10,13 @@
 .compare-builder-volume input{font:inherit;max-width:165px;min-width:90px;padding:10px 12px;color:inherit;background:#101722;border:1px solid #596b79;border-radius:9px}
 .compare-builder-volume small{opacity:.78}
 @media(max-width:640px){.compare-builder-presets button{flex:1 1 43%}.compare-builder-volume input{width:130px}}
+
+.compare-evidence{margin:28px 0;border-top:1px solid rgba(143,245,218,.22);padding-top:24px}
+.compare-evidence-head h3{font-size:clamp(1.2rem,2vw,1.65rem);margin:6px 0}
+.compare-evidence-head p,.compare-evidence-note{opacity:.78;line-height:1.6}
+.compare-evidence-head>span{font-size:.75rem;letter-spacing:.13em;color:#8ff5da}
+.compare-evidence-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px;margin:18px 0 26px}
+.compare-evidence-card{border:1px solid rgba(143,245,218,.18);border-radius:16px;padding:19px;background:rgba(143,245,218,.035)}
+.compare-evidence-card h4{margin:0 0 8px;font-size:1.05rem}.compare-evidence-card a{color:#8ff5da}
+.compare-engine-cautions:not(:empty){padding:8px 15px;border-inline-start:3px solid #dfa870}
+.compare-builder-error[hidden]{display:none}
