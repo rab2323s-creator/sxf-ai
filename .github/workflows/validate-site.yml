@@ -23,6 +23,7 @@ jobs:
           python-version: "3.12"
       - name: Syntax check
         run: |
+          python -m py_compile scripts/ensure_compare_v2.py
           python -m py_compile scripts/update_news.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
           node --check models/pricing/pricing.js
           node --check tools/ai-model-cost-calculator/calculator.js
@@ -42,9 +43,10 @@ jobs:
           python tests/test_ai_auto_enrichment.py
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
-      - name: Guard Compare V2 during content regeneration
+      - name: Restore and verify Compare V2 after regeneration
         run: |
-          python -c "from pathlib import Path; h=Path('compare/index.html').read_text(); assert 'compareDecisionCockpit' in h and '/compare/decision-cockpit.js' in h, 'Compare cockpit lost during rebuild'"
+          python scripts/ensure_compare_v2.py
+          python scripts/ensure_compare_v2.py --check
       - name: Prepare AI enrichment candidates
         run: python scripts/prepare_ai_enrichment.py
       - name: Render reviewed AI preview
