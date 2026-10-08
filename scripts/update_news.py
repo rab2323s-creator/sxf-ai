@@ -2637,96 +2637,44 @@ def select_brief_items(items, limit=5):
             break
     return selected
 
+def signal_processing_context():
+    from signal_processing import SignalProcessingContext
+    return SignalProcessingContext(
+        clean_summary=clean_summary,
+        categorize=categorize,
+        classify_tags=classify_tags,
+        slug_aliases=SLUG_ALIASES,
+        signal_slug=signal_slug,
+        base_url=BASE_URL,
+        signal_score=signal_score,
+        seo_quality=seo_quality,
+        seo_signal_eligible=seo_signal_eligible,
+        editorial_units=editorial_units,
+        valid_url=valid_url,
+        parse_date=parse_date,
+        source_by_name=SOURCE_BY_NAME,
+        source_expansion_names=SOURCE_EXPANSION_NAMES,
+        source_expansion_max_current_per_source=SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE,
+        source_expansion_max_current_total=SOURCE_EXPANSION_MAX_CURRENT_TOTAL,
+        max_items=MAX_ITEMS,
+    )
+
+
 def prepare_items(items):
-    prepared = []
-    for item in items:
-        row = dict(item)
-        row["summary"] = clean_summary(row.get("summary", ""))
-        row["category"] = categorize(row["title"], row["source"])
-        row["tags"] = classify_tags(row["title"], row["source"], row["category"])
-        row["signal_slug"] = SLUG_ALIASES.get(row["url"]) or row.get("signal_slug") or signal_slug(row)
-        row["signal_url"] = f'{BASE_URL}/signals/{row["signal_slug"]}/'
-        score, factors = signal_score(row)
-        row["signal_score"] = score
-        row["score_factors"] = factors
-        quality_score, quality_factors = seo_quality(row)
-        row["seo_quality_score"] = quality_score
-        row["seo_quality_factors"] = quality_factors
-        row["seo_eligible"] = seo_signal_eligible(row, quality_score)
-        row["editorial"] = editorial_units(row)
-        prepared.append(row)
-    return prepared
+    from signal_processing import prepare_items as _prepare_items
+    return _prepare_items(items, signal_processing_context())
 
 def load_items(path):
-    if not path.exists():
-        return []
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        return payload.get("items", []) if isinstance(payload, dict) else []
-    except Exception:
-        return []
+    from signal_processing import load_items as _load_items
+    return _load_items(path)
 
 def merge_archive(existing_items, incoming_items):
-    now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    by_url = {item.get("url"): dict(item) for item in existing_items if valid_url(item.get("url", ""))}
-
-    for incoming in incoming_items:
-        url = incoming["url"]
-        previous = by_url.get(url, {})
-        merged = dict(previous)
-        merged.update(incoming)
-        if not merged.get("summary") and previous.get("summary"):
-            merged["summary"] = previous["summary"]
-            merged["summary_origin"] = previous.get("summary_origin", "")
-        merged["category"] = categorize(merged["title"], merged["source"])
-        merged["tags"] = classify_tags(merged["title"], merged["source"], merged["category"])
-        merged["first_seen"] = previous.get("first_seen") or now_iso
-
-        before = {
-            "title": previous.get("title"),
-            "source": previous.get("source"),
-            "published": previous.get("published"),
-            "category": previous.get("category"),
-            "summary": clean_summary(previous.get("summary", "")),
-            "tags": previous.get("tags", []),
-        }
-        after = {
-            "title": merged.get("title"),
-            "source": merged.get("source"),
-            "published": merged.get("published"),
-            "category": merged.get("category"),
-            "summary": clean_summary(merged.get("summary", "")),
-            "tags": merged.get("tags", []),
-        }
-        merged["modified_at"] = now_iso if before != after else previous.get("modified_at", now_iso)
-        merged["last_seen"] = now_iso
-        by_url[url] = merged
-
-    valid = []
-    for item in by_url.values():
-        if not valid_url(item.get("url", "")):
-            continue
-        if parse_date(item.get("published", "")) is None:
-            continue
-        if not item.get("first_seen"):
-            item["first_seen"] = now_iso
-        if not item.get("modified_at"):
-            item["modified_at"] = now_iso
-        valid.append(item)
-    valid.sort(key=lambda x: parse_date(x["published"]), reverse=True)
-    return prepare_items(valid)
+    from signal_processing import merge_archive as _merge_archive
+    return _merge_archive(existing_items, incoming_items, signal_processing_context())
 
 def client_item(item):
-    return {
-        "title": item["title"],
-        "url": item["url"],
-        "signal_url": item["signal_url"],
-        "source": item["source"],
-        "published": item["published"],
-        "category": item["category"],
-        "tags": item.get("tags", []),
-        "signal_score": item.get("signal_score", 0),
-    }
+    from signal_processing import client_item as _client_item
+    return _client_item(item)
 
 def normalize_model_text(value):
     return value.replace("‑", "-").replace("–", "-").replace("—", "-")
@@ -10926,40 +10874,8 @@ def update_sitemap(items):
 
 
 def select_current_items(archive, cutoff):
-    selected = []
-    expansion_counts = {name: 0 for name in SOURCE_EXPANSION_NAMES}
-    expansion_total = 0
-
-    for item in archive:
-        published = parse_date(item.get("published", ""))
-        if published is None or published < cutoff:
-            continue
-
-        source = item.get("source", "")
-        source_config = SOURCE_BY_NAME.get(source, {})
-        status = source_config.get("status", "live")
-        if status in {"shadow", "disabled"}:
-            continue
-
-        max_current = source_config.get("max_current", MAX_ITEMS)
-        source_selected = sum(1 for selected_item in selected if selected_item.get("source") == source)
-        if source_selected >= max_current:
-            continue
-
-        if source in SOURCE_EXPANSION_NAMES:
-            if expansion_counts[source] >= SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
-                continue
-            if expansion_total >= SOURCE_EXPANSION_MAX_CURRENT_TOTAL:
-                continue
-            expansion_counts[source] += 1
-            expansion_total += 1
-
-        selected.append(item)
-        if len(selected) >= MAX_ITEMS:
-            break
-
-    return selected
-
+    from signal_processing import select_current_items as _select_current_items
+    return _select_current_items(archive, cutoff, signal_processing_context())
 
 def render_site(archive, current):
     """Rebuild HTML, JSON-LD and sitemap from in-memory prepared signal records."""
