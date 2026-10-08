@@ -95,30 +95,7 @@
   const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
   const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
 
-  const periodForDate = (model, date) => {
-    const schedule = model?.pricing?.standard || [];
-    return schedule.find(period => {
-      const afterStart = date >= period.start;
-      const beforeEnd = !period.end || date <= period.end;
-      return afterStart && beforeEnd;
-    }) || null;
-  };
-
-  const effectiveRates = (model, date, totalInput) => {
-    const period = periodForDate(model, date);
-    if (!period) return null;
-    const rates = {...period};
-    const longRule = model?.pricing?.long_context;
-    const long = Boolean(longRule && totalInput > Number(longRule.threshold_input_tokens));
-    if (long) {
-      for (const field of ["input", "cached_input", "cache_write", "output"]) {
-        if (typeof rates[field] === "number" && typeof longRule.multipliers?.[field] === "number") {
-          rates[field] *= longRule.multipliers[field];
-        }
-      }
-    }
-    return {rates, long, longRule};
-  };
+  const {periodForDate, effectiveRates, utcToday} = window.SXFPricing;
 
   const estimate = (model, date, input, cached, output) => {
     const effective = effectiveRates(model, date, input + cached);
@@ -462,7 +439,7 @@
     if (willOpen) render();
   });
 
-  fetch("/data/model-pricing.json", {cache: "no-cache"})
+  fetch("/data/model-pricing.json", {cache: "no-store"})
     .then(response => {
       if (!response.ok) throw new Error("Could not load model pricing catalog");
       return response.json();
@@ -474,7 +451,7 @@
       appendModelGroups(modelSelect);
       appendModelGroups(compareSelect, true);
       if (byId.has("gpt-6-sol")) modelSelect.value = "gpt-6-sol";
-      billingDate.value = data.source_verified || new Date().toISOString().slice(0, 10);
+      billingDate.value = utcToday();
       modelCountNode.textContent = String(data.models.length);
       providerCountNode.textContent = String(new Set(data.models.map(model => model.provider)).size);
       verifiedDateNode.textContent = data.source_verified || "Current";

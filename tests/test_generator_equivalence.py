@@ -83,9 +83,13 @@ def main():
             k for k in sorted(old_manifest.keys() | new_manifest.keys())
             if old_manifest.get(k) != new_manifest.get(k)
         ]
-        assert not changed, (
-            f"Old and new renderers differ in {len(changed)} output files: "
-            f"{changed[:35]}"
+        # These rendered pages intentionally differ after fixing effective-date
+        # pricing and adding the shared browser pricing policy.
+        expected_pricing_changes = {"index.html", "compare/index.html", "models/pricing/index.html"}
+        unexpected = [name for name in changed if name not in expected_pricing_changes]
+        assert not unexpected, (
+            f"Unexpected old/new renderer differences in {len(unexpected)} output files: "
+            f"{unexpected[:35]}"
         )
         for name in ("archive.json", "news.json", "model-history.json", "source-shadow.json"):
             source = (ROOT / "data" / name).read_bytes()

@@ -95,8 +95,14 @@ jobs:
         run: python scripts/render_ai_enrichment_preview.py
       - name: Review preview safeguards
         run: python tests/test_ai_enrichment_review.py
+      - name: Check shared pricing policy
+        run: |
+          node --check assets/pricing-policy.js
+          node tests/test_pricing_policy.cjs
       - name: Validate generated site
         run: python scripts/validate_site.py
+      - name: Block cross-page pricing drift
+        run: python tests/test_pricing_regression.py
       - name: Commit generated changes
         if: github.event_name != 'pull_request'
         run: |
