@@ -644,9 +644,9 @@
       }
     },
     "gemini-3.7-flash": {
-      "last_event_verified_at": "2026-10-03",
-      "last_event_id": "evt_0a970ec1e1968aacb2ac",
-      "snapshot_hash": "a254ee0449cf259a4ecf8680e9f64598a8a865dd3c0af5016d4b04bb1c4350d2",
+      "last_event_verified_at": "2026-10-07",
+      "last_event_id": "evt_012e765dfb17b4462d67",
+      "snapshot_hash": "269c50cc959db25120cf45e0c6a8f56b4a9920b9651b8f56f47264bbe7eafb32",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini 3",
@@ -661,7 +661,7 @@
             "medium",
             "high"
           ],
-          "default": null
+          "default": "medium"
         },
         "modalities": {
           "input": [
@@ -6587,7 +6587,41 @@
       ],
       "event_id": "evt_bcf9497a12948460c474",
       "event_hash": "bcf9497a12948460c474865534d0de33992e4d5a85cbe5bed44866e3676c188f"
+    },
+    {
+      "sequence": 72,
+      "type": "model_changed",
+      "model_id": "gemini-3.7-flash",
+      "verified_at": "2026-10-07",
+      "previous_event_hash": "bcf9497a12948460c474865534d0de33992e4d5a85cbe5bed44866e3676c188f",
+      "changes": [
+        {
+          "field": "reasoning",
+          "change_type": "reasoning_change",
+          "before": {
+            "type": "thinking level",
+            "levels": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": null
+          },
+          "after": {
+            "type": "thinking level",
+            "levels": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "medium"
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash"
+        }
+      ],
+      "event_id": "evt_012e765dfb17b4462d67",
+      "event_hash": "012e765dfb17b4462d67248194fff0e3c4e9fa833265c407bcb883b166314e35"
     }
   ],
-  "chain_head": "bcf9497a12948460c474865534d0de33992e4d5a85cbe5bed44866e3676c188f"
+  "chain_head": "012e765dfb17b4462d67248194fff0e3c4e9fa833265c407bcb883b166314e35"
 }
