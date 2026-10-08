@@ -24,6 +24,7 @@ jobs:
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_compare_v2.py
+          python -m py_compile scripts/ensure_model_evaluation_sections.py
           python -m py_compile scripts/update_news.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
           node --check models/pricing/pricing.js
           node --check tools/ai-model-cost-calculator/calculator.js
@@ -38,6 +39,8 @@ jobs:
         run: python tests/test_priority_evaluations.py
       - name: Validate 25-model independent benchmark expansion
         run: python tests/test_evaluation_coverage_25.py
+      - name: Validate 35-model evaluation expansion
+        run: python tests/test_evaluation_coverage_35.py
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
       - name: AI enrichment dry-run tests
@@ -54,6 +57,10 @@ jobs:
           python scripts/ensure_compare_v2.py
           python scripts/ensure_compare_v2.py --check
           python tests/test_compare_regeneration.py
+      - name: Restore model evaluation evidence cards after page generation
+        run: |
+          python scripts/ensure_model_evaluation_sections.py
+          python scripts/ensure_model_evaluation_sections.py --check
       - name: Prepare AI enrichment candidates
         run: python scripts/prepare_ai_enrichment.py
       - name: Render reviewed AI preview

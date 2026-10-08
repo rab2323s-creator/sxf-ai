@@ -10,7 +10,7 @@ catalog=json.loads((root/"data/model-pricing.json").read_text())
 models={m["model_id"] for m in catalog["models"]}
 benchmarks={b["benchmark_id"] for b in data["benchmarks"]}
 prior={o["model_id"] for o in data["observations"] if o["evidence_type"]=="independent"}
-assert len(prior)==25, f"Expected 25 models with independent observations; got {len(prior)}"
+assert len(prior)>=25, f"Expected at least the previously verified 25 models; got {len(prior)}"
 entries=manifest["entries"]
 assert len(entries)==13 and len({e["model_id"] for e in entries})==13
 expected={}
