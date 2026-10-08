@@ -81,7 +81,7 @@
   const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
   const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
 
-  const {utcToday} = window.SXFPricing;
+  const {utcToday, periodForDate} = window.SXFPricing;
   const effectiveRates = (model, totalInput) => {
     if (!isTokenCalculatorModel(model)) return null;
     return window.SXFPricing.effectiveRates(model, utcToday(), totalInput);
@@ -113,7 +113,7 @@
   };
 
   const pricingLabel = model => {
-    const p = periodForDate(model, catalog.source_verified);
+    const p = periodForDate(model, utcToday());
     if (!p) return model.pricing_status || "not-published";
     const basis = model.pricing_basis || {};
     if (basis.meter !== "tokens") {
@@ -183,8 +183,8 @@
     errors.hidden = true;
     const leftWarnings = engine.capacityWarnings(left, task);
     const rightWarnings = engine.capacityWarnings(right, task);
-    const leftCost = leftWarnings.length ? null : engine.pricing(left, task, catalog.source_verified);
-    const rightCost = rightWarnings.length ? null : engine.pricing(right, task, catalog.source_verified);
+    const leftCost = leftWarnings.length ? null : engine.pricing(left, task, utcToday());
+    const rightCost = rightWarnings.length ? null : engine.pricing(right, task, utcToday());
     const lc = leftCost?.available ? {total:leftCost.total,effective:{long:leftCost.long}} : null;
     const rc = rightCost?.available ? {total:rightCost.total,effective:{long:rightCost.long}} : null;
     let verdict = "No direct cost conclusion: one or both prices are unavailable or this workload exceeds published limits.";
