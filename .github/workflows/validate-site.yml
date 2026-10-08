@@ -42,6 +42,9 @@ jobs:
           python tests/test_ai_auto_enrichment.py
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
+      - name: Guard Compare V2 during content regeneration
+        run: |
+          python -c "from pathlib import Path; h=Path('compare/index.html').read_text(); assert 'compareDecisionCockpit' in h and '/compare/decision-cockpit.js' in h, 'Compare cockpit lost during rebuild'"
       - name: Prepare AI enrichment candidates
         run: python scripts/prepare_ai_enrichment.py
       - name: Render reviewed AI preview
