@@ -72,7 +72,7 @@ def check_actual_views():
           "Compare hub card rate mismatch")
     compare_detail = html_for("compare/gemini-3-8-flash-vs-gemini-3-7-flash/index.html")
     detail_match = re.search(
-        r'data-compare-model="gemini-3\\.7-flash"([\\s\\S]*?)</article>',
+        r'data-compare-model="gemini-3\.7-flash"([\s\S]*?)</article>',
         compare_detail,
     )
     check(detail_match is not None, "Compare detail Gemini 3.7 facts missing")
