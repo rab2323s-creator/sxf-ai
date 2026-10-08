@@ -1434,7 +1434,7 @@
           "medium",
           "high"
         ],
-        "default": null
+        "default": "medium"
       },
       "modalities": {
         "input": [
@@ -1450,15 +1450,20 @@
       },
       "positioning": "Google general-purpose Flash model for high-throughput multimodal reasoning, coding, and agent workflows.",
       "sxf_url": "/models/gemini-3-7-flash/",
-      "page_template": "catalog-reference",
+      "page_template": "editorial-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
         "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://ai.google.dev/gemini-api/docs/changelog"
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.7",
+        "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+        "https://ai.google.dev/gemini-api/docs/latest-model"
       ],
       "notes": [
-        "Knowledge cutoff is left unknown because the cited model documentation does not publish one.",
-        "The reasoning default is not inferred when the official model documentation does not state a default."
+        "Gemini 3.7 Flash is a stable, generally available model and remains fully supported, while Gemini 3.8 Flash is the newer Flash generation.",
+        "Google documents medium as the default thinking level, with low and high also supported; minimal is not supported.",
+        "Introductory Standard pricing runs through December 31, 2026, with higher Standard rates beginning January 1, 2027.",
+        "The model supports Batch, Flex and Priority inference, context caching, code execution, computer use (preview), file search, function calling, Google Search and Maps grounding, structured outputs, URL context and agentic video understanding."
       ],
       "pricing": {
         "standard": [
@@ -1479,7 +1484,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-03",
+        "verified_at": "2026-10-07",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
