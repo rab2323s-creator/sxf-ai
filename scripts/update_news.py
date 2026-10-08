@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
+from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -1898,28 +1899,12 @@ def relative_time(date_str):
     return d.strftime("%b %-d")
 
 def featured_html(item):
-    href = item.get("signal_url", item["url"])
-    return f'''<a class="featured-story" href="{escape(href, quote=True)}">
-  <div class="featured-main">
-    <div>
-      <div class="featured-topline"><strong>{escape(item["source"])}</strong><i></i><span>{escape(relative_time(item["published"]))}</span></div>
-      <h3 class="featured-title">{escape(item["title"])}</h3>
-    </div>
-    <div class="featured-footer"><span class="category-pill">{escape(item["category"])}</span><span class="open-label">Read signal <b>↗</b></span></div>
-  </div>
-  <div class="featured-visual" aria-hidden="true"><span class="signal-cross">+</span><span class="signal-number">01</span></div>
-</a>'''
+    """Compatibility entrypoint for the featured homepage card."""
+    return render_featured_card(item, FeedCardContext(relative_time=relative_time))
 
 def cards_html(items):
-    rows = []
-    for item in items:
-        href = item.get("signal_url", item["url"])
-        rows.append(f'''<a class="story-card" href="{escape(href, quote=True)}">
-  <div class="story-card-top"><span class="story-source">{escape(item["source"])}</span><span class="story-time">{escape(relative_time(item["published"]))}</span></div>
-  <h3 class="story-title">{escape(item["title"])}</h3>
-  <div class="story-card-bottom"><span class="category-pill">{escape(item["category"])}</span><span class="story-arrow" aria-hidden="true">↗</span></div>
-</a>''')
-    return "\n".join(rows)
+    """Compatibility entrypoint for the homepage story cards."""
+    return render_story_cards(items, FeedCardContext(relative_time=relative_time))
 
 def replace_block(source, start, end, body):
     pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
@@ -2183,15 +2168,8 @@ def update_index(items):
 
 
 def section_cards_html(items):
-    rows = []
-    for item in items[:12]:
-        href = item.get("signal_url", item["url"])
-        rows.append(f'''<a class="intel-card" href="{escape(href, quote=True)}">
-  <div class="intel-meta"><strong>{escape(item["source"])}</strong><span>{escape(relative_time(item["published"]))}</span></div>
-  <h3>{escape(item["title"])}</h3>
-  <div class="intel-foot"><span>{escape(item["category"])}</span><b>↗</b></div>
-</a>''')
-    return "\n".join(rows)
+    """Compatibility entrypoint for category section cards."""
+    return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
 def update_section_pages(items):
     for category, path in SECTION_PAGES.items():

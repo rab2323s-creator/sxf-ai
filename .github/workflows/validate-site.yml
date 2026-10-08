@@ -29,11 +29,13 @@ jobs:
         run: python tests/test_snapshot_rendering.py
       - name: Signal processing regression tests
         run: python tests/test_signal_processing.py
+      - name: Feed card rendering regression tests
+        run: python tests/test_feed_card_rendering.py
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_compare_v2.py
           python -m py_compile scripts/ensure_model_evaluation_sections.py
-          python -m py_compile scripts/sitemap_generation.py scripts/signal_processing.py scripts/update_news.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
+          python -m py_compile scripts/sitemap_generation.py scripts/signal_processing.py scripts/feed_card_rendering.py scripts/update_news.py tests/test_feed_card_rendering.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
           node --check models/pricing/pricing.js
           node --check tools/ai-model-cost-calculator/calculator.js
           node --check models/explorer.js
