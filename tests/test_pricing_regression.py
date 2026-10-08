@@ -66,11 +66,20 @@ def check_actual_views():
           "Pricing table input mismatch")
     check(f'<td class="price">{generator.catalog_price_label(active["output"])}</td>' in row.group(),
           "Pricing table output mismatch")
-    for page in ["compare/index.html", "compare/gemini-3-8-flash-vs-gemini-3-7-flash/index.html"]:
-        content = html_for(page)
-        check(f'Gemini 3.7 Flash: {generator.catalog_price_label(active["input"])}/'
-              f'{generator.catalog_price_label(active["output"])}' in content,
-              f"Compare display rate drift in {page}")
+    compare_hub = html_for("compare/index.html")
+    check(f'Gemini 3.7 Flash: {generator.catalog_price_label(active["input"])}/'
+          f'{generator.catalog_price_label(active["output"])}' in compare_hub,
+          "Compare hub card rate mismatch")
+    compare_detail = html_for("compare/gemini-3-8-flash-vs-gemini-3-7-flash/index.html")
+    detail_match = re.search(
+        r'data-compare-model="gemini-3\\.7-flash"([\\s\\S]*?)</article>',
+        compare_detail,
+    )
+    check(detail_match is not None, "Compare detail Gemini 3.7 facts missing")
+    check(f'<dt>Input / MTok</dt><dd>{generator.catalog_price_label(active["input"])}</dd>'
+          in detail_match.group(0), "Compare detail input differs from active catalog")
+    check(f'<dt>Output / MTok</dt><dd>{generator.catalog_price_label(active["output"])}</dd>'
+          in detail_match.group(0), "Compare detail output differs from active catalog")
     expected_cost = (100_000 * active["input"] + 10_000 * active["output"]) / 1_000_000
     calculated_cost, rates = generator.estimate_standard_cost(MODEL_ID, 100_000, 10_000)
     check(abs(calculated_cost - expected_cost) < 1e-10, "Calculator rate differs from displayed Standard price")
