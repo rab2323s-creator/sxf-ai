@@ -39,11 +39,13 @@ jobs:
         run: python tests/test_signal_article_rendering.py
       - name: Model provider directory HTML and SEO regression tests
         run: python tests/test_model_provider_index_rendering.py
+      - name: Comparison pages HTML and SEO regression tests
+        run: python tests/test_comparison_page_rendering.py
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_compare_v2.py
           python -m py_compile scripts/ensure_model_evaluation_sections.py
-          python -m py_compile scripts/sitemap_generation.py scripts/signal_processing.py scripts/feed_card_rendering.py scripts/html_shell.py scripts/signal_page_rendering.py scripts/signal_article_rendering.py scripts/model_provider_index_rendering.py scripts/update_news.py tests/test_signal_article_rendering.py tests/test_model_provider_index_rendering.py tests/test_feed_card_rendering.py tests/test_html_shell.py tests/test_signal_page_rendering.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
+          python -m py_compile scripts/sitemap_generation.py scripts/signal_processing.py scripts/feed_card_rendering.py scripts/html_shell.py scripts/signal_page_rendering.py scripts/signal_article_rendering.py scripts/model_provider_index_rendering.py scripts/comparison_page_rendering.py scripts/update_news.py tests/test_comparison_page_rendering.py tests/test_signal_article_rendering.py tests/test_model_provider_index_rendering.py tests/test_feed_card_rendering.py tests/test_html_shell.py tests/test_signal_page_rendering.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py
           node --check models/pricing/pricing.js
           node --check tools/ai-model-cost-calculator/calculator.js
           node --check models/explorer.js
