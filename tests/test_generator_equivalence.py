@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""Compare the previous and revised renderers against the SAME saved input.
+
+The legacy script is imported under another module name so its two historical
+__main__ guards do not fetch feeds. Only its final effective page rendering
+functions are invoked. The revised generator uses --render-only.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def manifest(root):
+    paths = list(root.rglob("*.html")) + [root / "sitemap.xml", root / "_redirects"]
+    return {
+        str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in paths
+        if p.is_file() and ".git" not in p.parts
+    }
+
+
+LEGACY_RENDER = """
+import importlib.util
+import json
+import sys
+from pathlib import Path
+root = Path.cwd()
+sys.path.insert(0, str(root / 'scripts'))
+spec = importlib.util.spec_from_file_location(
+    'legacy_sxf_generator', root / 'scripts' / 'update_news.py'
+)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+archive = json.loads((root / 'data' / 'archive.json').read_text())['items']
+current_rows = json.loads((root / 'data' / 'news.json').read_text())['items']
+by_url = {item['url']: item for item in archive}
+current = [by_url[item['url']] for item in current_rows]
+module.update_index(current)
+module.update_section_pages(current)
+module.build_discovery_pages(archive, current)
+module.normalize_static_shells()
+module.update_sitemap(archive)
+"""
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--baseline", default="origin/main")
+    args = parser.parse_args()
+    legacy_code = subprocess.check_output(
+        ["git", "show", f"{args.baseline}:scripts/update_news.py"],
+        cwd=ROOT,
+    ).decode("utf-8")
+
+    with tempfile.TemporaryDirectory(prefix="sxf-render-parity-") as d:
+        temp_root = Path(d)
+        old_root, new_root = temp_root / "old", temp_root / "new"
+        ignore = shutil.ignore_patterns(".git", "__pycache__", "*.pyc", ".pytest_cache")
+        shutil.copytree(ROOT, old_root, ignore=ignore)
+        shutil.copytree(ROOT, new_root, ignore=ignore)
+        (old_root / "scripts" / "update_news.py").write_text(legacy_code, encoding="utf-8")
+
+        for root in (old_root, new_root):
+            assert (root / "data" / "archive.json").is_file()
+            assert (root / "data" / "news.json").is_file()
+
+        subprocess.run([sys.executable, "-c", LEGACY_RENDER], check=True, cwd=old_root)
+        subprocess.run(
+            [sys.executable, "scripts/update_news.py", "--render-only"],
+            check=True, cwd=new_root,
+        )
+        old_manifest, new_manifest = manifest(old_root), manifest(new_root)
+        changed = [
+            k for k in sorted(old_manifest.keys() | new_manifest.keys())
+            if old_manifest.get(k) != new_manifest.get(k)
+        ]
+        assert not changed, (
+            f"Old and new renderers differ in {len(changed)} output files: "
+            f"{changed[:35]}"
+        )
+        for name in ("archive.json", "news.json", "model-history.json", "source-shadow.json"):
+            source = (ROOT / "data" / name).read_bytes()
+            assert (old_root / "data" / name).read_bytes() == source
+            assert (new_root / "data" / name).read_bytes() == source
+        print(
+            f"PASS: {len(old_manifest)} HTML, sitemap and redirect artifacts "
+            "are byte-identical with legacy renderer using the same snapshots"
+        )
+
+
+if __name__ == "__main__":
+    main()
