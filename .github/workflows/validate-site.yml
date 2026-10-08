@@ -27,6 +27,8 @@ jobs:
         run: python tests/test_generator_definitions.py
       - name: Offline snapshot rendering unit tests
         run: python tests/test_snapshot_rendering.py
+      - name: Signal processing regression tests
+        run: python tests/test_signal_processing.py
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_compare_v2.py
