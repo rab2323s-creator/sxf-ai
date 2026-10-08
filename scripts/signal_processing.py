@@ -23,7 +23,6 @@ class SignalProcessingContext:
     editorial_units: object
     valid_url: object
     parse_date: object
-    prepare_items: object
     source_by_name: object
     source_expansion_names: object
     source_expansion_max_current_per_source: object
@@ -31,7 +30,7 @@ class SignalProcessingContext:
     max_items: object
 
 
-prepare_items(items):
+def prepare_items(items, context: SignalProcessingContext):
     clean_summary = context.clean_summary
     categorize = context.categorize
     classify_tags = context.classify_tags
@@ -73,13 +72,12 @@ def load_items(path):
         return []
 
 
-merge_archive(existing_items, incoming_items):
+def merge_archive(existing_items, incoming_items, context: SignalProcessingContext):
     valid_url = context.valid_url
     categorize = context.categorize
     classify_tags = context.classify_tags
     clean_summary = context.clean_summary
     parse_date = context.parse_date
-    prepare_items = context.prepare_items
 
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     by_url = {item.get("url"): dict(item) for item in existing_items if valid_url(item.get("url", ""))}
@@ -128,7 +126,7 @@ merge_archive(existing_items, incoming_items):
             item["modified_at"] = now_iso
         valid.append(item)
     valid.sort(key=lambda x: parse_date(x["published"]), reverse=True)
-    return prepare_items(valid)
+    return prepare_items(valid, context)
 
 
 def client_item(item):
@@ -144,7 +142,7 @@ def client_item(item):
     }
 
 
-select_current_items(archive, cutoff):
+def select_current_items(archive, cutoff, context: SignalProcessingContext):
     parse_date = context.parse_date
     source_by_name = context.source_by_name
     source_expansion_names = context.source_expansion_names
