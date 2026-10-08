@@ -43,6 +43,8 @@ jobs:
           python tests/test_ai_enrichment.py
           python tests/test_ai_enrichment_pilot.py
           python tests/test_ai_auto_enrichment.py
+      - name: Handle missing context sizes in generated evaluation explorer
+        run: python scripts/patch_nullable_evaluation_context.py
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
       - name: Restore Compare V2 after feed generation
