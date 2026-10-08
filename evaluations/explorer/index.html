@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="AI Model Benchmark Explorer — Cost vs Score &amp; Pareto Views | SXF / AI" />
       <meta name="twitter:description" content="Explore AI model benchmark evidence with comparable-group controls, provider filters, cost-vs-score and context-vs-score Pareto views. No synthetic universal ranking." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"SXF AI Evaluation Explorer","url":"https://sxf.si/evaluations/explorer/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Interactive AI model benchmark explorer with methodology-aware comparability, workload economics and Pareto views.","isAccessibleForFree":true},{"@type":"Dataset","name":"SXF AI Evaluation Explorer dataset","url":"https://sxf.si/data/model-evaluations.json","dateModified":"2026-10-04","distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-evaluations.json"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-pricing.json"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Evaluations","item":"https://sxf.si/evaluations/"},{"@type":"ListItem","position":3,"name":"Explorer","item":"https://sxf.si/evaluations/explorer/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"SXF AI Evaluation Explorer","url":"https://sxf.si/evaluations/explorer/","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Interactive AI model benchmark explorer with methodology-aware comparability, workload economics and Pareto views.","isAccessibleForFree":true},{"@type":"Dataset","name":"SXF AI Evaluation Explorer dataset","url":"https://sxf.si/data/model-evaluations.json","dateModified":"2026-10-08","distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-evaluations.json"},{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://sxf.si/data/model-pricing.json"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Evaluations","item":"https://sxf.si/evaluations/"},{"@type":"ListItem","position":3,"name":"Explorer","item":"https://sxf.si/evaluations/explorer/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -39,7 +39,7 @@
         <p class="eyebrow">EVALUATION EXPLORER V1</p>
         <h1>Benchmark evidence.<br><span>Decision views, not one score.</span></h1>
         <p>Filter by benchmark, evaluator, provider and comparable group. Switch between ranked evidence, cost-vs-score and context-vs-score views without mixing incompatible runs.</p>
-        <div class="collection-stats"><div><strong>12</strong><span>benchmarks</span></div><div><strong>34</strong><span>observations</span></div><div><strong>6</strong><span>models evaluated</span></div><div><strong>2026-10-04</strong><span>verified</span></div></div>
+        <div class="collection-stats"><div><strong>12</strong><span>benchmarks</span></div><div><strong>76</strong><span>observations</span></div><div><strong>12</strong><span>models evaluated</span></div><div><strong>2026-10-08</strong><span>verified</span></div></div>
       </section>
 
       <section class="evaluation-explorer shell" data-evaluation-explorer
@@ -92,6 +92,13 @@
               <td>high</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-astra-high-vs-gpt-6-astra-low" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/claude-sonnet-5-5/">Claude Sonnet 5.5</a><small>Anthropic</small></th>
+              <td>47</td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>$0.3<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-gpt-6-sol-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
               <th scope="row"><a href="/models/grok-4-7/">Grok 4.7</a><small>xAI</small></th>
               <td>46</td>
               <td>500,000<small>tokens</small></td>
@@ -106,12 +113,33 @@
               <td>high</td>
               <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-6-astra-low" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/gpt-5-6-sol/">GPT-5.6 Sol</a><small>OpenAI</small></th>
+              <td>42</td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>$0.6<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-sol-high-vs-gpt-5-6-sol-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
               <th scope="row"><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a><small>Google</small></th>
               <td>41</td>
               <td>1,048,576<small>tokens</small></td>
               <td>$0.1125<small>100K input + 10K output</small></td>
               <td>high</td>
               <td><a href="https://artificialanalysis.ai/models/gemini-3-8-flash" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/models/gpt-6-luna/">GPT-6 Luna</a><small>OpenAI</small></th>
+              <td>33</td>
+              <td>1,050,000<small>tokens</small></td>
+              <td>$0.015<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/gpt-6-luna-high-vs-gpt-6-sol-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
+            </tr><tr data-explorer-fallback-row>
+              <th scope="row"><a href="/guides/gpt-6-vs-claude/">Claude Sonnet 5</a><small>Anthropic</small></th>
+              <td>32</td>
+              <td>1,000,000<small>tokens</small></td>
+              <td>$0.3<small>100K input + 10K output</small></td>
+              <td>high</td>
+              <td><a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high" target="_blank" rel="noopener noreferrer">Evidence ↗</a></td>
             </tr></tbody>
             </table>
           </div>
