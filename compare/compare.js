@@ -81,26 +81,10 @@
   const pricingQuantity = model => Number(model?.pricing_basis?.quantity || 1_000_000);
   const pricingDisplayUnit = model => model?.pricing_basis?.display_unit || "per 1 million tokens";
 
-  const periodForDate = (model, date) => {
-    const schedule = model?.pricing?.standard || [];
-    return schedule.find(period => date >= period.start && (!period.end || date <= period.end)) || null;
-  };
-
+  const {utcToday} = window.SXFPricing;
   const effectiveRates = (model, totalInput) => {
     if (!isTokenCalculatorModel(model)) return null;
-    const period = periodForDate(model, catalog.source_verified);
-    if (!period) return null;
-    const rates = {...period};
-    const rule = model?.pricing?.long_context;
-    const long = Boolean(rule && totalInput > Number(rule.threshold_input_tokens));
-    if (long) {
-      for (const field of ["input", "cached_input", "cache_write", "output"]) {
-        if (typeof rates[field] === "number" && typeof rule.multipliers?.[field] === "number") {
-          rates[field] *= rule.multipliers[field];
-        }
-      }
-    }
-    return {rates, long, rule};
+    return window.SXFPricing.effectiveRates(model, utcToday(), totalInput);
   };
 
   const modelCost = (model, input, cached, output) => {
@@ -252,11 +236,11 @@
   };
 
   Promise.all([
-    fetch(root.dataset.catalog || "/data/model-pricing.json", {cache: "no-cache"}).then(r => {
+    fetch(root.dataset.catalog || "/data/model-pricing.json", {cache: "no-store"}).then(r => {
       if (!r.ok) throw new Error("catalog");
       return r.json();
     }),
-    fetch(root.dataset.registry || "/data/model-comparisons.json", {cache: "no-cache"}).then(r => {
+    fetch(root.dataset.registry || "/data/model-comparisons.json", {cache: "no-store"}).then(r => {
       if (!r.ok) throw new Error("registry");
       return r.json();
     })
@@ -290,7 +274,7 @@
   [inputTokens, cachedTokens, outputTokens].forEach(node => node?.addEventListener("input", () => {
     presetButtons.forEach(item => item.setAttribute("aria-pressed", "false"));
   }));
-  fetch("/data/model-evaluations.json", {cache:"no-cache"})
+  fetch("/data/model-evaluations.json", {cache:"no-store"})
     .then(r => { if (!r.ok) throw new Error("evaluations"); return r.json(); })
     .then(data => { evaluations = data; render(); })
     .catch(() => { evaluations = null; render(); });

@@ -1362,7 +1362,7 @@ def comparison_price_snapshot(model_id, on_date=None):
     model = model_catalog_entry(model_id)
     if not model_has_official_paid_pricing(model):
         return None
-    return active_standard_price(model_id, on_date or MODEL_PRICING_CATALOG["source_verified"])
+    return active_standard_price(model_id, on_date)
 
 
 def comparison_price_text(model_id, on_date=None):
@@ -1435,7 +1435,7 @@ def compare_workload_cost(model_id, input_tokens=100000, output_tokens=10000, ca
         uncached_input_tokens=input_tokens,
         output_tokens=output_tokens,
         cached_input_tokens=cached_tokens,
-        on_date=MODEL_PRICING_CATALOG["source_verified"],
+        on_date=None,
     )[0]
 
 
@@ -1568,11 +1568,24 @@ def active_standard_price(model_id, on_date=None):
             f"{model_id} is not calculator-eligible: pricing_status={model_pricing_status(model)!r}"
         )
     schedule = model.get("pricing", {}).get("standard", [])
-    target = on_date or datetime.now(timezone.utc).date()
+    target = datetime.now(timezone.utc).date() if on_date is None else on_date
     if isinstance(target, str):
         target = datetime.fromisoformat(target).date()
 
-    for period in schedule:
+    # Inclusive UTC calendar-day boundaries. Reject invalid/overlapping schedules;
+    # never silently select the final (possibly future) price.
+    ordered = sorted(schedule, key=lambda period: period["start"])
+    previous_end = None
+    for index, period in enumerate(ordered):
+        start = datetime.fromisoformat(period["start"]).date()
+        end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
+        if end is not None and end < start:
+            raise RuntimeError(f"Invalid Standard pricing period for {model_id}: end before start")
+        if index and (previous_end is None or start <= previous_end):
+            raise RuntimeError(f"Overlapping Standard pricing periods for {model_id}")
+        previous_end = end
+
+    for period in ordered:
         start = datetime.fromisoformat(period["start"]).date()
         end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
         if target >= start and (end is None or target <= end):
@@ -2069,7 +2082,24 @@ def select_homepage_signals(items, limit=HOMEPAGE_SIGNAL_LIMIT):
     return selected[:limit]
 
 
-def homepage_change_cards(limit=3):
+def homepage_standard_price(model_id, on_date=None):
+    """Return the current Standard price, or None for unpublished/gap dates.
+
+    All displayed rates come from the canonical catalog, not ledger snapshots.
+    Unexpected schedule errors (such as overlaps) must fail the build.
+    """
+    model = MODEL_PRICING_BY_ID.get(model_id, {})
+    if not model_has_official_paid_pricing(model):
+        return None
+    try:
+        return active_standard_price(model_id, on_date=on_date)
+    except RuntimeError as exc:
+        if str(exc).startswith("No Standard pricing period"):
+            return None
+        raise
+
+
+def homepage_change_cards(limit=3, on_date=None):
     history = load_model_history()
     candidates = [event for event in history["events"] if event.get("type") != "baseline"]
     candidates.sort(key=lambda event: (event.get("verified_at", ""), event.get("sequence", 0)), reverse=True)
@@ -2105,8 +2135,7 @@ def homepage_change_cards(limit=3):
         href = model.get("sxf_url") or f"/models/{slugify(name)}/"
         context = snapshot.get("context_window", model.get("context_window"))
         context_text = compact_token_count(context) if context is not None else "Not published"
-        pricing = snapshot.get("pricing", {}).get("standard") or model.get("pricing", {}).get("standard") or []
-        active = pricing[-1] if pricing else {}
+        active = homepage_standard_price(model_id, on_date=on_date) or {}
         input_price = active.get("input")
         output_price = active.get("output")
         price_text = "Pricing not published"
@@ -8899,7 +8928,7 @@ def compare_index_html(items):
       </section>
 
       <section class="model-reference-lower shell compare-hub-faq"><div class="model-sources"><p class="eyebrow">DATA LAYER</p><a href="/data/model-pricing.json"><span>Canonical model database</span><b>↗</b></a><a href="/data/model-comparisons.json"><span>Curated comparison registry</span><b>↗</b></a><a href="/data/model-history.json"><span>Append-only model history</span><b>↗</b></a><a href="/models/pricing/"><span>Pricing database & calculator</span><b>↗</b></a></div><div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div></section>
-    </main>{page_footer()}<script src="/compare/compare.js" defer></script></body></html>'''
+    </main>{page_footer()}<script src="/assets/pricing-policy.js?v=20261009" defer></script><script src="/compare/compare.js" defer></script></body></html>'''
 
 
 def gpt6_comparison_html(items):
@@ -10199,6 +10228,7 @@ def model_pricing_page_html():
         </section>
       </main>
       {page_footer()}
+      <script src="/assets/pricing-policy.js?v=20261009" defer></script>
       <script src="/models/pricing/pricing.js" defer></script>
     </body></html>'''
 
