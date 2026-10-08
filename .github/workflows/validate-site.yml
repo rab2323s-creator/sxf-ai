@@ -36,6 +36,8 @@ jobs:
           node --check evaluations/explorer/explorer.js
       - name: Verify priority independent evaluation evidence
         run: python tests/test_priority_evaluations.py
+      - name: Validate 25-model independent benchmark expansion
+        run: python tests/test_evaluation_coverage_25.py
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
       - name: AI enrichment dry-run tests
@@ -43,6 +45,8 @@ jobs:
           python tests/test_ai_enrichment.py
           python tests/test_ai_enrichment_pilot.py
           python tests/test_ai_auto_enrichment.py
+      - name: Handle missing context sizes in generated evaluation explorer
+        run: python scripts/patch_nullable_evaluation_context.py
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
       - name: Restore and verify Compare V2 after regeneration

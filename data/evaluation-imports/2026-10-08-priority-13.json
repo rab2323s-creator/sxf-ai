@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0",
+  "verified_on": "2026-10-08",
+  "benchmark_index_version": "4.3.2",
+  "evaluator": "Artificial Analysis",
+  "import_policy": "Manually transcribed measured scores only. Missing data remain absent. Estimated scores indicated with an asterisk in the source are excluded. Exact model variant and source preserved. Source evaluation run dates may differ from verification date.",
+  "entries": [
+    {
+      "model_id": "gemini-3.7-flash",
+      "model_variant": "Gemini 3.7 Flash (High)",
+      "reasoning_effort": "high",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gemini-3-7-flash-vs-gemini-3-6-flash",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 39,
+        "aa-briefcase-v1.1": 1113,
+        "gdpval-aa-v2.1": 1392,
+        "automationbench-aa": 62,
+        "terminal-bench-4.0-aa": 14,
+        "scicode-aa": 57,
+        "humanitys-last-exam-aa": 48,
+        "critpt-aa": 14,
+        "aa-lcr-v1.1": 82
+      }
+    },
+    {
+      "model_id": "gemini-3.6-flash",
+      "model_variant": "Gemini 3.6 Flash (High)",
+      "reasoning_effort": "high",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gemini-3-7-flash-vs-gemini-3-6-flash",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 34,
+        "aa-briefcase-v1.1": 953,
+        "gdpval-aa-v2.1": 1286,
+        "automationbench-aa": 53,
+        "terminal-bench-4.0-aa": 7,
+        "scicode-aa": 53,
+        "humanitys-last-exam-aa": 41,
+        "critpt-aa": 11,
+        "aa-lcr-v1.1": 80
+      }
+    },
+    {
+      "model_id": "gemini-3.5-flash-lite",
+      "model_variant": "Gemini 3.5 Flash-Lite",
+      "reasoning_effort": "not specified for this variant",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/gemini-3-6-flash-vs-gemini-3-5-flash-lite",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 22,
+        "aa-briefcase-v1.1": 648,
+        "gdpval-aa-v2.1": 986,
+        "automationbench-aa": 25,
+        "terminal-bench-4.0-aa": 1,
+        "scicode-aa": 41,
+        "humanitys-last-exam-aa": 19,
+        "critpt-aa": 0,
+        "aa-lcr-v1.1": 76
+      }
+    },
+    {
+      "model_id": "grok-4.6",
+      "model_variant": "Grok 4.6 (High)",
+      "reasoning_effort": "high",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 44,
+        "aa-briefcase-v1.1": 1540,
+        "gdpval-aa-v2.1": 1609,
+        "automationbench-aa": 67,
+        "terminal-bench-4.0-aa": 21,
+        "scicode-aa": 56,
+        "humanitys-last-exam-aa": 43,
+        "critpt-aa": 17,
+        "aa-lcr-v1.1": 80
+      }
+    },
+    {
+      "model_id": "grok-4.3",
+      "model_variant": "Grok 4.3 (Medium)",
+      "reasoning_effort": "medium",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium",
+      "scores": {
+        "humanitys-last-exam-aa": 30,
+        "critpt-aa": 5,
+        "aa-lcr-v1.1": 75
+      },
+      "excluded": [
+        "Intelligence Index 25* is an evaluator estimate, not a measured score; excluded.",
+        "Other benchmark cells are blank; no zero scores inferred."
+      ]
+    },
+    {
+      "model_id": "deepseek-flash",
+      "model_variant": "DeepSeek V4.1 Flash (Max)",
+      "reasoning_effort": "max",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/deepseek-v4-1-flash-vs-deepseek-v4-pro",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 39,
+        "aa-briefcase-v1.1": 1420,
+        "gdpval-aa-v2.1": 1600,
+        "automationbench-aa": 69,
+        "terminal-bench-4.0-aa": 27,
+        "scicode-aa": 52,
+        "humanitys-last-exam-aa": 39,
+        "critpt-aa": 14,
+        "aa-lcr-v1.1": 84
+      }
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "model_variant": "DeepSeek V4 Pro 0813 (Max)",
+      "reasoning_effort": "max",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/deepseek-v4-1-flash-vs-deepseek-v4-pro",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 36,
+        "aa-briefcase-v1.1": 1256,
+        "gdpval-aa-v2.1": 1454,
+        "automationbench-aa": 57,
+        "terminal-bench-4.0-aa": 14,
+        "scicode-aa": 51,
+        "humanitys-last-exam-aa": 41,
+        "critpt-aa": 18,
+        "aa-lcr-v1.1": 80
+      }
+    },
+    {
+      "model_id": "mistral-medium-3-5",
+      "model_variant": "Mistral Medium 3.5 (evaluation default; effort undisclosed)",
+      "reasoning_effort": "not published — Mistral Medium 3.5",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-mistral-small-4",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 14,
+        "aa-briefcase-v1.1": 523,
+        "gdpval-aa-v2.1": 763,
+        "automationbench-aa": 6,
+        "terminal-bench-4.0-aa": 0,
+        "scicode-aa": 40,
+        "humanitys-last-exam-aa": 14,
+        "critpt-aa": 0,
+        "aa-lcr-v1.1": 69
+      }
+    },
+    {
+      "model_id": "mistral-small-2603",
+      "model_variant": "Mistral Small 4 (Reasoning)",
+      "reasoning_effort": "reasoning",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/mistral-medium-3-5-vs-mistral-small-4",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 11,
+        "aa-briefcase-v1.1": 242,
+        "gdpval-aa-v2.1": 365,
+        "automationbench-aa": 1,
+        "terminal-bench-4.0-aa": 0,
+        "scicode-aa": 39,
+        "humanitys-last-exam-aa": 10,
+        "critpt-aa": 0,
+        "aa-lcr-v1.1": 50
+      }
+    },
+    {
+      "model_id": "qwen3.8-max",
+      "model_variant": "Qwen3.8 Max (0902)",
+      "reasoning_effort": "not published — Qwen3.8 Max 0902",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/qwen3-8-max-vs-glm-5-3-low",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 45,
+        "aa-briefcase-v1.1": 1621,
+        "gdpval-aa-v2.1": 1671,
+        "automationbench-aa": 56,
+        "terminal-bench-4.0-aa": 39,
+        "scicode-aa": 52,
+        "humanitys-last-exam-aa": 43,
+        "critpt-aa": 18,
+        "aa-lcr-v1.1": 80
+      },
+      "notes": [
+        "Independent page specifies 0902 release; this observation is ONLY for that variant."
+      ]
+    },
+    {
+      "model_id": "glm-5.3",
+      "model_variant": "GLM-5.3 (Max)",
+      "reasoning_effort": "max",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/glm-5-3-vs-kimi-k3-low",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 45,
+        "aa-briefcase-v1.1": 1509,
+        "gdpval-aa-v2.1": 1651,
+        "automationbench-aa": 62,
+        "terminal-bench-4.0-aa": 42,
+        "scicode-aa": 59,
+        "humanitys-last-exam-aa": 42,
+        "critpt-aa": 19,
+        "aa-lcr-v1.1": 80
+      }
+    },
+    {
+      "model_id": "kimi-k3",
+      "model_variant": "Kimi K3 (Max)",
+      "reasoning_effort": "max",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/qwen3-8-2-4t-a95b-vs-kimi-k3",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 44,
+        "aa-briefcase-v1.1": 1501,
+        "gdpval-aa-v2.1": 1533,
+        "automationbench-aa": 58,
+        "terminal-bench-4.0-aa": 13,
+        "scicode-aa": 59,
+        "humanitys-last-exam-aa": 47,
+        "critpt-aa": 23,
+        "aa-lcr-v1.1": 89
+      }
+    },
+    {
+      "model_id": "MiniMax-M3",
+      "model_variant": "MiniMax-M3 (effort unspecified)",
+      "reasoning_effort": "not published — MiniMax-M3",
+      "source_url": "https://artificialanalysis.ai/models/comparisons/deepseek-v4-pro-vs-minimax-m3",
+      "scores": {
+        "aa-intelligence-index-v4.3.2": 29,
+        "aa-briefcase-v1.1": 1091,
+        "gdpval-aa-v2.1": 1245,
+        "automationbench-aa": 21,
+        "terminal-bench-4.0-aa": 2,
+        "scicode-aa": 47,
+        "humanitys-last-exam-aa": 39,
+        "critpt-aa": 4,
+        "aa-lcr-v1.1": 83
+      }
+    }
+  ]
+}
