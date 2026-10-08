@@ -44,6 +44,13 @@
     research: {input: 120000, cached: 30000, output: 8000}
   });
   const results = document.getElementById("compareBuilderResults");
+  const errors = document.getElementById("compareBuilderError");
+  const evidence = document.getElementById("compareEvidence");
+  const engine = window.SxfCompareEngine;
+  let evaluations = null;
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, char =>
+    ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+
   const curatedLink = document.getElementById("compareCuratedLink");
 
   let catalog = null;
@@ -172,39 +179,63 @@
     const right = byId.get(modelB.value);
     if (!left || !right) return;
     if (left.model_id === right.model_id) {
-      results.innerHTML = '<div class="compare-builder-error">Choose two different models.</div>';
+      errors.hidden = false; errors.textContent = "Choose two different models."; results.replaceChildren(); evidence.replaceChildren();
       curatedLink.hidden = true;
       return;
     }
 
-    const input = number(inputTokens?.value);
-    const cached = number(cachedTokens?.value);
-    const output = number(outputTokens?.value);
-    const leftCost = modelCost(left, input, cached, output);
-    const rightCost = modelCost(right, input, cached, output);
-
-    let verdict = "";
-    if (leftCost && rightCost) {
-      if (Math.abs(leftCost.total - rightCost.total) < 1e-12) {
-        verdict = "Direct token cost is equal for this workload.";
-      } else {
-        const cheaper = leftCost.total < rightCost.total ? left : right;
-        const lower = Math.min(leftCost.total, rightCost.total);
-        const higher = Math.max(leftCost.total, rightCost.total);
-        verdict = cheaper.model + " has the lower direct token cost for this workload (" +
-          money(lower) + " vs " + money(higher) + ").";
-      }
-    } else {
-      verdict = "A direct paid-token cost winner is not shown because at least one model lacks a calculator-eligible provider Standard rate.";
+    const task = engine?.workload({
+      input: inputTokens?.value, cached: cachedTokens?.value,
+      output: outputTokens?.value, requests: monthlyRequests?.value
+    });
+    if (!task?.ok) {
+      errors.hidden = false;
+      errors.textContent = task?.error || "Comparison engine could not load.";
+      results.replaceChildren();
+      evidence.replaceChildren();
+      curatedLink.hidden = true;
+      return;
     }
-
-    const volume = Math.max(1, Math.min(100000000, number(monthlyRequests?.value) || 1));
-    const monthlyNote = leftCost && rightCost
-      ? "At " + volume.toLocaleString() + " requests/month: " + left.model + " " + money(leftCost.total * volume) + " vs " + right.model + " " + money(rightCost.total * volume) + ". Direct token costs only."
-      : "Monthly cost comparison unavailable without comparable official paid-token rates.";
-
-    results.innerHTML = `<div class="compare-builder-summary"><span>WORKLOAD RESULT</span><strong>${verdict}</strong><small>Pricing is not a quality score. Compare acceptance rate, latency and tool reliability on your own workload.</small><small>${monthlyNote}</small></div>
-      <div class="compare-builder-grid">${card(left, leftCost)}${card(right, rightCost)}</div>`;
+    errors.hidden = true;
+    const leftWarnings = engine.capacityWarnings(left, task);
+    const rightWarnings = engine.capacityWarnings(right, task);
+    const leftCost = leftWarnings.length ? null : engine.pricing(left, task, catalog.source_verified);
+    const rightCost = rightWarnings.length ? null : engine.pricing(right, task, catalog.source_verified);
+    const lc = leftCost?.available ? {total:leftCost.total,effective:{long:leftCost.long}} : null;
+    const rc = rightCost?.available ? {total:rightCost.total,effective:{long:rightCost.long}} : null;
+    let verdict = "No direct cost conclusion: one or both prices are unavailable or this workload exceeds published limits.";
+    if (lc && rc) {
+      const delta = Math.abs(lc.total - rc.total);
+      verdict = delta < 1e-12
+        ? "Direct token costs are equal for this workload."
+        : (lc.total < rc.total ? left.model : right.model) +
+          " has lower estimated direct token cost for this workload.";
+    }
+    const monthlyNote = lc && rc
+      ? "For " + task.requests.toLocaleString() + " requests/month: " +
+        esc(left.model) + " " + money(leftCost.monthly) + " vs " +
+        esc(right.model) + " " + money(rightCost.monthly) + "."
+      : "Monthly cost unavailable until comparable rates and valid model limits are confirmed.";
+    results.innerHTML = `<div class="compare-builder-summary"><span>WORKLOAD RESULT</span><strong>${esc(verdict)}</strong><small>${monthlyNote}</small><small>Estimates use official catalog rates and illustrative token budgets; not quality, speed, or total ownership cost.</small></div>
+      <div class="compare-builder-grid">${card(left,lc)}${card(right,rc)}</div>
+      <div class="compare-engine-cautions">${leftWarnings.map(x=>"<p>"+esc(left.model)+": "+esc(x)+"</p>").join("")}${rightWarnings.map(x=>"<p>"+esc(right.model)+": "+esc(x)+"</p>").join("")}</div>`;
+    const pairs = engine.benchmarkPairs(evaluations, left.model_id, right.model_id);
+    const benchmarks = pairs.length ? pairs.map(p => {
+      const l = p.left, r = p.right, b = p.benchmark;
+      const qualifier = p.configurationDiffers
+        ? "Different evaluated configurations; scores are descriptive, not a controlled head-to-head result."
+        : "Matching evaluation group and configuration.";
+      return `<article class="compare-evidence-card"><h4>${esc(b.name)} <small>${esc(b.version)}</small></h4>
+        <p>${esc(left.model)}: <strong>${esc(l.score)} ${esc(b.unit || "")}</strong> · ${esc(right.model)}: <strong>${esc(r.score)} ${esc(b.unit || "")}</strong></p>
+        <p class="compare-evidence-note">${esc(qualifier)} Scores are specific to this benchmark, not a universal model rating.</p>
+        <p class="compare-evidence-note">Configurations: ${esc(l.model_configuration?.reasoning_effort || "undisclosed")} vs ${esc(r.model_configuration?.reasoning_effort || "undisclosed")}. Verified data: ${esc(evaluations.source_verified || "undated")}.</p>
+        <a href="${esc(l.source_url)}" target="_blank" rel="noopener noreferrer">Source A ↗</a> · <a href="${esc(r.source_url)}" target="_blank" rel="noopener noreferrer">Source B ↗</a></article>`;
+    }).join("") : '<p>No directly comparable independent evaluation observations are available for this matchup.</p>';
+    const aFit = engine.fit(left, ["coding","agents"]);
+    const bFit = engine.fit(right, ["coding","agents"]);
+    evidence.innerHTML = `<div class="compare-evidence-head"><span>INDEPENDENT EVIDENCE</span><h3>Task-specific performance, with sources</h3><p>Benchmark coverage is not a universal recommendation. Missing information stays missing.</p></div>
+      <div class="compare-evidence-list">${benchmarks}</div>
+      <div class="compare-evidence-head"><h3>Decision guidance</h3><p>For a cost-sensitive workload, choose the lower-cost model only after testing answer quality and latency on your own prompts. Catalog capabilities: ${esc(left.model)} lists ${esc(aFit.listed.join(", ") || "no coding/agent tags")}; ${esc(right.model)} lists ${esc(bFit.listed.join(", ") || "no coding/agent tags")}. These tags are not proven performance.</p></div>`;
 
     const pair = (registry.comparisons || []).find(entry => {
       if (!entry.indexable || entry.model_ids?.length !== 2) return false;
@@ -257,6 +288,10 @@
   [inputTokens, cachedTokens, outputTokens].forEach(node => node?.addEventListener("input", () => {
     presetButtons.forEach(item => item.setAttribute("aria-pressed", "false"));
   }));
+  fetch("/data/model-evaluations.json", {cache:"no-cache"})
+    .then(r => { if (!r.ok) throw new Error("evaluations"); return r.json(); })
+    .then(data => { evaluations = data; render(); })
+    .catch(() => { evaluations = null; render(); });
   [modelA, modelB, inputTokens, cachedTokens, outputTokens, monthlyRequests].forEach(node => {
     node?.addEventListener("input", render);
     node?.addEventListener("change", render);
