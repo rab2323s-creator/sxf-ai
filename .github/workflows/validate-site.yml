@@ -28,6 +28,9 @@ jobs:
           node --check tools/ai-model-cost-calculator/calculator.js
           node --check models/explorer.js
           node --check compare/compare.js
+          node --check compare/decision-engine.js
+          node --check tests/test_compare_engine.cjs
+          node tests/test_compare_engine.cjs
           node --check evaluations/explorer/explorer.js
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
