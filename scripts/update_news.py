@@ -15,6 +15,11 @@ from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
+from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
+from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
+from signal_page_rendering import SignalPageContext, signal_row as render_signal_row, signals_index_html as render_signals_index_html
+from signal_article_rendering import SignalArticleContext, signal_page_html as render_signal_article
+from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -1898,28 +1903,12 @@ def relative_time(date_str):
     return d.strftime("%b %-d")
 
 def featured_html(item):
-    href = item.get("signal_url", item["url"])
-    return f'''<a class="featured-story" href="{escape(href, quote=True)}">
-  <div class="featured-main">
-    <div>
-      <div class="featured-topline"><strong>{escape(item["source"])}</strong><i></i><span>{escape(relative_time(item["published"]))}</span></div>
-      <h3 class="featured-title">{escape(item["title"])}</h3>
-    </div>
-    <div class="featured-footer"><span class="category-pill">{escape(item["category"])}</span><span class="open-label">Read signal <b>↗</b></span></div>
-  </div>
-  <div class="featured-visual" aria-hidden="true"><span class="signal-cross">+</span><span class="signal-number">01</span></div>
-</a>'''
+    """Compatibility entrypoint for the featured homepage card."""
+    return render_featured_card(item, FeedCardContext(relative_time=relative_time))
 
 def cards_html(items):
-    rows = []
-    for item in items:
-        href = item.get("signal_url", item["url"])
-        rows.append(f'''<a class="story-card" href="{escape(href, quote=True)}">
-  <div class="story-card-top"><span class="story-source">{escape(item["source"])}</span><span class="story-time">{escape(relative_time(item["published"]))}</span></div>
-  <h3 class="story-title">{escape(item["title"])}</h3>
-  <div class="story-card-bottom"><span class="category-pill">{escape(item["category"])}</span><span class="story-arrow" aria-hidden="true">↗</span></div>
-</a>''')
-    return "\n".join(rows)
+    """Compatibility entrypoint for the homepage story cards."""
+    return render_story_cards(items, FeedCardContext(relative_time=relative_time))
 
 def replace_block(source, start, end, body):
     pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
@@ -2183,15 +2172,8 @@ def update_index(items):
 
 
 def section_cards_html(items):
-    rows = []
-    for item in items[:12]:
-        href = item.get("signal_url", item["url"])
-        rows.append(f'''<a class="intel-card" href="{escape(href, quote=True)}">
-  <div class="intel-meta"><strong>{escape(item["source"])}</strong><span>{escape(relative_time(item["published"]))}</span></div>
-  <h3>{escape(item["title"])}</h3>
-  <div class="intel-foot"><span>{escape(item["category"])}</span><b>↗</b></div>
-</a>''')
-    return "\n".join(rows)
+    """Compatibility entrypoint for category section cards."""
+    return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
 def update_section_pages(items):
     for category, path in SECTION_PAGES.items():
@@ -2637,96 +2619,44 @@ def select_brief_items(items, limit=5):
             break
     return selected
 
+def signal_processing_context():
+    from signal_processing import SignalProcessingContext
+    return SignalProcessingContext(
+        clean_summary=clean_summary,
+        categorize=categorize,
+        classify_tags=classify_tags,
+        slug_aliases=SLUG_ALIASES,
+        signal_slug=signal_slug,
+        base_url=BASE_URL,
+        signal_score=signal_score,
+        seo_quality=seo_quality,
+        seo_signal_eligible=seo_signal_eligible,
+        editorial_units=editorial_units,
+        valid_url=valid_url,
+        parse_date=parse_date,
+        source_by_name=SOURCE_BY_NAME,
+        source_expansion_names=SOURCE_EXPANSION_NAMES,
+        source_expansion_max_current_per_source=SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE,
+        source_expansion_max_current_total=SOURCE_EXPANSION_MAX_CURRENT_TOTAL,
+        max_items=MAX_ITEMS,
+    )
+
+
 def prepare_items(items):
-    prepared = []
-    for item in items:
-        row = dict(item)
-        row["summary"] = clean_summary(row.get("summary", ""))
-        row["category"] = categorize(row["title"], row["source"])
-        row["tags"] = classify_tags(row["title"], row["source"], row["category"])
-        row["signal_slug"] = SLUG_ALIASES.get(row["url"]) or row.get("signal_slug") or signal_slug(row)
-        row["signal_url"] = f'{BASE_URL}/signals/{row["signal_slug"]}/'
-        score, factors = signal_score(row)
-        row["signal_score"] = score
-        row["score_factors"] = factors
-        quality_score, quality_factors = seo_quality(row)
-        row["seo_quality_score"] = quality_score
-        row["seo_quality_factors"] = quality_factors
-        row["seo_eligible"] = seo_signal_eligible(row, quality_score)
-        row["editorial"] = editorial_units(row)
-        prepared.append(row)
-    return prepared
+    from signal_processing import prepare_items as _prepare_items
+    return _prepare_items(items, signal_processing_context())
 
 def load_items(path):
-    if not path.exists():
-        return []
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        return payload.get("items", []) if isinstance(payload, dict) else []
-    except Exception:
-        return []
+    from signal_processing import load_items as _load_items
+    return _load_items(path)
 
 def merge_archive(existing_items, incoming_items):
-    now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-    by_url = {item.get("url"): dict(item) for item in existing_items if valid_url(item.get("url", ""))}
-
-    for incoming in incoming_items:
-        url = incoming["url"]
-        previous = by_url.get(url, {})
-        merged = dict(previous)
-        merged.update(incoming)
-        if not merged.get("summary") and previous.get("summary"):
-            merged["summary"] = previous["summary"]
-            merged["summary_origin"] = previous.get("summary_origin", "")
-        merged["category"] = categorize(merged["title"], merged["source"])
-        merged["tags"] = classify_tags(merged["title"], merged["source"], merged["category"])
-        merged["first_seen"] = previous.get("first_seen") or now_iso
-
-        before = {
-            "title": previous.get("title"),
-            "source": previous.get("source"),
-            "published": previous.get("published"),
-            "category": previous.get("category"),
-            "summary": clean_summary(previous.get("summary", "")),
-            "tags": previous.get("tags", []),
-        }
-        after = {
-            "title": merged.get("title"),
-            "source": merged.get("source"),
-            "published": merged.get("published"),
-            "category": merged.get("category"),
-            "summary": clean_summary(merged.get("summary", "")),
-            "tags": merged.get("tags", []),
-        }
-        merged["modified_at"] = now_iso if before != after else previous.get("modified_at", now_iso)
-        merged["last_seen"] = now_iso
-        by_url[url] = merged
-
-    valid = []
-    for item in by_url.values():
-        if not valid_url(item.get("url", "")):
-            continue
-        if parse_date(item.get("published", "")) is None:
-            continue
-        if not item.get("first_seen"):
-            item["first_seen"] = now_iso
-        if not item.get("modified_at"):
-            item["modified_at"] = now_iso
-        valid.append(item)
-    valid.sort(key=lambda x: parse_date(x["published"]), reverse=True)
-    return prepare_items(valid)
+    from signal_processing import merge_archive as _merge_archive
+    return _merge_archive(existing_items, incoming_items, signal_processing_context())
 
 def client_item(item):
-    return {
-        "title": item["title"],
-        "url": item["url"],
-        "signal_url": item["signal_url"],
-        "source": item["source"],
-        "published": item["published"],
-        "category": item["category"],
-        "tags": item.get("tags", []),
-        "signal_score": item.get("signal_score", 0),
-    }
+    from signal_processing import client_item as _client_item
+    return _client_item(item)
 
 def normalize_model_text(value):
     return value.replace("‑", "-").replace("–", "-").replace("—", "-")
@@ -3704,45 +3634,12 @@ def category_path(category):
     }.get(category, "/signals/")
 
 def page_header(active=""):
-    links = [
-        ("/models/", "Models", "models"),
-        ("/compare/", "Compare", "compare"),
-        ("/tools/", "Tools", "tools"),
-        ("/research/", "Research", "research"),
-        ("/open-source/", "Open Source", "open-source"),
-        ("/guides/", "Guides", "guides"),
-        ("/superintelligence/", "Superintelligence", "superintelligence"),
-        ("/brief/", "Brief", "brief"),
-        ("/about/", "About", "about"),
-    ]
-    nav_parts = []
-    for href, label, key in links:
-        current = ' aria-current="page"' if key == active else ""
-        nav_parts.append(f'<a href="{href}"{current}>{label}</a>')
-    nav = "".join(nav_parts)
-    return f'''<header class="site-header"><div class="header-inner">
-      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
-      <nav class="top-nav" aria-label="Primary navigation">{nav}</nav>
-      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
-    </div></header>'''
+    """Compatibility entrypoint for site navigation."""
+    return render_page_header(active)
 
 def page_footer():
-    return '''<footer class="footer shell">
-      <div class="footer-main">
-        <div class="footer-identity">
-          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
-          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
-          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
-          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
-        </div>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
-          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
-          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
-        </nav>
-      </div>
-      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>'''
+    """Compatibility entrypoint for the site footer."""
+    return render_page_footer()
 
 def normalize_static_shells():
     header_pattern = re.compile(r'<header class="site-header">.*?</header>', re.S)
@@ -3766,42 +3663,8 @@ def normalize_static_shells():
 
 
 def page_head(title, description, canonical, schema, page_type="website", robots="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"):
-    safe_description = escape(description[:180], quote=True)
-    if page_type == "article":
-        social_image_meta = '<meta name="twitter:card" content="summary" />'
-    else:
-        social_image_meta = '''<meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
-      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />'''
-    return f'''<head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="color-scheme" content="dark" />
-      <title>{escape(title)}</title>
-      <meta name="description" content="{safe_description}" />
-      <meta name="robots" content="{escape(robots, quote=True)}" />
-      <meta name="googlebot" content="{escape(robots, quote=True)}" />
-      <meta name="theme-color" content="#07090d" />
-      <link rel="canonical" href="{escape(canonical, quote=True)}" />
-      <link rel="alternate" hreflang="en" href="{escape(canonical, quote=True)}" />
-      <link rel="alternate" hreflang="x-default" href="{escape(canonical, quote=True)}" />
-      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      <meta property="og:type" content="{escape(page_type, quote=True)}" />
-      <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="{escape(title, quote=True)}" />
-      <meta property="og:description" content="{safe_description}" />
-      <meta property="og:url" content="{escape(canonical, quote=True)}" />
-      {social_image_meta}
-      <meta name="twitter:title" content="{escape(title, quote=True)}" />
-      <meta name="twitter:description" content="{safe_description}" />
-      <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")}</script>
-      <link rel="stylesheet" href="/styles.css" />
-      <link rel="stylesheet" href="/intelligence.css" />
-    </head>'''
+    """Compatibility entrypoint for SEO metadata and structured data."""
+    return render_page_head(title, description, canonical, schema, page_type, robots)
 
 def related_items(item, items, limit=5):
     base_tokens = set(re.findall(r"[a-z0-9]+", normalize_model_text(item["title"]).lower())) - STOPWORDS
@@ -3820,424 +3683,50 @@ def related_items(item, items, limit=5):
     scored.sort(key=lambda row: (row[0], row[1]), reverse=True)
     return [row[2] for row in scored[:limit]]
 
+def signal_page_context():
+    """Supply the current shared presentation dependencies without freezing globals."""
+    return SignalPageContext(
+        base_url=BASE_URL,
+        display_date=display_date,
+        relative_time=relative_time,
+        page_head=page_head,
+        page_header=page_header,
+        page_footer=page_footer,
+    )
+
+
 def signal_row(item):
-    return f'''<a class="signal-row" href="/signals/{escape(item["signal_slug"], quote=True)}/">
-      <div class="signal-row-meta"><span>{escape(item["source"])}</span><time datetime="{escape(item["published"], quote=True)}">{escape(display_date(item["published"]))}</time></div>
-      <h3>{escape(item["title"])}</h3>
-      <div class="signal-row-foot"><span>{escape(item["category"])}</span><b>Open signal ↗</b></div>
-    </a>'''
+    """Compatibility renderer for signal rows used across specialist pages."""
+    return render_signal_row(item, signal_page_context())
+
+def signal_article_context():
+    """Resolve current live dependencies, retaining legacy monkeypatchability."""
+    return SignalArticleContext(
+        base_url=BASE_URL,
+        compact_description=compact_description,
+        seo_signal_eligible=seo_signal_eligible,
+        category_path=category_path,
+        item_topics=item_topics,
+        extract_models=extract_models,
+        slugify=slugify,
+        related_items=related_items,
+        signal_row=signal_row,
+        editorial_units=editorial_units,
+        display_date=display_date,
+        page_head=page_head,
+        page_header=page_header,
+        page_footer=page_footer,
+    )
+
 
 def signal_page_html(item, items):
-    canonical = item["signal_url"]
-    is_async_merge_deep_dive = canonical.endswith("/github-async-merge-api-generally-available-2bced9c/")
-    page_title = item["title"] + " | SXF / AI"
-    page_h1 = item["title"]
-    description = compact_description(item)
-    modified = item.get("modified_at") or item["published"]
-    if is_async_merge_deep_dive:
-        page_title = "GitHub Async Merge API: GA, Stacked PRs & Merge Queues | SXF / AI"
-        page_h1 = "GitHub Async Merge API: GA, Stacked PRs & Merge Queues"
-        description = "GitHub's async merge API is generally available. Learn how merge-async works, stacked pull request support, merge queues, permissions, status polling, errors and migration from synchronous merges."
-        modified = "2026-10-05"
-    indexable = bool(item.get("seo_eligible", seo_signal_eligible(item)))
-    robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if indexable else "noindex,follow"
-    schema = {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "WebPage",
-                "@id": canonical + "#webpage",
-                "url": canonical,
-                "name": page_title,
-                "description": description,
-                "isPartOf": {"@id": "https://sxf.si/#website"},
-                "mainEntity": {"@id": canonical + "#article"},
-                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
-                "publishingPrinciples": "https://sxf.si/about/#method",
-                "inLanguage": "en",
-            },
-            {
-                "@type": ["Article", "TechArticle"] if is_async_merge_deep_dive else "Article",
-                "@id": canonical + "#article",
-                "headline": page_h1,
-                "description": description,
-                "datePublished": item["published"],
-                "dateModified": modified,
-                "mainEntityOfPage": {"@id": canonical + "#webpage"},
-                "url": canonical,
-                "articleSection": item["category"],
-                "isPartOf": {"@id": "https://sxf.si/#website"},
-                "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
-                "creator": {"@id": "https://vivamediacreative.com/labs/#organization"},
-                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
-                "publishingPrinciples": "https://sxf.si/about/#method",
-                "citation": [
-                    item["url"],
-                    "https://docs.github.com/en/rest/pulls/pulls?apiVersion=2026-03-10",
-                ] if is_async_merge_deep_dive else item["url"],
-                "keywords": [
-                    "GitHub async merge API",
-                    "GitHub merge API",
-                    "stacked pull requests",
-                    "GitHub merge queue",
-                    "merge-async endpoint",
-                    "GitHub REST API",
-                ] if is_async_merge_deep_dive else None,
-                "inLanguage": "en",
-            },
-            {
-                "@type": "BreadcrumbList",
-                "@id": canonical + "#breadcrumb",
-                "itemListElement": [
-                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
-                    {"@type": "ListItem", "position": 2, "name": "Signals", "item": BASE_URL + "/signals/"},
-                    {"@type": "ListItem", "position": 3, "name": item["category"], "item": BASE_URL + category_path(item["category"])},
-                ],
-            },
-        ],
-    }
-    if is_async_merge_deep_dive:
-        schema["@graph"].append({
-            "@type": "FAQPage",
-            "@id": canonical + "#faq",
-            "mainEntityOfPage": {"@id": canonical + "#webpage"},
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "What is the GitHub async merge API?",
-                    "acceptedAnswer": {"@type": "Answer", "text": "It is GitHub's REST API for requesting a pull request merge in the background or adding the pull request to a merge queue. New requests can return HTTP 202 with a UUID that is used to poll the merge result."},
-                },
-                {
-                    "@type": "Question",
-                    "name": "Does the async merge API support stacked pull requests?",
-                    "acceptedAnswer": {"@type": "Answer", "text": "Yes. GitHub documents the async merge API as the required API for merging stacked pull requests, including open downstack pull requests."},
-                },
-                {
-                    "@type": "Question",
-                    "name": "What permission is required for an asynchronous merge?",
-                    "acceptedAnswer": {"@type": "Answer", "text": "GitHub documents Contents repository permission with write access for fine-grained tokens used with the asynchronous merge endpoint."},
-                },
-                {
-                    "@type": "Question",
-                    "name": "How long can an async merge result be fetched?",
-                    "acceptedAnswer": {"@type": "Answer", "text": "GitHub documents that an asynchronous merge result is retained for 24 hours after its most recent update; after that, fetching that UUID returns 404."},
-                },
-            ],
-        })
-        # Remove null-only optional properties from the special graph before serialization.
-        for entity in schema["@graph"]:
-            if entity.get("keywords") is None:
-                entity.pop("keywords", None)
+    """Compatibility entrypoint for rendered Signal article routes."""
+    return render_signal_article(item, items, signal_article_context())
 
-    topics = item_topics(item)
-    models = extract_models(item["title"])
-    topic_links = "".join(
-        f'<a href="/topics/{escape(t["slug"], quote=True)}/">{escape(t["name"])}</a>' for t in topics[:4]
-    )
-    model_links = "".join(
-        f'<a href="/models/{escape(slugify(name), quote=True)}/">{escape(name)}</a>' for name in models[:4]
-    )
-    deep_dive_html = ""
-    if is_async_merge_deep_dive:
-        deep_dive_html = f'''
-        <section class="signal-deep-dive shell" aria-labelledby="async-merge-explained">
-          <div class="intel-section-head"><div><p class="eyebrow">SXF TECHNICAL EXPLAINER</p><h2 id="async-merge-explained">How GitHub's async merge API works.</h2></div><span>Verified October 5, 2026</span></div>
-          <div class="deep-dive-lead">
-            <p>GitHub's asynchronous merge endpoint changes the integration pattern from “request a merge and wait for the final result” to “submit work, receive a request identifier, then check the result.” That matters most in busy repositories, merge-queue workflows and stacked pull-request systems where a merge can involve checks, rules, retries or multiple dependent pull requests.</p>
-          </div>
-          <div class="deep-dive-grid">
-            <article><span>01 / SUBMIT</span><h3>Send the merge request.</h3><p>Use <code>PUT /repos/{{owner}}/{{repo}}/pulls/{{pull_number}}/merge-async</code>. For a new background request GitHub can return <code>202 Accepted</code> plus a UUID.</p></article>
-            <article><span>02 / PROCESS</span><h3>GitHub handles the merge asynchronously.</h3><p>Background processing lets GitHub retry certain failures and reduces timeout risk for complex merges. The request can merge directly or use a merge queue.</p></article>
-            <article><span>03 / POLL</span><h3>Fetch the result by UUID.</h3><p>Poll the result endpoint until the request reports <code>merged</code>, <code>enqueued</code> or <code>failed</code>. An <code>enqueued</code> result means the PR entered the queue; it does not mean the PR has merged yet.</p></article>
-          </div>
 
-          <div class="deep-dive-section">
-            <p class="eyebrow">WHY THIS API IS DIFFERENT</p>
-            <h2>Async merge vs the synchronous merge endpoint.</h2>
-            <div class="deep-dive-table-wrap"><table class="deep-dive-table">
-              <thead><tr><th>Area</th><th>Async merge API</th><th>Synchronous merge endpoint</th></tr></thead>
-              <tbody>
-                <tr><th>Execution model</th><td>Background request with status lookup</td><td>Merge result returned in the request flow</td></tr>
-                <tr><th>New request status</th><td><code>202</code> + UUID when accepted</td><td><code>200</code> when merge succeeds</td></tr>
-                <tr><th>Stacked PRs</th><td>Required API for stacked pull requests</td><td>Not the supported path for stacked PR merging</td></tr>
-                <tr><th>Merge queues</th><td>Can enqueue explicitly or follow repository default</td><td>Does not provide the same async merge-queue workflow</td></tr>
-                <tr><th>Complex merges</th><td>Designed to reduce timeout risk and allow certain retries</td><td>Caller waits on the merge request lifecycle</td></tr>
-              </tbody>
-            </table></div>
-          </div>
-
-          <div class="deep-dive-section">
-            <p class="eyebrow">REQUEST CONTROLS</p>
-            <h2>The parameters automation builders need to understand.</h2>
-            <div class="deep-dive-facts">
-              <div><strong>merge_action</strong><p><code>default</code>, <code>direct_merge</code>, or <code>merge_queue</code>. Default uses a merge queue when the target branch has one configured.</p></div>
-              <div><strong>sha</strong><p>Locks the request to the expected PR head. If the PR changes between request and execution, GitHub cancels the merge rather than merging a different head.</p></div>
-              <div><strong>merge_method</strong><p>For direct merges, the API supports <code>merge</code>, <code>squash</code>, or <code>rebase</code>.</p></div>
-              <div><strong>bypass_rules</strong><p>Can request rule bypass only when the authenticated actor already has permission to bypass those repository rules.</p></div>
-            </div>
-          </div>
-
-          <div class="deep-dive-section">
-            <p class="eyebrow">STATUS & FAILURE MODEL</p>
-            <h2>What each response means in production.</h2>
-            <div class="deep-dive-status-grid">
-              <article><strong>200</strong><p>The PR is already merged or already in a merge queue.</p></article>
-              <article><strong>202</strong><p>The merge request was accepted for background processing; store the returned UUID.</p></article>
-              <article><strong>400</strong><p>The pull request is not ready for merge, such as a closed or draft PR.</p></article>
-              <article><strong>409</strong><p>Another async merge request is already pending; GitHub returns that request's UUID and options.</p></article>
-            </div>
-            <p class="deep-dive-note">Important operational detail: GitHub says branch protection and repository rules are not evaluated during the initial basic-state check. Also, async merge results are retained for 24 hours after their most recent update, so long-lived automation should persist the outcome it needs rather than treating the result endpoint as permanent storage.</p>
-          </div>
-
-          <div class="deep-dive-section">
-            <p class="eyebrow">STACKED PULL REQUESTS</p>
-            <h2>Why stacked PR support is the standout capability.</h2>
-            <p>GitHub explicitly documents this as the required merge API for stacked pull requests. When the requested pull request is part of a stack, the operation includes open downstack pull requests. That makes the endpoint materially different for teams and developer tools that organize large changes as dependent, reviewable layers instead of one oversized pull request.</p>
-            <p>For automation authors, that means “merge this PR” can represent a graph of dependent changes rather than a single isolated branch operation. Integrations should therefore treat stacked merges as stateful background work and surface the returned status clearly to users.</p>
-          </div>
-
-          <div class="deep-dive-section">
-            <p class="eyebrow">MIGRATION CHECKLIST</p>
-            <h2>When should an integration move to async merge?</h2>
-            <ul class="deep-dive-checklist">
-              <li><strong>Use it for new programmatic merge automation.</strong> GitHub now recommends the async API over the synchronous REST endpoint or GraphQL merge mutations.</li>
-              <li><strong>Use it for stacked pull requests.</strong> This is the supported merge API for stacked PRs.</li>
-              <li><strong>Model the workflow as a state machine.</strong> Persist the UUID, handle pending/merged/enqueued/failed states, and distinguish “queued” from “merged.”</li>
-              <li><strong>Verify permissions.</strong> Fine-grained tokens need repository <code>Contents: write</code> for these endpoints.</li>
-              <li><strong>Handle race conditions.</strong> Supply the expected head SHA when you need to prevent merging a PR that changed after the request was created.</li>
-              <li><strong>Do not assume result URLs are permanent.</strong> The documented result retention window is 24 hours after the latest update.</li>
-            </ul>
-          </div>
-
-          <div class="deep-dive-section deep-dive-faq">
-            <p class="eyebrow">FAQ</p>
-            <h2>GitHub async merge API questions.</h2>
-            <details><summary>What is the GitHub async merge API?</summary><p>It is a REST API that requests a pull request merge in the background or adds the pull request to a merge queue. A newly accepted background request can return HTTP 202 and a UUID for result polling.</p></details>
-            <details><summary>Does it support stacked pull requests?</summary><p>Yes. GitHub documents the async merge endpoint as the required API for stacked pull requests, and the operation can include open downstack pull requests.</p></details>
-            <details><summary>What permissions does it need?</summary><p>For fine-grained tokens, GitHub documents <code>Contents</code> repository permission with write access.</p></details>
-            <details><summary>How long is the result available?</summary><p>The result is retained for 24 hours after its most recent update. After that window, requesting the UUID returns 404.</p></details>
-          </div>
-
-          <div class="deep-dive-sources">
-            <p class="eyebrow">PRIMARY SOURCES</p>
-            <h2>Documentation used for this explainer.</h2>
-            <a href="https://github.blog/changelog/2026-10-01-github-async-merge-api-generally-available/" target="_blank" rel="noopener noreferrer"><strong>GitHub Changelog</strong><span>General availability announcement ↗</span></a>
-            <a href="https://docs.github.com/en/rest/pulls/pulls?apiVersion=2026-03-10#merge-a-pull-request-asynchronously" target="_blank" rel="noopener noreferrer"><strong>GitHub REST API Docs</strong><span>Endpoint, parameters, permissions and status model ↗</span></a>
-          </div>
-        </section>'''
-
-    related = "".join(signal_row(x) for x in related_items(item, items))
-    eligible_items = [row for row in items if row.get("seo_eligible", seo_signal_eligible(row))]
-    archive_navigation = ""
-    if indexable and item in eligible_items and len(eligible_items) > 1:
-        archive_index = eligible_items.index(item)
-        prev_item = eligible_items[archive_index - 1] if archive_index > 0 else None
-        next_item = eligible_items[archive_index + 1] if archive_index + 1 < len(eligible_items) else None
-        nav_links = []
-        if prev_item:
-            nav_links.append(
-                f'<a rel="prev" href="/signals/{escape(prev_item["signal_slug"], quote=True)}/"><span>Previous signal</span><strong>{escape(prev_item["title"])}</strong></a>'
-            )
-        if next_item:
-            nav_links.append(
-                f'<a rel="next" href="/signals/{escape(next_item["signal_slug"], quote=True)}/"><span>Next signal</span><strong>{escape(next_item["title"])}</strong></a>'
-            )
-        archive_navigation = (
-            '<nav class="signal-archive-navigation shell" aria-label="Signal archive navigation">'
-            + "".join(nav_links)
-            + "</nav>"
-        )
-    editorial = item.get("editorial") or editorial_units(item)
-    summary_label = "Source summary" if item.get("summary") else "SXF signal note"
-    return f'''<!doctype html><html lang="en">
-    {page_head(page_title, description, canonical, schema, "article", robots)}
-    <body class="intel-page signal-page">
-      <a class="skip-link" href="#signal-main">Skip to signal</a>
-      <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
-      {page_header()}
-      <main id="signal-main">
-        <section class="intel-hero shell">
-          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="{escape(category_path(item["category"]), quote=True)}">{escape(item["category"])}</a></nav>
-          <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / {escape(item["category"].upper())}</div>
-          <h1>{escape(page_h1)}</h1>
-          <div class="signal-meta-strip">
-            <div><span>SOURCE</span><strong>{escape(item["source"])}</strong></div>
-            <div><span>PUBLISHED</span><strong>{escape(display_date(item["published"]))}</strong></div>
-            <div><span>LAYER</span><strong>{escape(item["category"])}</strong></div>
-            <div><span>SIGNAL SCORE</span><strong>{item.get("signal_score", 0):02d}/100</strong></div>
-          </div>
-        </section>
-        <section class="signal-layout shell">
-          <article class="signal-brief">
-            <p class="eyebrow">{summary_label.upper()}</p>
-            <p class="signal-summary">{escape(editorial["what_changed"])}</p>
-            <div class="signal-context"><span>WHY IT MATTERS</span><p>{escape(editorial["why_it_matters"])}</p></div>
-            <div class="signal-context"><span>WHAT TO VERIFY</span><p>{escape(editorial["what_to_verify"])}</p></div>
-          </article>
-          <aside class="source-card">
-            <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(item["source"])}</strong>
-            <p>Read the original publication for the complete context behind this signal.</p>
-            <a href="{escape(item["url"], quote=True)}" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
-          </aside>
-        </section>
-        {deep_dive_html}
-        <section class="signal-taxonomy shell">
-          <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
-          <div><span>MODELS</span>{model_links or '<small>No named model detected</small>'}</div>
-        </section>
-        {archive_navigation}
-        <section class="related-signals shell">
-          <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
-          <div class="signal-list">{related}</div>
-        </section>
-      </main>
-      {page_footer()}
-    </body></html>'''
 def signals_index_html(items):
-    canonical = f"{BASE_URL}/signals/"
-    description = "Track verified AI model releases, agent updates, research, benchmarks, tools and open-source changes from primary sources with the SXF AI signal index."
-    page_modified = max((item.get("modified_at") or item.get("published") or "" for item in items), default="")
-    agent_pattern = re.compile(r"\\bagent(?:s|ic)?\\b|\\bmcp\\b|computer use|tool calling|multi[- ]step|long[- ]running", re.I)
-
-    def latest_matching(predicate):
-        return next((item for item in items if predicate(item)), None)
-
-    snapshot_items = [
-        ("MODEL", latest_matching(lambda item: item["category"] == "Models")),
-        ("AGENT", latest_matching(lambda item: bool(agent_pattern.search(" ".join([item.get("title", ""), item.get("summary", "")]))))),
-        ("RESEARCH", latest_matching(lambda item: item["category"] == "Research")),
-        ("TOOLS", latest_matching(lambda item: item["category"] == "Tools")),
-    ]
-    snapshot_cards = []
-    for label, item in snapshot_items:
-        if not item:
-            continue
-        snapshot_cards.append(f'''<a class="signals-snapshot-card" href="{escape(item.get("signal_url", item["url"]), quote=True)}">
-          <div><span>{escape(label)}</span><small>{escape(item["source"])}</small></div>
-          <h3>{escape(item["title"])}</h3>
-          <p>{escape(relative_time(item["published"]))} · Primary source linked</p>
-          <b>Open signal ↗</b>
-        </a>''')
-
-    schema = {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "CollectionPage",
-                "@id": canonical + "#webpage",
-                "name": "AI Signals — Latest Models, Agents & Research Updates | SXF / AI",
-                "url": canonical,
-                "description": description,
-                "isPartOf": {"@id": "https://sxf.si/#website"},
-                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
-                "publishingPrinciples": "https://sxf.si/about/#method",
-                "breadcrumb": {"@id": canonical + "#breadcrumb"},
-                "mainEntity": {"@id": canonical + "#signal-list"},
-                **({"dateModified": page_modified} if page_modified else {}),
-                "about": [
-                    {"@type": "Thing", "name": "AI models"},
-                    {"@type": "Thing", "name": "AI agents"},
-                    {"@type": "Thing", "name": "Artificial intelligence research"},
-                    {"@type": "Thing", "name": "AI developer tools"},
-                    {"@type": "Thing", "name": "Open source artificial intelligence"},
-                ],
-                "inLanguage": "en",
-            },
-            {
-                "@type": "ItemList",
-                "@id": canonical + "#signal-list",
-                "name": "Latest verified AI signals",
-                "description": "Latest primary-source AI model, agent, research, tool and open-source updates tracked by SXF / AI.",
-                "itemListOrder": "https://schema.org/ItemListOrderDescending",
-                "numberOfItems": min(len(items), 40),
-                "mainEntityOfPage": {"@id": canonical + "#webpage"},
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": i + 1,
-                        "item": {
-                            "@type": "Article",
-                            "@id": item["signal_url"] + "#article",
-                            "name": item["title"],
-                            "url": item["signal_url"],
-                            "mainEntityOfPage": {"@id": item["signal_url"] + "#webpage"},
-                            "isPartOf": {"@id": "https://sxf.si/#website"},
-                        },
-                    }
-                    for i, item in enumerate(items[:40])
-                ],
-            },
-            {
-                "@type": "BreadcrumbList",
-                "@id": canonical + "#breadcrumb",
-                "itemListElement": [
-                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": BASE_URL + "/"},
-                    {"@type": "ListItem", "position": 2, "name": "AI Signals", "item": canonical},
-                ],
-            },
-        ],
-    }
-    rows = "".join(signal_row(item) for item in items[:40])
-    archive_items = [item for item in items[40:] if item.get("seo_eligible")]
-    archive_links = "".join(
-        f'<a href="{escape(item.get("signal_url", item["url"]), quote=True)}"><span>{escape(item["title"])}</span><small>{escape(item["source"])} · {escape(display_date(item["published"]))}</small></a>'
-        for item in archive_items
-    )
-    archive_directory = (
-        f'''<section class="signals-directory shell" aria-labelledby="signals-directory-title">
-          <div class="intel-section-head"><div><p class="eyebrow">VERIFIED ARCHIVE</p><h2 id="signals-directory-title">More verified AI signals.</h2></div><span>{len(archive_items)} indexed signals</span></div>
-          <div class="signals-directory-list">{archive_links}</div>
-        </section>'''
-        if archive_items else ""
-    )
-    return f'''<!doctype html><html lang="en">{page_head("AI Signals — Latest Models, Agents & Research Updates | SXF / AI", description, canonical, schema)}
-    <body class="intel-page collection-page signals-page"><a class="skip-link" href="#signals-main">Skip to signals</a>
-    {page_header()}<main id="signals-main">
-      <section class="collection-hero signals-hero shell">
-        <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><span>Signals</span></nav>
-        <p class="eyebrow">SXF AI SIGNAL INDEX</p>
-        <h1>AI Signals:<br><span>Models, Agents & Research Updates</span></h1>
-        <p>Track verified AI model releases, agent developments, research, benchmarks, developer tools and open-source changes. Every signal keeps the primary source attached so you can move from what changed to the evidence behind it.</p>
-        <div class="collection-stats"><div><strong id="signalsCount">{len(items)}</strong><span>tracked signals</span></div><div><strong>Models · Agents · Research</strong><span>core intelligence</span></div><div><strong>3h</strong><span>refresh cycle</span></div></div>
-      </section>
-
-      <section class="signals-snapshot shell" aria-labelledby="signals-snapshot-title">
-        <div class="intel-section-head"><div><p class="eyebrow">INTELLIGENCE SNAPSHOT</p><h2 id="signals-snapshot-title">What matters right now.</h2></div><a href="/about/#method">How SXF verifies signals ↗</a></div>
-        <div class="signals-snapshot-grid">{"".join(snapshot_cards)}</div>
-      </section>
-
-      <section class="signals-explorer shell" aria-labelledby="signals-stream-title">
-        <div class="intel-section-head"><div><p class="eyebrow">LIVE INDEX</p><h2 id="signals-stream-title">Latest verified AI signals.</h2></div><a href="/brief/">Read SXF Brief ↗</a></div>
-        <div class="signals-toolbar" role="group" aria-label="Filter AI signals">
-          <div class="signals-filters">
-            <button class="signals-filter active" type="button" data-signal-filter="All">All</button>
-            <button class="signals-filter" type="button" data-signal-filter="Models">Models</button>
-            <button class="signals-filter" type="button" data-signal-filter="Agents">Agents</button>
-            <button class="signals-filter" type="button" data-signal-filter="Research">Research</button>
-            <button class="signals-filter" type="button" data-signal-filter="Tools">Tools</button>
-            <button class="signals-filter" type="button" data-signal-filter="Open Source">Open Source</button>
-          </div>
-          <label class="signals-search"><span class="sr-only">Search all AI signals</span><input id="signalsSearch" type="search" placeholder="Search all signals — GPT-6, agents, Copilot…" autocomplete="off"></label>
-        </div>
-        <p class="signals-result-meta" id="signalsResultMeta">Showing the latest 40 signals. Filters and search use the full current SXF feed.</p>
-        <div class="signal-list" id="signalsFeed">{rows}</div>
-        <div class="signals-empty" id="signalsEmpty" hidden>No signals match this filter yet.</div>
-      </section>
-
-      {archive_directory}
-
-      <section class="signals-gateways shell" aria-labelledby="signals-gateways-title">
-        <div class="intel-section-head"><div><p class="eyebrow">EXPLORE BY INTENT</p><h2 id="signals-gateways-title">Move from updates to deeper intelligence.</h2></div></div>
-        <div class="signals-gateway-grid">
-          <a href="/models/"><span>MODELS</span><strong>AI Model Intelligence</strong><p>Releases, capabilities, context, limits and model pages.</p><b>Explore models ↗</b></a>
-          <a href="/topics/ai-agents/"><span>AGENTS</span><strong>AI Agent Intelligence</strong><p>Agent systems, memory, reliability, security and workflows.</p><b>Explore agents ↗</b></a>
-          <a href="/research/"><span>RESEARCH</span><strong>AI Research</strong><p>Benchmarks, evaluations, safety and research context.</p><b>Explore research ↗</b></a>
-          <a href="/compare/"><span>COMPARE</span><strong>Compare AI Models</strong><p>Pricing, context windows, specifications and workload fit.</p><b>Compare models ↗</b></a>
-          <a href="/models/pricing/"><span>PRICING</span><strong>AI Model Pricing</strong><p>Normalized API pricing and model specifications from primary sources.</p><b>Compare pricing ↗</b></a>
-          <a href="/topics/ai-security/"><span>SECURITY</span><strong>AI Security Signals</strong><p>Prompt injection, agent risk, permissions, MCP and defenses.</p><b>Explore security ↗</b></a>
-        </div>
-      </section>
-    </main>{page_footer()}<script src="/signals.js" defer></script></body></html>'''
+    """Compatibility renderer for the Signals index and its SEO markup."""
+    return render_signals_index_html(items, signal_page_context())
 
 def ai_security_topic_page_html(topic, items):
     canonical = f"{BASE_URL}/topics/ai-security/"
@@ -5642,71 +5131,22 @@ def build_catalog_model_pages(items):
     return rendered
 
 
-def provider_index_html(items):
-    providers = sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]})
-    cards = []
-    for provider in providers:
-        models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == provider]
-        paid = sum(1 for model in models if model_has_official_paid_pricing(model))
-        verified = max(model["provenance"]["verified_at"] for model in models)
-        cards.append(
-            f'''<a class="tracked-model" href="/providers/{escape(provider_slug(provider), quote=True)}/">
-              <span>{len(models):02d}</span><strong>{escape(provider)}</strong>
-              <small>{len(models)} tracked model{"s" if len(models) != 1 else ""} · {paid} calculator-priced · verified {escape(verified)}</small><b>↗</b>
-            </a>'''
-        )
+def provider_index_context():
+    """Resolve the current model registry and page-shell dependencies."""
+    return ProviderIndexContext(
+        base_url=BASE_URL,
+        model_pricing_catalog=MODEL_PRICING_CATALOG,
+        model_has_official_paid_pricing=model_has_official_paid_pricing,
+        provider_slug=provider_slug,
+        page_head=page_head,
+        page_header=page_header,
+        page_footer=page_footer,
+    )
 
-    canonical = BASE_URL + "/providers/"
-    schema = {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "CollectionPage",
-                "name": "AI Model Providers | SXF / AI",
-                "url": canonical,
-                "description": "Verified model portfolios, pricing availability, specifications and source-backed change history by AI provider.",
-                "isPartOf": {"@id": BASE_URL + "/#website"},
-                "inLanguage": "en",
-            },
-            {
-                "@type": "ItemList",
-                "name": "Tracked AI model providers",
-                "numberOfItems": len(providers),
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": index + 1,
-                        "name": provider,
-                        "url": f'{BASE_URL}/providers/{provider_slug(provider)}/',
-                    }
-                    for index, provider in enumerate(providers)
-                ],
-            },
-        ],
-    }
-    return f'''<!doctype html><html lang="en">{page_head(
-        "AI Model Providers — OpenAI, Anthropic, Google, xAI & Meta | SXF / AI",
-        "Browse verified AI model portfolios by provider, including pricing availability, model specs, official sources and change history.",
-        canonical,
-        schema,
-    )}
-    <body class="intel-page model-page">{page_header("models")}<main>
-      <section class="collection-hero shell">
-        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Providers</span></nav>
-        <p class="eyebrow">MODEL INTELLIGENCE / PROVIDERS</p>
-        <h1>AI model providers.<br><span>One verified data layer.</span></h1>
-        <p>Browse provider portfolios without mixing direct API pricing, partner pricing and self-hosted economics. Every model record points back to official evidence.</p>
-        <div class="collection-stats">
-          <div><strong>{len(providers)}</strong><span>providers</span></div>
-          <div><strong>{len(MODEL_PRICING_CATALOG["models"])}</strong><span>tracked models</span></div>
-          <div><strong>{escape(MODEL_PRICING_CATALOG["source_verified"])}</strong><span>catalog verified</span></div>
-        </div>
-      </section>
-      <section class="shell">
-        <div class="intel-section-head"><div><p class="eyebrow">PROVIDER DIRECTORY</p><h2>Choose a model ecosystem.</h2></div><a href="/models/pricing/">Pricing explorer ↗</a></div>
-        <div class="tracked-models">{"".join(cards)}</div>
-      </section>
-    </main>{page_footer()}</body></html>'''
+
+def provider_index_html(items):
+    """Compatibility entrypoint for the indexed model provider directory."""
+    return render_provider_index_html(items, provider_index_context())
 
 
 def provider_page_html(provider, items):
@@ -10897,219 +10337,37 @@ def build_discovery_pages(items, current_items):
     issue_dir.mkdir(parents=True, exist_ok=True)
     (issue_dir / "index.html").write_text(brief_issue_html(current_items, issue_date), encoding="utf-8")
     (BRIEF_DIR / "index.html").write_text(brief_index_html(current_items, issue_date), encoding="utf-8")
-def sitemap_entry(url, lastmod):
-    return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
-
-def sitemap_image_entry(url, lastmod, *image_urls):
-    image_nodes = "".join(
-        f"<image:image><image:loc>{image_url}</image:loc></image:image>"
-        for image_url in image_urls
-    )
-    return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod>{image_nodes}</url>"
-
 def content_lastmod(items, fallback="2026-09-26"):
-    dates = []
-    for item in items:
-        modified = parse_date(item.get("modified_at", "")) or parse_date(item.get("published", ""))
-        if modified is not None:
-            dates.append(modified)
-    return max(dates).date().isoformat() if dates else fallback
+    from sitemap_generation import content_lastmod as _content_lastmod
+    return _content_lastmod(items, parse_date, fallback)
+
 
 def update_sitemap(items):
-    generated_today = datetime.now(timezone.utc).date().isoformat()
-    global_lastmod = content_lastmod(items)
-    category_lastmod = {
-        category: content_lastmod([item for item in items if item["category"] == category], global_lastmod)
-        for category in ("Models", "Tools", "Research", "Open Source")
-    }
-    model_collection_items = [
-        item for item in items
-        if item["category"] == "Models" or extract_models(item["title"])
-    ]
-    guide_lastmod = max(content_lastmod(items[:6], "2026-09-26"), "2026-10-05")
-    gpt6_compare_items = [
-        item for item in items
-        if {"GPT-6", "GPT-6 Astra", "GPT-6 Sol", "GPT-6 Luna"}.intersection(extract_models(item["title"]))
-    ]
-    sol_opus_items = [
-        item for item in items
-        if {"GPT-6 Sol", "Claude Opus 5.5"}.intersection(extract_models(item["title"]))
-    ]
+    from sitemap_generation import SitemapContext, write_sitemap
 
-    rows = [
-        sitemap_entry(f"{BASE_URL}/", global_lastmod),
-        sitemap_entry(f"{BASE_URL}/models/", content_lastmod(model_collection_items, category_lastmod["Models"])),
-        sitemap_entry(f"{BASE_URL}/models/pricing/", MODEL_PRICING_CATALOG["source_verified"]),
-        sitemap_entry(f"{BASE_URL}/tools/", category_lastmod["Tools"]),
-        sitemap_entry(f"{BASE_URL}/tools/ai-model-cost-calculator/", MODEL_PRICING_CATALOG["source_verified"]),
-        sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
-        sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
-        sitemap_entry(f"{BASE_URL}/signals/", global_lastmod),
-        sitemap_entry(f"{BASE_URL}/topics/", global_lastmod),
-        sitemap_entry(f"{BASE_URL}/brief/", generated_today),
-        sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
-        sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
-        sitemap_entry(f"{BASE_URL}/compare/", generated_today),
-        sitemap_entry(f"{BASE_URL}/evaluations/", MODEL_EVALUATION_CATALOG["source_verified"]),
-        sitemap_entry(f"{BASE_URL}/evaluations/explorer/", MODEL_EVALUATION_CATALOG["source_verified"]),
-    ] + [
-        sitemap_entry(
-            f'{BASE_URL}/evaluations/{benchmark["benchmark_id"]}/',
-            MODEL_EVALUATION_CATALOG["source_verified"],
-        )
-        for benchmark in MODEL_EVALUATION_CATALOG["benchmarks"]
-    ] + [
-        sitemap_entry(f"{BASE_URL}/guides/best-ai-coding-tools/", "2026-09-25"),
-        sitemap_entry(f"{BASE_URL}/guides/gpt-6-vs-claude/", "2026-09-25"),
-        sitemap_entry(f"{BASE_URL}/guides/open-source-ai-models/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/best-ai-agents/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/ai-agent-security/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/github-copilot-alternatives/", "2026-09-26"),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/model-context-protocol-mcp/",
-            "2026-10-05",
-            f"{BASE_URL}/guides/model-context-protocol-mcp/images/mcp-architecture-map.svg"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/github-copilot-memory/",
-            "2026-10-05",
-            f"{BASE_URL}/guides/github-copilot-memory/images/github-copilot-memory-map.svg"
-        ),
-        sitemap_entry(f"{BASE_URL}/guides/prompt-injection/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/ai-super-agents/", "2026-09-26"),
-        sitemap_entry(f"{BASE_URL}/guides/how-to-build-ai-super-agent/", "2026-09-28"),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/ai-agent-discovery/",
-            "2026-10-03",
-            f"{BASE_URL}/guides/ai-agent-discovery/images/ai-agent-discovery-routing-map.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/ai-agent-authorization/",
-            "2026-10-03",
-            f"{BASE_URL}/guides/ai-agent-authorization/images/ai-agent-authority-chain.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/ai-negotiation-agents/",
-            "2026-10-02",
-            f"{BASE_URL}/guides/ai-negotiation-agents/images/ai-negotiation-agents-autonomous-bargaining.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/ai-agent-collusion-secret-communication/",
-            "2026-10-01",
-            f"{BASE_URL}/guides/ai-agent-collusion-secret-communication/images/ai-agent-secret-collusion-steganography.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/can-ai-replicate-itself/",
-            "2026-10-01",
-            f"{BASE_URL}/guides/can-ai-replicate-itself/images/ai-self-replication-model-escape-map.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/ai-shutdown-resistance/",
-            "2026-09-30",
-            f"{BASE_URL}/guides/ai-shutdown-resistance/images/ai-shutdown-resistance-instrumental-convergence.webp"
-        ),
-        sitemap_entry(
-            f"{BASE_URL}/guides/ai-deception-alignment-faking/",
-            "2026-09-30"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/can-ai-become-conscious/",
-            "2026-09-30",
-            f"{BASE_URL}/guides/can-ai-become-conscious/images/ai-consciousness-evidence-ladder.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/what-is-agentic-ai/",
-            "2026-09-30",
-            f"{BASE_URL}/guides/what-is-agentic-ai/images/how-agentic-ai-works.webp",
-            f"{BASE_URL}/guides/what-is-agentic-ai/images/agentic-ai-vs-chatbot-generative-ai.webp"
-        ),
-        sitemap_image_entry(
-            f"{BASE_URL}/guides/will-ai-take-over-the-world/",
-            "2026-09-29",
-            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-capability-stack.webp",
-            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/digital-ai-takeover-vs-robots.webp",
-            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/current-ai-vs-takeover-requirements.webp",
-            f"{BASE_URL}/guides/will-ai-take-over-the-world/images/ai-takeover-realistic-timeline.webp"
-        ),
-    ]
+    return write_sitemap(items, SitemapContext(
+        base_url=BASE_URL,
+        sitemap_path=SITEMAP,
+        model_pricing_catalog=MODEL_PRICING_CATALOG,
+        model_evaluation_catalog=MODEL_EVALUATION_CATALOG,
+        model_comparison_catalog=MODEL_COMPARISON_CATALOG,
+        extract_models=extract_models,
+        comparison_registry_rows=comparison_registry_rows,
+        seo_signal_eligible=seo_signal_eligible,
+        parse_date=parse_date,
+        topic_groups=topic_groups,
+        topic_page_indexable=topic_page_indexable,
+        provider_slug=provider_slug,
+        model_groups=model_groups,
+        catalog_owns_model_route=catalog_owns_model_route,
+        model_page_indexable=model_page_indexable,
+        slugify=slugify,
+    ))
 
-    for comparison in comparison_registry_rows():
-        rows.append(sitemap_entry(
-            f'{BASE_URL}/compare/{comparison["slug"]}/',
-            MODEL_COMPARISON_CATALOG["source_verified"],
-        ))
 
-    for item in items:
-        if not item.get("seo_eligible", seo_signal_eligible(item)):
-            continue
-        modified = parse_date(item.get("modified_at", "")) or parse_date(item["published"])
-        rows.append(sitemap_entry(item["signal_url"], modified.date().isoformat()))
-
-    for slug, (_topic, matched) in topic_groups(items).items():
-        if topic_page_indexable(matched):
-            rows.append(sitemap_entry(f"{BASE_URL}/topics/{slug}/", content_lastmod(matched)))
-
-    rows.append(sitemap_entry(f"{BASE_URL}/providers/", MODEL_PRICING_CATALOG["source_verified"]))
-    for provider in sorted({model["provider"] for model in MODEL_PRICING_CATALOG["models"]}):
-        provider_models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == provider]
-        provider_verified = max(model["provenance"]["verified_at"] for model in provider_models)
-        rows.append(sitemap_entry(
-            f"{BASE_URL}/providers/{provider_slug(provider)}/",
-            provider_verified,
-        ))
-
-    for model in MODEL_PRICING_CATALOG["models"]:
-        if model.get("page_template") not in {"catalog-reference", "editorial-reference"}:
-            continue
-        rows.append(sitemap_entry(
-            BASE_URL + model["sxf_url"],
-            model["provenance"]["verified_at"],
-        ))
-
-    for name, matched in model_groups(items).items():
-        if catalog_owns_model_route(name):
-            continue
-        if model_page_indexable(name, matched):
-            rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", content_lastmod(matched)))
-
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "\n".join(rows) + "\n</urlset>\n"
-    SITEMAP.write_text(xml, encoding="utf-8")
 def select_current_items(archive, cutoff):
-    selected = []
-    expansion_counts = {name: 0 for name in SOURCE_EXPANSION_NAMES}
-    expansion_total = 0
-
-    for item in archive:
-        published = parse_date(item.get("published", ""))
-        if published is None or published < cutoff:
-            continue
-
-        source = item.get("source", "")
-        source_config = SOURCE_BY_NAME.get(source, {})
-        status = source_config.get("status", "live")
-        if status in {"shadow", "disabled"}:
-            continue
-
-        max_current = source_config.get("max_current", MAX_ITEMS)
-        source_selected = sum(1 for selected_item in selected if selected_item.get("source") == source)
-        if source_selected >= max_current:
-            continue
-
-        if source in SOURCE_EXPANSION_NAMES:
-            if expansion_counts[source] >= SOURCE_EXPANSION_MAX_CURRENT_PER_SOURCE:
-                continue
-            if expansion_total >= SOURCE_EXPANSION_MAX_CURRENT_TOTAL:
-                continue
-            expansion_counts[source] += 1
-            expansion_total += 1
-
-        selected.append(item)
-        if len(selected) >= MAX_ITEMS:
-            break
-
-    return selected
-
+    from signal_processing import select_current_items as _select_current_items
+    return _select_current_items(archive, cutoff, signal_processing_context())
 
 def render_site(archive, current):
     """Rebuild HTML, JSON-LD and sitemap from in-memory prepared signal records."""
