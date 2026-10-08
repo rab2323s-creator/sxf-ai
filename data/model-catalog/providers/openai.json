@@ -967,15 +967,20 @@
       },
       "positioning": "Near-Astra GPT-6 tier for complex coding, computer use and professional work at lower cost.",
       "sxf_url": "/models/gpt-6-1-sol/",
-      "page_template": "catalog-reference",
+      "page_template": "editorial-reference",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
         "https://developers.openai.com/api/docs/pricing",
-        "https://developers.openai.com/api/docs/changelog"
+        "https://developers.openai.com/api/docs/changelog",
+        "https://openai.com/index/introducing-gpt-6-1-sol/",
+        "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
+        "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
       ],
       "notes": [
-        "Released September 29, 2026 as the newer Sol model.",
-        "Prompts above 272K input tokens use higher long-context multipliers across the full request."
+        "Released September 29, 2026 as the newer Sol model, positioned near GPT-6 Astra for complex work at one-fifth of Astra's standard input/output token prices.",
+        "Prompts above 272K input tokens use 2x input, cached-input and cache-write rates and 1.5x output rates for the full request.",
+        "GPT-6.1 Sol requires the Responses API for tool calling; Chat Completions is supported without tool calling.",
+        "OpenAI documents US and EU data residency; Fast mode is unavailable with EU data residency."
       ],
       "pricing": {
         "standard": [
