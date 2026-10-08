@@ -1,0 +1,12 @@
+/* Compare scenario controls: scoped to the existing comparison builder. */
+.compare-builder-presets{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 14px}
+.compare-builder-presets>span{font-weight:700;margin-right:6px}
+.compare-builder-presets button{font:inherit;padding:10px 15px;color:inherit;background:rgba(143,245,218,.05);border:1px solid rgba(143,245,218,.3);border-radius:999px;cursor:pointer;transition:background .15s,border-color .15s}
+.compare-builder-presets button:hover,.compare-builder-presets button:focus-visible{border-color:#8ff5da;background:rgba(143,245,218,.13)}
+.compare-builder-presets button[aria-pressed="true"]{background:rgba(143,245,218,.2);border-color:#8ff5da}
+.compare-builder-presets small{width:100%;opacity:.76;line-height:1.45}
+.compare-builder-volume{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0 22px}
+.compare-builder-volume label{font-weight:700}
+.compare-builder-volume input{font:inherit;max-width:165px;min-width:90px;padding:10px 12px;color:inherit;background:#101722;border:1px solid #596b79;border-radius:9px}
+.compare-builder-volume small{opacity:.78}
+@media(max-width:640px){.compare-builder-presets button{flex:1 1 43%}.compare-builder-volume input{width:130px}}
