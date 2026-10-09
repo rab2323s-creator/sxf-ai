@@ -5,6 +5,7 @@ const meta=document.getElementById('signalsResultMeta');
 const filters=[...document.querySelectorAll('.signals-filter')];
 let items=[];
 let active='All';
+let openSourceUrls=new Set();
 
 function esc(v=''){
   return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]));
@@ -22,6 +23,8 @@ function isAgent(x){
 function matchesFilter(x){
   if(active==='All')return true;
   if(active==='Agents')return isAgent(x);
+  if(active==='Open Source')return openSourceUrls.has(x.url)||
+    String(x.category||'').trim().toLowerCase()==='open source';
   return x.category===active;
 }
 function card(x){
@@ -52,12 +55,18 @@ filters.forEach(btn=>btn.addEventListener('click',()=>{
 }));
 search?.addEventListener('input',render);
 
-fetch('/data/news.json',{cache:'no-cache'})
-  .then(r=>r.json())
-  .then(data=>{
-    items=Array.isArray(data.items)?data.items:[];
-    render();
-  })
-  .catch(()=>{
-    meta.textContent='Live filtering is temporarily unavailable. The latest indexed signals remain visible below.';
-  });
+Promise.all([
+  fetch('/data/news.json',{cache:'no-cache'}).then(r=>{
+    if(!r.ok)throw new Error('Signals feed unavailable');
+    return r.json();
+  }),
+  fetch('/data/open-source.json',{cache:'no-cache'})
+    .then(r=>r.ok?r.json():{items:[]})
+    .catch(()=>({items:[]}))
+]).then(([data,openData])=>{
+  items=Array.isArray(data.items)?data.items:[];
+  openSourceUrls=new Set((openData.items||[]).map(x=>x.url));
+  render();
+}).catch(()=>{
+  meta.textContent='Live filtering is temporarily unavailable. The latest indexed signals remain visible below.';
+});

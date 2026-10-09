@@ -91,6 +91,19 @@ def main():
             "models/index.html", "models/qwen3-8-max/index.html",
             "providers/alibaba-cloud/index.html",
             "models/qwen3-5-397b-a17b/index.html",
+            # Open Source views change deliberately, with no unrelated pages.
+            "open-source/index.html",
+            "topics/open-source-ai/index.html",
+            "topics/index.html",
+            # Topic membership also affects related topic links/metadata on these
+            # specific signals; their canonical paths and article content stay stable.
+            "signals/discover-local-models-in-github-copilot-cli-cfd130b/index.html",
+            "signals/fine-tuning-a-350m-model-for-better-structured-outputs-in-100-grpo-ste-4502076/index.html",
+            "signals/introducing-olmo-core-3-open-scalable-training-infrastructure-for-larg-0bf00b7/index.html",
+            "signals/open-sourcing-astabrief-the-fast-report-generation-model-in-asta-d599f0a/index.html",
+            "signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/index.html",
+            "signals/the-open-asr-leaderboard-adds-its-first-global-south-language-b0b2c2d/index.html",
+            "sitemap.xml",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (

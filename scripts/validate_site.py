@@ -197,8 +197,23 @@ def validate_ai_security_authority_page():
 def validate_section_counts(news):
     expected = {
         category: sum(1 for item in news["items"] if item.get("category") == category)
-        for category in ("Models", "Tools", "Research", "Open Source")
+        for category in ("Models", "Tools", "Research")
     }
+    # The Open Source section intentionally draws from the complete archive.
+    open_path = ROOT / "data" / "open-source.json"
+    if not open_path.is_file():
+        fail("Missing generated Open Source feed")
+    open_feed = json.loads(open_path.read_text(encoding="utf-8"))
+    from update_news import open_source_current_signals, ARCHIVE_OUT
+    archive = json.loads(ARCHIVE_OUT.read_text(encoding="utf-8"))["items"]
+    selected = open_source_current_signals(archive, open_feed["updated_at"])
+    feed_urls = [item["url"] for item in open_feed["items"]]
+    selected_urls = [item["url"] for item in selected]
+    if feed_urls != selected_urls or len(feed_urls) != len(set(feed_urls)):
+        fail("Open Source feed disagrees with canonical archive topic membership/order")
+    if open_feed.get("updated_at") != news.get("updated_at"):
+        fail("Open Source and Signals snapshot times disagree")
+    expected["Open Source"] = len(feed_urls)
     paths = {
         "Models": ROOT / "models" / "index.html",
         "Tools": ROOT / "tools" / "index.html",
@@ -214,6 +229,20 @@ def validate_section_counts(news):
         actual = int(match.group(1))
         if actual != expected[category]:
             fail(f"{path}: sectionCount {actual} != {expected[category]} current {category} items")
+        if category == "Open Source":
+            section = text.split("<!-- SXF:SECTION_FEED_START -->", 1)[-1].split(
+                "<!-- SXF:SECTION_FEED_END -->", 1
+            )[0]
+            if section.count('class="intel-card"') != len(feed_urls):
+                fail("Open Source HTML cards/count differ from generated feed")
+            schema_match = re.search(
+                r'<script type="application/ld\+json" id="section-signals-schema">(.*?)</script>', text, re.S
+            )
+            if not schema_match:
+                fail("Open Source structured data missing")
+            schema = json.loads(schema_match.group(1))
+            if schema.get("numberOfItems") != min(len(feed_urls), 10):
+                fail("Open Source schema count disagrees with generated feed")
 
 
 def validate_model_history():
