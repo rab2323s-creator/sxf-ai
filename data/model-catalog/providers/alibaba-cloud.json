@@ -201,12 +201,76 @@
         "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
       ],
       "notes": [
-        "Alibaba Cloud publishes distinct rates for prompts up to 128K and above 128K through 256K.",
-        "Numeric rates are source-verified but no historical effective-from date is inferred for the canonical schedule."
+        "Alibaba Cloud publishes Global list prices in Frankfurt and Virginia in two request-input-length tiers: up to 128K and above 128K to 256K tokens. The per-token rate for a request follows its input-size tier.",
+        "Singapore (International scope) has separate list prices; China (Beijing) also publishes tiered rates. SXF does not mix regional rates or treat minimum Global prices as universal.",
+        "Rates were checked against official Alibaba Cloud documentation on 2026-10-09; this verification date is not an asserted historical pricing effective-from date. Promotions are excluded."
       ],
-      "pricing": {},
+      "pricing": {
+        "tiered": {
+          "basis": "input_tokens_per_request",
+          "verified_at": "2026-10-09",
+          "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+          "scopes": [
+            {
+              "scope": "Global",
+              "regions": [
+                "Germany (Frankfurt)",
+                "US (Virginia)"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": 131072,
+                  "input": 0.172,
+                  "output": 1.032
+                },
+                {
+                  "min_input_tokens": 131073,
+                  "max_input_tokens": 262144,
+                  "input": 0.43,
+                  "output": 2.58
+                }
+              ]
+            },
+            {
+              "scope": "International",
+              "regions": [
+                "Singapore"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": null,
+                  "input": 0.6,
+                  "output": 3.6
+                }
+              ]
+            },
+            {
+              "scope": "China",
+              "regions": [
+                "China (Beijing)"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": 131072,
+                  "input": 0.172,
+                  "output": 1.032
+                },
+                {
+                  "min_input_tokens": 131073,
+                  "max_input_tokens": 262144,
+                  "input": 0.43,
+                  "output": 2.58
+                }
+              ]
+            }
+          ]
+        }
+      },
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-10-09",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
@@ -215,7 +279,7 @@
           "knowledge_cutoff": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
           "reasoning": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
           "modalities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
-          "pricing": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "pricing": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
           "access": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
           "lifecycle": "https://www.alibabacloud.com/help/en/model-studio/newly-released-models",
           "capabilities": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b"
