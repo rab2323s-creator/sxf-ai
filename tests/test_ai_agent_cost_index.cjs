@@ -13,6 +13,7 @@ class Element {
   append(...nodes){this.children.push(...nodes)}
   replaceChildren(...nodes){this.children=nodes}
   setAttribute(k,v){this[k]=v}
+  querySelector(){return this.statusText||(this.statusText=new Element("span"))}
   closest(){return {textContent:"test input"}}
   scrollIntoView(){}
   remove(){}
