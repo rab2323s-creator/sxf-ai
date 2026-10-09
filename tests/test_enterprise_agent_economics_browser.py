@@ -31,6 +31,10 @@ with sync_playwright() as p:
         assert page.locator('#studyYear').inner_text()=="$122,414"
         assert page.locator('#studyROI').inner_text()=="82.9%"
         assert page.locator('#studyUnit').inner_text()=="$1.24"
+        if page.evaluate("document.documentElement.scrollWidth>window.innerWidth"):
+            offenders=page.evaluate("""() => [...document.querySelectorAll('body *')].map(el=>({tag:el.tagName,cls:typeof el.className==='string'?el.className:'',id:el.id,left:Math.round(el.getBoundingClientRect().left),right:Math.round(el.getBoundingClientRect().right)})).filter(o=>o.right>innerWidth+1 || o.left < -1).slice(0,35)""")
+            print("DIAGNOSTIC OVERFLOW",width,"document",page.evaluate("document.documentElement.scrollWidth"),"offenders",offenders,flush=True)
+            page.screenshot(path=str(ROOT/f"econ-study-{width}-overflow.png"),full_page=True)
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth"),"Horizontal overflow: "+str(width)
         page.locator('#studyCase').select_option('documents')
         assert page.locator('#studyROI').inner_text()=="-2.8%"
