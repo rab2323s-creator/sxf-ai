@@ -1,0 +1,31 @@
+name: AI agent economics internal links QA (read only)
+
+on:
+  push:
+    branches: [feature/agent-economics-contextual-internal-links]
+    paths:
+      - "guides/what-is-agentic-ai/index.html"
+      - "guides/best-ai-agents/index.html"
+      - "guides/how-to-build-ai-super-agent/index.html"
+      - "guides/ai-agent-security/index.html"
+      - "guides/ai-negotiation-agents/index.html"
+      - "scripts/update_news.py"
+      - "tests/test_agent_economics_internal_links.py"
+      - ".github/workflows/agent-economics-internal-links-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify contextual placement and target existence
+        run: python3 tests/test_agent_economics_internal_links.py
+      - name: Verify guide generator syntax
+        run: python3 -m py_compile scripts/update_news.py

@@ -6780,6 +6780,7 @@ def best_ai_agents_guide_html(items):
               <p class="eyebrow">PRICING</p>
               <h2>How much do AI agents cost in 2026?</h2>
               <p>Agent pricing is moving away from one simple subscription metric because an agent consumes several resources: model inference, tool calls, browsers or virtual machines, third-party APIs and sometimes long-lived execution environments.</p>
+              <p>A plan price alone cannot show whether deployment pays off. SXF's <a href="/guides/ai-agent-cost/">AI Agent Cost, TCO and ROI analysis</a> breaks down operating costs, failed attempts, human review and year-one investment decisions using three explicitly modeled enterprise workflows.</p>
               <div class="guide-pricing-list">
                 <div><strong>ChatGPT Work</strong><p>Included on eligible paid ChatGPT plans; Plus is $20/month. Business Standard is $20/user/month annual or $25 monthly, with flexible credits available beyond included usage.</p><a href="https://openai.com/business/pricing/" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
                 <div><strong>Claude Cowork</strong><p>Included with Claude Pro at $20/month ($17/month equivalent annually), Max tiers, Team and Enterprise. Usage limits apply and heavy Cowork work consumes capacity faster than ordinary chat.</p><a href="https://claude.com/product/cowork" target="_blank" rel="noopener noreferrer">Verify pricing ↗</a></div>
