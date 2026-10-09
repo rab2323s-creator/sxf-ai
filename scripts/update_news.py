@@ -8936,7 +8936,7 @@ def compare_index_html(items):
       </section>
 
       <section class="model-reference-lower shell compare-hub-faq"><div class="model-sources"><p class="eyebrow">DATA LAYER</p><a href="/data/model-pricing.json"><span>Canonical model database</span><b>↗</b></a><a href="/data/model-comparisons.json"><span>Curated comparison registry</span><b>↗</b></a><a href="/data/model-history.json"><span>Append-only model history</span><b>↗</b></a><a href="/models/pricing/"><span>Pricing database & calculator</span><b>↗</b></a></div><div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div></section>
-    </main>{page_footer()}<script src="/assets/pricing-policy.js?v=20261009" defer></script><script src="/compare/compare.js" defer></script></body></html>'''
+    </main>{page_footer()}<script src="/assets/pricing-policy.js?v=20261009-p2" defer></script><script src="/compare/compare.js" defer></script></body></html>'''
 
 
 def gpt6_comparison_html(items):
@@ -10235,7 +10235,7 @@ def model_pricing_page_html():
         </section>
       </main>
       {page_footer()}
-      <script src="/assets/pricing-policy.js?v=20261009" defer></script>
+      <script src="/assets/pricing-policy.js?v=20261009-p2" defer></script>
       <script src="/models/pricing/pricing.js" defer></script>
     </body></html>'''
 
