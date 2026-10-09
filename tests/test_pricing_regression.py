@@ -61,7 +61,7 @@ def check_actual_views():
     check(generator.catalog_period_for_date(qwen, "2026-10-09")["output"] == 4.951,
           "Qwen source price drift")
     pricing = html_for("models/pricing/index.html")
-    qwen_row = next((r for r in re.findall(r'<tr data-pricing-row[\\s\\S]*?</tr>', pricing)
+    qwen_row = next((r for r in re.findall(r'<tr data-pricing-row[\s\S]*?</tr>', pricing)
                      if '<small>qwen3.8-max</small>' in r), None)
     check(qwen_row is not None and "$4.951" in qwen_row, "Qwen rendered price rounded")
     model_html = html_for("models/index.html")
