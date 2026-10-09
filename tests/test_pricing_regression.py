@@ -54,6 +54,16 @@ def check_actual_views():
     check(MODEL["pricing_basis"]["quantity"] == 1_000_000, "Gemini pricing units drift")
     check(MODEL["pricing_basis"]["meter"] == "tokens", "Gemini pricing meter drift")
     check_card()
+    check(generator.catalog_price_label(4.951) == "$4.951", "Qwen output precision lost")
+    check(generator.catalog_price_label(0.075) == "$0.075", "Cached price precision lost")
+    check(generator.catalog_price_label(0.0045) == "$0.0045", "Small price precision lost")
+    qwen = next(m for m in CATALOG["models"] if m["model_id"] == "qwen3.8-max")
+    check(generator.catalog_period_for_date(qwen, "2026-10-09")["output"] == 4.951,
+          "Qwen source price drift")
+    pricing = html_for("models/pricing/index.html")
+    qwen_row = next((r for r in re.findall(r'<tr data-pricing-row[\\s\\S]*?</tr>', pricing)
+                     if '<small>qwen3.8-max</small>' in r), None)
+    check(qwen_row is not None and "$4.951" in qwen_row, "Qwen rendered price rounded")
     model_html = html_for("models/index.html")
     match = re.search(r'data-model-id="gemini-3.7-flash"([\s\S]*?)</tr>', model_html)
     check(match is not None, "Models table missing Gemini 3.7")
@@ -145,6 +155,10 @@ def main():
                            ("2027-01-01", EXPECTED_2027)]:
         check_rate(generator.active_standard_price(MODEL_ID, date), expected, "official Gemini " + date)
     check_fixture()
+    mistral = next(m for m in CATALOG["models"] if m["model_id"] == "mistral-large-4")
+    for date, inp, out in [("2026-10-19", 0.68, 2.09), ("2026-10-20", 1.36, 4.18)]:
+        rates = generator.catalog_period_for_date(mistral, date)
+        check(rates["input"] == inp and rates["output"] == out, "Mistral transition drift")
     check_actual_views()
     print("PASS: Gemini official pricing, homepage fixture, current rendered cross-page rates, and calculator costs")
 

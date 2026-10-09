@@ -79,11 +79,7 @@
     return "$" + value.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: digits});
   };
 
-  const rateMoney = value => {
-    if (!Number.isFinite(Number(value))) return "—";
-    const n = Number(value);
-    return "$" + n.toLocaleString(undefined, {minimumFractionDigits: n >= 1 ? 2 : 0, maximumFractionDigits: 4});
-  };
+  const rateMoney = value => window.SXFPricing.formatRate(value);
 
   const compactNumber = value => Number(value).toLocaleString(undefined, {maximumFractionDigits: 0});
 
@@ -318,7 +314,7 @@
     const cached = tokenValue(cachedTokens);
     const output = tokenValue(outputTokens);
     const usage = volume();
-    const date = billingDate.value || catalog.source_verified;
+    const date = billingDate.value || utcToday();
     const result = estimate(model, date, input, cached, output);
 
     resultModelName.textContent = model.model;
