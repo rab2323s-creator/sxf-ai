@@ -103,6 +103,8 @@ def main():
             "signals/open-sourcing-astabrief-the-fast-report-generation-model-in-asta-d599f0a/index.html",
             "signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/index.html",
             "signals/the-open-asr-leaderboard-adds-its-first-global-south-language-b0b2c2d/index.html",
+            # The Jump Trading article loses a spurious Open Source topic link.
+            "signals/how-jump-trading-is-scaling-quant-research-with-chatgpt-342677a/index.html",
             "sitemap.xml",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
