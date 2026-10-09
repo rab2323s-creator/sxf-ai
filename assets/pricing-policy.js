@@ -38,5 +38,14 @@
     }
     return {rates, long, longRule};
   };
-  root.SXFPricing = Object.freeze({utcToday, periodForDate, effectiveRates});
-})(window);
+  const formatRate = value => {
+    const n = Number(value);
+    if (!Number.isFinite(n) || n < 0) return "—";
+    return "$" + n.toLocaleString("en-US", {
+      minimumFractionDigits: 2, maximumFractionDigits: 8
+    });
+  };
+  const api = Object.freeze({utcToday, periodForDate, effectiveRates, formatRate});
+  if (root) root.SXFPricing = api;
+  if (typeof module === "object" && module.exports) module.exports = api;
+})(typeof window !== "undefined" ? window : (typeof globalThis !== "undefined" ? globalThis : null));
