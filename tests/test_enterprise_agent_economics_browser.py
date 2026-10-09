@@ -19,7 +19,7 @@ url=f"http://127.0.0.1:{server.server_port}/guides/ai-agent-cost/"
 
 with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
-    for width,height in ((1440,900),(390,844),(320,740)):
+    for width,height in ((1440,900),(1024,768),(768,1024),(430,932),(390,844),(375,812),(320,740)):
         page=browser.new_page(viewport={"width":width,"height":height},device_scale_factor=1)
         errors=[]
         page.on("pageerror",lambda e:errors.append(str(e)))
@@ -36,6 +36,36 @@ with sync_playwright() as p:
             print("DIAGNOSTIC OVERFLOW",width,"document",page.evaluate("document.documentElement.scrollWidth"),"offenders",offenders,flush=True)
             page.screenshot(path=str(ROOT/f"econ-study-{width}-overflow.png"),full_page=True)
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth"),"Horizontal overflow: "+str(width)
+        # Uploaded diagrams retain their natural aspect ratio and never exceed their article column.
+        image_paths = {
+            "cost-image-hero": "/guides/ai-agent-cost/images/ai-agent-cost-breakdown.webp",
+            "cost-image-flow": "/guides/ai-agent-cost/images/ai-agent-roi-workflow.webp",
+        }
+        for figure_id, expected_src in image_paths.items():
+            figure = page.locator(f"#{figure_id}")
+            image = figure.locator("img")
+            link = figure.locator(".econ-figure-zoom")
+            image.scroll_into_view_if_needed()
+            image.evaluate("(image) => image.decode()")
+            assert image.get_attribute("src") == expected_src
+            assert image.get_attribute("width") == "1672"
+            assert image.get_attribute("height") == "941"
+            assert link.get_attribute("href") == expected_src
+            assert link.get_attribute("target") == "_blank"
+            assert link.get_attribute("rel") == "noopener noreferrer"
+            geometry = image.evaluate("""(image) => {
+                const r = image.getBoundingClientRect();
+                const column = document.querySelector('.econ-content').getBoundingClientRect();
+                return {left:r.left,right:r.right,width:r.width,height:r.height,
+                        columnLeft:column.left,columnRight:column.right,
+                        naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight}
+            }""")
+            assert geometry["naturalWidth"] == 1672, (width, figure_id, geometry)
+            assert geometry["naturalHeight"] == 941, (width, figure_id, geometry)
+            assert geometry["right"] <= geometry["columnRight"] + 1, (width, figure_id, geometry)
+            assert geometry["left"] >= geometry["columnLeft"] - 1, (width, figure_id, geometry)
+            assert abs(geometry["width"]/geometry["height"] - 1672/941) < .015, (width, figure_id, geometry)
+        assert page.locator(".econ-original-figure").count() == 2
         page.locator('#studyCase').select_option('documents')
         assert page.locator('#studyROI').inner_text()=="-2.8%"
         assert page.locator('#studyYear').inner_text()=="$164,281"
