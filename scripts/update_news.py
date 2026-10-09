@@ -4818,9 +4818,7 @@ def catalog_model_reference_html(model_id, items):
           </div>
         </section>
 
-        {tiered_details}
-
-        {f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
+        {tiered_details + chr(10) * 2 + "        " if tiered_details else ""}{f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
