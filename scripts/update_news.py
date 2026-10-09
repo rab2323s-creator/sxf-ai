@@ -2483,7 +2483,6 @@ TOPICS = [
         "category": "Open Source",
         "strong_patterns": [
             r"\bopen[- ]sourc(?:e|ing)\b",
-            r"\bopen[- ](?:model|models|inference|training)\b",
             r"\blocal models?\b",
             r"\bolmo[- ]core\b",
             r"\bopen weights?\b",
