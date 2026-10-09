@@ -76,3 +76,10 @@
 @media(max-width:960px){.econ-main-grid{grid-template-columns:1fr}.econ-toc{position:static;display:flex;flex-wrap:wrap;gap:6px}.econ-toc strong{width:100%}.econ-toc a{border:1px solid #354741;padding:7px 10px;border-radius:6px}.econ-scenario-cards{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.econ-page .econ-shell{padding:0 17px}.econ-hero{padding:29px 22px}.econ-hero h1{font-size:38px}.econ-breadcrumb{padding:17px 0 19px!important}.econ-main-grid{gap:22px;padding-top:30px}.econ-scenario-cards,.econ-decision,.econ-sense-metrics,.econ-sensitivity .econ-sense-fields{grid-template-columns:1fr}.econ-figure{padding:16px}.econ-sensitivity{padding:17px}.econ-content section{margin-bottom:42px}}
 @media(prefers-reduced-motion:reduce){.econ-sense-meter>div{transition:none}}
+
+/* Mobile containment: navigation remains scrollable within its own track;
+   long equations and tables wrap or scroll inside their dedicated regions. */
+.econ-page .site-header{max-width:100%;overflow-x:clip}
+.econ-page main{min-width:0;max-width:100%;overflow-x:clip}
+.econ-page .econ-content{overflow-wrap:anywhere}
+.econ-page .econ-table-scroll{max-width:100%;width:100%;overflow-x:auto}
