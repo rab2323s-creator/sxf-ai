@@ -6,6 +6,7 @@ on:
       - "guides/ai-agent-cost/**"
       - "data/enterprise-agent-economics-assumptions.json"
       - "tests/test_enterprise_agent_economics.cjs"
+      - "tests/test_enterprise_agent_economics_browser.py"
       - "scripts/update_news.py"
       - "scripts/sitemap_generation.py"
       - "sitemap.xml"
@@ -32,6 +33,20 @@ jobs:
         run: node tests/test_enterprise_agent_economics.cjs
       - name: Verify generator syntax
         run: python3 -m py_compile scripts/update_news.py scripts/sitemap_generation.py
+      - name: Install Chromium browser test dependencies
+        run: |
+          python3 -m pip install playwright==1.56.0
+          python3 -m playwright install --with-deps chromium
+      - name: Test research UI in real desktop and mobile Chromium
+        run: python3 tests/test_enterprise_agent_economics_browser.py
+      - name: Upload browser screenshots for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: economics-browser-screenshots
+          path: econ-study-*-test.png
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Package read-only research preview
         uses: actions/upload-artifact@v4
         with:
