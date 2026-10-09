@@ -104,6 +104,8 @@ def main():
             "signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/index.html",
             "signals/the-open-asr-leaderboard-adds-its-first-global-south-language-b0b2c2d/index.html",
             "sitemap.xml",
+            # Intentional editorial addition: enterprise agent economics study in Guides.
+            "guides/index.html",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (
