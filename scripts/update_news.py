@@ -19,11 +19,13 @@ from feed_card_rendering import FeedCardContext, featured_html as render_feature
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
 from signal_page_rendering import SignalPageContext, signal_row as render_signal_row, signals_index_html as render_signals_index_html
 from signal_article_rendering import SignalArticleContext, signal_page_html as render_signal_article
+from open_source_signals import select_open_source_signals
 from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
 ARCHIVE_OUT = ROOT / "data" / "archive.json"
+OPEN_SOURCE_FEED_OUT = ROOT / "data" / "open-source.json"
 SLUG_ALIASES_PATH = ROOT / "data" / "slug_aliases.json"
 MODEL_PRICING_PATH = ROOT / "data" / "model-pricing.json"
 MODEL_HISTORY_PATH = ROOT / "data" / "model-history.json"
@@ -2276,11 +2278,38 @@ def section_cards_html(items):
     """Compatibility entrypoint for category section cards."""
     return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
-def update_section_pages(items):
+def open_source_current_signals(archive, updated_at):
+    topic = next(topic for topic in TOPICS if topic["slug"] == "open-source-ai")
+    return select_open_source_signals(
+        archive, as_of=parse_date(updated_at), days=MAX_AGE_DAYS,
+        matches_topic=lambda item: topic_matches(item, topic),
+        source_by_name=SOURCE_BY_NAME, parse_date=parse_date,
+    )
+
+
+def update_section_pages(items, archive=None):
+    # Reuse the persisted feed timestamp so offline builds remain identical.
+    snapshot = json.loads(OUT.read_text(encoding="utf-8"))
+    source_items = archive if archive is not None else load_items(ARCHIVE_OUT)
+    open_items = open_source_current_signals(source_items, snapshot["updated_at"])
+    OPEN_SOURCE_FEED_OUT.write_text(
+        json.dumps({
+            "updated_at": snapshot["updated_at"],
+            "window_days": MAX_AGE_DAYS,
+            "items": [
+                {**client_item(item), "summary": topic_summary_text(item)}
+                for item in open_items
+            ],
+        }, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
     for category, path in SECTION_PAGES.items():
         if not path.exists():
             continue
-        filtered = [item for item in items if item["category"] == category]
+        filtered = open_items if category == "Open Source" else [
+            item for item in items if item["category"] == category
+        ]
         page = path.read_text(encoding="utf-8")
         page, count_updates = re.subn(
             r'(<strong id="sectionCount">)\d+(</strong>)',
@@ -2329,7 +2358,7 @@ GPT6_SOL_GEMINI_COMPARE_SLUG = "gpt-6-sol-vs-gemini-3-8-flash"
 CLAUDE_OPUS_GEMINI_COMPARE_SLUG = "claude-opus-5-5-vs-gemini-3-8-flash"
 GPT6_ASTRA_FABLE_COMPARE_SLUG = "gpt-6-astra-vs-claude-fable-5-1"
 
-TOPIC_RELEVANCE_VERSION = "sxf-topic-relevance-v2"
+TOPIC_RELEVANCE_VERSION = "sxf-topic-relevance-v3"
 
 TOPICS = [
     {
@@ -2447,7 +2476,10 @@ TOPICS = [
         "threshold": 55,
         "category": "Open Source",
         "strong_patterns": [
-            r"\bopen[- ]source\b",
+            r"\bopen[- ]sourc(?:e|ing)\b",
+            r"\bopen[- ](?:model|models|inference|training)\b",
+            r"\blocal models?\b",
+            r"\bolmo[- ]core\b",
             r"\bopen weights?\b",
             r"\bweights?\b",
             r"\bcheckpoints?\b",
@@ -3632,7 +3664,7 @@ def topic_relevance(item, topic):
     score = 0
     evidence = []
 
-    category_match = bool(topic.get("category") and category == topic["category"])
+    category_match = bool(topic.get("category") and " ".join(str(category).split()).casefold() == " ".join(str(topic["category"]).split()).casefold())
     if category_match:
         score += 80
         evidence.append("category-exact")
@@ -3686,6 +3718,14 @@ def topic_matches(item, topic):
     score, _ = topic_relevance(item, topic)
     if score < int(topic.get("threshold", 55)):
         return False
+
+    if topic.get("slug") == "open-source-ai":
+        # RSS boilerplate, source identity or a weak keyword cannot, by itself,
+        # establish Open Source membership. Require evidence in the title.
+        primary = " ".join(str(item.get("category", "")).split()).casefold() == "open source"
+        title = normalize_model_text(item.get("title", ""))
+        if not primary and topic_pattern_hits(title, topic.get("strong_patterns", [])) == 0:
+            return False
 
     if topic.get("require_title_strong"):
         title = normalize_model_text(item.get("title", ""))
@@ -10504,7 +10544,7 @@ def select_current_items(archive, cutoff):
 def render_site(archive, current):
     """Rebuild HTML, JSON-LD and sitemap from in-memory prepared signal records."""
     update_index(current)
-    update_section_pages(current)
+    update_section_pages(current, archive)
     build_discovery_pages(archive, current)
     normalize_static_shells()
     update_sitemap(archive)
