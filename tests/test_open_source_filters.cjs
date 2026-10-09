@@ -60,7 +60,7 @@ async function signals(){
   const search={value:'',addEventListener(){}};
   const filters=['All','Models','Agents','Research','Tools','Open Source'].map(key=>({
     dataset:{signalFilter:key},classList:{remove(){},add(){}},
-    addEventListener:(_event,cb)=>{this.click=cb;},
+    addEventListener(_event,cb){this.click=cb;},
   }));
   const nodes={signalsFeed:feed,signalsEmpty:empty,
     signalsSearch:search,signalsResultMeta:meta};
