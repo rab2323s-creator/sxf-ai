@@ -101,6 +101,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_entry(f"{BASE_URL}/guides/ai-agent-cost/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/compare/", generated_today),
