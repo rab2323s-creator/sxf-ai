@@ -27,6 +27,8 @@ jobs:
         run: |
           node --check ai-agent-cost/index.js
           node --check assets/pricing-policy.js
+      - name: Verify calculator unit economics and edge cases
+        run: node tests/test_ai_agent_cost_index.cjs
       - name: Verify HTML, SEO, and catalog integrity
         run: |
           python3 - <<'PY'
