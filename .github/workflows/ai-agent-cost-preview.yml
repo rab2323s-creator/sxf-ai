@@ -1,0 +1,80 @@
+name: Review AI Agent Cost Index (no deploy)
+on:
+  push:
+    branches:
+      - feature/ai-agent-cost-index-v1
+    paths:
+      - "ai-agent-cost/**"
+      - "tests/test_ai_agent_cost_index.cjs"
+      - "guides/ai-agent-cost/index.html"
+      - "scripts/sitemap_generation.py"
+      - "sitemap.xml"
+      - ".github/workflows/ai-agent-cost-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check JavaScript syntax
+        run: |
+          node --check ai-agent-cost/index.js
+          node --check assets/pricing-policy.js
+      - name: Verify calculator unit economics and edge cases
+        run: node tests/test_ai_agent_cost_index.cjs
+      - name: Verify HTML, SEO, and catalog integrity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import json
+          import re
+          class Page(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.ids = []
+                  self.h1 = 0
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if 'id' in a: self.ids.append(a['id'])
+                  if tag == 'h1': self.h1 += 1
+                  if tag == 'a': self.links.append(a.get('href', ''))
+          path = Path('ai-agent-cost/index.html')
+          html = path.read_text(encoding='utf-8')
+          page = Page()
+          page.feed(html)
+          assert page.h1 == 1, 'Exactly one H1 required'
+          assert len(page.ids) == len(set(page.ids)), 'Duplicate element IDs'
+          for src in ['/ai-agent-cost/index.js', '/ai-agent-cost/index.css', '/assets/pricing-policy.js']:
+              assert src in html, f'Missing asset {src}'
+          assert '<link rel="canonical" href="https://sxf.si/ai-agent-cost/">' in html
+          assert '/ai-agent-cost/' in Path('scripts/sitemap_generation.py').read_text()
+          assert '/ai-agent-cost/' in Path('sitemap.xml').read_text()
+          assert '/ai-agent-cost/' in Path('guides/ai-agent-cost/index.html').read_text()
+          catalog = json.loads(Path('data/model-pricing.json').read_text())
+          assert catalog.get('source_verified') and catalog.get('models')
+          assert '/data/model-pricing.json' in Path('ai-agent-cost/index.js').read_text()
+          assert len(catalog['models']) >= 50
+          print('PASS: HTML / SEO / canonical catalog / sitemap / internal-link checks')
+          PY
+      - name: Package review files (no deploy, no commit)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-agent-cost-preview
+          path: |
+            ai-agent-cost/
+            assets/pricing-policy.js
+            styles.css
+            favicon.svg
+            data/model-pricing.json
+          retention-days: 7
+          if-no-files-found: error

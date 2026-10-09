@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#07090d">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>AI Agent Cost Index — Model API Rates, TCO & ROI Calculator | SXF / AI</title>
+  <meta name="description" content="Compare source-documented AI model API rates and estimate enterprise agent total cost of ownership, cost per successful task and ROI. Interactive, catalog-linked and transparent about assumptions.">
+  <link rel="canonical" href="https://sxf.si/ai-agent-cost/">
+  <link rel="alternate" hreflang="en" href="https://sxf.si/ai-agent-cost/">
+  <link rel="alternate" hreflang="x-default" href="https://sxf.si/ai-agent-cost/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SXF / AI">
+  <meta property="og:title" content="AI Agent Cost Index — Pricing Intelligence & ROI Calculator">
+  <meta property="og:description" content="Model-level API prices plus a transparent total-cost simulator for AI agent workflows.">
+  <meta property="og:url" content="https://sxf.si/ai-agent-cost/">
+  <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Agent Cost Index | SXF / AI">
+  <meta name="twitter:description" content="Model rates, total agent cost, cost per successful outcome and scenario ROI.">
+  <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"CollectionPage","@id":"https://sxf.si/ai-agent-cost/#webpage","url":"https://sxf.si/ai-agent-cost/","name":"AI Agent Cost Index — Model API Rates, TCO & ROI Calculator","description":"A catalog-linked pricing reference and scenario calculator for AI agent unit economics.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/ai-agent-cost/#application"},"inLanguage":"en","datePublished":"2026-10-09"},
+      {"@type":"WebApplication","@id":"https://sxf.si/ai-agent-cost/#application","name":"SXF AI Agent Cost Calculator","url":"https://sxf.si/ai-agent-cost/#calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"JavaScript required to load catalog rates","description":"Estimates Standard API token costs and editable operational expenses for AI agent scenarios. Outputs are estimates, not measured industry benchmarks.","isAccessibleForFree":true,"inLanguage":"en"},
+      {"@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},
+        {"@type":"ListItem","position":2,"name":"AI Agent Cost Index","item":"https://sxf.si/ai-agent-cost/"}
+      ]}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/ai-agent-cost/index.css">
+  <script src="/assets/pricing-policy.js" defer></script>
+  <script src="/ai-agent-cost/index.js" defer></script>
+</head>
+<body class="agent-cost-index">
+  <a class="aci-skip" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+    <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+    <div class="header-status"><span class="pulse-dot"></span>INTELLIGENCE</div>
+  </div></header>
+
+  <main id="main">
+    <div class="aci-wrap">
+      <nav class="aci-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF / AI</a><span aria-hidden="true">/</span><span>AI Agent Cost Index</span></nav>
+      <section class="aci-hero" aria-labelledby="aci-title">
+        <div class="aci-hero-inner">
+          <p class="aci-eyebrow"><span class="aci-dot"></span> COST INTELLIGENCE · ENTERPRISE AGENTS · 2026</p>
+          <h1 id="aci-title">AI Agent <span>Cost Index.</span></h1>
+          <p class="aci-lead">A decision-grade view of agent economics. Start with documented model API rates, model your real operating costs, and compare <strong>cost per successful outcome</strong> — not just the token bill.</p>
+          <div class="aci-actions"><a class="aci-btn aci-btn-primary" href="#calculator">Model your agent cost <span aria-hidden="true">↗</span></a><a class="aci-btn aci-btn-outline" href="#rates">Browse model rates <span aria-hidden="true">↓</span></a></div>
+          <p class="aci-hero-note">Pricing is loaded from the existing SXF catalog, not hardcoded into this page. Scenario results depend on your inputs.</p>
+        </div>
+        <div class="aci-hero-art" aria-hidden="true">
+          <div class="aci-hero-grid"></div>
+          <div class="aci-diagram">
+            <div class="aci-diagram-node aci-dn-a"><span>API</span><strong>MODEL</strong></div>
+            <div class="aci-diagram-node aci-dn-b"><span>OPS</span><strong>RUN</strong></div>
+            <div class="aci-diagram-node aci-dn-c"><span>QA</span><strong>REVIEW</strong></div>
+            <div class="aci-diagram-core"><small>UNIT ECONOMICS</small><strong>$/<em>SUCCESS</em></strong><span>Real cost of outcomes</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="aci-metrics" aria-label="Catalog status">
+        <div class="aci-metric"><span>CATALOG MODELS</span><strong id="statModels">—</strong><small>All tracked model types</small></div>
+        <div class="aci-metric"><span>ELIGIBLE TOKEN MODELS</span><strong id="statEligible">—</strong><small>Standard paid, input + output</small></div>
+        <div class="aci-metric"><span>TRACKED PROVIDERS</span><strong id="statProviders">—</strong><small>Catalog-wide</small></div>
+        <div class="aci-metric"><span>CATALOG REVIEW DATE</span><strong class="aci-metric-date" id="statVerified">—</strong><small>Not a real-time API price feed</small></div>
+      </section>
+
+      <div class="aci-alert" id="catalogStatus" role="status" aria-live="polite"><span class="aci-status-ring" aria-hidden="true"></span><span>Loading the SXF price catalog…</span></div>
+
+      <section class="aci-section" id="rates" aria-labelledby="ratesHeading">
+        <div class="aci-section-head"><div><p class="aci-kicker">01 / THE RATE LAYER</p><h2 id="ratesHeading">Provider-published API rates.</h2><p>Compare the direct Standard API rates recorded by SXF. These are <em>model costs</em>, not all-in agent prices. Only paid generative models with comparable token units appear here.</p></div><a class="aci-text-link" href="/models/pricing/">Full model pricing database ↗</a></div>
+        <div class="aci-toolbar">
+          <label class="aci-search-label" for="rateSearch">FIND A MODEL<input id="rateSearch" type="search" placeholder="Search model or provider…" autocomplete="off"></label>
+          <label for="providerFilter">PROVIDER<select id="providerFilter"><option value="all">All providers</option></select></label>
+          <label class="aci-check"><input type="checkbox" id="agentOnly"><span>Only agent-capable models</span></label>
+          <button type="button" id="exportRates" class="aci-small-btn" disabled>Export CSV ↓</button>
+        </div>
+        <div class="aci-table-scroll" role="region" aria-label="AI model pricing table" tabindex="0">
+          <table class="aci-rates-table"><thead><tr><th scope="col">Model & source</th><th scope="col">Input / 1M</th><th scope="col">Cached / 1M</th><th scope="col">Output / 1M</th><th scope="col">Verified</th><th scope="col">Estimate</th></tr></thead><tbody id="rateRows"><tr><td colspan="6">Waiting for source-linked pricing data…</td></tr></tbody></table>
+        </div>
+        <div class="aci-table-bottom"><span id="rateCount" aria-live="polite">Waiting for catalog</span><span>USD · Standard paid token rates · Short-context baseline; applicable long-context rules are calculated per request.</span></div>
+        <p class="aci-tiny">A “verified” date reflects the source record's last documented check, not continuous monitoring. Provider billing may vary with context length, caching, tool calls, service tier, location, and enterprise terms.</p>
+      </section>
+
+      <section class="aci-section aci-simulator" id="calculator" aria-labelledby="calculatorHeading">
+        <div class="aci-section-head"><div><p class="aci-kicker">02 / OUTCOME ECONOMICS</p><h2 id="calculatorHeading">AI agent total-cost calculator.</h2><p>Change each assumption for your workflow. Default values are <strong>illustrative inputs, not measured industry averages</strong>.</p></div><span class="aci-data-tag">CATALOG-LINKED RATES</span></div>
+        <div class="aci-preset-row" aria-label="Illustrative workload presets">
+          <button type="button" class="aci-preset" data-preset="support">Support triage <span>↗</span></button>
+          <button type="button" class="aci-preset" data-preset="documents">Document workflow <span>↗</span></button>
+          <button type="button" class="aci-preset" data-preset="research">Research assistance <span>↗</span></button>
+          <span>Illustrative starting scenarios — review every value.</span>
+        </div>
+        <div class="aci-calc-layout">
+          <form class="aci-calc-inputs" id="agentCostForm">
+            <fieldset><legend><span>01</span> MODEL & WORKLOAD</legend>
+              <div class="aci-fields">
+                <label class="aci-field aci-span-2">API model <select id="calcModel" name="calcModel" required disabled><option value="">Loading model prices…</option></select></label>
+                <label class="aci-field">Tasks per month <input id="monthlyTasks" type="number" min="1" max="100000000" step="1" value="10000"></label>
+                <label class="aci-field">Model calls / task <input id="callsPerTask" type="number" min="1" max="1000" step="1" value="2"></label>
+                <label class="aci-field">Input tokens / call <input id="inputTokens" type="number" min="0" max="10000000" step="100" value="2000"></label>
+                <label class="aci-field">Output tokens / call <input id="outputTokens" type="number" min="0" max="10000000" step="100" value="500"></label>
+                <label class="aci-field">Cached input share (%) <input id="cachePercent" type="number" min="0" max="100" step="5" value="0"></label>
+                <label class="aci-field">Extra retry calls (%) <input id="retryPercent" type="number" min="0" max="1000" step="5" value="10"></label>
+              </div>
+              <p class="aci-field-note" id="selectedRates">Select a model to see current catalog rates.</p>
+            </fieldset>
+            <fieldset><legend><span>02</span> OPERATIONS & HUMAN OVERSIGHT</legend>
+              <div class="aci-fields">
+                <label class="aci-field">Tool fees / model call (USD) <input id="toolCost" type="number" min="0" max="100000" step="0.001" value="0.002"></label>
+                <label class="aci-field">Infrastructure / month (USD) <input id="infraCost" type="number" min="0" max="100000000" step="25" value="300"></label>
+                <label class="aci-field">Operations / month (USD) <input id="opsCost" type="number" min="0" max="100000000" step="25" value="600"></label>
+                <label class="aci-field">Build cost allocated / month (USD) <input id="buildCost" type="number" min="0" max="100000000" step="25" value="500"></label>
+                <label class="aci-field">Tasks reviewed by humans (%) <input id="reviewPercent" type="number" min="0" max="100" step="5" value="15"></label>
+                <label class="aci-field">Minutes per review <input id="reviewMinutes" type="number" min="0" max="1440" step="0.5" value="2"></label>
+                <label class="aci-field">Loaded reviewer cost / hour (USD) <input id="hourlyCost" type="number" min="0" max="100000" step="1" value="35"></label>
+              </div>
+            </fieldset>
+            <fieldset><legend><span>03</span> OUTCOMES & VALUE</legend>
+              <div class="aci-fields">
+                <label class="aci-field">Task success rate (%) <input id="successRate" type="number" min="0" max="100" step="1" value="85"></label>
+                <label class="aci-field">Incremental value / success (USD) <input id="valuePerSuccess" type="number" min="0" max="100000000" step="0.1" value="1.8"></label>
+              </div>
+              <p class="aci-field-note">“Incremental value” must represent actual savings or profit attributable to success, not gross revenue or an assumed universal benchmark.</p>
+            </fieldset>
+            <p class="aci-validation" id="calcWarning" role="alert" hidden></p>
+          </form>
+
+          <aside class="aci-result-panel" aria-label="Calculated monthly estimates">
+            <div class="aci-result-top"><span>MONTHLY TOTAL COST</span><strong id="totalCost" aria-live="polite">—</strong><small id="resultStatus">Waiting for source-linked model rates</small></div>
+            <div class="aci-unit-grid">
+              <div><span>COST / SUCCESSFUL TASK</span><strong id="costPerSuccess">—</strong></div>
+              <div><span>COST / ALL TASKS</span><strong id="costPerTask">—</strong></div>
+              <div><span>SUCCESSFUL TASKS</span><strong id="successfulTasks">—</strong></div>
+              <div><span>MODELED MONTHLY ROI</span><strong id="roiPercent">—</strong></div>
+            </div>
+            <h3>Monthly cost composition</h3>
+            <div class="aci-breakdown-bar" id="breakdownBar" aria-label="Cost breakdown"></div>
+            <table class="aci-breakdown" aria-label="Monthly cost breakdown"><tbody>
+              <tr><th scope="row"><i class="aci-swatch aci-swatch-api"></i> Model API</th><td id="apiMonthly">—</td></tr>
+              <tr><th scope="row"><i class="aci-swatch aci-swatch-tools"></i> Tools</th><td id="toolsMonthly">—</td></tr>
+              <tr><th scope="row"><i class="aci-swatch aci-swatch-human"></i> Human review</th><td id="humanMonthly">—</td></tr>
+              <tr><th scope="row"><i class="aci-swatch aci-swatch-ops"></i> Infra + operations + build allocation</th><td id="fixedMonthly">—</td></tr>
+            </tbody></table>
+            <div class="aci-result-foot"><span>Estimated incremental value</span><strong id="monthlyValue">—</strong></div>
+            <div class="aci-result-foot"><span>Estimated net monthly value</span><strong id="monthlyNet">—</strong></div>
+            <button type="button" class="aci-copy" id="copyScenario">Copy calculation summary ↗</button>
+            <p class="aci-tiny">Scenario estimate, not a quote, guaranteed saving or observed ROI. Upstream changes are reflected only after SXF updates its verified catalog.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="aci-section aci-context" id="method" aria-labelledby="methodHeading">
+        <div class="aci-section-head"><div><p class="aci-kicker">03 / METHODOLOGY</p><h2 id="methodHeading">How the numbers are calculated.</h2><p>Separating measured price inputs from business assumptions is essential to comparable total cost of ownership.</p></div><a class="aci-text-link" href="/about/#method">Editorial standards ↗</a></div>
+        <div class="aci-method-grid">
+          <article><span class="aci-method-n">01 / SOURCE</span><h3>One canonical catalog</h3><p>Standard model rates, provider links, effective pricing periods, long-context conditions and verification dates come from <a href="/data/model-pricing.json">SXF's shared pricing dataset</a>. We never overwrite it with an aggregator price.</p></article>
+          <article><span class="aci-method-n">02 / MODEL COST</span><h3>Per-call token arithmetic</h3><p>Each model call charges uncached input tokens, cached input tokens when supported, and output tokens at their applicable USD-per-million rate. Retry overhead increases the modeled number of calls.</p></article>
+          <article><span class="aci-method-n">03 / TOTAL COST</span><h3>Not just API spend</h3><p>Monthly total = model API + tool charges + human review + infrastructure + operations + allocated build cost. Success and ROI calculations use the full modeled total.</p></article>
+          <article><span class="aci-method-n">04 / COMPARABILITY</span><h3>Unit economics</h3><p>Cost per successful task = total monthly cost ÷ expected successful tasks. Modeled ROI = (incremental value − monthly cost) ÷ monthly cost. A zero-success scenario has no defined cost-per-success.</p></article>
+        </div>
+        <div class="aci-scope"><h3>What this index does not claim</h3><p>It does not measure real-world task success rates, represent negotiated enterprise pricing, include every billable third-party tool, or convert illustrative scenarios into industry benchmarks. Extra charges — batch/fast tiers, cache writes/storage, grounding, searches, regional uplifts and taxes — require separate modeling when applicable.</p><p>Dates labeled “catalog review” and “per-model verification” are record dates, <strong>not a claim of live polling of every provider</strong>.</p></div>
+      </section>
+
+      <section class="aci-section aci-further" aria-labelledby="furtherHeading">
+        <div class="aci-section-head"><div><p class="aci-kicker">04 / GO DEEPER</p><h2 id="furtherHeading">From rates to deployment decisions.</h2><p>Compare APIs, understand risk, and bring a defensible business case to procurement.</p></div></div>
+        <div class="aci-further-grid">
+          <a href="/guides/ai-agent-cost/"><span>BUYER'S GUIDE</span><strong>AI Agent Cost in 2026</strong><small>Cost layers, worked examples, build vs buy, and hidden expenses.</small><b>↗</b></a>
+          <a href="/tools/ai-model-cost-calculator/"><span>SPECIALIST TOOL</span><strong>AI Model Cost Calculator</strong><small>Detailed API-only token economics for a selected model.</small><b>↗</b></a>
+          <a href="/research/ai-agent-reliability/"><span>RESEARCH</span><strong>AI Agent Reliability</strong><small>Why successful outcomes matter more than nominal task volume.</small><b>↗</b></a>
+          <a href="/guides/ai-agent-security/"><span>OPERATIONS</span><strong>AI Agent Security</strong><small>Plan risk controls, oversight and operational safeguards.</small><b>↗</b></a>
+        </div>
+      </section>
+
+      <section class="aci-section aci-governance" aria-labelledby="governanceHeading">
+        <div><p class="aci-kicker">05 / TRANSPARENCY</p><h2 id="governanceHeading">Change control, not price theater.</h2><p>The index is tied to SXF's provider-sourced price catalog. External monitoring detects potential differences, but never rewrites official records automatically. Confirmed changes enter the canonical database after source review and validation.</p><p class="aci-updated"><span class="aci-dot"></span> Index launched <time datetime="2026-10-09">October 9, 2026</time>. Catalog review date above is populated from the actual dataset.</p></div>
+        <div class="aci-gov-links"><a href="/models/pricing/">Browse detailed prices ↗</a><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI pricing source ↗</a><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic pricing source ↗</a><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Google pricing source ↗</a></div>
+      </section>
+
+      <section class="aci-partners" aria-labelledby="partnersHeading">
+        <div><p class="aci-kicker">PARTNERSHIPS</p><h2 id="partnersHeading">Reach buyers, not just browsers.</h2><p>Relevant businesses can inquire about clearly labeled sponsorship opportunities. Advertisers do not control the methodology, rankings, source choice or calculated outcomes. No sponsored listings are included in the pricing table.</p></div>
+        <a class="aci-btn aci-btn-outline" href="mailto:info@sxf.si?subject=SXF%20AI%20Agent%20Cost%20Index%20partnership">Partnership inquiries ↗</a>
+      </section>
+      <p class="aci-legal">SXF / AI provides informational estimates only. Validate provider-specific invoices, regional terms, caching, service tier, tokenization and all operational assumptions before procurement.</p>
+    </div>
+  </main>
+  <footer class="footer shell"><div class="footer-main"><div class="footer-identity"><a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a><p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p><p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p><a class="footer-contact" href="mailto:info@sxf.si">CONTACT <strong>info@sxf.si</strong> ↗</a></div><nav class="footer-nav" aria-label="Footer navigation"><div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models</a><a href="/models/pricing/">Model Pricing</a><a href="/ai-agent-cost/">AI Agent Cost Index</a><a href="/research/">Research</a></div><div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models</a><a href="/guides/">Guides</a><a href="/tools/">Tools</a></div><div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method</a><a href="mailto:info@sxf.si">Contact</a></div></nav></div><div class="footer-bottom"><span>© <span id="year">2026</span> SXF / AI</span><span>Independent source-linked pricing intelligence.</span></div></footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body></html>
