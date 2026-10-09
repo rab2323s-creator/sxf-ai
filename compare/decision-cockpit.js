@@ -35,7 +35,7 @@
     const task=engines.workload(Object.fromEntries(["input","cached","output","requests"].map((key,i)=>[key,document.getElementById(ids[i])?.value])));
     if (!task.ok){output("Review workload inputs",escapeHtml(task.error),"","Results are withheld until inputs are valid.");return;}
     const warnings=[engines.capacityWarnings(left,task),engines.capacityWarnings(right,task)];
-    const priced=[left,right].map((m,i)=> warnings[i].length ? {available:false,reason:"Exceeds model limits"}:engines.pricing(m,task,catalog.source_verified));
+    const priced=[left,right].map((m,i)=> warnings[i].length ? {available:false,reason:"Exceeds model limits"}:engines.pricing(m,task,window.SXFPricing.utcToday()));
     const pairs=engines.benchmarkPairs(evals,left.model_id,right.model_id);
     const cfgMatches=pairs.filter(p=>!p.configurationDiffers);
     const chosen=goals[goal.value]||goals.budget;
@@ -107,7 +107,7 @@
     catch{shareStatus.textContent="Copy this URL from the address bar: "+u.href;}
   });
   restore();
-  Promise.all([fetch("/data/model-pricing.json").then(r=>{if(!r.ok)throw Error("catalog");return r.json()}),
+  Promise.all([fetch("/data/model-pricing.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("catalog");return r.json()}),
     fetch("/data/model-evaluations.json").then(r=>{if(!r.ok)throw Error("evaluations");return r.json()})])
     .then(([c,e])=>{catalog=c;evals=e;render()})
     .catch(()=>{panel.textContent="Decision data unavailable. Existing comparison remains accessible.";});

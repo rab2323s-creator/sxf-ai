@@ -46,3 +46,10 @@ for (const page of ["compare/index.html","models/pricing/index.html","tools/ai-m
  assert.match(html,/\/assets\/pricing-policy\.js\?v=20261009/);
 }
 console.log("PASS: shared browser date selection, overlap/gap boundaries, Gemini schedule, and cache policy");
+
+const shared=require("../assets/pricing-policy.js");
+assert.equal(shared.formatRate(4.951),"$4.951");
+assert.equal(shared.formatRate(0.075),"$0.075");
+assert.equal(shared.formatRate(0.0045),"$0.0045");
+assert.equal(shared.formatRate(1.5),"$1.50");
+assert.equal(shared.periodForDate(fixture,"2027-01-01").output,7.5);

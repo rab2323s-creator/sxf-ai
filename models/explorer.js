@@ -768,7 +768,7 @@
   mobileQuery.addEventListener?.("change", syncMobileMode);
   syncMobileMode();
 
-  fetch("/data/model-index.json", {cache: "no-cache"})
+  fetch("/data/model-index.json", {cache: "no-store"})
     .then(response => {
       if (!response.ok) throw new Error("model-index");
       return response.json();

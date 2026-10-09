@@ -32,7 +32,11 @@
 
   function activePeriod(model, date) {
     if (!date || !model || !Array.isArray(model.pricing?.standard)) return null;
-    return model.pricing.standard.find(p => p.start <= date && (!p.end || date <= p.end)) || null;
+    const policy = typeof window !== "undefined"
+      ? window.SXFPricing
+      : (typeof module === "object" && module.exports ? require("../assets/pricing-policy.js") : null);
+    if (!policy) throw new Error("Shared SXF pricing policy is not loaded");
+    return policy.periodForDate(model, date);
   }
 
   function validRate(n) {

@@ -6,6 +6,7 @@ on:
     branches: [main]
   schedule:
     - cron: "17 */3 * * *"
+    - cron: "7 0 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -64,6 +65,8 @@ jobs:
           python tests/test_ai_auto_enrichment.py
       - name: Handle missing context sizes in generated evaluation explorer
         run: python scripts/patch_nullable_evaluation_context.py
+      - name: Refresh effective-date model price index
+        run: python scripts/build_model_index.py
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
       - name: Verify offline HTML/SEO rebuild parity

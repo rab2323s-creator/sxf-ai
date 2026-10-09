@@ -36,10 +36,7 @@
     });
   };
 
-  const rateMoney = value => "$" + Number(value).toLocaleString(undefined, {
-    minimumFractionDigits: Number(value) >= 1 ? 2 : 0,
-    maximumFractionDigits: 4
-  });
+  const rateMoney = value => window.SXFPricing.formatRate(value);
 
   const isTokenCalculatorModel = model =>
     model?.pricing_basis?.meter === "tokens" &&
@@ -107,7 +104,7 @@
     const cached = number(cachedInput?.value);
     const output = number(outputTokens?.value);
     const totalInput = input + cached;
-    const date = pricingDate.value || catalog.source_verified;
+    const date = pricingDate.value || utcToday();
     const effective = effectiveRates(model, date, totalInput);
 
     if (!effective) {

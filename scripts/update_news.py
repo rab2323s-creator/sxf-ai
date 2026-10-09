@@ -1378,7 +1378,7 @@ def compare_live_facts_html(model_ids):
     cards = []
     for model_id in model_ids:
         model = model_catalog_entry(model_id)
-        price = comparison_price_snapshot(model_id, verified)
+        price = comparison_price_snapshot(model_id)
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
         input_price = catalog_price_label(price["input"]) if price else "Not published"
@@ -1561,35 +1561,46 @@ def model_has_official_paid_pricing(model):
     )
 
 
-def active_standard_price(model_id, on_date=None):
-    model = model_catalog_entry(model_id)
-    if not model_has_official_paid_pricing(model):
-        raise RuntimeError(
-            f"{model_id} is not calculator-eligible: pricing_status={model_pricing_status(model)!r}"
-        )
+def catalog_period_for_date(model, on_date=None):
+    """Return the effective Standard period for any pricing meter using inclusive UTC dates.
+
+    The source_verified field is verification metadata, never the billing date.
+    Invalid and overlapping schedules raise rather than silently choosing a rate.
+    """
     schedule = model.get("pricing", {}).get("standard", [])
     target = datetime.now(timezone.utc).date() if on_date is None else on_date
     if isinstance(target, str):
         target = datetime.fromisoformat(target).date()
-
-    # Inclusive UTC calendar-day boundaries. Reject invalid/overlapping schedules;
-    # never silently select the final (possibly future) price.
     ordered = sorted(schedule, key=lambda period: period["start"])
     previous_end = None
     for index, period in enumerate(ordered):
         start = datetime.fromisoformat(period["start"]).date()
         end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
         if end is not None and end < start:
-            raise RuntimeError(f"Invalid Standard pricing period for {model_id}: end before start")
+            raise RuntimeError(f"Invalid Standard pricing period for {model.get('model_id')}: end before start")
         if index and (previous_end is None or start <= previous_end):
-            raise RuntimeError(f"Overlapping Standard pricing periods for {model_id}")
+            raise RuntimeError(f"Overlapping Standard pricing periods for {model.get('model_id')}")
         previous_end = end
-
     for period in ordered:
         start = datetime.fromisoformat(period["start"]).date()
         end = datetime.fromisoformat(period["end"]).date() if period.get("end") else None
         if target >= start and (end is None or target <= end):
             return period
+    return None
+
+
+def active_standard_price(model_id, on_date=None):
+    model = model_catalog_entry(model_id)
+    if not model_has_official_paid_pricing(model):
+        raise RuntimeError(
+            f"{model_id} is not calculator-eligible: pricing_status={model_pricing_status(model)!r}"
+        )
+    period = catalog_period_for_date(model, on_date)
+    if period is not None:
+        return period
+    target = datetime.now(timezone.utc).date() if on_date is None else on_date
+    if isinstance(target, str):
+        target = datetime.fromisoformat(target).date()
     raise RuntimeError(f"No Standard pricing period for {model_id} on {target.isoformat()}")
 
 
@@ -1609,10 +1620,14 @@ def effective_standard_price(model_id, input_tokens=0, on_date=None):
 
 
 def catalog_price_label(value):
-    value = float(value)
-    if value >= 1:
-        return f"${value:,.2f}"
-    rendered = f"{value:.4f}".rstrip("0").rstrip(".")
+    """Display exact vendor precision (including $4.951), not fixed cents."""
+    from decimal import Decimal, ROUND_HALF_UP
+    amount = Decimal(str(value))
+    if not amount.is_finite() or amount < 0:
+        raise ValueError(f"Invalid Standard price: {value!r}")
+    if amount.as_tuple().exponent < -8:
+        amount = amount.quantize(Decimal("0.00000001"), rounding=ROUND_HALF_UP)
+    rendered = format(amount, "f")
     if "." not in rendered:
         rendered += ".00"
     else:
@@ -3431,13 +3446,6 @@ def model_explorer_html():
     models = MODEL_PRICING_CATALOG["models"]
     providers = sorted({model["provider"] for model in models})
 
-    def period_for_model(model):
-        schedule = model.get("pricing", {}).get("standard", [])
-        for period in schedule:
-            if verified >= period["start"] and (not period.get("end") or verified <= period["end"]):
-                return period
-        return None
-
     rows = []
     for index, model in enumerate(models):
         provenance = model["provenance"]
@@ -3446,7 +3454,7 @@ def model_explorer_html():
         pricing_status = model_pricing_status(model)
         basis = model.get("pricing_basis", {})
         meter = basis.get("meter")
-        period = period_for_model(model)
+        period = catalog_period_for_date(model)
         capabilities = model.get("capabilities", [])
         search = " ".join([
             model["model"], model["model_id"], model["provider"],
@@ -8928,7 +8936,7 @@ def compare_index_html(items):
       </section>
 
       <section class="model-reference-lower shell compare-hub-faq"><div class="model-sources"><p class="eyebrow">DATA LAYER</p><a href="/data/model-pricing.json"><span>Canonical model database</span><b>↗</b></a><a href="/data/model-comparisons.json"><span>Curated comparison registry</span><b>↗</b></a><a href="/data/model-history.json"><span>Append-only model history</span><b>↗</b></a><a href="/models/pricing/"><span>Pricing database & calculator</span><b>↗</b></a></div><div class="model-faq"><p class="eyebrow">COMPARE FAQ</p>{faq_html}</div></section>
-    </main>{page_footer()}<script src="/assets/pricing-policy.js?v=20261009" defer></script><script src="/compare/compare.js" defer></script></body></html>'''
+    </main>{page_footer()}<script src="/assets/pricing-policy.js?v=20261009-p2" defer></script><script src="/compare/compare.js" defer></script></body></html>'''
 
 
 def gpt6_comparison_html(items):
@@ -9938,10 +9946,7 @@ def model_pricing_page_html():
         meter = basis.get("meter")
         display_unit = basis.get("display_unit", "")
         schedule = model.get("pricing", {}).get("standard", [])
-        period = next((
-            candidate for candidate in schedule
-            if verified >= candidate["start"] and (not candidate.get("end") or verified <= candidate["end"])
-        ), None)
+        period = catalog_period_for_date(model)
         notes = []
         if not period:
             notes.append(f'Pricing status: {escape(pricing_status)}')
@@ -9954,8 +9959,10 @@ def model_pricing_page_html():
                 f'{long_context["multipliers"]["input"]:g}× input/cache · '
                 f'{long_context["multipliers"]["output"]:g}× output'
             )
-        if len(schedule) > 1:
-            notes.append(f'Scheduled Standard pricing change from {escape(schedule[1]["start"])}; see the model record for native billing dimensions.')
+        today_iso = datetime.now(timezone.utc).date().isoformat()
+        next_period = next((p for p in sorted(schedule, key=lambda p: p["start"]) if p["start"] > today_iso), None)
+        if next_period:
+            notes.append(f'Scheduled Standard pricing change from {escape(next_period["start"])}; see the model record for native billing dimensions.')
         for note in model.get("notes", [])[:1]:
             notes.append(escape(note))
 
@@ -10228,7 +10235,7 @@ def model_pricing_page_html():
         </section>
       </main>
       {page_footer()}
-      <script src="/assets/pricing-policy.js?v=20261009" defer></script>
+      <script src="/assets/pricing-policy.js?v=20261009-p2" defer></script>
       <script src="/models/pricing/pricing.js" defer></script>
     </body></html>'''
 

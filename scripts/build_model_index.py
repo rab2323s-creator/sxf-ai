@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,7 +57,10 @@ def compact_standard_rate(model: dict, verified: str):
 
 
 def build_index(catalog: dict) -> dict:
+    # The compact index keeps source_verified as provenance but selects the
+    # effective billing rates for the current UTC date.
     verified = catalog["source_verified"]
+    effective_date = datetime.now(timezone.utc).date().isoformat()
     models = []
     for model in catalog["models"]:
         row = {
@@ -77,7 +81,7 @@ def build_index(catalog: dict) -> dict:
                 "display_unit": model["pricing_basis"]["display_unit"],
             },
             "verified_at": model["provenance"]["verified_at"],
-            "standard_rate": compact_standard_rate(model, verified),
+            "standard_rate": compact_standard_rate(model, effective_date),
         }
         if set(row) != INDEX_MODEL_KEYS:
             raise IndexError(f"{model['model_id']}: lightweight index contract drift")

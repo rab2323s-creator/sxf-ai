@@ -68,10 +68,7 @@
     return "$" + value.toLocaleString(undefined, {maximumFractionDigits: digits});
   };
 
-  const rate = value => {
-    if (!Number.isFinite(Number(value))) return "—";
-    return "$" + Number(value).toLocaleString(undefined, {maximumFractionDigits: 4});
-  };
+  const rate = value => window.SXFPricing.formatRate(value);
 
   const isTokenCalculatorModel = model =>
     model?.pricing_basis?.meter === "tokens" &&

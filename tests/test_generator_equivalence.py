@@ -85,7 +85,12 @@ def main():
         ]
         # These rendered pages intentionally differ after fixing effective-date
         # pricing and adding the shared browser pricing policy.
-        expected_pricing_changes = {"index.html", "compare/index.html", "models/pricing/index.html"}
+        expected_pricing_changes = {
+            "index.html", "compare/index.html", "models/pricing/index.html",
+            # Preserving Qwen's official $4.951 output rate in generated cards.
+            "models/index.html", "models/qwen3-8-max/index.html",
+            "providers/alibaba-cloud/index.html",
+        }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (
             f"Unexpected old/new renderer differences in {len(unexpected)} output files: "
