@@ -3,7 +3,7 @@ const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/st
 const html=fs.readFileSync("ai-agent-cost/index.html","utf8");
 const source=fs.readFileSync("ai-agent-cost/index.js","utf8");
 const pricing=fs.readFileSync("assets/pricing-policy.js","utf8");
-const ids=[...html.matchAll(/\\bid="([^"]+)"/g)].map(x=>x[1]);
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 assert.equal(new Set(ids).size,ids.length,"Duplicate HTML IDs");
 class Element {
   constructor(tag){this.tagName=tag;this.children=[];this.handlers={};this.dataset={};this.style={};this.value="";this.textContent="";this.disabled=false;this.hidden=false;this.checked=false;this.min="";this.max="";}
@@ -19,8 +19,8 @@ class Element {
   remove(){}
 }
 const els=Object.fromEntries(ids.map(id=>[id,new Element("div")]));
-for(const match of html.matchAll(/<input\\b[^>]*>/gi)){
-  const tag=match[0],id=tag.match(/\\bid="([^"]+)"/)?.[1];if(!id||!els[id])continue;
+for(const match of html.matchAll(/<input\b[^>]*>/gi)){
+  const tag=match[0],id=tag.match(/\bid="([^"]+)"/)?.[1];if(!id||!els[id])continue;
   for(const attr of ["value","min","max"]){const v=tag.match(new RegExp("\\b"+attr+'="([^"]*)"'));if(v)els[id][attr]=v[1]}
 }
 const presets=Object.fromEntries(["support","documents","research"].map(k=>{const e=new Element("button");e.dataset.preset=k;return [k,e]}));
