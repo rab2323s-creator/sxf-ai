@@ -6,7 +6,7 @@ const pricing=fs.readFileSync("assets/pricing-policy.js","utf8");
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 assert.equal(new Set(ids).size,ids.length,"Duplicate HTML IDs");
 class Element {
-  constructor(tag){this.tagName=tag;this.children=[];this.handlers={};this.dataset={};this.style={};this.value="";this.textContent="";this.disabled=false;this.hidden=false;this.checked=false;this.min="";this.max="";}
+  constructor(tag){this.tagName=tag;this.children=[];this.handlers={};this.dataset={};this.style={};this._value="";Object.defineProperty(this,"value",{get:()=>this._value,set:v=>{this._value=String(v)}});this.textContent="";this.disabled=false;this.hidden=false;this.checked=false;this.min="";this.max="";}
   addEventListener(k,fn){(this.handlers[k]??=[]).push(fn)}
   trigger(k){(this.handlers[k]||[]).forEach(fn=>fn({target:this}))}
   appendChild(el){this.children.push(el);return el}
