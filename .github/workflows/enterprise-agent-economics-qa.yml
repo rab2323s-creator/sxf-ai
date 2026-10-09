@@ -1,0 +1,46 @@
+name: Enterprise agent economics research QA (read only)
+on:
+  push:
+    branches: [feature/enterprise-agent-economics-study]
+    paths:
+      - "guides/ai-agent-cost/**"
+      - "data/enterprise-agent-economics-assumptions.json"
+      - "tests/test_enterprise_agent_economics.cjs"
+      - "scripts/update_news.py"
+      - "scripts/sitemap_generation.py"
+      - "sitemap.xml"
+      - ".github/workflows/enterprise-agent-economics-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify static JavaScript
+        run: node --check guides/ai-agent-cost/study.js
+      - name: Verify model rates, study arithmetic, HTML and SEO
+        run: node tests/test_enterprise_agent_economics.cjs
+      - name: Verify generator syntax
+        run: python3 -m py_compile scripts/update_news.py scripts/sitemap_generation.py
+      - name: Package read-only research preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: enterprise-agent-economics-review
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            guides/ai-agent-cost/
+            data/enterprise-agent-economics-assumptions.json
+            data/model-pricing.json
+            styles.css
+            intelligence.css
