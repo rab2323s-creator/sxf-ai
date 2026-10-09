@@ -106,6 +106,8 @@ def main():
             "sitemap.xml",
             # Intentional editorial addition: enterprise agent economics study in Guides.
             "guides/index.html",
+            # Intentional contextual citation in generator-backed Best AI Agents.
+            "guides/best-ai-agents/index.html",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (
