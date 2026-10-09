@@ -134,6 +134,17 @@
     try {
       const v=readInputs();
       $("calcWarning").hidden=true;
+      // A valid price estimate must also describe a technically valid model request.
+      if (!Number.isInteger(v.inputTokens) || !Number.isInteger(v.outputTokens)) {
+        throw new Error("Input and output token counts must be whole numbers.");
+      }
+      const context = Number(m.context_window);
+      if (Number.isFinite(context) && context > 0 && v.inputTokens + v.outputTokens > context) {
+        throw new Error("The total input and output tokens per call exceed this model's documented context window (" + context.toLocaleString("en-US") + ").");
+      }
+      if (typeof m.max_output === "number" && Number.isFinite(m.max_output) && v.outputTokens > m.max_output) {
+        throw new Error("The output tokens per call exceed this model's documented maximum output (" + m.max_output.toLocaleString("en-US") + ").");
+      }
       // Cache tokens are a subset of total input tokens; do not double count them.
       const cachedTokens=v.inputTokens*v.cachePercent/100;
       const uncachedTokens=v.inputTokens-cachedTokens;
@@ -238,6 +249,8 @@
     }
   }
   async function init(){
+    // The calculator is interactive, not a server form: Enter must not reload the page.
+    $("agentCostForm").addEventListener("submit", event => event.preventDefault());
     for(const id of fields)$(id).addEventListener("input",calculate);
     $("calcModel").addEventListener("change",calculate);
     for(const id of ["rateSearch","providerFilter","agentOnly"])$(id).addEventListener(id==="rateSearch"?"input":"change",updateRows);
