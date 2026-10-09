@@ -1636,6 +1636,61 @@ def catalog_price_label(value):
     return "$" + rendered
 
 
+def catalog_tiered_global(model):
+    """Return explicitly scoped list-price tiers, never a fictitious flat rate."""
+    tiered = model.get("pricing", {}).get("tiered")
+    if not tiered or model_pricing_status(model) != "official-paid":
+        return None
+    scope = next((s for s in tiered["scopes"] if s["scope"] == "Global"), None)
+    return (tiered, scope) if scope else None
+
+
+def catalog_tiered_short_label(model):
+    resolved = catalog_tiered_global(model)
+    if not resolved:
+        return None
+    _tiered, global_scope = resolved
+    tier = global_scope["tiers"][0]
+    boundary = tier.get("max_input_tokens")
+    qualifier = f"≤{boundary // 1024}K input/request" if boundary else "all supported input lengths"
+    return (
+        f'Tiered Global · from {catalog_price_label(tier["input"])} in · '
+        f'{catalog_price_label(tier["output"])} out / MTok '
+        f'({qualifier}; other regions differ)'
+    )
+
+
+def catalog_tiered_detail_html(model):
+    resolved = catalog_tiered_global(model)
+    if not resolved:
+        return ""
+    tiered, _global_scope = resolved
+    rows = []
+    for scope in tiered["scopes"]:
+        regions = ", ".join(scope["regions"])
+        for tier in scope["tiers"]:
+            lower, upper = tier["min_input_tokens"], tier["max_input_tokens"]
+            tokens = (
+                f'{lower:,}–{upper:,} input tokens/request'
+                if upper is not None else f'{lower:,}+ input tokens/request (within model limits)'
+            )
+            rows.append(
+                f'<div><span>{escape(scope["scope"])} · {escape(regions)} · {escape(tokens)}</span>'
+                f'<p>{escape(catalog_price_label(tier["input"]))} input · '
+                f'{escape(catalog_price_label(tier["output"]))} output per 1 million tokens</p></div>'
+            )
+    return (
+        '<section class="model-deep-section"><div class="model-section-head">'
+        '<p class="eyebrow">REGIONAL TIERED PRICING</p>'
+        '<h2>Published list rates depend on request input length and region.</h2></div>'
+        f'<div class="model-caveat-list">{"".join(rows)}</div>'
+        f'<p class="reference-note">Official list prices verified {escape(tiered["verified_at"])}; '
+        'no historical effective-start date is claimed. Promotion prices are excluded. '
+        f'<a href="{escape(tiered["source_url"], quote=True)}" target="_blank" '
+        'rel="noopener noreferrer">Official pricing evidence ↗</a></p></section>'
+    )
+
+
 def catalog_reference_variant(variant):
     model = model_catalog_entry(variant["model_id"])
     price = active_standard_price(variant["model_id"])
@@ -2156,6 +2211,8 @@ def homepage_change_cards(limit=3, on_date=None):
         price_text = "Pricing not published"
         if input_price is not None and output_price is not None:
             price_text = f'{catalog_price_label(input_price)} in · {catalog_price_label(output_price)} out / MTok'
+        elif catalog_tiered_global(model):
+            price_text = catalog_tiered_short_label(model)
         evidence = event.get("evidence", {})
         source = evidence.get("model") or evidence.get("provider") or evidence.get("pricing") or (model.get("official_sources") or [""])[0]
         verified = event.get("verified_at", "")
@@ -3484,6 +3541,12 @@ def model_explorer_html():
                 if dimensions and rates.get(dimensions[0]) is not None:
                     input_label = catalog_price_label(rates[dimensions[0]]) + " " + basis.get("display_unit", "")
 
+        elif catalog_tiered_global(model):
+            tier = catalog_tiered_global(model)[1]["tiers"][0]
+            input_label = f'From {catalog_price_label(tier["input"])} {basis.get("display_unit", "")} (Global ≤128K; tiered)'
+            output_label = f'From {catalog_price_label(tier["output"])} {basis.get("display_unit", "")} (Global ≤128K; tiered)'
+            # Keep numeric sort as unavailable: a conditional tier rate is not a flat price.
+
         context = model.get("context_window")
         context_value = "" if context is None else str(int(context))
         context_label = "Not published" if context is None else f"{int(context):,}<small>tokens</small>"
@@ -4640,6 +4703,20 @@ def catalog_model_reference_html(model_id, items):
                 primary_label = "STANDARD RATE"
                 output_price = "—"
                 output_fact_label = "OUTPUT RATE"
+    tiered_rates = catalog_tiered_global(model)
+    tiered_details = catalog_tiered_detail_html(model)
+    if tiered_rates:
+        tier = tiered_rates[1]["tiers"][0]
+        primary_price = catalog_price_label(tier["input"])
+        output_price = catalog_price_label(tier["output"])
+        primary_label = "GLOBAL ≤128K INPUT"
+        output_fact_label = "GLOBAL ≤128K OUTPUT"
+        pricing_summary = (
+            f'Tiered Global list rates for ≤128K input/request: '
+            f'{primary_price} input · {output_price} output per MTok. '
+            f'Above 128K up to 256K and other regions have different rates'
+        )
+
     source_links = "".join(
         f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">'
         f'<span>{escape(urlparse(url).netloc + urlparse(url).path)}</span><b>↗</b></a>'
@@ -4741,7 +4818,7 @@ def catalog_model_reference_html(model_id, items):
           </div>
         </section>
 
-        {f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
+        {tiered_details + chr(10) * 2 + "        " if tiered_details else ""}{f'<section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list">{note_html}</div></section>' if note_html else ""}
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
@@ -5228,6 +5305,8 @@ def provider_page_html(provider, items):
                 rates = period.get("rates", {})
                 if dimensions and rates.get(dimensions[0]) is not None:
                     pricing = f'{catalog_price_label(rates[dimensions[0]])} {display_unit}'.strip()
+        elif catalog_tiered_global(model):
+            pricing = catalog_tiered_short_label(model)
         context = model.get("context_window")
         context_label = "Not published" if context is None else f"{int(context):,}"
         model_cards.append(
@@ -9948,7 +10027,7 @@ def model_pricing_page_html():
         schedule = model.get("pricing", {}).get("standard", [])
         period = catalog_period_for_date(model)
         notes = []
-        if not period:
+        if not period and not catalog_tiered_global(model):
             notes.append(f'Pricing status: {escape(pricing_status)}')
         if display_unit:
             notes.append(f'Pricing basis: {escape(display_unit)}')
@@ -9963,6 +10042,17 @@ def model_pricing_page_html():
         next_period = next((p for p in sorted(schedule, key=lambda p: p["start"]) if p["start"] > today_iso), None)
         if next_period:
             notes.append(f'Scheduled Standard pricing change from {escape(next_period["start"])}; see the model record for native billing dimensions.')
+        if catalog_tiered_global(model):
+            global_tiers = catalog_tiered_global(model)[1]["tiers"]
+            low, high = global_tiers[0], global_tiers[1]
+            notes.append(
+                f'Global (Frankfurt/Virginia): ≤128K input/request '
+                f'{catalog_price_label(low["input"])} input / {catalog_price_label(low["output"])} output; '
+                f'>128K–256K {catalog_price_label(high["input"])} input / '
+                f'{catalog_price_label(high["output"])} output per MTok. '
+                f'International (Singapore): {catalog_price_label(0.6)} / {catalog_price_label(3.6)}. '
+                f'Tiered rates; no single flat comparison applies.'
+            )
         for note in model.get("notes", [])[:1]:
             notes.append(escape(note))
 
@@ -9982,6 +10072,11 @@ def model_pricing_page_html():
                 rates = period.get("rates", {})
                 if dimensions and rates.get(dimensions[0]) is not None:
                     primary_label = catalog_price_label(rates[dimensions[0]])
+
+        if catalog_tiered_global(model):
+            tier = catalog_tiered_global(model)[1]["tiers"][0]
+            primary_label = f'From {catalog_price_label(tier["input"])}'
+            output_label = f'From {catalog_price_label(tier["output"])}'
 
         note_html = "".join(f'<span class="pricing-rule">{note}</span>' for note in notes)
         search = " ".join([

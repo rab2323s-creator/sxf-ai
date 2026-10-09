@@ -105,7 +105,9 @@ jobs:
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
-        run: python tests/test_pricing_regression.py
+        run: |
+          python tests/test_pricing_regression.py
+          python tests/test_qwen_tiered_pricing.py
       - name: Commit generated changes
         if: github.event_name != 'pull_request'
         run: |

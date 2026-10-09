@@ -90,6 +90,7 @@ def main():
             # Preserving Qwen's official $4.951 output rate in generated cards.
             "models/index.html", "models/qwen3-8-max/index.html",
             "providers/alibaba-cloud/index.html",
+            "models/qwen3-5-397b-a17b/index.html",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (

@@ -2712,9 +2712,9 @@
       }
     },
     "qwen3.5-397b-a17b": {
-      "last_event_verified_at": "2026-10-07",
-      "last_event_id": "evt_8e73a9cb15ea4b44e377",
-      "snapshot_hash": "61b6f1c28daf46d89e488f20864fbd38c40d2519dd007e220f2f1d9e28fd8733",
+      "last_event_verified_at": "2026-10-09",
+      "last_event_id": "evt_ec2cb6c65a6e3ddf3f04",
+      "snapshot_hash": "094fb723332d80fee0ebe6db528c13851501aeecbbbc079faf0859d960a8cb5d",
       "snapshot": {
         "provider": "Alibaba Cloud",
         "family": "Qwen3.5",
@@ -2739,7 +2739,70 @@
             "text"
           ]
         },
-        "pricing": {}
+        "pricing": {
+          "tiered": {
+            "basis": "input_tokens_per_request",
+            "verified_at": "2026-10-09",
+            "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+            "scopes": [
+              {
+                "scope": "Global",
+                "regions": [
+                  "Germany (Frankfurt)",
+                  "US (Virginia)"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 131072,
+                    "input": 0.172,
+                    "output": 1.032
+                  },
+                  {
+                    "min_input_tokens": 131073,
+                    "max_input_tokens": 262144,
+                    "input": 0.43,
+                    "output": 2.58
+                  }
+                ]
+              },
+              {
+                "scope": "International",
+                "regions": [
+                  "Singapore"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": null,
+                    "input": 0.6,
+                    "output": 3.6
+                  }
+                ]
+              },
+              {
+                "scope": "China",
+                "regions": [
+                  "China (Beijing)"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 131072,
+                    "input": 0.172,
+                    "output": 1.032
+                  },
+                  {
+                    "min_input_tokens": 131073,
+                    "max_input_tokens": 262144,
+                    "input": 0.43,
+                    "output": 2.58
+                  }
+                ]
+              }
+            ]
+          }
+        }
       }
     }
   },
@@ -6621,7 +6684,88 @@
       ],
       "event_id": "evt_012e765dfb17b4462d67",
       "event_hash": "012e765dfb17b4462d67248194fff0e3c4e9fa833265c407bcb883b166314e35"
+    },
+    {
+      "sequence": 73,
+      "type": "model_changed",
+      "model_id": "qwen3.5-397b-a17b",
+      "verified_at": "2026-10-09",
+      "previous_event_hash": "012e765dfb17b4462d67248194fff0e3c4e9fa833265c407bcb883b166314e35",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {},
+          "after": {
+            "tiered": {
+              "basis": "input_tokens_per_request",
+              "verified_at": "2026-10-09",
+              "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b",
+              "scopes": [
+                {
+                  "scope": "Global",
+                  "regions": [
+                    "Germany (Frankfurt)",
+                    "US (Virginia)"
+                  ],
+                  "tiers": [
+                    {
+                      "min_input_tokens": 1,
+                      "max_input_tokens": 131072,
+                      "input": 0.172,
+                      "output": 1.032
+                    },
+                    {
+                      "min_input_tokens": 131073,
+                      "max_input_tokens": 262144,
+                      "input": 0.43,
+                      "output": 2.58
+                    }
+                  ]
+                },
+                {
+                  "scope": "International",
+                  "regions": [
+                    "Singapore"
+                  ],
+                  "tiers": [
+                    {
+                      "min_input_tokens": 1,
+                      "max_input_tokens": null,
+                      "input": 0.6,
+                      "output": 3.6
+                    }
+                  ]
+                },
+                {
+                  "scope": "China",
+                  "regions": [
+                    "China (Beijing)"
+                  ],
+                  "tiers": [
+                    {
+                      "min_input_tokens": 1,
+                      "max_input_tokens": 131072,
+                      "input": 0.172,
+                      "output": 1.032
+                    },
+                    {
+                      "min_input_tokens": 131073,
+                      "max_input_tokens": 262144,
+                      "input": 0.43,
+                      "output": 2.58
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b"
+        }
+      ],
+      "event_id": "evt_ec2cb6c65a6e3ddf3f04",
+      "event_hash": "ec2cb6c65a6e3ddf3f04e7b4d399e12aca14c9adfbfe80538c7626a257048b36"
     }
   ],
-  "chain_head": "012e765dfb17b4462d67248194fff0e3c4e9fa833265c407bcb883b166314e35"
+  "chain_head": "ec2cb6c65a6e3ddf3f04e7b4d399e12aca14c9adfbfe80538c7626a257048b36"
 }

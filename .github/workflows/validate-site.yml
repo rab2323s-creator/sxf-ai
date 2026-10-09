@@ -98,7 +98,9 @@ jobs:
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
-        run: python tests/test_pricing_regression.py
+        run: |
+          python tests/test_pricing_regression.py
+          python tests/test_qwen_tiered_pricing.py
 
   browser:
     name: Compare browser verification

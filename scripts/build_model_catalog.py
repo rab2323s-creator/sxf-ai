@@ -169,6 +169,57 @@ def validate_pricing(model: dict, label: str):
             for token_key in ("input", "cached_input", "output", "cache_write", "cache_write_5m", "cache_write_1h"):
                 require(token_key not in period, f"{p}.{token_key} is not valid for {meter} pricing")
 
+    # Documented regional/request-length pricing without a historical effective-from
+    # date is intentionally separate from dated, flat Standard calculator pricing.
+    tiered = pricing.get("tiered")
+    if tiered is not None:
+        require(model.get("pricing_status") == "official-paid", f"{label}: tiered rates must be official-paid")
+        require(model.get("calculator_eligible") is False, f"{label}: tiered rates must not enter the flat-price calculator")
+        require(meter == "tokens" and {"input", "output"} <= set(dimensions),
+                f"{label}: tiered rates require token input and output dimensions")
+        require(not schedules, f"{label}: tiered-only pricing must not impersonate dated flat Standard rates")
+        require(isinstance(tiered, dict) and set(tiered) == {"basis", "verified_at", "source_url", "scopes"},
+                f"{label}: invalid tiered pricing contract")
+        require(tiered["basis"] == "input_tokens_per_request", f"{label}: unsupported tiered billing basis")
+        validate_iso_date(tiered["verified_at"], f"{label}.pricing.tiered.verified_at")
+        require(tiered["source_url"] in model.get("official_sources", []),
+                f"{label}: tiered pricing source must be an official model source")
+        scopes = tiered["scopes"]
+        require(isinstance(scopes, list) and scopes, f"{label}: tiered pricing scopes required")
+        used_scopes = set()
+        for scope in scopes:
+            require(isinstance(scope, dict) and set(scope) == {"scope", "regions", "tiers"},
+                    f"{label}: invalid tiered scope contract")
+            name = scope["scope"]
+            require(isinstance(name, str) and name and name not in used_scopes,
+                    f"{label}: duplicate/invalid pricing scope")
+            used_scopes.add(name)
+            regions = scope["regions"]
+            require(isinstance(regions, list) and regions and
+                    all(isinstance(region, str) and region for region in regions) and
+                    len(regions) == len(set(regions)), f"{label}: invalid region list")
+            tiers = scope["tiers"]
+            require(isinstance(tiers, list) and tiers, f"{label}: pricing tiers required")
+            next_input = 1
+            for index, tier in enumerate(tiers):
+                require(isinstance(tier, dict) and
+                        set(tier) == {"min_input_tokens", "max_input_tokens", "input", "output"},
+                        f"{label}: invalid tier contract")
+                lower, upper = tier["min_input_tokens"], tier["max_input_tokens"]
+                require(type(lower) is int and lower == next_input,
+                        f"{label}: tier boundaries must be contiguous from 1 input token")
+                require(upper is None or (type(upper) is int and upper >= lower),
+                        f"{label}: invalid tier maximum")
+                require(upper is not None or index == len(tiers) - 1,
+                        f"{label}: open-ended tier must be last")
+                for price_key in ("input", "output"):
+                    rate = tier[price_key]
+                    require(type(rate) in (int, float) and 0 <= rate < float("inf"),
+                            f"{label}: tier {price_key} must be finite and non-negative")
+                if upper is not None:
+                    next_input = upper + 1
+        require("Global" in used_scopes, f"{label}: a Global reference tier is required")
+
     long_context = pricing.get("long_context")
     if long_context is not None:
         require(meter == "tokens", f"{label}.pricing.long_context is only valid for token pricing")
