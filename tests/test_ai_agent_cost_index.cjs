@@ -69,7 +69,7 @@ async function run(){
  assert.equal(els.totalCost.textContent,"$0.00");
  assert.equal(els.roiPercent.textContent,"N/A");
  presets.documents.trigger("click");
- assert.equal(els.monthlyTasks.value,2500);
+ assert.equal(els.monthlyTasks.value,"2500");
  assert.ok(val("totalCost")>0);
  console.log("PASS: Catalog loading, eligible-rate filters, cost arithmetic, cached inputs, zero success, invalid input, no-cache fallback, zero-cost handling, and presets.");
 }
