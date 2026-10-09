@@ -48,7 +48,7 @@ async function run(){
  assert.equal(els.statModels.textContent,"3");
  assert.equal(els.statEligible.textContent,"2");
  assert.equal(els.calcModel.value,"gpt-6-sol");
- const total=198+44+175+1400;
+ const total=198+44+1750+1400; // 1500 reviews × 2 minutes × $35/hour
  approximately(val("totalCost"),total);
  approximately(val("costPerSuccess"),total/8500);
  approximately(val("costPerTask"),total/10000);
