@@ -7557,6 +7557,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-agent-cost/",
+            "category": "Agents · Economics · Enterprise",
+            "categories": ["agents", "research", "tools"],
+            "kicker": "ENTERPRISE AGENT ECONOMICS",
+            "title": "AI Agent Cost in 2026: Enterprise TCO, Reliability & ROI Analysis",
+            "description": "Three reproducible enterprise scenarios spanning accepted-outcome economics, human oversight, year-one ROI, build vs buy and risk-aware procurement.",
+            "meta": "TCO · ROI · Reliability · Enterprise",
+            "updated": "Oct 10, 2026",
+            "read_time": "24 min",
+        },
+        {
             "href": "/guides/model-context-protocol-mcp/",
             "category": "Agents · Infrastructure",
             "categories": ["agents", "coding", "security", "tools"],
