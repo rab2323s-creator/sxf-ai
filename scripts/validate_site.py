@@ -1267,6 +1267,17 @@ def validate_topic_relevance(archive):
         (
             "open-source-ai",
             item(
+                "How Jump Trading is scaling quant research with ChatGPT",
+                "Jump Trading expands quantitative financial research using ChatGPT.",
+                source="OpenAI",
+                category="Research",
+            ),
+            False,
+            "quantitative finance must not be mistaken for model quantization",
+        ),
+        (
+            "open-source-ai",
+            item(
                 "Transformers now runs llama.cpp quants",
                 "New local inference support lands in Transformers.",
                 source="Hugging Face",

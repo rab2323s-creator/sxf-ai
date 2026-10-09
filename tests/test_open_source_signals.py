@@ -45,6 +45,24 @@ def main():
     for row in negatives:
         assert not site.topic_matches(row, topic), row["title"]
 
+    # "quant" can refer to quantitative finance, not model quantization.
+    jump = sample(
+        "How Jump Trading is scaling quant research with ChatGPT",
+        source="OpenAI", category="Research",
+        summary="Financial quantitative research using ChatGPT.",
+    )
+    jump["tags"] = ["Open Source AI"]  # Simulate an obsolete archive tag.
+    assert not site.topic_matches(jump, topic)
+    assert "Open Source AI" not in site.classify_tags(
+        jump["title"], jump["source"], jump["category"])
+    finance = sample("Quant trading strategy updates", source="GitHub")
+    assert not site.topic_matches(finance, topic)
+    assert site.categorize(finance["title"], finance["source"]) != "Open Source"
+
+    actual_quantization = sample("GGUF quantization support in local inference",
+                                 source="Hugging Face")
+    assert site.topic_matches(actual_quantization, topic)
+
     # The older signal is outside the first 80 but still within the 21-day policy.
     archive = ([sample("Unrelated update " + str(i), source="GitHub", age=1)
                 for i in range(80)]
@@ -70,6 +88,9 @@ def main():
     full = json.loads((ROOT / "data/archive.json").read_text(encoding="utf-8"))
     expected = site.open_source_current_signals(full["items"], feed["updated_at"])
     assert [x["url"] for x in feed["items"]] == [x["url"] for x in expected]
+    assert not any("Jump Trading" in x["title"] for x in expected), (
+        "Quantitative-finance signals must never enter Open Source"
+    )
     assert news["updated_at"] == feed["updated_at"]
     html = (ROOT / "open-source/index.html").read_text(encoding="utf-8")
     block = html.split("<!-- SXF:SECTION_FEED_START -->", 1)[1].split(

@@ -1813,7 +1813,7 @@ def categorize(title, source):
     if re.search(r"\bresearch\b|\bpaper\b|\bstudy\b|\bbenchmark\b|\bevaluation\b|\bscience\b|\bsafety\b|\bmisalignment\b|\bassessment\b", t):
         return "Research"
 
-    if re.search(r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b|\bquants?\b|\brepository release\b", t):
+    if re.search(r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b|\brepository release\b", t):
         return "Open Source"
 
     if re.search(r"\bgpt[- ]\d+(?:\.\d+)?\b|\bclaude(?:\s+[a-z]+)?\s+\d+(?:\.\d+)?\b|\bgemini(?:\s+\d+(?:\.\d+)?)?\b|\blfm\d+(?:\.\d+)?\b|\bllm\b|\bfoundation models?\b|\bvision-language model\b|\bmultimodal model\b|\breasoning model\b|\bembedding model\b", t):
@@ -1831,7 +1831,7 @@ def classify_tags(title, source, category):
         ("AI Agents", r"\bagents?\b|\bagentic\b"),
         ("Security", r"\bsecurity\b|\bsafety\b|\bsandbox(?:ing)?\b|\bcyber\b|\bproof of presence\b"),
         ("Multimodal AI", r"\bmultimodal\b|\bvision\b|\bimage\b|\bvideo\b|\bvoice\b|\baudio\b"),
-        ("Open Source AI", r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b|\bquants?\b"),
+        ("Open Source AI", r"\bopen[- ]source\b|\bopen weights?\b|\bweights\b|\bcheckpoint\b|\bllama\.cpp\b|\bmlx\b"),
         ("Research", r"\bresearch\b|\bpaper\b|\bstudy\b|\bbenchmark\b|\bevaluation\b|\bscience\b"),
     ]
     for label, pattern in rules:
@@ -2490,7 +2490,8 @@ TOPICS = [
             r"\bcheckpoints?\b",
             r"\bllama\.cpp\b",
             r"\bmlx\b",
-            r"\bquants?\b",
+            # Bare "quant" also means quantitative finance (not quantization).
+            # The explicit quantization, GGUF and llama.cpp patterns cover AI formats.
             r"\bquantization\b",
             r"\bgguf\b",
             r"\blocal ai\b",
