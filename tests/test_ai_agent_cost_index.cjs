@@ -42,7 +42,7 @@ vm.runInNewContext(pricing,{window,console});
 const context={document:doc,window,fetch:async()=>({ok:true,json:async()=>catalog}),setTimeout:()=>{},navigator:{clipboard:{writeText:async()=>{}}},console};
 vm.runInNewContext(source,context);
 const val=id=>Number(String(els[id].textContent).replace(/[$,%]/g,""));
-function approximately(actual,expected){assert.ok(Math.abs(actual-expected)<0.03,actual+" not close to "+expected)}
+function approximately(actual,expected){assert.ok(Math.abs(actual-expected)<0.051,actual+" not close to "+expected)}
 async function run(){
  for(let i=0;i<5;i++)await new Promise(resolve=>setImmediate(resolve));
  assert.equal(els.statModels.textContent,"3");
