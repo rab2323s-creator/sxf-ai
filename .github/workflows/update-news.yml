@@ -46,7 +46,7 @@ jobs:
       - name: Syntax check
         run: |
           python -m py_compile scripts/ensure_model_evaluation_sections.py
-          python -m py_compile scripts/sitemap_generation.py scripts/signal_processing.py scripts/feed_card_rendering.py scripts/html_shell.py scripts/signal_page_rendering.py scripts/signal_article_rendering.py scripts/model_provider_index_rendering.py scripts/update_news.py tests/test_signal_article_rendering.py tests/test_model_provider_index_rendering.py tests/test_feed_card_rendering.py tests/test_html_shell.py tests/test_signal_page_rendering.py scripts/ai_security_topic_template.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py tests/test_model_explorer_rendering.py tests/test_model_explorer_filters.py
+          python -m py_compile scripts/sitemap_generation.py scripts/open_source_signals.py scripts/signal_processing.py scripts/feed_card_rendering.py scripts/html_shell.py scripts/signal_page_rendering.py scripts/signal_article_rendering.py scripts/model_provider_index_rendering.py scripts/update_news.py tests/test_signal_article_rendering.py tests/test_model_provider_index_rendering.py tests/test_feed_card_rendering.py tests/test_html_shell.py tests/test_signal_page_rendering.py tests/test_open_source_signals.py scripts/ai_security_topic_template.py scripts/validate_site.py scripts/model_history.py scripts/source_adapters.py scripts/prepare_ai_enrichment.py scripts/ai_publish_quality.py scripts/run_ai_enrichment_pilot.py scripts/run_ai_auto_enrichment.py scripts/render_ai_enrichment_preview.py tests/test_source_adapters.py tests/test_ai_enrichment.py tests/test_ai_enrichment_pilot.py tests/test_ai_auto_enrichment.py tests/test_ai_enrichment_review.py tests/test_model_explorer_rendering.py tests/test_model_explorer_filters.py
           node --check models/pricing/pricing.js
           node --check tools/ai-model-cost-calculator/calculator.js
           node --check models/explorer.js
@@ -69,6 +69,10 @@ jobs:
         run: python scripts/build_model_index.py
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
+      - name: Open Source topic, page and filter regressions
+        run: |
+          python tests/test_open_source_signals.py
+          node tests/test_open_source_filters.cjs
       - name: Verify offline HTML/SEO rebuild parity
         run: python tests/test_snapshot_rendering.py --parity
       - name: Restore Compare V2 after feed generation

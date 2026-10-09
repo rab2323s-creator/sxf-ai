@@ -236,7 +236,7 @@ def validate_section_counts(news):
             if section.count('class="intel-card"') != len(feed_urls):
                 fail("Open Source HTML cards/count differ from generated feed")
             schema_match = re.search(
-                r'<script type="application/ld\\+json" id="section-signals-schema">(.*?)</script>', text, re.S
+                r'<script type="application/ld\+json" id="section-signals-schema">(.*?)</script>', text, re.S
             )
             if not schema_match:
                 fail("Open Source structured data missing")

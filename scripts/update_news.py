@@ -2319,7 +2319,13 @@ def update_section_pages(items, archive=None):
         )
         if count_updates != 1:
             raise RuntimeError(f"Could not update sectionCount in {path}")
-        page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", section_cards_html(filtered))
+        # Other sections retain the existing 12-card preview; Open Source
+        # must show every selected item so the count and HTML agree.
+        cards = (
+            "\n".join(section_cards_html(filtered[i:i + 12]) for i in range(0, len(filtered), 12))
+            if category == "Open Source" else section_cards_html(filtered)
+        )
+        page = replace_block(page, "<!-- SXF:SECTION_FEED_START -->", "<!-- SXF:SECTION_FEED_END -->", cards)
         section_path = category_path(category)
         section_url = BASE_URL + section_path
         schema = {

@@ -91,6 +91,10 @@ def main():
             "models/index.html", "models/qwen3-8-max/index.html",
             "providers/alibaba-cloud/index.html",
             "models/qwen3-5-397b-a17b/index.html",
+            # Open Source views change deliberately, with no unrelated pages.
+            "open-source/index.html",
+            "topics/open-source-ai/index.html",
+            "topics/index.html",
         }
         unexpected = [name for name in changed if name not in expected_pricing_changes]
         assert not unexpected, (
