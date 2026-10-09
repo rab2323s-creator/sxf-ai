@@ -1,7 +1,7 @@
 name: Enterprise agent economics research QA (read only)
 on:
   push:
-    branches: [feature/enterprise-agent-economics-study]
+    branches: [feature/enterprise-agent-economics-study, fix/agent-cost-responsive-image-access]
     paths:
       - "guides/ai-agent-cost/**"
       - "data/enterprise-agent-economics-assumptions.json"
