@@ -8,7 +8,7 @@ assert.equal(new Set(ids).size,ids.length,"Duplicate HTML IDs");
 class Element {
   constructor(tag){this.tagName=tag;this.children=[];this.handlers={};this.dataset={};this.style={};this._value="";Object.defineProperty(this,"value",{get:()=>this._value,set:v=>{this._value=String(v)}});this.textContent="";this.disabled=false;this.hidden=false;this.checked=false;this.min="";this.max="";}
   addEventListener(k,fn){(this.handlers[k]??=[]).push(fn)}
-  trigger(k){(this.handlers[k]||[]).forEach(fn=>fn({target:this}))}
+  trigger(k,event){(this.handlers[k]||[]).forEach(fn=>fn(event||{target:this,preventDefault(){}}))}
   appendChild(el){this.children.push(el);return el}
   append(...nodes){this.children.push(...nodes)}
   replaceChildren(...nodes){this.children=nodes}
@@ -33,7 +33,7 @@ const doc={
   body:new Element("body")
 };
 const catalog={source_verified:"2026-10-09",models:[
- {provider:"OpenAI",model:"Test Agent",model_id:"gpt-6-sol",pricing_status:"official-paid",calculator_eligible:true,pricing_basis:{meter:"tokens",quantity:1000000},pricing:{standard:[{start:"2026-01-01",end:null,input:2,cached_input:0.2,output:10}]},provenance:{verified_at:"2026-09-27",evidence:{pricing:"https://example.com/pricing"}},capabilities:["agents"]},
+ {provider:"OpenAI",model:"Test Agent",model_id:"gpt-6-sol",context_window:10000,max_output:2500,pricing_status:"official-paid",calculator_eligible:true,pricing_basis:{meter:"tokens",quantity:1000000},pricing:{standard:[{start:"2026-01-01",end:null,input:2,cached_input:0.2,output:10}]},provenance:{verified_at:"2026-09-27",evidence:{pricing:"https://example.com/pricing"}},capabilities:["agents"]},
  {provider:"Anthropic",model:"No Cached Rate",model_id:"other",pricing_status:"official-paid",calculator_eligible:true,pricing_basis:{meter:"tokens",quantity:1000000},pricing:{standard:[{start:"2026-01-01",end:null,input:1,output:5}]},provenance:{verified_at:"2026-09-27",evidence:{pricing:"https://example.com/pricing"}},capabilities:[]},
  {provider:"X",model:"Unavailable",model_id:"unavailable",pricing_status:"not-published",calculator_eligible:false,pricing_basis:{meter:"tokens",quantity:1000000},pricing:{standard:[]},provenance:{verified_at:"2026-09-27"},capabilities:[]}
 ]};
@@ -68,9 +68,22 @@ async function run(){
  els.valuePerSuccess.trigger("input");
  assert.equal(els.totalCost.textContent,"$0.00");
  assert.equal(els.roiPercent.textContent,"N/A");
+ // Block technically invalid per-call input/output limits without inventing a price.
+ els.calcModel.value="gpt-6-sol";els.calcModel.trigger("change");
+ els.inputTokens.value="9000";els.outputTokens.value="2000";els.outputTokens.trigger("input");
+ assert.equal(els.calcWarning.hidden,false);
+ assert.match(els.calcWarning.textContent,/context window/i);
+ els.inputTokens.value="2000";els.outputTokens.value="2600";els.outputTokens.trigger("input");
+ assert.equal(els.calcWarning.hidden,false);
+ assert.match(els.calcWarning.textContent,/maximum output/i);
+ els.outputTokens.value="500";els.outputTokens.trigger("input");
+ assert.equal(els.calcWarning.hidden,true);
+ let submitPrevented=false;
+ els.agentCostForm.trigger("submit",{preventDefault:()=>{submitPrevented=true}});
+ assert.equal(submitPrevented,true);
  presets.documents.trigger("click");
  assert.equal(els.monthlyTasks.value,"2500");
  assert.ok(val("totalCost")>0);
- console.log("PASS: Catalog loading, eligible-rate filters, cost arithmetic, cached inputs, zero success, invalid input, no-cache fallback, zero-cost handling, and presets.");
+ console.log("PASS: Catalog loading, eligible-rate filters, cost arithmetic, cached inputs, zero success, invalid input, no-cache fallback, zero-cost handling, model context limits, submit prevention, and presets.");
 }
 run().catch(err=>{console.error(err);process.exitCode=1});
