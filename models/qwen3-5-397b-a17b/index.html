@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="Qwen3.5-397B-A17B — API Specs, Context &amp; Pricing | SXF / AI" />
       <meta name="twitter:description" content="Qwen3.5-397B-A17B reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Alibaba Cloud sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/qwen3-5-397b-a17b/#article","headline":"Qwen3.5-397B-A17B — API Specs, Context & Pricing","description":"Qwen3.5-397B-A17B reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Alibaba Cloud sources.","url":"https://sxf.si/models/qwen3-5-397b-a17b/","dateModified":"2026-10-07","about":{"@type":"Thing","name":"Qwen3.5-397B-A17B"},"citation":["https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b","https://www.alibabacloud.com/help/en/model-studio/newly-released-models","https://www.alibabacloud.com/help/en/model-studio/model-pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Qwen3.5-397B-A17B","item":"https://sxf.si/models/qwen3-5-397b-a17b/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/qwen3-5-397b-a17b/#article","headline":"Qwen3.5-397B-A17B — API Specs, Context & Pricing","description":"Qwen3.5-397B-A17B reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Alibaba Cloud sources.","url":"https://sxf.si/models/qwen3-5-397b-a17b/","dateModified":"2026-10-09","about":{"@type":"Thing","name":"Qwen3.5-397B-A17B"},"citation":["https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b","https://www.alibabacloud.com/help/en/model-studio/newly-released-models","https://www.alibabacloud.com/help/en/model-studio/model-pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Qwen3.5-397B-A17B","item":"https://sxf.si/models/qwen3-5-397b-a17b/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -42,7 +42,7 @@
         <div class="collection-stats">
           <div><strong>262,144</strong><span>context tokens</span></div>
           <div><strong>65,536</strong><span>max output</span></div>
-          <div><strong>2026-10-07</strong><span>last verified</span></div>
+          <div><strong>2026-10-09</strong><span>last verified</span></div>
         </div>
       </section>
 
@@ -58,8 +58,8 @@
             <div><span>CONTEXT WINDOW</span><strong>262,144</strong><small>tokens</small></div>
             <div><span>MAX OUTPUT</span><strong>65,536</strong></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
-            <div><span>STANDARD RATE</span><strong>Not published</strong><small>per 1 million tokens</small></div>
-            <div><span>OUTPUT RATE</span><strong>—</strong><small>per 1 million tokens</small></div>
+            <div><span>GLOBAL ≤128K INPUT</span><strong>$0.172</strong><small>per 1 million tokens</small></div>
+            <div><span>GLOBAL ≤128K OUTPUT</span><strong>$1.032</strong><small>per 1 million tokens</small></div>
           </div>
         </div>
 
@@ -75,12 +75,14 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
           <div class="model-split">
-            <div><p>Official paid API.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <div><p>Tiered Global list rates for ≤128K input/request: $0.172 input · $1.032 output per MTok. Above 128K up to 256K and other regions have different rates.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
           </div>
         </section>
 
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Alibaba Cloud publishes distinct rates for prompts up to 128K and above 128K through 256K.</p></div><div><span>02</span><p>Numeric rates are source-verified but no historical effective-from date is inferred for the canonical schedule.</p></div></div></section>
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">REGIONAL TIERED PRICING</p><h2>Published list rates depend on request input length and region.</h2></div><div class="model-caveat-list"><div><span>Global · Germany (Frankfurt), US (Virginia) · 1–131,072 input tokens/request</span><p>$0.172 input · $1.032 output per 1 million tokens</p></div><div><span>Global · Germany (Frankfurt), US (Virginia) · 131,073–262,144 input tokens/request</span><p>$0.43 input · $2.58 output per 1 million tokens</p></div><div><span>International · Singapore · 1+ input tokens/request (within model limits)</span><p>$0.60 input · $3.60 output per 1 million tokens</p></div><div><span>China · China (Beijing) · 1–131,072 input tokens/request</span><p>$0.172 input · $1.032 output per 1 million tokens</p></div><div><span>China · China (Beijing) · 131,073–262,144 input tokens/request</span><p>$0.43 input · $2.58 output per 1 million tokens</p></div></div><p class="reference-note">Official list prices verified 2026-10-09; no historical effective-start date is claimed. Promotion prices are excluded. <a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer">Official pricing evidence ↗</a></p></section>
+
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Alibaba Cloud publishes Global list prices in Frankfurt and Virginia in two request-input-length tiers: up to 128K and above 128K to 256K tokens. The per-token rate for a request follows its input-size tier.</p></div><div><span>02</span><p>Singapore (International scope) has separate list prices; China (Beijing) also publishes tiered rates. SXF does not mix regional rates or treat minimum Global prices as universal.</p></div><div><span>03</span><p>Rates were checked against official Alibaba Cloud documentation on 2026-10-09; this verification date is not an asserted historical pricing effective-from date. Promotions are excluded.</p></div></div></section>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
@@ -97,18 +99,30 @@
         </section>
       </section>
 
-      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="qwen3.5-397b-a17b">
-          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Qwen3.5-397B-A17B: what changed.</h2><p>No post-baseline factual changes recorded for Qwen3.5-397B-A17B since 2026-10-07.</p></div>
-          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-10-07</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
-        </section>
+      <section class="model-change-watch shell" data-what-changed data-change-count="1" data-change-models="qwen3.5-397b-a17b">
+      <div class="intel-section-head"><div><p class="eyebrow">WHAT CHANGED</p><h2>Qwen3.5-397B-A17B: what changed.</h2></div><span>1 verified change since 2026-10-07</span></div>
+      <div class="change-watch-grid"><article class="change-watch-card" data-change-event="evt_ec2cb6c65a6e3ddf3f04" data-model-id="qwen3.5-397b-a17b">
+              <div class="change-watch-meta"><span>Qwen3.5-397B-A17B</span><time datetime="2026-10-09">2026-10-09</time></div>
+              <div class="change-deltas"><div class="change-delta" data-change-type="pricing_change">
+              <span>Pricing schedule</span>
+              <div><del>—</del><b>→</b><ins>—</ins></div>
+            </div></div>
+              <a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer">Verify at official source ↗</a>
+            </article></div>
+      <div class="compare-live-foot"><span>Only source-backed factual changes enter this view.</span><a href="/data/model-history.json">Open full ledger ↗</a></div>
+    </section>
       <section class="model-history shell" data-model-history data-history-models="qwen3.5-397b-a17b">
       <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>Qwen3.5-397B-A17B verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
-      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_8e73a9cb15ea4b44e377" data-model-id="qwen3.5-397b-a17b">
+      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_ec2cb6c65a6e3ddf3f04" data-model-id="qwen3.5-397b-a17b">
+              <div class="model-history-meta"><span>CHANGE</span><time datetime="2026-10-09">2026-10-09</time></div>
+              <h3>Qwen3.5-397B-A17B</h3><p>Pricing schedule: — → —</p>
+              <a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article><article class="model-history-event" data-history-event="evt_8e73a9cb15ea4b44e377" data-model-id="qwen3.5-397b-a17b">
               <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-10-07">2026-10-07</time></div>
               <h3>Qwen3.5-397B-A17B</h3><p>Baseline verified: 262,144 context · 65,536 max output</p>
               <a href="https://www.alibabacloud.com/help/en/model-studio/qwen3-5-397b-a17b" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
             </article></div>
-      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 012e765dfb17…</p>
+      <p class="reference-note">Append-only SXF ledger · 2 verified events · chain head ec2cb6c65a6e…</p>
     </section>
       
     <section class="evaluation-model-bridge shell" data-model-evaluations="qwen3.5-397b-a17b">
