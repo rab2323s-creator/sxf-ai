@@ -27,8 +27,8 @@
     <header class="econ-hero">
       <p class="econ-eyebrow">SXF / AI RESEARCH BRIEF · ENTERPRISE UNIT ECONOMICS · 2026</p>
       <h1>AI Agent Cost in 2026: <span>Enterprise TCO, Reliability &amp; ROI Analysis</span></h1>
-      <p class="econ-lead">How much does an AI agent <em>really</em> cost a business? We model three enterprise workflows from source-linked API prices through human review, reliability, implementation, governance and the cash-value of accepted outcomes. The result is a reproducible decision framework—not a vendor price list.</p>
-      <div class="econ-meta"><span>Published: Oct 9, 2026</span><span>Revised: Oct 10, 2026</span><span>Evidence: primary sources + modeled scenarios + measured synthetic pilot</span><span>Currency: USD</span><span>Horizon: 12 months</span></div>
+      <p class="econ-lead">How much does an AI agent <em>really</em> cost a business? We model three enterprise workflows from source-linked API prices through human review, reliability, implementation, governance and accepted outcomes. We also report an original, reproducible <strong>empirical experiment</strong> on 24 synthetic support-policy cases with a locally run model. The cost scenarios remain modeled; the model accuracy and latency were actually measured.</p>
+      <div class="econ-meta"><span>Published: Oct 9, 2026</span><span>Revised: Oct 10, 2026</span><span>Evidence: original measured experiment + modeled enterprise scenarios</span><span>Currency: USD</span><span>Horizon: 12 months</span></div>
       <div class="econ-hero-actions">
         <a class="econ-btn econ-btn-primary" href="#results">Examine the three cases ↘</a>
         <a class="econ-btn" href="#method">Audit the method ↗</a>
@@ -241,8 +241,8 @@
         </section>
 
         <section id="measured-local-pilot" aria-labelledby="measured-local-h"><span class="econ-kicker">FIELD NOTE / REPRODUCIBLE LOCAL INFERENCE · OCT 10, 2026</span>
-          <h2 id="measured-local-h">Measured small-model support decisions: 83.3% exact-match accuracy on a synthetic set.</h2>
-          <p><strong>This is a measured model inference result, not a deployed autonomous AI agent or a real-world enterprise cost study.</strong> We evaluated the openly licensed <strong>Qwen3-4B-Instruct-2507</strong> model (4-bit GGUF, CPU llama.cpp) against 24 pre-registered, author-written support policy scenarios. Each scenario was repeated three times per GitHub Actions workflow, in two separately executed workflows. Both workflows returned <strong>60 correct structured decisions out of 72 attempts (83.3%)</strong>; each 24-case repetition scored 20/24. The runs used the same scenarios and are not 144 independent real-world samples.</p>
+          <h2 id="measured-local-h">SXF / AI original empirical study: 83.3% accuracy in real Qwen model tests.</h2>
+          <p><strong>This is a real, reproducible experiment using actual AI-model responses, not merely estimated performance.</strong> The test cases are synthetic; no company, customer or production system was involved, and it is not a deployed autonomous agent study. We evaluated the openly licensed <strong>Qwen3-4B-Instruct-2507</strong> model (4-bit GGUF, CPU llama.cpp) against 24 pre-registered, author-written support policy scenarios. Each scenario was repeated three times per GitHub Actions workflow, in two separately executed workflows. Both workflows returned <strong>60 correct structured decisions out of 72 attempts (83.3%)</strong>; each 24-case repetition scored 20/24. The runs used the same scenarios and are not 144 independent real-world samples.</p>
           <div class="econ-table-scroll"><table class="econ-table"><thead><tr><th>Observed measurement</th><th>Workflow run #1</th><th>Workflow run #2</th></tr></thead><tbody>
             <tr><td>Cases × repeated decisions</td><td>24 × 3 = 72</td><td>24 × 3 = 72</td></tr>
             <tr><td>Correct structured decisions</td><td>60 / 72 (83.3%)</td><td>60 / 72 (83.3%)</td></tr>
