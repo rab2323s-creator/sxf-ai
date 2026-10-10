@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="visual-title visual-desc"><title id="visual-title">Claude Sonnet in GitHub Copilot — how a developer request becomes a reviewable code change</title><desc id="visual-desc">An editorial architecture illustration of a developer instruction entering the GitHub Copilot layer, routed to the Claude Sonnet model, tools, tests, and a verified pull request.</desc><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080d17"/><stop offset=".56" stop-color="#142038"/><stop offset="1" stop-color="#09101c"/></linearGradient>
+<radialGradient id="halo"><stop stop-color="#4e7eff" stop-opacity=".28"/><stop offset="1" stop-color="#4e7eff" stop-opacity="0"/></radialGradient>
+<linearGradient id="accent"><stop stop-color="#8de9ff"/><stop offset=".45" stop-color="#8ca9ff"/><stop offset="1" stop-color="#8cfae4"/></linearGradient>
+<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#88acf6" stroke-opacity=".10" stroke-width="1"/></pattern>
+<filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="25" flood-color="#010509" flood-opacity=".6"/></filter></defs>
+<rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/><ellipse cx="830" cy="495" rx="800" ry="420" fill="url(#halo)"/>
+<rect x="75" y="73" rx="12" width="154" height="42" fill="#173449" stroke="#58dfd2" stroke-opacity=".45"/>
+<text x="93" y="101" font-size="21" font-family="Arial,sans-serif" font-weight="800" fill="#a5fff0">SXF / AI</text>
+<text x="255" y="101" font-size="20" letter-spacing="4" font-family="Arial,sans-serif" font-weight="700" fill="#91b0cc">RESEARCH-LED DEVELOPER GUIDE</text>
+
+<text x="75" y="190" font-family="Arial,sans-serif" font-size="59" font-weight="800" fill="#f5f9ff">CLAUDE SONNET</text>
+<text x="75" y="253" font-family="Arial,sans-serif" font-size="59" font-weight="800" fill="#f5f9ff">IN GITHUB COPILOT</text>
+<text x="77" y="307" font-family="Arial,sans-serif" font-size="27" fill="#aabed9">The model is the reasoning engine. Copilot is the working environment.</text>
+<g filter="url(#shadow)">
+<rect x="75" y="389" width="318" height="305" rx="27" fill="#15233b" stroke="#789ff3" stroke-width="2"/>
+<rect x="98" y="417" width="272" height="48" rx="12" fill="#263958"/>
+<text x="118" y="448" font-family="Arial,sans-serif" font-size="21" font-weight="800" fill="#b6cdfd">01 / DEVELOPER</text>
+<path d="M117 513h235M117 552h193M117 591h218" stroke="#88b4f4" stroke-opacity=".45" stroke-width="11" stroke-linecap="round"/>
+<text x="118" y="646" fill="#e9f3ff" font-size="23" font-family="Arial,sans-serif" font-weight="700">Request + repository</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="493" y="361" width="548" height="364" rx="34" fill="#152a42" stroke="#9ce0ff" stroke-width="2"/>
+<rect x="521" y="392" width="492" height="64" rx="16" fill="#223c56"/>
+<text x="547" y="434" fill="#c4faff" font-size="24" font-weight="800" font-family="Arial,sans-serif">02 / COPILOT EXECUTION LAYER</text>
+<rect x="525" y="481" width="480" height="104" rx="18" fill="#233b63" stroke="#90b2ff" stroke-width="2"/>
+<text x="553" y="524" fill="#f3f6ff" font-size="34" font-weight="800" font-family="Arial,sans-serif">Claude Sonnet 5.5</text>
+<text x="555" y="559" fill="#bcd1ee" font-size="20" font-family="Arial,sans-serif">Model choice &amp; reasoning</text>
+<text x="540" y="637" fill="#a6f5e8" font-size="23" font-family="Arial,sans-serif">Context · tools · policy · tool calls</text>
+<text x="540" y="672" fill="#99b4d4" font-size="20" font-family="Arial,sans-serif">Run, inspect, revise, verify</text>
+</g>
+<g filter="url(#shadow)">
+<rect x="1140" y="389" width="385" height="305" rx="27" fill="#153438" stroke="#77e9d5" stroke-width="2"/>
+<rect x="1165" y="417" width="333" height="48" rx="12" fill="#215052"/>
+<text x="1185" y="448" fill="#a9ffeb" font-family="Arial,sans-serif" font-size="21" font-weight="800">03 / VERIFIED OUTPUT</text>
+<text x="1180" y="524" fill="#f5fffd" font-size="30" font-family="Arial,sans-serif" font-weight="800">Code changes</text>
+<text x="1180" y="573" fill="#c0e9e2" font-size="24" font-family="Arial,sans-serif">Tests &amp; diffs</text>
+<text x="1180" y="624" fill="#c0e9e2" font-size="24" font-family="Arial,sans-serif">Reviewable PR</text>
+<path d="m1433 640 24 19 40-51" stroke="#83ffe1" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path d="M393 536H483" stroke="#a1c6ff" stroke-width="7" stroke-linecap="round"/><path d="m468 523 18 13-18 13" stroke="#a1c6ff" fill="none" stroke-width="6"/>
+<path d="M1041 536H1130" stroke="#84f3e0" stroke-width="7" stroke-linecap="round"/><path d="m1115 523 18 13-18 13" stroke="#84f3e0" fill="none" stroke-width="6"/>
+<rect x="75" y="762" width="1450" height="60" rx="15" fill="#162d3e" stroke="#75c8c5" stroke-opacity=".45"/>
+<text x="104" y="801" fill="#cbf9ef" font-size="22" font-family="Arial,sans-serif" font-weight="700">MODEL SELECTOR ≠ PERMISSION GRANT</text>
+<text x="580" y="801" fill="#a7c2d9" font-size="21" font-family="Arial,sans-serif">Validate model access, usage, changes and tests separately.</text>
+<path d="M75 852H1525" stroke="#86a5d9" stroke-opacity=".35"/>
+<text x="75" y="877" fill="#748faa" font-size="17" font-family="Arial,sans-serif" letter-spacing="2">SXF ORIGINAL EXPLANATORY VISUAL · OCT 2026</text></svg>
