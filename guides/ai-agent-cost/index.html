@@ -28,13 +28,13 @@
       <p class="econ-eyebrow">SXF / AI RESEARCH BRIEF · ENTERPRISE UNIT ECONOMICS · 2026</p>
       <h1>AI Agent Cost in 2026: <span>Enterprise TCO, Reliability &amp; ROI Analysis</span></h1>
       <p class="econ-lead">How much does an AI agent <em>really</em> cost a business? We model three enterprise workflows from source-linked API prices through human review, reliability, implementation, governance and the cash-value of accepted outcomes. The result is a reproducible decision framework—not a vendor price list.</p>
-      <div class="econ-meta"><span>Published: Oct 9, 2026</span><span>Revised: Oct 10, 2026</span><span>Evidence: primary sources + modeled assumptions</span><span>Currency: USD</span><span>Horizon: 12 months</span></div>
+      <div class="econ-meta"><span>Published: Oct 9, 2026</span><span>Revised: Oct 10, 2026</span><span>Evidence: primary sources + modeled scenarios + measured synthetic pilot</span><span>Currency: USD</span><span>Horizon: 12 months</span></div>
       <div class="econ-hero-actions">
         <a class="econ-btn econ-btn-primary" href="#results">Examine the three cases ↘</a>
         <a class="econ-btn" href="#method">Audit the method ↗</a>
         <a class="econ-btn" href="/ai-agent-cost/">Open live cost index ↗</a>
       </div>
-      <div class="econ-promise"><strong>Evidence standard:</strong> This is an independent, fully specified <strong>scenario analysis</strong>, not an actual enterprise field trial, vendor quote or statistical estimate of average agent ROI. Every numerical result below can be reconstructed from the downloadable assumptions. No real organization, customer or employee was tested for this study.</div>
+      <div class="econ-promise"><strong>Evidence standard:</strong> The enterprise TCO and ROI analysis is an independent, fully specified <strong>scenario analysis</strong>, not an actual enterprise field trial, vendor quote or statistical estimate of average agent ROI. A separate measured <strong>synthetic local-model benchmark</strong> appears below and is not treated as enterprise economics. No real organization, customer or employee was tested for this study.</div>
     </header>
     <div class="econ-main-grid">
       <aside class="econ-toc" aria-label="On this page">
@@ -43,7 +43,7 @@
         <a href="#cost-stack">The complete cost stack</a><a href="#results">Three workload results</a>
         <a href="#reliability">Reliability economics</a><a href="#sensitivity">Interactive sensitivity</a>
         <a href="#tco-roi">TCO, ROI &amp; payback</a><a href="#build-buy">Build vs buy vs defer</a>
-        <a href="#pilot">Evaluation protocol</a><a href="#procurement">Procurement scorecard</a>
+        <a href="#measured-local-pilot">Measured local pilot</a><a href="#pilot">Evaluation protocol</a><a href="#procurement">Procurement scorecard</a>
         <a href="#faq">Frequently asked questions</a><a href="#sources">Sources and limitations</a>
       </aside>
       <div class="econ-content">
@@ -238,6 +238,22 @@
             <tr><td>Decision test</td><td colspan="2">Normalize both options on the same 12-month horizon, accepted-task denominator, service levels, control obligations and discounted cash flows where appropriate.</td></tr>
           </tbody></table></div>
           <p>A vendor may reduce deployment friction but increase switching costs; an internal build may improve control but consume substantial engineering capacity. There is no universally cheaper direction. A financial model that excludes supervision on the vendor path or engineering time on the build path is biased by construction.</p>
+        </section>
+
+        <section id="measured-local-pilot" aria-labelledby="measured-local-h"><span class="econ-kicker">FIELD NOTE / REPRODUCIBLE LOCAL INFERENCE · OCT 10, 2026</span>
+          <h2 id="measured-local-h">Measured small-model support decisions: 83.3% exact-match accuracy on a synthetic set.</h2>
+          <p><strong>This is a measured model inference result, not a deployed autonomous AI agent or a real-world enterprise cost study.</strong> We evaluated the openly licensed <strong>Qwen3-4B-Instruct-2507</strong> model (4-bit GGUF, CPU llama.cpp) against 24 pre-registered, author-written support policy scenarios. Each scenario was repeated three times per GitHub Actions workflow, in two separately executed workflows. Both workflows returned <strong>60 correct structured decisions out of 72 attempts (83.3%)</strong>; each 24-case repetition scored 20/24. The runs used the same scenarios and are not 144 independent real-world samples.</p>
+          <div class="econ-table-scroll"><table class="econ-table"><thead><tr><th>Observed measurement</th><th>Workflow run #1</th><th>Workflow run #2</th></tr></thead><tbody>
+            <tr><td>Cases × repeated decisions</td><td>24 × 3 = 72</td><td>24 × 3 = 72</td></tr>
+            <tr><td>Correct structured decisions</td><td>60 / 72 (83.3%)</td><td>60 / 72 (83.3%)</td></tr>
+            <tr><td>Invalid replies / API failures</td><td>0</td><td>0</td></tr>
+            <tr><td>Median measured response latency</td><td>3.865 s</td><td>7.966 s</td></tr>
+            <tr><td>P95 measured response latency</td><td>5.036 s</td><td>10.288 s</td></tr>
+            <tr><td>Provider inference API fees</td><td>$0 (local CPU inference)</td><td>$0 (local CPU inference)</td></tr>
+          </tbody></table></div>
+          <p><strong>Four repeatable failure cases:</strong> <code>SX-009</code> suggested replacement beyond the documented damage window even while its explanation identified the correct escalation; <code>SX-014</code> labeled an eligible cancellation as a refund; <code>SX-017</code> denied an eligible unshipped cancellation; <code>SX-023</code> used a refund-denial label for a warranty denial. Each of the four failed in all three repetitions of both workflow runs. These cases illustrate why explanations alone are not a substitute for correctly typed, reviewable decisions.</p>
+          <p><strong>Evidence and audit trail:</strong> <a href="/data/agent-support-local-results-2026-10-10.json">machine-readable results summary</a>, <a href="/data/agent-support-pilot-cases.json">synthetic test cases and decision rubric</a>, <a href="https://github.com/rab2323s-creator/sxf-ai/actions/runs/38012977547">full run #1 (download raw response artifact)</a>, and <a href="https://github.com/rab2323s-creator/sxf-ai/actions/runs/38012993589">full run #2 (download raw response artifact)</a>. Both workflow jobs completed successfully. Data, model checksum, runner code, seeds, and llama.cpp engine revision are recorded for replication.</p>
+          <p><strong>Cost boundary:</strong> the $0 above means no provider inference API fee. It does <em>not</em> include CPU compute value, electricity, engineering time, manual review, infrastructure, or deployment. These figures do not establish cost per accepted enterprise ticket, total cost of ownership, enterprise ROI or production safety; the three economic scenarios elsewhere on this page remain explicitly modeled.</p>
         </section>
 
         <section id="pilot" aria-labelledby="pilot-h"><span class="econ-kicker">09 / PRACTICAL EXPERIMENTAL PROTOCOL</span>
