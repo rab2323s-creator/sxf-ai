@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "type": "observed_local_inference_synthetic_case_benchmark",
+  "date_utc": "2026-10-10",
+  "model": "Qwen3-4B-Instruct-2507 Q4_K_M (GGUF), llama.cpp CPU inference",
+  "model_sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "dataset_sha256": "b052d08815a8bcfad6e0d52d379f42a0db0dba967da82252e898920391f85a58",
+  "inference_engine_commit": "10a60cf303566e10d6a7a2774c17d2085503d87b",
+  "dataset": "24 preregistered synthetic customer-support policy scenarios in six categories",
+  "repetitions_per_workflow": 3,
+  "github_actions_runs": [
+    {
+      "id": 38012977547,
+      "url": "https://github.com/rab2323s-creator/sxf-ai/actions/runs/38012977547",
+      "passed": true,
+      "correct": 60,
+      "attempts": 72,
+      "accuracy": 0.8333,
+      "median_seconds": 3.865,
+      "p95_seconds": 5.036,
+      "prompt_tokens": 16524,
+      "completion_tokens": 3870,
+      "measured_inference_wall_seconds": 290.678
+    },
+    {
+      "id": 38012993589,
+      "url": "https://github.com/rab2323s-creator/sxf-ai/actions/runs/38012993589",
+      "passed": true,
+      "correct": 60,
+      "attempts": 72,
+      "accuracy": 0.8333,
+      "median_seconds": 7.966,
+      "p95_seconds": 10.288,
+      "prompt_tokens": 16524,
+      "completion_tokens": 3870,
+      "measured_inference_wall_seconds": 595.942
+    }
+  ],
+  "accuracy_definition": "Exact match of model JSON decision against preregistered policy rubric. Each of 24 authored cases repeated 3 times in each independent workflow run.",
+  "run_level_repeated_case_results": "20/24 correct in each repetition across both workflow executions; model outputs match across executions.",
+  "failure_case_ids": [
+    {
+      "id": "SX-009",
+      "expected": "escalate",
+      "actual": "replace_item",
+      "issue": "Structured decision conflicts with reasoning acknowledging late damage claim."
+    },
+    {
+      "id": "SX-014",
+      "expected": "cancel_order",
+      "actual": "approve_refund",
+      "issue": "Refund label selected instead of cancel action."
+    },
+    {
+      "id": "SX-017",
+      "expected": "cancel_order",
+      "actual": "deny_cancel",
+      "issue": "Denies still-unshipped request."
+    },
+    {
+      "id": "SX-023",
+      "expected": "deny_warranty",
+      "actual": "deny_refund",
+      "issue": "Denial is about warranty but wrong action type."
+    }
+  ],
+  "per_category_first_run": {
+    "refund": {
+      "correct": 15,
+      "attempts": 15
+    },
+    "damage": {
+      "correct": 9,
+      "attempts": 12
+    },
+    "shipping": {
+      "correct": 12,
+      "attempts": 12
+    },
+    "cancel": {
+      "correct": 6,
+      "attempts": 12
+    },
+    "privacy": {
+      "correct": 9,
+      "attempts": 9
+    },
+    "warranty": {
+      "correct": 9,
+      "attempts": 12
+    }
+  },
+  "api_inference_fees_usd": 0,
+  "limitations": [
+    "Synthetic author-written dataset; no enterprise customers or real support tickets.",
+    "Decision recommendation only, not tool-using autonomous AI agent.",
+    "Repeated trials reuse same 24 cases, not 144 independent task samples.",
+    "No measured energy/hardware/engineering cost or human baseline, so enterprise ROI and total cost cannot be inferred.",
+    "Latency differs between hosted CI runs; hardware contention may vary.",
+    "Exact match is not a calibrated assessment of policy risk and harm.",
+    "Artifacts containing all per-item model replies are attached to the GitHub workflow runs, not automatically published on site."
+  ]
+}
