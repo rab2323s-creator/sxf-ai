@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "015114d6bbf3501e34b1f7f60c4cdfb2777f46986c9baa8fe18e0bd0974722c6",
+  "snapshot_hash": "5d03210618e1a615ae9b582c289c3192e8baf7c6266fbd379bb17270a9a420b1",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1437,6 +1437,79 @@
     },
     {
       "rank": 4,
+      "signal_slug": "github-copilot-weekly-releases-october-5-8e5ec29",
+      "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-october-5-8e5ec29/",
+      "title": "GitHub Copilot weekly releases — October 5",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-10-09T22:58:23Z",
+      "priority_score": 149,
+      "evidence_hash": "b1f506ea525de57017c8a0a34bfb52d51628db8b4104fdcfef1a1481ef688480",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "GitHub Copilot weekly releases — October 5",
+          "url": "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5",
+          "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-october-5-8e5ec29/",
+          "source": "GitHub",
+          "published": "2026-10-09T22:58:23Z",
+          "category": "Tools",
+          "tags": [
+            "GitHub Copilot"
+          ],
+          "summary": "This week’s updates make Copilot easier to use across accounts and environments, with more control over what agents can access and how you manage their work. GitHub Copilot Claude Haiku…",
+          "signal_score": 56,
+          "seo_quality_score": 73,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "high-value-topic"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 5,
       "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
       "title": "GitHub Copilot in VS Code, September 2026 releases",
@@ -1510,7 +1583,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "signal_slug": "claude-haiku-5-5-in-github-copilot-86f546d",
       "signal_url": "https://sxf.si/signals/claude-haiku-5-5-in-github-copilot-86f546d/",
       "title": "Claude Haiku 5.5 in GitHub Copilot",
@@ -1583,7 +1656,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 7,
       "signal_slug": "gpt-6-1-sol-in-github-copilot-9be84db",
       "signal_url": "https://sxf.si/signals/gpt-6-1-sol-in-github-copilot-9be84db/",
       "title": "GPT-6.1 Sol in GitHub Copilot",
@@ -1798,7 +1871,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 8,
       "signal_slug": "claude-sonnet-5-5-in-github-copilot-c579283",
       "signal_url": "https://sxf.si/signals/claude-sonnet-5-5-in-github-copilot-c579283/",
       "title": "Claude Sonnet 5.5 in GitHub Copilot",
@@ -2083,7 +2156,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 9,
       "signal_slug": "open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31",
       "signal_url": "https://sxf.si/signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/",
       "title": "Open TTS Leaderboard: Scalable Evaluation for Multilingual Text-to-Speech and Voice Cloning",
@@ -2158,7 +2231,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 10,
       "signal_slug": "actions-runner-controller-release-0-15-0-619fccc",
       "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
       "title": "Actions Runner Controller release 0.15.0",
@@ -2193,78 +2266,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "introducing-dots-884977e",
-      "signal_url": "https://sxf.si/signals/introducing-dots-884977e/",
-      "title": "Introducing dots",
-      "source": "OpenAI",
-      "category": "Tools",
-      "published": "2026-09-29T00:00:00Z",
-      "priority_score": 126,
-      "evidence_hash": "8364fd03c29f95ca74a80c2ac26c12cf50d96169074db2e4718857a245988c6d",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing dots",
-          "url": "https://openai.com/index/introducing-dots",
-          "signal_url": "https://sxf.si/signals/introducing-dots-884977e/",
-          "source": "OpenAI",
-          "published": "2026-09-29T00:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "Dots by OpenAI are proactive assistants that can keep working across complex projects and everyday tasks. Learn how dots help you stay in control while work moves forward.",
-          "signal_score": 46,
-          "seo_quality_score": 60,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/introducing-dots"
         ]
       },
       "requested_output": {
