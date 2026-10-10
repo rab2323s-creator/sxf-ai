@@ -99,6 +99,8 @@ jobs:
         run: |
           node --check assets/pricing-policy.js
           node tests/test_pricing_policy.cjs
+      - name: Verify synthetic support agent pilot fixtures (no API calls)
+        run: python tests/test_agent_support_pilot.py
       - name: Verify reproducible agent economics stress test
         run: node scripts/agent_economics_stress_test.cjs --check
       - name: Validate generated site
