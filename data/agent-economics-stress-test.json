@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "study_id": "sxf-enterprise-agent-economics-2026-10",
+  "study_as_of": "2026-10-10",
+  "evidence_class": "Deterministic hypothetical sensitivity analysis; not measured model accuracy, observed outcomes, deployment ROI, forecast or probability",
+  "protocol": {
+    "variables": [
+      "accepted_success_rate",
+      "human_review_fraction",
+      "value_realization_fraction"
+    ],
+    "deltas_absolute_percentage_points": [
+      -10,
+      -5,
+      0,
+      5,
+      10
+    ],
+    "clamp_fraction_to": [
+      0,
+      1
+    ],
+    "combinations_per_case": 125,
+    "interpretation": "All grid combinations are equally enumerated, NOT sampled from a measured probability distribution.",
+    "volume_scenarios": [
+      0.5,
+      2
+    ],
+    "volume_assumption": "Per-task usage scales linearly; implementation and monthly fixed costs remain unchanged.",
+    "prices": "Historical Standard text input/output rates effective on study_as_of; assumes no prompt caching or extra vendor tiers."
+  },
+  "cases": [
+    {
+      "id": "support",
+      "name": "Customer support triage",
+      "model_id": "gpt-6-luna",
+      "base_roi_pct": 82.9,
+      "base_cost_per_accepted_usd": 1.24,
+      "grid": {
+        "combinations": 125,
+        "minimum_roi_pct": 9.6,
+        "median_roi_pct": 82.9,
+        "maximum_roi_pct": 211.6,
+        "nonnegative_combinations": 125
+      },
+      "one_factor_10_percentage_points": {
+        "accepted_success_rate": {
+          "minus_10pp_roi": 60.6,
+          "plus_10pp_roi": 105.2
+        },
+        "human_review_fraction": {
+          "minus_10pp_roi": 140.7,
+          "plus_10pp_roi": 47.5
+        },
+        "value_realization_fraction": {
+          "minus_10pp_roi": 54.7,
+          "plus_10pp_roi": 111
+        }
+      },
+      "volume": {
+        "half_base_tasks_roi_pct": 21.5,
+        "double_base_tasks_roi_pct": 144.6
+      }
+    },
+    {
+      "id": "documents",
+      "name": "Invoice and document processing",
+      "model_id": "claude-sonnet-5",
+      "base_roi_pct": -2.8,
+      "base_cost_per_accepted_usd": 6.34,
+      "grid": {
+        "combinations": 125,
+        "minimum_roi_pct": -35.8,
+        "median_roi_pct": -2.8,
+        "maximum_roi_pct": 42.1,
+        "nonnegative_combinations": 53
+      },
+      "one_factor_10_percentage_points": {
+        "accepted_success_rate": {
+          "minus_10pp_roi": -13.6,
+          "plus_10pp_roi": 8
+        },
+        "human_review_fraction": {
+          "minus_10pp_roi": 8.2,
+          "plus_10pp_roi": -11.8
+        },
+        "value_realization_fraction": {
+          "minus_10pp_roi": -20.5,
+          "plus_10pp_roi": 14.9
+        }
+      },
+      "volume": {
+        "half_base_tasks_roi_pct": -38.6,
+        "double_base_tasks_roi_pct": 37.1
+      }
+    },
+    {
+      "id": "research",
+      "name": "Research and evidence synthesis",
+      "model_id": "gpt-6-sol",
+      "base_roi_pct": -37.8,
+      "base_cost_per_accepted_usd": 34.81,
+      "grid": {
+        "combinations": 125,
+        "minimum_roi_pct": -59.6,
+        "median_roi_pct": -38.2,
+        "maximum_roi_pct": -9.5,
+        "nonnegative_combinations": 0
+      },
+      "one_factor_10_percentage_points": {
+        "accepted_success_rate": {
+          "minus_10pp_roi": -46.4,
+          "plus_10pp_roi": -29.1
+        },
+        "human_review_fraction": {
+          "minus_10pp_roi": -33.8,
+          "plus_10pp_roi": -41.3
+        },
+        "value_realization_fraction": {
+          "minus_10pp_roi": -50.2,
+          "plus_10pp_roi": -25.3
+        }
+      },
+      "volume": {
+        "half_base_tasks_roi_pct": -59.8,
+        "double_base_tasks_roi_pct": -14.2
+      }
+    }
+  ]
+}
