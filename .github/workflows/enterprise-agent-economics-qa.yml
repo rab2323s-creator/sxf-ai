@@ -5,6 +5,8 @@ on:
     paths:
       - "guides/ai-agent-cost/**"
       - "data/enterprise-agent-economics-assumptions.json"
+      - "data/agent-economics-stress-test.json"
+      - "scripts/agent_economics_stress_test.cjs"
       - "tests/test_enterprise_agent_economics.cjs"
       - "tests/test_enterprise_agent_economics_browser.py"
       - "scripts/update_news.py"
@@ -29,6 +31,8 @@ jobs:
           node-version: "22"
       - name: Verify static JavaScript
         run: node --check guides/ai-agent-cost/study.js
+      - name: Verify 375 deterministic sensitivity combinations and published snapshot
+        run: node scripts/agent_economics_stress_test.cjs --check
       - name: Verify model rates, study arithmetic, HTML and SEO
         run: node tests/test_enterprise_agent_economics.cjs
       - name: Verify generator syntax
