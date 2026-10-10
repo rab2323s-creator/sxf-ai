@@ -181,6 +181,20 @@
           <div class="econ-note"><strong>Scope of sensitivity:</strong> success, review share and captured value change. The retry-call count, token volume, fixed expenses, baseline labor cost and implementation expense remain fixed for causal clarity. Varying the success rate does not automatically model changes to rework, risk, throughput or reviewer time. For adverse events, treat results as lower-bound planning estimates until separately quantified.</div>
         </section>
 
+        <section id="stress-test" aria-labelledby="stress-test-h"><span class="econ-kicker">REPRODUCIBLE SENSITIVITY EXPERIMENT</span>
+          <h2 id="stress-test-h">What happens when the assumptions move? A 375-run deterministic stress test.</h2>
+          <p>We enumerated 125 parameter combinations for each of the three existing workflows (375 in total). Accepted success, human-review share, and realized value independently shift by −10, −5, 0, +5, or +10 <strong>percentage points</strong> from their declared baselines, clipped to the 0–100% range. We separately recomputed half and double monthly task volume while retaining setup and fixed operating costs. Every result uses the same published study equations and dated model-price records.</p>
+          <!-- SXF:STRESS_TEST_TABLE_START -->
+<div class="econ-table-scroll"><table class="econ-table"><thead><tr><th>Workflow</th><th data-numeric>Base ROI</th><th data-numeric>125-case ROI range</th><th data-numeric>Grid cases at or above 0% ROI</th><th data-numeric>Half / double workload ROI</th></tr></thead><tbody>
+<tr><td>Customer support triage</td><td data-numeric>+82.9%</td><td data-numeric>+9.6% to +211.6%</td><td data-numeric>125 / 125</td><td data-numeric>+21.5% / +144.6%</td></tr>
+<tr><td>Invoice and document processing</td><td data-numeric>-2.8%</td><td data-numeric>-35.8% to +42.1%</td><td data-numeric>53 / 125</td><td data-numeric>-38.6% / +37.1%</td></tr>
+<tr><td>Research and evidence synthesis</td><td data-numeric>-37.8%</td><td data-numeric>-59.6% to -9.5%</td><td data-numeric>0 / 125</td><td data-numeric>-59.8% / -14.2%</td></tr>
+</tbody></table></div>
+          <!-- SXF:STRESS_TEST_TABLE_END -->
+          <p><strong>Interpretation:</strong> support triage remains positive across this <em>specified</em> grid; invoice economics cross zero; research remains negative. The 53/125 or 125/125 figures are <strong>not probabilities</strong>: parameter combinations were enumerated, not sampled from a measured distribution. The range is not a statistical confidence interval or evidence of actual deployment performance.</p>
+          <p><strong>Reproduce and audit:</strong> <a href="/data/agent-economics-stress-test.json">Download all summary results and experiment protocol (JSON)</a>, review the <a href="https://github.com/rab2323s-creator/sxf-ai/blob/main/scripts/agent_economics_stress_test.cjs">calculation generator</a>, and run <code>node scripts/agent_economics_stress_test.cjs --check</code> against the repository. The experiment is intentionally limited to three hypothetical workflows; it does not run real agents, measure quality, sample customer tasks, estimate probability, or establish representative industry ROI.</p>
+        </section>
+
         <section id="tco-roi" aria-labelledby="roi-h"><span class="econ-kicker">07 / 12-MONTH INVESTMENT CASE</span>
           <h2 id="roi-h">TCO and ROI are different questions. Payback is a third.</h2>
           <p><strong>Total cost of ownership</strong> asks what the organization must spend to launch and operate the complete agent system. <strong>ROI</strong> asks whether captured incremental value exceeds that spend. <strong>Payback</strong> asks when incremental recurring value covers one-time setup. Each needs a common time horizon, a defensible baseline and the same boundary for what counts as incremental agent expenditure.</p>
