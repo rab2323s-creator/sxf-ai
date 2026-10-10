@@ -28,7 +28,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify evaluation cases (without inference)
-        run: python tests/test_agent_support_pilot.py
+        run: |
+          python tests/test_agent_support_pilot.py
+          python tests/test_agent_support_local_pilot.py
       - name: Install CPU llama.cpp server
         run: |
           sudo apt-get update -qq
