@@ -43,14 +43,19 @@ jobs:
           python - <<'PY'
           import urllib.request
           from pathlib import Path
-          url = "https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-Q4_K_M.gguf?download=true"
+          url = "https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/b48eaa0431fbfc07e852bc574f440def545d5ccb/Qwen3-4B-Instruct-2507-Q4_K_M.gguf"
           out = Path("/tmp/sxf-model/qwen3-4b-instruct-2507-q4_k_m.gguf")
           with urllib.request.urlopen(url, timeout=120) as response, out.open("wb") as file:
               while chunk := response.read(1024*1024):
                   file.write(chunk)
           if out.stat().st_size < 500_000_000:
               raise RuntimeError("Unexpected model file size")
-          print("Downloaded model bytes:",out.stat().st_size)
+          import hashlib
+          actual = hashlib.sha256(out.read_bytes()).hexdigest()
+          expected = "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597"
+          if actual != expected:
+              raise RuntimeError("Model checksum did not match pinned official file")
+          print("Downloaded verified model bytes:",out.stat().st_size)
           PY
           sha256sum /tmp/sxf-model/*.gguf | awk '{print $1}' > /tmp/model-sha256.txt
       - name: Start local model inference server
