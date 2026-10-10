@@ -1,0 +1,90 @@
+name: Free local Qwen support pilot (no paid API)
+
+on:
+  workflow_dispatch:
+    inputs:
+      repetitions:
+        description: 'Repetitions of the 24 preregistered synthetic cases'
+        required: true
+        type: choice
+        options: ['1', '3']
+        default: '3'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sxf-free-support-pilot
+  cancel-in-progress: false
+
+jobs:
+  local-open-model-evaluation:
+    name: Local Qwen model / synthetic support decisions
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify evaluation cases (without inference)
+        run: python tests/test_agent_support_pilot.py
+      - name: Install CPU llama.cpp server
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq cmake build-essential libcurl4-openssl-dev
+          git clone --depth 1 https://github.com/ggml-org/llama.cpp.git /tmp/sxf-llama-cpp
+          cmake -S /tmp/sxf-llama-cpp -B /tmp/sxf-llama-cpp/build -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF
+          cmake --build /tmp/sxf-llama-cpp/build --config Release --target llama-server -j 2
+          git -C /tmp/sxf-llama-cpp rev-parse HEAD > /tmp/llama-commit.txt
+      - name: Download openly licensed 4-bit model (no vendor API key)
+        run: |
+          mkdir -p /tmp/sxf-model
+          python - <<'PY'
+          import urllib.request
+          from pathlib import Path
+          url = "https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen3-4B-Instruct-2507-Q4_K_M.gguf?download=true"
+          out = Path("/tmp/sxf-model/qwen3-4b-instruct-2507-q4_k_m.gguf")
+          with urllib.request.urlopen(url, timeout=120) as response, out.open("wb") as file:
+              while chunk := response.read(1024*1024):
+                  file.write(chunk)
+          if out.stat().st_size < 500_000_000:
+              raise RuntimeError("Unexpected model file size")
+          print("Downloaded model bytes:",out.stat().st_size)
+          PY
+          sha256sum /tmp/sxf-model/*.gguf | awk '{print $1}' > /tmp/model-sha256.txt
+      - name: Start local model inference server
+        run: |
+          /tmp/sxf-llama-cpp/build/bin/llama-server \
+            -m /tmp/sxf-model/qwen3-4b-instruct-2507-q4_k_m.gguf \
+            --host 127.0.0.1 --port 8087 --ctx-size 4096 --threads 4 \
+            --alias sxf-local-qwen3-4b \
+            > /tmp/sxf-llama-server.log 2>&1 &
+          echo $! > /tmp/llama.pid
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:8087/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          tail -80 /tmp/sxf-llama-server.log
+          exit 1
+      - name: Perform real local model evaluation, no paid service
+        run: |
+          python scripts/agent_support_local_pilot.py \
+            --model sxf-local-qwen3-4b \
+            --repeats "${{ inputs.repetitions }}" \
+            --model-sha256 "$(cat /tmp/model-sha256.txt)" \
+            --engine-commit "$(cat /tmp/llama-commit.txt)" \
+            --timeout 180 \
+            --output "$RUNNER_TEMP/sxf-free-local-agent-results.json"
+      - name: Upload research results for independent review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sxf-free-local-pilot-results
+          path: |
+            ${{ runner.temp }}/sxf-free-local-agent-results.json
+            /tmp/sxf-llama-server.log
+          if-no-files-found: ignore
+          retention-days: 30
