@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "decision": "Owner-authorized after primary-source verification",
+  "reviewed_at": "2026-10-12T15:42:00Z",
+  "approved_candidates": [
+    {
+      "candidate_id": "cand_google_gemini_3_8_live_extended",
+      "detected_at": "2026-10-06T12:30:00Z",
+      "provider": "Google",
+      "canonical_model_id": "gemini-3.8-live-extended-thinking",
+      "change_type": "new_model",
+      "observed_identity": {
+        "provider_native_id": "gemini-3.8-live-extended-thinking",
+        "display_name": "Gemini 3.8 Live Extended Thinking"
+      },
+      "identity_resolution": {
+        "status": "new",
+        "matched_model_id": null,
+        "confidence": "high",
+        "possible_duplicates": []
+      },
+      "proposed_record": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Live Extended Thinking",
+        "model_id": "gemini-3.8-live-extended-thinking",
+        "context_window": 131072,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "background asynchronous reasoning",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "positioning": "Google Live voice endpoint with continuous audio, background thinking and asynchronous agent tool use.",
+        "notes": [
+          "Official API ID gemini-3.8-live-extended-thinking is distinct from gemini-3.8-live.",
+          "Standard TEXT input/output $0.75/$4.50 per million text tokens; AUDIO input/output $3/$12 per million audio tokens; image/video input $1 per million tokens.",
+          "Audio sessions use multiple native meters; text calculator disabled.",
+          "Only non-blocking async function calls supported. Clients must use interaction_status to detect a truly idle session."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.75,
+              "output": 4.5
+            }
+          ]
+        },
+        "pricing_status": "official-paid",
+        "capabilities": [
+          "general",
+          "reasoning",
+          "vision",
+          "video",
+          "audio",
+          "speech-to-speech",
+          "agents",
+          "tool-use"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per million TEXT tokens; audio/video priced separately"
+        },
+        "sxf_url": "/models/gemini-3-8-live-extended-thinking/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "provenance": {
+          "verified_at": "2026-10-12",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+            "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+          }
+        },
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        }
+      },
+      "diff": {
+        "model_id": {
+          "before": null,
+          "after": "gemini-3.8-live-extended-thinking"
+        }
+      },
+      "evidence": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models",
+          "source_type": "official_model_doc",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "source_type": "official_pricing",
+          "retrieved_at": "2026-10-06T12:30:00Z"
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "SXF AI owner-authorized review",
+        "reviewed_at": "2026-10-12T15:42:00Z"
+      }
+    }
+  ]
+}

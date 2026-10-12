@@ -535,6 +535,116 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Claude 5",
+      "model": "Claude Haiku 5.5",
+      "model_id": "claude-haiku-5-5",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "medium",
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Fast, low-cost Claude for classification, extraction, routing, coding subagents and high-volume conversations.",
+      "notes": [
+        "Prompt-length tiered Standard API prices: <=100,000 input prompt tokens $0.10 input/$0.50 output per million; >100,000 prompt tokens $0.50 input/$2.50 output per million.",
+        "Caching, Batch discounts and US-only inference routing use different prices. Flat price calculator is disabled.",
+        "Native Claude API ID is claude-haiku-5-5. Standard max output 128K; Batch API beta provides a distinct 300K output option."
+      ],
+      "pricing": {
+        "tiered": {
+          "basis": "input_tokens_per_request",
+          "verified_at": "2026-10-12",
+          "source_url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "scopes": [
+            {
+              "scope": "Global",
+              "regions": [
+                "Global Standard API"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": 100000,
+                  "input": 0.1,
+                  "output": 0.5
+                },
+                {
+                  "min_input_tokens": 100001,
+                  "max_input_tokens": null,
+                  "input": 0.5,
+                  "output": 2.5
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents",
+        "tool-use",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per million tokens, <=100K or >100K prompt tier"
+      },
+      "sxf_url": "/models/claude-haiku-5-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "access": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

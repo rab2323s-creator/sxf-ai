@@ -79,7 +79,7 @@ for model_id, (provider, capability) in selected_specialists.items():
 
 candidate_queue = json.loads((ROOT / "data" / "model-candidates" / "queue.json").read_text(encoding="utf-8"))
 assert not selected_specialists.keys() & {item["proposed_record"]["model_id"] for item in candidate_queue["candidates"]}, "Published models still appear as pending candidates"
-assert len(candidate_queue["candidates"]) == 3, "Three unapproved candidates must remain pending"
+assert len(candidate_queue["candidates"]) == 2, "Two unapproved candidates must remain pending"
 explorer_js = (ROOT / "models" / "explorer.js").read_text(encoding="utf-8")
 assert '<option value="image-generation">Image generation</option>' in explorer_js, "Image generation task filter is missing"
 
@@ -147,7 +147,7 @@ next_ten = {
     "flux-2-klein-9b": ("Black Forest Labs", "image-generation", "images"),
     "flux-2-pro": ("Black Forest Labs", "image-generation", "images"),
 }
-assert len(catalog["models"]) == 95, "Expected 95 models after ten source-verified additions"
+assert len(catalog["models"]) >= 95, "Expected at least 95 models after ten source-verified additions"
 for mid, (provider,task,meter) in next_ten.items():
     row=next(m for m in catalog["models"] if m["model_id"] == mid)
     assert row["provider"] == provider and task in row["capabilities"], f"{mid}: provider/task mismatch"
@@ -163,3 +163,17 @@ for slug in ("gpt-image-2-vs-gpt-image-2-5-flare", "ideogram-4-vs-ideogram-3", "
     assert "SPECIALIST BUYER GUIDE" in html and f"https://sxf.si/compare/{slug}/" in html, f"{slug}: SEO or decision factors missing"
 
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")
+
+# Verified 100-model release gates
+assert len(catalog["models"]) == 100
+for mid in ["claude-haiku-5-5","gemini-3.1-pro-preview","gemini-3.1-flash-image","gemini-3.8-live-extended-thinking","stable-image-ultra"]:
+    row = next(x for x in catalog["models"] if x["model_id"] == mid)
+    assert row["official_sources"] and row["calculator_eligible"] is False
+    page=ROOT / row["sxf_url"].strip("/") / "index.html"
+    assert page.is_file() and f"https://sxf.si{row['sxf_url']}" in page.read_text(encoding="utf-8")
+for mid in ("claude-haiku-5-5", "gemini-3.1-pro-preview"):
+    row=next(x for x in catalog["models"] if x["model_id"] == mid)
+    assert row["pricing"].get("tiered") and not row["pricing"].get("standard")
+for slug in ["claude-haiku-5-5-vs-claude-sonnet-5-5","gemini-3-1-pro-preview-vs-gemini-3-8-flash","nano-banana-2-vs-nano-banana-2-1","gemini-3-8-live-extended-thinking-vs-gemini-3-8-live","stable-image-ultra-vs-flux-2-pro"]:
+    page=ROOT / "compare" / slug / "index.html"
+    assert page.is_file() and f"https://sxf.si/compare/{slug}/" in page.read_text(encoding="utf-8")
