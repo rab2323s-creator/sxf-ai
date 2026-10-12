@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 85,
-    "fresh": 85,
+    "total": 95,
+    "fresh": 95,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -1367,6 +1367,31 @@
       ]
     },
     {
+      "model_id": "flux-2-klein-9b",
+      "provider": "Black Forest Labs",
+      "model": "FLUX.2 Klein 9B",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://api.bfl.ai/docs",
+        "https://bfl.ai/pricing?category=flux.2"
+      ]
+    },
+    {
       "model_id": "flux-2-max",
       "provider": "Black Forest Labs",
       "model": "FLUX.2 Max",
@@ -1388,6 +1413,31 @@
       ],
       "source_urls": [
         "https://bfl.ai/models/flux-2-max",
+        "https://bfl.ai/pricing?category=flux.2"
+      ]
+    },
+    {
+      "model_id": "flux-2-pro",
+      "provider": "Black Forest Labs",
+      "model": "FLUX.2 Pro",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://api.bfl.ai/docs",
         "https://bfl.ai/pricing?category=flux.2"
       ]
     },
@@ -1414,6 +1464,106 @@
       "source_urls": [
         "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
         "https://www.byteplus.com/en/product/modelark/pricing"
+      ]
+    },
+    {
+      "model_id": "flux-general-en",
+      "provider": "Deepgram",
+      "model": "Deepgram Flux",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://deepgram.com/pricing",
+        "https://developers.deepgram.com/docs/flux"
+      ]
+    },
+    {
+      "model_id": "nova-3",
+      "provider": "Deepgram",
+      "model": "Deepgram Nova-3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://deepgram.com/pricing",
+        "https://developers.deepgram.com/docs/model"
+      ]
+    },
+    {
+      "model_id": "scribe_v2",
+      "provider": "ElevenLabs",
+      "model": "ElevenLabs Scribe v2",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "https://elevenlabs.io/pricing/api"
+      ]
+    },
+    {
+      "model_id": "scribe_v2_realtime",
+      "provider": "ElevenLabs",
+      "model": "ElevenLabs Scribe v2 Realtime",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "https://elevenlabs.io/pricing/api"
       ]
     },
     {
@@ -1567,6 +1717,81 @@
       ]
     },
     {
+      "model_id": "ideogram-v3",
+      "provider": "Ideogram",
+      "model": "Ideogram 3.0",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "https://ideogram.ai/pricing/"
+      ]
+    },
+    {
+      "model_id": "ideogram-v4",
+      "provider": "Ideogram",
+      "model": "Ideogram 4.0",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "https://ideogram.ai/pricing/"
+      ]
+    },
+    {
+      "model_id": "gpt-image-2",
+      "provider": "OpenAI",
+      "model": "GPT-Image-2",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
       "model_id": "gpt-image-2.5-flare",
       "provider": "OpenAI",
       "model": "GPT-Image-2.5 Flare",
@@ -1664,6 +1889,31 @@
       "source_urls": [
         "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
         "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gen4.5",
+      "provider": "Runway",
+      "model": "Runway Gen-4.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.dev.runwayml.com/guides/pricing/",
+        "https://docs.dev.runwayml.com/guides/using-the-api/"
       ]
     },
     {

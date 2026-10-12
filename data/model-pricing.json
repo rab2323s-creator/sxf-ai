@@ -7502,6 +7502,814 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "provider": "OpenAI",
+      "family": "GPT Image 2",
+      "model": "GPT-Image-2",
+      "model_id": "gpt-image-2",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "OpenAI fast, high-fidelity image generation and editing for production creatives, reference images and flexible output sizes.",
+      "notes": [
+        "OpenAI Standard image-token rates are $4.00 input, $1.00 cached image input, $15.00 generated IMAGE output per 1M tokens; TEXT prompt input is separately billed $2.50 and $0.625 cached per 1M TEXT tokens.",
+        "This model is not GPT-Image-2.5 Sunburst or Flare. All picture costs vary with image quality, resolution, prompt text and reference usage; do not interpret image-token rates as fixed prices per output image.",
+        "Text-only calculator excluded because image output token consumption is a different price dimension."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 4,
+            "cached_input": 1,
+            "output": 15
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million IMAGE tokens (text input separate)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/gpt-image-2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Ideogram",
+      "family": "Ideogram Image",
+      "model": "Ideogram 4.0",
+      "model_id": "ideogram-v4",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Ideogram 4.0 high-quality image creation with detailed prompt control, brand-style typography, designs and creative editing.",
+      "notes": [
+        "Ideogram API lists $0.03 per image for Ideogram 4.0 Turbo generation. DEFAULT is $0.06 and QUALITY $0.10 per image. This catalog rate is TURBO ONLY; changing speed or editing endpoints changes price.",
+        "Provider's canonical API endpoint is POST /v1/ideogram-v4/generate. Rendering_speed=FLASH is currently not accepted at this version; Turbo, Default and Quality are the published modes.",
+        "Prices apply to single generated output images; custom models, special output resolutions and other operations may have distinct rates.",
+        "Supported high-resolution and transparent-background variants have separate endpoints and settings."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/ideogram-v4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "https://ideogram.ai/pricing/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "pricing": "https://ideogram.ai/pricing/",
+          "access": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "lifecycle": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "capabilities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Ideogram",
+      "family": "Ideogram Image",
+      "model": "Ideogram 3.0",
+      "model_id": "ideogram-v3",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Ideogram's established 3.0 image generation/editing model for design, accurate typography, character references and remix workflows.",
+      "notes": [
+        "Ideogram 3.0 API TURBO output costs $0.03 per image. DEFAULT $0.06, QUALITY $0.09. Prices vary further for character reference and editing endpoints.",
+        "Native official API endpoint is POST /v1/ideogram-v3/generate; provider documentation describes the model as a prior stable generation relative to Ideogram 4.0.",
+        "Do not compare one per-image Turbo rate against an image-token or high-quality-output rate as if the configurations were equal."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/ideogram-v3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "https://ideogram.ai/pricing/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "pricing": "https://ideogram.ai/pricing/",
+          "access": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "lifecycle": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "capabilities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Runway",
+      "family": "Runway Gen",
+      "model": "Runway Gen-4.5",
+      "model_id": "gen4.5",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "positioning": "Runway API text-to-video and image-to-video model for cinematic camera motion, prompt-controlled shots and production video sequences.",
+      "notes": [
+        "Official Runway Dev API model ID is gen4.5, usable for both text-to-video and image-to-video requests.",
+        "Runway developer price: 12 credits per generated second and $0.01 per purchased API credit, equivalent to $0.12 per second or $7.20 per minute before sales tax. The catalog displays the one-minute equivalent, NOT a charge for a fixed video.",
+        "Runway creative app subscriptions and Explore Mode are not the same as Developer API billing. Professional/HDR formats add surcharges (e.g. +5 or +20 credits/second).",
+        "Official creator guide documents 2–10 second clips for standard text/image-to-video modes. LLM context-window and token max-output fields do not apply."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 7.2
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "video-generation"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per generated minute (equivalent to $0.12/second; 12 credits/second)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/gen4-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "https://docs.dev.runwayml.com/guides/pricing/",
+        "https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "context_window": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "max_output": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "knowledge_cutoff": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "reasoning": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "modalities": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "pricing": "https://docs.dev.runwayml.com/guides/pricing/",
+          "access": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "lifecycle": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "capabilities": "https://docs.dev.runwayml.com/guides/using-the-api/"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Deepgram",
+      "family": "Deepgram Nova",
+      "model": "Deepgram Nova-3",
+      "model_id": "nova-3",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Deepgram speech-to-text for recorded meetings, calls, noisy recordings, multilingual utterances and streaming captions.",
+      "notes": [
+        "Official Pay-As-You-Go pre-recorded monolingual Nova-3 rate is $0.0043 per audio minute; multilingual pre-recorded is $0.0052/minute.",
+        "Streaming Nova-3 monolingual has a limited-time promotional $0.0048/minute ($0.0077 regular), while multilingual streaming is currently $0.0058/minute ($0.0092 regular). These are separate prices and may change after the promotion.",
+        "Provider-native model argument model=nova-3 or nova-3-general and available domain options. This record represents general Nova-3, NOT a medical/pharma specialist variant.",
+        "Optional paid add-ons, multi-channel billing and endpoint type must be verified for true workload costs; only base pre-recorded monolingual audio pricing is displayed."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.0043
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per pre-recorded MONOLINGUAL audio minute (streaming/multilingual differ)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/nova-3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.deepgram.com/docs/model",
+        "https://deepgram.com/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.deepgram.com/docs/model",
+          "context_window": "https://developers.deepgram.com/docs/model",
+          "max_output": "https://developers.deepgram.com/docs/model",
+          "knowledge_cutoff": "https://developers.deepgram.com/docs/model",
+          "reasoning": "https://developers.deepgram.com/docs/model",
+          "modalities": "https://developers.deepgram.com/docs/model",
+          "pricing": "https://deepgram.com/pricing",
+          "access": "https://developers.deepgram.com/docs/model",
+          "lifecycle": "https://developers.deepgram.com/docs/model",
+          "capabilities": "https://developers.deepgram.com/docs/model"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Deepgram",
+      "family": "Deepgram Flux",
+      "model": "Deepgram Flux",
+      "model_id": "flux-general-en",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Deepgram low-latency speech recognition with integrated end-of-turn detection for interruptible English-language voice agents.",
+      "notes": [
+        "Official Pay-As-You-Go Flux English STREAMING rate is currently $0.0065/audio minute (limited-time promotional, regular $0.0077). Multilingual Flux variant is $0.0078/minute and is NOT represented by this model ID.",
+        "Provider-native API model argument model=flux-general-en, via the Flux speech-to-text streaming endpoint; includes real-time conversational turn detection.",
+        "Provider documentation describes integrated turn-taking and interrupt handling; practical latency and accuracy require task-specific testing.",
+        "Rate is a date-verified promotion and must be rechecked; any additional add-ons are excluded from the base rate."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.0065
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per streaming ENGLISH audio minute (promotional Pay As You Go)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-general-en/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.deepgram.com/docs/flux",
+        "https://deepgram.com/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.deepgram.com/docs/flux",
+          "context_window": "https://developers.deepgram.com/docs/flux",
+          "max_output": "https://developers.deepgram.com/docs/flux",
+          "knowledge_cutoff": "https://developers.deepgram.com/docs/flux",
+          "reasoning": "https://developers.deepgram.com/docs/flux",
+          "modalities": "https://developers.deepgram.com/docs/flux",
+          "pricing": "https://deepgram.com/pricing",
+          "access": "https://developers.deepgram.com/docs/flux",
+          "lifecycle": "https://developers.deepgram.com/docs/flux",
+          "capabilities": "https://developers.deepgram.com/docs/flux"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "ElevenLabs",
+      "family": "Scribe",
+      "model": "ElevenLabs Scribe v2",
+      "model_id": "scribe_v2",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "ElevenLabs multilingual speech recognition for file transcripts, subtitle creation, speaker identification and keyterm-prompted transcription.",
+      "notes": [
+        "ElevenLabs official Speech to Text API model ID is scribe_v2, used at POST /v1/speech-to-text.",
+        "Official API pricing lists $0.22 per input audio hour, equivalent to $0.0036667/minute; catalog rate retains the native $0.22 PER HOUR, not a synthetic generative token rate.",
+        "Optional entity detection and keyterm prompting are charged separately (published $0.07/hour and $0.05/hour respectively). Supported media, rate limits and language support depend on endpoint.",
+        "Output is text transcription, not generated speech. Generic text-token calculator is disabled."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.22
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 60,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per 60 audio minutes (hourly API rate; add-ons extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/scribe-v2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "https://elevenlabs.io/pricing/api"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "pricing": "https://elevenlabs.io/pricing/api",
+          "access": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "lifecycle": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "capabilities": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "ElevenLabs",
+      "family": "Scribe",
+      "model": "ElevenLabs Scribe v2 Realtime",
+      "model_id": "scribe_v2_realtime",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "ElevenLabs low-latency streaming transcription via WebSocket, with partial/final utterances and voice-activity detection.",
+      "notes": [
+        "Official WebSocket model_id is scribe_v2_realtime at wss://api.elevenlabs.io/v1/speech-to-text/realtime.",
+        "ElevenLabs official API rate is $0.39 per processed audio hour, expressed as per 60 minutes here (equivalent to $0.0065/minute). This is audio-time billing, not the cost of model-generated text.",
+        "Supports 90+ languages, manual or VAD commit, optional word-level timestamps and single-use browser tokens for client integrations.",
+        "Realtime and offline Scribe rates are different; compare using audio duration and streaming needs, never as token output rates."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.39
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 60,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per 60 audio minutes (realtime WebSocket hourly API rate)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/scribe-v2-realtime/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "https://elevenlabs.io/pricing/api"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "pricing": "https://elevenlabs.io/pricing/api",
+          "access": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "lifecycle": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "capabilities": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "model": "FLUX.2 Klein 9B",
+      "model_id": "flux-2-klein-9b",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs fast, compact 9B image generation and editing model with open weights and high-throughput API.",
+      "notes": [
+        "Official BFL API endpoint is POST /v1/flux-2-klein-9b. The model's weights are available with license terms; open weights do NOT imply unrestricted commercial usage.",
+        "BFL API published price: $0.015 for the first OUTPUT megapixel, +$0.002 for each additional output MP, +$0.002 per reference-image input MP. Displayed $0.015 is a STARTING first-MP rate.",
+        "Image pixels are rounded to billed megapixels; reference images and resolution can increase per-result charges. 4K and multi-image workflows require checking configuration caps.",
+        "Useful for low-latency imagery and on-premise experimentation; quality comparisons must use real prompts."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.015
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-2-klein-9b/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api.bfl.ai/docs",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://bfl.ai/models/flux-2-klein"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api.bfl.ai/docs",
+          "context_window": "https://api.bfl.ai/docs",
+          "max_output": "https://api.bfl.ai/docs",
+          "knowledge_cutoff": "https://api.bfl.ai/docs",
+          "reasoning": "https://api.bfl.ai/docs",
+          "modalities": "https://api.bfl.ai/docs",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://api.bfl.ai/docs",
+          "lifecycle": "https://api.bfl.ai/docs",
+          "capabilities": "https://api.bfl.ai/docs"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "model": "FLUX.2 Pro",
+      "model_id": "flux-2-pro",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs professional mid-range FLUX.2 image generator/editor balancing high visual quality and API cost.",
+      "notes": [
+        "Official BFL API endpoint is POST /v1/flux-2-pro. Proprietary hosted model; access through BFL API.",
+        "BFL published price is $0.03 for the first output megapixel, plus $0.015 per additional output MP and $0.015 per input reference-image MP. Displayed $0.03 is a STARTING rate and not a universal all-resolution image price.",
+        "Compare Pro vs Klein 9B and Max at identical resolution and reference input counts. Unverified quality superiority or latency guarantees are not claimed."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-2-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api.bfl.ai/docs",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://help.bfl.ai/articles/8446125349-quickstart-guide"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api.bfl.ai/docs",
+          "context_window": "https://api.bfl.ai/docs",
+          "max_output": "https://api.bfl.ai/docs",
+          "knowledge_cutoff": "https://api.bfl.ai/docs",
+          "reasoning": "https://api.bfl.ai/docs",
+          "modalities": "https://api.bfl.ai/docs",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://api.bfl.ai/docs",
+          "lifecycle": "https://api.bfl.ai/docs",
+          "capabilities": "https://api.bfl.ai/docs"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ],
   "verification_policy": {
