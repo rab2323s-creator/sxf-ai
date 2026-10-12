@@ -59,6 +59,8 @@ jobs:
         run: python tests/test_evaluation_coverage_25.py
       - name: Validate 35-model evaluation expansion
         run: python tests/test_evaluation_coverage_35.py
+      - name: Sitemap lastmod regression tests
+        run: python tests/test_sitemap_lastmod.py
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
       - name: AI enrichment dry-run tests
@@ -105,6 +107,8 @@ jobs:
           python tests/test_agent_support_local_pilot.py
       - name: Verify reproducible agent economics stress test
         run: node scripts/agent_economics_stress_test.cjs --check
+      - name: Refresh sitemap after post-render changes
+        run: python scripts/sitemap_lastmod.py --refresh
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
