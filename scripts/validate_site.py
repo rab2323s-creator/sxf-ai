@@ -1115,7 +1115,7 @@ def validate_compare_contracts_and_model_histories():
             model = models[model_id]
             row_pattern = (
                 rf'<article class="compare-live-card"[^>]+data-compare-model="{re.escape(model_id)}"'
-                rf'[^>]+data-context="{int(model["context_window"])}"'
+                rf'[^>]+data-context="{("unknown" if model.get("context_window") is None else int(model["context_window"]))}"'
                 rf'[^>]+data-max-output="{re.escape(str(model.get("max_output")))}"'
                 rf'[^>]+data-pricing-status="{re.escape(model.get("pricing_status", "not-published"))}"'
             )
