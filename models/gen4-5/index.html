@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Runway Gen-4.5 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Runway Gen-4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Runway sources." />
+      <title>Runway Gen-4.5: Pricing, API, Text-to-Video &amp; Specs | SXF / AI</title>
+      <meta name="description" content="Runway Gen-4.5 model guide: 12 credits/sec pricing, 2–10s 720p clips, text-to-video and image-to-video settings, API examples, prompts and comparisons." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Runway Gen-4.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Runway Gen-4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Runway sources." />
+      <meta property="og:title" content="Runway Gen-4.5: Pricing, API, Text-to-Video &amp; Specs | SXF / AI" />
+      <meta property="og:description" content="Runway Gen-4.5 model guide: 12 credits/sec pricing, 2–10s 720p clips, text-to-video and image-to-video settings, API examples, prompts and comparisons." />
       <meta property="og:url" content="https://sxf.si/models/gen4-5/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,9 +23,9 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Runway Gen-4.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Runway Gen-4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Runway sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gen4-5/#article","headline":"Runway Gen-4.5 — API Specs, Context & Pricing","description":"Runway Gen-4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Runway sources.","url":"https://sxf.si/models/gen4-5/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Runway Gen-4.5"},"citation":["https://docs.dev.runwayml.com/guides/using-the-api/","https://docs.dev.runwayml.com/guides/pricing/","https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Runway Gen-4.5","item":"https://sxf.si/models/gen4-5/"}]}]}</script>
+      <meta name="twitter:title" content="Runway Gen-4.5: Pricing, API, Text-to-Video &amp; Specs | SXF / AI" />
+      <meta name="twitter:description" content="Runway Gen-4.5 model guide: 12 credits/sec pricing, 2–10s 720p clips, text-to-video and image-to-video settings, API examples, prompts and comparisons." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gen4-5/#article","headline":"Runway Gen-4.5: Pricing, API, Text-to-Video & Specs","description":"Runway Gen-4.5 model guide: 12 credits/sec pricing, 2–10s 720p clips, text-to-video and image-to-video settings, API examples, prompts and comparisons.","url":"https://sxf.si/models/gen4-5/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Runway Gen-4.5"},"citation":["https://docs.dev.runwayml.com/guides/using-the-api/","https://docs.dev.runwayml.com/guides/pricing/","https://docs.dev.runwayml.com/assets/inputs/","https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5","https://help.runwayml.com/hc/en-us/articles/42460036199443-Text-to-Video-Prompting-Guide","https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide","https://academy.runwayml.com/guides/prompting-guide","https://help.runwayml.com/hc/en-us/articles/47313504791059-Camera-Terms-Prompts-Examples"],"inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/gen4-5/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Runway Gen-4.5","item":"https://sxf.si/models/gen4-5/"}]},{"@type":"FAQPage","@id":"https://sxf.si/models/gen4-5/#faq","url":"https://sxf.si/models/gen4-5/#faq","mainEntity":[{"@type":"Question","name":"What is Runway Gen-4.5?","acceptedAnswer":{"@type":"Answer","text":"Runway Gen-4.5 is Runway's video-generation model for making short clips from text prompts or a reference image plus a motion prompt. Its strengths include camera direction, multi-action prompts, and visual continuity."}},{"@type":"Question","name":"How much does Runway Gen-4.5 cost?","acceptedAnswer":{"@type":"Answer","text":"Runway Dev lists 12 credits per generated second. At $0.01 per developer API credit, a 5-second clip costs 60 credits ($0.60), and a 10-second clip costs 120 credits ($1.20), before taxes or optional output-format charges. Creative-app plan billing is separate."}},{"@type":"Question","name":"What is the Runway Gen-4.5 API model ID?","acceptedAnswer":{"@type":"Answer","text":"Use gen4.5 in Runway's API or SDK. The documented image-to-video endpoint also accepts text-to-video requests when promptImage is omitted."}},{"@type":"Question","name":"Does Gen-4.5 support text-to-video and image-to-video?","acceptedAnswer":{"@type":"Answer","text":"Yes. Text-to-video accepts a written scene and motion description. Image-to-video uses an input still image to define appearance and composition, with text describing how the image should animate."}},{"@type":"Question","name":"What video durations and resolution does Gen-4.5 support?","acceptedAnswer":{"@type":"Answer","text":"Runway's creator documentation lists 2 to 10 seconds, a standard 720p output and 24 or 25 frames per second in the web app. Aspect-ratio options depend on the mode."}},{"@type":"Question","name":"What aspect ratios are available for Gen-4.5?","acceptedAnswer":{"@type":"Answer","text":"Runway lists 16:9 and 9:16 for text-to-video, while image-to-video supports landscape, portrait, square and widescreen formats, including 16:9, 9:16, 1:1, 4:3, 3:4 and 21:9."}},{"@type":"Question","name":"How should I write a Gen-4.5 prompt?","acceptedAnswer":{"@type":"Answer","text":"For text-to-video, describe the subject, setting, action, camera movement and desired timing. For image-to-video, let the input still establish the visual scene and emphasize movement and temporal changes in the prompt."}},{"@type":"Question","name":"Is Runway Gen-4.5 cheaper than Gen-4 Turbo?","acceptedAnswer":{"@type":"Answer","text":"No. Runway Dev lists Gen-4.5 at 12 credits per second and Gen-4 Turbo at 5 credits per second. Gen-4 Turbo is the lower-cost choice for iterations; output quality should be judged on your own test prompts."}},{"@type":"Question","name":"Can I generate a 60-second video with one Gen-4.5 request?","acceptedAnswer":{"@type":"Answer","text":"Not through the standard 2–10-second clip-generation modes documented for Gen-4.5. Longer sequences require producing and editing or combining shorter shots."}},{"@type":"Question","name":"Can I export ProRes or HDR with Gen-4.5?","acceptedAnswer":{"@type":"Answer","text":"Runway documents optional professional output formats. ProRes or PNG sequence adds 5 credits per second; HDR or other 10-bit formats have a separate surcharge. Availability and pricing can depend on plan, output dimensions and format."}}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -37,11 +37,11 @@
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Runway Gen-4.5</span></nav>
         <p class="eyebrow">MODEL REFERENCE / RUNWAY</p>
-        <h1>Runway Gen-4.5<br><span>verified model reference.</span></h1>
-        <p>Runway API text-to-video and image-to-video model for cinematic camera motion, prompt-controlled shots and production video sequences.</p>
+        <h1>Runway Gen-4.5<br><span>Video model, pricing &amp; API.</span></h1>
+        <p>Runway Gen-4.5 is a video-generation model for text-to-video and image-to-video clips. Compare 2–10-second formats, 720p output, 12 credits/second pricing and the gen4.5 API.</p>
         <div class="collection-stats">
-          <div><strong>Not published</strong><span>context not published</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
+          <div><strong>2–10s</strong><span>clip duration</span></div>
+          <div><strong>720p</strong><span>standard resolution</span></div>
           <div><strong>2026-10-12</strong><span>last verified</span></div>
         </div>
       </section>
@@ -79,6 +79,123 @@
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
           </div>
         </section>
+
+        
+        <section class="model-deep-section" id="gen45-overview" data-runway-gen45-guide>
+          <div class="model-section-head"><p class="eyebrow">MODEL OVERVIEW</p><h2>What is Runway Gen-4.5?</h2></div>
+          <p><strong>Runway Gen-4.5 is a video-generation model</strong> that turns written directions into moving scenes or animates a supplied image. The model is designed for creators who want to direct the subject, camera movement and timing of short shots instead of relying on an undirected animation. It supports both <strong>text-to-video</strong> and <strong>image-to-video</strong> workflows in Runway's web app and developer tools.</p>
+          <p><strong>Quick answer:</strong> Runway documents 2–10-second clips, standard 720p output, 24 or 25 fps in the creator interface, and a base generation rate of 12 credits per second. The Runway Dev API model identifier is <code>gen4.5</code>. Video generation is billed by output duration, not language-model input/output tokens.</p>
+          <nav class="model-related-links" aria-label="Jump to Gen-4.5 details">
+            <a href="#gen45-pricing"><span>VIDEO PRICING</span><strong>Credits and example costs</strong><b>↗</b></a>
+            <a href="#gen45-modes"><span>VIDEO MODES</span><strong>Text-to-video vs image-to-video</strong><b>↗</b></a>
+            <a href="#gen45-api"><span>DEVELOPER API</span><strong>Model ID and code example</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="gen45-specifications">
+          <div class="model-section-head"><p class="eyebrow">TECHNICAL SPECIFICATIONS</p><h2>Runway Gen-4.5 specs: resolution, duration, FPS and formats.</h2><p>These are video-generation limits, not text-LLM context-window figures.</p></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL ID</span><h3><code>gen4.5</code></h3><p>The identifier to use in Runway's developer API and SDK.</p></article>
+            <article><span>CLIP LENGTH</span><h3>2–10 seconds</h3><p>Runway's standard Gen-4.5 creator workflow generates short clips; longer edited videos require multiple shots.</p></article>
+            <article><span>STANDARD OUTPUT</span><h3>720p video</h3><p>Runway's creator guide lists 24 fps and 25 fps frame-rate options. Upscaling and professional output formats are separate workflows.</p></article>
+            <article><span>TEXT-TO-VIDEO RATIOS</span><h3>16:9 and 9:16</h3><p>Use 1280×720 for landscape or 720×1280 for portrait in the documented text-only workflow.</p></article>
+            <article><span>IMAGE-TO-VIDEO RATIOS</span><h3>Six common formats</h3><p>16:9, 9:16, 1:1, 4:3, 3:4 and 21:9, including 960×960 square and 1584×672 ultra-wide formats. Consult current endpoint input limits for precise accepted pixel dimensions.</p></article>
+            <article><span>INPUT / OUTPUT</span><h3>Text + optional image → video</h3><p>Text-to-video begins with a written prompt; image-to-video animates a still image using a motion prompt. A token context-window or text output cap is not published for this service.</p></article>
+          </div>
+          <p>Source: <a href="https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5" target="_blank" rel="noopener noreferrer">Runway's Gen-4.5 creator specifications</a> and <a href="https://docs.dev.runwayml.com/assets/inputs/" target="_blank" rel="noopener noreferrer">Runway Dev input and aspect-ratio requirements</a>. Availability may differ between the web product and developer endpoints.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-pricing">
+          <div class="model-section-head"><p class="eyebrow">MODEL PRICING</p><h2>Runway Gen-4.5 pricing: credits and cost per video.</h2></div>
+          <p>Runway Dev charges <strong>12 credits per second</strong> for Gen-4.5. The developer portal sells credits at <strong>$0.01 each</strong>, making the base API equivalent <strong>$0.12 per second</strong>. The catalog's <strong>$7.20 per generated minute</strong> is only a unit conversion: a normal Gen-4.5 generation is a 2–10-second clip, not a one-minute output.</p>
+          <div class="model-capability-grid">
+            <article><span>2-SECOND CLIP</span><h3>24 credits ≈ $0.24</h3><p>Smallest listed standard clip duration. Formula: 2 seconds × 12 credits per second.</p></article>
+            <article><span>5-SECOND CLIP</span><h3>60 credits ≈ $0.60</h3><p>Useful baseline for testing camera movements and short product shots. Formula: 5 × 12 credits.</p></article>
+            <article><span>10-SECOND CLIP</span><h3>120 credits ≈ $1.20</h3><p>Upper end of the standard single-clip range. Formula: 10 × 12 credits.</p></article>
+          </div>
+          <p><strong>Important:</strong> these are developer API credit equivalents before taxes or extra format costs. Runway's creative-app subscription credits and Explore Mode operate under their own plan terms; don't treat an Unlimited web subscription as unlimited API usage.</p>
+          <p><strong>Optional formats:</strong> Runway Dev lists a ProRes/PNG-sequence surcharge of 5 credits per second, and a 10-bit/HDR surcharge starting at 20 credits per second (higher for outputs larger than four megapixels). These apply on top of the model's 12-credit base rate. Verify that the requested format is supported by your endpoint and account.</p>
+          <p>Official rates: <a href="https://docs.dev.runwayml.com/guides/pricing/" target="_blank" rel="noopener noreferrer">Runway Dev API pricing</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-modes">
+          <div class="model-section-head"><p class="eyebrow">VIDEO GENERATION MODES</p><h2>Runway Gen-4.5 text-to-video vs image-to-video.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>TEXT TO VIDEO</span><h3>Describe the entire shot</h3><p>Provide the subject, environment, action, framing, lighting and camera motion in words. Start here for exploring fresh concepts, scene designs and cinematic establishing shots without a reference image.</p><p><strong>Example prompt:</strong> A wide shot of a tram moving through a rainy neon-lit city at dusk. The camera tracks beside it as reflections glide across the wet pavement, then gently pushes toward the driver.</p></article>
+            <article><span>IMAGE TO VIDEO</span><h3>Animate a chosen first frame</h3><p>Upload or pass a still image to anchor the subject and composition. Then focus the written prompt on motion and timing: what changes, how the subject moves and how the camera behaves. This is useful for products, character continuity and art-directed shots.</p><p><strong>Example motion prompt:</strong> The camera makes a slow clockwise orbit around the bottle. Condensation droplets roll down the glass as the background lights softly drift out of focus.</p></article>
+          </div>
+          <p><strong>Prompting distinction:</strong> text-to-video needs visual and motion detail; image-to-video typically needs much less re-description of the supplied image and more instruction about movement. Runway's <a href="https://help.runwayml.com/hc/en-us/articles/42460036199443-Text-to-Video-Prompting-Guide" target="_blank" rel="noopener noreferrer">text-to-video guide</a> and <a href="https://help.runwayml.com/hc/en-us/articles/48324313115155-Image-to-Video-Prompting-Guide" target="_blank" rel="noopener noreferrer">image-to-video guide</a> explain both approaches.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-prompting">
+          <div class="model-section-head"><p class="eyebrow">PROMPT ENGINEERING</p><h2>How to write better Gen-4.5 prompts.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>Specify visible actions.</strong> Replace vague goals like “a dramatic video” with concrete subject movements, physical interactions and environmental changes. In text-to-video, establish the shot first; in image-to-video, use the supplied frame as the starting point.</p></div>
+            <div><span>02</span><p><strong>Direct the camera.</strong> Use film terms such as locked camera, dolly-in, orbit, overhead tracking or handheld movement, and specify direction and pacing. Avoid stacking several conflicting movements into a short clip.</p></div>
+            <div><span>03</span><p><strong>Give events a sequence.</strong> For more complex action, describe a clear beginning, transition and end. A 10-second shot has more room for multiple beats than a 2-second shot.</p></div>
+            <div><span>04</span><p><strong>Iterate one variable at a time.</strong> Keep the subject and framing fixed while testing a different camera path or motion speed; this makes failures easier to diagnose and helps you compare outputs.</p></div>
+            <div><span>05</span><p><strong>Use a clean reference frame.</strong> Image-to-video depends heavily on the input image's framing and subject clarity. Describe the desired animation directly instead of trying to rewrite the appearance of an already-defined scene.</p></div>
+          </div>
+          <p>These are practical workflow recommendations grounded in Runway's <a href="https://academy.runwayml.com/guides/prompting-guide" target="_blank" rel="noopener noreferrer">Gen-4.5 prompting academy</a> and <a href="https://help.runwayml.com/hc/en-us/articles/47313504791059-Camera-Terms-Prompts-Examples" target="_blank" rel="noopener noreferrer">camera-direction examples</a>. Results vary by scene, prompt and input frame.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-api">
+          <div class="model-section-head"><p class="eyebrow">RUNWAY DEVELOPER API</p><h2>How to use Gen-4.5 through the API.</h2></div>
+          <p>Runway's documented SDK and API use the exact model identifier <code>gen4.5</code>. Create an image-to-video task with a <code>promptImage</code> and a <code>promptText</code>; omit the image for text-only video generation. The generation endpoint creates an asynchronous task: collect the task ID and retrieve the completed output using the API or the SDK's waiting helper.</p>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>Set up Runway Dev:</strong> create an API project and store your secret in <code>RUNWAYML_API_SECRET</code>, never in browser-side source code.</p></div>
+            <div><span>02</span><p><strong>Pick the mode:</strong> use <code>model: "gen4.5"</code>, <code>promptText</code>, <code>duration</code> and <code>ratio</code>. For image-to-video, add <code>promptImage</code> with an accepted image URL or upload reference.</p></div>
+            <div><span>03</span><p><strong>Submit and monitor:</strong> POST to <code>/v1/image_to_video</code>, receive a task ID, and fetch the result when the task completes. Handle failures and retries in production rather than assuming synchronous output.</p></div>
+          </div>
+          <p><strong>Minimal text-to-video request:</strong></p>
+          <pre style="white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto"><code>curl -X POST https://api.dev.runwayml.com/v1/image_to_video \
+  -H "Authorization: Bearer $RUNWAYML_API_SECRET" \
+  -H "X-Runway-Version: 2024-11-06" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gen4.5",
+    "promptText": "A wide shot of clouds crossing snowy peaks. Slow dolly forward.",
+    "ratio": "1280:720",
+    "duration": 5
+  }'</code></pre>
+          <p>For image-to-video, supply a valid <code>promptImage</code> field as well. The request structure is based on Runway's <a href="https://docs.dev.runwayml.com/guides/using-the-api/" target="_blank" rel="noopener noreferrer">official API quickstart</a>. Validate output sizes, account access and current API-version requirements before deploying.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-comparisons">
+          <div class="model-section-head"><p class="eyebrow">ALTERNATIVES AND TRADE-OFFS</p><h2>Gen-4.5 vs Gen-4 Turbo: cost and workflow.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>RUNWAY GEN-4.5</span><h3>12 credits per second</h3><p>Choose when you want to test Runway's newer prompt-adherence and complex motion capabilities, with both text-to-video and image-to-video options.</p></article>
+            <article><span>RUNWAY GEN-4 TURBO</span><h3>5 credits per second</h3><p>A lower-cost Runway alternative for rapid image-to-video iterations and simpler creative experiments. Gen-4 Turbo is not a direct substitute for all Gen-4.5 modes; compare each mode and use case before selecting.</p></article>
+          </div>
+          <p>At 5 seconds, base Runway Dev pricing works out to approximately <strong>$0.60 for Gen-4.5</strong> or <strong>$0.25 for Gen-4 Turbo</strong>. This is a price comparison, not a claim about measured visual quality. For other vendors, explore the <a href="/models/kling-3-0/">Kling 3.0 model reference</a> or the <a href="/compare/">SXF model comparison hub</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-use-cases">
+          <div class="model-section-head"><p class="eyebrow">PRACTICAL APPLICATIONS</p><h2>Best use cases and limitations of Runway Gen-4.5.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MARKETING</span><h3>Short campaign footage</h3><p>Create controlled product shots, atmosphere clips and pre-production concepts where camera movement and visual style are important.</p></article>
+            <article><span>FILM AND DESIGN</span><h3>Storyboards and previsualization</h3><p>Explore camera moves, scene pacing and alternative shots before committing to a production plan or combining clips in an editor.</p></article>
+            <article><span>CREATOR WORKFLOWS</span><h3>Animate art-directed images</h3><p>Start from a designed still frame and test one motion concept at a time, preserving the look established by the reference image.</p></article>
+          </div>
+          <p><strong>Know the limits:</strong> standard generations are short clips; individual outputs are not complete feature-length scenes. Complex scenes may require iteration and editing. Creative-app plan access is separate from API usage, and advanced export options carry additional conditions or costs. Runway's creator guide publishes video output settings, but not an LLM-style context window or knowledge cutoff.</p>
+        </section>
+
+        <section class="model-deep-section" id="gen45-faq">
+          <div class="model-section-head"><p class="eyebrow">COMMON QUESTIONS</p><h2>Runway Gen-4.5 FAQs.</h2></div>
+          <div class="model-caveat-list">
+            <div><span>01</span><p><strong>What is Runway Gen-4.5?</strong> Runway Gen-4.5 is Runway's video-generation model for making short clips from text prompts or a reference image plus a motion prompt. Its strengths include camera direction, multi-action prompts, and visual continuity.</p></div>
+            <div><span>02</span><p><strong>How much does Runway Gen-4.5 cost?</strong> Runway Dev lists 12 credits per generated second. At $0.01 per developer API credit, a 5-second clip costs 60 credits ($0.60), and a 10-second clip costs 120 credits ($1.20), before taxes or optional output-format charges. Creative-app plan billing is separate.</p></div>
+            <div><span>03</span><p><strong>What is the Runway Gen-4.5 API model ID?</strong> Use gen4.5 in Runway's API or SDK. The documented image-to-video endpoint also accepts text-to-video requests when promptImage is omitted.</p></div>
+            <div><span>04</span><p><strong>Does Gen-4.5 support text-to-video and image-to-video?</strong> Yes. Text-to-video accepts a written scene and motion description. Image-to-video uses an input still image to define appearance and composition, with text describing how the image should animate.</p></div>
+            <div><span>05</span><p><strong>What video durations and resolution does Gen-4.5 support?</strong> Runway's creator documentation lists 2 to 10 seconds, a standard 720p output and 24 or 25 frames per second in the web app. Aspect-ratio options depend on the mode.</p></div>
+            <div><span>06</span><p><strong>What aspect ratios are available for Gen-4.5?</strong> Runway lists 16:9 and 9:16 for text-to-video, while image-to-video supports landscape, portrait, square and widescreen formats, including 16:9, 9:16, 1:1, 4:3, 3:4 and 21:9.</p></div>
+            <div><span>07</span><p><strong>How should I write a Gen-4.5 prompt?</strong> For text-to-video, describe the subject, setting, action, camera movement and desired timing. For image-to-video, let the input still establish the visual scene and emphasize movement and temporal changes in the prompt.</p></div>
+            <div><span>08</span><p><strong>Is Runway Gen-4.5 cheaper than Gen-4 Turbo?</strong> No. Runway Dev lists Gen-4.5 at 12 credits per second and Gen-4 Turbo at 5 credits per second. Gen-4 Turbo is the lower-cost choice for iterations; output quality should be judged on your own test prompts.</p></div>
+            <div><span>09</span><p><strong>Can I generate a 60-second video with one Gen-4.5 request?</strong> Not through the standard 2–10-second clip-generation modes documented for Gen-4.5. Longer sequences require producing and editing or combining shorter shots.</p></div>
+            <div><span>10</span><p><strong>Can I export ProRes or HDR with Gen-4.5?</strong> Runway documents optional professional output formats. ProRes or PNG sequence adds 5 credits per second; HDR or other 10-bit formats have a separate surcharge. Availability and pricing can depend on plan, output dimensions and format.</p></div>
+          </div>
+        </section>
+
 
         <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Official Runway Dev API model ID is gen4.5, usable for both text-to-video and image-to-video requests.</p></div><div><span>02</span><p>Runway developer price: 12 credits per generated second and $0.01 per purchased API credit, equivalent to $0.12 per second or $7.20 per minute before sales tax. The catalog displays the one-minute equivalent, NOT a charge for a fixed video.</p></div><div><span>03</span><p>Runway creative app subscriptions and Explore Mode are not the same as Developer API billing. Professional/HDR formats add surcharges (e.g. +5 or +20 credits/second).</p></div><div><span>04</span><p>Official creator guide documents 2–10 second clips for standard text/image-to-video modes. LLM context-window and token max-output fields do not apply.</p></div></div></section>
 
