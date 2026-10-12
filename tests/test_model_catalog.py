@@ -40,4 +40,18 @@ assert all(
     for m in catalog["models"]
 ), "Calculator-eligible models require official Standard pricing"
 
+# Previously shared guide links must resolve to unique, indexable model references.
+for model_id, expected_route in {
+    "claude-sonnet-5": "/models/claude-sonnet-5/",
+    "claude-haiku-4-5-20251001": "/models/claude-haiku-4-5/",
+}.items():
+    model = next(row for row in catalog["models"] if row["model_id"] == model_id)
+    assert model["sxf_url"] == expected_route, f"{model_id}: expected dedicated page"
+    assert model.get("page_template") == "catalog-reference", f"{model_id}: missing page generator"
+    html_path = ROOT / expected_route.lstrip("/") / "index.html"
+    assert html_path.exists(), f"{model_id}: generated HTML file missing"
+    html = html_path.read_text(encoding="utf-8")
+    assert f'<link rel="canonical" href="https://sxf.si{expected_route}"' in html, f"{model_id}: canonical mismatch"
+    assert 'data-model-history' in html, f"{model_id}: missing verified history"
+
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")
