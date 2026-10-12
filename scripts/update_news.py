@@ -23,6 +23,7 @@ from open_source_signals import select_open_source_signals
 from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 from gemini_live_extended_page import enrich_gemini_live_extended_page
 from runway_gen45_model_page import enrich_runway_gen45_page
+from flux2_max_model_page import enrich_flux2_max_page
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -5273,6 +5274,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_gemini_live_extended_page(page)
     if model_id == "gen4.5":
         page = enrich_runway_gen45_page(page)
+    if model_id == "flux-2-max":
+        page = enrich_flux2_max_page(page)
     if "data-what-changed" not in page:
         page = inject_before_main_end(
             page,
