@@ -1494,7 +1494,7 @@ def compare_decision_items(model_ids):
         items.append(("Direct token cost", text))
     else:
         unavailable = [model["model"] for model in models if not model_has_official_paid_pricing(model)]
-        items.append(("Direct token cost", "These specialist modalities do not have a directly comparable text-token cost. Check model-specific image, video, credit and service-token pricing instead."))
+        items.append(("Direct token cost", "These specialist modalities do not have a directly comparable text-token cost. Check model-specific image, video, credit and service-token pricing instead." if any("image-generation" in m.get("capabilities", []) or "video-generation" in m.get("capabilities", []) for m in models) else f'Direct Standard token-cost comparison is unavailable because {", ".join(unavailable)} does not have a calculator-eligible provider-published paid rate in the SXF catalog.'))
 
     left_output = left.get("max_output")
     right_output = right.get("max_output")
