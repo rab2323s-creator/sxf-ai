@@ -2165,6 +2165,19 @@ def main():
     from sitemap_lastmod import validate_sitemap_state
     validate_sitemap_state(ROOT / "sitemap.xml", BASE)
 
+    # Ensure the guide still answers the direct search intent in five scannable steps.
+    agent_guide = (ROOT / "guides" / "ai-agent-evaluation-checklist" / "index.html").read_text(encoding="utf-8")
+    quick = re.search(r'<section class="guide-answer shell" id="answer"[^>]*>(.*?)</section>', agent_guide, re.S)
+    if not quick or '<h2 id="evaluation-quick-answer-title">How to Evaluate an AI Agent Before Production</h2>' not in quick.group(1):
+        fail("Agent evaluation guide is missing its direct-answer introduction")
+    quick_html = quick.group(1)
+    quick_steps = re.search(r'<ol class="ae-quick-steps">(.*?)</ol>', quick_html, re.S)
+    if not quick_steps or quick_steps.group(1).count("<li>") != 5:
+        fail("Agent evaluation quick answer must contain exactly five actionable steps")
+    for fragment in set(re.findall(r'href="#([^"]+)"', quick_html)):
+        if f'id="{fragment}"' not in agent_guide and f"id='{fragment}'" not in agent_guide:
+            fail(f"Broken evaluation quick-answer anchor: #{fragment}")
+
     core=[ROOT/"index.html",ROOT/"about"/"index.html",ROOT/"signals"/"index.html",ROOT/"topics"/"index.html",ROOT/"brief"/"index.html"]
     core += [ROOT/x/"index.html" for x in ("models","tools","research","open-source")]
     core.append(ROOT/"models"/"pricing"/"index.html")
