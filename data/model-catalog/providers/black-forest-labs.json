@@ -81,6 +81,167 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "FLUX.2",
+      "model": "FLUX.2 Klein 9B",
+      "model_id": "flux-2-klein-9b",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs fast, compact 9B image generation and editing model with open weights and high-throughput API.",
+      "notes": [
+        "Official BFL API endpoint is POST /v1/flux-2-klein-9b. The model's weights are available with license terms; open weights do NOT imply unrestricted commercial usage.",
+        "BFL API published price: $0.015 for the first OUTPUT megapixel, +$0.002 for each additional output MP, +$0.002 per reference-image input MP. Displayed $0.015 is a STARTING first-MP rate.",
+        "Image pixels are rounded to billed megapixels; reference images and resolution can increase per-result charges. 4K and multi-image workflows require checking configuration caps.",
+        "Useful for low-latency imagery and on-premise experimentation; quality comparisons must use real prompts."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.015
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-2-klein-9b/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api.bfl.ai/docs",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://bfl.ai/models/flux-2-klein"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api.bfl.ai/docs",
+          "context_window": "https://api.bfl.ai/docs",
+          "max_output": "https://api.bfl.ai/docs",
+          "knowledge_cutoff": "https://api.bfl.ai/docs",
+          "reasoning": "https://api.bfl.ai/docs",
+          "modalities": "https://api.bfl.ai/docs",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://api.bfl.ai/docs",
+          "lifecycle": "https://api.bfl.ai/docs",
+          "capabilities": "https://api.bfl.ai/docs"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "FLUX.2",
+      "model": "FLUX.2 Pro",
+      "model_id": "flux-2-pro",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs professional mid-range FLUX.2 image generator/editor balancing high visual quality and API cost.",
+      "notes": [
+        "Official BFL API endpoint is POST /v1/flux-2-pro. Proprietary hosted model; access through BFL API.",
+        "BFL published price is $0.03 for the first output megapixel, plus $0.015 per additional output MP and $0.015 per input reference-image MP. Displayed $0.03 is a STARTING rate and not a universal all-resolution image price.",
+        "Compare Pro vs Klein 9B and Max at identical resolution and reference input counts. Unverified quality superiority or latency guarantees are not claimed."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-2-pro/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://api.bfl.ai/docs",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://help.bfl.ai/articles/8446125349-quickstart-guide"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://api.bfl.ai/docs",
+          "context_window": "https://api.bfl.ai/docs",
+          "max_output": "https://api.bfl.ai/docs",
+          "knowledge_cutoff": "https://api.bfl.ai/docs",
+          "reasoning": "https://api.bfl.ai/docs",
+          "modalities": "https://api.bfl.ai/docs",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://api.bfl.ai/docs",
+          "lifecycle": "https://api.bfl.ai/docs",
+          "capabilities": "https://api.bfl.ai/docs"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

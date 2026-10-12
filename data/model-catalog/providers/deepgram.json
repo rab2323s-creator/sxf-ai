@@ -1,0 +1,161 @@
+{
+  "provider": "Deepgram",
+  "models": [
+    {
+      "family": "Deepgram Nova",
+      "model": "Deepgram Nova-3",
+      "model_id": "nova-3",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Deepgram speech-to-text for recorded meetings, calls, noisy recordings, multilingual utterances and streaming captions.",
+      "notes": [
+        "Official Pay-As-You-Go pre-recorded monolingual Nova-3 rate is $0.0043 per audio minute; multilingual pre-recorded is $0.0052/minute.",
+        "Streaming Nova-3 monolingual has a limited-time promotional $0.0048/minute ($0.0077 regular), while multilingual streaming is currently $0.0058/minute ($0.0092 regular). These are separate prices and may change after the promotion.",
+        "Provider-native model argument model=nova-3 or nova-3-general and available domain options. This record represents general Nova-3, NOT a medical/pharma specialist variant.",
+        "Optional paid add-ons, multi-channel billing and endpoint type must be verified for true workload costs; only base pre-recorded monolingual audio pricing is displayed."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.0043
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per pre-recorded MONOLINGUAL audio minute (streaming/multilingual differ)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/nova-3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.deepgram.com/docs/model",
+        "https://deepgram.com/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.deepgram.com/docs/model",
+          "context_window": "https://developers.deepgram.com/docs/model",
+          "max_output": "https://developers.deepgram.com/docs/model",
+          "knowledge_cutoff": "https://developers.deepgram.com/docs/model",
+          "reasoning": "https://developers.deepgram.com/docs/model",
+          "modalities": "https://developers.deepgram.com/docs/model",
+          "pricing": "https://deepgram.com/pricing",
+          "access": "https://developers.deepgram.com/docs/model",
+          "lifecycle": "https://developers.deepgram.com/docs/model",
+          "capabilities": "https://developers.deepgram.com/docs/model"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Deepgram Flux",
+      "model": "Deepgram Flux",
+      "model_id": "flux-general-en",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Deepgram low-latency speech recognition with integrated end-of-turn detection for interruptible English-language voice agents.",
+      "notes": [
+        "Official Pay-As-You-Go Flux English STREAMING rate is currently $0.0065/audio minute (limited-time promotional, regular $0.0077). Multilingual Flux variant is $0.0078/minute and is NOT represented by this model ID.",
+        "Provider-native API model argument model=flux-general-en, via the Flux speech-to-text streaming endpoint; includes real-time conversational turn detection.",
+        "Provider documentation describes integrated turn-taking and interrupt handling; practical latency and accuracy require task-specific testing.",
+        "Rate is a date-verified promotion and must be rechecked; any additional add-ons are excluded from the base rate."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.0065
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per streaming ENGLISH audio minute (promotional Pay As You Go)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/flux-general-en/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.deepgram.com/docs/flux",
+        "https://deepgram.com/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.deepgram.com/docs/flux",
+          "context_window": "https://developers.deepgram.com/docs/flux",
+          "max_output": "https://developers.deepgram.com/docs/flux",
+          "knowledge_cutoff": "https://developers.deepgram.com/docs/flux",
+          "reasoning": "https://developers.deepgram.com/docs/flux",
+          "modalities": "https://developers.deepgram.com/docs/flux",
+          "pricing": "https://deepgram.com/pricing",
+          "access": "https://developers.deepgram.com/docs/flux",
+          "lifecycle": "https://developers.deepgram.com/docs/flux",
+          "capabilities": "https://developers.deepgram.com/docs/flux"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

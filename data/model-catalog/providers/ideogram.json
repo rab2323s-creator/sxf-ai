@@ -1,0 +1,164 @@
+{
+  "provider": "Ideogram",
+  "models": [
+    {
+      "family": "Ideogram Image",
+      "model": "Ideogram 4.0",
+      "model_id": "ideogram-v4",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Ideogram 4.0 high-quality image creation with detailed prompt control, brand-style typography, designs and creative editing.",
+      "notes": [
+        "Ideogram API lists $0.03 per image for Ideogram 4.0 Turbo generation. DEFAULT is $0.06 and QUALITY $0.10 per image. This catalog rate is TURBO ONLY; changing speed or editing endpoints changes price.",
+        "Provider's canonical API endpoint is POST /v1/ideogram-v4/generate. Rendering_speed=FLASH is currently not accepted at this version; Turbo, Default and Quality are the published modes.",
+        "Prices apply to single generated output images; custom models, special output resolutions and other operations may have distinct rates.",
+        "Supported high-resolution and transparent-background variants have separate endpoints and settings."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/ideogram-v4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "https://ideogram.ai/pricing/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "pricing": "https://ideogram.ai/pricing/",
+          "access": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "lifecycle": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+          "capabilities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Ideogram Image",
+      "model": "Ideogram 3.0",
+      "model_id": "ideogram-v3",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Ideogram's established 3.0 image generation/editing model for design, accurate typography, character references and remix workflows.",
+      "notes": [
+        "Ideogram 3.0 API TURBO output costs $0.03 per image. DEFAULT $0.06, QUALITY $0.09. Prices vary further for character reference and editing endpoints.",
+        "Native official API endpoint is POST /v1/ideogram-v3/generate; provider documentation describes the model as a prior stable generation relative to Ideogram 4.0.",
+        "Do not compare one per-image Turbo rate against an image-token or high-quality-output rate as if the configurations were equal."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.03
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/ideogram-v3/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "https://ideogram.ai/pricing/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "pricing": "https://ideogram.ai/pricing/",
+          "access": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "lifecycle": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+          "capabilities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

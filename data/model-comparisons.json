@@ -572,6 +572,210 @@
           "detail": "These are official product capabilities, not an SXF image benchmark. Reproduce tasks with the same style, resolution and source assets to decide."
         }
       ]
+    },
+    {
+      "slug": "gpt-image-2-vs-gpt-image-2-5-flare",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-image-2",
+        "gpt-image-2.5-flare"
+      ],
+      "title": "GPT-Image-2 vs GPT-Image-2.5 Flare",
+      "kicker": "Image generation · budget vs premium",
+      "summary": "Compare GPT-Image-2 vs GPT-Image-2.5 Flare using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "gpt",
+        "gpt"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Official IMAGE-token pricing",
+          "detail": "GPT-Image-2 Standard image tokens are $4 input, $1 cached and $15 output per million. Flare costs $8 input, $2 cached and $30 output. Both separately charge prompt TEXT tokens; equal images may consume different tokens."
+        },
+        {
+          "title": "Choose by production needs",
+          "detail": "GPT-Image-2 emphasizes accessible image generation and editing. Flare emphasizes fast high-quality image output within the 2.5 line."
+        },
+        {
+          "title": "Measure effective per-image cost",
+          "detail": "Image resolution, number of references, input text and quality settings change the final bill; multiplying token rates alone is insufficient."
+        }
+      ]
+    },
+    {
+      "slug": "ideogram-4-vs-ideogram-3",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "ideogram-v4",
+        "ideogram-v3"
+      ],
+      "title": "Ideogram 4.0 vs Ideogram 3.0",
+      "kicker": "Generational image design",
+      "summary": "Compare Ideogram 4.0 vs Ideogram 3.0 using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "ideogram",
+        "ideogram"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Official TURBO prices",
+          "detail": "Both providers list $0.03 for a single TURBO output image. Ideogram 4.0 DEFAULT is $0.06 and QUALITY $0.10; Ideogram 3.0 DEFAULT is $0.06 and QUALITY $0.09."
+        },
+        {
+          "title": "Creative controls",
+          "detail": "Ideogram 4.0 supports structured prompting and newer layouts for text-centric design; Ideogram 3.0 has a stable established Remix, Edit and Reframe API contract."
+        },
+        {
+          "title": "No synthetic quality winner",
+          "detail": "Run identical logo, poster, typography and editing prompts across matched speed and size settings before deciding."
+        }
+      ]
+    },
+    {
+      "slug": "runway-gen-4-5-vs-kling-3-0",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gen4.5",
+        "kling-3.0"
+      ],
+      "title": "Runway Gen-4.5 vs Kling VIDEO 3.0",
+      "kicker": "Professional AI video creation",
+      "summary": "Compare Runway Gen-4.5 vs Kling VIDEO 3.0 using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "gen4.5",
+        "kling"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Comparable output duration",
+          "detail": "Runway Gen-4.5 is documented for 2–10-second text/image-to-video clips and its API uses 12 developer credits/second. Kling 3.0 creator docs describe 3–15-second clips and varying credits by mode."
+        },
+        {
+          "title": "Native billing",
+          "detail": "Runway API sells credits at $0.01, resulting in $0.12/second for standard Gen-4.5 video, excluding HDR surcharges. Kling credits are consumer-plan references and must not be falsely converted into a universal USD API figure."
+        },
+        {
+          "title": "Production tradeoffs",
+          "detail": "Test camera movement, temporal consistency, prompt adherence, audio modes and output resolution on your real storyboard."
+        }
+      ]
+    },
+    {
+      "slug": "deepgram-nova-3-vs-elevenlabs-scribe-v2",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "nova-3",
+        "scribe_v2"
+      ],
+      "title": "Deepgram Nova-3 vs ElevenLabs Scribe v2",
+      "kicker": "Multilingual audio transcription",
+      "summary": "Compare Deepgram Nova-3 vs ElevenLabs Scribe v2 using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "nova",
+        "scribe_v2"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Audio-time pricing",
+          "detail": "Deepgram Nova-3 lists pre-recorded MONOLINGUAL $0.0043/min ($0.258/hour). ElevenLabs Scribe v2 lists $0.22/hour. Different add-on policies and multilingual modes affect effective cost."
+        },
+        {
+          "title": "Language and diarization",
+          "detail": "Compare language support, accuracy on calls and accents, word-level timing, speaker diarization and keyterm prompting for each workflow."
+        },
+        {
+          "title": "Different modes",
+          "detail": "Nova-3 supports prerecorded and streaming with separate rate cards; Scribe v2 is focused on file/batch STT, and ElevenLabs has Scribe Realtime for streaming."
+        }
+      ]
+    },
+    {
+      "slug": "deepgram-flux-vs-scribe-realtime-v2",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "flux-general-en",
+        "scribe_v2_realtime"
+      ],
+      "title": "Deepgram Flux vs Scribe v2 Realtime",
+      "kicker": "Voice-agent streaming transcription",
+      "summary": "Compare Deepgram Flux vs Scribe v2 Realtime using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "flux",
+        "scribe_v2_realtime"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Published native prices",
+          "detail": "Deepgram Flux English uses a time-limited $0.0065/min streaming rate; Scribe v2 Realtime lists $0.39/hour (also $0.0065/min). Provider promotions and voice-activity policies may change real costs."
+        },
+        {
+          "title": "Turn detection",
+          "detail": "Flux offers speech recognition plus integrated end-of-turn detection. Scribe Realtime offers partial/final transcripts and VAD-assisted commits via WebSocket."
+        },
+        {
+          "title": "Latency decisions",
+          "detail": "Compare end-of-turn latency, interruption accuracy, reliability and accented/multilingual speech using your own agent sessions."
+        }
+      ]
+    },
+    {
+      "slug": "flux-2-pro-vs-flux-2-klein-9b",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "flux-2-pro",
+        "flux-2-klein-9b"
+      ],
+      "title": "FLUX.2 Pro vs Klein 9B",
+      "kicker": "Quality, speed and image economics",
+      "summary": "Compare FLUX.2 Pro vs Klein 9B using official sources, cost units, supported workflows and provider access, with no fabricated benchmark winner.",
+      "tags": [
+        "pricing",
+        "specialist",
+        "compare",
+        "flux",
+        "flux"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "BFL first-MP prices",
+          "detail": "FLUX.2 Pro starts at $0.03 per first output MP; Klein 9B at $0.015. Additional output and reference-image megapixels have separate model-specific rates."
+        },
+        {
+          "title": "Hosting options",
+          "detail": "FLUX.2 Klein 9B is available as licensed open weights and an API. FLUX.2 Pro is offered as a hosted BFL API model."
+        },
+        {
+          "title": "Workload-specific choice",
+          "detail": "Evaluate design fidelity, speed and edit consistency at identical resolutions. Prices here refer to first output MP, not fixed costs for all image sizes."
+        }
+      ]
     }
   ]
 }

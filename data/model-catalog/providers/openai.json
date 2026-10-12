@@ -1725,6 +1725,87 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "GPT Image 2",
+      "model": "GPT-Image-2",
+      "model_id": "gpt-image-2",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "OpenAI fast, high-fidelity image generation and editing for production creatives, reference images and flexible output sizes.",
+      "notes": [
+        "OpenAI Standard image-token rates are $4.00 input, $1.00 cached image input, $15.00 generated IMAGE output per 1M tokens; TEXT prompt input is separately billed $2.50 and $0.625 cached per 1M TEXT tokens.",
+        "This model is not GPT-Image-2.5 Sunburst or Flare. All picture costs vary with image quality, resolution, prompt text and reference usage; do not interpret image-token rates as fixed prices per output image.",
+        "Text-only calculator excluded because image output token consumption is a different price dimension."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 4,
+            "cached_input": 1,
+            "output": 15
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million IMAGE tokens (text input separate)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/gpt-image-2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }
