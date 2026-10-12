@@ -6,6 +6,8 @@ on:
       - "data/model-catalog/providers/**"
       - "data/model-catalog/manifest.json"
       - "scripts/build_model_catalog.py"
+      - "scripts/update_news.py"
+      - "scripts/validate_site.py"
   workflow_dispatch:
 permissions:
   contents: write
