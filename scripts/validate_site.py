@@ -2151,6 +2151,16 @@ def main():
         if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex',html,re.I):
             fail(f"noindex URL in sitemap: {loc}")
 
+    # Keep indexable evergreen research and guide URLs discoverable across feed rebuilds.
+    for route in (
+        "/research/ai-agent-reliability/",
+        "/research/ai-agent-memory/",
+        "/research/ai-coding-agent-architecture/",
+        "/guides/claude-sonnet-github-copilot/",
+    ):
+        if BASE + route not in seen:
+            fail(f"priority evergreen page missing from sitemap: {route}")
+
     core=[ROOT/"index.html",ROOT/"about"/"index.html",ROOT/"signals"/"index.html",ROOT/"topics"/"index.html",ROOT/"brief"/"index.html"]
     core += [ROOT/x/"index.html" for x in ("models","tools","research","open-source")]
     core.append(ROOT/"models"/"pricing"/"index.html")
