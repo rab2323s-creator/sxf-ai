@@ -87,6 +87,8 @@
         <option value="tool-use">Tool use</option>
         <option value="image-generation">Image generation</option>
         <option value="video-generation">Video generation</option>
+        <option value="music-generation">Music generation</option>
+        <option value="tts">Text to speech</option>
         <option value="ocr">OCR</option>
         <option value="transcription">Transcription</option>
         <option value="rerank">Reranking</option>

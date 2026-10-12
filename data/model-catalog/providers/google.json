@@ -1287,6 +1287,171 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "Gemini Omni",
+      "model": "Gemini Omni Flash 1.1",
+      "model_id": "gemini-omni-1.1-flash",
+      "context_window": 1048576,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "positioning": "Google stable multimodal conversational video-generation and editing model with video extension, upscaling and iteration through the Interactions API.",
+      "notes": [
+        "Standard paid Gemini API input rate is $1.50 per 1 million input tokens across text/image/video/audio. Generated VIDEO output is $17.50 per 1 million VIDEO tokens; text output, when applicable, is $9.00 per 1 million text tokens.",
+        "Google specifies 5,792 tokens per second of 720p video, equivalent to approximately $0.10/second at the published Standard video-output rate. Other resolutions and input usage alter total cost.",
+        "Supports 3–10-second video output; video edit/extension inputs are limited to 10 seconds. The 1,048,576 context token window describes input capacity, not an output-video token quota.",
+        "Use provider-native ID gemini-omni-1.1-flash; Gemini Omni Flash is the product name. Text-only cost calculator disabled for mixed video/media pricing."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 1.5,
+            "output": 17.5
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "video",
+        "video-generation",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million input / VIDEO output tokens (text output separate)"
+      },
+      "sxf_url": "/models/gemini-omni-1-1-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Lyria",
+      "model": "Lyria 3.5",
+      "model_id": "lyria-3.5",
+      "context_window": 131072,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "audio",
+          "text"
+        ]
+      },
+      "positioning": "Google's full-song music generation model for high-fidelity MP3 audio and optional lyrics, with structural coherence across verses, choruses and bridges.",
+      "notes": [
+        "Google Gemini API publishes $0.08 per generated full song, billed per request (Standard paid tier); no free API tier. This is NOT a token or per-second price.",
+        "Native music generation model ID: lyria-3.5. Supports text and image prompts; output includes 44.1kHz stereo MP3 audio and lyrics.",
+        "Song length can be a couple of minutes and is guided by the prompt. There is no separate publicly specified generative max_output token count applicable to finished audio.",
+        "Music generation is its own task filter; it does not participate in generative text token pricing estimates."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "request": 0.08
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "music-generation"
+      ],
+      "pricing_basis": {
+        "meter": "requests",
+        "quantity": 1,
+        "dimensions": [
+          "request"
+        ],
+        "display_unit": "per generated full song (Standard paid API)"
+      },
+      "sxf_url": "/models/lyria-3-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/music-generation"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

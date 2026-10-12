@@ -420,6 +420,158 @@
           "detail": "Kling exposes a developer text-to-video/kling-3.0 endpoint. Seedance 2.0 is available as dreamina-seedance-2-0-260128 on BytePlus ModelArk, subject to deployment and account availability."
         }
       ]
+    },
+    {
+      "slug": "gpt-image-2-5-sunburst-vs-flare",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gpt-image-2.5-sunburst",
+        "gpt-image-2.5-flare"
+      ],
+      "title": "GPT-Image-2.5 Sunburst vs Flare",
+      "kicker": "OpenAI image generation",
+      "summary": "Compare Sunburst and Flare on supported image workflow, published modality-specific token prices, editing capability and performance claims without assuming equal output token consumption.",
+      "tags": [
+        "openai",
+        "image-generation",
+        "image-editing",
+        "speed",
+        "pricing"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Published Image API token rates",
+          "detail": "Both models publish $8 image input, $2 cached image input and $30 image output per million image tokens in Standard pricing. Prompt text charges are separate ($5 input and $1.25 cached per 1M text tokens)."
+        },
+        {
+          "title": "Different positioning",
+          "detail": "OpenAI describes Flare as its fastest model for high-quality everyday images. Sunburst targets high-fidelity image generation and precise editing. No independent SXF speed or quality benchmark is claimed."
+        },
+        {
+          "title": "Compare actual image cost",
+          "detail": "Equal token rates do not imply identical cost per picture: generated image-token consumption varies with chosen output size, quality and model implementation."
+        },
+        {
+          "title": "Practical choice",
+          "detail": "Try Flare for speed-sensitive interactive iteration, and Sunburst for complex high-precision image editing; evaluate samples on the same prompt."
+        }
+      ]
+    },
+    {
+      "slug": "eleven-v4-vs-eleven-v4-turbo",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "eleven_v4",
+        "eleven_v4_turbo"
+      ],
+      "title": "Eleven v4 vs Eleven v4 Turbo",
+      "kicker": "Speech quality vs realtime",
+      "summary": "Compare ElevenLabs flagship expressive text-to-speech variants on use cases, supported languages, latency claims, streaming and credit-based billing.",
+      "tags": [
+        "elevenlabs",
+        "tts",
+        "voice-agents",
+        "latency",
+        "multilingual"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Delivery priority",
+          "detail": "Eleven v4 targets expressive narration, audiobooks, long-form dialogue and voice cloning. Eleven v4 Turbo targets responsive interactive applications and agents."
+        },
+        {
+          "title": "Provider latency claim",
+          "detail": "ElevenLabs quotes about 100 ms median inference latency for v4 Turbo. This is a vendor-published figure, not an independently measured end-to-end latency."
+        },
+        {
+          "title": "Billing clarity",
+          "detail": "ElevenLabs describes a character/credit-based TTS service with subscription-specific pricing. No universal verified USD/1K-character API figure is asserted for these new variants."
+        },
+        {
+          "title": "Language coverage",
+          "detail": "The Eleven v4 family supports 90+ languages including Arabic. Check voice availability, tags and agent integration for your exact task."
+        }
+      ]
+    },
+    {
+      "slug": "gemini-omni-flash-vs-kling-3-0",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gemini-omni-1.1-flash",
+        "kling-3.0"
+      ],
+      "title": "Gemini Omni Flash vs Kling VIDEO 3.0",
+      "kicker": "Video generation and editing",
+      "summary": "Compare Google conversational video editing and Kling narrative video generation on input modes, video duration and incompatible per-token versus credit pricing.",
+      "tags": [
+        "google",
+        "kling",
+        "video-generation",
+        "editing",
+        "credits"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Conversational editing",
+          "detail": "Gemini Omni 1.1 Flash supports iterative video editing and extensions via Google Interactions API; Kling VIDEO 3.0 emphasizes creative text/image-to-video, multi-shot sequencing and optional audio."
+        },
+        {
+          "title": "Published duration",
+          "detail": "Gemini Omni Flash supports 3–10 seconds of video output, while Kling 3.0 product documentation references 3–15 seconds for supported modes. Actual constraints depend on configuration."
+        },
+        {
+          "title": "Do not compare unlike rates",
+          "detail": "Gemini Omni quotes $17.50 per 1M video output tokens (about $0.10/sec at 720p) and separate input costs; Kling publishes consumer-plan Credits/second but not a verified equivalent USD API rate."
+        },
+        {
+          "title": "Best evaluation",
+          "detail": "Compare storyboard consistency, editability, motion, sound and total clip cost on identical workflow settings."
+        }
+      ]
+    },
+    {
+      "slug": "flux-2-max-vs-nano-banana-pro",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "flux-2-max",
+        "gemini-3-pro-image"
+      ],
+      "title": "FLUX.2 Max vs Nano Banana Pro",
+      "kicker": "Premium image creation",
+      "summary": "Compare premium image generation and image editing for brand consistency, output pricing units, text rendering and production workflows.",
+      "tags": [
+        "black-forest-labs",
+        "google",
+        "image-generation",
+        "image-editing",
+        "pricing"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Different cost units",
+          "detail": "FLUX.2 Max starts at $0.07 for the first output MP, adds $0.03 per additional MP and $0.03 per reference-input MP. Nano Banana Pro lists $0.134 per 1K/2K image and $0.24 per 4K image (output-only estimates)."
+        },
+        {
+          "title": "Workflow fit",
+          "detail": "FLUX.2 Max focuses on product visualization, reference consistency, layout and grounded visual generation. Nano Banana Pro focuses on precise typography, product mockups and complex image edits."
+        },
+        {
+          "title": "Hidden input charges",
+          "detail": "Image references and output resolutions affect FLUX charges; Nano Banana input text, image tokens and grounding can add charges. A universal per-image winner is not supported."
+        },
+        {
+          "title": "No invented quality score",
+          "detail": "These are official product capabilities, not an SXF image benchmark. Reproduce tasks with the same style, resolution and source assets to decide."
+        }
+      ]
     }
   ]
 }
