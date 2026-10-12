@@ -926,6 +926,185 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "Gemini 3.8",
+      "model": "Gemini 3.8 Live",
+      "model_id": "gemini-3.8-live",
+      "context_window": 131072,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "interleaved reasoning",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "positioning": "Google's stable low-latency native-audio Live API model for voice agents with asynchronous function calling and multimodal inputs.",
+      "notes": [
+        "Shown Standard prices cover TEXT tokens only: $0.75 input and $4.50 output per 1M text tokens.",
+        "AUDIO is billed at $3.00 input and $12.00 output per 1M audio tokens (Google also publishes approximate per-minute equivalents). IMAGE/VIDEO inputs cost $1.00 per 1M tokens.",
+        "A free tier is listed by Google, but the catalog displays the paid-tier Standard text rates; mixed-modality voice costs are not comparable to text-only estimates.",
+        "Google documents no supported context caching or Batch API for this model. Its interleaved reasoning is designed to avoid reasoning-induced delay."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 0.75,
+            "output": 4.5
+          }
+        ]
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million TEXT tokens (audio/video separate)"
+      },
+      "sxf_url": "/models/gemini-3-8-live/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual field-by-field primary-source verification of official model documentation and published Standard prices",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Gemini Embedding",
+      "model": "Gemini Embedding 2",
+      "model_id": "gemini-embedding-2",
+      "context_window": 8192,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "embedding"
+        ]
+      },
+      "positioning": "Google stable multimodal embedding model for semantic search and cross-modal retrieval across text, images, audio, video and PDFs.",
+      "notes": [
+        "Displayed Standard price ($0.20 per 1M tokens) applies to TEXT embedding inputs only. Embeddings have no generative output-token charge.",
+        "Google separately bills IMAGE input at $0.45 per 1M image tokens ($0.00012/image), AUDIO at $6.50 per 1M audio tokens ($0.00016/second), and VIDEO at $12.00 per 1M video tokens ($0.00079/frame).",
+        "Batch pricing differs: $0.10 text, $0.225 image, $3.25 audio and $6.00 video per 1M corresponding input tokens.",
+        "Output embedding dimensions are configurable 128–3072 (recommended 768, 1536 or 3072). Embedding 2 vectors are NOT directly compatible with Gemini Embedding 001 vectors; migration requires re-embedding existing documents.",
+        "The generic generative text-cost calculator excludes input-only embedding inference."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 0.2
+          }
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "video",
+        "audio",
+        "embeddings"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1 million TEXT input tokens (other media separate)"
+      },
+      "sxf_url": "/models/gemini-embedding-2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual field-by-field primary-source verification of official model documentation and published Standard prices",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

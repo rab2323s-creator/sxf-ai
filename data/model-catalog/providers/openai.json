@@ -1374,6 +1374,276 @@
         ],
         "display_unit": "per 1 million tokens"
       }
+    },
+    {
+      "family": "GPT Image 2.5",
+      "model": "GPT-Image-2.5 Sunburst",
+      "model_id": "gpt-image-2.5-sunburst",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "OpenAI high-fidelity image-generation and precise image-editing model for complex visual creation workflows.",
+      "notes": [
+        "This model generates image output, not text. Official Standard image-token rates are $8.00 input, $2.00 cached image input and $30.00 output per 1M image tokens.",
+        "Text prompt/input tokens are billed separately at $5.00 input and $1.25 cached per 1M text tokens; the displayed headline image-token rates do not include these text charges.",
+        "Image-token consumption varies by generation quality and size. No standalone image count price or token context/max output was claimed by the cited model page. The generic text token calculator excludes this model."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 8,
+            "cached_input": 2,
+            "output": 30
+          }
+        ]
+      },
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million IMAGE tokens (text input billed separately)"
+      },
+      "sxf_url": "/models/gpt-image-2-5-sunburst/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual field-by-field primary-source verification of official model documentation and published Standard prices",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "GPT Realtime",
+      "model": "GPT-Realtime-2.1",
+      "model_id": "gpt-realtime-2.1",
+      "context_window": 128000,
+      "max_output": 32000,
+      "knowledge_cutoff": "2024-09-30",
+      "reasoning": {
+        "type": "configurable reasoning effort",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "positioning": "OpenAI full-size realtime reasoning and tool-use model for responsive, interruptible production voice agents.",
+      "notes": [
+        "Displayed Standard token rates are TEXT ONLY: $4.00 input, $0.40 cached, and $24.00 output per 1M text tokens.",
+        "AUDIO Standard rates differ: $32.00 input, $0.40 cached input and $64.00 output per 1M audio tokens. IMAGE input is $5.00, cached $0.50 per 1M image tokens.",
+        "Mixed-modality realtime bills each modality separately; the generic text cost calculator must not be used to estimate full voice-session bills.",
+        "The model supports configurable reasoning effort, which can affect token usage and response latency."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 4,
+            "cached_input": 0.4,
+            "output": 24
+          }
+        ]
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million TEXT tokens (audio/image separate)"
+      },
+      "sxf_url": "/models/gpt-realtime-2-1/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual field-by-field primary-source verification of official model documentation and published Standard prices",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "GPT Realtime",
+      "model": "GPT-Realtime-2.1 Mini",
+      "model_id": "gpt-realtime-2.1-mini",
+      "context_window": 128000,
+      "max_output": 32000,
+      "knowledge_cutoff": "2024-09-30",
+      "reasoning": {
+        "type": "reasoning tokens",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "positioning": "Lower-cost, lower-latency distilled OpenAI realtime voice-agent model with reasoning and tool support.",
+      "notes": [
+        "Displayed Standard prices are TEXT ONLY: $0.60 input, $0.06 cached and $2.40 output per 1M text tokens.",
+        "AUDIO Standard prices: $10.00 input, $0.30 cached input and $20.00 output per 1M audio tokens. IMAGE input $0.80 and cached $0.08 per 1M image tokens.",
+        "For WebRTC, WebSocket or SIP voice sessions, text-only token pricing is not a reliable total-session estimate; the generic token calculator is disabled."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 0.6,
+            "cached_input": 0.06,
+            "output": 2.4
+          }
+        ]
+      },
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million TEXT tokens (audio/image separate)"
+      },
+      "sxf_url": "/models/gpt-realtime-2-1-mini/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual field-by-field primary-source verification of official model documentation and published Standard prices",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini"
+        }
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

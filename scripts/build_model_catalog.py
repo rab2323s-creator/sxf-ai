@@ -36,7 +36,7 @@ ALLOWED_PRICING_STATUSES = {
 ALLOWED_LIFECYCLE_STATUSES = {"current", "preview", "legacy", "deprecated"}
 ALLOWED_CAPABILITIES = {
     "general", "reasoning", "coding", "agents", "tool-use", "vision", "video", "audio",
-    "speech-to-speech", "transcription", "tts", "ocr", "embeddings", "rerank",
+    "image-generation", "speech-to-speech", "transcription", "tts", "ocr", "embeddings", "rerank",
     "moderation", "long-context",
 }
 ALLOWED_PRICING_METERS = {
