@@ -2804,6 +2804,201 @@
           }
         }
       }
+    },
+    "gemini-3.8-live": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_3c4f315209dc5d118934",
+      "snapshot_hash": "e499855610f9a0239d8b97e72f12dc3c12bf193ee6a8b680a6479b2091f15b98",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Live",
+        "context_window": 131072,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "interleaved reasoning",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.75,
+              "output": 4.5
+            }
+          ]
+        }
+      }
+    },
+    "gemini-embedding-2": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_62bf33bfc2691354d749",
+      "snapshot_hash": "4e020b792a148cf758f55a2a4f79ec5f0c7af62b8ba6cf4939693d0e5ee5ecea",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Embedding",
+        "model": "Gemini Embedding 2",
+        "context_window": 8192,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.2
+            }
+          ]
+        }
+      }
+    },
+    "gpt-image-2.5-sunburst": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_d864a46d6a78338b1c06",
+      "snapshot_hash": "3ce1d704b44755398318dec4a88c3c9fa92ef1b5b77d9b7e726efbb5474e42d3",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2.5",
+        "model": "GPT-Image-2.5 Sunburst",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 8,
+              "cached_input": 2,
+              "output": 30
+            }
+          ]
+        }
+      }
+    },
+    "gpt-realtime-2.1": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_a289f2e4c8c1a8acffd3",
+      "snapshot_hash": "d884f8377f1f0e6e048ac372861b18c1b7acaf84db50e677bef656fa2ef5a931",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-2.1",
+        "context_window": 128000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": {
+          "type": "configurable reasoning effort",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.4,
+              "output": 24
+            }
+          ]
+        }
+      }
+    },
+    "gpt-realtime-2.1-mini": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_b12eeb63a07ea9ab51a1",
+      "snapshot_hash": "d830d9eaeaee70f4cb0066eba295afe2ecd3bfcd927c0eed9c6514ce8b1e98bd",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-2.1 Mini",
+        "context_window": 128000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": {
+          "type": "reasoning tokens",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.6,
+              "cached_input": 0.06,
+              "output": 2.4
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -6765,7 +6960,277 @@
       ],
       "event_id": "evt_ec2cb6c65a6e3ddf3f04",
       "event_hash": "ec2cb6c65a6e3ddf3f04e7b4d399e12aca14c9adfbfe80538c7626a257048b36"
+    },
+    {
+      "sequence": 74,
+      "type": "model_added",
+      "model_id": "gemini-3.8-live",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "ec2cb6c65a6e3ddf3f04e7b4d399e12aca14c9adfbfe80538c7626a257048b36",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Live",
+        "context_window": 131072,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "interleaved reasoning",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.75,
+              "output": 4.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_3c4f315209dc5d118934",
+      "event_hash": "3c4f315209dc5d118934758bcefc2c90f2745d777c26b84c935af0c41ef0d970"
+    },
+    {
+      "sequence": 75,
+      "type": "model_added",
+      "model_id": "gemini-embedding-2",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "3c4f315209dc5d118934758bcefc2c90f2745d777c26b84c935af0c41ef0d970",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Embedding",
+        "model": "Gemini Embedding 2",
+        "context_window": 8192,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "embedding"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.2
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_62bf33bfc2691354d749",
+      "event_hash": "62bf33bfc2691354d7494413f2f574f7b56572541fc9d547bfcb8a2bccddb936"
+    },
+    {
+      "sequence": 76,
+      "type": "model_added",
+      "model_id": "gpt-image-2.5-sunburst",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "62bf33bfc2691354d7494413f2f574f7b56572541fc9d547bfcb8a2bccddb936",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2.5",
+        "model": "GPT-Image-2.5 Sunburst",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 8,
+              "cached_input": 2,
+              "output": 30
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "family": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "model": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_d864a46d6a78338b1c06",
+      "event_hash": "d864a46d6a78338b1c069eea69174979bb51af6edfcded3f3216840d10cca6f5"
+    },
+    {
+      "sequence": 77,
+      "type": "model_added",
+      "model_id": "gpt-realtime-2.1",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "d864a46d6a78338b1c069eea69174979bb51af6edfcded3f3216840d10cca6f5",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-2.1",
+        "context_window": 128000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": {
+          "type": "configurable reasoning effort",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 4,
+              "cached_input": 0.4,
+              "output": 24
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "family": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "model": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_a289f2e4c8c1a8acffd3",
+      "event_hash": "a289f2e4c8c1a8acffd3b23b89b400433ccf8c207f082757d8f433e35eaa0b36"
+    },
+    {
+      "sequence": 78,
+      "type": "model_added",
+      "model_id": "gpt-realtime-2.1-mini",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "a289f2e4c8c1a8acffd3b23b89b400433ccf8c207f082757d8f433e35eaa0b36",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Realtime",
+        "model": "GPT-Realtime-2.1 Mini",
+        "context_window": 128000,
+        "max_output": 32000,
+        "knowledge_cutoff": "2024-09-30",
+        "reasoning": {
+          "type": "reasoning tokens",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.6,
+              "cached_input": 0.06,
+              "output": 2.4
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "family": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "model": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_b12eeb63a07ea9ab51a1",
+      "event_hash": "b12eeb63a07ea9ab51a12cc33ab4b7a7bab6ccc5e1e2182b2a9b7131e2b9bdde"
     }
   ],
-  "chain_head": "ec2cb6c65a6e3ddf3f04e7b4d399e12aca14c9adfbfe80538c7626a257048b36"
+  "chain_head": "b12eeb63a07ea9ab51a12cc33ab4b7a7bab6ccc5e1e2182b2a9b7131e2b9bdde"
 }
