@@ -7558,6 +7558,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-agent-evaluation-checklist/",
+            "category": "Agents · Evaluation · Reliability",
+            "categories": ["agents", "research", "security", "tools"],
+            "kicker": "AI AGENT EVALUATION · 25 TESTS",
+            "title": "AI Agent Evaluation Checklist (2026): 25 Tests + Free Scorecard",
+            "description": "Practical tests for real agent outcomes, memory, tools, safety and cost—with 25 pass criteria, original diagrams, CSV scorecard and Python scorer.",
+            "meta": "AI Agent Evaluation · Testing · Reliability · Scorecard",
+            "updated": "Oct 12, 2026",
+            "read_time": "27 min",
+        },
+        {
             "href": "/guides/ai-agent-cost/",
             "category": "Agents · Economics · Enterprise",
             "categories": ["agents", "research", "tools"],

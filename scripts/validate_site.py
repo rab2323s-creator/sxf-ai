@@ -2153,6 +2153,7 @@ def main():
 
     # Keep indexable evergreen research and guide URLs discoverable across feed rebuilds.
     for route in (
+        "/guides/ai-agent-evaluation-checklist/",
         "/research/ai-agent-reliability/",
         "/research/ai-agent-memory/",
         "/research/ai-coding-agent-architecture/",
