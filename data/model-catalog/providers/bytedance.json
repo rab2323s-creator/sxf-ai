@@ -1,0 +1,89 @@
+{
+  "provider": "ByteDance",
+  "models": [
+    {
+      "family": "Seedance 2",
+      "model": "Seedance 2.0",
+      "model_id": "dreamina-seedance-2-0-260128",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "video",
+          "audio"
+        ]
+      },
+      "positioning": "ByteDance joint audio-video generation model for cinematic multi-shot clips with text, image, audio and video references, served through BytePlus ModelArk.",
+      "notes": [
+        "BytePlus ModelArk native ID is dreamina-seedance-2-0-260128. This is distinct from Seedance 2.0 Fast or Mini; account activation, region and service availability must be checked in BytePlus.",
+        "The catalog's displayed reference Standard rate ($7.00 per 1M billed service tokens) applies ONLY to 480p/720p generation without video in the input. BytePlus also lists $4.30 with video input at 480p/720p; $4.70 with video input at 1080p and $7.70 without video input at 1080p.",
+        "Billing depends on resolution, model configuration and token consumption; this is NOT a per-generated-text-token rate or a guaranteed price per clip. The generic text cost calculator excludes Seedance.",
+        "ByteDance documents 4–15 second native audio/video generation, including references to up to 9 images, 3 video clips and 3 audio clips. Max output tokens/context window for a text LLM do not apply to video output."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 7
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "video",
+        "audio",
+        "video-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input"
+        ],
+        "display_unit": "per 1M metered service tokens (no video input, 480p/720p only)"
+      },
+      "sxf_url": "/models/dreamina-seedance-2-0-260128/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "https://www.byteplus.com/en/product/modelark/pricing",
+        "https://seed.bytedance.com/en/blog/seedance-2-0-official-launch"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "context_window": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "max_output": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "knowledge_cutoff": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "reasoning": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "modalities": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "pricing": "https://www.byteplus.com/en/product/modelark/pricing",
+          "access": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "lifecycle": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "capabilities": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

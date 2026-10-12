@@ -1105,6 +1105,188 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "Gemini Nano Banana",
+      "model": "Nano Banana 2.1",
+      "model_id": "gemini-nano-banana-2.1",
+      "context_window": 131072,
+      "max_output": 32768,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking level",
+        "levels": [
+          "minimal",
+          "medium",
+          "high"
+        ],
+        "default": "medium"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "PDF"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "positioning": "Google's efficient production image creation and conversational editing model with 1K, 2K and 4K output and improved text rendering, references and character consistency.",
+      "notes": [
+        "Standard paid API input: $1.50 per 1M text/image/video input tokens; generated IMAGE output: $30.00 per 1M IMAGE output tokens. Text and thinking output is separately priced at $7.50 per 1M text tokens; do not apply the image rate to text.",
+        "Google estimates $0.0336 per 1K image, $0.0504 per 2K image and $0.113 per 4K image in Standard mode. Input prompts, Search grounding, Batch and additional output tokens may incur separate charges.",
+        "Stable provider-native ID gemini-nano-banana-2.1. The generative text-token cost calculator is intentionally disabled because output mixes image and text tokens."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 1.5,
+            "output": 30
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "video",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens (IMAGE output; text output billed separately)"
+      },
+      "sxf_url": "/models/gemini-nano-banana-2-1/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/image-generation"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Gemini Nano Banana",
+      "model": "Nano Banana Pro",
+      "model_id": "gemini-3-pro-image",
+      "context_window": 65536,
+      "max_output": 32768,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "positioning": "Google premium image generation and editing model for complex graphics, high-fidelity product mockups, brand consistency and precise text rendering.",
+      "notes": [
+        "Stable provider-native model ID is gemini-3-pro-image; Nano Banana Pro is its consumer-facing name.",
+        "Standard paid API rates: $2.00 per 1M text/image input tokens and $120.00 per 1M generated IMAGE output tokens. Text and thinking output is priced separately at $12.00 per 1M text tokens.",
+        "Google's Standard estimates are $0.134 per 1K/2K image or $0.24 per 4K image; prompt/input tokens, search grounding and optional service tiers can add charges.",
+        "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 2,
+            "output": 120
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million tokens (IMAGE output; text output billed separately)"
+      },
+      "sxf_url": "/models/gemini-3-pro-image/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/image-generation"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

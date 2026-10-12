@@ -1371,6 +1371,8 @@ def comparison_price_text(model_id, on_date=None):
     model = model_catalog_entry(model_id)
     price = comparison_price_snapshot(model_id, on_date)
     if not price:
+        if model.get("pricing_status") == "official-paid" and not model.get("calculator_eligible"):
+            return "media-specific pricing"
         return model_pricing_status(model)
     return f'{catalog_price_label(price["input"])}/{catalog_price_label(price["output"])}'
 
@@ -1383,9 +1385,10 @@ def compare_live_facts_html(model_ids):
         price = comparison_price_snapshot(model_id)
         evidence = model["provenance"]["evidence"]
         modalities = " + ".join(model.get("modalities", {}).get("input", [])) or "Not published"
-        input_price = catalog_price_label(price["input"]) if price else "Not published"
+        specialist = model.get("pricing_status") == "official-paid" and not model.get("calculator_eligible")
+        input_price = catalog_price_label(price["input"]) if price else ("See native rates" if specialist else "Not published")
         cached_price = catalog_price_label(price.get("cached_input")) if price and price.get("cached_input") is not None else "—"
-        output_price = catalog_price_label(price["output"]) if price else "Not published"
+        output_price = catalog_price_label(price["output"]) if price else ("See native rates" if specialist else "Not published")
         cards.append(
             f'''<article class="compare-live-card" data-compare-model="{escape(model_id, quote=True)}"
               data-context="{"unknown" if model.get("context_window") is None else int(model["context_window"])}" data-max-output="{escape(str(model.get("max_output")), quote=True)}"
@@ -1421,8 +1424,8 @@ def compare_pair_fact_line(model_ids):
     parts = []
     for model_id in model_ids:
         model = model_catalog_entry(model_id)
-        context_m = model["context_window"] / 1_000_000
-        context_label = f"{context_m:.2f}".rstrip("0").rstrip(".") + "M"
+        context = model.get("context_window")
+        context_label = (f"{context / 1_000_000:.2f}".rstrip("0").rstrip(".") + "M") if context is not None else "not published"
         price_text = comparison_price_text(model_id)
         parts.append(f'{model["model"]}: {price_text} · {context_label}')
     return " | ".join(parts)
@@ -1448,16 +1451,20 @@ def compare_decision_items(model_ids):
     left, right = models
     items = []
 
-    if left["context_window"] != right["context_window"]:
-        winner = left if left["context_window"] > right["context_window"] else right
+    left_context, right_context = left.get("context_window"), right.get("context_window")
+    if left_context is None or right_context is None:
+        if left_context is None and right_context is None:
+            items.append(("Context capacity", "Neither provider publishes a comparable token-based context limit for this video-generation service."))
+        else:
+            published = left if left_context is not None else right
+            items.append(("Context capacity", f'{published["model"]} publishes a {published["context_window"]:,}-token context; the other model does not publish a comparable context limit.'))
+    elif left_context != right_context:
+        winner = left if left_context > right_context else right
         loser = right if winner is left else left
         ratio = winner["context_window"] / loser["context_window"]
-        items.append((
-            "Context capacity",
-            f'{winner["model"]} publishes the larger context window: {winner["context_window"]:,} vs {loser["context_window"]:,} tokens ({ratio:.1f}×).'
-        ))
+        items.append(("Context capacity", f'{winner["model"]} publishes the larger context window: {winner["context_window"]:,} vs {loser["context_window"]:,} tokens ({ratio:.1f}×).'))
     else:
-        items.append(("Context capacity", f'Both publish a {left["context_window"]:,}-token context window.'))
+        items.append(("Context capacity", f'Both publish a {left_context:,}-token context window.'))
 
     left_inputs = set(left.get("modalities", {}).get("input", []))
     right_inputs = set(right.get("modalities", {}).get("input", []))
@@ -1487,7 +1494,7 @@ def compare_decision_items(model_ids):
         items.append(("Direct token cost", text))
     else:
         unavailable = [model["model"] for model in models if not model_has_official_paid_pricing(model)]
-        items.append(("Direct token cost", f'Direct Standard token-cost comparison is unavailable because {", ".join(unavailable)} does not have a calculator-eligible provider-published paid rate in the SXF catalog.'))
+        items.append(("Direct token cost", "These specialist modalities do not have a directly comparable text-token cost. Check model-specific image, video, credit and service-token pricing instead."))
 
     left_output = left.get("max_output")
     right_output = right.get("max_output")
@@ -8871,6 +8878,19 @@ def generic_comparison_page_html(comparison):
         f'<article><span>{index:02d}</span><h3>{escape(label)}</h3><p>{escape(text)}</p></article>'
         for index, (label, text) in enumerate(decision_items, 1)
     )
+    specialist_factors = comparison.get("specialist_factors", [])
+    specialist_html = ""
+    if specialist_factors:
+        specialists = "".join(
+            f'<article><span>{index:02d}</span><h3>{escape(factor["title"])}</h3><p>{escape(factor["detail"])}</p></article>'
+            for index, factor in enumerate(specialist_factors, 1)
+        )
+        specialist_html = (
+            '<section class="compare-v2-decisions shell"><div class="intel-section-head">'
+            '<div><p class="eyebrow">SPECIALIST BUYER GUIDE</p><h2>What matters for visual creation.</h2></div>'
+            '<span>Published facts · no synthetic ranking</span></div>'
+            f'<div class="compare-v2-decision-grid">{specialists}</div></section>'
+        )
     source_links = "".join(
         f'<a href="{escape(model["provenance"]["evidence"]["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(model["model"])} official specs</span><b>↗</b></a>'
         for model in (left, right)
@@ -8939,11 +8959,12 @@ def generic_comparison_page_html(comparison):
         <p>{escape(comparison["summary"])}</p>
         <div class="comparison-meta">
           <div><span>PROVIDERS</span><strong>{escape(left["provider"])} · {escape(right["provider"])}</strong></div>
-          <div><span>CONTEXT</span><strong>{left["context_window"]:,} · {right["context_window"]:,}</strong></div>
+          <div><span>CONTEXT</span><strong>{"Not published" if left.get("context_window") is None else f'{left["context_window"]:,}'} · {"Not published" if right.get("context_window") is None else f'{right["context_window"]:,}'}</strong></div>
           <div><span>PRICING</span><strong>{escape(comparison_price_text(left["model_id"]))} · {escape(comparison_price_text(right["model_id"]))}</strong></div>
         </div>
       </section>
       {compare_live_facts_html(model_ids)}
+      {specialist_html}
 
       <section class="compare-v2-decisions shell">
         <div class="intel-section-head"><div><p class="eyebrow">DECISION FACTORS</p><h2>What materially changes the choice.</h2></div><span>No synthetic winner score</span></div>
