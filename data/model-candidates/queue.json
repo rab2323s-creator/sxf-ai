@@ -3,58 +3,6 @@
   "policy": "Candidates never publish directly; approval produces a canonical source patch that must pass normal catalog validation.",
   "candidates": [
     {
-      "candidate_id": "cand_google_gemini_3_8_live_extended",
-      "detected_at": "2026-10-06T12:30:00Z",
-      "provider": "Google",
-      "canonical_model_id": null,
-      "change_type": "new_model",
-      "observed_identity": {
-        "provider_native_id": "gemini-3.8-live-extended-thinking",
-        "display_name": "Gemini 3.8 Live Extended Thinking"
-      },
-      "identity_resolution": {
-        "status": "new",
-        "matched_model_id": null,
-        "confidence": "high",
-        "possible_duplicates": []
-      },
-      "proposed_record": {
-        "model_id": "gemini-3.8-live-extended-thinking",
-        "model": "Gemini 3.8 Live Extended Thinking",
-        "provider": "Google"
-      },
-      "diff": {
-        "model_id": {
-          "before": null,
-          "after": "gemini-3.8-live-extended-thinking"
-        }
-      },
-      "evidence": [
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/models",
-          "source_type": "official_model_doc",
-          "retrieved_at": "2026-10-06T12:30:00Z"
-        },
-        {
-          "url": "https://ai.google.dev/gemini-api/docs/pricing",
-          "source_type": "official_pricing",
-          "retrieved_at": "2026-10-06T12:30:00Z"
-        }
-      ],
-      "validation": {
-        "status": "pending",
-        "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
-      },
-      "review": {
-        "status": "pending",
-        "reviewed_by": null,
-        "reviewed_at": null
-      }
-    },
-    {
       "candidate_id": "cand_amazon_nova_2_sonic",
       "detected_at": "2026-10-06T12:30:00Z",
       "provider": "Amazon",

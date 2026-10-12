@@ -1,0 +1,84 @@
+{
+  "provider": "Stability AI",
+  "models": [
+    {
+      "family": "Stable Image",
+      "model": "Stable Image Ultra",
+      "model_id": "stable-image-ultra",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Stability AI hosted Ultra image creation endpoint for detailed commercial visual output.",
+      "notes": [
+        "Official service endpoint POST /v2beta/stable-image/generate/ultra. This is a hosted API service, not an independent open-weight model.",
+        "Official billing 8 credits per successful image. At the published 1 credit = $0.01 exchange rate, that equals $0.08 per successful generation.",
+        "Other editing and image APIs are billed differently; published token context/max-output limits are not provided."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.08
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per successful Ultra image, 8 credits"
+      },
+      "sxf_url": "/models/stable-image-ultra/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://platform.stability.ai/docs/api-reference",
+        "https://platform.stability.ai/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.stability.ai/docs/api-reference",
+          "context_window": "https://platform.stability.ai/docs/api-reference",
+          "max_output": "https://platform.stability.ai/docs/api-reference",
+          "knowledge_cutoff": "https://platform.stability.ai/docs/api-reference",
+          "reasoning": "https://platform.stability.ai/docs/api-reference",
+          "modalities": "https://platform.stability.ai/docs/api-reference",
+          "access": "https://platform.stability.ai/docs/api-reference",
+          "lifecycle": "https://platform.stability.ai/docs/api-reference",
+          "capabilities": "https://platform.stability.ai/docs/api-reference",
+          "pricing": "https://platform.stability.ai/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

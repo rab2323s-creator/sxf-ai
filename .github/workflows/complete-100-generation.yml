@@ -1,0 +1,42 @@
+name: Build 100 source-verified models
+on:
+  push:
+    branches: [feat/complete-100-verified-models]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate catalog and all pages
+        run: |
+          python scripts/build_model_catalog.py
+          python scripts/build_model_index.py
+          python scripts/build_reverification_queue.py
+          python -c 'from pathlib import Path; import sys; sys.path.insert(0, "scripts"); from model_history import sync_model_history_file; sync_model_history_file(Path("data/model-pricing.json"), Path("data/model-history.json"))'
+          python scripts/update_news.py --render-only --sync-aliases
+          python scripts/ensure_compare_v2.py
+          python scripts/ensure_model_evaluation_sections.py
+          python scripts/sitemap_lastmod.py --refresh
+          python scripts/build_model_catalog.py --check
+          python scripts/build_model_index.py --check
+          python scripts/build_reverification_queue.py --check
+          python scripts/validate_model_identity.py
+          python scripts/validate_model_candidates.py
+          python tests/test_model_catalog.py
+          python scripts/validate_site.py
+      - name: Save generated assets to feature branch
+        run: |
+          git config user.name sxf-ai-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "build: regenerate verified 100-model site"
+            git push origin HEAD:feat/complete-100-verified-models
+          fi

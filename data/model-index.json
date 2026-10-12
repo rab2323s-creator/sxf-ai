@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-12",
-  "model_count": 95,
-  "provider_count": 20,
+  "model_count": 100,
+  "provider_count": 21,
   "models": [
     {
       "model_id": "gpt-6-astra",
@@ -3148,6 +3148,178 @@
       "verified_at": "2026-10-12",
       "standard_rate": {
         "image": 0.03
+      }
+    },
+    {
+      "model_id": "claude-haiku-5-5",
+      "model": "Claude Haiku 5.5",
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "sxf_url": "/models/claude-haiku-5-5/",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents",
+        "tool-use",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per million tokens, <=100K or >100K prompt tier"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": null
+    },
+    {
+      "model_id": "gemini-3.1-pro-preview",
+      "model": "Gemini 3.1 Pro Preview",
+      "provider": "Google",
+      "family": "Gemini 3",
+      "sxf_url": "/models/gemini-3-1-pro-preview/",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video",
+        "audio",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "preview"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per million tokens, <=200K or >200K prompt tier"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": null
+    },
+    {
+      "model_id": "gemini-3.1-flash-image",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+      "provider": "Google",
+      "family": "Gemini Nano Banana",
+      "sxf_url": "/models/gemini-3-1-flash-image/",
+      "context_window": 131072,
+      "max_output": 32768,
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per million tokens: IMAGE output only, text output separate"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 0.5,
+        "output": 60
+      }
+    },
+    {
+      "model_id": "gemini-3.8-live-extended-thinking",
+      "model": "Gemini 3.8 Live Extended Thinking",
+      "provider": "Google",
+      "family": "Gemini 3.8",
+      "sxf_url": "/models/gemini-3-8-live-extended-thinking/",
+      "context_window": 131072,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per million TEXT tokens; audio/video priced separately"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 0.75,
+        "output": 4.5
+      }
+    },
+    {
+      "model_id": "stable-image-ultra",
+      "model": "Stable Image Ultra",
+      "provider": "Stability AI",
+      "family": "Stable Image",
+      "sxf_url": "/models/stable-image-ultra/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per successful Ultra image, 8 credits"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.08
       }
     }
   ]
