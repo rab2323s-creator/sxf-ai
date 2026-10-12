@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 75,
-    "fresh": 75,
+    "total": 79,
+    "fresh": 79,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -1367,6 +1367,56 @@
       ]
     },
     {
+      "model_id": "dreamina-seedance-2-0-260128",
+      "provider": "ByteDance",
+      "model": "Seedance 2.0",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "https://www.byteplus.com/en/product/modelark/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-3-pro-image",
+      "provider": "Google",
+      "model": "Nano Banana Pro",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
       "model_id": "gemini-3.8-live",
       "provider": "Google",
       "model": "Gemini 3.8 Live",
@@ -1413,6 +1463,31 @@
       ],
       "source_urls": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-nano-banana-2.1",
+      "provider": "Google",
+      "model": "Nano Banana 2.1",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
         "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
@@ -1879,6 +1954,31 @@
         "https://huggingface.co/zai-org/GLM-5.3",
         "https://z.ai/blog/glm-5.3",
         "https://z.ai/model-api"
+      ]
+    },
+    {
+      "model_id": "kling-3.0",
+      "provider": "Kling AI",
+      "model": "Kling VIDEO 3.0",
+      "lifecycle_status": "current",
+      "pricing_status": "not-published",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_other",
+      "review_interval_days": 45,
+      "due_at": "2026-11-26",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "https://kling.ai/quickstart/klingai-video-3-model-user-guide"
       ]
     },
     {

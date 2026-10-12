@@ -3,8 +3,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>GitHub Security Advisory Comments API: Public Preview | SXF / AI</title>
-      <meta name="description" content="GitHub’s REST API can now list, read, add and edit repository security advisory comments. See permissions, confidential limits, use cases and rollout." />
+      <title>Repository security advisory comments API in public preview | SXF / AI</title>
+      <meta name="description" content="You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discu" />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -14,17 +14,17 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="article" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="GitHub Security Advisory Comments API: Public Preview | SXF / AI" />
-      <meta property="og:description" content="GitHub’s REST API can now list, read, add and edit repository security advisory comments. See permissions, confidential limits, use cases and rollout." />
+      <meta property="og:title" content="Repository security advisory comments API in public preview | SXF / AI" />
+      <meta property="og:description" content="You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discu" />
       <meta property="og:url" content="https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:title" content="GitHub Security Advisory Comments API: Public Preview | SXF / AI" />
-      <meta name="twitter:description" content="GitHub’s REST API can now list, read, add and edit repository security advisory comments. See permissions, confidential limits, use cases and rollout." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Article","TechArticle"],"@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#article","headline":"GitHub repository security advisory comments API: public preview","description":"GitHub’s REST API can now list, read, add and edit repository security advisory comments. See permissions, confidential limits, use cases and rollout.","datePublished":"2026-10-02T13:15:25Z","dateModified":"2026-10-04","mainEntityOfPage":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/","url":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/","articleSection":"Tools","isPartOf":{"@id":"https://sxf.si/#website"},"author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"about":[{"@type":"Thing","name":"Coding AI"},{"@type":"Thing","name":"Security"}],"citation":["https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/","https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/","https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10","https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory","https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports","https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately"],"image":"https://sxf.si/assets/og/sxf-ai-social.webp","inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Signals","item":"https://sxf.si/signals/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://sxf.si/tools/"},{"@type":"ListItem","position":4,"name":"GitHub repository security advisory comments API: public preview","item":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can the GitHub repository security advisory comments API do?","acceptedAnswer":{"@type":"Answer","text":"In public preview, the REST API can list comments on a repository security advisory, get a single comment, add a comment, and edit a comment. GitHub also supports filtering listed comments by update time."}},{"@type":"Question","name":"Does the comments API work with private vulnerability reports?","acceptedAnswer":{"@type":"Answer","text":"Yes. GitHub says the REST comments endpoints work with repository security advisories created from private vulnerability reports, subject to the same access rules that control the advisory itself."}},{"@type":"Question","name":"Can the REST API return confidential advisory comments?","acceptedAnswer":{"@type":"Answer","text":"No. GitHub states that confidential comments are not returned by the new REST comments endpoints. Confidential comments are maintainer-only, require repository write access, and are available separately through GraphQL."}},{"@type":"Question","name":"What permissions are required for security advisory comments?","acceptedAnswer":{"@type":"Answer","text":"A caller must be able to view the repository security advisory and have the appropriate repository security advisories read or write permission or token scope for the operation. Users who cannot access the advisory cannot access its comments."}},{"@type":"Question","name":"Can repository security advisory comments be deleted through the REST API?","acceptedAnswer":{"@type":"Answer","text":"Not in the current public preview. GitHub supports listing, reading, adding, and editing comments through these REST endpoints, but deleting comments is not yet supported."}},{"@type":"Question","name":"Which GitHub plans have the advisory comments API preview?","acceptedAnswer":{"@type":"Answer","text":"GitHub says the public preview is available for public repositories on GitHub Free, GitHub Pro, GitHub Team, and GitHub Enterprise Cloud."}}]},{"@type":"ItemList","name":"GitHub repository security advisory comments API: public preview comparison","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Thing","name":"Read advisory discussion","description":"Previously, the discussion attached to a repository security advisory was primarily reachable through the web interface. The preview adds REST operations to list advisory comments and retrieve a single comment."}},{"@type":"ListItem","position":2,"item":{"@type":"Thing","name":"Write triage context","description":"Security automation can now add comments and edit existing comments through the REST API, making it possible for internal triage systems to write notes back to an advisory."}},{"@type":"ListItem","position":3,"item":{"@type":"Thing","name":"Detect active discussions","description":"Repository advisory responses now include a non-confidential comment count, and linked repository-advisory counts also appear in global advisory responses. Tools can use the count to decide whether a discussion fetch is necessary."}},{"@type":"ListItem","position":4,"item":{"@type":"Thing","name":"Private vulnerability reports","description":"When a private vulnerability report becomes a draft repository security advisory, its regular discussion can participate in the same comments API workflow, subject to the advisory’s access rules."}},{"@type":"ListItem","position":5,"item":{"@type":"Thing","name":"Confidential maintainer notes","description":"Confidential comments remain deliberately separated from the REST surface. They are limited to people with repository write access and are available through GraphQL rather than the new REST comments endpoints."}},{"@type":"ListItem","position":6,"item":{"@type":"Thing","name":"Comment deletion","description":"The preview supports reading, creating, and editing comments but does not yet support deleting them through the REST API."}}]}]}</script>
+      <meta name="twitter:title" content="Repository security advisory comments API in public preview | SXF / AI" />
+      <meta name="twitter:description" content="You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discu" />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#webpage","url":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/","name":"Repository security advisory comments API in public preview | SXF / AI","description":"You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discussion on an advisory…","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#article"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","inLanguage":"en"},{"@type":"Article","@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#article","headline":"Repository security advisory comments API in public preview","description":"You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discussion on an advisory…","datePublished":"2026-10-02T13:15:25Z","dateModified":"2026-10-02T17:53:52.627738Z","mainEntityOfPage":{"@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#webpage"},"url":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/","articleSection":"Tools","isPartOf":{"@id":"https://sxf.si/#website"},"author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","citation":"https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview","keywords":null,"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://sxf.si/signals/repository-security-advisory-comments-api-in-public-preview-15293fa/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Signals","item":"https://sxf.si/signals/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://sxf.si/tools/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
-    <body class="intel-page signal-page research-signal-page">
+    <body class="intel-page signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
       <header class="site-header"><div class="header-inner">
@@ -32,192 +32,37 @@
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header>
-      
       <main id="signal-main">
-        <section class="intel-hero shell research-hero">
+        <section class="intel-hero shell">
           <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="/tools/">Tools</a></nav>
-          <div class="intel-kicker"><span class="pulse-dot"></span> RESEARCH SIGNAL / TOOLS</div>
-          <h1>GitHub repository security advisory comments API: public preview</h1>
-          <p class="research-deck">GitHub’s repository security advisory comments API brings advisory discussion into the REST API for the first time. Security teams can now list, retrieve, add, and edit non-confidential comments on repository security advisories, including advisories created from private vulnerability reports. The change matters because triage context, coordination notes, audit evidence, and migration data no longer have to remain locked inside the web interface.</p>
+          <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / TOOLS</div>
+          <h1>Repository security advisory comments API in public preview</h1>
           <div class="signal-meta-strip">
             <div><span>SOURCE</span><strong>GitHub</strong></div>
             <div><span>PUBLISHED</span><strong>October 2, 2026</strong></div>
-            <div><span>REVIEWED</span><strong>2026-10-04</strong></div>
-            <div><span>STATUS</span><strong>Published</strong></div>
+            <div><span>LAYER</span><strong>Tools</strong></div>
+            <div><span>SIGNAL SCORE</span><strong>48/100</strong></div>
           </div>
         </section>
-
         <section class="signal-layout shell">
           <article class="signal-brief">
-            <p class="eyebrow">WHAT CHANGED</p>
-            <p class="signal-summary">Before this public preview, repository security advisory discussion was available through GitHub’s web interface but not exposed through a comparable REST comments workflow. GitHub now provides REST operations to list advisory comments, fetch an individual comment, add a comment, and edit an existing comment. List operations can be limited to comments updated since a given time, and repository advisory responses now expose a comments count. GitHub also adds the linked repository-advisory comment count to global advisory responses so tools can detect active discussion before fetching comment bodies.</p>
-            <div class="signal-context"><span>WHY IT MATTERS</span><p>Repository security advisories often contain the operational context that does not fit neatly into CVE metadata: questions from reporters, triage decisions, reproduction details, coordination status, and follow-up notes. REST access means that context can participate in the same automation patterns teams already use around issues and pull requests. Security engineering teams can export discussions for audits or migrations, add triage notes from internal tooling, identify advisories with active discussion, and build workflows around private vulnerability reports without requiring a person to copy information out of the GitHub web UI.</p></div>
-            <div class="signal-context"><span>PRICING / CAPABILITY IMPACT</span><p>This release changes workflow capability rather than pricing. Security tooling can now treat repository-advisory discussion as structured API data instead of browser-only context. That enables incremental synchronization, audit exports, migration tooling, automated triage notes, and advisory dashboards that first inspect comment counts before fetching discussion content. The main boundary is confidentiality: REST exposes non-confidential discussion only, while confidential maintainer comments remain outside this REST surface.</p></div>
-            <div class="signal-context"><span>WHO SHOULD CARE</span><p>Application security teams, open-source maintainers, vulnerability-management platform builders, security operations teams, auditors, and organizations migrating advisory data should care most. The API is especially useful when repository security advisories are part of a larger security workflow and the discussion itself contains triage context that must be synchronized, analyzed, archived, or updated by internal tooling.</p></div>
+            <p class="eyebrow">SOURCE SUMMARY</p>
+            <p class="signal-summary">You can now read, add, and edit comments on repository security advisories using the REST API, including advisories created from private vulnerability reports. Until now, the discussion on an advisory…</p>
+            <div class="signal-context"><span>WHY IT MATTERS</span><p>Safety and security updates can change how a system should be evaluated, deployed, or governed even when headline capability is unchanged. The useful signal is whether the work introduces a concrete framework, evidence base, control, or reporting standard that can be applied in practice.</p></div>
+            <div class="signal-context"><span>WHAT TO VERIFY</span><p>Check the scope of the evaluation or policy, who defined the criteria, the underlying evidence, known limitations, whether results were independently reviewed, and which safeguards are actually deployed versus proposed.</p></div>
           </article>
           <aside class="source-card">
             <span class="source-card-label">SOURCE OF RECORD</span><strong>GitHub</strong>
-            <p>This research signal is grounded in the cited official sources and structured evidence used by SXF.</p>
+            <p>Read the original publication for the complete context behind this signal.</p>
             <a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
           </aside>
         </section>
-
-        <section class="research-section shell">
-          <div class="intel-section-head"><div><p class="eyebrow">KEY FACTS</p><h2>The release, reduced to verified facts.</h2></div><span>8 cited facts</span></div>
-          <div class="research-grid"><article class="research-card">
-          <p>The public-preview API can list comments on a repository security advisory, retrieve one comment, add a comment, and edit a comment.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>The list operation can be limited to comments updated since a specified time, which supports incremental synchronization instead of repeatedly pulling an entire discussion history.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>Repository security advisory responses now include a comments count, and global advisory responses include the count for their linked repository advisory; GitHub says these counts cover non-confidential comments.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>The REST comments API also works with repository security advisories created from private vulnerability reports, so reporter discussions can be integrated into automated triage workflows.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </article><article class="research-card">
-          <p>Access follows the advisory’s permissions. A caller must be able to view the advisory and have the appropriate repository security advisories read or write permission or token scope for the action being performed.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </article><article class="research-card">
-          <p>Confidential comments are not returned by these REST endpoints. GitHub exposes confidential comments separately through GraphQL, and repository collaborators without write access cannot read them.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </article><article class="research-card">
-          <p>Deleting advisory comments is not supported through the REST API in this public preview.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>GitHub says the comments API preview is available for public repositories on GitHub Free, GitHub Pro, GitHub Team, and GitHub Enterprise Cloud.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article></div>
-        </section>
-
         
-        <section class="research-section shell">
-          <div class="intel-section-head"><div><p class="eyebrow">WORKFLOW MAP</p><h2>What the REST preview unlocks — and what stays restricted.</h2></div><span>6 dimensions</span></div>
-          <div class="model-comparison research-comparison"><div class="model-table-wrap"><table>
-            <thead><tr><th>Dimension</th><th>Analysis</th><th>Evidence</th></tr></thead>
-            <tbody><tr>
-          <th scope="row">Read advisory discussion</th>
-          <td>Previously, the discussion attached to a repository security advisory was primarily reachable through the web interface. The preview adds REST operations to list advisory comments and retrieve a single comment.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div></td>
-        </tr><tr>
-          <th scope="row">Write triage context</th>
-          <td>Security automation can now add comments and edit existing comments through the REST API, making it possible for internal triage systems to write notes back to an advisory.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div></td>
-        </tr><tr>
-          <th scope="row">Detect active discussions</th>
-          <td>Repository advisory responses now include a non-confidential comment count, and linked repository-advisory counts also appear in global advisory responses. Tools can use the count to decide whether a discussion fetch is necessary.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div></td>
-        </tr><tr>
-          <th scope="row">Private vulnerability reports</th>
-          <td>When a private vulnerability report becomes a draft repository security advisory, its regular discussion can participate in the same comments API workflow, subject to the advisory’s access rules.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div></td>
-        </tr><tr>
-          <th scope="row">Confidential maintainer notes</th>
-          <td>Confidential comments remain deliberately separated from the REST surface. They are limited to people with repository write access and are available through GraphQL rather than the new REST comments endpoints.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div></td>
-        </tr><tr>
-          <th scope="row">Comment deletion</th>
-          <td>The preview supports reading, creating, and editing comments but does not yet support deleting them through the REST API.</td>
-          <td><div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div></td>
-        </tr></tbody>
-          </table></div></div>
-        </section>
-        
-
-        <section class="research-section shell">
-          <div class="research-two-up">
-            <div>
-              <div class="intel-section-head"><div><p class="eyebrow">TECHNICAL DETAILS</p><h2>Specs that change implementation.</h2></div></div>
-              <div class="research-stack"><article class="research-card">
-          <p>A synchronization job can request advisory comments updated since a given time, which lets an integration process only changed discussion instead of treating every advisory thread as a full refresh.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>Authorization is inherited from the repository security advisory model: callers must be able to access the advisory and use a token or app permission appropriate for repository security advisories and the requested read or write action.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </article><article class="research-card">
-          <p>The comments count exposed on advisory responses counts non-confidential comments. It should not be interpreted as the complete number of all maintainer-visible comments when confidential discussion exists.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div>
-        </article><article class="research-card">
-          <p>Confidential comments are permission-sensitive maintainer notes. They are visible only to people with repository write access, are not returned by the REST comments API, and views of them are recorded in GitHub’s audit log.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div>
-        </article><article class="research-card">
-          <p>Private vulnerability reports can become draft repository security advisories. Regular comments are visible to the reporter and advisory collaborators, while confidential comments provide a separate maintainer-only discussion channel.</p>
-          <div class="research-citations"><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div>
-        </article><article class="research-card">
-          <p>The preview is scoped to public repositories across GitHub Free, Pro, Team, and Enterprise Cloud according to GitHub’s release announcement.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article></div>
-            </div>
-            <div>
-              <div class="intel-section-head"><div><p class="eyebrow">PRACTICAL TAKEAWAYS</p><h2>What to do with the information.</h2></div></div>
-              <div class="research-stack"><article class="research-card">
-          <p>Use the comments count as a cheap discovery signal before fetching discussion bodies when building organization-wide advisory dashboards or migration tooling.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>For audit or archival pipelines, synchronize comments incrementally with the updated-since filter and store advisory identifiers alongside comment records so the discussion remains traceable to its source advisory.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </article><article class="research-card">
-          <p>Do not assume REST exports contain every maintainer discussion. If confidential comments are in use, design the audit process around the fact that those comments are intentionally omitted from the REST endpoints.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div>
-        </article><article class="research-card">
-          <p>Separate read-only integrations from tools that add or edit triage notes, and grant only the repository security advisories permission level required for the workflow.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </article><article class="research-card">
-          <p>If a workflow depends on deleting comments or changing a comment between regular and confidential, account for current limitations: REST deletion is not supported, and GitHub does not let a posted comment switch confidentiality state.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a></div>
-        </article></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="research-section shell research-verify">
-          <div><p class="eyebrow">WHAT TO VERIFY</p><h2>Before production use.</h2></div>
-          <ol><li>Confirm that the target repository and plan are covered by the current public-preview rollout before depending on the comments endpoints in production automation.</li><li>Verify the exact repository security advisories read or write permission required by the token or GitHub App for each operation your integration performs.</li><li>Treat the advisory comment count as a count of non-confidential discussion, not a guarantee that every maintainer-only note is represented.</li><li>If the workflow handles private vulnerability reports, test access using the same reporter, collaborator, maintainer, and app permission roles that will exist in production.</li><li>Design around the current no-delete limitation for REST comments and decide how your system will handle corrections that cannot be represented as deletion.</li></ol>
-        </section>
-
-        <section class="research-section shell">
-          <div class="research-two-up research-lower">
-            <div class="model-faq">
-              <div class="intel-section-head"><div><p class="eyebrow">FAQ</p><h2>Search questions, answered directly.</h2></div><span>6 questions</span></div>
-              <details>
-          <summary>What can the GitHub repository security advisory comments API do?</summary>
-          <p>In public preview, the REST API can list comments on a repository security advisory, get a single comment, add a comment, and edit a comment. GitHub also supports filtering listed comments by update time.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </details><details>
-          <summary>Does the comments API work with private vulnerability reports?</summary>
-          <p>Yes. GitHub says the REST comments endpoints work with repository security advisories created from private vulnerability reports, subject to the same access rules that control the advisory itself.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </details><details>
-          <summary>Can the REST API return confidential advisory comments?</summary>
-          <p>No. GitHub states that confidential comments are not returned by the new REST comments endpoints. Confidential comments are maintainer-only, require repository write access, and are available separately through GraphQL.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </details><details>
-          <summary>What permissions are required for security advisory comments?</summary>
-          <p>A caller must be able to view the repository security advisory and have the appropriate repository security advisories read or write permission or token scope for the operation. Users who cannot access the advisory cannot access its comments.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">Source 2 ↗</a><a href="https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10" target="_blank" rel="noopener noreferrer">Source 3 ↗</a></div>
-        </details><details>
-          <summary>Can repository security advisory comments be deleted through the REST API?</summary>
-          <p>Not in the current public preview. GitHub supports listing, reading, adding, and editing comments through these REST endpoints, but deleting comments is not yet supported.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </details><details>
-          <summary>Which GitHub plans have the advisory comments API preview?</summary>
-          <p>GitHub says the public preview is available for public repositories on GitHub Free, GitHub Pro, GitHub Team, and GitHub Enterprise Cloud.</p>
-          <div class="research-citations"><a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">Source 1 ↗</a></div>
-        </details>
-            </div>
-            <div class="model-sources">
-              <div class="intel-section-head"><div><p class="eyebrow">OFFICIAL SOURCES</p><h2>Evidence used on this page.</h2></div></div>
-              <a href="https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/" target="_blank" rel="noopener noreferrer">https://github.blog/changelog/2026-10-02-repository-security-advisory-comments-api-in-public-preview/ <span>↗</span></a><a href="https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/" target="_blank" rel="noopener noreferrer">https://github.blog/changelog/2026-10-02-confidential-comments-on-repository-security-advisories/ <span>↗</span></a><a href="https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/rest/security-advisories/repository-advisories?apiVersion=2026-03-10 <span>↗</span></a><a href="https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory <span>↗</span></a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports <span>↗</span></a><a href="https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately <span>↗</span></a>
-            </div>
-          </div>
-        </section>
-
         <section class="signal-taxonomy shell">
           <div><span>TOPICS</span><small>No topic tag yet</small></div>
           <div><span>MODELS</span><small>No named model detected</small></div>
         </section>
-
+        <nav class="signal-archive-navigation shell" aria-label="Signal archive navigation"><a rel="prev" href="/signals/a-model-guide-for-the-gpt-6-family-8e206c4/"><span>Previous signal</span><strong>A model guide for the GPT-6 family</strong></a><a rel="next" href="/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/"><span>Next signal</span><strong>GitHub Copilot in VS Code, September 2026 releases</strong></a></nav>
         <section class="related-signals shell">
           <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
           <div class="signal-list"><a class="signal-row" href="/signals/confidential-comments-on-repository-security-advisories-04cee56/">
