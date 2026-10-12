@@ -1,0 +1,547 @@
+{
+  "schema_version": "1.0",
+  "decision": "Source-verified specialist continuation, authorized by owner",
+  "approved_at": "2026-10-12T14:25:00Z",
+  "approved_by": "repository owner — continuation authorized in ChatGPT conversation",
+  "candidates": [
+    {
+      "provider": "OpenAI",
+      "family": "GPT Image 2.5",
+      "model": "GPT-Image-2.5 Flare",
+      "model_id": "gpt-image-2.5-flare",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Fast OpenAI image generation and image-editing model for interactive, high-volume visual creation and everyday design tasks.",
+      "notes": [
+        "Standard paid image-token rates are $8.00 input, $2.00 cached image input and $30.00 output per 1 million IMAGE tokens. Text input is billed separately: $5.00 input and $1.25 cached per 1 million TEXT tokens.",
+        "GPT Image 2.5 Flare prioritizes generation speed, while Sunburst targets maximum editing and rendering capability. Published rates are equal; generation quality/latency comparisons require workload-specific evaluation.",
+        "Images vary in token consumption by quality and size, so the displayed token price is not a guaranteed per-image price. Text-only calculator is excluded."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 8,
+            "cached_input": 2,
+            "output": 30
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million IMAGE tokens (text input separately billed)"
+      },
+      "sxf_url": "/models/gpt-image-2-5-flare/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "cand_openai_gpt_image_2_5_flare"
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini Omni",
+      "model": "Gemini Omni Flash 1.1",
+      "model_id": "gemini-omni-1.1-flash",
+      "context_window": 1048576,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "positioning": "Google stable multimodal conversational video-generation and editing model with video extension, upscaling and iteration through the Interactions API.",
+      "notes": [
+        "Standard paid Gemini API input rate is $1.50 per 1 million input tokens across text/image/video/audio. Generated VIDEO output is $17.50 per 1 million VIDEO tokens; text output, when applicable, is $9.00 per 1 million text tokens.",
+        "Google specifies 5,792 tokens per second of 720p video, equivalent to approximately $0.10/second at the published Standard video-output rate. Other resolutions and input usage alter total cost.",
+        "Supports 3–10-second video output; video edit/extension inputs are limited to 10 seconds. The 1,048,576 context token window describes input capacity, not an output-video token quota.",
+        "Use provider-native ID gemini-omni-1.1-flash; Gemini Omni Flash is the product name. Text-only cost calculator disabled for mixed video/media pricing."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 1.5,
+            "output": 17.5
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "video",
+        "video-generation",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per 1 million input / VIDEO output tokens (text output separate)"
+      },
+      "sxf_url": "/models/gemini-omni-1-1-flash/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "creative_gemini-omni-1.1-flash"
+    },
+    {
+      "provider": "Google",
+      "family": "Lyria",
+      "model": "Lyria 3.5",
+      "model_id": "lyria-3.5",
+      "context_window": 131072,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "audio",
+          "text"
+        ]
+      },
+      "positioning": "Google's full-song music generation model for high-fidelity MP3 audio and optional lyrics, with structural coherence across verses, choruses and bridges.",
+      "notes": [
+        "Google Gemini API publishes $0.08 per generated full song, billed per request (Standard paid tier); no free API tier. This is NOT a token or per-second price.",
+        "Native music generation model ID: lyria-3.5. Supports text and image prompts; output includes 44.1kHz stereo MP3 audio and lyrics.",
+        "Song length can be a couple of minutes and is guided by the prompt. There is no separate publicly specified generative max_output token count applicable to finished audio.",
+        "Music generation is its own task filter; it does not participate in generative text token pricing estimates."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "request": 0.08
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "music-generation"
+      ],
+      "pricing_basis": {
+        "meter": "requests",
+        "quantity": 1,
+        "dimensions": [
+          "request"
+        ],
+        "display_unit": "per generated full song (Standard paid API)"
+      },
+      "sxf_url": "/models/lyria-3-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/music-generation"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+          "access": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "creative_lyria-3.5"
+    },
+    {
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "model": "FLUX.2 Max",
+      "model_id": "flux-2-max",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs premium image generation and image editing for precise text rendering, product photos, visual identity and strong reference consistency.",
+      "notes": [
+        "Official base price is $0.07 for the FIRST output megapixel (MP, 1024×1024). Each ADDITIONAL output MP is +$0.03, and image reference input is $0.03 per input MP. The displayed $0.07 is therefore a STARTING price, not a universal image cost.",
+        "Input and output resolutions round upward to whole megapixels separately. Output is capped at 4 MP; multiple references have provider-specific resize and billing rules.",
+        "FLUX.2 Max is available on BFL's API and other supported runtimes including Cloudflare Workers AI. The flat text-token calculator is not applicable.",
+        "Do not confuse FLUX.2 Max with newer FLUX 3 Image or other FLUX.2 variants."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.07
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output megapixel; additional/reference megapixels extra"
+      },
+      "sxf_url": "/models/flux-2-max/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://bfl.ai/models/flux-2-max",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://developers.cloudflare.com/ai/models/black-forest-labs/flux-2-max/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://bfl.ai/models/flux-2-max",
+          "context_window": "https://bfl.ai/models/flux-2-max",
+          "max_output": "https://bfl.ai/models/flux-2-max",
+          "knowledge_cutoff": "https://bfl.ai/models/flux-2-max",
+          "reasoning": "https://bfl.ai/models/flux-2-max",
+          "modalities": "https://bfl.ai/models/flux-2-max",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://bfl.ai/models/flux-2-max",
+          "lifecycle": "https://bfl.ai/models/flux-2-max",
+          "capabilities": "https://bfl.ai/models/flux-2-max"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "creative_flux-2-max"
+    },
+    {
+      "provider": "ElevenLabs",
+      "family": "Eleven v4",
+      "model": "Eleven v4",
+      "model_id": "eleven_v4",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "ElevenLabs expressive, multilingual high-quality text-to-speech and dialogue synthesis model for narration, audiobooks and character performances.",
+      "notes": [
+        "Provider-native ID eleven_v4 is available through the Text to Dialogue API; supports 90+ languages, including Arabic, and multiple speakers.",
+        "ElevenLabs documents one credit per character for text-to-speech as its general usage model; API pricing varies by plan, discounts and usage. We do not claim a verified flat USD-per-character price specific to Eleven v4.",
+        "Credits and plans are not convertible to one universal public USD rate. SXF therefore lists the native unit, provider billing reference and no invented flat Standard API rate.",
+        "The provider distinguishes Eleven v4 quality-first delivery from v4 Turbo optimized for near-realtime voice agents. The generic text calculator is disabled."
+      ],
+      "pricing": {},
+      "pricing_status": "not-published",
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "characters",
+        "quantity": 1,
+        "dimensions": [
+          "character"
+        ],
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "sxf_url": "/models/eleven-v4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/overview/models",
+        "https://elevenlabs.io/docs/overview/intro",
+        "https://elevenlabs.io/pricing/api",
+        "https://elevenlabs.io/docs/changelog/2026/9/28"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/overview/models",
+          "context_window": "https://elevenlabs.io/docs/overview/models",
+          "max_output": "https://elevenlabs.io/docs/overview/models",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+          "reasoning": "https://elevenlabs.io/docs/overview/models",
+          "modalities": "https://elevenlabs.io/docs/overview/models",
+          "pricing": "https://elevenlabs.io/docs/overview/intro",
+          "access": "https://elevenlabs.io/docs/overview/models",
+          "lifecycle": "https://elevenlabs.io/docs/overview/models",
+          "capabilities": "https://elevenlabs.io/docs/overview/models"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "creative_eleven_v4"
+    },
+    {
+      "provider": "ElevenLabs",
+      "family": "Eleven v4",
+      "model": "Eleven v4 Turbo",
+      "model_id": "eleven_v4_turbo",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "ElevenLabs low-latency multilingual text-to-speech model for voice agents, interactive assistants and fast real-time synthesis.",
+      "notes": [
+        "Provider-native ID eleven_v4_turbo is supported by ElevenLabs Text to Dialogue WebSocket and its realtime/agent ecosystem; 90+ languages including Arabic.",
+        "ElevenLabs reports approximately 100ms median inference latency for the model; this is a provider-reported figure, not an independent SXF benchmark.",
+        "ElevenLabs uses credits tied to input characters and subscriptions, but a universal public USD Standard rate for this specific API model and all plans is not established in the cited source. No invented direct price is supplied.",
+        "Compare with Eleven v4 for long-form expressive speech vs real-time interaction. Generic text-token calculator disabled."
+      ],
+      "pricing": {},
+      "pricing_status": "not-published",
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "characters",
+        "quantity": 1,
+        "dimensions": [
+          "character"
+        ],
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "sxf_url": "/models/eleven-v4-turbo/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/overview/models",
+        "https://elevenlabs.io/docs/overview/intro",
+        "https://elevenlabs.io/pricing/api",
+        "https://elevenlabs.io/docs/changelog/2026/9/28"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/overview/models",
+          "context_window": "https://elevenlabs.io/docs/overview/models",
+          "max_output": "https://elevenlabs.io/docs/overview/models",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+          "reasoning": "https://elevenlabs.io/docs/overview/models",
+          "modalities": "https://elevenlabs.io/docs/overview/models",
+          "pricing": "https://elevenlabs.io/docs/overview/intro",
+          "access": "https://elevenlabs.io/docs/overview/models",
+          "lifecycle": "https://elevenlabs.io/docs/overview/models",
+          "capabilities": "https://elevenlabs.io/docs/overview/models"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — continuation authorized in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T14:25:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "candidate_id": "creative_eleven_v4_turbo"
+    }
+  ]
+}

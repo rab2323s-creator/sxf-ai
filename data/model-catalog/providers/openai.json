@@ -1644,6 +1644,87 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "GPT Image 2.5",
+      "model": "GPT-Image-2.5 Flare",
+      "model_id": "gpt-image-2.5-flare",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Fast OpenAI image generation and image-editing model for interactive, high-volume visual creation and everyday design tasks.",
+      "notes": [
+        "Standard paid image-token rates are $8.00 input, $2.00 cached image input and $30.00 output per 1 million IMAGE tokens. Text input is billed separately: $5.00 input and $1.25 cached per 1 million TEXT tokens.",
+        "GPT Image 2.5 Flare prioritizes generation speed, while Sunburst targets maximum editing and rendering capability. Published rates are equal; generation quality/latency comparisons require workload-specific evaluation.",
+        "Images vary in token consumption by quality and size, so the displayed token price is not a guaranteed per-image price. Text-only calculator is excluded."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 8,
+            "cached_input": 2,
+            "output": 30
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "cached_input",
+          "output"
+        ],
+        "display_unit": "per 1 million IMAGE tokens (text input separately billed)"
+      },
+      "sxf_url": "/models/gpt-image-2-5-flare/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "pricing": "https://developers.openai.com/api/docs/pricing",
+          "access": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+          "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

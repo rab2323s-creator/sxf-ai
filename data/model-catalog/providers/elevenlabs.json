@@ -1,0 +1,145 @@
+{
+  "provider": "ElevenLabs",
+  "models": [
+    {
+      "family": "Eleven v4",
+      "model": "Eleven v4",
+      "model_id": "eleven_v4",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "ElevenLabs expressive, multilingual high-quality text-to-speech and dialogue synthesis model for narration, audiobooks and character performances.",
+      "notes": [
+        "Provider-native ID eleven_v4 is available through the Text to Dialogue API; supports 90+ languages, including Arabic, and multiple speakers.",
+        "ElevenLabs documents one credit per character for text-to-speech as its general usage model; API pricing varies by plan, discounts and usage. We do not claim a verified flat USD-per-character price specific to Eleven v4.",
+        "Credits and plans are not convertible to one universal public USD rate. SXF therefore lists the native unit, provider billing reference and no invented flat Standard API rate.",
+        "The provider distinguishes Eleven v4 quality-first delivery from v4 Turbo optimized for near-realtime voice agents. The generic text calculator is disabled."
+      ],
+      "pricing": {},
+      "pricing_status": "not-published",
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "characters",
+        "quantity": 1,
+        "dimensions": [
+          "character"
+        ],
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "sxf_url": "/models/eleven-v4/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/overview/models",
+        "https://elevenlabs.io/docs/overview/intro",
+        "https://elevenlabs.io/pricing/api",
+        "https://elevenlabs.io/docs/changelog/2026/9/28"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/overview/models",
+          "context_window": "https://elevenlabs.io/docs/overview/models",
+          "max_output": "https://elevenlabs.io/docs/overview/models",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+          "reasoning": "https://elevenlabs.io/docs/overview/models",
+          "modalities": "https://elevenlabs.io/docs/overview/models",
+          "pricing": "https://elevenlabs.io/docs/overview/intro",
+          "access": "https://elevenlabs.io/docs/overview/models",
+          "lifecycle": "https://elevenlabs.io/docs/overview/models",
+          "capabilities": "https://elevenlabs.io/docs/overview/models"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Eleven v4",
+      "model": "Eleven v4 Turbo",
+      "model_id": "eleven_v4_turbo",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text"
+        ],
+        "output": [
+          "audio"
+        ]
+      },
+      "positioning": "ElevenLabs low-latency multilingual text-to-speech model for voice agents, interactive assistants and fast real-time synthesis.",
+      "notes": [
+        "Provider-native ID eleven_v4_turbo is supported by ElevenLabs Text to Dialogue WebSocket and its realtime/agent ecosystem; 90+ languages including Arabic.",
+        "ElevenLabs reports approximately 100ms median inference latency for the model; this is a provider-reported figure, not an independent SXF benchmark.",
+        "ElevenLabs uses credits tied to input characters and subscriptions, but a universal public USD Standard rate for this specific API model and all plans is not established in the cited source. No invented direct price is supplied.",
+        "Compare with Eleven v4 for long-form expressive speech vs real-time interaction. Generic text-token calculator disabled."
+      ],
+      "pricing": {},
+      "pricing_status": "not-published",
+      "capabilities": [
+        "tts"
+      ],
+      "pricing_basis": {
+        "meter": "characters",
+        "quantity": 1,
+        "dimensions": [
+          "character"
+        ],
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "sxf_url": "/models/eleven-v4-turbo/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/overview/models",
+        "https://elevenlabs.io/docs/overview/intro",
+        "https://elevenlabs.io/pricing/api",
+        "https://elevenlabs.io/docs/changelog/2026/9/28"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/overview/models",
+          "context_window": "https://elevenlabs.io/docs/overview/models",
+          "max_output": "https://elevenlabs.io/docs/overview/models",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+          "reasoning": "https://elevenlabs.io/docs/overview/models",
+          "modalities": "https://elevenlabs.io/docs/overview/models",
+          "pricing": "https://elevenlabs.io/docs/overview/intro",
+          "access": "https://elevenlabs.io/docs/overview/models",
+          "lifecycle": "https://elevenlabs.io/docs/overview/models",
+          "capabilities": "https://elevenlabs.io/docs/overview/models"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

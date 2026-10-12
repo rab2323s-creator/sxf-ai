@@ -3,58 +3,6 @@
   "policy": "Candidates never publish directly; approval produces a canonical source patch that must pass normal catalog validation.",
   "candidates": [
     {
-      "candidate_id": "cand_openai_gpt_image_2_5_flare",
-      "detected_at": "2026-10-06T12:30:00Z",
-      "provider": "OpenAI",
-      "canonical_model_id": null,
-      "change_type": "new_model",
-      "observed_identity": {
-        "provider_native_id": "gpt-image-2.5-flare",
-        "display_name": "GPT-Image-2.5 Flare"
-      },
-      "identity_resolution": {
-        "status": "new",
-        "matched_model_id": null,
-        "confidence": "high",
-        "possible_duplicates": []
-      },
-      "proposed_record": {
-        "model_id": "gpt-image-2.5-flare",
-        "model": "GPT-Image-2.5 Flare",
-        "provider": "OpenAI"
-      },
-      "diff": {
-        "model_id": {
-          "before": null,
-          "after": "gpt-image-2.5-flare"
-        }
-      },
-      "evidence": [
-        {
-          "url": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
-          "source_type": "official_model_doc",
-          "retrieved_at": "2026-10-06T12:30:00Z"
-        },
-        {
-          "url": "https://developers.openai.com/api/docs/pricing",
-          "source_type": "official_pricing",
-          "retrieved_at": "2026-10-06T12:30:00Z"
-        }
-      ],
-      "validation": {
-        "status": "pending",
-        "errors": [],
-        "warnings": [
-          "Field-by-field canonical normalization is pending; no unverified pricing/spec/lifecycle claim is approved by this candidate record."
-        ]
-      },
-      "review": {
-        "status": "pending",
-        "reviewed_by": null,
-        "reviewed_at": null
-      }
-    },
-    {
       "candidate_id": "cand_google_gemini_3_8_live_extended",
       "detected_at": "2026-10-06T12:30:00Z",
       "provider": "Google",

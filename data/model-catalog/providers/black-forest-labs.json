@@ -1,0 +1,86 @@
+{
+  "provider": "Black Forest Labs",
+  "models": [
+    {
+      "family": "FLUX.2",
+      "model": "FLUX.2 Max",
+      "model_id": "flux-2-max",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Black Forest Labs premium image generation and image editing for precise text rendering, product photos, visual identity and strong reference consistency.",
+      "notes": [
+        "Official base price is $0.07 for the FIRST output megapixel (MP, 1024×1024). Each ADDITIONAL output MP is +$0.03, and image reference input is $0.03 per input MP. The displayed $0.07 is therefore a STARTING price, not a universal image cost.",
+        "Input and output resolutions round upward to whole megapixels separately. Output is capped at 4 MP; multiple references have provider-specific resize and billing rules.",
+        "FLUX.2 Max is available on BFL's API and other supported runtimes including Cloudflare Workers AI. The flat text-token calculator is not applicable.",
+        "Do not confuse FLUX.2 Max with newer FLUX 3 Image or other FLUX.2 variants."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.07
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per first output megapixel; additional/reference megapixels extra"
+      },
+      "sxf_url": "/models/flux-2-max/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://bfl.ai/models/flux-2-max",
+        "https://bfl.ai/pricing?category=flux.2",
+        "https://developers.cloudflare.com/ai/models/black-forest-labs/flux-2-max/"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://bfl.ai/models/flux-2-max",
+          "context_window": "https://bfl.ai/models/flux-2-max",
+          "max_output": "https://bfl.ai/models/flux-2-max",
+          "knowledge_cutoff": "https://bfl.ai/models/flux-2-max",
+          "reasoning": "https://bfl.ai/models/flux-2-max",
+          "modalities": "https://bfl.ai/models/flux-2-max",
+          "pricing": "https://bfl.ai/pricing?category=flux.2",
+          "access": "https://bfl.ai/models/flux-2-max",
+          "lifecycle": "https://bfl.ai/models/flux-2-max",
+          "capabilities": "https://bfl.ai/models/flux-2-max"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

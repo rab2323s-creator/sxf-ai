@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-12",
-  "model_count": 79,
-  "provider_count": 15,
+  "model_count": 85,
+  "provider_count": 17,
   "models": [
     {
       "model_id": "gpt-6-astra",
@@ -2652,6 +2652,191 @@
       "standard_rate": {
         "input": 7
       }
+    },
+    {
+      "model_id": "gpt-image-2.5-flare",
+      "model": "GPT-Image-2.5 Flare",
+      "provider": "OpenAI",
+      "family": "GPT Image 2.5",
+      "sxf_url": "/models/gpt-image-2-5-flare/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million IMAGE tokens (text input separately billed)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 8,
+        "cached_input": 2,
+        "output": 30
+      }
+    },
+    {
+      "model_id": "gemini-omni-1.1-flash",
+      "model": "Gemini Omni Flash 1.1",
+      "provider": "Google",
+      "family": "Gemini Omni",
+      "sxf_url": "/models/gemini-omni-1-1-flash/",
+      "context_window": 1048576,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "video",
+        "video-generation",
+        "long-context"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million input / VIDEO output tokens (text output separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 1.5,
+        "output": 17.5
+      }
+    },
+    {
+      "model_id": "lyria-3.5",
+      "model": "Lyria 3.5",
+      "provider": "Google",
+      "family": "Lyria",
+      "sxf_url": "/models/lyria-3-5/",
+      "context_window": 131072,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "music-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "requests",
+        "display_unit": "per generated full song (Standard paid API)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "request": 0.08
+      }
+    },
+    {
+      "model_id": "flux-2-max",
+      "model": "FLUX.2 Max",
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "sxf_url": "/models/flux-2-max/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per first output megapixel; additional/reference megapixels extra"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.07
+      }
+    },
+    {
+      "model_id": "eleven_v4",
+      "model": "Eleven v4",
+      "provider": "ElevenLabs",
+      "family": "Eleven v4",
+      "sxf_url": "/models/eleven-v4/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "tts"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "characters",
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": null
+    },
+    {
+      "model_id": "eleven_v4_turbo",
+      "model": "Eleven v4 Turbo",
+      "provider": "ElevenLabs",
+      "family": "Eleven v4",
+      "sxf_url": "/models/eleven-v4-turbo/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "tts"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "not-published",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "characters",
+        "display_unit": "per input character; credit cost and USD vary by plan"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": null
     }
   ]
 }

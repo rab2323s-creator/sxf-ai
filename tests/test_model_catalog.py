@@ -79,7 +79,7 @@ for model_id, (provider, capability) in selected_specialists.items():
 
 candidate_queue = json.loads((ROOT / "data" / "model-candidates" / "queue.json").read_text(encoding="utf-8"))
 assert not selected_specialists.keys() & {item["proposed_record"]["model_id"] for item in candidate_queue["candidates"]}, "Published models still appear as pending candidates"
-assert len(candidate_queue["candidates"]) == 4, "Four unapproved candidates must remain pending"
+assert len(candidate_queue["candidates"]) == 3, "Three unapproved candidates must remain pending"
 explorer_js = (ROOT / "models" / "explorer.js").read_text(encoding="utf-8")
 assert '<option value="image-generation">Image generation</option>' in explorer_js, "Image generation task filter is missing"
 
@@ -104,5 +104,34 @@ for slug in ("nano-banana-2-1-vs-nano-banana-pro", "kling-3-0-vs-seedance-2-0"):
     assert comparison_page.is_file(), f"{slug}: generated comparison page missing"
     assert f'https://sxf.si/compare/{slug}/' in comparison_page.read_text(encoding="utf-8"), f"{slug}: canonical comparison missing"
 assert '<option value="video-generation">Video generation</option>' in (ROOT / "models/explorer.js").read_text(encoding="utf-8")
+
+# Creative specialist continuation — verify unique routes, native meters and SEO.
+creative_specialists = {
+    "gpt-image-2.5-flare": ("OpenAI", "image-generation", "tokens"),
+    "gemini-omni-1.1-flash": ("Google", "video-generation", "tokens"),
+    "lyria-3.5": ("Google", "music-generation", "requests"),
+    "flux-2-max": ("Black Forest Labs", "image-generation", "images"),
+    "eleven_v4": ("ElevenLabs", "tts", "characters"),
+    "eleven_v4_turbo": ("ElevenLabs", "tts", "characters"),
+}
+assert len(catalog["models"]) >= 85, "Expected 85 verified models after creative batch"
+for mid, (provider,capability,meter) in creative_specialists.items():
+    row = next(m for m in catalog["models"] if m["model_id"] == mid)
+    assert row["provider"] == provider and capability in row["capabilities"], f"{mid}: provider or capability mismatch"
+    assert row["pricing_basis"]["meter"] == meter, f"{mid}: native billing unit mismatch"
+    assert not row["calculator_eligible"], f"{mid}: media model incorrectly in text calculator"
+    assert row["page_template"] == "catalog-reference", f"{mid}: no dedicated page generator"
+    route = ROOT / row["sxf_url"].lstrip("/") / "index.html"
+    assert route.is_file(), f"{mid}: missing generated page"
+    body = route.read_text(encoding="utf-8")
+    assert f'https://sxf.si{row["sxf_url"]}' in body and "data-model-history" in body, f"{mid}: canonical/history mismatch"
+for mid in ("eleven_v4", "eleven_v4_turbo"):
+    assert next(m for m in catalog["models"] if m["model_id"] == mid)["pricing_status"] == "not-published", f"{mid}: invented USD API rate"
+assert 'music-generation' in (ROOT / "models/explorer.js").read_text(encoding="utf-8")
+for slug in ("gpt-image-2-5-sunburst-vs-flare", "eleven-v4-vs-eleven-v4-turbo", "gemini-omni-flash-vs-kling-3-0", "flux-2-max-vs-nano-banana-pro"):
+    html = ROOT / "compare" / slug / "index.html"
+    assert html.is_file(), f"{slug}: missing comparison page"
+    text = html.read_text(encoding="utf-8")
+    assert "SPECIALIST BUYER GUIDE" in text and f'https://sxf.si/compare/{slug}/' in text, f"{slug}: missing specialist metadata"
 
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")
