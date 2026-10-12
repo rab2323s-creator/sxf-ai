@@ -3143,6 +3143,189 @@
         },
         "pricing": {}
       }
+    },
+    "eleven_v4": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_933fe63f0b0adc8758d7",
+      "snapshot_hash": "bb41103ae12353ce2d28d18f0d757de63be96e9b2d298740cf9357239d0edd2a",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Eleven v4",
+        "model": "Eleven v4",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "eleven_v4_turbo": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_5a89ba2470b6ece6ad72",
+      "snapshot_hash": "7ebedf249f4c0850770d26f5d785fc20919c92f37b68e735649cd83389a79eaf",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Eleven v4",
+        "model": "Eleven v4 Turbo",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {}
+      }
+    },
+    "flux-2-max": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_ce3d5cd612627a577d9c",
+      "snapshot_hash": "f09fc3e15aadb4156ae68010de38df22110133503c05684c7c9852e9a5bbe615",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Max",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.07
+              }
+            }
+          ]
+        }
+      }
+    },
+    "gemini-omni-1.1-flash": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_f06edb7df3a127b49f5c",
+      "snapshot_hash": "b44254282f91280631bb81c461899b92d4edec51b2bbc4c20238c1b33a8c1cc4",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Omni",
+        "model": "Gemini Omni Flash 1.1",
+        "context_window": 1048576,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "video"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 1.5,
+              "output": 17.5
+            }
+          ]
+        }
+      }
+    },
+    "gpt-image-2.5-flare": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_a4c8f537a214428f24a4",
+      "snapshot_hash": "09a79aaeffdb8136aeb7e34225ac9602980746da9cbbd0e198dd26aadaaa9e17",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2.5",
+        "model": "GPT-Image-2.5 Flare",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 8,
+              "cached_input": 2,
+              "output": 30
+            }
+          ]
+        }
+      }
+    },
+    "lyria-3.5": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_a805f17ab1adc01b0a09",
+      "snapshot_hash": "2078d64517b8d8fa56c84484769c99b8580ea04ada3739a7c554c6f47278594b",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Lyria",
+        "model": "Lyria 3.5",
+        "context_window": 131072,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "audio",
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "request": 0.08
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -7578,7 +7761,280 @@
       },
       "event_id": "evt_ead2f63aed16dc37b6dc",
       "event_hash": "ead2f63aed16dc37b6dc74aea6ad45d9e32db84a0d25003ddda6bb01bcd2090f"
+    },
+    {
+      "sequence": 83,
+      "type": "model_added",
+      "model_id": "eleven_v4",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "ead2f63aed16dc37b6dc74aea6ad45d9e32db84a0d25003ddda6bb01bcd2090f",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Eleven v4",
+        "model": "Eleven v4",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://elevenlabs.io/docs/overview/models",
+        "family": "https://elevenlabs.io/docs/overview/models",
+        "model": "https://elevenlabs.io/docs/overview/models",
+        "context_window": "https://elevenlabs.io/docs/overview/models",
+        "max_output": "https://elevenlabs.io/docs/overview/models",
+        "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+        "reasoning": "https://elevenlabs.io/docs/overview/models",
+        "modalities": "https://elevenlabs.io/docs/overview/models",
+        "pricing": "https://elevenlabs.io/docs/overview/intro"
+      },
+      "event_id": "evt_933fe63f0b0adc8758d7",
+      "event_hash": "933fe63f0b0adc8758d7a25efd19335efa53d04c5cadacf3a2973ead9878c225"
+    },
+    {
+      "sequence": 84,
+      "type": "model_added",
+      "model_id": "eleven_v4_turbo",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "933fe63f0b0adc8758d7a25efd19335efa53d04c5cadacf3a2973ead9878c225",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Eleven v4",
+        "model": "Eleven v4 Turbo",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "audio"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://elevenlabs.io/docs/overview/models",
+        "family": "https://elevenlabs.io/docs/overview/models",
+        "model": "https://elevenlabs.io/docs/overview/models",
+        "context_window": "https://elevenlabs.io/docs/overview/models",
+        "max_output": "https://elevenlabs.io/docs/overview/models",
+        "knowledge_cutoff": "https://elevenlabs.io/docs/overview/models",
+        "reasoning": "https://elevenlabs.io/docs/overview/models",
+        "modalities": "https://elevenlabs.io/docs/overview/models",
+        "pricing": "https://elevenlabs.io/docs/overview/intro"
+      },
+      "event_id": "evt_5a89ba2470b6ece6ad72",
+      "event_hash": "5a89ba2470b6ece6ad72ff93fb9e5c641a818f1c28bf6443bde56a96f3230e52"
+    },
+    {
+      "sequence": 85,
+      "type": "model_added",
+      "model_id": "flux-2-max",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "5a89ba2470b6ece6ad72ff93fb9e5c641a818f1c28bf6443bde56a96f3230e52",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Max",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.07
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://bfl.ai/models/flux-2-max",
+        "family": "https://bfl.ai/models/flux-2-max",
+        "model": "https://bfl.ai/models/flux-2-max",
+        "context_window": "https://bfl.ai/models/flux-2-max",
+        "max_output": "https://bfl.ai/models/flux-2-max",
+        "knowledge_cutoff": "https://bfl.ai/models/flux-2-max",
+        "reasoning": "https://bfl.ai/models/flux-2-max",
+        "modalities": "https://bfl.ai/models/flux-2-max",
+        "pricing": "https://bfl.ai/pricing?category=flux.2"
+      },
+      "event_id": "evt_ce3d5cd612627a577d9c",
+      "event_hash": "ce3d5cd612627a577d9c5f350297ccfdbf7b603267c77c5ed252b890263e02f8"
+    },
+    {
+      "sequence": 86,
+      "type": "model_added",
+      "model_id": "gemini-omni-1.1-flash",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "ce3d5cd612627a577d9c5f350297ccfdbf7b603267c77c5ed252b890263e02f8",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Omni",
+        "model": "Gemini Omni Flash 1.1",
+        "context_window": 1048576,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "video"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 1.5,
+              "output": 17.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_f06edb7df3a127b49f5c",
+      "event_hash": "f06edb7df3a127b49f5c8a5c3e684a23e6dbf9ad7745625793e2a4a4f6eee2d3"
+    },
+    {
+      "sequence": 87,
+      "type": "model_added",
+      "model_id": "gpt-image-2.5-flare",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "f06edb7df3a127b49f5c8a5c3e684a23e6dbf9ad7745625793e2a4a4f6eee2d3",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2.5",
+        "model": "GPT-Image-2.5 Flare",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 8,
+              "cached_input": 2,
+              "output": 30
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "family": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "model": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_a4c8f537a214428f24a4",
+      "event_hash": "a4c8f537a214428f24a47958e93e16b54c7bcf25c90cf55bd757fa6550ac8f81"
+    },
+    {
+      "sequence": 88,
+      "type": "model_added",
+      "model_id": "lyria-3.5",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "a4c8f537a214428f24a47958e93e16b54c7bcf25c90cf55bd757fa6550ac8f81",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Lyria",
+        "model": "Lyria 3.5",
+        "context_window": 131072,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "audio",
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "request": 0.08
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "family": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "model": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_a805f17ab1adc01b0a09",
+      "event_hash": "a805f17ab1adc01b0a095e0361f7899e8a401b622d4d21c71ba87dceaabc7f97"
     }
   ],
-  "chain_head": "ead2f63aed16dc37b6dc74aea6ad45d9e32db84a0d25003ddda6bb01bcd2090f"
+  "chain_head": "a805f17ab1adc01b0a095e0361f7899e8a401b622d4d21c71ba87dceaabc7f97"
 }
