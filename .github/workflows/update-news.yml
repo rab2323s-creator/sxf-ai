@@ -52,6 +52,8 @@ jobs:
           node --check models/explorer.js
           node --check compare/compare.js
           node --check evaluations/explorer/explorer.js
+      - name: Sitemap lastmod regression tests
+        run: python tests/test_sitemap_lastmod.py
       - name: Source adapter contract tests
         run: python tests/test_source_adapters.py
       - name: Model Explorer rendering regression tests
@@ -106,6 +108,8 @@ jobs:
         run: |
           node --check assets/pricing-policy.js
           node tests/test_pricing_policy.cjs
+      - name: Refresh sitemap after post-render changes
+        run: python scripts/sitemap_lastmod.py --refresh
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift

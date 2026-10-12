@@ -231,5 +231,8 @@ def write_sitemap(items, context: SitemapContext):
         if model_page_indexable(name, matched):
             rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", lastmod(matched)))
 
+    from sitemap_lastmod import synchronize_lastmod
+    rows = synchronize_lastmod(rows, SITEMAP, BASE_URL)
+
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + "\n".join(rows) + "\n</urlset>\n"
     SITEMAP.write_text(xml, encoding="utf-8")

@@ -2161,6 +2161,9 @@ def main():
         if BASE + route not in seen:
             fail(f"priority evergreen page missing from sitemap: {route}")
 
+    from sitemap_lastmod import validate_sitemap_state
+    validate_sitemap_state(ROOT / "sitemap.xml", BASE)
+
     core=[ROOT/"index.html",ROOT/"about"/"index.html",ROOT/"signals"/"index.html",ROOT/"topics"/"index.html",ROOT/"brief"/"index.html"]
     core += [ROOT/x/"index.html" for x in ("models","tools","research","open-source")]
     core.append(ROOT/"models"/"pricing"/"index.html")
