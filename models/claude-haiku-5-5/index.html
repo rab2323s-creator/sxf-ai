@@ -2,10 +2,10 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Claude Haiku 5.5 — Releases &amp; Signals | SXF / AI</title>
-      <meta name="description" content="Track Claude Haiku 5.5 releases, capability changes and related primary-source signals on SXF / AI." />
-      <meta name="robots" content="noindex,follow" />
-      <meta name="googlebot" content="noindex,follow" />
+      <title>Claude Haiku 5.5 — API Specs, Context &amp; Pricing | SXF / AI</title>
+      <meta name="description" content="Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
       <link rel="canonical" href="https://sxf.si/models/claude-haiku-5-5/" />
       <link rel="alternate" hreflang="en" href="https://sxf.si/models/claude-haiku-5-5/" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Claude Haiku 5.5 — Releases &amp; Signals | SXF / AI" />
-      <meta property="og:description" content="Track Claude Haiku 5.5 releases, capability changes and related primary-source signals on SXF / AI." />
+      <meta property="og:title" content="Claude Haiku 5.5 — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta property="og:description" content="Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
       <meta property="og:url" content="https://sxf.si/models/claude-haiku-5-5/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,9 +23,9 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Claude Haiku 5.5 — Releases &amp; Signals | SXF / AI" />
-      <meta name="twitter:description" content="Track Claude Haiku 5.5 releases, capability changes and related primary-source signals on SXF / AI." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Claude Haiku 5.5 reference and updates | SXF / AI","url":"https://sxf.si/models/claude-haiku-5-5/","description":"Track Claude Haiku 5.5 releases, capability changes and related primary-source signals on SXF / AI.","isPartOf":{"@id":"https://sxf.si/#website"},"about":{"@type":"Thing","name":"Claude Haiku 5.5"},"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 5.5","item":"https://sxf.si/models/claude-haiku-5-5/"}]}]}</script>
+      <meta name="twitter:title" content="Claude Haiku 5.5 — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta name="twitter:description" content="Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-haiku-5-5/#article","headline":"Claude Haiku 5.5 — API Specs, Context & Pricing","description":"Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources.","url":"https://sxf.si/models/claude-haiku-5-5/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Claude Haiku 5.5"},"citation":["https://platform.claude.com/docs/en/models/haiku-5-5/overview","https://platform.claude.com/docs/en/about-claude/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 5.5","item":"https://sxf.si/models/claude-haiku-5-5/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -34,21 +34,96 @@
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
-      <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Claude Haiku 5.5</span></nav>
-      <p class="eyebrow">MODEL INTELLIGENCE</p><h1>Claude Haiku 5.5<br><span>release signals.</span></h1><p>Track Claude Haiku 5.5 releases, capability changes and related primary-source signals on SXF / AI.</p>
-      <div class="collection-stats"><div><strong>1</strong><span>tracked signals</span></div><div><strong>1</strong><span>primary sources</span></div><div><strong>October 7, 2026</strong><span>latest tracked</span></div></div></section>
-      
-      <section class="signal-layout shell"><article class="signal-brief"><p class="eyebrow">LATEST DEVELOPMENT</p><h2>Claude Haiku 5.5 in GitHub Copilot</h2><p class="signal-summary">Claude Haiku 5.5, Anthropic’s newest lightweight model, is now generally available in GitHub Copilot. It is designed for fast, high-volume work like subagents, quick edits, and terminal tasks. In early…</p><a class="brief-open" href="/signals/claude-haiku-5-5-in-github-copilot-86f546d/">Open latest signal ↗</a></article>
-      <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>Claude Haiku 5.5</strong><p>Tracked from October 7, 2026 through October 7, 2026 across 1 primary source.</p></aside></section>
-      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent Claude Haiku 5.5 signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/claude-haiku-5-5-in-github-copilot-86f546d/">
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Claude Haiku 5.5</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / ANTHROPIC</p>
+        <h1>Claude Haiku 5.5<br><span>verified model reference.</span></h1>
+        <p>Fast, low-cost Claude for classification, extraction, routing, coding subagents and high-volume conversations.</p>
+        <div class="collection-stats">
+          <div><strong>1,000,000</strong><span>context tokens</span></div>
+          <div><strong>128,000</strong><span>max output</span></div>
+          <div><strong>2026-10-12</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <h2>Claude Haiku 5.5 at a glance.</h2>
+            <p>Anthropic documents a 1,000,000-token context window. Input modalities: text + image. Output: text. Pricing status: Official paid API.</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>claude-haiku-5-5</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>128,000</strong></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>2026-06</strong></div>
+            <div><span>GLOBAL ≤128K INPUT</span><strong>$0.10</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
+            <div><span>GLOBAL ≤128K OUTPUT</span><strong>$0.50</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>REASONING</span><h3>effort controlled · default medium</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
+            <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
+          <div class="model-split">
+            <div><p>Tiered Global list rates for ≤128K input/request: $0.10 input · $0.50 output per MTok. Above 128K up to 256K and other regions have different rates.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
+          </div>
+        </section>
+
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">REGIONAL TIERED PRICING</p><h2>Published list rates depend on request input length and region.</h2></div><div class="model-caveat-list"><div><span>Global · Global Standard API · 1–100,000 input tokens/request</span><p>$0.10 input · $0.50 output per 1 million tokens</p></div><div><span>Global · Global Standard API · 100,001+ input tokens/request (within model limits)</span><p>$0.50 input · $2.50 output per 1 million tokens</p></div></div><p class="reference-note">Official list prices verified 2026-10-12; no historical effective-start date is claimed. Promotion prices are excluded. <a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview" target="_blank" rel="noopener noreferrer">Official pricing evidence ↗</a></p></section>
+
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Prompt-length tiered Standard API prices: &lt;=100,000 input prompt tokens $0.10 input/$0.50 output per million; &gt;100,000 prompt tokens $0.50 input/$2.50 output per million.</p></div><div><span>02</span><p>Caching, Batch discounts and US-only inference routing use different prices. Flat price calculator is disabled.</p></div><div><span>03</span><p>Native Claude API ID is claude-haiku-5-5. Standard max output 128K; Batch API beta provides a distinct 300K output option.</p></div></div></section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
+          <div class="model-related-links">
+            <a href="/providers/anthropic/"><span>PROVIDER</span><strong>Anthropic model portfolio</strong><b>↗</b></a>
+            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
+            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-sources"><a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview" target="_blank" rel="noopener noreferrer"><span>platform.claude.com/docs/en/models/haiku-5-5/overview</span><b>↗</b></a><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer"><span>platform.claude.com/docs/en/about-claude/pricing</span><b>↗</b></a></div>
+        </section>
+      </section>
+
+      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="claude-haiku-5-5">
+          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Claude Haiku 5.5: what changed.</h2><p>No post-baseline factual changes recorded for Claude Haiku 5.5 since 2026-10-12.</p></div>
+          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-10-12</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
+        </section>
+      <section class="model-history shell" data-model-history data-history-models="claude-haiku-5-5">
+      <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>Claude Haiku 5.5 verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
+      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_46dbe8695c1114c8976b" data-model-id="claude-haiku-5-5">
+              <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-10-12">2026-10-12</time></div>
+              <h3>Claude Haiku 5.5</h3><p>Baseline verified: 1,000,000 context · 128,000 max output</p>
+              <a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article></div>
+      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 77b0ad167e15…</p>
+    </section>
+      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Recent Claude Haiku 5.5 signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/claude-haiku-5-5-in-github-copilot-86f546d/">
       <div class="signal-row-meta"><span>GitHub</span><time datetime="2026-10-07T20:12:18Z">October 7, 2026</time></div>
       <h3>Claude Haiku 5.5 in GitHub Copilot</h3>
       <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
     </a></div></section>
-    <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="">
-          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Claude Haiku 5.5: what changed.</h2><p>No post-baseline factual changes recorded for  since 2026-09-27.</p></div>
-          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-09-27</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
-        </section></main><footer class="footer shell">
+    <section class="model-compare-bridge shell" data-model-comparisons="claude-haiku-5-5">
+      <div class="intel-section-head"><div><p class="eyebrow">COMPARE CLAUDE HAIKU 5.5</p><h2>Put this model in context.</h2></div><a href="/compare/">Open Compare Engine ↗</a></div>
+      <div class="model-related-links"><a href="/compare/claude-haiku-5-5-vs-claude-sonnet-5-5/">
+          <span>Verified provider capabilities and billing</span>
+          <strong>Claude Haiku 5.5 vs Claude Sonnet 5.5</strong><b>↗</b>
+        </a></div>
+    </section></main><footer class="footer shell">
       <div class="footer-main">
         <div class="footer-identity">
           <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>

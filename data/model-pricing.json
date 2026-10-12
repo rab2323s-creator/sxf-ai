@@ -8310,6 +8310,499 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "provider": "Anthropic",
+      "family": "Claude 5",
+      "model": "Claude Haiku 5.5",
+      "model_id": "claude-haiku-5-5",
+      "context_window": 1000000,
+      "max_output": 128000,
+      "knowledge_cutoff": "2026-06",
+      "reasoning": {
+        "type": "adaptive thinking",
+        "levels": [
+          "effort controlled"
+        ],
+        "default": "medium",
+        "always_on": false
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Fast, low-cost Claude for classification, extraction, routing, coding subagents and high-volume conversations.",
+      "notes": [
+        "Prompt-length tiered Standard API prices: <=100,000 input prompt tokens $0.10 input/$0.50 output per million; >100,000 prompt tokens $0.50 input/$2.50 output per million.",
+        "Caching, Batch discounts and US-only inference routing use different prices. Flat price calculator is disabled.",
+        "Native Claude API ID is claude-haiku-5-5. Standard max output 128K; Batch API beta provides a distinct 300K output option."
+      ],
+      "pricing": {
+        "tiered": {
+          "basis": "input_tokens_per_request",
+          "verified_at": "2026-10-12",
+          "source_url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "scopes": [
+            {
+              "scope": "Global",
+              "regions": [
+                "Global Standard API"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": 100000,
+                  "input": 0.1,
+                  "output": 0.5
+                },
+                {
+                  "min_input_tokens": 100001,
+                  "max_input_tokens": null,
+                  "input": 0.5,
+                  "output": 2.5
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "coding",
+        "agents",
+        "tool-use",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per million tokens, <=100K or >100K prompt tier"
+      },
+      "sxf_url": "/models/claude-haiku-5-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "context_window": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "max_output": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "reasoning": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "modalities": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "access": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "lifecycle": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "capabilities": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini 3",
+      "model": "Gemini 3.1 Pro Preview",
+      "model_id": "gemini-3.1-pro-preview",
+      "context_window": 1048576,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "video",
+          "audio",
+          "PDF"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "Google's Preview long-context multimodal reasoning and coding model for complex agents and document analysis.",
+      "notes": [
+        "Official API ID gemini-3.1-pro-preview; preview availability may change.",
+        "Standard tiered input/output token prices per million: $2/$12 for prompts <=200K, $4/$18 above 200K; caching and grounding are additional.",
+        "Fixed token calculator disabled because the rate depends on prompt length."
+      ],
+      "pricing": {
+        "tiered": {
+          "basis": "input_tokens_per_request",
+          "verified_at": "2026-10-12",
+          "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "scopes": [
+            {
+              "scope": "Global",
+              "regions": [
+                "Global Standard API"
+              ],
+              "tiers": [
+                {
+                  "min_input_tokens": 1,
+                  "max_input_tokens": 200000,
+                  "input": 2,
+                  "output": 12
+                },
+                {
+                  "min_input_tokens": 200001,
+                  "max_input_tokens": null,
+                  "input": 4,
+                  "output": 18
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "coding",
+        "agents",
+        "tool-use",
+        "vision",
+        "video",
+        "audio",
+        "long-context"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per million tokens, <=200K or >200K prompt tier"
+      },
+      "sxf_url": "/models/gemini-3-1-pro-preview/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "preview"
+      }
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini Nano Banana",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+      "model_id": "gemini-3.1-flash-image",
+      "context_window": 131072,
+      "max_output": 32768,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "thinking",
+        "levels": [
+          "supported"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text",
+          "image"
+        ]
+      },
+      "positioning": "Google image-generation and editing endpoint for efficient interactive visual creation; distinct from Nano Banana 2.1.",
+      "notes": [
+        "Native API ID gemini-3.1-flash-image is different from gemini-nano-banana-2.1 already in the catalog.",
+        "Standard paid rates: text/image input $0.50 per million tokens; IMAGE output $60 per million tokens; text/thinking output $3 per million tokens.",
+        "Provider image estimates are $0.045 for 0.5K, $0.067 for 1K, $0.101 for 2K and $0.151 for 4K output; additional inputs and grounding cost extra.",
+        "Mixed image/text pricing is not a generic fixed token calculator rate."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 0.5,
+            "output": 60
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "reasoning",
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per million tokens: IMAGE output only, text output separate"
+      },
+      "sxf_url": "/models/gemini-3-1-flash-image/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Google",
+      "family": "Gemini 3.8",
+      "model": "Gemini 3.8 Live Extended Thinking",
+      "model_id": "gemini-3.8-live-extended-thinking",
+      "context_window": 131072,
+      "max_output": 65536,
+      "knowledge_cutoff": null,
+      "reasoning": {
+        "type": "background asynchronous reasoning",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": null
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "output": [
+          "text",
+          "audio"
+        ]
+      },
+      "positioning": "Google Live voice endpoint with continuous audio, background thinking and asynchronous agent tool use.",
+      "notes": [
+        "Official API ID gemini-3.8-live-extended-thinking is distinct from gemini-3.8-live.",
+        "Standard TEXT input/output $0.75/$4.50 per million text tokens; AUDIO input/output $3/$12 per million audio tokens; image/video input $1 per million tokens.",
+        "Audio sessions use multiple native meters; text calculator disabled.",
+        "Only non-blocking async function calls supported. Clients must use interaction_status to detect a truly idle session."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "input": 0.75,
+            "output": 4.5
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "pricing_basis": {
+        "meter": "tokens",
+        "quantity": 1000000,
+        "dimensions": [
+          "input",
+          "output"
+        ],
+        "display_unit": "per million TEXT tokens; audio/video priced separately"
+      },
+      "sxf_url": "/models/gemini-3-8-live-extended-thinking/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "provider": "Stability AI",
+      "family": "Stable Image",
+      "model": "Stable Image Ultra",
+      "model_id": "stable-image-ultra",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "image"
+        ]
+      },
+      "positioning": "Stability AI hosted Ultra image creation endpoint for detailed commercial visual output.",
+      "notes": [
+        "Official service endpoint POST /v2beta/stable-image/generate/ultra. This is a hosted API service, not an independent open-weight model.",
+        "Official billing 8 credits per successful image. At the published 1 credit = $0.01 exchange rate, that equals $0.08 per successful generation.",
+        "Other editing and image APIs are billed differently; published token context/max-output limits are not provided."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "image": 0.08
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "pricing_basis": {
+        "meter": "images",
+        "quantity": 1,
+        "dimensions": [
+          "image"
+        ],
+        "display_unit": "per successful Ultra image, 8 credits"
+      },
+      "sxf_url": "/models/stable-image-ultra/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://platform.stability.ai/docs/api-reference",
+        "https://platform.stability.ai/pricing"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://platform.stability.ai/docs/api-reference",
+          "context_window": "https://platform.stability.ai/docs/api-reference",
+          "max_output": "https://platform.stability.ai/docs/api-reference",
+          "knowledge_cutoff": "https://platform.stability.ai/docs/api-reference",
+          "reasoning": "https://platform.stability.ai/docs/api-reference",
+          "modalities": "https://platform.stability.ai/docs/api-reference",
+          "access": "https://platform.stability.ai/docs/api-reference",
+          "lifecycle": "https://platform.stability.ai/docs/api-reference",
+          "capabilities": "https://platform.stability.ai/docs/api-reference",
+          "pricing": "https://platform.stability.ai/pricing"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ],
   "verification_policy": {

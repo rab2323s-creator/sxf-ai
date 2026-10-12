@@ -3662,6 +3662,244 @@
           ]
         }
       }
+    },
+    "claude-haiku-5-5": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_46dbe8695c1114c8976b",
+      "snapshot_hash": "32104855fac193722c6ab8f0675b6fbd3b10b8313efd656987301b9adfc6cc1f",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Haiku 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "medium",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "tiered": {
+            "basis": "input_tokens_per_request",
+            "verified_at": "2026-10-12",
+            "source_url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+            "scopes": [
+              {
+                "scope": "Global",
+                "regions": [
+                  "Global Standard API"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 100000,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  {
+                    "min_input_tokens": 100001,
+                    "max_input_tokens": null,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gemini-3.1-flash-image": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_93892929c6b88d49d7ff",
+      "snapshot_hash": "8b298ce3040f2c5f42231fd19036a16875925f752d42d68ab2cbcd5d54b83277",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+        "context_window": 131072,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.5,
+              "output": 60
+            }
+          ]
+        }
+      }
+    },
+    "gemini-3.1-pro-preview": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_cd0c382319e543377f34",
+      "snapshot_hash": "d5f0ee79647b0c0d41c25a08625a74ee71d63f54a3978b34afec6b743b15f4be",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.1 Pro Preview",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "tiered": {
+            "basis": "input_tokens_per_request",
+            "verified_at": "2026-10-12",
+            "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+            "scopes": [
+              {
+                "scope": "Global",
+                "regions": [
+                  "Global Standard API"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 200000,
+                    "input": 2,
+                    "output": 12
+                  },
+                  {
+                    "min_input_tokens": 200001,
+                    "max_input_tokens": null,
+                    "input": 4,
+                    "output": 18
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gemini-3.8-live-extended-thinking": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_b7a1d0ebc2ca3715f5ec",
+      "snapshot_hash": "4ca896b4dc69d96cccac193aaac9820764ab61e481f6f27591d3ab90e372dffd",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Live Extended Thinking",
+        "context_window": 131072,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "background asynchronous reasoning",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.75,
+              "output": 4.5
+            }
+          ]
+        }
+      }
+    },
+    "stable-image-ultra": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_77b0ad167e1577fc5df3",
+      "snapshot_hash": "571b7ddd3258ef7e40be4394a69add0060bb992279da2f972c558657b8a965d8",
+      "snapshot": {
+        "provider": "Stability AI",
+        "family": "Stable Image",
+        "model": "Stable Image Ultra",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.08
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -8856,7 +9094,320 @@
       },
       "event_id": "evt_7134f8093db5a6438066",
       "event_hash": "7134f8093db5a643806696c8bc64b00d867d808cdef403b3595f0cc006bde71f"
+    },
+    {
+      "sequence": 99,
+      "type": "model_added",
+      "model_id": "claude-haiku-5-5",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "7134f8093db5a643806696c8bc64b00d867d808cdef403b3595f0cc006bde71f",
+      "snapshot": {
+        "provider": "Anthropic",
+        "family": "Claude 5",
+        "model": "Claude Haiku 5.5",
+        "context_window": 1000000,
+        "max_output": 128000,
+        "knowledge_cutoff": "2026-06",
+        "reasoning": {
+          "type": "adaptive thinking",
+          "levels": [
+            "effort controlled"
+          ],
+          "default": "medium",
+          "always_on": false
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "tiered": {
+            "basis": "input_tokens_per_request",
+            "verified_at": "2026-10-12",
+            "source_url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+            "scopes": [
+              {
+                "scope": "Global",
+                "regions": [
+                  "Global Standard API"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 100000,
+                    "input": 0.1,
+                    "output": 0.5
+                  },
+                  {
+                    "min_input_tokens": 100001,
+                    "max_input_tokens": null,
+                    "input": 0.5,
+                    "output": 2.5
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "family": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "model": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "context_window": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "max_output": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "knowledge_cutoff": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "reasoning": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "modalities": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "pricing": "https://platform.claude.com/docs/en/about-claude/pricing"
+      },
+      "event_id": "evt_46dbe8695c1114c8976b",
+      "event_hash": "46dbe8695c1114c8976b32ace134bfb7663302289a059ead5c101e260ce2682f"
+    },
+    {
+      "sequence": 100,
+      "type": "model_added",
+      "model_id": "gemini-3.1-flash-image",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "46dbe8695c1114c8976b32ace134bfb7663302289a059ead5c101e260ce2682f",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+        "context_window": 131072,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.5,
+              "output": 60
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_93892929c6b88d49d7ff",
+      "event_hash": "93892929c6b88d49d7ff7244e52c556fbc3f14f8e54b1fec185400d053bd4763"
+    },
+    {
+      "sequence": 101,
+      "type": "model_added",
+      "model_id": "gemini-3.1-pro-preview",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "93892929c6b88d49d7ff7244e52c556fbc3f14f8e54b1fec185400d053bd4763",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3",
+        "model": "Gemini 3.1 Pro Preview",
+        "context_window": 1048576,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "PDF"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "tiered": {
+            "basis": "input_tokens_per_request",
+            "verified_at": "2026-10-12",
+            "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+            "scopes": [
+              {
+                "scope": "Global",
+                "regions": [
+                  "Global Standard API"
+                ],
+                "tiers": [
+                  {
+                    "min_input_tokens": 1,
+                    "max_input_tokens": 200000,
+                    "input": 2,
+                    "output": 12
+                  },
+                  {
+                    "min_input_tokens": 200001,
+                    "max_input_tokens": null,
+                    "input": 4,
+                    "output": 18
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_cd0c382319e543377f34",
+      "event_hash": "cd0c382319e543377f3492141f0288a911f28c03c944c13eb6ed9a6ce96629f3"
+    },
+    {
+      "sequence": 102,
+      "type": "model_added",
+      "model_id": "gemini-3.8-live-extended-thinking",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "cd0c382319e543377f3492141f0288a911f28c03c944c13eb6ed9a6ce96629f3",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini 3.8",
+        "model": "Gemini 3.8 Live Extended Thinking",
+        "context_window": 131072,
+        "max_output": 65536,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "background asynchronous reasoning",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 0.75,
+              "output": 4.5
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_b7a1d0ebc2ca3715f5ec",
+      "event_hash": "b7a1d0ebc2ca3715f5ecbcc176a744edff1a259fbe557738fec4065f0c1ec928"
+    },
+    {
+      "sequence": 103,
+      "type": "model_added",
+      "model_id": "stable-image-ultra",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "b7a1d0ebc2ca3715f5ecbcc176a744edff1a259fbe557738fec4065f0c1ec928",
+      "snapshot": {
+        "provider": "Stability AI",
+        "family": "Stable Image",
+        "model": "Stable Image Ultra",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.08
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://platform.stability.ai/docs/api-reference",
+        "family": "https://platform.stability.ai/docs/api-reference",
+        "model": "https://platform.stability.ai/docs/api-reference",
+        "context_window": "https://platform.stability.ai/docs/api-reference",
+        "max_output": "https://platform.stability.ai/docs/api-reference",
+        "knowledge_cutoff": "https://platform.stability.ai/docs/api-reference",
+        "reasoning": "https://platform.stability.ai/docs/api-reference",
+        "modalities": "https://platform.stability.ai/docs/api-reference",
+        "pricing": "https://platform.stability.ai/pricing"
+      },
+      "event_id": "evt_77b0ad167e1577fc5df3",
+      "event_hash": "77b0ad167e1577fc5df3946f18c27e09b086fb9b9650717d3bf8314a48e3aee7"
     }
   ],
-  "chain_head": "7134f8093db5a643806696c8bc64b00d867d808cdef403b3595f0cc006bde71f"
+  "chain_head": "77b0ad167e1577fc5df3946f18c27e09b086fb9b9650717d3bf8314a48e3aee7"
 }

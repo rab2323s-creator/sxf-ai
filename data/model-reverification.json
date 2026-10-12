@@ -10,8 +10,8 @@
     "publication_policy": "Reverification queue is advisory; source changes create candidates and never auto-publish."
   },
   "summary": {
-    "total": 95,
-    "fresh": 95,
+    "total": 100,
+    "fresh": 100,
     "due": 0,
     "overdue": 0,
     "critical": 0,
@@ -1367,6 +1367,31 @@
       ]
     },
     {
+      "model_id": "claude-haiku-5-5",
+      "provider": "Anthropic",
+      "model": "Claude Haiku 5.5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+      ]
+    },
+    {
       "model_id": "flux-2-klein-9b",
       "provider": "Black Forest Labs",
       "model": "FLUX.2 Klein 9B",
@@ -1592,6 +1617,31 @@
       ]
     },
     {
+      "model_id": "gemini-3.1-flash-image",
+      "provider": "Google",
+      "model": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
       "model_id": "gemini-3.8-live",
       "provider": "Google",
       "model": "Gemini 3.8 Live",
@@ -1613,6 +1663,31 @@
       ],
       "source_urls": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gemini-3.8-live-extended-thinking",
+      "provider": "Google",
+      "model": "Gemini 3.8 Live Extended Thinking",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
         "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
@@ -1914,6 +1989,31 @@
       "source_urls": [
         "https://docs.dev.runwayml.com/guides/pricing/",
         "https://docs.dev.runwayml.com/guides/using-the-api/"
+      ]
+    },
+    {
+      "model_id": "stable-image-ultra",
+      "provider": "Stability AI",
+      "model": "Stable Image Ultra",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-11-11",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.stability.ai/docs/api-reference",
+        "https://platform.stability.ai/pricing"
       ]
     },
     {
@@ -2428,6 +2528,31 @@
       ],
       "source_urls": [
         "https://docs.mistral.ai/models/shieldstral-1-0"
+      ]
+    },
+    {
+      "model_id": "gemini-3.1-pro-preview",
+      "provider": "Google",
+      "model": "Gemini 3.1 Pro Preview",
+      "lifecycle_status": "preview",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-12",
+      "age_days": 0,
+      "policy": "preview",
+      "review_interval_days": 7,
+      "due_at": "2026-10-19",
+      "status": "fresh",
+      "priority": "low",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+        "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     }
   ]
