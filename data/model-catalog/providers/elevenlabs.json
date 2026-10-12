@@ -140,6 +140,164 @@
       "lifecycle": {
         "status": "current"
       }
+    },
+    {
+      "family": "Scribe",
+      "model": "ElevenLabs Scribe v2",
+      "model_id": "scribe_v2",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "ElevenLabs multilingual speech recognition for file transcripts, subtitle creation, speaker identification and keyterm-prompted transcription.",
+      "notes": [
+        "ElevenLabs official Speech to Text API model ID is scribe_v2, used at POST /v1/speech-to-text.",
+        "Official API pricing lists $0.22 per input audio hour, equivalent to $0.0036667/minute; catalog rate retains the native $0.22 PER HOUR, not a synthetic generative token rate.",
+        "Optional entity detection and keyterm prompting are charged separately (published $0.07/hour and $0.05/hour respectively). Supported media, rate limits and language support depend on endpoint.",
+        "Output is text transcription, not generated speech. Generic text-token calculator is disabled."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.22
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 60,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per 60 audio minutes (hourly API rate; add-ons extra)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/scribe-v2/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "https://elevenlabs.io/pricing/api"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "pricing": "https://elevenlabs.io/pricing/api",
+          "access": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "lifecycle": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+          "capabilities": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    },
+    {
+      "family": "Scribe",
+      "model": "ElevenLabs Scribe v2 Realtime",
+      "model_id": "scribe_v2_realtime",
+      "modalities": {
+        "input": [
+          "audio"
+        ],
+        "output": [
+          "text"
+        ]
+      },
+      "positioning": "ElevenLabs low-latency streaming transcription via WebSocket, with partial/final utterances and voice-activity detection.",
+      "notes": [
+        "Official WebSocket model_id is scribe_v2_realtime at wss://api.elevenlabs.io/v1/speech-to-text/realtime.",
+        "ElevenLabs official API rate is $0.39 per processed audio hour, expressed as per 60 minutes here (equivalent to $0.0065/minute). This is audio-time billing, not the cost of model-generated text.",
+        "Supports 90+ languages, manual or VAD commit, optional word-level timestamps and single-use browser tokens for client integrations.",
+        "Realtime and offline Scribe rates are different; compare using audio duration and streaming needs, never as token output rates."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 0.39
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 60,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per 60 audio minutes (realtime WebSocket hourly API rate)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/scribe-v2-realtime/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "https://elevenlabs.io/pricing/api"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "pricing": "https://elevenlabs.io/pricing/api",
+          "access": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "lifecycle": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+          "capabilities": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
     }
   ]
 }

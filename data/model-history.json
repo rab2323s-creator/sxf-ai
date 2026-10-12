@@ -3326,6 +3326,342 @@
           ]
         }
       }
+    },
+    "flux-2-klein-9b": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_c027c7183422643d259a",
+      "snapshot_hash": "cba392f65e71600f3500733596511b667ed397c778e991eeba15f9ad34ab63d6",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Klein 9B",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.015
+              }
+            }
+          ]
+        }
+      }
+    },
+    "flux-2-pro": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_886f75682ce4ce3c4983",
+      "snapshot_hash": "466cf2364d6484838b8935b6cab0d917634209cbf892a28dae2ce56aaa873ad9",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Pro",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      }
+    },
+    "flux-general-en": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_d9a6dc4627ae92b5a36f",
+      "snapshot_hash": "cdde1fbadb4c905b4e62c4b90b8229f52bdc440eb7a48d4d3a47fe951d213600",
+      "snapshot": {
+        "provider": "Deepgram",
+        "family": "Deepgram Flux",
+        "model": "Deepgram Flux",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.0065
+              }
+            }
+          ]
+        }
+      }
+    },
+    "gen4.5": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_86a50d7119e4ed498afb",
+      "snapshot_hash": "f4e436dac3a6bd5ca783998f170ca77fb7fdb7dc551d89c08a930fa69b05d827",
+      "snapshot": {
+        "provider": "Runway",
+        "family": "Runway Gen",
+        "model": "Runway Gen-4.5",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "video"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 7.2
+              }
+            }
+          ]
+        }
+      }
+    },
+    "gpt-image-2": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_32b524842fd86a37fb38",
+      "snapshot_hash": "75d5a1f6cd1eb81811e8c211ab8d4cbfa7dbac5845ed6f5ae00f307090e9ed22",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2",
+        "model": "GPT-Image-2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 4,
+              "cached_input": 1,
+              "output": 15
+            }
+          ]
+        }
+      }
+    },
+    "ideogram-v3": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_a6a0420c26f5f8a46d9f",
+      "snapshot_hash": "50a41d5a41def62d64171f19631aedb32b6abd60f6c53acbfe496f47901fb176",
+      "snapshot": {
+        "provider": "Ideogram",
+        "family": "Ideogram Image",
+        "model": "Ideogram 3.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ideogram-v4": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_3a03214a09dcd82e3748",
+      "snapshot_hash": "b83ac530d15b54b452fc6da25e6c47be192f0ffce491d0464710175c0ab34652",
+      "snapshot": {
+        "provider": "Ideogram",
+        "family": "Ideogram Image",
+        "model": "Ideogram 4.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      }
+    },
+    "nova-3": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_76089e7fce7362b08418",
+      "snapshot_hash": "cf560e29ddc4af68b0841e3aabde833ac0f535b5c8d7769417cb59001ccd7861",
+      "snapshot": {
+        "provider": "Deepgram",
+        "family": "Deepgram Nova",
+        "model": "Deepgram Nova-3",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.0043
+              }
+            }
+          ]
+        }
+      }
+    },
+    "scribe_v2": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_b3678466088783dc68c3",
+      "snapshot_hash": "e489dc228964586965650aa6a29231722ca2c048466373649d7512bc8b2cf4f7",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Scribe",
+        "model": "ElevenLabs Scribe v2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.22
+              }
+            }
+          ]
+        }
+      }
+    },
+    "scribe_v2_realtime": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_7134f8093db5a6438066",
+      "snapshot_hash": "83a4d3680aa4e76cfcc61df159eea8f594412f3c94c99bd82a9aee6ee1821288",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Scribe",
+        "model": "ElevenLabs Scribe v2 Realtime",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.39
+              }
+            }
+          ]
+        }
+      }
     }
   },
   "events": [
@@ -8034,7 +8370,493 @@
       },
       "event_id": "evt_a805f17ab1adc01b0a09",
       "event_hash": "a805f17ab1adc01b0a095e0361f7899e8a401b622d4d21c71ba87dceaabc7f97"
+    },
+    {
+      "sequence": 89,
+      "type": "model_added",
+      "model_id": "flux-2-klein-9b",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "a805f17ab1adc01b0a095e0361f7899e8a401b622d4d21c71ba87dceaabc7f97",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Klein 9B",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.015
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://api.bfl.ai/docs",
+        "family": "https://api.bfl.ai/docs",
+        "model": "https://api.bfl.ai/docs",
+        "context_window": "https://api.bfl.ai/docs",
+        "max_output": "https://api.bfl.ai/docs",
+        "knowledge_cutoff": "https://api.bfl.ai/docs",
+        "reasoning": "https://api.bfl.ai/docs",
+        "modalities": "https://api.bfl.ai/docs",
+        "pricing": "https://bfl.ai/pricing?category=flux.2"
+      },
+      "event_id": "evt_c027c7183422643d259a",
+      "event_hash": "c027c7183422643d259ac7ef9cedd106eec873eea82db13ed5d74f816c065c3c"
+    },
+    {
+      "sequence": 90,
+      "type": "model_added",
+      "model_id": "flux-2-pro",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "c027c7183422643d259ac7ef9cedd106eec873eea82db13ed5d74f816c065c3c",
+      "snapshot": {
+        "provider": "Black Forest Labs",
+        "family": "FLUX.2",
+        "model": "FLUX.2 Pro",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://api.bfl.ai/docs",
+        "family": "https://api.bfl.ai/docs",
+        "model": "https://api.bfl.ai/docs",
+        "context_window": "https://api.bfl.ai/docs",
+        "max_output": "https://api.bfl.ai/docs",
+        "knowledge_cutoff": "https://api.bfl.ai/docs",
+        "reasoning": "https://api.bfl.ai/docs",
+        "modalities": "https://api.bfl.ai/docs",
+        "pricing": "https://bfl.ai/pricing?category=flux.2"
+      },
+      "event_id": "evt_886f75682ce4ce3c4983",
+      "event_hash": "886f75682ce4ce3c4983a6d82a77e08200af39b8add3de8cd69ea865ecfa9db1"
+    },
+    {
+      "sequence": 91,
+      "type": "model_added",
+      "model_id": "flux-general-en",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "886f75682ce4ce3c4983a6d82a77e08200af39b8add3de8cd69ea865ecfa9db1",
+      "snapshot": {
+        "provider": "Deepgram",
+        "family": "Deepgram Flux",
+        "model": "Deepgram Flux",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.0065
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.deepgram.com/docs/flux",
+        "family": "https://developers.deepgram.com/docs/flux",
+        "model": "https://developers.deepgram.com/docs/flux",
+        "context_window": "https://developers.deepgram.com/docs/flux",
+        "max_output": "https://developers.deepgram.com/docs/flux",
+        "knowledge_cutoff": "https://developers.deepgram.com/docs/flux",
+        "reasoning": "https://developers.deepgram.com/docs/flux",
+        "modalities": "https://developers.deepgram.com/docs/flux",
+        "pricing": "https://deepgram.com/pricing"
+      },
+      "event_id": "evt_d9a6dc4627ae92b5a36f",
+      "event_hash": "d9a6dc4627ae92b5a36f244d3cbe1f360c7fe05a025dff0feaf802b8498cf4bf"
+    },
+    {
+      "sequence": 92,
+      "type": "model_added",
+      "model_id": "gen4.5",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "d9a6dc4627ae92b5a36f244d3cbe1f360c7fe05a025dff0feaf802b8498cf4bf",
+      "snapshot": {
+        "provider": "Runway",
+        "family": "Runway Gen",
+        "model": "Runway Gen-4.5",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "video"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 7.2
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "family": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "model": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "context_window": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "max_output": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "knowledge_cutoff": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "reasoning": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "modalities": "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "pricing": "https://docs.dev.runwayml.com/guides/pricing/"
+      },
+      "event_id": "evt_86a50d7119e4ed498afb",
+      "event_hash": "86a50d7119e4ed498afb0ef57f52c5f3e07518c21b6510fdd027faf5d628e036"
+    },
+    {
+      "sequence": 93,
+      "type": "model_added",
+      "model_id": "gpt-image-2",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "86a50d7119e4ed498afb0ef57f52c5f3e07518c21b6510fdd027faf5d628e036",
+      "snapshot": {
+        "provider": "OpenAI",
+        "family": "GPT Image 2",
+        "model": "GPT-Image-2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 4,
+              "cached_input": 1,
+              "output": 15
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "family": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "model": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "context_window": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "max_output": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "reasoning": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2",
+        "pricing": "https://developers.openai.com/api/docs/pricing"
+      },
+      "event_id": "evt_32b524842fd86a37fb38",
+      "event_hash": "32b524842fd86a37fb38cce263f30ce6b631d9af1eee4ef579edd516d8d35da1"
+    },
+    {
+      "sequence": 94,
+      "type": "model_added",
+      "model_id": "ideogram-v3",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "32b524842fd86a37fb38cce263f30ce6b631d9af1eee4ef579edd516d8d35da1",
+      "snapshot": {
+        "provider": "Ideogram",
+        "family": "Ideogram Image",
+        "model": "Ideogram 3.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "family": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "model": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v3",
+        "pricing": "https://ideogram.ai/pricing/"
+      },
+      "event_id": "evt_a6a0420c26f5f8a46d9f",
+      "event_hash": "a6a0420c26f5f8a46d9f81a205b8b1cd7d4e1d805c9860073c074239caff8ec1"
+    },
+    {
+      "sequence": 95,
+      "type": "model_added",
+      "model_id": "ideogram-v4",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "a6a0420c26f5f8a46d9f81a205b8b1cd7d4e1d805c9860073c074239caff8ec1",
+      "snapshot": {
+        "provider": "Ideogram",
+        "family": "Ideogram Image",
+        "model": "Ideogram 4.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "image": 0.03
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "family": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "model": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "context_window": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "max_output": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "knowledge_cutoff": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "reasoning": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "modalities": "https://developer.ideogram.ai/v1/api-reference/generate-images/generate-v4",
+        "pricing": "https://ideogram.ai/pricing/"
+      },
+      "event_id": "evt_3a03214a09dcd82e3748",
+      "event_hash": "3a03214a09dcd82e374873cdefba82d2f3595aa5f9ff9531fd67ea2516052177"
+    },
+    {
+      "sequence": 96,
+      "type": "model_added",
+      "model_id": "nova-3",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "3a03214a09dcd82e374873cdefba82d2f3595aa5f9ff9531fd67ea2516052177",
+      "snapshot": {
+        "provider": "Deepgram",
+        "family": "Deepgram Nova",
+        "model": "Deepgram Nova-3",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.0043
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://developers.deepgram.com/docs/model",
+        "family": "https://developers.deepgram.com/docs/model",
+        "model": "https://developers.deepgram.com/docs/model",
+        "context_window": "https://developers.deepgram.com/docs/model",
+        "max_output": "https://developers.deepgram.com/docs/model",
+        "knowledge_cutoff": "https://developers.deepgram.com/docs/model",
+        "reasoning": "https://developers.deepgram.com/docs/model",
+        "modalities": "https://developers.deepgram.com/docs/model",
+        "pricing": "https://deepgram.com/pricing"
+      },
+      "event_id": "evt_76089e7fce7362b08418",
+      "event_hash": "76089e7fce7362b08418a64d9875143c0cc1ecb2cad06fee128d2a9a76d6100f"
+    },
+    {
+      "sequence": 97,
+      "type": "model_added",
+      "model_id": "scribe_v2",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "76089e7fce7362b08418a64d9875143c0cc1ecb2cad06fee128d2a9a76d6100f",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Scribe",
+        "model": "ElevenLabs Scribe v2",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.22
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "family": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "model": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/convert",
+        "pricing": "https://elevenlabs.io/pricing/api"
+      },
+      "event_id": "evt_b3678466088783dc68c3",
+      "event_hash": "b3678466088783dc68c3c13dc1580cb7d976c1be65fb0d22ace7f61f48858217"
+    },
+    {
+      "sequence": 98,
+      "type": "model_added",
+      "model_id": "scribe_v2_realtime",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "b3678466088783dc68c3c13dc1580cb7d976c1be65fb0d22ace7f61f48858217",
+      "snapshot": {
+        "provider": "ElevenLabs",
+        "family": "Scribe",
+        "model": "ElevenLabs Scribe v2 Realtime",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "rates": {
+                "minute": 0.39
+              }
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "family": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "model": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "context_window": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "max_output": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "knowledge_cutoff": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "reasoning": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "modalities": "https://elevenlabs.io/docs/api-reference/speech-to-text/v-1-speech-to-text-realtime",
+        "pricing": "https://elevenlabs.io/pricing/api"
+      },
+      "event_id": "evt_7134f8093db5a6438066",
+      "event_hash": "7134f8093db5a643806696c8bc64b00d867d808cdef403b3595f0cc006bde71f"
     }
   ],
-  "chain_head": "a805f17ab1adc01b0a095e0361f7899e8a401b622d4d21c71ba87dceaabc7f97"
+  "chain_head": "7134f8093db5a643806696c8bc64b00d867d808cdef403b3595f0cc006bde71f"
 }

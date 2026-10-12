@@ -1,0 +1,86 @@
+{
+  "provider": "Runway",
+  "models": [
+    {
+      "family": "Runway Gen",
+      "model": "Runway Gen-4.5",
+      "model_id": "gen4.5",
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video"
+        ]
+      },
+      "positioning": "Runway API text-to-video and image-to-video model for cinematic camera motion, prompt-controlled shots and production video sequences.",
+      "notes": [
+        "Official Runway Dev API model ID is gen4.5, usable for both text-to-video and image-to-video requests.",
+        "Runway developer price: 12 credits per generated second and $0.01 per purchased API credit, equivalent to $0.12 per second or $7.20 per minute before sales tax. The catalog displays the one-minute equivalent, NOT a charge for a fixed video.",
+        "Runway creative app subscriptions and Explore Mode are not the same as Developer API billing. Professional/HDR formats add surcharges (e.g. +5 or +20 credits/second).",
+        "Official creator guide documents 2–10 second clips for standard text/image-to-video modes. LLM context-window and token max-output fields do not apply."
+      ],
+      "pricing": {
+        "standard": [
+          {
+            "start": "2026-10-12",
+            "end": null,
+            "rates": {
+              "minute": 7.2
+            }
+          }
+        ]
+      },
+      "pricing_status": "official-paid",
+      "capabilities": [
+        "vision",
+        "video-generation"
+      ],
+      "pricing_basis": {
+        "meter": "minutes",
+        "quantity": 1,
+        "dimensions": [
+          "minute"
+        ],
+        "display_unit": "per generated minute (equivalent to $0.12/second; 12 credits/second)"
+      },
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "sxf_url": "/models/gen4-5/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://docs.dev.runwayml.com/guides/using-the-api/",
+        "https://docs.dev.runwayml.com/guides/pricing/",
+        "https://help.runwayml.com/hc/en-us/articles/46974685288467-Creating-with-Gen-4-5"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "context_window": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "max_output": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "knowledge_cutoff": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "reasoning": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "modalities": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "pricing": "https://docs.dev.runwayml.com/guides/pricing/",
+          "access": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "lifecycle": "https://docs.dev.runwayml.com/guides/using-the-api/",
+          "capabilities": "https://docs.dev.runwayml.com/guides/using-the-api/"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

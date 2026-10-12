@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
   "source_verified": "2026-10-12",
-  "model_count": 85,
-  "provider_count": 17,
+  "model_count": 95,
+  "provider_count": 20,
   "models": [
     {
       "model_id": "gpt-6-astra",
@@ -2837,6 +2837,318 @@
       },
       "verified_at": "2026-10-12",
       "standard_rate": null
+    },
+    {
+      "model_id": "gpt-image-2",
+      "model": "GPT-Image-2",
+      "provider": "OpenAI",
+      "family": "GPT Image 2",
+      "sxf_url": "/models/gpt-image-2/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million IMAGE tokens (text input separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 4,
+        "cached_input": 1,
+        "output": 15
+      }
+    },
+    {
+      "model_id": "ideogram-v4",
+      "model": "Ideogram 4.0",
+      "provider": "Ideogram",
+      "family": "Ideogram Image",
+      "sxf_url": "/models/ideogram-v4/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.03
+      }
+    },
+    {
+      "model_id": "ideogram-v3",
+      "model": "Ideogram 3.0",
+      "provider": "Ideogram",
+      "family": "Ideogram Image",
+      "sxf_url": "/models/ideogram-v3/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per image, Turbo generation only (Default/Quality higher)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.03
+      }
+    },
+    {
+      "model_id": "gen4.5",
+      "model": "Runway Gen-4.5",
+      "provider": "Runway",
+      "family": "Runway Gen",
+      "sxf_url": "/models/gen4-5/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "video-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per generated minute (equivalent to $0.12/second; 12 credits/second)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "minute": 7.2
+      }
+    },
+    {
+      "model_id": "nova-3",
+      "model": "Deepgram Nova-3",
+      "provider": "Deepgram",
+      "family": "Deepgram Nova",
+      "sxf_url": "/models/nova-3/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per pre-recorded MONOLINGUAL audio minute (streaming/multilingual differ)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "minute": 0.0043
+      }
+    },
+    {
+      "model_id": "flux-general-en",
+      "model": "Deepgram Flux",
+      "provider": "Deepgram",
+      "family": "Deepgram Flux",
+      "sxf_url": "/models/flux-general-en/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per streaming ENGLISH audio minute (promotional Pay As You Go)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "minute": 0.0065
+      }
+    },
+    {
+      "model_id": "scribe_v2",
+      "model": "ElevenLabs Scribe v2",
+      "provider": "ElevenLabs",
+      "family": "Scribe",
+      "sxf_url": "/models/scribe-v2/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per 60 audio minutes (hourly API rate; add-ons extra)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "minute": 0.22
+      }
+    },
+    {
+      "model_id": "scribe_v2_realtime",
+      "model": "ElevenLabs Scribe v2 Realtime",
+      "provider": "ElevenLabs",
+      "family": "Scribe",
+      "sxf_url": "/models/scribe-v2-realtime/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "transcription",
+        "audio"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "minutes",
+        "display_unit": "per 60 audio minutes (realtime WebSocket hourly API rate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "minute": 0.39
+      }
+    },
+    {
+      "model_id": "flux-2-klein-9b",
+      "model": "FLUX.2 Klein 9B",
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "sxf_url": "/models/flux-2-klein-9b/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": true,
+        "self_hostable": true
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.015
+      }
+    },
+    {
+      "model_id": "flux-2-pro",
+      "model": "FLUX.2 Pro",
+      "provider": "Black Forest Labs",
+      "family": "FLUX.2",
+      "sxf_url": "/models/flux-2-pro/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "images",
+        "display_unit": "per first output MP (additional/reference MP extra)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "image": 0.03
+      }
     }
   ]
 }

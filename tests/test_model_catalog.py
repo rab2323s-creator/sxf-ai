@@ -134,4 +134,32 @@ for slug in ("gpt-image-2-5-sunburst-vs-flare", "eleven-v4-vs-eleven-v4-turbo", 
     text = html.read_text(encoding="utf-8")
     assert "SPECIALIST BUYER GUIDE" in text and f'https://sxf.si/compare/{slug}/' in text, f"{slug}: missing specialist metadata"
 
+# 10 verified creator/voice models — canonical, SEO, and native-meter regression.
+next_ten = {
+    "gpt-image-2": ("OpenAI", "image-generation", "tokens"),
+    "ideogram-v4": ("Ideogram", "image-generation", "images"),
+    "ideogram-v3": ("Ideogram", "image-generation", "images"),
+    "gen4.5": ("Runway", "video-generation", "minutes"),
+    "nova-3": ("Deepgram", "transcription", "minutes"),
+    "flux-general-en": ("Deepgram", "transcription", "minutes"),
+    "scribe_v2": ("ElevenLabs", "transcription", "minutes"),
+    "scribe_v2_realtime": ("ElevenLabs", "transcription", "minutes"),
+    "flux-2-klein-9b": ("Black Forest Labs", "image-generation", "images"),
+    "flux-2-pro": ("Black Forest Labs", "image-generation", "images"),
+}
+assert len(catalog["models"]) == 95, "Expected 95 models after ten source-verified additions"
+for mid, (provider,task,meter) in next_ten.items():
+    row=next(m for m in catalog["models"] if m["model_id"] == mid)
+    assert row["provider"] == provider and task in row["capabilities"], f"{mid}: provider/task mismatch"
+    assert row["pricing_basis"]["meter"] == meter and row["calculator_eligible"] is False, f"{mid}: incompatible generic token calculator"
+    reference = ROOT / row["sxf_url"].strip("/") / "index.html"
+    assert reference.is_file(), f"{mid}: no generated model reference"
+    text=reference.read_text(encoding="utf-8")
+    assert f"https://sxf.si{row['sxf_url']}" in text and "data-model-history" in text and "data-model-comparisons" in text, f"{mid}: missing SEO/history/comparison link"
+for slug in ("gpt-image-2-vs-gpt-image-2-5-flare", "ideogram-4-vs-ideogram-3", "runway-gen-4-5-vs-kling-3-0", "deepgram-nova-3-vs-elevenlabs-scribe-v2", "deepgram-flux-vs-scribe-realtime-v2", "flux-2-pro-vs-flux-2-klein-9b"):
+    comparison_file=ROOT / "compare" / slug / "index.html"
+    assert comparison_file.is_file(), f"{slug}: comparison missing"
+    html=comparison_file.read_text(encoding="utf-8")
+    assert "SPECIALIST BUYER GUIDE" in html and f"https://sxf.si/compare/{slug}/" in html, f"{slug}: SEO or decision factors missing"
+
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")
