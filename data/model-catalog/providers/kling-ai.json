@@ -1,0 +1,78 @@
+{
+  "provider": "Kling AI",
+  "models": [
+    {
+      "family": "Kling VIDEO",
+      "model": "Kling VIDEO 3.0",
+      "model_id": "kling-3.0",
+      "context_window": null,
+      "max_output": null,
+      "knowledge_cutoff": null,
+      "reasoning": null,
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "video",
+          "audio"
+        ]
+      },
+      "positioning": "Kling AI video generation model supporting text-to-video, image-to-video, multis-shot storyboards, character element references and optional native audio.",
+      "notes": [
+        "The official developer API provides /text-to-video/kling-3.0 and supports both 720p/1080p/4K video settings; product and developer-plan access or pricing may differ.",
+        "Official creative product reference pricing: 720p without native audio 6 Credits/second, 720p with audio 9 Credits/second; 1080p without audio 8 Credits/second, 1080p with audio 12 Credits/second. Voice control adds 2 Credits/second. These are product CREDITS, not USD.",
+        "An exact public Standard USD-denominated developer API rate was not established from the official references. No credit-to-USD conversion is asserted and no flat USD rate is published in SXF.",
+        "Duration is documented as 3–15 seconds in the official user guide. Video output is not a token-generation output limit; no artificial context window or max_output tokens are claimed.",
+        "Reference credit rates come from Kling AI's consumer-facing creative plan, not a verified USD-denominated developer API tariff."
+      ],
+      "pricing": {},
+      "pricing_status": "not-published",
+      "capabilities": [
+        "vision",
+        "video-generation"
+      ],
+      "pricing_basis": {
+        "meter": "requests",
+        "quantity": 1,
+        "dimensions": [
+          "request"
+        ],
+        "display_unit": "per generation task (official credits vary by second, resolution and audio)"
+      },
+      "sxf_url": "/models/kling-3-0/",
+      "page_template": "catalog-reference",
+      "official_sources": [
+        "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "https://kling.ai/quickstart/klingai-video-3-model-user-guide",
+        "https://kling.ai/blog/kling-video-3-0-credit-cost-guide"
+      ],
+      "provenance": {
+        "verified_at": "2026-10-12",
+        "verification_method": "manual primary-source verification",
+        "evidence": {
+          "model_identity": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "context_window": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "max_output": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "knowledge_cutoff": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "reasoning": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "modalities": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "pricing": "https://kling.ai/quickstart/klingai-video-3-model-user-guide",
+          "access": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "lifecycle": "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "capabilities": "https://kling.ai/document-api/apiReference/model/textToVideo"
+        }
+      },
+      "calculator_eligible": false,
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      }
+    }
+  ]
+}

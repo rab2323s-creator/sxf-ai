@@ -1,0 +1,434 @@
+{
+  "schema_version": "1.0",
+  "description": "Explicit repository-owner authorization in the 2026-10-12 conversation to publish four source-verified creative generation models.",
+  "approved_at": "2026-10-12T13:02:00Z",
+  "reviewed_by": "repository owner — explicit approval in ChatGPT conversation",
+  "models": [
+    {
+      "candidate_id": "cand_visual_gemini_nano_banana_2_1",
+      "provider": "Google",
+      "model_id": "gemini-nano-banana-2.1",
+      "model": "Nano Banana 2.1",
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — explicit approval in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T13:02:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "identity_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/image-generation"
+      ],
+      "proposed_record": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana 2.1",
+        "model_id": "gemini-nano-banana-2.1",
+        "context_window": 131072,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "PDF"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "positioning": "Google's efficient production image creation and conversational editing model with 1K, 2K and 4K output and improved text rendering, references and character consistency.",
+        "notes": [
+          "Standard paid API input: $1.50 per 1M text/image/video input tokens; generated IMAGE output: $30.00 per 1M IMAGE output tokens. Text and thinking output is separately priced at $7.50 per 1M text tokens; do not apply the image rate to text.",
+          "Google estimates $0.0336 per 1K image, $0.0504 per 2K image and $0.113 per 4K image in Standard mode. Input prompts, Search grounding, Batch and additional output tokens may incur separate charges.",
+          "Stable provider-native ID gemini-nano-banana-2.1. The generative text-token cost calculator is intentionally disabled because output mixes image and text tokens."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 1.5,
+              "output": 30
+            }
+          ]
+        },
+        "pricing_status": "official-paid",
+        "capabilities": [
+          "reasoning",
+          "vision",
+          "video",
+          "image-generation"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens (IMAGE output; text output billed separately)"
+        },
+        "sxf_url": "/models/gemini-nano-banana-2-1/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/image-generation"
+        ],
+        "provenance": {
+          "verified_at": "2026-10-12",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+            "access": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+            "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+          }
+        },
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        }
+      }
+    },
+    {
+      "candidate_id": "cand_visual_gemini_3_pro_image",
+      "provider": "Google",
+      "model_id": "gemini-3-pro-image",
+      "model": "Nano Banana Pro",
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — explicit approval in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T13:02:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "identity_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/image-generation"
+      ],
+      "proposed_record": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana Pro",
+        "model_id": "gemini-3-pro-image",
+        "context_window": 65536,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "positioning": "Google premium image generation and editing model for complex graphics, high-fidelity product mockups, brand consistency and precise text rendering.",
+        "notes": [
+          "Stable provider-native model ID is gemini-3-pro-image; Nano Banana Pro is its consumer-facing name.",
+          "Standard paid API rates: $2.00 per 1M text/image input tokens and $120.00 per 1M generated IMAGE output tokens. Text and thinking output is priced separately at $12.00 per 1M text tokens.",
+          "Google's Standard estimates are $0.134 per 1K/2K image or $0.24 per 4K image; prompt/input tokens, search grounding and optional service tiers can add charges.",
+          "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 2,
+              "output": 120
+            }
+          ]
+        },
+        "pricing_status": "official-paid",
+        "capabilities": [
+          "reasoning",
+          "vision",
+          "image-generation"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input",
+            "output"
+          ],
+          "display_unit": "per 1 million tokens (IMAGE output; text output billed separately)"
+        },
+        "sxf_url": "/models/gemini-3-pro-image/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/image-generation"
+        ],
+        "provenance": {
+          "verified_at": "2026-10-12",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+            "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+            "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+          }
+        },
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        }
+      }
+    },
+    {
+      "candidate_id": "cand_visual_kling_3_0",
+      "provider": "Kling AI",
+      "model_id": "kling-3.0",
+      "model": "Kling VIDEO 3.0",
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — explicit approval in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T13:02:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "identity_sources": [
+        "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "https://kling.ai/quickstart/klingai-video-3-model-user-guide",
+        "https://kling.ai/blog/kling-video-3-0-credit-cost-guide"
+      ],
+      "proposed_record": {
+        "provider": "Kling AI",
+        "family": "Kling VIDEO",
+        "model": "Kling VIDEO 3.0",
+        "model_id": "kling-3.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "positioning": "Kling AI video generation model supporting text-to-video, image-to-video, multis-shot storyboards, character element references and optional native audio.",
+        "notes": [
+          "The official developer API provides /text-to-video/kling-3.0 and supports both 720p/1080p/4K video settings; product and developer-plan access or pricing may differ.",
+          "Official creative product reference pricing: 720p without native audio 6 Credits/second, 720p with audio 9 Credits/second; 1080p without audio 8 Credits/second, 1080p with audio 12 Credits/second. Voice control adds 2 Credits/second. These are product CREDITS, not USD.",
+          "An exact public Standard USD-denominated developer API rate was not established from the official references. No credit-to-USD conversion is asserted and no flat USD rate is published in SXF.",
+          "Duration is documented as 3–15 seconds in the official user guide. Video output is not a token-generation output limit; no artificial context window or max_output tokens are claimed."
+        ],
+        "pricing": {},
+        "pricing_status": "not-published",
+        "capabilities": [
+          "vision",
+          "video-generation"
+        ],
+        "pricing_basis": {
+          "meter": "requests",
+          "quantity": 1,
+          "dimensions": [
+            "request"
+          ],
+          "display_unit": "per generation task (official credits vary by second, resolution and audio)"
+        },
+        "sxf_url": "/models/kling-3-0/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://kling.ai/document-api/apiReference/model/textToVideo",
+          "https://kling.ai/quickstart/klingai-video-3-model-user-guide",
+          "https://kling.ai/blog/kling-video-3-0-credit-cost-guide"
+        ],
+        "provenance": {
+          "verified_at": "2026-10-12",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "context_window": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "max_output": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "knowledge_cutoff": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "reasoning": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "modalities": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "pricing": "https://kling.ai/quickstart/klingai-video-3-model-user-guide",
+            "access": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "lifecycle": "https://kling.ai/document-api/apiReference/model/textToVideo",
+            "capabilities": "https://kling.ai/document-api/apiReference/model/textToVideo"
+          }
+        },
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        }
+      }
+    },
+    {
+      "candidate_id": "cand_visual_dreamina_seedance_2_0_260128",
+      "provider": "ByteDance",
+      "model_id": "dreamina-seedance-2-0-260128",
+      "model": "Seedance 2.0",
+      "review": {
+        "status": "approved",
+        "reviewed_by": "repository owner — explicit approval in ChatGPT conversation",
+        "reviewed_at": "2026-10-12T13:02:00Z"
+      },
+      "validation": {
+        "status": "passed",
+        "errors": [],
+        "warnings": []
+      },
+      "identity_sources": [
+        "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "https://www.byteplus.com/en/product/modelark/pricing",
+        "https://seed.bytedance.com/en/blog/seedance-2-0-official-launch"
+      ],
+      "proposed_record": {
+        "provider": "ByteDance",
+        "family": "Seedance 2",
+        "model": "Seedance 2.0",
+        "model_id": "dreamina-seedance-2-0-260128",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "positioning": "ByteDance joint audio-video generation model for cinematic multi-shot clips with text, image, audio and video references, served through BytePlus ModelArk.",
+        "notes": [
+          "BytePlus ModelArk native ID is dreamina-seedance-2-0-260128. This is distinct from Seedance 2.0 Fast or Mini; account activation, region and service availability must be checked in BytePlus.",
+          "The catalog's displayed reference Standard rate ($7.00 per 1M billed service tokens) applies ONLY to 480p/720p generation without video in the input. BytePlus also lists $4.30 with video input at 480p/720p; $4.70 with video input at 1080p and $7.70 without video input at 1080p.",
+          "Billing depends on resolution, model configuration and token consumption; this is NOT a per-generated-text-token rate or a guaranteed price per clip. The generic text cost calculator excludes Seedance.",
+          "ByteDance documents 4–15 second native audio/video generation, including references to up to 9 images, 3 video clips and 3 audio clips. Max output tokens/context window for a text LLM do not apply to video output."
+        ],
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 7
+            }
+          ]
+        },
+        "pricing_status": "official-paid",
+        "capabilities": [
+          "vision",
+          "video",
+          "audio",
+          "video-generation"
+        ],
+        "pricing_basis": {
+          "meter": "tokens",
+          "quantity": 1000000,
+          "dimensions": [
+            "input"
+          ],
+          "display_unit": "per 1M metered service tokens (no video input, 480p/720p only)"
+        },
+        "sxf_url": "/models/dreamina-seedance-2-0-260128/",
+        "page_template": "catalog-reference",
+        "official_sources": [
+          "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+          "https://www.byteplus.com/en/product/modelark/pricing",
+          "https://seed.bytedance.com/en/blog/seedance-2-0-official-launch"
+        ],
+        "provenance": {
+          "verified_at": "2026-10-12",
+          "verification_method": "manual primary-source verification",
+          "evidence": {
+            "model_identity": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "context_window": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "max_output": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "knowledge_cutoff": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "reasoning": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "modalities": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "pricing": "https://www.byteplus.com/en/product/modelark/pricing",
+            "access": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "lifecycle": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+            "capabilities": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1"
+          }
+        },
+        "calculator_eligible": false,
+        "access": {
+          "official_api": true,
+          "open_weight": false,
+          "self_hostable": false
+        },
+        "lifecycle": {
+          "status": "current"
+        }
+      }
+    }
+  ]
+}

@@ -2999,6 +2999,150 @@
           ]
         }
       }
+    },
+    "dreamina-seedance-2-0-260128": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_3844a57c34314b760537",
+      "snapshot_hash": "9d54332520c3d1e21abc96f04fd015e38661889a4c91b2918d67bc6ea8016d15",
+      "snapshot": {
+        "provider": "ByteDance",
+        "family": "Seedance 2",
+        "model": "Seedance 2.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 7
+            }
+          ]
+        }
+      }
+    },
+    "gemini-3-pro-image": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_79d732ff5b51a032072e",
+      "snapshot_hash": "1d86d728568ff9bb98f1cb72c9d55d439070b571ae9e4fbe169e2732a048ae23",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana Pro",
+        "context_window": 65536,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 2,
+              "output": 120
+            }
+          ]
+        }
+      }
+    },
+    "gemini-nano-banana-2.1": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_ed175a71c8bbea766f8c",
+      "snapshot_hash": "90df51f36445187cf7698dc8b1ddcabbb96cc318f669405494ab2e33a393b5b7",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana 2.1",
+        "context_window": 131072,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "PDF"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 1.5,
+              "output": 30
+            }
+          ]
+        }
+      }
+    },
+    "kling-3.0": {
+      "last_event_verified_at": "2026-10-12",
+      "last_event_id": "evt_ead2f63aed16dc37b6dc",
+      "snapshot_hash": "d1e4b15f7ae440eb3e6b8f7b3877f81fe1598b83966bea7b62016843385123db",
+      "snapshot": {
+        "provider": "Kling AI",
+        "family": "Kling VIDEO",
+        "model": "Kling VIDEO 3.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "pricing": {}
+      }
     }
   },
   "events": [
@@ -7230,7 +7374,211 @@
       },
       "event_id": "evt_b12eeb63a07ea9ab51a1",
       "event_hash": "b12eeb63a07ea9ab51a12cc33ab4b7a7bab6ccc5e1e2182b2a9b7131e2b9bdde"
+    },
+    {
+      "sequence": 79,
+      "type": "model_added",
+      "model_id": "dreamina-seedance-2-0-260128",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "b12eeb63a07ea9ab51a12cc33ab4b7a7bab6ccc5e1e2182b2a9b7131e2b9bdde",
+      "snapshot": {
+        "provider": "ByteDance",
+        "family": "Seedance 2",
+        "model": "Seedance 2.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 7
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "family": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "model": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "context_window": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "max_output": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "knowledge_cutoff": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "reasoning": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "modalities": "https://docs.byteplus.com/de/docs/modelark/seedance-2-0?redirect=1",
+        "pricing": "https://www.byteplus.com/en/product/modelark/pricing"
+      },
+      "event_id": "evt_3844a57c34314b760537",
+      "event_hash": "3844a57c34314b760537b4813b41acbe1e3b7bc077394c5a716eb63e92588e52"
+    },
+    {
+      "sequence": 80,
+      "type": "model_added",
+      "model_id": "gemini-3-pro-image",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "3844a57c34314b760537b4813b41acbe1e3b7bc077394c5a716eb63e92588e52",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana Pro",
+        "context_window": 65536,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking",
+          "levels": [
+            "supported"
+          ],
+          "default": null
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 2,
+              "output": 120
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_79d732ff5b51a032072e",
+      "event_hash": "79d732ff5b51a032072efaee8ffe0cdefe8f75f778fb39145cdb2e629a2f2be0"
+    },
+    {
+      "sequence": 81,
+      "type": "model_added",
+      "model_id": "gemini-nano-banana-2.1",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "79d732ff5b51a032072efaee8ffe0cdefe8f75f778fb39145cdb2e629a2f2be0",
+      "snapshot": {
+        "provider": "Google",
+        "family": "Gemini Nano Banana",
+        "model": "Nano Banana 2.1",
+        "context_window": 131072,
+        "max_output": 32768,
+        "knowledge_cutoff": null,
+        "reasoning": {
+          "type": "thinking level",
+          "levels": [
+            "minimal",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "PDF"
+          ],
+          "output": [
+            "text",
+            "image"
+          ]
+        },
+        "pricing": {
+          "standard": [
+            {
+              "start": "2026-10-12",
+              "end": null,
+              "input": 1.5,
+              "output": 30
+            }
+          ]
+        }
+      },
+      "evidence": {
+        "provider": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "family": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "model": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "context_window": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "max_output": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "knowledge_cutoff": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1",
+        "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
+      },
+      "event_id": "evt_ed175a71c8bbea766f8c",
+      "event_hash": "ed175a71c8bbea766f8ccd4baa85c0235bbb909880da039e4627034a07c9f68a"
+    },
+    {
+      "sequence": 82,
+      "type": "model_added",
+      "model_id": "kling-3.0",
+      "verified_at": "2026-10-12",
+      "previous_event_hash": "ed175a71c8bbea766f8ccd4baa85c0235bbb909880da039e4627034a07c9f68a",
+      "snapshot": {
+        "provider": "Kling AI",
+        "family": "Kling VIDEO",
+        "model": "Kling VIDEO 3.0",
+        "context_window": null,
+        "max_output": null,
+        "knowledge_cutoff": null,
+        "reasoning": null,
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "video",
+            "audio"
+          ]
+        },
+        "pricing": {}
+      },
+      "evidence": {
+        "provider": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "family": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "model": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "context_window": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "max_output": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "knowledge_cutoff": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "reasoning": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "modalities": "https://kling.ai/document-api/apiReference/model/textToVideo",
+        "pricing": "https://kling.ai/quickstart/klingai-video-3-model-user-guide"
+      },
+      "event_id": "evt_ead2f63aed16dc37b6dc",
+      "event_hash": "ead2f63aed16dc37b6dc74aea6ad45d9e32db84a0d25003ddda6bb01bcd2090f"
     }
   ],
-  "chain_head": "b12eeb63a07ea9ab51a12cc33ab4b7a7bab6ccc5e1e2182b2a9b7131e2b9bdde"
+  "chain_head": "ead2f63aed16dc37b6dc74aea6ad45d9e32db84a0d25003ddda6bb01bcd2090f"
 }

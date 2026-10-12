@@ -83,4 +83,26 @@ assert len(candidate_queue["candidates"]) == 4, "Four unapproved candidates must
 explorer_js = (ROOT / "models" / "explorer.js").read_text(encoding="utf-8")
 assert '<option value="image-generation">Image generation</option>' in explorer_js, "Image generation task filter is missing"
 
+# Visual generation expansion: preserve source-backed native billing and generated routes.
+visual_models = {
+    "gemini-nano-banana-2.1": ("Google", "image-generation"),
+    "gemini-3-pro-image": ("Google", "image-generation"),
+    "kling-3.0": ("Kling AI", "video-generation"),
+    "dreamina-seedance-2-0-260128": ("ByteDance", "video-generation"),
+}
+assert len(catalog["models"]) >= 79, "Expected four reviewed visual-generation models"
+for model_id, (provider, capability) in visual_models.items():
+    model = next(row for row in catalog["models"] if row["model_id"] == model_id)
+    assert model["provider"] == provider and capability in model["capabilities"], f"{model_id}: provider or capability mismatch"
+    assert not model["calculator_eligible"], f"{model_id}: media billing must not enter text arithmetic"
+    assert model["page_template"] == "catalog-reference", f"{model_id}: missing page generation"
+    assert (ROOT / model["sxf_url"].lstrip("/") / "index.html").is_file(), f"{model_id}: model page missing"
+assert next(x for x in catalog["models"] if x["model_id"] == "kling-3.0")["pricing_status"] == "not-published", "Never convert Kling Credits into invented USD API prices"
+assert next(x for x in catalog["models"] if x["model_id"] == "dreamina-seedance-2-0-260128")["pricing_basis"]["display_unit"].find("480p/720p") >= 0, "Seedance price must retain its billing caveat"
+for slug in ("nano-banana-2-1-vs-nano-banana-pro", "kling-3-0-vs-seedance-2-0"):
+    comparison_page = ROOT / "compare" / slug / "index.html"
+    assert comparison_page.is_file(), f"{slug}: generated comparison page missing"
+    assert f'https://sxf.si/compare/{slug}/' in comparison_page.read_text(encoding="utf-8"), f"{slug}: canonical comparison missing"
+assert '<option value="video-generation">Video generation</option>' in (ROOT / "models/explorer.js").read_text(encoding="utf-8")
+
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "name": "SXF AI Comparison Registry",
-  "source_verified": "2026-10-04",
+  "source_verified": "2026-10-12",
   "strategy": {
     "index_policy": "Only curated high-intent comparisons are indexable. Arbitrary model selections are available in the interactive compare builder without generating thin crawlable URLs.",
     "evidence_policy": "Generated comparison facts must come from data/model-pricing.json and data/model-history.json. No benchmark, speed, quality, or winner claim may be inferred from specifications alone.",
@@ -341,6 +341,85 @@
         "high-volume"
       ],
       "indexable": true
+    },
+    {
+      "slug": "nano-banana-2-1-vs-nano-banana-pro",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "gemini-nano-banana-2.1",
+        "gemini-3-pro-image"
+      ],
+      "title": "Nano Banana 2.1 vs Nano Banana Pro",
+      "kicker": "Image generation · 1K–4K",
+      "summary": "Compare Google's efficient Nano Banana 2.1 and premium Nano Banana Pro on image pricing, output resolutions, model identifiers, context and creative workflows using primary sources.",
+      "tags": [
+        "google",
+        "nano-banana",
+        "image-generation",
+        "image-editing",
+        "pricing",
+        "multimodal"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "1K and 2K image output",
+          "detail": "Google estimates Nano Banana 2.1 at $0.0336 per 1K image or $0.0504 per 2K image, versus Nano Banana Pro at $0.134 for a 1K or 2K image. Those output-only estimates exclude input and grounding costs."
+        },
+        {
+          "title": "4K image output",
+          "detail": "Google estimates $0.113 per generated 4K image for Nano Banana 2.1 versus $0.24 for Nano Banana Pro. Image tokens and separately billed text/thinking tokens should not be conflated."
+        },
+        {
+          "title": "Choose by creative workflow",
+          "detail": "Nano Banana 2.1 targets efficient conversational editing, high throughput and consistent multi-reference subjects. Nano Banana Pro targets advanced graphic design, precision creative control and complex high-fidelity compositions."
+        },
+        {
+          "title": "No invented quality benchmark",
+          "detail": "Neither model has an SXF verified side-by-side image quality score here. Test actual brand copy, compositing, edit consistency and typography on your own prompts."
+        }
+      ]
+    },
+    {
+      "slug": "kling-3-0-vs-seedance-2-0",
+      "type": "pair",
+      "template": "generic",
+      "model_ids": [
+        "kling-3.0",
+        "dreamina-seedance-2-0-260128"
+      ],
+      "title": "Kling VIDEO 3.0 vs Seedance 2.0",
+      "kicker": "Video generation · native audio",
+      "summary": "Compare Kling VIDEO 3.0 and ByteDance Seedance 2.0 on native-audio video generation, reference inputs, duration, official access and their incompatible native pricing units.",
+      "tags": [
+        "kling",
+        "bytedance",
+        "seedance",
+        "video-generation",
+        "audio",
+        "pricing",
+        "cinematic"
+      ],
+      "indexable": true,
+      "specialist_factors": [
+        {
+          "title": "Inputs and direction",
+          "detail": "Kling 3.0 officially supports text-to-video, image-to-video, reference elements and multi-shot prompts. Seedance 2.0 supports text, images, video clips and audio clips as multimodal references."
+        },
+        {
+          "title": "Clip length and sound",
+          "detail": "Both platforms document up to 15-second video generation with native audio capabilities. Duration, aspect ratio, credits and resulting quality depend on mode and deployment."
+        },
+        {
+          "title": "Pricing is not directly interchangeable",
+          "detail": "Kling's product guide publishes Credits per generated second (e.g. 6 Credits/s for 720p without audio), while BytePlus publishes Seedance 2.0 USD per million metered service tokens, varying with resolution and video inputs. No universal USD-per-video winner can be calculated."
+        },
+        {
+          "title": "Official API availability",
+          "detail": "Kling exposes a developer text-to-video/kling-3.0 endpoint. Seedance 2.0 is available as dreamina-seedance-2-0-260128 on BytePlus ModelArk, subject to deployment and account availability."
+        }
+      ]
     }
   ]
 }
