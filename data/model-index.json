@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
-  "source_verified": "2026-10-09",
-  "model_count": 70,
+  "source_verified": "2026-10-12",
+  "model_count": 75,
   "provider_count": 13,
   "models": [
     {
@@ -2343,6 +2343,186 @@
       },
       "verified_at": "2026-10-09",
       "standard_rate": null
+    },
+    {
+      "model_id": "gpt-image-2.5-sunburst",
+      "model": "GPT-Image-2.5 Sunburst",
+      "provider": "OpenAI",
+      "family": "GPT Image 2.5",
+      "sxf_url": "/models/gpt-image-2-5-sunburst/",
+      "context_window": null,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "image-generation"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million IMAGE tokens (text input billed separately)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 8,
+        "cached_input": 2,
+        "output": 30
+      }
+    },
+    {
+      "model_id": "gpt-realtime-2.1",
+      "model": "GPT-Realtime-2.1",
+      "provider": "OpenAI",
+      "family": "GPT Realtime",
+      "sxf_url": "/models/gpt-realtime-2-1/",
+      "context_window": 128000,
+      "max_output": 32000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million TEXT tokens (audio/image separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 4,
+        "cached_input": 0.4,
+        "output": 24
+      }
+    },
+    {
+      "model_id": "gpt-realtime-2.1-mini",
+      "model": "GPT-Realtime-2.1 Mini",
+      "provider": "OpenAI",
+      "family": "GPT Realtime",
+      "sxf_url": "/models/gpt-realtime-2-1-mini/",
+      "context_window": 128000,
+      "max_output": 32000,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million TEXT tokens (audio/image separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 0.6,
+        "cached_input": 0.06,
+        "output": 2.4
+      }
+    },
+    {
+      "model_id": "gemini-3.8-live",
+      "model": "Gemini 3.8 Live",
+      "provider": "Google",
+      "family": "Gemini 3.8",
+      "sxf_url": "/models/gemini-3-8-live/",
+      "context_window": 131072,
+      "max_output": 65536,
+      "capabilities": [
+        "general",
+        "reasoning",
+        "vision",
+        "video",
+        "audio",
+        "speech-to-speech",
+        "agents",
+        "tool-use"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million TEXT tokens (audio/video separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 0.75,
+        "output": 4.5
+      }
+    },
+    {
+      "model_id": "gemini-embedding-2",
+      "model": "Gemini Embedding 2",
+      "provider": "Google",
+      "family": "Gemini Embedding",
+      "sxf_url": "/models/gemini-embedding-2/",
+      "context_window": 8192,
+      "max_output": null,
+      "capabilities": [
+        "vision",
+        "video",
+        "audio",
+        "embeddings"
+      ],
+      "access": {
+        "official_api": true,
+        "open_weight": false,
+        "self_hostable": false
+      },
+      "lifecycle": {
+        "status": "current"
+      },
+      "pricing_status": "official-paid",
+      "calculator_eligible": false,
+      "pricing_basis": {
+        "meter": "tokens",
+        "display_unit": "per 1 million TEXT input tokens (other media separate)"
+      },
+      "verified_at": "2026-10-12",
+      "standard_rate": {
+        "input": 0.2
+      }
     }
   ]
 }

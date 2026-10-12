@@ -54,4 +54,33 @@ for model_id, expected_route in {
     assert f'<link rel="canonical" href="https://sxf.si{expected_route}"' in html, f"{model_id}: canonical mismatch"
     assert 'data-model-history' in html, f"{model_id}: missing verified history"
 
+# New multimodal specialist records must not silently enter text-only arithmetic.
+selected_specialists = {
+    "gpt-image-2.5-sunburst": ("OpenAI", "image-generation"),
+    "gpt-realtime-2.1": ("OpenAI", "speech-to-speech"),
+    "gpt-realtime-2.1-mini": ("OpenAI", "speech-to-speech"),
+    "gemini-3.8-live": ("Google", "speech-to-speech"),
+    "gemini-embedding-2": ("Google", "embeddings"),
+}
+assert len(catalog["models"]) >= 75, "Expected the approved specialist batch"
+for model_id, (provider, capability) in selected_specialists.items():
+    model = next(row for row in catalog["models"] if row["model_id"] == model_id)
+    assert model["provider"] == provider, f"{model_id}: provider mismatch"
+    assert capability in model["capabilities"], f"{model_id}: missing capability"
+    assert model["calculator_eligible"] is False, f"{model_id}: mixed-modality specialist must not enter text calculator"
+    assert model["pricing_basis"]["meter"] == "tokens", f"{model_id}: expected published native unit"
+    assert model["page_template"] == "catalog-reference", f"{model_id}: missing generated page contract"
+    assert model["sxf_url"].startswith("/models/"), f"{model_id}: missing canonical route"
+    reference = ROOT / model["sxf_url"].lstrip("/") / "index.html"
+    assert reference.is_file(), f"{model_id}: missing HTML reference"
+    html = reference.read_text(encoding="utf-8")
+    assert f'<link rel="canonical" href="https://sxf.si{model["sxf_url"]}"' in html, f"{model_id}: wrong canonical URL"
+    assert "data-model-history" in html and "data-what-changed" in html, f"{model_id}: missing provenance modules"
+
+candidate_queue = json.loads((ROOT / "data" / "model-candidates" / "queue.json").read_text(encoding="utf-8"))
+assert not selected_specialists.keys() & {item["proposed_record"]["model_id"] for item in candidate_queue["candidates"]}, "Published models still appear as pending candidates"
+assert len(candidate_queue["candidates"]) == 4, "Four unapproved candidates must remain pending"
+explorer_js = (ROOT / "models" / "explorer.js").read_text(encoding="utf-8")
+assert '<option value="image-generation">Image generation</option>' in explorer_js, "Image generation task filter is missing"
+
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")

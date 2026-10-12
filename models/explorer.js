@@ -85,6 +85,7 @@
         <option value="coding">Coding</option>
         <option value="agents">Agents</option>
         <option value="tool-use">Tool use</option>
+        <option value="image-generation">Image generation</option>
         <option value="ocr">OCR</option>
         <option value="transcription">Transcription</option>
         <option value="rerank">Reranking</option>
