@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from html import escape
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
+from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
 from typing import Callable
 
 
@@ -314,4 +315,6 @@ def signal_page_html(item, items, context: SignalArticleContext):
         return enrich_copilot_oct5_signal(page)
     if canonical.endswith('/atlassian-and-openai-expand-partnership-to-turn-enterprise-knowledge-i-60ef2af/'):
         return enrich_atlassian_openai_signal(page)
+    if canonical.endswith('/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/'):
+        return enrich_open_tts_leaderboard_signal(page)
     return page
