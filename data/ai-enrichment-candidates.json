@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "a7cfb8d0cc11a5a6f7be77704d2b877cccdddb07b259fc154ffb2c7fec4b0855",
+  "snapshot_hash": "eb9c175a7a037704adc2c32da2cf2095d30a5aa83d11ca5decfdf884f51e4a63",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1848,6 +1848,76 @@
     },
     {
       "rank": 8,
+      "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
+      "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
+      "title": "Search and filter for budgets now available",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-10-13T12:06:09Z",
+      "priority_score": 126,
+      "evidence_hash": "19c39ab796f1f057d5a6a703a062a94ff656b442955a9bd57ab014ab3155fb56",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Search and filter for budgets now available",
+          "url": "https://github.blog/changelog/2026-10-13-search-and-filter-for-budgets-now-available",
+          "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
+          "source": "GitHub",
+          "published": "2026-10-13T12:06:09Z",
+          "category": "Tools",
+          "tags": [],
+          "summary": "The “Budgets and alerts” page in your GitHub billing settings now shows all of your budgets in one list that you can search and filter. Whether you manage budgets for…",
+          "signal_score": 46,
+          "seo_quality_score": 60,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://github.blog/changelog/2026-10-13-search-and-filter-for-budgets-now-available"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 9,
       "signal_slug": "actions-runner-controller-release-0-15-0-619fccc",
       "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
       "title": "Actions Runner Controller release 0.15.0",
@@ -1917,7 +1987,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 10,
       "signal_slug": "local-sandboxing-for-github-copilot-now-generally-available-87f43b6",
       "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
       "title": "Local sandboxing for GitHub Copilot now generally available",
@@ -1956,78 +2026,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "introducing-playground-create-and-play-custom-games-22643d6",
-      "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
-      "title": "Introducing Playground: Create and play custom games",
-      "source": "Google AI",
-      "category": "Tools",
-      "published": "2026-10-07T12:00:00Z",
-      "priority_score": 120,
-      "evidence_hash": "a470941f59f77f0d2227173d07649fdc163b7346d25a758675fbc39385f21a1f",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing Playground: Create and play custom games",
-          "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
-          "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
-          "source": "Google AI",
-          "published": "2026-10-07T12:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "Google AI"
-          ],
-          "summary": "Playground is a new experimental gaming platform that lets you create, play, and share custom games.",
-          "signal_score": 46,
-          "seo_quality_score": 54,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/"
         ]
       },
       "requested_output": {
