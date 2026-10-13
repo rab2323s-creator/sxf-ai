@@ -83,7 +83,10 @@ def main():
         dataset.write_text(json.dumps({"source_verified": "2026-10-13", "models": [{"model": "A", "price": 3, "provenance": {"verified_at": "2026-10-13"}}]}), encoding="utf-8")
         assert content_fingerprint(root, NEXT, BASE) != initial_data_hash
         refresh_existing_sitemap(sitemap, BASE)
-        assert "<lastmod>2026-10-12</lastmod>" in sitemap.read_text().splitlines()[-2]
+        # refresh_existing_sitemap uses the current UTC date, not the fixture\'s today.
+        from datetime import datetime, timezone
+        current_utc_day = datetime.now(timezone.utc).date().isoformat()
+        assert f"<lastmod>{current_utc_day}</lastmod>" in sitemap.read_text().splitlines()[-2]
         validate_sitemap_state(sitemap, BASE)
 
         # Detect unrefreshed content and refuse to silently claim timestamps are accurate.
