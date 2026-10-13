@@ -1,0 +1,161 @@
+<section class="model-reference model-reference-deep shell luna-editorial" id="luna-model-reference" data-luna-reference>
+  <div class="luna-intro">
+    <div class="luna-lead">
+      <p class="eyebrow">SOURCE-VERIFIED MODEL REFERENCE · OPENAI</p>
+      <h2>What is GPT-6 Luna?</h2>
+      <p><strong>GPT-6 Luna</strong> is OpenAI's most cost-efficient GPT-6 tier, designed for focused, high-volume tasks. It is a reasoning-capable text model that accepts text and image inputs and produces text. With a <strong>1,050,000-token context window</strong>, <strong>128,000 maximum output tokens</strong> and a particularly low Standard API rate, Luna is a candidate for scaled extraction, classification, structured generation and controlled agent workflows.</p>
+      <p>It is not automatically the strongest GPT-6 model: <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> aims at complex coding, agentic and professional work, while <a href="/models/gpt-6-astra/">GPT-6 Astra</a> targets the hardest reasoning and high-stakes workflows. Luna can be the smarter economic choice when it <em>passes your task's quality checks</em>. The point of this reference is to show exactly what it can do, what it costs and where paying more may be justified.</p>
+      <p class="luna-alert"><strong>Pricing detail most summaries miss:</strong> Luna's $0.10 input and $0.50 output prices apply to Standard requests with up to 272,000 input tokens. <strong>Above 272K input tokens, the entire request</strong> moves to higher rates—not just the part above the threshold.</p>
+      <p class="reference-note">Last editorial verification: October 13, 2026 · Model ID <code>gpt-6-luna</code> · Provider: OpenAI · Primary references: <a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer">model documentation</a> and <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">rate card</a>.</p>
+    </div>
+    <aside class="luna-at-glance" aria-label="GPT-6 Luna quick specifications">
+      <div><span>API MODEL ID</span><strong><code>gpt-6-luna</code></strong></div>
+      <div><span>CONTEXT WINDOW</span><strong>1,050,000 <small>tokens</small></strong></div>
+      <div><span>MAX OUTPUT</span><strong>128,000 <small>tokens</small></strong></div>
+      <div><span>KNOWLEDGE CUTOFF</span><strong>May 18, 2026</strong></div>
+      <div><span>STANDARD INPUT / 1M</span><strong>{{LUNA_INPUT}}</strong></div>
+      <div><span>STANDARD OUTPUT / 1M</span><strong>{{LUNA_OUTPUT}}</strong></div>
+    </aside>
+  </div>
+
+  <nav class="luna-jump" aria-label="On this GPT-6 Luna page">
+    <a href="#luna-pricing">Pricing</a>
+    <a href="#luna-long-context">272K threshold</a>
+    <a href="#luna-estimator">Cost calculator</a>
+    <a href="#luna-comparison">Luna vs Sol vs Astra</a>
+    <a href="#luna-usecases">Use cases</a>
+    <a href="#luna-api">API</a>
+    <a href="#luna-faq">FAQ</a>
+  </nav>
+
+  <section class="luna-section" id="luna-pricing">
+    <div class="model-section-head"><p class="eyebrow">OPENAI OFFICIAL API PRICING</p><h2>GPT-6 Luna pricing: Standard, cached input and cache writes.</h2><p>Prices are USD per million billable tokens. Input, a cache hit and a cache write are separate accounting dimensions. This table shows Luna's published Standard schedule.</p></div>
+    <div class="luna-table-wrap" role="region" aria-label="Luna API Standard token pricing" tabindex="0">
+      <table class="luna-table"><thead><tr><th scope="col">Token category</th><th scope="col">≤272K input</th><th scope="col">&gt;272K input</th></tr></thead>
+      <tbody>{{LUNA_RATE_ROWS}}</tbody></table>
+    </div>
+    <p><strong>Cached input</strong> refers to tokens successfully read from a previously cached prefix. <strong>Cache writes</strong> are tokens written into the cache and have a different billable rate. The rates cannot be applied interchangeably; inspect actual usage fields from the API to see what was billed.</p>
+    <div class="luna-price-cards">
+      <article><span>STANDARD · SHORT</span><strong>{{LUNA_INPUT}} / {{LUNA_OUTPUT}}</strong><p>Uncached input / output for each million tokens at up to 272K prompt input.</p></article>
+      <article><span>STANDARD · LONG</span><strong>{{LUNA_LONG_INPUT}} / {{LUNA_LONG_OUTPUT}}</strong><p>Uncached input / output for each million tokens when the prompt crosses the 272K threshold.</p></article>
+      <article><span>BATCH &amp; FLEX</span><strong>50% of Standard</strong><p>Published model-card relationship; these tiers have different throughput and execution behavior.</p></article>
+      <article><span>FAST</span><strong>2× Standard</strong><p>Applicable Fast rates; use only when available and latency is worth the higher bill.</p></article>
+    </div>
+    <p class="luna-note">The table and calculator below use <strong>Standard direct API pricing</strong>, not a guaranteed invoice. Web search, computer use and other billable tools can add fees. OpenAI lists a 10% regional-processing premium where applicable; tax and operational costs are outside token prices. <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">Check current provider pricing ↗</a>.</p>
+  </section>
+
+  <section class="luna-section" id="luna-long-context">
+    <div class="model-section-head"><p class="eyebrow">LONG-CONTEXT ECONOMICS</p><h2>What happens above 272,000 GPT-6 Luna input tokens?</h2></div>
+    <p>OpenAI documents a <strong>strictly greater than 272,000 input-token</strong> boundary. At 272,000 input tokens or fewer, the shorter schedule applies. At 272,001 tokens and beyond, Standard pricing changes to <strong>2× input</strong>, <strong>2× cached input</strong>, <strong>2× cache writes</strong> and <strong>1.5× output</strong> across the <em>whole request</em>. This is a request-level tier switch, not an incremental overage fee.</p>
+    <div class="luna-boundary">
+      <article><span>EXAMPLE A · 272,000 INPUT</span><strong>{{THRESHOLD_SHORT}}</strong><p>Plus 2,000 generated output tokens. The request remains in the shorter Standard band.</p></article>
+      <article><span>EXAMPLE B · 272,001 INPUT</span><strong>{{THRESHOLD_LONG}}</strong><p>Plus the same 2,000 output tokens. All billable categories now use long-context rates.</p></article>
+    </div>
+    <p>The sharp price step means applications hovering near 272K input tokens need careful context budgeting. Consider retrieval, document chunking, compaction and prompt deduplication <em>when doing so preserves the information required for correctness</em>. A larger window can process large inputs, but it does not guarantee perfect recall, and a small reduction in prompt length does not necessarily reduce task failure.</p>
+    <p><strong>One million tokens of context is capacity—not the cheap-rate allowance.</strong> Luna can accept long text or image-grounded input within its 1,050,000-token context, but the extended schedule must be included in estimates for large documents, repositories and agent histories.</p>
+  </section>
+
+  <section class="luna-section" id="luna-estimator">
+    <div class="model-section-head"><p class="eyebrow">LIVE COST ESTIMATOR</p><h2>GPT-6 Luna token cost calculator.</h2><p>Enter projected token usage and compare the same quantities at Luna, GPT-6.1 Sol and GPT-6 Astra Standard rates. A higher-quality model may use different tokens in practice.</p></div>
+    <div class="luna-calculator" data-luna-calculator data-rates="{{RATE_JSON}}">
+      <form class="luna-input-grid" id="luna-cost-form">
+        <label><span>Uncached input tokens</span><input type="number" min="0" max="1050000" step="1000" inputmode="numeric" name="uncached" value="8000" required><small>New prompt content</small></label>
+        <label><span>Cached input tokens</span><input type="number" min="0" max="1050000" step="1000" inputmode="numeric" name="cached" value="0" required><small>Previously cached reads</small></label>
+        <label><span>Cache-write tokens</span><input type="number" min="0" max="1050000" step="1000" inputmode="numeric" name="write" value="0" required><small>Newly cached content</small></label>
+        <label><span>Output tokens</span><input type="number" min="0" max="128000" step="500" inputmode="numeric" name="output" value="2000" required><small>Includes billed reasoning output</small></label>
+      </form>
+      <p class="luna-calculator-status" role="status" data-luna-status>Standard short-context rates</p>
+      <div class="luna-results" aria-live="polite">
+        <article class="luna-cheapest"><span>GPT-6 Luna</span><strong data-luna-cost="luna">{{DEFAULT_LUNA}}</strong><small>Estimated USD/request</small></article>
+        <article><span>GPT-6.1 Sol</span><strong data-luna-cost="sol">{{DEFAULT_SOL}}</strong><small>Estimated USD/request</small></article>
+        <article><span>GPT-6 Astra</span><strong data-luna-cost="astra">{{DEFAULT_ASTRA}}</strong><small>Estimated USD/request</small></article>
+      </div>
+      <p class="luna-note">Assumes Standard rates, complete measured input categories and no additional billable tools, regional premiums or processing tiers. Input above 1,050,000 tokens and output above 128,000 are rejected. Prices are estimates—not an API billing feed.</p>
+    </div>
+    <h3>Worked GPT-6 Luna cost examples</h3>
+    <div class="luna-table-wrap" role="region" aria-label="GPT-6 Luna request cost scenarios" tabindex="0"><table class="luna-table"><thead><tr><th scope="col">Example task and token usage</th><th scope="col">Luna</th><th scope="col">6.1 Sol</th><th scope="col">Astra</th></tr></thead><tbody>{{EXAMPLE_ROWS}}</tbody></table></div>
+    <p class="reference-note">Worked examples hold measured token counts constant so the arithmetic can be compared. They do not predict model-quality differences or actual outputs. For low-volume budgets, remember that tool calls, retries and operations can outweigh the base Luna token rate.</p>
+  </section>
+
+  <section class="luna-section" id="luna-comparison">
+    <div class="model-section-head"><p class="eyebrow">MODEL SELECTION</p><h2>GPT-6 Luna vs GPT-6.1 Sol vs GPT-6 Astra.</h2><p>All three publish the same context and output limits; their positioning, reasoning options and input/output economics differ.</p></div>
+    <div class="luna-model-grid">
+      <article><span>EFFICIENCY-FIRST</span><h3>GPT-6 Luna</h3><p>Start here when tasks repeat, validation is straightforward and total workload cost matters more than frontier capability.</p><strong>{{LUNA_INPUT}} in / {{LUNA_OUTPUT}} out</strong><small>Standard short-context per 1M</small><a href="#luna-usecases">Best Luna workloads ↓</a></article>
+      <article><span>QUALITY / COST BALANCE</span><h3>GPT-6.1 Sol</h3><p>Use for complex software tasks, tool-heavy agent flows, computer use and professional work that benefit from stronger reasoning at a mid-tier price.</p><strong>{{SOL_INPUT}} in / {{SOL_OUTPUT}} out</strong><small>Standard short-context per 1M</small><a href="/models/gpt-6-1-sol/">Full Sol reference ↗</a></article>
+      <article><span>HIGHEST CAPABILITY</span><h3>GPT-6 Astra</h3><p>Consider for unusually difficult reasoning, cross-tool projects and high-impact assignments where higher success could outweigh higher token cost.</p><strong>{{ASTRA_INPUT}} in / {{ASTRA_OUTPUT}} out</strong><small>Standard short-context per 1M</small><a href="/models/gpt-6-astra/">Full Astra reference ↗</a></article>
+    </div>
+    <p><strong>Headline rate ratio:</strong> at short-context Standard list rates, Luna's uncached input and output are <strong>20× cheaper than GPT-6.1 Sol</strong> and <strong>100× cheaper than Astra</strong>. Those ratios apply to the stated token price categories, not to end-to-end task cost or quality. More retries, larger output, extra tools, and lower task success can erase savings.</p>
+    <p>When comparing “Luna vs Sol,” use the right release: <a href="/models/gpt-6-sol/">GPT-6 Sol</a> was the original middle tier, while <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> is OpenAI's newer recommended model. This page compares against 6.1 Sol rather than treating the names as equivalent. See also the <a href="/models/gpt-6/">GPT-6 family hub</a> for the broader model-selection map.</p>
+  </section>
+
+  <section class="luna-section" id="luna-usecases">
+    <div class="model-section-head"><p class="eyebrow">WHAT TO BUILD WITH LUNA</p><h2>When should you choose GPT-6 Luna?</h2><p>Choose from tasks that can be automatically checked, sampled by humans or escalated when confidence is low.</p></div>
+    <div class="luna-use-grid">
+      <article><span>01 · STRUCTURED EXTRACTION</span><h3>Documents and predictable fields</h3><p>Extract invoice line items, support-ticket metadata or standardized record fields. Validate against a schema and reconcile numeric totals before committing records. If complex ambiguity or expert interpretation dominates, compare Sol.</p></article>
+      <article><span>02 · CLASSIFICATION</span><h3>High-volume triage and routing</h3><p>Label messages, summarize user feedback and route incidents. Measure accuracy per class—especially rare, sensitive or costly-to-misclassify categories—rather than optimizing solely for cost per request.</p></article>
+      <article><span>03 · TEMPLATED COMMUNICATION</span><h3>Drafts with clear requirements</h3><p>Generate standardized replies, FAQs and operational summaries using an approved knowledge base. Keep policy and source-of-truth content explicit. Human review remains important for high-stakes advice.</p></article>
+      <article><span>04 · CODE SUPPORT</span><h3>Small, verifiable coding tasks</h3><p>Try boilerplate generation, straightforward patches, lint suggestions or test drafting. Use automated tests; escalate multi-file debugging, hard architecture or fragile agent workflows to 6.1 Sol or Astra when justified.</p></article>
+      <article><span>05 · TOOL-ENABLED AUTOMATION</span><h3>Focused agents with guardrails</h3><p>Luna supports function calls and built-in tools through the Responses API. Use constrained tool contracts, retries with budgets, injection defenses and explicit approvals for irreversible actions.</p></article>
+      <article><span>06 · LONG DOCUMENT PROCESSING</span><h3>Big contexts with financial guardrails</h3><p>Luna's 1.05M context can be useful for large text, but a 272K+ request triggers the higher price band. Test whether retrieval or chunking can retain quality at lower input cost.</p></article>
+    </div>
+    <div class="luna-decision"><h3>A practical selection sequence</h3><ol><li><strong>Define success.</strong> Collect real examples with expected results, hard cases and privacy constraints.</li><li><strong>Measure Luna first</strong> on focused tasks: accuracy, latency, billed tokens, retry rate and tool success.</li><li><strong>Compare 6.1 Sol</strong> on tasks Luna misses; calculate incremental cost per corrected outcome.</li><li><strong>Test Astra only where needed</strong> for demanding or high-error-cost work; avoid a blanket upgrade.</li><li><strong>Recheck in production.</strong> Monitor prompt distribution, context threshold crossings, cached usage and data drift.</li></ol></div>
+  </section>
+
+  <section class="luna-section" id="luna-api">
+    <div class="model-section-head"><p class="eyebrow">DEVELOPER DOCUMENTATION</p><h2>How to use GPT-6 Luna in the OpenAI API.</h2><p>The API model ID is <code>gpt-6-luna</code>. For normal production reasoning and tool integrations, prefer the <strong>Responses API</strong>.</p></div>
+    <pre class="luna-code"><code>from openai import OpenAI
+
+client = OpenAI()  # Set OPENAI_API_KEY in your environment
+response = client.responses.create(
+    model="gpt-6-luna",
+    reasoning={"effort": "medium"},
+    input="Classify this support message and explain the label briefly.",
+)
+print(response.output_text)</code></pre>
+    <div class="luna-use-grid">
+      <article><span>REASONING CONFIGURATION</span><h3>none, low, medium, high, xhigh, max</h3><p>OpenAI documents <code>medium</code> as the default. <code>none</code> can be economical for easy tasks; stronger effort can help some work but may increase output usage and latency. Evaluate the entire workflow.</p></article>
+      <article><span>ENDPOINT CONSTRAINT</span><h3>Responses for reasoning with tools</h3><p>Tool calling is supported through Responses. If you must use Chat Completions, function calling on Luna requires <code>reasoning_effort="none"</code>. These surfaces are not interchangeable.</p></article>
+      <article><span>INPUT AND OUTPUT</span><h3>Text and images in; text out</h3><p>Use text or image inputs for inspection and response generation. This is not a speech synthesis, realtime audio or video-generation model; those need other endpoints/models.</p></article>
+      <article><span>STRUCTURED OUTPUTS</span><h3>Schema-friendly workflows</h3><p>OpenAI lists structured outputs, streaming and function calling. Apply schema validation and downstream consistency checks; format validity by itself does not prove the underlying answer is correct.</p></article>
+    </div>
+    <p><strong>Prompting advice:</strong> keep instructions explicit, provide a handful of representative edge cases when useful, separate data from instructions and require a verifiable output contract. For repeated system prompts, keep prefix content stable to improve the chance of cache reuse, then confirm hits in usage reports.</p>
+    <p><strong>Parameter compatibility:</strong> with reasoning effort other than <code>none</code>, OpenAI advises removing <code>temperature</code>, <code>top_p</code> and certain token-logprob settings that are not supported. Consult the <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer">GPT-6 migration guide</a> before copying parameters from older integrations.</p>
+  </section>
+
+  <section class="luna-section" id="luna-benchmarks">
+    <div class="model-section-head"><p class="eyebrow">BENCHMARKS AND EVIDENCE</p><h2>How to interpret GPT-6 Luna benchmarks.</h2></div>
+    <p>SXF retains its separately maintained model-evaluation observations below, including evaluator names, benchmark versions, reasoning settings and evidence links. Use those cards to inspect individual measurements rather than treating one score as a universal ranking against Sol or Astra.</p>
+    <p>For purchasing or architecture decisions, compare real workflows under identical conditions: same prompt data, context length, reasoning effort, allowed tools, success criteria and privacy policy. Record <strong>cost per accepted task</strong> and <strong>latency per accepted task</strong>. A cheaper per-token model is valuable only if it performs the required work reliably.</p>
+    <p>Long-context benchmarks are especially easy to overgeneralize. A model can accept large input while still missing relevant details or making unsupported inferences. Check source citation fidelity and exact retrieval, not just whether it can ingest the document.</p>
+  </section>
+
+  <section class="luna-section" id="luna-limitations">
+    <div class="model-section-head"><p class="eyebrow">LIMITS AND CAVEATS</p><h2>What GPT-6 Luna's spec sheet does not guarantee.</h2></div>
+    <div class="luna-caveats">
+      <div><b>01</b><p><strong>Context is not perfect recall.</strong> A 1.05M window gives capacity, not a promise that every detail is recovered or correctly reasoned about.</p></div>
+      <div><b>02</b><p><strong>Cheap tokens do not prove cheap outcomes.</strong> Retries, tool costs, reviews and escalations must be included when modeling total economics.</p></div>
+      <div><b>03</b><p><strong>Reasoning is configurable.</strong> Higher settings may alter task quality, output use and speed; use measured configurations, not one effort level for every request.</p></div>
+      <div><b>04</b><p><strong>The long-context boundary is abrupt.</strong> Monitor the entire input count because one additional token beyond 272K changes the rate applied to the whole request.</p></div>
+      <div><b>05</b><p><strong>Tools need operational controls.</strong> Sandbox execution, limit privileges, verify external content and require approval for sensitive actions.</p></div>
+      <div><b>06</b><p><strong>API and ChatGPT access differ.</strong> Consumer product names, quotas and subscriptions should not be confused with OpenAI API billing or processing mode availability.</p></div>
+    </div>
+  </section>
+
+  <section class="luna-section" id="luna-faq">
+    <div class="model-section-head"><p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p><h2>GPT-6 Luna FAQ.</h2></div>
+    <div class="model-faq luna-faq">{{FAQ_HTML}}</div>
+  </section>
+
+  <section class="luna-section" id="luna-sources">
+    <div class="model-section-head"><p class="eyebrow">PRIMARY-SOURCE REFERENCES</p><h2>Verified OpenAI documentation and related model guides.</h2></div>
+    <div class="luna-sources">
+      <a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer"><span>OPENAI MODEL CARD</span><strong>GPT-6 Luna specs, API support and prices ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>RATE CARD</span><strong>Official Standard, long context and serving tiers ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer"><span>IMPLEMENTATION GUIDE</span><strong>GPT-6 family, reasoning and tool migration ↗</strong></a>
+      <a href="/models/gpt-6/"><span>FAMILY HUB</span><strong>GPT-6 model family comparison ↗</strong></a>
+      <a href="/models/gpt-6-1-sol/"><span>UPGRADE CHOICE</span><strong>GPT-6.1 Sol detailed reference ↗</strong></a>
+      <a href="/models/gpt-6-astra/"><span>HIGHEST CAPABILITY</span><strong>GPT-6 Astra detailed reference ↗</strong></a>
+    </div>
+    <p class="reference-note">Method: price facts and specifications are sourced to OpenAI. Illustrative request costs are calculated from published Standard price fields. Workload recommendations are editorial interpretations, not a new vendor benchmark. The independently tracked SXF change history, recent signals and evaluation evidence remain attached to this model page.</p>
+  </section>
+</section>
