@@ -1,0 +1,195 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#article",
+      "headline": "Gemini 3.8 Flash TTS: Pricing, Voice API, Specs and Examples",
+      "description": "Gemini 3.8 Flash TTS guide: voice API examples, $9/M audio tokens, 8K input, 130+ languages, multi-speaker controls, limits and Flash-Lite comparison.",
+      "url": "https://sxf.si/models/gemini-3-8-flash-tts/",
+      "mainEntityOfPage": {
+        "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#webpage"
+      },
+      "dateModified": "2026-10-13",
+      "author": {
+        "@type": "Organization",
+        "name": "SXF / AI",
+        "url": "https://sxf.si/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SXF / AI",
+        "url": "https://sxf.si/"
+      },
+      "about": {
+        "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#model"
+      },
+      "citation": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/speech-generation",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts"
+      ],
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#webpage",
+      "url": "https://sxf.si/models/gemini-3-8-flash-tts/",
+      "name": "Gemini 3.8 Flash TTS: Pricing, Voice API & Examples | SXF / AI",
+      "description": "Gemini 3.8 Flash TTS guide: voice API examples, $9/M audio tokens, 8K input, 130+ languages, multi-speaker controls, limits and Flash-Lite comparison.",
+      "mainEntity": {
+        "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#model"
+      },
+      "inLanguage": "en",
+      "breadcrumb": {
+        "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#breadcrumb"
+      }
+    },
+    {
+      "@type": "Thing",
+      "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#model",
+      "name": "Gemini 3.8 Flash TTS",
+      "description": "Google text-to-speech model for expressive long-form narration and multi-speaker dialogue.",
+      "sameAs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "API model ID",
+          "value": "gemini-3.8-flash-tts"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Input token limit",
+          "value": 8192
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Output serving token limit",
+          "value": 16384
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Input modality",
+          "value": "text"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Output modality",
+          "value": "audio"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "SXF / AI",
+          "item": "https://sxf.si/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Models",
+          "item": "https://sxf.si/models/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Gemini 3.8 Flash TTS",
+          "item": "https://sxf.si/models/gemini-3-8-flash-tts/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sxf.si/models/gemini-3-8-flash-tts/#faq",
+      "url": "https://sxf.si/models/gemini-3-8-flash-tts/#tts-faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Gemini 3.8 Flash TTS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google's text-to-speech model for expressive, studio-style narration, regional accents and multi-speaker dialogue. It takes text and returns audio; it is not the Gemini Live API."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Gemini 3.8 Flash TTS model ID?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use gemini-3.8-flash-tts in the Gemini API. It is different from the general-purpose gemini-3.8-flash model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Gemini 3.8 Flash TTS cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Through December 31, 2026, Google lists $0.50 per million text input tokens and $9 per million generated audio output tokens on Standard paid API; from January 1, 2027 the published rates are $1 and $18."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much is a minute of generated speech?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At Google's 25 output audio tokens per second, 60 seconds is 1,500 audio tokens. That costs approximately $0.0135 at the introductory Standard rate, before text input charges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Gemini 3.8 Flash TTS support multiple speakers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In a single request Google supports up to two configured speakers using prebuilt voices. Each dialogue turn needs a matching speech_metadata.speaker value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I control speaking style and add pauses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use speech_metadata.style for turn-level performance and inline tags such as <short pause> or <laugh> for point-in-time vocal events."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Gemini 3.8 Flash TTS support Arabic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Google's supported-language list includes Standard Arabic and Egyptian Arabic; the model automatically detects input language. Actual pronunciation should be evaluated with your own transcripts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the context window and output limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google documents an 8,192-token input limit and a 16,384-token output serving limit. Audio duration is billed by generated audio tokens, not ordinary text output."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Gemini 3.8 Flash TTS the same as Gemini Live?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Flash TTS converts a supplied transcript to audio, whereas the Live API is intended for interactive streaming, multimodal conversation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Flash TTS vs Flash-Lite TTS: which should I choose?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose Flash TTS for maximum vocal nuance, difficult pronunciations, dialect coverage and long narration. Choose Flash-Lite TTS for lower-cost, high-throughput or everyday voice production; both share the same request schema."
+          }
+        }
+      ]
+    }
+  ]
+}
