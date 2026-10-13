@@ -25,6 +25,7 @@ from gemini_live_extended_page import enrich_gemini_live_extended_page
 from gemini_38_flash_tts_model_page import enrich_gemini_38_flash_tts_page
 from gemini_38_flash_lite_tts_model_page import enrich_gemini_38_flash_lite_tts_page
 from gpt6_family_model_page import enrich_gpt6_family_page
+from gpt61_release_page import enrich_gpt61_release_page
 from gpt6_luna_model_page import enrich_gpt6_luna_page
 from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
@@ -1045,6 +1046,8 @@ def catalog_model_ids_for_name(name):
     ]
     if exact:
         return exact
+    if name == "GPT-6.1":
+        return ["gpt-6.1-sol"]
     if name == "GPT-6":
         return ["gpt-6-astra", "gpt-6-sol", "gpt-6-luna"]
     if name == "GPT-5.6":
@@ -4679,6 +4682,8 @@ def model_page_html(name, items):
       <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>{escape(name)}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
+    if name == "GPT-6.1":
+        return enrich_gpt61_release_page(page, MODEL_PRICING_BY_ID)
     return enrich_gpt6_family_page(page, MODEL_PRICING_BY_ID) if name == "GPT-6" else page
 
 
