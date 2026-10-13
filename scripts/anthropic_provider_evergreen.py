@@ -41,7 +41,8 @@ def _modify_model_block(page, slug, tag, modify):
         pattern = r'<article class="model-family-card">(?:(?!</article>).)*?<h3><a href="/models/' + re.escape(slug) + r'/">.*?</article>'
     else:
         pattern = r'<tr><th scope="row"><a href="/models/' + re.escape(slug) + r'/">.*?</tr>'
-    matches = list(re.finditer(pattern, page, re.DOTALL))
+    portfolio_start = page.index('<h2>Claude model portfolio</h2>')
+    matches = [m for m in re.finditer(pattern, page, re.DOTALL) if m.start() > portfolio_start]
     if len(matches) != 1:
         raise ValueError("Anthropic expected one " + tag + " block for " + slug)
     match = matches[0]
