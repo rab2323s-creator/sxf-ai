@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "eb9c175a7a037704adc2c32da2cf2095d30a5aa83d11ca5decfdf884f51e4a63",
+  "snapshot_hash": "6928f1c1eb794a27f3cfdc0a84c9af4210f83ab96f2a564d70a09ff54e4ccd7f",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1221,6 +1221,79 @@
     },
     {
       "rank": 3,
+      "signal_slug": "gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc",
+      "signal_url": "https://sxf.si/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/",
+      "title": "Gemini 4 Argon: Built to solve your hardest problems",
+      "source": "Google AI",
+      "category": "Models",
+      "published": "2026-10-13T16:00:00Z",
+      "priority_score": 163,
+      "evidence_hash": "dcce802109f52f40f46b8c1cce6337c7bd74b2a479fd6c6d4d8707179da0484a",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Gemini 4 Argon: Built to solve your hardest problems",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+          "signal_url": "https://sxf.si/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/",
+          "source": "Google AI",
+          "published": "2026-10-13T16:00:00Z",
+          "category": "Models",
+          "tags": [
+            "Google AI"
+          ],
+          "summary": "We’re giving developers, enterprises, scientists, and consumers access to Gemini 4 Argon, our latest frontier model.",
+          "signal_score": 46,
+          "seo_quality_score": 62,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "durable-intelligence-layer"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 4,
       "signal_slug": "github-copilot-weekly-releases-october-5-8e5ec29",
       "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-october-5-8e5ec29/",
       "title": "GitHub Copilot weekly releases — October 5",
@@ -1293,7 +1366,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
       "title": "GitHub Copilot in VS Code, September 2026 releases",
@@ -1367,7 +1440,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "signal_slug": "claude-haiku-5-5-in-github-copilot-86f546d",
       "signal_url": "https://sxf.si/signals/claude-haiku-5-5-in-github-copilot-86f546d/",
       "title": "Claude Haiku 5.5 in GitHub Copilot",
@@ -1557,7 +1630,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 7,
       "signal_slug": "gpt-6-1-sol-in-github-copilot-9be84db",
       "signal_url": "https://sxf.si/signals/gpt-6-1-sol-in-github-copilot-9be84db/",
       "title": "GPT-6.1 Sol in GitHub Copilot",
@@ -1772,7 +1845,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 8,
       "signal_slug": "open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31",
       "signal_url": "https://sxf.si/signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/",
       "title": "Open TTS Leaderboard: Scalable Evaluation for Multilingual Text-to-Speech and Voice Cloning",
@@ -1847,7 +1920,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 9,
       "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
       "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
       "title": "Search and filter for budgets now available",
@@ -1917,7 +1990,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 10,
       "signal_slug": "actions-runner-controller-release-0-15-0-619fccc",
       "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
       "title": "Actions Runner Controller release 0.15.0",
@@ -1952,80 +2025,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "local-sandboxing-for-github-copilot-now-generally-available-87f43b6",
-      "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
-      "title": "Local sandboxing for GitHub Copilot now generally available",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-07T15:46:17Z",
-      "priority_score": 125,
-      "evidence_hash": "b4d590fde850bc9a1eb3ac84053f9d7b34b1041b41c7904e80cf69e3ec3f103b",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Local sandboxing for GitHub Copilot now generally available",
-          "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available",
-          "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
-          "source": "GitHub",
-          "published": "2026-10-07T15:46:17Z",
-          "category": "Tools",
-          "tags": [
-            "GitHub Copilot",
-            "Security"
-          ],
-          "summary": "Local sandboxing for GitHub Copilot is now generally available in GitHub Copilot CLI, the GitHub Copilot app, and VS Code sessions using Agent Host. Local sandboxes give developers a secure…",
-          "signal_score": 38,
-          "seo_quality_score": 67,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available"
         ]
       },
       "requested_output": {
