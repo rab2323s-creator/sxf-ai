@@ -45,7 +45,7 @@ def enrich_copilot_oct5_signal(page: str) -> str:
         raise ValueError('Copilot taxonomy anchor missing')
     page = page.replace(point, BODY + '\n' + point, 1)
     page = page.replace('<div><span>MODELS</span><small>No named model detected</small></div>', '<div><span>MODELS</span><a href="/models/claude-haiku-5-5/">Claude Haiku 5.5</a></div>', 1)
-    m = re.search(r'(<script type="application/ld\\+json">)(.*?)(</script>)', page, re.DOTALL)
+    m = re.search(r'(<script type="application/ld\+json">)(.*?)(</script>)', page, re.DOTALL)
     if m is None:
         raise ValueError('Copilot JSON-LD missing')
     graph = json.loads(m.group(2))['@graph']
