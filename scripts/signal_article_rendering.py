@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
+from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from typing import Callable
 
 
@@ -264,7 +265,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
         )
     editorial = item.get("editorial") or editorial_units(item)
     summary_label = "Source summary" if item.get("summary") else "SXF signal note"
-    return f'''<!doctype html><html lang="en">
+    page = f'''<!doctype html><html lang="en">
     {page_head(page_title, description, canonical, schema, "article", robots)}
     <body class="intel-page signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
@@ -308,3 +309,6 @@ def signal_page_html(item, items, context: SignalArticleContext):
       </main>
       {page_footer()}
     </body></html>'''
+    if canonical.endswith('/github-copilot-weekly-releases-october-5-8e5ec29/'):
+        return enrich_copilot_oct5_signal(page)
+    return page
