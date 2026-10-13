@@ -1,0 +1,164 @@
+<section class="model-reference model-reference-deep shell gpt6-family" id="gpt6-reference" data-gpt6-family>
+  <div class="gpt6-intro">
+    <div>
+      <p class="eyebrow">MODEL FAMILY REFERENCE · VERIFIED SOURCES</p>
+      <h2>What is GPT-6? Understand the family before choosing a model.</h2>
+      <p><strong>GPT-6</strong> is OpenAI's family of reasoning-focused models for coding, professional knowledge work, research, and tool-using agents. The main model-selection path currently has three tiers: <strong>GPT-6 Astra</strong> for the hardest tasks, <strong>GPT-6.1 Sol</strong> for near-Astra capability at a lower price, and <strong>GPT-6 Luna</strong> for focused, high-volume workloads.</p>
+      <p>They share a <strong>1,050,000-token context window</strong>, a <strong>128,000-token maximum output</strong>, text and image input, and text output. Shared limits do not mean interchangeable behavior: reasoning controls, cache economics, quality under realistic workloads and API constraints are different. Use this page to compare published facts and choose an initial candidate; use the linked individual model pages for detailed endpoint and release information.</p>
+      <p class="gpt6-callout"><strong>Important 2026 update:</strong> OpenAI announced <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> on September 29 as the newer middle-tier model. The earlier <a href="/models/gpt-6-sol/">GPT-6 Sol</a> still has a distinct model ID and reference page. They are not synonyms. This guide compares the three models highlighted in OpenAI's current GPT-6 selection guidance.</p>
+      <p class="reference-note">Editorial source check: October 13, 2026 · Standard API list prices in USD · All rates and model constraints sourced from OpenAI developer documentation.</p>
+    </div>
+    <aside class="gpt6-spec-summary" aria-label="GPT-6 family facts">
+      <div><span>CURRENT CHOICES</span><strong>Astra · 6.1 Sol · Luna</strong></div>
+      <div><span>INPUT CONTEXT</span><strong>1,050,000 <small>tokens</small></strong></div>
+      <div><span>MAX OUTPUT</span><strong>128,000 <small>tokens</small></strong></div>
+      <div><span>MODALITIES</span><strong>Text + image → text</strong></div>
+      <div><span>LONG CONTEXT</span><strong>Above 272K <small>input tokens</small></strong></div>
+      <div><span>PRICE UNITS</span><strong>USD / million tokens</strong></div>
+    </aside>
+  </div>
+
+  <nav class="gpt6-jump" aria-label="GPT-6 reference sections">
+    <a href="#gpt6-variants">Model tiers</a><a href="#gpt6-pricing">Pricing</a><a href="#gpt6-calculator">Cost calculator</a><a href="#gpt6-decision">Which model?</a><a href="#gpt6-specs">Specifications</a><a href="#gpt6-api">API</a><a href="#gpt6-faq">FAQ</a>
+  </nav>
+
+  <section class="gpt6-section" id="gpt6-variants">
+    <div class="model-section-head"><p class="eyebrow">THREE CURRENT MODEL CHOICES</p><h2>GPT-6 Astra vs GPT-6.1 Sol vs GPT-6 Luna.</h2><p>Choose by required quality, expected task volume and cost per successful result—not just model branding.</p></div>
+    <div class="gpt6-cards">
+      <article class="gpt6-card">
+        <span class="gpt6-kicker">HIGHEST CAPABILITY</span><h3>GPT-6 Astra</h3>
+        <p>For complex multi-step engineering, research, professional work, computer use and high-impact assignments where more capability can justify a higher rate.</p>
+        <dl><div><dt>Model ID</dt><dd><code>gpt-6-astra</code></dd></div><div><dt>Input / 1M</dt><dd>{{ASTRA_INPUT}}</dd></div><div><dt>Output / 1M</dt><dd>{{ASTRA_OUTPUT}}</dd></div><div><dt>Reasoning</dt><dd>low–max</dd></div></dl>
+        <a href="/models/gpt-6-astra/">Explore Astra specs and evidence ↗</a>
+      </article>
+      <article class="gpt6-card gpt6-featured">
+        <span class="gpt6-kicker">BALANCED STARTING POINT</span><h3>GPT-6.1 Sol</h3>
+        <p>Near-Astra positioning for complex coding agents, workflows and computer use at one-fifth Astra's standard input and output token rates.</p>
+        <dl><div><dt>Model ID</dt><dd><code>gpt-6.1-sol</code></dd></div><div><dt>Input / 1M</dt><dd>{{SOL_INPUT}}</dd></div><div><dt>Output / 1M</dt><dd>{{SOL_OUTPUT}}</dd></div><div><dt>Reasoning</dt><dd>low–max</dd></div></dl>
+        <a href="/models/gpt-6-1-sol/">Explore 6.1 Sol specs and evidence ↗</a>
+      </article>
+      <article class="gpt6-card">
+        <span class="gpt6-kicker">HIGH-VOLUME EFFICIENCY</span><h3>GPT-6 Luna</h3>
+        <p>For structured extraction, classification, repeated support tasks and cost-sensitive automation when your own evaluation confirms adequate quality.</p>
+        <dl><div><dt>Model ID</dt><dd><code>gpt-6-luna</code></dd></div><div><dt>Input / 1M</dt><dd>{{LUNA_INPUT}}</dd></div><div><dt>Output / 1M</dt><dd>{{LUNA_OUTPUT}}</dd></div><div><dt>Reasoning</dt><dd>none–max</dd></div></dl>
+        <a href="/models/gpt-6-luna/">Explore Luna specs and evidence ↗</a>
+      </article>
+    </div>
+    <p class="gpt6-footnote"><strong>Why not GPT-6 Sol (original) in the primary tier cards?</strong> OpenAI's newest recommendation guide now selects GPT-6.1 Sol. The <a href="/models/gpt-6-sol/">original GPT-6 Sol</a> remains relevant for migrations, cost comparisons, compatibility and previously tested workloads.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-pricing">
+    <div class="model-section-head"><p class="eyebrow">OFFICIAL STANDARD API PRICING</p><h2>GPT-6 API pricing: input, cached input, cache writes and output.</h2><p>Per million tokens, before any extra tool, data-residency or specialized serving charges. Cached reads and cache writes are distinct billing dimensions.</p></div>
+    <h3>Short-context rates: up to 272,000 input tokens</h3>
+    <div class="gpt6-table-scroll" tabindex="0" role="region" aria-label="Short context GPT-6 API rates"><table class="gpt6-table"><thead><tr><th scope="col">Model</th><th scope="col">Input</th><th scope="col">Cached input</th><th scope="col">Cache write</th><th scope="col">Output</th></tr></thead><tbody>{{SHORT_ROWS}}</tbody></table></div>
+    <h3>Long-context rates: over 272,000 input tokens</h3>
+    <div class="gpt6-table-scroll" tabindex="0" role="region" aria-label="Long context GPT-6 API rates"><table class="gpt6-table"><thead><tr><th scope="col">Model</th><th scope="col">Input</th><th scope="col">Cached input</th><th scope="col">Cache write</th><th scope="col">Output</th></tr></thead><tbody>{{LONG_ROWS}}</tbody></table></div>
+    <p><strong>How the threshold works:</strong> when total prompt input exceeds 272K tokens, the entire request uses the higher long-context price. The published schedule is 2× input and cache rates, and 1.5× output rates. A 300K-token prompt does not pay standard rates on the first 272K and a higher rate on only the remaining 28K.</p>
+    <p>Rates can also change by service tier: <strong>Batch, Flex, Fast and Ultrafast</strong> may have their own availability and prices. Data-residency processing may add a regional uplift, and some tool calls are billed separately. Always consult <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI's official rate card</a> for your deployment. The latest Sol model has <strong>{{SOL_CACHED}}/M cached input</strong>; original GPT-6 Sol has <strong>{{OLD_SOL_CACHED}}/M</strong> at short context.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-calculator">
+    <div class="model-section-head"><p class="eyebrow">WORKLOAD COST ESTIMATOR</p><h2>Calculate a GPT-6 API request cost.</h2><p>Change the billable token counts to estimate the same workload across Astra, 6.1 Sol and Luna. This calculator deliberately uses Standard token rates only.</p></div>
+    <div class="gpt6-calculator" data-gpt6-calc data-rates='{{RATES_JSON}}'>
+      <form class="gpt6-inputs" id="gpt6-cost-form">
+        <label><span>Uncached input tokens</span><input name="input" type="number" min="0" max="1050000" inputmode="numeric" step="1000" value="8000"><small>New prompt tokens</small></label>
+        <label><span>Cached input tokens</span><input name="cached" type="number" min="0" max="1050000" inputmode="numeric" step="1000" value="0"><small>Reads from existing cache</small></label>
+        <label><span>Cache-write tokens</span><input name="writes" type="number" min="0" max="1050000" inputmode="numeric" step="1000" value="0"><small>Newly written cached tokens</small></label>
+        <label><span>Output tokens</span><input name="output" type="number" min="0" max="128000" inputmode="numeric" step="500" value="2000"><small>Billable generated tokens</small></label>
+      </form>
+      <p class="gpt6-tier" data-gpt6-tier role="status">Standard short-context rates · 8,000 prompt tokens</p>
+      <div class="gpt6-results" aria-live="polite">
+        <article><span>Astra</span><strong data-cost="astra">{{DEFAULT_ASTRA}}</strong><small>Estimated USD / request</small></article>
+        <article><span>6.1 Sol</span><strong data-cost="sol">{{DEFAULT_SOL}}</strong><small>Estimated USD / request</small></article>
+        <article><span>Luna</span><strong data-cost="luna">{{DEFAULT_LUNA}}</strong><small>Estimated USD / request</small></article>
+      </div>
+      <p class="gpt6-footnote">The estimator excludes tool calls, taxes, Fast/Flex/Batch/Ultrafast tiers, extra compute, residency uplifts and retry cost. Models may use different output-token counts for the same task. Values above the documented 1,050,000-token input or 128,000-token output limits are rejected.</p>
+    </div>
+    <h3>Worked example prices for three different token workloads</h3>
+    <div class="gpt6-table-scroll" tabindex="0" role="region" aria-label="GPT-6 example request costs"><table class="gpt6-table"><thead><tr><th scope="col">Example request</th><th scope="col">Astra</th><th scope="col">6.1 Sol</th><th scope="col">Luna</th></tr></thead><tbody>{{EXAMPLE_ROWS}}</tbody></table></div>
+    <p class="reference-note">These calculations apply OpenAI's published Standard rates to fixed hypothetical token counts; they are not claims about actual task quality, completion time or token usage across models.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-decision">
+    <div class="model-section-head"><p class="eyebrow">PRODUCTION MODEL SELECTION</p><h2>Which GPT-6 model is best for your use case?</h2><p>The most useful choice depends on how much work succeeds, the cost of an error, and how often requests repeat.</p></div>
+    <div class="gpt6-use-grid">
+      <article><span>AGENTIC CODING</span><h3>Benchmark 6.1 Sol, then Astra</h3><p>Use <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> as a quality/cost baseline for multi-file edits, tests, tool orchestration and debugging. Escalate genuinely hard cases to <a href="/models/gpt-6-astra/">Astra</a> only when your evaluation shows better outcomes.</p></article>
+      <article><span>HIGH-VOLUME DATA EXTRACTION</span><h3>Consider Luna with validation</h3><p>For categorization, structured extraction and routine internal automation, Luna can reduce spend. Verify schema conformance, numeric accuracy and failure handling before routing large traffic volumes.</p></article>
+      <article><span>COMPLEX PROFESSIONAL WORK</span><h3>Pay for demonstrated quality</h3><p>For sensitive documents, expert research or difficult analytical synthesis, compare the full results on source accuracy and downstream rework, not only the length of the generated answer.</p></article>
+      <article><span>LONG DOCUMENTS</span><h3>Shared window, different judgment</h3><p>All three current models offer 1.05M context. Test retrieval and reasoning across long prompts; avoid assuming a large input limit means guaranteed factual recall, and account for the long-context price band.</p></article>
+      <article><span>COMPUTER USE &amp; TOOLS</span><h3>Use appropriate API permissions</h3><p>Agents need tool controls, limited permissions, monitoring and human approval for irreversible actions. OpenAI's Responses API is the recommended surface for reasoning with tools.</p></article>
+      <article><span>LATENCY &amp; ENTERPRISE</span><h3>Choose processing separately</h3><p>Fast and other processing options vary by model, region and account. Lower reasoning effort may reduce latency, but performance and residency eligibility must be measured against your own constraints.</p></article>
+    </div>
+    <div class="gpt6-steps"><div><b>1</b><p>Build a representative test set including difficult and failure-prone tasks.</p></div><div><b>2</b><p>Establish quality and cost per successful job using 6.1 Sol.</p></div><div><b>3</b><p>Use Luna where measured success remains high at scale.</p></div><div><b>4</b><p>Route hard or high-impact tasks to Astra when it earns the premium.</p></div></div>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-specs">
+    <div class="model-section-head"><p class="eyebrow">API REFERENCE SPECS</p><h2>GPT-6 token limits, knowledge cutoff and reasoning modes.</h2></div>
+    <div class="gpt6-table-scroll" tabindex="0" role="region" aria-label="GPT-6 model specification comparison"><table class="gpt6-table"><thead><tr><th scope="col">Specification</th><th scope="col">Astra</th><th scope="col">6.1 Sol</th><th scope="col">Luna</th></tr></thead><tbody>
+      <tr><th scope="row">Model ID</th><td><code>gpt-6-astra</code></td><td><code>gpt-6.1-sol</code></td><td><code>gpt-6-luna</code></td></tr>
+      <tr><th scope="row">Context window</th><td>1,050,000</td><td>1,050,000</td><td>1,050,000</td></tr>
+      <tr><th scope="row">Max output</th><td>128,000</td><td>128,000</td><td>128,000</td></tr>
+      <tr><th scope="row">Knowledge cutoff</th><td>{{ASTRA_CUTOFF}}</td><td>{{SOL_CUTOFF}}</td><td>{{LUNA_CUTOFF}}</td></tr>
+      <tr><th scope="row">Reasoning effort</th><td>low, medium, high, xhigh, max</td><td>low, medium, high, xhigh, max</td><td>none, low, medium, high, xhigh, max</td></tr>
+      <tr><th scope="row">Modalities</th><td>Text + image in / text out</td><td>Text + image in / text out</td><td>Text + image in / text out</td></tr>
+    </tbody></table></div>
+    <p><strong>Reasoning isn't a single switch.</strong> Astra and 6.1 Sol do not support <code>reasoning.effort=none</code>, while the earlier Sol and Luna do. All three current models support medium-effort starting configurations; high, xhigh and max are valuable only if your own task tests justify the extra tokens or latency. OpenAI documents tool use and streaming, but support depends on the particular API endpoint and parameter combination.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-api">
+    <div class="model-section-head"><p class="eyebrow">PYTHON DEVELOPER EXAMPLE</p><h2>How to call GPT-6.1 Sol with OpenAI's Responses API.</h2><p>The example explicitly names a current model. Switch <code>model</code> to <code>gpt-6-astra</code> or <code>gpt-6-luna</code> only after checking applicable reasoning effort and endpoint rules.</p></div>
+    <pre class="gpt6-code"><code>from openai import OpenAI
+
+client = OpenAI()  # OPENAI_API_KEY in environment
+
+response = client.responses.create(
+    model="gpt-6.1-sol",
+    reasoning={"effort": "medium"},
+    input="Review this function for correctness and edge cases.",
+)
+print(response.output_text)</code></pre>
+    <div class="gpt6-use-grid">
+      <article><span>RESPONSES API</span><h3>Preferred for reasoning with tools</h3><p>Use Responses for tool-enabled workflows. Astra and 6.1 Sol require it for tool calling; the older Sol and Luna only support Chat Completions function calling with reasoning set to none.</p></article>
+      <article><span>CACHING</span><h3>Measure hits and writes</h3><p>Separate input, cached input and cache-write tokens. Reuse stable prefixes where possible; inspect actual usage rather than assuming caching automatically improves every request.</p></article>
+      <article><span>PARAMETERS</span><h3>Remove unsupported options</h3><p>With reasoning enabled, parameters such as <code>temperature</code> and <code>top_p</code> may be invalid. Check OpenAI's current migration guidance before copying older SDK code.</p></article>
+    </div>
+    <p>For pricing and architecture, account for the difference between <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer">OpenAI API model selection</a> and the GPT-6 models exposed through ChatGPT, Codex or other products. Product availability and API billing are separate.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-limitations">
+    <div class="model-section-head"><p class="eyebrow">REAL-WORLD RESTRICTIONS</p><h2>GPT-6 limitations and deployment checklist.</h2></div>
+    <div class="gpt6-caveats">
+      <div><b>01</b><p><strong>A million tokens is not a guarantee of perfect recall.</strong> Test extraction and answer faithfulness with long, messy documents and irrelevant distractors.</p></div>
+      <div><b>02</b><p><strong>The cheapest token is not always the cheapest result.</strong> Include retries, tool calls, reasoning token use, caching and human review.</p></div>
+      <div><b>03</b><p><strong>Vendor evaluations are not deployment guarantees.</strong> Look for benchmark methodology and match the prompt, effort, tools and grading to your real workloads.</p></div>
+      <div><b>04</b><p><strong>Models and APIs differ.</strong> Do not assume a Chat Completions call with tools or the same sampling parameters works with all tiers.</p></div>
+      <div><b>05</b><p><strong>Long context changes the entire request bill.</strong> Crossing 272K prompt tokens can materially change cost; use a high-context test budget.</p></div>
+      <div><b>06</b><p><strong>Agents need security boundaries.</strong> Use permission scoping, audit logs, prompt-injection defenses and approvals for sensitive or irreversible actions.</p></div>
+    </div>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-history">
+    <div class="model-section-head"><p class="eyebrow">FAMILY RELEASE TRACKER</p><h2>GPT-6 release timeline and the newer Sol model.</h2></div>
+    <div class="gpt6-timeline">
+      <div><time datetime="2026-09-03">September 3, 2026</time><p><strong>Astra:</strong> OpenAI launched its quality-first GPT-6 model for difficult professional and technical work. <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener noreferrer">Official announcement ↗</a></p></div>
+      <div><time datetime="2026-09-22">September 22, 2026</time><p><strong>Sol and Luna:</strong> new pricing and efficiency choices joined the GPT-6 family. <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener noreferrer">Official announcement ↗</a></p></div>
+      <div><time datetime="2026-09-29">September 29, 2026</time><p><strong>6.1 Sol:</strong> the middle tier was upgraded. Short-context cached input fell from {{OLD_SOL_CACHED}} per million on original Sol to {{SOL_CACHED}} on 6.1 Sol. <a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">Official upgrade ↗</a></p></div>
+    </div>
+    <p>For existing integrations, benchmark <code>gpt-6.1-sol</code> rather than silently replacing <code>gpt-6-sol</code>. Recheck tool calls, reasoning effort, cache economics, latency and evaluation outcomes. SXF keeps individual <a href="/models/gpt-6-sol/">original Sol</a> and <a href="/models/gpt-6-1-sol/">new Sol</a> pages separately.</p>
+  </section>
+
+  <section class="gpt6-section" id="gpt6-faq"><div class="model-section-head"><p class="eyebrow">COMMON QUESTIONS</p><h2>GPT-6 FAQ: models, costs and API compatibility.</h2></div><div class="model-faq gpt6-faq">{{FAQ_HTML}}</div></section>
+
+  <section class="gpt6-section" id="gpt6-sources">
+    <div class="model-section-head"><p class="eyebrow">PRIMARY DOCUMENTATION</p><h2>Verify GPT-6 claims with OpenAI sources.</h2></div>
+    <div class="gpt6-sources">
+      <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer"><span>MODEL SELECTION</span><strong>Using GPT-6 and model migration ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>API PRICING</span><strong>OpenAI Standard and serving tiers ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer"><span>MODEL CARD</span><strong>GPT-6 Astra specifications ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer"><span>MODEL CARD</span><strong>GPT-6.1 Sol specifications ↗</strong></a>
+      <a href="https://developers.openai.com/api/docs/models/gpt-6-luna" target="_blank" rel="noopener noreferrer"><span>MODEL CARD</span><strong>GPT-6 Luna specifications ↗</strong></a>
+      <a href="/compare/gpt-6-astra-vs-sol-vs-luna/"><span>SXF DEEP DIVE</span><strong>Original GPT-6 family comparison ↗</strong></a>
+    </div>
+    <p class="reference-note">SXF independently calculates the illustrative token-cost examples from provider-published rates. Editorial model-selection advice is not a universal accuracy ranking. The related-news stream and verified change ledger below remain visible and automatically updated.</p>
+  </section>
+</section>

@@ -1,0 +1,68 @@
+/* Responsive GPT-6 family guide: intentionally scoped to this single model route. */
+.gpt6-family{--g6-border:rgba(184,204,233,.21);--g6-muted:#b5c4d8;max-width:1240px;margin:auto;padding-bottom:40px;color:#f0f6ff}
+.gpt6-family *{box-sizing:border-box}.gpt6-family a{overflow-wrap:anywhere;text-underline-offset:3px}
+.gpt6-family h2{font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:1.22;letter-spacing:-.03em;margin:0 0 14px}
+.gpt6-family h3{font-size:clamp(1.08rem,1.5vw,1.35rem);line-height:1.35;margin:16px 0 10px}
+.gpt6-family p{line-height:1.75;color:#cbd7e5}
+.gpt6-intro{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);gap:clamp(20px,4vw,52px);padding:clamp(20px,4vw,52px) 0}
+.gpt6-intro>div>p{max-width:78ch}
+.gpt6-callout{background:rgba(69,98,154,.16);border-left:3px solid #a7c4fa;padding:13px 17px;border-radius:0 12px 12px 0}
+.gpt6-spec-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start}
+.gpt6-spec-summary>div{min-width:0;background:linear-gradient(145deg,rgba(42,61,86,.6),rgba(16,23,37,.75));border:1px solid var(--g6-border);border-radius:13px;padding:16px}
+.gpt6-spec-summary>div:first-child{grid-column:1/-1}.gpt6-spec-summary span{display:block;font-size:.68rem;letter-spacing:.09em;color:var(--g6-muted);margin-bottom:10px;font-weight:750}
+.gpt6-spec-summary strong{font-size:clamp(.95rem,1.5vw,1.22rem);overflow-wrap:anywhere}.gpt6-spec-summary small{font-size:.72rem;color:var(--g6-muted)}
+.gpt6-jump{display:flex;gap:9px;overflow-x:auto;scrollbar-width:thin;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding:10px 0 16px}
+.gpt6-jump a{flex:none;scroll-snap-align:start;display:grid;place-items:center;min-height:44px;padding:8px 17px;text-decoration:none;font-size:.87rem;font-weight:650;color:#e2eeff;background:rgba(43,64,94,.30);border:1px solid var(--g6-border);border-radius:100px}
+.gpt6-jump a:hover{background:rgba(106,142,201,.29)}
+.gpt6-section{scroll-margin-top:85px;padding:clamp(26px,4vw,48px) 0;border-top:1px solid var(--g6-border)}
+.gpt6-section>.model-section-head{max-width:80ch;margin-bottom:21px}
+.gpt6-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.gpt6-card{min-width:0;border:1px solid var(--g6-border);border-radius:16px;padding:clamp(16px,2.4vw,25px);background:linear-gradient(160deg,#1d2a3d,#0e1624);display:flex;flex-direction:column}
+.gpt6-featured{border-color:#8caedf}.gpt6-kicker{font-size:.69rem;letter-spacing:.10em;font-weight:800;color:#b6cced}
+.gpt6-card>p{flex:1;margin:0 0 16px}.gpt6-card dl{margin:0 0 17px}
+.gpt6-card dl>div{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--g6-border);gap:10px;padding:9px 0;font-size:.81rem}
+.gpt6-card dt{color:var(--g6-muted)}.gpt6-card dd{margin:0;text-align:right;color:#eff6ff;font-weight:750;overflow-wrap:anywhere}
+.gpt6-card>a{min-height:44px;display:grid;place-items:center;text-align:center;border-radius:10px;border:1px solid var(--g6-border);padding:11px;background:rgba(88,119,171,.16);font-weight:700;text-decoration:none}
+.gpt6-footnote{font-size:.9rem;padding:13px 16px;border:1px solid var(--g6-border);border-radius:11px;background:rgba(37,55,79,.27);margin-top:17px}
+.gpt6-table-scroll{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border:1px solid var(--g6-border);border-radius:13px;margin:16px 0 24px}
+.gpt6-table{width:100%;min-width:640px;border-collapse:collapse;white-space:nowrap}
+.gpt6-table th,.gpt6-table td{padding:14px 15px;border-bottom:1px solid var(--g6-border);font-size:.88rem;color:#dce7f8;text-align:right;font-variant-numeric:tabular-nums}
+.gpt6-table th:first-child,.gpt6-table td:first-child{text-align:left}.gpt6-table tbody tr:last-child>*{border-bottom:0}
+.gpt6-table thead{background:#1a283a}.gpt6-table thead th{color:#b9cce9;font-weight:800;font-size:.78rem}
+.gpt6-table tbody tr:nth-child(even){background:rgba(61,86,115,.16)}
+.gpt6-example-note{display:block;font-size:.76rem;color:#9eafc7;margin-top:5px;font-weight:400}
+.gpt6-calculator{border:1px solid var(--g6-border);border-radius:16px;padding:clamp(16px,3vw,28px);background:linear-gradient(140deg,#17263b,#0c1625);margin-bottom:27px}
+.gpt6-inputs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.gpt6-inputs label{display:flex;flex-direction:column;gap:8px;min-width:0;font-size:.84rem;color:#e6efff;font-weight:720}
+.gpt6-inputs input{min-height:46px;border-radius:9px;border:1px solid #61738e;background:#0b1423;color:white;font-size:1rem;width:100%;padding:11px}
+.gpt6-inputs small{font-size:.74rem;color:var(--g6-muted);font-weight:400}
+.gpt6-tier{margin:20px 0 11px;font-weight:750;color:#c8dbfc!important}
+.gpt6-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gpt6-results article{padding:17px;min-width:0;background:rgba(6,15,27,.69);border:1px solid var(--g6-border);border-radius:12px}
+.gpt6-results span,.gpt6-results small{display:block;font-size:.76rem;color:#b8cadf}
+.gpt6-results strong{display:block;font-size:clamp(1.4rem,2vw,1.9rem);color:white;margin:10px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.gpt6-use-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gpt6-use-grid article{min-width:0;border:1px solid var(--g6-border);border-radius:13px;padding:20px;background:rgba(43,62,89,.26)}
+.gpt6-use-grid article>span{font-size:.72rem;letter-spacing:.09em;color:#b4ccf1;font-weight:800}
+.gpt6-use-grid article h3{margin:12px 0 9px}.gpt6-use-grid article p{margin:0;font-size:.93rem}
+.gpt6-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-top:24px}
+.gpt6-steps>div{border-top:2px solid #91b1e3;padding:15px 7px}.gpt6-steps b{display:grid;place-items:center;border-radius:50%;background:#2b4c79;color:white;width:32px;height:32px}
+.gpt6-code{overflow-x:auto;max-width:100%;padding:20px;background:#090f1b;border:1px solid var(--g6-border);border-radius:13px;line-height:1.7;color:#e4edfc;font-size:.89rem}
+.gpt6-caveats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gpt6-caveats>div{padding:17px 20px;background:rgba(40,60,85,.3);border:1px solid var(--g6-border);border-radius:13px}
+.gpt6-caveats b{color:#bbd4ff}.gpt6-caveats p{margin:8px 0}
+.gpt6-timeline{border-left:2px solid #7499d5;margin-left:8px;padding-left:23px}
+.gpt6-timeline>div{margin-bottom:23px;position:relative}.gpt6-timeline>div:before{content:"";position:absolute;left:-31px;top:5px;width:14px;height:14px;background:#8cadf0;border:3px solid #0e1726;border-radius:50%}
+.gpt6-timeline time{font-weight:800;color:#d7e8ff}
+.gpt6-faq{max-width:940px}.gpt6-faq details{padding:13px 17px;border:1px solid var(--g6-border);border-radius:10px;background:rgba(37,57,81,.28);margin-bottom:9px}
+.gpt6-faq summary{cursor:pointer;line-height:1.6;color:#e6f0ff;font-weight:750;min-height:28px}
+.gpt6-faq details p{margin:10px 0 4px}
+.gpt6-sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.gpt6-sources a{display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:85px;padding:17px;border:1px solid var(--g6-border);border-radius:12px;text-decoration:none;background:rgba(42,61,85,.27)}
+.gpt6-sources span{font-size:.7rem;color:#adc3e2;letter-spacing:.06em;font-weight:800}
+.gpt6-sources strong{font-size:.96rem;color:#eff6ff}
+.gpt6-family :is(a,input,summary,[tabindex]):focus-visible{outline:3px solid #9dc2ff;outline-offset:3px}
+@media(max-width:1000px){.gpt6-cards,.gpt6-use-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gpt6-featured{order:-1}.gpt6-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:690px){.gpt6-intro{grid-template-columns:minmax(0,1fr);gap:24px}.gpt6-cards,.gpt6-use-grid,.gpt6-caveats,.gpt6-sources{grid-template-columns:minmax(0,1fr)}.gpt6-featured{order:0}.gpt6-results{grid-template-columns:minmax(0,1fr)}.gpt6-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.gpt6-table th,.gpt6-table td{padding:12px 13px;font-size:.82rem}.gpt6-jump a{font-size:.82rem}.gpt6-section{padding:30px 0}}
+@media(max-width:380px){.gpt6-spec-summary,.gpt6-inputs,.gpt6-steps{grid-template-columns:minmax(0,1fr)}.gpt6-family h2{font-size:1.42rem}}
+@media(prefers-reduced-motion:reduce){.gpt6-jump{scroll-behavior:auto}}

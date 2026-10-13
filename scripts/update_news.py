@@ -23,6 +23,7 @@ from open_source_signals import select_open_source_signals
 from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 from gemini_live_extended_page import enrich_gemini_live_extended_page
 from gemini_38_flash_tts_model_page import enrich_gemini_38_flash_tts_page
+from gpt6_family_model_page import enrich_gpt6_family_page
 from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
@@ -4666,7 +4667,7 @@ def model_page_html(name, items):
     schema = {"@context":"https://schema.org","@graph":schema_graph}
     rows = "".join(signal_row(item) for item in items[:30])
     reference = model_reference_html(name)
-    return f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, robots=robots)}
+    page = f'''<!doctype html><html lang="en">{page_head(title, description, canonical, schema, robots=robots)}
     <body class="intel-page model-page">{page_header("models")}<main>
       <section class="collection-hero shell"><nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>{escape(name)}</span></nav>
       <p class="eyebrow">MODEL INTELLIGENCE</p><h1>{escape(name)}<br><span>{"model reference." if name == "Claude Opus 5.5" else ("model family reference." if name == "GPT-5.6" else ("reference & signals." if ref else "release signals."))}</span></h1><p>{escape(description)}</p>
@@ -4676,6 +4677,7 @@ def model_page_html(name, items):
       <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>{escape(name)}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
+    return enrich_gpt6_family_page(page, MODEL_PRICING_BY_ID) if name == "GPT-6" else page
 
 
 
