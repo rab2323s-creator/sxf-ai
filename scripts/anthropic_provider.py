@@ -1,6 +1,7 @@
 """Anthropic provider authority page. The generator calls this with its runtime globals."""
 from html import escape
 from datetime import date
+from anthropic_provider_evergreen import enrich_anthropic_provider_page
 
 def render_anthropic_provider_html(ctx, items):
     catalog = ctx["MODEL_PRICING_CATALOG"]
@@ -59,7 +60,7 @@ def render_anthropic_provider_html(ctx, items):
     head = ctx["page_head"](title, description, canonical, schema)
     header = ctx["page_header"]("models")
     footer = ctx["page_footer"]()
-    return f'''<!doctype html><html lang="en">{head}<body class="intel-page model-page">{header}<main>
+    page = f'''<!doctype html><html lang="en">{head}<body class="intel-page model-page">{header}<main>
     <section class="collection-hero shell">
       <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/providers/">Providers</a><span>/</span>Anthropic</nav>
       <p class="eyebrow">PROVIDER INTELLIGENCE · VERIFIED {h(verified)}</p>
@@ -99,3 +100,4 @@ def render_anthropic_provider_html(ctx, items):
       <div class="model-related-links">{official(docs, "Models overview")}{official(pricing_url, "Pricing")}{official(lifecycle, "Deprecations")}{official(tools_url, "Tools")}{official(code_url, "Claude Code")}<a href="/models/">Model directory ↗</a><a href="/compare/">Comparison hub ↗</a></div>
     </section>
     </main>{footer}</body></html>'''
+    return enrich_anthropic_provider_page(page, models, verified)
