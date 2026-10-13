@@ -1,0 +1,222 @@
+<section class="model-reference model-reference-deep shell lite-guide" id="flash-lite-guide" data-flash-lite-tts-guide>
+  <div class="lite-intro">
+    <div class="lite-intro-copy">
+      <p class="eyebrow">GOOGLE AI · PRIMARY-SOURCE MODEL REFERENCE</p>
+      <h2>What is Gemini 3.8 Flash-Lite TTS?</h2>
+      <p><strong>Gemini 3.8 Flash-Lite TTS</strong> is Google's production <strong>text-to-speech</strong> model for cost-efficient, low-latency voice generation at scale. It turns a supplied text transcript into speech audio, using selectable voices and structured delivery instructions. Google positions Flash-Lite for bulk narration, read-aloud features, voice replication and conversational voice-agent pipelines.</p>
+      <p>The exact Gemini API model ID is <code>gemini-3.8-flash-lite-tts</code>. It accepts <strong>text input</strong> and returns <strong>audio output</strong>, with an <strong>8,192-token input limit</strong>, a <strong>16,384-token output serving limit</strong>, and support for <strong>101 languages</strong>. It is not the general-purpose <a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash</a> reasoning model or the bidirectional Gemini Live API.</p>
+      <p>Choose Flash-Lite when you need <strong>many usable audio clips at controlled cost</strong>. Choose <a href="/models/gemini-3-8-flash-tts/">Gemini 3.8 Flash TTS</a> when premium vocal fidelity, subtle acting, difficult pronunciations or broad regional-dialect coverage matter more than unit price. The two Gemini 3.8 TTS variants share the same request schema, making side-by-side testing straightforward.</p>
+      <p class="lite-highlight"><strong>Bottom line:</strong> Standard paid audio-output pricing through December 2026 is {{LITE_2026_OUT}}/million audio tokens for Flash-Lite, versus {{FLASH_2026_OUT}} for Flash TTS. At Google's <strong>25 audio tokens per second</strong>, one generated minute costs about <strong>{{LITE_MINUTE_2026}}</strong> on Lite and <strong>{{FLASH_MINUTE_2026}}</strong> on Flash before transcript input. This is an output-price comparison, not a measured quality score.</p>
+      <p class="reference-note">Editorial verification: October 13, 2026. Official sources: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts" target="_blank" rel="noopener noreferrer">model card</a>, <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">API price list</a> and <a href="https://ai.google.dev/gemini-api/docs/speech-generation" target="_blank" rel="noopener noreferrer">speech generation guide</a>.</p>
+    </div>
+    <aside class="lite-specs" aria-label="Gemini Flash-Lite TTS verified quick facts">
+      <div><span>API MODEL ID</span><strong><code>gemini-3.8-flash-lite-tts</code></strong></div>
+      <div><span>INPUT LIMIT</span><strong>8,192 <small>tokens</small></strong></div>
+      <div><span>OUTPUT SERVING LIMIT</span><strong>16,384 <small>tokens</small></strong></div>
+      <div><span>SUPPORTED LANGUAGES</span><strong>101</strong></div>
+      <div><span>INPUT → OUTPUT</span><strong>Text → Audio</strong></div>
+      <div><span>STANDARD AUDIO, 2026</span><strong>{{LITE_2026_OUT}} <small>per 1M</small></strong></div>
+    </aside>
+  </div>
+
+  <nav class="lite-toc" aria-label="On this Flash-Lite TTS model page">
+    <a href="#lite-versus-flash">Lite vs Flash</a>
+    <a href="#lite-pricing">Pricing</a>
+    <a href="#lite-calculator">Cost calculator</a>
+    <a href="#lite-api">API example</a>
+    <a href="#lite-voices">Voices</a>
+    <a href="#lite-production">Production</a>
+    <a href="#lite-faq">FAQ</a>
+  </nav>
+
+  <section class="lite-section" id="lite-versus-flash">
+    <div class="model-section-head"><p class="eyebrow">THE DIRECT COMPARISON</p><h2>Gemini 3.8 Flash-Lite TTS vs Flash TTS: what changes?</h2><p>Google explicitly documents different priorities for these two compatible TTS models. Neither is universally better for every voice application.</p></div>
+    <div class="lite-model-cards">
+      <article class="lite-model-card lite-model-selected">
+        <span class="lite-kicker">THROUGHPUT &amp; VALUE</span>
+        <h3>Flash-Lite TTS</h3>
+        <p>For scalable read-aloud, automated voice messages, everyday narration and latency-sensitive voice-agent cascades.</p>
+        <dl>
+          <div><dt>Model ID</dt><dd><code>gemini-3.8-flash-lite-tts</code></dd></div>
+          <div><dt>Languages</dt><dd>101</dd></div>
+          <div><dt>Standard audio output, 2026</dt><dd>{{LITE_2026_OUT}} / 1M</dd></div>
+          <div><dt>1 generated audio minute</dt><dd>{{LITE_MINUTE_2026}}</dd></div>
+        </dl>
+        <a href="#lite-production">See best production workflows ↓</a>
+      </article>
+      <article class="lite-model-card">
+        <span class="lite-kicker">CREATIVE FIDELITY &amp; NUANCE</span>
+        <h3>Flash TTS</h3>
+        <p>For audiobooks, premium narration, complex multi-speaker scenes, high-expression acting and challenging dialects.</p>
+        <dl>
+          <div><dt>Model ID</dt><dd><code>gemini-3.8-flash-tts</code></dd></div>
+          <div><dt>Languages</dt><dd>130</dd></div>
+          <div><dt>Standard audio output, 2026</dt><dd>{{FLASH_2026_OUT}} / 1M</dd></div>
+          <div><dt>1 generated audio minute</dt><dd>{{FLASH_MINUTE_2026}}</dd></div>
+        </dl>
+        <a href="/models/gemini-3-8-flash-tts/">Open Flash TTS model guide ↗</a>
+      </article>
+    </div>
+    <div class="lite-table-scroller" tabindex="0" role="region" aria-label="Flash-Lite versus Flash TTS specifications and capabilities">
+      <table class="lite-table">
+        <thead><tr><th scope="col">Decision factor</th><th scope="col">Flash-Lite TTS</th><th scope="col">Flash TTS</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Primary benefit</th><td>Lower cost; high throughput; low latency</td><td>Maximum voice fidelity; acting nuance</td></tr>
+          <tr><th scope="row">Best fit</th><td>Read-aloud, bulk jobs, voice-agent cascades</td><td>Studio narration, audiobooks, nuanced dialogue</td></tr>
+          <tr><th scope="row">Supported languages</th><td>101</td><td>130</td></tr>
+          <tr><th scope="row">Input and output</th><td>Text → audio</td><td>Text → audio</td></tr>
+          <tr><th scope="row">Input token limit</th><td>8,192</td><td>8,192</td></tr>
+          <tr><th scope="row">Output serving limit</th><td>16,384</td><td>16,384</td></tr>
+          <tr><th scope="row">API format</th><td>Same Gemini 3.8 TTS schema</td><td>Same Gemini 3.8 TTS schema</td></tr>
+          <tr><th scope="row">Paid Standard audio output through 2026</th><td>{{LITE_2026_OUT}}/1M</td><td>{{FLASH_2026_OUT}}/1M</td></tr>
+          <tr><th scope="row">Paid Standard audio output from 2027</th><td>{{LITE_2027_OUT}}/1M</td><td>{{FLASH_2027_OUT}}/1M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>What's the actual saving?</strong> Flash-Lite's Standard <em>audio output</em> is one-third less expensive than Flash's: {{LITE_2026_OUT}} instead of {{FLASH_2026_OUT}} per million tokens. The text-input rate is identical, so your overall bill is not guaranteed to be exactly one-third lower. Quality, generated duration, retries, latency and request volume should determine the final choice.</p>
+  </section>
+
+  <section class="lite-section" id="lite-pricing">
+    <div class="model-section-head"><p class="eyebrow">PUBLISHED GOOGLE PRICING</p><h2>Flash-Lite TTS pricing in 2026 and 2027: text and generated audio.</h2><p>These figures come from Google's paid Gemini API rate card. All prices below are in USD per million tokens, but <strong>text inputs and audio outputs use different billing dimensions</strong>.</p></div>
+    <div class="lite-price-splits">
+      <article><span>STANDARD · THROUGH DEC 31, 2026</span><strong>{{LITE_2026_IN}} in / {{LITE_2026_OUT}} out</strong><p>Text input and generated audio output. Audio generation is also published at {{LITE_2026_TEN_SEC}} per ten seconds.</p></article>
+      <article><span>STANDARD · STARTING JAN 1, 2027</span><strong>{{LITE_2027_IN}} in / {{LITE_2027_OUT}} out</strong><p>Published future Standard text/audio rates. Google's declared 2027 price transition is not today's effective price.</p></article>
+    </div>
+    <div class="lite-table-scroller" tabindex="0" role="region" aria-label="Paid Gemini Flash-Lite TTS API rates by serving tier and date">
+      <table class="lite-table">
+        <thead><tr><th scope="col">Paid serving tier</th><th scope="col">2026 text input / 1M</th><th scope="col">2026 audio output / 1M</th><th scope="col">2027 text input / 1M</th><th scope="col">2027 audio output / 1M</th></tr></thead>
+        <tbody>{{PRICING_TIERS}}</tbody>
+      </table>
+    </div>
+    <p><strong>About API tiers:</strong> Standard is the baseline for interactive and regular requests. Google's Batch and Flex rates are lower for suitable asynchronous or flexible workloads; Priority is priced higher. Available capacity, execution behavior and eligibility can vary. The <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">official rate card</a> also documents free-tier usage subject to limits.</p>
+    <p><strong>Important caching documentation caveat:</strong> Google's pricing page publishes a cached-input rate ({{LITE_2026_CACHE}}/million through 2026 and {{LITE_2027_CACHE}} from 2027), but the Flash-Lite TTS model card currently marks the caching capability as <em>not supported</em>. Do not assume TTS request caching works merely because a price line exists. The calculator below conservatively treats all supplied transcript input as regular text input, and does not claim cache discounts. <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts" target="_blank" rel="noopener noreferrer">Verify feature availability at the provider ↗</a></p>
+    <p>Google additionally lists cache storage fees on its pricing page; these are not included in the usage estimates. If using a paid service tier other than Standard, use its own rate and confirm any caching support independently.</p>
+  </section>
+
+  <section class="lite-section" id="lite-calculator">
+    <div class="model-section-head"><p class="eyebrow">INTERACTIVE AUDIO COST COMPARISON</p><h2>Gemini 3.8 Flash-Lite TTS cost calculator: per minute, hour or production batch.</h2><p>Enter total generated audio minutes and the total transcript input-token estimate, then compare Flash-Lite and Flash. Switch the date-specific price schedule without conflating 2026 and 2027 prices.</p></div>
+    <div class="lite-calculator" data-lite-calculator data-rates="{{CALCULATOR_RATES}}">
+      <form class="lite-calc-inputs" id="lite-cost-form">
+        <label><span>Generated audio minutes</span><input type="number" inputmode="decimal" min="0" max="1000000" step="any" name="minutes" value="60" required><small>Total across all generated clips</small></label>
+        <label><span>Text input tokens, total</span><input type="number" inputmode="numeric" min="0" max="1000000000" step="1" name="textTokens" value="12000" required><small>All transcript input across requests</small></label>
+        <label><span>Pricing period</span><select name="period"><option value="2026">Through Dec 31, 2026</option><option value="2027">From Jan 1, 2027</option></select><small>Published Standard paid prices</small></label>
+        <label><span>Serving tier</span><select name="tier"><option value="standard">Standard</option><option value="batch">Batch</option><option value="flex">Flex</option><option value="priority">Priority</option></select><small>Provider-published tier rates</small></label>
+      </form>
+      <p class="lite-calc-status" data-lite-calc-status role="status">Standard 2026 prices · 60 minutes estimated output</p>
+      <div class="lite-calc-results" aria-live="polite">
+        <article class="lite-lower-cost"><span>Flash-Lite TTS</span><strong data-lite-total="lite">{{EXAMPLE_LITE}}</strong><small>Text input + audio output, USD</small></article>
+        <article><span>Flash TTS</span><strong data-lite-total="flash">{{EXAMPLE_FLASH}}</strong><small>Text input + audio output, USD</small></article>
+        <article><span>Estimated savings with Lite</span><strong data-lite-total="saved">{{EXAMPLE_SAVED}}</strong><small>For identical duration and transcript tokens</small></article>
+      </div>
+      <p class="lite-calc-detail" data-lite-breakdown>Audio tokens = minutes × 60 × 25; text input billed separately.</p>
+      <p class="lite-disclaimer">Calculator estimate, not an invoice. Uses Google's published 25 generated audio tokens per second and the selected published API token prices. Assumes successful output with exactly the entered duration, no extra generation/retries or other fees. It does not assume unavailable caching or predict a voice-quality difference. Real billed usage depends on the API response and other applied terms.</p>
+    </div>
+    <h3>Worked Gemini TTS audio pricing examples</h3>
+    <div class="lite-table-scroller" tabindex="0" role="region" aria-label="Text-to-speech cost examples by output duration">
+      <table class="lite-table">
+        <thead><tr><th scope="col">Generated audio</th><th scope="col">Audio tokens</th><th scope="col">Lite Standard 2026</th><th scope="col">Flash Standard 2026</th><th scope="col">Lite Standard 2027</th></tr></thead>
+        <tbody>{{COST_EXAMPLES}}</tbody>
+      </table>
+    </div>
+    <p class="reference-note">These example-table figures are <strong>audio-output charges only</strong>. Add transcript text input tokens (e.g. 1,000 input text tokens adds {{LITE_1000_TEXT_2026}} at 2026 Standard). A long audiobook must also be broken into requests that respect the input and output serving limits.</p>
+  </section>
+
+  <section class="lite-section" id="lite-use-cases">
+    <div class="model-section-head"><p class="eyebrow">MODEL CHOICE BY PRODUCT</p><h2>What should you use Gemini 3.8 Flash-Lite TTS for?</h2><p>Google positions Lite for high throughput and latency sensitivity, but the actual choice must be validated on your languages, voice identities and scripts.</p></div>
+    <div class="lite-usecases">
+      <article><span>01 · AUDIO ARTICLES</span><h3>News and read-aloud features</h3><p>Generate narration on demand for articles, product descriptions and accessibility-oriented reading experiences. Use clear punctuation and a stable voice, and evaluate difficult names, abbreviations and numerals before publishing.</p></article>
+      <article><span>02 · LARGE CONTENT LIBRARIES</span><h3>Training and e-learning audio</h3><p>Turn reusable course lessons into speech at a predictable per-minute output rate. Separate chapters into coherent segments, maintain transcript/version alignment and spot-check pronunciation in every supported locale.</p></article>
+      <article><span>03 · VOICE AGENT CASCADES</span><h3>Speech after an agent produces text</h3><p>For a pipeline that uses a separate recognition/LLM stage and then synthesizes a reply, Flash-Lite is a price/latency-oriented output component. It is <em>not</em> itself the bidirectional Gemini Live API.</p></article>
+      <article><span>04 · NOTIFICATIONS AND IVR</span><h3>Personalized speech at volume</h3><p>Generate short prompts and branded notifications with clear delivery settings. Define fallbacks for failures, invalid input and unavailable capacity. For telephony, confirm audio format and sample-rate compatibility.</p></article>
+      <article><span>05 · VOICE DESIGN WORKFLOWS</span><h3>Consistent brand voice</h3><p>Use Google's voice library and voice-design ecosystem for consistent narrators. Replication requires appropriate permission and handling of people's identities; test quality and consent procedures carefully.</p></article>
+      <article><span>06 · REGIONAL AND CREATIVE AUDIO</span><h3>Know when to move to Flash</h3><p>Switch to Flash TTS for premium audiobooks, unusually difficult pronunciation, subtle emotional acting, or dialects beyond Lite's documented language support. Evaluate both variants using the same test script.</p></article>
+    </div>
+    <div class="lite-checklist">
+      <h3>How to choose between the two TTS variants</h3>
+      <ol><li><strong>Define an acceptance test.</strong> Pick representative voices, numerals, language samples, long passages and emotional delivery instructions.</li><li><strong>Run the same script on both models.</strong> Use the same voice and style where supported, and record audio quality, generation time and failure/retry frequency.</li><li><strong>Calculate full production economics.</strong> Include actual audio seconds, text input, service tier, failed requests and any post-processing.</li><li><strong>Start with Lite when quality passes.</strong> Escalate specific creative or dialect-heavy segments to Flash rather than paying the premium for every clip.</li></ol>
+    </div>
+  </section>
+
+  <section class="lite-section" id="lite-api">
+    <div class="model-section-head"><p class="eyebrow">COPYABLE GEMINI API CODE</p><h2>How to generate a WAV file with Gemini 3.8 Flash-Lite TTS (Python).</h2><p>Google's documented Interactions API supports both 3.8 TTS variants. Use <code>gemini-3.8-flash-lite-tts</code> for Lite, and switch just the <code>model</code> value to A/B test Flash TTS.</p></div>
+    <pre class="lite-code"><code>import base64
+from google import genai
+
+client = genai.Client()  # Set GEMINI_API_KEY in the environment
+result = client.interactions.create(
+    model="gemini-3.8-flash-lite-tts",
+    input=[{
+        "type": "user_input",
+        "content": [{
+            "type": "text",
+            "text": "Your delivery is arriving this afternoon.",
+            "annotations": [{
+                "type": "speech_metadata",
+                "style": "clear, warm and helpful",
+            }],
+        }],
+    }],
+    response_format={"type": "audio"},
+    generation_config={
+        "speech_config": [{"voice": "Kore"}],
+    },
+)
+
+with open("lite-tts-output.wav", "wb") as audio_file:
+    audio_file.write(base64.b64decode(result.output_audio.data))</code></pre>
+    <p><strong>Installation:</strong> install Google's maintained <code>google-genai</code> SDK and follow its current version requirements for Gemini 3.8 TTS. Keep the API key server-side. The example uses <code>speech_metadata.style</code> to specify delivery; spoken words remain in the <code>text</code> field. <a href="https://ai.google.dev/gemini-api/docs/speech-generation" target="_blank" rel="noopener noreferrer">Official example and SDK guidance ↗</a></p>
+    <div class="lite-code-grid">
+      <article><span>1 / SELECT A VOICE</span><h3>Prebuilt or designed</h3><p><code>Kore</code> and other supported voices can be chosen through <code>speech_config</code>. Different personas should be tested for each language and deployment.</p></article>
+      <article><span>2 / STRUCTURE PERFORMANCE</span><h3>Speech metadata</h3><p>Put sustained emotion, delivery and pace instructions in structured <code>speech_metadata.style</code>, not as words that the model may read aloud.</p></article>
+      <article><span>3 / SAVE VALID AUDIO</span><h3>WAV vs PCM</h3><p>The default complete-request response is WAV with a RIFF header. Save the bytes directly; do not add a second WAV wrapper. Streaming instead uses raw PCM by default.</p></article>
+      <article><span>4 / STREAM IF NEEDED</span><h3>Chunked PCM</h3><p>The Gemini TTS streaming mode returns 16-bit, 24-kHz mono PCM chunks by default. Confirm chunk ordering, player format and buffering for your application.</p></article>
+    </div>
+  </section>
+
+  <section class="lite-section" id="lite-voices">
+    <div class="model-section-head"><p class="eyebrow">VOICE CONTROL &amp; MULTILINGUAL OUTPUT</p><h2>Supported voices, languages, pronunciation and multi-speaker TTS.</h2></div>
+    <p>Google reports <strong>101 languages</strong> for Flash-Lite, with automatic input-language detection. Its wider 3.8 Flash TTS model reports 130. Language counts reflect provider support; they do not mean identical pronunciation or naturalness across every locale, voice or named entity. Build a listening test with your own words, dates, addresses and customer vocabulary.</p>
+    <p><strong>Prebuilt voices</strong> can be selected in the TTS request, and Google also documents an Extended Voice Library, voice design and voice replication. For voice identity, use the voice field and/or supported designed-voice ID. A one-line text prompt is not a secure substitute for explicit voice authorization.</p>
+    <p><strong>Single- and two-speaker support:</strong> Google documents speaker metadata for dialogue and up to two prebuilt-voice speakers per request. Each turn must supply <code>speech_metadata.speaker</code> matching a configured speaker. For scripts with more characters or voice-designed personas, synthesize turns separately where necessary and handle editing, alignment and transitions.</p>
+    <p><strong>Event tags:</strong> insert momentary cues such as <code>&lt;short pause&gt;</code>, <code>&lt;laugh&gt;</code> or <code>&lt;sigh&gt;</code> at the specific event. Keep continuous style instructions separate in <code>speech_metadata.style</code>. Input text is treated as a transcript: old prompting like “Speaker 1:” or “Say cheerfully:” may be read aloud if inserted as plain speech.</p>
+    <p>Voice replication should only be used with appropriate consent and licensing, particularly for public-facing or commercial narration. Google's <a href="https://ai.google.dev/gemini-api/docs/speech-generation" target="_blank" rel="noopener noreferrer">TTS guide</a> describes voices, sample rates, supported formats and the relevant request format.</p>
+  </section>
+
+  <section class="lite-section" id="lite-production">
+    <div class="model-section-head"><p class="eyebrow">PRODUCTION AND MIGRATION CHECKLIST</p><h2>Production considerations for low-latency and bulk audio systems.</h2></div>
+    <div class="lite-production-grid">
+      <article><b>01</b><h3>Account for real audio seconds</h3><p>Pricing is derived from generated audio tokens, not from transcript word counts. At 25 audio tokens/second, a 60-second file uses roughly 1,500 audio output tokens. Add separate text-input cost.</p></article>
+      <article><b>02</b><h3>Batch where execution permits</h3><p>For libraries and non-interactive narration, investigate Batch or Flex prices and capacity. For latency-critical voice-agent pipelines, benchmark your chosen serving tier end to end.</p></article>
+      <article><b>03</b><h3>Segment long transcripts</h3><p>The input limit is 8,192 tokens and the output serving limit is 16,384. Split longer scripts at natural sentence or scene boundaries; maintain consistent voices and review audible joins.</p></article>
+      <article><b>04</b><h3>Upgrade from 3.1 carefully</h3><p>Flash-Lite is Google's suggested replacement for <code>gemini-3.1-flash-tts-preview</code>. Migrate old role/style text into structured speech metadata, and update WAV handling rather than only replacing the model ID.</p></article>
+      <article><b>05</b><h3>Use appropriate output formats</h3><p>Google supports WAV, raw PCM, μ-law and A-law choices. Confirm the integration needs (browser playback, telecom gateway, streaming) and sample-rate requirements before storing files.</p></article>
+      <article><b>06</b><h3>Plan fallbacks and permissions</h3><p>Apply quotas, errors, retry budgets and privacy policies. Always keep API keys secret and confirm rights to produce any replicated voice. Voice synthesis does not replace an agent's reasoning, speech recognition or Live conversation session.</p></article>
+    </div>
+  </section>
+
+  <section class="lite-section" id="lite-limitations">
+    <div class="model-section-head"><p class="eyebrow">TECHNICAL LIMITATIONS</p><h2>What Flash-Lite TTS does not do.</h2></div>
+    <p>Google's model card lists audio generation as supported, but not general-purpose <strong>function calling, code execution, search grounding, structured text output, image generation, thinking or Live API</strong> for this model. It is a speech generation endpoint: connect separate models or tools when you need a fully conversational voice agent, retrieval or planning.</p>
+    <p>The model card also lists caching as unsupported despite the cached-input line on the pricing page. Both pages are linked above. For trustworthy estimates and production decisions, use verified billed usage and do not assume every listed billing dimension can currently be enabled for this TTS SKU.</p>
+    <p>The serving limits are not a promise of an arbitrary uninterrupted audiobook in one request. For substantial narration, split into multiple manageable inputs and test silence, pronunciation, continuity and voice consistency between outputs.</p>
+  </section>
+
+  <section class="lite-section" id="lite-faq">
+    <div class="model-section-head"><p class="eyebrow">ANSWERS FOR DEVELOPERS &amp; CONTENT TEAMS</p><h2>Gemini 3.8 Flash-Lite TTS frequently asked questions.</h2></div>
+    <div class="model-faq lite-faq">{{FAQ_HTML}}</div>
+  </section>
+
+  <section class="lite-section" id="lite-sources">
+    <div class="model-section-head"><p class="eyebrow">RESEARCH &amp; VERIFICATION</p><h2>Official Gemini 3.8 Flash-Lite TTS sources.</h2></div>
+    <p>Every hard specification and token rate above is grounded in Google's documentation. The duration cost calculator applies Google's published billing equivalence of 25 audio output tokens per second. Model-choice and deployment advice is editorial guidance, not an independently measured quality ranking.</p>
+    <div class="lite-source-grid">
+      <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts" target="_blank" rel="noopener noreferrer"><span>MODEL CARD</span><strong>Flash-Lite capabilities, limits, languages &amp; migration ↗</strong></a>
+      <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts" target="_blank" rel="noopener noreferrer"><span>COMPETITOR TIER</span><strong>Flash TTS official specifications ↗</strong></a>
+      <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>RATE CARD</span><strong>Effective dates and Standard/Batch/Flex/Priority prices ↗</strong></a>
+      <a href="https://ai.google.dev/gemini-api/docs/speech-generation" target="_blank" rel="noopener noreferrer"><span>DEVELOPER REFERENCE</span><strong>Google TTS API, speech metadata &amp; formats ↗</strong></a>
+      <a href="/models/gemini-3-8-flash-tts/"><span>SXF MODEL REFERENCE</span><strong>Full Gemini 3.8 Flash TTS guide ↗</strong></a>
+      <a href="/providers/google/"><span>PROVIDER DIRECTORY</span><strong>Browse Google's model lineup ↗</strong></a>
+    </div>
+    <p class="reference-note">The SXF append-only verified history following this section remains independent from editorial analysis and retains the original model route.</p>
+  </section>
+</section>
