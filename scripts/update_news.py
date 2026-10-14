@@ -5362,6 +5362,14 @@ def provider_index_html(items):
 
 
 def provider_page_html(provider, items):
+    if provider == "Cohere":
+        from cohere_provider_page import enrich_cohere_provider
+        models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == "Cohere"]
+        return enrich_cohere_provider(generic_provider_page_html(provider, items), models)
+    return generic_provider_page_html(provider, items)
+
+
+def generic_provider_page_html(provider, items):
     if provider == "Anthropic":
         from anthropic_provider import render_anthropic_provider_html
         return render_anthropic_provider_html(globals(), items)

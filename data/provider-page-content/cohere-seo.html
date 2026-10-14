@@ -1,0 +1,209 @@
+<section class="model-reference model-reference-deep shell cohere-guide" id="cohere-guide" data-cohere-editorial="2026-10-15" aria-label="Cohere AI models buyer and developer guide">
+  <div class="cohere-intro">
+    <div>
+      <p class="eyebrow">COHERE MODEL ECOSYSTEM · VERIFIED OCTOBER 2026</p>
+      <h2>Which Cohere AI model should you choose?</h2>
+      <p><strong>Cohere</strong> builds language models and retrieval tools for enterprise AI. Its portfolio is not one interchangeable chatbot: <strong>Command</strong> generates and reasons over language, <strong>Embed</strong> converts text and images to search vectors, <strong>Rerank</strong> sorts search results by relevance, <strong>Parse</strong> extracts document content, and <strong>North</strong> includes specialized models for code and translation.</p>
+      <p>If you're building a knowledge assistant or RAG pipeline, the most useful stack may be <strong>Parse → Embed → vector/keyword retrieval → Rerank → Command</strong>. Each component serves a different purpose and can be evaluated or replaced independently. A Rerank API call will not generate a user-facing answer; an Embed vector will not summarize a PDF; and a Command model alone does not give you a current, searchable document index.</p>
+      <p>This guide compares the <strong>{{TRACKED_COUNT}} Cohere model pages tracked by SXF</strong>, explains the actual units used in Cohere pricing, and links to official documentation. It is an independent model-selection resource, not Cohere's own website or a claim that every model can be bought under the same billing plan.</p>
+    </div>
+    <div class="cohere-decision-grid">
+      <a href="#cohere-command"><span>WRITE &amp; REASON</span><strong>Command</strong><small>Chat · agents · tool use</small></a>
+      <a href="#cohere-embed"><span>INDEX &amp; SEARCH</span><strong>Embed</strong><small>Vectors · multimodal retrieval</small></a>
+      <a href="#cohere-rerank"><span>RANK RESULTS</span><strong>Rerank</strong><small>Retrieval quality · reranking</small></a>
+      <a href="#cohere-parse"><span>READ FILES</span><strong>Parse</strong><small>PDFs · forms · tables</small></a>
+      <a href="#cohere-north"><span>SPECIALIZED TASKS</span><strong>North</strong><small>Code agents · translation</small></a>
+    </div>
+  </div>
+  <nav class="cohere-toc" aria-label="On this Cohere provider page">
+    <span>JUMP TO</span>
+    <a href="#cohere-compare">Model comparison</a><a href="#cohere-pricing">Pricing</a>
+    <a href="#cohere-workflow">RAG architecture</a><a href="#cohere-api">API examples</a>
+    <a href="#cohere-model-directory">All models</a><a href="#cohere-faq">FAQ</a><a href="#cohere-sources">Sources</a>
+  </nav>
+
+  <section class="model-deep-section" id="cohere-compare">
+    <div class="model-section-head"><p class="eyebrow">2026 COHERE MODEL LIST</p><h2>Compare all {{TRACKED_COUNT}} Cohere AI models by task, context and access.</h2></div>
+    <p>Start with what the model <em>returns</em> rather than its headline context size. Generative token limits apply to Chat models; Embed produces vectors, Rerank produces relevance rankings, and Parse returns structured document content. A dash in the output column does <strong>not</strong> mean the endpoint produces nothing or has unlimited output.</p>
+    <div class="cohere-table-scroll" role="region" tabindex="0" aria-label="Comparison table of Cohere models">
+      <table class="cohere-table">
+        <caption>Models and documented context windows from the SXF source-verified catalog. Follow each model link for detailed specifications.</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">Family</th><th scope="col">Primary purpose</th><th scope="col">Context / input limit</th><th scope="col">Output</th></tr></thead>
+        <tbody>
+          {{MODEL_ROWS}}
+        </tbody>
+      </table>
+    </div>
+    <p class="cohere-note">Context values here follow the catalog's source-backed model cards. Maximum generative output is shown only where the provider documents it. Rates, regional availability and trial-key access can differ by endpoint or deployment. <a href="#cohere-sources">Review official sources</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-command">
+    <div class="model-section-head"><p class="eyebrow">CHAT &amp; AGENTS</p><h2>Cohere Command models: A+ vs A Reasoning.</h2></div>
+    <p><strong><a href="/models/command-a-plus/">Command A+</a></strong> is a general-purpose enterprise chat and agent model with visual input, multilingual capabilities, tool use, structured outputs and cited-document workflows. Cohere lists <strong>128K context</strong>, <strong>64K max output</strong> and an API ID of <code>command-a-plus-05-2026</code>. The vendor's model guide documents access with trial or production keys within rate limits, and separate dedicated deployment through Model Vault.</p>
+    <p><strong><a href="/models/command-a-reasoning/">Command A Reasoning</a></strong> targets more deliberate, multistep problem solving and agent workflows, with <strong>256K context</strong> and <strong>32K max output</strong> in the verified catalog. The practical question is not simply which one has the longer context: evaluate how each handles tool failures, multilingual passages, instruction hierarchy, grounded citations and your actual response time budget.</p>
+    <p>For high-stakes document answers, combine Command with retrieved, access-controlled passages rather than asking it to recall private facts. Require citations to supplied evidence and use human checks for legal, financial and safety-sensitive decisions. <a href="https://docs.cohere.com/docs/command-a-plus">Official Command A+ reference</a>; <a href="https://docs.cohere.com/docs/command-a-reasoning">Command A Reasoning reference</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-embed">
+    <div class="model-section-head"><p class="eyebrow">SEMANTIC SEARCH</p><h2>Cohere Embed models: v5 Pro vs v5 Fast vs Embed 4.</h2></div>
+    <p>Embedding models transform a document and its query into mathematical vectors for semantic matching. They are commonly paired with a vector database and a separate reranking step. Cohere's <strong>Embed 5</strong> family supports text, images and mixed text-and-image inputs with a <strong>128K context</strong> and selectable vector dimensions including <strong>256, 512, 768, 1,024, 1,536 and 2,048</strong> (2,048 default), as listed in the current documentation.</p>
+    <div class="cohere-choice-grid">
+      <article><span>QUALITY FIRST</span><h3><a href="/models/embed-v5-0-pro/">Embed 5 Pro</a></h3><p>Consider for difficult retrieval over complex business documents, multilingual material and offline indexing where higher latency may be acceptable.</p></article>
+      <article><span>LATENCY FIRST</span><h3><a href="/models/embed-v5-0-fast/">Embed 5 Fast</a></h3><p>Consider for interactive query-time embedding, frequent agent iterations and high-throughput use cases. Measure your own recall-latency trade-off.</p></article>
+      <article><span>EARLIER GENERATION</span><h3><a href="/models/embed-v4-0/">Embed v4.0</a></h3><p>A multimodal retrieval option for existing deployments. Cohere lists 256–1,536 dimensions (1,536 default) and 128K context; test migration rather than assuming embeddings are interchangeable.</p></article>
+    </div>
+    <p><strong>Important compatibility detail:</strong> Cohere documents that <strong>Embed 5 Pro and Fast share an embedding space</strong>, so a corpus embedded with one can be queried with the other in supported scenarios. That does not automatically extend to Embed v4 or other providers' embedding families. Changing vector dimensions or model generations may require rebuilding a vector index. <a href="https://docs.cohere.com/docs/cohere-embed">Official Embed specifications</a>; <a href="https://docs.cohere.com/v1/changelog">Embed 5 release notes (Sept 30, 2026)</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-rerank">
+    <div class="model-section-head"><p class="eyebrow">SECOND-STAGE RETRIEVAL</p><h2>Cohere Rerank 4 Pro vs Rerank 4 Fast.</h2></div>
+    <p>Unlike embeddings, reranking starts with an <em>existing set of candidate results</em>. Given a search query and document snippets, Cohere's Rerank API returns a better relevance ordering and relevance scores. This makes it useful after vector search, hybrid retrieval or classic keyword/BM25 search.</p>
+    <div class="cohere-choice-grid">
+      <article><span>COMPLEX DATA</span><h3><a href="/models/rerank-4-pro/">Rerank 4 Pro</a></h3><p>Choose as a test candidate where nuanced multilingual relevance, semi-structured JSON documents and quality matter more than raw throughput.</p></article>
+      <article><span>LOWER LATENCY</span><h3><a href="/models/rerank-4-fast/">Rerank 4 Fast</a></h3><p>Test for high-volume, interactive or cost-sensitive retrieval where reduced reranking latency and throughput are priorities.</p></article>
+    </div>
+    <p>Both tracked variants have a <strong>32,768-token context specification</strong> in the provider catalog; that is not a generated-text output limit. The price unit for hosted Rerank can be a <strong>search</strong>: Cohere defines one search as a query plus up to 100 ranked documents, and longer documents may be chunked into additional units. Validate your typical document lengths before estimating costs. <a href="https://docs.cohere.com/docs/rerank">Rerank model guide</a>; <a href="https://cohere.com/pricing">official billing explanation</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-parse">
+    <div class="model-section-head"><p class="eyebrow">DOCUMENT INGESTION</p><h2>Cohere Parse 5: extract PDFs, scans, tables and forms before RAG.</h2></div>
+    <p><strong><a href="/models/parse-v5-0/">Parse 5</a></strong> is a document-understanding model accessible through the Parse API. Cohere lists <strong>8,192 context tokens</strong> and input support for <strong>PDF, PowerPoint and JPEG</strong> formats in its official guide. Its documented output is layout-aware Markdown with extracted text, tables, lists, forms, descriptions and page-position information—useful before indexing content for enterprise search.</p>
+    <p>Parse is not a substitute for a generative assistant or an embedding index. Cohere cautions that it <strong>does not return confidence scores</strong> for extracted content and that header/footer or typographic hierarchy may not be identified reliably. The API may also return different output representations depending on the requested format. Verify tables and figures before routing parsed text to an automated decision process. <a href="https://docs.cohere.com/docs/parse">Official Parse guide</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-north">
+    <div class="model-section-head"><p class="eyebrow">TASK-SPECIALIZED MODELS</p><h2>Cohere North Mini Code and North Small Translate.</h2></div>
+    <p><strong><a href="/models/north-mini-code-1-0/">North Mini Code</a></strong> targets repository-level coding and terminal-agent workflows. The tracked model card lists <strong>256K context</strong> and <strong>64K output</strong>. Evaluate whether its tool permissions, execution environment and deployment path fit your security needs before granting agent access to source repositories or shell commands.</p>
+    <p><strong><a href="/models/north-small-translate-1-0/">North Small Translate</a></strong> specializes in multilingual translation with <strong>16K input context</strong> and a <strong>16K maximum output</strong> in the tracked catalog. Translation quality depends on language pair, domain terminology and formatting constraints: evaluate representative business texts, numbers and named entities rather than assuming every locale performs identically.</p>
+    <p>These are specialized models, not direct substitutes for Embed or Rerank. Confirm the current deployment channel, availability and open-weight license individually from Cohere's official model cards.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-pricing">
+    <div class="model-section-head"><p class="eyebrow">PRICING WITHOUT FALSE EQUIVALENCE</p><h2>Cohere API pricing vs Model Vault: what actually gets billed?</h2></div>
+    <p><strong>Do not read “0 calculator-priced” in a catalog as “0 dollars”.</strong> The original SXF provider summary counted only models with complete, normalized public token-rate contracts in its cost calculator. Cohere's current range includes separate billing meters and enterprise deployment options, so an unknown or absent token quote must not be mistaken for free production access.</p>
+    <div class="cohere-choice-grid">
+      <article><span>CHAT / COMMAND</span><h3>Input and output tokens</h3><p>Generative API plans commonly meter prompt and response tokens separately. A free or rate-limited trial key is not an unlimited production plan.</p></article>
+      <article><span>EMBED</span><h3>Tokens embedded</h3><p>Cost depends on text processed and sometimes media type, serving tier or deployment. Embedding models produce vectors, not separately charged generated prose.</p></article>
+      <article><span>RERANK</span><h3>Search units</h3><p>Cohere defines a standard search as one query with up to 100 documents. Longer documents can count as multiple ranking units.</p></article>
+      <article><span>MODEL VAULT</span><h3>Dedicated capacity</h3><p>Per-instance hourly or contracted monthly/annual rates are not the same as a pay-as-you-go model-token quote.</p></article>
+    </div>
+    <h3>Published Cohere Model Vault example prices</h3>
+    <p>These figures come from Cohere's public pricing table and are <strong>per dedicated instance</strong>. They are not generic hosted-API usage charges, and monthly plans have different commitment conditions. Snapshot reviewed October 15, 2026.</p>
+    <div class="cohere-table-scroll" role="region" tabindex="0" aria-label="Cohere Model Vault instance pricing">
+      <table class="cohere-table">
+        <caption>USD per instance, public Standard Vault pricing tiers</caption>
+        <thead><tr><th scope="col">Model / tier</th><th scope="col">Hourly rate</th><th scope="col">Monthly reference</th><th scope="col">Billing basis</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Embed 5 Pro · Small</th><td>$3.00</td><td>$2,000</td><td>Dedicated instance</td></tr>
+          <tr><th scope="row">Embed 5 Fast · Medium</th><td>$5.00</td><td>$3,250</td><td>Dedicated instance</td></tr>
+          <tr><th scope="row">Rerank 4 Pro · Medium</th><td>$5.00</td><td>$3,250</td><td>Dedicated instance</td></tr>
+          <tr><th scope="row">Rerank 4 Fast · Medium</th><td>$5.00</td><td>$3,250</td><td>Dedicated instance</td></tr>
+          <tr><th scope="row">Parse 5 · Medium</th><td>$4.00</td><td>$2,500</td><td>Dedicated instance</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>Command A+</strong> also has a documented Standard Vault deployment rate of <strong>$17.50 per instance-hour at the L tier</strong> in Cohere's specialist Vault documentation, with different XL and commitment options. Availability can require a waitlist. This is not evidence of a $17.50 chat-request price. <a href="https://cohere.com/pricing">Cohere public pricing</a> · <a href="https://docs.cohere.com/docs/model-vault/standard/pricing">Vault rate details</a> · <a href="https://docs.cohere.com/docs/how-does-cohere-pricing-work">API billing units</a>.</p>
+    <p class="cohere-note">Rate schedules and tiers can change. Always verify the current vendor offer for your region, plan, and usage meter. Free trial keys are rate limited and are not intended for unrestricted commercial workloads.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-workflow">
+    <div class="model-section-head"><p class="eyebrow">BUILD A PRACTICAL RAG SYSTEM</p><h2>How Command, Embed, Rerank and Parse work together.</h2></div>
+    <ol class="cohere-steps">
+      <li><strong>Parse the inputs.</strong> Convert PDFs, tables and scans to structured text with Parse 5, retaining page numbers, permissions and original file references.</li>
+      <li><strong>Build embeddings.</strong> Chunk content and use Embed 5 Pro or Fast for vectors; store them in a secure vector index with metadata filters.</li>
+      <li><strong>Retrieve candidates.</strong> Combine vector similarity with keyword search if necessary, enforcing the current user's document permissions.</li>
+      <li><strong>Rerank the top candidates.</strong> Send the search query and candidate snippets to Rerank 4 Pro or Fast to improve result order.</li>
+      <li><strong>Generate a grounded answer.</strong> Give the best verified passages to Command A+ or a suitable Command model, requesting citations and recording sources.</li>
+    </ol>
+    <p>This pattern separates indexing, retrieval quality and reasoning costs. It is not a claim that adding every endpoint always improves your system. Measure retrieval recall, ranking relevance, answer faithfulness, per-request latency and total cost on a labeled dataset. <a href="https://docs.cohere.com/v2/docs/rag-complete-example">Cohere's official end-to-end RAG example</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-api">
+    <div class="model-section-head"><p class="eyebrow">PYTHON SDK · API V2</p><h2>How to call Cohere models: Chat, Embed and Rerank examples.</h2></div>
+    <p>Install the maintained SDK with <code>pip install -U cohere</code>, create a key in Cohere's dashboard and set the <code>CO_API_KEY</code> environment variable. Cohere V2 endpoints use <code>cohere.ClientV2</code>. Do not place API keys in client-side JavaScript or a public repository.</p>
+    <h3>Generate text with Command A+</h3>
+    <pre class="cohere-code"><code>import os
+import cohere
+
+co = cohere.ClientV2(api_key=os.environ["CO_API_KEY"])
+answer = co.chat(
+    model="command-a-plus-05-2026",
+    messages=[
+        {"role": "user", "content": "Summarize three requirements for a secure RAG service."}
+    ],
+)
+for item in answer.message.content:
+    if item.type == "text":
+        print(item.text)</code></pre>
+    <h3>Rerank search results with Rerank 4 Fast</h3>
+    <pre class="cohere-code"><code>docs = [
+    "A refund may be requested within 30 days of purchase.",
+    "Standard delivery takes three to five business days.",
+    "Customers can reset their password in account settings."
+]
+ranking = co.rerank(
+    model="rerank-v4.0-fast",
+    query="How long do I have to request a refund?",
+    documents=docs,
+    top_n=2,
+)
+for match in ranking.results:
+    print(match.index, round(match.relevance_score, 4), docs[match.index])</code></pre>
+    <h3>Create embeddings with Embed 5 Fast</h3>
+    <pre class="cohere-code"><code>vector_result = co.embed(
+    model="embed-v5.0-fast",
+    input_type="search_document",
+    embedding_types=["float"],
+    inputs=[{"content": [
+        {"type": "text", "text": "Refund requests close after 30 days."}
+    ]}],
+)
+print(vector_result)  # Embedding response, not generated prose</code></pre>
+    <p>Model IDs, response shapes and optional fields may change between API versions and deployments; follow the official <a href="https://docs.cohere.com/reference/chat">Chat reference</a>, <a href="https://docs.cohere.com/reference/embed">Embed reference</a> and <a href="https://docs.cohere.com/docs/reranking-quickstart">Rerank quickstart</a> when adapting these snippets for production.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-model-picker">
+    <div class="model-section-head"><p class="eyebrow">DECISION CHECKLIST</p><h2>How to choose the right Cohere model for production.</h2></div>
+    <div class="cohere-choice-grid">
+      <article><span>PRIMARY OUTPUT</span><h3>What do you need returned?</h3><p>Natural-language answer → Command. Vector representation → Embed. Ranked candidate list → Rerank. Extracted document text → Parse. Code/translation specialist → North.</p></article>
+      <article><span>QUALITY vs SPEED</span><h3>What is your latency budget?</h3><p>Evaluate Pro versus Fast using real queries and representative documents. Vendor positioning is a starting hypothesis, not your workload benchmark.</p></article>
+      <article><span>COST CONTRACT</span><h3>What unit is billed?</h3><p>Check tokens, search units, image/document processing, or per-instance dedicated capacity. Compare estimates using the same workload and region.</p></article>
+      <article><span>OPERATIONS</span><h3>Where will the model run?</h3><p>Decide between an API, dedicated Model Vault, cloud marketplace, or available open-weight deployment. Confirm security, data residency, rate limits and licenses.</p></article>
+    </div>
+    <p>Explore the <a href="/compare/">SXF comparison hub</a> to examine cross-provider options, or go directly to the model cards in the existing directory below. SXF preserves verifiable facts and marks missing price contracts as unavailable rather than making them up.</p>
+  </section>
+
+  <section class="model-deep-section" id="cohere-faq">
+    <div class="model-section-head"><p class="eyebrow">COHERE QUESTIONS ANSWERED</p><h2>Cohere models FAQ: list, pricing, API and enterprise deployment.</h2></div>
+    <div class="cohere-faq">
+      <details><summary>What AI models does Cohere offer?</summary><p>Cohere offers Command models for generation and agents, Embed for vector search, Rerank for ordering search results, Parse for document extraction, and North models for specialized coding and translation tasks. This SXF directory tracks 10 Cohere model pages as of October 2026.</p></details>
+      <details><summary>Which Cohere model should I use for a chatbot?</summary><p>Use a Command chat model such as Command A+ if it meets your language, tool, latency and deployment requirements. Embed and Rerank serve supporting retrieval tasks rather than replacing the answer-generation model.</p></details>
+      <details><summary>What is the difference between Cohere Embed and Rerank?</summary><p>Embed creates vectors so a search system can retrieve semantically similar items. Rerank takes a query and an existing set of candidate documents and orders those candidates by relevance. They are often used together.</p></details>
+      <details><summary>What is Cohere Command A+?</summary><p>Command A+ is a Cohere multimodal enterprise chat and agent model. The official model card lists 128K context, 64K maximum output, tool use, multilingual support, citations and structured outputs. Its API ID is command-a-plus-05-2026.</p></details>
+      <details><summary>Is Cohere API access free?</summary><p>Cohere provides free trial API keys with usage and rate limits; trial access is not unrestricted production access. Production API billing and dedicated Model Vault commitments depend on the model, plan and serving channel.</p></details>
+      <details><summary>How does Cohere Rerank pricing work?</summary><p>Hosted reranking is measured in search units: one query with up to 100 ranked documents is one search, while long documents may be split into additional chunks. The exact current per-search price depends on the plan; Model Vault uses a separate per-instance rate.</p></details>
+      <details><summary>How much does Cohere Model Vault cost?</summary><p>Published examples include $3 per hour for Embed 5 Pro Small, $5 per hour for Rerank 4 Pro Medium and $4 per hour for Parse 5 Medium, per dedicated instance. These are not per-token API rates; confirm current commitment and region terms.</p></details>
+      <details><summary>Which model is better, Embed 5 Pro or Embed 5 Fast?</summary><p>Cohere positions Embed 5 Pro for retrieval quality and Embed 5 Fast for lower latency and higher throughput. Cohere documents a shared embedding space between Pro and Fast. The best choice depends on your evaluation set and operating requirements.</p></details>
+      <details><summary>When should I use Cohere Parse 5?</summary><p>Use Parse 5 to extract text, tables, forms and layout information from PDFs, slides and images before indexing enterprise documents. It produces document representations and does not replace a chat model or vector search system.</p></details>
+      <details><summary>Can I use Cohere models with Python?</summary><p>Yes. Install the cohere package, authenticate with an API key and use cohere.ClientV2 with the Chat, Embed, Rerank or Parse endpoints. Models and supported API features can differ by endpoint and deployment.</p></details>
+      <details><summary>Can Cohere models run privately?</summary><p>Cohere offers dedicated Model Vault and private deployment options for supported models. Availability, capacity, terms and whether open weights can be self-hosted must be verified for the specific model and deployment region.</p></details>
+    </div>
+  </section>
+
+  <section class="model-deep-section" id="cohere-sources">
+    <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES &amp; EDITORIAL METHOD</p><h2>Cohere documentation, pricing evidence and update policy.</h2></div>
+    <p><strong>Editorial review: October 15, 2026.</strong> Model names, roles and context windows are drawn from the provider catalog with primary-source provenance. Cost examples distinguish API metering from dedicated capacity; public Vendor rates may change. Claims of superior quality or retrieval gain require controlled independent comparisons and are not invented on this page.</p>
+    <div class="model-sources">
+      <a href="https://docs.cohere.com/v1/docs/models" target="_blank" rel="noopener noreferrer"><span>Cohere model catalog and supported endpoints</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer"><span>Command A+ model specifications and Chat capabilities</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/docs/cohere-embed" target="_blank" rel="noopener noreferrer"><span>Embed v4/v5 dimensions and multimodal support</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/docs/rerank" target="_blank" rel="noopener noreferrer"><span>Rerank 4 Pro/Fast model documentation</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/docs/parse" target="_blank" rel="noopener noreferrer"><span>Parse 5 document capabilities and limitations</span><b>↗</b></a>
+      <a href="https://cohere.com/pricing" target="_blank" rel="noopener noreferrer"><span>Cohere official API and Model Vault pricing</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/docs/model-vault/standard/pricing" target="_blank" rel="noopener noreferrer"><span>Model Vault dedicated deployment rates</span><b>↗</b></a>
+      <a href="https://docs.cohere.com/v2/docs/rag-complete-example" target="_blank" rel="noopener noreferrer"><span>End-to-end Chat + Embed + Rerank pipeline</span><b>↗</b></a>
+    </div>
+    <p class="cohere-note">The existing model directory and primary-source change ledger remain active below this guide. This page explains the portfolio; individual model pages carry version-specific facts, provenance and detailed limits.</p>
+  </section>
+</section>
+
