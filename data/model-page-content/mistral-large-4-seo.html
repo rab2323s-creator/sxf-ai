@@ -1,0 +1,168 @@
+<section class="model-reference model-reference-deep shell ml4-reference" id="ml4-guide" data-ml4-editorial="2026-10-14" aria-label="Mistral Large 4 model guide">
+  <div class="ml4-lead">
+    <div>
+      <p class="eyebrow">MODEL GUIDE · OCTOBER 2026</p>
+      <h2>Mistral Large 4: the quick answer.</h2>
+      <p><strong>Mistral Large 4 (ML4)</strong> is Mistral AI's flagship general-purpose multimodal, reasoning and agentic model, released in <strong>Public Preview on October 6, 2026</strong>. It accepts text and images, writes text, supports a <strong>1-million-token context window</strong>, and is available via the <strong>Mistral Studio API</strong>. Its announced Mixture-of-Experts architecture has approximately <strong>1.05 trillion total parameters</strong> and <strong>52 billion active parameters</strong> according to Mistral's current model card.</p>
+      <p>For buyers, the immediate decision is its <strong>limited launch discount</strong>, API quality on your own documents and agent workflows, and the risk of deploying a preview model that may change before General Availability. Open-weight availability has been <em>announced</em>, but downloadable weights should not be assumed to exist until Mistral actually publishes them.</p>
+      <p class="ml4-caveat"><strong>Fact check:</strong> 1M context is not an unlimited output allowance. Mistral has not published a separate verified max-output token count or knowledge cutoff in the source record used here. Do not treat these missing specifications as zeros or make up limits.</p>
+    </div>
+    <div class="ml4-facts" aria-label="Mistral Large 4 specifications">
+      <div><span>MODEL / API ID</span><strong><code>mistral-large-4</code></strong></div>
+      <div><span>CONTEXT</span><strong>1,000,000 tokens</strong></div>
+      <div><span>PREVIEW DATE</span><strong>October 6, 2026</strong></div>
+      <div><span>ARCHITECTURE</span><strong>MoE · 1.05T total</strong></div>
+      <div><span>INPUT → OUTPUT</span><strong>Text + image → text</strong></div>
+      <div><span>API STATUS</span><strong>Public Preview</strong></div>
+    </div>
+  </div>
+
+  <nav class="ml4-toc" aria-label="On this model page">
+    <span>JUMP TO</span>
+    <a href="#ml4-pricing">Pricing</a><a href="#ml4-specs">Specifications</a>
+    <a href="#ml4-api">API examples</a><a href="#ml4-use-cases">Use cases</a>
+    <a href="#ml4-comparisons">Comparisons</a><a href="#ml4-faq">FAQ</a>
+    <a href="#ml4-sources">Sources</a>
+  </nav>
+
+  <section class="model-deep-section" id="ml4-pricing">
+    <div class="model-section-head"><p class="eyebrow">2026 API PRICING</p><h2>Mistral Large 4 pricing: launch discount vs regular rates.</h2></div>
+    <p><strong>{{PRICE_STATUS}}</strong> Mistral announced a 50% discount for the first two weeks after the October 6 launch. Its official model card displays promotional rates of <strong>$0.68 per million input tokens</strong>, <strong>$0.07 per million cached input tokens</strong>, and <strong>$2.09 per million output tokens</strong>. The corresponding regular rates are <strong>$1.36 / $0.14 / $4.18</strong>. SXF's catalog schedules the launch rate through <strong>October 19, 2026</strong> and the regular rate from <strong>October 20, 2026</strong>, subject to Mistral's live pricing.</p>
+    <div class="ml4-table-scroll" role="region" aria-label="Mistral Large 4 API pricing table" tabindex="0">
+      <table class="ml4-table">
+        <caption>USD per 1 million tokens, published Standard reference rates</caption>
+        <thead><tr><th scope="col">Usage</th><th scope="col">Launch offer (Oct 6–19)</th><th scope="col">Regular (from Oct 20)</th><th scope="col">Current tracked rate</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Input tokens</th><td>$0.68</td><td>$1.36</td><td><strong>{{CURRENT_INPUT}}</strong></td></tr>
+          <tr><th scope="row">Cached input</th><td>$0.07</td><td>$0.14</td><td><strong>{{CURRENT_CACHED}}</strong></td></tr>
+          <tr><th scope="row">Output tokens</th><td>$2.09</td><td>$4.18</td><td><strong>{{CURRENT_OUTPUT}}</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ml4-metrics">
+      <article><span>ILLUSTRATIVE PROMO REQUEST</span><strong>$0.1438</strong><small>150K standard input + 20K output tokens</small></article>
+      <article><span>ILLUSTRATIVE REGULAR REQUEST</span><strong>$0.2876</strong><small>Same 150K input + 20K output tokens</small></article>
+      <article><span>ACTIVE REFERENCE PERIOD</span><strong>{{CURRENT_PHASE}}</strong><small>Automatically selected from catalog rate dates</small></article>
+    </div>
+    <h3>How to calculate a Mistral Large 4 API request</h3>
+    <p>Estimate cost as <code>(uncached_input × input_rate + cached_input × cached_rate + output × output_rate) / 1,000,000</code>, where the rates are USD per million tokens. For example, a 150,000-token <em>uncached</em> prompt and a 20,000-token response cost <strong>$0.1438 at the launch prices</strong> or <strong>$0.2876 at standard regular prices</strong>. These are arithmetic examples, not measurements of response quality or actual user bills.</p>
+    <p>Actual billing can vary with Batch inference, priority or regional deployments, prompt caching eligibility, tools and account-specific terms. Read the <a href="https://docs.mistral.ai/models/mistral-large-4-0">official Mistral Large 4 card</a> and <a href="https://docs.mistral.ai/inference/pricing">Mistral's current pricing documentation</a> before purchasing capacity. For general cross-model estimates, use <a href="/models/pricing/">SXF's model pricing explorer</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-specs">
+    <div class="model-section-head"><p class="eyebrow">TECHNICAL SPECIFICATIONS</p><h2>Mistral Large 4 context window, modalities and supported features.</h2></div>
+    <p>A <strong>1M-token context window</strong> is useful for processing longer repositories, multi-document evidence and extended tool-call histories without constantly splitting prompts. It does <em>not</em> guarantee reliable recall over every token. Test retrieval accuracy, citations, truncation behavior and latency on your own data rather than assuming maximum-context runs are always preferable.</p>
+    <div class="model-capability-grid">
+      <article><span>VISION &amp; DOCUMENTS</span><h3>Text and image understanding</h3><p>Ask questions about images, charts, scanned documents, diagrams and PDFs through supported image or document inputs. Vision support is not the same thing as image generation.</p></article>
+      <article><span>STRUCTURED WORK</span><h3>Function calling and JSON outputs</h3><p>The official model card lists structured outputs, function calling, document Q&amp;A, chat completions and supported tool-equipped agent workflows.</p></article>
+      <article><span>REASONING</span><h3>Adjustable effort</h3><p>Mistral's reasoning guide documents <code>reasoning_effort</code> with <code>none</code> or <code>high</code> for Mistral Large 4. More effort can increase output usage and latency.</p></article>
+    </div>
+    <h3>Architecture: why 1.05T parameters does not mean 1.05T active parameters</h3>
+    <p>Mistral describes an expert-routed <strong>Mixture-of-Experts (MoE)</strong> model: the full network has about <strong>1.05T</strong> total parameters, but only a subset is active for a token. The current model card reports <strong>52B active parameters</strong>, plus a <strong>1.6B vision encoder</strong>. The figures describe architecture, not throughput guarantees; actual speed depends on serving hardware and workload.</p>
+    <h3>What is not independently verified yet?</h3>
+    <p>Do not infer a maximum generated-output length, training-data cutoff, guaranteed requests per second, local GPU requirements, download URL or open-weight license from the 1M context figure or the preview announcement. These details depend on documented releases and serving configurations. As of this review, Mistral announced an open-weight release for later in October 2026; that is a <strong>forward-looking release plan, not proof that weights are already downloadable</strong>.</p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-api">
+    <div class="model-section-head"><p class="eyebrow">DEVELOPER QUICK START</p><h2>How to use Mistral Large 4 with Python and the Chat Completions API.</h2></div>
+    <p>Install the supported Mistral Python SDK with <code>pip install mistralai</code>, create a Mistral API key in Studio, and place it in the <code>MISTRAL_API_KEY</code> environment variable. The October 2026 API model name shown in the launch changelog is <code>mistral-large-4</code>. This example asks for a concrete, verifiable answer instead of relying on undocumented output parameters.</p>
+    <pre class="ml4-code"><code>import os
+from mistralai import Mistral
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+result = client.chat.complete(
+    model="mistral-large-4",
+    messages=[
+        {"role": "system", "content": "Respond clearly. Cite provided evidence."},
+        {"role": "user", "content": "List three checks for an invoice-review agent."}
+    ],
+)
+print(result.choices[0].message.content)</code></pre>
+    <h3>Python example: ask Mistral Large 4 to reason more carefully</h3>
+    <p>The official reasoning documentation lists <code>reasoning_effort="high"</code> for Mistral Large 4, with a <code>none</code> mode for minimal surfaced reasoning. In high mode, the response <code>message.content</code> can be structured as thinking and text chunks rather than a single string; production clients must handle that difference. Avoid logging private thinking content or exposing it to end users unnecessarily.</p>
+    <pre class="ml4-code"><code>response = client.chat.complete(
+    model="mistral-large-4",
+    messages=[{
+        "role": "user",
+        "content": "Compare these three contract clauses for conflicting obligations."
+    }],
+    reasoning_effort="high",
+)
+content = response.choices[0].message.content
+if isinstance(content, str):
+    print(content)
+else:
+    for chunk in content:
+        if getattr(chunk, "type", None) == "text":
+            print(chunk.text)</code></pre>
+    <p>Mistral's reasoning guide also refers to the versioned name <code>mistral-large-4-0</code>. Always check the model identifier currently enabled on your account. <a href="https://docs.mistral.ai/studio/conversations/reasoning">Mistral reasoning and response-shape documentation</a>.</p>
+    <h3>Image understanding with the Mistral Large 4 API</h3>
+    <p>The official Mistral cookbook demonstrates passing mixed text and image content in a chat message to locate objects within an image. Use that pattern for technical diagrams and visual inspection; a small demonstration is not a guarantee of reliable visual localization on industrial data. <a href="https://docs.mistral.ai/resources/cookbooks/mistral-image_understanding-bbox_getstarted">See Mistral's verified bounding-box example.</a></p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-use-cases">
+    <div class="model-section-head"><p class="eyebrow">USE CASES &amp; TRADE-OFFS</p><h2>What is Mistral Large 4 best used for?</h2></div>
+    <div class="model-capability-grid">
+      <article><span>CODING AGENTS</span><h3>Repository understanding</h3><p>Analyze multi-file code changes, propose plans, and connect function calls to testing tools. Gate shell access, production credentials and code execution behind explicit permissions.</p></article>
+      <article><span>ENTERPRISE KNOWLEDGE</span><h3>Long reports and legal documents</h3><p>Reason over many clauses, financial statements or requirements. Ask for page-level citations, validate figures and ensure human oversight for professional advice.</p></article>
+      <article><span>MULTIMODAL ANALYSIS</span><h3>Charts, drawings and visual grounding</h3><p>Inspect PDFs, equipment diagrams and images. Treat location and OCR claims as hypotheses to verify against originals.</p></article>
+      <article><span>RESEARCH &amp; SCIENCE</span><h3>Code-assisted analysis</h3><p>Draft data-processing steps, simulation scaffolds and structured findings. Reproduce numeric results and use tests before relying on generated scientific code.</p></article>
+      <article><span>AGENTIC WORKFLOWS</span><h3>Tool-connected processes</h3><p>Use structured outputs and function calling to integrate business tools. Evaluate task completion, tool error recovery and security boundaries.</p></article>
+      <article><span>EU DEPLOYMENT PLANNING</span><h3>European infrastructure options</h3><p>Mistral describes plans for regionally managed deployment and future downloadable weights. Verify contractual residency, operational controls and weight availability individually.</p></article>
+    </div>
+    <p><strong>When not to choose ML4:</strong> use a narrower model when strict latency, cost, speech generation or tiny on-device footprints matter most; use a specialized OCR or transcription service where fidelity on those tasks matters more than general reasoning. And because ML4 is still a preview, do not build irreversible compliance or safety-critical workflows around unverified performance claims.</p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-benchmarks">
+    <div class="model-section-head"><p class="eyebrow">EVIDENCE, NOT HYPE</p><h2>Mistral Large 4 benchmarks: what the scores actually show.</h2></div>
+    <p>Mistral's October launch post highlights <strong>61.7% on DeepSWE v1.1</strong>, <strong>28.3% on Terminal-Bench 4.0</strong> and <strong>59.9% on AutomationBench</strong> for its reported configurations. The launch also describes strong visual grounding, cybersecurity and professional knowledge-work outcomes. These are <strong>developer-reported launch results or cited third-party evaluator scores</strong>, not proof that ML4 is always better than alternatives. Dataset versions, scaffolds, tool access, prompts and reasoning budgets can change results.</p>
+    <p>This site also tracks <a href="/evaluations/">independent model evaluation methodology</a> and displays evaluator-attributed observations on this page. Compare like-for-like settings and evaluate on your own task set; never blend an Elo value, a percentage and a launch marketing result into a single invented score. <a href="https://mistral.ai/news/mistral-large-4/">Read Mistral's release methodology and benchmark notes.</a></p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-comparisons">
+    <div class="model-section-head"><p class="eyebrow">MODEL SELECTION</p><h2>Mistral Large 4 vs Large 3 and Medium 3.5.</h2></div>
+    <div class="ml4-table-scroll" role="region" aria-label="Comparison with other Mistral models" tabindex="0">
+      <table class="ml4-table">
+        <caption>Decision-oriented comparison; not a standardized performance ranking</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">Context</th><th scope="col">Availability / positioning</th><th scope="col">Best next check</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mistral Large 4</th><td>1M tokens</td><td>Public Preview; multimodal MoE, tool use and reasoning</td><td>Preview stability, promo window, agent quality</td></tr>
+          <tr><th scope="row"><a href="/models/mistral-large-2512/">Mistral Large 3</a></th><td>Consult model card</td><td>Earlier open-weight family with established deployment options</td><td>Self-hosting requirements and licensing</td></tr>
+          <tr><th scope="row"><a href="/models/mistral-medium-3-5/">Mistral Medium 3.5</a></th><td>256K tokens</td><td>Generally Available multimodal coding/agent model</td><td>Predictability and cost for shorter tasks</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>ML4 is a sensible candidate when you need a longer context window or want to test Mistral's newest multimodal agent capabilities. Medium 3.5 may be preferable where mature lifecycle support and shorter-context needs dominate. Large 3 remains relevant when a downloadable older-generation model is important. Neither alternative should be dismissed without an apples-to-apples evaluation and actual hosting-cost estimate.</p>
+    <p>For comparisons beyond Mistral, explore <a href="/models/deepseek-v4-pro/">DeepSeek V4 Pro</a>, <a href="/models/qwen3-8-max/">Qwen3.8 Max</a> and the <a href="/compare/">SXF model comparison hub</a>. These links provide research starting points, not unverified claims of superiority.</p>
+  </section>
+
+  <section class="model-deep-section" id="ml4-faq">
+    <div class="model-section-head"><p class="eyebrow">SEARCH QUESTIONS ANSWERED</p><h2>Mistral Large 4 FAQ: pricing, API, context, release and weights.</h2></div>
+    <div class="ml4-faq">
+      <details><summary>What is Mistral Large 4?</summary><p>Mistral Large 4 is Mistral AI's October 2026 multimodal Mixture-of-Experts model in Public Preview. It supports text and image inputs, text outputs, reasoning, structured outputs and tool-connected workflows.</p></details>
+      <details><summary>How much does Mistral Large 4 cost per million tokens?</summary><p>Launch-period Standard prices are $0.68 input, $0.07 cached input and $2.09 output per million tokens through October 19, 2026 in SXF's verified rate schedule. From October 20 the listed regular rates are $1.36, $0.14 and $4.18 respectively. Confirm current pricing with Mistral before purchase.</p></details>
+      <details><summary>What is the Mistral Large 4 context window?</summary><p>The official model card lists a 1,000,000-token context window. This describes the model's context capacity, not a guarantee of perfect long-document recall or a separately published maximum output size.</p></details>
+      <details><summary>What is the Mistral Large 4 API model ID?</summary><p>The public-preview API is listed as mistral-large-4 in Mistral's launch changelog and model card. Reasoning documentation also mentions a versioned mistral-large-4-0 identifier. Check availability in your own Mistral Studio account.</p></details>
+      <details><summary>Is Mistral Large 4 open source or downloadable?</summary><p>Mistral announced open-weight plans for later in October 2026. At this review, the announcement is not proof of a downloadable release, and no license or hardware requirement should be assumed without an official weights publication.</p></details>
+      <details><summary>Does Mistral Large 4 support images and PDF analysis?</summary><p>Yes. Mistral lists multimodal text-and-image understanding and document Q&amp;A. Production PDF handling should follow the documented API input type, with extracted results validated against source documents.</p></details>
+      <details><summary>Does Mistral Large 4 support function calling and JSON outputs?</summary><p>Yes. The official model card lists function calling, structured outputs, built-in tools and supported agent/conversation endpoints.</p></details>
+      <details><summary>Can I use Mistral Large 4 from Python?</summary><p>Yes. Install the mistralai SDK, set your MISTRAL_API_KEY variable and use client.chat.complete with model=mistral-large-4. See the runnable example above.</p></details>
+      <details><summary>What is the difference between Mistral Large 4 and Mistral Medium 3.5?</summary><p>Mistral Large 4 is a newer Public Preview model with a 1M context window. Mistral Medium 3.5 is a generally available coding and agent model with a 256K window. Compare cost, latency and task-level quality before choosing.</p></details>
+      <details><summary>Is Mistral Large 4 ready for production?</summary><p>It is accessible as a public preview, but Mistral's lifecycle policy allows preview models to receive updates and does not guarantee a transition to general availability. Use regression tests, controlled rollouts and fallback strategies.</p></details>
+    </div>
+  </section>
+
+  <section class="model-deep-section" id="ml4-sources">
+    <div class="model-section-head"><p class="eyebrow">PRIMARY-SOURCE VERIFICATION</p><h2>Mistral Large 4 official documentation and methodology.</h2></div>
+    <p>Editorial review: <strong>October 14, 2026</strong>. Prices, release status and architecture derive from Mistral's dated launch and official model card. We keep supplier claims, illustrative calculations and the independent benchmark feed separate. The model's source record does not presently verify a max-output cap or knowledge cutoff. Dates are not automatically proof of new model weights or new GA status.</p>
+    <div class="model-sources">
+      <a href="https://docs.mistral.ai/models/mistral-large-4-0" rel="noopener noreferrer" target="_blank"><span>Official model card — prices, 1M context and supported API features</span><b>↗</b></a>
+      <a href="https://mistral.ai/news/mistral-large-4/" rel="noopener noreferrer" target="_blank"><span>October 6 launch announcement — architecture, open-weight roadmap, benchmarks</span><b>↗</b></a>
+      <a href="https://docs.mistral.ai/resources/changelogs" rel="noopener noreferrer" target="_blank"><span>Release changelog — preview launch and two-week discount</span><b>↗</b></a>
+      <a href="https://docs.mistral.ai/inference/pricing" rel="noopener noreferrer" target="_blank"><span>Mistral API pricing and serving-tier considerations</span><b>↗</b></a>
+      <a href="https://docs.mistral.ai/studio/conversations/reasoning" rel="noopener noreferrer" target="_blank"><span>Reasoning guide — reasoning_effort and SDK response structures</span><b>↗</b></a>
+      <a href="https://docs.mistral.ai/inference/model-lifecycle" rel="noopener noreferrer" target="_blank"><span>Public Preview lifecycle and availability caveats</span><b>↗</b></a>
+      <a href="https://docs.mistral.ai/resources/cookbooks/mistral-image_understanding-bbox_getstarted" rel="noopener noreferrer" target="_blank"><span>Image-understanding cookbook and verified Python pattern</span><b>↗</b></a>
+    </div>
+  </section>
+</section>
