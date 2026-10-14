@@ -35,6 +35,7 @@ from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
 from gpt_rosalind_research_page import enrich_gpt_rosalind_research_page
 from amazon_nova_2_lite_page import enrich_amazon_nova_2_lite
 from mistral_large_4_page import enrich_mistral_large_4
+from gemini_embedding_001_page import enrich_gemini_embedding_001
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -5286,6 +5287,8 @@ def render_catalog_model_page(model_id, items):
     else:
         return None
 
+    if model_id == "gemini-embedding-001":
+        page = enrich_gemini_embedding_001(page, model)
     if model_id == "mistral-large-4":
         page = enrich_mistral_large_4(page, model)
     if model_id == "amazon.nova-2-lite-v1:0":
