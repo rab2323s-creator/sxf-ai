@@ -33,6 +33,7 @@ from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
 from gpt_rosalind_research_page import enrich_gpt_rosalind_research_page
+from amazon_nova_2_lite_page import enrich_amazon_nova_2_lite
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "news.json"
@@ -5284,6 +5285,8 @@ def render_catalog_model_page(model_id, items):
     else:
         return None
 
+    if model_id == "amazon.nova-2-lite-v1:0":
+        page = enrich_amazon_nova_2_lite(page, model)
     if model_id == "gpt-6-luna":
         page = enrich_gpt6_luna_page(page, MODEL_PRICING_BY_ID)
     if model_id == "gemini-3.8-flash-lite-tts":
