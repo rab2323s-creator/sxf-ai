@@ -1,0 +1,231 @@
+<section class="model-reference model-reference-deep shell ge001-guide" id="ge001-guide" data-ge001-editorial="2026-10-14" aria-label="Gemini Embedding 001 model reference and developer guide">
+  <div class="ge001-intro">
+    <div class="ge001-intro-copy">
+      <p class="eyebrow">TEXT EMBEDDINGS · GOOGLE GEMINI API</p>
+      <h2>What is Gemini Embedding 001?</h2>
+      <p><strong>Gemini Embedding 001</strong> (<code>gemini-embedding-001</code>) is Google's stable <strong>text embedding model</strong>. It converts text into numerical vectors to help software find related passages by meaning instead of exact keywords. It is designed for semantic search, retrieval-augmented generation (RAG), clustering, classification and similarity scoring—not writing chat responses.</p>
+      <p>Google documents <strong>2,048 input tokens per text</strong> and a <strong>3,072-dimensional default vector</strong>, with shorter vectors such as 768 and 1,536 dimensions available to trade storage against retrieval quality. The Gemini Developer API charges <strong>$0.15 per million input tokens</strong> for paid Standard use and <strong>$0.075 per million</strong> for paid Batch use; an eligible free tier is also listed.</p>
+      <p>As of October 14, 2026, this text-only model remains available. <a href="/models/gemini-embedding-2/">Gemini Embedding 2</a> is Google's newer multimodal offering. Its vectors are <strong>not interchangeable</strong> with Embedding 001 vectors, so an upgrade requires re-embedding stored documents and queries. <a href="https://ai.google.dev/gemini-api/docs/embeddings">Google's embeddings documentation</a> explains the migration rules.</p>
+      <p class="ge001-note">Verified October 14, 2026 against Google's official Gemini API model card, embeddings guide and pricing documentation. The prices shown are Gemini Developer API reference rates; Vertex AI or contracted pricing can differ.</p>
+    </div>
+    <dl class="ge001-facts">
+      <div><dt>API model ID</dt><dd><code>gemini-embedding-001</code></dd></div>
+      <div><dt>Input limit</dt><dd>2,048 tokens</dd></div>
+      <div><dt>Default output</dt><dd>3,072 dimensions</dd></div>
+      <div><dt>Recommended sizes</dt><dd>768 · 1,536 · 3,072</dd></div>
+      <div><dt>Paid Standard</dt><dd>$0.15 / 1M tokens</dd></div>
+      <div><dt>Supported input</dt><dd>Text only</dd></div>
+    </dl>
+  </div>
+
+  <nav class="ge001-toc" aria-label="Gemini Embedding 001 guide sections">
+    <span>ON THIS PAGE</span>
+    <a href="#ge001-pricing">Pricing</a>
+    <a href="#ge001-dimensions">Dimensions</a>
+    <a href="#ge001-tasks">Task types</a>
+    <a href="#ge001-python">Python API</a>
+    <a href="#ge001-rag">RAG guide</a>
+    <a href="#ge001-vs-2">vs Embedding 2</a>
+    <a href="#ge001-faq">FAQ</a>
+  </nav>
+
+  <section class="model-deep-section" id="ge001-pricing">
+    <div class="model-section-head"><p class="eyebrow">API COSTS</p><h2>Gemini Embedding 001 pricing: free tier, Standard and Batch.</h2></div>
+    <p>Google bills this embedding model on <strong>input text tokens</strong>, not output tokens. A vector is returned instead of generated prose, so a separate text-generation output rate does not apply. Paid Standard pricing is <strong>$0.15 per 1 million input tokens</strong>; the asynchronous Batch API is <strong>$0.075 per 1 million</strong>, a 50% reduction for workloads that can tolerate delayed processing. Google also lists a free tier subject to applicable limits and terms.</p>
+    <div class="ge001-scroll-table" role="region" aria-label="Gemini Embedding 001 price comparison" tabindex="0">
+      <table class="ge001-table">
+        <caption>Gemini Developer API pricing · USD · checked October 14, 2026</caption>
+        <thead><tr><th scope="col">Serving mode</th><th scope="col">Price / 1M text tokens</th><th scope="col">Best for</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Free tier</th><td>Free within quota</td><td>Experiments and light prototypes; quota and data-use terms apply</td></tr>
+          <tr><th scope="row">Paid Standard</th><td><strong>$0.15</strong></td><td>Interactive indexing and on-demand embedding calls</td></tr>
+          <tr><th scope="row">Paid Batch</th><td><strong>$0.075</strong></td><td>Offline ingestion and bulk re-indexing where completion time is flexible</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Calculate Gemini Embedding 001 cost from your input tokens</h3>
+    <form class="ge001-cost-tool" id="ge001-cost-tool" aria-label="Gemini Embedding 001 cost estimator">
+      <div class="ge001-field"><label for="ge001-tokens">Total input tokens to embed</label><input id="ge001-tokens" type="number" inputmode="numeric" min="1" max="1000000000000" step="1" value="1000000" required /></div>
+      <div class="ge001-field"><label for="ge001-tier">Pricing mode</label><select id="ge001-tier"><option value="0.15">Paid Standard — $0.15 / 1M</option><option value="0.075">Paid Batch — $0.075 / 1M</option></select></div>
+      <div class="ge001-result"><span>Estimated embedding API cost</span><output id="ge001-cost-result" for="ge001-tokens ge001-tier" aria-live="polite">$0.15</output></div>
+    </form>
+    <p class="ge001-note">Estimate = input tokens ÷ 1,000,000 × selected rate. This is not a Google billing quote and excludes vector-database storage, retrieval infrastructure, subsequent Gemini generation, applicable tax and tier-specific terms.</p>
+    <p>Example: indexing <strong>1 million documents averaging 500 input tokens</strong> is approximately <strong>500 million tokens</strong>. At published rates that is <strong>$75 Standard</strong> or <strong>$37.50 Batch</strong>, before storage and search costs. The same document may need several chunks if it exceeds the model's per-input token limit. <a href="https://ai.google.dev/gemini-api/docs/pricing">Check live Google Gemini API pricing</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-dimensions">
+    <div class="model-section-head"><p class="eyebrow">VECTOR SPECIFICATIONS</p><h2>2,048-token input limit, 3,072 dimensions and smaller embeddings.</h2></div>
+    <p>The <strong>2,048-token maximum</strong> applies to the input text sent to <code>gemini-embedding-001</code>. It is not a 2K-token generative context window: this endpoint generates a vector, not a chat completion. For long documents, chunk by tokens and add source metadata before indexing. Avoid silently truncating policies, citations or headings that matter to retrieval quality.</p>
+    <p>By default, Google returns a <strong>3,072-number vector</strong>. Its Matryoshka Representation Learning support lets developers request shorter vectors using <code>output_dimensionality</code>. Google's suggested options are <strong>768, 1,536 and 3,072 dimensions</strong>. Smaller vectors can materially reduce vector-database size and similarity-search compute, but the best dimensionality depends on your own retrieval recall and language mix.</p>
+    <div class="ge001-scroll-table" role="region" aria-label="Embedding dimensionality and approximate memory" tabindex="0">
+      <table class="ge001-table">
+        <caption>Raw float32 vector memory only; ignores database indexes, IDs and replicas</caption>
+        <thead><tr><th scope="col">Dimensions</th><th scope="col">Bytes / vector</th><th scope="col">1M vectors, decimal GB</th><th scope="col">Typical reason to test</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">768</th><td>3,072 B</td><td>3.072 GB</td><td>Lower storage cost, faster candidate search</td></tr>
+          <tr><th scope="row">1,536</th><td>6,144 B</td><td>6.144 GB</td><td>Middle ground between size and quality</td></tr>
+          <tr><th scope="row">3,072 (default)</th><td>12,288 B</td><td>12.288 GB</td><td>Maximum documented vector detail</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Important: manually normalize shortened Embedding 001 vectors</h3>
+    <p>Google notes that <strong>truncated Embedding 001 vectors should be normalized</strong> before cosine or dot-product ranking; the full 3,072-dimensional vector is already normalized. This differs from Gemini Embedding 2, which automatically normalizes shortened output. Whatever dimensionality you choose, configure your vector index to the <em>same fixed dimension</em> as both stored vectors and query vectors. Do not mix dimensions in one index. <a href="https://ai.google.dev/gemini-api/docs/embeddings">See Google's normalization guidance</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-tasks">
+    <div class="model-section-head"><p class="eyebrow">RETRIEVAL QUALITY</p><h2>Which Gemini Embedding 001 task_type should you use?</h2></div>
+    <p>Unlike the newer Embedding 2 API, Embedding 001 uses the <code>task_type</code> parameter to optimize different relationships between text vectors. For document search, embed your indexed passages with <code>RETRIEVAL_DOCUMENT</code> and the search prompt with <code>RETRIEVAL_QUERY</code>. Matching the task to the workflow is often more useful than blindly increasing vector dimensionality.</p>
+    <div class="ge001-scroll-table" role="region" aria-label="Gemini Embedding 001 supported task types" tabindex="0">
+      <table class="ge001-table">
+        <caption>Task names and intended usage from Google's Embeddings documentation</caption>
+        <thead><tr><th scope="col">Task type</th><th scope="col">Use it for</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>RETRIEVAL_DOCUMENT</code></th><td>Indexing documents, articles and code passages</td></tr>
+          <tr><th scope="row"><code>RETRIEVAL_QUERY</code></th><td>Embedding a user's search phrase before vector retrieval</td></tr>
+          <tr><th scope="row"><code>QUESTION_ANSWERING</code></th><td>Finding passages that answer a question</td></tr>
+          <tr><th scope="row"><code>CODE_RETRIEVAL_QUERY</code></th><td>Matching natural-language queries to indexed code</td></tr>
+          <tr><th scope="row"><code>SEMANTIC_SIMILARITY</code></th><td>Sentence similarity and near-duplicate detection; not the default document-retrieval setting</td></tr>
+          <tr><th scope="row"><code>CLASSIFICATION</code> / <code>CLUSTERING</code></th><td>Grouping, labeling and segmenting text</td></tr>
+          <tr><th scope="row"><code>FACT_VERIFICATION</code></th><td>Retrieving evidence relevant to checking a claim</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Google also documents usage-specific choices such as question answering and code retrieval. Use task settings consistently with your evaluation protocol; compare recall@k and answer quality on a labeled set rather than assuming a task label is a guaranteed quality boost.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-python">
+    <div class="model-section-head"><p class="eyebrow">DEVELOPER EXAMPLES</p><h2>Gemini Embedding 001 Python API: generate a 768-dimensional vector.</h2></div>
+    <p>Install Google's supported SDK with <code>pip install -U google-genai</code>. Set <code>GEMINI_API_KEY</code> in your environment; never paste your key into a browser-side page. This minimal Python example embeds a document using the <strong>Gemini API</strong> and explicitly requests 768 dimensions:</p>
+    <pre class="ge001-code"><code>from google import genai
+from google.genai import types
+
+client = genai.Client()
+response = client.models.embed_content(
+    model="gemini-embedding-001",
+    contents="Refunds are available within 30 days with a receipt.",
+    config=types.EmbedContentConfig(
+        task_type="RETRIEVAL_DOCUMENT",
+        output_dimensionality=768,
+    ),
+)
+document_vector = response.embeddings[0].values
+print(len(document_vector))  # 768</code></pre>
+    <p>The response contains embedding vectors, <em>not</em> a summary or generated answer. For search indexes, you should store each vector alongside a document identifier, title, chunk number, update timestamp and access-control metadata.</p>
+    <h3>Python example: query-document retrieval with cosine similarity</h3>
+    <p>Use <code>RETRIEVAL_DOCUMENT</code> for indexed passages, <code>RETRIEVAL_QUERY</code> for the user question, and normalize both 768-dimensional vectors before comparing them. The following demo deliberately uses small in-memory vectors so it can be understood without an external vector database:</p>
+    <pre class="ge001-code"><code>import math
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+documents = [
+    "A customer may request a refund within thirty days.",
+    "Shipping usually takes three to five business days.",
+]
+doc_vectors = client.models.embed_content(
+    model="gemini-embedding-001",
+    contents=documents,
+    config=types.EmbedContentConfig(
+        task_type="RETRIEVAL_DOCUMENT",
+        output_dimensionality=768,
+    ),
+).embeddings
+
+query_vector = client.models.embed_content(
+    model="gemini-embedding-001",
+    contents="How long do I have to ask for a refund?",
+    config=types.EmbedContentConfig(
+        task_type="RETRIEVAL_QUERY",
+        output_dimensionality=768,
+    ),
+).embeddings[0].values
+
+def unit(vector):
+    length = math.sqrt(sum(value * value for value in vector))
+    return [value / length for value in vector] if length else vector
+
+q = unit(query_vector)
+scores = [
+    sum(a * b for a, b in zip(q, unit(item.values)))
+    for item in doc_vectors
+]
+best_index = max(range(len(scores)), key=scores.__getitem__)
+print(documents[best_index], scores[best_index])</code></pre>
+    <p>These scores demonstrate a vector-retrieval technique; they do not prove a fixed accuracy. In production, compute embeddings offline, keep access controls in the retrieval layer, apply metadata filters and optionally rerank the top candidates before sending grounded passages to a generative answer model. See Google's <a href="https://ai.google.dev/gemini-api/docs/embeddings">Python and task-type examples</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-rag">
+    <div class="model-section-head"><p class="eyebrow">REAL APPLICATIONS</p><h2>How to use Gemini Embedding 001 for semantic search, RAG and recommendations.</h2></div>
+    <div class="ge001-use-grid">
+      <article><span>SEARCH</span><h3>Semantic document search</h3><p>Index support articles or product descriptions as passage vectors; retrieve relevant chunks when users ask in different wording. Preserve citations and permissions with each result.</p></article>
+      <article><span>RAG</span><h3>Grounded question answering</h3><p>Retrieve passages using embeddings, then give those passages to a separate generative model. Gemini Embedding 001 itself does not formulate the final prose answer.</p></article>
+      <article><span>PRODUCTS</span><h3>Recommendations and deduplication</h3><p>Find descriptions that convey similar intent, cluster duplicate records or build related-product suggestions. Test on genuine catalog examples.</p></article>
+      <article><span>ANALYTICS</span><h3>Clustering and classification</h3><p>Group tickets or feedback into topics and train downstream classifiers. Evaluate language coverage and class balance rather than treating vector proximity as certainty.</p></article>
+    </div>
+    <h3>A dependable RAG indexing pipeline</h3>
+    <ol class="ge001-process">
+      <li><strong>Prepare and clean:</strong> parse documents, keep titles, permissions and source links.</li>
+      <li><strong>Chunk by tokens:</strong> keep each text input at or under 2,048 tokens; test overlaps and section boundaries for your data.</li>
+      <li><strong>Embed documents:</strong> use <code>RETRIEVAL_DOCUMENT</code> and one consistent dimensionality.</li>
+      <li><strong>Search:</strong> embed questions with <code>RETRIEVAL_QUERY</code>, filter by user permissions, then rank the candidate chunks.</li>
+      <li><strong>Answer with citations:</strong> pass trusted retrieved passages to a separate Gemini chat model and evaluate groundedness and refusal behavior.</li>
+    </ol>
+    <p>For privacy-sensitive data, send only documents you are authorized to process; review Google's free-tier versus paid-tier data-use terms. Embedding is a search primitive, not a substitute for an access-control system or factual verification.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-vs-2">
+    <div class="model-section-head"><p class="eyebrow">2026 MODEL COMPARISON</p><h2>Gemini Embedding 001 vs Gemini Embedding 2: which should you use?</h2></div>
+    <p>Google released Gemini Embedding 2 as a newer <strong>multimodal embedding model</strong>. Embedding 001 remains relevant for existing text-only indexes and its lower published text-token rate. Embedding 2 is more flexible if you need vector search across text, images, audio, video or PDFs. The two models operate in <strong>incompatible embedding spaces</strong>—rebuild the index rather than mixing generations.</p>
+    <div class="ge001-scroll-table" role="region" aria-label="Gemini Embedding 001 versus Embedding 2" tabindex="0">
+      <table class="ge001-table">
+        <caption>Gemini Developer API reference values, October 2026</caption>
+        <thead><tr><th scope="col">Property</th><th scope="col">Gemini Embedding 001</th><th scope="col"><a href="/models/gemini-embedding-2/">Gemini Embedding 2</a></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Input</th><td>Text</td><td>Text, images, audio, video, PDFs</td></tr>
+          <tr><th scope="row">Text token limit</th><td>2,048</td><td>8,192</td></tr>
+          <tr><th scope="row">Default vector</th><td>3,072 dimensions</td><td>3,072 dimensions</td></tr>
+          <tr><th scope="row">Paid Standard text price</th><td>$0.15 / 1M</td><td>$0.20 / 1M</td></tr>
+          <tr><th scope="row">Paid Batch text price</th><td>$0.075 / 1M</td><td>$0.10 / 1M</td></tr>
+          <tr><th scope="row">Task instructions</th><td><code>task_type</code> field</td><td>Text instructions in prompt; no <code>task_type</code> field</td></tr>
+          <tr><th scope="row">Truncated vectors</th><td>Manually normalize</td><td>Auto-normalized</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Migration checklist from Embedding 001 to Embedding 2</h3>
+    <p>Re-embed your stored corpus and all search queries using the new model; choose a consistent dimension; create a separate vector index; retune similarity thresholds; compare offline recall, ranking, speed and actual costs; and switch traffic gradually with a fallback. <strong>Never compare an Embedding 001 vector directly with an Embedding 2 vector</strong>, even when both have 768 dimensions. Consult <a href="https://ai.google.dev/gemini-api/docs/embeddings">Google's official migration section</a>.</p>
+    <p>For a broader provider comparison, see <a href="/models/embed-v4-0/">Cohere Embed v4.0</a>, <a href="/models/codestral-embed/">Codestral Embed</a> and <a href="/providers/google/">Google's model catalog</a>. Benchmark any replacement using the same dataset, retrieval task and infrastructure rather than comparing prices alone.</p>
+  </section>
+
+  <section class="model-deep-section" id="ge001-faq">
+    <div class="model-section-head"><p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p><h2>Gemini Embedding 001 FAQ.</h2></div>
+    <div class="ge001-faq">
+      <details><summary>What is Gemini Embedding 001 used for?</summary><p>Gemini Embedding 001 converts text into numerical vectors for semantic search, RAG document retrieval, clustering, classification and similarity. It does not generate conversational text.</p></details>
+      <details><summary>How much does Gemini Embedding 001 cost?</summary><p>Google lists $0.15 per million input text tokens on the paid Standard Gemini API tier and $0.075 per million on Batch. An eligible free tier also exists. These are embedding input charges, not generative output-token charges.</p></details>
+      <details><summary>Is Gemini Embedding 001 free?</summary><p>Google lists a free Gemini API tier for this model, subject to limits and data-use terms. Production paid usage is charged by input tokens. Check the official pricing page for your account and serving route.</p></details>
+      <details><summary>What is the maximum Gemini Embedding 001 input size?</summary><p>Google documents a limit of 2,048 input tokens per text. Chunk longer documents before embedding them and preserve metadata to reconnect retrieved results with the source.</p></details>
+      <details><summary>How many dimensions does Gemini Embedding 001 return?</summary><p>The default embedding vector has 3,072 dimensions. Google recommends evaluating 768, 1,536 or 3,072 dimensions depending on the desired storage and retrieval-quality trade-off.</p></details>
+      <details><summary>Does Gemini Embedding 001 support images or video?</summary><p>No. Gemini Embedding 001 is text-only. Google's newer Gemini Embedding 2 supports embedding text, images, video, audio and PDFs in a unified multimodal vector space.</p></details>
+      <details><summary>How do I use Gemini Embedding 001 in Python?</summary><p>Install the google-genai SDK, provide GEMINI_API_KEY, then call client.models.embed_content with model gemini-embedding-001 and an optional EmbedContentConfig specifying task_type and output_dimensionality.</p></details>
+      <details><summary>Which task types should I use for RAG search?</summary><p>Use RETRIEVAL_DOCUMENT when indexing source passages and RETRIEVAL_QUERY for the user's search text. Embed both sides with the same model and dimensionality and evaluate ranking quality.</p></details>
+      <details><summary>Do I need to normalize 768-dimensional Gemini Embedding 001 vectors?</summary><p>Yes. Google recommends manual normalization for Embedding 001 vectors truncated below the default 3,072 dimensions before cosine or dot-product comparisons. Gemini Embedding 2 automatically normalizes shortened vectors.</p></details>
+      <details><summary>Can I mix Gemini Embedding 001 and Gemini Embedding 2 vectors?</summary><p>No. Google states their embedding spaces are incompatible. Migrating requires re-embedding the stored corpus and query vectors and validating a separate index.</p></details>
+      <details><summary>What is the difference between embedding and text-generation models?</summary><p>An embedding model returns a fixed-length vector representing text meaning, useful for search and similarity. A generative Gemini model produces text or other content; RAG commonly combines vector retrieval with a separate generator.</p></details>
+    </div>
+  </section>
+
+  <section class="model-deep-section" id="ge001-sources">
+    <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES &amp; REVIEW</p><h2>Google documentation, pricing and verification notes.</h2></div>
+    <p>Editorial review: <strong>October 14, 2026</strong>. Specifications are taken from Google AI for Developers model pages and embedding guides. Pricing refers to Gemini Developer API Standard and Batch text input; the cost tool and raw vector-memory estimates are arithmetic illustrations, not benchmark results. No model superiority, ranking outcome or performance guarantee is inferred from these numbers.</p>
+    <div class="model-sources">
+      <a href="https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001" target="_blank" rel="noopener noreferrer"><span>Google model card: input limit, output dimensionality and supported data types</span><b>↗</b></a>
+      <a href="https://ai.google.dev/gemini-api/docs/embeddings" target="_blank" rel="noopener noreferrer"><span>Official embeddings guide: Python, retrieval task types, normalization and migration</span><b>↗</b></a>
+      <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer"><span>Gemini Developer API pricing: Standard, Batch and free tier</span><b>↗</b></a>
+      <a href="https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2" target="_blank" rel="noopener noreferrer"><span>Gemini Embedding 2 official specifications and supported modalities</span><b>↗</b></a>
+    </div>
+    <div class="model-related-links">
+      <a href="/models/gemini-embedding-2/"><span>COMPARE</span><strong>Gemini Embedding 2 model page</strong><b>↗</b></a>
+      <a href="/providers/google/"><span>PROVIDER</span><strong>Google AI model portfolio</strong><b>↗</b></a>
+      <a href="/models/pricing/"><span>API REFERENCE</span><strong>Verified model price directory</strong><b>↗</b></a>
+    </div>
+  </section>
+</section>
