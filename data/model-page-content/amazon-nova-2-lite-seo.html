@@ -1,0 +1,147 @@
+
+<section class="model-reference model-reference-deep shell" id="nova2-guide" data-nova2-editorial="2026-10-14" aria-label="Amazon Nova 2 Lite technical guide">
+  <div class="model-reference-intro">
+    <div class="model-reference-copy">
+      <p class="eyebrow">DEVELOPER GUIDE · VERIFIED AWS DOCUMENTATION</p>
+      <h2>What is Amazon Nova 2 Lite?</h2>
+      <p><strong>Amazon Nova 2 Lite</strong> is Amazon's cost-conscious multimodal reasoning model, launched on December 2, 2025 and served through <strong>Amazon Bedrock</strong>. It reads text, images, documents and video and generates text. AWS positions it for customer support, document understanding, software assistance and multi-step agents where throughput and operating cost matter.</p>
+      <p>Its headline specifications are a <strong>1,000,000-token context window</strong>, a <strong>64K-token maximum output</strong> listed on the Bedrock model card and an <strong>October 2025 knowledge cutoff</strong>. Extended thinking is optional: keep it off for simpler extraction or summarization, and switch to low, medium or high effort for tasks that benefit from additional reasoning. It is not an image-generation, text-to-speech or audio-transcription model.</p>
+      <p class="reference-note">Editorially reviewed October 14, 2026. Technical model specifications follow the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html">official AWS model card</a>; prices below are reference rates for the tracked Standard offer, not universal quotes for every Region or tier.</p>
+    </div>
+    <div class="model-fact-grid">
+      <div><span>LAUNCHED</span><strong>Dec 2, 2025</strong></div>
+      <div><span>MODEL ID</span><strong>amazon.nova-2-lite-v1:0</strong></div>
+      <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
+      <div><span>MAX OUTPUT</span><strong>64K</strong><small>per AWS model card</small></div>
+      <div><span>KNOWLEDGE CUTOFF</span><strong>Oct 2025</strong></div>
+      <div><span>ACCESS</span><strong>Amazon Bedrock</strong><small>Converse / Invoke</small></div>
+    </div>
+  </div>
+
+  <section class="model-deep-section" id="nova2-pricing">
+    <div class="model-section-head"><p class="eyebrow">PRICING EXPLAINED</p><h2>Amazon Nova 2 Lite API pricing: input, output and real examples.</h2></div>
+    <p>At the <strong>tracked Standard reference rates</strong>, Nova 2 Lite costs <strong>{{INPUT_PRICE}} per million input tokens</strong> and <strong>{{OUTPUT_PRICE}} per million output tokens</strong>. The effective charge depends on the selected AWS Region, inference profile, service tier, caching, batching and usage type. Compare your configured route against the <a href="https://aws.amazon.com/bedrock/pricing/">current Amazon Bedrock pricing</a> before estimating production spend.</p>
+    <div class="model-capability-grid">
+      <article><span>INPUT · REFERENCE</span><h3>{{INPUT_PRICE}} / 1M</h3><p>Text and other metered input usage. Image and document ingestion may have modality-specific token accounting.</p></article>
+      <article><span>OUTPUT · REFERENCE</span><h3>{{OUTPUT_PRICE}} / 1M</h3><p>Visible generated text and chargeable reasoning tokens where extended thinking is enabled.</p></article>
+      <article><span>WORKLOAD EXAMPLE</span><h3>{{COST_EXAMPLE}}</h3><p>Illustrative 50,000 input tokens plus 10,000 output tokens, at the two reference rates; not a guaranteed bill.</p></article>
+    </div>
+    <h3>How to estimate a Nova 2 Lite request</h3>
+    <p>Multiply <em>input tokens / 1,000,000</em> by the input rate, then add <em>output tokens / 1,000,000</em> times the output rate. If your application generates extra reasoning tokens or uses optional tools, include the relevant metered usage. For high-volume document jobs, measure token usage from actual Bedrock responses instead of estimating from page count alone.</p>
+    <p>A June 2026 AWS document-processing example explains that Nova 2 Lite now uses fixed per-image billing in that workflow, with <strong>230 input tokens for one image</strong>. AWS estimated approximately <strong>$0.0027 per page</strong> for its specific extraction prompt and output lengths; that is <em>an AWS example, not a flat price for all PDF or image requests</em>. <a href="https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/">See the method and cost assumptions.</a></p>
+    <p class="reference-note">Some Bedrock tiers offer different economics. Standard, Flex, Priority, Batch and cross-Region choices should not be treated as interchangeable. Review <a href="/models/pricing/">the SXF model pricing explorer</a> and <a href="/tools/ai-model-cost-calculator/">token cost calculator</a> for broader planning.</p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-context">
+    <div class="model-section-head"><p class="eyebrow">SPECS &amp; LIMITS</p><h2>1M context, 64K output, supported modalities and limitations.</h2></div>
+    <div class="model-capability-grid">
+      <article><span>ACCEPTS</span><h3>Text, images, documents and video</h3><p>Analyze contracts, screenshots, product photos, scanned pages or video frames. Use the documented input format and per-request limits for each media type.</p></article>
+      <article><span>GENERATES</span><h3>Text responses</h3><p>Use Nova 2 Lite for analysis, structured textual answers, classification and code help; it does not natively produce audio, generated images or video.</p></article>
+      <article><span>REASONING</span><h3>Off by default</h3><p>Explicitly enable low, medium or high extended thinking when a task warrants the additional latency and chargeable tokens.</p></article>
+    </div>
+    <p>The million-token context is a capacity ceiling, <strong>not a promise of perfect recall</strong> or unlimited output. For long contracts or large codebases, split and label sources, request evidence-backed answers, and evaluate recall on your actual documents. AWS lists a 64K output maximum on the Bedrock model card; SDK/runtime generation settings may impose lower effective limits.</p>
+    <p>For video, AWS documents frame-based understanding rather than soundtrack comprehension: <strong>do not rely on Nova 2 Lite to transcribe the audio track of a video</strong>. Dedicated speech models are a better choice when audio input is the central task. For documents, validate detected text, positions and numerical data before taking automated actions. <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/using-multimodal-models.html">AWS multimodal input guide</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-api">
+    <div class="model-section-head"><p class="eyebrow">PYTHON EXAMPLE</p><h2>How to call Amazon Nova 2 Lite with Boto3 and Bedrock Converse.</h2></div>
+    <p>Install <code>boto3</code>, configure AWS credentials and ensure the calling role has permission to invoke Amazon Bedrock models. Use an inference profile available in your Region. This minimal example returns the model's text answer using the <strong>Converse API</strong> and a global cross-Region profile; choose a geo profile instead if data-residency rules require it.</p>
+    <pre style="overflow-x:auto;padding:1rem;border:1px solid #334153;border-radius:12px;background:#0d1420;color:#e5edf8"><code>import boto3
+from botocore.config import Config
+
+client = boto3.client(
+    "bedrock-runtime",
+    region_name="us-east-1",
+    config=Config(read_timeout=3600),
+)
+response = client.converse(
+    modelId="global.amazon.nova-2-lite-v1:0",
+    messages=[{
+        "role": "user",
+        "content": [{"text": "Summarize three causes of shipping delays."}]
+    }],
+    inferenceConfig={"maxTokens": 400},
+)
+for block in response["output"]["message"]["content"]:
+    if "text" in block:
+        print(block["text"])
+print(response.get("usage"))</code></pre>
+    <p>For reasoning-intensive tasks, replace the basic call's <code>inferenceConfig</code> with the following argument. The response may include redacted reasoning blocks; inspect text blocks separately. AWS notes that high reasoning effort is incompatible with settings such as <code>maxTokens</code>, <code>temperature</code>, <code>topP</code> and <code>topK</code>, so omit those settings when using high effort.</p>
+    <pre style="overflow-x:auto;padding:1rem;border:1px solid #334153;border-radius:12px;background:#0d1420;color:#e5edf8"><code>additionalModelRequestFields={
+    "reasoningConfig": {
+        "type": "enabled",
+        "maxReasoningEffort": "low"
+    }
+}</code></pre>
+    <p><strong>Model IDs:</strong> <code>amazon.nova-2-lite-v1:0</code> is the base model ID; <code>global.amazon.nova-2-lite-v1:0</code>, <code>us.amazon.nova-2-lite-v1:0</code> and <code>eu.amazon.nova-2-lite-v1:0</code> are distinct routing profiles. Check active regional support before copying an ID. <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/using-converse-api.html">Converse documentation</a> and <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/core-inference.html">model-ID reference</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-reasoning">
+    <div class="model-section-head"><p class="eyebrow">DECISION GUIDE</p><h2>When should you enable extended thinking?</h2></div>
+    <p>Use <strong>reasoning off</strong> for routine text rewriting, extraction or classification when your evaluation set shows acceptable accuracy. Try <strong>low</strong> effort first for instructions with several constraints or multi-step workflows. Progress to <strong>medium</strong> or <strong>high</strong> only if the quality gain is meaningful relative to extra latency and output-token charges.</p>
+    <p>Reasoning is not the same as live internet access. Nova 2 Lite supports separately configured built-in <strong>web grounding</strong> and a <strong>code interpreter</strong> in supported workflows; those features must be enabled and assessed for your security and compliance requirements. AWS redacts internal reasoning content in responses even though the tokens may be billable. <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/reasoning-capabilities.html">AWS reasoning documentation</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-use-cases">
+    <div class="model-section-head"><p class="eyebrow">PRACTICAL USE CASES</p><h2>Where Nova 2 Lite is useful—and where another model may be better.</h2></div>
+    <div class="model-capability-grid">
+      <article><span>DOCUMENT AUTOMATION</span><h3>Forms, PDFs and scanned pages</h3><p>Extract targeted fields and summarize text-plus-image documents. Specify an output format, retain the source page and review low-confidence extraction before downstream actions.</p></article>
+      <article><span>CUSTOMER SUPPORT</span><h3>Policy-aware response drafts</h3><p>Ground replies in current knowledge-base passages, ask for citations and test policy conflicts. Human review remains important for high-stakes support decisions.</p></article>
+      <article><span>CODING &amp; AGENTS</span><h3>Task planning and tool use</h3><p>Draft code, propose multi-step plans and supply text instructions to external tools. Use permissions, tool-call validation and audit logging in production.</p></article>
+    </div>
+    <p>A useful architectural pattern is a <strong>two-stage document pipeline</strong>: have Nova 2 Lite extract image/text metadata at lower cost, then route only ambiguous spatial relationships to a more specialized reasoning model. AWS documented this approach in June 2026 using scanned yearbook pages. It is evidence of a particular pipeline—not a universal accuracy or savings claim. <a href="https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/">Read the AWS case study.</a></p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-comparison">
+    <div class="model-section-head"><p class="eyebrow">UPGRADE PATH</p><h2>Amazon Nova 2 Lite vs Nova 1 Lite: what changes?</h2></div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;text-align:left">
+        <thead><tr><th scope="col" style="padding:.75rem;border-bottom:1px solid #334153">Feature</th><th scope="col" style="padding:.75rem;border-bottom:1px solid #334153">Nova 1 Lite</th><th scope="col" style="padding:.75rem;border-bottom:1px solid #334153">Nova 2 Lite</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" style="padding:.75rem;border-bottom:1px solid #334153">Context window</th><td style="padding:.75rem;border-bottom:1px solid #334153">300K</td><td style="padding:.75rem;border-bottom:1px solid #334153">1M</td></tr>
+          <tr><th scope="row" style="padding:.75rem;border-bottom:1px solid #334153">Maximum output</th><td style="padding:.75rem;border-bottom:1px solid #334153">10K</td><td style="padding:.75rem;border-bottom:1px solid #334153">64K on model card</td></tr>
+          <tr><th scope="row" style="padding:.75rem;border-bottom:1px solid #334153">Text, image, video input</th><td style="padding:.75rem;border-bottom:1px solid #334153">Yes</td><td style="padding:.75rem;border-bottom:1px solid #334153">Yes</td></tr>
+          <tr><th scope="row" style="padding:.75rem;border-bottom:1px solid #334153">Extended thinking</th><td style="padding:.75rem;border-bottom:1px solid #334153">No</td><td style="padding:.75rem;border-bottom:1px solid #334153">Low, medium, high</td></tr>
+          <tr><th scope="row" style="padding:.75rem;border-bottom:1px solid #334153">Built-in web and code tools</th><td style="padding:.75rem;border-bottom:1px solid #334153">Not included</td><td style="padding:.75rem;border-bottom:1px solid #334153">Supported when configured</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>If you migrate from Nova 1 Lite, update your model/inference profile ID, recheck cost and quota assumptions, enable reasoning deliberately and retest your workload. In particular, <strong>high reasoning effort requires different inference parameters</strong>. AWS published a practical migration walkthrough on March 18, 2026: <a href="https://aws.amazon.com/blogs/machine-learning/migrate-from-amazon-nova-1-to-amazon-nova-2-on-amazon-bedrock/">Nova 1 to Nova 2 migration guide</a>.</p>
+  </section>
+
+  <section class="model-deep-section" id="nova2-faq">
+    <div class="model-section-head"><p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p><h2>Amazon Nova 2 Lite FAQ.</h2></div>
+    <div class="model-faq-list">
+      <details><summary>What is Amazon Nova 2 Lite?</summary><p>Amazon Nova 2 Lite is a multimodal, text-output reasoning model available through Amazon Bedrock. It handles text, images, documents and video for automation, analysis and agentic workloads.</p></details>
+      <details><summary>How much does Amazon Nova 2 Lite cost?</summary><p>SXF's tracked Standard reference rates are {{INPUT_PRICE}} per million input tokens and {{OUTPUT_PRICE}} per million output tokens. Actual AWS prices vary by routing, Region, service tier and caching, so confirm the applicable Amazon Bedrock pricing table.</p></details>
+      <details><summary>What is the Amazon Nova 2 Lite model ID?</summary><p>The base model ID is amazon.nova-2-lite-v1:0. Amazon Bedrock also offers inference profile IDs including global.amazon.nova-2-lite-v1:0 and us.amazon.nova-2-lite-v1:0, depending on regional availability.</p></details>
+      <details><summary>What are the context window and maximum output?</summary><p>AWS lists 1 million context tokens and 64K maximum output tokens for Amazon Nova 2 Lite on its Bedrock model card. Application settings and service constraints may impose lower effective limits.</p></details>
+      <details><summary>Does Nova 2 Lite understand video and audio?</summary><p>Nova 2 Lite analyzes video visually along with text, images and documents, but does not provide general audio-track transcription or native audio output. Use a speech model for audio-specific tasks.</p></details>
+      <details><summary>Does Amazon Nova 2 Lite support reasoning?</summary><p>Yes. Extended thinking is disabled by default and can be enabled with low, medium or high reasoning effort. Reasoning tokens may be billed even when reasoning content is redacted.</p></details>
+      <details><summary>Can I call Amazon Nova 2 Lite with Python?</summary><p>Yes. Use boto3 with the Amazon Bedrock Runtime Converse API, your AWS credentials and an available model inference profile. The Python example above provides a minimal request.</p></details>
+      <details><summary>Is Nova 2 Lite better than Nova 1 Lite?</summary><p>Nova 2 Lite expands the context window from 300K to 1M tokens, adds extended thinking and built-in tools, and increases the documented output capacity. Whether it performs better for your application should be determined with a representative test set.</p></details>
+    </div>
+  </section>
+
+  <section class="model-deep-section" id="nova2-sources">
+    <div class="model-section-head"><p class="eyebrow">PRIMARY SOURCES &amp; METHOD</p><h2>Official AWS documentation and verification.</h2></div>
+    <p>This guide distinguishes AWS-published specifications, observed AWS case-study outcomes and SXF's illustrative cost arithmetic. It does not treat promotional benchmark claims as independent tests. Check AWS documentation for subsequent changes to regional availability, pricing and model lifecycle.</p>
+    <div class="model-sources">
+      <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html" target="_blank" rel="noopener noreferrer"><span>AWS model card: model specifications, API access, regions and limits</span><b>↗</b></a>
+      <a href="https://aws.amazon.com/bedrock/pricing/" target="_blank" rel="noopener noreferrer"><span>Amazon Bedrock pricing: confirm your billing route and tier</span><b>↗</b></a>
+      <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/using-converse-api.html" target="_blank" rel="noopener noreferrer"><span>AWS Converse API reference and code patterns</span><b>↗</b></a>
+      <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/reasoning-capabilities.html" target="_blank" rel="noopener noreferrer"><span>AWS extended-thinking documentation</span><b>↗</b></a>
+      <a href="https://docs.aws.amazon.com/nova/latest/nova2-userguide/using-multimodal-models.html" target="_blank" rel="noopener noreferrer"><span>AWS multimodal input documentation and limitations</span><b>↗</b></a>
+      <a href="https://aws.amazon.com/blogs/machine-learning/migrate-from-amazon-nova-1-to-amazon-nova-2-on-amazon-bedrock/" target="_blank" rel="noopener noreferrer"><span>AWS Nova 1 to Nova 2 migration analysis, March 2026</span><b>↗</b></a>
+      <a href="https://aws.amazon.com/blogs/machine-learning/pair-nova-2-lite-with-claude-for-cost-optimized-document-processing/" target="_blank" rel="noopener noreferrer"><span>AWS document extraction and image-billing case study, June 2026</span><b>↗</b></a>
+    </div>
+  </section>
+  <section class="model-deep-section">
+    <div class="model-section-head"><p class="eyebrow">FURTHER READING</p><h2>Compare options and continue researching.</h2></div>
+    <div class="model-related-links">
+      <a href="/providers/amazon/"><span>PROVIDER</span><strong>Amazon AI models</strong><b>↗</b></a>
+      <a href="/models/pricing/"><span>PRICING</span><strong>Compare AI API prices</strong><b>↗</b></a>
+      <a href="/models/"><span>DIRECTORY</span><strong>All tracked AI models</strong><b>↗</b></a>
+    </div>
+  </section>
+</section>
