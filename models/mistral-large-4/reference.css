@@ -1,0 +1,40 @@
+/* Mistral Large 4 editorial reference. Scoped to preserve other model pages. */
+.ml4-reference {--ml4-stroke:rgba(160,179,210,.19);--ml4-muted:#aebbd0;--ml4-panel:rgba(16,25,39,.72);overflow-wrap:anywhere}
+.ml4-reference a{color:#89c7ff;text-underline-offset:3px}
+.ml4-reference a:hover,.ml4-reference a:focus-visible{color:#c6e7ff}
+.ml4-reference .model-section-head {margin-bottom:1rem}
+.ml4-reference p{line-height:1.75}
+.ml4-reference .ml4-lead{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(255px,1fr);gap:clamp(1rem,3vw,2.25rem);align-items:start}
+.ml4-reference .ml4-lead h2{font-size:clamp(1.5rem,2.2vw,2.1rem);line-height:1.22}
+.ml4-reference .ml4-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+.ml4-reference .ml4-facts>div{background:var(--ml4-panel);border:1px solid var(--ml4-stroke);border-radius:13px;padding:1rem;min-width:0}
+.ml4-reference .ml4-facts span,.ml4-reference .ml4-metrics span{display:block;font-size:.69rem;letter-spacing:.08em;color:var(--ml4-muted);margin-bottom:.5rem}
+.ml4-reference .ml4-facts strong{display:block;font-size:clamp(.87rem,1.15vw,1rem);line-height:1.4}
+.ml4-reference .ml4-facts code{font-size:.85em;white-space:normal;overflow-wrap:anywhere}
+.ml4-reference .ml4-caveat{background:rgba(63,91,129,.13);border-inline-start:3px solid #7ec6ff;border-radius:5px;padding:1rem 1.2rem}
+.ml4-reference .ml4-toc{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-top:2rem;padding:1rem 0;border-top:1px solid var(--ml4-stroke);border-bottom:1px solid var(--ml4-stroke)}
+.ml4-reference .ml4-toc>span{font-size:.7rem;color:var(--ml4-muted);letter-spacing:.07em;margin-right:.25rem}
+.ml4-reference .ml4-toc a{border:1px solid var(--ml4-stroke);border-radius:999px;background:var(--ml4-panel);padding:.4rem .78rem;color:#d9edff;text-decoration:none;font-size:.83rem}
+.ml4-reference .ml4-toc a:hover,.ml4-reference .ml4-toc a:focus-visible{border-color:#9bcffc}
+.ml4-reference .ml4-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid var(--ml4-stroke);border-radius:13px}
+.ml4-reference .ml4-table{border-collapse:collapse;min-width:620px;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}
+.ml4-reference .ml4-table caption{color:var(--ml4-muted);text-align:left;padding:.9rem 1rem;background:var(--ml4-panel)}
+.ml4-reference .ml4-table th,.ml4-reference .ml4-table td{padding:.9rem 1rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--ml4-stroke)}
+.ml4-reference .ml4-table thead th{background:rgba(35,52,78,.52);font-size:.79rem;color:#d5e2f7}
+.ml4-reference .ml4-table tbody tr:last-child td,.ml4-reference .ml4-table tbody tr:last-child th{border-bottom:0}
+.ml4-reference .ml4-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1.2rem 0}
+.ml4-reference .ml4-metrics article{padding:1rem;border:1px solid var(--ml4-stroke);border-radius:12px;background:var(--ml4-panel);min-width:0}
+.ml4-reference .ml4-metrics strong{display:block;font-size:clamp(1.05rem,2vw,1.45rem);font-variant-numeric:tabular-nums;margin-bottom:.5rem}
+.ml4-reference .ml4-metrics small{color:var(--ml4-muted);line-height:1.55}
+.ml4-reference .ml4-code{max-width:100%;overflow-x:auto;border:1px solid var(--ml4-stroke);border-radius:12px;background:#0b1320;color:#e5efff;padding:1.2rem 1.4rem;line-height:1.6;tab-size:4;font-size:.84rem;white-space:pre}
+.ml4-reference .ml4-code code{white-space:pre;font-size:inherit;background:none;color:inherit}
+.ml4-reference .model-capability-grid article {min-width:0}
+.ml4-reference .ml4-faq{display:grid;gap:.6rem}
+.ml4-reference .ml4-faq details{background:var(--ml4-panel);border:1px solid var(--ml4-stroke);border-radius:11px;padding:.9rem 1.1rem}
+.ml4-reference .ml4-faq summary{cursor:pointer;font-weight:650;line-height:1.5;padding-right:.6rem}
+.ml4-reference .ml4-faq details[open] summary{margin-bottom:.65rem}
+.ml4-reference .ml4-faq details p{margin:0;color:#c8d6e9}
+.ml4-reference .model-deep-section {scroll-margin-top:84px}
+@media (max-width:900px){.ml4-reference .ml4-lead{grid-template-columns:1fr}.ml4-reference .ml4-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ml4-reference .ml4-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.ml4-reference .ml4-metrics{grid-template-columns:1fr}.ml4-reference .ml4-toc{gap:.4rem}.ml4-reference .ml4-toc a{font-size:.78rem;padding:.4rem .65rem}.ml4-reference .ml4-facts>div{padding:.8rem}.ml4-reference .ml4-code{font-size:.74rem;padding:.9rem}.ml4-reference .ml4-table{font-size:.84rem}.ml4-reference .ml4-faq details{padding:.85rem}.ml4-reference .model-section-head h2{font-size:clamp(1.24rem,5vw,1.65rem)}}
+@media (prefers-reduced-motion:reduce){.ml4-reference *{scroll-behavior:auto!important}}
