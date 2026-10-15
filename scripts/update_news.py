@@ -10518,7 +10518,7 @@ def benchmark_page_with_guide_link(benchmark):
              'Read the SXF guide to AA-Briefcase, AA-LCR, GDPval-AA, '
              'Intelligence Index and the difference between Elo, accuracy '
              'and composite scores.</span></a></aside>')
-    return page.replace("</main>", block + "\\n</main>", 1)
+    return page.replace("</main>", block + "\n</main>", 1)
 
 
 def build_discovery_pages(items, current_items):
