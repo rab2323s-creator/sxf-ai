@@ -101,6 +101,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_image_entry(f"{BASE_URL}/guides/run-ai-models-locally/", "2026-10-16", f"{BASE_URL}/guides/run-ai-models-locally/images/ollama-lmstudio-vllm-architecture.svg", f"{BASE_URL}/guides/run-ai-models-locally/images/gpu-vram-memory-budget.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/best-ai-text-to-speech-models/", "2026-10-15", f"{BASE_URL}/guides/best-ai-text-to-speech-models/images/tts-model-selection.svg", f"{BASE_URL}/guides/best-ai-text-to-speech-models/images/tts-evaluation-pipeline.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/ai-model-benchmarks-explained/", "2026-10-15", f"{BASE_URL}/guides/ai-model-benchmarks-explained/images/intelligence-index-weights.svg", f"{BASE_URL}/guides/ai-model-benchmarks-explained/images/benchmark-scoring-metrics.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/best-embedding-models-for-rag/", "2026-10-15", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/embedding-spaces-gemini-cohere.svg", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/production-rag-pipeline.svg"),
