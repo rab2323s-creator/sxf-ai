@@ -10576,6 +10576,22 @@ def open_source_ai_models_guide_with_local_link(items):
     return page.replace("</main>", teaser + "\n</main>", 1)
 
 
+def superintelligence_hub_with_explosion_link(items, current_items):
+    """Add a durable contextual link from the ASI topic hub to the deep reference."""
+    page = superintelligence_index_html(items, current_items)
+    block = ('<aside class="shell" aria-label="Intelligence explosion research guide" '
+             'style="margin:2rem auto">'
+             '<a href="/guides/intelligence-explosion/" '
+             'style="display:block;padding:1.2rem;border:1px solid #52778e;'
+             'border-radius:12px;text-decoration:none">'
+             '<strong>What is an intelligence explosion? ↗</strong>'
+             '<span style="display:block;margin-top:.5rem">'
+             'How recursive AI self-improvement could lead to superintelligence, '
+             'what DeepMind and METR actually show, and why fast takeoff is not inevitable.'
+             '</span></a></aside>')
+    return page.replace("</main>", block + "\n</main>", 1)
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10605,7 +10621,7 @@ def build_discovery_pages(items, current_items):
         provider_path.mkdir(parents=True, exist_ok=True)
         (provider_path / "index.html").write_text(provider_page_html(provider, items), encoding="utf-8")
 
-    (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
+    (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_hub_with_explosion_link(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     from intelligence_explosion_guide import render_intelligence_explosion_guide
