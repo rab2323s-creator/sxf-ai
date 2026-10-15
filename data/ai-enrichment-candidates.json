@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "b6e0e28eccaf35be8e9ad8828c29f39975ca4fc41d5b64b2ca598cdd041a1f34",
+  "snapshot_hash": "6628f601a38cd2906513c20db0bcb09f24d5c1429c1d67065bcd2623caf3bc58",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -2249,14 +2249,14 @@
     },
     {
       "rank": 10,
-      "signal_slug": "actions-runner-controller-release-0-15-0-619fccc",
-      "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
-      "title": "Actions Runner Controller release 0.15.0",
+      "signal_slug": "local-sandboxing-for-github-copilot-now-generally-available-87f43b6",
+      "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
+      "title": "Local sandboxing for GitHub Copilot now generally available",
       "source": "GitHub",
       "category": "Tools",
-      "published": "2026-10-01T13:01:31Z",
-      "priority_score": 126,
-      "evidence_hash": "7221c0fe2b6e3f890f5dd8df3045d9332cfe7be991d2931e79589f0c58061c71",
+      "published": "2026-10-07T15:46:17Z",
+      "priority_score": 125,
+      "evidence_hash": "b4d590fde850bc9a1eb3ac84053f9d7b34b1041b41c7904e80cf69e3ec3f103b",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
@@ -2265,24 +2265,28 @@
           "source_urls": []
         },
         "signal": {
-          "title": "Actions Runner Controller release 0.15.0",
-          "url": "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0",
-          "signal_url": "https://sxf.si/signals/actions-runner-controller-release-0-15-0-619fccc/",
+          "title": "Local sandboxing for GitHub Copilot now generally available",
+          "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available",
+          "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
           "source": "GitHub",
-          "published": "2026-10-01T13:01:31Z",
+          "published": "2026-10-07T15:46:17Z",
           "category": "Tools",
-          "tags": [],
-          "summary": "GitHub Actions Runner Controller 0.15.0 includes reliability, scalability, and observability improvements for runner scale sets. These updates help you operate larger runner fleets with fewer disruptions during upgrades and Kubernetes…",
-          "signal_score": 46,
-          "seo_quality_score": 60,
+          "tags": [
+            "GitHub Copilot",
+            "Security"
+          ],
+          "summary": "Local sandboxing for GitHub Copilot is now generally available in GitHub Copilot CLI, the GitHub Copilot app, and VS Code sessions using Agent Host. Local sandboxes give developers a secure…",
+          "signal_score": 38,
+          "seo_quality_score": 67,
           "seo_quality_factors": [
             "substantive-source-summary",
-            "search-worthy-event"
+            "search-worthy-event",
+            "high-value-topic"
           ]
         },
         "models": [],
         "source_urls": [
-          "https://github.blog/changelog/2026-10-01-actions-runner-controller-release-0-15-0"
+          "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available"
         ]
       },
       "requested_output": {
