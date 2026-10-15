@@ -7619,6 +7619,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-model-benchmarks-explained/",
+            "category": "Models · Benchmarks · Research",
+            "categories": ["models", "research", "tools"],
+            "kicker": "AI MODEL BENCHMARK REFERENCE",
+            "title": "AI Model Benchmarks Explained (2026): AA-Briefcase, AA-LCR, GDPval-AA & Intelligence Index",
+            "description": "Understand Elo vs accuracy, benchmark methodology, ten-test Intelligence Index weighting and the limits of agent and long-context benchmarks.",
+            "meta": "Elo · Long context · Model evaluation",
+            "updated": "Oct 15, 2026",
+            "read_time": "15 min",
+        },
+        {
             "href": "/guides/best-embedding-models-for-rag/",
             "category": "Models · Retrieval · RAG",
             "categories": ["models", "research", "tools", "coding"],
@@ -10489,6 +10500,27 @@ def model_pricing_page_html():
     </body></html>'''
 
 
+def benchmark_page_with_guide_link(benchmark):
+    """Add an editorial interpretation link to priority benchmark result pages."""
+    page = benchmark_page_html(benchmark)
+    if benchmark.get("benchmark_id") not in {
+        "aa-briefcase-v1.1", "aa-lcr-v1.1", "gdpval-aa-v2.1",
+        "aa-intelligence-index-v4.3.2",
+    }:
+        return page
+    block = ('<aside class="shell" aria-label="Benchmark interpretation guide" '
+             'style="margin-top:2rem;margin-bottom:2rem">'
+             '<a href="/guides/ai-model-benchmarks-explained/" '
+             'style="display:block;padding:1rem;border:1px solid #486079;'
+             'border-radius:12px;text-decoration:none">'
+             '<strong>How to interpret this benchmark ↗</strong>'
+             '<span style="display:block;margin-top:.5rem">'
+             'Read the SXF guide to AA-Briefcase, AA-LCR, GDPval-AA, '
+             'Intelligence Index and the difference between Elo, accuracy '
+             'and composite scores.</span></a></aside>')
+    return page.replace("</main>", block + "\n</main>", 1)
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10508,7 +10540,7 @@ def build_discovery_pages(items, current_items):
         benchmark_dir = evaluations_dir / benchmark["benchmark_id"]
         benchmark_dir.mkdir(parents=True, exist_ok=True)
         (benchmark_dir / "index.html").write_text(
-            benchmark_page_html(benchmark),
+            benchmark_page_with_guide_link(benchmark),
             encoding="utf-8",
         )
 
@@ -10521,6 +10553,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from ai_model_benchmarks_guide import guide_html as render_benchmarks_guide
+    benchmarks_guide_dir = GUIDES_DIR / "ai-model-benchmarks-explained"
+    benchmarks_guide_dir.mkdir(parents=True, exist_ok=True)
+    (benchmarks_guide_dir / "index.html").write_text(render_benchmarks_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     from rag_embedding_guide import guide_html as render_rag_embedding_guide
     rag_guide = GUIDES_DIR / "best-embedding-models-for-rag"
     rag_guide.mkdir(parents=True, exist_ok=True)
