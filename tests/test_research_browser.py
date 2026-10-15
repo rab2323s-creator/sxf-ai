@@ -14,6 +14,13 @@ def main():
             page.locator("#research-heading").wait_for()
             assert page.locator("h1").count() == 1
             assert page.locator(".research-featured-card").count() == 3
+            page.wait_for_function("() => [...document.querySelectorAll('.research-featured-image img')].length === 3 && [...document.querySelectorAll('.research-featured-image img')].every(img => img.complete)", timeout=15000)
+            image_status = page.locator(".research-featured-image img").evaluate_all(
+                "(imgs) => imgs.map(img => ({src: img.currentSrc, naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight}))"
+            )
+            assert all(img["naturalWidth"] > 0 and img["naturalHeight"] > 0 for img in image_status), (
+                f"Broken featured research images at {name}: {image_status}"
+            )
             assert page.locator(".research-jump-links a").count() == 4
             assert page.locator(".research-faq-item").count() == 3
             metrics = page.evaluate("""() => {
