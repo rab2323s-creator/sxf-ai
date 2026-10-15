@@ -5313,6 +5313,16 @@ def render_catalog_model_page(model_id, items):
         page = enrich_deepseek_v4_pro_page(page)
     if model_id == "gpt-rosalind-research":
         page = enrich_gpt_rosalind_research_page(page)
+    if model_id in {"gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"}:
+        tts_link = ('<aside class="shell" aria-label="TTS model selection guide" '
+                    'style="margin-top:1.5rem;margin-bottom:1.5rem">'
+                    '<a href="/guides/best-ai-text-to-speech-models/" '
+                    'style="display:block;padding:1rem;border:1px solid #49677e;border-radius:12px;text-decoration:none">'
+                    '<strong>Compare the best AI text-to-speech models ↗</strong>'
+                    '<span style="display:block;margin-top:.5rem">'
+                    'Explore Gemini Flash versus Flash-Lite TTS, audio-minute pricing, '
+                    'API examples and WER/latency benchmarks.</span></a></aside>')
+        page = inject_before_main_end(page, tts_link)
     if "data-what-changed" not in page:
         page = inject_before_main_end(
             page,
