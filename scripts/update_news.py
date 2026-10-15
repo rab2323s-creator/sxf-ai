@@ -7634,7 +7634,7 @@ def guides_index_html(items, current_items):
             "categories": ["research", "models", "security"],
             "kicker": "INTELLIGENCE EXPLOSION REFERENCE",
             "title": "What Is an Intelligence Explosion? Recursive Self-Improvement, AI Takeoff & Superintelligence",
-            "description": "Understand recursive AI self-improvement, hard vs soft takeoff, evidence from DeepMind and METR, and what researchers would need to prove an intelligence explosion.",
+            "description": "A source-verified guide to AI self-improvement, AlphaEvolve experiments, METR controlled results, AGI-to-ASI pathways and hard versus soft takeoff.",
             "meta": "ASI · Recursive improvement · Takeoff",
             "updated": "Oct 16, 2026",
             "read_time": "19 min",

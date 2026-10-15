@@ -31,7 +31,7 @@ class IntelligenceExplosionGuideTest(unittest.TestCase):
         self.assertEqual(self.html.count('<meta property="og:image"'), 1)
         self.assertEqual(self.html.count('<meta name="twitter:card"'), 1)
         self.assertNotIn("intelligence-explosion-2026", self.html)
-        article = next(x for x in self.graph if x["@type"] == "TechArticle")
+        article = next(x for x in self.graph if x["@type"] == "Article")
         self.assertEqual(article["url"], url)
         self.assertIn("https://arxiv.org/abs/2608.14426", article["citation"])
         self.assertIn("https://metr.org/blog/2026-10-14-ai-rd-acceleration-assessment-proposal/", article["citation"])
@@ -78,6 +78,34 @@ class IntelligenceExplosionGuideTest(unittest.TestCase):
                  "https://sxf.si/guides/intelligence-explosion/"]
         self.assertEqual(len(pages), 1)
         self.assertEqual(len(pages[0].findall("image:image", ns)), 2)
+
+    def test_research_evidence_and_attribution(self):
+        self.assertIn("By <a href=\"/about/\">SXF / AI editorial team</a>", self.html)
+        self.assertIn('id="experiments"', self.body)
+        self.assertIn('id="asi-pathways"', self.body)
+        self.assertIn('six very different levels of achievement', self.body)
+        self.assertEqual(self.body.count('<section id="experiments">'), 1)
+        self.assertIn('23% faster', self.body)
+        self.assertIn('1% less training time', self.body)
+        self.assertIn('16 experienced open-source developers', self.body)
+        self.assertIn('246 real issues', self.body)
+        self.assertIn('19%', self.body)
+        self.assertIn('participant-selection bias', self.body)
+        for link in (
+            "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+            "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+            "https://metr.org/blog/2026-02-24-uplift-update/",
+            "https://deepmind.google/research/publications/239142/",
+        ):
+            self.assertIn(link, self.body)
+        article = next(x for x in self.graph if x["@type"] == "Article")
+        self.assertEqual(article["author"]["url"], "https://sxf.si/about/")
+        self.assertIn("https://metr.org/blog/2026-02-24-uplift-update/", article["citation"])
+        definition = re.search(r'<p class="ie-definition">(.+?)</p>', self.body)
+        self.assertIsNotNone(definition)
+        self.assertGreaterEqual(len(re.sub(r"<[^>]+>", "", definition.group(1)).split()), 40)
+        self.assertLessEqual(len(re.sub(r"<[^>]+>", "", definition.group(1)).split()), 60)
+        self.assertEqual(self.body.count('<details>'), 10)
 
 
 if __name__ == "__main__":

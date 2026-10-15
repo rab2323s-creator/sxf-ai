@@ -18,7 +18,7 @@ def render_intelligence_explosion_guide():
     rendered = before + START + content + END + after
     for required in ("https://sxf.si/guides/intelligence-explosion/",
                      "recursive-improvement-feedback-loop.svg",
-                     "hard-vs-soft-ai-takeoff.svg", "FAQPage", "TechArticle"):
+                     "hard-vs-soft-ai-takeoff.svg", "FAQPage", "\"@type\":\"Article\""):
         if required not in rendered:
             raise RuntimeError("Intelligence-explosion guide missing: " + required)
     if content.count("<details>") != 10:
