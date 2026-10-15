@@ -1,6 +1,9 @@
 const body=document.body;
 const category=body.dataset.category||'';
 const isOpenSource=category==='Open Source';
+const isResearch=category==='Research';
+const resultsStatus=document.getElementById('researchResultsCount');
+let feedReady=false;
 const feed=document.getElementById('sectionFeed');
 const empty=document.getElementById('sectionEmpty');
 const search=document.getElementById('sectionSearch');
@@ -21,7 +24,7 @@ function ago(v){
   return days<7?days+'d ago':d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
 }
 function textFor(x){
-  return ((x.title||'')+' '+(x.source||'')+(isOpenSource?' '+(x.summary||'')+' '+(x.tags||[]).join(' '):'')).toLowerCase();
+  return ((x.title||'')+' '+(x.source||'')+((isOpenSource||isResearch)?' '+(x.summary||'')+' '+(x.tags||[]).join(' '):'')).toLowerCase();
 }
 function match(x){
   if(!activeKeywords)return true;
@@ -35,15 +38,18 @@ function card(x){
     esc(x.title)+'</h3><div class="intel-foot"><span>'+esc(x.category)+'</span><b>↗</b></div></a>';
 }
 function render(){
+  if(!feedReady)return;
   const q=(search?.value||'').trim().toLowerCase();
   const visible=items.filter(x=>match(x)&&(!q||textFor(x).includes(q)));
   feed.innerHTML=visible.map(card).join('');
   empty.hidden=visible.length!==0;
-  count.textContent=isOpenSource?visible.length:items.length;
+  if(count)count.textContent=isOpenSource?visible.length:items.length;
+  if(resultsStatus)resultsStatus.textContent=visible.length+' of '+items.length+' live research updates shown.';
 }
 lenses.forEach(b=>b.addEventListener('click',()=>{
   lenses.forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
+  if(isResearch)lenses.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
   activeKeywords=b.dataset.keywords||'';
   render();
 }));
@@ -54,6 +60,10 @@ fetch(source,{cache:'no-cache'})
   .then(d=>{
     items=(d.items||[]).filter(x=>isOpenSource||
       String(x.category||'').trim().toLowerCase()===category.trim().toLowerCase());
+    feedReady=true;
     render();
   })
-  .catch(()=>{/* Preserve server-rendered cards and count on fetch failure. */});
+  .catch(()=>{
+    // Keep server-rendered links indexable and usable during network failures.
+    if(resultsStatus)resultsStatus.textContent='Live filtering unavailable. The latest research links below remain available.';
+  });
