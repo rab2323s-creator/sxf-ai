@@ -101,6 +101,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_image_entry(f"{BASE_URL}/guides/best-embedding-models-for-rag/", "2026-10-15", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/embedding-spaces-gemini-cohere.svg", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/production-rag-pipeline.svg"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-evaluation-checklist/", "2026-10-12"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-cost/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
