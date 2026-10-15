@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "6628f601a38cd2906513c20db0bcb09f24d5c1429c1d67065bcd2623caf3bc58",
+  "snapshot_hash": "2934808a65e044009202b2515a9d5f63663ac4e3ba74a05fa1a5dc852c0221b4",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1367,80 +1367,6 @@
     },
     {
       "rank": 5,
-      "signal_slug": "github-copilot-in-vs-code-september-2026-releases-b33dfca",
-      "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
-      "title": "GitHub Copilot in VS Code, September 2026 releases",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-01T19:09:10Z",
-      "priority_score": 149,
-      "evidence_hash": "93251ff3551fbe082f531287c85e4bd33581f3751616cbae9e627f0c10eaf605",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "GitHub Copilot in VS Code, September 2026 releases",
-          "url": "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
-          "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-september-2026-releases-b33dfca/",
-          "source": "GitHub",
-          "published": "2026-10-01T19:09:10Z",
-          "category": "Tools",
-          "tags": [
-            "GitHub Copilot",
-            "Coding AI"
-          ],
-          "summary": "This changelog covers VS Code v1.136 through v1.140, shipped throughout September 2026. September’s releases streamline agent-driven development from implementation through pull request merge. Automations handle repeatable tasks, agent merge helps…",
-          "signal_score": 56,
-          "seo_quality_score": 73,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 6,
       "signal_slug": "gemini-4-argon-in-github-copilot-619c2f7",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-in-github-copilot-619c2f7/",
       "title": "Gemini 4 Argon in GitHub Copilot",
@@ -1513,7 +1439,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "signal_slug": "claude-haiku-5-5-in-github-copilot-86f546d",
       "signal_url": "https://sxf.si/signals/claude-haiku-5-5-in-github-copilot-86f546d/",
       "title": "Claude Haiku 5.5 in GitHub Copilot",
@@ -1703,7 +1629,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "signal_slug": "how-third-moment-research-runs-10-000-agents-for-36-hours-e181547",
       "signal_url": "https://sxf.si/signals/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/",
       "title": "How Third Moment Research runs 10,000 agents for 36+ hours",
@@ -2178,7 +2104,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
       "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
       "title": "Search and filter for budgets now available",
@@ -2248,7 +2174,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "local-sandboxing-for-github-copilot-now-generally-available-87f43b6",
       "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
       "title": "Local sandboxing for GitHub Copilot now generally available",
@@ -2287,6 +2213,78 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "introducing-playground-create-and-play-custom-games-22643d6",
+      "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
+      "title": "Introducing Playground: Create and play custom games",
+      "source": "Google AI",
+      "category": "Tools",
+      "published": "2026-10-07T12:00:00Z",
+      "priority_score": 120,
+      "evidence_hash": "a470941f59f77f0d2227173d07649fdc163b7346d25a758675fbc39385f21a1f",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing Playground: Create and play custom games",
+          "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
+          "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
+          "source": "Google AI",
+          "published": "2026-10-07T12:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "Google AI"
+          ],
+          "summary": "Playground is a new experimental gaming platform that lets you create, play, and share custom games.",
+          "signal_score": 46,
+          "seo_quality_score": 54,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/"
         ]
       },
       "requested_output": {
