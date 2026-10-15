@@ -5,6 +5,7 @@ import json
 import re
 from pathlib import Path
 from html.parser import HTMLParser
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "research" / "index.html"
@@ -70,7 +71,12 @@ def main():
     for img in p.images:
         assert img.get("alt"), "Image alt text required"
         assert img.get("width") and img.get("height"), "Dimensions required to avoid layout shift"
-        assert (ROOT / img["src"].lstrip("/")).exists(), "Research image missing: " + img["src"]
+        image_path = ROOT / img["src"].lstrip("/")
+        assert image_path.exists(), "Research image missing: " + img["src"]
+        if image_path.suffix.lower() == ".svg":
+            svg = ET.parse(image_path).getroot()
+            assert svg.tag == "{http://www.w3.org/2000/svg}svg", "Invalid SVG root: " + img["src"]
+            assert svg.get("viewBox") or (svg.get("width") and svg.get("height")), "SVG missing dimensions: " + img["src"]
     scripts = re.findall(r'<script type="application/ld\+json"(?:[^>]*)>(.*?)</script>', source, re.S)
     assert len(scripts) == 2
     schemas = [json.loads(x) for x in scripts]
