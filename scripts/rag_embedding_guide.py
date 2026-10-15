@@ -54,5 +54,5 @@ def guide_html(shell):
 <p class="eyebrow">SXF GUIDES / MODEL RESEARCH</p>
 <h1>Best AI Embedding Models for RAG in 2026:<br><span>Gemini vs Cohere</span></h1>
 <p class="guide-deck">A rigorous comparison of Google Gemini Embedding 001 and 2 with Cohere Embed 5 Pro and Fast: real API costs, vector storage, model compatibility, multimodal retrieval, Python implementation, and how to evaluate search quality without marketing hype.</p>
-<div class="guide-byline"><div><span>Reading time</span><strong>18 min</strong></div><div><span>Research standard</span><strong>Official source verification</strong></div><div><span>Reviewed</span><strong>October 15, 2026</strong></div></div>
+<div class="guide-byline"><div><span>Reading time</span><strong>18 min</strong></div><div><span>Research standard</span><strong>Official source verification</strong></div></div>
 </header>{content}</article></main>{page_footer()}</body></html>'''
