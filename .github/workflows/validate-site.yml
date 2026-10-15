@@ -109,6 +109,8 @@ jobs:
         run: node scripts/agent_economics_stress_test.cjs --check
       - name: Refresh sitemap after post-render changes
         run: python scripts/sitemap_lastmod.py --refresh
+      - name: Intelligence explosion reference regression
+        run: python tests/test_intelligence_explosion_guide.py
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
