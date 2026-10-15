@@ -1,4 +1,4 @@
-"""Render an evidence-backed reference guide to AI model benchmark methodology."""
+"""Render the verified TTS model comparison guide on site rebuilds."""
 import json
 from pathlib import Path
 from html import escape
@@ -33,9 +33,9 @@ def guide_html(shell):
     return f'''<!doctype html><html lang="en">{head}
 <body class="intel-page guide-article-page">{page_header("guides")}<main><article>
 <header class="guide-article-hero shell">
-<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>RAG Embeddings</span></nav>
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Text-to-Speech</span></nav>
 <p class="eyebrow">SXF GUIDES / SPEECH TECHNOLOGY</p>
 <h1>Best AI Text-to-Speech Models in 2026:<br><span>Gemini TTS, Pricing &amp; Benchmarks</span></h1>
-<p class="guide-deck">A rigorous comparison of Google Gemini Embedding 001 and 2 with Cohere Embed 5 Pro and Fast: real API costs, vector storage, model compatibility, multimodal retrieval, Python implementation, and how to evaluate search quality without marketing hype.</p>
+<p class="guide-deck">A practical comparison of Gemini 3.8 Flash and Flash-Lite TTS: API costs, generated-audio math, voice quality, evaluation metrics and Python implementation.</p>
 <div class="guide-byline"><div><span>Reading time</span><strong>20 min</strong></div><div><span>Research standard</span><strong>Official source verification</strong></div></div>
-</header>{content}</article></main>{page_footer()}</body></html>'''
+</header>{content}</article></main>{page_footer()}<script defer src="/guides/best-ai-text-to-speech-models/reference.js"></script></body></html>'''
