@@ -10500,6 +10500,27 @@ def model_pricing_page_html():
     </body></html>'''
 
 
+def benchmark_page_with_guide_link(benchmark):
+    """Add an editorial interpretation link to priority benchmark result pages."""
+    page = benchmark_page_html(benchmark)
+    if benchmark.get("benchmark_id") not in {
+        "aa-briefcase-v1.1", "aa-lcr-v1.1", "gdpval-aa-v2.1",
+        "aa-intelligence-index-v4.3.2",
+    }:
+        return page
+    block = ('<aside class="shell" aria-label="Benchmark interpretation guide" '
+             'style="margin-top:2rem;margin-bottom:2rem">'
+             '<a href="/guides/ai-model-benchmarks-explained/" '
+             'style="display:block;padding:1rem;border:1px solid #486079;'
+             'border-radius:12px;text-decoration:none">'
+             '<strong>How to interpret this benchmark ↗</strong>'
+             '<span style="display:block;margin-top:.5rem">'
+             'Read the SXF guide to AA-Briefcase, AA-LCR, GDPval-AA, '
+             'Intelligence Index and the difference between Elo, accuracy '
+             'and composite scores.</span></a></aside>')
+    return page.replace("</main>", block + "\\n</main>", 1)
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10519,7 +10540,7 @@ def build_discovery_pages(items, current_items):
         benchmark_dir = evaluations_dir / benchmark["benchmark_id"]
         benchmark_dir.mkdir(parents=True, exist_ok=True)
         (benchmark_dir / "index.html").write_text(
-            benchmark_page_html(benchmark),
+            benchmark_page_with_guide_link(benchmark),
             encoding="utf-8",
         )
 
