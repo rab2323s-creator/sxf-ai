@@ -7619,6 +7619,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-model-benchmarks-explained/",
+            "category": "Models · Benchmarks · Research",
+            "categories": ["models", "research", "tools"],
+            "kicker": "AI MODEL BENCHMARK REFERENCE",
+            "title": "AI Model Benchmarks Explained (2026): AA-Briefcase, AA-LCR, GDPval-AA & Intelligence Index",
+            "description": "Understand Elo vs accuracy, benchmark methodology, ten-test Intelligence Index weighting and the limits of agent and long-context benchmarks.",
+            "meta": "Elo · Long context · Model evaluation",
+            "updated": "Oct 15, 2026",
+            "read_time": "15 min",
+        },
+        {
             "href": "/guides/best-embedding-models-for-rag/",
             "category": "Models · Retrieval · RAG",
             "categories": ["models", "research", "tools", "coding"],
@@ -10521,6 +10532,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from ai_model_benchmarks_guide import guide_html as render_benchmarks_guide
+    benchmarks_guide_dir = GUIDES_DIR / "ai-model-benchmarks-explained"
+    benchmarks_guide_dir.mkdir(parents=True, exist_ok=True)
+    (benchmarks_guide_dir / "index.html").write_text(render_benchmarks_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     from rag_embedding_guide import guide_html as render_rag_embedding_guide
     rag_guide = GUIDES_DIR / "best-embedding-models-for-rag"
     rag_guide.mkdir(parents=True, exist_ok=True)
