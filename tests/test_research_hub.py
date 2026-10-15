@@ -48,7 +48,11 @@ def main():
     assert source.count('<!-- SXF:SECTION_SCHEMA_END -->') == 1
     assert re.search(r'<strong id="sectionCount">\d+</strong>', source)
     assert source.index('id="featured-research-title"') < source.index('id="signals"')
-    assert source.index('id="benchmark-evidence"') < source.index('id="signals"')
+    assert source.index('id="signals"') < source.index('id="benchmark-evidence"')
+    assert source.index('class="research-jump shell"') < source.index('id="featured-research-title"')
+    assert source.count('class="research-faq-item"') == 3
+    assert source.count('class="research-featured-card research-featured-card-lead"') == 1
+    assert '<details class="research-method-disclosure">' in source
     for required in (
         "/research/ai-agent-memory/",
         "/research/ai-agent-reliability/",
