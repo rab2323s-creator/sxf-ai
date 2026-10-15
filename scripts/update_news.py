@@ -5313,6 +5313,16 @@ def render_catalog_model_page(model_id, items):
         page = enrich_deepseek_v4_pro_page(page)
     if model_id == "gpt-rosalind-research":
         page = enrich_gpt_rosalind_research_page(page)
+    if model_id in {"gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"}:
+        tts_link = ('<aside class="shell" aria-label="TTS model selection guide" '
+                    'style="margin-top:1.5rem;margin-bottom:1.5rem">'
+                    '<a href="/guides/best-ai-text-to-speech-models/" '
+                    'style="display:block;padding:1rem;border:1px solid #49677e;border-radius:12px;text-decoration:none">'
+                    '<strong>Compare the best AI text-to-speech models ↗</strong>'
+                    '<span style="display:block;margin-top:.5rem">'
+                    'Explore Gemini Flash versus Flash-Lite TTS, audio-minute pricing, '
+                    'API examples and WER/latency benchmarks.</span></a></aside>')
+        page = inject_before_main_end(page, tts_link)
     if "data-what-changed" not in page:
         page = inject_before_main_end(
             page,
@@ -7618,6 +7628,17 @@ def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/best-ai-text-to-speech-models/",
+            "category": "Models · Audio · TTS",
+            "categories": ["models", "research", "tools"],
+            "kicker": "TEXT-TO-SPEECH MODEL GUIDE",
+            "title": "Best AI Text-to-Speech Models in 2026: Gemini TTS, Pricing & Benchmarks",
+            "description": "Compare Gemini 3.8 Flash and Flash-Lite TTS, API pricing per audio minute, WER evaluation, Python code, voices and production audio.",
+            "meta": "Gemini TTS · Voices · Pricing · Benchmarks",
+            "updated": "Oct 15, 2026",
+            "read_time": "20 min",
+        },
         {
             "href": "/guides/ai-model-benchmarks-explained/",
             "category": "Models · Benchmarks · Research",
@@ -10553,6 +10574,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from best_ai_tts_guide import guide_html as render_tts_guide
+    tts_guide_dir = GUIDES_DIR / "best-ai-text-to-speech-models"
+    tts_guide_dir.mkdir(parents=True, exist_ok=True)
+    (tts_guide_dir / "index.html").write_text(render_tts_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     from ai_model_benchmarks_guide import guide_html as render_benchmarks_guide
     benchmarks_guide_dir = GUIDES_DIR / "ai-model-benchmarks-explained"
     benchmarks_guide_dir.mkdir(parents=True, exist_ok=True)
