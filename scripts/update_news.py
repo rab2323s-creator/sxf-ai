@@ -7629,6 +7629,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/run-ai-models-locally/",
+            "category": "Models · Local AI · Hardware",
+            "categories": ["models", "research", "tools", "coding"],
+            "kicker": "LOCAL AI DEPLOYMENT REFERENCE",
+            "title": "How to Run AI Models Locally in 2026: Ollama vs LM Studio vs vLLM, GPU & VRAM Guide",
+            "description": "Set up Ollama, LM Studio and vLLM. Compare local LLM memory, quantization, GPUs, local APIs, hardware sizing and operating costs.",
+            "meta": "Local LLM · Ollama · VRAM · vLLM",
+            "updated": "Oct 16, 2026",
+            "read_time": "20 min",
+        },
+        {
             "href": "/guides/best-ai-text-to-speech-models/",
             "category": "Models · Audio · TTS",
             "categories": ["models", "research", "tools"],
@@ -10542,6 +10553,18 @@ def benchmark_page_with_guide_link(benchmark):
     return page.replace("</main>", block + "\n</main>", 1)
 
 
+def open_source_ai_models_guide_with_local_link(items):
+    page = open_source_ai_models_guide_html(items)
+    teaser = ('<aside class="shell" aria-label="Local AI deployment guide" '
+              'style="margin:2rem auto"><a href="/guides/run-ai-models-locally/" '
+              'style="display:block;padding:1rem;border:1px solid #52778e;border-radius:12px;text-decoration:none">'
+              '<strong>How to run these AI models locally ↗</strong>'
+              '<span style="display:block;margin-top:.5rem">'
+              'Compare Ollama, LM Studio, vLLM, GPU and VRAM requirements, quantization and local APIs.'
+              '</span></a></aside>')
+    return page.replace("</main>", teaser + "\n</main>", 1)
+
+
 def build_discovery_pages(items, current_items):
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10574,6 +10597,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from local_inference_guide import render_local_inference_guide
+    local_guide_dir = GUIDES_DIR / "run-ai-models-locally"
+    local_guide_dir.mkdir(parents=True, exist_ok=True)
+    (local_guide_dir / "index.html").write_text(render_local_inference_guide(), encoding="utf-8")
     from best_ai_tts_guide import guide_html as render_tts_guide
     tts_guide_dir = GUIDES_DIR / "best-ai-text-to-speech-models"
     tts_guide_dir.mkdir(parents=True, exist_ok=True)
@@ -10594,7 +10621,7 @@ def build_discovery_pages(items, current_items):
     (model_guide_path / "index.html").write_text(gpt6_vs_claude_guide_html(items), encoding="utf-8")
     open_models_guide_path = GUIDES_DIR / "open-source-ai-models"
     open_models_guide_path.mkdir(parents=True, exist_ok=True)
-    (open_models_guide_path / "index.html").write_text(open_source_ai_models_guide_html(items), encoding="utf-8")
+    (open_models_guide_path / "index.html").write_text(open_source_ai_models_guide_with_local_link(items), encoding="utf-8")
     agents_guide_path = GUIDES_DIR / "best-ai-agents"
     agents_guide_path.mkdir(parents=True, exist_ok=True)
     (agents_guide_path / "index.html").write_text(best_ai_agents_guide_html(items), encoding="utf-8")
