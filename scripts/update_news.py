@@ -7629,6 +7629,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/intelligence-explosion/",
+            "category": "ASI · Research · AI Futures",
+            "categories": ["research", "models", "security"],
+            "kicker": "INTELLIGENCE EXPLOSION REFERENCE",
+            "title": "What Is an Intelligence Explosion? Recursive Self-Improvement, AI Takeoff & Superintelligence",
+            "description": "Understand recursive AI self-improvement, hard vs soft takeoff, evidence from DeepMind and METR, and what researchers would need to prove an intelligence explosion.",
+            "meta": "ASI · Recursive improvement · Takeoff",
+            "updated": "Oct 16, 2026",
+            "read_time": "19 min",
+        },
+        {
             "href": "/guides/run-ai-models-locally/",
             "category": "Models · Local AI · Hardware",
             "categories": ["models", "research", "tools", "coding"],
@@ -10597,6 +10608,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from intelligence_explosion_guide import render_intelligence_explosion_guide
+    ie_dir = GUIDES_DIR / "intelligence-explosion"
+    ie_dir.mkdir(parents=True, exist_ok=True)
+    (ie_dir / "index.html").write_text(render_intelligence_explosion_guide(), encoding="utf-8")
     from local_inference_guide import render_local_inference_guide
     local_guide_dir = GUIDES_DIR / "run-ai-models-locally"
     local_guide_dir.mkdir(parents=True, exist_ok=True)
