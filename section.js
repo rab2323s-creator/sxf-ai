@@ -49,7 +49,7 @@ function render(){
 lenses.forEach(b=>b.addEventListener('click',()=>{
   lenses.forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
-  lenses.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  if(isResearch)lenses.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
   activeKeywords=b.dataset.keywords||'';
   render();
 }));
