@@ -7619,6 +7619,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/best-embedding-models-for-rag/",
+            "category": "Models · Retrieval · RAG",
+            "categories": ["models", "research", "tools", "coding"],
+            "kicker": "EMBEDDING MODEL BUYER GUIDE",
+            "title": "Best AI Embedding Models for RAG in 2026: Gemini vs Cohere",
+            "description": "Compare Google Gemini Embedding 001 and 2 with Cohere Embed 5 Pro and Fast by pricing, vector compatibility, multimodal retrieval, Python API, and operational evaluation.",
+            "meta": "Gemini · Cohere · Embeddings · RAG",
+            "updated": "Oct 15, 2026",
+            "read_time": "18 min",
+        },
+        {
             "href": "/guides/ai-agent-evaluation-checklist/",
             "category": "Agents · Evaluation · Reliability",
             "categories": ["agents", "research", "security", "tools"],
@@ -10510,6 +10521,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_index_html(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from rag_embedding_guide import guide_html as render_rag_embedding_guide
+    rag_guide = GUIDES_DIR / "best-embedding-models-for-rag"
+    rag_guide.mkdir(parents=True, exist_ok=True)
+    (rag_guide / "index.html").write_text(render_rag_embedding_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
     (coding_guide_path / "index.html").write_text(best_ai_coding_tools_html(items), encoding="utf-8")
