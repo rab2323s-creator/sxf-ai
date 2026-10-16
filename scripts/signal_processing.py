@@ -28,6 +28,7 @@ class SignalProcessingContext:
     source_expansion_max_current_per_source: object
     source_expansion_max_current_total: object
     max_items: object
+    assess_news: object = None  # Optional, preserves legacy processing-test fixtures.
 
 
 def prepare_items(items, context: SignalProcessingContext):
@@ -46,6 +47,10 @@ def prepare_items(items, context: SignalProcessingContext):
     for item in items:
         row = dict(item)
         row["summary"] = clean_summary(row.get("summary", ""))
+        if context.assess_news is not None:
+            decision = context.assess_news(row.get("title", ""), row["summary"], row.get("source", ""))
+            row["relevance_status"] = decision.status
+            row["relevance_reason"] = decision.reason
         row["category"] = categorize(row["title"], row["source"])
         row["tags"] = classify_tags(row["title"], row["source"], row["category"])
         row["signal_slug"] = slug_aliases.get(row["url"]) or row.get("signal_slug") or signal_slug(row)
@@ -157,6 +162,8 @@ def select_current_items(archive, cutoff, context: SignalProcessingContext):
     for item in archive:
         published = parse_date(item.get("published", ""))
         if published is None or published < cutoff:
+            continue
+        if item.get("relevance_status", "accept") != "accept":
             continue
 
         source = item.get("source", "")
