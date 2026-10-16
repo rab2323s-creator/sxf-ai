@@ -40,7 +40,7 @@ def signals_index_html(items, context: SignalPageContext):
     canonical = f"{BASE_URL}/signals/"
     description = "Track verified AI model releases, agent updates, research, benchmarks, tools and open-source changes from primary sources with the SXF AI signal index."
     page_modified = max((item.get("modified_at") or item.get("published") or "" for item in items), default="")
-    agent_pattern = re.compile(r"\\bagent(?:s|ic)?\\b|\\bmcp\\b|computer use|tool calling|multi[- ]step|long[- ]running", re.I)
+    agent_pattern = re.compile(r"\bagent(?:s|ic)?\b|\bmcp\b|computer use|tool calling|multi[- ]step|long[- ]running", re.I)
 
     def latest_matching(predicate):
         return next((item for item in items if predicate(item)), None)
