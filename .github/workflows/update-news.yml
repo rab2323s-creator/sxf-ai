@@ -33,6 +33,8 @@ jobs:
         run: python tests/test_snapshot_rendering.py
       - name: Signal processing regression tests
         run: python tests/test_signal_processing.py
+      - name: Editorial news relevance tests
+        run: python tests/test_news_relevance.py
       - name: Feed card rendering regression tests
         run: python tests/test_feed_card_rendering.py
       - name: Shared HTML shell and SEO regression tests
