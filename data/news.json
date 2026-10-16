@@ -1,6 +1,28 @@
 {
-  "updated_at": "2026-10-15T23:40:38.738242Z",
+  "updated_at": "2026-10-16T04:25:12.879147Z",
   "items": [
+    {
+      "title": "Multi-repo support and other improvements for GitHub Copilot in Slack and Microsoft Teams",
+      "url": "https://github.blog/changelog/2026-10-15-copilot-in-slack-and-teams-adds-model-and-repository-updates",
+      "signal_url": "https://sxf.si/signals/multi-repo-support-and-other-improvements-for-github-copilot-in-slack--5c6d7a0/",
+      "source": "GitHub",
+      "published": "2026-10-16T02:16:35Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot"
+      ],
+      "signal_score": 38
+    },
+    {
+      "title": "Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline",
+      "url": "https://huggingface.co/blog/nvidia/scaling-indic-pretraining",
+      "signal_url": "https://sxf.si/signals/scaling-indic-pretraining-2-8-trillion-tokens-and-an-open-data-generat-ba4e733/",
+      "source": "Hugging Face",
+      "published": "2026-10-16T01:44:47Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
     {
       "title": "Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint",
       "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1",
@@ -128,6 +150,18 @@
         "Multimodal AI"
       ],
       "signal_score": 42
+    },
+    {
+      "title": "Sullivan & Cromwell brings legal expertise into agreement review",
+      "url": "https://openai.com/index/sullivan-cromwell",
+      "signal_url": "https://sxf.si/signals/sullivan-cromwell-brings-legal-expertise-into-agreement-review-dd00c04/",
+      "source": "OpenAI",
+      "published": "2026-10-15T00:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
     },
     {
       "title": "HydraFusion updates and new Max option",
@@ -887,40 +921,6 @@
       "category": "Tools",
       "tags": [],
       "signal_score": 28
-    },
-    {
-      "title": "npm staged publishing now supports creating new packages",
-      "url": "https://github.blog/changelog/2026-10-02-npm-staged-publishing-now-supports-creating-new-packages",
-      "signal_url": "https://sxf.si/signals/npm-staged-publishing-now-supports-creating-new-packages-5ef20db/",
-      "source": "GitHub",
-      "published": "2026-10-02T19:05:17Z",
-      "category": "Tools",
-      "tags": [],
-      "signal_score": 28
-    },
-    {
-      "title": "Selected models in GitHub Copilot deprecated",
-      "url": "https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated",
-      "signal_url": "https://sxf.si/signals/selected-models-in-github-copilot-deprecated-d3c3f69/",
-      "source": "GitHub",
-      "published": "2026-10-02T18:24:19Z",
-      "category": "Tools",
-      "tags": [
-        "GitHub Copilot"
-      ],
-      "signal_score": 38
-    },
-    {
-      "title": "A model guide for the GPT-6 family",
-      "url": "https://openai.com/index/practical-guide-building-gpt-6",
-      "signal_url": "https://sxf.si/signals/a-model-guide-for-the-gpt-6-family-8e206c4/",
-      "source": "OpenAI",
-      "published": "2026-10-02T16:15:00Z",
-      "category": "Models",
-      "tags": [
-        "OpenAI"
-      ],
-      "signal_score": 46
     }
   ],
   "feed_errors": [],
@@ -933,17 +933,17 @@
     "publishing_configured": 5,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 118,
+      "OpenAI": 119,
       "Google AI": 22,
-      "Hugging Face": 42,
-      "GitHub": 81,
+      "Hugging Face": 43,
+      "GitHub": 82,
       "Google Research": 12
     },
     "current_counts": {
       "OpenAI": 24,
       "Google AI": 2,
-      "Hugging Face": 13,
-      "GitHub": 38,
+      "Hugging Face": 14,
+      "GitHub": 37,
       "Google Research": 3
     },
     "sources": {
@@ -951,10 +951,10 @@
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 1295,
-        "relevance_accepted_count": 1295,
-        "quality_accepted_count": 73,
-        "accepted_candidate_count": 73,
+        "parsed_candidate_count": 1296,
+        "relevance_accepted_count": 1296,
+        "quality_accepted_count": 74,
+        "accepted_candidate_count": 74,
         "rejected_candidate_count": 1222,
         "duplicate_count": 0,
         "age_rejection_count": 1222,
@@ -967,7 +967,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "Google AI": {
@@ -990,7 +990,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "Hugging Face": {
@@ -1006,14 +1006,14 @@
         "age_rejection_count": 860,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 13,
+        "publish_count": 14,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "GitHub": {
@@ -1029,14 +1029,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 38,
+        "publish_count": 37,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "Google Research": {
@@ -1059,7 +1059,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "Anthropic": {
@@ -1082,7 +1082,7 @@
         "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -1107,7 +1107,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "xAI": {
@@ -1130,7 +1130,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       },
       "Microsoft": {
@@ -1153,7 +1153,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-15T23:40:01.471761Z",
+        "last_successful_fetch": "2026-10-16T04:24:26.463488Z",
         "errors": []
       }
     },
