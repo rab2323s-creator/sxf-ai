@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from news_relevance import assess_news
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
@@ -2028,17 +2029,17 @@ HOMEPAGE_SIGNAL_LIMIT = 8
 HOMEPAGE_SOURCE_LIMIT = 2
 
 HOMEPAGE_AGENT_PATTERN = re.compile(
-    r"\\bagents?\\b|\\bagentic\\b|multi-agent|computer use|tool use|"
+    r"\bagents?\b|\bagentic\b|multi-agent|computer use|tool use|"
     r"agent memory|agent reliability|agent security|autonomous agent",
     re.I,
 )
 HOMEPAGE_MODEL_PATTERN = re.compile(
-    r"\\bmodels?\\b|gpt[- .]?\\d|claude|gemini|grok|llama|"
+    r"\bmodels?\b|gpt[- .]?\\d|claude|gemini|grok|llama|"
     r"reasoning model|context window|token pricing|multimodal model",
     re.I,
 )
 HOMEPAGE_RESEARCH_PATTERN = re.compile(
-    r"\\bresearch\\b|benchmark|evaluation|evals?|safety|alignment|"
+    r"\bresearch\b|benchmark|evaluation|evals?|safety|alignment|"
     r"paper|study|science|methodology|reproducib",
     re.I,
 )
@@ -2786,6 +2787,7 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
+        assess_news=assess_news,
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -11035,7 +11037,7 @@ def main():
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
     current = select_current_items(archive, cutoff)
     if not current:
-        current = archive[:MAX_ITEMS]
+        raise RuntimeError("No AI-relevant current signals: refusing to publish unrelated archive fallback")
 
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     archive_source_counts = {
