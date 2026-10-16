@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T11:31:08.660486Z",
+  "updated_at": "2026-10-16T16:44:03.434732Z",
   "retention_days": 14,
   "max_items_per_source": 50,
   "max_rejected_items_per_source": 20,
@@ -164,7 +164,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-15T20:48:12.474553Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -192,7 +192,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-14T21:44:54.765221Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -220,7 +220,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-14T11:59:05.840880Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -248,7 +248,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-08T18:52:55.882165Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -276,7 +276,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-08T15:36:59.910914Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -307,7 +307,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-06T23:23:54.525980Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -335,7 +335,7 @@
         "quality_score_below_threshold"
       ],
       "first_rejected_at": "2026-10-03T11:34:17.764136Z",
-      "last_rejected_at": "2026-10-16T11:30:14.067512Z",
+      "last_rejected_at": "2026-10-16T16:43:13.132205Z",
       "provenance": {
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter": "anthropic-sitemap",
@@ -352,15 +352,15 @@
     "archive_counts": {
       "OpenAI": 119,
       "Google AI": 22,
-      "Hugging Face": 43,
-      "GitHub": 82,
+      "Hugging Face": 44,
+      "GitHub": 84,
       "Google Research": 12
     },
     "current_counts": {
       "OpenAI": 24,
       "Google AI": 2,
-      "Hugging Face": 14,
-      "GitHub": 37,
+      "Hugging Face": 15,
+      "GitHub": 36,
       "Google Research": 3
     },
     "sources": {
@@ -370,11 +370,11 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1296,
         "relevance_accepted_count": 1296,
-        "quality_accepted_count": 73,
-        "accepted_candidate_count": 73,
-        "rejected_candidate_count": 1223,
+        "quality_accepted_count": 72,
+        "accepted_candidate_count": 72,
+        "rejected_candidate_count": 1224,
         "duplicate_count": 0,
-        "age_rejection_count": 1223,
+        "age_rejection_count": 1224,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 24,
@@ -384,7 +384,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "Google AI": {
@@ -407,30 +407,30 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "Hugging Face": {
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 879,
-        "relevance_accepted_count": 879,
-        "quality_accepted_count": 19,
-        "accepted_candidate_count": 19,
+        "parsed_candidate_count": 880,
+        "relevance_accepted_count": 880,
+        "quality_accepted_count": 20,
+        "accepted_candidate_count": 20,
         "rejected_candidate_count": 860,
         "duplicate_count": 0,
         "age_rejection_count": 860,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 14,
+        "publish_count": 15,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "GitHub": {
@@ -446,14 +446,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 37,
+        "publish_count": 36,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "Google Research": {
@@ -476,7 +476,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "Anthropic": {
@@ -499,7 +499,7 @@
         "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -524,7 +524,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "xAI": {
@@ -547,7 +547,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       },
       "Microsoft": {
@@ -570,7 +570,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-16T11:30:14.067512Z",
+        "last_successful_fetch": "2026-10-16T16:43:13.132205Z",
         "errors": []
       }
     },
