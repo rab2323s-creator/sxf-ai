@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
 from news_relevance import assess_news, primary_category, partition_news_rows
+from editorial_review import reviewed_category
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
@@ -1827,6 +1828,9 @@ def parse_date(value):
         return None
 
 def categorize(title, source):
+    correction = reviewed_category(title, source)
+    if correction:
+        return correction
     t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
 
     # Product and developer surfaces beat incidental model mentions.
@@ -2312,7 +2316,7 @@ def discoverable_news(items):
     """
     return [
         item for item in items
-        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", "")).status == "accept"
+        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
     ]
 
 
