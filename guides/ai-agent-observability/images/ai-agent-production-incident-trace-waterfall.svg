@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+<title id="title">AI agent production incident: trace waterfall and root cause</title><desc id="description">Original SXF synthetic incident example tracing a normal routing span, three timeouts on inventory lookup, repeated LLM decisions, budget escalation, blocked write step, and resolution by idempotency, retry caps and approval gates.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1e28"/><stop offset="1" stop-color="#080c11"/></linearGradient></defs><rect width="1600" height="900" fill="url(#bg)"/><g font-family="Arial,sans-serif">
+<text x="85" y="91" font-size="21" letter-spacing="4" font-weight="bold" fill="#c8ff4d">SXF / AI · INCIDENT FORENSICS</text><text x="85" y="152" font-size="56" font-weight="bold" fill="#f1f8f6">An agent run is a timeline, not one response.</text><text x="85" y="200" font-size="24" fill="#abbec4">Synthetic support-agent incident · illustration, not live telemetry</text>
+<rect x="85" y="249" width="1430" height="491" rx="25" fill="#101b26" stroke="#34474f" stroke-width="2"/>
+<text x="120" y="302" font-size="22" font-weight="bold" fill="#dbe7e9">Nested span</text><text x="980" y="302" font-size="18" fill="#9eb1bb">0 s</text><text x="1120" y="302" font-size="18" fill="#9eb1bb">2 s</text><text x="1260" y="302" font-size="18" fill="#9eb1bb">4 s</text><text x="1390" y="302" font-size="18" fill="#9eb1bb">6 s</text>
+<g stroke="#2c3c43" stroke-dasharray="5 7"><path d="M954 318V694M1094 318V694M1234 318V694M1374 318V694"/></g>
+<text x="120" y="355" font-size="22" fill="#e7eff1">invoke_agent · support</text><rect x="954" y="326" width="449" height="34" rx="9" fill="#6ad1ac"/><text x="1178" y="350" font-size="17" fill="#10271d" text-anchor="middle" font-weight="bold">6.4 s end-to-end</text>
+<text x="120" y="424" font-size="22" fill="#e7eff1">generation · plan</text><rect x="974" y="393" width="72" height="35" rx="8" fill="#8ab9d4"/>
+<text x="120" y="493" font-size="22" fill="#ffe9d2">execute_tool · inventory</text><rect x="1047" y="462" width="84" height="35" rx="8" fill="#ffad6e"/><rect x="1140" y="462" width="82" height="35" rx="8" fill="#ffad6e"/><rect x="1231" y="462" width="86" height="35" rx="8" fill="#ffad6e"/><text x="1374" y="487" font-size="17" fill="#ffc59a">3 timeouts</text>
+<text x="120" y="562" font-size="22" fill="#e7eff1">generation · recovery</text><rect x="1320" y="531" width="56" height="35" rx="8" fill="#8ab9d4"/>
+<text x="120" y="631" font-size="22" fill="#d4ffb7">policy · approval check</text><rect x="1379" y="600" width="24" height="35" rx="8" fill="#c8ff4d"/>
+<text x="120" y="698" font-size="22" fill="#fae8b9">refund_write · blocked</text><rect x="1380" y="670" width="23" height="25" rx="6" fill="#ffe08d"/>
+<path d="M1378 669L1405 698M1405 669L1378 698" stroke="#9d6434" stroke-width="4"/>
+<rect x="84" y="778" width="1433" height="79" rx="17" fill="#17251e" stroke="#7ea482"/>
+<text x="111" y="811" font-size="25" font-weight="bold" fill="#d1ff7d">CAUSE</text><text x="220" y="811" font-size="24" fill="#e2ede3">Tool timeout + unbounded retry policy + escalating cost</text>
+<text x="111" y="844" font-size="21" font-weight="bold" fill="#84eed4">FIX</text><text x="220" y="844" font-size="21" fill="#d0e8df">Backoff + retry cap + circuit breaker + server-owned authorization</text>
+</g></svg>
