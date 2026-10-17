@@ -7725,6 +7725,17 @@ def guides_index_html(items, current_items):
             "read_time": "18 min",
         },
         {
+            "href": "/guides/ai-agent-observability/",
+            "category": "Agents · Observability · Production",
+            "categories": ["agents", "research", "security", "tools"],
+            "kicker": "AGENT OPERATIONS · MONITORING & TRACING",
+            "title": "AI Agent Observability: Tracing, Monitoring, Debugging & Production Incident Response",
+            "description": "Instrument AI agents with OpenTelemetry, trace tool calls, monitor cost and latency, investigate production failures and protect private telemetry.",
+            "meta": "Agent observability · OpenTelemetry · Tracing · Incidents",
+            "updated": "Oct 17, 2026",
+            "read_time": "25 min",
+        },
+        {
             "href": "/guides/ai-agent-evaluation-checklist/",
             "category": "Agents · Evaluation · Reliability",
             "categories": ["agents", "research", "security", "tools"],
