@@ -108,6 +108,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_image_entry(f"{BASE_URL}/guides/best-embedding-models-for-rag/", "2026-10-15", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/embedding-spaces-gemini-cohere.svg", f"{BASE_URL}/guides/best-embedding-models-for-rag/images/production-rag-pipeline.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/rag-vs-fine-tuning-vs-long-context/", "2026-10-17", f"{BASE_URL}/guides/rag-vs-fine-tuning-vs-long-context/images/rag-fine-tuning-long-context-architecture.svg", f"{BASE_URL}/guides/rag-vs-fine-tuning-vs-long-context/images/rag-vs-fine-tuning-decision-tree.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/llm-quantization-explained/", "2026-10-17", f"{BASE_URL}/guides/llm-quantization-explained/images/llm-quantization-4bit-vs-8bit-weights.svg", f"{BASE_URL}/guides/llm-quantization-explained/images/llm-vram-kv-cache-memory-budget.svg"),
+        sitemap_image_entry(f"{BASE_URL}/guides/ai-agent-observability/", "2026-10-17", f"{BASE_URL}/guides/ai-agent-observability/images/ai-agent-observability-tracing-pipeline.svg", f"{BASE_URL}/guides/ai-agent-observability/images/ai-agent-production-incident-trace-waterfall.svg"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-evaluation-checklist/", "2026-10-12"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-cost/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
