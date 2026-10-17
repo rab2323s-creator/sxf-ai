@@ -163,7 +163,11 @@ def select_current_items(archive, cutoff, context: SignalProcessingContext):
         published = parse_date(item.get("published", ""))
         if published is None or published < cutoff:
             continue
-        if item.get("relevance_status", "accept") != "accept":
+        if context.assess_news is not None:
+            decision = context.assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""))
+            if decision.status != "accept":
+                continue
+        elif item.get("relevance_status", "accept") != "accept":
             continue
 
         source = item.get("source", "")
