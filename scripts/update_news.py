@@ -7692,6 +7692,17 @@ def guides_index_html(items, current_items):
             "read_time": "15 min",
         },
         {
+            "href": "/guides/rag-vs-fine-tuning-vs-long-context/",
+            "category": "Models · RAG · AI Architecture",
+            "categories": ["models", "research", "tools", "coding"],
+            "kicker": "RAG VS FINE-TUNING · ARCHITECTURE REFERENCE",
+            "title": "RAG vs Fine-Tuning vs Long Context: Which AI Architecture Should You Use?",
+            "description": "Compare retrieval, training and long context with original diagrams, use-case matrices, privacy and cost decisions, a worksheet and shared evaluation cases.",
+            "meta": "RAG · Fine-tuning · Long context · Architecture",
+            "updated": "Oct 17, 2026",
+            "read_time": "23 min",
+        },
+        {
             "href": "/guides/best-embedding-models-for-rag/",
             "category": "Models · Retrieval · RAG",
             "categories": ["models", "research", "tools", "coding"],
