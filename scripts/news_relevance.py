@@ -2,6 +2,7 @@
 from __future__ import annotations
 import re
 from dataclasses import dataclass
+from editorial_review import REVIEWED_NEWS
 
 
 @dataclass(frozen=True)
@@ -61,9 +62,12 @@ def substantive_summary(value: str) -> str:
     return "" if BOILERPLATE.fullmatch(summary) else summary
 
 
-def assess_news(title: str, summary: str, source: str) -> NewsDecision:
+def assess_news(title: str, summary: str, source: str, url: str = "") -> NewsDecision:
     """Source-specific, auditable classification. Review is not auto-accepted."""
     title = (title or "").strip()
+    reviewed = REVIEWED_NEWS.get((url or "").strip())
+    if reviewed and reviewed["title"] == title and reviewed["source"] == (source or "").strip():
+        return NewsDecision(reviewed["status"], "individually_reviewed_source")
     summary = substantive_summary(summary)
     source = (source or "").strip()
     if not title or not source:
@@ -132,7 +136,7 @@ def partition_news_rows(rows):
     """
     approved, review, rejected = [], [], []
     for item in rows:
-        decision = assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""))
+        decision = assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", ""))
         if decision.status == "accept":
             approved.append(item)
         elif decision.status == "review":
