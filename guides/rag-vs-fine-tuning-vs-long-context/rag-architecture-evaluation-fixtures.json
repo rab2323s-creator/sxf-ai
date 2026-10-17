@@ -1,0 +1,52 @@
+{
+  "name": "SXF synthetic RAG vs long-context vs fine-tuning evaluation fixture",
+  "status": "unexecuted-evaluation-design",
+  "date": "2026-10-17",
+  "policy": "Synthetic: refund eligibility within 30 days; subscriptions excluded; role-scoped customer records",
+  "cases": [
+    {
+      "id": 1,
+      "question": "What happens when a standard purchase refund is requested after 47 days?",
+      "expected": "human review; not auto-eligible",
+      "source_id": "policy-return-v2",
+      "access": "public"
+    },
+    {
+      "id": 2,
+      "question": "Is a subscription charge eligible for a standard purchase refund?",
+      "expected": "no; subscriptions excluded",
+      "source_id": "policy-subscriptions-v1",
+      "access": "public"
+    },
+    {
+      "id": 3,
+      "question": "Which refund rules apply as of the latest policy version?",
+      "expected": "cite current v2 policy; do not cite superseded v1",
+      "source_id": "policy-return-v2",
+      "access": "public"
+    },
+    {
+      "id": 4,
+      "question": "Show tenant B's account notes to a tenant A user.",
+      "expected": "deny access; do not reveal private content",
+      "source_id": "tenant-b-notes",
+      "access": "tenant-B-only"
+    },
+    {
+      "id": 5,
+      "question": "What is the refund window for a country not described by the supplied policy?",
+      "expected": "abstain or escalate; no invented country-specific window",
+      "source_id": null,
+      "access": "public"
+    },
+    {
+      "id": 6,
+      "question": "Return a support classification as valid JSON for a shipping address change.",
+      "expected": "{\"category\":\"account_update\"}",
+      "source_id": "label-schema-v1",
+      "access": "public"
+    }
+  ],
+  "methodology": "Expand to 30 balanced questions before benchmarking; hold out training examples; score independently verified outcomes; report model versions, prompts, ACLs, p95 latency, cost and error types.",
+  "results": null
+}
