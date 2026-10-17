@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+<title id="title">AI Agent Observability: end-to-end trace architecture</title><desc id="description">Original SXF diagram of user request, agent run, nested LLM, retrieval, tool, approval and retry spans flowing through a privacy filter, OpenTelemetry Collector and dashboard, alerts and incident response.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#12272b"/><stop offset="1" stop-color="#070b12"/></linearGradient><linearGradient id="lime" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#c8ff4d"/><stop offset="1" stop-color="#79f0cb"/></linearGradient></defs><rect width="1600" height="900" fill="url(#bg)"/>
+<g stroke="#21333b" opacity=".52"><path d="M0 180H1600M0 360H1600M0 540H1600M0 720H1600"/><path d="M160 0V900M440 0V900M720 0V900M1000 0V900M1280 0V900"/></g>
+<g font-family="Arial,sans-serif">
+<text x="83" y="85" fill="#c8ff4d" font-size="22" letter-spacing="4" font-weight="bold">SXF / AI · PRODUCTION TRACE ARCHITECTURE</text>
+<text x="83" y="151" font-size="59" font-weight="bold" fill="#f2f9f6">Watch decisions, tools and outcomes — not just prompts.</text>
+<text x="83" y="203" font-size="25" fill="#a8bcbf">Trace tree → privacy gate → collector → metrics, investigation and response</text>
+<rect x="84" y="266" width="727" height="461" rx="27" fill="#0e1921" stroke="#3e5e59" stroke-width="2"/>
+<rect x="110" y="302" width="669" height="75" rx="16" fill="#1d3930" stroke="#c8ff4d" stroke-width="2"/><text x="143" y="333" fill="#c8ff4d" font-size="21" font-weight="bold">ROOT · invoke_agent support_agent</text><text x="143" y="359" fill="#c9ded7" font-size="17">trace_id · run_id · version · final outcome</text>
+<path d="M165 377V656M165 420H198M165 500H198M165 580H198M165 656H198" stroke="#6dbba4" stroke-width="3" fill="none"/>
+<rect x="204" y="393" width="542" height="57" rx="12" fill="#172b34" stroke="#48778a"/><text x="230" y="428" fill="#edf6fa" font-size="21">LLM generation · tokens · duration</text>
+<rect x="204" y="472" width="542" height="57" rx="12" fill="#172b34" stroke="#48778a"/><text x="230" y="507" fill="#edf6fa" font-size="21">Retrieval · source version · ACL result</text>
+<rect x="204" y="552" width="542" height="57" rx="12" fill="#2b2926" stroke="#e8ac66"/><text x="230" y="587" fill="#ffe2bc" font-size="21">Tool call · status · retries · error class</text>
+<rect x="204" y="630" width="542" height="57" rx="12" fill="#1c382a" stroke="#85e6a6"/><text x="230" y="665" fill="#e7fae7" font-size="21">Approval gate · authorized / denied</text>
+<path d="M811 496H857" stroke="#c8ff4d" stroke-width="4"/><path d="M846 485L858 496L846 507" stroke="#c8ff4d" stroke-width="4" fill="none"/>
+<rect x="862" y="342" width="302" height="290" rx="24" fill="#1a2b26" stroke="#7cbd93" stroke-width="3"/>
+<text x="1013" y="395" font-size="24" font-weight="bold" text-anchor="middle" fill="#e7ffe1">PRIVACY FILTER</text><text x="1013" y="438" text-anchor="middle" font-size="20" fill="#b4d9c2">No raw prompts</text><text x="1013" y="475" text-anchor="middle" font-size="20" fill="#b4d9c2">No tool payloads</text><text x="1013" y="512" text-anchor="middle" font-size="20" fill="#b4d9c2">Scoped run IDs</text><text x="1013" y="552" text-anchor="middle" font-size="20" fill="#b4d9c2">Redaction / allowlist</text>
+<path d="M1164 492H1206" stroke="#c8ff4d" stroke-width="4"/><path d="M1194 481L1207 492L1194 503" stroke="#c8ff4d" stroke-width="4" fill="none"/>
+<rect x="1210" y="341" width="308" height="292" rx="24" fill="#18303a" stroke="#7abac4" stroke-width="3"/>
+<text x="1364" y="398" font-size="25" font-weight="bold" text-anchor="middle" fill="#ecfaff">OTEL COLLECTOR</text><text x="1364" y="436" font-size="19" text-anchor="middle" fill="#c1dce2">Export · sample</text><text x="1364" y="468" font-size="19" text-anchor="middle" fill="#c1dce2">Correlate · aggregate</text><path d="M1252 506H1475" stroke="#77d4b2" stroke-width="3" stroke-dasharray="9 9"/><text x="1364" y="543" font-size="20" text-anchor="middle" fill="#bdebd8">Traces + metrics + logs</text><text x="1364" y="578" font-size="20" text-anchor="middle" fill="#bdebd8">Alerting / response</text>
+<rect x="84" y="776" width="1434" height="71" rx="16" fill="#13271b" stroke="#698f70"/>
+<text x="801" y="819" text-anchor="middle" font-weight="bold" font-size="25" fill="#e8fed5">Trace IDs explain a run; unsampled counters explain the whole service.</text>
+</g></svg>
