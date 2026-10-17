@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from news_relevance import assess_news, primary_category, partition_news_rows
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
@@ -1844,7 +1845,7 @@ def categorize(title, source):
         return "Models"
 
     source_config = SOURCE_BY_NAME.get(source, {})
-    return source_config.get("default_category", "Tools")
+    return primary_category(title, source, default=source_config.get("default_category", "Tools"))
 
 def classify_tags(title, source, category):
     t = title.replace("‑", "-").replace("–", "-").replace("—", "-").lower()
@@ -2028,17 +2029,17 @@ HOMEPAGE_SIGNAL_LIMIT = 8
 HOMEPAGE_SOURCE_LIMIT = 2
 
 HOMEPAGE_AGENT_PATTERN = re.compile(
-    r"\\bagents?\\b|\\bagentic\\b|multi-agent|computer use|tool use|"
+    r"\bagents?\b|\bagentic\b|multi-agent|computer use|tool use|"
     r"agent memory|agent reliability|agent security|autonomous agent",
     re.I,
 )
 HOMEPAGE_MODEL_PATTERN = re.compile(
-    r"\\bmodels?\\b|gpt[- .]?\\d|claude|gemini|grok|llama|"
+    r"\bmodels?\b|gpt[- .]?\\d|claude|gemini|grok|llama|"
     r"reasoning model|context window|token pricing|multimodal model",
     re.I,
 )
 HOMEPAGE_RESEARCH_PATTERN = re.compile(
-    r"\\bresearch\\b|benchmark|evaluation|evals?|safety|alignment|"
+    r"\bresearch\b|benchmark|evaluation|evals?|safety|alignment|"
     r"paper|study|science|methodology|reproducib",
     re.I,
 )
@@ -2302,10 +2303,23 @@ def section_cards_html(items):
     """Compatibility entrypoint for category section cards."""
     return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
+def discoverable_news(items):
+    """Keep only editorially accepted items in public discovery surfaces.
+
+    This is computed from source evidence, including legacy snapshots that do
+    not yet carry a relevance_status field. The complete archive is retained
+    for existing URLs and the independently reviewed SEO policy.
+    """
+    return [
+        item for item in items
+        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", "")).status == "accept"
+    ]
+
+
 def open_source_current_signals(archive, updated_at):
     topic = next(topic for topic in TOPICS if topic["slug"] == "open-source-ai")
     return select_open_source_signals(
-        archive, as_of=parse_date(updated_at), days=MAX_AGE_DAYS,
+        discoverable_news(archive), as_of=parse_date(updated_at), days=MAX_AGE_DAYS,
         matches_topic=lambda item: topic_matches(item, topic),
         source_by_name=SOURCE_BY_NAME, parse_date=parse_date,
     )
@@ -2786,6 +2800,7 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
+        assess_news=assess_news,
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -10593,6 +10608,10 @@ def superintelligence_hub_with_explosion_link(items, current_items):
 
 
 def build_discovery_pages(items, current_items):
+    # Keep all historic signal route files (and their current SEO metadata).
+    # Curate every *listing and recommendation* from approved news only.
+    legacy_items = items
+    items = discoverable_news(items)
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
     BRIEF_DIR.mkdir(parents=True, exist_ok=True)
@@ -10659,8 +10678,8 @@ def build_discovery_pages(items, current_items):
     super_agents_guide_path = GUIDES_DIR / "ai-super-agents"
     super_agents_guide_path.mkdir(parents=True, exist_ok=True)
     (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
-    (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
-    for item in items:
+    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=legacy_items), encoding="utf-8")
+    for item in legacy_items:
         path = SIGNALS_DIR / item["signal_slug"]
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
@@ -10780,6 +10799,11 @@ def select_current_items(archive, cutoff):
 
 def render_site(archive, current):
     """Rebuild HTML, JSON-LD and sitemap from in-memory prepared signal records."""
+    # In particular, render-only builds may read old snapshots without
+    # relevance_status: do not allow those rows to leak into public surfaces.
+    current = discoverable_news(current)
+    if not current:
+        raise RuntimeError("No editorially approved current news; refusing to render")
     update_index(current)
     update_section_pages(current, archive)
     build_discovery_pages(archive, current)
@@ -11028,6 +11052,14 @@ def main():
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
 
+    # Reject noise BEFORE adding new articles to the archive or sitemap.
+    # Previously published URLs are preserved separately as legacy records.
+    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming)
+    print(
+        f"Editorial ingestion gate: accepted={len(incoming)}, "
+        f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
+    )
+
     archive = merge_archive(existing, incoming)
     if not archive:
         raise RuntimeError("No valid signals available after archive merge")
@@ -11035,7 +11067,7 @@ def main():
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
     current = select_current_items(archive, cutoff)
     if not current:
-        current = archive[:MAX_ITEMS]
+        raise RuntimeError("No AI-relevant current signals: refusing to publish unrelated archive fallback")
 
     now_iso = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     archive_source_counts = {

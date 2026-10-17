@@ -1351,7 +1351,15 @@ def validate_topic_relevance(archive):
     if topic_matches(openai_sample, google_topic):
         fail("source-owned Google AI topic must not match an OpenAI signal")
 
-    groups = topic_groups(archive.get("items", []))
+    # Topic listings intentionally exclude news rejected by the editorial
+    # relevance policy. Archived article URLs and their SEO settings remain
+    # intact; validate public discovery against that curated inventory.
+    from news_relevance import assess_news
+    public_archive = [
+        item for item in archive.get("items", [])
+        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", "")).status == "accept"
+    ]
+    groups = topic_groups(public_archive)
     expected_slugs = {topic["slug"] for topic in TOPICS}
     missing = expected_slugs - set(groups)
     if missing:
