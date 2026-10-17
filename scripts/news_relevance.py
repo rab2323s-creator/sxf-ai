@@ -122,3 +122,21 @@ def primary_category(title: str, source: str, summary: str = "",
     ):
         return "Models"
     return default if default in {"Tools", "Models", "Research", "Open Source"} else "Tools"
+
+
+def partition_news_rows(rows):
+    """Split ingestion into approved, human-review, and rejected candidates.
+
+    Neither review nor rejected rows may enter the public archive as new pages.
+    Legacy archive records are deliberately not modified by this helper.
+    """
+    approved, review, rejected = [], [], []
+    for item in rows:
+        decision = assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""))
+        if decision.status == "accept":
+            approved.append(item)
+        elif decision.status == "review":
+            review.append(item)
+        else:
+            rejected.append(item)
+    return approved, review, rejected
