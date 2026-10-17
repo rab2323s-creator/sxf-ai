@@ -48,7 +48,7 @@ def prepare_items(items, context: SignalProcessingContext):
         row = dict(item)
         row["summary"] = clean_summary(row.get("summary", ""))
         if context.assess_news is not None:
-            decision = context.assess_news(row.get("title", ""), row["summary"], row.get("source", ""))
+            decision = context.assess_news(row.get("title", ""), row["summary"], row.get("source", ""), row.get("url", ""))
             row["relevance_status"] = decision.status
             row["relevance_reason"] = decision.reason
         row["category"] = categorize(row["title"], row["source"])
@@ -164,7 +164,7 @@ def select_current_items(archive, cutoff, context: SignalProcessingContext):
         if published is None or published < cutoff:
             continue
         if context.assess_news is not None:
-            decision = context.assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""))
+            decision = context.assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", ""))
             if decision.status != "accept":
                 continue
         elif item.get("relevance_status", "accept") != "accept":

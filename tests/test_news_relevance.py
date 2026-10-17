@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from news_relevance import assess_news, primary_category, substantive_summary, partition_news_rows
+from editorial_review import REVIEWED_NEWS, CATEGORY_CORRECTIONS, reviewed_category
 
 class NewsRelevanceTests(unittest.TestCase):
     def test_reject_unrelated_github(self):
@@ -99,6 +100,26 @@ class NewsRelevanceTests(unittest.TestCase):
         self.assertEqual([x["url"] for x in review], ["https://x.test/review"])
         self.assertEqual([x["url"] for x in rejected], ["https://x.test/noise"])
         self.assertEqual(len(rows), 3)
+
+    def test_all_eighteen_reviewed_records(self):
+        self.assertEqual(len(REVIEWED_NEWS), 18)
+        self.assertEqual(sum(x["status"] == "accept" for x in REVIEWED_NEWS.values()), 16)
+        self.assertEqual(sum(x["status"] == "reject" for x in REVIEWED_NEWS.values()), 2)
+        for url, item in REVIEWED_NEWS.items():
+            with self.subTest(url=url):
+                actual = assess_news(item["title"], "", item["source"], url)
+                self.assertEqual(actual.status, item["status"])
+                self.assertEqual(actual.reason, "individually_reviewed_source")
+                if item["status"] == "accept":
+                    self.assertEqual(reviewed_category(item["title"], item["source"]), item["category"])
+                self.assertNotEqual(assess_news(item["title"] + " changed", "", item["source"], url).reason,
+                                    "individually_reviewed_source")
+
+    def test_manual_overrides_do_not_admit_unrelated_news(self):
+        self.assertEqual(assess_news("Open source license compliance generally available", "", "GitHub").status, "reject")
+        self.assertEqual(assess_news("Xcode 27 runner image generally available", "", "GitHub").status, "reject")
+        self.assertEqual(len(CATEGORY_CORRECTIONS), 5)
+        self.assertEqual(reviewed_category("Granite Switch 4.1: Chat, Decisions, and Speech from One Endpoint", "Hugging Face"), "Models")
 
     def test_summary_boilerplate(self):
         self.assertEqual(substantive_summary("We’re on a journey to advance and democratize artificial intelligence through open source and open science."), "")

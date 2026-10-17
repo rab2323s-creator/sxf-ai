@@ -1357,7 +1357,7 @@ def validate_topic_relevance(archive):
     from news_relevance import assess_news
     public_archive = [
         item for item in archive.get("items", [])
-        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", "")).status == "accept"
+        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
     ]
     groups = topic_groups(public_archive)
     expected_slugs = {topic["slug"] for topic in TOPICS}
