@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T00:27:31.476735Z",
+  "updated_at": "2026-10-17T01:04:14.710412Z",
   "items": [
     {
       "title": "How Itaú is building generative AI for its entire customer base",
@@ -13,7 +13,7 @@
       "summary": "With ia.i, a conversational interface, and the IARA governance platform, Itaú is applying its AI First strategy to customers and employees — in one of Brazil’s most regulated sectors.",
       "first_seen": "2026-10-16T23:41:21.947330Z",
       "modified_at": "2026-10-16T23:41:21.947330Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-ita-is-building-generative-ai-for-its-entire-customer-base-65442e7",
       "signal_url": "https://sxf.si/signals/how-ita-is-building-generative-ai-for-its-entire-customer-base-65442e7/",
       "signal_score": 28,
@@ -43,7 +43,7 @@
       "summary": "General Science",
       "first_seen": "2026-10-16T23:41:21.947330Z",
       "modified_at": "2026-10-16T23:41:21.947330Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3",
       "signal_url": "https://sxf.si/signals/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3/",
       "signal_score": 41,
@@ -170,23 +170,25 @@
       "url": "https://huggingface.co/blog/nvidia/scaling-indic-pretraining",
       "source": "Hugging Face",
       "published": "2026-10-16T01:44:47Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [],
       "summary": "",
       "first_seen": "2026-10-16T04:25:12.844856Z",
-      "modified_at": "2026-10-16T04:25:12.844856Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "scaling-indic-pretraining-2-8-trillion-tokens-and-an-open-data-generat-ba4e733",
       "signal_url": "https://sxf.si/signals/scaling-indic-pretraining-2-8-trillion-tokens-and-an-open-data-generat-ba4e733/",
-      "signal_score": 28,
+      "signal_score": 31,
       "score_factors": [],
-      "seo_quality_score": 3,
-      "seo_quality_factors": [],
+      "seo_quality_score": 11,
+      "seo_quality_factors": [
+        "durable-intelligence-layer"
+      ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published an update titled “Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline.” SXF classifies it under Tools and preserves the direct path to the original publication for the complete context.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "what_changed": "Hugging Face published an update titled “Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline.” SXF classifies it under Research and preserves the direct path to the original publication for the complete context.",
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "relevance_status": "accept",
       "relevance_reason": "ai_community_topic"
@@ -196,31 +198,32 @@
       "url": "https://huggingface.co/blog/reflection-beam",
       "source": "Hugging Face",
       "published": "2026-10-16T00:00:00Z",
-      "category": "Tools",
+      "category": "Models",
       "tags": [],
       "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
       "summary_origin": "source-meta",
       "first_seen": "2026-10-16T16:44:03.388172Z",
-      "modified_at": "2026-10-16T16:44:03.388172Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
-      "signal_score": 42,
+      "signal_score": 46,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 33,
+      "seo_quality_score": 44,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Stack Overflow for Agents triples signups with ChatGPT plugin",
@@ -235,7 +238,7 @@
       "summary": "Two engineers shipped Stack Overflow for Agents in a few weeks with Codex, and its ChatGPT plugin helped drive up to 10× growth in agent creation.",
       "first_seen": "2026-10-16T23:41:21.947330Z",
       "modified_at": "2026-10-16T23:41:21.947330Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "stack-overflow-for-agents-triples-signups-with-chatgpt-plugin-9db4940",
       "signal_url": "https://sxf.si/signals/stack-overflow-for-agents-triples-signups-with-chatgpt-plugin-9db4940/",
       "signal_score": 38,
@@ -261,24 +264,26 @@
       "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1",
       "source": "Hugging Face",
       "published": "2026-10-15T20:34:01Z",
-      "category": "Tools",
+      "category": "Models",
       "tags": [],
       "summary": "A Blog post by IBM Granite on Hugging Face",
       "summary_origin": "source-meta",
       "first_seen": "2026-10-15T20:48:50.684336Z",
-      "modified_at": "2026-10-15T20:48:50.684336Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "granite-switch-4-1-chat-decisions-and-speech-from-one-endpoint-a01e022",
       "signal_url": "https://sxf.si/signals/granite-switch-4-1-chat-decisions-and-speech-from-one-endpoint-a01e022/",
-      "signal_score": 28,
+      "signal_score": 32,
       "score_factors": [],
-      "seo_quality_score": 3,
-      "seo_quality_factors": [],
+      "seo_quality_score": 11,
+      "seo_quality_factors": [
+        "durable-intelligence-layer"
+      ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "A Blog post by IBM Granite on Hugging Face",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
       },
       "relevance_status": "accept",
       "relevance_reason": "ai_community_topic"
@@ -326,7 +331,7 @@
       "summary": "We will deprecate the following models across all GitHub Copilot experiences (including Copilot Chat, inline edits, ask and agent modes, and code completions) on November 16th, 2026: Model Deprecation date…",
       "first_seen": "2026-10-15T20:48:50.684336Z",
       "modified_at": "2026-10-15T20:48:50.684336Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "upcoming-deprecation-of-selected-github-copilot-models-in-mid-november-818ecaf",
       "signal_url": "https://sxf.si/signals/upcoming-deprecation-of-selected-github-copilot-models-in-mid-november-818ecaf/",
       "signal_score": 38,
@@ -360,7 +365,7 @@
       "summary": "Introducing the Rosalind Academic Plan, offering eligible academic labs sponsored access to GPT-Rosalind and tools to advance life sciences research.",
       "first_seen": "2026-10-15T22:19:50.067445Z",
       "modified_at": "2026-10-15T22:19:50.067445Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "bringing-gpt-rosalind-to-academic-research-labs-a72d1e4",
       "signal_url": "https://sxf.si/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
       "signal_score": 43,
@@ -392,7 +397,7 @@
       "summary": "Code scanning AI Scan for pull requests is now generally available. It complements CodeQL by finding vulnerabilities in pull request changes for languages and frameworks that CodeQL does not currently…",
       "first_seen": "2026-10-15T17:06:37.389035Z",
       "modified_at": "2026-10-15T17:06:37.389035Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "ai-scan-for-pull-requests-generally-available-39ed69c",
       "signal_url": "https://sxf.si/signals/ai-scan-for-pull-requests-generally-available-39ed69c/",
       "signal_score": 28,
@@ -424,7 +429,7 @@
       "summary": "Agentic autofix for code scanning alerts is now generally available. It remediates alerts by working across your codebase the way a developer would: it explores relevant files, proposes a fix,…",
       "first_seen": "2026-10-15T14:38:03.862839Z",
       "modified_at": "2026-10-15T14:38:03.862839Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "agentic-autofix-for-code-scanning-alerts-general-availability-b7ac465",
       "signal_url": "https://sxf.si/signals/agentic-autofix-for-code-scanning-alerts-general-availability-b7ac465/",
       "signal_score": 38,
@@ -490,7 +495,7 @@
       "summary": "Celebrate Teachers’ Day with AI for Educators in Brazilian Portuguese and see how Study Mode can help teachers support active, step-by-step learning.",
       "first_seen": "2026-10-15T14:38:03.862839Z",
       "modified_at": "2026-10-15T14:38:03.862839Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "teaching-students-to-think-and-learn-through-questions-fa14b8f",
       "signal_url": "https://sxf.si/signals/teaching-students-to-think-and-learn-through-questions-fa14b8f/",
       "signal_score": 28,
@@ -553,7 +558,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-15T17:06:37.389035Z",
       "modified_at": "2026-10-15T17:06:37.389035Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "welcome-flux-3-image-klein-in-diffusers-3733c75",
       "signal_url": "https://sxf.si/signals/welcome-flux-3-image-klein-in-diffusers-3733c75/",
       "signal_score": 28,
@@ -586,7 +591,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-15T20:48:50.684336Z",
       "modified_at": "2026-10-17T00:27:31.425487Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac",
       "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
       "signal_score": 44,
@@ -620,7 +625,7 @@
       "summary": "In collaboration with OpenAI, Sullivan & Cromwell developed Agreement Analyzer, an AI tool for identifying issues in a draft agreement.",
       "first_seen": "2026-10-16T04:25:12.844856Z",
       "modified_at": "2026-10-16T04:25:12.844856Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "sullivan-cromwell-brings-legal-expertise-into-agreement-review-dd00c04",
       "signal_url": "https://sxf.si/signals/sullivan-cromwell-brings-legal-expertise-into-agreement-review-dd00c04/",
       "signal_score": 28,
@@ -648,7 +653,7 @@
       "summary": "HydraFusion has an updated model pool, improved orchestration workflows, and introduces HydraFusion Max. Both HydraFusion and HydraFusion Max are available across VS Code, the GitHub Copilot app, and GitHub Copilot…",
       "first_seen": "2026-10-14T21:45:31.174258Z",
       "modified_at": "2026-10-14T21:45:31.174258Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "hydrafusion-updates-and-new-max-option-116eea7",
       "signal_url": "https://sxf.si/signals/hydrafusion-updates-and-new-max-option-116eea7/",
       "signal_score": 28,
@@ -678,7 +683,7 @@
       "summary": "Earth AI",
       "first_seen": "2026-10-14T17:16:51.387628Z",
       "modified_at": "2026-10-14T21:45:31.174258Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "putting-earth-ai-to-work-geospatial-agents-for-our-planet-s-biggest-ch-93dc9e9",
       "signal_url": "https://sxf.si/signals/putting-earth-ai-to-work-geospatial-agents-for-our-planet-s-biggest-ch-93dc9e9/",
       "signal_score": 41,
@@ -704,26 +709,28 @@
       "url": "https://huggingface.co/blog/allenai/hiro-acev2",
       "source": "Hugging Face",
       "published": "2026-10-14T16:12:42Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [],
       "summary": "",
       "first_seen": "2026-10-14T16:14:03.826400Z",
-      "modified_at": "2026-10-14T16:14:03.826400Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "hiro-acev2-simulating-extreme-weather-at-3-km-resolution-for-a-fractio-672ebf7",
       "signal_url": "https://sxf.si/signals/hiro-acev2-simulating-extreme-weather-at-3-km-resolution-for-a-fractio-672ebf7/",
-      "signal_score": 28,
+      "signal_score": 31,
       "score_factors": [],
-      "seo_quality_score": 3,
-      "seo_quality_factors": [],
+      "seo_quality_score": 11,
+      "seo_quality_factors": [
+        "durable-intelligence-layer"
+      ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published an update titled “HiRO-ACEv2: Simulating extreme weather at 3 km resolution for a fraction of the cost.” SXF classifies it under Tools and preserves the direct path to the original publication for the complete context.",
+        "what_changed": "Hugging Face published an update titled “HiRO-ACEv2: Simulating extreme weather at 3 km resolution for a fraction of the cost.” SXF classifies it under Research and preserves the direct path to the original publication for the complete context.",
         "why_it_matters": "Cost changes can alter which workloads are economical to run at scale, especially for high-volume or agentic use. The meaningful signal is not the headline price alone but how the new rates interact with caching, long context, tool use, and production volume.",
         "what_to_verify": "Check the billing unit, context thresholds, cached-input treatment, tool or service charges, regional differences, and the date the new pricing takes effect."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "GitHub Actions workflow lockfiles in public preview",
@@ -767,7 +774,7 @@
       "summary": "See how Amp pushes the frontier of what agents can do with GPT-6 Astra, Ultrafast, GPT-Live-1, and Sign in with ChatGPT.",
       "first_seen": "2026-10-14T17:16:51.387628Z",
       "modified_at": "2026-10-14T17:16:51.387628Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "amp-puts-ai-agents-to-work-beyond-code-with-openai-models-a0e0fec",
       "signal_url": "https://sxf.si/signals/amp-puts-ai-agents-to-work-beyond-code-with-openai-models-a0e0fec/",
       "signal_score": 38,
@@ -800,7 +807,7 @@
       "summary": "With OpenAI Daybreak, SentinelOne cuts weeks of malware analysis to hours, creating capacity to investigate more threats.",
       "first_seen": "2026-10-14T21:45:31.174258Z",
       "modified_at": "2026-10-14T21:45:31.174258Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "sentinelone-cuts-malware-analysis-from-weeks-to-hours-24cc989",
       "signal_url": "https://sxf.si/signals/sentinelone-cuts-malware-analysis-from-weeks-to-hours-24cc989/",
       "signal_score": 28,
@@ -832,7 +839,7 @@
       "summary": "With GPT-6 Astra and GPT-6.1 Sol, Codex, and Daybreak for cybersecurity, this AI lab builds agents that focus for days and improve with use.",
       "first_seen": "2026-10-14T16:14:03.826400Z",
       "modified_at": "2026-10-14T16:14:03.826400Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-third-moment-research-runs-10-000-agents-for-36-hours-e181547",
       "signal_url": "https://sxf.si/signals/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/",
       "signal_score": 53,
@@ -868,7 +875,7 @@
       "summary": "Block is building AI-powered security with OpenAI. Its security team investigates threats faster and proposes patches in minutes.",
       "first_seen": "2026-10-14T23:34:49.037946Z",
       "modified_at": "2026-10-14T23:34:49.037946Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-block-is-building-ai-powered-security-with-openai-technology-7d10f0d",
       "signal_url": "https://sxf.si/signals/how-block-is-building-ai-powered-security-with-openai-technology-7d10f0d/",
       "signal_score": 28,
@@ -900,7 +907,7 @@
       "summary": "New analysis shows how agentic AI adoption is growing across EU enterprises and small businesses—and where deeper use could unlock more value.",
       "first_seen": "2026-10-14T11:59:45.345189Z",
       "modified_at": "2026-10-14T11:59:45.345189Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-eu-s-next-chapter-in-ai-is-agentic-2f3282e",
       "signal_url": "https://sxf.si/signals/the-eu-s-next-chapter-in-ai-is-agentic-2f3282e/",
       "signal_score": 38,
@@ -1029,7 +1036,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-13T20:21:16.669856Z",
       "modified_at": "2026-10-13T20:21:16.669856Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "run-fast-private-agents-on-device-with-lfm2-5-24b-a2b-550c4c0",
       "signal_url": "https://sxf.si/signals/run-fast-private-agents-on-device-with-lfm2-5-24b-a2b-550c4c0/",
       "signal_score": 56,
@@ -1077,8 +1084,8 @@
         "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
         "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
       },
-      "relevance_status": "review",
-      "relevance_reason": "github_indirect_ai_mention"
+      "relevance_status": "reject",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Gemini 4 Argon: Built to solve your hardest problems",
@@ -1092,7 +1099,7 @@
       "summary": "We’re giving developers, enterprises, scientists, and consumers access to Gemini 4 Argon, our latest frontier model.",
       "first_seen": "2026-10-13T16:12:42.463126Z",
       "modified_at": "2026-10-13T16:12:42.463126Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/",
       "signal_score": 46,
@@ -1246,7 +1253,7 @@
       "summary": "Higgsfield brings creators longer videos with GPT-6 Astra, precise visuals with GPT-Image-2.5, and a path to voice filmmaking with GPT-Live.",
       "first_seen": "2026-10-13T20:21:16.669856Z",
       "modified_at": "2026-10-13T20:21:16.669856Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "higgsfield-takes-ai-video-from-1-minute-to-over-10-ffc748c",
       "signal_url": "https://sxf.si/signals/higgsfield-takes-ai-video-from-1-minute-to-over-10-ffc748c/",
       "signal_score": 28,
@@ -1472,8 +1479,8 @@
         "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
         "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Sophos cuts threat investigation time by 96% with OpenAI Daybreak",
@@ -1487,7 +1494,7 @@
       "summary": "Discover how Sophos uses OpenAI’s Daybreak to cut cyber-threat investigation time by 96% and automate 52% of MDR cases while preserving human oversight.",
       "first_seen": "2026-10-09T10:40:10.499418Z",
       "modified_at": "2026-10-09T10:40:10.499418Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "sophos-cuts-threat-investigation-time-by-96-with-openai-daybreak-edd5846",
       "signal_url": "https://sxf.si/signals/sophos-cuts-threat-investigation-time-by-96-with-openai-daybreak-edd5846/",
       "signal_score": 28,
@@ -1517,7 +1524,7 @@
       "summary": "Using GPT-6 Astra in Codex, Asana made its browser agent 76x cheaper and 5x faster in tests to offer customers more capable models.",
       "first_seen": "2026-10-09T22:09:07.475483Z",
       "modified_at": "2026-10-09T22:09:07.475483Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7",
       "signal_url": "https://sxf.si/signals/asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7/",
       "signal_score": 46,
@@ -1643,7 +1650,7 @@
       "summary": "Across recruiting, engineering, and operations, Oracle turns specialist knowledge into fast, repeatable workflows with ChatGPT Work and Codex.",
       "first_seen": "2026-10-08T18:53:28.547853Z",
       "modified_at": "2026-10-08T18:53:28.547853Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-oracle-turns-days-of-work-into-minutes-with-chatgpt-and-codex-112b5f0",
       "signal_url": "https://sxf.si/signals/how-oracle-turns-days-of-work-into-minutes-with-chatgpt-and-codex-112b5f0/",
       "signal_score": 28,
@@ -1702,7 +1709,7 @@
       "summary": "With GPT-5.6, GPT-6 Astra, and GPT‑Image‑2.5, Pollo AI helps creators turn bold ideas into detailed images and cinematic video ads.",
       "first_seen": "2026-10-08T18:53:28.547853Z",
       "modified_at": "2026-10-08T18:53:28.547853Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "pollo-ai-turns-creative-ideas-into-campaigns-with-openai-ca1ec6c",
       "signal_url": "https://sxf.si/signals/pollo-ai-turns-creative-ideas-into-campaigns-with-openai-ca1ec6c/",
       "signal_score": 28,
@@ -1733,7 +1740,7 @@
       "summary": "LegalOn cut estimated daily Codex costs by 65% while maintaining development speed. It matched Astra, Sol, and Luna to tasks and managed budgets strategically.",
       "first_seen": "2026-10-09T00:16:55.698917Z",
       "modified_at": "2026-10-09T00:16:55.698917Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "legalon-halves-codex-costs-while-maintaining-development-speed-f6d3626",
       "signal_url": "https://sxf.si/signals/legalon-halves-codex-costs-while-maintaining-development-speed-f6d3626/",
       "signal_score": 28,
@@ -1764,7 +1771,7 @@
       "summary": "OpenAI disrupted two AI-enabled influence operations that used false-front journalists and a think tank to spread geopolitical messaging.",
       "first_seen": "2026-10-08T15:37:49.057519Z",
       "modified_at": "2026-10-08T15:37:49.057519Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "disrupting-ai-enabled-false-front-operations-077dea1",
       "signal_url": "https://sxf.si/signals/disrupting-ai-enabled-false-front-operations-077dea1/",
       "signal_score": 28,
@@ -1787,31 +1794,32 @@
       "url": "https://huggingface.co/blog/building-with-ml-intern",
       "source": "Hugging Face",
       "published": "2026-10-08T00:00:00Z",
-      "category": "Tools",
+      "category": "Models",
       "tags": [],
       "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
       "summary_origin": "source-meta",
       "first_seen": "2026-10-08T22:25:45.329728Z",
-      "modified_at": "2026-10-08T22:25:45.329728Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4",
       "signal_url": "https://sxf.si/signals/the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4/",
-      "signal_score": 42,
+      "signal_score": 46,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 33,
+      "seo_quality_score": 44,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Claude Haiku 5.5 in GitHub Copilot",
@@ -1853,7 +1861,7 @@
       "url": "https://huggingface.co/blog/LiquidAI/open-d1",
       "source": "Hugging Face",
       "published": "2026-10-07T16:54:33Z",
-      "category": "Tools",
+      "category": "Models",
       "tags": [
         "Multimodal AI"
       ],
@@ -1864,17 +1872,18 @@
       "last_seen": "2026-10-13T16:59:29.532544Z",
       "signal_slug": "multimodal-open-d1-decision-models-for-the-edge-0825a48",
       "signal_url": "https://sxf.si/signals/multimodal-open-d1-decision-models-for-the-edge-0825a48/",
-      "signal_score": 28,
+      "signal_score": 32,
       "score_factors": [],
-      "seo_quality_score": 13,
+      "seo_quality_score": 21,
       "seo_quality_factors": [
+        "durable-intelligence-layer",
         "high-value-topic"
       ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "A Blog post by Liquid AI on Hugging Face",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
       },
       "relevance_status": "accept",
       "relevance_reason": "ai_community_topic"
@@ -1988,7 +1997,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-07T13:31:12.574149Z",
       "modified_at": "2026-10-17T00:27:31.425487Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "introducing-falcon-asr-91ed3eb",
       "signal_url": "https://sxf.si/signals/introducing-falcon-asr-91ed3eb/",
       "signal_score": 50,
@@ -2014,7 +2023,7 @@
       "url": "https://huggingface.co/blog/nvidia/nemotron-ioi-and-imo-2026",
       "source": "Hugging Face",
       "published": "2026-10-07T12:45:31Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [],
       "summary": "",
       "first_seen": "2026-10-07T13:31:12.574149Z",
@@ -2022,17 +2031,19 @@
       "last_seen": "2026-10-15T23:40:38.705156Z",
       "signal_slug": "one-model-family-two-gold-level-results-fine-tuning-nemotron-for-ioi-a-5bdd694",
       "signal_url": "https://sxf.si/signals/one-model-family-two-gold-level-results-fine-tuning-nemotron-for-ioi-a-5bdd694/",
-      "signal_score": 42,
+      "signal_score": 45,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 9,
-      "seo_quality_factors": [],
+      "seo_quality_score": 20,
+      "seo_quality_factors": [
+        "durable-intelligence-layer"
+      ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published an update titled “One Model Family, Two Gold-Level Results: Fine-Tuning Nemotron for IOI and IMO.” SXF classifies it under Tools and preserves the direct path to the original publication for the complete context.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "what_changed": "Hugging Face published an update titled “One Model Family, Two Gold-Level Results: Fine-Tuning Nemotron for IOI and IMO.” SXF classifies it under Research and preserves the direct path to the original publication for the complete context.",
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "relevance_status": "accept",
       "relevance_reason": "ai_community_topic"
@@ -2049,7 +2060,7 @@
       "summary": "Playground is a new experimental gaming platform that lets you create, play, and share custom games.",
       "first_seen": "2026-10-07T13:31:12.574149Z",
       "modified_at": "2026-10-07T13:31:12.574149Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "introducing-playground-create-and-play-custom-games-22643d6",
       "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
       "signal_score": 46,
@@ -2082,7 +2093,7 @@
       "summary": "College Planner is coming to ChatGPT for Teens to help students manage college applications, alongside new flashcards, quizzes, and a teen AI council.",
       "first_seen": "2026-10-07T20:40:01.905375Z",
       "modified_at": "2026-10-07T20:40:01.905375Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "helping-teens-learn-plan-and-shape-the-future-of-ai-ad4e146",
       "signal_url": "https://sxf.si/signals/helping-teens-learn-plan-and-shape-the-future-of-ai-ad4e146/",
       "signal_score": 28,
@@ -2112,7 +2123,7 @@
       "summary": "Radisson partnered with Accenture to build a ChatGPT plugin using OpenAI technology, helping travelers find, compare, and book hotels while planning their trips.",
       "first_seen": "2026-10-07T20:40:01.905375Z",
       "modified_at": "2026-10-07T20:40:01.905375Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "radisson-hotel-group-brings-hotel-discovery-into-chatgpt-04e9dc3",
       "signal_url": "https://sxf.si/signals/radisson-hotel-group-brings-hotel-discovery-into-chatgpt-04e9dc3/",
       "signal_score": 28,
@@ -2142,7 +2153,7 @@
       "summary": "GPT‑6 is rolling out globally in ChatGPT with Intelligent UI, delivering faster responses with visuals and interactive experiences you can explore and use directly.",
       "first_seen": "2026-10-07T20:40:01.905375Z",
       "modified_at": "2026-10-07T20:40:01.905375Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "gpt-6-and-intelligent-ui-for-everyone-0ca1450",
       "signal_url": "https://sxf.si/signals/gpt-6-and-intelligent-ui-for-everyone-0ca1450/",
       "signal_score": 46,
@@ -2239,7 +2250,7 @@
       "summary": "Atlassian and OpenAI are expanding their partnership to connect frontier models with enterprise knowledge and help teams plan, build, and deliver work.",
       "first_seen": "2026-10-06T23:24:37.408132Z",
       "modified_at": "2026-10-06T23:24:37.408132Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "atlassian-and-openai-expand-partnership-to-turn-enterprise-knowledge-i-60ef2af",
       "signal_url": "https://sxf.si/signals/atlassian-and-openai-expand-partnership-to-turn-enterprise-knowledge-i-60ef2af/",
       "signal_score": 35,
@@ -2270,7 +2281,7 @@
       "summary": "Earth AI",
       "first_seen": "2026-10-06T15:59:26.755289Z",
       "modified_at": "2026-10-06T15:59:26.755289Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c",
       "signal_url": "https://sxf.si/signals/unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c/",
       "signal_score": 32,
@@ -2302,7 +2313,7 @@
       "summary": "Jump Trading uses OpenAI to expand quantitative research. See how longer-running AI workflows combine multiple data sources with human review.",
       "first_seen": "2026-10-06T23:24:37.408132Z",
       "modified_at": "2026-10-06T23:24:37.408132Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-jump-trading-is-scaling-quant-research-with-chatgpt-342677a",
       "signal_url": "https://sxf.si/signals/how-jump-trading-is-scaling-quant-research-with-chatgpt-342677a/",
       "signal_score": 43,
@@ -2336,7 +2347,7 @@
       "summary": "OpenAI publishes new results on open problems in mathematics from an internal frontier model and shares Lean proof formalizations and research details on GitHub.",
       "first_seen": "2026-10-06T23:24:37.408132Z",
       "modified_at": "2026-10-06T23:24:37.408132Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "sharing-ai-progress-in-mathematics-47b9255",
       "signal_url": "https://sxf.si/signals/sharing-ai-progress-in-mathematics-47b9255/",
       "signal_score": 28,
@@ -2398,7 +2409,7 @@
       "summary": "Learn how OpenAI and Ironclad are training and evaluating AI agents on complex contracting workflows to advance computer use for professional work.",
       "first_seen": "2026-10-06T23:24:37.408132Z",
       "modified_at": "2026-10-06T23:24:37.408132Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "advancing-computer-use-with-ironclad-9964af8",
       "signal_url": "https://sxf.si/signals/advancing-computer-use-with-ironclad-9964af8/",
       "signal_score": 28,
@@ -2486,7 +2497,7 @@
       "summary": "Generative AI",
       "first_seen": "2026-10-06T16:13:44.290854Z",
       "modified_at": "2026-10-06T16:13:44.290854Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "open-and-emergent-problems-in-agentic-privacy-and-security-a-contextua-c3d6698",
       "signal_url": "https://sxf.si/signals/open-and-emergent-problems-in-agentic-privacy-and-security-a-contextua-c3d6698/",
       "signal_score": 41,
@@ -2519,7 +2530,7 @@
       "summary": "How OpenAI is approaching text watermarking under EU rules. Learn where watermarks apply, how detection works, and why access starts with researchers.",
       "first_seen": "2026-10-05T21:54:14.596306Z",
       "modified_at": "2026-10-05T21:54:14.596306Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "our-approach-to-eu-text-provenance-rules-78ad538",
       "signal_url": "https://sxf.si/signals/our-approach-to-eu-text-provenance-rules-78ad538/",
       "signal_score": 28,
@@ -2549,7 +2560,7 @@
       "summary": "OpenAI introduces a new visual ad format in ChatGPT and expands measurement tools, attribution partnerships, and brand suitability for advertisers.",
       "first_seen": "2026-10-05T10:38:08.297221Z",
       "modified_at": "2026-10-05T10:38:08.297221Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "building-advertising-for-the-way-people-use-ai-3cbec84",
       "signal_url": "https://sxf.si/signals/building-advertising-for-the-way-people-use-ai-3cbec84/",
       "signal_score": 28,
@@ -2580,7 +2591,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-03T23:49:44.392482Z",
       "modified_at": "2026-10-03T23:49:44.392482Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-agent-said-it-was-done-the-database-disagreed-89764ea",
       "signal_url": "https://sxf.si/signals/the-agent-said-it-was-done-the-database-disagreed-89764ea/",
       "signal_score": 38,
@@ -2763,7 +2774,7 @@
       "summary": "Learn how startups can choose GPT-6 models, tune reasoning effort, improve prompts and skills, coordinate tools, and prepare workflows for production.",
       "first_seen": "2026-10-02T17:53:52.627738Z",
       "modified_at": "2026-10-02T17:53:52.627738Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "a-model-guide-for-the-gpt-6-family-8e206c4",
       "signal_url": "https://sxf.si/signals/a-model-guide-for-the-gpt-6-family-8e206c4/",
       "signal_score": 46,
@@ -2790,28 +2801,33 @@
       "url": "https://huggingface.co/blog/allenai/astabrief",
       "source": "Hugging Face",
       "published": "2026-10-02T15:19:50Z",
-      "category": "Tools",
-      "tags": [],
+      "category": "Open Source",
+      "tags": [
+        "Open Source AI"
+      ],
       "summary": "",
       "first_seen": "2026-10-02T17:53:52.627738Z",
       "modified_at": "2026-10-02T17:53:52.627738Z",
       "last_seen": "2026-10-09T13:47:07.574715Z",
       "signal_slug": "open-sourcing-astabrief-the-fast-report-generation-model-in-asta-d599f0a",
       "signal_url": "https://sxf.si/signals/open-sourcing-astabrief-the-fast-report-generation-model-in-asta-d599f0a/",
-      "signal_score": 42,
+      "signal_score": 44,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 9,
-      "seo_quality_factors": [],
+      "seo_quality_score": 27,
+      "seo_quality_factors": [
+        "durable-intelligence-layer",
+        "high-value-topic"
+      ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published an update titled “Open-sourcing AstaBrief, the fast report-generation model in Asta.” SXF classifies it under Tools and preserves the direct path to the original publication for the complete context.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "what_changed": "Hugging Face published an update titled “Open-sourcing AstaBrief, the fast report-generation model in Asta.” SXF classifies it under Open Source and preserves the direct path to the original publication for the complete context.",
+        "why_it_matters": "This can change what developers are able to run locally or integrate without depending on a hosted API. The practical value depends on whether the release includes usable artifacts, broad hardware or runtime support, and a license that fits real deployment.",
+        "what_to_verify": "Check the released code or weights, license, supported quantization or model formats, hardware and memory requirements, runtime compatibility, benchmarks, and reproduction instructions."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "The latest AI news we announced in September 2026",
@@ -2825,7 +2841,7 @@
       "summary": "Here are Google’s latest AI updates from September 2026",
       "first_seen": "2026-10-02T17:53:52.627738Z",
       "modified_at": "2026-10-02T17:53:52.627738Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-latest-ai-news-we-announced-in-september-2026-1122627",
       "signal_url": "https://sxf.si/signals/the-latest-ai-news-we-announced-in-september-2026-1122627/",
       "signal_score": 28,
@@ -2953,7 +2969,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-02T09:50:43.427222Z",
       "modified_at": "2026-10-02T09:50:43.427222Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "autosynthdata-generating-training-data-for-enterprise-agents-a885ed6",
       "signal_url": "https://sxf.si/signals/autosynthdata-generating-training-data-for-enterprise-agents-a885ed6/",
       "signal_score": 38,
@@ -2985,7 +3001,7 @@
       "summary": "Chatham Financial uses Codex and GPT-5.6 to build technology and redesign workflows, cutting trade validation from 30 minutes to under 4.",
       "first_seen": "2026-10-02T17:53:52.627738Z",
       "modified_at": "2026-10-02T17:53:52.627738Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "chatham-scales-its-capital-markets-expertise-with-openai-a97398f",
       "signal_url": "https://sxf.si/signals/chatham-scales-its-capital-markets-expertise-with-openai-a97398f/",
       "signal_score": 28,
@@ -3232,7 +3248,7 @@
       "summary": "Advanced AI may matter most for the routine work behind breakthrough ideas. Explore why execution could shape the next economy and the pace of progress.",
       "first_seen": "2026-10-01T18:26:47.972824Z",
       "modified_at": "2026-10-01T18:26:47.972824Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-eternal-complement-7e67b43",
       "signal_url": "https://sxf.si/signals/the-eternal-complement-7e67b43/",
       "signal_score": 28,
@@ -3385,7 +3401,7 @@
       "summary": "Albertsons Cos. is using ChatGPT Enterprise and the OpenAI API to help teams work faster and make grocery shopping easier for millions of customers.",
       "first_seen": "2026-10-01T18:26:47.972824Z",
       "modified_at": "2026-10-01T18:26:47.972824Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-albertsons-companies-is-reimagining-retail-from-the-inside-out-a80484c",
       "signal_url": "https://sxf.si/signals/how-albertsons-companies-is-reimagining-retail-from-the-inside-out-a80484c/",
       "signal_score": 28,
@@ -3408,30 +3424,34 @@
       "url": "https://huggingface.co/blog/allenai/olmocore3",
       "source": "Hugging Face",
       "published": "2026-10-01T15:01:43Z",
-      "category": "Tools",
-      "tags": [],
+      "category": "Open Source",
+      "tags": [
+        "Open Source AI"
+      ],
       "summary": "",
       "first_seen": "2026-10-01T18:26:47.972824Z",
       "modified_at": "2026-10-01T18:26:47.972824Z",
       "last_seen": "2026-10-02T09:50:43.427222Z",
       "signal_slug": "introducing-olmo-core-3-open-scalable-training-infrastructure-for-larg-0bf00b7",
       "signal_url": "https://sxf.si/signals/introducing-olmo-core-3-open-scalable-training-infrastructure-for-larg-0bf00b7/",
-      "signal_score": 46,
+      "signal_score": 48,
       "score_factors": [
         "release"
       ],
-      "seo_quality_score": 30,
+      "seo_quality_score": 48,
       "seo_quality_factors": [
-        "search-worthy-event"
+        "search-worthy-event",
+        "durable-intelligence-layer",
+        "high-value-topic"
       ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published a release-focused update titled “Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs.” SXF is tracking it as a tools signal and keeps the original publication as the source of record.",
-        "why_it_matters": "A product launch or feature release matters when it changes a workflow users can actually perform, not simply the product’s positioning. The impact depends on availability, permissions, integration depth, and whether the feature removes a real operational constraint.",
-        "what_to_verify": "Check release status, supported plans and platforms, required permissions, limits or quotas, integration prerequisites, pricing impact, and whether the feature is generally available or still in preview."
+        "what_changed": "Hugging Face published a release-focused update titled “Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs.” SXF is tracking it as a open source signal and keeps the original publication as the source of record.",
+        "why_it_matters": "This can change what developers are able to run locally or integrate without depending on a hosted API. The practical value depends on whether the release includes usable artifacts, broad hardware or runtime support, and a license that fits real deployment.",
+        "what_to_verify": "Check the released code or weights, license, supported quantization or model formats, hardware and memory requirements, runtime compatibility, benchmarks, and reproduction instructions."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "GitHub async merge API generally available",
@@ -3507,7 +3527,7 @@
       "summary": "As it opens a new location, the social club prepares grant applications in 2 hours instead of 3 days and liquor-license materials in 3 hours instead of 4 days.",
       "first_seen": "2026-10-01T21:51:50.941927Z",
       "modified_at": "2026-10-01T21:51:50.941927Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-den-frees-up-10-15-hours-a-week-to-grow-with-chatgpt-work-3bba527",
       "signal_url": "https://sxf.si/signals/the-den-frees-up-10-15-hours-a-week-to-grow-with-chatgpt-work-3bba527/",
       "signal_score": 28,
@@ -3658,7 +3678,7 @@
       "summary": "Learn how OpenAI disrupted a campaign to extract protected model reasoning and is strengthening defenses against adversarial distillation.",
       "first_seen": "2026-09-30T20:04:18.314336Z",
       "modified_at": "2026-09-30T20:04:18.314336Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "disrupting-a-coordinated-model-distillation-campaign-6a91381",
       "signal_url": "https://sxf.si/signals/disrupting-a-coordinated-model-distillation-campaign-6a91381/",
       "signal_score": 42,
@@ -3690,7 +3710,7 @@
       "summary": "OpenAI is partnering with America’s SBDC to expand hands-on AI training and local support for small businesses, alongside a new report on how small teams are using AI.",
       "first_seen": "2026-09-30T20:04:18.314336Z",
       "modified_at": "2026-09-30T20:04:18.314336Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "helping-small-businesses-put-ai-to-work-b5e5e43",
       "signal_url": "https://sxf.si/signals/helping-small-businesses-put-ai-to-work-b5e5e43/",
       "signal_score": 28,
@@ -3722,7 +3742,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-30T20:04:18.314336Z",
       "modified_at": "2026-09-30T20:04:18.314336Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31",
       "signal_url": "https://sxf.si/signals/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/",
       "signal_score": 43,
@@ -3818,7 +3838,7 @@
       "summary": "Algorithms & Theory",
       "first_seen": "2026-09-29T22:19:38.834460Z",
       "modified_at": "2026-09-29T22:19:38.834460Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-diffusion-controller-unifies-and-simplifies-ai-image-generation-105e76d",
       "signal_url": "https://sxf.si/signals/how-diffusion-controller-unifies-and-simplifies-ai-image-generation-105e76d/",
       "signal_score": 31,
@@ -3877,7 +3897,7 @@
       "url": "https://huggingface.co/blog/nvidia/kumo-tabular",
       "source": "Hugging Face",
       "published": "2026-09-29T15:30:38Z",
-      "category": "Tools",
+      "category": "Models",
       "tags": [],
       "summary": "",
       "first_seen": "2026-09-29T18:07:03.345797Z",
@@ -3885,48 +3905,51 @@
       "last_seen": "2026-10-07T06:07:56.446331Z",
       "signal_slug": "nvidia-kumo-tabular-sets-a-new-accuracy-efficiency-frontier-for-tabula-493cf3f",
       "signal_url": "https://sxf.si/signals/nvidia-kumo-tabular-sets-a-new-accuracy-efficiency-frontier-for-tabula-493cf3f/",
-      "signal_score": 28,
+      "signal_score": 32,
       "score_factors": [],
-      "seo_quality_score": 3,
-      "seo_quality_factors": [],
+      "seo_quality_score": 11,
+      "seo_quality_factors": [
+        "durable-intelligence-layer"
+      ],
       "seo_eligible": false,
       "editorial": {
-        "what_changed": "Hugging Face published an update titled “NVIDIA Kumo Tabular Sets a New Accuracy-Efficiency Frontier for Tabular Prediction.” SXF classifies it under Tools and preserves the direct path to the original publication for the complete context.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "what_changed": "Hugging Face published an update titled “NVIDIA Kumo Tabular Sets a New Accuracy-Efficiency Frontier for Tabular Prediction.” SXF classifies it under Models and preserves the direct path to the original publication for the complete context.",
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Getting the Source Right, Not Just the Fact: Source-Aware Verification for MCP Agents",
       "url": "https://huggingface.co/blog/MultiverseComputingCAI/getting-the-source-right-not-just-the-fact-source",
       "source": "Hugging Face",
       "published": "2026-09-29T13:07:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [
         "AI Agents"
       ],
       "summary": "A Blog post by Multiverse Computing on Hugging Face",
       "summary_origin": "source-meta",
       "first_seen": "2026-09-29T18:07:03.345797Z",
-      "modified_at": "2026-09-29T18:07:03.345797Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "getting-the-source-right-not-just-the-fact-source-aware-verification-f-984223f",
       "signal_url": "https://sxf.si/signals/getting-the-source-right-not-just-the-fact-source-aware-verification-f-984223f/",
-      "signal_score": 38,
+      "signal_score": 41,
       "score_factors": [
         "developer"
       ],
-      "seo_quality_score": 19,
+      "seo_quality_score": 27,
       "seo_quality_factors": [
+        "durable-intelligence-layer",
         "high-value-topic"
       ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "A Blog post by Multiverse Computing on Hugging Face",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "relevance_status": "accept",
       "relevance_reason": "ai_community_topic"
@@ -3943,7 +3966,7 @@
       "summary": "Meet GPT-6.1 Sol: near-Astra intelligence for coding, computer use, and professional work at one-fifth of Astra’s standard API input and output token prices.",
       "first_seen": "2026-09-29T18:07:03.345797Z",
       "modified_at": "2026-10-08T15:37:49.057519Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "introducing-gpt-6-1-sol-dd66aca",
       "signal_url": "https://sxf.si/signals/introducing-gpt-6-1-sol-dd66aca/",
       "signal_score": 64,
@@ -3979,7 +4002,7 @@
       "summary": "Explore more than 20 announcements from OpenAI DevDay 2026, including GPT-6 Astra, ChatGPT, Codex, APIs, security, and new tools for builders.",
       "first_seen": "2026-09-29T18:07:03.345797Z",
       "modified_at": "2026-09-29T18:07:03.345797Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "devday-2026-recap-19db7cc",
       "signal_url": "https://sxf.si/signals/devday-2026-recap-19db7cc/",
       "signal_score": 28,
@@ -4009,7 +4032,7 @@
       "summary": "Dots by OpenAI are proactive assistants that can keep working across complex projects and everyday tasks. Learn how dots help you stay in control while work moves forward.",
       "first_seen": "2026-09-29T18:07:03.345797Z",
       "modified_at": "2026-09-30T00:43:44.782581Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "introducing-dots-884977e",
       "signal_url": "https://sxf.si/signals/introducing-dots-884977e/",
       "signal_score": 46,
@@ -4071,7 +4094,7 @@
       "summary": "Watch the winning trailer from the Future Vision XPRIZE, The Gifted.",
       "first_seen": "2026-09-28T21:15:34.788328Z",
       "modified_at": "2026-09-28T21:15:34.788328Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "watch-the-winning-trailer-from-the-future-vision-xprize-the-gifted-1eadd56",
       "signal_url": "https://sxf.si/signals/watch-the-winning-trailer-from-the-future-vision-xprize-the-gifted-1eadd56/",
       "signal_score": 28,
@@ -4101,7 +4124,7 @@
       "summary": "OpenAI apologises for incidents involving Australian government websites and outlines stronger safeguards and support to strengthen Australia’s cyber defences.",
       "first_seen": "2026-09-29T09:54:21.592971Z",
       "modified_at": "2026-09-29T09:54:21.592971Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "how-we-will-do-better-for-australia-cfe8e90",
       "signal_url": "https://sxf.si/signals/how-we-will-do-better-for-australia-cfe8e90/",
       "signal_score": 35,
@@ -4134,7 +4157,7 @@
       "summary": "Our early guidelines for safety cases in frontier AI training cover technical safeguards, operational practices, and investigating misalignment incidents",
       "first_seen": "2026-09-29T09:54:21.592971Z",
       "modified_at": "2026-09-29T09:54:21.592971Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "towards-safety-cases-for-frontier-ai-training-cf468ec",
       "signal_url": "https://sxf.si/signals/towards-safety-cases-for-frontier-ai-training-cf468ec/",
       "signal_score": 41,
@@ -4204,7 +4227,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-28T13:18:00.534876Z",
       "modified_at": "2026-09-28T13:18:00.534876Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "holo4-powering-generalist-computer-use-agents-9552195",
       "signal_url": "https://sxf.si/signals/holo4-powering-generalist-computer-use-agents-9552195/",
       "signal_score": 38,
@@ -4236,7 +4259,7 @@
       "summary": "OpenAI is expanding the Lenfest AI Collaborative and Fellowship Program with $5 million in funding and up to $5 million in software credits and engineering support.",
       "first_seen": "2026-09-28T21:15:34.788328Z",
       "modified_at": "2026-09-28T21:15:34.788328Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-lenfest-institute-grows-landmark-program-with-expanded-openai-supp-216d56b",
       "signal_url": "https://sxf.si/signals/the-lenfest-institute-grows-landmark-program-with-expanded-openai-supp-216d56b/",
       "signal_score": 28,
@@ -4267,7 +4290,7 @@
       "summary": "We’re collecting real stories of builders, tinkerers, researchers, and creators who are using Codex to do incredible things. If you want to be a part of the next chapter of the Codex Originals program, tell us more about your story and project below.",
       "first_seen": "2026-09-28T21:15:34.788328Z",
       "modified_at": "2026-09-28T21:15:34.788328Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "are-you-a-codex-original-914f147",
       "signal_url": "https://sxf.si/signals/are-you-a-codex-original-914f147/",
       "signal_score": 28,
@@ -4298,7 +4321,7 @@
       "summary": "GPT-6 Astra completed a 50-tab tax workbook twice as fast as GPT-5.6 Sol, and its stronger understanding of user intent gives Basis more confidence in real-world use.",
       "first_seen": "2026-09-28T21:15:34.788328Z",
       "modified_at": "2026-09-28T21:15:34.788328Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "basis-completes-a-tax-workbook-2x-faster-with-gpt-6-astra-bf0fe8c",
       "signal_url": "https://sxf.si/signals/basis-completes-a-tax-workbook-2x-faster-with-gpt-6-astra-bf0fe8c/",
       "signal_score": 53,
@@ -4333,7 +4356,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-05T21:54:14.596306Z",
       "modified_at": "2026-10-05T21:54:14.596306Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "welcome-rl-environments-to-the-hub-a30a6af",
       "signal_url": "https://sxf.si/signals/welcome-rl-environments-to-the-hub-a30a6af/",
       "signal_score": 28,
@@ -4348,8 +4371,8 @@
         "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
         "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
       },
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Enterprise managed settings in-product validator",
@@ -4456,7 +4479,7 @@
       "summary": "With Codex, GPT-Live-1, and GPT-6 Astra, Proaction builds, operates, and sells modern fleet management faster.",
       "first_seen": "2026-09-25T19:17:04.915264Z",
       "modified_at": "2026-09-25T19:17:04.915264Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "proaction-boosts-sales-60-and-saves-75-hours-with-codex-d2d497e",
       "signal_url": "https://sxf.si/signals/proaction-boosts-sales-60-and-saves-75-hours-with-codex-d2d497e/",
       "signal_score": 28,
@@ -4647,7 +4670,7 @@
       "summary": "Lowe’s uses OpenAI models to power Mylow and Mylow Companion, helping customers and associates answer 25M+ questions and move home improvement projects forward.",
       "first_seen": "2026-10-09T22:09:07.475483Z",
       "modified_at": "2026-10-09T22:09:07.475483Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "lowe-s-answers-millions-of-home-improvement-questions-with-openai-e340960",
       "signal_url": "https://sxf.si/signals/lowe-s-answers-millions-of-home-improvement-questions-with-openai-e340960/",
       "signal_score": 28,
@@ -4711,7 +4734,7 @@
       "summary": "Wayfair uses OpenAI models to improve ecommerce support and product catalog accuracy, automating ticket triage and enhancing millions of product attributes at scale.",
       "first_seen": "2026-10-05T21:54:14.596306Z",
       "modified_at": "2026-10-05T21:54:14.596306Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "wayfair-boosts-catalog-accuracy-and-support-speed-with-openai-69f2b5e",
       "signal_url": "https://sxf.si/signals/wayfair-boosts-catalog-accuracy-and-support-speed-with-openai-69f2b5e/",
       "signal_score": 28,
@@ -4772,7 +4795,7 @@
       "summary": "Generative AI",
       "first_seen": "2026-09-27T10:02:09.055410Z",
       "modified_at": "2026-09-27T10:02:09.055410Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "automating-coherent-long-form-video-generation-da79314",
       "signal_url": "https://sxf.si/signals/automating-coherent-long-form-video-generation-da79314/",
       "signal_score": 31,
@@ -4942,8 +4965,8 @@
       "seo_quality_score": 3,
       "seo_quality_factors": [],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Google Beam expands with new regions, partners, and customers",
@@ -4968,7 +4991,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 45,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -4999,7 +5022,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 17,
       "seo_quality_factors": [],
       "seo_eligible": false,
@@ -5064,7 +5087,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 49,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5096,7 +5119,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 43,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5129,7 +5152,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 42,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5164,7 +5187,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 45,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5200,7 +5223,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 43,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5233,7 +5256,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 60,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5299,7 +5322,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 51,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5332,7 +5355,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 68,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5400,7 +5423,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5466,7 +5489,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 86,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5502,7 +5525,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 89,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5575,7 +5598,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 75,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5608,7 +5631,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5641,7 +5664,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 69,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5677,7 +5700,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 51,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5720,8 +5743,8 @@
         "high-value-topic"
       ],
       "seo_eligible": true,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "reject",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Pruning LLMs Like a Physicist: Block Removal as an Ising Optimization Problem",
@@ -5774,7 +5797,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 58,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5808,7 +5831,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5838,7 +5861,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5868,7 +5891,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5900,7 +5923,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 42,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -5932,14 +5955,14 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 27,
       "seo_quality_factors": [
         "substantive-source-summary"
       ],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "New experts join Google’s AI & Economy team",
@@ -5962,7 +5985,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 27,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -5992,7 +6015,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6026,7 +6049,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 81,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6048,7 +6071,7 @@
       "summary": "Education Innovation",
       "first_seen": "2026-09-27T10:02:09.055410Z",
       "modified_at": "2026-09-27T10:02:09.055410Z",
-      "last_seen": "2026-10-16T23:41:21.947330Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "the-future-of-practice-enabling-teachers-to-create-learning-interactiv-26cb687",
       "signal_url": "https://sxf.si/signals/the-future-of-practice-enabling-teachers-to-create-learning-interactiv-26cb687/",
       "signal_score": 31,
@@ -6063,8 +6086,8 @@
         "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
         "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
-      "relevance_status": "review",
-      "relevance_reason": "research_topic_unconfirmed"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Making global data easier to explore",
@@ -6087,7 +6110,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6117,7 +6140,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6149,7 +6172,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 60,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6183,7 +6206,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 71,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6215,7 +6238,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6245,7 +6268,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6275,7 +6298,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6308,7 +6331,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6338,7 +6361,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6357,7 +6380,7 @@
       "summary": "Algorithms & Theory",
       "first_seen": "2026-09-27T10:02:09.055410Z",
       "modified_at": "2026-09-27T10:02:09.055410Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "signal_slug": "bypassing-inference-bottlenecks-accelerating-complex-ai-search-with-re-e0b2eaa",
       "signal_url": "https://sxf.si/signals/bypassing-inference-bottlenecks-accelerating-complex-ai-search-with-re-e0b2eaa/",
       "signal_score": 31,
@@ -6399,7 +6422,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 19,
       "seo_quality_factors": [
         "high-value-topic"
@@ -6429,7 +6452,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6463,7 +6486,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 60,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6495,7 +6518,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6525,7 +6548,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 27,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6555,7 +6578,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 27,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6585,7 +6608,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6615,7 +6638,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 33,
       "seo_quality_factors": [
         "substantive-source-summary"
@@ -6647,7 +6670,7 @@
       ],
       "first_seen": "2026-09-25T14:46:02.539643Z",
       "modified_at": "2026-09-25T14:46:02.539643Z",
-      "last_seen": "2026-10-17T00:27:31.425487Z",
+      "last_seen": "2026-10-17T01:04:14.659846Z",
       "seo_quality_score": 48,
       "seo_quality_factors": [
         "substantive-source-summary",
@@ -6977,8 +7000,8 @@
         "substantive-source-summary"
       ],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Rebuilding AUTOMATIC1111 with Gradio Workflow",
@@ -7006,8 +7029,8 @@
         "substantive-source-summary"
       ],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Paul Christiano joins OpenAI Foundation Board",
@@ -7694,7 +7717,7 @@
       "url": "https://huggingface.co/blog/grpo-with-trl-ifstruct",
       "source": "Hugging Face",
       "published": "2026-09-03T00:00:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [],
       "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
       "first_seen": "2026-09-25T14:46:02.539643Z",
@@ -7702,24 +7725,25 @@
       "last_seen": "2026-10-07T23:44:06.347410Z",
       "signal_slug": "fine-tuning-a-350m-model-for-better-structured-outputs-in-100-grpo-ste-4502076",
       "signal_url": "https://sxf.si/signals/fine-tuning-a-350m-model-for-better-structured-outputs-in-100-grpo-ste-4502076/",
-      "signal_score": 49,
+      "signal_score": 52,
       "score_factors": [
         "model",
         "product-change"
       ],
       "editorial": {
         "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "summary_origin": "source-meta",
-      "seo_quality_score": 36,
+      "seo_quality_score": 44,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Give Your Coding Agents a Memory You Own",
@@ -7761,7 +7785,7 @@
       "url": "https://huggingface.co/blog/train-to-paint-with-code",
       "source": "Hugging Face",
       "published": "2026-09-03T00:00:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [
         "Coding AI"
       ],
@@ -7771,24 +7795,25 @@
       "last_seen": "2026-10-07T23:44:06.347410Z",
       "signal_slug": "training-a-coding-model-to-paint-watercolours-with-trl-and-openenv-b844bde",
       "signal_url": "https://sxf.si/signals/training-a-coding-model-to-paint-watercolours-with-trl-and-openenv-b844bde/",
-      "signal_score": 42,
+      "signal_score": 45,
       "score_factors": [
         "model"
       ],
       "editorial": {
         "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "summary_origin": "source-meta",
-      "seo_quality_score": 43,
+      "seo_quality_score": 54,
       "seo_quality_factors": [
         "substantive-source-summary",
+        "durable-intelligence-layer",
         "high-value-topic"
       ],
-      "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "seo_eligible": true,
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Proactive cyber defense for governments and enterprises",
@@ -8613,7 +8638,7 @@
       "url": "https://huggingface.co/blog/train-multi-vector-encoder",
       "source": "Hugging Face",
       "published": "2026-08-26T00:00:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [],
       "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
       "first_seen": "2026-09-25T14:46:02.539643Z",
@@ -8621,21 +8646,22 @@
       "last_seen": "2026-09-29T23:52:16.102638Z",
       "signal_slug": "training-and-finetuning-multi-vector-embedding-models-with-sentence-tr-5309d96",
       "signal_url": "https://sxf.si/signals/training-and-finetuning-multi-vector-embedding-models-with-sentence-tr-5309d96/",
-      "signal_score": 28,
+      "signal_score": 31,
       "score_factors": [],
       "editorial": {
         "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
       "summary_origin": "source-meta",
-      "seo_quality_score": 27,
+      "seo_quality_score": 35,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
-      "relevance_status": "review",
-      "relevance_reason": "ai_community_insufficient_context"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "AgentHands: Generating interactive hand gestures for spatially grounded agent conversations in XR",
@@ -8966,11 +8992,11 @@
       "Google Research": 13
     },
     "current_counts": {
-      "OpenAI": 34,
+      "OpenAI": 32,
       "Google AI": 3,
-      "Hugging Face": 14,
-      "GitHub": 24,
-      "Google Research": 5
+      "Hugging Face": 18,
+      "GitHub": 23,
+      "Google Research": 4
     },
     "sources": {
       "OpenAI": {
@@ -8986,14 +9012,14 @@
         "age_rejection_count": 1224,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 34,
+        "publish_count": 32,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "Google AI": {
@@ -9016,7 +9042,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "Hugging Face": {
@@ -9032,14 +9058,14 @@
         "age_rejection_count": 860,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 14,
+        "publish_count": 18,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "GitHub": {
@@ -9055,14 +9081,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 24,
+        "publish_count": 23,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "Google Research": {
@@ -9078,14 +9104,14 @@
         "age_rejection_count": 55,
         "relevance_rejection_count": 37,
         "quality_rejection_count": 0,
-        "publish_count": 5,
+        "publish_count": 4,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "Anthropic": {
@@ -9108,7 +9134,7 @@
         "adapter_invalid_count": 1,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -9133,7 +9159,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "xAI": {
@@ -9156,7 +9182,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       },
       "Microsoft": {
@@ -9179,7 +9205,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-17T00:26:58.638187Z",
+        "last_successful_fetch": "2026-10-17T01:03:42.718947Z",
         "errors": []
       }
     },
