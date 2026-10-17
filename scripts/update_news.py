@@ -7703,6 +7703,17 @@ def guides_index_html(items, current_items):
             "read_time": "23 min",
         },
         {
+            "href": "/guides/llm-quantization-explained/",
+            "category": "Models · Quantization · VRAM",
+            "categories": ["models", "research", "tools", "coding"],
+            "kicker": "LLM QUANTIZATION · 4-BIT VS 8-BIT",
+            "title": "LLM Quantization Explained: 4-Bit vs 8-Bit, GGUF, AWQ, GPTQ & VRAM",
+            "description": "Technical guide to quantized LLM models, GGUF formats, Q4_K_M vs Q8_0, exact weight math, KV cache memory, calculator, and reproducible benchmark methods.",
+            "meta": "LLM quantization · GGUF · GPU VRAM · KV cache",
+            "updated": "Oct 17, 2026",
+            "read_time": "22 min",
+        },
+        {
             "href": "/guides/best-embedding-models-for-rag/",
             "category": "Models · Retrieval · RAG",
             "categories": ["models", "research", "tools", "coding"],
