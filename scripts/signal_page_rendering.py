@@ -30,7 +30,7 @@ def signal_row(item, context: SignalPageContext):
     </a>'''
 
 
-def signals_index_html(items, context: SignalPageContext):
+def signals_index_html(items, context: SignalPageContext, legacy_items=None):
     BASE_URL = context.base_url
     display_date = context.display_date
     relative_time = context.relative_time
@@ -126,6 +126,29 @@ def signals_index_html(items, context: SignalPageContext):
         f'<a href="{escape(item.get("signal_url", item["url"]), quote=True)}"><span>{escape(item["title"])}</span><small>{escape(item["source"])} · {escape(display_date(item["published"]))}</small></a>'
         for item in archive_items
     )
+    # Indexed legacy articles remain reachable, without mixing unreviewed
+    # historic records into the editorially verified current stream.
+    approved_urls = {item.get("url") for item in items}
+    historic_indexed = [
+        item for item in (legacy_items or [])
+        if item.get("seo_eligible") and item.get("url") not in approved_urls
+    ]
+    historic_links = "".join(
+        f'<a href="{escape(item.get("signal_url", item["url"]), quote=True)}">'
+        f'<span>{escape(item["title"])}</span>'
+        f'<small>{escape(item["source"])} · {escape(display_date(item["published"]))}</small></a>'
+        for item in historic_indexed
+    )
+    historic_directory = (
+        f'''<section class="signals-directory shell" aria-label="Historic indexed URLs pending editorial review">
+          <details><summary>Historic source archive ({len(historic_indexed)} pages)</summary>
+          <p>Previously published pages preserved for URL continuity. These entries
+          are not part of the current editorially selected AI news stream.</p>
+          <div class="signals-directory-list">{historic_links}</div>
+          </details>
+        </section>'''
+        if historic_indexed else ""
+    )
     archive_directory = (
         f'''<section class="signals-directory shell" aria-labelledby="signals-directory-title">
           <div class="intel-section-head"><div><p class="eyebrow">VERIFIED ARCHIVE</p><h2 id="signals-directory-title">More verified AI signals.</h2></div><span>{len(archive_items)} indexed signals</span></div>
@@ -168,6 +191,7 @@ def signals_index_html(items, context: SignalPageContext):
       </section>
 
       {archive_directory}
+      {historic_directory}
 
       <section class="signals-gateways shell" aria-labelledby="signals-gateways-title">
         <div class="intel-section-head"><div><p class="eyebrow">EXPLORE BY INTENT</p><h2 id="signals-gateways-title">Move from updates to deeper intelligence.</h2></div></div>
