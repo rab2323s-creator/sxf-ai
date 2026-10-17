@@ -4,7 +4,7 @@ import sys
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from news_relevance import assess_news, primary_category, substantive_summary
+from news_relevance import assess_news, primary_category, substantive_summary, partition_news_rows
 
 class NewsRelevanceTests(unittest.TestCase):
     def test_reject_unrelated_github(self):
@@ -87,6 +87,18 @@ class NewsRelevanceTests(unittest.TestCase):
         self.assertIn("discoverable_news(archive), as_of=", src)
         self.assertIn("for item in legacy_items:", src)
         ast.parse(src)
+
+    def test_ingestion_gate_never_archives_rejected_or_review_rows(self):
+        rows = [
+            {"title": "GitHub Copilot adds a new AI coding model", "summary": "", "source": "GitHub", "url": "https://x.test/ai"},
+            {"title": "Xcode 27 runner image generally available", "summary": "", "source": "GitHub", "url": "https://x.test/noise"},
+            {"title": "Secret scanning blocks Anthropic keys by default", "summary": "", "source": "GitHub", "url": "https://x.test/review"},
+        ]
+        accepted, review, rejected = partition_news_rows(rows)
+        self.assertEqual([x["url"] for x in accepted], ["https://x.test/ai"])
+        self.assertEqual([x["url"] for x in review], ["https://x.test/review"])
+        self.assertEqual([x["url"] for x in rejected], ["https://x.test/noise"])
+        self.assertEqual(len(rows), 3)
 
     def test_summary_boilerplate(self):
         self.assertEqual(substantive_summary("We’re on a journey to advance and democratize artificial intelligence through open source and open science."), "")
