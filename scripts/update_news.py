@@ -10678,7 +10678,7 @@ def build_discovery_pages(items, current_items):
     super_agents_guide_path = GUIDES_DIR / "ai-super-agents"
     super_agents_guide_path.mkdir(parents=True, exist_ok=True)
     (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
-    (SIGNALS_DIR / "index.html").write_text(signals_index_html(items), encoding="utf-8")
+    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=legacy_items), encoding="utf-8")
     for item in legacy_items:
         path = SIGNALS_DIR / item["signal_slug"]
         path.mkdir(parents=True, exist_ok=True)
