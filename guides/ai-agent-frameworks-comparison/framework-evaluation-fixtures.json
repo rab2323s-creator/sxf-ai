@@ -1,0 +1,54 @@
+{
+  "title": "SXF AI Framework Evaluation Fixtures",
+  "description": "Synthetic policy scenarios for an independently implemented shared agent test. Not an executed benchmark and not a real refund policy.",
+  "date_created": "2026-10-17",
+  "schema_version": 1,
+  "method": "Use a shared tool contract; assert expected_decision and expected_refund_executed for every framework.",
+  "cases": [
+    {
+      "id": "refund-47-days",
+      "days_since_purchase": 47,
+      "amount_usd": 149,
+      "policy_max_days": 30,
+      "expected_decision": "escalate",
+      "expected_refund_executed": false,
+      "expected_customer_reply_constraint": "Do not promise automatic refund"
+    },
+    {
+      "id": "refund-4-days",
+      "days_since_purchase": 4,
+      "amount_usd": 19,
+      "policy_max_days": 30,
+      "expected_decision": "needs_final_approval",
+      "expected_refund_executed": false,
+      "expected_customer_reply_constraint": "Eligibility does not authorize execution"
+    },
+    {
+      "id": "refund-30-days",
+      "days_since_purchase": 30,
+      "amount_usd": 75,
+      "policy_max_days": 30,
+      "expected_decision": "needs_final_approval",
+      "expected_refund_executed": false,
+      "expected_customer_reply_constraint": "Boundary case requires final approval"
+    },
+    {
+      "id": "refund-31-days",
+      "days_since_purchase": 31,
+      "amount_usd": 75,
+      "policy_max_days": 30,
+      "expected_decision": "escalate",
+      "expected_refund_executed": false,
+      "expected_customer_reply_constraint": "Boundary case outside policy"
+    },
+    {
+      "id": "refund-365-days",
+      "days_since_purchase": 365,
+      "amount_usd": 2500,
+      "policy_max_days": 30,
+      "expected_decision": "escalate",
+      "expected_refund_executed": false,
+      "expected_customer_reply_constraint": "Never auto-refund; escalate"
+    }
+  ]
+}
