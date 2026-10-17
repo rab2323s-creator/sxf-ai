@@ -62,6 +62,7 @@
   <p>The strongest design is layered: treat web pages, email, documents, RAG results and tool outputs as untrusted; give each agent a managed identity with least-privilege permissions; allow only approved tools and actions; isolate code and browser execution; keep secrets outside the model context; require human approval for high-impact actions; and log every tool call, authorization decision and external side effect. Prompt-injection detection helps, but it is not a substitute for architectural controls.</p></div>
 </section>
 
+<div class="shell" style="margin:24px auto;padding:19px 21px;background:#101e18;border-left:3px solid #c8ff4d;border-radius:10px;color:#d0dfd7;font-size:14px;line-height:1.7">Security requires evidence, not only policies. See <a href="/guides/ai-agent-observability/" style="color:#c8ff4d;text-decoration:underline">AI Agent Observability</a> to trace authorized/denied tools while protecting sensitive data in telemetry.</div>
 <div class="guide-reading shell">
 <aside class="guide-toc"><span>IN THIS GUIDE</span>
   <a href="#what-is-ai-agent-security">What is AI agent security?</a>
