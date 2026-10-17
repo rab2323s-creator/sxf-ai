@@ -7643,10 +7643,75 @@ def superintelligence_index_html(items, current_items):
       </section>
     </main>{page_footer()}</body></html>'''
 
+def add_evergreen_guide_crosslink(html, topic):
+    """Keep contextual links to new evergreen references after generated-page rebuilds."""
+    links = {
+        "local": (
+            "/guides/llm-quantization-explained/",
+            "4-bit vs 8-bit LLM quantization, GGUF and VRAM requirements",
+            "Choosing a quantized model? ",
+        ),
+        "open_source": (
+            "/guides/llm-quantization-explained/",
+            "LLM Quantization Explained",
+            "Understand Q4_K_M, Q8_0 and KV cache before choosing hardware: ",
+        ),
+        "benchmarks": (
+            "/guides/how-to-choose-ai-model/",
+            "How to Choose an AI Model",
+            "Ready to make a selection rather than read a score? ",
+        ),
+        "embeddings": (
+            "/guides/rag-vs-fine-tuning-vs-long-context/",
+            "RAG vs Fine-Tuning vs Long Context",
+            "Before choosing an embedding model, decide whether retrieval fits your architecture: ",
+        ),
+    }
+    if topic not in links:
+        return html
+    route, label, intro = links[topic]
+    if f'href="{route}"' in html:
+        return html
+    anchor = '<div class="guide-reading shell">'
+    if anchor not in html:
+        return html
+    box = (
+        '<div class="shell" style="margin:24px auto;padding:19px 22px;'
+        'background:#102017;border-left:3px solid #c8ff4d;'
+        'border-radius:10px;color:#c6dccf;line-height:1.7;font-size:14px">'
+        + intro
+        + '<a style="color:#c8ff4d;text-decoration:underline" href="'
+        + route + '">' + label + '</a>.</div>\n'
+    )
+    return html.replace(anchor, box + anchor, 1)
+
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
+        {
+            "href": "/guides/how-to-choose-ai-model/",
+            "category": "Models · Evaluation · Decisions",
+            "categories": ["models", "research", "tools", "coding"],
+            "kicker": "AI MODEL SELECTION FRAMEWORK",
+            "title": "How to Choose the Best AI Model for Your Use Case: Quality, Cost, Speed & Privacy",
+            "description": "A practical model-selection framework with interactive shortlist tool, cost-per-accepted-outcome calculator, coding and RAG examples, privacy and model benchmarks.",
+            "meta": "AI model selection · Cost · Quality · Speed · Privacy",
+            "updated": "Oct 17, 2026",
+            "read_time": "21 min",
+        },
+        {
+            "href": "/guides/ai-agent-frameworks-comparison/",
+            "category": "Agents · Frameworks · Engineering",
+            "categories": ["agents", "coding", "tools", "research"],
+            "kicker": "AI AGENT FRAMEWORK COMPARISON",
+            "title": "AI Agent Frameworks Compared: LangGraph vs CrewAI vs OpenAI Agents SDK vs Microsoft vs Google ADK",
+            "description": "Five agent frameworks compared by orchestration, persistence, approvals and deployment with Python examples and an interactive selector.",
+            "meta": "LangGraph · CrewAI · OpenAI SDK · Microsoft · Google ADK",
+            "updated": "Oct 17, 2026",
+            "read_time": "24 min",
+        },
         {
             "href": "/guides/intelligence-explosion/",
             "category": "ASI · Research · AI Futures",
@@ -10687,7 +10752,7 @@ def build_discovery_pages(items, current_items):
     from local_inference_guide import render_local_inference_guide
     local_guide_dir = GUIDES_DIR / "run-ai-models-locally"
     local_guide_dir.mkdir(parents=True, exist_ok=True)
-    (local_guide_dir / "index.html").write_text(render_local_inference_guide(), encoding="utf-8")
+    (local_guide_dir / "index.html").write_text(add_evergreen_guide_crosslink(render_local_inference_guide(), "local"), encoding="utf-8")
     from best_ai_tts_guide import guide_html as render_tts_guide
     tts_guide_dir = GUIDES_DIR / "best-ai-text-to-speech-models"
     tts_guide_dir.mkdir(parents=True, exist_ok=True)
@@ -10695,11 +10760,11 @@ def build_discovery_pages(items, current_items):
     from ai_model_benchmarks_guide import guide_html as render_benchmarks_guide
     benchmarks_guide_dir = GUIDES_DIR / "ai-model-benchmarks-explained"
     benchmarks_guide_dir.mkdir(parents=True, exist_ok=True)
-    (benchmarks_guide_dir / "index.html").write_text(render_benchmarks_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
+    (benchmarks_guide_dir / "index.html").write_text(add_evergreen_guide_crosslink(render_benchmarks_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), "benchmarks"), encoding="utf-8")
     from rag_embedding_guide import guide_html as render_rag_embedding_guide
     rag_guide = GUIDES_DIR / "best-embedding-models-for-rag"
     rag_guide.mkdir(parents=True, exist_ok=True)
-    (rag_guide / "index.html").write_text(render_rag_embedding_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
+    (rag_guide / "index.html").write_text(add_evergreen_guide_crosslink(render_rag_embedding_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), "embeddings"), encoding="utf-8")
     coding_guide_path = GUIDES_DIR / "best-ai-coding-tools"
     coding_guide_path.mkdir(parents=True, exist_ok=True)
     (coding_guide_path / "index.html").write_text(best_ai_coding_tools_html(items), encoding="utf-8")
@@ -10708,7 +10773,7 @@ def build_discovery_pages(items, current_items):
     (model_guide_path / "index.html").write_text(gpt6_vs_claude_guide_html(items), encoding="utf-8")
     open_models_guide_path = GUIDES_DIR / "open-source-ai-models"
     open_models_guide_path.mkdir(parents=True, exist_ok=True)
-    (open_models_guide_path / "index.html").write_text(open_source_ai_models_guide_with_local_link(items), encoding="utf-8")
+    (open_models_guide_path / "index.html").write_text(add_evergreen_guide_crosslink(open_source_ai_models_guide_with_local_link(items), "open_source"), encoding="utf-8")
     agents_guide_path = GUIDES_DIR / "best-ai-agents"
     agents_guide_path.mkdir(parents=True, exist_ok=True)
     (agents_guide_path / "index.html").write_text(best_ai_agents_guide_html(items), encoding="utf-8")
