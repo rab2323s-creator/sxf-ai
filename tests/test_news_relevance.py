@@ -53,6 +53,41 @@ class NewsRelevanceTests(unittest.TestCase):
         self.assertEqual(primary_category("Welcome open-weight model", "Hugging Face"), "Open Source")
         self.assertEqual(primary_category("Gemini 4 Argon in GitHub Copilot", "GitHub"), "Tools")
 
+    def test_current_selector_rechecks_old_archive_rows(self):
+        from datetime import datetime, timezone, timedelta
+        from types import SimpleNamespace
+        from signal_processing import select_current_items
+        now = datetime.now(timezone.utc)
+        def item(title, source="GitHub"):
+            return {"title": title, "summary": "", "source": source,
+                    "url": "https://example.test/" + str(len(title)),
+                    "published": now.isoformat(), "relevance_status": "accept"}
+        ctx = SimpleNamespace(
+            parse_date=lambda v: datetime.fromisoformat(v.replace("Z", "+00:00")),
+            source_by_name={"GitHub": {"status": "live", "max_current": 10}},
+            source_expansion_names=set(),
+            source_expansion_max_current_per_source=10,
+            source_expansion_max_current_total=10,
+            max_items=10, assess_news=assess_news,
+        )
+        selected = select_current_items([
+            item("Search and filter for budgets now available"),
+            item("Gemini 4 Argon in GitHub Copilot"),
+        ], now - timedelta(days=21), ctx)
+        self.assertEqual([x["title"] for x in selected],
+                         ["Gemini 4 Argon in GitHub Copilot"])
+
+    def test_discovery_filters_legacy_snapshot_items(self):
+        import ast
+        # Static guard: every discovery render must use the common gate, while
+        # historic articles and existing SEO routes are still generated.
+        src = (Path(__file__).resolve().parents[1] / "scripts" / "update_news.py").read_text()
+        self.assertIn("items = discoverable_news(items)", src)
+        self.assertIn("current = discoverable_news(current)", src)
+        self.assertIn("discoverable_news(archive), as_of=", src)
+        self.assertIn("for item in legacy_items:", src)
+        ast.parse(src)
+
     def test_summary_boilerplate(self):
         self.assertEqual(substantive_summary("We’re on a journey to advance and democratize artificial intelligence through open source and open science."), "")
         self.assertNotEqual(substantive_summary("A major new AI model was released."), "")
