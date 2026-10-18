@@ -149,6 +149,40 @@ def main():
     assert '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />' in wrapper_html
     assert len(schema_from(update_news.signal_page_html(special, [special]))["@graph"]) == 4
 
+    # Source summaries are included for discovery, but they must never become
+    # part of a model name or produce a link to a non-existent model page.
+    lfm_title = "Run fast, private agents on-device with LFM2.5-24B-A2B"
+    lfm_summary = "A Blog post by Liquid AI on Hugging Face"
+    assert update_news.extract_models(lfm_title + " " + lfm_summary) == ["LFM2.5-24B-A2B"]
+    lfm = sample("lfm-agent-signal", eligible=True, title=lfm_title)
+    lfm["summary"] = lfm_summary
+    lfm_html = update_news.signal_page_html(lfm, [lfm])
+    assert '<a href="/models/lfm2-5-24b-a2b/">LFM2.5-24B-A2B</a>' in lfm_html
+    assert "/models/lfm2-5-24b-a2b-a-blog-post" not in lfm_html
+
+    vl_title = "Accelerating vision-language models with LFM2.5-VL-DSpark"
+    assert update_news.extract_models(vl_title + " " + lfm_summary) == ["LFM2.5-VL-DSpark"]
+    vl = sample("lfm-vl-signal", eligible=True, title=vl_title)
+    vl["summary"] = lfm_summary
+    assert '<a href="/models/lfm2-5-vl-dspark/">LFM2.5-VL-DSpark</a>' in update_news.signal_page_html(vl, [vl])
+
+    # A genuine mention with no corresponding local page is not a clickable
+    # broken link. A model with a local page still appears in the taxonomy.
+    missing_model = sample("mention-without-catalog-page", eligible=True, title="GPT-4.1")
+    missing_model["summary"] = "Uses GPT-5.6 for multilingual agents"
+    missing_html = update_news.signal_page_html(missing_model, [missing_model])
+    assert 'href="/models/gpt-4-1/"' not in missing_html
+    assert '<a href="/models/gpt-5-6/">GPT-5.6</a>' in missing_html
+
+    # Regression guard: all model-link suggestions from archive records must
+    # correspond to an existing /models/<slug>/index.html page.
+    archive = json.loads((Path(__file__).resolve().parents[1] / "data/archive.json").read_text(encoding="utf-8"))
+    for entry in archive["items"]:
+        text = entry["title"] + " " + (entry.get("summary") or "")
+        for name in update_news.extract_linkable_models(text):
+            dest = Path(__file__).resolve().parents[1] / "models" / update_news.slugify(name) / "index.html"
+            assert dest.is_file(), f"Model link target does not exist: {dest}"
+
     print("PASS: signal articles canonical, robots/noindex, dates, schema, archive links, source escaping and GitHub deep dive")
 
 

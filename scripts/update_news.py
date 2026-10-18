@@ -2606,7 +2606,7 @@ MODEL_PATTERNS = [
     re.compile(r"\bGPT[- ]\d+(?:\.\d+)?(?:\s+(?:Astra|Sol|Luna|Live))?", re.I),
     re.compile(r"\bClaude\s+[A-Za-z]+\s+\d+(?:\.\d+)?", re.I),
     re.compile(r"\bGemini(?:\s+\d+(?:\.\d+)?)?(?:\s+(?:Pro|Flash|Ultra))?", re.I),
-    re.compile(r"\bLFM\d+(?:\.\d+)?(?:[- ][A-Za-z0-9.]+)*", re.I),
+    re.compile(r"\bLFM\d+(?:\.\d+)?(?:-[A-Za-z0-9]+)*\b", re.I),
 ]
 
 STOPWORDS = {
@@ -3887,6 +3887,18 @@ def signal_row(item):
     """Compatibility renderer for signal rows used across specialist pages."""
     return render_signal_row(item, signal_page_context())
 
+def extract_linkable_models(text):
+    """Model mentions from title/summary with a verified local model detail page.
+
+    Source summaries can contain boilerplate adjacent to model names. Never
+    fabricate a /models/ URL for a name missing from the static catalog.
+    """
+    return [
+        name for name in extract_models(text)
+        if (ROOT / "models" / slugify(name) / "index.html").is_file()
+    ]
+
+
 def signal_article_context():
     """Resolve current live dependencies, retaining legacy monkeypatchability."""
     return SignalArticleContext(
@@ -3895,7 +3907,7 @@ def signal_article_context():
         seo_signal_eligible=seo_signal_eligible,
         category_path=category_path,
         item_topics=item_topics,
-        extract_models=extract_models,
+        extract_models=extract_linkable_models,
         slugify=slugify,
         related_items=related_items,
         signal_row=signal_row,
