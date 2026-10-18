@@ -52,7 +52,7 @@ def assert_benchmark_meta(html: str) -> None:
     import json
     title = re.search(r'<title>(.*?)</title>', html, re.S)
     desc = re.search(r'<meta name="description" content="([^"]+)"', html)
-    schema = re.search(r'<script type="application/ld\\+json">(.*?)</script>', html, re.S)
+    schema = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
     assert title and unescape(title.group(1)) == "AA Benchmarks Explained: AA-Briefcase, AA-LCR & AI Index | SXF"
     assert desc and unescape(desc.group(1)) == "What are Artificial Analysis (AA) benchmarks? Compare AA-Briefcase v1.1, AA-LCR v1.1 and the Intelligence Index, including scoring methods and limitations."
     assert schema, "Missing JSON-LD"
