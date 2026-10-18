@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "policy": "Explicit editorial reviews checked against cited primary sources; generic templates must not overwrite them.",
+  "items": {
+    "bringing-gpt-rosalind-to-academic-research-labs-a72d1e4": {
+      "reviewed_at": "2026-10-18",
+      "seo_title": "GPT-Rosalind Academic Plan: 30 Free Seats & Eligibility | SXF / AI",
+      "h1": "GPT-Rosalind Academic Plan: free seats, eligibility and access",
+      "meta_description": "OpenAI's Rosalind Academic Plan offers eligible US university labs up to 30 free seats for 12 months. Learn about approvals, API limits and research uses.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/introducing-the-rosalind-academic-plan/",
+      "summary": "OpenAI's Rosalind Academic Plan offers eligible U.S. university research labs up to 30 Business Standard seats at no cost for up to 12 months. GPT-Rosalind, a specialized life-sciences model, requires separate trusted-access approval; this plan does not include API access.",
+      "editorial": {
+        "what_changed": "OpenAI announced an academic access program on October 15, 2026, rather than a new broadly released model or benchmark. Eligible U.S. university labs can receive up to 30 Business Standard seats at no cost for up to 12 months, while use of the GPT-Rosalind model is separately subject to trusted-access approval.",
+        "why_it_matters": "Principal investigators and lab leads can pursue research workflows in genomics, medicinal chemistry and wet-lab planning with lower seat costs. The operational distinction is between obtaining the Business seats and obtaining approval for GPT-Rosalind. Labs at universities already on OpenAI Enterprise must use their institution's access process.",
+        "what_to_verify": "Only academic labs at U.S. universities are eligible at announcement time. The PI or lab lead applies and passes institutional and use-case review. The 30-seat and 12-month caps are maxima, API access is not included, and OpenAI states research data is not used for model training by default. This announcement does not quantify new model benchmark gains."
+      },
+      "evidence": [
+        {
+          "label": "Access allowance",
+          "fact": "Up to 30 Business Standard seats, $0 per user per month, for up to 12 months.",
+          "source": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
+        },
+        {
+          "label": "Eligibility",
+          "fact": "Academic labs at U.S. universities; a PI/lab lead applies. Existing Enterprise universities have a separate route.",
+          "source": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
+        },
+        {
+          "label": "GPT-Rosalind vs API",
+          "fact": "Specialized model access needs trusted-access approval; no API is included with this plan.",
+          "source": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
+        },
+        {
+          "label": "Research privacy",
+          "fact": "OpenAI states that research data shared through the program is not used for training by default.",
+          "source": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
+        }
+      ],
+      "limitations": "This is an access-program announcement, not a comparison with a previous GPT-Rosalind model. The source does not establish an independently measured improvement in drug-discovery speed or laboratory outcomes.",
+      "sources": [
+        "https://openai.com/index/introducing-the-rosalind-academic-plan/"
+      ]
+    },
+    "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423": {
+      "reviewed_at": "2026-10-18",
+      "seo_title": "Reflection Beam 501B: Open Weights, Specs & Benchmarks | SXF / AI",
+      "h1": "Reflection Beam 501B: model specs, license and benchmark limits",
+      "meta_description": "Reflection Beam is a 501B-parameter, 23B-active MoE model with 1M context and Apache 2.0 weights. See BF16, FP8, NVFP4 and benchmark caveats.",
+      "source_name": "Reflection AI",
+      "primary_source": "https://reflection.ai/blog/introducing-beam",
+      "summary": "Reflection's Beam 1.0 is a text-only mixture-of-experts model with 501.3 billion total and 23.4 billion active parameters, a 1M-token context window, and Apache 2.0 open weights on Hugging Face in BF16, FP8 and NVFP4 for coding, reasoning and agentic tasks.",
+      "editorial": {
+        "what_changed": "Reflection's Beam 1.0 now has Apache 2.0 open weights available in BF16, FP8 and NVFP4 formats. Its published model card lists 501.3B total and 23.4B active parameters, text-only input/output and 1M-token context. That is more specific than the launch post's earlier promise to publish the weights.",
+        "why_it_matters": "Teams investigating self-hosted coding and agents can examine published checkpoints, licensing and multiple numeric formats rather than depending solely on hosted API access. The 23.4B active-parameter figure describes activation per token, not the complete weight memory requirement. Reflection's own Terminal-Bench 2.1 table reports Beam 80.1 versus GLM 5.2 at 81.0 and GLM 5.3 at 88.2; this is one task-specific, vendor-reported comparison, not an independent global ranking.",
+        "what_to_verify": "Use the exact BF16, FP8 or NVFP4 checkpoint and test GPU memory, latency and long-context performance in the target serving stack. Reflection's 3–4x inference-compute claims are estimates excluding prefill and serving overhead; they are not measured production prices. No direct prior Beam release is supplied for a version-over-version comparison, and the model card labels the technical report as forthcoming."
+      },
+      "evidence": [
+        {
+          "label": "Architecture",
+          "fact": "501.3B total / 23.4B active parameters; 1M-token context; text-only MoE with 256 experts.",
+          "source": "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
+        },
+        {
+          "label": "Weights and license",
+          "fact": "Apache 2.0 release in BF16, FP8 and NVFP4, documented by Reflection's Hugging Face model card.",
+          "source": "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
+        },
+        {
+          "label": "Vendor-run coding results",
+          "fact": "Reflection's Terminal-Bench 2.1 values: Beam 80.1, GLM 5.2 81.0, GLM 5.3 88.2.",
+          "source": "https://reflection.ai/blog/introducing-beam"
+        },
+        {
+          "label": "Compute comparison limits",
+          "fact": "Reflection reports 100M+ RL rollouts; the launch estimate of 3–4x inference efficiency excludes prefill and serving overhead.",
+          "source": "https://reflection.ai/blog/introducing-beam"
+        }
+      ],
+      "limitations": "No direct prior Beam generation is reported, and vendor-run benchmark comparisons may use different settings. Model context and active parameter counts do not establish actual deployment cost, GPU memory use or reliability.",
+      "sources": [
+        "https://reflection.ai/blog/introducing-beam",
+        "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
+      ]
+    }
+  }
+}
