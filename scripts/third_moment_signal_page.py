@@ -25,15 +25,15 @@ def enrich_third_moment_signal(page: str) -> str:
         if count != 1: raise ValueError("Missing Third Moment SEO metadata: " + meta)
     old_card = '<meta name="twitter:card" content="summary" />'
     if old_card not in page: raise ValueError("Missing original Twitter card")
-    og = '<meta property="og:image" content="' + SOCIAL + '" />\\n' + \
-         '<meta property="og:image:width" content="1200" />\\n' + \
-         '<meta property="og:image:height" content="630" />\\n' + \
-         '<meta property="og:image:type" content="image/webp" />\\n' + \
-         '<meta property="og:image:alt" content="SXF analysis of Third Moment Research and 10,000 long-running AI agents" />\\n' + \
-         '<meta name="twitter:image" content="' + SOCIAL + '" />\\n' + \
-         '<meta name="twitter:image:alt" content="Third Moment Research: 10,000 concurrent AI agents, 36–48-hour sessions and 97% faster backtests, as reported by OpenAI" />\\n'
+    og = '<meta property="og:image" content="' + SOCIAL + '" />\n' + \
+         '<meta property="og:image:width" content="1200" />\n' + \
+         '<meta property="og:image:height" content="630" />\n' + \
+         '<meta property="og:image:type" content="image/webp" />\n' + \
+         '<meta property="og:image:alt" content="SXF analysis of Third Moment Research and 10,000 long-running AI agents" />\n' + \
+         '<meta name="twitter:image" content="' + SOCIAL + '" />\n' + \
+         '<meta name="twitter:image:alt" content="Third Moment Research: 10,000 concurrent AI agents, 36–48-hour sessions and 97% faster backtests, as reported by OpenAI" />\n'
     page = page.replace(old_card, og + '<meta name="twitter:card" content="summary_large_image" />', 1)
-    match = re.search(r'<script type="application/ld\\+json">([\\s\\S]+?)</script>', page)
+    match = re.search(r'<script type="application/ld\+json">([\s\S]+?)</script>', page)
     if match is None: raise ValueError("Missing Third Moment JSON-LD")
     data = json.loads(match.group(1))
     wp = next(x for x in data["@graph"] if x["@type"] == "WebPage")
@@ -56,7 +56,7 @@ def enrich_third_moment_signal(page: str) -> str:
         if n != 1: raise ValueError("Missing Third Moment editorial section: " + label)
     target = '<section class="signal-taxonomy shell">'
     if target not in page: raise ValueError("Missing Third Moment taxonomy")
-    page = page.replace(target,SECTION_HTML + '\\n' + target,1)
-    page,n = re.subn(r'<div><span>MODELS</span>[\\s\\S]*?</div>',lambda m:'<div><span>MODELS</span>' + MODEL_LINKS + '</div>',page,count=1)
+    page = page.replace(target,SECTION_HTML + '\n' + target,1)
+    page,n = re.subn(r'<div><span>MODELS</span>[\s\S]*?</div>',lambda m:'<div><span>MODELS</span>' + MODEL_LINKS + '</div>',page,count=1)
     if n != 1: raise ValueError("Missing model taxonomy")
     return page
