@@ -11,6 +11,7 @@ from signal_editorial_reviews import get_review, render_review_evidence
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
+from third_moment_signal_page import enrich_third_moment_signal
 from typing import Callable
 
 
@@ -155,7 +156,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                 entity.pop("keywords", None)
 
     topics = item_topics(item)
-    models = extract_models(item["title"])
+    models = extract_models(item["title"] + " " + (item.get("summary") or ""))
     topic_links = "".join(
         f'<a href="/topics/{escape(t["slug"], quote=True)}/">{escape(t["name"])}</a>' for t in topics[:4]
     )
@@ -328,4 +329,6 @@ def signal_page_html(item, items, context: SignalArticleContext):
         return enrich_atlassian_openai_signal(page)
     if canonical.endswith('/open-tts-leaderboard-scalable-evaluation-for-multilingual-text-to-spee-581ab31/'):
         return enrich_open_tts_leaderboard_signal(page)
+    if canonical.endswith('/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/'):
+        return enrich_third_moment_signal(page)
     return page
