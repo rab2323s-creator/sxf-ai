@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "33e6de25f861f826224e99a548b41ac00449ec5728acce9476fd2a9c28db76bc",
+  "snapshot_hash": "412fc5496ad25ab71b34c20c6451df743303b89d998799003d68283595eef59d",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1101,6 +1101,76 @@
     },
     {
       "rank": 7,
+      "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
+      "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
+      "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
+      "source": "Hugging Face",
+      "category": "Models",
+      "published": "2026-10-16T00:00:00Z",
+      "priority_score": 131,
+      "evidence_hash": "2dc1a6bf7adca26e41ddafb08fedec10b668a047372beaafa1d8f409b72b0da3",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
+          "url": "https://huggingface.co/blog/reflection-beam",
+          "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
+          "source": "Hugging Face",
+          "published": "2026-10-16T00:00:00Z",
+          "category": "Models",
+          "tags": [],
+          "summary": "Reflection's Beam 1.0 is a text-only mixture-of-experts model with 501.3 billion total and 23.4 billion active parameters, a 1M-token context window, and Apache 2.0 open weights on Hugging Face in BF16, FP8 and NVFP4 for coding, reasoning and agentic tasks.",
+          "signal_score": 46,
+          "seo_quality_score": 50,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "durable-intelligence-layer"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://huggingface.co/blog/reflection-beam"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 8,
       "signal_slug": "how-third-moment-research-runs-10-000-agents-for-36-hours-e181547",
       "signal_url": "https://sxf.si/signals/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/",
       "title": "How Third Moment Research runs 10,000 agents for 36+ hours",
@@ -1575,7 +1645,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 9,
       "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
       "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
       "title": "Search and filter for budgets now available",
@@ -1645,7 +1715,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 10,
       "signal_slug": "local-sandboxing-for-github-copilot-now-generally-available-87f43b6",
       "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
       "title": "Local sandboxing for GitHub Copilot now generally available",
@@ -1684,78 +1754,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "introducing-playground-create-and-play-custom-games-22643d6",
-      "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
-      "title": "Introducing Playground: Create and play custom games",
-      "source": "Google AI",
-      "category": "Tools",
-      "published": "2026-10-07T12:00:00Z",
-      "priority_score": 120,
-      "evidence_hash": "a470941f59f77f0d2227173d07649fdc163b7346d25a758675fbc39385f21a1f",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing Playground: Create and play custom games",
-          "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
-          "signal_url": "https://sxf.si/signals/introducing-playground-create-and-play-custom-games-22643d6/",
-          "source": "Google AI",
-          "published": "2026-10-07T12:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "Google AI"
-          ],
-          "summary": "Playground is a new experimental gaming platform that lets you create, play, and share custom games.",
-          "signal_score": 46,
-          "seo_quality_score": 54,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/"
         ]
       },
       "requested_output": {
