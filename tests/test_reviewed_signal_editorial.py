@@ -35,7 +35,7 @@ def main():
         html = update_news.signal_page_html(prepared, [prepared])
         assert '<meta name="robots" content="index,follow' in html
         assert '<h1>' + review["h1"] + '</h1>' in unescape(html)
-        assert 'class="signal-evidence"' in html
+        assert 'signal-evidence" aria-labelledby="signal-evidence-title"' in html
         assert review["limitations"] in unescape(html)
         for evidence in review["evidence"]:
             assert evidence["label"] in unescape(html)
