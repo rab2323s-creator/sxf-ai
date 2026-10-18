@@ -29,7 +29,7 @@ def guide_html(shell):
     page_footer=shell["page_footer"]
     graph=[
         {"@type":"WebPage","@id":URL+"#webpage","url":URL,"name":TITLE,"description":DESCRIPTION,"inLanguage":"en","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":URL+"#article"},"breadcrumb":{"@id":URL+"#breadcrumb"}},
-        {"@type":"TechArticle","@id":URL+"#article","url":URL,"mainEntityOfPage":{"@id":URL+"#webpage"},"headline":TITLE.split(" | ")[0],"description":DESCRIPTION,"datePublished":"2026-10-15","dateModified":"2026-10-15","author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"image":IMAGES,"articleSection":"AI Model Benchmark Research","citation":SOURCES,"inLanguage":"en","keywords":["ai model benchmarks explained","aa-briefcase v1.1","aa-lcr v1.1","gdpval-aa v2.1","artificial analysis intelligence index"]},
+        {"@type":"TechArticle","@id":URL+"#article","url":URL,"mainEntityOfPage":{"@id":URL+"#webpage"},"headline":TITLE.split(" | ")[0],"description":DESCRIPTION,"datePublished":"2026-10-15","dateModified":"2026-10-18","author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"image":IMAGES,"articleSection":"AI Model Benchmark Research","citation":SOURCES,"inLanguage":"en","keywords":["ai model benchmarks explained","aa-briefcase v1.1","aa-lcr v1.1","gdpval-aa v2.1","artificial analysis intelligence index"]},
         {"@type":"BreadcrumbList","@id":URL+"#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://sxf.si/guides/"},{"@type":"ListItem","position":3,"name":"AI Model Benchmarks Explained","item":URL}]},
         {"@type":"FAQPage","@id":URL+"#faq","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in FAQ]},
     ]
@@ -42,9 +42,9 @@ def guide_html(shell):
     return f'''<!doctype html><html lang="en">{head}
 <body class="intel-page guide-article-page">{page_header("guides")}<main><article>
 <header class="guide-article-hero shell">
-<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>RAG Embeddings</span></nav>
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>AI Model Benchmarks Explained</span></nav>
 <p class="eyebrow">SXF GUIDES / BENCHMARK RESEARCH</p>
 <h1>AI Model Benchmarks Explained (2026):<br><span>AA-Briefcase, AA-LCR, GDPval-AA &amp; Intelligence Index</span></h1>
-<p class="guide-deck">A rigorous comparison of Google Gemini Embedding 001 and 2 with Cohere Embed 5 Pro and Fast: real API costs, vector storage, model compatibility, multimodal retrieval, Python implementation, and how to evaluate search quality without marketing hype.</p>
+<p class="guide-deck">Not all AI benchmarks measure the same thing. Compare how AA-Briefcase v1.1, AA-LCR v1.1, GDPval-AA v2.1 and the Artificial Analysis Intelligence Index evaluate model capabilities, how their scoring methods differ, and which results are useful when choosing a model for real workloads.</p>
 <div class="guide-byline"><div><span>Reading time</span><strong>15 min</strong></div><div><span>Research standard</span><strong>Official source verification</strong></div></div>
 </header>{content}</article></main>{page_footer()}</body></html>'''
