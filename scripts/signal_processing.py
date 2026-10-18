@@ -43,6 +43,7 @@ def prepare_items(items, context: SignalProcessingContext):
     seo_signal_eligible = context.seo_signal_eligible
     editorial_units = context.editorial_units
 
+    from signal_editorial_reviews import get_review
     prepared = []
     for item in items:
         row = dict(item)
@@ -55,6 +56,13 @@ def prepare_items(items, context: SignalProcessingContext):
         row["tags"] = classify_tags(row["title"], row["source"], row["category"])
         row["signal_slug"] = slug_aliases.get(row["url"]) or row.get("signal_slug") or signal_slug(row)
         row["signal_url"] = f'{base_url}/signals/{row["signal_slug"]}/'
+        review = get_review(row)
+        if review:
+            # Reviewed primary-source facts cannot be overwritten by recurring feed updates.
+            row["summary"] = review["summary"]
+            row["summary_origin"] = "reviewed-primary-source"
+            row["modified_at"] = max(row.get("modified_at") or "", review["reviewed_at"] + "T00:00:00Z")
+            row["editorial_reviewed_at"] = review["reviewed_at"]
         score, factors = signal_score(row)
         row["signal_score"] = score
         row["score_factors"] = factors
@@ -62,7 +70,7 @@ def prepare_items(items, context: SignalProcessingContext):
         row["seo_quality_score"] = quality_score
         row["seo_quality_factors"] = quality_factors
         row["seo_eligible"] = seo_signal_eligible(row, quality_score)
-        row["editorial"] = editorial_units(row)
+        row["editorial"] = dict(review["editorial"]) if review else editorial_units(row)
         prepared.append(row)
     return prepared
 

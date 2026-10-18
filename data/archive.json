@@ -200,10 +200,10 @@
       "published": "2026-10-16T00:00:00Z",
       "category": "Models",
       "tags": [],
-      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-      "summary_origin": "source-meta",
+      "summary": "Reflection's Beam 1.0 is a text-only mixture-of-experts model with 501.3 billion total and 23.4 billion active parameters, a 1M-token context window, and Apache 2.0 open weights on Hugging Face in BF16, FP8 and NVFP4 for coding, reasoning and agentic tasks.",
+      "summary_origin": "reviewed-primary-source",
       "first_seen": "2026-10-16T16:44:03.388172Z",
-      "modified_at": "2026-10-17T01:04:14.659846Z",
+      "modified_at": "2026-10-18T00:00:00Z",
       "last_seen": "2026-10-18T00:33:51.023320Z",
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
@@ -211,19 +211,20 @@
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 44,
+      "seo_quality_score": 50,
       "seo_quality_factors": [
         "substantive-source-summary",
         "durable-intelligence-layer"
       ],
-      "seo_eligible": false,
+      "seo_eligible": true,
       "editorial": {
-        "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
-        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
-        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
+        "what_changed": "Reflection's Beam 1.0 now has Apache 2.0 open weights available in BF16, FP8 and NVFP4 formats. Its published model card lists 501.3B total and 23.4B active parameters, text-only input/output and 1M-token context. That is more specific than the launch post's earlier promise to publish the weights.",
+        "why_it_matters": "Teams investigating self-hosted coding and agents can examine published checkpoints, licensing and multiple numeric formats rather than depending solely on hosted API access. The 23.4B active-parameter figure describes activation per token, not the complete weight memory requirement. Reflection's own Terminal-Bench 2.1 table reports Beam 80.1 versus GLM 5.2 at 81.0 and GLM 5.3 at 88.2; this is one task-specific, vendor-reported comparison, not an independent global ranking.",
+        "what_to_verify": "Use the exact BF16, FP8 or NVFP4 checkpoint and test GPU memory, latency and long-context performance in the target serving stack. Reflection's 3–4x inference-compute claims are estimates excluding prefill and serving overhead; they are not measured production prices. No direct prior Beam release is supplied for a version-over-version comparison, and the model card labels the technical report as forthcoming."
       },
       "relevance_status": "accept",
-      "relevance_reason": "individually_reviewed_source"
+      "relevance_reason": "individually_reviewed_source",
+      "editorial_reviewed_at": "2026-10-18"
     },
     {
       "title": "Stack Overflow for Agents triples signups with ChatGPT plugin",
@@ -396,9 +397,9 @@
         "Research",
         "OpenAI"
       ],
-      "summary": "Introducing the Rosalind Academic Plan, offering eligible academic labs sponsored access to GPT-Rosalind and tools to advance life sciences research.",
+      "summary": "OpenAI's Rosalind Academic Plan offers eligible U.S. university research labs up to 30 Business Standard seats at no cost for up to 12 months. GPT-Rosalind, a specialized life-sciences model, requires separate trusted-access approval; this plan does not include API access.",
       "first_seen": "2026-10-15T22:19:50.067445Z",
-      "modified_at": "2026-10-15T22:19:50.067445Z",
+      "modified_at": "2026-10-18T00:00:00Z",
       "last_seen": "2026-10-18T00:33:51.023320Z",
       "signal_slug": "bringing-gpt-rosalind-to-academic-research-labs-a72d1e4",
       "signal_url": "https://sxf.si/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
@@ -414,12 +415,14 @@
       ],
       "seo_eligible": true,
       "editorial": {
-        "what_changed": "Introducing the Rosalind Academic Plan, offering eligible academic labs sponsored access to GPT-Rosalind and tools to advance life sciences research.",
-        "why_it_matters": "The important change is broader access to the announced product or capability, which can move a capability from announcement to actual workflow use. The impact depends on who receives access, where it is available, and whether the release is general availability or a limited rollout.",
-        "what_to_verify": "Check eligible plans or users, regions, product surfaces, default versus opt-in status, rollout timing, usage limits, and whether any capabilities remain preview-only."
+        "what_changed": "OpenAI announced an academic access program on October 15, 2026, rather than a new broadly released model or benchmark. Eligible U.S. university labs can receive up to 30 Business Standard seats at no cost for up to 12 months, while use of the GPT-Rosalind model is separately subject to trusted-access approval.",
+        "why_it_matters": "Principal investigators and lab leads can pursue research workflows in genomics, medicinal chemistry and wet-lab planning with lower seat costs. The operational distinction is between obtaining the Business seats and obtaining approval for GPT-Rosalind. Labs at universities already on OpenAI Enterprise must use their institution's access process.",
+        "what_to_verify": "Only academic labs at U.S. universities are eligible at announcement time. The PI or lab lead applies and passes institutional and use-case review. The 30-seat and 12-month caps are maxima, API access is not included, and OpenAI states research data is not used for model training by default. This announcement does not quantify new model benchmark gains."
       },
       "relevance_status": "accept",
-      "relevance_reason": "ai_primary_source"
+      "relevance_reason": "ai_primary_source",
+      "summary_origin": "reviewed-primary-source",
+      "editorial_reviewed_at": "2026-10-18"
     },
     {
       "title": "AI Scan for pull requests generally available",
