@@ -1335,3 +1335,38 @@
 .model-show-more{appearance:none;min-width:180px;border:1px solid rgba(200,255,77,.24);border-radius:999px;background:rgba(200,255,77,.035);color:#bdc7d1;padding:11px 18px;font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease}
 .model-show-more:hover,.model-show-more:focus-visible{border-color:rgba(200,255,77,.55);background:rgba(200,255,77,.07);color:var(--accent);outline:none}
 @media(max-width:640px){.model-results-control{padding-top:14px}.model-show-more{width:100%}}
+
+/* What Is Agentic AI — documented research-agent field test (2026-10-18) */
+.agentic-ai-guide .sxf-agent-field-test .sxf-agent-test-brief{margin:27px 0 17px;padding:23px 25px;border:1px solid rgba(200,255,77,.22);border-left:3px solid var(--accent);border-radius:15px;background:linear-gradient(135deg,rgba(200,255,77,.065),#0a1015 75%)}
+.agentic-ai-guide .sxf-agent-test-label{display:block;color:var(--accent);font-size:10px;font-weight:850;letter-spacing:.16em}
+.agentic-ai-guide .sxf-agent-test-brief>p{margin:13px 0 20px!important;color:#c8d4dc!important;font-size:15px!important;line-height:1.8!important}
+.agentic-ai-guide .sxf-agent-test-meta{display:flex;flex-wrap:wrap;gap:9px}
+.agentic-ai-guide .sxf-agent-test-meta span{padding:6px 10px;border:1px solid rgba(200,255,77,.12);border-radius:999px;color:#a5b2bc;font-size:10px;line-height:1.4}
+.agentic-ai-guide .sxf-agent-test-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0 38px}
+.agentic-ai-guide .sxf-agent-test-stats>div{min-width:0;padding:19px 17px;background:#0a0e13;border:1px solid var(--line);border-radius:14px}
+.agentic-ai-guide .sxf-agent-test-stats strong{display:block;margin-bottom:8px;color:#e2fbb2;font-size:clamp(20px,2.6vw,28px);font-weight:850;line-height:1.1;letter-spacing:-.055em}
+.agentic-ai-guide .sxf-agent-test-stats span{display:block;color:#82919d;font-size:11px;line-height:1.6}
+.agentic-ai-guide .sxf-agent-test-steps{list-style:none;margin:22px 0 38px;padding:0;border-top:1px solid var(--line)}
+.agentic-ai-guide .sxf-agent-test-steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:18px;padding:19px 0;border-bottom:1px solid var(--line)}
+.agentic-ai-guide .sxf-agent-test-steps li>span{padding-top:3px;color:var(--accent);font:700 12px ui-monospace,SFMono-Regular,Menlo,monospace}
+.agentic-ai-guide .sxf-agent-test-steps strong{font-size:15px}
+.agentic-ai-guide .sxf-agent-test-steps p{margin:8px 0 0!important;color:#91a0aa!important;font-size:13px!important;line-height:1.75!important}
+.agentic-ai-guide .sxf-agent-test-steps a{color:#c8ff4d;text-decoration:underline;text-underline-offset:3px}
+.agentic-ai-guide .sxf-agent-test-table{min-width:650px}
+.agentic-ai-guide .sxf-agent-test-table th{font-size:10px}
+.agentic-ai-guide .sxf-agent-test-table td{vertical-align:top;line-height:1.65}
+.agentic-ai-guide .sxf-agent-test-outcome{margin:26px 0 15px;padding:24px 25px;border:1px solid rgba(200,255,77,.2);border-radius:15px;background:#0d1717}
+.agentic-ai-guide .sxf-agent-test-outcome>strong{display:block;margin:11px 0;color:#f1f6ed;font-size:22px;letter-spacing:-.025em}
+.agentic-ai-guide .sxf-agent-test-outcome p{margin:0!important;color:#a2b4af!important;font-size:13px!important;line-height:1.8!important}
+.agentic-ai-guide .sxf-agent-test-evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 22px}
+.agentic-ai-guide .sxf-agent-test-evidence a{display:block;min-width:0;padding:20px;border:1px solid var(--line);border-radius:14px;background:#0a0e13;text-decoration:none;transition:border-color .2s}
+.agentic-ai-guide .sxf-agent-test-evidence a:hover{border-color:var(--accent)}
+.agentic-ai-guide .sxf-agent-test-evidence a>span{display:block;margin-bottom:10px;color:#84959d;font-size:9px;font-weight:800;letter-spacing:.12em}
+.agentic-ai-guide .sxf-agent-test-evidence a>strong{display:block;color:#e9f4e4;font-size:14px;line-height:1.5}
+.agentic-ai-guide .sxf-agent-test-note{padding-top:11px;border-top:1px solid var(--line);color:#85939d!important;font-size:12px!important;line-height:1.85!important}
+@media(max-width:720px){
+  .agentic-ai-guide .sxf-agent-test-brief{padding:19px!important}
+  .agentic-ai-guide .sxf-agent-test-stats{grid-template-columns:1fr}
+  .agentic-ai-guide .sxf-agent-test-evidence{grid-template-columns:1fr}
+  .agentic-ai-guide .sxf-agent-test-steps li{grid-template-columns:29px minmax(0,1fr);gap:12px}
+}
