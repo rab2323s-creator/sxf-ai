@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
+from signal_editorial_reviews import get_review, render_review_evidence
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
@@ -47,6 +48,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     page_header = context.page_header
     page_footer = context.page_footer
     canonical = item["signal_url"]
+    review = get_review(item)
     is_async_merge_deep_dive = canonical.endswith("/github-async-merge-api-generally-available-2bced9c/")
     page_title = item["title"] + " | SXF / AI"
     page_h1 = item["title"]
@@ -57,6 +59,11 @@ def signal_page_html(item, items, context: SignalArticleContext):
         page_h1 = "GitHub Async Merge API: GA, Stacked PRs & Merge Queues"
         description = "GitHub's async merge API is generally available. Learn how merge-async works, stacked pull request support, merge queues, permissions, status polling, errors and migration from synchronous merges."
         modified = "2026-10-05"
+    if review:
+        page_title = review["seo_title"]
+        page_h1 = review["h1"]
+        description = review["meta_description"]
+        modified = max(modified, review["reviewed_at"] + "T00:00:00Z")
     indexable = bool(item.get("seo_eligible", seo_signal_eligible(item)))
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if indexable else "noindex,follow"
     schema = {
@@ -92,7 +99,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                 "citation": [
                     item["url"],
                     "https://docs.github.com/en/rest/pulls/pulls?apiVersion=2026-03-10",
-                ] if is_async_merge_deep_dive else item["url"],
+                ] if is_async_merge_deep_dive else review["sources"] if review else item["url"],
                 "keywords": [
                     "GitHub async merge API",
                     "GitHub merge API",
@@ -265,8 +272,11 @@ def signal_page_html(item, items, context: SignalArticleContext):
             + "".join(nav_links)
             + "</nav>"
         )
-    editorial = item.get("editorial") or editorial_units(item)
-    summary_label = "Source summary" if item.get("summary") else "SXF signal note"
+    editorial = review["editorial"] if review else item.get("editorial") or editorial_units(item)
+    evidence_html = render_review_evidence(review)
+    source_name = review["source_name"] if review else item["source"]
+    source_url = review["primary_source"] if review else item["url"]
+    summary_label = "SXF verified brief" if review else "Source summary" if item.get("summary") else "SXF signal note"
     page = f'''<!doctype html><html lang="en">
     {page_head(page_title, description, canonical, schema, "article", robots)}
     <body class="intel-page signal-page">
@@ -279,7 +289,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
           <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / {escape(item["category"].upper())}</div>
           <h1>{escape(page_h1)}</h1>
           <div class="signal-meta-strip">
-            <div><span>SOURCE</span><strong>{escape(item["source"])}</strong></div>
+            <div><span>SOURCE</span><strong>{escape(source_name)}</strong></div>
             <div><span>PUBLISHED</span><strong>{escape(display_date(item["published"]))}</strong></div>
             <div><span>LAYER</span><strong>{escape(item["category"])}</strong></div>
             <div><span>SIGNAL SCORE</span><strong>{item.get("signal_score", 0):02d}/100</strong></div>
@@ -293,12 +303,13 @@ def signal_page_html(item, items, context: SignalArticleContext):
             <div class="signal-context"><span>WHAT TO VERIFY</span><p>{escape(editorial["what_to_verify"])}</p></div>
           </article>
           <aside class="source-card">
-            <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(item["source"])}</strong>
+            <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(source_name)}</strong>
             <p>Read the original publication for the complete context behind this signal.</p>
-            <a href="{escape(item["url"], quote=True)}" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
+            <a href="{escape(source_url, quote=True)}" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
           </aside>
         </section>
         {deep_dive_html}
+        {evidence_html}
         <section class="signal-taxonomy shell">
           <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
           <div><span>MODELS</span>{model_links or '<small>No named model detected</small>'}</div>
