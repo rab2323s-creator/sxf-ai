@@ -1,0 +1,111 @@
+{
+  "run_id": "sxf-agent-research-2026-10-18",
+  "date": "2026-10-18",
+  "objective": "Produce a source-backed research brief comparing documented agent workflow capabilities of OpenAI Agents SDK, Google ADK and LangGraph.",
+  "agent": {
+    "model": "GPT-6",
+    "host": "tool-enabled ChatGPT session",
+    "architecture": "single research agent with tool calls",
+    "delegated_subagents": 0
+  },
+  "tool_types_used": [
+    "web_search",
+    "web_document_retrieval",
+    "github_repository_connector",
+    "structured_content_validation"
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "name": "OpenAI Agents SDK",
+      "final_url": "https://developers.openai.com/api/docs/guides/agents/sdk",
+      "observation": "Code-first agents; application-managed runtime, tools, state and approval integration; handoffs and tracing linked from the SDK guide.",
+      "verification": "Read on first-party maintained documentation page"
+    },
+    {
+      "id": "S2",
+      "name": "Google Agent Development Kit",
+      "final_url": "https://adk.dev/workflows/",
+      "observation": "Composes agents and executable nodes as graph, dynamic, collaborative and template workflows.",
+      "verification": "Read on first-party maintained documentation page"
+    },
+    {
+      "id": "S3",
+      "name": "LangGraph",
+      "final_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "observation": "Thread-level checkpoints and cross-thread stores for agent state; resumability and human-in-the-loop are persistence use cases.",
+      "verification": "Read on first-party maintained documentation page"
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "action": "Plan",
+      "result": "Defined first-party source requirement and common evaluation axes: orchestration, state, production visibility."
+    },
+    {
+      "sequence": 2,
+      "action": "Search",
+      "result": "Discovered official sources for OpenAI Agents SDK, Google ADK and LangGraph; selected vendor- or project-maintained documentation."
+    },
+    {
+      "sequence": 3,
+      "action": "Fetch",
+      "result": "Read OpenAI Agents SDK documentation and checked code-first SDK ownership, tools, handoffs and tracing links.",
+      "source_ids": [
+        "S1"
+      ]
+    },
+    {
+      "sequence": 4,
+      "action": "Fetch and resolve",
+      "requested_url": "https://google.github.io/adk-docs/workflows/",
+      "resolved_url": "https://adk.dev/workflows/",
+      "result": "Read Google ADK workflow documentation after canonical-site redirect.",
+      "source_ids": [
+        "S2"
+      ]
+    },
+    {
+      "sequence": 5,
+      "action": "Fetch and resolve",
+      "requested_url": "https://docs.langchain.com/oss/python/langgraph/durable-execution",
+      "resolved_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+      "result": "Read the current persistence documentation after redirect.",
+      "source_ids": [
+        "S3"
+      ]
+    },
+    {
+      "sequence": 6,
+      "action": "Synthesize",
+      "result": "Produced a conditional selection brief without asserting untested relative performance.",
+      "source_ids": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "sequence": 7,
+      "action": "Validate",
+      "result": "Checked source mapping, required content sections, cross-links and structured artifact content before GitHub publication."
+    }
+  ],
+  "outcomes": {
+    "task_completed": true,
+    "primary_sources_inspected": 3,
+    "resolved_documentation_redirects": 2,
+    "claimed_sdk_benchmarks": 0,
+    "token_usage": null,
+    "billed_cost_usd": null,
+    "end_to_end_elapsed_seconds": null,
+    "reason_unmeasured": "Session tools do not expose comparable billing/token or end-to-end timing telemetry."
+  },
+  "limitations": [
+    "Documentation review only; did not run or benchmark the OpenAI Agents SDK, Google ADK or LangGraph frameworks.",
+    "The trace describes observable steps and documents consulted, not a raw model-internal token-by-token execution log.",
+    "No independent human adjudication is claimed.",
+    "Documentation can change after the run date."
+  ]
+}
