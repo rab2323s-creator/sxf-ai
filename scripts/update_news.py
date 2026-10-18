@@ -6918,7 +6918,7 @@ def best_ai_agents_guide_html(items):
                 <div><span>AI AGENT</span><strong>Goal → actions → observations → outcome</strong><p>Optimized for delegation. The system can continue through multiple steps, use tools and environments, and return after work has been executed.</p></div>
               </div>
               <p>The boundary is not binary. Modern products can behave like a chatbot in one mode and an agent in another. The useful test is how much responsibility the system can take for the execution loop while remaining observable and controllable.</p>
-              <p>For the underlying concept and architecture, read <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? How AI Agents Actually Work</a>: it explains the goal → plan → tool → action → observation loop and when agentic AI is meaningfully different from a chatbot or ordinary generative AI.</p>
+              <p>For the underlying concept and architecture, read <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? Definition, How It Works &amp; Examples</a>: it explains the goal → plan → tool → action → observation loop and when agentic AI is meaningfully different from a chatbot or ordinary generative AI.</p>
             </section>
 
             <section class="guide-faq-section" id="faq">
@@ -7213,7 +7213,7 @@ def ai_super_agents_guide_html(items):
                 <article><span>Superintelligence</span><p>A hypothetical intelligence that substantially exceeds human capability across very broad cognitive domains.</p></article>
               </div>
               <p>A super agent may look more capable than its base model because orchestration gives it memory, tools, parallel workers and persistence. That is <strong>system-level capability amplification</strong>, not evidence that the underlying model has become superintelligent.</p>
-              <p>If the agentic layer itself is new to you, start with <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? How AI Agents Actually Work</a> for the execution loop, tools, memory, autonomy and the difference between an agent, chatbot and generative AI.</p>
+              <p>If the agentic layer itself is new to you, start with <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? Definition, How It Works &amp; Examples</a> for the execution loop, tools, memory, autonomy and the difference between an agent, chatbot and generative AI.</p>
               <p>For the public-facing question of where that trajectory could lead, SXF's <a href="/guides/will-ai-take-over-the-world/">Will AI Take Over the World? The First 24 Hours of an AI Takeover</a> guide tests the takeover question as a capability-and-control scenario, separating current agents from the much stronger autonomy, access and counter-control a genuine loss-of-control event would require.</p>
             </section>
 
@@ -7937,7 +7937,7 @@ def guides_index_html(items, current_items):
             "category": "Agents · Fundamentals",
             "categories": ["agents", "research", "security"],
             "kicker": "AGENTIC AI EXPLAINED",
-            "title": "What Is Agentic AI? How AI Agents Actually Work",
+            "title": "What Is Agentic AI? Definition, How It Works & Examples",
             "description": "How AI agents plan, use tools, act, remember context and complete multi-step work—with real 2026 examples, use cases, limits and safety controls.",
             "meta": "Agents · Tools · Memory · Autonomy",
             "updated": "Sep 30, 2026",

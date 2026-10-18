@@ -767,7 +767,7 @@ def validate_agentic_ai_guide():
     text = path.read_text(encoding="utf-8")
     required = [
         "<h1>What Is Agentic AI?",
-        "How AI Agents Actually Work",
+        "<h1>What Is Agentic AI?<br><span>Definition, How It Works &amp; Examples</span></h1>",
         'id="definition"', 'id="how-it-works"', 'id="comparison"',
         'id="examples"', 'id="use-cases"', 'id="multi-agent"',
         'id="security"', 'id="evaluation"', 'id="faq"',
@@ -781,6 +781,10 @@ def validate_agentic_ai_guide():
     for marker in required:
         if marker not in text:
             fail(f"Agentic AI guide missing required marker: {marker}")
+    # Match the live H1 including its HTML-escaped ampersand.
+    expected_title = "What Is Agentic AI? Definition, How It Works & Examples"
+    if text.count("<h1>What Is Agentic AI?<br><span>Definition, How It Works &amp; Examples</span></h1>") != 1:
+        fail("Agentic AI guide H1 does not match the current SEO headline")
     if text.count('data-image-slot=') != 2:
         fail("Agentic AI guide must contain exactly two research image slots")
     for image_path in [
@@ -804,10 +808,17 @@ def validate_agentic_ai_guide():
         if schema_type not in types:
             fail(f"Agentic AI guide missing schema type: {schema_type}")
     image_objects = [entry for entry in graph if isinstance(entry, dict) and entry.get("@type") == "ImageObject"]
+    for schema_type in ("WebPage", "TechArticle"):
+        entries = [x for x in graph if isinstance(x, dict) and x.get("@type") == schema_type]
+        if len(entries) != 1:
+            fail(f"Agentic AI guide must contain one {schema_type} schema node")
+        field = "name" if schema_type == "WebPage" else "headline"
+        if entries[0].get(field) != expected_title:
+            fail(f"Agentic AI guide {schema_type} schema title does not match H1")
     if len(image_objects) != 2:
         fail("Agentic AI guide schema must contain exactly two ImageObject nodes")
     guides = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
-    if '/guides/what-is-agentic-ai/' not in guides or "What Is Agentic AI? How AI Agents Actually Work" not in guides:
+    if '/guides/what-is-agentic-ai/' not in guides or "What Is Agentic AI? Definition, How It Works & Examples" not in guides:
         fail("Guides index missing Agentic AI guide")
     topic = (ROOT / "topics" / "ai-agents" / "index.html").read_text(encoding="utf-8")
     if '/guides/what-is-agentic-ai/' not in topic:
