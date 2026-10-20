@@ -53,6 +53,8 @@ def main():
     assert source.index('class="research-jump shell"') < source.index('id="featured-research-title"')
     assert source.count('class="research-faq-item"') == 3
     assert source.count('class="research-featured-card research-featured-card-lead"') == 1
+    assert source.count('class="research-featured-card"') == 3
+    assert '/research/ai-agent-payment-negotiation/' in p.links
     assert '<details class="research-method-disclosure">' in source
     for required in (
         "/research/ai-agent-memory/",
@@ -82,6 +84,9 @@ def main():
     schemas = [json.loads(x) for x in scripts]
     collection = next(x for x in schemas[0]["@graph"] if x.get("@type") == "CollectionPage")
     assert collection["url"] == "https://sxf.si/research/"
+    featured = next(x for x in schemas[0]["@graph"] if x.get("@id", "").endswith("#featured-research"))
+    assert featured["numberOfItems"] == 4
+    assert any("ai-agent-payment-negotiation" in row["url"] for row in featured["itemListElement"])
     assert any(x.get("@id", "").endswith("#featured-research") for x in schemas[0]["@graph"])
     assert schemas[1]["@type"] == "ItemList"
     assert "section-signals-schema" in source
