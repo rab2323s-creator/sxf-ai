@@ -141,22 +141,22 @@
 
   <section class="model-deep-section" id="ml4-pricing">
     <div class="model-section-head"><p class="eyebrow">2026 API PRICING</p><h2>Mistral Large 4 pricing: launch discount vs regular rates.</h2></div>
-    <p><strong>Launch-period discounted rates apply through October 19, 2026.</strong> Mistral announced a 50% discount for the first two weeks after the October 6 launch. Its official model card displays promotional rates of <strong>$0.68 per million input tokens</strong>, <strong>$0.07 per million cached input tokens</strong>, and <strong>$2.09 per million output tokens</strong>. The corresponding regular rates are <strong>$1.36 / $0.14 / $4.18</strong>. SXF's catalog schedules the launch rate through <strong>October 19, 2026</strong> and the regular rate from <strong>October 20, 2026</strong>, subject to Mistral's live pricing.</p>
+    <p><strong>Launch discount has ended; regular rates apply according to the tracked schedule.</strong> Mistral announced a 50% discount for the first two weeks after the October 6 launch. Its official model card displays promotional rates of <strong>$0.68 per million input tokens</strong>, <strong>$0.07 per million cached input tokens</strong>, and <strong>$2.09 per million output tokens</strong>. The corresponding regular rates are <strong>$1.36 / $0.14 / $4.18</strong>. SXF's catalog schedules the launch rate through <strong>October 19, 2026</strong> and the regular rate from <strong>October 20, 2026</strong>, subject to Mistral's live pricing.</p>
     <div class="ml4-table-scroll" role="region" aria-label="Mistral Large 4 API pricing table" tabindex="0">
       <table class="ml4-table">
         <caption>USD per 1 million tokens, published Standard reference rates</caption>
         <thead><tr><th scope="col">Usage</th><th scope="col">Launch offer (Oct 6–19)</th><th scope="col">Regular (from Oct 20)</th><th scope="col">Current tracked rate</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Input tokens</th><td>$0.68</td><td>$1.36</td><td><strong>$0.68</strong></td></tr>
-          <tr><th scope="row">Cached input</th><td>$0.07</td><td>$0.14</td><td><strong>$0.07</strong></td></tr>
-          <tr><th scope="row">Output tokens</th><td>$2.09</td><td>$4.18</td><td><strong>$2.09</strong></td></tr>
+          <tr><th scope="row">Input tokens</th><td>$0.68</td><td>$1.36</td><td><strong>$1.36</strong></td></tr>
+          <tr><th scope="row">Cached input</th><td>$0.07</td><td>$0.14</td><td><strong>$0.14</strong></td></tr>
+          <tr><th scope="row">Output tokens</th><td>$2.09</td><td>$4.18</td><td><strong>$4.18</strong></td></tr>
         </tbody>
       </table>
     </div>
     <div class="ml4-metrics">
       <article><span>ILLUSTRATIVE PROMO REQUEST</span><strong>$0.1438</strong><small>150K standard input + 20K output tokens</small></article>
       <article><span>ILLUSTRATIVE REGULAR REQUEST</span><strong>$0.2876</strong><small>Same 150K input + 20K output tokens</small></article>
-      <article><span>ACTIVE REFERENCE PERIOD</span><strong>Launch offer</strong><small>Automatically selected from catalog rate dates</small></article>
+      <article><span>ACTIVE REFERENCE PERIOD</span><strong>Regular rates</strong><small>Automatically selected from catalog rate dates</small></article>
     </div>
     <h3>How to calculate a Mistral Large 4 API request</h3>
     <p>Estimate cost as <code>(uncached_input × input_rate + cached_input × cached_rate + output × output_rate) / 1,000,000</code>, where the rates are USD per million tokens. For example, a 150,000-token <em>uncached</em> prompt and a 20,000-token response cost <strong>$0.1438 at the launch prices</strong> or <strong>$0.2876 at standard regular prices</strong>. These are arithmetic examples, not measurements of response quality or actual user bills.</p>
