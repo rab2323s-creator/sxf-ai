@@ -101,6 +101,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_image_entry(f"{BASE_URL}/guides/deploy-ai-agents-production/", "2026-10-21", f"{BASE_URL}/guides/deploy-ai-agents-production/images/production-agent-architecture.svg", f"{BASE_URL}/guides/deploy-ai-agents-production/images/agent-deployment-release-gates.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/intelligence-explosion/", "2026-10-16", f"{BASE_URL}/guides/intelligence-explosion/images/recursive-improvement-feedback-loop.svg", f"{BASE_URL}/guides/intelligence-explosion/images/hard-vs-soft-ai-takeoff.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/run-ai-models-locally/", "2026-10-16", f"{BASE_URL}/guides/run-ai-models-locally/images/ollama-lmstudio-vllm-architecture.svg", f"{BASE_URL}/guides/run-ai-models-locally/images/gpu-vram-memory-budget.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/best-ai-text-to-speech-models/", "2026-10-15", f"{BASE_URL}/guides/best-ai-text-to-speech-models/images/tts-model-selection.svg", f"{BASE_URL}/guides/best-ai-text-to-speech-models/images/tts-evaluation-pipeline.svg"),
