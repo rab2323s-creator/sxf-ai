@@ -114,6 +114,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-reliability/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-memory/", "2026-10-01"),
+        sitemap_entry(f"{BASE_URL}/research/ai-agent-payment-negotiation/", "2026-10-20"),
         sitemap_entry(f"{BASE_URL}/research/ai-coding-agent-architecture/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/guides/claude-sonnet-github-copilot/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/superintelligence/", "2026-10-01"),
