@@ -30,8 +30,9 @@ def test_viewports(server):
             page.goto(url, wait_until="domcontentloaded")
             page.locator("#research-heading").wait_for()
             assert page.locator("h1").count() == 1
-            assert page.locator(".research-featured-card").count() == 3
-            page.wait_for_function("() => [...document.querySelectorAll('.research-featured-image img')].length === 3 && [...document.querySelectorAll('.research-featured-image img')].every(img => img.complete)", timeout=15000)
+            assert page.locator(".research-featured-card").count() == 4
+            assert page.locator(".research-featured-grid a[href='/research/ai-agent-payment-negotiation/']").count() == 1
+            page.wait_for_function("() => [...document.querySelectorAll('.research-featured-image img')].length === 4 && [...document.querySelectorAll('.research-featured-image img')].every(img => img.complete)", timeout=15000)
             image_status = page.locator(".research-featured-image img").evaluate_all(
                 "(imgs) => imgs.map(img => ({src: img.currentSrc, naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight}))"
             )

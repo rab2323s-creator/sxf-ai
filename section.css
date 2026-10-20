@@ -195,3 +195,9 @@
   .mode-research .top-nav a{flex:0 0 auto}
   .mode-research .top-nav::-webkit-scrollbar{display:none}
 }
+
+/* Four editorial research cards preserve the original card hierarchy. */
+.mode-research .research-featured-grid--four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mode-research .research-featured-grid--four .research-featured-card-lead{grid-row:auto}
+@media(max-width:1100px){.mode-research .research-featured-grid--four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.mode-research .research-featured-grid--four{grid-template-columns:1fr}}
