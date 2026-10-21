@@ -5295,6 +5295,14 @@ def model_comparison_links_html(model_id, limit=4):
 
 
 def render_catalog_model_page(model_id, items):
+    if model_id == "scribe_v2_realtime":
+        # Preserve the editorial Scribe Realtime reference and its SEO metadata.
+        # Edit models/scribe-v2-realtime/editorial.html instead of generated index.html.
+        source = ROOT / "models" / "scribe-v2-realtime" / "editorial.html"
+        page = source.read_text(encoding="utf-8")
+        if page.count("<title>ElevenLabs Scribe v2 Realtime") != 1 or 'id="scribe-v2-realtime-guide"' not in page:
+            raise RuntimeError("Scribe Realtime editorial model page invalid: refusing thin fallback")
+        return page
     model = model_catalog_entry(model_id)
     template = model.get("page_template")
 
