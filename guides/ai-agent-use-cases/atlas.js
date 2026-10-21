@@ -13,7 +13,7 @@ const saved=baseline-monthly;$("oa-baseline").textContent=fmt(baseline);$("oa-mo
 costIds.forEach(x=>x?.addEventListener("input",calculate));calculate();
 const ids=["oa-repeat","oa-risk-level","oa-errors","oa-access","oa-savings-high"].map($);
 const score=()=>{const [repeat,risk,errors,access,savings]=ids.map(x=>Number(x.value));
-const fit=repeat*4+savings*3+(5-errors)*4+(5-access)*3+(5-risk)*4;const bounded=Math.max(0,Math.min(90,Math.round(fit/90*100)));
+const fit=repeat*4+savings*3+(5-errors)*4+(5-access)*3+(5-risk)*4;const bounded=Math.max(0,Math.min(100,Math.round(fit/90*100)));
 $("oa-index").textContent=bounded+"/100";let label=risk>=4||access>=4||errors>=4?"High-risk: human-controlled decision and tighter safeguards":repeat>=4&&risk<=2&&errors<=2?"Consider deterministic workflow first":"Consider bounded AI assistance or an agent pilot";
 $("oa-index-class").textContent=label;$("oa-index-notice").textContent="SXF heuristic index; not validated prediction, ROI proof or autonomous deployment authorization."};
 ids.forEach(x=>x?.addEventListener("input",score));score();

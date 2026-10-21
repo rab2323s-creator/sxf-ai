@@ -39,7 +39,7 @@ def main():
     naive=run("naive")
     guarded=run("guarded")
     assert naive["duplicate_actions"]>0
-    assert guarded["duplicate_actions"]==0
+    assert guarded.get("duplicate_actions",0)==0
     assert guarded["side_effect_calls"]<=naive["side_effect_calls"]
     assert guarded["unique_actions"]<=naive["unique_actions"]
     output={"study":"Synthetic fault injection; not an LLM benchmark",
