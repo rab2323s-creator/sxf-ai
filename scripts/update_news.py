@@ -9123,6 +9123,12 @@ def evaluations_index_html():
 
 
 def generic_comparison_page_html(comparison):
+    if comparison["slug"] == "nano-banana-2-1-vs-nano-banana-pro":
+        template = COMPARE_DIR / comparison["slug"] / "editorial.html"
+        result = template.read_text(encoding="utf-8")
+        if result.count('<title>Nano Banana 2.1 vs Nano Banana Pro') != 1 or 'data-compare-contract' not in result or 'id="sxf-nano-banana-buyers-guide"' not in result:
+            raise RuntimeError("Missing Nano Banana specialist guide: refusing generic fallback")
+        return result
     if comparison["slug"] == "deepgram-nova-3-vs-elevenlabs-scribe-v2":
         # Preserve the specialist speech-to-text article across catalog regeneration.
         # Edit compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/editorial.html,
