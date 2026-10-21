@@ -1,0 +1,11 @@
+Gate,Owner,Pass Criterion,Status,Evidence
+Authentication,Security,Trust boundary denies unauthorized tenants,Pending,
+Secrets,Security,No raw provider credentials exposed to clients,Pending,
+Routing,Backend,Model versions and capability parity verified,Pending,
+Rate limits,SRE,Shared RPM TPM and concurrency policies tested,Pending,
+Retry policy,SRE,Backoff and Retry-After and request budgets validated,Pending,
+Failover quality,QA,Schema and independently judged task outcomes pass,Pending,
+Streaming,Backend,No hidden model switch after first delivered token,Pending,
+Caching,Privacy,Response isolation and retention signed off,Pending,
+Observability,SRE,Redacted traces and cost per accepted outcome,Pending,
+Disaster recovery,SRE,Config backup rollback and response tested,Pending,
