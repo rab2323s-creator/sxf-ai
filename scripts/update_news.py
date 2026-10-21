@@ -9123,6 +9123,12 @@ def evaluations_index_html():
 
 
 def generic_comparison_page_html(comparison):
+    if comparison["slug"] == "gpt-image-2-vs-gpt-image-2-5-flare":
+        template = COMPARE_DIR / comparison["slug"] / "editorial.html"
+        result = template.read_text(encoding="utf-8")
+        if result.count("<title>GPT-Image-2 vs GPT-Image-2.5 Flare") != 1 or 'data-compare-contract' not in result or 'id="sxf-gpt-image-flare-buyer-guide"' not in result:
+            raise RuntimeError("Missing specialist GPT Image Flare guide")
+        return result
     if comparison["slug"] == "runway-gen-4-5-vs-kling-3-0":
         template = COMPARE_DIR / comparison["slug"] / "editorial.html"
         result = template.read_text(encoding="utf-8")
