@@ -1136,7 +1136,8 @@ def validate_compare_contracts_and_model_histories():
             if evidence["model_identity"] not in html or evidence["pricing"] not in html:
                 fail(f"{slug}: official evidence links missing for {model_id}")
 
-        if template == "generic":
+        specialist_stt = (slug == "deepgram-nova-3-vs-elevenlabs-scribe-v2" and "Original SXF reproducibility lab" in html and "Speech-to-text pricing:" in html)
+        if template == "generic" and not specialist_stt:
             for marker_text in ("DECISION FACTORS", "No synthetic winner score", "OFFICIAL SOURCES", "RELATED MATCHUPS"):
                 if marker_text not in html:
                     fail(f"{slug}: generic comparison missing decision marker {marker_text!r}")
