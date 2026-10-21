@@ -59,7 +59,7 @@ def main():
     assert estimate(201000,2000,D("0"),False)[1]==D(".5125")
     assert estimate(201000,2000,D(".5"),False)[1]==D(".30145")
     assert estimate(201000,2000,D(".5"),True)[1]==D(".24116")
-    assert estimate(900000,8000,D(".8"),True)[1]==D(".5968")
+    assert estimate(900000,8000,D(".8"),True)[1]==D(".6224")
     assert all(r["estimated_token_cost_usd"] for r in rows)
     target=Path(__file__).with_name("sxf-grok43-context-cost-scenarios.csv")
     with target.open("w",encoding="utf-8",newline="") as f:

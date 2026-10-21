@@ -5295,6 +5295,12 @@ def model_comparison_links_html(model_id, limit=4):
 
 
 def render_catalog_model_page(model_id, items):
+    if model_id == "grok-4.3":
+        source = ROOT / "models" / "grok-4-3" / "editorial.html"
+        html = source.read_text(encoding="utf-8")
+        if html.count("<title>Grok 4.3") != 1 or 'id="sxf-grok43-original-guide"' not in html or "data-model-history" not in html:
+            raise RuntimeError("Grok 4.3 editorial source invalid; refusing generated fallback")
+        return html
     if model_id == "scribe_v2_realtime":
         # Preserve the editorial Scribe Realtime reference and its SEO metadata.
         # Edit models/scribe-v2-realtime/editorial.html instead of generated index.html.
