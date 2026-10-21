@@ -9123,6 +9123,12 @@ def evaluations_index_html():
 
 
 def generic_comparison_page_html(comparison):
+    if comparison["slug"] == "runway-gen-4-5-vs-kling-3-0":
+        template = COMPARE_DIR / comparison["slug"] / "editorial.html"
+        result = template.read_text(encoding="utf-8")
+        if result.count("<title>Runway Gen-4.5 vs Kling VIDEO 3.0") != 1 or 'data-compare-contract' not in result or 'id="sxf-runway-kling-video-guide"' not in result:
+            raise RuntimeError("Missing specialized Runway Kling comparison")
+        return result
     if comparison["slug"] == "nano-banana-2-1-vs-nano-banana-pro":
         template = COMPARE_DIR / comparison["slug"] / "editorial.html"
         result = template.read_text(encoding="utf-8")
