@@ -101,6 +101,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_image_entry(f"{BASE_URL}/guides/ai-model-licensing/", "2026-10-21", f"{BASE_URL}/guides/ai-model-licensing/images/ai-model-licensing-evidence-architecture.svg", f"{BASE_URL}/guides/ai-model-licensing/images/sxf-license-evidence-audit.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/llm-gateway/", "2026-10-21", f"{BASE_URL}/guides/llm-gateway/images/llm-gateway-production-architecture.svg", f"{BASE_URL}/guides/llm-gateway/images/sxf-llm-gateway-http-lab.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/vector-database-for-rag/", "2026-10-21", f"{BASE_URL}/guides/vector-database-for-rag/images/vector-rag-reference-architecture.svg", f"{BASE_URL}/guides/vector-database-for-rag/images/vector-filtering-experiment.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/deploy-ai-agents-production/", "2026-10-21", f"{BASE_URL}/guides/deploy-ai-agents-production/images/production-agent-architecture.svg", f"{BASE_URL}/guides/deploy-ai-agents-production/images/agent-deployment-release-gates.svg"),
