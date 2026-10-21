@@ -9115,6 +9115,15 @@ def evaluations_index_html():
 
 
 def generic_comparison_page_html(comparison):
+    if comparison["slug"] == "deepgram-nova-3-vs-elevenlabs-scribe-v2":
+        # Preserve the specialist speech-to-text article across catalog regeneration.
+        # Edit compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/editorial.html,
+        # not the generated index.html. Prices are a dated editorial snapshot.
+        template = COMPARE_DIR / comparison["slug"] / "editorial.html"
+        result = template.read_text(encoding="utf-8")
+        if result.count("<title>Deepgram Nova-3 vs ElevenLabs Scribe v2") != 1:
+            raise RuntimeError("Missing specialist comparison title; refusing generic fallback")
+        return result
     model_ids = comparison["model_ids"]
     if len(model_ids) != 2:
         raise RuntimeError(f'{comparison["slug"]}: generic comparison requires exactly two models')
