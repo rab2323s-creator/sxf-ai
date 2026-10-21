@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>Grok 4.3 — API Specs, Context &amp; Pricing | SXF / AI</title>
+      <meta name="description" content="Grok 4.3: xAI API specs, 1M context, 200K long-context token pricing, caching, reasoning, tools and an original SXF cost calculator." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/models/grok-4-3/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/models/grok-4-3/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/models/grok-4-3/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="Grok 4.3 — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta property="og:description" content="Grok 4.3 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official xAI sources." />
+      <meta property="og:url" content="https://sxf.si/models/grok-4-3/" />
+      <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
+      <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
+      <meta name="twitter:title" content="Grok 4.3 — API Specs, Context &amp; Pricing | SXF / AI" />
+      <meta name="twitter:description" content="Grok 4.3 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official xAI sources." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","url":"https://sxf.si/models/grok-4-3/","headline":"Grok 4.3 — API Specs, Context & Pricing","description":"Grok 4.3: xAI API specs, 1M context, 200K long-context token pricing, caching, reasoning, tools and an original SXF cost calculator.","dateModified":"2026-10-22","inLanguage":"en","citation":["https://docs.x.ai/developers/models/grok-4.3","https://docs.x.ai/developers/pricing"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Grok 4.3?","acceptedAnswer":{"@type":"Answer","text":"A text-output xAI reasoning model with text/image input and one-million-token context."}},{"@type":"Question","name":"What is the Grok 4.3 API model name?","acceptedAnswer":{"@type":"Answer","text":"grok-4.3."}},{"@type":"Question","name":"How much does Grok 4.3 cost?","acceptedAnswer":{"@type":"Answer","text":"Below 200K prompt tokens, $1.25 input and $2.50 output per million; at 200K or above, $2.50 input and $5.00 output."}},{"@type":"Question","name":"What is Grok 4.3's context window?","acceptedAnswer":{"@type":"Answer","text":"1,000,000 tokens; this is not a published maximum output guarantee."}},{"@type":"Question","name":"Does Grok 4.3 support caching?","acceptedAnswer":{"@type":"Answer","text":"Published cached input prices are $0.20 short and $0.40 long per million when caching applies."}},{"@type":"Question","name":"Can I use Grok 4.3 with function calling?","acceptedAnswer":{"@type":"Answer","text":"Yes in compatible API workflows; validate arguments, authority and side effects."}},{"@type":"Question","name":"Does Grok 4.3 generate images?","acceptedAnswer":{"@type":"Answer","text":"It accepts images and produces text; image generation is not the model's normal output."}},{"@type":"Question","name":"Did SXF benchmark Grok 4.3 on real prompts?","acceptedAnswer":{"@type":"Answer","text":"No. SXF constructed a reproducible 48-case synthetic pricing experiment; no paid API inference or quality testing."}}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" /><link rel="stylesheet" href="/models/grok-4-3/reference.css" />
+    </head>
+    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header><main>
+      <section class="collection-hero shell">
+        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Grok 4.3</span></nav>
+        <p class="eyebrow">MODEL REFERENCE / XAI</p>
+        <h1>Grok 4.3<br><span>verified model reference.</span></h1>
+        <p>xAI long-context Grok model with configurable reasoning and a one-million-token context window.</p>
+        <div class="collection-stats">
+          <div><strong>1,000,000</strong><span>context tokens</span></div>
+          <div><strong>Not published</strong><span>max output</span></div>
+          <div><strong>2026-10-03</strong><span>last verified</span></div>
+        </div>
+      </section>
+
+      <section class="model-reference model-reference-deep shell">
+        <div class="model-reference-intro">
+          <div class="model-reference-copy">
+            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
+            <h2>Grok 4.3 at a glance.</h2>
+            <p>xAI documents a 1,000,000-token context window. Input modalities: text + image. Output: text. Pricing status: Official paid API.</p>
+          </div>
+          <div class="model-fact-grid">
+            <div><span>MODEL ID</span><strong>grok-4.3</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
+            <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
+            <div><span>STANDARD INPUT</span><strong>$1.25</strong><small>per 1 million tokens</small></div>
+            <div><span>STANDARD OUTPUT</span><strong>$2.50</strong><small>per 1 million tokens</small></div>
+          </div>
+        </div>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>REASONING</span><h3>none · low · medium · high · xhigh · default low</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
+            <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
+          <div class="model-split">
+            <div><p>$1.25 input · $0.20 cached · $2.50 output per 1 million tokens.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <aside class="model-side-note"><span>CALCULATOR</span><strong>Eligible</strong><p>This model has calculator-compatible generative token input/output rates.</p></aside>
+          </div>
+        </section>
+
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>xAI does not publish a separate text output cap on the cited model page.</p></div><div><span>02</span><p>Knowledge cutoff is left unknown because no verified value is stored in the cited official model documentation.</p></div><div><span>03</span><p>The stored Standard pricing start is anchored to xAI&#x27;s May 15, 2026 migration/pricing-impact date.</p></div></div></section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
+          <div class="model-related-links">
+            <a href="/providers/xai/"><span>PROVIDER</span><strong>xAI model portfolio</strong><b>↗</b></a>
+            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
+            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
+          </div>
+        </section>
+
+        <section class="model-deep-section">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
+          <div class="model-sources"><a href="https://docs.x.ai/developers/models/grok-4.3" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/models/grok-4.3</span><b>↗</b></a><a href="https://docs.x.ai/developers/pricing" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/pricing</span><b>↗</b></a><a href="https://docs.x.ai/developers/migration/may-15-retirement" target="_blank" rel="noopener noreferrer"><span>docs.x.ai/developers/migration/may-15-retirement</span><b>↗</b></a></div>
+        </section>
+      </section>
+
+      <div class="g43-guide shell" id="sxf-grok43-original-guide"><header class="g43-hero"><p class="eyebrow">SXF / AI · GROK · ENTERPRISE TECHNICAL REFERENCE</p><h2>Grok 4.3: Pricing, 1M Token Context, API, Reasoning &amp; Production</h2><p>Source-based answers for developers and enterprise AI buyers, with original long-context pricing research, live cost estimation and a comparison against better retrieval approaches.</p><div class="g43-tags"><span>Publisher-documented rates</span><span>48 synthetic cost scenarios</span><span>Interactive calculator</span><span>Zero invented model scores</span></div></header><nav class="g43-nav"><a href="#g43-about">Overview</a><a href="#g43-specs">Specs</a><a href="#g43-price">Prices</a><a href="#g43-cost-tool">Calculator</a><a href="#g43-experiment">Original research</a><a href="#g43-context">Long context</a><a href="#g43-agents">Agent use</a><a href="#g43-faq">FAQ</a><a href="#g43-sources">Sources</a></nav><section class="g43-section" id="g43-about"><h2>What is Grok 4.3?</h2><p><strong>Grok 4.3</strong> is a paid xAI reasoning-oriented model that takes text and image inputs and generates text. Its official API model identifier is <code>grok-4.3</code>, and its published context capacity is <strong>one million tokens</strong>. Typical applications include large document analysis, long-context reasoning, image understanding, developer tools and structured business workflows.</p><p>A one-million-token context window does <strong>not</strong> mean that you can request one million output tokens. No standalone maximum response size or knowledge cutoff should be invented when the official source is silent.</p></section>
+<section class="g43-section" id="g43-specs"><h2>Grok 4.3 technical specifications</h2><div class="g43-table" tabindex="0"><table><thead><tr><th>Specification</th><th>Official evidence or cautious interpretation</th></tr></thead><tbody><tr><th>Model ID</th><td>grok-4.3</td></tr><tr><th>Provider</th><td>xAI</td></tr><tr><th>Context</th><td>1,000,000 tokens</td></tr><tr><th>Input</th><td>text + image</td></tr><tr><th>Output</th><td>text</td></tr><tr><th>Maximum output tokens</th><td>Not independently verified from official record</td></tr><tr><th>Knowledge cutoff</th><td>Not verified</td></tr><tr><th>Reasoning</th><td>Provider-documented effort levels; confirm supported endpoint</td></tr><tr><th>Tool calling</th><td>Available for appropriate APIs; validate exact schema and authorizations</td></tr></tbody></table></div><p>Supported modalities and controls may differ by xAI API endpoint and service region. A model name does not guarantee all optional platform tools are enabled in every third-party channel.</p></section>
+<section class="g43-section" id="g43-price"><h2>Grok 4.3 pricing: 200K token breakpoint</h2><figure class="g43-fig"><img src="/models/grok-4-3/images/grok43-pricing-boundary.svg" loading="lazy" width="1600" height="900" alt="Grok 4.3 200K short and long context official xAI token pricing"></figure><div class="g43-table" tabindex="0"><table><thead><tr><th>Price per million tokens</th><th>Under 200K prompt</th><th>200K+ prompt</th></tr></thead><tbody><tr><th>Uncached input</th><td>$1.25</td><td>$2.50</td></tr><tr><th>Cached input (eligible)</th><td>$0.20</td><td>$0.40</td></tr><tr><th>Generated output</th><td>$2.50</td><td>$5.00</td></tr><tr><th>Input with eligible Batch 20% discount</th><td>$1.00</td><td>$2.00</td></tr><tr><th>Output with eligible Batch 20% discount</th><td>$2.00</td><td>$4.00</td></tr></tbody></table></div><p>xAI's long-context pricing applies to a request entering the 200K+ prompt tier; it is not simply a surcharge on the excess tokens. Actual cached usage, Batch eligibility, server tools, Premium tiers and retries can change real invoices. Consult <a href="https://docs.x.ai/developers/pricing">xAI official pricing</a>.</p></section>
+<section class="g43-section" id="g43-cost-tool"><h2>Interactive Grok 4.3 cost calculator</h2><div class="g43-panel"><div class="g43-fields"><label>Prompt input tokens<input id="g43-input" type="number" min="0" max="1000000" value="180000"></label><label>Actually cached prompt tokens<input id="g43-cached" type="number" min="0" value="0"></label><label>Output tokens<input id="g43-output" type="number" min="0" value="2500"></label><label>Processing mode<select id="g43-mode"><option value="standard">Standard</option><option value="batch">Batch (eligible)</option></select></label><label>Monthly requests<input id="g43-calls" type="number" min="0" value="1000"></label><label>Other costs per request (USD)<input id="g43-tools" type="number" min="0" step=".001" value="0"></label></div><div class="g43-metrics"><div><span>Price tier</span><strong id="g43-tier">—</strong></div><div><span>Cost / request</span><strong id="g43-single">—</strong></div><div><span>Monthly estimate</span><strong id="g43-month">—</strong></div><div><span>Token configuration</span><strong id="g43-comparison">—</strong></div></div><p class="g43-small">Arithmetic only. Cache hits, token counts and tool fees are user assumptions, not live usage.</p></div></section>
+<section class="g43-section" id="g43-experiment"><h2>Original SXF engineering lab: 48 context billing scenarios</h2><figure class="g43-fig"><img src="/models/grok-4-3/images/grok43-cost-architecture.svg" loading="lazy" width="1600" height="900" alt="Original SXF Grok 4.3 prompt pricing and deployment decision diagram"></figure><p>SXF created a <strong>reproducible Python standard-library economic experiment</strong> spanning four fictional prompt lengths (199K, 201K, 400K, 900K), two output sizes, three assumed cache fractions and Standard/Batch processing: <strong>48 scenarios</strong>. No xAI requests were executed and no Grok output accuracy, latency or actual caching was measured.</p><div class="g43-table" tabindex="0"><table><thead><tr><th>Illustrative request</th><th>Estimated cost</th></tr></thead><tbody><tr><th>199K prompt + 2K output, uncached Standard</th><td>$0.25375</td></tr><tr><th>201K prompt + 2K output, uncached Standard</th><td>$0.51250</td></tr><tr><th>201K prompt + 2K output, 50% assumed cache, Batch</th><td>$0.24116</td></tr></tbody></table></div><div class="g43-downloads"><a href="/models/grok-4-3/sxf-grok43-context-cost-lab.py" download><b>Reproduce original Python billing study</b><span>48 synthetic cases and explicit assertions</span></a><a href="/models/grok-4-3/research-methodology.md" download><b>Methodology and limits</b><span>Primary sources and real benchmark protocol</span></a></div></section>
+<section class="g43-section" id="g43-context"><h2>Should you use a million-token prompt or RAG?</h2><p>A 1M context capacity permits substantial document corpora, repository files and longer conversations. But unnecessarily large prompts can cost more, especially above the <strong>200K pricing boundary</strong>. Retrieval augmented generation, targeted search, compression and verified citations often offer a better fit for focused queries.</p><p>Test how source-grounded answers change with full-context ingestion versus selected passages. Measure costs per correct answer, retrieved-evidence support, timeouts and context waste—not context size alone.</p><div class="g43-table" tabindex="0"><table><thead><tr><th>Task</th><th>Large context choice</th><th>Alternative</th></tr></thead><tbody><tr><th>Document Q&A</th><td>Whole permitted document if cross-section analysis matters</td><td>Retrieve relevant passages and cite source</td></tr><tr><th>Codebase agent</th><td>Snapshot multiple files for cross-file tasks</td><td>Targeted code search and commit pinning</td></tr><tr><th>Enterprise memory</th><td>Full conversation or long reference packs</td><td>Compact durable state plus retrieval</td></tr><tr><th>Research reports</th><td>Read many documents in one go</td><td>Source-attributed sections and verified evidence</td></tr></tbody></table></div></section>
+<section class="g43-section" id="g43-reasoning"><h2>Reasoning effort, response quality and prompt caching</h2><p>Grok 4.3 publishes configurable reasoning capabilities. The list of effort names can differ between overview docs, per-model documentation and API service channels. Validate the value you intend to use before shipping and track real token use and response time.</p><p>A cached-token discount applies only when a request actually qualifies for caching and its usage is recorded. Do not assume all repeated instructions are automatically billed as cached. Use xAI's usage and cost-tick reporting as the source for invoice reconciliation.</p></section>
+<section class="g43-section" id="g43-vision"><h2>Can Grok 4.3 see or generate images?</h2><p>It supports <strong>image input understanding and text output</strong>, not image generation as a normal output modality. Test charts, documents, screenshots and forms on permission-cleared images. Score extracted labels and numbers against verified references and do not infer perfect OCR or visual reasoning from mere modality support.</p></section>
+<section class="g43-section" id="g43-agents"><h2>AI agents, function calling and structured JSON</h2><div class="g43-table" tabindex="0"><table><thead><tr><th>Engineering risk</th><th>Production test</th></tr></thead><tbody><tr><th>Wrong tool arguments</th><td>Validate JSON schema and semantic correctness</td></tr><tr><th>Unapproved side effects</th><td>Auth gate and idempotency for actions</td></tr><tr><th>Invented facts</th><td>Review against authorized source citations</td></tr><tr><th>Invalid JSON</th><td>Schema enforcement plus content validation</td></tr><tr><th>Tool/network failures</th><td>Bounded retries, logging and rollback</td></tr><tr><th>Excess context cost</th><td>Measure cache usage and token accounting</td></tr></tbody></table></div><p>A schema-valid JSON result can still contain unsupported facts. Your application must enforce authority boundaries and not delegate permission decisions to the model. See <a href="/guides/llm-gateway/">SXF LLM Gateway</a> and <a href="/guides/deploy-ai-agents-production/">Deploy AI Agents in Production</a>.</p></section>
+<section class="g43-section" id="g43-api"><h2>API integration and safe production deployment</h2><p>Use the published model ID <code>grok-4.3</code> with xAI's documented official API and a current maintained client. Pin model, provider region, rate tier and supported reasoning/tool parameters; check rate limits on the actual tier you purchase. Keep credentials server-side and review customer data terms.</p><div class="g43-code"><div>ARCHITECTURE PSEUDOCODE — NOT EXECUTED</div><pre><code>model = "grok-4.3"
+context = retrieve_or_prepare_authorized_data(task)
+estimate_prompt_tokens(context)
+verify_long_context_cost_threshold()
+response = call_xai_supported_api(model, context)
+validate_tool_authorization_and_sources(response)
+reconcile_actual_usage_cost_ticks(response)</code></pre></div></section>
+<section class="g43-section" id="g43-decision"><h2>Interactive Grok 4.3 deployment decision matrix</h2><div class="g43-panel"><div class="g43-fields"><label>Use case<select id="g43-use"><option value="documents">Document analysis</option><option value="agents">Agent with tools</option><option value="vision">Visual input</option></select></label><label>Prompt size<select id="g43-context-need"><option value="normal">Under 200K</option><option value="huge">At least 200K</option></select></label><label>Budget<select id="g43-cost"><option value="normal">Balanced</option><option value="tight">Cost-sensitive</option></select></label><label>Answer format<select id="g43-output-need"><option value="prose">Written answer</option><option value="json">Structured JSON</option></select></label></div><div id="g43-plan" class="g43-output" aria-live="polite"></div></div></section>
+<section class="g43-section" id="g43-other"><h2>Grok 4.3 vs Grok 4.6 and newer models</h2><p>Grok 4.3 is not the most recent model in SXF's xAI catalog. Read the independently maintained <a href="/models/grok-4-6/">Grok 4.6</a> and <a href="/models/grok-4-7/">Grok 4.7</a> pages. Newer models can have different costs and serving limits; choose based on verified task quality, token economics and API availability rather than version number alone.</p></section>
+<section class="g43-section" id="g43-checklist"><h2>Enterprise Grok 4.3 readiness and quality audit</h2><ol class="g43-steps"><li>Check live model availability and service API.</li><li>Pin provider prices and region, including long-context and Batch rules.</li><li>Measure actual prompt, output and cached tokens.</li><li>Run human-reviewed document, vision and tool-action tests.</li><li>Implement retries, authorization, audit logs and cost budgets.</li><li>Benchmark against newer model versions using identical authorized inputs.</li></ol><div class="g43-downloads"><a href="/models/grok-4-3/grok43-live-evaluation-scorecard.csv" download><b>Download live evaluation scorecard</b><span>For future real measurements</span></a></div></section>
+<section class="g43-section" id="g43-faq"><h2>Grok 4.3 FAQ</h2><div class="g43-faq"><details><summary>What is Grok 4.3?</summary><p>A text-output xAI reasoning model with text/image input and one-million-token context.</p></details><details><summary>What is the Grok 4.3 API model name?</summary><p>grok-4.3.</p></details><details><summary>How much does Grok 4.3 cost?</summary><p>Below 200K prompt tokens, $1.25 input and $2.50 output per million; at 200K or above, $2.50 input and $5.00 output.</p></details><details><summary>What is Grok 4.3's context window?</summary><p>1,000,000 tokens; this is not a published maximum output guarantee.</p></details><details><summary>Does Grok 4.3 support caching?</summary><p>Published cached input prices are $0.20 short and $0.40 long per million when caching applies.</p></details><details><summary>Can I use Grok 4.3 with function calling?</summary><p>Yes in compatible API workflows; validate arguments, authority and side effects.</p></details><details><summary>Does Grok 4.3 generate images?</summary><p>It accepts images and produces text; image generation is not the model's normal output.</p></details><details><summary>Did SXF benchmark Grok 4.3 on real prompts?</summary><p>No. SXF constructed a reproducible 48-case synthetic pricing experiment; no paid API inference or quality testing.</p></details></div></section>
+<section class="g43-section" id="g43-sources"><h2>Official xAI sources, audit notes and internal links</h2><div class="g43-sources"><a href="https://docs.x.ai/developers/models/grok-4.3" rel="noopener noreferrer" target="_blank"><b>Grok 4.3 model specification ↗</b><span>Primary-source publication</span></a><a href="https://docs.x.ai/developers/pricing" rel="noopener noreferrer" target="_blank"><b>xAI official pricing ↗</b><span>Primary-source publication</span></a><a href="https://docs.x.ai/developers/cost-tracking" rel="noopener noreferrer" target="_blank"><b>xAI cost tracking ↗</b><span>Primary-source publication</span></a><a href="https://docs.x.ai/developers/model-capabilities/text/reasoning" rel="noopener noreferrer" target="_blank"><b>xAI reasoning ↗</b><span>Primary-source publication</span></a><a href="https://docs.x.ai/developers/model-capabilities/text/structured-outputs" rel="noopener noreferrer" target="_blank"><b>xAI structured outputs ↗</b><span>Primary-source publication</span></a><a href="https://docs.x.ai/developers/rate-limits" rel="noopener noreferrer" target="_blank"><b>xAI API rate limits ↗</b><span>Primary-source publication</span></a><a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html" rel="noopener noreferrer" target="_blank"><b>AWS Bedrock Grok 4.3 documentation ↗</b><span>Primary-source publication</span></a></div><div class="g43-links"><a href="/providers/xai/"><b>xAI model portfolio</b><span>Other models and provider facts</span></a><a href="/models/pricing/"><b>SXF model pricing</b><span>Compare current paid AI models</span></a></div></section></div><section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="grok-4.3">
+          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Grok 4.3: what changed.</h2><p>No post-baseline factual changes recorded for Grok 4.3 since 2026-10-03.</p></div>
+          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-10-03</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
+        </section>
+      <section class="model-history shell" data-model-history data-history-models="grok-4.3">
+      <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>Grok 4.3 verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
+      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_c658c24c246cb2d9576b" data-model-id="grok-4.3">
+              <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-10-03">2026-10-03</time></div>
+              <h3>Grok 4.3</h3><p>Baseline verified: 1,000,000 context · Not published max output · $1.25 input / $0.20 cached / $2.50 output per 1 million tokens</p>
+              <a href="https://docs.x.ai/developers/models/grok-4.3" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article></div>
+      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 77b0ad167e15…</p>
+    </section>
+      
+    <section class="evaluation-model-bridge shell" data-model-evaluations="grok-4.3">
+      <div class="intel-section-head"><div><p class="eyebrow">EVALUATION EVIDENCE</p><h2>Grok 4.3 benchmark observations.</h2></div><a href="/evaluations/">Evaluation methodology ↗</a></div>
+      <div class="evaluation-card-grid"><article>
+              <div><span>independent</span><small>Artificial Analysis</small></div>
+              <h3>AA-LCR 1.1</h3>
+              <strong>75.0%</strong>
+              <p>long context reasoning · reasoning medium</p>
+              <a href="https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium" target="_blank" rel="noopener noreferrer">Evidence ↗</a>
+            </article><article>
+              <div><span>independent</span><small>Artificial Analysis · under review</small></div>
+              <h3>CritPt</h3>
+              <strong>5.0%</strong>
+              <p>frontier science reasoning · reasoning medium</p>
+              <a href="https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium" target="_blank" rel="noopener noreferrer">Evidence ↗</a>
+            </article><article>
+              <div><span>independent</span><small>Artificial Analysis</small></div>
+              <h3>Humanity&#x27;s Last Exam</h3>
+              <strong>30.0%</strong>
+              <p>multidisciplinary reasoning · reasoning medium</p>
+              <a href="https://artificialanalysis.ai/models/comparisons/grok-4-6-vs-grok-4-3-medium" target="_blank" rel="noopener noreferrer">Evidence ↗</a>
+            </article></div>
+      <p class="evaluation-disclaimer">Scores are shown only with their evaluator, benchmark version and model configuration. They are not merged into a universal model score.</p>
+    </section></main><footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/labs/">VMC Labs <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="https://vivamediacreative.com/labs/">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script src="/models/grok-4-3/reference.js" defer></script></body></html>
