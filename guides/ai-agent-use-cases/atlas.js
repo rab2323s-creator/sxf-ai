@@ -1,0 +1,20 @@
+(()=>{"use strict";const $=s=>document.getElementById(s);const q=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const fmt=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
+const atlas=$("oa-atlas");let items=[];const filters=["oa-search","oa-category","oa-pattern","oa-risk"].map($);
+const render=()=>{if(!atlas)return;const [search,cat,pattern,risk]=filters.map(x=>x?.value||"");const match=items.filter(c=>(!search||(c.title+" "+c.description+" "+c.kpi).toLowerCase().includes(search.toLowerCase()))&&(!cat||c.category===cat)&&(!pattern||c.pattern===pattern)&&(!risk||c.risk===risk));$("oa-count").textContent=match.length+" / "+items.length+" cases";atlas.replaceChildren();for(const c of match){const a=document.createElement("article");a.className="oa-case";const h=document.createElement("h3");h.textContent=c.title;const p=document.createElement("p");p.textContent=c.description;const m=document.createElement("small");m.textContent=c.id+" · "+c.category+" · "+({agent:"Agent candidate",workflow:"Deterministic workflow",assist:"AI-assisted",human:"Human decision required"}[c.pattern])+" · "+c.risk+" risk";const d=document.createElement("p");d.textContent="KPI: "+c.kpi;const g=document.createElement("p");g.textContent="Control: "+c.guardrail;a.append(m,h,p,d,g);atlas.append(a)}};
+fetch("/guides/ai-agent-use-cases/atlas.json").then(r=>{if(!r.ok)throw Error("atlas fetch failed");return r.json()}).then(d=>{items=d.cases;const cats=[...new Set(items.map(x=>x.category))];cats.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;$("oa-category").append(o)});render()}).catch(()=>{$("oa-count").textContent="Download the case-study CSV if the interactive catalog is unavailable."});filters.forEach(x=>x?.addEventListener("input",render));
+const costIds=["oa-volume","oa-minutes","oa-hourly","oa-accept","oa-review","oa-agent","oa-platform","oa-setup"].map($);
+const calculate=()=>{const [volume,minutes,hourly,accept,review,agent,platform,setup]=costIds.map(x=>Number(x.value));const vals=[volume,minutes,hourly,accept,review,agent,platform,setup];if(!vals.every(Number.isFinite)||vals.some(v=>v<0)||accept>100||review>100||volume>1e7){$("oa-savings").textContent="Check inputs";return}
+const baseline=volume*minutes/60*hourly,accepted=accept/100,reviewFrac=review/100;
+const reviewCosts=volume*accepted*reviewFrac*minutes/60*hourly;
+const residual=volume*(1-accepted)*minutes/60*hourly;
+const monthly=volume*agent+platform+reviewCosts+residual;
+const saved=baseline-monthly;$("oa-baseline").textContent=fmt(baseline);$("oa-monthly").textContent=fmt(monthly);$("oa-savings").textContent=fmt(saved);$("oa-year").textContent=fmt(saved*12-setup);$("oa-note").textContent="Assumes accepted tasks require only the specified review share; failures revert to full human handling. Excludes errors, rework, downtime, taxes and opportunity cost."};
+costIds.forEach(x=>x?.addEventListener("input",calculate));calculate();
+const ids=["oa-repeat","oa-risk-level","oa-errors","oa-access","oa-savings-high"].map($);
+const score=()=>{const [repeat,risk,errors,access,savings]=ids.map(x=>Number(x.value));
+const fit=repeat*4+savings*3+(5-errors)*4+(5-access)*3+(5-risk)*4;const bounded=Math.max(0,Math.min(90,Math.round(fit/90*100)));
+$("oa-index").textContent=bounded+"/100";let label=risk>=4||access>=4||errors>=4?"High-risk: human-controlled decision and tighter safeguards":repeat>=4&&risk<=2&&errors<=2?"Consider deterministic workflow first":"Consider bounded AI assistance or an agent pilot";
+$("oa-index-class").textContent=label;$("oa-index-notice").textContent="SXF heuristic index; not validated prediction, ROI proof or autonomous deployment authorization."};
+ids.forEach(x=>x?.addEventListener("input",score));score();
+})();
