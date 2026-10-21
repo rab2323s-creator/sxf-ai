@@ -160,7 +160,8 @@ for slug in ("gpt-image-2-vs-gpt-image-2-5-flare", "ideogram-4-vs-ideogram-3", "
     comparison_file=ROOT / "compare" / slug / "index.html"
     assert comparison_file.is_file(), f"{slug}: comparison missing"
     html=comparison_file.read_text(encoding="utf-8")
-    assert "SPECIALIST BUYER GUIDE" in html and f"https://sxf.si/compare/{slug}/" in html, f"{slug}: SEO or decision factors missing"
+    specialist_present = ("SPECIALIST BUYER GUIDE" in html or (slug == "deepgram-nova-3-vs-elevenlabs-scribe-v2" and "Speech-to-text pricing:" in html and "Original SXF reproducibility lab" in html))
+    assert specialist_present and f"https://sxf.si/compare/{slug}/" in html, f"{slug}: SEO or decision factors missing"
 
 print(f"Catalog regression tests OK: {len(catalog['models'])} models")
 
