@@ -72,7 +72,7 @@
       ", " + item.risk + " risk). Enter your own company data below.";
     const target = $("framework");
     target.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
     });
     target.querySelector("h2").focus({ preventScroll: true });
   });
