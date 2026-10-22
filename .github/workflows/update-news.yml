@@ -39,6 +39,8 @@ jobs:
         run: python tests/test_feed_card_rendering.py
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
+      - name: Homepage decision pathways and SEO regression
+        run: python tests/test_homepage_decision_pathways.py
       - name: Benchmarks guide content-consistency regression
         run: python tests/test_ai_model_benchmarks_guide.py
       - name: Signals index HTML and SEO regression tests
