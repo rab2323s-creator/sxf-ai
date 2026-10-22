@@ -61,9 +61,9 @@ def main():
     assert 'id="decision-pathways-title"' in html
     for path in EXPECTED:
         assert (ROOT / path.lstrip("/") / "index.html").is_file(), f"Missing pathway target: {path}"
-    match = re.search(r'<script type="application/ld\\+json">(.*?)</script>', html, re.S)
-    assert match, "Homepage structured data missing"
-    data = json.loads(match.group(1))
+    schema_start = '<script type="application/ld+json">'
+    assert schema_start in html, "Homepage structured data missing"
+    data = json.loads(html.split(schema_start, 1)[1].split("</script>", 1)[0])
     nodes = data["@graph"]
     page = next(node for node in nodes if node.get("@type") == "CollectionPage")
     item = next(node for node in nodes if node.get("@id") == "https://sxf.si/#decision-pathways")
