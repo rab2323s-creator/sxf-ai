@@ -100,7 +100,7 @@
           "@id": "https://sxf.si/#primaryimage"
         },
         "mainEntity": {
-          "@id": "https://sxf.si/#latest-signals"
+          "@id": "https://sxf.si/#decision-pathways"
         },
         "about": [
           {
@@ -167,6 +167,36 @@
           }
         ],
         "inLanguage": "en"
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://sxf.si/#decision-pathways",
+        "name": "Start with AI model and agent decisions",
+        "description": "Primary pathways to AI model comparisons, API pricing, benchmark evidence and AI agent research.",
+        "itemListOrder": "https://schema.org/ItemListOrderAscending",
+        "numberOfItems": 4,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {"@type": "WebPage", "name": "Compare AI Models", "url": "https://sxf.si/compare/"}
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {"@type": "WebPage", "name": "Explore API Pricing", "url": "https://sxf.si/models/pricing/"}
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {"@type": "WebPage", "name": "Examine AI Benchmarks", "url": "https://sxf.si/evaluations/"}
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {"@type": "WebPage", "name": "Research AI Agents", "url": "https://sxf.si/research/"}
+          }
+        ]
       }
     ]
   }
@@ -192,13 +222,14 @@
     <section class="hero shell hero-premium">
       <div class="hero-frame">
         <div class="hero-identity">
-          <div class="hero-kicker"><span class="pulse-dot"></span> LIVE AI SIGNAL RADAR</div>
+          <div class="hero-kicker"><span class="pulse-dot"></span> SOURCE-BACKED AI INTELLIGENCE</div>
           <h1>AI Models &amp; AI Agents: Comparisons, Pricing, Benchmarks &amp; Research</h1>
           <p class="hero-copy">Explore AI models, agents, benchmarks, API pricing and the latest research. Compare capabilities, track important updates and make informed decisions using source-backed intelligence.</p>
           <div class="hero-actions">
-            <a class="primary-cta" href="#latest">Open the radar <span>↘</span></a>
-            <a class="secondary-cta" href="/about/">How SXF works</a>
+            <a class="primary-cta" href="/compare/">Compare AI Models <span aria-hidden="true">↗</span></a>
+            <a class="secondary-cta" href="/models/pricing/">Explore API Pricing <span aria-hidden="true">↗</span></a>
           </div>
+          <a class="hero-tertiary-cta" href="#latest">View latest AI signals <span aria-hidden="true">↓</span></a>
 
           <div class="signal-strip" aria-label="Feed status">
             <div><strong id="storyCount">80</strong><span>tracked signals</span></div>
@@ -263,6 +294,43 @@
           <div class="radar-meta radar-meta-b">09 SOURCES · 05 LIVE · 04 VALIDATING</div>
         </div>
       </div>
+    </section>
+
+    <section class="decision-pathways shell" id="decision-pathways" aria-labelledby="decision-pathways-title">
+      <div class="decision-pathways-heading">
+        <div>
+          <p class="eyebrow">START WITH A DECISION</p>
+          <h2 id="decision-pathways-title">Compare models. Understand costs. Evaluate evidence.</h2>
+        </div>
+        <p>Use SXF's source-backed intelligence to evaluate models, pricing, benchmarks and AI agents before choosing what fits your work.</p>
+      </div>
+      <div class="decision-pathways-grid">
+        <a class="decision-pathway-card" href="/compare/">
+          <span class="decision-pathway-index">01 / MODEL COMPARISONS</span>
+          <h3>Compare AI Models</h3>
+          <p>Compare capabilities, context limits and model trade-offs with source-linked evidence.</p>
+          <span class="decision-pathway-link">Open comparison builder <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="decision-pathway-card" href="/models/pricing/">
+          <span class="decision-pathway-index">02 / API ECONOMICS</span>
+          <h3>Explore API Pricing</h3>
+          <p>Review published model pricing, understand billing differences and estimate API costs.</p>
+          <span class="decision-pathway-link">Compare model costs <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="decision-pathway-card" href="/evaluations/">
+          <span class="decision-pathway-index">03 / BENCHMARK EVIDENCE</span>
+          <h3>Examine AI Benchmarks</h3>
+          <p>Inspect evaluation results with methodology, model versions and configurations attached.</p>
+          <span class="decision-pathway-link">Explore evaluations <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="decision-pathway-card" href="/research/">
+          <span class="decision-pathway-index">04 / AGENT RESEARCH</span>
+          <h3>Research AI Agents</h3>
+          <p>Explore agent reliability, memory and security research to assess real-world trade-offs.</p>
+          <span class="decision-pathway-link">Read the research <span aria-hidden="true">↗</span></span>
+        </a>
+      </div>
+      <p class="decision-pathways-note">Following new releases? <a href="#latest">Visit the live AI signal radar <span aria-hidden="true">↓</span></a></p>
     </section>
 
     <section class="what-changed shell" aria-labelledby="what-changed-title">
