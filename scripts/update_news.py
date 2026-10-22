@@ -8113,7 +8113,7 @@ def guides_index_html(items, current_items):
             "read_time": "7 min",
         },
     ]
-    featured = published[:2]
+    featured = published[:3]
     featured_cards = "".join(
         f'''<a class="guide-feature-card {"guide-feature-lead" if i == 0 else ""}" href="{escape(g["href"], quote=True)}">
           <div class="guide-card-top"><span class="guide-card-kicker">{escape(g["kicker"])}</span><small>{escape(g["updated"])}</small></div>
