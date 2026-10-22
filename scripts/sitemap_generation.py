@@ -3,8 +3,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Callable
+import re
 
 
 @dataclass(frozen=True)
@@ -25,6 +27,54 @@ class SitemapContext:
     catalog_owns_model_route: Callable
     model_page_indexable: Callable
     slugify: Callable
+
+
+
+class GuideHeadParser(HTMLParser):
+    """Read a guide's canonical and indexability from its HTML head."""
+
+    def __init__(self):
+        super().__init__()
+        self.canonical = None
+        self.robots = []
+
+    def handle_starttag(self, tag, attrs):
+        props = dict(attrs)
+        if tag == "link" and "canonical" in props.get("rel", "").lower().split():
+            self.canonical = props.get("href")
+        elif tag == "meta" and props.get("name", "").lower() in {"robots", "googlebot"}:
+            self.robots.append(props.get("content", "").lower())
+
+
+def indexable_guide_urls(site_root: Path, base_url: str):
+    """Find publishable guide pages; exclude explicitly noindexed guides."""
+    for page in sorted((site_root / "guides").glob("*/index.html")):
+        html = page.read_text(encoding="utf-8")
+        head = html.split("</head>", 1)[0]
+        metadata = GuideHeadParser()
+        metadata.feed(head)
+        if any("noindex" in value.split(",") or "noindex" in value for value in metadata.robots):
+            continue
+        expected = f"{base_url}/guides/{page.parent.name}/"
+        if metadata.canonical != expected:
+            raise ValueError(
+                f"Indexable guide must have a matching self-canonical: {page} "
+                f"(expected {expected}, got {metadata.canonical})"
+            )
+        yield expected
+
+
+def append_missing_guide_rows(rows: list[str], site_root: Path, base_url: str, today: str):
+    """Preserve authored guide entries (including images); add new guides automatically."""
+    known = {
+        match.group(1)
+        for row in rows
+        if (match := re.search(r"<loc>([^<]+)</loc>", row))
+    }
+    for url in indexable_guide_urls(site_root, base_url):
+        if url not in known:
+            rows.append(sitemap_entry(url, today))
+            known.add(url)
 
 
 def sitemap_entry(url, lastmod):
@@ -245,6 +295,10 @@ def write_sitemap(items, context: SitemapContext):
             continue
         if model_page_indexable(name, matched):
             rows.append(sitemap_entry(f"{BASE_URL}/models/{slugify(name)}/", lastmod(matched)))
+
+    # Guide URLs are discovered from self-canonical, indexable HTML so new
+    # articles cannot be forgotten when the handwritten guide list grows.
+    append_missing_guide_rows(rows, SITEMAP.parent, BASE_URL, generated_today)
 
     from sitemap_lastmod import synchronize_lastmod
     rows = synchronize_lastmod(rows, SITEMAP, BASE_URL)

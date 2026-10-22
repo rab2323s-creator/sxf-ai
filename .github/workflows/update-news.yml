@@ -118,6 +118,8 @@ jobs:
           node tests/test_pricing_policy.cjs
       - name: Refresh sitemap after post-render changes
         run: python scripts/sitemap_lastmod.py --refresh
+      - name: Verify complete Guides sitemap coverage
+        run: python tests/test_guides_sitemap.py
       - name: Intelligence explosion reference regression
         run: python tests/test_intelligence_explosion_guide.py
       - name: Validate generated site
