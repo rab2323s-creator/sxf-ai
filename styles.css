@@ -619,6 +619,41 @@ button,input{font:inherit}
 .discovery-gateway p{max-width:520px;margin:8px 0 22px;color:#7e8997;font-size:13px;line-height:1.65}
 .discovery-gateway b{color:var(--accent);font-size:11px;font-weight:800}
 
+
+/* Consolidated homepage references keep unique resources and provenance accessible. */
+.featured-resources{padding:90px 0 84px}
+.featured-resources-heading{margin-bottom:27px}
+.featured-resources-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.featured-resource-card{min-width:0;min-height:245px;display:flex;flex-direction:column;padding:24px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(155deg,rgba(255,255,255,.031),rgba(255,255,255,.008));transition:border-color .2s ease,transform .2s ease}
+.featured-resource-card:hover{border-color:rgba(200,255,77,.34);transform:translateY(-2px)}
+.featured-resource-card:focus-visible,.featured-collections a:focus-visible,.featured-brief-link:focus-visible,.featured-source-proof summary:focus-visible,.featured-source-links a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.featured-resource-meta{font:800 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent);letter-spacing:.1em}
+.featured-resource-card h3{margin:27px 0 9px;font-size:clamp(23px,2.2vw,30px);letter-spacing:-.04em;line-height:1.11}
+.featured-resource-card p{margin:0 0 24px;font-size:13px;line-height:1.7;color:#a6b2c1}
+.featured-resource-link{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line);font-size:12px;font-weight:750;color:#e4ebf4}
+.featured-resource-link span{color:var(--accent)}
+.featured-collections{margin-top:18px;display:flex;align-items:center;flex-wrap:wrap;gap:10px 17px;padding:18px 2px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.featured-collections>span{margin-right:auto;font:800 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;color:#96a3b2}
+.featured-collections a{font-size:12px;font-weight:740;color:#d8e1ec}
+.featured-collections a:hover,.featured-source-links a:hover{color:var(--accent)}
+.featured-collections a span{color:var(--accent)}
+.featured-resources-footer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.featured-brief-link,.featured-source-proof{min-width:0;min-height:116px;border:1px solid var(--line);border-radius:17px;padding:20px;background:rgba(255,255,255,.018)}
+.featured-brief-link{display:flex;flex-direction:column;gap:8px}
+.featured-brief-link strong{font-size:18px;letter-spacing:-.025em}
+.featured-brief-link>span:last-child{font-size:12px;color:#c5d0dc}
+.featured-brief-link>span:last-child span{color:var(--accent)}
+.featured-source-proof summary{cursor:pointer;list-style:none;font-size:16px;font-weight:800;color:#e7edf5;display:flex;justify-content:space-between;gap:14px}
+.featured-source-proof summary::-webkit-details-marker{display:none}
+.featured-source-proof summary span{color:var(--accent)}
+.featured-source-proof>p{margin:13px 0;color:#a2adbc;font-size:13px;line-height:1.6}
+.featured-source-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px;margin-top:17px}
+.featured-source-links a{font-size:12px;color:#d5dfeb}
+.featured-source-links a span{color:var(--accent)}
+@media(max-width:950px){.featured-resources-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-resources-footer{grid-template-columns:1fr}}
+@media(max-width:600px){.featured-resources{padding:65px 0}.featured-resources-grid{grid-template-columns:1fr}.featured-resource-card{min-height:214px;padding:20px}.featured-collections{align-items:flex-start;gap:13px}.featured-collections>span{flex-basis:100%}.featured-source-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.featured-resource-card{transition:none}.featured-resource-card:hover{transform:none}}
+
 /* SXF ESSENTIAL INTELLIGENCE */
 .essential-intelligence{padding:108px 0 86px}
 .essential-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}

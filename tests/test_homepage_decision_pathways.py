@@ -73,6 +73,27 @@ def main():
     assert ".decision-pathways-grid" in css and "@media(max-width:530px)" in css
     assert ".decision-pathway-card:focus-visible" in css
     assert "@media(prefers-reduced-motion:reduce)" in css
+    # Consolidation must preserve unique editorial pages and source evidence.
+    assert parser.section_ids.index("latest") < parser.section_ids.index("agent-intelligence")
+    assert parser.section_ids.index("agent-intelligence") < parser.section_ids.index("about")
+    assert "essential-intelligence shell" not in parser.section_ids
+    assert "discovery-gateways shell" not in parser.section_ids
+    assert "id=\"essential-ai-title\"" in html
+    assert html.count('class="featured-resource-card"') == 6
+    preserved = (
+        "/models/", "/topics/ai-agents/", "/topics/ai-security/", "/topics/",
+        "/research/ai-agent-memory/", "/research/ai-agent-reliability/",
+        "/guides/ai-agent-security/", "/guides/what-is-agentic-ai/",
+        "/compare/gpt-6-astra-vs-sol-vs-luna/", "/superintelligence/",
+        "/brief/", "/signals/",
+    )
+    for href in preserved:
+        assert href in parser.anchors, f"Important internal link lost: {href}"
+        assert (ROOT / href.lstrip("/") / "index.html").is_file(), href
+    assert '<details class="featured-source-proof" id="sources">' in html
+    assert html.count('class="featured-source-links"') == 1
+    assert html.count('target="_blank" rel="noopener noreferrer"') >= 9
+    assert ".featured-resources-grid" in css and ".featured-source-proof summary:focus-visible" in css
     print("PASS: homepage decision pathways, links, schema and responsive styles")
 
 
