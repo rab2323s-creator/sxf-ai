@@ -19,6 +19,12 @@ assert.ok(html.includes("atlas-core.js"));
 assert.ok(html.includes('id="oa-current"'));
 assert.ok(html.includes('id="oa-validation"'));
 assert.ok(js.includes("core.compareCosts"));
+assert.ok(html.includes("<h3>AI Agent Examples: turn a scenario into a decision</h3>"));
+assert.ok(html.includes("Use these AI Agent Examples to find a task like yours"));
+for (const link of ["/models/pricing/", "/compare/", "/guides/ai-agent-evaluation-checklist/"]) {
+  assert.ok(html.includes('<a href="' + link + '">'), "Missing contextual SXF internal link: " + link);
+}
+
 assert.equal(core.matchesCase(cases[0], {search: "SUPPORT",category: "",pattern: "",risk: ""}), true);
 assert.equal(core.matchesCase(cases[0], {search: "missing_keyword_785",category: "",pattern: "",risk: ""}), false);
 assert.equal(core.parseField(""), NaN); // NaN is equal using Object.is in strictEqual
