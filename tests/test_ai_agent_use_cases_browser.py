@@ -17,12 +17,27 @@ def run():
     try:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True)
-            for width in (360, 390, 768, 1440):
+            for width in (320, 360, 390, 768, 1024, 1366, 1440):
                 page = browser.new_page(viewport={"width": width, "height": 850})
                 errors = []
                 page.on("pageerror", lambda e: errors.append(str(e)))
                 page.goto(url, wait_until="networkidle")
                 assert not errors, errors
+                hero = page.locator(".oa-hero")
+                assert hero.locator("h1").count() == 1
+                ctas = hero.locator(".oa-hero-cta")
+                assert ctas.count() == 3
+                assert ctas.evaluate_all("(links) => links.map(a => a.getAttribute('href'))") == ["#atlas", "#framework", "#roi"]
+                for target in ("atlas", "framework", "roi"):
+                    assert page.locator(f"section#{target}").count() == 1
+                hero_size = hero.locator("h1").evaluate("(el) => parseFloat(getComputedStyle(el).fontSize)")
+                assert hero_size <= (38 if width <= 390 else 53), (width, hero_size)
+                if width <= 390:
+                    assert ctas.evaluate_all("(els) => els.every(el => el.getBoundingClientRect().height >= 44)")
+                ctas.nth(2).click()
+                assert page.evaluate("location.hash") == "#roi"
+                assert page.locator("#roi").evaluate("(el) => el.getBoundingClientRect().top") >= -5
+                page.locator("#top").scroll_into_view_if_needed()
                 assert page.locator(".oa-case").count() == 50
                 assert page.locator(".oa-case:visible").count() == 50
                 assert "50 of 50" in page.locator("#oa-count").inner_text()
