@@ -7717,6 +7717,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/what-is-vibe-coding/",
+            "category": "Coding · AI Tools · Engineering",
+            "categories": ["coding", "tools", "agents", "security"],
+            "kicker": "VIBE CODING FIELD GUIDE",
+            "title": "What Is Vibe Coding? Tools, Costs & Risks (2026)",
+            "description": "Build a website through natural-language prompting, compare six tool workflows and use the original SXF calculator lab, tests and security checklist.",
+            "meta": "Vibe coding · AI coding tools · Costs · Security",
+            "updated": "Oct 22, 2026",
+            "read_time": "16 min",
+        },
+        {
             "href": "/guides/how-to-choose-ai-model/",
             "category": "Models · Evaluation · Decisions",
             "categories": ["models", "research", "tools", "coding"],
