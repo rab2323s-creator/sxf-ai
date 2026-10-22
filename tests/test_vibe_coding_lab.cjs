@@ -9,6 +9,7 @@ close(calculate({...normal,requests:0}).total,0);
 close(calculate({...normal,requests:2,inputUsdPerMillion:.25,outputUsdPerMillion:1.5}).total,.002);
 for (const [key,value] of [["requests",-1],["requests",1.5],["inputTokens","NaN"],["outputTokens",Infinity],["inputUsdPerMillion",-1],["requests",1e30]])assert.throws(()=>calculate({...normal,[key]:value}),RangeError);
 assert.throws(()=>calculate({...normal,requests:9007199254740991,inputTokens:9007199254740991,inputUsdPerMillion:1e300}),RangeError);
+for (const val of ["", "   ", null, undefined, true, {}, []]) assert.throws(()=>calculate({...normal,requests:val}),RangeError);
 const html=fs.readFileSync("guides/what-is-vibe-coding/index.html","utf8");
 const head=html.split("</head>",1)[0];
 assert.match(head,/<link rel="canonical" href="https:\/\/sxf.si\/guides\/what-is-vibe-coding\/"/);
