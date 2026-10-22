@@ -21,6 +21,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Agent Opportunity Atlas regression tests
+        run: |
+          node --check guides/ai-agent-use-cases/atlas-core.js
+          node --check guides/ai-agent-use-cases/atlas.js
+          node tests/test_ai_agent_use_cases.cjs
+          python -m py_compile guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
+          python guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
@@ -136,6 +143,8 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Test Compare UI in desktop and mobile Chromium
         run: python tests/test_compare_browser.py
+      - name: Test Atlas decisions, mobile and no-JavaScript experience
+        run: python tests/test_ai_agent_use_cases_browser.py
       - name: Test Research mobile, tablet and desktop experience
         run: python tests/test_research_browser.py
       - name: Keep browser screenshots for review

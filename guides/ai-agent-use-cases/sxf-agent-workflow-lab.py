@@ -40,6 +40,11 @@ def main():
     guarded=run("guarded")
     assert naive["duplicate_actions"]>0
     assert guarded.get("duplicate_actions",0)==0
+    expected=sum(i % 7 != 0 and i % 12 != 0 for i in range(120))
+    assert guarded["unique_actions"] == expected
+    assert guarded["side_effect_calls"] == expected
+    assert guarded.get("approval_block_attempts", 0) > 0
+    assert guarded.get("invalid_input_attempts", 0) > 0
     assert guarded["side_effect_calls"]<=naive["side_effect_calls"]
     assert guarded["unique_actions"]<=naive["unique_actions"]
     output={"study":"Synthetic fault injection; not an LLM benchmark",

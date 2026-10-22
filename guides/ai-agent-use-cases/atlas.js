@@ -1,20 +1,130 @@
-(()=>{"use strict";const $=s=>document.getElementById(s);const q=(s,r=document)=>Array.from(r.querySelectorAll(s));
-const fmt=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n);
-const atlas=$("oa-atlas");let items=[];const filters=["oa-search","oa-category","oa-pattern","oa-risk"].map($);
-const render=()=>{if(!atlas)return;const [search,cat,pattern,risk]=filters.map(x=>x?.value||"");const match=items.filter(c=>(!search||(c.title+" "+c.description+" "+c.kpi).toLowerCase().includes(search.toLowerCase()))&&(!cat||c.category===cat)&&(!pattern||c.pattern===pattern)&&(!risk||c.risk===risk));$("oa-count").textContent=match.length+" / "+items.length+" cases";atlas.replaceChildren();for(const c of match){const a=document.createElement("article");a.className="oa-case";const h=document.createElement("h3");h.textContent=c.title;const p=document.createElement("p");p.textContent=c.description;const m=document.createElement("small");m.textContent=c.id+" · "+c.category+" · "+({agent:"Agent candidate",workflow:"Deterministic workflow",assist:"AI-assisted",human:"Human decision required"}[c.pattern])+" · "+c.risk+" risk";const d=document.createElement("p");d.textContent="KPI: "+c.kpi;const g=document.createElement("p");g.textContent="Control: "+c.guardrail;a.append(m,h,p,d,g);atlas.append(a)}};
-fetch("/guides/ai-agent-use-cases/atlas.json").then(r=>{if(!r.ok)throw Error("atlas fetch failed");return r.json()}).then(d=>{items=d.cases;const cats=[...new Set(items.map(x=>x.category))];cats.forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;$("oa-category").append(o)});render()}).catch(()=>{$("oa-count").textContent="Download the case-study CSV if the interactive catalog is unavailable."});filters.forEach(x=>x?.addEventListener("input",render));
-const costIds=["oa-volume","oa-minutes","oa-hourly","oa-accept","oa-review","oa-agent","oa-platform","oa-setup"].map($);
-const calculate=()=>{const [volume,minutes,hourly,accept,review,agent,platform,setup]=costIds.map(x=>Number(x.value));const vals=[volume,minutes,hourly,accept,review,agent,platform,setup];if(!vals.every(Number.isFinite)||vals.some(v=>v<0)||accept>100||review>100||volume>1e7){$("oa-savings").textContent="Check inputs";return}
-const baseline=volume*minutes/60*hourly,accepted=accept/100,reviewFrac=review/100;
-const reviewCosts=volume*accepted*reviewFrac*minutes/60*hourly;
-const residual=volume*(1-accepted)*minutes/60*hourly;
-const monthly=volume*agent+platform+reviewCosts+residual;
-const saved=baseline-monthly;$("oa-baseline").textContent=fmt(baseline);$("oa-monthly").textContent=fmt(monthly);$("oa-savings").textContent=fmt(saved);$("oa-year").textContent=fmt(saved*12-setup);$("oa-note").textContent="Assumes accepted tasks require only the specified review share; failures revert to full human handling. Excludes errors, rework, downtime, taxes and opportunity cost."};
-costIds.forEach(x=>x?.addEventListener("input",calculate));calculate();
-const ids=["oa-repeat","oa-risk-level","oa-errors","oa-access","oa-savings-high"].map($);
-const score=()=>{const [repeat,risk,errors,access,savings]=ids.map(x=>Number(x.value));
-const fit=repeat*4+savings*3+(5-errors)*4+(5-access)*3+(5-risk)*4;const bounded=Math.max(0,Math.min(100,Math.round(fit/90*100)));
-$("oa-index").textContent=bounded+"/100";let label=risk>=4||access>=4||errors>=4?"High-risk: human-controlled decision and tighter safeguards":repeat>=4&&risk<=2&&errors<=2?"Consider deterministic workflow first":"Consider bounded AI assistance or an agent pilot";
-$("oa-index-class").textContent=label;$("oa-index-notice").textContent="SXF heuristic index; not validated prediction, ROI proof or autonomous deployment authorization."};
-ids.forEach(x=>x?.addEventListener("input",score));score();
+/* Progressive enhancement: the 50 editorial cases are already in HTML.
+ * Filtering, comparison, and scoring work without an API or third-party analytics. */
+(function () {
+  "use strict";
+  const core = window.SXFAtlasCore;
+  const $ = id => document.getElementById(id);
+  const fmt = n => new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", maximumFractionDigits: 2
+  }).format(n);
+  const cards = Array.from(document.querySelectorAll("#oa-atlas .oa-case"));
+  const controls = ["oa-search", "oa-category", "oa-pattern", "oa-risk"].map($);
+  const count = $("oa-count");
+  const empty = $("oa-empty");
+  if (!core || !cards.length || !count || controls.some(x => !x)) {
+    if (count) count.textContent = "All case studies are available below. Interactive tools could not start.";
+    return;
+  }
+  const items = cards.map(node => ({
+    node,
+    id: node.dataset.id,
+    category: node.dataset.category,
+    pattern: node.dataset.pattern,
+    risk: node.dataset.risk,
+    title: node.querySelector("h3").textContent,
+    description: node.querySelector(".oa-case-description").textContent,
+    kpi: node.querySelector(".oa-case-kpi").textContent,
+    guardrail: node.querySelector(".oa-case-guardrail").textContent
+  }));
+  const category = $("oa-category");
+  [...new Set(items.map(item => item.category))].sort().forEach(name => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    category.append(option);
+  });
+  function readFilters() {
+    return {
+      search: $("oa-search").value,
+      category: category.value,
+      pattern: $("oa-pattern").value,
+      risk: $("oa-risk").value
+    };
+  }
+  function filterCases() {
+    const filters = readFilters();
+    let shown = 0;
+    for (const item of items) {
+      item.node.hidden = !core.matchesCase(item, filters);
+      if (!item.node.hidden) shown++;
+    }
+    count.textContent = shown + " of " + items.length + " cases";
+    empty.hidden = shown !== 0;
+    $("oa-clear").hidden = !Object.values(filters).some(Boolean);
+  }
+  controls.forEach(control => control.addEventListener("input", filterCases));
+  function clearFilters() {
+    controls.forEach(control => { control.value = ""; });
+    filterCases();
+    $("oa-search").focus();
+  }
+  $("oa-clear").addEventListener("click", clearFilters);
+  $("oa-reset").addEventListener("click", clearFilters);
+  filterCases();
+
+  // Case choice gives users context; it intentionally does not fabricate numeric inputs.
+  $("oa-atlas").addEventListener("click", event => {
+    const button = event.target.closest(".oa-evaluate");
+    if (!button) return;
+    const item = items.find(entry => entry.id === button.dataset.case);
+    if (!item) return;
+    $("oa-selected").textContent = item.title + " (" + core.LABELS[item.pattern] +
+      ", " + item.risk + " risk). Enter your own company data below.";
+    const target = $("framework");
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+    });
+    target.querySelector("h2").focus({ preventScroll: true });
+  });
+
+  const scoreIds = ["oa-repeat", "oa-risk-level", "oa-errors", "oa-access", "oa-savings-high"];
+  const scoring = () => {
+    const [repeat, risk, errors, access, savings] = scoreIds.map(id => core.parseField($(id).value));
+    scoreIds.forEach(id => {
+      const display = $(id + "-value");
+      if (display) display.textContent = $(id).value + " / 5";
+    });
+    const result = core.opportunity({ repeat, risk, errors, access, savings });
+    $("oa-index").textContent = result.valid ? result.score + "/100" : "—";
+    $("oa-index-class").textContent = result.valid ? result.explanation : result.error;
+    $("oa-index-notice").textContent = "SXF screening heuristic, not a validated prediction or permission to automate. Safety gates take precedence over this score.";
+  };
+  scoreIds.forEach(id => $(id).addEventListener("input", scoring));
+  scoring();
+
+  const fieldIds = {
+    volume: "oa-volume", minutes: "oa-minutes", hourly: "oa-hourly",
+    accepted: "oa-accept", review: "oa-review", agentCost: "oa-agent",
+    agentPlatform: "oa-platform", setup: "oa-setup",
+    currentPerTask: "oa-current-task", currentPlatform: "oa-current-platform",
+    currentManual: "oa-current-manual"
+  };
+  const outputIds = ["oa-baseline", "oa-current", "oa-monthly", "oa-savings", "oa-year"];
+  function calculate() {
+    const input = Object.fromEntries(Object.entries(fieldIds).map(
+      ([key, id]) => [key, core.parseField($(id).value)]
+    ));
+    const outcome = core.compareCosts(input);
+    const validation = $("oa-validation");
+    validation.hidden = outcome.valid;
+    if (!outcome.valid) {
+      validation.textContent = outcome.error;
+      outputIds.forEach(id => { $(id).textContent = "—"; });
+      $("oa-recommendation").textContent = "Complete all inputs to compare the two approaches.";
+      $("oa-note").textContent = "No results are displayed for invalid inputs.";
+      return;
+    }
+    validation.textContent = "";
+    $("oa-baseline").textContent = fmt(outcome.humanBaseline);
+    $("oa-current").textContent = fmt(outcome.currentCost);
+    $("oa-monthly").textContent = fmt(outcome.agentCost);
+    $("oa-savings").textContent = fmt(outcome.monthlyDelta);
+    $("oa-year").textContent = fmt(outcome.firstYearDelta);
+    $("oa-recommendation").textContent = outcome.recommendation;
+    $("oa-note").textContent = "Hypothetical USD scenario. Monthly difference = current workflow minus proposed agent. Year one subtracts setup. " +
+      "Model per-task costs must include retries. Excludes error losses, taxes, downtime, rework, migration and opportunity cost. " +
+      "Validate acceptance and exceptions using actual data before acting.";
+  }
+  Object.values(fieldIds).forEach(id => $(id).addEventListener("input", calculate));
+  calculate();
 })();
