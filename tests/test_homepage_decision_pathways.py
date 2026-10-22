@@ -55,7 +55,7 @@ def main():
     assert parser.ctas.get("secondary-cta") == "/models/pricing/", parser.ctas
     assert parser.paths == list(EXPECTED), parser.paths
     assert parser.section_ids.index("decision-pathways") < parser.section_ids.index("what-changed shell")
-    assert parser.section_ids.index("decision-pathways") < parser.section_ids.index("radar shell")
+    assert parser.section_ids.index("decision-pathways") < parser.section_ids.index("latest")
     assert '#latest' in parser.anchors, "The radar must remain easy to reach"
     assert 'aria-labelledby="decision-pathways-title"' in html
     assert 'id="decision-pathways-title"' in html
