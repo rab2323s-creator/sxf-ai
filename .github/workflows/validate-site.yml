@@ -21,6 +21,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Agent Opportunity Atlas regression tests
+        run: |
+          node --check guides/ai-agent-use-cases/atlas-core.js
+          node --check guides/ai-agent-use-cases/atlas.js
+          node tests/test_ai_agent_use_cases.cjs
+          python -m py_compile guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
+          python guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
