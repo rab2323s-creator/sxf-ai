@@ -122,6 +122,8 @@ jobs:
         run: python scripts/sitemap_lastmod.py --refresh
       - name: Verify complete Guides sitemap coverage
         run: python tests/test_guides_sitemap.py
+      - name: Vibe coding original lab and SEO regression
+        run: node tests/test_vibe_coding_lab.cjs
       - name: Intelligence explosion reference regression
         run: python tests/test_intelligence_explosion_guide.py
       - name: Validate generated site
