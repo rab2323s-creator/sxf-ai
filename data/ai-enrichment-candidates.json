@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "f55b8a7b04b65079fab61517d74f74b85edec54539093261c674897180ee638c",
+  "snapshot_hash": "22fe73ddb0f22b25650d5d7ba8bdd66a45267ffb18d12c72cfa2b53c4b3649f9",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -162,79 +162,6 @@
     },
     {
       "rank": 3,
-      "signal_slug": "github-copilot-weekly-releases-october-5-8e5ec29",
-      "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-october-5-8e5ec29/",
-      "title": "GitHub Copilot weekly releases — October 5",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-09T22:58:23Z",
-      "priority_score": 149,
-      "evidence_hash": "b1f506ea525de57017c8a0a34bfb52d51628db8b4104fdcfef1a1481ef688480",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "GitHub Copilot weekly releases — October 5",
-          "url": "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5",
-          "signal_url": "https://sxf.si/signals/github-copilot-weekly-releases-october-5-8e5ec29/",
-          "source": "GitHub",
-          "published": "2026-10-09T22:58:23Z",
-          "category": "Tools",
-          "tags": [
-            "GitHub Copilot"
-          ],
-          "summary": "This week’s updates make Copilot easier to use across accounts and environments, with more control over what agents can access and how you manage their work. GitHub Copilot Claude Haiku…",
-          "signal_score": 56,
-          "seo_quality_score": 73,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-10-09-github-copilot-weekly-releases-october-5"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 4,
       "signal_slug": "gemini-4-argon-in-github-copilot-619c2f7",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-in-github-copilot-619c2f7/",
       "title": "Gemini 4 Argon in GitHub Copilot",
@@ -307,7 +234,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
       "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
@@ -377,7 +304,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "signal_slug": "how-third-moment-research-runs-10-000-agents-for-36-hours-e181547",
       "signal_url": "https://sxf.si/signals/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/",
       "title": "How Third Moment Research runs 10,000 agents for 36+ hours",
@@ -852,7 +779,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
       "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
       "title": "Search and filter for budgets now available",
@@ -922,7 +849,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "signal_slug": "global-default-for-copilot-features-generally-available-658f804",
       "signal_url": "https://sxf.si/signals/global-default-for-copilot-features-generally-available-658f804/",
       "title": "Global default for Copilot features generally available",
@@ -995,7 +922,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "signal_slug": "bringing-gpt-rosalind-to-academic-research-labs-a72d1e4",
       "signal_url": "https://sxf.si/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
       "title": "Bringing GPT-Rosalind to academic research labs",
@@ -1174,7 +1101,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "openai-and-poland-s-nask-partner-to-advance-ai-safety-and-security-15c1f8e",
       "signal_url": "https://sxf.si/signals/openai-and-poland-s-nask-partner-to-advance-ai-safety-and-security-15c1f8e/",
       "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
@@ -1213,6 +1140,80 @@
         "models": [],
         "source_urls": [
           "https://openai.com/index/openai-nask-ai-safety-security-partnership"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac",
+      "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
+      "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+      "source": "Hugging Face",
+      "category": "Open Source",
+      "published": "2026-10-15T00:00:00Z",
+      "priority_score": 110,
+      "evidence_hash": "f98ca608bb62dfbaccdbd922d05b7b44ea122aa5ba0e468d7d84fbda9d6cf322",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+          "url": "https://huggingface.co/blog/meta-muse-spark-open",
+          "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
+          "source": "Hugging Face",
+          "published": "2026-10-15T00:00:00Z",
+          "category": "Open Source",
+          "tags": [
+            "Multimodal AI",
+            "Open Source AI"
+          ],
+          "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+          "signal_score": 44,
+          "seo_quality_score": 51,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "durable-intelligence-layer",
+            "high-value-topic"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://huggingface.co/blog/meta-muse-spark-open"
         ]
       },
       "requested_output": {
