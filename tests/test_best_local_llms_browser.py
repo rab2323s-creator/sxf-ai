@@ -16,7 +16,7 @@ def run():
         partial(SimpleHTTPRequestHandler, directory=str(ROOT)),
     )
     Thread(target=server.serve_forever, daemon=True).start()
-    url = f"http://127.0.0.1:{server.server_port}/guides/best-local-llms-by-vram/"
+    url = f"http://127.0.0.1:{server.server_port}/tools/local-llm-vram-finder/"
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
