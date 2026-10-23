@@ -144,6 +144,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/models/pricing/", MODEL_PRICING_CATALOG["source_verified"]),
         sitemap_entry(f"{BASE_URL}/tools/", category_lastmod["Tools"]),
         sitemap_entry(f"{BASE_URL}/tools/ai-model-cost-calculator/", MODEL_PRICING_CATALOG["source_verified"]),
+        sitemap_entry(f"{BASE_URL}/tools/local-llm-vram-finder/", generated_today),
         sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
         sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
         sitemap_entry(f"{BASE_URL}/signals/", global_lastmod),
