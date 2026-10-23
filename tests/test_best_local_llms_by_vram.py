@@ -7,10 +7,10 @@ import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGE = ROOT / "guides/best-local-llms-by-vram/index.html"
+PAGE = ROOT / "tools/local-llm-vram-finder/index.html"
 CSS = PAGE.parent / "guide.css"
 JS = PAGE.parent / "selector.js"
-CANONICAL = "https://sxf.si/guides/best-local-llms-by-vram/"
+CANONICAL = "https://sxf.si/tools/local-llm-vram-finder/"
 
 class PageParser(HTMLParser):
     def __init__(self):
@@ -49,11 +49,11 @@ def main():
     assert "prefers-reduced-motion" in css
     assert "evaluate(" in js and "textContent" in js
     assert "innerHTML" in js and "esc(" in js
-    guides = (ROOT / "guides/index.html").read_text(encoding="utf-8")
-    assert '/guides/best-local-llms-by-vram/' in guides
+    guides = (ROOT / "tools/index.html").read_text(encoding="utf-8")
+    assert '/tools/local-llm-vram-finder/' in guides
     result = subprocess.run(
         ["node", "-e", """
-          const s=require('./guides/best-local-llms-by-vram/selector.js');
+          const s=require('./tools/local-llm-vram-finder/selector.js');
           if(s.MODELS.length!==13)throw Error('Model count');
           for(const m of s.MODELS){
             if(!(m.size>0) || !s.SOURCES[m.source])throw Error(m.tag);
