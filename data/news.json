@@ -1,6 +1,16 @@
 {
-  "updated_at": "2026-10-23T17:13:33.851359Z",
+  "updated_at": "2026-10-23T21:28:28.714433Z",
   "items": [
+    {
+      "title": "Bringing foundational models to the front lines of TB screening",
+      "url": "https://research.google/blog/bringing-foundational-models-to-the-front-lines-of-tb-screening/",
+      "signal_url": "https://sxf.si/signals/bringing-foundational-models-to-the-front-lines-of-tb-screening-3c115b0/",
+      "source": "Google Research",
+      "published": "2026-10-23T18:51:33Z",
+      "category": "Research",
+      "tags": [],
+      "signal_score": 31
+    },
     {
       "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users (Part II)",
       "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
@@ -12,6 +22,18 @@
         "OpenAI"
       ],
       "signal_score": 28
+    },
+    {
+      "title": "Securing our frontier model training environment",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
+      "source": "OpenAI",
+      "published": "2026-10-23T10:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 42
     },
     {
       "title": "GitHub Copilot in Visual Studio — September update",
@@ -924,29 +946,6 @@
         "Multimodal AI"
       ],
       "signal_score": 32
-    },
-    {
-      "title": "Purpose-built model for leaked secret detection",
-      "url": "https://github.blog/changelog/2026-10-07-purpose-built-model-for-leaked-secret-detection",
-      "signal_url": "https://sxf.si/signals/purpose-built-model-for-leaked-secret-detection-5260e9d/",
-      "source": "GitHub",
-      "published": "2026-10-07T16:13:56Z",
-      "category": "Tools",
-      "tags": [],
-      "signal_score": 42
-    },
-    {
-      "title": "Local sandboxing for GitHub Copilot now generally available",
-      "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available",
-      "signal_url": "https://sxf.si/signals/local-sandboxing-for-github-copilot-now-generally-available-87f43b6/",
-      "source": "GitHub",
-      "published": "2026-10-07T15:46:17Z",
-      "category": "Tools",
-      "tags": [
-        "GitHub Copilot",
-        "Security"
-      ],
-      "signal_score": 38
     }
   ],
   "feed_errors": [],
@@ -959,41 +958,41 @@
     "publishing_configured": 5,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 140,
+      "OpenAI": 141,
       "Google AI": 23,
       "Hugging Face": 52,
       "GitHub": 90,
-      "Google Research": 14
+      "Google Research": 15
     },
     "current_counts": {
-      "OpenAI": 36,
+      "OpenAI": 37,
       "Google AI": 2,
       "Hugging Face": 19,
-      "GitHub": 20,
-      "Google Research": 3
+      "GitHub": 18,
+      "Google Research": 4
     },
     "sources": {
       "OpenAI": {
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 1317,
-        "relevance_accepted_count": 1317,
-        "quality_accepted_count": 82,
-        "accepted_candidate_count": 82,
+        "parsed_candidate_count": 1318,
+        "relevance_accepted_count": 1318,
+        "quality_accepted_count": 83,
+        "accepted_candidate_count": 83,
         "rejected_candidate_count": 1235,
         "duplicate_count": 0,
         "age_rejection_count": 1235,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 36,
+        "publish_count": 37,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "Google AI": {
@@ -1016,7 +1015,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "Hugging Face": {
@@ -1039,7 +1038,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "GitHub": {
@@ -1055,14 +1054,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 20,
+        "publish_count": 18,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "Google Research": {
@@ -1071,21 +1070,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 100,
         "relevance_accepted_count": 63,
-        "quality_accepted_count": 7,
-        "accepted_candidate_count": 7,
-        "rejected_candidate_count": 93,
+        "quality_accepted_count": 8,
+        "accepted_candidate_count": 8,
+        "rejected_candidate_count": 92,
         "duplicate_count": 0,
-        "age_rejection_count": 56,
+        "age_rejection_count": 55,
         "relevance_rejection_count": 37,
         "quality_rejection_count": 0,
-        "publish_count": 3,
+        "publish_count": 4,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "Anthropic": {
@@ -1108,7 +1107,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -1133,7 +1132,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "xAI": {
@@ -1156,7 +1155,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       },
       "Microsoft": {
@@ -1179,7 +1178,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-23T17:12:53.398406Z",
+        "last_successful_fetch": "2026-10-23T21:27:41.011198Z",
         "errors": []
       }
     },
