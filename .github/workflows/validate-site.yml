@@ -28,6 +28,10 @@ jobs:
           node tests/test_ai_agent_use_cases.cjs
           python -m py_compile guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
           python guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
+      - name: Local LLM GPU selector, SEO and linking regression
+        run: |
+          node --check guides/best-local-llms-by-vram/selector.js
+          python tests/test_best_local_llms_by_vram.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
