@@ -34,7 +34,7 @@ def main():
     assert '<meta name="robots" content="index,follow' in html
     assert '<html lang="en">' in html
     assert '<meta name="viewport" content="width=device-width, initial-scale=1">' in html
-    assert '<title>Best Local LLMs by VRAM' in html
+    assert '<title>Local LLM VRAM Finder' in html
     assert "schema.org" in html and '"TechArticle"' in html
     for id_ in ("quick-picks", "model-finder", "comparison", "memory", "setup", "questions", "sources-title"):
         assert id_ in parsed.ids, id_
@@ -49,8 +49,13 @@ def main():
     assert "prefers-reduced-motion" in css
     assert "evaluate(" in js and "textContent" in js
     assert "innerHTML" in js and "esc(" in js
-    guides = (ROOT / "tools/index.html").read_text(encoding="utf-8")
-    assert '/tools/local-llm-vram-finder/' in guides
+    tools_hub = (ROOT / "tools/index.html").read_text(encoding="utf-8")
+    assert 'href="/tools/local-llm-vram-finder/"' in tools_hub
+    assert 'guides/best-local-llms-by-vram' not in tools_hub
+    assert not (ROOT / 'guides/best-local-llms-by-vram').exists()
+    sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
+    assert CANONICAL in sitemap
+    assert 'https://sxf.si/guides/best-local-llms-by-vram/' not in sitemap
     result = subprocess.run(
         ["node", "-e", """
           const s=require('./tools/local-llm-vram-finder/selector.js');
