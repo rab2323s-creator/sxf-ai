@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#070b10">
+<title>Local LLM VRAM Finder (2026): Best Models for 8GB–32GB GPUs | SXF / AI</title>
+<meta name="description" content="Free Local LLM VRAM Finder for 8GB, 12GB, 16GB, 24GB and 32GB GPUs. Compare published model sizes for coding, chat and vision with clear memory estimates.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://sxf.si/tools/local-llm-vram-finder/">
+<link rel="alternate" hreflang="en" href="https://sxf.si/tools/local-llm-vram-finder/">
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/tools/local-llm-vram-finder/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SXF / AI">
+<meta property="og:title" content="Local LLM VRAM Finder: Find the Best AI Model for Your GPU">
+<meta property="og:description" content="Evidence-linked local model selector for 8GB to 32GB GPUs. Compare file sizes, context headroom, coding and vision picks.">
+<meta property="og:url" content="https://sxf.si/tools/local-llm-vram-finder/">
+<meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Local LLM VRAM Finder: 8GB–32GB GPU Guide">
+<meta name="twitter:description" content="Select your VRAM, workload and context length. Get cautious, source-backed local LLM candidates.">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/intelligence.css">
+<link rel="stylesheet" href="/tools/local-llm-vram-finder/guide.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/tools/local-llm-vram-finder/#webpage","url":"https://sxf.si/tools/local-llm-vram-finder/","name":"Local LLM VRAM Finder (2026): Best Models for 8GB–32GB GPUs | SXF / AI","description":"Free local LLM selection by GPU VRAM, intended workload and context length, based on published sizes and explained memory headroom.","inLanguage":"en","breadcrumb":{"@id":"https://sxf.si/tools/local-llm-vram-finder/#breadcrumb"},"mainEntity":{"@id":"https://sxf.si/tools/local-llm-vram-finder/#article"}},{"@type":"TechArticle","@id":"https://sxf.si/tools/local-llm-vram-finder/#article","headline":"Local LLM VRAM Finder (2026): Best Models for 8GB–32GB GPUs","datePublished":"2026-10-24","dateModified":"2026-10-24","author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"mainEntityOfPage":{"@id":"https://sxf.si/tools/local-llm-vram-finder/#webpage"},"about":[{"@type":"Thing","name":"Local large language models"},{"@type":"Thing","name":"GPU video memory (VRAM)"},{"@type":"Thing","name":"Ollama"}],"citation":["https://ollama.com/library/qwen3/tags","https://ollama.com/library/qwen2.5-coder/tags","https://ollama.com/library/gemma3/tags","https://ollama.com/library/qwen3-vl/tags","https://docs.ollama.com/context-length","https://huggingface.co/Qwen/Qwen3-8B","https://huggingface.co/google/gemma-3-12b-it"],"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://sxf.si/tools/local-llm-vram-finder/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://sxf.si/tools/"},{"@type":"ListItem","position":3,"name":"Local LLM VRAM Finder","item":"https://sxf.si/tools/local-llm-vram-finder/"}]},{"@type":"WebApplication","@id":"https://sxf.si/tools/local-llm-vram-finder/#app","name":"Local LLM VRAM Finder","url":"https://sxf.si/tools/local-llm-vram-finder/","description":"Free in-browser tool to compare local LLM candidates by discrete GPU VRAM, workload and context-size allowance.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"inLanguage":"en","provider":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"}}]}</script>
+<script src="/tools/local-llm-vram-finder/selector.js" defer></script>
+</head>
+<body class="intel-page vram-page">
+<a class="vram-skip" href="#main-content">Skip to main content</a>
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+<main id="main-content">
+<article>
+<div class="vram-wrap">
+<nav class="vram-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/tools/">Tools</a><span>/</span><span>Local LLM VRAM Finder</span></nav>
+<section class="vram-hero" aria-labelledby="page-title">
+<div class="vram-hero-copy">
+<div class="vram-eyebrow"><span class="vram-dot"></span> SXF INTERACTIVE TOOL <span class="vram-eyebrow-div">/</span> LOCAL INFERENCE</div>
+<h1 id="page-title">Local LLM <em>VRAM Finder</em> (2026)</h1>
+<p class="vram-lede">Find a practical local AI model for <strong>8GB, 12GB, 16GB, 24GB or 32GB GPUs</strong>. Compare published model download sizes, choose by workload, and leave room for context and runtime memory—not just weights.</p>
+<div class="vram-hero-actions"><a class="vram-primary" href="#model-finder">Find my model <span aria-hidden="true">↗</span></a><a class="vram-secondary" href="#quick-picks">See picks by VRAM ↓</a></div>
+<div class="vram-meta"><span>Published 24 Oct 2026</span><span>Source check: 24 Oct 2026</span><span>Primary-source sizes</span></div>
+</div>
+<div class="vram-hero-visual" aria-label="Illustrative GPU memory allocation showing model weights and additional runtime headroom">
+<div class="vram-v-top"><span>GPU MEMORY / PLANNING VIEW</span><span class="vram-v-live">SOURCE-BASED</span></div>
+<div class="vram-chip"><span>VRAM</span><strong>16<span>GB</span></strong><small>Example · Qwen3 14B</small></div>
+<div class="vram-bar"><span class="vram-bar-weight" style="width:58.125%"></span><span class="vram-bar-cache" style="width:18.75%"></span></div>
+<div class="vram-v-legend"><span><i class="vram-key-w"></i> 9.3 GB model download</span><span><i class="vram-key-o"></i> 3 GB illustrative buffer</span></div>
+<p>Illustrative only. Download sizes are <strong>not measured peak VRAM</strong>; buffers, KV cache and GPU offload vary by runtime.</p>
+</div>
+</section>
+<nav class="vram-local-nav" aria-label="On this page"><a href="#quick-picks">VRAM picks</a><a href="#model-finder">Model finder</a><a href="#comparison">Model sizes</a><a href="#memory">Memory math</a><a href="#setup">Quick start</a><a href="#questions">FAQ</a></nav>
+
+<section class="vram-section vram-tool" id="model-finder" aria-labelledby="finder-title">
+<div class="vram-tool-top"><div><p class="vram-kicker">01 / INTERACTIVE MODEL SELECTOR</p><h2 id="finder-title">Find a local LLM for your GPU</h2><p>Change the inputs to compare source-linked model candidates. No account, tracking or external request required.</p></div><span class="vram-tool-stamp">RUNS IN YOUR BROWSER</span></div>
+<form id="vram-finder" class="vram-controls" aria-label="Local model selection inputs">
+<label for="vram-capacity"><span>Available GPU VRAM</span><select id="vram-capacity" name="vram"><option value="8">8 GB</option><option value="12">12 GB</option><option value="16" selected>16 GB</option><option value="24">24 GB</option><option value="32">32 GB</option></select></label>
+<label for="vram-workload"><span>Primary task</span><select id="vram-workload" name="workload"><option value="coding" selected>Coding</option><option value="chat">Chat &amp; reasoning</option><option value="vision">Images &amp; vision</option></select></label>
+<label for="vram-context"><span>Planning context</span><select id="vram-context" name="context"><option value="4096">4K tokens</option><option value="8192" selected>8K tokens</option><option value="16384">16K tokens</option><option value="32768">32K tokens</option></select></label>
+</form>
+<p class="vram-tool-note">This calculator uses a <strong>conservative planning allowance</strong> (2 / 3 / 4.5 / 7 GB for 4K / 8K / 16K / 32K, plus 1 GB for image tasks). These are SXF heuristics, <em>not</em> measured KV-cache sizes for each architecture. Ollama model tag sizes are download sizes. Check actual GPU residency with <code>ollama ps</code>.</p>
+<div class="vram-results-header"><h3>Matched model candidates</h3><span id="vram-count" role="status" aria-live="polite">Select settings to compare published sizes.</span></div>
+<div id="vram-results" class="vram-results" aria-live="polite" aria-relevant="additions text"><p>Enable JavaScript to use the interactive finder. The verified model table and VRAM picks below remain available without it.</p></div>
+<div class="vram-results-foot"><span id="vram-fit-method">Fit status is an estimate—not a benchmark or warranty.</span><a href="#memory">Understand the memory estimate →</a></div>
+</section>
+
+
+<section class="vram-intro" aria-labelledby="answer-title"><div><p class="vram-kicker">THE SHORT ANSWER</p><h2 id="answer-title">Which local LLM fits your GPU?</h2></div>
+<div><p>For an <strong>8GB GPU</strong>, start with a compact 4B–8B quantized model, such as Qwen3 4B or Qwen3 8B at a modest context length. At <strong>12GB–16GB</strong>, the published files for Qwen3 14B, Qwen2.5-Coder 14B and Gemma 3 12B become candidates. With <strong>24GB–32GB</strong>, larger quantized options such as Qwen3 30B, Qwen2.5-Coder 32B and Gemma 3 27B are worth evaluating. None of these statements guarantees full-GPU loading at your chosen context length.</p>
+<p>This is a hardware-selection guide, not a claim that one model wins all benchmarks. To install a runtime, use <a href="/guides/run-ai-models-locally/">our Ollama vs LM Studio vs vLLM guide</a>; for GGUF, AWQ and quantization tradeoffs, see <a href="/guides/llm-quantization-explained/">LLM Quantization Explained</a>.</p></div></section>
+
+<section id="quick-picks" class="vram-section" aria-labelledby="quick-title"><div class="vram-section-head"><div><p class="vram-kicker">02 / HARDWARE FIRST</p><h2 id="quick-title">Best local LLM candidates by GPU VRAM</h2></div><p>Starting points based on published <em>quantized download sizes</em>, not head-to-head performance measurements.</p></div>
+<div class="vram-pick-grid">
+<a class="vram-pick" href="#model-finder"><div class="vram-pick-cap"><strong>8<span>GB</span></strong><span>ENTRY GPU</span></div><h3>Compact and capable</h3><p>Qwen3 8B for general chat; Qwen2.5-Coder 7B for code; Qwen3-VL 4B for images. Use short context at first.</p><span class="vram-pick-link">Explore 8GB options →</span></a>
+<a class="vram-pick" href="#model-finder"><div class="vram-pick-cap"><strong>12<span>GB</span></strong><span>MAINSTREAM</span></div><h3>Room for 12B–14B</h3><p>Qwen2.5-Coder 14B or Gemma 3 12B can be candidates with conservative memory settings; avoid assuming huge context fits.</p><span class="vram-pick-link">Explore 12GB options →</span></a>
+<a class="vram-pick" href="#model-finder"><div class="vram-pick-cap"><strong>16<span>GB</span></strong><span>FLEXIBLE</span></div><h3>A balanced local setup</h3><p>Qwen3 14B, Qwen2.5-Coder 14B and Gemma 3 12B provide choices across chat, coding and multimodal tasks.</p><span class="vram-pick-link">Explore 16GB options →</span></a>
+<a class="vram-pick" href="#model-finder"><div class="vram-pick-cap"><strong>24<span>GB</span></strong><span>ADVANCED</span></div><h3>Larger quantized models</h3><p>Consider Qwen3 30B, Gemma 3 27B or Qwen2.5-Coder 32B. Long context and concurrency can exceed the remaining headroom.</p><span class="vram-pick-link">Explore 24GB options →</span></a>
+<a class="vram-pick" href="#model-finder"><div class="vram-pick-cap"><strong>32<span>GB</span></strong><span>WORKSTATION</span></div><h3>More space for context</h3><p>The same larger model files leave more memory for runtime buffers, image inputs and longer context. Still benchmark your workload.</p><span class="vram-pick-link">Explore 32GB options →</span></a>
+</div>
+</section>
+
+<section id="comparison" class="vram-section" aria-labelledby="comparison-title"><div class="vram-section-head"><div><p class="vram-kicker">03 / VERIFIED FILE SIZES</p><h2 id="comparison-title">Local AI model comparison: download sizes</h2></div><p>Tagged files in Ollama's official model registry; sizes rounded as displayed on the cited tag listings, checked 24 October 2026.</p></div>
+<div class="vram-table-scroll" role="region" aria-label="Local LLM size comparison table" tabindex="0">
+<table class="vram-table"><caption>Download sizes of selected quantized Ollama models, not measured peak VRAM or benchmark scores.</caption><thead><tr><th scope="col">Model tag</th><th scope="col">Size</th><th scope="col">Workload</th><th scope="col">Context caveat</th><th scope="col">Official source</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>qwen3:4b</code></th><td>2.5 GB</td><td>General chat</td><td>4K start recommended</td><td><a href="https://ollama.com/library/qwen3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3:8b</code></th><td>5.2 GB</td><td>Chat, reasoning</td><td>8GB cards: keep context modest</td><td><a href="https://ollama.com/library/qwen3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3:14b</code></th><td>9.3 GB</td><td>Chat, reasoning</td><td>Check 12GB headroom carefully</td><td><a href="https://ollama.com/library/qwen3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3:30b</code></th><td>19 GB</td><td>Chat, agents</td><td>24GB cards: limited overhead</td><td><a href="https://ollama.com/library/qwen3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen2.5-coder:7b</code></th><td>4.7 GB</td><td>Coding</td><td>Good smaller-file candidate</td><td><a href="https://ollama.com/library/qwen2.5-coder/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen2.5-coder:14b</code></th><td>9.0 GB</td><td>Coding</td><td>12GB cards: short-context test</td><td><a href="https://ollama.com/library/qwen2.5-coder/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen2.5-coder:32b</code></th><td>20 GB</td><td>Coding</td><td>Prefer 24GB+ with short context</td><td><a href="https://ollama.com/library/qwen2.5-coder/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>gemma3:4b</code></th><td>3.4 GB</td><td>Chat, images</td><td>Check vision memory overhead</td><td><a href="https://ollama.com/library/gemma3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>gemma3:12b</code></th><td>8.2 GB</td><td>Chat, images</td><td>Vision adds image-processing cost</td><td><a href="https://ollama.com/library/gemma3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>gemma3:27b</code></th><td>17 GB</td><td>Chat, images</td><td>Context may limit full offload</td><td><a href="https://ollama.com/library/gemma3/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3-vl:4b</code></th><td>3.3 GB</td><td>Image understanding</td><td>Allow extra headroom for images</td><td><a href="https://ollama.com/library/qwen3-vl/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3-vl:8b</code></th><td>6.2 GB</td><td>Image understanding</td><td>8GB may require CPU offload</td><td><a href="https://ollama.com/library/qwen3-vl/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+<tr><th scope="row"><code>qwen3-vl:30b</code></th><td>20 GB</td><td>Image understanding</td><td>Images and context add overhead</td><td><a href="https://ollama.com/library/qwen3-vl/tags" rel="noopener noreferrer">Ollama ↗</a></td></tr>
+</tbody></table></div>
+<p class="vram-caption">A 5.2 GB Ollama artifact does <strong>not</strong> mean 5.2 GB is sufficient GPU memory. The exact tag, architecture, GPU backend, context, number of parallel sessions and offloading determine runtime use. Published sizes can change when maintainers retag models.</p>
+</section>
+
+<section class="vram-section" id="memory" aria-labelledby="memory-title"><div class="vram-section-head"><div><p class="vram-kicker">04 / ENGINEERING REALITY</p><h2 id="memory-title">How much VRAM does a local LLM actually need?</h2></div></div>
+<div class="vram-two-col"><div class="vram-prose">
+<p>Your GPU must hold more than model weights. Quantized file size is a useful starting point, but loading a local model also consumes space for execution buffers and a <strong>KV cache</strong>. A longer context or more simultaneous requests can increase memory demand. Multimodal inputs may add image-processing overhead.</p>
+<p>For rough initial planning, this page compares <strong>the published Ollama download size + an explicit SXF headroom allowance</strong>. It is deliberately not a hardware benchmark. A model shown as a candidate may still spill onto system RAM or refuse to load at your chosen settings.</p>
+<h3>Why 4-bit vs 8-bit matters</h3><p>A lower-bit quantized model generally uses fewer bytes for stored weights, but GGUF formats add metadata and different quantizers use different layouts. Q4_K_M, Q8_0, AWQ and GPTQ are not interchangeable in fidelity, compatibility or speed. Read our <a href="/guides/llm-quantization-explained/">quantization guide and VRAM calculator</a> before choosing a different variant.</p>
+<h3>GPU VRAM versus system RAM</h3><p>On an NVIDIA or AMD discrete GPU, VRAM is separate from system RAM. Some runtimes can offload layers to the CPU, but that usually affects throughput and latency. Apple Silicon uses unified memory, so these discrete-GPU bands should <strong>not</strong> be interpreted as equivalent Mac RAM requirements.</p>
+</div><div class="vram-method-card"><p class="vram-kicker">SXF MEMORY WORKSHEET</p><div class="vram-equation"><span>Published model size</span><b>+</b><span>Runtime / KV headroom</span><b>=</b><strong>Initial planning target</strong></div><p><strong>Worked example: Qwen3 8B</strong></p><p>Ollama lists a 5.2 GB download. With SXF's 3 GB illustrative allowance for 8K context, the worksheet produces <strong>8.2 GB</strong>. This does not prove the model cannot run on an 8GB GPU; it flags the need to test a shorter context, offloading or an alternate quantization.</p><p>Actual memory use is architecture- and configuration-dependent; the allowance is a screening tool, not a model-specific KV cache formula.</p><a href="https://docs.ollama.com/context-length" rel="noopener noreferrer">Ollama context-length documentation ↗</a></div></div>
+</section>
+
+<section class="vram-section" id="setup" aria-labelledby="setup-title"><div class="vram-section-head"><div><p class="vram-kicker">05 / FROM DECISION TO EXECUTION</p><h2 id="setup-title">Run your selected local model with Ollama</h2></div><p>Minimal example for supported desktop platforms. Choose a verified model tag from the table.</p></div>
+<ol class="vram-steps"><li><div><b>01</b><h3>Install Ollama</h3><p>Follow the <a href="https://docs.ollama.com/quickstart" rel="noopener noreferrer">official quickstart</a> for your operating system. Download weights only from sources you trust; check model terms before business use.</p></div></li>
+<li><div><b>02</b><h3>Start with a smaller, known tag</h3><p>For a first coding test on an 8GB GPU, begin with the published 7B coding variant, or use the selector above for your workload.</p><div class="vram-command"><code>ollama run qwen2.5-coder:7b</code><button type="button" class="vram-copy" data-copy="ollama run qwen2.5-coder:7b" aria-label="Copy Ollama run command">Copy</button></div></div></li>
+<li><div><b>03</b><h3>Check what loaded onto the GPU</h3><p>While the model is running, inspect the processor/offload information. Record the actual memory behavior and compare it against the planning estimate.</p><div class="vram-command"><code>ollama ps</code><button type="button" class="vram-copy" data-copy="ollama ps" aria-label="Copy Ollama ps command">Copy</button></div></div></li>
+<li><div><b>04</b><h3>Increase context carefully</h3><p>Start at a modest context length, then evaluate latency, quality and out-of-memory behavior at 8K, 16K or higher. Larger advertised context windows do not mean every GPU can serve them at full length. See the <a href="/guides/run-ai-models-locally/">complete local deployment guide</a> for runtime and API settings.</p></div></li></ol>
+</section>
+
+<section class="vram-section" id="questions" aria-labelledby="faq-title"><div class="vram-section-head"><div><p class="vram-kicker">06 / PRACTICAL QUESTIONS</p><h2 id="faq-title">Local LLM GPU &amp; VRAM FAQ</h2></div></div>
+<div class="vram-faq">
+<details><summary>What is the best LLM for an 8GB GPU?</summary><p>There is no universal performance winner. For a source-backed starting point, Qwen3 4B (2.5 GB published download), Qwen2.5-Coder 7B (4.7 GB) and Qwen3 8B (5.2 GB) cover chat and code. With Qwen3 8B, reduce context or plan for offload if your system does not have enough runtime headroom.</p></details>
+<details><summary>Can a 12GB GPU run a 14B model?</summary><p>Some 14B quantized artifacts are around 9.0–9.3 GB, leaving only a few GB before buffers, KV cache and OS use. A modest context configuration may work, but it is not guaranteed. The exact tag and runtime matter more than parameter count alone.</p></details>
+<details><summary>Which local coding LLM should I run with 16GB VRAM?</summary><p>Qwen2.5-Coder 14B is a practical candidate with a published 9.0 GB Ollama download. Test it on representative repository edits and error fixing; a smaller 7B model may still be preferable for latency. These are workload suggestions, not head-to-head benchmark rankings.</p></details>
+<details><summary>Can I run a 30B model on a 24GB GPU?</summary><p>Some quantized 30B model tags have download sizes around 19–20 GB. They can be candidates for 24GB cards at modest context, but KV cache and runtime buffers reduce available headroom. Long context or concurrency may force partial CPU offloading.</p></details>
+<details><summary>How is an Ollama model file size different from VRAM use?</summary><p>The tag size describes downloaded model data, while runtime VRAM includes loading format, execution workspace, KV cache and sometimes image processing. Use <code>ollama ps</code> to see whether Ollama places a running model on GPU, CPU or both.</p></details>
+<details><summary>Can I run these models on a laptop or Apple Silicon Mac?</summary><p>Many local models work on compatible laptops, but laptop GPU TGP, thermals, OS and available shared/system memory matter. Macs have unified memory rather than the dedicated VRAM bands in this page. See <a href="/guides/run-ai-models-locally/">the full local inference setup guide</a> for Apple Silicon and CPU-only considerations.</p></details>
+<details><summary>Is 4-bit quantization always the best choice?</summary><p>No. A smaller quant may enable a bigger model or a larger context, but can affect quality and may behave differently across inference engines. Compare on your own prompts with the same runtime and settings. <a href="/guides/llm-quantization-explained/">Learn about GGUF and 4-bit vs 8-bit</a>.</p></details>
+<details><summary>Are these local AI models allowed for commercial use?</summary><p>Licenses differ. The Qwen3 model card lists Apache-2.0, whereas Google Gemma models use Gemma-specific terms. Check the exact publisher card, associated files and current license before production use. The selector does not grant licensing rights.</p></details>
+</div></section>
+<section class="vram-section vram-sources" aria-labelledby="sources-title"><div class="vram-section-head"><div><p class="vram-kicker">SOURCE LOG / NO INVENTED BENCHMARKS</p><h2 id="sources-title">Methodology and primary references</h2></div></div>
+<p>The file-size dataset is a fixed, editorially selected snapshot of exact Ollama model tags as displayed on their model library tag pages on <time datetime="2026-10-24">24 October 2026</time>. We did <strong>not</strong> run independent throughput, memory telemetry or quality benchmarks. We do not infer that a larger model wins a coding benchmark, nor that a reported download fits completely into VRAM. If a model tag changes, the published sizes and guide require re-verification.</p>
+<div class="vram-source-links"><a href="https://ollama.com/library/qwen3/tags" rel="noopener noreferrer">Ollama · Qwen3 tags ↗</a><a href="https://ollama.com/library/qwen2.5-coder/tags" rel="noopener noreferrer">Ollama · Qwen2.5-Coder tags ↗</a><a href="https://ollama.com/library/gemma3/tags" rel="noopener noreferrer">Ollama · Gemma 3 tags ↗</a><a href="https://ollama.com/library/qwen3-vl/tags" rel="noopener noreferrer">Ollama · Qwen3-VL tags ↗</a><a href="https://docs.ollama.com/context-length" rel="noopener noreferrer">Ollama · Context length ↗</a><a href="https://huggingface.co/Qwen/Qwen3-8B" rel="noopener noreferrer">Qwen · Model card and license ↗</a><a href="https://huggingface.co/google/gemma-3-12b-it" rel="noopener noreferrer">Gemma 3 · Model card and terms ↗</a></div>
+</section>
+<section class="vram-next" aria-labelledby="next-title"><div><p class="vram-kicker">KEEP EXPLORING SXF</p><h2 id="next-title">Choose your model. Then make it work.</h2></div><div class="vram-next-links"><a href="/guides/open-source-ai-models/">Compare open-source models &amp; licenses ↗</a><a href="/guides/run-ai-models-locally/">Install Ollama or LM Studio ↗</a><a href="/guides/llm-quantization-explained/">Calculate weight &amp; KV memory ↗</a><a href="/guides/how-to-choose-ai-model/">AI model selection worksheet ↗</a></div></section>
+</div>
+</article></main>
+<footer class="vram-footer"><div class="vram-wrap"><a href="/">SXF / AI</a><span>Evidence-first model intelligence. Updated 24 October 2026.</span><a href="/about/#method">Editorial methodology ↗</a></div></footer>
+</body></html>
