@@ -30,7 +30,7 @@ jobs:
           python guides/ai-agent-use-cases/sxf-agent-workflow-lab.py
       - name: Local LLM GPU selector, SEO and linking regression
         run: |
-          node --check guides/best-local-llms-by-vram/selector.js
+          node --check tools/local-llm-vram-finder/selector.js
           python tests/test_best_local_llms_by_vram.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
