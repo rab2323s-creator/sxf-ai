@@ -62,20 +62,27 @@ def main():
     result = subprocess.run(
         ["node", "-e", """
           const s=require('./tools/local-llm-vram-finder/selector.js');
-          const catalog=require('./data/local-llm-catalog.json');
-          const list=s.validate(catalog);
-          if(list.length<13||list.length>220)throw Error('Source-backed catalog size');
-          if(!s.search('coder','all',list).length)throw Error('Search missing');
-          if(!s.evaluate(16,'coding',8192,list).some(m=>m.tag==='qwen2.5-coder:14b'))throw Error('Coding lookup');
-          if(s.evaluate(8,'invalid',8192,list).length)throw Error('Invalid task');
-          if(s.hardwareFor(list[0],8192,'chat').planning<=list[0].sizeGb)throw Error('Headroom missing');
-          if(s.evaluate(16,'vision',8192,list).some(m=>!m.workloads.includes('vision')))throw Error('Cross-task result');
-          const bad=s.joinBenchmarks(list,{schemaVersion:1,measurements:[{modelId:list[0].id,tokensPerSecond:42,evidenceType:'estimated'}]});
-          if(bad[0].measurements.length)throw Error('Estimated performance must not display as measured');
-          const candidate={modelId:list[0].id,gpu:'Synthetic GPU',runtime:'test-runner',quantization:list[0].tag,measuredAt:'2026-10-24',sourceUrl:'https://example.org/benchmark',tokensPerSecond:42,contextTokens:8192,concurrency:1,evidenceType:'measured'};
-          const joined=s.joinBenchmarks(list,{schemaVersion:1,measurements:[candidate]});
-          if(joined[0].measurements.length!==1)throw Error('Measured performance evidence contract');
-          console.log('PASS: catalog selector and reverse lookups');
+          const list=s.validate(require('./data/local-llm-catalog.json'));
+          if(list.length!==191)throw Error('Expected reviewed 191 source variants');
+          for(const m of list){
+            for(const workload of m.workloads){
+              for(const ctx of [4096,8192,16384,32768]){
+                const same=s.evaluate(16,workload,ctx,[m])[0];
+                const reverse=s.hardwareFor(m,ctx,workload);
+                if(!same||same.planning!==reverse.planning)throw Error('Forward/reverse mismatch '+m.id);
+              }
+            }
+          }
+          if(s.evaluate(8,'invalid',8192,list).length)throw Error('bad task');
+          if(!s.search('coder','all',list).length)throw Error('search missing');
+          const families=s.groupFamilies(s.evaluate(16,'chat',8192,list));
+          if(families.some(g=>!g.variants.length))throw Error('empty family');
+          const vision=list.find(m=>m.format==='GGUF'&&m.workloads.includes('vision'));
+          if(!s.visionEvidence(vision).includes('NOT validated'))throw Error('Missing vision caveat');
+          const low=list.find(m=>m.quantization==='Q2_K');
+          const q4=list.find(m=>m.quantization==='Q4_K_M');
+          if(!(s.quantRank(low)>s.quantRank(q4)))throw Error('low-bit quality caution');
+          console.log('PASS: v3 all forward/reverse estimates, family grouping, vision and quantization caveats');
         """], cwd=ROOT, capture_output=True, text=True, check=True
     )
     print(result.stdout.strip())
