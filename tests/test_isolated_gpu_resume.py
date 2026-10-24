@@ -34,7 +34,15 @@ nb = json.loads((root / "notebooks/sxf_isolated_gpu_benchmark_v2.ipynb").read_te
 cells = ["".join(cell["source"]) for cell in nb["cells"] if cell["cell_type"] == "code"]
 for cell in cells:
     ast.parse(cell)
+assert "supports_vision_resume()" in cells[0]
+assert 'FALLBACK_REF="fix/isolated-vision-resumable-evidence-v3"' in cells[0]
+assert "BENCHMARK_SHA=" in cells[0]
 assert "WORKLOAD=\"vision\"" in cells[1]
+assert "benchmark-stdout-" in cells[1]
+assert "benchmark-stderr-" in cells[1]
+assert "benchmark-run-" in cells[1]
+assert '"exitCode":run.returncode' in cells[1]
+assert 'benchmark-stderr-*.log' in cells[2]
 assert '"--workload",WORKLOAD' in cells[1]
 assert "if run.returncode:raise" not in cells[1]
 assert '*-partial-*.json' in cells[2]
