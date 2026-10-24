@@ -169,3 +169,6 @@
 .vram-page .vram-variant-list span,.vram-page .vram-variant-list small{display:block;line-height:1.5}
 .vram-page .vram-variant-list small{font-size:.76rem;color:var(--v-muted);margin-top:5px}
 .vram-page .vram-variants a{color:#b7f4e9}
+
+/* Keep the working selector close to the top of compact screens; remove decorative example only. */
+@media(max-width:650px){.vram-page .vram-hero-visual{display:none}.vram-page .vram-hero{padding:16px 0 24px;gap:0}.vram-page .vram-tool{margin-top:26px}.vram-page .vram-hero-actions{margin-top:18px}}
