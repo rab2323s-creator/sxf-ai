@@ -52,14 +52,14 @@ def gpu():
 def png_fixture():
     width = height = 128
     pixels = b"".join(
-        b"\\x00" + b"".join(
+        b"\x00" + b"".join(
             bytes((238, 42, 42)) if 24 <= x < 104 and 24 <= y < 104 else bytes((36, 77, 208))
             for x in range(width))
         for y in range(height)
     )
     def chunk(kind, data):
         return struct.pack("!I", len(data)) + kind + data + struct.pack("!I", zlib.crc32(kind + data) & 0xffffffff)
-    return (b"\\x89PNG\\r\\n\\x1a\\n"
+    return (b"\x89PNG\r\n\x1a\n"
             + chunk(b"IHDR", struct.pack("!2I5B", width, height, 8, 2, 0, 0, 0))
             + chunk(b"IDAT", zlib.compress(pixels)) + chunk(b"IEND", b""))
 
@@ -214,7 +214,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
         path = output_dir / (stem + "-isolated.json")
         if path.exists():
             raise FileExistsError("Would overwrite evidence " + str(path))
-        path.write_text(json.dumps(report, indent=2) + "\\n")
+        path.write_text(json.dumps(report, indent=2) + "\n")
         report_paths.append(path)
         # Unload NOW, so subsequent model is not contaminated by this one.
         unload_all()
@@ -230,4 +230,4 @@ if __name__ == "__main__":
     parser.add_argument("--repeats", type=int, default=3)
     options = parser.parse_args()
     paths = run(options.output_dir, options.ollama_bin, context=options.context, repeats=options.repeats)
-    print("PASS: measured user-run evidence recorded for human review:", *(str(x) for x in paths), sep="\\n")
+    print("PASS: measured user-run evidence recorded for human review:", *(str(x) for x in paths), sep="\n")
