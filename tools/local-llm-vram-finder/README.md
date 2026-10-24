@@ -55,3 +55,6 @@ Replace the illustrative URL with an **actual immutable public measurement repor
 
 ## Recommended measurement matrix (not completed)
 Review independently: RTX 3060 12GB, RTX 4060 Ti 16GB, RTX 4090 24GB (or equivalently documented hardware). Start with Ollama Qwen3 8B and Qwen2.5 Coder 7B for text controls, then image-capable Ollama Qwen3 VL 4B; for GGUF projector studies, audit Gemma3 4B, Qwen3-VL 4B and Qwen3-VL 8B in a pinned llama.cpp build. Treat untested models and unsupported GPU hardware as **not measured**. Do not extrapolate benchmark results from one device to another.
+
+## Publication approval rule
+Only registry entries with `evidenceType: "measured"` and `reviewStatus: "approved"` are rendered in the public selector. Generated trial candidates are `draft-not-published` and must never appear as public results. A reviewer must verify immutable evidence, trial artifacts, device/driver and runtime versions, model identity and offload conditions before approving. Nothing is auto-approved.\n
