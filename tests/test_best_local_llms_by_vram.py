@@ -56,18 +56,21 @@ def main():
     sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
     assert CANONICAL in sitemap
     assert 'https://sxf.si/guides/best-local-llms-by-vram/' not in sitemap
+    assert 'id="vram-search"' in html and 'id="vram-mode"' in html
+    assert (ROOT / "data/local-llm-sources.json").is_file()
+    assert (ROOT / "scripts/update_local_llm_catalog.py").is_file()
     result = subprocess.run(
         ["node", "-e", """
           const s=require('./tools/local-llm-vram-finder/selector.js');
-          if(s.MODELS.length!==13)throw Error('Model count');
-          for(const m of s.MODELS){
-            if(!(m.size>0) || !s.SOURCES[m.source])throw Error(m.tag);
-          }
-          if(s.evaluate(8,'coding',8192).some(m=>m.status==='out'))throw Error('bad filter');
-          if(!s.evaluate(16,'coding',8192).some(m=>m.tag==='qwen2.5-coder:14b'))throw Error('14b missing');
-          if(s.evaluate(8,'invalid',8192).length)throw Error('invalid workload');
-          if(s.evaluate(16,'vision',8192).some(m=>!m.use.includes('vision')))throw Error('cross-task result');
-          console.log('PASS: selector contracts');
+          const catalog=require('./data/local-llm-catalog.json');
+          const list=s.validate(catalog);
+          if(list.length!==13)throw Error('Source-backed snapshot');
+          if(!s.search('coder','all',list).length)throw Error('Search missing');
+          if(!s.evaluate(16,'coding',8192,list).some(m=>m.tag==='qwen2.5-coder:14b'))throw Error('Coding lookup');
+          if(s.evaluate(8,'invalid',8192,list).length)throw Error('Invalid task');
+          if(s.hardwareFor(list[0],8192,'chat').planning<=list[0].sizeGb)throw Error('Headroom missing');
+          if(s.evaluate(16,'vision',8192,list).some(m=>!m.workloads.includes('vision')))throw Error('Cross-task result');
+          console.log('PASS: catalog selector and reverse lookups');
         """], cwd=ROOT, capture_output=True, text=True, check=True
     )
     print(result.stdout.strip())
