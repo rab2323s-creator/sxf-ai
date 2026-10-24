@@ -89,7 +89,7 @@ def unload_all():
 
 def save_json_atomic(path, data):
     tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(json.dumps(data, indent=2) + "\\n")
+    tmp.write_text(json.dumps(data, indent=2) + "\n")
     tmp.replace(path)
 
 
