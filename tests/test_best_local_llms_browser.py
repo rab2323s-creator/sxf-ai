@@ -46,11 +46,16 @@ def run():
                 page.locator("#vram-context").select_option("4096")
                 assert page.locator("#vram-result").count() == 0  # not a valid element
                 assert page.locator(".vram-result").count() >= 2
+                assert page.locator("#vram-reviewed-evidence").is_hidden()
                 page.locator("#vram-search").fill("qwen3-vl")
                 page.locator("#vram-reviewed-evidence").wait_for(state="visible", timeout=10000)
                 case_text = page.locator("#vram-reviewed-evidence").inner_text()
                 assert "64.23" in case_text and "qwen3-vl:4b-instruct" in case_text
                 assert "not model-only VRAM" in case_text
+                page.locator("#vram-context").select_option("8192")
+                assert "Different context selected" in page.locator("#vram-reviewed-evidence").inner_text()
+                page.locator("#vram-search").fill("qwen3-vl:4b")
+                assert page.locator("#vram-reviewed-evidence").is_hidden()
                 page.locator("#vram-search").fill("qwen3-vl:8b")
                 assert page.locator("#vram-reviewed-evidence").is_hidden()
                 page.locator("#vram-search").fill("gemma")
