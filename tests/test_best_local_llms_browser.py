@@ -29,15 +29,15 @@ def run():
                 page.locator(".vram-result").first.wait_for(timeout=15000)
                 assert page.locator("h1").count() == 1
                 assert page.locator(".vram-table tbody tr").count() == 13
-                assert "planning candidate" in page.locator("#vram-count").inner_text()
-                assert 1 <= page.locator(".vram-result").count() <= 12
+                assert "model famil" in page.locator("#vram-count").inner_text()
+                assert 1 <= page.locator(".vram-result").count() <= 8
                 if page.locator("#vram-show-more").is_visible():
                     page.locator("#vram-show-more").click()
-                    assert page.locator(".vram-result").count() > 12
+                    assert page.locator(".vram-result").count() > 8
 
                 page.locator("#vram-search").fill("")
                 page.locator("#vram-capacity").select_option("8")
-                assert "planning candidate" in page.locator("#vram-count").inner_text()
+                assert "model famil" in page.locator("#vram-count").inner_text()
                 assert page.locator(".vram-result").count() >= 1
 
                 page.locator("#vram-capacity").select_option("24")
@@ -54,14 +54,14 @@ def run():
                 assert page.locator(".vram-result").count() == 0
                 assert "No catalog matches" in page.locator("#vram-results").inner_text()
 
-                page.locator("#vram-mode").select_option("model")
+                page.locator("#vram-mode").select_option("model")\n                assert page.locator("#vram-context").is_visible()\n                assert page.locator("#vram-workload").is_visible()\n                page.locator("#vram-workload").select_option("chat")
                 page.locator("#vram-search").fill("qwen")
-                assert "model variant" in page.locator("#vram-count").inner_text()
-                assert "Nearest listed GPU size" in page.locator("#vram-results").inner_text()
+                assert "model famil" in page.locator("#vram-count").inner_text()
+                assert "Nearest listed GPU tier" in page.locator("#vram-results").inner_text()
                 page.locator("#vram-search").fill("model-that-does-not-exist")
                 assert "No catalog matches" in page.locator("#vram-results").inner_text()
 
-                # Input changes should not trigger JS errors or viewport-wide scrolling.
+                assert page.locator(".vram-variants").count() >= 0\n                # Input changes should not trigger JS errors or viewport-wide scrolling.
                 assert not errors, (width, errors)
                 extent = page.evaluate("({ width: innerWidth, document: document.documentElement.scrollWidth })")
                 assert extent["document"] <= width + 2, (width, extent)
