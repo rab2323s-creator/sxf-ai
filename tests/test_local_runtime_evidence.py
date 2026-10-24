@@ -23,7 +23,7 @@ except OSError:pass
 else:raise AssertionError("Inventory must fail closed on source outage")
 model=next(m for m in catalog["models"] if m["id"]=="ollama:qwen3:8b")
 trial={"trial":1,"warmup":False,"completionTokens":32,"generationDurationNs":2_000_000_000,"tokensPerSecond":16.0,"observedPeakGpuUsedMiB":5000,"observedGpuUsedDeltaMiB":200,"wallSeconds":2.4,"telemetrySampleIntervalMs":200}
-candidate={"schemaVersion":1,"kind":"local-measurement-candidate","publicationStatus":"review-required","repetitions":3,"warmupCount":1,"modelId":model["id"],"modelTag":model["tag"],"runtime":"Ollama","runtimeVersion":"synthetic-test","contextTokens":4096,"concurrency":1,"gpu":{"name":"Synthetic GPU - NOT REAL","uuid":"SYNTHETIC","totalMiB":8192},"runRecords":[dict(trial,trial=0,warmup=True)]+[dict(trial,trial=i+1) for i in range(3)]}
+candidate={"schemaVersion":1,"kind":"local-measurement-candidate","publicationStatus":"review-required","repetitions":3,"warmupCount":1,"modelId":model["id"],"modelTag":model["tag"],"runtime":"Ollama","runtimeVersion":"synthetic-test","workload":"chat","inputImageSha256":None,"contextTokens":4096,"concurrency":1,"gpu":{"name":"Synthetic GPU - NOT REAL","uuid":"SYNTHETIC","totalMiB":8192},"runRecords":[dict(trial,trial=0,warmup=True)]+[dict(trial,trial=i+1) for i in range(3)]}
 inspect(candidate,catalog)
 bad=copy.deepcopy(candidate);bad["runRecords"][1]["tokensPerSecond"]=99
 try:inspect(bad,catalog)
