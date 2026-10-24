@@ -115,23 +115,25 @@ def capture_generation(payload):
             or type(response.get("eval_duration")) is not int
             or response["eval_count"] <= 0 or response["eval_duration"] <= 0):
         raise RuntimeError("Incomplete Ollama measured token metrics.")
-    answer = response.get("response")
-    if not answer and isinstance(response.get("message"), dict):
-        answer = response["message"].get("content")
+    if endpoint == "/api/chat":
+        message = response.get("message")
+        answer = message.get("content") if isinstance(message, dict) else None
+    else:
+        answer = response.get("response")
     if not isinstance(answer, str) or not answer.strip():
         raise RuntimeError("Empty answer from Ollama: done_reason=" + str(response.get("done_reason")) + ", thinking_chars=" + str(len(response.get("thinking") or (response.get("message") or {}).get("thinking") or "")) + ". No Vision benchmark accepted.")
     return response, wall, max(samples), len(samples)
 
 
-def run(output_dir, ollama_bin, *, context=4096, repeats=3):
+def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
     if not shutil.which("nvidia-smi"):
         raise RuntimeError("No NVIDIA GPU in Colab. This is a hardware allocation issue, not an SXF code error.")
     if context != 4096 or repeats < 3:
         raise ValueError("This review procedure uses context=4096 and at least 3 measured runs.")
+    if workload not in ("all", "text", "vision"):
+        raise ValueError("Unsupported workload.")
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    if any(output_dir.glob("*.json")):
-        raise FileExistsError("Evidence files already exist. Use a fresh output directory; never overwrite a capture.")
     base_device = gpu()
     runtime_version = api("/api/version").get("version")
     if not runtime_version:
@@ -139,11 +141,24 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
 
     image_bytes = png_fixture()
     image_file = output_dir / "vision-square.png"
-    image_file.write_bytes(image_bytes)
+    if image_file.exists() and image_file.read_bytes() != image_bytes:
+        raise FileExistsError("Original fixture differs; refusing to overwrite it.")
+    if not image_file.exists():
+        image_file.write_bytes(image_bytes)
     digest = hashlib.sha256(image_bytes).hexdigest()
 
     report_paths = []
-    for tag, workload, stem in TRIALS:
+    selected = [trial for trial in TRIALS if workload == "all"
+                or trial[1] == ("chat" if workload == "text" else "vision")]
+    for tag, kind, stem in selected:
+        path = output_dir / (stem + "-isolated.json")
+        if path.exists():
+            previous = json.loads(path.read_text())
+            if not valid_completed_report(previous, tag, kind, context, repeats, digest):
+                raise RuntimeError("Existing evidence incomplete or mismatched; preserved: " + str(path))
+            print("Skipping already completed report (original provenance retained):", path, flush=True)
+            report_paths.append(path)
+            continue
         unload_all()
         baseline = gpu()
         if baseline["gpuUuidSha256"] != base_device["gpuUuidSha256"]:
@@ -155,7 +170,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
         if len(tags) != 1 or not isinstance(tags[0].get("digest"), str):
             raise RuntimeError("Installed tag/digest cannot be uniquely verified: " + tag)
         info = tags[0]
-        prompt = ("Describe the main visible shapes and colors in this image." if workload == "vision"
+        prompt = ("Describe the main visible shapes and colors in this image." if kind == "vision"
                   else "Explain how GPU VRAM differs from system RAM in three short paragraphs.")
         payload = {
             "model": tag, "prompt": prompt, "stream": False, "think": False,
@@ -163,7 +178,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                 "num_ctx": context, "num_predict": 192, "temperature": 0
             }
         }
-        if workload == "vision":
+        if kind == "vision":
             # /api/chat is a better-supported route for image-bearing multimodal messages.
             payload = {"model": tag, "messages": [{"role": "user", "content": prompt,
                         "images": [base64.b64encode(image_bytes).decode("ascii")]}],
@@ -173,7 +188,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
         records = []
         model_ps = None
         for i in range(repeats + 1):
-            if workload == "vision":
+            if kind == "vision":
                 payload["_sxf_endpoint"] = "/api/chat"
             response, wall, device_peak, samples = capture_generation(payload)
             ps = resident_models()
@@ -190,8 +205,8 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                 "loadDurationNs": response.get("load_duration"),
                 "totalDurationNs": response.get("total_duration"),
                 "doneReason": response.get("done_reason"),
-                "answer": (response.get("message") or {}).get("content") if workload == "vision" else response["response"],
-                "answerSha256": hashlib.sha256(((response.get("message") or {}).get("content") if workload == "vision" else response["response"]).encode()).hexdigest(),
+                "answer": (response.get("message") or {}).get("content") if kind == "vision" else response["response"],
+                "answerSha256": hashlib.sha256(((response.get("message") or {}).get("content") if kind == "vision" else response["response"]).encode()).hexdigest(),
                 "gpuWideObservedPeakUsedMiB": device_peak,
                 "gpuWideObservedIncreaseOverBaselineMiB": max(0, device_peak - baseline["usedMiB"]),
                 "gpuSamples": samples, "gpuSampleIntervalMs": 200,
@@ -208,13 +223,13 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
             "modelId": "ollama:" + tag, "modelTag": tag, "modelDigest": info["digest"],
             "modelSizeBytes": info.get("size"),
             "reportedQuantization": (info.get("details") or {}).get("quantization_level"),
-            "workload": workload, "prompt": prompt, "contextTokens": context,
-            "requestedOutputTokens": 512 if workload == "vision" else 192, "requestedThink": False, "concurrency": 1,
+            "workload": kind, "prompt": prompt, "contextTokens": context,
+            "requestedOutputTokens": 512 if kind == "vision" else 192, "requestedThink": False, "concurrency": 1,
             "warmupCount": 1, "repetitions": repeats,
-            "imageSha256": digest if workload == "vision" else None,
-            "imageBytes": len(image_bytes) if workload == "vision" else None,
-            "expectedImageDescription": "A centered red square on a blue background." if workload == "vision" else None,
-            "visionAnswerReview": "manual-check-required" if workload == "vision" else None,
+            "imageSha256": digest if kind == "vision" else None,
+            "imageBytes": len(image_bytes) if kind == "vision" else None,
+            "expectedImageDescription": "A centered red square on a blue background." if kind == "vision" else None,
+            "visionAnswerReview": "manual-check-required" if kind == "vision" else None,
             "gpuBaselineAfterUnloadingOthers": baseline,
             "gpuAfterLastInference": gpu(),
             "ollamaPsAfterInference": model_ps,
@@ -238,6 +253,7 @@ if __name__ == "__main__":
     parser.add_argument("--ollama-bin", required=True)
     parser.add_argument("--context", type=int, default=4096)
     parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--workload", choices=("all", "text", "vision"), default="all")
     options = parser.parse_args()
-    paths = run(options.output_dir, options.ollama_bin, context=options.context, repeats=options.repeats)
+    paths = run(options.output_dir, options.ollama_bin, context=options.context, repeats=options.repeats, workload=options.workload)
     print("PASS: measured user-run evidence recorded for human review:", *(str(x) for x in paths), sep="\n")
