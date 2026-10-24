@@ -34,3 +34,9 @@ assert "extractall(path=install_dir, filter=\"data\")" in helper
 assert "https://ollama.com/install.sh" not in helper
 
 assert full.count('"fetch", "origin", "main"') == 3
+
+assert full.count('capture_output=True, text=True') >= 2
+assert full.count('run.stderr[-12000:]') == 2
+measure=(root/'scripts/measure_local_ollama.py').read_text()
+ast.parse(measure)
+assert '"think":False' in measure
