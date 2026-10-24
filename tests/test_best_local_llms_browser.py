@@ -70,7 +70,7 @@ def run():
                 page.locator("#vram-workload").select_option("coding")
                 page.locator("#vram-context").select_option("8192")
                 page.locator("#vram-capacity").select_option("16")
-                page.locator("#vram-search").fill("Qwen3 Coder 30B")
+                page.locator("#vram-search").fill("Qwen2.5 Coder 32B")
                 assert "Conditional: aggressive quantization" in page.locator("#vram-results").inner_text()
                 assert "Why shown:" in page.locator("#vram-results").inner_text()
                 # Input changes should not trigger JS errors or viewport-wide scrolling.
