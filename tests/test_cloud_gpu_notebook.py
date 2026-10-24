@@ -12,13 +12,15 @@ assert len(codes)>=6
 for i,src in enumerate(codes):
     ast.parse(src,filename=f"notebook-cell-{i}")
 full="\n".join(codes)
-assert full.index('shutil.which("nvidia-smi")')<full.index('"ollama","pull"')
+assert full.index('shutil.which("nvidia-smi")')<full.index('ensure_ollama_ready(OUTPUT)')
 assert "measure_local_ollama.py" in full
 assert '"--image",str(image_file)' in full
-assert '"--repeats","3"' in full
+assert '"--repeats", "3"' in full or '"--repeats","3"' in full
 assert 'kind")!="local-measurement-candidate"' in full
 assert 'files.download(str(archive))' in full
 assert "local-llm-benchmarks.json" not in full
 assert "reviewStatus" not in full and "approved" not in full
-assert 'http://127.0.0.1:11434/api/version' in full
+assert 'ensure_ollama_ready(OUTPUT)' in full
+assert 'OLLAMA, "pull", "qwen3:8b"' in full
+assert (root/'scripts/ensure_colab_ollama.py').is_file()
 print("PASS: cloud notebook parses, gates GPUs before downloads, invokes local real-inference tools, never writes public benchmark registry")
