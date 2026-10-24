@@ -179,22 +179,25 @@ function familyCard(g,mode,cap,workload,context){
 function reviewedCaseStudy(data,query,workload){
  if(workload!=='vision'||!data||data.schemaVersion!==1||!Array.isArray(data.observations))return null;
  const normalized=String(query||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
- // A distinct Ollama Instruct release: never attach this evidence to qwen3-vl:4b or a GGUF variant.
- if(normalized&&!['qwen3vl','qwen3vl4b','qwen3vl4binstruct','qwen','vision','instruct'].some(term=>term.includes(normalized)))return null;
+ // Only two deliberate queries show this separate Instruct case study. A query for
+ // qwen3-vl:4b names the DIFFERENT thinking model and must never inherit the result.
+ if(normalized!=='qwen3vl'&&normalized!=='qwen3vl4binstruct')return null;
  const b=data.observations.find(v=>v.modelId==='ollama:qwen3-vl:4b-instruct');
  if(!b||b.modelTag!=='qwen3-vl:4b-instruct'||b.reviewStatus!=='reviewed-user-capture'||b.publicationScope!=='source-linked-case-study-only'||b.measurementKind!=='generation-only'||b.contextTokens!==4096||b.workload!=='vision'||b.runtime!=='Ollama'||b.gpu!=='NVIDIA Tesla T4'||typeof b.sourceUrl!=='string'||!/^https:\/\/github\.com\/rab2323s-creator\/sxf-ai\/blob\/main\/docs\/benchmarks\//.test(b.sourceUrl)||!Array.isArray(b.measuredGenerationTokensPerSecond)||b.measuredGenerationTokensPerSecond.length!==3||!b.measuredGenerationTokensPerSecond.every(x=>Number.isFinite(x)&&x>0))return null;
  return b;
 }
-function reviewedCaseStudyHTML(b){
+function reviewedCaseStudyHTML(b,selectedContext){
  if(!b)return '';
  const mean=b.measuredGenerationTokensPerSecond.reduce((a,x)=>a+x,0)/3;
+ const differs=Number(selectedContext)!==b.contextTokens;
+ const contextNote=differs?'<p class="vram-warning"><strong>Different context selected:</strong> The finder is set to '+esc(Number(selectedContext))+' tokens, but this case study was measured at '+esc(b.contextTokens)+' tokens only. Do not transfer its speed or GPU memory reading to the selected context.</p>':'';
  return '<article class="vram-reviewed-card"><h4>Reviewed user-captured Vision test — '+esc(b.modelDisplayName)+'</h4>'+
   '<p><strong>'+mean.toFixed(2)+' generated tokens/second</strong> (three measured runs, warmup excluded). Generation-only, not end-to-end latency.</p>'+
   '<p><strong>Exact version:</strong> <code>'+esc(b.modelTag)+'</code> · '+esc(b.quantization)+' · '+esc(b.gpu)+' · Ollama '+esc(b.runtimeVersion)+' · context '+esc(b.contextTokens)+'.</p>'+
   '<p><strong>GPU-wide observed peak:</strong> '+esc(b.gpuWideObservedPeakUsedMiB)+' MiB (entire GPU, not model-only VRAM). <strong>Ollama-reported GPU residency:</strong> '+esc(b.ollamaReportedGpuResidentMiB)+' MiB (runtime-reported, not independently verified).</p>'+
   '<p><strong>Image check:</strong> '+esc(b.fixtureResult)+'</p>'+
   '<p><strong>Scope:</strong> This is a separate Ollama Instruct case study, not a benchmark for the catalogued <code>qwen3-vl:4b</code> thinking tag or any GGUF file. Does not change screening, compatibility, or estimated VRAM requirements.</p>'+
-  '<p><a href="'+esc(b.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Reviewed source report ↗</a> · Original ZIP privately retained, not publicly hosted.</p></article>';
+  '<p><a href="'+esc(b.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Reviewed source report ↗</a> · Original ZIP privately retained, not publicly hosted.</p>'+contextNote+'</article>';
 }
 function initialize(){
  const form=document.getElementById('vram-finder');if(!form)return;
@@ -213,7 +216,7 @@ function initialize(){
   if(reviewedSlot){
    const caseStudy=reviewedCaseStudy(reviewedData,query,workload);
    // Case study is not part of the catalog and does not change model counts or GPU filtering.
-   reviewedSlot.innerHTML=reviewedCaseStudyHTML(caseStudy);
+   reviewedSlot.innerHTML=reviewedCaseStudyHTML(caseStudy,ctx);
    reviewedSlot.hidden=!caseStudy;
   }
   const candidates=evaluate(mode==='model'?256:cap,workload,ctx,search(query,workload));
