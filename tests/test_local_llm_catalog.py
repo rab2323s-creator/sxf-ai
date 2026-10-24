@@ -11,6 +11,7 @@ def main():
  old=load(ROOT/"data/local-llm-catalog.json")
  config=load(ROOT/"data/local-llm-sources.json")
  validate(old)
+ old={"schemaVersion":2,"models":[m for m in old["models"] if m["format"]=="Ollama"]}
  assert len(old["models"])>=13
  entry={"repo":"Example/Repo","name":"Sample 8B","workloads":["chat"],"license":"unknown"}
  rows=[{"path":"Sample-8B-Q4_K_M.gguf","size":5_123_456_789},
