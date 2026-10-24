@@ -186,3 +186,10 @@
 /* User-captured evidence: long digests must not expand mobile viewport. */
 .vram-page #measured-evidence .vram-two-col > .vram-prose{min-width:0}
 .vram-page #measured-evidence .vram-prose p,.vram-page #measured-evidence .vram-prose code,.vram-page #measured-evidence .vram-prose a{overflow-wrap:anywhere;word-break:break-word}
+
+/* A reviewed case study is separate from model-family screening cards. */
+.vram-page .vram-reviewed-evidence[hidden]{display:none!important}
+.vram-page .vram-reviewed-card{margin:15px 0 20px;padding:20px;border:1px solid #56877a;border-radius:12px;background:#102520;min-width:0;overflow-wrap:anywhere}
+.vram-page .vram-reviewed-card h4{margin:0 0 12px;color:#dcf7e9;font-size:1.1rem}
+.vram-page .vram-reviewed-card p{margin:9px 0;line-height:1.6;font-size:.86rem}
+.vram-page .vram-reviewed-card a{color:#b7f4e9;text-decoration:underline}
