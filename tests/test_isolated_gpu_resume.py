@@ -14,17 +14,17 @@ fixture_hash = module.hashlib.sha256(module.png_fixture()).hexdigest()
 row = {"trial": 0, "warmup": True, "tokensPerSecond": 12.0, "answer": "red square"}
 record = {
     "schemaVersion": 2, "publicationStatus": "review-required-not-published",
-    "modelTag": "qwen3-vl:4b", "workload": "vision",
+    "modelTag": "qwen3-vl:4b-instruct", "workload": "vision",
     "modelDigest": "a"*64, "contextTokens": 4096, "repetitions": 3,
     "warmupCount": 1, "imageSha256": fixture_hash,
     "runRecords": [{**row, "trial": i, "warmup": i == 0} for i in range(4)]
 }
-assert module.valid_completed_report(record, "qwen3-vl:4b", "vision", 4096, 3, fixture_hash)
+assert module.valid_completed_report(record, "qwen3-vl:4b-instruct", "vision", 4096, 3, fixture_hash)
 assert not module.valid_completed_report(record, "qwen3:8b", "vision", 4096, 3, fixture_hash)
-assert not module.valid_completed_report(record, "qwen3-vl:4b", "vision", 8192, 3, fixture_hash)
-assert not module.valid_completed_report(record, "qwen3-vl:4b", "vision", 4096, 3, "bad")
-assert not module.valid_completed_report({**record, "runRecords": record["runRecords"][:2]}, "qwen3-vl:4b", "vision", 4096, 3, fixture_hash)
-assert not module.valid_completed_report({**record, "runRecords": [{**x, "answer": ""} for x in record["runRecords"]]}, "qwen3-vl:4b", "vision", 4096, 3, fixture_hash)
+assert not module.valid_completed_report(record, "qwen3-vl:4b-instruct", "vision", 8192, 3, fixture_hash)
+assert not module.valid_completed_report(record, "qwen3-vl:4b-instruct", "vision", 4096, 3, "bad")
+assert not module.valid_completed_report({**record, "runRecords": record["runRecords"][:2]}, "qwen3-vl:4b-instruct", "vision", 4096, 3, fixture_hash)
+assert not module.valid_completed_report({**record, "runRecords": [{**x, "answer": ""} for x in record["runRecords"]]}, "qwen3-vl:4b-instruct", "vision", 4096, 3, fixture_hash)
 with tempfile.TemporaryDirectory() as directory:
     destination = Path(directory) / "partial.json"
     module.save_json_atomic(destination, {"publicationStatus": "incomplete-do-not-publish", "runRecords": [row]})
@@ -35,6 +35,8 @@ cells = ["".join(cell["source"]) for cell in nb["cells"] if cell["cell_type"] ==
 for cell in cells:
     ast.parse(cell)
 assert "supports_vision_resume()" in cells[0]
+assert "qwen3-vl:4b-instruct" in (root / "scripts/measure_isolated_gpu_evidence.py").read_text()
+assert "*-setup-*.json" in cells[2]
 assert 'FALLBACK_REF="fix/isolated-vision-resumable-evidence-v3"' in cells[0]
 assert "BENCHMARK_SHA=" in cells[0]
 assert "WORKLOAD=\"vision\"" in cells[1]
