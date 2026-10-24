@@ -29,6 +29,17 @@ bad=copy.deepcopy(candidate);bad["runRecords"][1]["tokensPerSecond"]=99
 try:inspect(bad,catalog)
 except AssertionError:pass
 else:raise AssertionError("Fabricated throughput accepted")
+vision_model=next(m for m in catalog["models"] if m["id"]=="ollama:qwen3-vl:4b")
+vision_case=copy.deepcopy(candidate)
+vision_case["modelId"]=vision_model["id"]
+vision_case["modelTag"]=vision_model["tag"]
+vision_case["workload"]="vision"
+try:inspect(vision_case,catalog)
+except AssertionError:pass
+else:raise AssertionError("Vision trial without image evidence accepted")
+vision_case["inputImageSha256"]="a"*64
+vision_case["inputImageBytes"]=1024
+inspect(vision_case,catalog)
 bad=copy.deepcopy(candidate);bad["runRecords"]=bad["runRecords"][:2]
 try:inspect(bad,catalog)
 except AssertionError:pass
