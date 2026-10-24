@@ -32,3 +32,26 @@ python tests/test_best_local_llms_browser.py  # Playwright Chromium required
 ```
 
 The automatic candidate refresh is **not** evidence that 100–200 model families have been validated. Public count is the count of individually sourced artifact records; breadth is expanded only through reviewed data.
+
+## Vision runtime-evidence pilot (source checking is NOT execution)
+- `data/local-llm-runtime-audit.json` lists **three candidate model+projector pairs**: Gemma 3 4B, Qwen3-VL 4B, and Qwen3-VL 8B (Q4_K_M GGUF), plus Ollama text/vision control model IDs. Filename and listing status are source leads only; no compatibility is certified.
+- `python scripts/audit_local_vision_sources.py` checks the shortlist against the current catalog entirely offline.
+- `python scripts/audit_local_vision_sources.py --refresh` requests Hugging Face repository file trees and verifies exact projector filename and byte size. It writes the audit file only after **all** source queries complete; errors leave the prior reviewed snapshot unchanged. The result is `hub-byte-verified` (bytes only), `not-found`, or previously `listed-not-byte-verified`. **None** of these outcomes is a model-loading result.
+- Runtime execution and projector matching must be independently tested with the pinned llama.cpp build and recorded command, GPU, backend, context, image input, model SHA256, projector SHA256 and observed GPU memory. No such vision execution evidence has been collected or published in this pilot.
+
+## Reproducible local GPU measurement capture
+A real NVIDIA GPU with `nvidia-smi`, a running **local** Ollama at `127.0.0.1:11434`, and the exact pre-installed Ollama tag is required. Example:
+```sh
+ollama pull qwen3:8b
+python scripts/measure_local_ollama.py --model-id ollama:qwen3:8b --context 4096 --repeats 3 --output local-results/qwen3-8b-4096.json
+```
+The script makes **one warmup + at least three** deterministic `/api/generate` calls, preserving per-trial `eval_count`, `eval_duration`, generation tokens/sec, wall-clock time and a 200ms `nvidia-smi` sampling record. The sampling is **not** model-exclusive GPU allocation, is not guaranteed to catch a momentary true peak, and does **not** verify 100% GPU residency or image support. A stable GPU, pinned runtime version, and isolation from other processes are essential for any reproducible claim. **No remote inference calls or public benchmark writes occur.** The script does not pull models or install binaries.
+```sh
+python scripts/review_local_gpu_measurement.py local-results/qwen3-8b-4096.json --evidence-url https://YOUR-IMMUTABLE-REPORT-URL --output local-results/qwen3-8b-review.json
+```
+Replace the illustrative URL with an **actual immutable public measurement report** after uploading and reviewing the original artifact. The review tool independently verifies model IDs, runtime details, warmup count, numeric consistency and all repeats, and emits a **draft** result only. Publication requires human review for GPU/VRAM isolation, actual runtime residency, licenses, physical hardware provenance and test conditions. Upload artifacts outside the repo until approved; local output paths should never contain private prompts.
+- `data/local-llm-benchmarks.json` stays empty until valid real runs and independent evidence exist; synthetic tests only assert rejection behavior. **Never** publish example measurements.
+- A VRAM selection estimate remains based on file size plus an illustration buffer, not the sampling output.
+
+## Recommended measurement matrix (not completed)
+Review independently: RTX 3060 12GB, RTX 4060 Ti 16GB, RTX 4090 24GB (or equivalently documented hardware). Start with Ollama Qwen3 8B and Qwen2.5 Coder 7B for text controls, then image-capable Ollama Qwen3 VL 4B; for GGUF projector studies, audit Gemma3 4B, Qwen3-VL 4B and Qwen3-VL 8B in a pinned llama.cpp build. Treat untested models and unsupported GPU hardware as **not measured**. Do not extrapolate benchmark results from one device to another.
