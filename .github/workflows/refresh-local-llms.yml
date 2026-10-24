@@ -1,0 +1,44 @@
+name: Refresh local LLM catalog candidates
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_local_llm_catalog.py'
+      - 'data/local-llm-sources.json'
+      - '.github/workflows/refresh-local-llms.yml'
+  schedule:
+    - cron: "27 6 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: local-llm-catalog-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify stored catalog before refresh
+        run: |
+          python scripts/update_local_llm_catalog.py --check
+          python tests/test_local_llm_catalog.py
+      - name: Refresh source-file sizes from Hugging Face
+        run: python scripts/update_local_llm_catalog.py
+      - name: Create review PR for source changes
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "data: refresh source-verified local LLM file sizes"
+          branch: automation/local-llm-catalog-refresh
+          delete-branch: true
+          title: "Review source-verified local LLM catalog refresh"
+          body: |
+            Automated, source-gated Hugging Face GGUF catalog update.
+            Exact single-file byte sizes, no invented tokens/sec or VRAM benchmarks.
+            Review source repositories, architecture support and licensing before merging.
+          add-paths: data/local-llm-catalog.json
