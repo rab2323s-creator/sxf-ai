@@ -71,7 +71,7 @@ def run():
                 page.locator("#vram-context").select_option("8192")
                 page.locator("#vram-capacity").select_option("16")
                 page.locator("#vram-search").fill("")
-                assert "Conditional: aggressive quantization" in page.locator("#vram-results").inner_text()
+                assert "Conditional: aggressive quantization" in page.locator("#vram-results").inner_text(), (width, page.locator("#vram-count").inner_text(), page.locator("#vram-results").inner_text()[:3500])
                 assert "Why shown:" in page.locator("#vram-results").inner_text()
                 # Input changes should not trigger JS errors or viewport-wide scrolling.
                 assert not errors, (width, errors)
