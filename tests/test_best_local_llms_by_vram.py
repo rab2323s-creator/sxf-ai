@@ -89,8 +89,8 @@ def main():
           const ordinary=coding.find(g=>!g.quantWarning);
           if(!ordinary||!s.screeningAssessment(ordinary,'gpu','coding').label.includes('Memory candidate'))throw Error('Memory-only candidate label missing');
           const visionGroups=s.groupFamilies(s.evaluate(24,'vision',4096,list));
-          const vision=visionGroups.find(g=>g.primary.format==='GGUF'&&!g.quantWarning);
-          if(!vision||!s.screeningAssessment(vision,'gpu','vision').label.includes('Needs validation'))throw Error('Unverified vision not flagged');
+          const visionCandidate=visionGroups.find(g=>g.primary.format==='GGUF'&&!g.quantWarning);
+          if(!visionCandidate||!s.screeningAssessment(visionCandidate,'gpu','vision').label.includes('Needs validation'))throw Error('Unverified vision not flagged');
           const reverse=s.screeningAssessment(ordinary,'model','coding');
           if(!reverse.label.includes('Estimated GPU tier'))throw Error('Reverse must disclose estimate');
           console.log('PASS: v3.1 conditional, vision, reverse and memory-only evidence labels');
