@@ -51,6 +51,11 @@ def main():
                     'Original ZIP is not publicly hosted here'):
         assert snippet.lower() in html.lower(), snippet
     assert 'href="#measured-evidence"' in html
+    assert 'eval_count × 10⁹ / eval_duration_ns' in html
+    assert '06 / FROM DECISION TO EXECUTION' in html
+    assert '07 / PRACTICAL QUESTIONS' in html
+    assert 'The model catalog as a whole has not undergone independent' in html
+    assert 'one exact configuration and fixture' in html
     assert 'github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md' in html
     assert json.loads((ROOT / "data/local-llm-benchmarks.json").read_text())["measurements"] == []
     assert "not measured peak VRAM" in html
