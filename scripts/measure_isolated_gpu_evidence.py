@@ -22,7 +22,7 @@ import zlib
 API = "http://127.0.0.1:11434"
 TRIALS = (
     ("qwen3:8b", "chat", "qwen3-8b"),
-    ("qwen3-vl:4b", "vision", "qwen3-vl-4b"),
+    ("qwen3-vl:4b-instruct", "vision", "qwen3-vl-4b-instruct"),
 )
 
 
@@ -199,6 +199,23 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
         if len(tags) != 1 or not isinstance(tags[0].get("digest"), str):
             raise RuntimeError("Installed tag/digest cannot be uniquely verified: " + tag)
         info = tags[0]
+        # Preserve identity and baseline before the first expensive inference attempt.
+        # A setup record is diagnostic evidence, never a passed benchmark.
+        setup_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        setup_path = output_dir / (stem + "-setup-" + setup_id + ".json")
+        save_json_atomic(setup_path, {
+            "schemaVersion": 2, "kind": "sxf-gpu-setup-diagnostic",
+            "publicationStatus": "diagnostic-do-not-publish",
+            "capturedAtUtc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "modelTag": tag, "modelDigest": info["digest"],
+            "reportedQuantization": (info.get("details") or {}).get("quantization_level"),
+            "modelFileSizeBytes": info.get("size"),
+            "gpuBaselineAfterUnloadingOthers": baseline,
+            "runtime": "Ollama", "runtimeVersion": runtime_version,
+            "workload": kind, "contextTokens": context, "repetitions": repeats,
+            "visionImageSha256": digest if kind == "vision" else None,
+            "notes": "This records model identity before inference, NOT proof of a successful image answer or generation speed.",
+        })
         prompt = ("Describe the main visible shapes and colors in this image." if kind == "vision"
                   else "Explain how GPU VRAM differs from system RAM in three short paragraphs.")
         payload = {
