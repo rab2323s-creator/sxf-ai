@@ -22,7 +22,7 @@ import zlib
 API = "http://127.0.0.1:11434"
 TRIALS = (
     ("qwen3:8b", "chat", "qwen3-8b"),
-    ("qwen3-vl:4b", "vision", "qwen3-vl-4b"),
+    ("qwen3-vl:4b-instruct", "vision", "qwen3-vl-4b-instruct"),
 )
 
 
@@ -87,6 +87,35 @@ def unload_all():
     raise RuntimeError("Could not clear previous Ollama model residency; no baseline recorded.")
 
 
+def save_json_atomic(path, data):
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2) + "\n")
+    tmp.replace(path)
+
+
+def valid_completed_report(data, tag, kind, context, repeats, image_hash):
+    if not isinstance(data, dict):
+        return False
+    if (data.get("schemaVersion") != 2
+            or data.get("publicationStatus") != "review-required-not-published"
+            or data.get("modelTag") != tag or data.get("workload") != kind
+            or data.get("contextTokens") != context
+            or data.get("repetitions") != repeats or data.get("warmupCount") != 1):
+        return False
+    if not isinstance(data.get("modelDigest"), str) or not data["modelDigest"]:
+        return False
+    if kind == "vision" and data.get("imageSha256") != image_hash:
+        return False
+    rows = data.get("runRecords")
+    return (isinstance(rows, list) and len(rows) == repeats + 1
+            and all(isinstance(row, dict) and row.get("trial") == i
+                    and row.get("warmup") is (i == 0)
+                    and isinstance(row.get("tokensPerSecond"), (float, int))
+                    and row["tokensPerSecond"] > 0
+                    and isinstance(row.get("answer"), str) and row["answer"].strip()
+                    for i, row in enumerate(rows)))
+
+
 def capture_generation(payload):
     samples = [gpu()["usedMiB"]]
     errors = []
@@ -115,23 +144,25 @@ def capture_generation(payload):
             or type(response.get("eval_duration")) is not int
             or response["eval_count"] <= 0 or response["eval_duration"] <= 0):
         raise RuntimeError("Incomplete Ollama measured token metrics.")
-    answer = response.get("response")
-    if not answer and isinstance(response.get("message"), dict):
-        answer = response["message"].get("content")
+    if endpoint == "/api/chat":
+        message = response.get("message")
+        answer = message.get("content") if isinstance(message, dict) else None
+    else:
+        answer = response.get("response")
     if not isinstance(answer, str) or not answer.strip():
         raise RuntimeError("Empty answer from Ollama: done_reason=" + str(response.get("done_reason")) + ", thinking_chars=" + str(len(response.get("thinking") or (response.get("message") or {}).get("thinking") or "")) + ". No Vision benchmark accepted.")
     return response, wall, max(samples), len(samples)
 
 
-def run(output_dir, ollama_bin, *, context=4096, repeats=3):
+def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
     if not shutil.which("nvidia-smi"):
         raise RuntimeError("No NVIDIA GPU in Colab. This is a hardware allocation issue, not an SXF code error.")
     if context != 4096 or repeats < 3:
         raise ValueError("This review procedure uses context=4096 and at least 3 measured runs.")
+    if workload not in ("all", "text", "vision"):
+        raise ValueError("Unsupported workload.")
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    if any(output_dir.glob("*.json")):
-        raise FileExistsError("Evidence files already exist. Use a fresh output directory; never overwrite a capture.")
     base_device = gpu()
     runtime_version = api("/api/version").get("version")
     if not runtime_version:
@@ -139,11 +170,24 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
 
     image_bytes = png_fixture()
     image_file = output_dir / "vision-square.png"
-    image_file.write_bytes(image_bytes)
+    if image_file.exists() and image_file.read_bytes() != image_bytes:
+        raise FileExistsError("Original fixture differs; refusing to overwrite it.")
+    if not image_file.exists():
+        image_file.write_bytes(image_bytes)
     digest = hashlib.sha256(image_bytes).hexdigest()
 
     report_paths = []
-    for tag, workload, stem in TRIALS:
+    selected = [trial for trial in TRIALS if workload == "all"
+                or trial[1] == ("chat" if workload == "text" else "vision")]
+    for tag, kind, stem in selected:
+        path = output_dir / (stem + "-isolated.json")
+        if path.exists():
+            previous = json.loads(path.read_text())
+            if not valid_completed_report(previous, tag, kind, context, repeats, digest):
+                raise RuntimeError("Existing evidence incomplete or mismatched; preserved: " + str(path))
+            print("Skipping already completed report (original provenance retained):", path, flush=True)
+            report_paths.append(path)
+            continue
         unload_all()
         baseline = gpu()
         if baseline["gpuUuidSha256"] != base_device["gpuUuidSha256"]:
@@ -155,7 +199,24 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
         if len(tags) != 1 or not isinstance(tags[0].get("digest"), str):
             raise RuntimeError("Installed tag/digest cannot be uniquely verified: " + tag)
         info = tags[0]
-        prompt = ("Describe the main visible shapes and colors in this image." if workload == "vision"
+        # Preserve identity and baseline before the first expensive inference attempt.
+        # A setup record is diagnostic evidence, never a passed benchmark.
+        setup_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        setup_path = output_dir / (stem + "-setup-" + setup_id + ".json")
+        save_json_atomic(setup_path, {
+            "schemaVersion": 2, "kind": "sxf-gpu-setup-diagnostic",
+            "publicationStatus": "diagnostic-do-not-publish",
+            "capturedAtUtc": dt.datetime.now(dt.timezone.utc).isoformat(),
+            "modelTag": tag, "modelDigest": info["digest"],
+            "reportedQuantization": (info.get("details") or {}).get("quantization_level"),
+            "modelFileSizeBytes": info.get("size"),
+            "gpuBaselineAfterUnloadingOthers": baseline,
+            "runtime": "Ollama", "runtimeVersion": runtime_version,
+            "workload": kind, "contextTokens": context, "repetitions": repeats,
+            "visionImageSha256": digest if kind == "vision" else None,
+            "notes": "This records model identity before inference, NOT proof of a successful image answer or generation speed.",
+        })
+        prompt = ("Describe the main visible shapes and colors in this image." if kind == "vision"
                   else "Explain how GPU VRAM differs from system RAM in three short paragraphs.")
         payload = {
             "model": tag, "prompt": prompt, "stream": False, "think": False,
@@ -163,7 +224,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                 "num_ctx": context, "num_predict": 192, "temperature": 0
             }
         }
-        if workload == "vision":
+        if kind == "vision":
             # /api/chat is a better-supported route for image-bearing multimodal messages.
             payload = {"model": tag, "messages": [{"role": "user", "content": prompt,
                         "images": [base64.b64encode(image_bytes).decode("ascii")]}],
@@ -171,9 +232,11 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                        "options": {"num_ctx": context, "num_predict": 512, "temperature": 0}}
 
         records = []
+        attempt_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        progress_path = output_dir / (stem + "-partial-" + attempt_id + ".json")
         model_ps = None
         for i in range(repeats + 1):
-            if workload == "vision":
+            if kind == "vision":
                 payload["_sxf_endpoint"] = "/api/chat"
             response, wall, device_peak, samples = capture_generation(payload)
             ps = resident_models()
@@ -190,14 +253,23 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                 "loadDurationNs": response.get("load_duration"),
                 "totalDurationNs": response.get("total_duration"),
                 "doneReason": response.get("done_reason"),
-                "answer": (response.get("message") or {}).get("content") if workload == "vision" else response["response"],
-                "answerSha256": hashlib.sha256(((response.get("message") or {}).get("content") if workload == "vision" else response["response"]).encode()).hexdigest(),
+                "answer": (response.get("message") or {}).get("content") if kind == "vision" else response["response"],
+                "answerSha256": hashlib.sha256(((response.get("message") or {}).get("content") if kind == "vision" else response["response"]).encode()).hexdigest(),
                 "gpuWideObservedPeakUsedMiB": device_peak,
                 "gpuWideObservedIncreaseOverBaselineMiB": max(0, device_peak - baseline["usedMiB"]),
                 "gpuSamples": samples, "gpuSampleIntervalMs": 200,
                 "psReportedSizeBytes": model_ps.get("size"), "psReportedGpuResidentBytes": model_ps.get("size_vram"),
             }
             records.append(record)
+            save_json_atomic(progress_path, {
+                "schemaVersion": 2, "kind": "sxf-isolated-gpu-partial-evidence",
+                "publicationStatus": "incomplete-do-not-publish",
+                "modelTag": tag, "modelDigest": info["digest"], "workload": kind,
+                "runtimeVersion": runtime_version, "gpuBaselineAfterModelUnload": baseline,
+                "contextTokens": context, "requestedRepetitions": repeats,
+                "imageSha256": digest if kind == "vision" else None,
+                "runRecords": records,
+            })
             print(tag, "warmup" if i == 0 else "trial " + str(i),
                   "tokens/s =", record["tokensPerSecond"], flush=True)
         report = {
@@ -208,13 +280,13 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
             "modelId": "ollama:" + tag, "modelTag": tag, "modelDigest": info["digest"],
             "modelSizeBytes": info.get("size"),
             "reportedQuantization": (info.get("details") or {}).get("quantization_level"),
-            "workload": workload, "prompt": prompt, "contextTokens": context,
-            "requestedOutputTokens": 512 if workload == "vision" else 192, "requestedThink": False, "concurrency": 1,
+            "workload": kind, "prompt": prompt, "contextTokens": context,
+            "requestedOutputTokens": 512 if kind == "vision" else 192, "requestedThink": False, "concurrency": 1,
             "warmupCount": 1, "repetitions": repeats,
-            "imageSha256": digest if workload == "vision" else None,
-            "imageBytes": len(image_bytes) if workload == "vision" else None,
-            "expectedImageDescription": "A centered red square on a blue background." if workload == "vision" else None,
-            "visionAnswerReview": "manual-check-required" if workload == "vision" else None,
+            "imageSha256": digest if kind == "vision" else None,
+            "imageBytes": len(image_bytes) if kind == "vision" else None,
+            "expectedImageDescription": "A centered red square on a blue background." if kind == "vision" else None,
+            "visionAnswerReview": "manual-check-required" if kind == "vision" else None,
             "gpuBaselineAfterUnloadingOthers": baseline,
             "gpuAfterLastInference": gpu(),
             "ollamaPsAfterInference": model_ps,
@@ -224,7 +296,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
         path = output_dir / (stem + "-isolated.json")
         if path.exists():
             raise FileExistsError("Would overwrite evidence " + str(path))
-        path.write_text(json.dumps(report, indent=2) + "\n")
+        save_json_atomic(path, report)
         report_paths.append(path)
         # Unload NOW, so subsequent model is not contaminated by this one.
         unload_all()
@@ -238,6 +310,7 @@ if __name__ == "__main__":
     parser.add_argument("--ollama-bin", required=True)
     parser.add_argument("--context", type=int, default=4096)
     parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--workload", choices=("all", "text", "vision"), default="all")
     options = parser.parse_args()
-    paths = run(options.output_dir, options.ollama_bin, context=options.context, repeats=options.repeats)
+    paths = run(options.output_dir, options.ollama_bin, context=options.context, repeats=options.repeats, workload=options.workload)
     print("PASS: measured user-run evidence recorded for human review:", *(str(x) for x in paths), sep="\n")
