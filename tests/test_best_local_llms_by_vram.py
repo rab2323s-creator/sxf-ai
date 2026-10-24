@@ -57,6 +57,7 @@ def main():
     assert CANONICAL in sitemap
     assert 'https://sxf.si/guides/best-local-llms-by-vram/' not in sitemap
     assert 'id="vram-search"' in html and 'id="vram-mode"' in html
+    assert "178 GGUF single-file variants" in html and "13 Ollama tags" in html
     assert (ROOT / "data/local-llm-sources.json").is_file()
     assert (ROOT / "scripts/update_local_llm_catalog.py").is_file()
     result = subprocess.run(
@@ -82,6 +83,17 @@ def main():
           const low=list.find(m=>m.quantization==='Q2_K');
           const q4=list.find(m=>m.quantization==='Q4_K_M');
           if(!(s.quantRank(low)>s.quantRank(q4)))throw Error('low-bit quality caution');
+          const coding=s.groupFamilies(s.evaluate(16,'coding',8192,list).filter(m=>m.status!=='out'));
+          const conditional=coding.find(g=>g.primary.quantization==='Q2_K');
+          if(!conditional||!s.screeningAssessment(conditional,'gpu','coding').label.startsWith('Conditional'))throw Error('Low-bit labeled as preferred');
+          const ordinary=coding.find(g=>!g.quantWarning);
+          if(!ordinary||!s.screeningAssessment(ordinary,'gpu','coding').label.includes('Memory candidate'))throw Error('Memory-only candidate label missing');
+          const visionGroups=s.groupFamilies(s.evaluate(24,'vision',4096,list));
+          const visionCandidate=visionGroups.find(g=>g.primary.format==='GGUF'&&!g.quantWarning);
+          if(!visionCandidate||!s.screeningAssessment(visionCandidate,'gpu','vision').label.includes('Needs validation'))throw Error('Unverified vision not flagged');
+          const reverse=s.screeningAssessment(ordinary,'model','coding');
+          if(!reverse.label.includes('Estimated GPU tier'))throw Error('Reverse must disclose estimate');
+          console.log('PASS: v3.1 conditional, vision, reverse and memory-only evidence labels');
           console.log('PASS: v3 all forward/reverse estimates, family grouping, vision and quantization caveats');
         """], cwd=ROOT, capture_output=True, text=True, check=True
     )

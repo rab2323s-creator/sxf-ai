@@ -108,6 +108,38 @@ function groupFamilies(entries){
   return tier(a)-tier(b)||quantRank(a.primary)-quantRank(b.primary)||a.primary.planning-b.primary.planning||a.name.localeCompare(b.name);
  });
 }
+/* Screening labels describe evidence only, never benchmarked quality or guaranteed GPU fit. */
+function screeningAssessment(g,mode,workload){
+ const m=g.primary;
+ const low=!!(m.quantization&&LOW_BIT.test(m.quantization));
+ const vision=workload==='vision'&&m.format==='GGUF';
+ const borderline=mode==='gpu'&&m.status==='tight';
+ let label,why,limits;
+ if(low){
+  label='Conditional: aggressive quantization';
+  why='Only a 2–3-bit variant of this family meets the selected memory screening conditions. Listed for comparison, NOT recommended as a quality pick.';
+  limits='Quality impact, runtime support and full-GPU loading require independent testing.';
+ }else if(vision){
+  label='Needs validation: vision assets';
+  why='A source-listed GGUF file meets the memory screening criteria, but its image-processing assets have not been validated.';
+  limits='Projector and any extra files, runtime support, and actual VRAM use are not confirmed.';
+ }else if(borderline){
+  label='Borderline: above planning budget';
+  why='The published file size plus illustrative memory allowance exceeds the selected GPU budget by up to 2 GB.';
+  limits='Do not assume full GPU loading; shorter context, smaller quantization or CPU offload may be required.';
+ }else if(mode==='model'){
+  label='Estimated GPU tier only';
+  why='The listed GPU tier comes from published file size plus the stated task/context allowance, not a hardware benchmark.';
+  limits='No verified performance, full-GPU residency, or model-quality ranking.';
+ }else{
+  label='Memory candidate: not tested';
+  why='The source-listed file size plus illustrative memory allowance falls within the selected GPU budget.';
+  limits='This is not a measured memory peak, verified runtime compatibility, or a quality ranking.';
+ }
+ if(borderline&&low)limits+=' The planning target also exceeds the selected GPU budget.';
+ if(vision&&low)limits+=' Vision projector files and image memory have not been validated.';
+ return {label,why,limits,low,vision,borderline};
+}
 function evidenceHTML(m,workload,context){
  const e=estimate(m,context,workload);
  if(!e)return '';
@@ -124,12 +156,13 @@ function variantItem(m,workload,context){
  const vision=workload==='vision'?visionEvidence(m):null;
  const source='<a href="'+esc(m.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Original source ↗</a>';
  const page=typeof m.sxfUrl==='string'&&/^\/models\/[a-z0-9-]+\/$/.test(m.sxfUrl)?' · <a href="'+esc(m.sxfUrl)+'">SXF model profile ↗</a>':'';
- return '<li><span><strong>'+esc(q)+'</strong> · '+m.sizeGb.toFixed(3)+' GB file · '+e.total.toFixed(2)+' GB estimated target · '+(m.status==='out'?'above selected GPU':m.status==='tight'?'tight GPU budget':'within planning budget')+'</span><small>'+source+page+' · '+esc(runtimeEvidence(m))+(vision?' · Vision assets unverified':'')+'</small></li>';
+ return '<li><span><strong>'+esc(q)+'</strong> · '+m.sizeGb.toFixed(3)+' GB file · '+e.total.toFixed(2)+' GB estimated target · '+(m.status==='out'?'above selected GPU':m.status==='tight'?'tight GPU budget':'within planning budget')+(m.quantization&&LOW_BIT.test(m.quantization)?' · CONDITIONAL: aggressive quantization':'')+'</span><small>'+source+page+' · '+esc(runtimeEvidence(m))+(vision?' · Vision assets unverified':'')+'</small></li>';
 }
 function familyCard(g,mode,cap,workload,context){
  const m=g.primary,h=hardwareFor(m,context,workload);
+ const assessment=screeningAssessment(g,mode,workload);
  const tight=m.status==='tight',out=m.status==='out';
- const label=mode==='model'?'GPU requirement estimate':out?'Above GPU planning budget':tight?'Tight estimate':'Within planning budget (not tested)';
+ const label=assessment.label;
  const capLabel=mode==='model'?'Nearest listed GPU tier: '+(h.suggested?h.suggested+' GB':'Above 128 GB'):'Selected GPU: '+cap+' GB';
  const all=g.variants.map(v=>variantItem(v,workload,context)).join('');
  const license=esc(m.license||'Needs source review');
@@ -137,6 +170,7 @@ function familyCard(g,mode,cap,workload,context){
  const bench=(m.measurements||[]).slice(0,2).map(b=>'<p class="vram-evidence">Measured '+Number(b.tokensPerSecond).toFixed(1)+' tokens/sec · '+esc(b.gpu)+' · '+esc(b.runtime)+' · context '+esc(b.contextTokens)+' · <a href="'+esc(b.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Benchmark evidence ↗</a></p>').join('');
  return '<article class="vram-result vram-family"><div class="vram-result-head"><div><h4>'+esc(g.name)+'</h4><p>'+g.variants.length+' source-listed variant'+(g.variants.length===1?'':'s')+' · screening choice: '+esc(m.quantization||'Ollama published tag')+'</p></div><span class="vram-badge'+(tight||out||g.quantWarning||g.visionReview?' caution':'')+'">'+esc(label)+'</span></div>'+
   '<p><strong>'+m.planning.toFixed(2)+' GB</strong> estimated planning target · '+esc(capLabel)+' · Not a measured VRAM requirement.</p>'+
+  '<div class="vram-decision"><p><strong>Why shown:</strong> '+esc(assessment.why)+'</p><p><strong>What to check:</strong> '+esc(assessment.limits)+'</p></div>'+
   evidenceHTML(m,workload,context)+
   '<p class="vram-card-small"><strong>License:</strong> '+license+' (check exact model card) · <strong>Source checked:</strong> '+esc(m.checkedAt||'unknown')+'</p>'+
   '<div class="vram-result-foot">'+note+' <a href="'+esc(m.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Model file source ↗</a></div>'+bench+
@@ -153,7 +187,8 @@ function initialize(){
   const note=document.getElementById('vram-mode-help');
   if(note)note.textContent=mode==='model'?'Search a model and pick its task/context. GPU estimates use the SAME inputs as GPU-first results.':'Select a GPU tier, task and context. Results are grouped by model family, not ranked by model quality.';
   if(!MODELS.length){count.textContent='Catalog unavailable';result.textContent='The source catalog did not load. See the sourced static comparison table below.';if(more)more.hidden=true;return;}
-  const candidates=evaluate(cap,workload,ctx,search(query,workload));
+  // The GPU selector is hidden in reverse mode, so it must not influence variant ordering.
+  const candidates=evaluate(mode==='model'?256:cap,workload,ctx,search(query,workload));
   const matched=mode==='gpu'?candidates.filter(m=>m.status!=='out'):candidates;
   const families=groupFamilies(matched);
   const visible=families.slice(0,resultLimit);
@@ -172,6 +207,6 @@ function initialize(){
   fetch('/data/local-llm-benchmarks.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(b=>{MODELS=joinBenchmarks(MODELS,b);render();}).catch(()=>{});
  }).catch(()=>{if(status)status.textContent='Catalog temporarily unavailable. The 13-entry source-linked comparison table below remains accessible.';render();});
 }
-if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,joinBenchmarks,estimate,evaluate,hardwareFor,search,familyKey,groupFamilies,quantRank,visionEvidence};
+if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,joinBenchmarks,estimate,evaluate,hardwareFor,search,familyKey,groupFamilies,quantRank,visionEvidence,screeningAssessment};
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();}
 })(typeof globalThis!=='undefined'?globalThis:this);

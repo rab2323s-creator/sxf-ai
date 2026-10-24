@@ -172,3 +172,13 @@
 
 /* Keep the working selector close to the top of compact screens; remove decorative example only. */
 @media(max-width:650px){.vram-page .vram-hero-visual{display:none}.vram-page .vram-hero{padding:16px 0 24px;gap:0}.vram-page .vram-tool{margin-top:26px}.vram-page .vram-hero-actions{margin-top:18px}}
+
+/* v3.1 explicit screening rationale */
+.vram-page .vram-decision{padding:11px 14px;margin:12px 0 15px;background:#13272a;border:1px solid #35555a;border-radius:9px}
+.vram-page .vram-decision p{font-size:.86rem;line-height:1.55;margin:5px 0;color:#deeee9}
+
+/* v3.1 long conditional labels must wrap on narrow phones, never expand viewport. */
+.vram-page .vram-family .vram-result-head{flex-wrap:wrap;min-width:0}
+.vram-page .vram-family .vram-result-head > div{min-width:0;flex:1 1 170px}
+.vram-page .vram-family .vram-badge{white-space:normal;max-width:100%;overflow-wrap:anywhere;line-height:1.45;text-align:center}
+.vram-page .vram-family .vram-decision,.vram-page .vram-family .vram-evidence{max-width:100%;min-width:0;overflow-wrap:anywhere}

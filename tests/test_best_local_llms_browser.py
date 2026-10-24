@@ -30,6 +30,7 @@ def run():
                 assert page.locator("h1").count() == 1
                 assert page.locator(".vram-table tbody tr").count() == 13
                 assert "model famil" in page.locator("#vram-count").inner_text()
+                assert page.locator(".vram-decision").count() >= 1
                 assert 1 <= page.locator(".vram-result").count() <= 8
                 if page.locator("#vram-show-more").is_visible():
                     page.locator("#vram-show-more").click()
@@ -65,6 +66,13 @@ def run():
                 assert "No matching models" in page.locator("#vram-results").inner_text()
 
                 assert page.locator(".vram-variants").count() >= 0
+                page.locator("#vram-mode").select_option("gpu")
+                page.locator("#vram-workload").select_option("coding")
+                page.locator("#vram-context").select_option("8192")
+                page.locator("#vram-capacity").select_option("16")
+                page.locator("#vram-search").fill("")
+                assert "conditional: aggressive quantization" in page.locator("#vram-results").inner_text().lower()
+                assert "Why shown:" in page.locator("#vram-results").inner_text()
                 # Input changes should not trigger JS errors or viewport-wide scrolling.
                 assert not errors, (width, errors)
                 extent = page.evaluate("({ width: innerWidth, document: document.documentElement.scrollWidth })")
