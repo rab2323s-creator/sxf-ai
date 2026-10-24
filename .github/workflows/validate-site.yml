@@ -31,6 +31,9 @@ jobs:
       - name: Local LLM GPU selector, SEO and linking regression
         run: |
           node --check tools/local-llm-vram-finder/selector.js
+          python -m py_compile scripts/update_local_llm_catalog.py
+          python scripts/update_local_llm_catalog.py --check
+          python tests/test_local_llm_catalog.py
           python tests/test_best_local_llms_by_vram.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
