@@ -23,4 +23,6 @@ assert "reviewStatus" not in full and "approved" not in full
 assert 'ensure_ollama_ready(OUTPUT)' in full
 assert 'OLLAMA, "pull", "qwen3:8b"' in full
 assert (root/'scripts/ensure_colab_ollama.py').is_file()
+assert '"pull", "--ff-only", "origin", "main"' in full
+assert full.count('Missing Ollama setup helper after refreshing SXF checkout.') >= 2
 print("PASS: cloud notebook parses, gates GPUs before downloads, invokes local real-inference tools, never writes public benchmark registry")
