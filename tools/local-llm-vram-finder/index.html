@@ -54,7 +54,7 @@
 <p>Illustrative only. Download sizes are <strong>not measured peak VRAM</strong>; buffers, KV cache and GPU offload vary by runtime.</p>
 </div>
 </section>
-<nav class="vram-local-nav" aria-label="On this page"><a href="#quick-picks">VRAM picks</a><a href="#model-finder">Model finder</a><a href="#comparison">Model sizes</a><a href="#memory">Memory math</a><a href="#setup">Quick start</a><a href="#questions">FAQ</a></nav>
+<nav class="vram-local-nav" aria-label="On this page"><a href="#quick-picks">VRAM picks</a><a href="#model-finder">Model finder</a><a href="#comparison">Model sizes</a><a href="#measured-evidence">Measured T4 test</a><a href="#memory">Memory math</a><a href="#setup">Quick start</a><a href="#questions">FAQ</a></nav>
 
 <section class="vram-section vram-tool" id="model-finder" aria-labelledby="finder-title">
 <div class="vram-tool-top"><div><p class="vram-kicker">01 / INTERACTIVE MODEL SELECTOR</p><h2 id="finder-title">Find a local LLM for your GPU</h2><p>Change the inputs to compare source-linked model candidates. No account or tracking required. The browser reads our locally hosted, source-checked catalog JSON.</p></div><span class="vram-tool-stamp">RUNS IN YOUR BROWSER</span></div>
@@ -112,7 +112,26 @@
 <p class="vram-caption">A 5.2 GB Ollama artifact does <strong>not</strong> mean 5.2 GB is sufficient GPU memory. The exact tag, architecture, GPU backend, context, number of parallel sessions and offloading determine runtime use. Published sizes can change when maintainers retag models.</p>
 </section>
 
-<section class="vram-section" id="memory" aria-labelledby="memory-title"><div class="vram-section-head"><div><p class="vram-kicker">04 / ENGINEERING REALITY</p><h2 id="memory-title">How much VRAM does a local LLM actually need?</h2></div></div>
+<section class="vram-section" id="measured-evidence" aria-labelledby="measured-evidence-title">
+<div class="vram-section-head"><div><p class="vram-kicker">04 / USER-CAPTURED GPU EVIDENCE</p><h2 id="measured-evidence-title">Measured on a real Tesla T4 session</h2></div><p>Reviewed user-submitted evidence, not a performance guarantee or a minimum GPU memory requirement.</p></div>
+<div class="vram-two-col"><div class="vram-prose">
+<h3>Qwen3-VL 4B Instruct — tested image prompt</h3>
+<p><strong>64.23 generated tokens/second</strong> arithmetic mean of three post-warmup Ollama runs (64.3089, 64.2733, 64.1013 tok/s). This is <strong>generation-only</strong>, calculated as <code>eval_count / eval_duration</code>, not end-to-end image processing or first-response latency.</p>
+<p><strong>Vision check: passed this specific fixture.</strong> All three measured answers correctly described a centered red square on a blue background. A single simple image does not establish general image-recognition accuracy.</p>
+<p><strong>Exact test:</strong> <code>qwen3-vl:4b-instruct</code>, quantization <code>Q4_K_M</code>, Ollama <code>0.40.10</code>, Tesla T4 (15,360 MiB), GPU driver <code>580.82.07</code>, requested context 4,096, one warmup and three measured trials. The <code>qwen3-vl:4b</code> thinking variant is <em>not</em> verified by this result.</p>
+<p>Model digest: <code>84f7ed8042fa7cdbd902f7dcb7d0370e032095047cc3244179f263b77b5bc318</code>.</p>
+</div><div class="vram-prose">
+<h3>Memory numbers mean different things</h3>
+<p><strong>4,455 MiB:</strong> highest observed <em>entire-GPU</em> used memory from 200 ms <code>nvidia-smi</code> sampling; baseline after unloading was 0 MiB. It is <strong>not</strong> independent model-only VRAM or a confirmed hardware minimum.</p>
+<p><strong>3,406.42 MiB:</strong> model GPU residency <em>reported by Ollama</em> (<code>/api/ps size_vram</code>); not an independently measured allocation or guaranteed complete residency.</p>
+<p><strong>3,337,225,651 bytes:</strong> Ollama-reported model file size; <strong>not</strong> GPU usage. Finder planning allowances elsewhere on this page remain estimates, not measurements.</p>
+<p><strong>Evidence status:</strong> user-supplied files and SHA-256 checked; source environment not independently attested. Original ZIP is not publicly hosted here, so public reproduction and independent verification remain limited.</p>
+<p><a href="https://github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md" rel="noopener noreferrer">GitHub source record ↗</a></p>
+</div></div>
+<p class="vram-caption">This measured example does not change the model-finder's estimated GPU tier, its compatibility labels, or the unapproved public benchmark registry. No universal fit, quality, speed or model-exclusive VRAM is claimed.</p>
+</section>
+
+<section class="vram-section" id="memory" aria-labelledby="memory-title"><div class="vram-section-head"><div><p class="vram-kicker">05 / ENGINEERING REALITY</p><h2 id="memory-title">How much VRAM does a local LLM actually need?</h2></div></div>
 <div class="vram-two-col"><div class="vram-prose">
 <p>Your GPU must hold more than model weights. Quantized file size is a useful starting point, but loading a local model also consumes space for execution buffers and a <strong>KV cache</strong>. A longer context or more simultaneous requests can increase memory demand. Multimodal inputs may add image-processing overhead.</p>
 <p>For rough initial planning, this page compares <strong>the published Ollama download size + an explicit SXF headroom allowance</strong>. It is deliberately not a hardware benchmark. A model shown as a candidate may still spill onto system RAM or refuse to load at your chosen settings.</p>

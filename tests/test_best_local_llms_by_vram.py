@@ -43,6 +43,16 @@ def main():
                 "https://docs.ollama.com/context-length"):
         assert url in parsed.links, url
     assert "download sizes" in html.lower()
+    # Reviewed measured evidence is visible but cannot silently replace estimates.
+    for snippet in ('id="measured-evidence"', '64.23 generated tokens/second',
+                    'highest observed', 'entire-GPU', 'reported by Ollama',
+                    'original ZIP is not publicly hosted', 'qwen3-vl:4b-instruct',
+                    'not</em> verified', 'not</strong> GPU usage',
+                    'Original ZIP is not publicly hosted here'):
+        assert snippet.lower() in html.lower(), snippet
+    assert 'href="#measured-evidence"' in html
+    assert 'github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md' in html
+    assert json.loads((ROOT / "data/local-llm-benchmarks.json").read_text())["measurements"] == []
     assert "not measured peak VRAM" in html
     assert "noindex" not in html
     assert "@media(max-width:650px)" in css
