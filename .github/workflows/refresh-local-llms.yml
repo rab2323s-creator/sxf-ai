@@ -1,5 +1,11 @@
 name: Refresh local LLM catalog candidates
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_local_llm_catalog.py'
+      - 'data/local-llm-sources.json'
+      - '.github/workflows/refresh-local-llms.yml'
   schedule:
     - cron: "27 6 * * 1"
   workflow_dispatch:
