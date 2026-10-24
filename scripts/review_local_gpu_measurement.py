@@ -22,6 +22,12 @@ def inspect(candidate,catalog):
     assert candidate["runtime"]=="Ollama" and isinstance(candidate["runtimeVersion"],str) and candidate["runtimeVersion"]
     assert isinstance(candidate["contextTokens"],int) and candidate["contextTokens"]>=128
     assert candidate["concurrency"]==1
+    assert candidate["workload"] in model["workloads"]
+    if candidate["workload"]=="vision":
+        assert isinstance(candidate.get("inputImageSha256"),str) and len(candidate["inputImageSha256"])==64
+        assert type(candidate.get("inputImageBytes")) is int and candidate["inputImageBytes"]>=64
+    else:
+        assert candidate.get("inputImageSha256") is None
     gpu=candidate["gpu"]
     assert isinstance(gpu["name"],str) and gpu["name"] and isinstance(gpu["uuid"],str) and gpu["uuid"]
     assert type(gpu["totalMiB"]) is int and gpu["totalMiB"]>=1024
