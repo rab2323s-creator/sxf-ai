@@ -70,6 +70,11 @@ def main():
           if(s.evaluate(8,'invalid',8192,list).length)throw Error('Invalid task');
           if(s.hardwareFor(list[0],8192,'chat').planning<=list[0].sizeGb)throw Error('Headroom missing');
           if(s.evaluate(16,'vision',8192,list).some(m=>!m.workloads.includes('vision')))throw Error('Cross-task result');
+          const bad=s.joinBenchmarks(list,{schemaVersion:1,measurements:[{modelId:list[0].id,tokensPerSecond:42,evidenceType:'estimated'}]});
+          if(bad[0].measurements.length)throw Error('Estimated performance must not display as measured');
+          const candidate={modelId:list[0].id,gpu:'Synthetic GPU',runtime:'test-runner',quantization:list[0].tag,measuredAt:'2026-10-24',sourceUrl:'https://example.org/benchmark',tokensPerSecond:42,contextTokens:8192,concurrency:1,evidenceType:'measured'};
+          const joined=s.joinBenchmarks(list,{schemaVersion:1,measurements:[candidate]});
+          if(joined[0].measurements.length!==1)throw Error('Measured performance evidence contract');
           console.log('PASS: catalog selector and reverse lookups');
         """], cwd=ROOT, capture_output=True, text=True, check=True
     )
