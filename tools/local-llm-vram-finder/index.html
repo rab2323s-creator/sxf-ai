@@ -31,7 +31,7 @@
 <a class="vram-skip" href="#main-content">Skip to main content</a>
 <header class="site-header"><div class="header-inner">
 <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
-<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/" aria-current="page">Guides</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/" aria-current="page">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
 <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
 </div></header>
 <main id="main-content">
@@ -57,16 +57,20 @@
 <nav class="vram-local-nav" aria-label="On this page"><a href="#quick-picks">VRAM picks</a><a href="#model-finder">Model finder</a><a href="#comparison">Model sizes</a><a href="#memory">Memory math</a><a href="#setup">Quick start</a><a href="#questions">FAQ</a></nav>
 
 <section class="vram-section vram-tool" id="model-finder" aria-labelledby="finder-title">
-<div class="vram-tool-top"><div><p class="vram-kicker">01 / INTERACTIVE MODEL SELECTOR</p><h2 id="finder-title">Find a local LLM for your GPU</h2><p>Change the inputs to compare source-linked model candidates. No account, tracking or external request required.</p></div><span class="vram-tool-stamp">RUNS IN YOUR BROWSER</span></div>
+<div class="vram-tool-top"><div><p class="vram-kicker">01 / INTERACTIVE MODEL SELECTOR</p><h2 id="finder-title">Find a local LLM for your GPU</h2><p>Change the inputs to compare source-linked model candidates. No account or tracking required. The browser reads our locally hosted, source-checked catalog JSON.</p></div><span class="vram-tool-stamp">RUNS IN YOUR BROWSER</span></div>
+<div class="vram-finder-modes"><label for="vram-mode">Lookup direction</label><select id="vram-mode" aria-describedby="vram-mode-help"><option value="gpu">I have a GPU — find models</option><option value="model">I have a model — find GPU memory</option></select><p id="vram-mode-help">Select GPU memory and task to shortlist models that may fit with runtime headroom.</p></div>
 <form id="vram-finder" class="vram-controls" aria-label="Local model selection inputs">
+<label class="vram-search-field" for="vram-search"><span>Search model name / quantization</span><input id="vram-search" type="search" placeholder="Qwen3, Gemma, Q4_K_M…" autocomplete="off"></label>
+<div id="vram-hardware-controls" class="vram-hardware-controls">
 <label for="vram-capacity"><span>Available GPU VRAM</span><select id="vram-capacity" name="vram"><option value="8">8 GB</option><option value="12">12 GB</option><option value="16" selected>16 GB</option><option value="24">24 GB</option><option value="32">32 GB</option></select></label>
 <label for="vram-workload"><span>Primary task</span><select id="vram-workload" name="workload"><option value="coding" selected>Coding</option><option value="chat">Chat &amp; reasoning</option><option value="vision">Images &amp; vision</option></select></label>
 <label for="vram-context"><span>Planning context</span><select id="vram-context" name="context"><option value="4096">4K tokens</option><option value="8192" selected>8K tokens</option><option value="16384">16K tokens</option><option value="32768">32K tokens</option></select></label>
-</form>
+</div></form>
+<p id="vram-data-status" class="vram-tool-note" role="status" aria-live="polite">Loading sourced model catalog…</p>
 <p class="vram-tool-note">This calculator uses a <strong>conservative planning allowance</strong> (2 / 3 / 4.5 / 7 GB for 4K / 8K / 16K / 32K, plus 1 GB for image tasks). These are SXF heuristics, <em>not</em> measured KV-cache sizes for each architecture. Ollama model tag sizes are download sizes. Check actual GPU residency with <code>ollama ps</code>.</p>
 <div class="vram-results-header"><h3>Matched model candidates</h3><span id="vram-count" role="status" aria-live="polite">Select settings to compare published sizes.</span></div>
-<div id="vram-results" class="vram-results" aria-live="polite" aria-relevant="additions text"><p>Enable JavaScript to use the interactive finder. The verified model table and VRAM picks below remain available without it.</p></div>
-<div class="vram-results-foot"><span id="vram-fit-method">Fit status is an estimate—not a benchmark or warranty.</span><a href="#memory">Understand the memory estimate →</a></div>
+<div id="vram-results" class="vram-results" aria-live="polite" aria-relevant="additions text"><p>Enable JavaScript to use the interactive finder. The 13-row source-linked snapshot and VRAM picks below remain available without it.</p></div>
+<div class="vram-results-foot"><span id="vram-fit-method">Fit status is a heuristic estimate—not a benchmark or warranty. Throughput is not measured.</span><a href="#memory">Understand the memory estimate →</a></div>
 </section>
 
 
