@@ -39,6 +39,7 @@ jobs:
           python tests/test_t4_evidence_documentation.py
           python tests/test_cloud_gpu_notebook.py
           python tests/test_isolated_vision_notebook.py
+          python tests/test_isolated_gpu_v2.py
           python -m py_compile scripts/measure_local_ollama.py scripts/review_local_gpu_measurement.py
           python tests/test_best_local_llms_by_vram.py
       - name: Single generator entrypoint regression
