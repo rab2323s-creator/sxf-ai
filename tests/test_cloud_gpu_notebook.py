@@ -24,7 +24,7 @@ assert 'ensure_ollama_ready(OUTPUT)' in full
 assert 'OLLAMA, "pull", "qwen3:8b"' in full
 assert (root/'scripts/ensure_colab_ollama.py').is_file()
 assert '"pull", "--ff-only", "origin", "main"' in full
-assert full.count('Missing Ollama setup helper after refreshing SXF checkout.') >= 2
+assert full.count('importlib.reload(ensure_colab_ollama)') == 3
 print("PASS: cloud notebook parses, gates GPUs before downloads, invokes local real-inference tools, never writes public benchmark registry")
 
 helper=(root/"scripts/ensure_colab_ollama.py").read_text()
@@ -32,3 +32,5 @@ ast.parse(helper)
 assert "ollama-linux-amd64.tar.zst" in helper
 assert "extractall(path=install_dir, filter=\"data\")" in helper
 assert "https://ollama.com/install.sh" not in helper
+
+assert full.count('"fetch", "origin", "main"') == 3
