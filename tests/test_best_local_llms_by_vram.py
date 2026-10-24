@@ -48,7 +48,7 @@ def main():
                     'highest observed', 'entire-GPU', 'reported by Ollama',
                     'original ZIP is not publicly hosted', 'qwen3-vl:4b-instruct',
                     'not</em> verified', 'not</strong> GPU usage',
-                    'The original ZIP is not publicly hosted'):
+                    'Original ZIP is not publicly hosted here'):
         assert snippet.lower() in html.lower(), snippet
     assert 'href="#measured-evidence"' in html
     assert 'github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md' in html
