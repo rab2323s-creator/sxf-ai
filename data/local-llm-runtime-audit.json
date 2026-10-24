@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "methodology": "Manual shortlist from source trees. Presence of a projector does not establish tested compatibility. --refresh validates exact bytes via the Hugging Face Hub tree API.",
+  "models": [
+    {
+      "modelId": "hf:ggml-org/gemma-3-4b-it-GGUF/gemma-3-4b-it-Q4_K_M.gguf",
+      "repository": "ggml-org/gemma-3-4b-it-GGUF",
+      "artifact": "GGUF",
+      "sourceTreeUrl": "https://huggingface.co/ggml-org/gemma-3-4b-it-GGUF/tree/main",
+      "projectorCandidate": {
+        "filename": "mmproj-model-f16.gguf",
+        "url": "https://huggingface.co/ggml-org/gemma-3-4b-it-GGUF/blob/main/mmproj-model-f16.gguf",
+        "listingEvidence": "https://huggingface.co/ggml-org/gemma-3-4b-it-GGUF/tree/main",
+        "sizeBytes": null,
+        "inventoryStatus": "listed-not-byte-verified"
+      },
+      "compatibilityStatus": "untested",
+      "visionInferenceStatus": "untested",
+      "lastSourceReview": "2026-10-24",
+      "notes": "Repository file listing only. Projector-to-model compatibility, GPU loading and usable image input are not measured."
+    },
+    {
+      "modelId": "hf:unsloth/Qwen3-VL-4B-Instruct-GGUF/Qwen3-VL-4B-Instruct-Q4_K_M.gguf",
+      "repository": "unsloth/Qwen3-VL-4B-Instruct-GGUF",
+      "artifact": "GGUF",
+      "sourceTreeUrl": "https://huggingface.co/unsloth/Qwen3-VL-4B-Instruct-GGUF/tree/main",
+      "projectorCandidate": {
+        "filename": "mmproj-F16.gguf",
+        "url": "https://huggingface.co/unsloth/Qwen3-VL-4B-Instruct-GGUF/blob/main/mmproj-F16.gguf",
+        "listingEvidence": "https://huggingface.co/unsloth/Qwen3-VL-4B-Instruct-GGUF/tree/main",
+        "sizeBytes": null,
+        "inventoryStatus": "listed-not-byte-verified"
+      },
+      "compatibilityStatus": "untested",
+      "visionInferenceStatus": "untested",
+      "lastSourceReview": "2026-10-24",
+      "notes": "Repository file listing only. Projector-to-model compatibility, GPU loading and usable image input are not measured."
+    },
+    {
+      "modelId": "hf:unsloth/Qwen3-VL-8B-Instruct-GGUF/Qwen3-VL-8B-Instruct-Q4_K_M.gguf",
+      "repository": "unsloth/Qwen3-VL-8B-Instruct-GGUF",
+      "artifact": "GGUF",
+      "sourceTreeUrl": "https://huggingface.co/unsloth/Qwen3-VL-8B-Instruct-GGUF/tree/main",
+      "projectorCandidate": {
+        "filename": "mmproj-F16.gguf",
+        "url": "https://huggingface.co/unsloth/Qwen3-VL-8B-Instruct-GGUF/blob/main/mmproj-F16.gguf",
+        "listingEvidence": "https://huggingface.co/unsloth/Qwen3-VL-8B-Instruct-GGUF/tree/main",
+        "sizeBytes": null,
+        "inventoryStatus": "listed-not-byte-verified"
+      },
+      "compatibilityStatus": "untested",
+      "visionInferenceStatus": "untested",
+      "lastSourceReview": "2026-10-24",
+      "notes": "Repository file listing only. Projector-to-model compatibility, GPU loading and usable image input are not measured."
+    }
+  ],
+  "textControls": [
+    "ollama:qwen2.5-coder:7b",
+    "ollama:qwen3:8b"
+  ],
+  "visionOllamaControl": "ollama:qwen3-vl:4b"
+}

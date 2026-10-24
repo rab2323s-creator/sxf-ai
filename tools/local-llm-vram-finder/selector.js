@@ -29,7 +29,7 @@ function joinBenchmarks(list,data){
  if(!data||data.schemaVersion!==1||!Array.isArray(data.measurements))return list;
  const map=new Map();
  for(const b of data.measurements){
-  if(!b||typeof b.modelId!=='string'||typeof b.gpu!=='string'||!b.gpu.trim()||typeof b.runtime!=='string'||!b.runtime.trim()||typeof b.quantization!=='string'||!b.quantization.trim()||typeof b.measuredAt!=='string'||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(b.measuredAt)||typeof b.sourceUrl!=='string'||!/^https:\/\/[^\s<>"]+$/.test(b.sourceUrl)||!(b.tokensPerSecond>0&&Number.isFinite(b.tokensPerSecond))||!Number.isSafeInteger(b.contextTokens)||b.contextTokens<128||!Number.isSafeInteger(b.concurrency)||b.concurrency<1||b.evidenceType!=='measured')continue;
+  if(!b||typeof b.modelId!=='string'||typeof b.gpu!=='string'||!b.gpu.trim()||typeof b.runtime!=='string'||!b.runtime.trim()||typeof b.quantization!=='string'||!b.quantization.trim()||typeof b.measuredAt!=='string'||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(b.measuredAt)||typeof b.sourceUrl!=='string'||!/^https:\/\/[^\s<>"]+$/.test(b.sourceUrl)||!(b.tokensPerSecond>0&&Number.isFinite(b.tokensPerSecond))||!Number.isSafeInteger(b.contextTokens)||b.contextTokens<128||!Number.isSafeInteger(b.concurrency)||b.concurrency<1||b.evidenceType!=='measured'||b.reviewStatus!=='approved')continue;
   if(!map.has(b.modelId))map.set(b.modelId,[]);
   map.get(b.modelId).push(b);
  }

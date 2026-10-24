@@ -34,6 +34,9 @@ jobs:
           python -m py_compile scripts/update_local_llm_catalog.py
           python scripts/update_local_llm_catalog.py --check
           python tests/test_local_llm_catalog.py
+          python scripts/audit_local_vision_sources.py
+          python tests/test_local_runtime_evidence.py
+          python -m py_compile scripts/measure_local_ollama.py scripts/review_local_gpu_measurement.py
           python tests/test_best_local_llms_by_vram.py
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
