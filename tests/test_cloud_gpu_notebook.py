@@ -15,7 +15,7 @@ full="\n".join(codes)
 assert full.index('shutil.which("nvidia-smi")')<full.index('ensure_ollama_ready(OUTPUT)')
 assert "measure_local_ollama.py" in full
 assert '"--image",str(image_file)' in full
-assert '"--repeats","3"' in full
+assert '"--repeats", "3"' in full or '"--repeats","3"' in full
 assert 'kind")!="local-measurement-candidate"' in full
 assert 'files.download(str(archive))' in full
 assert "local-llm-benchmarks.json" not in full
