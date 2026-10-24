@@ -93,6 +93,11 @@ def main():
           if(!visionCandidate||!s.screeningAssessment(visionCandidate,'gpu','vision').label.includes('Needs validation'))throw Error('Unverified vision not flagged');
           const reverse=s.screeningAssessment(ordinary,'model','coding');
           if(!reverse.label.includes('Estimated GPU tier'))throw Error('Reverse must disclose estimate');
+          const measurable={modelId:list[0].id,gpu:'Test-only GPU',runtime:'test',quantization:list[0].tag,measuredAt:'2026-10-24',sourceUrl:'https://example.org/evidence',tokensPerSecond:12.5,contextTokens:4096,concurrency:1,evidenceType:'measured',reviewStatus:'draft-not-published'};
+          const draft=s.joinBenchmarks(list,{schemaVersion:1,measurements:[measurable]});
+          if(draft[0].measurements.length!==0)throw Error('Unapproved evidence leaked');
+          const approved=s.joinBenchmarks(list,{schemaVersion:1,measurements:[{...measurable,reviewStatus:'approved'}]});
+          if(approved[0].measurements.length!==1)throw Error('Approved measured evidence hidden');
           console.log('PASS: v3.1 conditional, vision, reverse and memory-only evidence labels');
           console.log('PASS: v3 all forward/reverse estimates, family grouping, vision and quantization caveats');
         """], cwd=ROOT, capture_output=True, text=True, check=True
