@@ -87,6 +87,35 @@ def unload_all():
     raise RuntimeError("Could not clear previous Ollama model residency; no baseline recorded.")
 
 
+def save_json_atomic(path, data):
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2) + "\\n")
+    tmp.replace(path)
+
+
+def valid_completed_report(data, tag, kind, context, repeats, image_hash):
+    if not isinstance(data, dict):
+        return False
+    if (data.get("schemaVersion") != 2
+            or data.get("publicationStatus") != "review-required-not-published"
+            or data.get("modelTag") != tag or data.get("workload") != kind
+            or data.get("contextTokens") != context
+            or data.get("repetitions") != repeats or data.get("warmupCount") != 1):
+        return False
+    if not isinstance(data.get("modelDigest"), str) or not data["modelDigest"]:
+        return False
+    if kind == "vision" and data.get("imageSha256") != image_hash:
+        return False
+    rows = data.get("runRecords")
+    return (isinstance(rows, list) and len(rows) == repeats + 1
+            and all(isinstance(row, dict) and row.get("trial") == i
+                    and row.get("warmup") is (i == 0)
+                    and isinstance(row.get("tokensPerSecond"), (float, int))
+                    and row["tokensPerSecond"] > 0
+                    and isinstance(row.get("answer"), str) and row["answer"].strip()
+                    for i, row in enumerate(rows)))
+
+
 def capture_generation(payload):
     samples = [gpu()["usedMiB"]]
     errors = []
@@ -186,6 +215,8 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
                        "options": {"num_ctx": context, "num_predict": 512, "temperature": 0}}
 
         records = []
+        attempt_id = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        progress_path = output_dir / (stem + "-partial-" + attempt_id + ".json")
         model_ps = None
         for i in range(repeats + 1):
             if kind == "vision":
@@ -213,6 +244,15 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
                 "psReportedSizeBytes": model_ps.get("size"), "psReportedGpuResidentBytes": model_ps.get("size_vram"),
             }
             records.append(record)
+            save_json_atomic(progress_path, {
+                "schemaVersion": 2, "kind": "sxf-isolated-gpu-partial-evidence",
+                "publicationStatus": "incomplete-do-not-publish",
+                "modelTag": tag, "modelDigest": info["digest"], "workload": kind,
+                "runtimeVersion": runtime_version, "gpuBaselineAfterModelUnload": baseline,
+                "contextTokens": context, "requestedRepetitions": repeats,
+                "imageSha256": digest if kind == "vision" else None,
+                "runRecords": records,
+            })
             print(tag, "warmup" if i == 0 else "trial " + str(i),
                   "tokens/s =", record["tokensPerSecond"], flush=True)
         report = {
@@ -239,7 +279,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3, workload="all"):
         path = output_dir / (stem + "-isolated.json")
         if path.exists():
             raise FileExistsError("Would overwrite evidence " + str(path))
-        path.write_text(json.dumps(report, indent=2) + "\n")
+        save_json_atomic(path, report)
         report_paths.append(path)
         # Unload NOW, so subsequent model is not contaminated by this one.
         unload_all()
