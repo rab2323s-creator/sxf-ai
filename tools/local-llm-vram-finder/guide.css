@@ -157,3 +157,15 @@
 
 .vram-page .vram-show-more{display:block;margin:24px auto 8px;min-height:48px;cursor:pointer}
 .vram-page .vram-show-more[hidden]{display:none!important}
+
+/* Accuracy v3: all task/context controls stay visible in both lookup directions. */
+.vram-page .vram-family{min-width:0}
+.vram-page .vram-family .vram-evidence{font-size:.82rem;line-height:1.55;margin:10px 0;color:#c5d6dc}
+.vram-page .vram-family .vram-warning{font-size:.83rem;line-height:1.55;margin:12px 0;padding:10px 12px;border-left:3px solid #eab978;background:#2c261d;color:#ffe1b7}
+.vram-page .vram-variants{margin-top:16px;padding-top:13px;border-top:1px solid #34464f}
+.vram-page .vram-variants summary{cursor:pointer;color:#abeee1;font-size:.88rem;font-weight:750;line-height:1.5}
+.vram-page .vram-variant-list{margin:14px 0 0;padding-left:18px;display:grid;gap:10px}
+.vram-page .vram-variant-list li{padding-bottom:9px;border-bottom:1px solid #26343f;overflow-wrap:anywhere}
+.vram-page .vram-variant-list span,.vram-page .vram-variant-list small{display:block;line-height:1.5}
+.vram-page .vram-variant-list small{font-size:.76rem;color:var(--v-muted);margin-top:5px}
+.vram-page .vram-variants a{color:#b7f4e9}
