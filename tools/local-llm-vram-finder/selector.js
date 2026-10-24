@@ -176,11 +176,33 @@ function familyCard(g,mode,cap,workload,context){
   '<div class="vram-result-foot">'+note+' <a href="'+esc(m.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Model file source ↗</a></div>'+bench+
   '<details class="vram-variants"><summary>Compare all '+g.variants.length+' variants, quantizations and GPU estimates</summary><ul class="vram-variant-list">'+all+'</ul></details></article>';
 }
+function reviewedCaseStudy(data,query,workload){
+ if(workload!=='vision'||!data||data.schemaVersion!==1||!Array.isArray(data.observations))return null;
+ const normalized=String(query||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+ // A distinct Ollama Instruct release: never attach this evidence to qwen3-vl:4b or a GGUF variant.
+ if(normalized&&!['qwen3vl','qwen3vl4b','qwen3vl4binstruct','qwen','vision','instruct'].some(term=>term.includes(normalized)||normalized.includes(term)))return null;
+ const b=data.observations.find(v=>v.modelId==='ollama:qwen3-vl:4b-instruct');
+ if(!b||b.modelTag!=='qwen3-vl:4b-instruct'||b.reviewStatus!=='reviewed-user-capture'||b.publicationScope!=='source-linked-case-study-only'||b.measurementKind!=='generation-only'||b.contextTokens!==4096||b.workload!=='vision'||b.runtime!=='Ollama'||b.gpu!=='NVIDIA Tesla T4'||typeof b.sourceUrl!=='string'||!/^https:\/\/github\.com\/rab2323s-creator\/sxf-ai\/blob\/main\/docs\/benchmarks\//.test(b.sourceUrl)||!Array.isArray(b.measuredGenerationTokensPerSecond)||b.measuredGenerationTokensPerSecond.length!==3||!b.measuredGenerationTokensPerSecond.every(x=>Number.isFinite(x)&&x>0))return null;
+ return b;
+}
+function reviewedCaseStudyHTML(b){
+ if(!b)return '';
+ const mean=b.measuredGenerationTokensPerSecond.reduce((a,x)=>a+x,0)/3;
+ return '<article class="vram-reviewed-card"><h4>Reviewed user-captured Vision test — '+esc(b.modelDisplayName)+'</h4>'+
+  '<p><strong>'+mean.toFixed(2)+' generated tokens/second</strong> (three measured runs, warmup excluded). Generation-only, not end-to-end latency.</p>'+
+  '<p><strong>Exact version:</strong> <code>'+esc(b.modelTag)+'</code> · '+esc(b.quantization)+' · '+esc(b.gpu)+' · Ollama '+esc(b.runtimeVersion)+' · context '+esc(b.contextTokens)+'.</p>'+
+  '<p><strong>GPU-wide observed peak:</strong> '+esc(b.gpuWideObservedPeakUsedMiB)+' MiB (entire GPU, not model-only VRAM). <strong>Ollama-reported GPU residency:</strong> '+esc(b.ollamaReportedGpuResidentMiB)+' MiB (runtime-reported, not independently verified).</p>'+
+  '<p><strong>Image check:</strong> '+esc(b.fixtureResult)+'</p>'+
+  '<p><strong>Scope:</strong> This is a separate Ollama Instruct case study, not a benchmark for the catalogued <code>qwen3-vl:4b</code> thinking tag or any GGUF file. Does not change screening, compatibility, or estimated VRAM requirements.</p>'+
+  '<p><a href="'+esc(b.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Reviewed source report ↗</a> · Original ZIP privately retained, not publicly hosted.</p></article>';
+}
 function initialize(){
  const form=document.getElementById('vram-finder');if(!form)return;
  form.addEventListener('submit',e=>e.preventDefault());
  const status=document.getElementById('vram-data-status');
  const result=document.getElementById('vram-results'),count=document.getElementById('vram-count'),more=document.getElementById('vram-show-more');
+ let reviewedData=null;
+ const reviewedSlot=document.getElementById('vram-reviewed-evidence');
  const ids=['vram-mode','vram-capacity','vram-workload','vram-context','vram-search'];
  function render(){
   const mode=document.getElementById('vram-mode').value,cap=Number(document.getElementById('vram-capacity').value),workload=document.getElementById('vram-workload').value,ctx=Number(document.getElementById('vram-context').value),query=document.getElementById('vram-search').value;
@@ -188,6 +210,12 @@ function initialize(){
   if(note)note.textContent=mode==='model'?'Search a model and pick its task/context. GPU estimates use the SAME inputs as GPU-first results.':'Select a GPU tier, task and context. Results are grouped by model family, not ranked by model quality.';
   if(!MODELS.length){count.textContent='Catalog unavailable';result.textContent='The source catalog did not load. See the sourced static comparison table below.';if(more)more.hidden=true;return;}
   // The GPU selector is hidden in reverse mode, so it must not influence variant ordering.
+  if(reviewedSlot){
+   const caseStudy=reviewedCaseStudy(reviewedData,query,workload);
+   // Case study is not part of the catalog and does not change model counts or GPU filtering.
+   reviewedSlot.innerHTML=reviewedCaseStudyHTML(caseStudy);
+   reviewedSlot.hidden=!caseStudy;
+  }
   const candidates=evaluate(mode==='model'?256:cap,workload,ctx,search(query,workload));
   const matched=mode==='gpu'?candidates.filter(m=>m.status!=='out'):candidates;
   const families=groupFamilies(matched);
@@ -204,9 +232,10 @@ function initialize(){
   MODELS=validate(data);
   if(status)status.textContent=MODELS.length+' source-linked artifacts · memory numbers are estimates, not tests · catalog '+String(data.generatedAt||'unknown');
   render();
+  fetch('/data/local-llm-reviewed-evidence.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(data=>{reviewedData=data;render();}).catch(()=>{reviewedData=null;render();});
   fetch('/data/local-llm-benchmarks.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(b=>{MODELS=joinBenchmarks(MODELS,b);render();}).catch(()=>{});
  }).catch(()=>{if(status)status.textContent='Catalog temporarily unavailable. The 13-entry source-linked comparison table below remains accessible.';render();});
 }
-if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,joinBenchmarks,estimate,evaluate,hardwareFor,search,familyKey,groupFamilies,quantRank,visionEvidence,screeningAssessment};
+if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,joinBenchmarks,estimate,evaluate,hardwareFor,search,familyKey,groupFamilies,quantRank,visionEvidence,screeningAssessment,reviewedCaseStudy,reviewedCaseStudyHTML};
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();}
 })(typeof globalThis!=='undefined'?globalThis:this);
