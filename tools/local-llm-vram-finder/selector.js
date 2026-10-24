@@ -21,6 +21,16 @@ function validate(data){
  if(!out.length)throw Error('Empty catalog');
  return out;
 }
+function joinBenchmarks(list,data){
+ if(!data||data.schemaVersion!==1||!Array.isArray(data.measurements))return list;
+ const map=new Map();
+ for(const b of data.measurements){
+  if(!b||typeof b.modelId!=='string'||typeof b.gpu!=='string'||!b.gpu.trim()||typeof b.runtime!=='string'||!b.runtime.trim()||typeof b.quantization!=='string'||!b.quantization.trim()||typeof b.measuredAt!=='string'||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(b.measuredAt)||typeof b.sourceUrl!=='string'||!/^https:\/\/[^\s<>"]+$/.test(b.sourceUrl)||!(b.tokensPerSecond>0&&Number.isFinite(b.tokensPerSecond))||!Number.isSafeInteger(b.contextTokens)||b.contextTokens<128||!Number.isSafeInteger(b.concurrency)||b.concurrency<1||b.evidenceType!=='measured')continue;
+  if(!map.has(b.modelId))map.set(b.modelId,[]);
+  map.get(b.modelId).push(b);
+ }
+ return list.map(m=>({...m,measurements:(map.get(m.id)||[]).filter(b=>b.quantization===(m.quantization||m.tag||''))}));
+}
 function estimate(model,context,workload){
  const ctx=Number(context);
  if(!Object.prototype.hasOwnProperty.call(ALLOWANCES,ctx))return null;
@@ -54,12 +64,13 @@ function card(m,cap){
  const status=cap?(m.status==='budget'?'Within planning budget':m.status==='tight'?'Tight estimate':'Above GPU budget'):'Estimated hardware target';
  const warning=m.extraAssets?' Vision-language models can require additional projector files and memory; this is not a full download requirement.':'';
  const command=m.tag?'ollama run '+m.tag:'Check repository instructions and required artifacts';
+ const benchmarks=(m.measurements||[]).slice(0,2).map(b=>'<p class="vram-card-small"><strong>Measured '+Number(b.tokensPerSecond).toFixed(1)+' tokens/sec</strong> · '+esc(b.gpu)+' · '+esc(b.runtime)+' · '+esc(b.contextTokens)+' context tokens · concurrency '+esc(b.concurrency)+' · '+esc(b.measuredAt)+' · <a href="'+esc(b.sourceUrl)+'" rel="noopener noreferrer" target="_blank">Measurement evidence ↗</a></p>').join('');
  const sxf=(typeof m.sxfUrl==='string'&&/^\/models\/[a-z0-9-]+\/$/.test(m.sxfUrl))?'<a href="'+esc(m.sxfUrl)+'">SXF model page ↗</a>':'';
  return '<article class="vram-result"><div class="vram-result-head"><div><h4>'+esc(m.name)+'</h4><p>'+esc(m.format)+' · '+m.sizeGb.toFixed(2)+' GB published file size'+(m.quantization?' · '+esc(m.quantization):'')+'</p></div><span class="vram-badge'+(e.status==='tight'?' caution':'')+'">'+esc(status)+'</span></div>'+
  '<p><strong>'+e.planning.toFixed(2)+' GB</strong> estimated planning target = '+m.sizeGb.toFixed(2)+' GB file + '+e.allowance.toFixed(2)+' GB allowance. Not measured peak VRAM.</p>'+
  (!cap?'<p>Nearest listed GPU size: <strong>'+(e.suggested?e.suggested+' GB':'Above 128 GB')+'</strong> (discrete GPU estimate; not guaranteed).</p>':'')+
  '<p>'+esc(m.note||'')+esc(warning)+'</p><div class="vram-result-foot"><code>'+esc(command)+'</code><a href="'+esc(m.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Source ↗</a>'+sxf+'</div>'+
- '<p class="vram-card-small">Size evidence: '+esc(m.sizeEvidence)+' · checked '+esc(m.checkedAt||'unknown')+' · License: '+esc(m.license||'check source')+' · Speed: Not measured</p></article>';
+ '<p class="vram-card-small">Size evidence: '+esc(m.sizeEvidence)+' · checked '+esc(m.checkedAt||'unknown')+' · License: '+esc(m.license||'check source')+' · Speed: '+(benchmarks?'Configuration-specific measured result below':'Not measured')+'</p>'+benchmarks+'</article>';
 }
 function readContext(){const e=document.getElementById('vram-context');return e?Number(e.value):8192;}
 function render(){
@@ -93,6 +104,7 @@ function initialize(){
   MODELS=validate(data);
   if(status)status.textContent=MODELS.length+' sourced model variants · latest catalog '+esc(data.generatedAt||'unknown')+' · no speeds inferred';
   render();
+  fetch('/data/local-llm-benchmarks.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(b=>{MODELS=joinBenchmarks(MODELS,b);render();}).catch(()=>{});
  }).catch(err=>{
   if(status)status.textContent='Catalog temporarily unavailable. Browse the sourced comparison table below; interactive results require catalog data.';
   const output=document.getElementById('vram-results');if(output)output.textContent='Model catalog could not load. See the sourced static comparison table below.';
@@ -107,6 +119,6 @@ function showMode(){
  const caption=document.getElementById('vram-mode-help');
  if(caption)caption.textContent=model?'Search a specific model or quantization; we show a planning GPU size, not a benchmark.':'Select GPU memory and task to shortlist models that may fit with runtime headroom.';
 }
-if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,estimate,evaluate,hardwareFor,search};
+if(typeof module!=='undefined'&&module.exports)module.exports={ALLOWANCES,CAPACITIES,validate,joinBenchmarks,estimate,evaluate,hardwareFor,search};
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();}
 })(typeof globalThis!=='undefined'?globalThis:this);
