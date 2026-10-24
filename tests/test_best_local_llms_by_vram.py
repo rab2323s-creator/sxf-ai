@@ -58,6 +58,8 @@ def main():
     assert 'one exact configuration and fixture' in html
     assert 'github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md' in html
     assert json.loads((ROOT / "data/local-llm-benchmarks.json").read_text())["measurements"] == []
+    assert 'id="vram-reviewed-evidence"' in html
+    assert (ROOT / "data/local-llm-reviewed-evidence.json").is_file()
     assert "not measured peak VRAM" in html
     assert "noindex" not in html
     assert "@media(max-width:650px)" in css
