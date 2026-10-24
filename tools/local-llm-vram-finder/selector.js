@@ -180,7 +180,7 @@ function reviewedCaseStudy(data,query,workload){
  if(workload!=='vision'||!data||data.schemaVersion!==1||!Array.isArray(data.observations))return null;
  const normalized=String(query||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
  // A distinct Ollama Instruct release: never attach this evidence to qwen3-vl:4b or a GGUF variant.
- if(normalized&&!['qwen3vl','qwen3vl4b','qwen3vl4binstruct','qwen','vision','instruct'].some(term=>term.includes(normalized)||normalized.includes(term)))return null;
+ if(normalized&&!['qwen3vl','qwen3vl4b','qwen3vl4binstruct','qwen','vision','instruct'].some(term=>term.includes(normalized)))return null;
  const b=data.observations.find(v=>v.modelId==='ollama:qwen3-vl:4b-instruct');
  if(!b||b.modelTag!=='qwen3-vl:4b-instruct'||b.reviewStatus!=='reviewed-user-capture'||b.publicationScope!=='source-linked-case-study-only'||b.measurementKind!=='generation-only'||b.contextTokens!==4096||b.workload!=='vision'||b.runtime!=='Ollama'||b.gpu!=='NVIDIA Tesla T4'||typeof b.sourceUrl!=='string'||!/^https:\/\/github\.com\/rab2323s-creator\/sxf-ai\/blob\/main\/docs\/benchmarks\//.test(b.sourceUrl)||!Array.isArray(b.measuredGenerationTokensPerSecond)||b.measuredGenerationTokensPerSecond.length!==3||!b.measuredGenerationTokensPerSecond.every(x=>Number.isFinite(x)&&x>0))return null;
  return b;
