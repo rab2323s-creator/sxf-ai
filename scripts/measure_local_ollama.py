@@ -69,18 +69,18 @@ def run(args):
         watcher.start()
         started=time.monotonic()
         try:
-            ans=request("/api/generate",{"model":model["tag"],"prompt":prompt,"images":[base64.b64encode(image_bytes).decode("ascii")] if image_bytes else [],"stream":False,"keep_alive":"5m","options":{"num_ctx":args.context,"temperature":0,"num_predict":192}})
+            ans=request("/api/generate",{"model":model["tag"],"prompt":prompt,"images":[base64.b64encode(image_bytes).decode("ascii")] if image_bytes else [],"think":False,"stream":False,"keep_alive":"5m","options":{"num_ctx":args.context,"temperature":0,"num_predict":192}})
             wall=time.monotonic()-started
         finally:
             stop.set();watcher.join(timeout=3)
         if fail[0]:raise RuntimeError("GPU memory telemetry failed: "+fail[0])
         if ans.get("done") is not True or type(ans.get("eval_count")) is not int or type(ans.get("eval_duration")) is not int or ans["eval_count"]<=0 or ans["eval_duration"]<=0:raise RuntimeError("Incomplete Ollama generation metrics")
-        if not isinstance(ans.get("response"),str) or not ans["response"].strip():raise RuntimeError("Empty generated output")
+        if not isinstance(ans.get("response"),str) or not ans["response"].strip():raise RuntimeError("Empty generated output; possible thinking-only answer. Requested think=false, but the model/runtime may ignore it. Reasoning chars="+str(len(ans.get("thinking") or ""))+", done_reason="+str(ans.get("done_reason"))+"; refusing to publish this run.")
         record={"trial":i,"warmup":i==0,"wallSeconds":round(wall,3),"completionTokens":ans["eval_count"],"generationDurationNs":ans["eval_duration"],"tokensPerSecond":round(ans["eval_count"]*1e9/ans["eval_duration"],4),"observedPeakGpuUsedMiB":max(peak),"observedGpuUsedDeltaMiB":max(peak)-baseline["usedMiB"],"telemetrySampleIntervalMs":200}
         runs.append(record)
     measured=[r for r in runs if not r["warmup"]]
     if len(measured)<3 or min(r["tokensPerSecond"] for r in measured)<=0:raise RuntimeError("Incomplete repeats")
-    out={"schemaVersion":1,"kind":"local-measurement-candidate","publicationStatus":"review-required","measuredAt":dt.datetime.now(dt.timezone.utc).isoformat(),"modelId":model["id"],"modelTag":model["tag"],"quantization":"unknown-ollama-publisher-tag","runtime":"Ollama","runtimeVersion":version.get("version"),"gpu":baseline,"workload":"vision" if image_bytes else "chat","inputImageSha256":image_sha256,"inputImageBytes":len(image_bytes) if image_bytes else None,"contextTokens":args.context,"requestedOutputTokens":192,"concurrency":1,"warmupCount":1,"repetitions":args.repeats,"runRecords":runs,"notes":"GPU total used memory sampled every 200ms, not exact allocation to model. Measured peak is sample-limited; GPU may contain other processes. A vision run sends a real image payload but does not establish output correctness. CPU offload is not independently confirmed. Do not publish as full-GPU compatibility without runtime residency evidence."}
+    out={"schemaVersion":1,"kind":"local-measurement-candidate","publicationStatus":"review-required","measuredAt":dt.datetime.now(dt.timezone.utc).isoformat(),"modelId":model["id"],"modelTag":model["tag"],"quantization":"unknown-ollama-publisher-tag","runtime":"Ollama","runtimeVersion":version.get("version"),"gpu":baseline,"workload":"vision" if image_bytes else "chat","inputImageSha256":image_sha256,"inputImageBytes":len(image_bytes) if image_bytes else None,"contextTokens":args.context,"requestedOutputTokens":192,"requestedThink":False,"concurrency":1,"warmupCount":1,"repetitions":args.repeats,"runRecords":runs,"notes":"GPU total used memory sampled every 200ms, not exact allocation to model. Measured peak is sample-limited; GPU may contain other processes. Requested think=false; disablement may not be honored by every model/runtime. A vision run sends a real image payload but does not establish output correctness. CPU offload is not independently confirmed. Do not publish as full-GPU compatibility without runtime residency evidence."}
     output=Path(args.output)
     if output.exists():raise FileExistsError("Refusing to overwrite a measurement artifact")
     output.parent.mkdir(parents=True,exist_ok=True)
