@@ -182,3 +182,7 @@
 .vram-page .vram-family .vram-result-head > div{min-width:0;flex:1 1 170px}
 .vram-page .vram-family .vram-badge{white-space:normal;max-width:100%;overflow-wrap:anywhere;line-height:1.45;text-align:center}
 .vram-page .vram-family .vram-decision,.vram-page .vram-family .vram-evidence{max-width:100%;min-width:0;overflow-wrap:anywhere}
+
+/* User-captured evidence: long digests must not expand mobile viewport. */
+.vram-page #measured-evidence .vram-two-col > .vram-prose{min-width:0}
+.vram-page #measured-evidence .vram-prose p,.vram-page #measured-evidence .vram-prose code,.vram-page #measured-evidence .vram-prose a{overflow-wrap:anywhere;word-break:break-word}
