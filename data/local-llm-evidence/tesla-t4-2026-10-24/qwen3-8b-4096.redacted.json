@@ -1,0 +1,84 @@
+{
+  "recordType": "sanitized-user-supplied-ollama-capture",
+  "reviewStatus": "review-required-not-published",
+  "sourceArchiveSha256": "1105529c06a979f7426b4321827a5042ba4b779eb52a59cf9619554116f7baf4",
+  "sourceCaptureFile": "qwen3-8b-4096.json",
+  "sourceCaptureSha256": "62c86471bd7db192909ff3fc03bd8e8356c097374eeeb9595eba9e7089dbae6d",
+  "sourceCaptureBytes": 2354,
+  "redactions": [
+    "measurement.gpu.uuid"
+  ],
+  "redactionNote": "All other measurement fields transcribed from original uploaded candidate; this derivative is NOT byte-identical to the source. Original capture retained by user, not embedded in GitHub.",
+  "measurement": {
+    "schemaVersion": 1,
+    "kind": "local-measurement-candidate",
+    "publicationStatus": "review-required",
+    "measuredAt": "2026-10-24T13:41:28.690676+00:00",
+    "modelId": "ollama:qwen3:8b",
+    "modelTag": "qwen3:8b",
+    "quantization": "unknown-ollama-publisher-tag",
+    "runtime": "Ollama",
+    "runtimeVersion": "0.40.10",
+    "gpu": {
+      "name": "Tesla T4",
+      "totalMiB": 15360,
+      "usedMiB": 0
+    },
+    "workload": "chat",
+    "inputImageSha256": null,
+    "inputImageBytes": null,
+    "contextTokens": 4096,
+    "requestedOutputTokens": 192,
+    "requestedThink": false,
+    "concurrency": 1,
+    "warmupCount": 1,
+    "repetitions": 3,
+    "runRecords": [
+      {
+        "trial": 0,
+        "warmup": true,
+        "wallSeconds": 8.575,
+        "completionTokens": 192,
+        "generationDurationNs": 4829591000,
+        "tokensPerSecond": 39.7549,
+        "observedPeakGpuUsedMiB": 5467,
+        "observedGpuUsedDeltaMiB": 5467,
+        "telemetrySampleIntervalMs": 200
+      },
+      {
+        "trial": 1,
+        "warmup": false,
+        "wallSeconds": 4.958,
+        "completionTokens": 192,
+        "generationDurationNs": 4902624000,
+        "tokensPerSecond": 39.1627,
+        "observedPeakGpuUsedMiB": 5467,
+        "observedGpuUsedDeltaMiB": 5467,
+        "telemetrySampleIntervalMs": 200
+      },
+      {
+        "trial": 2,
+        "warmup": false,
+        "wallSeconds": 4.9,
+        "completionTokens": 192,
+        "generationDurationNs": 4844456000,
+        "tokensPerSecond": 39.6329,
+        "observedPeakGpuUsedMiB": 5467,
+        "observedGpuUsedDeltaMiB": 5467,
+        "telemetrySampleIntervalMs": 200
+      },
+      {
+        "trial": 3,
+        "warmup": false,
+        "wallSeconds": 4.896,
+        "completionTokens": 192,
+        "generationDurationNs": 4864716000,
+        "tokensPerSecond": 39.4679,
+        "observedPeakGpuUsedMiB": 5467,
+        "observedGpuUsedDeltaMiB": 5467,
+        "telemetrySampleIntervalMs": 200
+      }
+    ],
+    "notes": "GPU total used memory sampled every 200ms, not exact allocation to model. Measured peak is sample-limited; GPU may contain other processes. Requested think=false; disablement may not be honored by every model/runtime. A vision run sends a real image payload but does not establish output correctness. CPU offload is not independently confirmed. Do not publish as full-GPU compatibility without runtime residency evidence."
+  }
+}
