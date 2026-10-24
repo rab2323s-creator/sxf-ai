@@ -102,7 +102,8 @@ def capture_generation(payload):
     thread.start()
     start = time.monotonic()
     try:
-        response = api("/api/generate", payload)
+        endpoint = payload.get("_sxf_endpoint", "/api/generate")
+        response = api(endpoint, {k: v for k, v in payload.items() if k != "_sxf_endpoint"})
         wall = time.monotonic() - start
     finally:
         stop.set()
@@ -115,8 +116,10 @@ def capture_generation(payload):
             or response["eval_count"] <= 0 or response["eval_duration"] <= 0):
         raise RuntimeError("Incomplete Ollama measured token metrics.")
     answer = response.get("response")
+    if not answer and isinstance(response.get("message"), dict):
+        answer = response["message"].get("content")
     if not isinstance(answer, str) or not answer.strip():
-        raise RuntimeError("Empty answer; cannot verify vision quality or text generation.")
+        raise RuntimeError("Empty answer from Ollama: done_reason=" + str(response.get("done_reason")) + ", thinking_chars=" + str(len(response.get("thinking") or (response.get("message") or {}).get("thinking") or "")) + ". No Vision benchmark accepted.")
     return response, wall, max(samples), len(samples)
 
 
@@ -161,11 +164,17 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
             }
         }
         if workload == "vision":
-            payload["images"] = [base64.b64encode(image_bytes).decode("ascii")]
+            # /api/chat is a better-supported route for image-bearing multimodal messages.
+            payload = {"model": tag, "messages": [{"role": "user", "content": prompt,
+                        "images": [base64.b64encode(image_bytes).decode("ascii")]}],
+                       "stream": False, "think": False, "keep_alive": "20m",
+                       "options": {"num_ctx": context, "num_predict": 512, "temperature": 0}}
 
         records = []
         model_ps = None
         for i in range(repeats + 1):
+            if workload == "vision":
+                payload["_sxf_endpoint"] = "/api/chat"
             response, wall, device_peak, samples = capture_generation(payload)
             ps = resident_models()
             if len(ps) != 1 or (ps[0].get("name") or ps[0].get("model")) != tag:
@@ -181,7 +190,8 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
                 "loadDurationNs": response.get("load_duration"),
                 "totalDurationNs": response.get("total_duration"),
                 "doneReason": response.get("done_reason"),
-                "answer": response["response"], "answerSha256": hashlib.sha256(response["response"].encode()).hexdigest(),
+                "answer": (response.get("message") or {}).get("content") if workload == "vision" else response["response"],
+                "answerSha256": hashlib.sha256(((response.get("message") or {}).get("content") if workload == "vision" else response["response"]).encode()).hexdigest(),
                 "gpuWideObservedPeakUsedMiB": device_peak,
                 "gpuWideObservedIncreaseOverBaselineMiB": max(0, device_peak - baseline["usedMiB"]),
                 "gpuSamples": samples, "gpuSampleIntervalMs": 200,
@@ -199,7 +209,7 @@ def run(output_dir, ollama_bin, *, context=4096, repeats=3):
             "modelSizeBytes": info.get("size"),
             "reportedQuantization": (info.get("details") or {}).get("quantization_level"),
             "workload": workload, "prompt": prompt, "contextTokens": context,
-            "requestedOutputTokens": 192, "requestedThink": False, "concurrency": 1,
+            "requestedOutputTokens": 512 if workload == "vision" else 192, "requestedThink": False, "concurrency": 1,
             "warmupCount": 1, "repetitions": repeats,
             "imageSha256": digest if workload == "vision" else None,
             "imageBytes": len(image_bytes) if workload == "vision" else None,
