@@ -54,14 +54,18 @@ def run():
                 assert page.locator(".vram-result").count() == 0
                 assert "No catalog matches" in page.locator("#vram-results").inner_text()
 
-                page.locator("#vram-mode").select_option("model")\n                assert page.locator("#vram-context").is_visible()\n                assert page.locator("#vram-workload").is_visible()\n                page.locator("#vram-workload").select_option("chat")
+                page.locator("#vram-mode").select_option("model")
+                assert page.locator("#vram-context").is_visible()
+                assert page.locator("#vram-workload").is_visible()
+                page.locator("#vram-workload").select_option("chat")
                 page.locator("#vram-search").fill("qwen")
                 assert "model famil" in page.locator("#vram-count").inner_text()
                 assert "Nearest listed GPU tier" in page.locator("#vram-results").inner_text()
                 page.locator("#vram-search").fill("model-that-does-not-exist")
                 assert "No catalog matches" in page.locator("#vram-results").inner_text()
 
-                assert page.locator(".vram-variants").count() >= 0\n                # Input changes should not trigger JS errors or viewport-wide scrolling.
+                assert page.locator(".vram-variants").count() >= 0
+                # Input changes should not trigger JS errors or viewport-wide scrolling.
                 assert not errors, (width, errors)
                 extent = page.evaluate("({ width: innerWidth, document: document.documentElement.scrollWidth })")
                 assert extent["document"] <= width + 2, (width, extent)
