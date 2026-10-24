@@ -115,6 +115,18 @@ def main():
           if(draft[0].measurements.length!==0)throw Error('Unapproved evidence leaked');
           const approved=s.joinBenchmarks(list,{schemaVersion:1,measurements:[{...measurable,reviewStatus:'approved'}]});
           if(approved[0].measurements.length!==1)throw Error('Approved measured evidence hidden');
+          const study=require('./data/local-llm-reviewed-evidence.json');
+          const exact=s.reviewedCaseStudy(study,'qwen3-vl','vision');
+          if(!exact||exact.modelTag!=='qwen3-vl:4b-instruct')throw Error('Exact Instruct case study not shown');
+          if(s.reviewedCaseStudy(study,'qwen3-vl:8b','vision'))throw Error('Case study leaked to wrong model');
+          if(s.reviewedCaseStudy(study,'qwen3-vl','coding'))throw Error('Vision test shown on coding workflow');
+          if(s.reviewedCaseStudy(study,'gemma','vision'))throw Error('Vision test leaked to unrelated model');
+          const card=s.reviewedCaseStudyHTML(exact);
+          if(!card.includes('64.23')||!card.includes('4,455')&& !card.includes('4455')||!card.includes('not model-only VRAM')||!card.includes('qwen3-vl:4b-instruct'))throw Error('Missing measured evidence caveats');
+          if(s.reviewedCaseStudy({...study,observations:[{...exact,reviewStatus:'approved'}]},'qwen3-vl','vision'))throw Error('Wrong case-study approval state accepted');
+          if(s.reviewedCaseStudy({...study,observations:[{...exact,sourceUrl:'javascript:alert(1)'}]},'qwen3-vl','vision'))throw Error('Untrusted source link accepted');
+          if(list.some(m=>m.id==='ollama:qwen3-vl:4b-instruct'))throw Error('Exact tested variant unexpectedly added to source catalog');
+          if(s.joinBenchmarks(list,require('./data/local-llm-benchmarks.json')).some(m=>m.measurements&&m.measurements.length))throw Error('Case study must not approve benchmark registry');
           console.log('PASS: v3.1 conditional, vision, reverse and memory-only evidence labels');
           console.log('PASS: v3 all forward/reverse estimates, family grouping, vision and quantization caveats');
         """], cwd=ROOT, capture_output=True, text=True, check=True
