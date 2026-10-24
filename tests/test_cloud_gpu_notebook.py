@@ -32,3 +32,6 @@ ast.parse(helper)
 assert "ollama-linux-amd64.tar.zst" in helper
 assert "extractall(path=install_dir, filter=\"data\")" in helper
 assert "https://ollama.com/install.sh" not in helper
+
+assert full.count('importlib.reload(ensure_colab_ollama)') == 3
+assert full.count('"fetch", "origin", "main"') == 3
