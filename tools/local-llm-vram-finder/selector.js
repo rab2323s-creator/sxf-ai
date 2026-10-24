@@ -7,6 +7,7 @@ const ALLOWANCES=Object.freeze({4096:2,8192:3,16384:4.5,32768:7});
 const CAPACITIES=[4,6,8,10,12,16,20,24,32,48,64,80,96,128];
 const CATALOG_URL='/data/local-llm-catalog.json';
 let MODELS=[];
+let resultLimit=12;
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const validUrl=u=>typeof u==='string'&&u.startsWith('https://')&&/^(https:\/\/)(huggingface\.co|ollama\.com)(\/|$)/.test(u);
 function validate(data){
@@ -81,23 +82,26 @@ function render(){
  const query=document.getElementById('vram-search').value;
  let matches;
  if(mode==='model'){
-  matches=search(query,'all').slice(0,40);
-  if(!query.trim())matches=matches.slice(0,20);
+  matches=search(query,'all');
   count.textContent=matches.length+' model variant'+(matches.length===1?'':'s')+' shown'+(query?' for "'+query.slice(0,40)+'"':'');
  }else{
-  matches=evaluate(cap,workload,ctx).filter(m=>m.status!=='out'&&(!query||[m.name,m.id,m.tag,m.quantization].join(' ').toLowerCase().includes(query.toLowerCase()))).slice(0,30);
+  matches=evaluate(cap,workload,ctx).filter(m=>m.status!=='out'&&(!query||[m.name,m.id,m.tag,m.quantization].join(' ').toLowerCase().includes(query.toLowerCase())));
   count.textContent=matches.length+' planning candidate'+(matches.length===1?'':'s')+' for '+cap+'GB';
  }
- result.innerHTML=matches.length?matches.map(m=>card(m,mode==='gpu'?cap:null)).join(''):'<p>No catalog matches. Try another model name, workload, smaller context, or CPU offloading. GPU estimates are not guarantees.</p>';
+ const more=document.getElementById('vram-show-more');
+ if(more){more.hidden=matches.length<=resultLimit;more.textContent='Show '+Math.min(12,matches.length-resultLimit)+' more variants';}
+ count.textContent+=' · showing '+Math.min(resultLimit,matches.length)+' of '+matches.length;
+ result.innerHTML=matches.length?matches.slice(0,resultLimit).map(m=>card(m,mode==='gpu'?cap:null)).join(''):'<p>No catalog matches. Try another model name, workload, smaller context, or CPU offloading. GPU estimates are not guarantees.</p>';
 }
 function initialize(){
  const form=document.getElementById('vram-finder');if(!form)return;
  form.addEventListener('submit',e=>e.preventDefault());
  for(const id of ['vram-mode','vram-capacity','vram-workload','vram-context','vram-search']){
-  const el=document.getElementById(id);if(el)el.addEventListener(id==='vram-search'?'input':'change',()=>{showMode();render();});
+  const el=document.getElementById(id);if(el)el.addEventListener(id==='vram-search'?'input':'change',()=>{resultLimit=12;showMode();render();});
  }
  document.querySelectorAll('.vram-pick').forEach((el,i)=>el.addEventListener('click',()=>{const f=document.getElementById('vram-capacity');if(f){f.value=['8','12','16','24','32'][i];document.getElementById('vram-mode').value='gpu';showMode();render();}}));
  document.querySelectorAll('.vram-copy').forEach(button=>button.addEventListener('click',async()=>{if(!navigator.clipboard)return;try{await navigator.clipboard.writeText(button.dataset.copy);button.textContent='Copied';}catch(_){button.textContent='Select text';}}));
+ const more=document.getElementById('vram-show-more');if(more)more.addEventListener('click',()=>{resultLimit+=12;render();});
  showMode();
  const status=document.getElementById('vram-data-status');
  fetch(CATALOG_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Catalog unavailable');return r.json();}).then(data=>{

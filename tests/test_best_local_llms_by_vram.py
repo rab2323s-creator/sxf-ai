@@ -64,7 +64,7 @@ def main():
           const s=require('./tools/local-llm-vram-finder/selector.js');
           const catalog=require('./data/local-llm-catalog.json');
           const list=s.validate(catalog);
-          if(list.length!==13)throw Error('Source-backed snapshot');
+          if(list.length<13||list.length>220)throw Error('Source-backed catalog size');
           if(!s.search('coder','all',list).length)throw Error('Search missing');
           if(!s.evaluate(16,'coding',8192,list).some(m=>m.tag==='qwen2.5-coder:14b'))throw Error('Coding lookup');
           if(s.evaluate(8,'invalid',8192,list).length)throw Error('Invalid task');
