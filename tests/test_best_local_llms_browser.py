@@ -52,7 +52,7 @@ def run():
                 page.locator("#vram-context").select_option("32768")
                 page.locator("#vram-search").fill("model-that-does-not-exist")
                 assert page.locator(".vram-result").count() == 0
-                assert "No catalog matches" in page.locator("#vram-results").inner_text()
+                assert "No matching models" in page.locator("#vram-results").inner_text()
 
                 page.locator("#vram-mode").select_option("model")
                 assert page.locator("#vram-context").is_visible()
@@ -62,7 +62,7 @@ def run():
                 assert "model famil" in page.locator("#vram-count").inner_text()
                 assert "Nearest listed GPU tier" in page.locator("#vram-results").inner_text()
                 page.locator("#vram-search").fill("model-that-does-not-exist")
-                assert "No catalog matches" in page.locator("#vram-results").inner_text()
+                assert "No matching models" in page.locator("#vram-results").inner_text()
 
                 assert page.locator(".vram-variants").count() >= 0
                 # Input changes should not trigger JS errors or viewport-wide scrolling.
