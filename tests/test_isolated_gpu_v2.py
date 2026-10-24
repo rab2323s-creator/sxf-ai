@@ -21,3 +21,7 @@ assert body.index('shutil.which("nvidia-smi")') < body.index("ensure_ollama_read
 assert "scripts/measure_isolated_gpu_evidence.py" in body
 assert 'files.download(str(archive))' in body
 print("PASS: isolated GPU V2 source parses and enforces review-only evidence.")
+
+assert '"/api/chat"' in s
+assert '"messages": [{"role": "user"' in s
+assert 'thinking_chars=' in s
