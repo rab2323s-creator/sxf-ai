@@ -141,3 +141,16 @@
 @media(max-width:980px){.vram-page .vram-hero{grid-template-columns:1fr;gap:27px;padding:42px 0}.vram-page .vram-hero-visual{max-width:580px}.vram-page .vram-intro{grid-template-columns:1fr;gap:15px;padding:56px 0}.vram-page .vram-pick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vram-page .vram-two-col{grid-template-columns:1fr}.vram-page .vram-section-head{display:block}.vram-page .vram-section-head>p{max-width:650px}.vram-page .vram-next{flex-direction:column}.vram-page .vram-tool-top{display:block}.vram-page .vram-tool-stamp{display:inline-block;margin:0 0 8px}}
 @media(max-width:650px){.vram-page .vram-wrap{width:min(100% - 30px,1180px)}.vram-page .vram-breadcrumb{padding-top:18px}.vram-page .vram-hero{padding:26px 0 38px}.vram-page h1{font-size:clamp(2.65rem,11vw,4rem)}.vram-page h2{font-size:1.8rem}.vram-page .vram-hero-visual{padding:20px}.vram-page .vram-meta{gap:7px}.vram-page .vram-meta span:not(:last-child):after{margin-left:7px}.vram-page .vram-local-nav{flex-wrap:nowrap;overflow-x:auto;margin-right:-15px;padding-right:15px}.vram-page .vram-section{padding:49px 0}.vram-page .vram-pick-grid,.vram-page .vram-results,.vram-page .vram-faq,.vram-page .vram-steps,.vram-page .vram-source-links,.vram-page .vram-next-links{grid-template-columns:1fr}.vram-page .vram-pick{min-height:unset}.vram-page .vram-tool{padding:21px;margin:48px -3px}.vram-page .vram-controls{grid-template-columns:1fr}.vram-page .vram-results-header,.vram-page .vram-results-foot{align-items:start;flex-direction:column}.vram-page .vram-section-head{margin-bottom:20px}.vram-page .vram-two-col{gap:12px}.vram-page .vram-method-card{padding:21px}.vram-page .vram-next{padding:44px 0}}
 @media(prefers-reduced-motion:reduce){.vram-page .vram-primary,.vram-page .vram-secondary,.vram-page .vram-pick{transition:none}}
+
+/* v2 catalog search and reverse-fit controls */
+.vram-page .vram-finder-modes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0 22px}
+.vram-page .vram-finder-modes label{font-weight:700;color:var(--v-text)}
+.vram-page .vram-finder-modes select,.vram-page .vram-search-field input{min-height:47px;border:1px solid var(--v-line);border-radius:10px;background:#0b131b;color:var(--v-text);padding:10px 12px;max-width:100%}
+.vram-page .vram-finder-modes p{flex-basis:100%;font-size:.85rem;color:var(--v-muted);margin:0}
+.vram-page .vram-search-field{grid-column:1/-1;display:flex;flex-direction:column;gap:9px;min-width:0}
+.vram-page .vram-search-field input{width:100%;font-size:1rem}
+.vram-page .vram-hardware-controls{display:contents}
+.vram-page .vram-hardware-controls[hidden]{display:none!important}
+.vram-page .vram-card-small{font-size:.76rem;color:var(--v-muted)}
+.vram-page .vram-result-foot{flex-wrap:wrap}
+@media(max-width:650px){.vram-page .vram-finder-modes{align-items:stretch;flex-direction:column}.vram-page .vram-finder-modes select{width:100%}}
