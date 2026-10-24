@@ -7,7 +7,7 @@ s=(root/"scripts/measure_isolated_gpu_evidence.py").read_text()
 ast.parse(s)
 assert 'unload_all()' in s
 assert 'model_ps.get("size_vram")' in s
-assert '"answer": response["response"]' in s
+assert '"answer": (response.get("message") or {}).get("content")' in s
 assert '"gpuWideObservedPeakUsedMiB"' in s
 assert 'review-required-not-published' in s
 assert "local-llm-benchmarks.json" not in s
@@ -21,3 +21,7 @@ assert body.index('shutil.which("nvidia-smi")') < body.index("ensure_ollama_read
 assert "scripts/measure_isolated_gpu_evidence.py" in body
 assert 'files.download(str(archive))' in body
 print("PASS: isolated GPU V2 source parses and enforces review-only evidence.")
+
+assert '"/api/chat"' in s
+assert '"messages": [{"role": "user"' in s
+assert 'thinking_chars=' in s
