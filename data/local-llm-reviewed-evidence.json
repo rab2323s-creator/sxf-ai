@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "policy": "Reviewed user-submitted case studies only. These are not approved universal benchmarks or inputs to GPU fit estimates. Exact model variants and runtimes must remain distinct.",
+  "observations": [
+    {
+      "modelId": "ollama:qwen3-vl:4b-instruct",
+      "modelTag": "qwen3-vl:4b-instruct",
+      "modelDigest": "84f7ed8042fa7cdbd902f7dcb7d0370e032095047cc3244179f263b77b5bc318",
+      "modelDisplayName": "Qwen3-VL 4B Instruct",
+      "quantization": "Q4_K_M",
+      "workload": "vision",
+      "gpu": "NVIDIA Tesla T4",
+      "gpuTotalMiB": 15360,
+      "gpuDriver": "580.82.07",
+      "runtime": "Ollama",
+      "runtimeVersion": "0.40.10",
+      "contextTokens": 4096,
+      "measuredAt": "2026-10-24",
+      "measuredGenerationTokensPerSecond": [
+        64.3089,
+        64.2733,
+        64.1013
+      ],
+      "measurementKind": "generation-only",
+      "warmupCount": 1,
+      "gpuWideBaselineMiB": 0,
+      "gpuWideObservedPeakUsedMiB": 4455,
+      "ollamaReportedGpuResidentMiB": 3406.42,
+      "fixtureResult": "Three of three measured answers correctly described the simple red-square-on-blue-background image.",
+      "fixtureSha256": "a01767e2afbfe9cab25d613c7d391e6057ff018960f9d07a961b064615b0fe7b",
+      "sourceUrl": "https://github.com/rab2323s-creator/sxf-ai/blob/main/docs/benchmarks/tesla-t4-qwen3-vl-4b-instruct-2026-10-24.md",
+      "originalArchiveSha256": "c7cf9fdca58b443db353d545033cd71230b2c83ecbc3946f960de9640c9eb93a",
+      "reviewStatus": "reviewed-user-capture",
+      "publicationScope": "source-linked-case-study-only",
+      "caveats": "One user-captured T4 session and one simple image. Not a verified minimum VRAM, model-exclusive GPU memory, independent hardware attestation, general vision quality, or speed for other configurations."
+    }
+  ]
+}
