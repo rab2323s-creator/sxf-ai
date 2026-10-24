@@ -7,7 +7,7 @@ s=(root/"scripts/measure_isolated_gpu_evidence.py").read_text()
 ast.parse(s)
 assert 'unload_all()' in s
 assert 'model_ps.get("size_vram")' in s
-assert '"answer": response["response"]' in s
+assert '"answer": (response.get("message") or {}).get("content")' in s
 assert '"gpuWideObservedPeakUsedMiB"' in s
 assert 'review-required-not-published' in s
 assert "local-llm-benchmarks.json" not in s
