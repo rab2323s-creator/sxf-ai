@@ -819,8 +819,10 @@ def validate_agentic_ai_guide():
         'href="/guides/ai-super-agents/"',
         'href="/guides/ai-agent-security/"',
         'href="/guides/how-to-build-ai-super-agent/"',
-        "Agentic AI vs generative AI",
-        "AI agent vs chatbot",
+        "<h2>How Does Agentic AI Work? The AI Agent Loop Explained</h2>",
+        "<h2>Agentic AI vs Generative AI: How Agents Differ from Chatbots</h2>",
+        "<h2>Agentic AI Examples: What AI Agents Do in the Real World</h2>",
+        "<h2>Agentic AI Applications: Eight Practical AI Agent Use Cases</h2>",
     ]
     for marker in required:
         if marker not in text:
