@@ -62,7 +62,7 @@
 <form id="vram-finder" class="vram-controls" aria-label="Local model selection inputs">
 <label class="vram-search-field" for="vram-search"><span>Search model name / quantization</span><input id="vram-search" type="search" placeholder="Qwen3, Gemma, Q4_K_M…" autocomplete="off"></label>
 <div id="vram-hardware-controls" class="vram-hardware-controls">
-<label for="vram-capacity"><span>Available GPU VRAM (used only for GPU-first filtering)</span><select id="vram-capacity" name="vram"><option value="8">8 GB</option><option value="12">12 GB</option><option value="16" selected>16 GB</option><option value="24">24 GB</option><option value="32">32 GB</option></select></label>
+<label id="vram-capacity-field" for="vram-capacity"><span>Available GPU VRAM (used only for GPU-first filtering)</span><select id="vram-capacity" name="vram"><option value="8">8 GB</option><option value="12">12 GB</option><option value="16" selected>16 GB</option><option value="24">24 GB</option><option value="32">32 GB</option></select></label>
 <label for="vram-workload"><span>Primary task</span><select id="vram-workload" name="workload"><option value="coding" selected>Coding</option><option value="chat">Chat &amp; reasoning</option><option value="vision">Images &amp; vision</option></select></label>
 <label for="vram-context"><span>Planning context</span><select id="vram-context" name="context"><option value="4096">4K tokens</option><option value="8192" selected>8K tokens</option><option value="16384">16K tokens</option><option value="32768">32K tokens</option></select></label>
 </div></form>

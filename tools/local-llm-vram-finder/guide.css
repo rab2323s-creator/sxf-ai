@@ -151,6 +151,9 @@
 .vram-page .vram-search-field input{width:100%;font-size:1rem}
 .vram-page .vram-hardware-controls{display:contents}
 .vram-page .vram-hardware-controls[hidden]{display:none!important}
+/* Hide only the unused VRAM input in model-first lookup; keep task/context active. */
+.vram-page #vram-capacity-field[hidden]{display:none!important}
+@media(min-width:651px){.vram-page .vram-controls.vram-reverse-mode{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .vram-page .vram-card-small{font-size:.76rem;color:var(--v-muted)}
 .vram-page .vram-result-foot{flex-wrap:wrap}
 @media(max-width:650px){.vram-page .vram-finder-modes{align-items:stretch;flex-direction:column}.vram-page .vram-finder-modes select{width:100%}}

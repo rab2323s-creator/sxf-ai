@@ -30,6 +30,9 @@ def run():
                 assert page.locator("h1").count() == 1
                 assert page.locator(".vram-table tbody tr").count() == 13
                 assert "model famil" in page.locator("#vram-count").inner_text()
+                assert page.locator("#vram-capacity").is_visible()
+                assert page.locator("#vram-capacity-field").is_visible()
+                assert not page.locator("#vram-finder").evaluate("(el) => el.classList.contains('vram-reverse-mode')")
                 assert page.locator(".vram-decision").count() >= 1
                 assert 1 <= page.locator(".vram-result").count() <= 8
                 if page.locator("#vram-show-more").is_visible():
@@ -68,8 +71,15 @@ def run():
                 assert "No matching models" in page.locator("#vram-results").inner_text()
 
                 page.locator("#vram-mode").select_option("model")
+                assert page.locator("#vram-capacity-field").is_hidden()
+                assert page.locator("#vram-capacity").is_hidden()
+                assert page.locator("#vram-search").is_visible()
+                assert page.locator("#vram-finder").evaluate("(el) => el.classList.contains('vram-reverse-mode')")
                 assert page.locator("#vram-context").is_visible()
                 assert page.locator("#vram-workload").is_visible()
+                assert page.locator("#vram-capacity").input_value() == "8"  # hidden value is preserved
+                cols = page.locator("#vram-finder").evaluate("(el) => getComputedStyle(el).gridTemplateColumns.split(' ').length")
+                assert cols == (1 if width <= 650 else 2), (width, cols)
                 page.locator("#vram-workload").select_option("chat")
                 page.locator("#vram-search").fill("qwen")
                 assert "model famil" in page.locator("#vram-count").inner_text()
@@ -79,6 +89,12 @@ def run():
 
                 assert page.locator(".vram-variants").count() >= 0
                 page.locator("#vram-mode").select_option("gpu")
+                assert page.locator("#vram-capacity").is_visible()
+                assert page.locator("#vram-capacity-field").is_visible()
+                assert page.locator("#vram-capacity").input_value() == "8"
+                assert not page.locator("#vram-finder").evaluate("(el) => el.classList.contains('vram-reverse-mode')")
+                cols = page.locator("#vram-finder").evaluate("(el) => getComputedStyle(el).gridTemplateColumns.split(' ').length")
+                assert cols == (1 if width <= 650 else 3), (width, cols)
                 page.locator("#vram-workload").select_option("coding")
                 page.locator("#vram-context").select_option("8192")
                 page.locator("#vram-capacity").select_option("16")
@@ -98,6 +114,9 @@ def run():
             assert response and response.status == 200
             assert without_js.locator(".vram-table tbody tr").count() == 13
             assert without_js.locator("#quick-picks .vram-pick").count() == 5
+            assert without_js.locator("#vram-capacity").is_visible()
+            assert without_js.locator("#vram-workload").is_visible()
+            assert without_js.locator("#vram-context").is_visible()
             assert without_js.locator("h1").count() == 1
             print("PASS: local LLM guide has indexable static fallback without JavaScript")
             without_js.close()

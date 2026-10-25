@@ -66,6 +66,11 @@ def main():
     assert "prefers-reduced-motion" in css
     assert "evaluate(" in js and "textContent" in js
     assert "innerHTML" in js and "esc(" in js
+    assert '<label id="vram-capacity-field" for="vram-capacity">' in html
+    assert "syncModeControls(mode)" in js and "capacityField.hidden=reverse" in js
+    assert "form.classList.toggle('vram-reverse-mode',reverse)" in js
+    assert ".vram-page #vram-capacity-field[hidden]{display:none!important}" in css
+    assert ".vram-controls.vram-reverse-mode" in css
     tools_hub = (ROOT / "tools/index.html").read_text(encoding="utf-8")
     assert 'href="/tools/local-llm-vram-finder/"' in tools_hub
     assert 'guides/best-local-llms-by-vram' not in tools_hub

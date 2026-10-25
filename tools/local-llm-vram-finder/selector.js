@@ -207,8 +207,17 @@ function initialize(){
  let reviewedData=null;
  const reviewedSlot=document.getElementById('vram-reviewed-evidence');
  const ids=['vram-mode','vram-capacity','vram-workload','vram-context','vram-search'];
+ const capacityField=document.getElementById('vram-capacity-field');
+ function syncModeControls(mode){
+  const reverse=mode==='model';
+  if(capacityField)capacityField.hidden=reverse;
+  form.classList.toggle('vram-reverse-mode',reverse);
+ }
+ // Sync immediately, even while catalog data is loading or unavailable.
+ syncModeControls(document.getElementById('vram-mode').value);
  function render(){
   const mode=document.getElementById('vram-mode').value,cap=Number(document.getElementById('vram-capacity').value),workload=document.getElementById('vram-workload').value,ctx=Number(document.getElementById('vram-context').value),query=document.getElementById('vram-search').value;
+  syncModeControls(mode);
   const note=document.getElementById('vram-mode-help');
   if(note)note.textContent=mode==='model'?'Search a model and pick its task/context. GPU estimates use the SAME inputs as GPU-first results.':'Select a GPU tier, task and context. Results are grouped by model family, not ranked by model quality.';
   if(!MODELS.length){count.textContent='Catalog unavailable';result.textContent='The source catalog did not load. See the sourced static comparison table below.';if(more)more.hidden=true;return;}
