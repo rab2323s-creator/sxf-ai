@@ -5417,6 +5417,10 @@ def provider_index_html(items):
 
 
 def provider_page_html(provider, items):
+    if provider == "Runway":
+        from runway_provider_page import enrich_runway_provider
+        models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == "Runway"]
+        return enrich_runway_provider(generic_provider_page_html(provider, items), models)
     if provider == "Cohere":
         from cohere_provider_page import enrich_cohere_provider
         models = [model for model in MODEL_PRICING_CATALOG["models"] if model["provider"] == "Cohere"]

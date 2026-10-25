@@ -709,6 +709,50 @@ def validate_model_pricing_catalog():
         if f"/providers/{provider_slug}/" not in providers_html:
             fail(f"provider index missing route for {provider}")
 
+    runway_provider_path = ROOT / "providers" / "runway" / "index.html"
+    runway_html = runway_provider_path.read_text(encoding="utf-8")
+    runway_markers = (
+        'data-runway-provider-guide="2026-10-25"',
+        'id="runway-platform"', 'id="runway-models"',
+        'id="runway-plans"', 'id="runway-api-cost"',
+        'id="runway-estimator"', 'id="runway-choices"',
+        'id="runway-faq"', 'id="runway-sources"',
+        'id="runway-directory"',
+        '/providers/runway/reference.css',
+        '/providers/runway/reference.js',
+        '/compare/runway-gen-4-5-vs-kling-3-0/#rv-calculator',
+        'https://docs.dev.runwayml.com/guides/pricing/',
+        '12 credits / second', '625 / month',
+    )
+    for marker in runway_markers:
+        if marker not in runway_html:
+            fail(f"Runway provider: missing required marker {marker}")
+    runway_scripts = re.findall(
+        r'<script type="application/ld\+json">(.*?)</script>',
+        runway_html, flags=re.S,
+    )
+    if len(runway_scripts) != 1:
+        fail("Runway provider must have exactly one JSON-LD block")
+    else:
+        runway_graph = json.loads(runway_scripts[0]).get("@graph", [])
+        for schema_type in ("CollectionPage", "BreadcrumbList", "ItemList", "TechArticle", "FAQPage"):
+            if len([n for n in runway_graph if n.get("@type") == schema_type]) != 1:
+                fail(f"Runway provider missing unique {schema_type} schema")
+        faq_node = next((n for n in runway_graph if n.get("@type") == "FAQPage"), {})
+        if len(faq_node.get("mainEntity", [])) != 6:
+            fail("Runway provider schema FAQ count differs from visible guide")
+    for asset in ("providers/runway/reference.css", "providers/runway/reference.js",
+                  "data/provider-page-content/runway-seo.html", "scripts/runway_provider_page.py"):
+        if not (ROOT / asset).is_file():
+            fail(f"Runway provider missing maintained asset: {asset}")
+    for linked_page in (
+        ROOT / "models" / "gen4-5" / "index.html",
+        ROOT / "compare" / "runway-gen-4-5-vs-kling-3-0" / "index.html",
+        ROOT / "compare" / "runway-gen-4-5-vs-kling-3-0" / "editorial.html",
+    ):
+        if '/providers/runway/' not in linked_page.read_text(encoding="utf-8"):
+            fail(f"Runway provider missing return link in {linked_page}")
+
     calculator_page = ROOT / "tools" / "ai-model-cost-calculator" / "index.html"
     calculator_html = calculator_page.read_text(encoding="utf-8")
     calculator_js = (ROOT / "tools" / "ai-model-cost-calculator" / "calculator.js").read_text(encoding="utf-8")
