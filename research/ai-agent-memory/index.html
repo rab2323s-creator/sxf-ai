@@ -120,7 +120,7 @@
 <p>The important word is <strong>useful</strong>. A transcript is history. A database is storage. A vector index is retrieval infrastructure. They become agent memory only when the system decides what matters, makes it available at the right moment and allows that information to change behavior.</p>
 <p>This distinction matters because long-running agents create enormous amounts of state: user messages, browser pages, files, tool outputs, plans, errors, intermediate results, observations and side effects. Keeping all of it is neither efficient nor safe. Agent memory is therefore a <em>selection problem</em> as much as a storage problem.</p>
 <div class="memory-note"><strong>The SXF rule</strong>A good memory system should remember less than the full history—but preserve more of what matters.</div>
-<p>Memory is also one of the core layers that separates a one-shot assistant from a durable <a href="/guides/what-is-agentic-ai/">agentic AI system</a>. Without persistent state, every new session is forced to reconstruct the world from scratch.</p>
+<p>Memory is one of the layers that separates a one-shot assistant from a persistent agent. If the goal → tool → observation loop is new, begin with <a href="/guides/what-is-agentic-ai/">What Is Agentic AI? A definition, examples and explanation of how agents work</a>. This research focuses on what state should survive between steps and sessions, when to retrieve it and when it must be revised or forgotten.</p>
 </section>
 
 <section id="context-rag-memory">
