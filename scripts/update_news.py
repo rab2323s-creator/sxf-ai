@@ -7721,6 +7721,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/why-does-chatgpt-make-things-up/",
+            "category": "AI Literacy · ChatGPT · Trust",
+            "categories": ["research","security","models"],
+            "kicker": "AI HALLUCINATIONS EXPLAINED",
+            "title": "Why Does ChatGPT Make Things Up? AI Hallucinations Explained",
+            "description": "Why AI confidently invents facts, examples of fake citations, a practical verification checklist, and original SXF source-audited examples.",
+            "meta": "AI hallucinations · ChatGPT facts · Verification",
+            "updated": "Oct 26, 2026",
+            "read_time": "15 min",
+        },
+        {
             "href": "/guides/what-is-vibe-coding/",
             "category": "Coding · AI Tools · Engineering",
             "categories": ["coding", "tools", "agents", "security"],

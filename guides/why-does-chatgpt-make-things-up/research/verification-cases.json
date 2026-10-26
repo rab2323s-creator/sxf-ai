@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "title": "SXF / AI — Eight-case claim-verification demonstration",
+  "authoredAt": "2026-10-26",
+  "protocol": "A deliberately constructed editorial before/after audit, NOT a captured chatbot evaluation.",
+  "evidenceBasis": "Human-reviewed first-party public documents, with a deterministic schema/consistency test.",
+  "uncheckedAnswersAre": "Purpose-written unsafe example drafts, not raw model outputs or representative samples.",
+  "verifiedAnswersAre": "Editor-rewritten conclusions anchored to the linked first-party documents.",
+  "nonClaims": [
+    "No ChatGPT or Gemini live calls were recorded.",
+    "No randomized or blinded trial.",
+    "No model hallucination rate, source-retrieval effect size, error reduction percentage, or statistically generalizable performance claim.",
+    "Source meaning is human-reviewed; automated tests check artifact structure and consistency, not scientific truth."
+  ],
+  "sources": {
+    "openai-help": {
+      "name": "OpenAI Help Center — Does ChatGPT tell the truth?",
+      "url": "https://help.openai.com/en/articles/8313428-does-chatgpt-tell-the-truth"
+    },
+    "openai-research": {
+      "name": "OpenAI — Why language models hallucinate (September 2025)",
+      "url": "https://openai.com/index/why-language-models-hallucinate/"
+    },
+    "nist": {
+      "name": "NIST AI 600-1 — Generative AI Profile, §2.2 Confabulation",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+    }
+  },
+  "cases": [
+    {
+      "id": "H01",
+      "question": "If ChatGPT sounds completely certain, is the answer definitely true?",
+      "fault": "confidence-as-proof",
+      "unchecked": "Yes. A confident tone means the information has been checked.",
+      "verified": "No. Confidence in wording is not a reliability measure; confirm consequential claims independently.",
+      "source": "openai-help",
+      "check": "Find OpenAI's warning that models can sound confident even when they are wrong."
+    },
+    {
+      "id": "H02",
+      "question": "Does a citation in an AI answer prove the cited article exists?",
+      "fault": "fabricated-reference",
+      "unchecked": "Yes. A formatted journal citation is evidence that the paper exists.",
+      "verified": "No. A citation can be fabricated. Open the source and verify the title, authors and whether the source supports the claim.",
+      "source": "openai-help",
+      "check": "Locate OpenAI's explicit examples of fabricated quotes, studies, citations or references."
+    },
+    {
+      "id": "H03",
+      "question": "Can searching the web remove every hallucination?",
+      "fault": "tool-guarantee",
+      "unchecked": "Yes. An AI answer with search enabled is guaranteed to be correct.",
+      "verified": "No. Search can improve verification, but a retrieved page or link is not proof that the generated claim matches that source.",
+      "source": "openai-help",
+      "check": "Compare the stated benefit of search with the recommendation to verify important information."
+    },
+    {
+      "id": "H04",
+      "question": "Can ChatGPT know today's changed rule without accessing a current source?",
+      "fault": "unsupported-recency",
+      "unchecked": "Yes. A fluent answer is enough to confirm the most recent rule.",
+      "verified": "Not necessarily. Without appropriate current retrieval, a model can miss information that changed after its training data.",
+      "source": "openai-help",
+      "check": "Check the Help Center's distinction between answers without search and with current search tools."
+    },
+    {
+      "id": "H05",
+      "question": "If the AI puts a sentence in quotation marks, is it a real quote?",
+      "fault": "invented-quote",
+      "unchecked": "Yes. Quotation marks show it was copied exactly.",
+      "verified": "No. A quote may be invented or altered; open the original document and match the exact words and context.",
+      "source": "openai-help",
+      "check": "Review the fabricated-quotation example and verify the wording at the alleged source."
+    },
+    {
+      "id": "H06",
+      "question": "What if a question leaves out the year, country or which person?",
+      "fault": "false-precision",
+      "unchecked": "The model should confidently choose one interpretation without mentioning it.",
+      "verified": "Ask for the missing detail or state the assumption; ambiguous questions can prompt overconfident, misleading answers.",
+      "source": "openai-help",
+      "check": "Locate the Help Center's caution about overconfident answers to ambiguous questions."
+    },
+    {
+      "id": "H07",
+      "question": "When a model hallucinates, does that prove it consciously intended to deceive?",
+      "fault": "anthropomorphic-intent",
+      "unchecked": "Yes. An incorrect answer proves the AI wanted to lie.",
+      "verified": "No. A false generated response does not establish intention. NIST uses 'confabulation' and describes risks from fluent false statements.",
+      "source": "nist",
+      "check": "Read §2.2 Confabulation and distinguish output-level error from claims about intent."
+    },
+    {
+      "id": "H08",
+      "question": "Can evaluation design make unsupported guessing more attractive than saying 'I don't know'?",
+      "fault": "overstated-research",
+      "unchecked": "Every model always guesses because every evaluation rewards bluffing.",
+      "verified": "Some standard accuracy-based evaluations can reward guessing over abstention; this is a research explanation, not a universal claim about every model or test.",
+      "source": "openai-research",
+      "check": "Read the research summary's qualified claim about common training and evaluation incentives."
+    }
+  ]
+}
