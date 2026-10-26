@@ -75,3 +75,7 @@ python scripts/run_hallucination_gemini_free.py --acknowledge-free-tier
 ```
 
 For GitHub Actions, put `GEMINI_API_KEY` in repository secrets and execute in a manually triggered workflow or another trusted runner. **Never add API credentials to files or action logs.** The runner stores raw responses, exact requests, per-arm grounding metadata and blank reviewer forms. If Google Search was enabled but not actually used, the run records this; **do not count such a response as a grounded search result**. The 12-question set is small and purposive, and no model outcomes are published until responses are independently checked by a person.
+
+## Observational six-pair ChatGPT UI pilot — compiled 2026-10-26
+
+[Read the case-by-case source review](chatgpt-ui-pilot-six-pairs-2026-10-26.md). A participant pasted 12 answers to the first 6 of the fixed questions: correct central answers were observed, with one volunteered Pluto-distance error and one quotation-fidelity issue in answers without manually selected Search. This is a **manual UI observation, not** execution of the preregistered 12-pair API plan. There are **no verifiable no-search execution traces or preserved original UI links**. Its outcomes must not be generalized to a model hallucination rate or causal effect of Search.
