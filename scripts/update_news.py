@@ -7721,6 +7721,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/how-to-tell-if-an-image-is-ai-generated/",
+            "category": "AI Literacy · Image Verification · Trust",
+            "categories": ["research","security","tools"],
+            "kicker": "AI IMAGE VERIFICATION · 7 FREE CHECKS",
+            "title": "How to Tell If an Image Is AI-Generated (2026): 7 Free Checks",
+            "description": "Seven practical, free ways to check an AI-generated photo—with SXF's original interactive Evidence Ladder, C2PA, SynthID and source-verification guide.",
+            "meta": "AI image detector · Google Lens · Content Credentials · SynthID",
+            "updated": "Oct 26, 2026",
+            "read_time": "11 min",
+        },
+        {
             "href": "/guides/why-does-chatgpt-make-things-up/",
             "category": "AI Literacy · ChatGPT · Trust",
             "categories": ["research","security","models"],

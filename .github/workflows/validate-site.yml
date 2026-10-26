@@ -46,6 +46,7 @@ jobs:
       - name: Hallucination guide and preregistered model-evaluation integrity
         run: |
           python tests/test_hallucination_guide.py
+          python tests/test_ai_image_verification_guide.py
           python tests/test_hallucination_model_eval.py
           python scripts/run_hallucination_model_eval.py --dry-run > /dev/null
           python -m py_compile scripts/run_hallucination_gemini_free.py
