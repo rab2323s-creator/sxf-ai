@@ -57,6 +57,13 @@ The script generates `reviews.csv` with empty human labels. No results dashboard
 
 Primary sources and reviewer targets are part of `questions.json`. The files and prompts are permissively inspectable; after actual authenticated runs, share a checked artifact and human review before adding findings to the article.
 
+
+## Free route focused on **ChatGPT**, not Gemini
+
+This is the preferred evidence path for the public article **Why Does ChatGPT Make Things Up?** when the owner has a ChatGPT subscription but does not want to fund API requests. Use [chatgpt-plus-manual-protocol.md](chatgpt-plus-manual-protocol.md) and the empty [chatgpt-plus-capture-template.csv](chatgpt-plus-capture-template.csv). The method collects responses from ChatGPT's consumer interface manually and requires source-based review; it is not an API experiment. No raw ChatGPT transcripts exist in this repository yet.
+
+The optional Gemini runner below compares Gemini and must not be represented as a ChatGPT result, even if it uses identical prompts.
+
 ## Free Google Gemini comparison (alternative)
 
 A second runner, `scripts/run_hallucination_gemini_free.py`, uses **Gemini 2.5 Flash**, the same 12 preregistered questions, and compares no-search answers with Google Search-grounded answers. It is **not a ChatGPT test**. Its execution may be $0 *only when the selected Google AI Studio project and search grounding are included in the account's eligible free tier*, and only within usage limits. Verify the current pricing and your project's billing status before execution. A GitHub connection alone does not provide a Gemini API key.
