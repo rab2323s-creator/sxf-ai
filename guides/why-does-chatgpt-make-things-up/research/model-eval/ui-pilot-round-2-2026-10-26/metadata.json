@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "study": "SXF ChatGPT second six-pair UI pilot",
+  "status": "partial_in_progress",
+  "compiled_on": "2026-10-26",
+  "question_set": "guides/why-does-chatgpt-make-things-up/research/model-eval/questions.json",
+  "participants": "single user sharing ChatGPT text in conversation",
+  "study_target_cases": [
+    "E07",
+    "E08",
+    "E09",
+    "E10",
+    "E11",
+    "E12"
+  ],
+  "collected_cases": [
+    "E07"
+  ],
+  "records": [
+    {
+      "case_id": "E07",
+      "arm": "no_search_selected",
+      "file": "responses/E07__no_search_selected.txt",
+      "original_response_utc": null,
+      "model_user_reported": "ChatGPT High",
+      "search_manually_selected": false,
+      "search_automatically_used": "unknown",
+      "origin": "user-pasted text, not platform export"
+    },
+    {
+      "case_id": "E07",
+      "arm": "search_selected",
+      "file": "responses/E07__search_selected.txt",
+      "original_response_utc": null,
+      "model_user_reported": "ChatGPT High",
+      "search_manually_selected": true,
+      "search_automatically_used": "not independently logged",
+      "origin": "user-pasted text with UI image previews omitted"
+    }
+  ],
+  "limitations": [
+    "No original ChatGPT conversation links or tool traces were provided",
+    "Only manual Search selection was reported; actual no-search environment not proven",
+    "Neither underlying model build nor exact response creation timestamps independently verified",
+    "No broad hallucination rate or causal search effect can be inferred",
+    "Do not conflate partial second pilot with the 12-case preregistered API study"
+  ]
+}
