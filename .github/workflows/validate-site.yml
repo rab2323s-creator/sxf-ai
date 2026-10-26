@@ -43,6 +43,11 @@ jobs:
           python tests/test_isolated_gpu_resume.py
           python -m py_compile scripts/measure_local_ollama.py scripts/review_local_gpu_measurement.py
           python tests/test_best_local_llms_by_vram.py
+      - name: Hallucination guide and preregistered model-evaluation integrity
+        run: |
+          python tests/test_hallucination_guide.py
+          python tests/test_hallucination_model_eval.py
+          python scripts/run_hallucination_model_eval.py --dry-run > /dev/null
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
