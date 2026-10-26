@@ -56,3 +56,15 @@ The script generates `reviews.csv` with empty human labels. No results dashboard
 - This protocol is not a claim of actual results, even if it is linked from SXF's guide.
 
 Primary sources and reviewer targets are part of `questions.json`. The files and prompts are permissively inspectable; after actual authenticated runs, share a checked artifact and human review before adding findings to the article.
+
+## Free Google Gemini comparison (alternative)
+
+A second runner, `scripts/run_hallucination_gemini_free.py`, uses **Gemini 2.5 Flash**, the same 12 preregistered questions, and compares no-search answers with Google Search-grounded answers. It is **not a ChatGPT test**. Its execution may be $0 *only when the selected Google AI Studio project and search grounding are included in the account's eligible free tier*, and only within usage limits. Verify the current pricing and your project's billing status before execution. A GitHub connection alone does not provide a Gemini API key.
+
+```bash
+python scripts/run_hallucination_gemini_free.py --dry-run
+# In Google AI Studio, create a free-tier key and configure GEMINI_API_KEY privately.
+python scripts/run_hallucination_gemini_free.py --acknowledge-free-tier
+```
+
+For GitHub Actions, put `GEMINI_API_KEY` in repository secrets and execute in a manually triggered workflow or another trusted runner. **Never add API credentials to files or action logs.** The runner stores raw responses, exact requests, per-arm grounding metadata and blank reviewer forms. If Google Search was enabled but not actually used, the run records this; **do not count such a response as a grounded search result**. The 12-question set is small and purposive, and no model outcomes are published until responses are independently checked by a person.

@@ -48,6 +48,8 @@ jobs:
           python tests/test_hallucination_guide.py
           python tests/test_hallucination_model_eval.py
           python scripts/run_hallucination_model_eval.py --dry-run > /dev/null
+          python -m py_compile scripts/run_hallucination_gemini_free.py
+          python scripts/run_hallucination_gemini_free.py --dry-run > /dev/null
       - name: Single generator entrypoint regression
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
