@@ -45,3 +45,9 @@ The A response presented a quotation about incorrect outputs and sounding confid
 **How to replicate:** Open [the frozen questions](questions.json), use the [manual capture protocol](chatgpt-plus-manual-protocol.md), save real conversation links/screenshots plus complete answers, explicitly inspect search activity, then independently review exact claims against linked primary sources. The original 12-pair API preregistration and its `PREREGISTERED_NOT_RUN` state remain unchanged; its runner has not been executed.
 
 Editorial observations can be used in the article with these caveats. They must **not** be promoted as a controlled experiment or marketed as a broad reliability statistic.
+
+## Text archive and collection metadata
+
+The **12 separately archived text records** are in [ui-pilot-2026-10-26/responses/](ui-pilot-2026-10-26/responses/); their machine-readable provenance is in [metadata.json](ui-pilot-2026-10-26/metadata.json). All records were reconstructed from the exact text the participant pasted into the SXF research discussion. E01–E03 retain pasted favicon-link markup; E04–E06 omit decorative favicon/image preview lines and explicitly mark omissions, while preserving the substantive answer content. **These are not primary ChatGPT export files or independently verified share links**. UTC times of each original answer were not provided and are recorded as `null`. The compilation date is not to be mistaken for a response timestamp. The participant reported High thinking effort. The A arm is *Search not selected by the participant*, not verified search absence. The B arm is *Search selected*, without independent execution logs.
+
+The article now includes a side-by-side Pluto distance comparison with the official NASA unit/reference-point correction. The original registered 12-pair API study was still never run.

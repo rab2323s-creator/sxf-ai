@@ -1,0 +1,21 @@
+Yes. OpenAI explicitly states that accuracy-only grading can encourage AI models to guess rather than admit uncertainty.
+
+In its September 5, 2025, research summary, “Why language models hallucinate,” OpenAI states:
+
+> “When models are graded only on accuracy, the percentage of questions they get exactly right, they are encouraged to guess rather than say ‘I don’t know.’”
+
+OpenAI explains that:
+
+- A correct guess earns points.
+- An incorrect guess earns zero points.
+- Saying “I don’t know” also earns zero points.
+
+Consequently, guessing can produce higher evaluation scores than acknowledging uncertainty.
+
+OpenAI recommends penalizing confident errors more than appropriate expressions of uncertainty, thereby discouraging hallucinations.
+
+Official source: [OpenAI — Why language models hallucinate (September 5, 2025)](https://openai.com/index/why-language-models-hallucinate/?utm_source=chatgpt.com)
+
+Conclusion: OpenAI confirms that accuracy-only evaluation can reward guessing over honesty about uncertainty, contributing to confident but incorrect AI answers.
+
+[Editorial archival note: Pasted answer included OpenAI favicon preview, omitted here.]
