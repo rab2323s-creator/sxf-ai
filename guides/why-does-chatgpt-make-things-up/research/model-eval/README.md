@@ -79,3 +79,7 @@ For GitHub Actions, put `GEMINI_API_KEY` in repository secrets and execute in a 
 ## Observational six-pair ChatGPT UI pilot — compiled 2026-10-26
 
 [Read the case-by-case source review](chatgpt-ui-pilot-six-pairs-2026-10-26.md). A participant pasted 12 answers to the first 6 of the fixed questions: correct central answers were observed, with one volunteered Pluto-distance error and one quotation-fidelity issue in answers without manually selected Search. This is a **manual UI observation, not** execution of the preregistered 12-pair API plan. There are **no verifiable no-search execution traces or preserved original UI links**. Its outcomes must not be generalized to a model hallucination rate or causal effect of Search.
+
+## Complete ChatGPT UI field observation: 12 paired questions, 24 pasted answers
+
+As of 2026-10-26, both manual UI rounds have been compiled. Read [the two-round summary](chatgpt-ui-two-rounds-summary-2026-10-26.md), [E01–E06 records](ui-pilot-2026-10-26/responses/) and [E07–E12 records](ui-pilot-round-2-2026-10-26/responses/). All twelve *central* answers were correct in both participant-reported arms, but the first round contains one clear volunteered Pluto-distance error and one quotation-fidelity issue. In E11 and E12 the replies avoided supplying unverifiable answers. **The preregistered API benchmark has never run**; no controlled search/no-search comparison, model version pinning or general hallucination rate follows from these manual captures.

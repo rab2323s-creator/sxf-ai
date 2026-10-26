@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "study": "SXF ChatGPT second six-pair UI pilot",
-  "status": "partial_in_progress",
+  "status": "completed_six_pairs_manually_reviewed_not_controlled_benchmark",
   "compiled_on": "2026-10-26",
   "question_set": "guides/why-does-chatgpt-make-things-up/research/model-eval/questions.json",
   "participants": "single user sharing ChatGPT text in conversation",
@@ -18,7 +18,8 @@
     "E08",
     "E09",
     "E10",
-    "E11"
+    "E11",
+    "E12"
   ],
   "records": [
     {
@@ -120,6 +121,26 @@
       "search_manually_selected": true,
       "search_automatically_used": "not independently logged",
       "origin": "user-pasted text; favicon card preserved as pasted"
+    },
+    {
+      "case_id": "E12",
+      "arm": "no_search_selected",
+      "file": "responses/E12__no_search_selected.txt",
+      "original_response_utc": null,
+      "model_user_reported": "ChatGPT High (per prior participant report; not independently verifiable)",
+      "search_manually_selected": false,
+      "search_automatically_used": "unknown",
+      "origin": "user-pasted text, including preview markup as pasted; not platform export"
+    },
+    {
+      "case_id": "E12",
+      "arm": "search_selected",
+      "file": "responses/E12__search_selected.txt",
+      "original_response_utc": null,
+      "model_user_reported": "ChatGPT High (per prior participant report; not independently verifiable)",
+      "search_manually_selected": true,
+      "search_automatically_used": "not independently logged",
+      "origin": "user-pasted text, including preview markup as pasted; not platform export"
     }
   ],
   "limitations": [
@@ -128,5 +149,8 @@
     "Neither underlying model build nor exact response creation timestamps independently verified",
     "No broad hallucination rate or causal search effect can be inferred",
     "Do not conflate partial second pilot with the 12-case preregistered API study"
-  ]
+  ],
+  "completed_on": "2026-10-26",
+  "result_scope": "Six questions E07–E12, twelve participant-pasted answers; all give the correct central answer, two E11/E12 pairs abstain appropriately, no factual errors identified in the available text. Not a model accuracy rate.",
+  "record_count": 12
 }
