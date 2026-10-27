@@ -7732,6 +7732,17 @@ def guides_index_html(items, current_items):
             "read_time": "11 min",
         },
         {
+            "href": "/guides/why-does-ai-use-water/",
+            "category": "AI Literacy · Environment · Evidence",
+            "categories": ["research", "models", "tools"],
+            "kicker": "AI WATER FOOTPRINT · ORIGINAL SXF LAB",
+            "title": "Why Does AI Use Water? ChatGPT Water & Electricity Explained",
+            "description": "Why AI uses water, what ChatGPT and Gemini figures actually mean, and an original SXF Water Footprint Lab and claim decoder.",
+            "meta": "AI water consumption · ChatGPT electricity · Data center cooling · Sustainability",
+            "updated": "Oct 27, 2026",
+            "read_time": "18 min",
+        },
+        {
             "href": "/guides/why-does-chatgpt-make-things-up/",
             "category": "AI Literacy · ChatGPT · Trust",
             "categories": ["research","security","models"],
