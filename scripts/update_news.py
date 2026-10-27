@@ -7754,6 +7754,17 @@ def guides_index_html(items, current_items):
             "read_time": "16 min",
         },
         {
+            "href": "/guides/flux-3-image-klein/",
+            "category": "Image Models · Local AI · Licensing",
+            "categories": ["models", "open-source", "research", "tools"],
+            "kicker": "FLUX 3 KLEIN · LOCAL IMAGE GENERATION",
+            "title": "FLUX 3 Image Klein: 8GB VRAM, ComfyUI Setup, License & Cost",
+            "description": "A hardware-aware guide to FLUX 3 Klein: 8GB INT8 ComfyUI, model variants, installation choices, source-backed costs and commercial-use licensing.",
+            "meta": "Black Forest Labs · FLUX 3 · INT8 · VRAM · ComfyUI",
+            "updated": "Oct 27, 2026",
+            "read_time": "18 min",
+        },
+        {
             "href": "/guides/how-to-choose-ai-model/",
             "category": "Models · Evaluation · Decisions",
             "categories": ["models", "research", "tools", "coding"],

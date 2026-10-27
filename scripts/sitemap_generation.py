@@ -152,6 +152,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        sitemap_image_entry(f"{BASE_URL}/guides/flux-3-image-klein/", "2026-10-27", f"{BASE_URL}/guides/flux-3-image-klein/images/flux3-klein-decision-card.webp"),
         sitemap_image_entry(f"{BASE_URL}/guides/ai-agent-use-cases/", "2026-10-22", f"{BASE_URL}/guides/ai-agent-use-cases/images/agent-decision-framework.svg", f"{BASE_URL}/guides/ai-agent-use-cases/images/sxf-workflow-fault-injection.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/ai-model-licensing/", "2026-10-21", f"{BASE_URL}/guides/ai-model-licensing/images/ai-model-licensing-evidence-architecture.svg", f"{BASE_URL}/guides/ai-model-licensing/images/sxf-license-evidence-audit.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/llm-gateway/", "2026-10-21", f"{BASE_URL}/guides/llm-gateway/images/llm-gateway-production-architecture.svg", f"{BASE_URL}/guides/llm-gateway/images/sxf-llm-gateway-http-lab.svg"),
