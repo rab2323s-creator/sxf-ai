@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "11da84e06092015e1d0ac4e1309ab0248760d81406825bad47b03612b8332b5f",
+  "snapshot_hash": "d79071c057bb1f9d8a8ee4afd8bd448acc1ff32945a9a066fc71955b8ccf517e",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -1213,76 +1213,6 @@
     },
     {
       "rank": 8,
-      "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
-      "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
-      "title": "Search and filter for budgets now available",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-13T12:06:09Z",
-      "priority_score": 126,
-      "evidence_hash": "19c39ab796f1f057d5a6a703a062a94ff656b442955a9bd57ab014ab3155fb56",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Search and filter for budgets now available",
-          "url": "https://github.blog/changelog/2026-10-13-search-and-filter-for-budgets-now-available",
-          "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
-          "source": "GitHub",
-          "published": "2026-10-13T12:06:09Z",
-          "category": "Tools",
-          "tags": [],
-          "summary": "The “Budgets and alerts” page in your GitHub billing settings now shows all of your budgets in one list that you can search and filter. Whether you manage budgets for…",
-          "signal_score": 46,
-          "seo_quality_score": 60,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-10-13-search-and-filter-for-budgets-now-available"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
       "signal_slug": "github-copilot-assisted-permissions-generally-available-e3d7ad0",
       "signal_url": "https://sxf.si/signals/github-copilot-assisted-permissions-generally-available-e3d7ad0/",
       "title": "GitHub Copilot assisted permissions generally available",
@@ -1444,7 +1374,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "global-default-for-copilot-features-generally-available-658f804",
       "signal_url": "https://sxf.si/signals/global-default-for-copilot-features-generally-available-658f804/",
       "title": "Global default for Copilot features generally available",
@@ -1495,6 +1425,214 @@
           "what_changed",
           "why_it_matters",
           "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8",
+      "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
+      "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
+      "source": "OpenAI",
+      "category": "Tools",
+      "published": "2026-10-26T22:00:00Z",
+      "priority_score": 123,
+      "evidence_hash": "2169bf952e143b71c64de6dd7688fa5a82e5204e46848e2a0b3373f7065a2673",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        "signal": {
+          "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
+          "url": "https://openai.com/index/greptile-code-review-codex-astra",
+          "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
+          "source": "OpenAI",
+          "published": "2026-10-26T22:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "Coding AI",
+            "OpenAI"
+          ],
+          "summary": "How Greptile uses GPT-6 Astra to test user workflows, Daybreak to strengthen security, and Codex to reduce rework.",
+          "signal_score": 42,
+          "seo_quality_score": 61,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "high-value-topic"
+          ]
+        },
+        "models": [
+          {
+            "model_id": "gpt-6-astra",
+            "provider": "OpenAI",
+            "family": "GPT-6",
+            "model": "GPT-6 Astra",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-04-30",
+            "reasoning": {
+              "type": "reasoning effort",
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "medium"
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
+            "pricing_standard": {
+              "start": "2026-09-03",
+              "end": null,
+              "input": 10,
+              "cached_input": 1,
+              "cache_write": 12.5,
+              "output": 50
+            },
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-09-27",
+            "official_sources": [
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "history": [
+              {
+                "sequence": 9,
+                "type": "baseline",
+                "model_id": "gpt-6-astra",
+                "verified_at": "2026-09-27",
+                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
+                "snapshot": {
+                  "provider": "OpenAI",
+                  "family": "GPT-6",
+                  "model": "GPT-6 Astra",
+                  "context_window": 1050000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-04-30",
+                  "reasoning": {
+                    "type": "reasoning effort",
+                    "levels": [
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max"
+                    ],
+                    "default": "medium"
+                  },
+                  "modalities": {
+                    "input": [
+                      "text",
+                      "image"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-09-03",
+                        "end": null,
+                        "input": 10,
+                        "cached_input": 1,
+                        "cache_write": 12.5,
+                        "output": 50
+                      }
+                    ],
+                    "long_context": {
+                      "threshold_input_tokens": 272000,
+                      "condition": "total input tokens greater than 272000",
+                      "applies_to_entire_request": true,
+                      "multipliers": {
+                        "input": 2,
+                        "cached_input": 2,
+                        "cache_write": 2,
+                        "output": 1.5
+                      }
+                    }
+                  }
+                },
+                "evidence": {
+                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "pricing": "https://developers.openai.com/api/docs/pricing"
+                },
+                "event_id": "evt_cd339bfc38a22ab47b70",
+                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
+              }
+            ]
+          }
+        ],
+        "source_urls": [
+          "https://developers.openai.com/api/docs/models/gpt-6-astra",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://openai.com/index/greptile-code-review-codex-astra"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "pricing_or_capability_impact",
+          "before_vs_after",
           "who_should_care",
           "what_to_verify",
           "faq",
