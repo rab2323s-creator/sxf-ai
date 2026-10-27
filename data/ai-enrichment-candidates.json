@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "c2ef64510b92d2f31d57822b89c5ad2add936bd294503b23843b2297e6d64c04",
+  "snapshot_hash": "8ff07efee6d5a43438f9124993c4ad04962fd6f3faa7f1ca5955fd285ee01cb3",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -88,6 +88,224 @@
     },
     {
       "rank": 2,
+      "signal_slug": "gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf",
+      "signal_url": "https://sxf.si/signals/gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf/",
+      "title": "GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases",
+      "source": "OpenAI",
+      "category": "Models",
+      "published": "2026-10-26T13:45:00Z",
+      "priority_score": 159,
+      "evidence_hash": "e89fc6511a676ec20ab38c39bb994fde9e85ee6bd24b261b6ce577f9ea638c71",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        "signal": {
+          "title": "GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases",
+          "url": "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+          "signal_url": "https://sxf.si/signals/gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf/",
+          "source": "OpenAI",
+          "published": "2026-10-26T13:45:00Z",
+          "category": "Models",
+          "tags": [
+            "Security",
+            "OpenAI"
+          ],
+          "summary": "CodeRabbit uses GPT-6.1 Sol to investigate security risks across complex codebases. Its security agent helps developers review findings and proposed fixes.",
+          "signal_score": 46,
+          "seo_quality_score": 58,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "durable-intelligence-layer",
+            "high-value-topic",
+            "case-study-penalty"
+          ]
+        },
+        "models": [
+          {
+            "model_id": "gpt-6.1-sol",
+            "provider": "OpenAI",
+            "family": "GPT-6",
+            "model": "GPT-6.1 Sol",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-04-30",
+            "reasoning": {
+              "type": "reasoning effort",
+              "levels": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ],
+              "default": "medium"
+            },
+            "modalities": {
+              "input": [
+                "text",
+                "image"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "Near-Astra GPT-6 tier for complex coding, computer use and professional work at lower cost.",
+            "pricing_standard": {
+              "start": "2026-09-29",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.1,
+              "cache_write": 2.5,
+              "output": 10
+            },
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-10-07",
+            "official_sources": [
+              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+              "https://developers.openai.com/api/docs/pricing",
+              "https://developers.openai.com/api/docs/changelog",
+              "https://openai.com/index/introducing-gpt-6-1-sol/",
+              "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
+              "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
+            ],
+            "history": [
+              {
+                "sequence": 52,
+                "type": "model_added",
+                "model_id": "gpt-6.1-sol",
+                "verified_at": "2026-10-07",
+                "previous_event_hash": "158b79ef9613bc7b207407ed429d2c8d8615ed7e1868dbf04bd6c843d3f42cec",
+                "snapshot": {
+                  "provider": "OpenAI",
+                  "family": "GPT-6",
+                  "model": "GPT-6.1 Sol",
+                  "context_window": 1050000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-04-30",
+                  "reasoning": {
+                    "type": "reasoning effort",
+                    "levels": [
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max"
+                    ],
+                    "default": "medium"
+                  },
+                  "modalities": {
+                    "input": [
+                      "text",
+                      "image"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-09-29",
+                        "end": null,
+                        "input": 2,
+                        "cached_input": 0.1,
+                        "cache_write": 2.5,
+                        "output": 10
+                      }
+                    ],
+                    "long_context": {
+                      "threshold_input_tokens": 272000,
+                      "condition": "total input tokens greater than 272000",
+                      "applies_to_entire_request": true,
+                      "multipliers": {
+                        "input": 2,
+                        "cached_input": 2,
+                        "cache_write": 2,
+                        "output": 1.5
+                      }
+                    }
+                  }
+                },
+                "evidence": {
+                  "provider": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "family": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "model": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+                  "pricing": "https://developers.openai.com/api/docs/pricing"
+                },
+                "event_id": "evt_ff5b5dc7ca29d0c60578",
+                "event_hash": "ff5b5dc7ca29d0c6057849395de1dc3505d84fa01aa1c42d1d88b4af4f4d45a7"
+              }
+            ]
+          }
+        ],
+        "source_urls": [
+          "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
+          "https://developers.openai.com/api/docs/changelog",
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+          "https://developers.openai.com/api/docs/pricing",
+          "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+          "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+          "https://openai.com/index/introducing-gpt-6-1-sol/"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "pricing_or_capability_impact",
+          "before_vs_after",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 3,
       "signal_slug": "open-source-license-compliance-generally-available-f70342f",
       "signal_url": "https://sxf.si/signals/open-source-license-compliance-generally-available-f70342f/",
       "title": "Open source license compliance generally available",
@@ -161,7 +379,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 3,
+      "rank": 4,
       "signal_slug": "gpt-6-1-terra-in-github-copilot-344482f",
       "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
       "title": "GPT-6.1 Terra in GitHub Copilot",
@@ -376,7 +594,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "signal_slug": "gemini-4-argon-in-github-copilot-619c2f7",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-in-github-copilot-619c2f7/",
       "title": "Gemini 4 Argon in GitHub Copilot",
@@ -449,7 +667,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
       "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
@@ -519,7 +737,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 7,
       "signal_slug": "how-third-moment-research-runs-10-000-agents-for-36-hours-e181547",
       "signal_url": "https://sxf.si/signals/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/",
       "title": "How Third Moment Research runs 10,000 agents for 36+ hours",
@@ -994,7 +1212,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 8,
       "signal_slug": "search-and-filter-for-budgets-now-available-243a01f",
       "signal_url": "https://sxf.si/signals/search-and-filter-for-budgets-now-available-243a01f/",
       "title": "Search and filter for budgets now available",
@@ -1064,7 +1282,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 9,
       "signal_slug": "global-default-for-copilot-features-generally-available-658f804",
       "signal_url": "https://sxf.si/signals/global-default-for-copilot-features-generally-available-658f804/",
       "title": "Global default for Copilot features generally available",
@@ -1137,15 +1355,15 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
-      "signal_slug": "bringing-gpt-rosalind-to-academic-research-labs-a72d1e4",
-      "signal_url": "https://sxf.si/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
-      "title": "Bringing GPT-Rosalind to academic research labs",
+      "rank": 10,
+      "signal_slug": "greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8",
+      "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
+      "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
       "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-15T19:00:00Z",
-      "priority_score": 115,
-      "evidence_hash": "058ae5d251dc5a2ad66e1ed180aaec3a3035ae11c04f649e9230b7e501d3e74d",
+      "category": "Tools",
+      "published": "2026-10-26T22:00:00Z",
+      "priority_score": 123,
+      "evidence_hash": "2169bf952e143b71c64de6dd7688fa5a82e5204e46848e2a0b3373f7065a2673",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
@@ -1156,89 +1374,108 @@
           ]
         },
         "signal": {
-          "title": "Bringing GPT-Rosalind to academic research labs",
-          "url": "https://openai.com/index/introducing-the-rosalind-academic-plan",
-          "signal_url": "https://sxf.si/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
+          "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
+          "url": "https://openai.com/index/greptile-code-review-codex-astra",
+          "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
           "source": "OpenAI",
-          "published": "2026-10-15T19:00:00Z",
-          "category": "Research",
+          "published": "2026-10-26T22:00:00Z",
+          "category": "Tools",
           "tags": [
-            "Research",
+            "Coding AI",
             "OpenAI"
           ],
-          "summary": "OpenAI's Rosalind Academic Plan offers eligible U.S. university research labs up to 30 Business Standard seats at no cost for up to 12 months. GPT-Rosalind, a specialized life-sciences model, requires separate trusted-access approval; this plan does not include API access.",
-          "signal_score": 43,
-          "seo_quality_score": 57,
+          "summary": "How Greptile uses GPT-6 Astra to test user workflows, Daybreak to strengthen security, and Codex to reduce rework.",
+          "signal_score": 42,
+          "seo_quality_score": 61,
           "seo_quality_factors": [
             "substantive-source-summary",
-            "durable-intelligence-layer",
+            "named-model",
             "high-value-topic"
           ]
         },
         "models": [
           {
-            "model_id": "gpt-rosalind-research",
+            "model_id": "gpt-6-astra",
             "provider": "OpenAI",
-            "family": "GPT-Rosalind",
-            "model": "GPT-Rosalind Research",
-            "context_window": null,
-            "max_output": null,
-            "knowledge_cutoff": null,
+            "family": "GPT-6",
+            "model": "GPT-6 Astra",
+            "context_window": 1050000,
+            "max_output": 128000,
+            "knowledge_cutoff": "2026-04-30",
             "reasoning": {
-              "type": "specialized reasoning",
+              "type": "reasoning effort",
               "levels": [
-                "supported"
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
               ],
-              "default": null
+              "default": "medium"
             },
             "modalities": {
               "input": [
-                "text"
+                "text",
+                "image"
               ],
               "output": [
                 "text"
               ]
             },
-            "positioning": "OpenAI specialized reasoning model for approved life-sciences research workflows and scientific tool use.",
+            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
             "pricing_standard": {
-              "start": "2026-10-05",
+              "start": "2026-09-03",
               "end": null,
-              "input": 5,
-              "cached_input": 0.5,
-              "output": 25
+              "input": 10,
+              "cached_input": 1,
+              "cache_write": 12.5,
+              "output": 50
             },
-            "pricing_long_context": null,
-            "verified_at": "2026-10-07",
+            "pricing_long_context": {
+              "threshold_input_tokens": 272000,
+              "condition": "total input tokens greater than 272000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "cache_write": 2,
+                "output": 1.5
+              }
+            },
+            "verified_at": "2026-09-27",
             "official_sources": [
-              "https://openai.com/gpt-rosalind/",
-              "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-              "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+              "https://developers.openai.com/api/docs/models/gpt-6-astra",
               "https://developers.openai.com/api/docs/pricing"
             ],
             "history": [
               {
-                "sequence": 66,
-                "type": "model_added",
-                "model_id": "gpt-rosalind-research",
-                "verified_at": "2026-10-07",
-                "previous_event_hash": "467461da2aadc5385c11c91bfe282c3d9be09a92529ccbd49d0fac92f529ccbf",
+                "sequence": 9,
+                "type": "baseline",
+                "model_id": "gpt-6-astra",
+                "verified_at": "2026-09-27",
+                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
                 "snapshot": {
                   "provider": "OpenAI",
-                  "family": "GPT-Rosalind",
-                  "model": "GPT-Rosalind Research",
-                  "context_window": null,
-                  "max_output": null,
-                  "knowledge_cutoff": null,
+                  "family": "GPT-6",
+                  "model": "GPT-6 Astra",
+                  "context_window": 1050000,
+                  "max_output": 128000,
+                  "knowledge_cutoff": "2026-04-30",
                   "reasoning": {
-                    "type": "specialized reasoning",
+                    "type": "reasoning effort",
                     "levels": [
-                      "supported"
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max"
                     ],
-                    "default": null
+                    "default": "medium"
                   },
                   "modalities": {
                     "input": [
-                      "text"
+                      "text",
+                      "image"
                     ],
                     "output": [
                       "text"
@@ -1247,38 +1484,48 @@
                   "pricing": {
                     "standard": [
                       {
-                        "start": "2026-10-05",
+                        "start": "2026-09-03",
                         "end": null,
-                        "input": 5,
-                        "cached_input": 0.5,
-                        "output": 25
+                        "input": 10,
+                        "cached_input": 1,
+                        "cache_write": 12.5,
+                        "output": 50
                       }
-                    ]
+                    ],
+                    "long_context": {
+                      "threshold_input_tokens": 272000,
+                      "condition": "total input tokens greater than 272000",
+                      "applies_to_entire_request": true,
+                      "multipliers": {
+                        "input": 2,
+                        "cached_input": 2,
+                        "cache_write": 2,
+                        "output": 1.5
+                      }
+                    }
                   }
                 },
                 "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/pricing",
-                  "family": "https://developers.openai.com/api/docs/pricing",
-                  "model": "https://developers.openai.com/api/docs/pricing",
-                  "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-                  "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
                   "pricing": "https://developers.openai.com/api/docs/pricing"
                 },
-                "event_id": "evt_cc9f559b418146fb12e3",
-                "event_hash": "cc9f559b418146fb12e372e285e4711298f9d9716beb9d4ce37f8d127cebbc24"
+                "event_id": "evt_cd339bfc38a22ab47b70",
+                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
               }
             ]
           }
         ],
         "source_urls": [
+          "https://developers.openai.com/api/docs/models/gpt-6-astra",
           "https://developers.openai.com/api/docs/pricing",
-          "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-          "https://openai.com/gpt-rosalind/",
-          "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-          "https://openai.com/index/introducing-the-rosalind-academic-plan"
+          "https://openai.com/index/greptile-code-review-codex-astra"
         ]
       },
       "requested_output": {
@@ -1294,80 +1541,6 @@
           "key_facts",
           "pricing_or_capability_impact",
           "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "openai-and-poland-s-nask-partner-to-advance-ai-safety-and-security-15c1f8e",
-      "signal_url": "https://sxf.si/signals/openai-and-poland-s-nask-partner-to-advance-ai-safety-and-security-15c1f8e/",
-      "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-23T00:00:00Z",
-      "priority_score": 113,
-      "evidence_hash": "e5e01301c68076716af02e3648e4f4af916f5b84a8fdd8506cf4d3293688e5e4",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "OpenAI and Poland’s NASK partner to advance AI safety and security",
-          "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
-          "signal_url": "https://sxf.si/signals/openai-and-poland-s-nask-partner-to-advance-ai-safety-and-security-15c1f8e/",
-          "source": "OpenAI",
-          "published": "2026-10-23T00:00:00Z",
-          "category": "Research",
-          "tags": [
-            "Security",
-            "OpenAI"
-          ],
-          "summary": "OpenAI and Poland’s NASK are partnering on AI safety, security, and technical research to strengthen safeguards and support a more resilient digital ecosystem.",
-          "signal_score": 41,
-          "seo_quality_score": 57,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/openai-nask-ai-safety-security-partnership"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
           "who_should_care",
           "what_to_verify",
           "faq",
