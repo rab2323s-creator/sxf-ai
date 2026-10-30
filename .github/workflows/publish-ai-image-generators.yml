@@ -44,7 +44,8 @@ jobs:
           article.write_text(html, encoding="utf-8")
           archive=json.loads(Path("data/archive.json").read_text(encoding="utf-8"))["items"]
           current=json.loads(Path("data/news.json").read_text(encoding="utf-8"))["items"]
-          directory=update_news.guides_index_html(archive,current)
+          prepared=update_news.prepare_items(current)
+          directory=update_news.guides_index_html(archive,prepared)
           assert '/guides/best-ai-image-generators/' in directory
           Path("guides/index.html").write_text(directory,encoding="utf-8")
           PY
