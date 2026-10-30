@@ -71,6 +71,8 @@ jobs:
         run: python tests/test_signal_page_rendering.py
       - name: Signal article HTML and SEO regression tests
         run: python tests/test_signal_article_rendering.py
+      - name: GitHub license-compliance page SEO and source integrity
+        run: python tests/test_github_license_compliance_signal.py
       - name: Verified editorial Signal regression
         run: python tests/test_reviewed_signal_editorial.py
       - name: Model provider directory HTML and SEO regression tests
