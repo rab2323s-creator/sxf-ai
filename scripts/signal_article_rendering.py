@@ -13,6 +13,7 @@ from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
 from third_moment_signal_page import enrich_third_moment_signal
 import github_license_compliance_signal_page as license_reference
+import gpt61_sol_copilot_signal_page as sol_copilot
 from typing import Callable
 
 
@@ -53,6 +54,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     review = get_review(item)
     is_async_merge_deep_dive = canonical.endswith("/github-async-merge-api-generally-available-2bced9c/")
     is_license_deep_dive = canonical.endswith(license_reference.SLUG)
+    is_sol_copilot_deep_dive = canonical.endswith(sol_copilot.SLUG)
     page_title = item["title"] + " | SXF / AI"
     page_h1 = item["title"]
     description = compact_description(item)
@@ -72,6 +74,11 @@ def signal_page_html(item, items, context: SignalArticleContext):
         page_h1 = license_reference.H1
         description = license_reference.DESCRIPTION
         modified = max(modified, license_reference.EDITED_AT)
+    if is_sol_copilot_deep_dive:
+        page_title = sol_copilot.TITLE
+        page_h1 = sol_copilot.H1
+        description = sol_copilot.DESCRIPTION
+        modified = max(modified, sol_copilot.EDITED_AT)
     indexable = bool(item.get("seo_eligible", seo_signal_eligible(item)))
     robots = "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" if indexable else "noindex,follow"
     schema = {
@@ -90,7 +97,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                 "inLanguage": "en",
             },
             {
-                "@type": ["Article", "TechArticle"] if (is_async_merge_deep_dive or is_license_deep_dive) else "Article",
+                "@type": ["Article", "TechArticle"] if (is_async_merge_deep_dive or is_license_deep_dive or is_sol_copilot_deep_dive) else "Article",
                 "@id": canonical + "#article",
                 "headline": page_h1,
                 "description": description,
@@ -107,7 +114,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                 "citation": [
                     item["url"],
                     "https://docs.github.com/en/rest/pulls/pulls?apiVersion=2026-03-10",
-                ] if is_async_merge_deep_dive else license_reference.SOURCES if is_license_deep_dive else review["sources"] if review else item["url"],
+                ] if is_async_merge_deep_dive else license_reference.SOURCES if is_license_deep_dive else sol_copilot.SOURCES if is_sol_copilot_deep_dive else review["sources"] if review else item["url"],
                 "keywords": [
                     "GitHub async merge API",
                     "GitHub merge API",
@@ -115,7 +122,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                     "GitHub merge queue",
                     "merge-async endpoint",
                     "GitHub REST API",
-                ] if is_async_merge_deep_dive else license_reference.KEYWORDS if is_license_deep_dive else None,
+                ] if is_async_merge_deep_dive else license_reference.KEYWORDS if is_license_deep_dive else sol_copilot.KEYWORDS if is_sol_copilot_deep_dive else None,
                 "inLanguage": "en",
             },
             {
@@ -164,6 +171,8 @@ def signal_page_html(item, items, context: SignalArticleContext):
 
     if is_license_deep_dive:
         schema["@graph"].append(license_reference.faq_schema(canonical))
+    if is_sol_copilot_deep_dive:
+        schema["@graph"].append(sol_copilot.faq_schema(canonical))
     topics = item_topics(item)
     models = extract_models(item["title"] + " " + (item.get("summary") or ""))
     topic_links = "".join(
@@ -282,13 +291,15 @@ def signal_page_html(item, items, context: SignalArticleContext):
             + "".join(nav_links)
             + "</nav>"
         )
-    editorial = license_reference.EDITORIAL if is_license_deep_dive else review["editorial"] if review else item.get("editorial") or editorial_units(item)
+    editorial = sol_copilot.EDITORIAL if is_sol_copilot_deep_dive else license_reference.EDITORIAL if is_license_deep_dive else review["editorial"] if review else item.get("editorial") or editorial_units(item)
     evidence_html = render_review_evidence(review)
     if is_license_deep_dive:
         deep_dive_html = license_reference.BODY_HTML
+    if is_sol_copilot_deep_dive:
+        deep_dive_html = sol_copilot.BODY
     source_name = review["source_name"] if review else item["source"]
     source_url = review["primary_source"] if review else item["url"]
-    summary_label = "SXF technical brief" if is_license_deep_dive else "SXF verified brief" if review else "Source summary" if item.get("summary") else "SXF signal note"
+    summary_label = "SXF technical brief" if (is_license_deep_dive or is_sol_copilot_deep_dive) else "SXF verified brief" if review else "Source summary" if item.get("summary") else "SXF signal note"
     page = f'''<!doctype html><html lang="en">
     {page_head(page_title, description, canonical, schema, "article", robots)}
     <body class="intel-page signal-page">
