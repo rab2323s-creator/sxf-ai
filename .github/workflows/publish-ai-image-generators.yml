@@ -1,0 +1,88 @@
+name: Publish AI image generator comparison guide
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-ai-image-generators.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-image-generators-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check image guide and directory generator
+        run: python tests/test_best_ai_image_generators_guide.py
+      - name: Build published guide and directory from source
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import update_news
+          from best_ai_image_generators_guide import guide_html, CANONICAL
+          helpers={"page_head":update_news.page_head,"page_header":update_news.page_header,"page_footer":update_news.page_footer}
+          html=guide_html(helpers)
+          assert 'data-image-buyers-guide' in html and 'href="'+CANONICAL+'"' in html
+          article=Path("guides/best-ai-image-generators/index.html")
+          article.parent.mkdir(parents=True, exist_ok=True)
+          article.write_text(html, encoding="utf-8")
+          archive=json.loads(Path("data/archive.json").read_text(encoding="utf-8"))["items"]
+          current=json.loads(Path("data/news.json").read_text(encoding="utf-8"))["items"]
+          directory=update_news.guides_index_html(archive,current)
+          assert '/guides/best-ai-image-generators/' in directory
+          Path("guides/index.html").write_text(directory,encoding="utf-8")
+          PY
+      - name: Add article to sitemap and sync content fingerprint
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          target="https://sxf.si/guides/best-ai-image-generators/"
+          file=Path("sitemap.xml")
+          s=file.read_text(encoding="utf-8")
+          if target not in s:
+            entry="  <url><loc>"+target+"</loc><lastmod>2026-10-31</lastmod></url>\n"
+            s=s.replace("</urlset>", entry+"</urlset>")
+            file.write_text(s, encoding="utf-8")
+          PY
+          python scripts/sitemap_lastmod.py --refresh
+      - name: Validate output source and indexability
+        run: |
+          python tests/test_best_ai_image_generators_guide.py
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          text=Path("guides/best-ai-image-generators/index.html").read_text(encoding="utf-8")
+          assert text.count('rel="canonical" href="https://sxf.si/guides/best-ai-image-generators/"') == 1
+          assert '<meta name="robots" content="index,follow' in text
+          assert "FAQPage" in text
+          assert 'href="/guides/best-ai-image-generators/"' in Path("guides/index.html").read_text(encoding="utf-8")
+          assert "https://sxf.si/guides/best-ai-image-generators/" in Path("sitemap.xml").read_text(encoding="utf-8")
+          PY
+      - name: Commit only guide, guide directory and sitemap data
+        run: |
+          git add guides/best-ai-image-generators/index.html guides/index.html sitemap.xml data/sitemap-lastmod-state.json
+          if git diff --cached --quiet; then
+            echo "Guide and sitemap already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "build(guides): publish AI image comparison, directory card and sitemap"
+          git push origin HEAD:main

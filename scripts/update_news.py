@@ -7724,6 +7724,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/best-ai-image-generators/",
+            "category": "Image Models · Comparison · Creative Tools",
+            "categories": ["models", "tools", "research", "open-source"],
+            "kicker": "BEST AI IMAGE GENERATORS / 2026",
+            "title": "Best AI Image Generators in 2026: GPT Image vs Midjourney vs Nano Banana vs FLUX vs Ideogram",
+            "description": "Compare five image generation platforms with first-party pricing, licenses, editing, image text, API access and a repeatable five-task evaluation plan.",
+            "meta": "GPT Image · Midjourney · Nano Banana · FLUX · Ideogram",
+            "updated": "Oct 31, 2026",
+            "read_time": "25 min",
+        },
+        {
             "href": "/guides/how-to-tell-if-an-image-is-ai-generated/",
             "category": "AI Literacy · Image Verification · Trust",
             "categories": ["research","security","tools"],
@@ -10860,6 +10871,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_hub_with_explosion_link(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from best_ai_image_generators_guide import guide_html as render_image_generators_guide
+    image_guide_dir = GUIDES_DIR / "best-ai-image-generators"
+    image_guide_dir.mkdir(parents=True, exist_ok=True)
+    (image_guide_dir / "index.html").write_text(render_image_generators_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     from intelligence_explosion_guide import render_intelligence_explosion_guide
     ie_dir = GUIDES_DIR / "intelligence-explosion"
     ie_dir.mkdir(parents=True, exist_ok=True)
