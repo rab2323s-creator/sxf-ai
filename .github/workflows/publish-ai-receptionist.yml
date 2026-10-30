@@ -1,0 +1,86 @@
+name: Publish AI receptionist business guide
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-ai-receptionist.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-ai-receptionist-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate editorial source and inbound links
+        run: python tests/test_ai_receptionist_guide.py
+      - name: Build target article and native Guides directory
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import update_news
+          import ai_receptionist_guide as ref
+          helpers={"page_head":update_news.page_head,"page_header":update_news.page_header,"page_footer":update_news.page_footer}
+          html=ref.guide_html(helpers)
+          assert 'data-ai-receptionist-guide' in html and ref.CANONICAL in html
+          path=Path("guides/ai-receptionist/index.html")
+          path.parent.mkdir(parents=True,exist_ok=True)
+          path.write_text(html,encoding="utf-8")
+          archive=json.loads(Path("data/archive.json").read_text(encoding="utf-8"))["items"]
+          current=json.loads(Path("data/news.json").read_text(encoding="utf-8"))["items"]
+          prepared=update_news.prepare_items(current)
+          index=update_news.guides_index_html(archive,prepared)
+          assert 'href="/guides/ai-receptionist/"' in index
+          Path("guides/index.html").write_text(index,encoding="utf-8")
+          PY
+      - name: Add sitemap URL and refresh lastmod fingerprints
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          site="https://sxf.si/guides/ai-receptionist/"
+          path=Path("sitemap.xml")
+          xml=path.read_text(encoding="utf-8")
+          if "<loc>"+site+"</loc>" not in xml:
+            xml=xml.replace("</urlset>","  <url><loc>"+site+"</loc><lastmod>2026-10-31</lastmod></url>\n</urlset>")
+            path.write_text(xml,encoding="utf-8")
+          PY
+          python scripts/sitemap_lastmod.py --refresh
+      - name: Verify published HTML, source mapping, Guide directory and sitemap
+        run: |
+          python tests/test_ai_receptionist_guide.py
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("guides/ai-receptionist/index.html").read_text(encoding="utf-8")
+          assert html.count('rel="canonical" href="https://sxf.si/guides/ai-receptionist/"') == 1
+          assert 'content="index,follow' in html and "FAQPage" in html
+          assert 'data-receptionist-calculator' in html
+          assert 'href="/guides/ai-receptionist/"' in Path("guides/index.html").read_text(encoding="utf-8")
+          assert "<loc>https://sxf.si/guides/ai-receptionist/</loc>" in Path("sitemap.xml").read_text(encoding="utf-8")
+          PY
+      - name: Commit generated artifacts without modifying unrelated pages
+        run: |
+          git add guides/ai-receptionist/index.html guides/index.html sitemap.xml data/sitemap-lastmod-state.json
+          if git diff --cached --quiet; then
+            echo "AI receptionist guide already published."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "build(guides): publish AI receptionist guide, index card and sitemap"
+          git push origin HEAD:main
