@@ -16,7 +16,7 @@ def main():
     assert '<meta name="robots" content="index,follow' in html
     assert "Vapi" in html and "Retell AI" in html and "ElevenLabs Reception" in html and "OpenAI Realtime" in html
     assert "$0.05" in html and "$0.31" in html and "$29" in html
-    assert "no booking is promised before" in html.lower() or "no booking is promised before" in html
+    assert "only confirm after" in html.lower() or "Only say" in html or "only announce" in html.lower()
     assert "20-call acceptance matrix" in html
     assert 'data-receptionist-calculator' in html
     assert '<script src="/guides/ai-receptionist/calculator.js"' in html
