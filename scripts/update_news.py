@@ -5332,6 +5332,9 @@ def render_catalog_model_page(model_id, items):
     else:
         return None
 
+    if model_id == "gpt-realtime-2.1":
+        from gpt_realtime_21_page import enrich_gpt_realtime_21
+        page = enrich_gpt_realtime_21(page, model)
     if model_id == "gemini-embedding-001":
         page = enrich_gemini_embedding_001(page, model)
     if model_id == "mistral-large-4":
