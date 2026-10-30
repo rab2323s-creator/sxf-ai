@@ -1,0 +1,57 @@
+name: Publish GPT-6.1 Sol GitHub Copilot editorial signal
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-gpt61-sol-copilot.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-gpt61-sol-copilot-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate source-backed signal and schema
+        run: python tests/test_gpt61_sol_copilot_signal.py
+      - name: Render only the requested signal page from source
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import update_news
+          import gpt61_sol_copilot_signal_page as reference
+          archive=json.loads(Path("data/archive.json").read_text(encoding="utf-8"))["items"]
+          item=next(row for row in archive if row["signal_slug"]=="gpt-6-1-sol-in-github-copilot-9be84db")
+          html=update_news.signal_page_html(item,archive)
+          assert 'data-gpt61-copilot-guide' in html
+          assert reference.DESCRIPTION in html
+          assert '<link rel="canonical" href="https://sxf.si'+reference.SLUG+'"' in html
+          Path("signals/gpt-6-1-sol-in-github-copilot-9be84db/index.html").write_text(html,encoding="utf-8")
+          PY
+      - name: Commit only the requested permalink
+        run: |
+          if git diff --quiet -- signals/gpt-6-1-sol-in-github-copilot-9be84db/index.html; then
+            echo "Signal already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add signals/gpt-6-1-sol-in-github-copilot-9be84db/index.html
+          git commit -m "build(signals): publish GPT-6.1 Sol Copilot verified reference"
+          git push origin HEAD:main
