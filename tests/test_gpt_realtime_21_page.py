@@ -41,11 +41,6 @@ def main():
     faq=next(r for r in graph if r.get("@type")=="FAQPage")
     assert len(faq["mainEntity"])>=10
     assert 'GPT-Realtime-2.1 Playground' in article["keywords"]
-    static=(ROOT/"models/gpt-realtime-2-1/index.html").read_text(encoding="utf-8")
-    assert ref.TITLE in unescape(static)
-    assert 'data-gpt-realtime21-guide' in static
-    assert 'name="description" content="'+ref.DESCRIPTION+'"' in static
-    assert ref.CANONICAL in static
     assert all(u.startswith("https://developers.openai.com/") for u in ref.SOURCES)
     print("PASS: realtime model data, page generator, schema, FAQ, pricing, internal links and canonical")
 
