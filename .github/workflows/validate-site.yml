@@ -77,6 +77,8 @@ jobs:
         run: python tests/test_gpt61_sol_copilot_signal.py
       - name: Verified editorial Signal regression
         run: python tests/test_reviewed_signal_editorial.py
+      - name: AI receptionist guide SEO and source regression
+        run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
       - name: GPT-Realtime-2.1 model editorial and SEO regression
