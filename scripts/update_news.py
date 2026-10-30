@@ -7724,6 +7724,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-receptionist/",
+            "category": "Voice Agents · Business Automation · Phone AI",
+            "categories": ["agents", "tools", "research", "models"],
+            "kicker": "AI RECEPTIONIST · COST & BUILD GUIDE",
+            "title": "AI Receptionist in 2026: How It Works, Real Costs & Best Voice AI Platforms",
+            "description": "Compare Vapi, Retell, ElevenLabs and OpenAI Realtime; calculate real phone-agent cost and build safe scheduling and call transfers.",
+            "meta": "AI receptionist · Phone answering · Booking · Voice agents",
+            "updated": "Oct 31, 2026",
+            "read_time": "28 min",
+        },
+        {
             "href": "/guides/best-ai-image-generators/",
             "category": "Image Models · Comparison · Creative Tools",
             "categories": ["models", "tools", "research", "open-source"],
@@ -10871,6 +10882,10 @@ def build_discovery_pages(items, current_items):
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_hub_with_explosion_link(items, current_items), encoding="utf-8")
     (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
+    from ai_receptionist_guide import guide_html as render_receptionist_guide
+    receptionist_dir = GUIDES_DIR / "ai-receptionist"
+    receptionist_dir.mkdir(parents=True, exist_ok=True)
+    (receptionist_dir / "index.html").write_text(render_receptionist_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
     from best_ai_image_generators_guide import guide_html as render_image_generators_guide
     image_guide_dir = GUIDES_DIR / "best-ai-image-generators"
     image_guide_dir.mkdir(parents=True, exist_ok=True)
