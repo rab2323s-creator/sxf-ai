@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate editorial source and inbound links
+      - name: Validate editorial source, pricing and inbound links
         run: python tests/test_ai_receptionist_guide.py
       - name: Build target article and native Guides directory
         run: |
