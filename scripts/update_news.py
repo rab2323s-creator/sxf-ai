@@ -51,6 +51,7 @@ MODEL_COMPARISONS_PATH = ROOT / "data" / "model-comparisons.json"
 MODEL_EVALUATIONS_PATH = ROOT / "data" / "model-evaluations.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
+EDITORIAL_REVIEW_QUEUE_PATH = ROOT / "data" / "editorial-review-queue.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -11309,6 +11310,34 @@ def main():
         f"Editorial ingestion gate: accepted={len(incoming)}, "
         f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
     )
+
+    # Persist only undecided new candidates for human review. No review row
+    # is merged into the public archive or included in the published feed.
+    prior_queue = {}
+    if EDITORIAL_REVIEW_QUEUE_PATH.exists():
+        try:
+            payload = json.loads(EDITORIAL_REVIEW_QUEUE_PATH.read_text(encoding="utf-8"))
+            prior_queue = {row["url"]: row for row in payload.get("items", [])
+                           if isinstance(row, dict) and isinstance(row.get("url"), str)}
+        except (ValueError, OSError, TypeError):
+            prior_queue = {}
+    observed_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    for item in review_candidates:
+        previous = prior_queue.get(item["url"], {})
+        decision = assess_editorial_news(item.get("title", ""), item.get("summary", ""),
+                                        item.get("source", ""), item.get("url", ""))
+        prior_queue[item["url"]] = {
+            "url": item["url"], "title": item["title"], "source": item["source"],
+            "summary": item.get("summary", ""), "published": item.get("published"),
+            "reason": decision.reason, "status": "review",
+            "first_seen": previous.get("first_seen") or observed_at,
+            "last_seen": observed_at,
+        }
+    review_rows = sorted(prior_queue.values(), key=lambda row: (row.get("published") or "", row["url"]), reverse=True)[:200]
+    EDITORIAL_REVIEW_QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    EDITORIAL_REVIEW_QUEUE_PATH.write_text(json.dumps({
+        "version": "sxf-editorial-review-v1", "items": review_rows,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     archive = merge_archive(existing, incoming)
     if not archive:
