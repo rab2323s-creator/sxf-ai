@@ -18,7 +18,7 @@ AI_TITLE = re.compile(
     r"\b(?:ai|artificial intelligence|generative ai|genai|"
     r"agentic|agents?|llms?|large language models?|machine learning|"
     r"deep learning|pretrain(?:ing|ed)|neural|multimodal|"
-    r"foundation models?|vision.language|inference|gpt[- .]?\d|"
+    r"foundation(?:al)? models?|vision.language|inference|gpt[- .]?\d|"
     r"chatgpt|codex|claude|gemini|grok|copilot|mcp|model context protocol|"
     r"diffusers?|llama|qwen|nemotron|granite|apertus|flux[.-]?\d|"
     r"falcon asr|asr|text.to.speech|open.weights?|model weights?|"
