@@ -4,6 +4,7 @@ const search=document.getElementById('signalsSearch');
 const meta=document.getElementById('signalsResultMeta');
 const filters=[...document.querySelectorAll('.signals-filter')];
 let items=[];
+let loaded=false;
 let active='All';
 let openSourceUrls=new Set();
 
@@ -35,6 +36,8 @@ function card(x){
     '<div class="signal-row-foot"><span>'+esc(x.category||'')+'</span><b>Open signal ↗</b></div></a>';
 }
 function render(){
+  // Preserve the server-rendered list if the live feed is unavailable.
+  if(!loaded)return;
   const q=(search?.value||'').trim().toLowerCase();
   const visible=items.filter(x=>{
     if(!matchesFilter(x))return false;
@@ -65,6 +68,7 @@ Promise.all([
     .catch(()=>({items:[]}))
 ]).then(([data,openData])=>{
   items=Array.isArray(data.items)?data.items:[];
+  loaded=true;
   openSourceUrls=new Set((openData.items||[]).map(x=>x.url));
   render();
 }).catch(()=>{

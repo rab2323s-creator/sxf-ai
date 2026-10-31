@@ -88,5 +88,8 @@ def enrich_gpt_realtime_21(page: str, model: dict) -> str:
     schema = json.dumps(root, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
     page = page[:start] + schema + page[end:]
     page = page.replace("</head>", '<link rel="stylesheet" href="/models/gpt-realtime-2-1/reference.css" />\n</head>', 1)
-    page = page.replace("</main>", BODY_HTML + "\n</main>", 1)
+    related = ('<aside class="shell related-guide" aria-label="Related voice agent guide">'
+               '<a href="/guides/ai-receptionist/">AI receptionist: deployment and call cost guide</a>'
+               '</aside>')
+    page = page.replace("</main>", BODY_HTML + related + "\n</main>", 1)
     return page

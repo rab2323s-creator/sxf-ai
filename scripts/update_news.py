@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
 from news_relevance import assess_news, primary_category, partition_news_rows
+from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
@@ -50,6 +51,7 @@ MODEL_COMPARISONS_PATH = ROOT / "data" / "model-comparisons.json"
 MODEL_EVALUATIONS_PATH = ROOT / "data" / "model-evaluations.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
+EDITORIAL_REVIEW_QUEUE_PATH = ROOT / "data" / "editorial-review-queue.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -2316,7 +2318,7 @@ def discoverable_news(items):
     """
     return [
         item for item in items
-        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
+        if assess_editorial_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
     ]
 
 
@@ -2804,7 +2806,7 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
-        assess_news=assess_news,
+        assess_news=assess_editorial_news,
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -10850,6 +10852,14 @@ def build_discovery_pages(items, current_items):
     # Keep all historic signal route files (and their current SEO metadata).
     # Curate every *listing and recommendation* from approved news only.
     legacy_items = items
+    # Model reference pages are durable, evidence-backed records, not the
+    # high-impact news feed. Keep their existing relevance-approved history
+    # so a stricter current-news policy never deindexes established models.
+    model_evidence_items = [
+        row for row in legacy_items
+        if assess_news(row.get("title", ""), row.get("summary", ""),
+                       row.get("source", ""), row.get("url", "")).status == "accept"
+    ]
     items = discoverable_news(items)
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10933,7 +10943,7 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(topic_page_html(topic, matched), encoding="utf-8")
 
-    for name, matched in model_groups(items).items():
+    for name, matched in model_groups(model_evidence_items).items():
         if not matched or catalog_owns_model_route(name):
             continue
         path = ROOT / "models" / slugify(name)
@@ -10947,7 +10957,7 @@ def build_discovery_pages(items, current_items):
         )
         (path / "index.html").write_text(page, encoding="utf-8")
 
-    build_catalog_model_pages(items)
+    build_catalog_model_pages(model_evidence_items)
     ensure_catalog_model_histories()
 
     # Render articles only after model routes exist. Model links are based on
@@ -11303,11 +11313,39 @@ def main():
 
     # Reject noise BEFORE adding new articles to the archive or sitemap.
     # Previously published URLs are preserved separately as legacy records.
-    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming)
+    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming, assess_editorial_news)
     print(
         f"Editorial ingestion gate: accepted={len(incoming)}, "
         f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
     )
+
+    # Persist only undecided new candidates for human review. No review row
+    # is merged into the public archive or included in the published feed.
+    prior_queue = {}
+    if EDITORIAL_REVIEW_QUEUE_PATH.exists():
+        try:
+            payload = json.loads(EDITORIAL_REVIEW_QUEUE_PATH.read_text(encoding="utf-8"))
+            prior_queue = {row["url"]: row for row in payload.get("items", [])
+                           if isinstance(row, dict) and isinstance(row.get("url"), str)}
+        except (ValueError, OSError, TypeError):
+            prior_queue = {}
+    observed_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    for item in review_candidates:
+        previous = prior_queue.get(item["url"], {})
+        decision = assess_editorial_news(item.get("title", ""), item.get("summary", ""),
+                                        item.get("source", ""), item.get("url", ""))
+        prior_queue[item["url"]] = {
+            "url": item["url"], "title": item["title"], "source": item["source"],
+            "summary": item.get("summary", ""), "published": item.get("published"),
+            "reason": decision.reason, "status": "review",
+            "first_seen": previous.get("first_seen") or observed_at,
+            "last_seen": observed_at,
+        }
+    review_rows = sorted(prior_queue.values(), key=lambda row: (row.get("published") or "", row["url"]), reverse=True)[:200]
+    EDITORIAL_REVIEW_QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    EDITORIAL_REVIEW_QUEUE_PATH.write_text(json.dumps({
+        "version": "sxf-editorial-review-v1", "items": review_rows,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     archive = merge_archive(existing, incoming)
     if not archive:

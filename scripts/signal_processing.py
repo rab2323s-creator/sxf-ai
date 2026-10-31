@@ -145,6 +145,7 @@ def merge_archive(existing_items, incoming_items, context: SignalProcessingConte
 def client_item(item):
     return {
         "title": item["title"],
+        "summary": item.get("summary", ""),
         "url": item["url"],
         "signal_url": item["signal_url"],
         "source": item["source"],

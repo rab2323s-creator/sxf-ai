@@ -18,7 +18,7 @@ AI_TITLE = re.compile(
     r"\b(?:ai|artificial intelligence|generative ai|genai|"
     r"agentic|agents?|llms?|large language models?|machine learning|"
     r"deep learning|pretrain(?:ing|ed)|neural|multimodal|"
-    r"foundation models?|vision.language|inference|gpt[- .]?\d|"
+    r"foundation(?:al)? models?|vision.language|inference|gpt[- .]?\d|"
     r"chatgpt|codex|claude|gemini|grok|copilot|mcp|model context protocol|"
     r"diffusers?|llama|qwen|nemotron|granite|apertus|flux[.-]?\d|"
     r"falcon asr|asr|text.to.speech|open.weights?|model weights?|"
@@ -128,15 +128,16 @@ def primary_category(title: str, source: str, summary: str = "",
     return default if default in {"Tools", "Models", "Research", "Open Source"} else "Tools"
 
 
-def partition_news_rows(rows):
+def partition_news_rows(rows, decision_fn=None):
     """Split ingestion into approved, human-review, and rejected candidates.
 
     Neither review nor rejected rows may enter the public archive as new pages.
     Legacy archive records are deliberately not modified by this helper.
     """
+    decision_fn = decision_fn or assess_news
     approved, review, rejected = [], [], []
     for item in rows:
-        decision = assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", ""))
+        decision = decision_fn(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", ""))
         if decision.status == "accept":
             approved.append(item)
         elif decision.status == "review":

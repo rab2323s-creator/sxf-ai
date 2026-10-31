@@ -30,6 +30,9 @@ def guide_html(shell):
     head=head.replace('<meta property="og:type" content="website"','<meta property="og:type" content="article"')
     head=head.replace("</head>",'<meta property="og:image" content="'+IMAGES[0]+'" /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:image" content="'+IMAGES[0]+'" /></head>')
     content=CONTENT.read_text(encoding="utf-8")
+    content += ('<aside class="shell related-guide" aria-label="Related voice agent guide">'
+                '<a href="/guides/ai-receptionist/">AI receptionist: voice agent deployment and cost guide</a>'
+                '</aside>')
     return f'''<!doctype html><html lang="en">{head}
 <body class="intel-page guide-article-page">{page_header("guides")}<main><article>
 <header class="guide-article-hero shell">

@@ -114,8 +114,8 @@ def unit_test():
     # A fresh model release must not change its article on the second render.
     builder_source = inspect.getsource(module.build_discovery_pages)
     route_markers = (
-        "for name, matched in model_groups(items).items():",
-        "build_catalog_model_pages(items)",
+        "for name, matched in model_groups(model_evidence_items).items():",
+        "build_catalog_model_pages(model_evidence_items)",
         "ensure_catalog_model_histories()",
         "for item in legacy_items:",
     )
