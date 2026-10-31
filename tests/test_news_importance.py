@@ -23,10 +23,15 @@ class EditorialImportanceTests(unittest.TestCase):
             ("GPT-6.1 Terra in GitHub Copilot", "GitHub"),
             ("Upcoming deprecation of selected GitHub Copilot models", "GitHub"),
             ("NVIDIA Nemotron 3.5 Embed, Rerank, and Parse: Advancing Agents with World-Class Retrieval Models", "Hugging Face"),
+            ("Gemini 4 Argon: Built to solve your hardest problems", "Google AI", "We’re giving developers access to Gemini 4 Argon, our latest frontier model."),
+            ("Try Google Pics: Easy image creation and editing in Google Workspace", "Google AI", "Built on the latest model, Google Pics is now available."),
+            ("Proactive cyber defense for governments and enterprises", "Google AI", "The Fairwind Program is a limited access program for governments using cyber defense tools."),
         ]
-        for title, source in samples:
+        for sample in samples:
+            title, source = sample[:2]
+            summary = sample[2] if len(sample) > 2 else ""
             with self.subTest(title=title):
-                self.assertEqual(self.decision(title, source), "accept")
+                self.assertEqual(self.decision(title, source, summary), "accept")
 
     def test_ambiguous_and_promotional_hold_for_review(self):
         samples = [
