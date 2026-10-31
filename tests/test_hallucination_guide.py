@@ -46,7 +46,7 @@ def main():
     assert len(ids) == len(set(ids)), "Duplicate HTML ID"
     assert "research/methodology.md" in page
     assert "research/verification-cases.json" in page
-    assert "not a ChatGPT benchmark" in page.lower()
+    assert "not a chatgpt benchmark" in page.lower()
     assert "fabricated quotes" in page.lower()
     assert "how to fact-check chatgpt" in page.lower()
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
