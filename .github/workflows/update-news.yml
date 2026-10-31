@@ -96,7 +96,7 @@ jobs:
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
       - name: Verify all source-cited editorial briefs after ingestion
-        run: python tests/test_reviewed_signal_editorial.py
+        run: python tests/test_reviewed_signal_editorial.py --post-ingest
       - name: Research hub SEO, accessibility and internal-link regressions
         run: python tests/test_research_hub.py
       - name: Open Source topic, page and filter regressions
