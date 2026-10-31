@@ -82,6 +82,251 @@
         "https://reflection.ai/blog/introducing-beam",
         "https://huggingface.co/reflection/Beam-1.0-501B-A23B"
       ]
+    },
+    "introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "AnySpeechRecognizer & AnyDecisionModel: Apple AI Models | SXF",
+      "h1": "AnySpeechRecognizer and AnyDecisionModel: open models for Apple",
+      "meta_description": "Open models target Apple speech recognition and decision workloads. The announcement does not establish speed or accuracy on every Apple device.",
+      "source_name": "Hugging Face",
+      "primary_source": "https://huggingface.co/blog/anydecisionmodel",
+      "summary": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms. Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it. Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local.",
+      "editorial": {
+        "what_changed": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms.",
+        "why_it_matters": "Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it.",
+        "what_to_verify": "Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "The original blog names two distinct model projects.",
+          "source": "https://huggingface.co/blog/anydecisionmodel"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "The focus is speech recognition and model-based decision tasks.",
+          "source": "https://huggingface.co/blog/anydecisionmodel"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "Apple platforms are named as the target ecosystem.",
+          "source": "https://huggingface.co/blog/anydecisionmodel"
+        }
+      ],
+      "limitations": "Open-source positioning does not guarantee a specific license, offline-only execution or measured performance.",
+      "sources": [
+        "https://huggingface.co/blog/anydecisionmodel"
+      ]
+    },
+    "build-more-responsive-apps-with-the-decisions-api-27825e3": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "OpenAI Decisions API: Developer Workflows & Limits | SXF",
+      "h1": "OpenAI Decisions API: focused decisions in applications",
+      "meta_description": "OpenAI announced a developer-facing Decisions API described as fast, focused and lower-cost. Check API access, request formats and real pricing before adoption.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/decisions-api",
+      "summary": "OpenAI announced a Decisions API designed for focused decisions within application workflows. Developers can evaluate a targeted decision interface for routing and classification instead of assuming every task needs unrestricted text generation. Confirm SDK and REST availability, supported task types, official pricing, response format, latency and human review for important decisions.",
+      "editorial": {
+        "what_changed": "OpenAI announced a Decisions API designed for focused decisions within application workflows.",
+        "why_it_matters": "Developers can evaluate a targeted decision interface for routing and classification instead of assuming every task needs unrestricted text generation.",
+        "what_to_verify": "Confirm SDK and REST availability, supported task types, official pricing, response format, latency and human review for important decisions."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "The official source describes a Decisions API for applications.",
+          "source": "https://openai.com/index/decisions-api"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "Fast and focused decisions are stated design goals.",
+          "source": "https://openai.com/index/decisions-api"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "Lower-cost operation is a product positioning claim, not a measured guarantee.",
+          "source": "https://openai.com/index/decisions-api"
+        }
+      ],
+      "limitations": "The source summary does not independently establish accuracy, real-world latency or pricing across all use cases.",
+      "sources": [
+        "https://openai.com/index/decisions-api"
+      ]
+    },
+    "securing-our-frontier-model-training-environment-48e2274": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "OpenAI Frontier Model Training Security Controls | SXF",
+      "h1": "Security controls for frontier-model training and evaluation",
+      "meta_description": "OpenAI describes stronger containment for frontier training and evaluation, including offline environments and high-compute red-teaming. These are.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "summary": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments. Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development. Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist.",
+      "editorial": {
+        "what_changed": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments.",
+        "why_it_matters": "Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development.",
+        "what_to_verify": "Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "The publisher reports strengthened containment measures.",
+          "source": "https://openai.com/index/securing-our-frontier-model-training-environment"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "Offline training or evaluation environments are among the stated controls.",
+          "source": "https://openai.com/index/securing-our-frontier-model-training-environment"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "The account includes high-compute red-teaming as a security activity.",
+          "source": "https://openai.com/index/securing-our-frontier-model-training-environment"
+        }
+      ],
+      "limitations": "The publisher's description is not an independent proof of universal isolation or absence of vulnerabilities.",
+      "sources": [
+        "https://openai.com/index/securing-our-frontier-model-training-environment"
+      ]
+    },
+    "using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "AI Agents in Biology: OpenAI & Scripps Research | SXF",
+      "h1": "AI agents analyze large biological datasets for research leads",
+      "meta_description": "OpenAI, PerturbAI and Scripps Research describe distributed AI agents exploring data from millions of brain cells. Leads are hypotheses, not validated medical.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+      "summary": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions. This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility. Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations.",
+      "editorial": {
+        "what_changed": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions.",
+        "why_it_matters": "This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility.",
+        "what_to_verify": "Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "The named collaborators include OpenAI, PerturbAI and Scripps Research.",
+          "source": "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "The workflow uses distributed AI agents for biological-data research.",
+          "source": "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "The source describes biological data from millions of brain cells.",
+          "source": "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+        }
+      ],
+      "limitations": "Potential leads must be independently validated before any claim of disease mechanism or treatment.",
+      "sources": [
+        "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+      ]
+    },
+    "welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "Muse Spark Open: Meta Multimodal MoE Model | SXF",
+      "h1": "Muse Spark Open: open weights and multimodal MoE design",
+      "meta_description": "Hugging Face describes Meta's Muse Spark Open as an open-weight multimodal mixture-of-experts model. Confirm checkpoints, license, modalities and benchmarks.",
+      "source_name": "Hugging Face",
+      "primary_source": "https://huggingface.co/blog/meta-muse-spark-open",
+      "summary": "Hugging Face announced Muse Spark Open as a named Meta multimodal mixture-of-experts model offered with open weights. Access to model weights may expand deployment and evaluation options for teams comparing multimodal AI systems. Review its model card for actual weights, license restrictions, modalities, model size, context length, GPU needs and independently reproduced evaluations.",
+      "editorial": {
+        "what_changed": "Hugging Face announced Muse Spark Open as a named Meta multimodal mixture-of-experts model offered with open weights.",
+        "why_it_matters": "Access to model weights may expand deployment and evaluation options for teams comparing multimodal AI systems.",
+        "what_to_verify": "Review its model card for actual weights, license restrictions, modalities, model size, context length, GPU needs and independently reproduced evaluations."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "Muse Spark Open is attributed to Meta in the announcement.",
+          "source": "https://huggingface.co/blog/meta-muse-spark-open"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "The release is described as multimodal and mixture-of-experts.",
+          "source": "https://huggingface.co/blog/meta-muse-spark-open"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "Open-weight availability is part of its stated positioning.",
+          "source": "https://huggingface.co/blog/meta-muse-spark-open"
+        }
+      ],
+      "limitations": "Open-weight does not necessarily imply an OSI-approved open-source license, small deployment footprint or benchmark leadership.",
+      "sources": [
+        "https://huggingface.co/blog/meta-muse-spark-open"
+      ]
+    },
+    "grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "Autonomous Wet-Lab AI Agents: Google Research | SXF",
+      "h1": "Grounding AI agents in real biological wet-lab workflows",
+      "meta_description": "Google Research discusses building blocks for AI agents constrained by experimental biology and wet-lab feedback, not simply text-only planning. Full autonomy.",
+      "source_name": "Google Research",
+      "primary_source": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/",
+      "summary": "Google Research published work on grounding AI agent behavior in the realities of biological wet-lab experimentation. Physical experiments require measurements, safety checks and feedback loops. Agent planning alone is not equivalent to reliable laboratory execution. Check actual demonstrated lab tasks, human supervision, experimental feedback, reproducibility, failure handling and safety constraints.",
+      "editorial": {
+        "what_changed": "Google Research published work on grounding AI agent behavior in the realities of biological wet-lab experimentation.",
+        "why_it_matters": "Physical experiments require measurements, safety checks and feedback loops. Agent planning alone is not equivalent to reliable laboratory execution.",
+        "what_to_verify": "Check actual demonstrated lab tasks, human supervision, experimental feedback, reproducibility, failure handling and safety constraints."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "The article concerns grounding AI agents in biological reality.",
+          "source": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "Its focus includes components of autonomous wet-lab systems.",
+          "source": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "The research connects agent planning to laboratory constraints.",
+          "source": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/"
+        }
+      ],
+      "limitations": "The title alone does not establish fully autonomous labs or validated scientific discoveries.",
+      "sources": [
+        "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/"
+      ]
+    },
+    "disrupting-a-coordinated-model-distillation-campaign-6a91381": {
+      "reviewed_at": "2026-10-31",
+      "seo_title": "OpenAI Model Distillation Campaign: Security Report | SXF",
+      "h1": "OpenAI reports disrupting coordinated model-distillation activity",
+      "meta_description": "OpenAI reports disrupting an effort to extract protected model reasoning via coordinated distillation. Attribution, scope and countermeasure effectiveness.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign",
+      "summary": "OpenAI published an incident report about coordinated adversarial model-distillation activity directed at protected model capabilities. Organized extraction attempts can affect the integrity of model access controls and the safety of hosted AI systems. Separate confirmed platform actions from inferred attacker objectives; seek technical evidence, independent verification and documented monitoring outcomes.",
+      "editorial": {
+        "what_changed": "OpenAI published an incident report about coordinated adversarial model-distillation activity directed at protected model capabilities.",
+        "why_it_matters": "Organized extraction attempts can affect the integrity of model access controls and the safety of hosted AI systems.",
+        "what_to_verify": "Separate confirmed platform actions from inferred attacker objectives; seek technical evidence, independent verification and documented monitoring outcomes."
+      },
+      "evidence": [
+        {
+          "label": "Source announcement",
+          "fact": "OpenAI says it detected a coordinated model-distillation campaign.",
+          "source": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
+        },
+        {
+          "label": "Technical scope",
+          "fact": "The account concerns attempts to extract protected model reasoning.",
+          "source": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
+        },
+        {
+          "label": "Evidence boundary",
+          "fact": "OpenAI reports taking action to disrupt the activity.",
+          "source": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
+        }
+      ],
+      "limitations": "The report is from the affected operator and does not prove independent actor attribution or future prevention.",
+      "sources": [
+        "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
+      ]
     }
   }
 }

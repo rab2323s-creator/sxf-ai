@@ -3502,6 +3502,14 @@ def seo_quality(item):
         score -= 20
         factors.append("case-study-penalty")
 
+    # Only source-backed, independently reviewed briefs receive this quality
+    # credit. A short or generic unreviewed feed summary gains nothing.
+    from signal_editorial_reviews import get_review
+    review = get_review(item)
+    if review and len(clean_summary(review.get("summary", ""))) >= 120 and len(review.get("evidence", [])) >= 3:
+        score = max(score, 70)
+        factors.append("verified-editorial-evidence")
+
     return max(0, min(100, score)), factors
 
 def seo_signal_eligible(item, quality_score=None):
