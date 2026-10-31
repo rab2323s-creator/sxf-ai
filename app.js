@@ -1,4 +1,5 @@
 const state={items:[],allItems:[],totalCount:0,filter:'All'};
+let feedLoaded=false;
 const feed=document.getElementById('feed');
 const featured=document.getElementById('featured');
 
@@ -79,6 +80,8 @@ function updateHeroSignal(item){
 }
 
 function render(){
+  // Keep pre-rendered homepage cards when the API feed is unavailable.
+  if(!feedLoaded)return;
   const visible=filteredItems();
   featured.innerHTML=featuredMarkup(visible[0]);
   feed.innerHTML=visible.slice(1).map(cardMarkup).join('');
@@ -113,11 +116,10 @@ fetch('./data/news.json',{cache:'no-cache'})
 
     document.getElementById('lastUpdated').textContent=data.updated_at?relativeTime(data.updated_at):'automatic';
     updateHeroSignal(state.items[0]);
+    feedLoaded=true;
     render();
   })
   .catch(()=>{
     document.getElementById('lastUpdated').textContent='offline';
-    featured.hidden=true;
-    empty.hidden=false;
-    empty.textContent='The live feed is temporarily unavailable.';
+    // HTML cards generated at build time remain available and clickable.
   });
