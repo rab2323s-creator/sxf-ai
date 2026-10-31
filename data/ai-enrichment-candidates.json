@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "0455550fe9f69434ec447ad25bc0ea78427e65ecfa4e73a52b8dedc30e2e5c19",
+  "snapshot_hash": "18567cbbbdb049d1c1222d1039a4647064f722c1bb7d419c21687b2470f7a528",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -22,7 +22,7 @@
       "category": "Models",
       "published": "2026-10-29T00:00:00Z",
       "priority_score": 175,
-      "evidence_hash": "6308d830a986ba008505b9b22851123188c6e34d359d501b7ef267efb3eba87d",
+      "evidence_hash": "ca90c7a2f18f25eb66563a7ee4e4f63ae6eb5e54aae8811cab6c0c8c6f587b47",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
@@ -38,7 +38,7 @@
           "published": "2026-10-29T00:00:00Z",
           "category": "Models",
           "tags": [],
-          "summary": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms. Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it. Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local.",
+          "summary": "AnySpeechRecognizer extends Apple's SpeechAnalyzer workflow with local Core ML engines including Parakeet and Qwen3-ASR plus up to four-speaker diarization. AnyDecisionModel offers typed Swift probability, choice and score outputs. The published recognition benchmarks are Mac-only and licenses vary by checkpoint.",
           "signal_score": 50,
           "seo_quality_score": 70,
           "seo_quality_factors": [
@@ -674,7 +674,7 @@
       "category": "Research",
       "published": "2026-10-23T10:00:00Z",
       "priority_score": 130,
-      "evidence_hash": "1178bc9b80eb1cc74dca7348d6c85a415213328d0465195073a52650c9329a33",
+      "evidence_hash": "be66596467a978f613a2455934750371798cc349ee799fdf33ec0cf1373fc0e3",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
@@ -692,7 +692,7 @@
           "tags": [
             "OpenAI"
           ],
-          "summary": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments. Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development. Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist.",
+          "summary": "OpenAI describes defense-in-depth controls for frontier model training and evaluation: an offline cached web environment, container-plus-microVM isolation, monitoring and network boundaries. A high-compute red team found real sandbox escapes and egress paths, leading to patches before RL training resumed on October 1.",
           "signal_score": 45,
           "seo_quality_score": 70,
           "seo_quality_factors": [
@@ -747,13 +747,15 @@
       "category": "Research",
       "published": "2026-10-21T04:50:00Z",
       "priority_score": 126,
-      "evidence_hash": "c4f3d53c9f02918379849bd96447a8118a32e67591ef996f2451c425930dc329",
+      "evidence_hash": "f2f727decbda6b2db342236ff2110157e0aa842204b29165c26d83e6d7eb58a2",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
+          "unit": "per 1 million tokens",
+          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         "signal": {
           "title": "Using thousands of AI agents to uncover new leads in biological data",
@@ -766,7 +768,7 @@
             "AI Agents",
             "OpenAI"
           ],
-          "summary": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions. This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility. Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations.",
+          "summary": "OpenAI, PerturbAI and Scripps Research used thousands of GPT-Rosalind agents to interrogate a whole-brain mouse CRISPR atlas spanning millions of cells in 32 minutes. Distributed analysis brought together gene perturbations, literature and hypotheses; a controlled comparison showed over 700 literature references versus 11 from a single agent at the largest workload.",
           "signal_score": 41,
           "seo_quality_score": 70,
           "seo_quality_factors": [
@@ -776,8 +778,109 @@
             "verified-editorial-evidence"
           ]
         },
-        "models": [],
+        "models": [
+          {
+            "model_id": "gpt-rosalind-research",
+            "provider": "OpenAI",
+            "family": "GPT-Rosalind",
+            "model": "GPT-Rosalind Research",
+            "context_window": null,
+            "max_output": null,
+            "knowledge_cutoff": null,
+            "reasoning": {
+              "type": "specialized reasoning",
+              "levels": [
+                "supported"
+              ],
+              "default": null
+            },
+            "modalities": {
+              "input": [
+                "text"
+              ],
+              "output": [
+                "text"
+              ]
+            },
+            "positioning": "OpenAI specialized reasoning model for approved life-sciences research workflows and scientific tool use.",
+            "pricing_standard": {
+              "start": "2026-10-05",
+              "end": null,
+              "input": 5,
+              "cached_input": 0.5,
+              "output": 25
+            },
+            "pricing_long_context": null,
+            "verified_at": "2026-10-07",
+            "official_sources": [
+              "https://openai.com/gpt-rosalind/",
+              "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+              "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "history": [
+              {
+                "sequence": 66,
+                "type": "model_added",
+                "model_id": "gpt-rosalind-research",
+                "verified_at": "2026-10-07",
+                "previous_event_hash": "467461da2aadc5385c11c91bfe282c3d9be09a92529ccbd49d0fac92f529ccbf",
+                "snapshot": {
+                  "provider": "OpenAI",
+                  "family": "GPT-Rosalind",
+                  "model": "GPT-Rosalind Research",
+                  "context_window": null,
+                  "max_output": null,
+                  "knowledge_cutoff": null,
+                  "reasoning": {
+                    "type": "specialized reasoning",
+                    "levels": [
+                      "supported"
+                    ],
+                    "default": null
+                  },
+                  "modalities": {
+                    "input": [
+                      "text"
+                    ],
+                    "output": [
+                      "text"
+                    ]
+                  },
+                  "pricing": {
+                    "standard": [
+                      {
+                        "start": "2026-10-05",
+                        "end": null,
+                        "input": 5,
+                        "cached_input": 0.5,
+                        "output": 25
+                      }
+                    ]
+                  }
+                },
+                "evidence": {
+                  "provider": "https://developers.openai.com/api/docs/pricing",
+                  "family": "https://developers.openai.com/api/docs/pricing",
+                  "model": "https://developers.openai.com/api/docs/pricing",
+                  "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+                  "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+                  "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+                  "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+                  "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+                  "pricing": "https://developers.openai.com/api/docs/pricing"
+                },
+                "event_id": "evt_cc9f559b418146fb12e3",
+                "event_hash": "cc9f559b418146fb12e372e285e4711298f9d9716beb9d4ce37f8d127cebbc24"
+              }
+            ]
+          }
+        ],
         "source_urls": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
+          "https://openai.com/gpt-rosalind/",
+          "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
           "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
         ]
       },
@@ -792,6 +895,8 @@
           "what_changed",
           "why_it_matters",
           "key_facts",
+          "pricing_or_capability_impact",
+          "before_vs_after",
           "who_should_care",
           "what_to_verify",
           "faq",

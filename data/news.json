@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T19:20:35.344878Z",
+  "updated_at": "2026-10-31T23:05:57.132477Z",
   "items": [
     {
       "title": "Community safety report and new protections for teens",
@@ -54,7 +54,7 @@
     },
     {
       "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
-      "summary": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms. Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it. Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local.",
+      "summary": "AnySpeechRecognizer extends Apple's SpeechAnalyzer workflow with local Core ML engines including Parakeet and Qwen3-ASR plus up to four-speaker diarization. AnyDecisionModel offers typed Swift probability, choice and score outputs. The published recognition benchmarks are Mac-only and licenses vary by checkpoint.",
       "url": "https://huggingface.co/blog/anydecisionmodel",
       "signal_url": "https://sxf.si/signals/introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752/",
       "source": "Hugging Face",
@@ -205,7 +205,7 @@
     },
     {
       "title": "Securing our frontier model training environment",
-      "summary": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments. Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development. Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist.",
+      "summary": "OpenAI describes defense-in-depth controls for frontier model training and evaluation: an offline cached web environment, container-plus-microVM isolation, monitoring and network boundaries. A high-compute red team found real sandbox escapes and egress paths, leading to patches before RL training resumed on October 1.",
       "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
       "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
       "source": "OpenAI",
@@ -231,7 +231,7 @@
     },
     {
       "title": "Build more responsive apps with the Decisions API",
-      "summary": "OpenAI announced a Decisions API designed for focused decisions within application workflows. Developers can evaluate a targeted decision interface for routing and classification instead of assuming every task needs unrestricted text generation. Confirm SDK and REST availability, supported task types, official pricing, response format, latency and human review for important decisions.",
+      "summary": "OpenAI's Decisions API is generally available for bounded decision questions using GPT-6 Luna. It supports predicate probabilities, predefined choices and ordered scores, with text, image or JSON context; up to 400 questions can be sent per request. Vendor and customer speed claims should not be treated as independent benchmarks.",
       "url": "https://openai.com/index/decisions-api",
       "signal_url": "https://sxf.si/signals/build-more-responsive-apps-with-the-decisions-api-27825e3/",
       "source": "OpenAI",
@@ -304,7 +304,7 @@
     },
     {
       "title": "Using thousands of AI agents to uncover new leads in biological data",
-      "summary": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions. This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility. Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations.",
+      "summary": "OpenAI, PerturbAI and Scripps Research used thousands of GPT-Rosalind agents to interrogate a whole-brain mouse CRISPR atlas spanning millions of cells in 32 minutes. Distributed analysis brought together gene perturbations, literature and hypotheses; a controlled comparison showed over 700 literature references versus 11 from a single agent at the largest workload.",
       "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
       "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
       "source": "OpenAI",
@@ -353,7 +353,7 @@
     },
     {
       "title": "Grounding AI agents in biological reality: Building blocks for autonomous wet labs",
-      "summary": "Google Research published work on grounding AI agent behavior in the realities of biological wet-lab experimentation. Physical experiments require measurements, safety checks and feedback loops. Agent planning alone is not equivalent to reliable laboratory execution. Check actual demonstrated lab tasks, human supervision, experimental feedback, reproducibility, failure handling and safety constraints.",
+      "summary": "Google Research reported three building blocks for human-supervised autonomous wet labs: VERID's robot-aware digital twin, iterative aptamer design with real assay feedback, and agent-guided protein binders. Reported final aptamer hit rates reached 33.5% and 42.1% for two test targets; binder affinity is not clinical efficacy.",
       "url": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/",
       "signal_url": "https://sxf.si/signals/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3/",
       "source": "Google Research",
@@ -412,7 +412,7 @@
     },
     {
       "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
-      "summary": "Hugging Face announced Muse Spark Open as a named Meta multimodal mixture-of-experts model offered with open weights. Access to model weights may expand deployment and evaluation options for teams comparing multimodal AI systems. Review its model card for actual weights, license restrictions, modalities, model size, context length, GPU needs and independently reproduced evaluations.",
+      "summary": "Meta's Muse Spark Open is an open-weight multimodal mixture-of-experts model with roughly 816B total and 42B active parameters per token, 256 experts per layer and a 1M-token context window. It accepts text, images, audio and video but generates text; the BF16 weights alone occupy around 1.5 TB.",
       "url": "https://huggingface.co/blog/meta-muse-spark-open",
       "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
       "source": "Hugging Face",
@@ -520,7 +520,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "Google AI": {
@@ -543,7 +543,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "Hugging Face": {
@@ -566,7 +566,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "GitHub": {
@@ -589,7 +589,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "Google Research": {
@@ -612,7 +612,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "Anthropic": {
@@ -635,7 +635,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -660,7 +660,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "xAI": {
@@ -683,7 +683,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       },
       "Microsoft": {
@@ -706,7 +706,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T19:19:56.520739Z",
+        "last_successful_fetch": "2026-10-31T23:05:09.340120Z",
         "errors": []
       }
     },
