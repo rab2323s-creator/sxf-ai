@@ -62,7 +62,8 @@ def main():
     for path in ["guides/why-does-chatgpt-make-things-up/index.html","guides/ai-deception-alignment-faking/index.html"]:
         assert "/guides/"+SLUG+"/" in (ROOT/path).read_text(encoding="utf-8"), path
     index=(ROOT/"guides/index.html").read_text(encoding="utf-8")
-    assert "SXF's original interactive Evidence Ladder" in index
+    from html import unescape
+    assert "SXF's original interactive Evidence Ladder" in unescape(index)
     print("PASS: image guide SEO, primary sources, cross-links, sitemap, generator parity and tool UI contracts")
 
 if __name__=="__main__":
