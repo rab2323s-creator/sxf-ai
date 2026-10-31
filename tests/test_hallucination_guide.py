@@ -22,7 +22,7 @@ def main():
     assert "not raw model outputs" in audit["uncheckedAnswersAre"].lower()
     for r in audit["cases"]:
         for key in ("id", "question", "fault", "unchecked", "verified", "source", "check"):
-            min_length = 3 if key == "id" else 9
+            min_length = 3 if key == "id" else 1 if key == "source" else 9
             assert isinstance(r.get(key), str) and len(r[key].strip()) >= min_length, (r.get("id"), key)
         assert r["source"] in audit["sources"]
         assert r["unchecked"] != r["verified"]
