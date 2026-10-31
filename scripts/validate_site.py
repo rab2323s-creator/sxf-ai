@@ -1412,10 +1412,10 @@ def validate_topic_relevance(archive):
     # Topic listings intentionally exclude news rejected by the editorial
     # relevance policy. Archived article URLs and their SEO settings remain
     # intact; validate public discovery against that curated inventory.
-    from news_relevance import assess_news
+    from news_importance import assess_editorial_news
     public_archive = [
         item for item in archive.get("items", [])
-        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
+        if assess_editorial_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
     ]
     groups = topic_groups(public_archive)
     expected_slugs = {topic["slug"] for topic in TOPICS}
