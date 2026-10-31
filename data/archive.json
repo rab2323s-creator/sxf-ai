@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T15:20:19.170597Z",
+  "updated_at": "2026-10-31T15:40:45.747488Z",
   "items": [
     {
       "title": "nemotron-halloween",
@@ -70,7 +70,7 @@
       "summary": "OpenAI is strengthening violence prevention in ChatGPT with expanded safeguards, earlier interventions, and a new commitment to public safety reporting.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "community-safety-report-and-new-protections-for-teens-c7606af",
@@ -127,31 +127,32 @@
       "url": "https://openai.com/index/updated-model-spec",
       "source": "OpenAI",
       "published": "2026-10-29T17:00:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [
         "OpenAI"
       ],
       "summary": "OpenAI’s updated Model Spec outlines five core values to guide more capable AI toward sound judgment, human agency, and faithfulness to human intent.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
-      "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source",
       "signal_slug": "an-updated-model-spec-for-more-capable-and-beneficial-ai-7bf0065",
       "signal_url": "https://sxf.si/signals/an-updated-model-spec-for-more-capable-and-beneficial-ai-7bf0065/",
-      "signal_score": 42,
+      "signal_score": 45,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 39,
+      "seo_quality_score": 50,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
-      "seo_eligible": false,
+      "seo_eligible": true,
       "editorial": {
         "what_changed": "OpenAI’s updated Model Spec outlines five core values to guide more capable AI toward sound judgment, human agency, and faithfulness to human intent.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       }
     },
     {
@@ -193,7 +194,7 @@
       "summary": "OpenAI uses layered monitoring to detect frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "how-we-detect-frontier-model-misalignment-d28967f",
@@ -311,6 +312,36 @@
       }
     },
     {
+      "title": "Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+      "url": "https://huggingface.co/blog/mistral-large4",
+      "source": "Hugging Face",
+      "published": "2026-10-29T00:00:00Z",
+      "category": "Models",
+      "tags": [],
+      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+      "summary_origin": "source-meta",
+      "first_seen": "2026-10-31T15:40:45.676551Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source",
+      "signal_slug": "welcome-le-chonk-mistral-large-4-on-hugging-face-a1765f4",
+      "signal_url": "https://sxf.si/signals/welcome-le-chonk-mistral-large-4-on-hugging-face-a1765f4/",
+      "signal_score": 32,
+      "score_factors": [],
+      "seo_quality_score": 35,
+      "seo_quality_factors": [
+        "substantive-source-summary",
+        "durable-intelligence-layer"
+      ],
+      "seo_eligible": false,
+      "editorial": {
+        "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
+        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
+      }
+    },
+    {
       "title": "Route and orchestrate models with GitHub Copilot Fusion",
       "url": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion",
       "source": "GitHub",
@@ -322,7 +353,7 @@
       "summary": "GitHub Copilot Fusion is generally available. Instead of picking a model for each task, choose Copilot Fusion and let Copilot intelligently route and orchestrate which models it uses for you.…",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_product_capability",
       "signal_slug": "route-and-orchestrate-models-with-github-copilot-fusion-194ab4b",
@@ -457,7 +488,7 @@
       "summary": "Shared Copilot Automations are rolling out, enabling teams to build and maintain AI-powered workflows together. With Copilot Automations, you can combine prompts, triggers, and tools to design workflows around the…",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_product_capability",
       "signal_slug": "build-shared-workflows-for-your-team-with-copilot-automations-2304fbe",
@@ -560,7 +591,7 @@
       "summary": "You can now generate and edit images using natural language in GitHub Copilot. When you ask for an image, your selected reasoning model calls a dedicated image-generation tool powered by…",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_product_capability",
       "signal_slug": "generate-and-edit-images-directly-in-copilot-05a87e9",
@@ -686,7 +717,7 @@
       "summary": "Education Innovation",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_measurable_technical_advance",
       "signal_slug": "the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continua-91ab09b",
@@ -718,7 +749,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "build-specialized-multimodal-models-with-lfm3-db98bf5",
@@ -752,7 +783,7 @@
       "summary": "",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_research",
       "signal_slug": "can-we-trust-llms-to-judge-whether-a-research-idea-is-novel-34370e8",
@@ -1008,29 +1039,30 @@
       "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities",
       "source": "OpenAI",
       "published": "2026-10-26T14:30:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [
         "OpenAI"
       ],
       "summary": "OpenAI shares model results on the Kakeya conjecture, Exponential Time Hypothesis, and quantum chromodynamics—and how researchers can verify and build on them.",
       "first_seen": "2026-10-27T00:02:20.792585Z",
-      "modified_at": "2026-10-27T00:02:20.792585Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source",
       "signal_slug": "working-with-academic-communities-to-build-scientific-understanding-f16aefe",
       "signal_url": "https://sxf.si/signals/working-with-academic-communities-to-build-scientific-understanding-f16aefe/",
-      "signal_score": 28,
+      "signal_score": 31,
       "score_factors": [],
-      "seo_quality_score": 33,
+      "seo_quality_score": 41,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
       "editorial": {
         "what_changed": "OpenAI shares model results on the Kakeya conjecture, Exponential Time Hypothesis, and quantum chromodynamics—and how researchers can verify and build on them.",
-        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
-        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       }
     },
     {
@@ -1046,7 +1078,7 @@
       "summary": "CodeRabbit uses GPT-6.1 Sol to investigate security risks across complex codebases. Its security agent helps developers review findings and proposed fixes.",
       "first_seen": "2026-10-27T00:02:20.792585Z",
       "modified_at": "2026-10-27T00:02:20.792585Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf",
@@ -1172,7 +1204,7 @@
       "summary": "Bringing fast and capable computer use to everyone",
       "first_seen": "2026-10-26T20:32:59.632065Z",
       "modified_at": "2026-10-26T20:32:59.632065Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "introducing-gpt-6-1-terra-1758535",
@@ -1239,7 +1271,7 @@
       "summary": "Generative AI",
       "first_seen": "2026-10-23T21:28:28.640610Z",
       "modified_at": "2026-10-23T21:28:28.640610Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_research",
       "signal_slug": "bringing-foundational-models-to-the-front-lines-of-tb-screening-3c115b0",
@@ -1399,7 +1431,7 @@
       "summary": "Anima expands what care teams can do with OpenAI models, giving them more capacity to respond to patients.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "anima-helps-clinics-cut-call-waits-by-75-with-gpt-6-and-gpt-live-c6099fc",
@@ -1737,7 +1769,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-22T11:02:10.972684Z",
       "modified_at": "2026-10-22T11:02:10.972684Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_measurable_technical_advance",
       "signal_slug": "how-specializing-the-vocabulary-of-slms-can-cut-inference-cost-by-77-i-354f89a",
@@ -1974,7 +2006,7 @@
       "summary": "Patch the Planet connects security researchers, maintainers, and incident responders to help address critical vulnerabilities across open source.",
       "first_seen": "2026-10-22T11:02:10.972684Z",
       "modified_at": "2026-10-22T11:02:10.972684Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "patch-the-planet-global-response-coordination-as-agents-uncover-critic-d3f5195",
@@ -2283,6 +2315,64 @@
       }
     },
     {
+      "title": "Hugging Face ❤️ TorchTPU: TPUs, Natively",
+      "url": "https://huggingface.co/blog/hf-torchtpu",
+      "source": "Hugging Face",
+      "published": "2026-10-20T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+      "summary_origin": "source-meta",
+      "first_seen": "2026-10-31T15:40:45.676551Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source",
+      "signal_slug": "hugging-face-torchtpu-tpus-natively-84cd8d4",
+      "signal_url": "https://sxf.si/signals/hugging-face-torchtpu-tpus-natively-84cd8d4/",
+      "signal_score": 28,
+      "score_factors": [],
+      "seo_quality_score": 27,
+      "seo_quality_factors": [
+        "substantive-source-summary"
+      ],
+      "seo_eligible": false,
+      "editorial": {
+        "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
+        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+      }
+    },
+    {
+      "title": "MPS in PyTorch 2.15",
+      "url": "https://huggingface.co/blog/mps-pytorch-2-15",
+      "source": "Hugging Face",
+      "published": "2026-10-20T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+      "summary_origin": "source-meta",
+      "first_seen": "2026-10-31T15:40:45.676551Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source",
+      "signal_slug": "mps-in-pytorch-2-15-3eb18e5",
+      "signal_url": "https://sxf.si/signals/mps-in-pytorch-2-15-3eb18e5/",
+      "signal_score": 28,
+      "score_factors": [],
+      "seo_quality_score": 27,
+      "seo_quality_factors": [
+        "substantive-source-summary"
+      ],
+      "seo_eligible": false,
+      "editorial": {
+        "what_changed": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
+        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
+        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
+      }
+    },
+    {
       "title": "Copilot model policy API for enterprise, orgs, and teams",
       "url": "https://github.blog/changelog/2026-10-19-copilot-model-policy-api-for-enterprise-orgs-and-teams",
       "source": "GitHub",
@@ -2584,7 +2674,7 @@
       "summary_origin": "reviewed-primary-source",
       "first_seen": "2026-10-16T16:44:03.388172Z",
       "modified_at": "2026-10-18T00:00:00Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
       "signal_score": 46,
@@ -3001,7 +3091,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-15T14:38:03.862839Z",
       "modified_at": "2026-10-15T14:38:03.862839Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "apertus-1-5-release-notes-e3c36d4",
       "signal_url": "https://sxf.si/signals/apertus-1-5-release-notes-e3c36d4/",
       "signal_score": 50,
@@ -3576,7 +3666,7 @@
       "summary": "We’re giving developers, enterprises, scientists, and consumers access to Gemini 4 Argon, our latest frontier model.",
       "first_seen": "2026-10-13T16:12:42.463126Z",
       "modified_at": "2026-10-13T16:12:42.463126Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/",
       "signal_score": 46,
@@ -4001,7 +4091,7 @@
       "summary": "Using GPT-6 Astra in Codex, Asana made its browser agent 76x cheaper and 5x faster in tests to offer customers more capable models.",
       "first_seen": "2026-10-09T22:09:07.475483Z",
       "modified_at": "2026-10-09T22:09:07.475483Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7",
       "signal_url": "https://sxf.si/signals/asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7/",
       "signal_score": 46,
@@ -4277,7 +4367,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-08T22:25:45.329728Z",
       "modified_at": "2026-10-17T01:04:14.659846Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4",
       "signal_url": "https://sxf.si/signals/the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4/",
       "signal_score": 46,
@@ -4474,7 +4564,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-07T13:31:12.574149Z",
       "modified_at": "2026-10-17T00:27:31.425487Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "introducing-falcon-asr-91ed3eb",
       "signal_url": "https://sxf.si/signals/introducing-falcon-asr-91ed3eb/",
       "signal_score": 50,
@@ -4623,34 +4713,33 @@
       "url": "https://openai.com/index/gpt-6-for-everyone",
       "source": "OpenAI",
       "published": "2026-10-07T00:00:00Z",
-      "category": "Models",
+      "category": "Tools",
       "tags": [
         "OpenAI"
       ],
       "summary": "GPT‑6 is rolling out globally in ChatGPT with Intelligent UI, delivering faster responses with visuals and interactive experiences you can explore and use directly.",
       "first_seen": "2026-10-07T20:40:01.905375Z",
-      "modified_at": "2026-10-07T20:40:01.905375Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "gpt-6-and-intelligent-ui-for-everyone-0ca1450",
       "signal_url": "https://sxf.si/signals/gpt-6-and-intelligent-ui-for-everyone-0ca1450/",
-      "signal_score": 46,
+      "signal_score": 42,
       "score_factors": [
         "model"
       ],
-      "seo_quality_score": 68,
+      "seo_quality_score": 57,
       "seo_quality_factors": [
         "substantive-source-summary",
-        "named-model",
-        "durable-intelligence-layer"
+        "named-model"
       ],
       "seo_eligible": true,
       "editorial": {
         "what_changed": "GPT‑6 is rolling out globally in ChatGPT with Intelligent UI, delivering faster responses with visuals and interactive experiences you can explore and use directly.",
-        "why_it_matters": "This signal may affect how GPT-6 is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
-        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
+        "why_it_matters": "This update matters if it changes a concrete workflow, permission boundary, integration, or user capability. The impact should be judged by what becomes possible in practice rather than by the announcement language alone.",
+        "what_to_verify": "Check who can use the change, supported platforms and workflows, permissions, rollout status, limits, pricing implications, and any documented technical constraints."
       },
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Update your IDE to restore agent activity in Copilot usage metrics",
@@ -4753,15 +4842,15 @@
       "url": "https://research.google/blog/earth-ais-planetary-geospatial-foundation-models-for-global-public-health/",
       "source": "Google Research",
       "published": "2026-10-06T15:05:11Z",
-      "category": "Models",
+      "category": "Research",
       "tags": [],
       "summary": "Earth AI",
       "first_seen": "2026-10-06T15:59:26.755289Z",
-      "modified_at": "2026-10-06T15:59:26.755289Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c",
       "signal_url": "https://sxf.si/signals/unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c/",
-      "signal_score": 32,
+      "signal_score": 31,
       "score_factors": [],
       "seo_quality_score": 11,
       "seo_quality_factors": [
@@ -4770,11 +4859,11 @@
       "seo_eligible": false,
       "editorial": {
         "what_changed": "Earth AI",
-        "why_it_matters": "This signal may affect how the model is positioned or deployed. The useful question is whether it changes capability, access, reliability, or economics enough to alter a real model-selection decision.",
-        "what_to_verify": "Check the exact model version, availability, pricing, context and output limits, tool support, benchmark evidence, and differences from the previous release."
+        "why_it_matters": "This research signal is useful if it changes the available evidence around capability, evaluation, safety, or scientific use. The strongest value comes from transparent methods and results that can be inspected or reproduced.",
+        "what_to_verify": "Check methodology, dataset or sample selection, baselines, evaluation criteria, limitations, conflicts or vendor involvement, and whether code or data are available for reproduction."
       },
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "How Jump Trading is scaling quant research with ChatGPT",
@@ -6381,7 +6470,7 @@
       "summary": "Meet GPT-6.1 Sol: near-Astra intelligence for coding, computer use, and professional work at one-fifth of Astra’s standard API input and output token prices.",
       "first_seen": "2026-09-29T18:07:03.345797Z",
       "modified_at": "2026-10-22T17:15:40.980072Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "introducing-gpt-6-1-sol-dd66aca",
       "signal_url": "https://sxf.si/signals/introducing-gpt-6-1-sol-dd66aca/",
       "signal_score": 64,
@@ -6509,7 +6598,7 @@
       "summary": "Dots by OpenAI are proactive assistants that can keep working across complex projects and everyday tasks. Learn how dots help you stay in control while work moves forward.",
       "first_seen": "2026-09-29T18:07:03.345797Z",
       "modified_at": "2026-09-30T00:43:44.782581Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "introducing-dots-884977e",
       "signal_url": "https://sxf.si/signals/introducing-dots-884977e/",
       "signal_score": 46,
@@ -6527,8 +6616,8 @@
         "why_it_matters": "A product launch or feature release matters when it changes a workflow users can actually perform, not simply the product’s positioning. The impact depends on availability, permissions, integration depth, and whether the feature removes a real operational constraint.",
         "what_to_verify": "Check release status, supported plans and platforms, required permissions, limits or quotas, integration prerequisites, pricing impact, and whether the feature is generally available or still in preview."
       },
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Self-hosted runner version enforcement date has moved",
@@ -6594,23 +6683,24 @@
       "url": "https://openai.com/index/how-we-will-do-better-for-australia",
       "source": "OpenAI",
       "published": "2026-09-28T19:00:00Z",
-      "category": "Tools",
+      "category": "Research",
       "tags": [
         "OpenAI"
       ],
       "summary": "OpenAI apologises for incidents involving Australian government websites and outlines stronger safeguards and support to strengthen Australia’s cyber defences.",
       "first_seen": "2026-09-29T09:54:21.592971Z",
-      "modified_at": "2026-09-29T09:54:21.592971Z",
-      "last_seen": "2026-10-31T14:38:00.343151Z",
+      "modified_at": "2026-10-31T15:40:45.676551Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "how-we-will-do-better-for-australia-cfe8e90",
       "signal_url": "https://sxf.si/signals/how-we-will-do-better-for-australia-cfe8e90/",
-      "signal_score": 35,
+      "signal_score": 38,
       "score_factors": [
         "product-change"
       ],
-      "seo_quality_score": 33,
+      "seo_quality_score": 47,
       "seo_quality_factors": [
-        "substantive-source-summary"
+        "substantive-source-summary",
+        "durable-intelligence-layer"
       ],
       "seo_eligible": false,
       "editorial": {
@@ -6618,8 +6708,8 @@
         "why_it_matters": "Safety and security updates can change how a system should be evaluated, deployed, or governed even when headline capability is unchanged. The useful signal is whether the work introduces a concrete framework, evidence base, control, or reporting standard that can be applied in practice.",
         "what_to_verify": "Check the scope of the evaluation or policy, who defined the criteria, the underlying evidence, known limitations, whether results were independently reviewed, and which safeguards are actually deployed versus proposed."
       },
-      "relevance_status": "review",
-      "relevance_reason": "importance_impact_unconfirmed"
+      "relevance_status": "accept",
+      "relevance_reason": "individually_reviewed_source"
     },
     {
       "title": "Towards safety cases for frontier AI training",
@@ -6798,7 +6888,7 @@
       "summary": "GPT-6 Astra completed a 50-tab tax workbook twice as fast as GPT-5.6 Sol, and its stronger understanding of user intent gives Basis more confidence in real-world use.",
       "first_seen": "2026-09-28T21:15:34.788328Z",
       "modified_at": "2026-09-28T21:15:34.788328Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "basis-completes-a-tax-workbook-2x-faster-with-gpt-6-astra-bf0fe8c",
       "signal_url": "https://sxf.si/signals/basis-completes-a-tax-workbook-2x-faster-with-gpt-6-astra-bf0fe8c/",
       "signal_score": 53,
@@ -6833,7 +6923,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-05T21:54:14.596306Z",
       "modified_at": "2026-10-05T21:54:14.596306Z",
-      "last_seen": "2026-10-31T15:20:19.075820Z",
+      "last_seen": "2026-10-31T15:40:45.676551Z",
       "signal_slug": "welcome-rl-environments-to-the-hub-a30a6af",
       "signal_url": "https://sxf.si/signals/welcome-rl-environments-to-the-hub-a30a6af/",
       "signal_score": 28,
@@ -11464,14 +11554,14 @@
     "archive_counts": {
       "OpenAI": 164,
       "Google AI": 24,
-      "Hugging Face": 57,
+      "Hugging Face": 60,
       "GitHub": 101,
       "Google Research": 16
     },
     "current_counts": {
-      "OpenAI": 6,
+      "OpenAI": 8,
       "Google AI": 1,
-      "Hugging Face": 10,
+      "Hugging Face": 13,
       "GitHub": 8,
       "Google Research": 2
     },
@@ -11489,14 +11579,14 @@
         "age_rejection_count": 1256,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 6,
+        "publish_count": 8,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "Google AI": {
@@ -11519,7 +11609,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "Hugging Face": {
@@ -11535,14 +11625,14 @@
         "age_rejection_count": 865,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 10,
+        "publish_count": 13,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "GitHub": {
@@ -11565,7 +11655,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "Google Research": {
@@ -11588,7 +11678,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "Anthropic": {
@@ -11611,7 +11701,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -11636,7 +11726,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "xAI": {
@@ -11659,7 +11749,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       },
       "Microsoft": {
@@ -11682,7 +11772,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:19:32.206016Z",
+        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
         "errors": []
       }
     },
