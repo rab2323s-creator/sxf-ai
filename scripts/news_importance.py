@@ -111,6 +111,8 @@ def assess_importance(title: str, summary: str = "", source: str = "") -> NewsDe
     if PROMOTIONAL.search(title) and not (model and RELEASE.search(title)):
         return NewsDecision("review", "importance_promotional_or_case_study")
 
+    if model and re.search(r"\bin (?:github )?copilot\b", title, re.I):
+        return NewsDecision("accept", "importance_named_model_platform_availability")
     if model and (RELEASE.search(title) or CAPABILITY.search(title) or TECHNICAL_CHANGE.search(title) or MEASURABLE.search(title)):
         return NewsDecision("accept", "importance_named_model_event")
     if ai and RELEASE.search(title) and TECHNICAL_CHANGE.search(title):
@@ -122,7 +124,7 @@ def assess_importance(title: str, summary: str = "", source: str = "") -> NewsDe
     if ai and technical and MEASURABLE.search(title):
         return NewsDecision("accept", "importance_measurable_technical_advance")
     if ai and source in {"Google Research", "Hugging Face", "Microsoft"} and (
-        (RESEARCH_IMPACT.search(title) and (CAPABILITY.search(title) or technical or re.search(r"\\b(?:screening|diagnos(?:is|tic)|learning)\\b", title, re.I)))
+        (RESEARCH_IMPACT.search(title) and (CAPABILITY.search(title) or technical or re.search(r"\b(?:screening|diagnos(?:is|tic)|learning)\b", title, re.I)))
         or (re.search(r"\b(?:new|novel|proposed)\b", title, re.I) and technical)
     ):
         return NewsDecision("accept", "importance_specific_research")
