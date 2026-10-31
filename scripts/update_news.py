@@ -10852,6 +10852,14 @@ def build_discovery_pages(items, current_items):
     # Keep all historic signal route files (and their current SEO metadata).
     # Curate every *listing and recommendation* from approved news only.
     legacy_items = items
+    # Model reference pages are durable, evidence-backed records, not the
+    # high-impact news feed. Keep their existing relevance-approved history
+    # so a stricter current-news policy never deindexes established models.
+    model_evidence_items = [
+        row for row in legacy_items
+        if assess_news(row.get("title", ""), row.get("summary", ""),
+                       row.get("source", ""), row.get("url", "")).status == "accept"
+    ]
     items = discoverable_news(items)
     SIGNALS_DIR.mkdir(parents=True, exist_ok=True)
     TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -10935,7 +10943,7 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(topic_page_html(topic, matched), encoding="utf-8")
 
-    for name, matched in model_groups(items).items():
+    for name, matched in model_groups(model_evidence_items).items():
         if not matched or catalog_owns_model_route(name):
             continue
         path = ROOT / "models" / slugify(name)
@@ -10949,7 +10957,7 @@ def build_discovery_pages(items, current_items):
         )
         (path / "index.html").write_text(page, encoding="utf-8")
 
-    build_catalog_model_pages(items)
+    build_catalog_model_pages(model_evidence_items)
     ensure_catalog_model_histories()
 
     # Render articles only after model routes exist. Model links are based on
