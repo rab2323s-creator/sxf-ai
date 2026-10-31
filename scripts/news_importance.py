@@ -111,6 +111,32 @@ def assess_importance(title: str, summary: str = "", source: str = "") -> NewsDe
     if PROMOTIONAL.search(title) and not (model and RELEASE.search(title)):
         return NewsDecision("review", "importance_promotional_or_case_study")
 
+    # A named frontier-model launch can have a descriptive headline rather
+    # than "introducing"; require direct release evidence in the source summary.
+    if model and source in {"OpenAI", "Google AI", "Anthropic", "Meta", "xAI"} and re.search(
+        r"\b(?:latest|new)\s+(?:frontier\s+)?model\b", summary, re.I
+    ):
+        return NewsDecision("accept", "importance_verified_model_announcement")
+    # New AI creative tools are meaningful when the official summary confirms
+    # their actual availability, not merely marketing or a launch rumor.
+    if source in {"OpenAI", "Google AI", "Anthropic", "Meta", "xAI"} and (
+        re.search(r"\bnow available\b", summary, re.I)
+        and AI_TECH.search(summary)
+        and re.search(r"\b(?:create|creation|editing|generat(?:e|ion)|tool|platform)\b", title, re.I)
+    ):
+        return NewsDecision("accept", "importance_available_ai_product")
+    # Material cyber-defense access programs and frontier safeguards. Holding
+    # incidental security mentions for review avoids GitHub security noise.
+    if source in {"OpenAI", "Google AI", "Anthropic", "Meta", "xAI"} and (
+        re.search(r"\bcyber defen[cs]e\b", title, re.I)
+        and re.search(r"\b(?:program|frontier ai|safeguards?|cyber|government)\b", summary, re.I)
+    ):
+        return NewsDecision("accept", "importance_primary_source_cyber_defense")
+    if source in {"OpenAI", "Google AI", "Anthropic", "Meta", "xAI"} and (
+        re.search(r"\bfrontier safeguards?\b", title, re.I)
+        and re.search(r"\b(?:cybersecurity|preparedness|safeguards?)\b", summary, re.I)
+    ):
+        return NewsDecision("accept", "importance_frontier_safeguards")
     if model and re.search(r"\bin (?:github )?copilot\b", title, re.I):
         return NewsDecision("accept", "importance_named_model_platform_availability")
     if model and (RELEASE.search(title) or CAPABILITY.search(title) or TECHNICAL_CHANGE.search(title) or MEASURABLE.search(title)):
