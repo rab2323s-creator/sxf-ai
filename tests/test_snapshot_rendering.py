@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import inspect
 import importlib.util
 import json
 import subprocess
@@ -109,7 +110,21 @@ def unit_test():
         assert digest(module.ARCHIVE_OUT) == first_archive_hash
         assert digest(module.OUT) == first_news_hash
 
-    print("PASS: offline rendering and alias synchronization are safe and idempotent")
+    # Signal articles decide model links from existing /models/ pages.
+    # A fresh model release must not change its article on the second render.
+    builder_source = inspect.getsource(module.build_discovery_pages)
+    route_markers = (
+        "for name, matched in model_groups(items).items():",
+        "build_catalog_model_pages(items)",
+        "ensure_catalog_model_histories()",
+        "for item in legacy_items:",
+    )
+    route_positions = [builder_source.index(marker) for marker in route_markers]
+    assert route_positions == sorted(route_positions), (
+        "Model routes must be generated before signal articles to keep rebuilds stable"
+    )
+
+    print("PASS: offline rendering, route order and alias synchronization are safe and idempotent")
 
 
 def main():

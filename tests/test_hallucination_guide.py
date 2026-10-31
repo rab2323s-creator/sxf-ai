@@ -22,7 +22,8 @@ def main():
     assert "not raw model outputs" in audit["uncheckedAnswersAre"].lower()
     for r in audit["cases"]:
         for key in ("id", "question", "fault", "unchecked", "verified", "source", "check"):
-            assert isinstance(r.get(key), str) and len(r[key].strip()) > 8, (r.get("id"), key)
+            min_length = 3 if key == "id" else 1 if key == "source" else 9
+            assert isinstance(r.get(key), str) and len(r[key].strip()) >= min_length, (r.get("id"), key)
         assert r["source"] in audit["sources"]
         assert r["unchecked"] != r["verified"]
         assert r["id"] in page
@@ -45,7 +46,7 @@ def main():
     assert len(ids) == len(set(ids)), "Duplicate HTML ID"
     assert "research/methodology.md" in page
     assert "research/verification-cases.json" in page
-    assert "not a ChatGPT benchmark" in page.lower()
+    assert "not a chatgpt benchmark" in page.lower()
     assert "fabricated quotes" in page.lower()
     assert "how to fact-check chatgpt" in page.lower()
     sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")

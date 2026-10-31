@@ -10926,11 +10926,6 @@ def build_discovery_pages(items, current_items):
     super_agents_guide_path.mkdir(parents=True, exist_ok=True)
     (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
     (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=legacy_items), encoding="utf-8")
-    for item in legacy_items:
-        path = SIGNALS_DIR / item["signal_slug"]
-        path.mkdir(parents=True, exist_ok=True)
-        (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
-
     groups = topic_groups(items)
     (TOPICS_DIR / "index.html").write_text(topics_index_html(groups), encoding="utf-8")
     for slug, (topic, matched) in groups.items():
@@ -10954,6 +10949,13 @@ def build_discovery_pages(items, current_items):
 
     build_catalog_model_pages(items)
     ensure_catalog_model_histories()
+
+    # Render articles only after model routes exist. Model links are based on
+    # existing model pages; rendering earlier makes the second pass different.
+    for item in legacy_items:
+        path = SIGNALS_DIR / item["signal_slug"]
+        path.mkdir(parents=True, exist_ok=True)
+        (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
