@@ -11027,11 +11027,9 @@ def build_discovery_pages(items, current_items):
             encoding="utf-8",
         )
 
-    issue_date = datetime.now(timezone.utc).date()
-    issue_dir = BRIEF_DIR / issue_date.isoformat()
-    issue_dir.mkdir(parents=True, exist_ok=True)
-    (issue_dir / "index.html").write_text(brief_issue_html(current_items, issue_date), encoding="utf-8")
-    (BRIEF_DIR / "index.html").write_text(brief_index_html(current_items, issue_date), encoding="utf-8")
+    # SXF Brief is a human-curated publication. This automatic feed build must
+    # never change its landing page, editorial selection, or dated editions.
+    # Update brief/index.html manually only after editorial approval.
 def content_lastmod(items, fallback="2026-09-26"):
     from sitemap_generation import content_lastmod as _content_lastmod
     return _content_lastmod(items, parse_date, fallback)
