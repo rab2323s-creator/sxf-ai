@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
 from news_relevance import assess_news, primary_category, partition_news_rows
+from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
@@ -2316,7 +2317,7 @@ def discoverable_news(items):
     """
     return [
         item for item in items
-        if assess_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
+        if assess_editorial_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
     ]
 
 
@@ -2804,7 +2805,7 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
-        assess_news=assess_news,
+        assess_news=assess_editorial_news,
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -11303,7 +11304,7 @@ def main():
 
     # Reject noise BEFORE adding new articles to the archive or sitemap.
     # Previously published URLs are preserved separately as legacy records.
-    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming)
+    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming, assess_editorial_news)
     print(
         f"Editorial ingestion gate: accepted={len(incoming)}, "
         f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
