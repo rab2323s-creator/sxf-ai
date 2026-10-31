@@ -6,6 +6,69 @@ Generated archive and news snapshots are not manually edited.
 """
 
 REVIEWED_NEWS = {
+    "https://openai.com/index/gpt-6-for-everyone": {
+        "source": "OpenAI",
+        "title": "GPT-6 and Intelligent UI for everyone",
+        "status": "accept",
+        "category": "Tools",
+        "rationale": "User-approved GPT-6 rollout and Intelligent UI announcement",
+    },
+    "https://openai.com/index/introducing-dots": {
+        "source": "OpenAI",
+        "title": "Introducing dots",
+        "status": "accept",
+        "category": "Tools",
+        "rationale": "User-approved launch of proactive OpenAI dots assistants",
+    },
+    "https://huggingface.co/blog/mistral-large4": {
+        "source": "Hugging Face",
+        "title": "Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+        "status": "accept",
+        "category": "Models",
+        "rationale": "User-approved Mistral Large 4 model release",
+    },
+    "https://huggingface.co/blog/mps-pytorch-2-15": {
+        "source": "Hugging Face",
+        "title": "MPS in PyTorch 2.15",
+        "status": "accept",
+        "category": "Tools",
+        "rationale": "User-approved technical PyTorch 2.15 MPS backend improvements",
+    },
+    "https://huggingface.co/blog/hf-torchtpu": {
+        "source": "Hugging Face",
+        "title": "Hugging Face ❤️ TorchTPU: TPUs, Natively",
+        "status": "accept",
+        "category": "Tools",
+        "rationale": "User-approved Hugging Face TorchTPU platform support",
+    },
+    "https://openai.com/index/updated-model-spec": {
+        "source": "OpenAI",
+        "title": "An updated Model Spec for more capable and beneficial AI",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved updated OpenAI Model Spec behavior and governance",
+    },
+    "https://openai.com/index/building-scientific-understanding-with-academic-communities": {
+        "source": "OpenAI",
+        "title": "Working with academic communities to build scientific understanding",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved scientific model research results and verification",
+    },
+    "https://openai.com/index/how-we-will-do-better-for-australia": {
+        "source": "OpenAI",
+        "title": "How we will do better for Australia",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved cybersecurity incident response and safeguards",
+    },
+    "https://research.google/blog/earth-ais-planetary-geospatial-foundation-models-for-global-public-health/": {
+        "source": "Google Research",
+        "title": "Unlocking Earth AI’s planetary geospatial foundation models for global public health",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved geospatial foundation-model research for public health",
+    },
     "https://huggingface.co/blog/reflection-beam": {
         "source": "Hugging Face",
         "title": "Welcome Beam: a 501B open model you can own, customize, and scale",

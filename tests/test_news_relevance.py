@@ -101,9 +101,9 @@ class NewsRelevanceTests(unittest.TestCase):
         self.assertEqual([x["url"] for x in rejected], ["https://x.test/noise"])
         self.assertEqual(len(rows), 3)
 
-    def test_all_eighteen_reviewed_records(self):
-        self.assertEqual(len(REVIEWED_NEWS), 18)
-        self.assertEqual(sum(x["status"] == "accept" for x in REVIEWED_NEWS.values()), 16)
+    def test_all_reviewed_records(self):
+        self.assertEqual(len(REVIEWED_NEWS), 27)
+        self.assertEqual(sum(x["status"] == "accept" for x in REVIEWED_NEWS.values()), 25)
         self.assertEqual(sum(x["status"] == "reject" for x in REVIEWED_NEWS.values()), 2)
         for url, item in REVIEWED_NEWS.items():
             with self.subTest(url=url):

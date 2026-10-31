@@ -11341,6 +11341,14 @@ def main():
             "first_seen": previous.get("first_seen") or observed_at,
             "last_seen": observed_at,
         }
+    # Clear individually approved or rejected cases from the pending queue;
+    # leave only items which still require review. Preserve source-specific
+    # approvals in editorial_review.py as the authoritative audit trail.
+    prior_queue = {
+        url: row for url, row in prior_queue.items()
+        if assess_editorial_news(row.get("title", ""), row.get("summary", ""),
+                                 row.get("source", ""), url).status == "review"
+    }
     review_rows = sorted(prior_queue.values(), key=lambda row: (row.get("published") or "", row["url"]), reverse=True)[:200]
     EDITORIAL_REVIEW_QUEUE_PATH.parent.mkdir(parents=True, exist_ok=True)
     EDITORIAL_REVIEW_QUEUE_PATH.write_text(json.dumps({
