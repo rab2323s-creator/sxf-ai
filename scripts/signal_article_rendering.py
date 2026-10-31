@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
-from signal_editorial_reviews import get_review, render_review_evidence
+from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
@@ -293,6 +293,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
         )
     editorial = sol_copilot.EDITORIAL if is_sol_copilot_deep_dive else license_reference.EDITORIAL if is_license_deep_dive else review["editorial"] if review else item.get("editorial") or editorial_units(item)
     evidence_html = render_review_evidence(review)
+    analysis_html = render_review_analysis(review)
     if is_license_deep_dive:
         deep_dive_html = license_reference.BODY_HTML
     if is_sol_copilot_deep_dive:
@@ -332,6 +333,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
           </aside>
         </section>
         {deep_dive_html}
+        {analysis_html}
         {evidence_html}
         <section class="signal-taxonomy shell">
           <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
