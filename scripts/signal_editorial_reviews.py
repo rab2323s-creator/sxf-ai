@@ -30,3 +30,30 @@ def render_review_evidence(review):
             '<div class="deep-dive-facts">' + "".join(cards) + '</div>'
             '<div class="deep-dive-section" style="margin-top:24px"><p class="eyebrow">LIMITATIONS</p>'
             '<p>' + escape(review["limitations"]) + '</p></div></section>')
+
+
+def render_review_analysis(review):
+    """Render source-grounded editorial analysis only for reviews with an analysis section."""
+    if not review or not review.get("analysis"):
+        return ""
+    sections = []
+    for i, section in enumerate(review["analysis"], 1):
+        heading = escape(section["heading"])
+        paragraphs = "".join("<p>" + escape(paragraph) + "</p>" for paragraph in section["paragraphs"])
+        source = escape(section["source"], quote=True)
+        sections.append(
+            '<article class="deep-dive-section">'
+            + '<p class="eyebrow">TECHNICAL ANALYSIS / ' + str(i).zfill(2) + '</p>'
+            + '<h2>' + heading + '</h2>' + paragraphs
+            + '<p><a href="' + source
+            + '" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p>'
+            + '</article>'
+        )
+    return (
+        '<section class="signal-deep-dive shell signal-editorial-analysis" aria-labelledby="signal-technical-analysis-title">'
+        '<div class="intel-section-head"><div><p class="eyebrow">SXF RESEARCH EXPLAINER</p>'
+        '<h2 id="signal-technical-analysis-title">What the technical evidence means.</h2></div>'
+        '<span>Source-grounded analysis</span></div>'
+        + "".join(sections)
+        + '</section>'
+    )
