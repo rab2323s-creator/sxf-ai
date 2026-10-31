@@ -46,6 +46,17 @@ def main():
         assert '<h1>' + review["h1"] + '</h1>' in unescape(html)
         assert 'signal-evidence" aria-labelledby="signal-evidence-title"' in html
         assert review["limitations"] in unescape(html)
+        if review.get("analysis"):
+            assert 'signal-editorial-analysis" aria-labelledby="signal-technical-analysis-title"' in html
+            assert len(review["analysis"]) >= 3, slug
+            assert len(review["evidence"]) >= 5, slug
+            assert all(len(block["paragraphs"]) >= 2 for block in review["analysis"]), slug
+            for block in review["analysis"]:
+                assert block["heading"] in unescape(html), slug
+                for paragraph in block["paragraphs"]:
+                    assert paragraph in unescape(html), slug
+                assert block["source"] in review["sources"], slug
+
         for evidence in review["evidence"]:
             assert evidence["label"] in unescape(html)
         schema = json.loads(html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0])["@graph"]
