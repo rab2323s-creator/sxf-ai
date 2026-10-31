@@ -6,6 +6,55 @@ Generated archive and news snapshots are not manually edited.
 """
 
 REVIEWED_NEWS = {
+    "https://huggingface.co/blog/anydecisionmodel": {
+        "source": "Hugging Face",
+        "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
+        "status": "accept",
+        "category": "Models",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://openai.com/index/decisions-api": {
+        "source": "OpenAI",
+        "title": "Build more responsive apps with the Decisions API",
+        "status": "accept",
+        "category": "Tools",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://openai.com/index/securing-our-frontier-model-training-environment": {
+        "source": "OpenAI",
+        "title": "Securing our frontier model training environment",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://openai.com/index/scaling-ai-research-for-complex-biological-data": {
+        "source": "OpenAI",
+        "title": "Using thousands of AI agents to uncover new leads in biological data",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://huggingface.co/blog/meta-muse-spark-open": {
+        "source": "Hugging Face",
+        "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+        "status": "accept",
+        "category": "Open Source",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/": {
+        "source": "Google Research",
+        "title": "Grounding AI agents in biological reality: Building blocks for autonomous wet labs",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
+    "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign": {
+        "source": "OpenAI",
+        "title": "Disrupting a coordinated model-distillation campaign",
+        "status": "accept",
+        "category": "Research",
+        "rationale": "User-approved source-backed technical signal with a reviewed evidence brief",
+    },
     "https://openai.com/index/gpt-6-for-everyone": {
         "source": "OpenAI",
         "title": "GPT-6 and Intelligent UI for everyone",
