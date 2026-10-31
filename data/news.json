@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T15:40:45.747488Z",
+  "updated_at": "2026-10-31T16:07:01.648960Z",
   "items": [
     {
       "title": "Community safety report and new protections for teens",
@@ -51,6 +51,17 @@
       "category": "Models",
       "tags": [],
       "signal_score": 32
+    },
+    {
+      "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
+      "summary": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms. Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it. Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local.",
+      "url": "https://huggingface.co/blog/anydecisionmodel",
+      "signal_url": "https://sxf.si/signals/introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752/",
+      "source": "Hugging Face",
+      "published": "2026-10-29T00:00:00Z",
+      "category": "Models",
+      "tags": [],
+      "signal_score": 50
     },
     {
       "title": "Route and orchestrate models with GitHub Copilot Fusion",
@@ -193,6 +204,19 @@
       "signal_score": 31
     },
     {
+      "title": "Securing our frontier model training environment",
+      "summary": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments. Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development. Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist.",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
+      "source": "OpenAI",
+      "published": "2026-10-23T10:00:00Z",
+      "category": "Research",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 45
+    },
+    {
       "title": "Anima helps clinics cut call waits by 75% with GPT-6 and GPT-Live",
       "summary": "Anima expands what care teams can do with OpenAI models, giving them more capacity to respond to patients.",
       "url": "https://openai.com/index/anima",
@@ -204,6 +228,19 @@
         "OpenAI"
       ],
       "signal_score": 46
+    },
+    {
+      "title": "Build more responsive apps with the Decisions API",
+      "summary": "OpenAI announced a Decisions API designed for focused decisions within application workflows. Developers can evaluate a targeted decision interface for routing and classification instead of assuming every task needs unrestricted text generation. Confirm SDK and REST availability, supported task types, official pricing, response format, latency and human review for important decisions.",
+      "url": "https://openai.com/index/decisions-api",
+      "signal_url": "https://sxf.si/signals/build-more-responsive-apps-with-the-decisions-api-27825e3/",
+      "source": "OpenAI",
+      "published": "2026-10-22T19:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 38
     },
     {
       "title": "NVIDIA Kumo Relational Outperforms Supervised Machine Learning on Relational Data, No Training Required",
@@ -266,6 +303,20 @@
       "signal_score": 38
     },
     {
+      "title": "Using thousands of AI agents to uncover new leads in biological data",
+      "summary": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions. This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility. Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations.",
+      "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+      "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
+      "source": "OpenAI",
+      "published": "2026-10-21T04:50:00Z",
+      "category": "Research",
+      "tags": [
+        "AI Agents",
+        "OpenAI"
+      ],
+      "signal_score": 41
+    },
+    {
       "title": "Hugging Face ❤️ TorchTPU: TPUs, Natively",
       "summary": "We’re on a journey to advance and democratize artificial intelligence through open source and open science.",
       "url": "https://huggingface.co/blog/hf-torchtpu",
@@ -299,6 +350,19 @@
         "GitHub Copilot"
       ],
       "signal_score": 38
+    },
+    {
+      "title": "Grounding AI agents in biological reality: Building blocks for autonomous wet labs",
+      "summary": "Google Research published work on grounding AI agent behavior in the realities of biological wet-lab experimentation. Physical experiments require measurements, safety checks and feedback loops. Agent planning alone is not equivalent to reliable laboratory execution. Check actual demonstrated lab tasks, human supervision, experimental feedback, reproducibility, failure handling and safety constraints.",
+      "url": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/",
+      "signal_url": "https://sxf.si/signals/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3/",
+      "source": "Google Research",
+      "published": "2026-10-16T18:11:34Z",
+      "category": "Research",
+      "tags": [
+        "AI Agents"
+      ],
+      "signal_score": 41
     },
     {
       "title": "Welcome Beam: a 501B open model you can own, customize, and scale",
@@ -345,6 +409,20 @@
       "category": "Models",
       "tags": [],
       "signal_score": 50
+    },
+    {
+      "title": "Welcome Muse Spark Open: open-weight frontier multimodal mixture-of-experts model from Meta",
+      "summary": "Hugging Face announced Muse Spark Open as a named Meta multimodal mixture-of-experts model offered with open weights. Access to model weights may expand deployment and evaluation options for teams comparing multimodal AI systems. Review its model card for actual weights, license restrictions, modalities, model size, context length, GPU needs and independently reproduced evaluations.",
+      "url": "https://huggingface.co/blog/meta-muse-spark-open",
+      "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
+      "source": "Hugging Face",
+      "published": "2026-10-15T00:00:00Z",
+      "category": "Open Source",
+      "tags": [
+        "Multimodal AI",
+        "Open Source AI"
+      ],
+      "signal_score": 44
     },
     {
       "title": "HiRO-ACEv2: Simulating extreme weather at 3 km resolution for a fraction of the cost",
@@ -410,16 +488,16 @@
     "archive_counts": {
       "OpenAI": 164,
       "Google AI": 24,
-      "Hugging Face": 60,
+      "Hugging Face": 61,
       "GitHub": 101,
       "Google Research": 16
     },
     "current_counts": {
-      "OpenAI": 8,
+      "OpenAI": 11,
       "Google AI": 1,
-      "Hugging Face": 13,
+      "Hugging Face": 15,
       "GitHub": 8,
-      "Google Research": 2
+      "Google Research": 3
     },
     "sources": {
       "OpenAI": {
@@ -435,14 +513,14 @@
         "age_rejection_count": 1256,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 8,
+        "publish_count": 11,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "Google AI": {
@@ -465,7 +543,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "Hugging Face": {
@@ -481,14 +559,14 @@
         "age_rejection_count": 865,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 13,
+        "publish_count": 15,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "GitHub": {
@@ -511,7 +589,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "Google Research": {
@@ -527,14 +605,14 @@
         "age_rejection_count": 56,
         "relevance_rejection_count": 36,
         "quality_rejection_count": 0,
-        "publish_count": 2,
+        "publish_count": 3,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "Anthropic": {
@@ -557,7 +635,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -582,7 +660,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "xAI": {
@@ -605,7 +683,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       },
       "Microsoft": {
@@ -628,7 +706,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-10-31T15:39:54.718440Z",
+        "last_successful_fetch": "2026-10-31T16:06:19.632620Z",
         "errors": []
       }
     },

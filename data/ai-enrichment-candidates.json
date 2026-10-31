@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "380dde406dc360247d3e16ddf1c6844127bd0fcb975e6704d40764f587086e56",
+  "snapshot_hash": "0455550fe9f69434ec447ad25bc0ea78427e65ecfa4e73a52b8dedc30e2e5c19",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -15,6 +15,78 @@
   "candidates": [
     {
       "rank": 1,
+      "signal_slug": "introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752",
+      "signal_url": "https://sxf.si/signals/introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752/",
+      "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
+      "source": "Hugging Face",
+      "category": "Models",
+      "published": "2026-10-29T00:00:00Z",
+      "priority_score": 175,
+      "evidence_hash": "6308d830a986ba008505b9b22851123188c6e34d359d501b7ef267efb3eba87d",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
+          "url": "https://huggingface.co/blog/anydecisionmodel",
+          "signal_url": "https://sxf.si/signals/introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752/",
+          "source": "Hugging Face",
+          "published": "2026-10-29T00:00:00Z",
+          "category": "Models",
+          "tags": [],
+          "summary": "New AnySpeechRecognizer and AnyDecisionModel projects target speech and decision workflows on Apple platforms. Speech and decision inference closer to Apple devices may support privacy-focused and offline apps if the released checkpoints and runtimes permit it. Verify the model cards, checkpoint and license availability, supported Apple hardware, recognition accuracy, latency and whether deployment is fully local.",
+          "signal_score": 50,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "durable-intelligence-layer",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://huggingface.co/blog/anydecisionmodel"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 2,
       "signal_slug": "gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf",
       "signal_url": "https://sxf.si/signals/gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf/",
       "title": "GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases",
@@ -232,7 +304,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 2,
+      "rank": 3,
       "signal_slug": "github-copilot-app-universe-releases-f3aa6db",
       "signal_url": "https://sxf.si/signals/github-copilot-app-universe-releases-f3aa6db/",
       "title": "GitHub Copilot app, Universe releases",
@@ -305,7 +377,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 3,
+      "rank": 4,
       "signal_slug": "github-copilot-in-vs-code-universe-releases-00c85ac",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-universe-releases-00c85ac/",
       "title": "GitHub Copilot in VS Code, Universe releases",
@@ -379,7 +451,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 4,
+      "rank": 5,
       "signal_slug": "gpt-6-1-terra-in-github-copilot-344482f",
       "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
       "title": "GPT-6.1 Terra in GitHub Copilot",
@@ -594,7 +666,155 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 6,
+      "signal_slug": "securing-our-frontier-model-training-environment-48e2274",
+      "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
+      "title": "Securing our frontier model training environment",
+      "source": "OpenAI",
+      "category": "Research",
+      "published": "2026-10-23T10:00:00Z",
+      "priority_score": 130,
+      "evidence_hash": "1178bc9b80eb1cc74dca7348d6c85a415213328d0465195073a52650c9329a33",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Securing our frontier model training environment",
+          "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+          "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
+          "source": "OpenAI",
+          "published": "2026-10-23T10:00:00Z",
+          "category": "Research",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "OpenAI published its approach to containment and safeguards in frontier-model training and evaluation environments. Training infrastructure and model weights are sensitive assets. Understanding isolation and access controls informs the threat model for frontier AI development. Determine which compute systems were covered, what offline means in practice, what tests were performed and what third-party audits exist.",
+          "signal_score": 45,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "durable-intelligence-layer",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/securing-our-frontier-model-training-environment"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 7,
+      "signal_slug": "using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62",
+      "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
+      "title": "Using thousands of AI agents to uncover new leads in biological data",
+      "source": "OpenAI",
+      "category": "Research",
+      "published": "2026-10-21T04:50:00Z",
+      "priority_score": 126,
+      "evidence_hash": "c4f3d53c9f02918379849bd96447a8118a32e67591ef996f2451c425930dc329",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Using thousands of AI agents to uncover new leads in biological data",
+          "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+          "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
+          "source": "OpenAI",
+          "published": "2026-10-21T04:50:00Z",
+          "category": "Research",
+          "tags": [
+            "AI Agents",
+            "OpenAI"
+          ],
+          "summary": "The collaboration used large-scale agent coordination to search complex biological datasets for possible research directions. This is an example of agent systems aiding scientific hypothesis generation, but the real impact depends on experiments and reproducibility. Look for published datasets, study methods, agent baselines, validated experimental results, and checks against spurious correlations.",
+          "signal_score": 41,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "durable-intelligence-layer",
+            "high-value-topic",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 8,
       "signal_slug": "repository-plugin-defaults-and-enterprise-plugin-controls-generally-av-eb90692",
       "signal_url": "https://sxf.si/signals/repository-plugin-defaults-and-enterprise-plugin-controls-generally-av-eb90692/",
       "title": "Repository plugin defaults and enterprise plugin controls generally available",
@@ -667,7 +887,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 9,
       "signal_slug": "github-copilot-assisted-permissions-generally-available-e3d7ad0",
       "signal_url": "https://sxf.si/signals/github-copilot-assisted-permissions-generally-available-e3d7ad0/",
       "title": "GitHub Copilot assisted permissions generally available",
@@ -829,7 +1049,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 10,
       "signal_slug": "global-default-for-copilot-features-generally-available-658f804",
       "signal_url": "https://sxf.si/signals/global-default-for-copilot-features-generally-available-658f804/",
       "title": "Global default for Copilot features generally available",
@@ -867,360 +1087,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-22-global-default-for-copilot-features-generally-available"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 8,
-      "signal_slug": "how-we-detect-frontier-model-misalignment-d28967f",
-      "signal_url": "https://sxf.si/signals/how-we-detect-frontier-model-misalignment-d28967f/",
-      "title": "How we detect frontier model misalignment",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-29T09:00:00Z",
-      "priority_score": 123,
-      "evidence_hash": "9592d93011edb71825881d1c5200c62a5a004d249d6a1346b87fce499b00b716",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "How we detect frontier model misalignment",
-          "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
-          "signal_url": "https://sxf.si/signals/how-we-detect-frontier-model-misalignment-d28967f/",
-          "source": "OpenAI",
-          "published": "2026-10-29T09:00:00Z",
-          "category": "Research",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "OpenAI uses layered monitoring to detect frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.",
-          "signal_score": 55,
-          "seo_quality_score": 53,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/how-we-detect-frontier-model-misalignment"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
-      "signal_slug": "greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8",
-      "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
-      "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
-      "source": "OpenAI",
-      "category": "Tools",
-      "published": "2026-10-26T22:00:00Z",
-      "priority_score": 123,
-      "evidence_hash": "2169bf952e143b71c64de6dd7688fa5a82e5204e46848e2a0b3373f7065a2673",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
-        },
-        "signal": {
-          "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
-          "url": "https://openai.com/index/greptile-code-review-codex-astra",
-          "signal_url": "https://sxf.si/signals/greptile-takes-bug-detection-beyond-code-review-with-gpt-6-astra-250e5d8/",
-          "source": "OpenAI",
-          "published": "2026-10-26T22:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "Coding AI",
-            "OpenAI"
-          ],
-          "summary": "How Greptile uses GPT-6 Astra to test user workflows, Daybreak to strengthen security, and Codex to reduce rework.",
-          "signal_score": 42,
-          "seo_quality_score": 61,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "named-model",
-            "high-value-topic"
-          ]
-        },
-        "models": [
-          {
-            "model_id": "gpt-6-astra",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Astra",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-30",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
-            "pricing_standard": {
-              "start": "2026-09-03",
-              "end": null,
-              "input": 10,
-              "cached_input": 1,
-              "cache_write": 12.5,
-              "output": 50
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-09-27",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-astra",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 9,
-                "type": "baseline",
-                "model_id": "gpt-6-astra",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Astra",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-30",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-03",
-                        "end": null,
-                        "input": 10,
-                        "cached_input": 1,
-                        "cache_write": 12.5,
-                        "output": 50
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_cd339bfc38a22ab47b70",
-                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
-              }
-            ]
-          }
-        ],
-        "source_urls": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra",
-          "https://developers.openai.com/api/docs/pricing",
-          "https://openai.com/index/greptile-code-review-codex-astra"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "how-check-point-accelerates-vulnerability-research-with-daybreak-8cb3332",
-      "signal_url": "https://sxf.si/signals/how-check-point-accelerates-vulnerability-research-with-daybreak-8cb3332/",
-      "title": "How Check Point accelerates vulnerability research with Daybreak",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-27T00:00:00Z",
-      "priority_score": 115,
-      "evidence_hash": "969ac754a658cd7fcb57a925da5112234912bef00ba4ae6c64c3c2053824fc90",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "How Check Point accelerates vulnerability research with Daybreak",
-          "url": "https://openai.com/index/check-point-daybreak",
-          "signal_url": "https://sxf.si/signals/how-check-point-accelerates-vulnerability-research-with-daybreak-8cb3332/",
-          "source": "OpenAI",
-          "published": "2026-10-27T00:00:00Z",
-          "category": "Research",
-          "tags": [
-            "Research",
-            "OpenAI"
-          ],
-          "summary": "With OpenAI Daybreak, Check Point speeds up the research behind new security protections, enabling its analysts to turn vulnerability intelligence into customer defenses faster.",
-          "signal_score": 43,
-          "seo_quality_score": 57,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/check-point-daybreak"
         ]
       },
       "requested_output": {
