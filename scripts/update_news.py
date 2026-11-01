@@ -3835,9 +3835,9 @@ def page_header(active=""):
     """Compatibility entrypoint for site navigation."""
     return render_page_header(active)
 
-def page_footer():
+def page_footer(home=False):
     """Compatibility entrypoint for the site footer."""
-    return render_page_footer()
+    return render_page_footer(home=home)
 
 def normalize_static_shells():
     header_pattern = re.compile(r'<header class="site-header">.*?</header>', re.S)
@@ -3850,7 +3850,7 @@ def normalize_static_shells():
 
         page = path.read_text(encoding="utf-8")
         page, header_updates = header_pattern.subn(lambda _match: page_header(active), page, count=1)
-        page, footer_updates = footer_pattern.subn(lambda _match: page_footer(), page, count=1)
+        page, footer_updates = footer_pattern.subn(lambda _match: page_footer(home=(path == INDEX)), page, count=1)
 
         if header_updates != 1:
             raise RuntimeError(f"Expected exactly one site header in {path}, found {header_updates}")
@@ -11488,6 +11488,8 @@ def main():
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     render_site(archive, current)
+    from footer_attribution import normalize_footer_attribution
+    normalize_footer_attribution(ROOT)
     print(
         f"Wrote {len(current)} current signals from {len(archive)} archived signals; "
         f"enriched {enriched} summaries; source errors: {len(errors)}; "
