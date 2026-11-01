@@ -75,6 +75,8 @@ jobs:
         run: python tests/test_lfm25_vl_dspark_model.py
       - name: LFM3 verified model family SEO and content regression
         run: python tests/test_lfm3_model.py
+      - name: LFM2.5 24B MoE source-backed model and SEO regression
+        run: python tests/test_lfm25_24b_model.py
       - name: GPT-6 Intelligent UI Signal SEO and content regression
         run: python tests/test_gpt6_intelligent_ui_signal.py
       - name: GitHub license-compliance page SEO and source integrity
