@@ -57,6 +57,10 @@
           {
             "title": "Read the SXF AI agent security guide",
             "url": "/guides/ai-agent-security/"
+          },
+          {
+            "title": "AI agent reliability: metrics beyond benchmarks",
+            "url": "/research/ai-agent-reliability/"
           }
         ],
         "signal_url": "#story-1"
@@ -95,7 +99,7 @@
               ]
             },
             {
-              "heading": "The decision for self-hosters",
+              "heading": "Should teams self-host Mistral Large 4?",
               "paragraphs": [
                 "A model with approximately one trillion total parameters is not a typical laptop deployment. Total checkpoint storage, expert distribution, available accelerators, KV cache, runtime support and latency all affect the actual bill. Active compute may be much smaller than total parameter storage in a mixture-of-experts design, but the inactive experts do not simply vanish from the weights.",
                 "For enterprises, a sensible pilot checks the precise model revision, the license, required VRAM, a fixed battery of coding and security tasks, and the cost of reviewing model-generated fixes. The concrete breakthrough is the option to run and adapt a frontier-scale model under local operational control; affordability still needs to be demonstrated."
@@ -111,6 +115,10 @@
             {
               "title": "AI model licensing explained",
               "url": "/guides/ai-model-licensing/"
+            },
+            {
+              "title": "Compare open-source and open-weight AI models",
+              "url": "/guides/open-source-ai-models/"
             }
           ],
           "signal_url": "#story-2"
@@ -148,7 +156,7 @@
               ]
             },
             {
-              "heading": "How SXF reads the milestone",
+              "heading": "What Google's orbital AI test means",
               "paragraphs": [
                 "Project Suncatcher is best understood as infrastructure feasibility research. The decisive metric in the next stage is not how impressive one generated poem sounds but whether chips, cooling, error handling and connections remain reliable over long periods in orbit.",
                 "There is also a broader economics question: cheap access to solar energy does not erase launch, maintenance, thermal-control or communications costs. Before claiming space AI is greener or cheaper than terrestrial computation, independent lifecycle and system-level comparisons will be needed."
@@ -254,7 +262,7 @@
               ]
             },
             {
-              "heading": "What teams should test before relying on it",
+              "heading": "What to check before using Gemini file editing",
               "paragraphs": [
                 "A sensible evaluation uses representative files: a PDF with citations, a spreadsheet with formulas and a slide deck with carefully placed elements. Ask whether content remains editable, formulas survive revisions, layout is preserved and the final export matches what reviewers approved.",
                 "For sensitive information, teams should also inspect their data-handling and sharing settings. SXF's editorial view is that the productivity leap comes from a reliable create-review-revise loop, not from promising that AI-generated material no longer needs proofreading."
@@ -275,23 +283,23 @@
           "signal_url": "#story-5"
         }
       ],
-      "big_picture_heading": "A frontier week measured by access, control and evidence.",
-      "big_picture": "New models raise expectations in coding and cyberdefense, Mistral extends self-hosting options, an orbital TPU proves a research milestone, publishers gain a proposed training-choice standard, and Gemini simplifies editing. The shared test is whether announced capabilities hold up in real workflows, with clear costs, safeguards and limitations.",
+      "big_picture_heading": "AI models face the real-world test: reliability, access and evidence.",
+      "big_picture": "Gemini 4 Carbon raises expectations for AI coding agents and security benchmarks. Mistral Large 4 expands open-weight model options, while Google's orbital TPU marks an early infrastructure experiment. OpenAI proposes clearer AI training preferences for publishers, and Gemini adds document-editing tools. The decisive questions are reliability, access, cost, safeguards and what the original evidence actually proves.",
       "watch": [
         {
-          "label": "Carbon's wider developer access",
+          "label": "Gemini 4 Carbon developer access",
           "icon": "◇"
         },
         {
-          "label": "Independent Mistral Large 4 evaluations",
+          "label": "Independent Mistral Large 4 benchmarks",
           "icon": "⬡"
         },
         {
-          "label": "Orbital TPU stress-testing results",
+          "label": "Google's orbital TPU reliability tests",
           "icon": "▱"
         },
         {
-          "label": "Final AI training preference syntax",
+          "label": "Adoption of AI training preference standards",
           "icon": "♧"
         }
       ]
@@ -319,5 +327,6 @@
       "url": "/brief/2026-10-25/"
     }
   ],
-  "image_alt_policy": "Fixed editorial illustrations: the alt attribute describes what is actually visible, with natural generic AI context only where appropriate. Never attach it to a changing headline, model, company or product. CSS background images remain decorative."
+  "image_alt_policy": "Fixed editorial illustrations: the alt attribute describes what is actually visible, with natural generic AI context only where appropriate. Never attach it to a changing headline, model, company or product. CSS background images remain decorative.",
+  "reader_facing_copy_policy": "Keep visible text useful to the reader, accurate to the current edition and specific to the news. Label original source dates unambiguously; avoid generic editorial notes, keyword stuffing and unimplemented subscription or archive claims. Keep this data file and the published HTML in sync at every manual update."
 }
