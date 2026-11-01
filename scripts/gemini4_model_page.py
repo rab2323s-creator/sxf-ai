@@ -1,0 +1,352 @@
+"""Google Gemini 4 family reference, verified from primary sources, November 2026.
+
+Editorial intent: separate publicly available Gemini 4 Argon from restricted
+Gemini 4 Carbon. The interactive SXF estimator performs local arithmetic,
+not live billing, API access or an inference benchmark.
+"""
+from __future__ import annotations
+
+from html import escape
+
+SLUG = "gemini-4"
+URL = "https://sxf.si/models/gemini-4/"
+TITLE = "Gemini 4: Argon vs Carbon, Pricing, Context & API | SXF"
+DESCRIPTION = ("Google Gemini 4 explained: Argon vs Carbon, 1M context, long decode, "
+               "API pricing through Nov 30, benchmarks, supported features, "
+               "Python quickstart and SXF token cost planner.")
+PUBLISHED = "2026-10-13"
+MODIFIED = "2026-11-01"
+SOURCES = {
+    "model_card": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+    "model_spec": "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+    "latest": "https://ai.google.dev/gemini-api/docs/latest-model",
+    "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+    "argon_launch": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+    "initial": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/",
+    "carbon": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+    "gemini_app": "https://gemini.google/release-notes/",
+    "thinking": "https://ai.google.dev/gemini-api/docs/thinking/",
+    "api": "https://ai.google.dev/gemini-api/docs/",
+}
+# Scores from the October 2026 Google DeepMind Gemini 4 Argon model card,
+# deliberately including comparisons that Argon loses. No SXF benchmark claimed.
+BENCHMARKS = [
+    ("Vals Index", "Knowledge work", "68.9%", "63.1%", "67.0%"),
+    ("AutomationBench", "Agents", "51.3%", "41.4%", "42.5%"),
+    ("DeepSWE v1.1", "Coding", "77.9%", "74.1%", "74.2%"),
+    ("FrontierSWE v2", "Coding", "55.0%", "65.5%", "62.3%"),
+    ("Terminal-bench 4.0", "Terminal agents", "57.4%", "58.2%", "66.4%"),
+    ("LABBench 2", "Science", "88.8%", "85.4%", "73.1%"),
+    ("GraphWalks 256K–1M (F1)", "Long context", "84.2%", "71.8%", "66.8%"),
+    ("Agent's Last Exam", "Computer use", "39.5%", "34.2%", "38.2%"),
+    ("OSWorld-2.0 offline partial score", "Computer use", "69.2%", "72.6%", "—"),
+    ("CWE-bench v1", "Security patching", "68.0%", "68.0%", "67.0%"),
+]
+FAQ = [
+    ("What is Gemini 4?", "Gemini 4 is Google DeepMind's frontier multimodal reasoning model family. Gemini 4 Argon entered broader Google and API availability on October 13, 2026; Gemini 4 Carbon was announced October 28 with initially restricted cyber-defender access."),
+    ("Is Gemini 4 Argon available in the API?", "Yes. The stable public model identifier is gemini-4-argon. Google documents it in the Gemini API and Google AI Studio, subject to paid account eligibility and usage limits."),
+    ("Can anyone access Gemini 4 Carbon?", "Not as a generally available public Gemini API model as of November 1, 2026. Google's October 28 announcement describes limited early access to selected cyber defenders and trusted partners; do not invent a public Carbon endpoint."),
+    ("What is the Gemini 4 Argon context window?", "Argon has a unified 1,048,576-token window shared by prompt input, thinking and output. The default synchronous output ceiling is 65,536 tokens, with longer decode available through background execution."),
+    ("What does Gemini 4 Argon cost per million tokens?", "Through November 30, 2026 Google advertises $2 per million input tokens, $10 per million output tokens including thinking, and $0.10 per million implicitly cached input tokens. From December 1 the published rates rise to $4, $20 and $0.20 respectively; consult current billing."),
+    ("Is Gemini 4 Argon free?", "No. Google lists Gemini 4 Argon as unavailable on the Gemini API Free tier. Access inside consumer Gemini plans is a separate entitlement and does not mean free API usage."),
+    ("Can Gemini 4 Argon generate images, video or speech?", "No. Google lists text output. It accepts text, image, video, audio and PDF input, but the model's API specification marks image generation, audio generation and the Live API as unsupported."),
+    ("Does Gemini 4 Argon support function calling and tools?", "Yes. Google documents function calling, structured outputs, code execution, URL context, Search grounding, file search and computer use in preview. Some tools may have separate billing or safety constraints."),
+    ("What are the Gemini 4 Argon thinking levels?", "Low, medium and high are supported; medium is the default. Thinking tokens are part of the unified context and billable output, so increasing reasoning effort may change costs and latency."),
+    ("How does Gemini 4 Argon compare with GPT-6 Astra or Claude Opus 5.5?", "Google's October 2026 model card shows Argon ahead on Vals Index and DeepSWE v1.1 but behind GPT-6 Astra on FrontierSWE v2 and behind Opus 5.5 on Terminal-bench 4.0. Outcomes depend on benchmark and run conditions."),
+    ("Is Gemini 4 open weight or can it run on a laptop?", "Google distributes Argon through hosted Google products and API channels rather than providing public weights for local self-hosting. The model card describes a sparse mixture-of-experts architecture but does not publish usable local RAM or VRAM requirements."),
+    ("What is the difference between Gemini 4 Argon and Carbon?", "Argon is the publicly documented, paid Gemini 4 reasoning model and API endpoint for general complex tasks. Carbon is a later frontier model announced October 28 with stronger vendor-reported cybersecurity benchmarks, but limited early access and no generally listed public API model identifier on November 1, 2026."),
+]
+
+
+def schema():
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type":"WebPage", "@id":URL+"#webpage", "url":URL,
+         "name":TITLE, "description":DESCRIPTION, "inLanguage":"en",
+         "dateModified":MODIFIED, "isPartOf":{"@id":"https://sxf.si/#website"},
+         "mainEntity":{"@id":URL+"#article"}, "about":{"@id":URL+"#family"}},
+        {"@type":"TechArticle","@id":URL+"#article","headline":TITLE,
+         "description":DESCRIPTION,"datePublished":PUBLISHED,"dateModified":MODIFIED,
+         "mainEntityOfPage":{"@id":URL+"#webpage"}, "inLanguage":"en",
+         "author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
+         "publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
+         "about":{"@id":URL+"#family"},"citation":list(SOURCES.values()),
+         "keywords":["Gemini 4", "Gemini 4 Argon", "Gemini 4 Carbon",
+                     "gemini-4-argon API", "Gemini 4 pricing", "Gemini 4 1M context",
+                     "Gemini 4 benchmarks", "Gemini 4 Argon vs GPT-6 Astra",
+                     "Gemini 4 long decode", "Google Gemini 4 release date"]},
+        {"@type":"Thing","@id":URL+"#family","name":"Google Gemini 4 model family",
+         "description":"Gemini 4 Argon, publicly available frontier reasoning model, and Gemini 4 Carbon, initially restricted frontier model announced in October 2026",
+         "sameAs":["https://deepmind.google/models/gemini/",SOURCES["argon_launch"]]},
+        {"@type":"ItemList","@id":URL+"#variants","name":"Gemini 4 announced models",
+         "numberOfItems":2,"itemListElement":[
+             {"@type":"ListItem","position":1,"name":"Gemini 4 Argon","url":SOURCES["model_spec"]},
+             {"@type":"ListItem","position":2,"name":"Gemini 4 Carbon","url":SOURCES["carbon"]}]},
+        {"@type":"BreadcrumbList","@id":URL+"#breadcrumbs","itemListElement":[
+             {"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},
+             {"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},
+             {"@type":"ListItem","position":3,"name":"Gemini 4","item":URL}]},
+        {"@type":"FAQPage","@id":URL+"#faq","mainEntity":[
+             {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}}
+             for q,a in FAQ]},
+    ]}
+
+
+def benchmark_rows():
+    return "".join(
+        "<tr><th scope=\"row\">"+escape(name)+"</th><td>"+escape(category)
+        +"</td><td>"+argon+"</td><td>"+astra+"</td><td>"+opus+"</td></tr>"
+        for name,category,argon,astra,opus in BENCHMARKS
+    )
+
+
+ARTICLE = r'''
+<section class="shell g4-hero" aria-labelledby="gemini4-title">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Gemini 4</span></nav>
+  <p class="eyebrow">GOOGLE DEEPMIND / FRONTIER MODEL REFERENCE / UPDATED NOVEMBER 1, 2026</p>
+  <h1 id="gemini4-title">Gemini 4 <span>Argon &amp; Carbon, explained.</span></h1>
+  <p class="g4-intro"><strong>Gemini 4</strong> is Google DeepMind's multimodal frontier reasoning family. <strong>Argon</strong> is the available API model for complex coding, agents, science and knowledge work. <strong>Carbon</strong>, announced October 28, is a more restricted frontier model in early cyber-defender testing. This SXF reference separates current access from launch claims, compares published evidence and provides a real, browser-local token cost and context planner.</p>
+  <div class="g4-status" role="note"><strong>Availability matters:</strong> Google lists <code>gemini-4-argon</code> as a stable paid API model. As of November 1, <strong>no generally available Carbon API model ID</strong> is listed. Do not pay for, integrate or compare a hypothetical public Carbon endpoint as if it already exists. <a href="https://ai.google.dev/gemini-api/docs/models" target="_blank" rel="noopener noreferrer">Check Google's live model list ↗</a></div>
+  <div class="g4-metrics" aria-label="Gemini 4 Argon official specifications"><div><strong>1,048,576</strong><span>shared input + thinking + output tokens</span></div><div><strong>65,536</strong><span>default synchronous output ceiling</span></div><div><strong>$2 / $10</strong><span>per 1M input / output tokens to Nov 30</span></div><div><strong>2 models</strong><span>Argon public; Carbon restricted</span></div></div>
+  <div class="g4-actions"><a class="g4-primary" href="#planner">Try the SXF token planner</a><a href="#specifications">Model specs</a><a href="#benchmarks">Benchmark evidence</a><a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" target="_blank" rel="noopener noreferrer">Official API model ↗</a></div>
+  <p class="g4-footnote">Argon broader launch: October 13, 2026 · Carbon announcement: October 28, 2026 · Vendor benchmarks are not independently reproduced by SXF.</p>
+</section>
+<div class="shell g4-layout">
+<aside class="g4-sidebar"><div class="g4-nav"><strong>EXPLORE GEMINI 4</strong><nav aria-label="Article contents"><a href="#overview">Direct answer</a><a href="#models">Argon vs Carbon</a><a href="#specifications">Specifications</a><a href="#planner">SXF cost &amp; context lab</a><a href="#pricing">API pricing</a><a href="#context">Long decode</a><a href="#benchmarks">Benchmark evidence</a><a href="#features">Multimodal &amp; tools</a><a href="#quickstart">Python &amp; JavaScript</a><a href="#rollout">Access &amp; safety</a><a href="#comparison">Real alternatives</a><a href="#limitations">Limitations</a><a href="#faq">FAQs</a><a href="#sources">Primary sources</a></nav></div></aside>
+<div class="g4-article">
+<section class="g4-section" id="overview">
+  <p class="eyebrow">DIRECT SEARCH ANSWER</p><h2>What is Google Gemini 4?</h2>
+  <p><strong>Gemini 4 is Google DeepMind's next-generation multimodal reasoning family, initially led by Gemini 4 Argon.</strong> Google previewed Argon for a limited set of cyber defenders on September 30 and expanded access on October 13, 2026. The frontier model accepts text, images, audio, video and PDF files as inputs and generates text. It uses a sparse mixture-of-experts transformer architecture according to the <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener noreferrer">official model card</a>; Google does not disclose a public parameter count or local weights.</p>
+  <p>Gemini 4 Argon targets <strong>software engineering, enterprise analysis, scientific reasoning, multi-step autonomous workflows and multimodal understanding</strong>. Its API identifier is <code>gemini-4-argon</code>. Google's later <strong>Gemini 4 Carbon</strong> announcement on October 28 emphasizes long-horizon coding and cyber-defense. However, Carbon's early restricted rollout means it should not be presented as a standard public alternative with a working API endpoint yet.</p>
+  <div class="g4-insight"><strong>Bottom line:</strong> for developers building an app today, use the documented Argon API. For assessing Google's claimed next frontier, read the Carbon announcement and its safety conditions—but distinguish announced performance from an accessible product.</div>
+</section>
+
+<section class="g4-section" id="models">
+  <p class="eyebrow">FAMILY STATUS / OCTOBER 2026</p><h2>Gemini 4 Argon vs Gemini 4 Carbon</h2>
+  <div class="g4-model-grid">
+    <article><span>AVAILABLE / STABLE API MODEL</span><h3>Gemini 4 Argon</h3><p>General frontier reasoning across text, images, audio and video inputs. Public paid API identifier <code>gemini-4-argon</code>; also supported in AI Studio, Gemini app for eligible Google AI Pro/Ultra users, and enterprise workflows.</p><dl><div><dt>API status</dt><dd>Listed / paid</dd></div><div><dt>Context</dt><dd>1,048,576 unified tokens</dd></div><div><dt>Thinking</dt><dd>Low, medium, high</dd></div></dl><a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" target="_blank" rel="noopener noreferrer">Argon documentation ↗</a></article>
+    <article><span>ANNOUNCED / RESTRICTED EARLY ACCESS</span><h3>Gemini 4 Carbon</h3><p>Next frontier release targeting complex long-horizon code and defensive cybersecurity. Google began limited access through its Fairwind cohort of selected defenders; no generally listed public Gemini API endpoint as of this source review.</p><dl><div><dt>API status</dt><dd>Not publicly listed</dd></div><div><dt>Context</dt><dd>Do not infer from Argon</dd></div><div><dt>Benchmark</dt><dd>Vendor-reported cyber gains</dd></div></dl><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener noreferrer">Carbon launch evidence ↗</a></article>
+  </div>
+  <p><strong>Timeline:</strong> September 30 — Argon initial controlled announcement; October 13 — Argon wider Gemini/API rollout; October 28 — Carbon announcement and restricted early cyber-defender access. Access, terms and endpoints can change after the review date. <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/" target="_blank" rel="noopener noreferrer">Argon rollout source</a> · <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener noreferrer">Carbon rollout source</a>.</p>
+</section>
+
+<section class="g4-section" id="specifications">
+  <p class="eyebrow">MODEL-CARD FACTS</p><h2>Gemini 4 Argon specifications and API capabilities</h2>
+  <div class="g4-table-wrap"><table><caption>Verified details for Gemini 4 Argon, not unannounced Carbon specifications</caption><tbody>
+    <tr><th scope="row">Developer</th><td>Google DeepMind</td></tr>
+    <tr><th scope="row">Public model ID</th><td><code>gemini-4-argon</code> (stable)</td></tr>
+    <tr><th scope="row">General availability</th><td>October 13, 2026 via paid Gemini API and eligible Google products</td></tr>
+    <tr><th scope="row">Model architecture</th><td>Large sparse mixture-of-experts transformer; parameter count not publicly disclosed</td></tr>
+    <tr><th scope="row">Inputs</th><td>Text, image, video, audio and PDF</td></tr>
+    <tr><th scope="row">Outputs</th><td><strong>Text</strong>; no native image or audio generation in Argon's API model</td></tr>
+    <tr><th scope="row">Unified token context</th><td><strong>1,048,576</strong> tokens including input, thinking and generated output</td></tr>
+    <tr><th scope="row">Synchronous output cap</th><td><strong>65,536</strong> tokens; higher via background long decode, subject to shared context</td></tr>
+    <tr><th scope="row">Thinking levels</th><td><code>low</code>, <code>medium</code> (default), <code>high</code></td></tr>
+    <tr><th scope="row">Function/tool support</th><td>Function calling, code execution, structured outputs, file search, Search grounding; computer use in preview</td></tr>
+    <tr><th scope="row">Caching</th><td>Implicit caching supported; explicit caching unavailable for this model</td></tr>
+    <tr><th scope="row">Live/audio generation</th><td>Live API: not supported; audio generation: not supported</td></tr>
+    <tr><th scope="row">Local model weights</th><td>Not publicly released for self-hosted laptop/VRAM deployment</td></tr>
+    <tr><th scope="row">Knowledge cutoff</th><td>March 2026, per model card; use tools for current facts</td></tr>
+  </tbody></table></div>
+  <p class="g4-note">Primary evidence: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" target="_blank" rel="noopener noreferrer">official API specifications</a> and <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener noreferrer">DeepMind model card</a>. Features such as computer use or grounding can require separate permissions and billing.</p>
+</section>
+
+<section class="g4-section" id="planner">
+  <p class="eyebrow">ORIGINAL SXF INTERACTIVE LAB</p><h2>SXF Gemini 4 Cost &amp; Context Lab</h2>
+  <p>Estimate the API spend for <strong>Gemini 4 Argon</strong> from expected input tokens, implicitly cached input, thinking and visible output tokens. Switch between October–November introductory prices and the announced December standard rates, and check whether your planned output fits <strong>65,536 synchronous tokens</strong> or needs background long decode. This is an original SXF arithmetic tool—not a live API call, tokenizer or a billing quote.</p>
+  <div class="g4-planner" data-g4-planner>
+    <div class="g4-planner-fields">
+      <label for="g4-rate">Published pricing period<select id="g4-rate" data-g4-rate><option value="intro">Through Nov 30, 2026 · introductory</option><option value="standard">Dec 1, 2026 onward · announced</option></select></label>
+      <div class="g4-field-pair"><label for="g4-input">Input tokens<input id="g4-input" data-g4-input type="number" min="0" max="1048576" step="1000" value="120000" inputmode="numeric"></label>
+      <label for="g4-cache">Input tokens with implicit cache hit<input id="g4-cache" data-g4-cache type="number" min="0" max="1048576" step="1000" value="20000" inputmode="numeric"></label></div>
+      <div class="g4-field-pair"><label for="g4-think">Estimated thinking tokens<input id="g4-think" data-g4-think type="number" min="0" max="1048576" step="1000" value="15000" inputmode="numeric"></label>
+      <label for="g4-output">Visible output tokens<input id="g4-output" data-g4-output type="number" min="0" max="1048576" step="1000" value="10000" inputmode="numeric"></label></div>
+      <p class="g4-note">Cached input is a <em>subset</em> of input, not an extra prompt. Thinking tokens are billable output and consume the shared context. Actual token counts are measured by Google, not character length.</p>
+    </div>
+    <div class="g4-planner-result">
+      <span>ILLUSTRATIVE ARGON API COST · USD</span><output data-g4-cost aria-live="polite" aria-atomic="true">$0.4500</output>
+      <div class="g4-calc-parts"><div><small>Input incl. cached</small><strong data-g4-input-cost>$0.2020</strong></div><div><small>Thinking + response</small><strong data-g4-output-cost>$0.2500</strong></div><div><small>Shared context used</small><strong data-g4-tokens>145,000 / 1,048,576</strong></div></div>
+      <div class="g4-context-meter" role="meter" aria-label="Unified Gemini 4 context used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14"><i data-g4-bar style="width:14%"></i></div>
+      <strong data-g4-status aria-live="polite">Fits standard synchronous output limit on paper</strong>
+      <p data-g4-explain>Estimates exclude tool and grounding charges; Google's metered token usage determines real billing.</p>
+    </div>
+  </div>
+  <p class="g4-footnote">Calculation: (input − cached input) × input rate + cached input × implicit-cache rate + (thinking + response) × output rate, divided by 1,000,000. Google additionally bills tokens consumed by tool instructions and tool workflows; the estimate excludes external tool/search charges, taxes, retries and service tier adjustments. A cache discount is not guaranteed for every request.</p>
+</section>
+
+<section class="g4-section" id="pricing">
+  <p class="eyebrow">DATES MATTER FOR SEARCH INTENT</p><h2>Gemini 4 Argon API pricing: 2026 introduction vs December rates</h2>
+  <div class="g4-table-wrap"><table><caption>Google's published paid standard inference pricing, USD per one million tokens</caption><thead><tr><th scope="col">Billable category</th><th scope="col">Through Nov 30, 2026</th><th scope="col">Starting Dec 1, 2026</th></tr></thead><tbody>
+    <tr><th scope="row">Input tokens</th><td><strong>$2.00</strong></td><td>$4.00</td></tr>
+    <tr><th scope="row">Implicitly cached input</th><td><strong>$0.10</strong></td><td>$0.20</td></tr>
+    <tr><th scope="row">Output including thinking tokens</th><td><strong>$10.00</strong></td><td>$20.00</td></tr>
+    <tr><th scope="row">Free-tier API access</th><td>Not available</td><td>Not advertised</td></tr>
+  </tbody></table></div>
+  <p>These are prices <strong>published as of the November 1, 2026 editorial review</strong>. A user asking “is Gemini 4 free?” should distinguish a consumer subscription's included access from separately metered Gemini API usage. Google explicitly excludes Argon from the Gemini API Free tier. Some batch, flex, priority, tool and search-grounding modes may have different billing; check <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">current pricing</a> before production.</p>
+  <div class="g4-insight"><strong>Practical cost control:</strong> reserve thinking tokens, select an appropriate thinking level, cap unnecessary output, track per-request usage and report cache hit rates. A long reasoning trace is not “free” just because it is hidden from the final answer.</div>
+</section>
+
+<section class="g4-section" id="context">
+  <p class="eyebrow">UNIFIED CONTEXT / LONG DECODE</p><h2>How does Gemini 4's 1M-token context and long decode work?</h2>
+  <p>Gemini 4 Argon has a <strong>unified 1,048,576-token context</strong>. Input, intermediate thinking and output <em>share</em> that capacity. It is inaccurate to promise one million input tokens <em>plus</em> another million output tokens. Even if a request stays below the advertised limit, accuracy on a specific long-document task is not guaranteed.</p>
+  <div class="g4-flow" role="list" aria-label="Gemini 4 context and output budget">
+    <div role="listitem"><span>01 / INPUT</span><strong>Prompt + multimodal files</strong><p>Text, PDFs, audio and videos consume a portion of the shared token budget.</p></div>
+    <div role="listitem"><span>02 / REASONING</span><strong>Thinking tokens</strong><p>Low, medium or high thinking can consume both output billing and shared context.</p></div>
+    <div role="listitem"><span>03 / RESPONSE</span><strong>Visible output + tools</strong><p>Standard synchronous output is capped at 65,536 tokens; additional tool context may also count.</p></div>
+    <div role="listitem"><span>04 / EXTEND</span><strong>Background long decode</strong><p>Request more than 65,536 output tokens via background execution and join continuation steps.</p></div>
+  </div>
+  <p>For a response longer than 65,536 tokens, Google's <a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer">Interactions API guide</a> documents <code>background=True</code> with a larger <code>max_output_tokens</code> budget. Google may continue across multiple internal hops; applications must poll status, concatenate output steps and account for timeouts and retries. The maximum remains bounded by the combined context, and real cost rises with generated tokens.</p>
+</section>
+
+<section class="g4-section" id="benchmarks">
+  <p class="eyebrow">PRIMARY-SOURCE EVALUATION, NOT SXF TESTS</p><h2>Gemini 4 Argon benchmarks vs GPT-6 Astra and Claude Opus 5.5</h2>
+  <p>The <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener noreferrer">October 2026 Google DeepMind model card</a> publishes scores for agentic coding, knowledge work, scientific reasoning, long context and security. These are Google's compiled results, not an independent SXF run. The selected rows below include <strong>benchmarks where Argon trails a competitor</strong>, not just flattering numbers.</p>
+  <div class="g4-table-wrap"><table><caption>Selected scores reported in Gemini 4 Argon's official October 2026 model card; compare only within each benchmark</caption><thead><tr><th scope="col">Test</th><th scope="col">Domain</th><th scope="col">Argon</th><th scope="col">GPT-6 Astra</th><th scope="col">Claude Opus 5.5</th></tr></thead><tbody><!-- G4_BENCHMARKS --></tbody></table></div>
+  <p><strong>What the numbers suggest:</strong> Argon scores ahead in the published Vals Index and DeepSWE v1.1 rows, while GPT-6 Astra leads on FrontierSWE v2 and Opus 5.5 leads on Terminal-bench 4.0. The model card's 256K–1M GraphWalks result is a narrow long-context graph task, not a guarantee that every million-token repository can be analyzed flawlessly. <strong>Benchmarks have different prompts, evaluation harnesses, tools and sampling choices.</strong></p>
+  <h3>What about Gemini 4 Carbon benchmarks?</h3>
+  <div class="g4-carbon-stats"><div><strong>88.2%</strong><span>SEC-bench Pro / vulnerability discovery</span></div><div><strong>54.8%</strong><span>ExploitGym / exploitation validation</span></div><div><strong>71.0%</strong><span>CWE-bench / vulnerability patching</span></div></div>
+  <p>Those three Carbon scores come from Google's <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener noreferrer">October 28 announcement</a>, with its own safety and test caveats. They are <strong>not Argon scores</strong>. As long as access is restricted, developers cannot assume they can reproduce Carbon results through the publicly listed Argon endpoint.</p>
+</section>
+
+<section class="g4-section" id="features">
+  <p class="eyebrow">REAL PRODUCT CAPABILITIES</p><h2>Gemini 4 Argon multimodal inputs, tools and limitations</h2>
+  <div class="g4-feature-grid">
+    <article><span>MULTIMODAL INPUT</span><h3>Read documents, images, audio and video</h3><p>Combine PDFs, video clips, speech and text prompts for multimodal analysis. The model's <em>output remains text</em>. Use task-specific validation for OCR, chart data, timestamps and financial/legal evidence.</p></article>
+    <article><span>PROGRAMMATIC TOOLS</span><h3>Build agent workflows</h3><p>Function calling, structured outputs, file search, Google Search grounding, URL context and code execution are documented. Computer use is in preview and should run in a confined environment with explicit approvals.</p></article>
+    <article><span>THINKING CONTROL</span><h3>Match reasoning to the job</h3><p>Low, medium and high thinking levels trade off reasoning effort, latency and billed generated tokens. Default medium is a starting point, not a universal optimization.</p></article>
+    <article><span>NOT SUPPORTED HERE</span><h3>Do not confuse input and generation</h3><p>Gemini 4 Argon does <strong>not</strong> expose audio generation, image generation or the Live API. Specialized image, speech and real-time models remain distinct products.</p></article>
+  </div>
+  <p>Tools can read sensitive pages, make changes or fetch untrusted material. Apply least privilege, confirmations for irreversible actions, prompt-injection checks, retry limits, logging and data retention controls before permitting an agent to operate autonomously. An LLM benchmark score cannot certify the security of an entire agent system.</p>
+</section>
+
+<section class="g4-section" id="quickstart">
+  <p class="eyebrow">OFFICIAL API QUICKSTART</p><h2>How to use Gemini 4 Argon with Python and JavaScript</h2>
+  <p>Use the public model ID <code>gemini-4-argon</code>. Google documents the <strong>Interactions API</strong> with the official <code>google-genai</code> SDK. The simple code below mirrors the primary-source quickstart and requires a paid API account with an authorized <code>GEMINI_API_KEY</code>.</p>
+  <div class="g4-code"><div><span>Install Python SDK</span><button type="button" data-g4-copy="install">Copy</button></div><pre id="g4-code-install"><code>python -m pip install -U google-genai</code></pre></div>
+  <div class="g4-code"><div><span>Python · Interactions API</span><button type="button" data-g4-copy="python">Copy</button></div><pre id="g4-code-python"><code>from google import genai
+
+client = genai.Client()
+result = client.interactions.create(
+    model="gemini-4-argon",
+    input="Summarize three risks of autonomous coding agents.",
+)
+print(result.output_text)</code></pre></div>
+  <div class="g4-code"><div><span>JavaScript · Interactions API</span><button type="button" data-g4-copy="javascript">Copy</button></div><pre id="g4-code-javascript"><code>import { GoogleGenAI } from "@google/genai";
+
+const client = new GoogleGenAI({});
+const result = await client.interactions.create({
+  model: "gemini-4-argon",
+  input: "Summarize three risks of autonomous coding agents.",
+});
+console.log(result.output_text);</code></pre></div>
+  <h3>Long-decode Python example: background execution</h3>
+  <div class="g4-code"><div><span>Python · long output</span><button type="button" data-g4-copy="long">Copy</button></div><pre id="g4-code-long"><code>import time
+from google import genai
+
+client = genai.Client()
+run = client.interactions.create(
+    model="gemini-4-argon",
+    input="Produce a detailed, source-aware engineering design.",
+    background=True,
+    generation_config={
+        "max_output_tokens": 131072,
+        "thinking_level": "high",
+    },
+)
+while run.status in ("in_progress", "queued"):
+    time.sleep(5)
+    run = client.interactions.get(id=run.id)
+
+text = "".join(
+    part.text
+    for step in run.steps if step.type == "model_output"
+    for part in step.content if part.type == "text"
+)
+print(text)
+print("Usage:", run.usage)</code></pre></div>
+  <p><strong>Deployment note:</strong> background execution is a documented capability, not a guarantee that every prompt needs or yields 131K tokens. Validate final status, handle timeouts/partial outputs, secure secrets in your environment and measure token usage. Follow <a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer">Google's maintained long-decode guidance</a> when SDK versions or API contracts change.</p>
+</section>
+
+<section class="g4-section" id="rollout">
+  <p class="eyebrow">ACCESS &amp; RESPONSIBLE USE</p><h2>Where is Gemini 4 available in November 2026?</h2>
+  <div class="g4-table-wrap"><table><caption>Access channels documented by Google in October 2026</caption><thead><tr><th scope="col">Surface</th><th scope="col">Gemini 4 Argon</th><th scope="col">Gemini 4 Carbon</th></tr></thead><tbody>
+    <tr><th scope="row">Gemini API</th><td>Stable <code>gemini-4-argon</code>, paid</td><td>No public endpoint listed as of review</td></tr>
+    <tr><th scope="row">Google AI Studio</th><td>Documented</td><td>Not publicly listed</td></tr>
+    <tr><th scope="row">Gemini app</th><td>Google AI Pro / Ultra, rollout and account conditions apply</td><td>Not generally available</td></tr>
+    <tr><th scope="row">Business / enterprise</th><td>Gemini services and enterprise distribution</td><td>Controlled early partner testing</td></tr>
+    <tr><th scope="row">Fairwind defenders</th><td>Initial restricted Argon preview preceded October rollout</td><td>Limited cyber-defender cohort announced Oct 28</td></tr>
+  </tbody></table></div>
+  <p>Google's <a href="https://gemini.google/release-notes/" target="_blank" rel="noopener noreferrer">Gemini app release notes</a> date the Argon Pro/Ultra rollout to October 13. <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener noreferrer">Carbon's announcement</a> explicitly describes initial access for a subset of trusted partners; model status should be checked before production planning.</p>
+</section>
+
+<section class="g4-section" id="comparison">
+  <p class="eyebrow">MODEL SELECTION, NOT BRAND HYPE</p><h2>When should you choose Gemini 4 Argon instead of other AI models?</h2>
+  <p><strong>Consider Argon</strong> for Google-hosted multimodal analysis, long-context evidence work, complex reasoning, tool-connected coding and the Interactions API. <strong>Evaluate GPT-6 Astra or Claude Opus 5.5</strong> as baselines for your exact coding, web-agent and long-document tasks; Google's own benchmark table shows that Argon does not lead every test. <strong>Consider smaller models</strong> for latency-sensitive, high-volume classification or low-cost tasks where a frontier reasoning model is unnecessary.</p>
+  <p>Use a 20–50-case task set, freeze prompt and tool permissions, compare exact outcomes and failure costs, measure the complete response including paid thinking and tool retries, and review safety exceptions. A vendor's headline rank is a discovery signal, not an empirical guarantee for your organization's workflow. See SXF's <a href="/compare/">model comparisons</a> and <a href="/models/pricing/">pricing index</a> for broader decision frameworks.</p>
+</section>
+
+<section class="g4-section" id="limitations">
+  <p class="eyebrow">READ BEFORE DEPLOYING</p><h2>Known limitations, context accuracy and safety</h2>
+  <ul>
+    <li><strong>Hallucinations:</strong> DeepMind's model card warns that generated results can contain errors, including on specialized professional tasks.</li>
+    <li><strong>Long-context ≠ perfect recall:</strong> 1M tokens is an API size limit, not evidence of error-free retrieval from million-token prompts.</li>
+    <li><strong>Paid thinking and tools:</strong> internal reasoning, function declarations and tool calls can contribute to billing, with extra search/grounding costs.</li>
+    <li><strong>Platform and feature differences:</strong> Gemini app subscriptions, API usage and enterprise controls are separate, with different eligibility.</li>
+    <li><strong>Carbon is not yet a generally available API replacement:</strong> don't guess its endpoint, context, parity or availability from Argon specifications.</li>
+    <li><strong>Private weights not available:</strong> no published laptop quantization/VRAM figures for hosted Gemini 4 Argon.</li>
+    <li><strong>Autonomous action requires guardrails:</strong> require confirmations for purchases, messages and production code changes, and isolate untrusted external content.</li>
+  </ul>
+</section>
+
+<section class="g4-section" id="faq">
+  <p class="eyebrow">QUESTIONS PEOPLE SEARCH FOR</p><h2>Gemini 4 Argon and Carbon FAQ</h2>
+  <div class="g4-faq">
+    <details><summary>What is Gemini 4?</summary><p>Google DeepMind's October 2026 frontier multimodal reasoning family. Argon is publicly available in the paid API; Carbon was announced later with limited initial access.</p></details>
+    <details><summary>Is Gemini 4 Argon on the API?</summary><p>Yes. Google's stable paid model identifier is <code>gemini-4-argon</code>, accessible through the Gemini API subject to account eligibility.</p></details>
+    <details><summary>Can I call Gemini 4 Carbon from the public API?</summary><p>No generally available Carbon endpoint was listed in Google's model catalog as of November 1, 2026. The October 28 rollout was limited to selected cyber defenders.</p></details>
+    <details><summary>How many tokens are in Gemini 4 Argon's context window?</summary><p>1,048,576 total, shared by input, thinking and output. A standard synchronous call has a 65,536 output ceiling unless you use background long decode.</p></details>
+    <details><summary>What is Gemini 4 API pricing?</summary><p>Argon's announced introductory paid rate is $2 per million input and $10 per million generated tokens through November 30, 2026, then $4 and $20 from December 1. Thinking tokens are billable output.</p></details>
+    <details><summary>Is Gemini 4 Argon free to use?</summary><p>Not through the Gemini API Free tier. Google AI Pro or Ultra subscriptions in the consumer app are different from API metering.</p></details>
+    <details><summary>Can Gemini 4 Argon create images or speech?</summary><p>Argon accepts audio, video and image inputs, but outputs text. Google's API spec does not support native image or audio generation or the Live API for Argon.</p></details>
+    <details><summary>What tools does Gemini 4 Argon support?</summary><p>Function calling, structured output, Search grounding, URL context, code execution and more, subject to features and permissions; computer use is listed in preview.</p></details>
+    <details><summary>Can I turn Gemini 4 thinking off?</summary><p>Argon supports low, medium and high; medium is the default. There is no documented off setting for this model.</p></details>
+    <details><summary>Is Gemini 4 Argon better than GPT-6 Astra?</summary><p>It depends on the benchmark. Google's October model card shows Argon ahead on Vals Index but behind Astra on FrontierSWE v2; test your own workload.</p></details>
+    <details><summary>Can I run Gemini 4 locally?</summary><p>Google has not released Argon's model weights for self-hosting, so generic RAM or quantization estimates would be misleading.</p></details>
+    <details><summary>What is different about Gemini 4 Carbon?</summary><p>Google presents Carbon as a later, stronger frontier and cybersecurity model, with October 28 restricted testing. Availability, API naming and technical limits should not be inferred from Argon.</p></details>
+  </div>
+</section>
+
+<section class="g4-section" id="sources">
+  <p class="eyebrow">EDITORIAL EVIDENCE / NOVEMBER 1, 2026</p><h2>Primary-source references and our research method</h2>
+  <p>Every technical specification, public endpoint, launch date and quoted benchmark was cross-checked against official Google or Google DeepMind documentation. The <strong>SXF Cost &amp; Context Lab</strong> is independently authored arithmetic; it is neither a Gemini inference test nor a metered Google bill. No fabricated Carbon API access, benchmark runs or live pricing guarantees are presented.</p>
+  <div class="g4-sources">
+    <a href="https://deepmind.google/models/model-cards/gemini-4-argon/" target="_blank" rel="noopener noreferrer"><strong>Google DeepMind Gemini 4 Argon model card</strong><span>Architecture, modalities, comparisons, limitations and safety ↗</span></a>
+    <a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon" target="_blank" rel="noopener noreferrer"><strong>Google AI Developers — Argon specification</strong><span>Model ID, token budget, supported tools and API limitations ↗</span></a>
+    <a href="https://ai.google.dev/gemini-api/docs/latest-model" target="_blank" rel="noopener noreferrer"><strong>Official Argon API migration and long-decode guide</strong><span>SDK examples, background execution, thinking and rate dates ↗</span></a>
+    <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer"><strong>Gemini API current pricing</strong><span>Check date-sensitive rates, tier conditions and billable extras ↗</span></a>
+    <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/" target="_blank" rel="noopener noreferrer"><strong>Gemini 4 Argon wider release — October 13</strong><span>Developer, app and enterprise rollout ↗</span></a>
+    <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/" target="_blank" rel="noopener noreferrer"><strong>Gemini 4 Carbon — October 28</strong><span>Restricted early access and cybersecurity benchmark claims ↗</span></a>
+  </div>
+  <p class="g4-related"><strong>Explore more SXF intelligence:</strong> <a href="/models/">AI model directory</a> · <a href="/models/pricing/">Model pricing</a> · <a href="/compare/">Compare frontier models</a> · <a href="/guides/ai-model-benchmarks-explained/">Benchmark methodology</a> · <a href="/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/">Gemini 4 Argon source signal</a>.</p>
+</section>
+</div></div>
+'''
+
+
+def render_page(items, *, page_head, page_header, page_footer):
+    """Return one indexable, canonical page without losing source text on rebuild."""
+    head = page_head(TITLE, DESCRIPTION, URL, schema(), "article",
+                     "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
+    head = head.replace("</head>", '<link rel="stylesheet" href="/assets/gemini4-model.css" /></head>', 1)
+    recent = ""
+    if items:
+        newest = items[0]
+        title = escape(newest.get("title", "Gemini 4 release signal"))
+        slug = escape(newest.get("signal_slug", ""), quote=True)
+        recent = ('<section class="shell g4-recent"><p class="eyebrow">RECENT SXF SIGNAL</p>'
+                  '<h2>Latest Gemini 4 source signal</h2><p>'+title+'</p>'
+                  '<a href="/signals/'+slug+'/">Open the dated signal ↗</a></section>')
+    article = ARTICLE.replace("<!-- G4_BENCHMARKS -->", benchmark_rows())
+    return ('<!doctype html><html lang="en">'+head+
+            '<body class="intel-page model-page sxf-gemini4">'+page_header("models")+
+            '<main id="main-content">'+article+recent+'</main>'+page_footer()+
+            '<script src="/assets/gemini4-model.js" defer></script></body></html>')

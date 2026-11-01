@@ -28,6 +28,7 @@ from gemini_live_extended_page import enrich_gemini_live_extended_page
 from lfm25_vl_dspark_model_page import render_page as render_lfm25_vl_dspark_page
 from lfm3_model_page import render_page as render_lfm3_model_page
 from lfm25_24b_model_page import render_page as render_lfm25_24b_model_page
+from gemini4_model_page import render_page as render_gemini4_model_page
 from gemini_38_flash_tts_model_page import enrich_gemini_38_flash_tts_page
 from gemini_38_flash_lite_tts_model_page import enrich_gemini_38_flash_lite_tts_page
 from gpt6_family_model_page import enrich_gpt6_family_page
@@ -3550,6 +3551,8 @@ def shadow_quality_rejection_record(item, observed_at):
     }
 
 def model_page_indexable(name, items):
+    if slugify(name) == "gemini-4":
+        return True  # Source-verified authored Gemini 4 model family reference.
     if slugify(name) == "lfm2-5-24b-a2b":
         return True  # Original, verified MoE model technical guide.
     if slugify(name) == "lfm3":
@@ -4666,6 +4669,8 @@ def gemini_38_flash_reference_html(items):
     </main>{page_footer()}</body></html>'''
 
 def model_page_html(name, items):
+    if slugify(name) == "gemini-4":
+        return render_gemini4_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
     if slugify(name) == "lfm2-5-24b-a2b":
         return render_lfm25_24b_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
     if slugify(name) == "lfm3":
