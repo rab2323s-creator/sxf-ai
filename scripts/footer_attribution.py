@@ -12,8 +12,8 @@ FOOTER = re.compile(r'(<footer class="footer shell">)(.*?)(</footer>)', re.S)
 VMC_URL = 'https://vivamediacreative.com/labs/'
 VIVA_URL = 'https://vivamediacreative.com/'
 NAV = re.compile(r'(<nav class="footer-nav"[^>]*>)(.*?)(</nav>)', re.S)
+ATTRIBUTION_ANCHOR = re.compile(
     r"""<a\b[^>]*\bhref=["']https://vivamediacreative\.com(?:/labs/?)?["'][^>]*>.*?</a>""",
-    r'<a\\b[^>]*\\bhref=["\\\']https://vivamediacreative\\.com(?:/labs/?)?["\\\'][^>]*>.*?</a>',
     re.S | re.I,
 )
 EXTERNAL_CREDIT = f'Developed within <a href="{VMC_URL}">VMC Labs</a>'
