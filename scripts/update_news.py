@@ -30,6 +30,27 @@ from lfm3_model_page import render_page as render_lfm3_model_page
 from lfm25_24b_model_page import render_page as render_lfm25_24b_model_page
 from gemini4_model_page import render_page as render_gemini4_model_page
 from gpt_live_transcribe_model_page import render_page as render_gpt_live_transcribe_page
+
+# Authored model references own their canonical routes, even if a future
+# pricing-catalog update starts tracking the same model. Feed and catalog
+# rendering must use *one* durable editorial source of truth.
+AUTHORED_MODEL_ROUTE_RENDERERS = {
+    "/models/lfm2-5-vl-dspark/": render_lfm25_vl_dspark_page,
+    "/models/lfm3/": render_lfm3_model_page,
+    "/models/lfm2-5-24b-a2b/": render_lfm25_24b_model_page,
+    "/models/gemini-4/": render_gemini4_model_page,
+    "/models/gpt-live-transcribe/": render_gpt_live_transcribe_page,
+}
+
+
+def render_authored_model_route(route, items):
+    """Render an authored model reference from its canonical route, if owned."""
+    renderer = AUTHORED_MODEL_ROUTE_RENDERERS.get(route)
+    if renderer is None:
+        return None
+    return renderer(
+        items, page_head=page_head, page_header=page_header, page_footer=page_footer
+    )
 from gemini_38_flash_tts_model_page import enrich_gemini_38_flash_tts_page
 from gemini_38_flash_lite_tts_model_page import enrich_gemini_38_flash_lite_tts_page
 from gpt6_family_model_page import enrich_gpt6_family_page
@@ -4672,16 +4693,11 @@ def gemini_38_flash_reference_html(items):
     </main>{page_footer()}</body></html>'''
 
 def model_page_html(name, items):
-    if slugify(name) == "gpt-live-transcribe":
-        return render_gpt_live_transcribe_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
-    if slugify(name) == "gemini-4":
-        return render_gemini4_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
-    if slugify(name) == "lfm2-5-24b-a2b":
-        return render_lfm25_24b_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
-    if slugify(name) == "lfm3":
-        return render_lfm3_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
-    if slugify(name) == "lfm2-5-vl-dspark":
-        return render_lfm25_vl_dspark_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
+    # Use the exact same authored source as the pricing-catalog route renderer.
+    slug = slugify(name)
+    editorial = render_authored_model_route(f"/models/{slug}/", items)
+    if editorial is not None:
+        return editorial
     slug = slugify(name)
     canonical = f"{BASE_URL}/models/{slug}/"
     ref = model_reference(name)
@@ -5347,13 +5363,12 @@ def render_catalog_model_page(model_id, items):
     model = model_catalog_entry(model_id)
     template = model.get("page_template")
 
-    # This route belongs to the canonical pricing catalog. The catalog renderer
-    # runs *after* the news-model renderer, so route it to the authored page here
-    # as well; otherwise every feed refresh replaces the guide with a thin card.
-    if model_id == "gpt-live-transcribe":
-        page = render_gpt_live_transcribe_page(
-            items, page_head=page_head, page_header=page_header, page_footer=page_footer
-        )
+    # Catalog pages render after news-model pages. Always preserve authored
+    # routes, including if one of these four models is added to pricing later.
+    # A fallback catalog-reference would otherwise overwrite the editorial.
+    editorial = render_authored_model_route(model.get("sxf_url", ""), items)
+    if editorial is not None:
+        page = editorial
     elif template == "editorial-reference":
         if model_id == "gemini-3.7-flash":
             page = gemini_37_flash_reference_html()
