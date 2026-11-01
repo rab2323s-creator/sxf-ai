@@ -26,6 +26,7 @@ from open_source_signals import select_open_source_signals
 from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 from gemini_live_extended_page import enrich_gemini_live_extended_page
 from lfm25_vl_dspark_model_page import render_page as render_lfm25_vl_dspark_page
+from lfm3_model_page import render_page as render_lfm3_model_page
 from gemini_38_flash_tts_model_page import enrich_gemini_38_flash_tts_page
 from gemini_38_flash_lite_tts_model_page import enrich_gemini_38_flash_lite_tts_page
 from gpt6_family_model_page import enrich_gpt6_family_page
@@ -3548,6 +3549,8 @@ def shadow_quality_rejection_record(item, observed_at):
     }
 
 def model_page_indexable(name, items):
+    if slugify(name) == "lfm3":
+        return True  # Verified, authored LFM3 model-family reference.
     if slugify(name) == "lfm2-5-vl-dspark":
         return True  # Authored, source-verified reference with dedicated SEO tests.
     substantive = [item for item in items if len(clean_summary(item.get("summary", ""))) >= SEO_MIN_SUMMARY_CHARS]
@@ -4660,6 +4663,8 @@ def gemini_38_flash_reference_html(items):
     </main>{page_footer()}</body></html>'''
 
 def model_page_html(name, items):
+    if slugify(name) == "lfm3":
+        return render_lfm3_model_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
     if slugify(name) == "lfm2-5-vl-dspark":
         return render_lfm25_vl_dspark_page(items, page_head=page_head, page_header=page_header, page_footer=page_footer)
     slug = slugify(name)
