@@ -1,0 +1,379 @@
+"""Source-backed, regeneration-safe LFM3 family guide.
+
+Liquid AI introduced LFM3 on October 27, 2026. This page distinguishes the
+six post-trained releases, their varying contexts, and the base checkpoint.
+"""
+from __future__ import annotations
+
+import json
+from html import escape
+
+SLUG = "lfm3"
+URL = "https://sxf.si/models/lfm3/"
+TITLE = "LFM3 Models Explained: Specs, Benchmarks & Local Setup | SXF"
+DESCRIPTION = ("LFM3 model family explained: Liquid AI's 1.7B text, 2B vision, audio, "
+               "omni and d1 decision models. Compare specs, benchmarks, fine-tuning "
+               "and local deployment.")
+PUBLISHED = "2026-10-27"
+MODIFIED = "2026-11-01"
+SOURCES = {
+    "announcement": "https://www.liquid.ai/blog/lfm3",
+    "technical": "https://huggingface.co/blog/LiquidAI/lfm3",
+    "text": "https://huggingface.co/LiquidAI/LFM3-1.7B",
+    "base": "https://huggingface.co/LiquidAI/LFM3-1.7B-Base",
+    "vision": "https://huggingface.co/LiquidAI/LFM3-VL-2B",
+    "audio": "https://huggingface.co/LiquidAI/LFM3-Audio-2B",
+    "omni": "https://huggingface.co/LiquidAI/LFM3-Omni-2B",
+    "decision": "https://huggingface.co/LiquidAI/d1-2B",
+    "decision_audio": "https://huggingface.co/LiquidAI/d1-Omni-2B",
+}
+VARIANTS = [
+    ("LFM3-1.7B", "Text", "Text", "Local agents, structured extraction, tool calling", "256K", SOURCES["text"]),
+    ("LFM3-VL-2B", "Text, image, video", "Text", "Document OCR, screenshot and video understanding", "128K", SOURCES["vision"]),
+    ("LFM3-Audio-2B", "Text, audio", "Text, speech", "Voice chat, ASR, speech synthesis and tool use", "32K", SOURCES["audio"]),
+    ("LFM3-Omni-2B", "Text, image, video, audio", "Text, speech", "Spoken visual Q&A and audiovisual assistants", "See model card", SOURCES["omni"]),
+    ("d1-2B", "Text, image, video", "Typed decisions", "Routing, calibration and visual inspection", "128K", SOURCES["decision"]),
+    ("d1-Omni-2B", "Text, image, video, audio", "Typed decisions", "Audio-aware routing and multimodal decisions", "See model card", SOURCES["decision_audio"]),
+]
+FAQ = [
+    ("What is LFM3 by Liquid AI?", "LFM3 is Liquid AI's family of compact, open-weight foundation models announced October 27, 2026. It shares a tri-hybrid 1.7B-parameter backbone and branches into text, vision, audio, omni and decision checkpoints."),
+    ("Is LFM3 a single model?", "No. LFM3 is a family. LFM3-1.7B is a text model; LFM3-VL-2B handles image and video; LFM3-Audio-2B handles speech; LFM3-Omni-2B combines modalities; d1-2B and d1-Omni-2B produce structured decisions."),
+    ("How large is the LFM3 context window?", "LFM3-1.7B has a published 256K-token context, LFM3-VL-2B has 128K and LFM3-Audio-2B has 32K. Do not assume the same context limit for all variants."),
+    ("Can LFM3 run locally?", "Yes, with the suitable checkpoint and supported hardware/runtime. Liquid AI says 4-bit LFM3-1.7B text weights fit in about 1 GB, but that excludes KV cache and runtime overhead. Video and audio components need additional memory."),
+    ("Is LFM3 open source or open weight?", "The checkpoints are distributed as open weights under the LFM Open License v1.0. Open weights do not automatically mean an unrestricted OSI-approved open-source license; inspect the actual terms."),
+    ("Can I fine-tune LFM3 on a single GPU?", "Liquid AI describes single-GPU fine-tuning across the family and publishes notebooks for text, image, audio and omni tasks. Actual VRAM, training duration and method vary with model, data, precision and hardware."),
+    ("How does LFM3 differ from LFM2.5?", "Liquid AI reports that LFM3-1.7B outperforms its LFM2.5-2.6B predecessor with about 35% fewer parameters, and LFM3-VL-2B scores 71.4 versus 57.6 for LFM2.5-VL-3B in Liquid AI's 62-evaluation vision aggregate. These are vendor-controlled results."),
+    ("Which LFM3 variant should I use for voice and images together?", "Choose LFM3-Omni-2B for spoken questions about images or combined video and audio with generated replies. If the goal is a calibrated decision rather than an open-ended reply, evaluate d1-Omni-2B."),
+    ("Does LFM3 offer a free API?", "The public announcement confirms weights, a Playground and the Liquid AI API. It does not establish a permanent free API tier or a universal per-token price; check current Liquid AI documentation and billing."),
+]
+
+
+def schema():
+    graph = [
+        {
+            "@type": "WebPage", "@id": URL + "#webpage", "url": URL,
+            "name": TITLE, "description": DESCRIPTION,
+            "inLanguage": "en", "dateModified": MODIFIED,
+            "isPartOf": {"@id": "https://sxf.si/#website"},
+            "mainEntity": {"@id": URL + "#article"},
+            "about": {"@id": URL + "#family"},
+        },
+        {
+            "@type": "TechArticle", "@id": URL + "#article",
+            "headline": TITLE, "description": DESCRIPTION,
+            "datePublished": PUBLISHED, "dateModified": MODIFIED,
+            "inLanguage": "en",
+            "mainEntityOfPage": {"@id": URL + "#webpage"},
+            "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
+            "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+            "publishingPrinciples": "https://sxf.si/about/#method",
+            "about": {"@id": URL + "#family"},
+            "citation": list(SOURCES.values()),
+            "keywords": [
+                "Liquid AI LFM3", "LFM3 models explained", "LFM3-1.7B",
+                "LFM3-VL-2B", "LFM3-Audio-2B", "LFM3-Omni-2B",
+                "d1-2B", "LFM3 benchmarks", "LFM3 local inference",
+                "LFM3 fine tuning",
+            ],
+        },
+        {
+            "@type": "Thing", "@id": URL + "#family",
+            "name": "LFM3 model family",
+            "alternateName": "Liquid Foundation Models 3",
+            "description": ("Six compact post-trained open-weight models built on Liquid AI's "
+                            "1.7B tri-hybrid backbone, spanning text, vision, audio, omni and decision use."),
+            "sameAs": [SOURCES["announcement"], SOURCES["technical"]],
+        },
+        {
+            "@type": "ItemList", "@id": URL + "#variants",
+            "name": "LFM3 released model variants",
+            "numberOfItems": len(VARIANTS),
+            "itemListElement": [
+                {"@type": "ListItem", "position": idx, "name": name, "url": link}
+                for idx, (name, _inputs, _outputs, _purpose, _context, link) in enumerate(VARIANTS, 1)
+            ],
+        },
+        {
+            "@type": "BreadcrumbList", "@id": URL + "#breadcrumbs",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": "https://sxf.si/"},
+                {"@type": "ListItem", "position": 2, "name": "Models", "item": "https://sxf.si/models/"},
+                {"@type": "ListItem", "position": 3, "name": "LFM3", "item": URL},
+            ],
+        },
+        {
+            "@type": "FAQPage", "@id": URL + "#faq",
+            "mainEntity": [
+                {"@type": "Question", "name": question,
+                 "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                for question, answer in FAQ
+            ],
+        },
+    ]
+    return {"@context": "https://schema.org", "@graph": graph}
+
+
+def variants_table():
+    rows = []
+    for name, inputs, outputs, purpose, context, link in VARIANTS:
+        rows.append(
+            '<tr><th scope="row"><a target="_blank" rel="noopener noreferrer" href="'
+            + escape(link, quote=True) + '">' + escape(name) + '</a></th>'
+            + '<td>' + escape(inputs) + '</td><td>' + escape(outputs) + '</td>'
+            + '<td>' + escape(context) + '</td><td>' + escape(purpose) + '</td></tr>'
+        )
+    return "".join(rows)
+
+
+ARTICLE = r"""
+<section class="shell lfm3-hero" id="overview">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>LFM3</span></nav>
+  <div class="lfm3-kicker"><span class="lfm3-dot" aria-hidden="true"></span> LIQUID AI · MODEL FAMILY REFERENCE · REVIEWED NOV 1, 2026</div>
+  <h1>LFM3 models:<br><span>small models, specialized intelligence.</span></h1>
+  <p class="lfm3-lede"><strong>LFM3</strong> is Liquid AI's October 27, 2026 open-weight model family: <strong>six roughly 2B-class variants</strong> for text, image, video, speech, combined multimodal input and structured decisions. Compare real model specifications, locally runnable examples, vendor benchmark results and a unique SXF model chooser.</p>
+  <p class="lfm3-alert"><strong>Important:</strong> LFM3 is a <em>family</em>, not a universal 2B model. The <strong>256K context window</strong> belongs to the text model; vision and audio checkpoints have different limits. The d1 variants return typed decisions rather than ordinary chat completions. <a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener noreferrer">Official announcement ↗</a></p>
+  <div class="lfm3-stat-grid" aria-label="LFM3 release highlights">
+    <div><strong>6</strong><span>post-trained model variants</span></div>
+    <div><strong>1.73B</strong><span>shared backbone parameters</span></div>
+    <div><strong>256K</strong><span>text model context window</span></div>
+    <div><strong>22T</strong><span>reported base training tokens</span></div>
+  </div>
+  <div class="lfm3-hero-actions"><a class="lfm3-cta" href="#model-finder">Find your LFM3 model <span aria-hidden="true">↗</span></a><a href="#models">Compare all six</a><a href="#setup">Start locally</a></div>
+  <p class="lfm3-caveat">Release date: October 27, 2026 · All reported benchmark claims on this page come from Liquid AI, not from independent SXF model evaluations.</p>
+</section>
+
+<div class="shell lfm3-layout">
+  <aside class="lfm3-navigation" aria-label="Page sections"><div class="lfm3-navigation-inner">
+    <strong>EXPLORE LFM3</strong><nav aria-label="Article contents">
+      <a href="#definition">What is LFM3?</a><a href="#model-finder">SXF model finder</a><a href="#models">All six variants</a>
+      <a href="#architecture">Tri-hybrid architecture</a><a href="#benchmarks">Benchmarks</a><a href="#hardware">Local hardware</a>
+      <a href="#setup">Quick start</a><a href="#finetuning">Fine-tuning</a><a href="#comparison">LFM3 vs LFM2.5</a>
+      <a href="#limitations">Limitations &amp; license</a><a href="#faq">FAQ</a><a href="#sources">Primary sources</a>
+    </nav>
+  </div></aside>
+  <div class="lfm3-article">
+
+<section class="lfm3-section" id="definition">
+  <p class="eyebrow">THE DIRECT ANSWER</p>
+  <h2>What is LFM3 by Liquid AI?</h2>
+  <p><strong>LFM3 is a family of lightweight foundation models built on Liquid AI's new 1.73-billion-parameter, 24-layer tri-hybrid backbone.</strong> The October 27, 2026 launch included six post-trained variants for language, vision, audio, omni experiences and decision-making, plus a separate base checkpoint for adaptation. Rather than requiring one large general-purpose network to handle every job, the family offers a small checkpoint matched to each input/output contract.</p>
+  <p>All variants trace back to <a href="https://huggingface.co/LiquidAI/LFM3-1.7B-Base" target="_blank" rel="noopener noreferrer">LFM3-1.7B-Base</a>. Specialized vision and audio branches add their own encoders and components. The decision models are derived from the vision or omni branches and answer questions through calibrated, typed outputs without generating a chat response token by token. This distinction is essential when comparing <strong>models, context limits, memory and accuracy</strong>.</p>
+  <p>Liquid AI says the 1.7B base was trained on <strong>22 trillion tokens</strong>, including a curated final 3.5T-token mid-training stage emphasizing agentic traces and tool calls. These are <strong>developer-reported training details</strong>, not independently audited data. <a href="https://huggingface.co/blog/LiquidAI/lfm3" target="_blank" rel="noopener noreferrer">Read the technical release notes ↗</a></p>
+</section>
+
+<section class="lfm3-section" id="model-finder">
+  <p class="eyebrow">ORIGINAL SXF INTERACTIVE EXPERIENCE</p>
+  <h2>Which LFM3 model should you actually use?</h2>
+  <p>Select the real task—not just the model name. This <strong>SXF Model-Fit Explorer</strong> chooses a checkpoint based on documented input/output capabilities, shows practical acceptance checks, and links to the official model card. It runs entirely in your browser, without a model inference call, upload or remote API.</p>
+  <div class="lfm3-finder" data-lfm3-finder>
+    <div class="lfm3-finder-form">
+      <label for="lfm3-task">What do you want to build?</label>
+      <select id="lfm3-task" data-lfm3-task>
+        <option value="agent">Local text agent / JSON extraction</option>
+        <option value="image">Images, charts, receipts or video</option>
+        <option value="speech">Speech recognition and voice replies</option>
+        <option value="omni">Spoken questions about visual scenes</option>
+        <option value="decide">Calibrated routing or image decisions</option>
+        <option value="voice-decide">Decisions based on voice and images</option>
+      </select>
+      <fieldset class="lfm3-finder-checks">
+        <legend>Your evaluation priorities</legend>
+        <label><input type="checkbox" data-lfm3-private checked /> Run privately / on device</label>
+        <label><input type="checkbox" data-lfm3-custom /> Adapt to specialist data</label>
+      </fieldset>
+      <p class="lfm3-finder-foot">Recommendation is a rule-based guide to the published model interfaces, not an automated performance or suitability certification.</p>
+    </div>
+    <div class="lfm3-finder-result" aria-live="polite" aria-atomic="true">
+      <span>BEST STARTING POINT</span><h3 data-lfm3-name>LFM3-1.7B</h3><p data-lfm3-reason>Use the small text model for structured extraction and tool calling.</p>
+      <div class="lfm3-result-grid"><div><small>INPUT → OUTPUT</small><strong data-lfm3-io>Text → Text</strong></div><div><small>PUBLISHED CONTEXT</small><strong data-lfm3-context>256K tokens</strong></div></div>
+      <p data-lfm3-check>Test real prompts, tool errors and JSON format compliance.</p>
+      <a data-lfm3-link href="https://huggingface.co/LiquidAI/LFM3-1.7B" target="_blank" rel="noopener noreferrer">Open official checkpoint ↗</a>
+    </div>
+  </div>
+  <p class="lfm3-note">No recommendation replaces a test using your own inputs. The full preprocessing pipeline, quantization, tool access, safety constraints and actual device memory must be evaluated separately.</p>
+</section>
+
+<section class="lfm3-section" id="models">
+  <p class="eyebrow">SIX RELEASED VARIANTS</p>
+  <h2>LFM3 model family comparison: inputs, outputs and use cases</h2>
+  <p>These are the six specialized launch models. The <strong>base checkpoint is separate</strong> and is intended for further training, not counted as a seventh post-trained assistant. Context lengths in this table are individual model-card claims where available; “see model card” means no family-wide limit is inferred.</p>
+  <div class="lfm3-table-wrap"><table class="lfm3-table">
+    <caption>Liquid AI's first six LFM3 variants, October 2026</caption>
+    <thead><tr><th scope="col">Official model</th><th scope="col">Input</th><th scope="col">Output</th><th scope="col">Context</th><th scope="col">Designed for</th></tr></thead>
+    <tbody><!-- LFM3_VARIANTS --></tbody></table></div>
+  <div class="lfm3-model-cards">
+    <article><span>01 · LANGUAGE</span><h3>LFM3-1.7B</h3><p>Text-only, post-trained for local agents, structured outputs and tools. <strong>256K tokens</strong>, not a guarantee of flawless 256K recall. Avoid treating it as an unrestricted coding agent.</p><a href="https://huggingface.co/LiquidAI/LFM3-1.7B" target="_blank" rel="noopener noreferrer">Text model card ↗</a></article>
+    <article><span>02 · VISION</span><h3>LFM3-VL-2B</h3><p>Reads images and video and replies in text. The published <strong>1.92B model</strong> includes a 164M vision encoder and 25M projector; its context is <strong>128K tokens</strong>.</p><a href="https://huggingface.co/LiquidAI/LFM3-VL-2B" target="_blank" rel="noopener noreferrer">Vision model card ↗</a></article>
+    <article><span>03 · SPEECH</span><h3>LFM3-Audio-2B</h3><p>Speech recognition, synthesis, voice chat, translation and audio reasoning. Audio is encoded at 16 kHz and speech can be output at 24 kHz. Its model-card context is <strong>32K tokens</strong>.</p><a href="https://huggingface.co/LiquidAI/LFM3-Audio-2B" target="_blank" rel="noopener noreferrer">Audio model card ↗</a></article>
+    <article><span>04 · OMNI</span><h3>LFM3-Omni-2B</h3><p>Combines image, video, spoken audio and text for assistants that can see, listen and speak. Liquid AI lists <strong>2.2B parameters</strong>; deploy only with the suitable modality pipeline.</p><a href="https://huggingface.co/LiquidAI/LFM3-Omni-2B" target="_blank" rel="noopener noreferrer">Omni model card ↗</a></article>
+    <article><span>05 · DECISIONS</span><h3>d1-2B</h3><p>Derived from the vision model. Gives calibrated yes/no, choice, score, extraction or visual-location answers in a forward pass rather than writing paragraphs.</p><a href="https://huggingface.co/LiquidAI/d1-2B" target="_blank" rel="noopener noreferrer">Decision model card ↗</a></article>
+    <article><span>06 · SPOKEN DECISIONS</span><h3>d1-Omni-2B</h3><p>Audio-aware version of d1, derived from the omni branch. Suitable for classification or routing when the input includes a voice request or recorded sound.</p><a href="https://huggingface.co/LiquidAI/d1-Omni-2B" target="_blank" rel="noopener noreferrer">Omni decision card ↗</a></article>
+  </div>
+</section>
+
+<section class="lfm3-section" id="architecture">
+  <p class="eyebrow">WHAT CHANGED UNDER THE HOOD</p>
+  <h2>LFM3 tri-hybrid architecture: 13 + 5 + 6 layers</h2>
+  <p>Liquid AI's 24-layer LFM3 language backbone mixes <strong>13 gated short convolutions</strong>, <strong>5 sliding-window attention layers</strong> (256-token local window) and <strong>6 global attention layers</strong>. These are different processing operators within a shared backbone, not three separate full-size models.</p>
+  <div class="lfm3-architecture" aria-label="LFM3 architecture layer type breakdown">
+    <div><strong>13 / 24</strong><span>Gated short convolutions</span><div class="lfm3-track"><i style="width:54.1667%"></i></div><small>Efficient local sequence mixing · kernel size 7</small></div>
+    <div><strong>5 / 24</strong><span>Sliding-window attention</span><div class="lfm3-track"><i style="width:20.8333%"></i></div><small>Local attention, 256-token window</small></div>
+    <div><strong>6 / 24</strong><span>Global attention</span><div class="lfm3-track"><i style="width:25%"></i></div><small>Longer-range token interactions</small></div>
+  </div>
+  <p>Other changes include <strong>head-wise gated attention</strong>, <strong>partial RoPE</strong> on global-attention heads and <strong>sandwich normalization</strong>. The vocabulary has 128,000 tokens. Liquid AI used a hardware-aware search across 14 device/backend configurations; the company reports LFM3-1.7B is about 25% faster than the comparison baseline <em>per parameter at 8K context</em>. That is not a universal 25% application speed gain. <a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener noreferrer">Architecture evidence ↗</a></p>
+  <div class="lfm3-insight"><strong>Practical implication:</strong> the text model targets efficient long-context inference, while the vision and audio variants add modality-specific encoders. A 256K model-card limit is a maximum supported context, not proof of accurate recall at every position.</div>
+</section>
+
+<section class="lfm3-section" id="benchmarks">
+  <p class="eyebrow">PUBLISHED NUMBERS, NOT SXF MEASUREMENTS</p>
+  <h2>LFM3 benchmarks: where are the improvements?</h2>
+  <p>Below are selected <strong>Liquid AI-published results</strong>. Compare numbers only within the same named test and the reported setup; differences across model families, prompt policies or tools do not establish an overall winner. <a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener noreferrer">Original detailed benchmark tables ↗</a></p>
+  <div class="lfm3-table-wrap"><table class="lfm3-table"><caption>Selected claims from Liquid AI's October 27 release</caption>
+    <thead><tr><th scope="col">Evaluation</th><th scope="col">LFM3 model</th><th scope="col">Prior / comparison</th><th scope="col">Interpretation</th></tr></thead><tbody>
+      <tr><th scope="row">WebArena-Verified</th><td>38.42 · LFM3-1.7B</td><td>3.02 · LFM2.5-2.6B</td><td>Vendor agent benchmark; depends on test harness.</td></tr>
+      <tr><th scope="row">Vision average, 62 evaluations</th><td>71.4 · LFM3-VL-2B</td><td>57.6 · LFM2.5-VL-3B</td><td>Unweighted mean across the vendor-selected vision evaluations.</td></tr>
+      <tr><th scope="row">Document / OCR / chart</th><td>83.9 · LFM3-VL-2B</td><td>71.2 · LFM2.5-VL-3B</td><td>Vision benchmark category, not a per-page OCR guarantee.</td></tr>
+      <tr><th scope="row">Daily-Omni video + audio</th><td>70.1 · LFM3-Omni-2B</td><td>61.3 · Qwen2.5-Omni-7B</td><td>Same benchmark in reported table, not full-task superiority.</td></tr>
+      <tr><th scope="row">ImajevBench decisions</th><td>75.5 · d1-2B</td><td>64.0 · d1-3B</td><td>Reported typed-decision benchmark.</td></tr>
+    </tbody></table></div>
+  <p>For vision comparison, the published LFM3-VL-2B overall average (<strong>71.4</strong>) is near the vendor's Gemma 4 12B result (<strong>71.7</strong>), but benchmark composition and inference settings matter. These are not direct independent tests performed by SXF. For production evaluation, track accuracy by your actual task—receipts, diagrams, screenshots, spoken commands—not only a single composite average.</p>
+</section>
+
+<section class="lfm3-section" id="hardware">
+  <p class="eyebrow">WEIGHTS ARE NOT TOTAL MEMORY</p>
+  <h2>Can LFM3 run locally? RAM, VRAM and quantization</h2>
+  <p>Liquid AI says <strong>the LFM3-1.7B text model fits in about 1 GB with 4-bit weights</strong>. That is the model-weights footprint, <strong>not a minimum system-RAM requirement</strong>. Token buffers, context length, KV cache, execution kernels and runtime overhead add memory. Vision and audio checkpoints also need encoders, decoders and preprocessing.</p>
+  <div class="lfm3-feature-grid"><div><span>TEXT · 4-BIT</span><strong>~1 GB</strong><p>Vendor-reported compressed weight scale. Not total RAM; actual file format and runtime matter.</p></div><div><span>TEXT · CONTEXT</span><strong>256K max</strong><p>Published supported window for LFM3-1.7B; a huge context still incurs memory and latency costs.</p></div><div><span>VISION</span><strong>128K</strong><p>Published LFM3-VL-2B context; high-resolution images and video frames add work.</p></div><div><span>AUDIO</span><strong>32K</strong><p>Published LFM3-Audio-2B context. Check audio buffers and speech codec separately.</p></div></div>
+  <p><strong>Runtime choices:</strong> the official text model card lists BF16 with vLLM, SGLang or Transformers; quantized GGUF for llama.cpp/Ollama/LM Studio; and MLX for Apple silicon. Availability and instructions differ by variant. Do not assume the same quantization support, throughput, context length or speed across all six checkpoints.</p>
+  <p>Before buying hardware, measure the exact checkpoint plus tokenizer, vision/audio preprocessing, prompt size, batch size and peak memory. A Raspberry Pi or phone appearing in the developer's architecture-search devices is <em>not</em> a guarantee that every multimodal variant works comfortably on every such device.</p>
+</section>
+
+<section class="lfm3-section" id="setup">
+  <p class="eyebrow">SOURCE-ALIGNED QUICK START</p>
+  <h2>How to run LFM3 locally with Python</h2>
+  <p>The official LFM3 release includes starter code for the text model. In a Python environment with the required dependencies and compatible hardware, load the model from Hugging Face. <strong>Use version-pinned environments for production</strong>; models using <code>trust_remote_code=True</code> execute repository-provided Python code, so review and pin the model revision before using it with private data.</p>
+  <div class="lfm3-code"><div><span>Terminal · install</span><button type="button" data-lfm3-copy="install" aria-label="Copy install command">Copy</button></div><pre id="lfm3-code-install"><code>python -m pip install -U transformers accelerate</code></pre></div>
+  <div class="lfm3-code"><div><span>Python · text inference</span><button type="button" data-lfm3-copy="text" aria-label="Copy Python example">Copy</button></div><pre id="lfm3-code-text"><code>from transformers import pipeline
+
+generator = pipeline(
+    "text-generation",
+    model="LiquidAI/LFM3-1.7B",
+    trust_remote_code=True,
+)
+messages = [
+    {"role": "user", "content": "Return JSON with a title and one-sentence summary of: local AI models."}
+]
+result = generator(
+    messages,
+    do_sample=True,
+    temperature=0.1,
+    top_k=50,
+    repetition_penalty=1.1,
+    max_new_tokens=512,
+)
+print(result[0]["generated_text"][-1]["content"])</code></pre></div>
+  <p>For <strong>images and video</strong>, load <code>LiquidAI/LFM3-VL-2B</code> with its official processor; Liquid AI documents <code>transformers&gt;=5.21.0</code> and vision dependencies. For <strong>speech</strong>, use the <a href="https://huggingface.co/LiquidAI/LFM3-Audio-2B" target="_blank" rel="noopener noreferrer">audio model's processor and LiquidCodec</a> (documented <code>transformers&gt;=5.20.2</code>). For combined inputs, follow the <a href="https://huggingface.co/LiquidAI/LFM3-Omni-2B" target="_blank" rel="noopener noreferrer">omni model card</a>; swapping the text checkpoint for a multimodal one in this simple pipeline is insufficient.</p>
+  <p>Official links: <a href="https://huggingface.co/LiquidAI/LFM3-1.7B" target="_blank" rel="noopener noreferrer">text</a> · <a href="https://huggingface.co/LiquidAI/LFM3-VL-2B" target="_blank" rel="noopener noreferrer">vision</a> · <a href="https://huggingface.co/LiquidAI/LFM3-Audio-2B" target="_blank" rel="noopener noreferrer">audio</a> · <a href="https://huggingface.co/LiquidAI/LFM3-Omni-2B" target="_blank" rel="noopener noreferrer">omni</a> · <a href="https://huggingface.co/LiquidAI/d1-2B" target="_blank" rel="noopener noreferrer">decision</a>.</p>
+</section>
+
+<section class="lfm3-section" id="finetuning">
+  <p class="eyebrow">BUILD SPECIALIST MODELS</p>
+  <h2>How to fine-tune LFM3 for your own domain</h2>
+  <p>Liquid AI provides examples of <strong>single-GPU fine-tuning</strong> across the family. Choose the post-trained variant whose interface fits the task, or start from <a href="https://huggingface.co/LiquidAI/LFM3-1.7B-Base" target="_blank" rel="noopener noreferrer">LFM3-1.7B-Base</a> if your project needs its own training objective. The published notebooks include supervised fine-tuning (SFT), direct preference optimization (DPO), group relative policy optimization (GRPO) and continued pretraining (CPT)—not every technique is equally appropriate for every task.</p>
+  <div class="lfm3-table-wrap"><table class="lfm3-table"><caption>Published examples of specialization paths</caption><thead><tr><th scope="col">Variant</th><th scope="col">Example fine-tuning task</th><th scope="col">Recommended verification</th></tr></thead><tbody>
+    <tr><th scope="row">LFM3-1.7B</th><td>Extract structured JSON from messy documents</td><td>Schema-valid output rate and field accuracy on held-out documents</td></tr>
+    <tr><th scope="row">LFM3-VL-2B</th><td>Read receipt photos to JSON</td><td>Line-item precision, totals and OCR errors by camera conditions</td></tr>
+    <tr><th scope="row">LFM3-Audio-2B</th><td>Turn spoken smart-home requests into tool calls</td><td>Word error rate, tool accuracy and safe rejection of ambiguous commands</td></tr>
+    <tr><th scope="row">LFM3-Omni-2B</th><td>Answer spoken questions about images</td><td>Cross-modal grounding, unsupported assertions and privacy</td></tr>
+    <tr><th scope="row">d1-2B / d1-Omni-2B</th><td>Calibrated decision workflows</td><td>Calibration curves, false-positive costs and shifts in input distribution</td></tr>
+  </tbody></table></div>
+  <p><strong>SXF evaluation protocol:</strong> (1) freeze a held-out test set; (2) save model revision, runtime and preprocessing settings; (3) report a baseline before tuning; (4) fine-tune on non-overlapping examples; (5) compare performance and cost against the same acceptance criteria; (6) evaluate failure cases, safety and calibration. A specialized model that improves one score but fails under distribution shift is not yet deployment-ready.</p>
+  <p>Vendor example: Liquid AI adapted LFM3-VL-2B to inspect wind-turbine blade images using around 3,000 training photos and tested on around 1,400 held-out images. The company reports classification accuracy reaching 67% after tuning, but this result is tied to that dataset and procedure—<strong>not a generic improvement guarantee</strong>. <a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener noreferrer">Methodology and project details ↗</a></p>
+</section>
+
+<section class="lfm3-section" id="comparison">
+  <p class="eyebrow">PREVIOUS GENERATION</p>
+  <h2>LFM3 vs LFM2.5: what actually improved?</h2>
+  <div class="lfm3-table-wrap"><table class="lfm3-table"><caption>Selected, non-interchangeable Liquid AI model and architecture changes</caption><thead><tr><th scope="col">Aspect</th><th scope="col">LFM3</th><th scope="col">Previous LFM family</th></tr></thead><tbody>
+    <tr><th scope="row">Language model</th><td>LFM3-1.7B, 1.73B parameters</td><td>LFM2.5-2.6B, about 2.6B; different model</td></tr>
+    <tr><th scope="row">Attention design</th><td>Tri-hybrid: convolution + local + global attention</td><td>Earlier hybrid design without the same 13/5/6 layer mix</td></tr>
+    <tr><th scope="row">Text context</th><td>256K for LFM3-1.7B</td><td>Compare the precise older checkpoint, not all LFM2 variants</td></tr>
+    <tr><th scope="row">Vision</th><td>LFM3-VL-2B with video support and new vision encoder</td><td>LFM2.5-VL-3B baseline in Liquid AI's benchmark table</td></tr>
+    <tr><th scope="row">Audio + omni</th><td>New audio encoder, LiquidCodec; first LFM omni model</td><td>Earlier audio models use different codecs and pipelines</td></tr>
+    <tr><th scope="row">Decision output</th><td>d1-2B and d1-Omni-2B return typed answers</td><td>d1-3B predecessor had fewer typed-decision capabilities</td></tr>
+  </tbody></table></div>
+  <p>The headline claim that LFM3-1.7B outperforms LFM2.5-2.6B with roughly <strong>35% fewer parameters</strong> comes from Liquid AI's evaluations. It does not mean every new branch beats every previous checkpoint on every task. If your goal is local vision latency rather than image comprehension, see SXF's separate <a href="/models/lfm2-5-vl-dspark/">LFM2.5-VL-DSpark speculative decoding guide</a>; DSpark is a drafter for LFM2.5-VL-3B, <em>not</em> a member of the LFM3 family.</p>
+</section>
+
+<section class="lfm3-section" id="limitations">
+  <p class="eyebrow">CHECK BEFORE DEPLOYMENT</p>
+  <h2>LFM3 limitations, safety and open-weight licensing</h2>
+  <ul>
+    <li><strong>Small model limits:</strong> LFM3-1.7B is suited to narrow agents but the official model card cautions against complex multi-step reasoning and agentic coding. Use retrieval for knowledge-intensive tasks.</li>
+    <li><strong>Modality-specific contexts:</strong> vision and speech branches do not inherit the text variant's 256K context window. Verify each model card and engine.</li>
+    <li><strong>Vendor measurements:</strong> LFM3 accuracy, speed, fine-tuning and token counts here reflect Liquid AI's reported setups. SXF has not run an independent LFM3 benchmark.</li>
+    <li><strong>No universal hardware promise:</strong> a 1 GB quantized weight claim is not proof that an entire agent, image pipeline or 256K KV cache fits in 1 GB of device RAM.</li>
+    <li><strong>Licensing:</strong> Hugging Face cards label the checkpoints <code>lfm1.0</code> / LFM Open License v1.0. Open weights are not necessarily an unrestricted OSI-approved open-source license; review conditions before redistribution or commercial use.</li>
+    <li><strong>Privacy and security:</strong> on-device inference can keep raw data on a device, but downloaded remote code, tool permissions, logs and external inference calls still require review.</li>
+    <li><strong>Decision calibration:</strong> a probability score is not automatically a correct probability after deployment or distribution shift. Test on target population data and set thresholds against error costs.</li>
+  </ul>
+</section>
+
+<section class="lfm3-section" id="faq">
+  <p class="eyebrow">SEARCH QUESTIONS ANSWERED</p>
+  <h2>Frequently asked questions about Liquid AI LFM3</h2>
+  <div class="lfm3-faq">
+    <details><summary>What is LFM3 by Liquid AI?</summary><p>A six-model, open-weight family announced on October 27, 2026, built around a compact 1.73B-parameter tri-hybrid backbone. Its branches handle text, vision, audio, omni and typed decisions.</p></details>
+    <details><summary>Is LFM3 one model or six?</summary><p>The first release comprises six specialized post-trained models. LFM3-1.7B-Base is a separate pre-trained starting checkpoint.</p></details>
+    <details><summary>What is the LFM3 context window?</summary><p>It varies. LFM3-1.7B specifies 256K tokens; LFM3-VL-2B specifies 128K; LFM3-Audio-2B specifies 32K. Check the specific model card for other branches.</p></details>
+    <details><summary>Can I run LFM3 on a laptop?</summary><p>Liquid AI targets local inference and says text weights occupy about 1 GB at 4-bit precision. Actual memory is higher and depends on context, runtime, encoders and batch size.</p></details>
+    <details><summary>Is LFM3 open-source?</summary><p>The family is distributed as open weights under LFM Open License v1.0. Review the license conditions; open weights do not automatically mean an OSI-approved unrestricted open-source license.</p></details>
+    <details><summary>Can I fine-tune LFM3 on one GPU?</summary><p>Liquid AI provides single-GPU examples and tutorials. The actual device memory and time requirements depend on the model, precision, data and fine-tuning method.</p></details>
+    <details><summary>What improved between LFM3 and LFM2.5?</summary><p>Liquid AI reports greater capability per parameter, a tri-hybrid backbone, a new vision encoder with video input, new audio components and specialized decision branches. Published comparisons are vendor-reported.</p></details>
+    <details><summary>Which LFM3 model handles voice and images?</summary><p>LFM3-Omni-2B accepts text, image, video and audio and produces text or speech. For typed decisions about voice and visual evidence, consider d1-Omni-2B.</p></details>
+    <details><summary>Does the LFM3 API have a permanent free tier?</summary><p>The release confirms Hugging Face weights, a Playground and Liquid AI API access, but not a permanent universal free tier. Consult the current service pricing and availability.</p></details>
+  </div>
+</section>
+
+<section class="lfm3-section" id="sources">
+  <p class="eyebrow">PRIMARY-SOURCE REGISTER</p>
+  <h2>Official LFM3 documentation and methodology</h2>
+  <p>Research reviewed <strong>November 1, 2026</strong>; original announcement <strong>October 27, 2026</strong>. The source documents the capabilities, model cards, benchmark configurations, checkpoint restrictions and vendor-reported metrics. The model-fit explorer, evaluation protocol and interpretation are original SXF editorial contributions, not new experimental measurements.</p>
+  <div class="lfm3-sources">
+    <a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener noreferrer"><strong>Liquid AI — LFM3 introduction</strong><span>Official release, architecture, benchmarks, fine-tuning evidence ↗</span></a>
+    <a href="https://huggingface.co/blog/LiquidAI/lfm3" target="_blank" rel="noopener noreferrer"><strong>Liquid AI — technical launch guide</strong><span>Model family, runnable snippets, six post-trained variants ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/LFM3-1.7B" target="_blank" rel="noopener noreferrer"><strong>Text model card — LFM3-1.7B</strong><span>256K context, supported runtimes, model limitations ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/LFM3-VL-2B" target="_blank" rel="noopener noreferrer"><strong>Vision model card — LFM3-VL-2B</strong><span>128K context, 1.92B breakdown, videos and benchmarks ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/LFM3-Audio-2B" target="_blank" rel="noopener noreferrer"><strong>Audio model card — LFM3-Audio-2B</strong><span>32K context, speech input/output and language support ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/d1-2B" target="_blank" rel="noopener noreferrer"><strong>Decision model card — d1-2B</strong><span>Typed calibrated responses, limits and decision use cases ↗</span></a>
+  </div>
+  <p class="lfm3-related"><strong>Continue researching:</strong> <a href="/guides/open-source-ai-models/">Open-weight AI models</a> · <a href="/guides/run-ai-models-locally/">Run models locally</a> · <a href="/guides/llm-quantization-explained/">LLM quantization</a> · <a href="/models/lfm2-5-vl-dspark/">LFM2.5-VL-DSpark</a> · <a href="/signals/build-specialized-multimodal-models-with-lfm3-db98bf5/">Original SXF launch signal</a>.</p>
+</section>
+
+  </div>
+</div>
+"""
+
+
+def render_page(items, *, page_head, page_header, page_footer):
+    """Publish original editorial content on the unchanged model permalink."""
+    head = page_head(
+        TITLE, DESCRIPTION, URL, schema(), "article",
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    )
+    head = head.replace("</head>", '<link rel="stylesheet" href="/assets/lfm3-model.css" /></head>', 1)
+    latest = items[0] if items else None
+    news = ""
+    if latest:
+        name = escape(latest.get("title", "LFM3 launch announcement"))
+        slug = escape(latest.get("signal_slug", ""), quote=True)
+        news = ('<section class="shell lfm3-recent"><p class="eyebrow">LATEST SXF SIGNAL</p>'
+                '<h2>Latest LFM3 release signal</h2><p>' + name + '</p>'
+                '<a href="/signals/' + slug + '/">Read the dated news analysis ↗</a></section>')
+    article = ARTICLE.replace("<!-- LFM3_VARIANTS -->", variants_table())
+    return (
+        '<!doctype html><html lang="en">' + head
+        + '<body class="intel-page model-page sxf-lfm3">' + page_header("models")
+        + '<main id="main-content">' + article + news + '</main>'
+        + page_footer() + '<script src="/assets/lfm3-model.js" defer></script></body></html>'
+    )
