@@ -77,6 +77,22 @@ def append_missing_guide_rows(rows: list[str], site_root: Path, base_url: str, t
             known.add(url)
 
 
+def append_indexable_brief_issue_rows(rows: list[str], site_root: Path, base_url: str, today: str):
+    """Index editorial dated issues only when opted in and self-canonical."""
+    for page in sorted((site_root / "brief").glob("*/index.html")):
+        slug = page.parent.name
+        if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", slug):
+            continue
+        metadata = GuideHeadParser()
+        metadata.feed(page.read_text(encoding="utf-8").split("</head>", 1)[0])
+        if any("noindex" in value for value in metadata.robots):
+            continue
+        expected = f"{base_url}/brief/{slug}/"
+        if metadata.canonical != expected:
+            raise ValueError(f"Indexable Brief issue must self-canonicalize: {page}")
+        rows.append(sitemap_entry(expected, today))
+
+
 def sitemap_entry(url, lastmod):
     return f"  <url><loc>{url}</loc><lastmod>{lastmod}</lastmod></url>"
 
@@ -302,6 +318,7 @@ def write_sitemap(items, context: SitemapContext):
     # Guide URLs are discovered from self-canonical, indexable HTML so new
     # articles cannot be forgotten when the handwritten guide list grows.
     append_missing_guide_rows(rows, SITEMAP.parent, BASE_URL, generated_today)
+    append_indexable_brief_issue_rows(rows, SITEMAP.parent, BASE_URL, generated_today)
 
     from sitemap_lastmod import synchronize_lastmod
     rows = synchronize_lastmod(rows, SITEMAP, BASE_URL)
