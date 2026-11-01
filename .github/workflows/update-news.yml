@@ -58,6 +58,8 @@ jobs:
         run: python tests/test_lfm25_24b_model.py
       - name: Gemini 4 family primary-source SEO and calculator regression
         run: python tests/test_gemini4_model.py
+      - name: GPT-Live-Transcribe SEO, sources and interactive lab regression
+        run: python tests/test_gpt_live_transcribe_model.py
       - name: GPT-6 Intelligent UI Signal SEO and content regression
         run: python tests/test_gpt6_intelligent_ui_signal.py
       - name: GitHub license-compliance page SEO and source integrity
