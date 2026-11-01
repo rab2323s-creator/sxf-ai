@@ -27,6 +27,20 @@ def main():
     assert model.URL in (ROOT/"sitemap.xml").read_text(encoding="utf-8")
     for path in ["assets/gpt-live-transcribe.css","assets/gpt-live-transcribe.js"]:
         assert (ROOT/path).is_file()
+    # Regression for the real failure: the pricing catalog owns this route and
+    # overwrote the authored page AFTER the news page had rendered successfully.
+    catalog_page=update_news.render_catalog_model_page("gpt-live-transcribe",[])
+    assert catalog_page is not None
+    assert "data-ltx-event-lab" in catalog_page
+    assert "data-ltx-cost" in catalog_page
+    assert "verified model reference." not in catalog_page
+    assert f'<link rel="canonical" href="{model.URL}"' in catalog_page
+    assert "data-model-history" in catalog_page
+    # Whole catalog build must preserve the same source-backed content.
+    update_news.build_catalog_model_pages([])
+    rebuilt=(ROOT/"models/gpt-live-transcribe/index.html").read_text(encoding="utf-8")
+    assert "data-ltx-event-lab" in rebuilt
+    assert "GPT-Live-Transcribe: Realtime API" in rebuilt
     rendered=update_news.model_page_html("GPT-Live-Transcribe",[])
     assert 'data-ltx-event-lab' in rendered
     assert f'<link rel="canonical" href="{model.URL}"' in rendered
