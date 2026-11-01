@@ -5347,7 +5347,14 @@ def render_catalog_model_page(model_id, items):
     model = model_catalog_entry(model_id)
     template = model.get("page_template")
 
-    if template == "editorial-reference":
+    # This route belongs to the canonical pricing catalog. The catalog renderer
+    # runs *after* the news-model renderer, so route it to the authored page here
+    # as well; otherwise every feed refresh replaces the guide with a thin card.
+    if model_id == "gpt-live-transcribe":
+        page = render_gpt_live_transcribe_page(
+            items, page_head=page_head, page_header=page_header, page_footer=page_footer
+        )
+    elif template == "editorial-reference":
         if model_id == "gemini-3.7-flash":
             page = gemini_37_flash_reference_html()
         elif model_id == "gpt-6.1-sol":
