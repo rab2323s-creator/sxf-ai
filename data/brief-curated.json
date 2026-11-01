@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "mode": "manual-editorial-only",
+  "policy": "SXF Brief is manually curated. Automated Signals feed must never change its story selection or regenerate its pages.",
+  "contact_email": "info@sxf.si",
+  "issues": [
+    {
+      "number": 1,
+      "date": "2026-11-01",
+      "edition_label": "Daily Editorial Intelligence",
+      "lead": {
+        "category": "Frontier models",
+        "headline": "GPT-6.1 Terra puts practical computer-use AI in the spotlight",
+        "dek": "OpenAI's Terra release focuses attention on faster, more accessible computer-use workflows. The meaningful test is whether those gains translate to reliable, affordable work across real applications.",
+        "analysis": "Terra's significance is not its launch name alone. Developers still need measurable success rates, latency, permissions and total deployment costs before switching an agent stack.",
+        "source": "OpenAI",
+        "source_url": "https://openai.com/index/introducing-gpt-6-1-terra",
+        "signal_url": "/signals/introducing-gpt-6-1-terra-1758535/",
+        "image": "/assets/brief/edition-001/lead-glass.webp",
+        "image_alt": "Golden-lit geometric glass structures representing a frontier AI model release"
+      },
+      "stories": [
+        {
+          "category": "Security",
+          "headline": "OpenAI details the security boundaries protecting frontier-model training",
+          "dek": "An offline web environment, microVM isolation and agent-led red-teaming form a defense-in-depth approach. The published findings show why sandbox escapes and network egress must be evaluated separately.",
+          "analysis": "OpenAI reports remediation, but its report is not proof of universal containment. Teams should test escape routes, monitoring and damage limits in their own infrastructure.",
+          "source": "OpenAI",
+          "source_url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+          "signal_url": "/signals/securing-our-frontier-model-training-environment-48e2274/",
+          "image": "/assets/brief/edition-001/story-security.webp",
+          "image_alt": "Gold-lit silicon processor illustrating AI infrastructure security"
+        },
+        {
+          "category": "Agents",
+          "headline": "Thousands of AI agents map clues across complex brain-cell data",
+          "dek": "A research collaboration used distributed GPT-Rosalind agents to interpret a mouse-brain CRISPR atlas. The reported 32-minute analysis generated testable hypotheses, not clinical treatments.",
+          "analysis": "Distributed agents can cover a broader literature, but more citations are not necessarily more accurate conclusions. Experimental replication remains essential.",
+          "source": "OpenAI / research collaborators",
+          "source_url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
+          "signal_url": "/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
+          "image": "/assets/brief/edition-001/story-agents.webp",
+          "image_alt": "Layered translucent violet glass panels representing parallel AI agents"
+        },
+        {
+          "category": "Open source",
+          "headline": "Muse Spark Open reveals the scale behind an open-weight multimodal model",
+          "dek": "The release reports roughly 816 billion total parameters, 42 billion active per token and a million-token context. Those numbers imply substantial serving requirements despite sparse inference.",
+          "analysis": "Active parameters describe compute, not total storage. Evaluate deployment hardware, quantization, usable context and licensing before adoption.",
+          "source": "Hugging Face / Meta",
+          "source_url": "https://huggingface.co/blog/meta-muse-spark-open",
+          "signal_url": "/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
+          "image": "/assets/brief/edition-001/story-open-source.webp",
+          "image_alt": "Luminous flowing golden computational mesh on a dark background"
+        },
+        {
+          "category": "Research",
+          "headline": "Google grounds laboratory agents in real experiments, not simulations alone",
+          "dek": "Google Research describes robot-aware validation and iterative molecular design. Reported aptamer hit rates improved in selected tests; binding results remain far from any clinical outcome.",
+          "analysis": "The key advance is a closed loop: plan, simulate, execute under supervision, measure and revise. Reproducibility and physical safeguards remain necessary.",
+          "source": "Google Research",
+          "source_url": "https://research.google/blog/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomous-wet-labs/",
+          "signal_url": "/signals/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3/",
+          "image": "/assets/brief/edition-001/story-research.webp",
+          "image_alt": "Blue-and-gold molecular protein structure"
+        }
+      ],
+      "big_picture_heading": "More capable systems. More demanding evidence.",
+      "big_picture": "Five developments point to the same challenge: new computer-use models, stronger containment, distributed scientific reasoning, open-weight multimodal systems and physical laboratory feedback must now be judged against reliability, costs, safeguards and reproducible evidence — not headlines alone.",
+      "watch": [
+        {
+          "label": "Real-world agent success rates",
+          "icon": "◇"
+        },
+        {
+          "label": "Sandbox escape and egress testing",
+          "icon": "⬡"
+        },
+        {
+          "label": "Open-model serving economics",
+          "icon": "▱"
+        },
+        {
+          "label": "Wet-lab replication of AI leads",
+          "icon": "♧"
+        }
+      ]
+    }
+  ],
+  "legacy_archive": [
+    {
+      "date": "2026-10-31",
+      "label": "Previous AI news radar",
+      "url": "/brief/2026-10-31/"
+    },
+    {
+      "date": "2026-10-27",
+      "label": "Previous AI news radar",
+      "url": "/brief/2026-10-27/"
+    },
+    {
+      "date": "2026-10-26",
+      "label": "Previous AI news radar",
+      "url": "/brief/2026-10-26/"
+    },
+    {
+      "date": "2026-10-25",
+      "label": "Previous AI news radar",
+      "url": "/brief/2026-10-25/"
+    }
+  ]
+}
