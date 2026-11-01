@@ -81,7 +81,7 @@ def append_indexable_brief_issue_rows(rows: list[str], site_root: Path, base_url
     """Index editorial dated issues only when opted in and self-canonical."""
     for page in sorted((site_root / "brief").glob("*/index.html")):
         slug = page.parent.name
-        if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", slug):
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", slug):
             continue
         metadata = GuideHeadParser()
         metadata.feed(page.read_text(encoding="utf-8").split("</head>", 1)[0])
