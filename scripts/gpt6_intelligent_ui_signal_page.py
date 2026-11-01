@@ -249,3 +249,4 @@ BODY = r'''
   update();
 })();
 </script>
+'''
