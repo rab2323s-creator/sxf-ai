@@ -12,7 +12,7 @@ FOOTER = re.compile(r'(<footer class="footer shell">)(.*?)(</footer>)', re.S)
 VMC_URL = 'https://vivamediacreative.com/labs/'
 VIVA_URL = 'https://vivamediacreative.com/'
 NAV = re.compile(r'(<nav class="footer-nav"[^>]*>)(.*?)(</nav>)', re.S)
-ATTRIBUTION_ANCHOR = re.compile(
+    r"""<a\b[^>]*\bhref=["']https://vivamediacreative\.com(?:/labs/?)?["'][^>]*>.*?</a>""",
     r'<a\\b[^>]*\\bhref=["\\\']https://vivamediacreative\\.com(?:/labs/?)?["\\\'][^>]*>.*?</a>',
     re.S | re.I,
 )
@@ -48,7 +48,7 @@ def normalize_footer_attribution(root: Path) -> int:
                 footer = footer.replace(INTERNAL_CREDIT, EXTERNAL_CREDIT)
             else:
                 footer = footer.replace(EXTERNAL_CREDIT, INTERNAL_CREDIT)
-            external_links = re.findall(r'href=["\\\']https://vivamediacreative\\.com(?:/labs/?)?["\\\']', footer)
+            external_links = re.findall(r"""href=["']https://vivamediacreative\.com(?:/labs/?)?["']""", footer)
             if is_home and (len(external_links) != 1 or EXTERNAL_CREDIT not in footer):
                 raise ValueError('Homepage must retain exactly one VMC Labs credit')
             if not is_home and external_links:
