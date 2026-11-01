@@ -16,7 +16,7 @@ def main():
     assert f'<link rel="canonical" href="{model.URL}"' in page
     assert 'data-lfm24-fit' in page and 'lfm25-24b-model.js' in page
     assert '2.45B' in page and '131,072' in page and 'Q4_K_M' in page
-    assert "vendor" in page.lower() and "not a measured memory test" in page
+    assert "vendor" in page.lower() and "not</em> a measured memory test" in page
     for source in model.SOURCES.values():
         assert source in page,source
     schema=json.loads(page.split('<script type="application/ld+json">',1)[1].split("</script>",1)[0])["@graph"]
