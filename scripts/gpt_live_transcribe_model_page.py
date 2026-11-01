@@ -1,0 +1,416 @@
+"""SXF source-verified GPT-Live-Transcribe reference, reproducible on feed rebuilds.
+
+Dates and prices refer to verified OpenAI API documentation as of Nov 1 2026.
+SXF tools simulate transcription events and calculate published duration rates:
+they do not perform transcription or contact the OpenAI API.
+"""
+from __future__ import annotations
+
+from html import escape
+
+SLUG = "gpt-live-transcribe"
+URL = "https://sxf.si/models/gpt-live-transcribe/"
+TITLE = "GPT-Live-Transcribe: Realtime API, Cost & Setup | SXF"
+DESCRIPTION = ("GPT-Live-Transcribe explained: $0.017/min pricing, WebSocket "
+               "session setup, transcript delta events, latency presets, context hints "
+               "and an interactive SXF caption/event lab.")
+PUBLISHED = "2026-07-28"
+MODIFIED = "2026-11-01"
+SOURCES = {
+    "model": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+    "realtime": "https://developers.openai.com/api/docs/guides/realtime-transcription",
+    "overview": "https://developers.openai.com/api/docs/guides/transcription",
+    "pricing": "https://developers.openai.com/api/docs/pricing",
+    "cookbook": "https://developers.openai.com/cookbook/examples/migrating_from_whisper_to_gpt_transcribe",
+    "changelog": "https://developers.openai.com/api/docs/changelog",
+    "deprecations": "https://developers.openai.com/api/docs/deprecations",
+    "announcement": "https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318",
+}
+RELATED = [
+    ("gpt-live-transcribe", "Realtime audio", "$0.017/min",
+     "Low-latency partial captions while audio arrives", URL),
+    ("gpt-transcribe", "Completed files / committed turns", "$0.0045/min",
+     "File workflows or committed-turn features", "https://sxf.si/models/gpt-transcribe/"),
+    ("gpt-realtime-whisper", "Existing realtime integration", "$0.017/min",
+     "Legacy integration where it is already supported; not new-build starting choice",
+     "https://developers.openai.com/api/docs/models/gpt-realtime-whisper"),
+]
+FAQ = [
+    ("What is GPT-Live-Transcribe?",
+     "GPT-Live-Transcribe is OpenAI's low-latency streaming speech-to-text model for live microphone, call, and other arriving audio. It emits transcript deltas and a final transcript for each committed turn."),
+    ("What does GPT-Live-Transcribe cost per minute?",
+     "OpenAI lists $0.017 per minute of realtime audio. At that published rate, 60 audio minutes cost about $1.02 before any ancillary infrastructure or other services. Confirm billing rates before deployment."),
+    ("Is GPT-Live-Transcribe cheaper than GPT-Transcribe?",
+     "No for the published base duration rates: GPT-Live-Transcribe costs $0.017 per audio minute versus $0.0045 per minute for GPT-Transcribe. The models serve different latency and recording workflows."),
+    ("How do I start a GPT-Live-Transcribe WebSocket session?",
+     "Connect to wss://api.openai.com/v1/realtime?intent=transcription with server-side API-key authorization, then send session.update with type transcription and audio.input.transcription.model set to gpt-live-transcribe. Do not place model in the connection URL."),
+    ("Can GPT-Live-Transcribe transcribe a prerecorded file?",
+     "Choose gpt-transcribe and the file transcription endpoint for a recording that is already complete. Streaming a completed file's output is not the same as realtime microphone transcription."),
+    ("Does GPT-Live-Transcribe support speaker diarization or word timestamps?",
+     "No. OpenAI's realtime transcription guide states that gpt-live-transcribe does not return word-level timestamps, speaker labels, or confidence scores. Add a compatible separate workflow if those outputs are required."),
+    ("How do I tune GPT-Live-Transcribe latency?",
+     "Use audio.input.transcription.delay with minimal, low, medium, high, or xhigh. OpenAI describes these as qualitative tradeoffs and does not guarantee a specific milliseconds value for each preset."),
+    ("Does GPT-Live-Transcribe support multiple languages?",
+     "It accepts a languages array with expected language codes, including selected ISO 639-1, ISO 639-3, and regional Chinese codes. These are hints, not detected-language predictions; unlike gpt-transcribe, this live model does not return detected-language codes."),
+    ("How can I improve domain-specific names and numbers?",
+     "Provide a relevant prompt describing the audio context, keywords for literal terms and acronyms, and a languages array. Keywords bias recognition and do not guarantee that the word will appear in a transcript."),
+    ("What are transcript delta and completed events?",
+     "conversation.item.input_audio_transcription.delta delivers partial text; conversation.item.input_audio_transcription.completed provides final transcript for a committed turn. Match results by item_id because turns may complete out of order."),
+    ("Does GPT-Live-Transcribe require server VAD?",
+     "No. OpenAI states that gpt-live-transcribe sessions do not support server_vad or semantic_vad. Use client-side voice activity detection or another turn-boundary strategy and send input_audio_buffer.commit."),
+    ("Does GPT-Live-Transcribe generate speech, images, or function calls?",
+     "No. It is input-audio-to-text transcription, with streaming output. It does not generate audio, images, or tool/function calls."),
+    ("What is the accuracy of GPT-Live-Transcribe?",
+     "In OpenAI's July 2026 announcement, GPT-Live-Transcribe achieved 19.70% transcription error on a 22-language Common Voice set versus 20.33% for the referenced Whisper baseline; on a nine-language Real-World Audio Recording benchmark it reported 9.60% versus 11.65%. These are OpenAI-reported evaluations, not SXF results."),
+    ("Is GPT-Live-Transcribe in the Free API tier?",
+     "No. OpenAI's GPT-Live-Transcribe model page states that the Free tier is not supported. Real-time audio processing is a metered API service."),
+]
+
+
+def schema():
+    return {"@context": "https://schema.org", "@graph": [
+        {"@type":"WebPage","@id":URL+"#webpage","url":URL,
+         "name":TITLE,"description":DESCRIPTION,"inLanguage":"en","dateModified":MODIFIED,
+         "isPartOf":{"@id":"https://sxf.si/#website"},
+         "mainEntity":{"@id":URL+"#article"},"about":{"@id":URL+"#model"}},
+        {"@type":"TechArticle","@id":URL+"#article","headline":TITLE,
+         "description":DESCRIPTION,"datePublished":PUBLISHED,"dateModified":MODIFIED,
+         "inLanguage":"en","mainEntityOfPage":{"@id":URL+"#webpage"},
+         "author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
+         "publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
+         "about":{"@id":URL+"#model"},"citation":list(SOURCES.values()),
+         "keywords":["GPT-Live-Transcribe","GPT-Live-Transcribe pricing",
+                     "gpt-live-transcribe realtime WebSocket", "live speech to text API",
+                     "gpt-live-transcribe vs gpt-transcribe",
+                     "gpt-live-transcribe delay latency",
+                     "OpenAI realtime transcription_session", "speech-to-text streaming deltas",
+                     "transcription prompt keywords languages","live captions cost calculator"]},
+        {"@type":"Thing","@id":URL+"#model","name":"GPT-Live-Transcribe",
+         "description":"OpenAI low-latency realtime audio-to-text streaming transcription model",
+         "sameAs":[SOURCES["model"]]},
+        {"@type":"ItemList","@id":URL+"#choices","name":"OpenAI speech transcription workflow options",
+         "numberOfItems":len(RELATED),
+         "itemListElement":[{"@type":"ListItem","position":i,"name":name,"url":link}
+                            for i,(name,_,_,_,link) in enumerate(RELATED,1)]},
+        {"@type":"BreadcrumbList","@id":URL+"#breadcrumbs","itemListElement":[
+            {"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},
+            {"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},
+            {"@type":"ListItem","position":3,"name":"GPT-Live-Transcribe","item":URL}]},
+        {"@type":"FAQPage","@id":URL+"#faq","mainEntity":[
+            {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}}
+            for q,a in FAQ]},
+    ]}
+
+
+def comparison_rows():
+    return "".join(
+        '<tr><th scope="row"><a href="'+escape(link,quote=True)+'">'+escape(name)+'</a></th>'
+        '<td>'+escape(workflow)+'</td><td>'+escape(price)+'</td><td>'+escape(use)+'</td></tr>'
+        for name,workflow,price,use,link in RELATED
+    )
+
+
+ARTICLE = r'''
+<section class="shell ltx-hero" id="top" aria-labelledby="ltx-title">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>GPT-Live-Transcribe</span></nav>
+  <p class="eyebrow">OPENAI AUDIO / MODEL REFERENCE / REVIEWED NOVEMBER 1, 2026</p>
+  <h1 id="ltx-title">GPT-Live-Transcribe <span>realtime speech to text, explained.</span></h1>
+  <p class="ltx-lead">OpenAI's <strong>low-latency live transcription</strong> model delivers partial speech-to-text updates as audio arrives, plus a final transcript at the end of each turn. Learn the official WebSocket setup, <strong>$0.017/min</strong> price, language and keyword hints, latency presets, limitations and workflow tradeoffs. Then try SXF's original <strong>Caption Event Lab</strong>—no API key or audio upload required.</p>
+  <div class="ltx-alert"><strong>Start with the right workflow:</strong> Use <code>gpt-live-transcribe</code> for a live microphone or call. Choose <a href="/models/gpt-transcribe/">gpt-transcribe</a> for a finished recording, or when you specifically need committed-turn processing or detected languages. Streaming text from a completed file is <em>not</em> equivalent to realtime audio transcription. <a href="https://developers.openai.com/api/docs/guides/transcription" target="_blank" rel="noopener noreferrer">OpenAI's decision guide ↗</a></div>
+  <div class="ltx-metrics" aria-label="Official GPT-Live-Transcribe facts">
+    <div><strong>$0.017</strong><span>per realtime audio minute</span></div>
+    <div><strong>5 presets</strong><span>minimal → xhigh delay</span></div>
+    <div><strong>24 kHz</strong><span>PCM in official session example</span></div>
+    <div><strong>Text only</strong><span>streamed deltas + final transcript</span></div>
+  </div>
+  <div class="ltx-actions"><a class="ltx-primary" href="#caption-lab">Try SXF Caption Event Lab</a><a href="#websocket">WebSocket setup</a><a href="#pricing">Compare pricing</a><a href="https://developers.openai.com/api/docs/models/gpt-live-transcribe" target="_blank" rel="noopener noreferrer">Official model card ↗</a></div>
+  <p class="ltx-muted">Model launched July 28, 2026 · Sources reviewed November 1, 2026 · This page does not claim independently measured latency or accuracy.</p>
+</section>
+
+<div class="shell ltx-layout">
+<aside class="ltx-aside"><div class="ltx-aside-inner"><strong>IN THIS REFERENCE</strong><nav aria-label="On this page">
+ <a href="#overview">What is it?</a><a href="#specs">Specifications</a><a href="#workflow">Choose a workflow</a><a href="#caption-lab">SXF Caption Event Lab</a><a href="#pricing">Pricing calculator</a><a href="#architecture">Transcription pipeline</a><a href="#websocket">WebSocket quickstart</a><a href="#latency">Latency &amp; accuracy</a><a href="#hints">Context &amp; languages</a><a href="#evidence">Benchmark evidence</a><a href="#production">Production checklist</a><a href="#limitations">Hard limits</a><a href="#faq">FAQs</a><a href="#sources">Sources</a>
+</nav></div></aside>
+<div class="ltx-article">
+
+<section id="overview" class="ltx-section">
+ <p class="eyebrow">DIRECT ANSWER</p><h2>What is GPT-Live-Transcribe?</h2>
+ <p><strong>GPT-Live-Transcribe is an OpenAI API speech-recognition model for live audio.</strong> It receives audio in a persistent realtime session and streams incremental text updates, followed by an authoritative final transcript after the client commits the audio turn. The model identifier is <code>gpt-live-transcribe</code>. Unlike a full speech-to-speech assistant, it does not answer with generated speech, execute functions or perform image tasks. <a href="https://developers.openai.com/api/docs/models/gpt-live-transcribe" target="_blank" rel="noopener noreferrer">Official model specification ↗</a>.</p>
+ <p>Use it for <strong>call captions, accessibility subtitles, live meetings, telephony transcripts, conversation monitoring and streaming voice-input interfaces</strong>. Its value is a transcription event stream while speech is happening, not a publicly promised fixed word-error rate or a fixed millisecond response time on every microphone.</p>
+ <p>OpenAI introduced this model alongside <a href="/models/gpt-transcribe/">GPT-Transcribe</a> on July 28, 2026. The latter prioritizes accurate file transcription and committed turns, while GPT-Live-Transcribe is tuned for responsive partial captions. The distinction is about <em>when the audio arrives</em> and what metadata your application needs—not simply whether an SDK has a <code>stream</code> option.</p>
+</section>
+
+<section id="specs" class="ltx-section">
+ <p class="eyebrow">PRIMARY-SOURCE CONTRACT</p><h2>GPT-Live-Transcribe specifications and supported features</h2>
+ <div class="ltx-table-wrap"><table><caption>Facts from OpenAI's model, transcription and realtime guides; unspecified values are not guessed</caption><tbody>
+  <tr><th scope="row">Model ID</th><td><code>gpt-live-transcribe</code></td></tr>
+  <tr><th scope="row">Developer / release</th><td>OpenAI · July 28, 2026</td></tr>
+  <tr><th scope="row">Primary API use</th><td>Realtime transcription session, WebSocket or WebRTC transport</td></tr>
+  <tr><th scope="row">Audio input</th><td>Live microphone or streamed audio; official PCM16 example at 24,000 Hz</td></tr>
+  <tr><th scope="row">Output</th><td>Text transcript deltas and completed-turn final transcript</td></tr>
+  <tr><th scope="row">Latency tuning</th><td><code>minimal</code>, <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code></td></tr>
+  <tr><th scope="row">Context hints</th><td>Free-form <code>prompt</code>, literal <code>keywords</code>, expected <code>languages</code> array</td></tr>
+  <tr><th scope="row">Turn detection</th><td>Client-managed boundaries; no server_vad or semantic_vad for this model</td></tr>
+  <tr><th scope="row">Speaker labels, word timestamps, confidence</th><td><strong>Not returned</strong>; design an alternative workflow when required</td></tr>
+  <tr><th scope="row">Detected language output</th><td>Not returned by live model; GPT-Transcribe can return it for supported workflows</td></tr>
+  <tr><th scope="row">Context window / max text tokens</th><td>No general-purpose context/output token cap published for the service</td></tr>
+  <tr><th scope="row">Functions, images, generated audio, fine-tuning</th><td>Not supported in the official model feature contract</td></tr>
+  <tr><th scope="row">Free tier</th><td>Not supported; usage is metered</td></tr>
+ </tbody></table></div>
+ <p class="ltx-note">Sources: <a href="https://developers.openai.com/api/docs/models/gpt-live-transcribe" target="_blank" rel="noopener noreferrer">model contract</a> and <a href="https://developers.openai.com/api/docs/guides/realtime-transcription" target="_blank" rel="noopener noreferrer">realtime transcription guide</a>. A voice-to-text app can choose to append other processing stages; do not attribute their features to this model itself.</p>
+</section>
+
+<section id="workflow" class="ltx-section">
+ <p class="eyebrow">MODEL SELECTION</p><h2>GPT-Live-Transcribe vs GPT-Transcribe vs Realtime Whisper</h2>
+ <p>Start with the audio acquisition pattern. A prerecorded file that produces streaming <em>output</em> need not open a persistent realtime session. The OpenAI transcription guide recommends GPT-Live-Transcribe for <strong>continuously arriving sound</strong> and GPT-Transcribe for <strong>completed audio</strong>. Legacy Realtime Whisper is supported in certain integrations but is not the recommended model for a new one.</p>
+ <div class="ltx-table-wrap"><table><caption>Official per-minute prices and recommended workflows (November 2026)</caption><thead><tr><th scope="col">Model</th><th scope="col">Workflow</th><th scope="col">Base audio price</th><th scope="col">Why choose it</th></tr></thead><tbody><!-- LTX_COMPARISON --></tbody></table></div>
+ <div class="ltx-split"><article><span>LIVE INPUT, EARLY TEXT</span><h3>Choose GPT-Live-Transcribe</h3><p>You need evolving live captions, partial text for the UI or near-immediate spoken-input feedback. You can handle partial revisions and application-managed turn boundaries.</p></article><article><span>COMPLETED AUDIO OR DETECTED LANGUAGE</span><h3>Choose GPT-Transcribe</h3><p>You already have the recording, or require detected language output or committed-turn processing. You prioritize a different accuracy/cost/latency contract.</p></article></div>
+ <p><strong>Avoid silent migration mistakes:</strong> OpenAI announced February 26, 2027 shutdowns for several older transcription endpoints and models. Changing only the model ID will not automatically preserve word timestamps, speaker labels or older response formats. <a href="https://developers.openai.com/api/docs/deprecations" target="_blank" rel="noopener noreferrer">Deprecation schedule ↗</a>.</p>
+</section>
+
+<section id="caption-lab" class="ltx-section">
+ <p class="eyebrow">ORIGINAL SXF PRODUCT EXPERIENCE</p><h2>SXF Caption Event Lab: see partial text become a final transcript</h2>
+ <p>Real live-transcription clients reconcile <strong>delta</strong> and <strong>completed</strong> events by <code>item_id</code>. Explore this <strong>locally simulated event stream</strong>: press Next event to reveal a synthetic caption update, then the authoritative final text. No microphone recording, audio upload, API call or account is involved. Events and text are invented for interface demonstration, <strong>not model accuracy measurements</strong>.</p>
+ <div class="ltx-event-lab" data-ltx-event-lab>
+  <div class="ltx-event-controls"><div><label for="ltx-scenario">Example audio scenario</label><select id="ltx-scenario" data-ltx-scenario><option value="support">Customer support · product code</option><option value="meeting">Meeting · action item</option><option value="bilingual">Bilingual speaker · code-switching</option></select></div>
+  <div class="ltx-event-buttons"><button type="button" data-ltx-next>Next event</button><button type="button" data-ltx-reset>Reset</button></div></div>
+  <div class="ltx-event-console"><div class="ltx-console-head"><span>SYNTHETIC EVENT</span><code data-ltx-event>session.ready</code></div>
+    <p data-ltx-explainer>Choose a scenario and advance the stream to inspect partial and final caption behavior.</p>
+    <div class="ltx-caption-preview"><small>CAPTION FOR ITEM <span data-ltx-item>item_003</span></small><output data-ltx-caption aria-live="polite" aria-atomic="true">Waiting for event…</output></div>
+    <div class="ltx-event-status"><span data-ltx-state>Not started</span><span data-ltx-progress>0 / 4 events</span></div>
+  </div>
+ </div>
+ <div class="ltx-insight"><strong>Integration insight:</strong> a delta updates tentative text; a completed event should replace the prior partial for that <code>item_id</code>. Multiple turns can finish out of order. Never assume partial fragments are final legal/clinical records or use event arrival order as a stable transcript identifier.</div>
+</section>
+
+<section id="pricing" class="ltx-section">
+ <p class="eyebrow">ORIGINAL SXF COST PLANNER</p><h2>GPT-Live-Transcribe API pricing: cost per minute, hour and team</h2>
+ <p>OpenAI currently publishes <strong>$0.017 per minute</strong> for GPT-Live-Transcribe and <strong>$0.0045 per minute</strong> for GPT-Transcribe. The difference reflects workflows: real-time captions versus recorded-file transcription. The arithmetic below is for planning, not a live billing quote; it excludes storage, telephony, network, translation, other models and application infrastructure.</p>
+ <div class="ltx-cost" data-ltx-cost>
+   <div class="ltx-cost-fields">
+     <label for="ltx-minutes">Audio minutes per session<input id="ltx-minutes" data-ltx-minutes type="number" inputmode="decimal" min="0" max="100000" step="1" value="60"></label>
+     <label for="ltx-sessions">Sessions per month<input id="ltx-sessions" data-ltx-sessions type="number" inputmode="numeric" min="1" max="1000000" step="1" value="100"></label>
+     <label for="ltx-live">Share needing live captions<input id="ltx-live" data-ltx-live type="range" min="0" max="100" step="5" value="100"><output for="ltx-live" data-ltx-live-value>100% live</output></label>
+     <p class="ltx-muted">Use 100% live if every audio minute genuinely requires streaming text. Lower the share only if recorded-file work can use GPT-Transcribe instead.</p>
+   </div>
+   <div class="ltx-cost-results"><span>ESTIMATED MONTHLY SPEECH API COST</span><output data-ltx-total aria-live="polite" aria-atomic="true">$102.00</output>
+    <dl><div><dt>Live model</dt><dd data-ltx-live-cost>$102.00</dd></div><div><dt>File model</dt><dd data-ltx-file-cost>$0.00</dd></div><div><dt>Audio volume</dt><dd data-ltx-volume>6,000 min</dd></div></dl>
+    <p data-ltx-savings>At 100% live, all audio uses GPT-Live-Transcribe.</p>
+   </div>
+ </div>
+ <p class="ltx-muted">Planning formula: minutes × sessions × [live fraction × $0.017 + recorded fraction × $0.0045]. Comparisons assume audio minutes are separately processed through the two documented workflows. Discounts, taxes, quotas and project limits can change actual billing. <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI official pricing ↗</a>.</p>
+</section>
+
+<section id="architecture" class="ltx-section">
+ <p class="eyebrow">IMPLEMENTATION ARCHITECTURE</p><h2>How does a GPT-Live-Transcribe session work?</h2>
+ <div class="ltx-steps" role="list" aria-label="Realtime transcription flow">
+  <div role="listitem"><span>01 / CONNECT</span><h3>Open a transcription WebSocket</h3><p>Server connects to <code>/v1/realtime?intent=transcription</code>; do not use a conversation-model URL.</p></div>
+  <div role="listitem"><span>02 / CONFIGURE</span><h3>Select model + audio format</h3><p>Send <code>session.update</code> with <code>type: transcription</code>, 24kHz PCM example and the model ID.</p></div>
+  <div role="listitem"><span>03 / STREAM</span><h3>Append speech chunks</h3><p>Base64-encode PCM16 frames and send <code>input_audio_buffer.append</code>. The server returns transcript deltas as recognition progresses.</p></div>
+  <div role="listitem"><span>04 / COMMIT</span><h3>Finalize each spoken turn</h3><p>Client-side VAD or another boundary triggers <code>input_audio_buffer.commit</code>; keep the final transcript keyed by <code>item_id</code>.</p></div>
+ </div>
+ <p>OpenAI's guide explicitly says <strong>no <code>server_vad</code> or <code>semantic_vad</code> for GPT-Live-Transcribe</strong>. Use client-managed turns and budget for jitter, backpressure, resampling, device interruptions and reconnects. If you need browser capture, follow the <a href="https://developers.openai.com/api/docs/guides/realtime-transcription" target="_blank" rel="noopener noreferrer">official WebRTC instructions</a> and never embed a long-lived secret API key into public client-side HTML.</p>
+</section>
+
+<section id="websocket" class="ltx-section">
+ <p class="eyebrow">WORKING CONFIGURATION / NO INVENTED FIELDS</p><h2>GPT-Live-Transcribe WebSocket quickstart (Node.js)</h2>
+ <p>A server-side WebSocket connection uses <code>wss://api.openai.com/v1/realtime?intent=transcription</code>. Importantly, <strong>omit <code>model</code> from this connection URL</strong>; it belongs in the <code>session.update</code> transcription configuration. This source-aligned example starts a session, prints partial and final text and leaves audio capture to your application's media pipeline.</p>
+ <div class="ltx-code"><div><span>Terminal · Node.js dependency</span><button type="button" data-ltx-copy="install" aria-label="Copy install command">Copy</button></div><pre id="ltx-code-install"><code>npm install ws</code></pre></div>
+ <div class="ltx-code"><div><span>Node.js · server-side WebSocket, save as transcribe.mjs</span><button type="button" data-ltx-copy="ws" aria-label="Copy WebSocket example">Copy</button></div><pre id="ltx-code-ws"><code>import WebSocket from "ws";
+
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) throw new Error("Set OPENAI_API_KEY");
+
+const ws = new WebSocket(
+  "wss://api.openai.com/v1/realtime?intent=transcription",
+  { headers: { Authorization: \`Bearer \${apiKey}\` } }
+);
+
+ws.on("open", () => {
+  ws.send(JSON.stringify({
+    type: "session.update",
+    session: {
+      type: "transcription",
+      audio: {
+        input: {
+          format: { type: "audio/pcm", rate: 24000 },
+          transcription: {
+            model: "gpt-live-transcribe",
+            delay: "low",
+            prompt: "A customer support call about an AC-42 subscription.",
+            keywords: ["AC-42", "premium plan"],
+            languages: ["en", "fr"]
+          },
+          turn_detection: null
+        }
+      }
+    }
+  }));
+});
+
+// Audio capture is deliberately omitted. Your pipeline must
+// convert incoming audio to base64 PCM16 at 24 kHz.
+// ws.send(JSON.stringify({
+//   type: "input_audio_buffer.append", audio: base64Pcm16
+// }));
+// On a client-detected turn boundary, send:
+// ws.send(JSON.stringify({type: "input_audio_buffer.commit"}));
+
+ws.on("message", (raw) => {
+  const event = JSON.parse(raw.toString());
+  if (event.type === "conversation.item.input_audio_transcription.delta") {
+    console.log("Partial", event.item_id, event.delta);
+  } else if (
+    event.type === "conversation.item.input_audio_transcription.completed"
+  ) {
+    console.log("Final", event.item_id, event.transcript);
+  } else if (event.type === "error") {
+    console.error(event);
+  }
+});
+
+ws.on("error", console.error);</code></pre></div>
+ <p><strong>What this example does not do:</strong> it does not capture the microphone, resample audio, authenticate a browser, reconnect sessions or automatically commit a turn. These are application-specific components that require implementation and testing. <a href="https://developers.openai.com/api/docs/guides/realtime-transcription" target="_blank" rel="noopener noreferrer">Check the maintained OpenAI session and event specification ↗</a>.</p>
+ <h3>Minimal event shapes and transcript reconciliation</h3>
+ <div class="ltx-code"><div><span>JSON · documented event types</span><button type="button" data-ltx-copy="events" aria-label="Copy sample event types">Copy</button></div><pre id="ltx-code-events"><code>{
+  "type": "conversation.item.input_audio_transcription.delta",
+  "item_id": "item_003",
+  "content_index": 0,
+  "delta": "Hello,"
+}
+
+{
+  "type": "conversation.item.input_audio_transcription.completed",
+  "item_id": "item_003",
+  "content_index": 0,
+  "transcript": "Hello, how are you?"
+}</code></pre></div>
+ <p>Store <code>item_id</code> alongside partial captions and replace the tentative text with the final transcript on completion. Do not assume every caption can be corrected merely by appending more text; different turns may finish out of order.</p>
+</section>
+
+<section id="latency" class="ltx-section">
+ <p class="eyebrow">TRADEOFFS YOU CAN TEST</p><h2>GPT-Live-Transcribe latency presets: minimal vs low vs high</h2>
+ <p>Set <code>audio.input.transcription.delay</code> to one of the five documented modes. <strong>Lower settings emit partials sooner</strong>; higher settings give the recognizer more sound context and can improve recognition quality. OpenAI does <strong>not</strong> publish a fixed millisecond latency for each setting, so numbers such as “200ms at low” would be invented unless measured on your own deployment.</p>
+ <div class="ltx-table-wrap"><table><caption>Qualitative choices from OpenAI realtime transcription guidance</caption><thead><tr><th scope="col">Delay preset</th><th scope="col">Practical starting point</th><th scope="col">Validation</th></tr></thead><tbody>
+  <tr><th scope="row"><code>minimal</code></th><td>Very latency-sensitive indicators and assistive interaction</td><td>Measure corrections, unfinished partials, early update usefulness</td></tr>
+  <tr><th scope="row"><code>low</code></th><td>Live captioning and fast user-visible updates</td><td>Measure perceived delay and domain-term accuracy</td></tr>
+  <tr><th scope="row"><code>medium</code></th><td>Balance initial readability and transcription stability</td><td>Check long, noisy and multilingual turns</td></tr>
+  <tr><th scope="row"><code>high</code></th><td>When complete and accurate words matter more than immediate display</td><td>Assess final transcript WER and time to stable text</td></tr>
+  <tr><th scope="row"><code>xhigh</code></th><td>Maximum tolerated delay for additional acoustic context</td><td>Measure whether extra waiting actually pays off</td></tr>
+ </tbody></table></div>
+ <p>A useful experiment compares <strong>time to first stable caption, time to final transcript, word error rate, named-entity error rate, empty/late turns and correction frequency</strong>. Fixed round-trip benchmarks must report microphone, network, audio chunk size, device, background noise and languages. A vendor claim of “low latency” is not a specific SLA.</p>
+</section>
+
+<section id="hints" class="ltx-section">
+ <p class="eyebrow">ACCURACY IMPROVEMENTS</p><h2>How to use prompt, keywords and languages in realtime transcription</h2>
+ <p>OpenAI supports three hint types: a <code>prompt</code> describing context, a <code>keywords</code> array for literal names and technical words, and a <code>languages</code> array of expected language codes. The model uses them to disambiguate speech. They are <strong>hints rather than forced replacements</strong>: providing a product name should not cause the recognizer to fabricate it if no one says it.</p>
+ <div class="ltx-split">
+  <article><span>GOOD CONTEXT</span><h3>Useful vocabulary</h3><p><code>prompt</code>: “Technical support about cloud billing.”<br><code>keywords</code>: <code>["AC-42", "Kubernetes", "premium plan"]</code><br><code>languages</code>: <code>["en", "fr"]</code></p><p>Prefer short, true terms present in the recording and evaluate names, account numbers and code-switching.</p></article>
+  <article><span>COMMON FAILURE</span><h3>Overprompting / invalid hints</h3><p>Do not instruct the model to output a particular transcript. Do not use singular <code>language</code> together with <code>languages</code>. Keywords cannot contain angle brackets or newlines, and unsupported language codes are rejected.</p><p>Keep identifiers appropriately redacted and do not embed unnecessary sensitive information in the prompt.</p></article>
+ </div>
+ <p>Supported formats include ISO 639-1 such as <code>en</code>, <code>es</code>, <code>fr</code>, selected ISO 639-3 codes and regional Chinese codes such as <code>zh-cn</code>. No “all languages have equal accuracy” claim follows from the support list. <a href="https://developers.openai.com/api/docs/guides/realtime-transcription" target="_blank" rel="noopener noreferrer">Official hint validation rules ↗</a>.</p>
+</section>
+
+<section id="evidence" class="ltx-section">
+ <p class="eyebrow">REPORTED BENCHMARKS / NOT SXF TESTS</p><h2>GPT-Live-Transcribe accuracy: OpenAI's July 2026 results</h2>
+ <p>In its July 29 developer announcement, OpenAI reported comparative speech recognition figures using distinct evaluation sets. These results are <strong>vendor-reported</strong>, not independent SXF testing. Avoid combining different test corpora into a universal single WER score or assuming the context-aware semantic metric is WER.</p>
+ <div class="ltx-table-wrap"><table><caption>OpenAI announcement results; percentage values use their stated benchmark metric</caption><thead><tr><th scope="col">Test</th><th scope="col">Live Transcribe</th><th scope="col">Comparison</th><th scope="col">Interpretation</th></tr></thead><tbody>
+  <tr><th scope="row">Common Voice · 22 languages</th><td><strong>19.70%</strong> error rate</td><td>20.33% · referenced Realtime Whisper baseline</td><td>Lower error is better on this multilingual test</td></tr>
+  <tr><th scope="row">Real-World Audio Recording · 9 languages</th><td><strong>9.60%</strong> error rate</td><td>11.65% · Realtime Whisper baseline</td><td>Vendor result on real-recorded audio</td></tr>
+  <tr><th scope="row">Context-Aware ASR · semantic accuracy</th><td><strong>44.6%</strong> with free-form context</td><td>38.5% without context</td><td>+6.1 percentage points in semantic accuracy, not a WER reduction</td></tr>
+ </tbody></table></div>
+ <p>OpenAI did not disclose a universal per-language latency or word-accuracy guarantee in this comparison. Your own error rate can differ on telephony, code-switching, noisy warehouses, unusual proper nouns, overlapping speakers and clipped audio. <a href="https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318" target="_blank" rel="noopener noreferrer">Read the original announcement and chart context ↗</a>.</p>
+</section>
+
+<section id="production" class="ltx-section">
+ <p class="eyebrow">SXF PRACTICAL EVALUATION</p><h2>Production checklist for live transcription apps</h2>
+ <ol class="ltx-checklist">
+  <li><strong>Design turns:</strong> manage voice activity on the client or server media layer, send <code>commit</code> deliberately and handle silences or talk-over.</li>
+  <li><strong>Capture data responsibly:</strong> obtain informed recording consent where required, disclose retention and restrict transcript access.</li>
+  <li><strong>Match your codec:</strong> normalize the official PCM16 example to 24kHz; profile packet size, jitter and resampling rather than guessing.</li>
+  <li><strong>Handle partials vs final:</strong> mark tentative captions in the UI and replace by <code>item_id</code> once final transcripts arrive.</li>
+  <li><strong>Test domain vocabulary:</strong> acronyms, contact names, numbers, addresses, dates and bilingual turns; add targeted hints only when relevant.</li>
+  <li><strong>Protect tokens:</strong> keep the OpenAI API key server-side, use secure temporary browser credentials/transport as documented, and rate-limit requests.</li>
+  <li><strong>Measure comprehensively:</strong> WER, entity errors, corrected partial count, initial/stable/final delays, empty and truncated turns.</li>
+  <li><strong>Fail safely:</strong> show connection interruptions, buffered audio loss, quota limits and possible transcript corrections; never show failed speech as confirmed text.</li>
+ </ol>
+ <p><strong>SXF evaluation idea:</strong> collect a consented, diverse test set of at least a few dozen real turns; blind the annotators to model identity and sample both easy and hard audio. Compare the five latency presets with identical codec/network, and report confidence intervals for accuracy rather than presenting a single anecdotal demo as performance evidence.</p>
+</section>
+
+<section id="limitations" class="ltx-section">
+ <p class="eyebrow">IMPORTANT NON-FEATURES</p><h2>What GPT-Live-Transcribe cannot do</h2>
+ <ul>
+  <li><strong>No speaker diarization:</strong> the model does not return speaker names or segment speaker labels.</li>
+  <li><strong>No word timestamps or per-word confidence:</strong> provide an alternative compatible transcription/alignment workflow when those fields are mandatory.</li>
+  <li><strong>No detected-language output:</strong> expected language <em>hints</em> do not mean language detection metadata in the transcript.</li>
+  <li><strong>No native streaming voice response or translation output:</strong> speech-to-speech translation uses a separate <a href="https://developers.openai.com/api/docs/models/gpt-realtime-translate" target="_blank" rel="noopener noreferrer">realtime translation model</a>.</li>
+  <li><strong>No server VAD:</strong> manage speech turns in your application and explicitly commit each turn.</li>
+  <li><strong>No fixed advertised 50ms/100ms latency SLA:</strong> benchmark delay levels in your own production conditions.</li>
+  <li><strong>No public general-purpose text context token window:</strong> do not copy a GPT chat model's context length or hallucinate a maximum transcription word count.</li>
+  <li><strong>Not a free local model:</strong> the official distribution is a metered hosted API; do not claim open-weight downloads or laptop quantization.</li>
+ </ul>
+</section>
+
+<section id="faq" class="ltx-section">
+ <p class="eyebrow">SEARCH QUESTIONS ANSWERED</p><h2>GPT-Live-Transcribe frequently asked questions</h2>
+ <div class="ltx-faq">
+  <details><summary>What is GPT-Live-Transcribe?</summary><p>OpenAI's live-audio speech-to-text API model that streams partial transcript deltas and a final transcript after each committed turn.</p></details>
+  <details><summary>How much does GPT-Live-Transcribe cost?</summary><p>The published rate is $0.017 per realtime audio minute. An hour of processed audio therefore costs approximately $1.02 before other infrastructure or tool expenses.</p></details>
+  <details><summary>Should I use GPT-Live-Transcribe or GPT-Transcribe?</summary><p>For microphone or call audio arriving now, start with GPT-Live-Transcribe. For a finished audio file or detected-language output, start with GPT-Transcribe.</p></details>
+  <details><summary>What WebSocket URL do I use?</summary><p>Use wss://api.openai.com/v1/realtime?intent=transcription with server-side authorization. Put model gpt-live-transcribe inside session.update, not in the WebSocket URL.</p></details>
+  <details><summary>Does it return speaker labels or word timestamps?</summary><p>No. It does not return speaker diarization, word-level timestamps or confidence scores.</p></details>
+  <details><summary>What are minimal, low and high delay settings?</summary><p>They are qualitative delay/accuracy presets: minimal, low, medium, high and xhigh. No fixed millisecond guarantee is published.</p></details>
+  <details><summary>Can I supply keywords and multiple language hints?</summary><p>Yes. Set prompt, keywords and languages in the transcription configuration. Use a languages array, not the singular language field, and validate codes.</p></details>
+  <details><summary>Does it return detected languages?</summary><p>No. GPT-Transcribe can return them in compatible workflows; GPT-Live-Transcribe uses language hints but does not return detected-language metadata.</p></details>
+  <details><summary>How do I know whether a caption is final?</summary><p>A delta event is tentative. The completed event carries a final transcript; match both by item_id.</p></details>
+  <details><summary>Does it support server_vad?</summary><p>No. For this model, turn_detection should be omitted or null. Your application commits audio turns.</p></details>
+  <details><summary>Can GPT-Live-Transcribe produce audio or call functions?</summary><p>No. It is a speech-to-text model; use a separate voice/chat model for spoken responses or tools.</p></details>
+  <details><summary>Are OpenAI's accuracy numbers independently verified here?</summary><p>No. SXF quotes and labels OpenAI's July 2026 results without claiming to have rerun those evaluations.</p></details>
+  <details><summary>Can I use GPT-Live-Transcribe for free?</summary><p>OpenAI's model card marks the API Free tier as unsupported. This is a paid realtime audio service.</p></details>
+  <details><summary>Can I run the weights locally?</summary><p>No public downloadable self-hosting weights or official VRAM requirement are listed for this hosted model.</p></details>
+ </div>
+</section>
+
+<section id="sources" class="ltx-section">
+ <p class="eyebrow">PRIMARY EVIDENCE / EDITORIAL DISCLOSURE</p><h2>Official GPT-Live-Transcribe documentation and methodology</h2>
+ <p>Original API availability: July 28, 2026; SXF reviewed sources on <strong>November 1, 2026</strong>. Price, protocol, limitations and language rules are grounded in the current OpenAI model and API documentation. The <strong>Caption Event Lab is a synthetic, browser-only UI demonstration</strong>—no audio is sent, and no model inference or speed measurements are performed.</p>
+ <div class="ltx-sources">
+   <a href="https://developers.openai.com/api/docs/models/gpt-live-transcribe" target="_blank" rel="noopener noreferrer"><strong>GPT-Live-Transcribe model specification</strong><span>Model ID, modalities, features, rate and Free tier status ↗</span></a>
+   <a href="https://developers.openai.com/api/docs/guides/realtime-transcription" target="_blank" rel="noopener noreferrer"><strong>OpenAI realtime transcription guide</strong><span>Session configuration, PCM input, events, delay and exact limits ↗</span></a>
+   <a href="https://developers.openai.com/api/docs/guides/transcription" target="_blank" rel="noopener noreferrer"><strong>OpenAI transcription model selection guide</strong><span>Realtime vs recorded file workflows, language hints and migration ↗</span></a>
+   <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer"><strong>OpenAI official pricing</strong><span>Per-minute rates for GPT-Live-Transcribe and related models ↗</span></a>
+   <a href="https://developers.openai.com/cookbook/examples/migrating_from_whisper_to_gpt_transcribe" target="_blank" rel="noopener noreferrer"><strong>Official migration cookbook</strong><span>Differences from Whisper-based transcription and output formats ↗</span></a>
+   <a href="https://community.openai.com/t/gpt-live-transcribe-and-gpt-transcribe-two-new-transcription-models-in-the-api/1388318" target="_blank" rel="noopener noreferrer"><strong>OpenAI July 2026 developer announcement</strong><span>Context-aware transcription and comparative ASR figures ↗</span></a>
+ </div>
+ <p class="ltx-related"><strong>Explore SXF:</strong> <a href="/models/gpt-transcribe/">GPT-Transcribe model reference</a> · <a href="/models/pricing/">API pricing guide</a> · <a href="/providers/openai/">OpenAI provider</a> · <a href="/compare/">Model comparisons</a> · <a href="/models/">All AI models</a>.</p>
+</section>
+</div></div>
+'''
+
+
+def render_page(items, *, page_head, page_header, page_footer):
+    head = page_head(
+        TITLE, DESCRIPTION, URL, schema(), "article",
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    )
+    head = head.replace(
+        "</head>", '<link rel="stylesheet" href="/assets/gpt-live-transcribe.css" /></head>', 1
+    )
+    related = ""
+    if items:
+        latest = items[0]
+        name = escape(latest.get("title", "GPT-Live-Transcribe release update"))
+        slug = escape(latest.get("signal_slug", ""), quote=True)
+        related = (
+            '<section class="shell ltx-news"><p class="eyebrow">SOURCE HISTORY</p>'
+            '<h2>Latest GPT-Live-Transcribe signal</h2><p>' + name + '</p>'
+            '<a href="/signals/' + slug + '/">Read the dated source signal ↗</a></section>'
+        )
+    article = ARTICLE.replace("<!-- LTX_COMPARISON -->", comparison_rows())
+    return (
+        '<!doctype html><html lang="en">' + head
+        + '<body class="intel-page model-page sxf-livetranscribe">' + page_header("models")
+        + '<main id="main-content">' + article + related + '</main>'
+        + page_footer()
+        + '<script src="/assets/gpt-live-transcribe.js" defer></script></body></html>'
+    )
