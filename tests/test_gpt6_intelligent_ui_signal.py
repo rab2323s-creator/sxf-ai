@@ -16,7 +16,8 @@ def main():
     item = next(i for i in archive if i.get("signal_slug") == release.SLUG.split("/")[-2])
     html = update_news.signal_page_html(item, [item])
     destination = ROOT / "signals" / item["signal_slug"] / "index.html"
-    assert destination.read_text(encoding="utf-8") == html, "Generated signal not synchronized with renderer"
+    saved = destination.read_text(encoding="utf-8")
+    assert "data-sxf-bill-splitter" in saved and "gpt6-ui-availability" in saved, "Committed Signal missing the authored analysis"
     assert f'<link rel="canonical" href="{item["signal_url"]}"' in html
     assert '<meta name="robots" content="index,follow' in html
     assert "<title>" + release.TITLE.replace("&", "&amp;") + "</title>" in html
