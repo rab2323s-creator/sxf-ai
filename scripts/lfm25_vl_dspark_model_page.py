@@ -1,0 +1,310 @@
+"""Primary-source, generation-safe reference for Liquid AI LFM2.5-VL-3B-DSpark.
+
+This is a speculative-decoding companion to LFM2.5-VL-3B, not an independent VLM.
+"""
+from __future__ import annotations
+
+import json
+from html import escape
+
+SLUG = "lfm2-5-vl-dspark"
+URL = "https://sxf.si/models/lfm2-5-vl-dspark/"
+TITLE = "LFM2.5-VL-DSpark: 279.5M Drafter, Speed & Setup | SXF"
+DESCRIPTION = ("LFM2.5-VL-3B-DSpark explained: 279.5M-parameter vision-language drafter, "
+               "measured M5 Max/H100 gains, SGLang, MLX-VLM, llama.cpp setup and limits.")
+PUBLISHED = "2026-09-24T00:00:00Z"
+MODIFIED = "2026-11-01T00:00:00Z"
+SOURCES = {
+    "announcement": "https://www.liquid.ai/blog/lfm2-5-vl-dspark",
+    "model_card": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark",
+    "gguf_card": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark-GGUF",
+    "parent": "https://www.liquid.ai/blog/lfm2-5-vl-3b",
+    "parent_card": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+    "blog": "https://huggingface.co/blog/liquidai/lfm2-5-vl-dspark",
+}
+FAQ = [
+    ("What is LFM2.5-VL-DSpark?",
+     "LFM2.5-VL-3B-DSpark is Liquid AI's experimental 279.5M-parameter draft model for speculative decoding with the separate LFM2.5-VL-3B vision-language target. It is not a standalone image understanding model."),
+    ("Does LFM2.5-VL-DSpark understand images on its own?",
+     "No. The LFM2.5-VL-3B target performs image encoding, prompt processing and final token verification. DSpark proposes candidate output tokens to speed up generation."),
+    ("How much faster is LFM2.5-VL-DSpark?",
+     "Liquid AI reports task-dependent decode gains up to 3.13x on an Apple M5 Max, 2.14x on an M3 Ultra and 2.66x on an NVIDIA H100. Best end-to-end figures are lower: 2.62x, 1.77x and 2.27x respectively. These are vendor measurements, not SXF benchmarks."),
+    ("How many parameters does the DSpark drafter have?",
+     "Its published breakdown sums to 279.5 million parameters: a 193.0M decoder, 21.0M projection and 65.5M Markov head, plus a small confidence head and normalization components."),
+    ("Can I run DSpark with llama.cpp, MLX-VLM or SGLang?",
+     "Yes, using the matching target and drafter checkpoints and compatible runtime versions. Liquid AI documents an F16 GGUF drafter for llama.cpp, MLX-VLM v0.7.2 or newer, and SGLang v0.5.19 or newer."),
+    ("How much VRAM or unified memory is required?",
+     "Liquid AI does not publish a universal minimum for the full target-plus-drafter-plus-vision-encoder stack. The separate F16 GGUF drafter is listed as 567 MB; the target, vision projector, runtime buffers and image workload add more memory."),
+    ("Does DSpark improve image understanding or benchmark accuracy?",
+     "No new quality model is created. With greedy decoding, accepted drafts are verified by the target; under matched sampling settings output distribution is preserved. The target model's image and reasoning quality remain the relevant comparison."),
+    ("Does quantization preserve the published speedups?",
+     "Not established. Liquid AI says its September 2026 release benchmarks used 16-bit processing and did not cover acceleration of quantized models."),
+]
+
+
+def schema():
+    term = {
+        "@type": "Thing", "@id": URL + "#model",
+        "name": "LFM2.5-VL-3B-DSpark",
+        "alternateName": "LFM2.5-VL-DSpark",
+        "description": ("279.5M-parameter experimental speculative-decoding drafter "
+                        "paired with Liquid AI LFM2.5-VL-3B for vision-language inference"),
+        "sameAs": [SOURCES["model_card"], SOURCES["gguf_card"]],
+    }
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage", "@id": URL + "#webpage", "url": URL, "name": TITLE,
+                "description": DESCRIPTION, "inLanguage": "en",
+                "isPartOf": {"@id": "https://sxf.si/#website"},
+                "mainEntity": {"@id": URL + "#article"},
+                "about": {"@id": URL + "#model"},
+                "dateModified": MODIFIED,
+            },
+            {
+                "@type": "TechArticle", "@id": URL + "#article", "headline": TITLE,
+                "description": DESCRIPTION,
+                "datePublished": PUBLISHED, "dateModified": MODIFIED,
+                "mainEntityOfPage": {"@id": URL + "#webpage"},
+                "inLanguage": "en",
+                "author": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publisher": {"@id": "https://vivamediacreative.com/labs/#organization"},
+                "publishingPrinciples": "https://sxf.si/about/#method",
+                "about": {"@id": URL + "#model"},
+                "citation": list(SOURCES.values()),
+                "keywords": [
+                    "LFM2.5-VL-DSpark", "LFM2.5-VL-3B-DSpark",
+                    "Liquid AI DSpark", "vision language speculative decoding",
+                    "LFM2.5-VL-3B-DSpark GGUF", "DSpark llama.cpp SGLang MLX-VLM",
+                ],
+            },
+            term,
+            {
+                "@type": "BreadcrumbList", "@id": URL + "#breadcrumbs",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "SXF / AI", "item": "https://sxf.si/"},
+                    {"@type": "ListItem", "position": 2, "name": "Models", "item": "https://sxf.si/models/"},
+                    {"@type": "ListItem", "position": 3, "name": "LFM2.5-VL-DSpark", "item": URL},
+                ],
+            },
+            {
+                "@type": "FAQPage", "@id": URL + "#faq",
+                "mainEntity": [
+                    {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                    for q, a in FAQ
+                ],
+            },
+        ],
+    }
+
+
+ARTICLE = r"""
+<section class="shell dspark-top" id="overview" aria-labelledby="dspark-title">
+  <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>LFM2.5-VL-DSpark</span></nav>
+  <p class="eyebrow">LIQUID AI / MODEL DEEP DIVE / VERIFIED NOVEMBER 1, 2026</p>
+  <h1 id="dspark-title">LFM2.5-VL-DSpark <span>explained.</span></h1>
+  <p class="dspark-lede">A <strong>279.5M-parameter speculative-decoding drafter</strong> for Liquid AI's LFM2.5-VL-3B vision-language model. What it accelerates, benchmark evidence, local setup, memory limits and when to use it.</p>
+  <div class="dspark-disclosure"><strong>Important distinction:</strong> DSpark is <em>not a standalone vision-language model</em>. The separate <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B" rel="noopener noreferrer" target="_blank">LFM2.5-VL-3B target</a> still interprets images and verifies output; DSpark drafts the next tokens.</div>
+  <div class="dspark-stats" aria-label="Key documented specifications">
+    <div><strong>279.5M</strong><span>drafter parameters</span></div>
+    <div><strong>8.9%</strong><span>added parameter count vs target</span></div>
+    <div><strong>3.13×</strong><span>best reported Apple M5 Max decode speedup</span></div>
+    <div><strong>2.66×</strong><span>best reported H100 decode speedup</span></div>
+  </div>
+  <div class="dspark-actions"><a class="dspark-primary" href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer">Official checkpoint ↗</a><a href="#setup">Run locally</a><a href="#benchmarks">Compare benchmarks</a></div>
+  <p class="dspark-caption">Release: September 24, 2026 · Status: experimental draft model · Data: Liquid AI measurements, <a href="https://www.liquid.ai/blog/lfm2-5-vl-dspark" target="_blank" rel="noopener noreferrer">not independently reproduced by SXF</a>.</p>
+</section>
+<div class="shell dspark-layout">
+<aside class="dspark-sidebar" aria-label="Page contents"><div class="dspark-sidebar-inner"><strong>ON THIS PAGE</strong><nav aria-label="Article sections">
+<a href="#definition">What it is</a><a href="#specifications">Specs</a><a href="#how-it-works">How it works</a><a href="#benchmarks">Benchmarks</a><a href="#calculator">Latency explorer</a><a href="#memory">Hardware &amp; memory</a><a href="#setup">Run it locally</a><a href="#use-cases">Use cases &amp; comparisons</a><a href="#limitations">Limitations</a><a href="#faq">FAQ</a><a href="#sources">Primary sources</a>
+</nav></div></aside>
+<div class="dspark-content">
+
+<section class="dspark-panel" id="definition">
+  <p class="eyebrow">DIRECT ANSWER</p><h2>What is LFM2.5-VL-DSpark?</h2>
+  <p><strong>LFM2.5-VL-3B-DSpark is an experimental draft model published by Liquid AI on September 24, 2026.</strong> It is a companion to <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B" target="_blank" rel="noopener noreferrer">LFM2.5-VL-3B</a>, not a new general-purpose image model. The target processes visual and text inputs, while a lightweight drafter predicts several candidate output tokens. The target then checks those guesses in fewer verification passes. <a href="https://www.liquid.ai/blog/lfm2-5-vl-dspark" target="_blank" rel="noopener noreferrer">Source: Liquid AI release</a>.</p>
+  <p>Think of the parent model as the <strong>image reader and final authority</strong>; DSpark is the <strong>draft assistant for the output stage</strong>. This distinction matters for search queries such as “LFM2.5-VL-DSpark image understanding”: the parent's image understanding determines answer quality. DSpark primarily changes inference throughput, not the vision model's abilities.</p>
+  <div class="dspark-compare"><div><span>THE TARGET MODEL</span><h3>LFM2.5-VL-3B</h3><p>Runs the vision encoder, understands screenshots and images, processes the prompt and verifies generated tokens.</p><a href="https://www.liquid.ai/blog/lfm2-5-vl-3b" target="_blank" rel="noopener noreferrer">Parent VLM details ↗</a></div><div><span>THE DRAFT MODEL</span><h3>LFM2.5-VL-3B-DSpark</h3><p>Reads selected target hidden states, proposes candidate tokens, and can reduce decoding time under compatible runtimes.</p><a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer">Drafter model card ↗</a></div></div>
+</section>
+
+<section class="dspark-panel" id="specifications">
+  <p class="eyebrow">CHECKPOINT FACTS</p><h2>LFM2.5-VL-3B-DSpark specifications</h2>
+  <div class="dspark-table-wrap"><table><caption>Official model-card facts. These are drafter specifications, not the entire vision model's specifications.</caption><tbody>
+    <tr><th scope="row">Developer</th><td>Liquid AI</td></tr>
+    <tr><th scope="row">Full checkpoint name</th><td><code>LiquidAI/LFM2.5-VL-3B-DSpark</code></td></tr>
+    <tr><th scope="row">Required target</th><td><code>LiquidAI/LFM2.5-VL-3B</code></td></tr>
+    <tr><th scope="row">Drafter size</th><td>279.5 million parameters (approximately 280M; +8.9% parameter count)</td></tr>
+    <tr><th scope="row">Decoder stack</th><td>193.0M, four attention layers</td></tr>
+    <tr><th scope="row">Hidden-state projection</th><td>21.0M parameters</td></tr>
+    <tr><th scope="row">Markov head</th><td>65.5M parameters; rank 256</td></tr>
+    <tr><th scope="row">Other components</th><td>Confidence head and normalization layers (6.4K)</td></tr>
+    <tr><th scope="row">Architecture</th><td>2,048 hidden size; 6,144 intermediate; 32 query heads / 8 KV heads; 64 head dimension; 128K vocabulary</td></tr>
+    <tr><th scope="row">Draft block</th><td>9 in training; usually 8 or 9 at inference, hardware-dependent</td></tr>
+    <tr><th scope="row">Formats</th><td>Safetensors checkpoint and separate GGUF drafter build</td></tr>
+    <tr><th scope="row">License</th><td><code>lfm1.0</code> (read the actual license before commercial deployment)</td></tr>
+  </tbody></table></div>
+  <p class="dspark-note"><strong>Data provenance:</strong> <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer">official drafter model card</a>. Parameters are not a VRAM requirement and do not include the memory used by the target, image encoder, KV cache, runtime and loading overhead.</p>
+</section>
+
+<section class="dspark-panel" id="how-it-works">
+  <p class="eyebrow">ARCHITECTURE</p><h2>How does speculative decoding work for vision-language models?</h2>
+  <div class="dspark-flow" role="list" aria-label="Speculative decoding stages">
+    <div role="listitem"><span>01 / ENCODE</span><strong>Image + text</strong><p>The full target model encodes visual information and processes the prompt. DSpark does not eliminate this step.</p></div>
+    <div role="listitem"><span>02 / DRAFT</span><strong>Propose a token block</strong><p>DSpark uses hidden states tapped from the target and generates likely next tokens with its smaller decoder.</p></div>
+    <div role="listitem"><span>03 / VERIFY</span><strong>Target checks each guess</strong><p>The full target verifies the candidates and accepts the valid prefix. Incorrect guesses are corrected by the target.</p></div>
+    <div role="listitem"><span>04 / CONTINUE</span><strong>Decode the next block</strong><p>The cycle repeats until completion. More accepted draft tokens can mean fewer expensive target passes.</p></div>
+  </div>
+  <p>By the time tokens reach the tapped layers, text and visual patches share the model's hidden-state representation. This is why a similar block-drafting technique can work for both text and multimodal output. In <strong>greedy decoding</strong>, exact verification preserves the target output; with matched stochastic sampling, the target output distribution is preserved. The system can still produce wrong descriptions if the <em>target</em> does—this is not an accuracy upgrade. <a href="https://huggingface.co/blog/liquidai/lfm2-5-vl-dspark" target="_blank" rel="noopener noreferrer">Source: published DSpark methodology</a>.</p>
+</section>
+
+<section class="dspark-panel" id="benchmarks">
+  <p class="eyebrow">MEASURED BY LIQUID AI / NOT SXF</p><h2>LFM2.5-VL-DSpark benchmarks: how fast is it?</h2>
+  <p>Liquid AI benchmarked the <strong>same LFM2.5-VL-3B target with and without DSpark</strong>. Figures below are the highest task-specific values published for the named hardware; they are <strong>not averages</strong> and should not be compared with unrelated models' image-quality scores.</p>
+  <div class="dspark-table-wrap"><table><caption>Vendor-reported maximum speedup, baseline = identical target without the drafter</caption><thead><tr><th scope="col">Hardware / runtime</th><th scope="col">Decode peak</th><th scope="col">End-to-end peak</th><th scope="col">Conditions</th></tr></thead><tbody>
+    <tr><th scope="row">Apple M5 Max · MLX-VLM</th><td><strong>3.13×</strong></td><td>2.62×</td><td>FP16 · batch 1 · greedy · block 8</td></tr>
+    <tr><th scope="row">Apple M3 Ultra · llama.cpp</th><td><strong>2.14×</strong></td><td>1.77×</td><td>FP16 · batch 1 · greedy · block 8</td></tr>
+    <tr><th scope="row">NVIDIA H100 80GB · SGLang</th><td><strong>2.66×</strong></td><td>2.27×</td><td>BF16 · batch 1 · greedy · block 9 (model card)</td></tr>
+  </tbody></table></div>
+  <p>The six evaluation task families include general visual question answering (GQA), image captioning (COCO), text VQA, chart understanding (CharXiv), complex reasoning (MMMU-Pro) and multi-turn conversation. The checkpoint card publishes a task-by-task table. For example, on an M5 Max, <strong>COCO</strong> reached 3.13× decode speedup, while <strong>MMMU-Pro</strong> reached the top 2.62× end-to-end speedup; these are <em>different tasks</em>. <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer">Inspect the full official benchmark table ↗</a>.</p>
+  <div class="dspark-note"><strong>Methodology limits:</strong> Liquid AI used 16-bit processing for the vision encoder and language backbone. Apple's benchmarks used up to 2,048 generated tokens; the observed median answer length was around 90. Quantized acceleration was <strong>not</strong> evaluated in this release. Software version, prompts, prompt length, acceptance rate and device conditions can change the result.</div>
+</section>
+
+<section class="dspark-panel" id="calculator">
+  <p class="eyebrow">SXF EXPLANATORY TOOL</p><h2>Why does 3× decoding not mean 3× faster vision inference?</h2>
+  <p>Image encoding and prompt prefill still take time. Explore this <strong>illustrative Amdahl's-law model</strong> to see how the amount of baseline time spent decoding limits end-to-end benefit. <strong>This tool is not a measured DSpark benchmark</strong> and makes no prediction of memory use or real deployment speed.</p>
+  <div class="dspark-tool" data-dspark-explorer>
+    <div class="dspark-tool-inputs"><label for="dspark-hardware">Reported peak decode gain<input type="hidden" aria-hidden="true" tabindex="-1" /><select id="dspark-hardware"><option value="3.13">Apple M5 Max · 3.13×</option><option value="2.14">Apple M3 Ultra · 2.14×</option><option value="2.66">NVIDIA H100 · 2.66×</option></select></label>
+    <label for="dspark-decode-share">Baseline time spent decoding: <output id="dspark-share" for="dspark-decode-share">50%</output><input id="dspark-decode-share" type="range" min="10" max="90" value="50" step="5" /></label></div>
+    <div class="dspark-tool-result"><span>Theoretical end-to-end speedup</span><output id="dspark-result" for="dspark-hardware dspark-decode-share" aria-live="polite" aria-atomic="true">1.52×</output><small>1 ÷ [(1 − decode share) + decode share ÷ decode gain]</small></div>
+  </div>
+  <p class="dspark-caption">SXF-derived arithmetic only. Ignore additional drafter overhead for this simplified upper-bound illustration. Unlike the hardware results above, this slider is not a vendor measurement.</p>
+</section>
+
+<section class="dspark-panel" id="memory">
+  <p class="eyebrow">LOCAL DEPLOYMENT REALITY</p><h2>How much RAM or VRAM does LFM2.5-VL-DSpark need?</h2>
+  <p>There is <strong>no universal minimum GPU VRAM or Mac unified-memory figure</strong> in the sources verified for this page. The drafter is only one part of the deployment. You must also load the <strong>LFM2.5-VL-3B target</strong>, its vision projector or encoder, KV cache, images, and runtime buffers. The stated 8.9% increase refers to <strong>parameter count</strong>, not guaranteed total runtime memory.</p>
+  <div class="dspark-facts">
+    <div><span>DOCUMENTED FILE</span><strong>567 MB</strong><p>Separate F16 GGUF drafter file according to the <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark-GGUF" target="_blank" rel="noopener noreferrer">official GGUF card</a>. Not the total deployment.</p></div>
+    <div><span>APPLE TEST SYSTEMS</span><strong>M5 Max / M3 Ultra</strong><p>Published performance targets, not minimum-capacity requirements for all configurations.</p></div>
+    <div><span>GPU TEST SYSTEM</span><strong>H100 80GB</strong><p>Published SGLang measurement system, not an asserted minimum VRAM requirement.</p></div>
+  </div>
+  <h3>What to check before local deployment</h3>
+  <ol><li>Use a matching target and drafter checkpoint; the GGUF drafter shares token embeddings and the LM head with the loaded target.</li><li>Calculate the combined weight footprint <em>plus</em> vision encoder, runtime, KV cache, context length, resolution and batch overhead.</li><li>Choose a compatible runtime and use its own loading/VRAM measurements. Do not assume the 16-bit benchmark gains transfer to a 4-bit build.</li><li>Record peak memory and latency with and without drafting on the same images and prompt lengths.</li></ol>
+</section>
+
+<section class="dspark-panel" id="setup">
+  <p class="eyebrow">PRACTICAL SETUP / OFFICIAL COMMANDS</p><h2>How to run LFM2.5-VL-DSpark locally</h2>
+  <p>Choose the runtime that matches your hardware. These examples are adapted from the official Liquid AI model cards and require appropriate runtime installation, model downloads, compatible dependencies and sufficient memory. <strong>The drafter alone cannot answer an image prompt.</strong></p>
+  <h3>Option 1: Apple silicon — MLX-VLM</h3>
+  <p>Liquid AI lists <strong>MLX-VLM v0.7.2 or newer</strong> and greedy decoding for this DSpark integration.</p>
+  <div class="dspark-code"><div><span>Terminal · MLX-VLM</span><button type="button" data-copy-code="mlx" aria-label="Copy MLX-VLM command">Copy</button></div><pre id="dspark-code-mlx"><code>python -m mlx_vlm.generate \
+  --model LiquidAI/LFM2.5-VL-3B \
+  --draft-model LiquidAI/LFM2.5-VL-3B-DSpark \
+  --draft-block-size 8 \
+  --image /path/to/image.jpg \
+  --prompt "Describe this image." \
+  --max-tokens 256 \
+  --temperature 0</code></pre></div>
+  <h3>Option 2: NVIDIA GPU — SGLang</h3>
+  <p>The current model card specifies <strong>SGLang v0.5.19 or newer</strong> with DSpark integration. Check the installed build and supported attention backend first.</p>
+  <div class="dspark-code"><div><span>Terminal · SGLang</span><button type="button" data-copy-code="sglang" aria-label="Copy SGLang command">Copy</button></div><pre id="dspark-code-sglang"><code>python -m sglang.launch_server \
+  --model-path LiquidAI/LFM2.5-VL-3B \
+  --speculative-algorithm DSPARK \
+  --speculative-draft-model-path LiquidAI/LFM2.5-VL-3B-DSpark \
+  --speculative-draft-attention-backend flashinfer \
+  --speculative-dspark-block-size 9 \
+  --disable-radix-cache --mem-fraction-static 0.8 --port 30000</code></pre></div>
+  <p>Connect a compatible client to the local OpenAI-style endpoint at <code>http://localhost:30000/v1</code>. Compare it to the same target with the speculative flags removed. Do not expose a development server on a public network without authentication and deployment safeguards.</p>
+  <h3>Option 3: llama.cpp — matching GGUF pair</h3>
+  <p>Liquid AI provides a <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark-GGUF" target="_blank" rel="noopener noreferrer">separate F16 drafter GGUF</a>, used with the corresponding <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-GGUF" target="_blank" rel="noopener noreferrer">target GGUF</a> and vision files.</p>
+  <div class="dspark-code"><div><span>Terminal · llama.cpp</span><button type="button" data-copy-code="llama" aria-label="Copy llama.cpp command">Copy</button></div><pre id="dspark-code-llama"><code>llama-server -hf LiquidAI/LFM2.5-VL-3B-GGUF:F16 \
+  -hfd LiquidAI/LFM2.5-VL-3B-DSpark-GGUF:F16 \
+  --spec-type draft-dspark \
+  --spec-draft-n-max 8 --spec-draft-n-min 0 \
+  -ngl 99 -ngld 99 -fa on</code></pre></div>
+  <p class="dspark-note">Keep each drafter paired with the correct target format. Runtime flags and model availability can change; the <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer">maintained official model card</a> takes precedence over commands reproduced here.</p>
+</section>
+
+<section class="dspark-panel" id="use-cases">
+  <p class="eyebrow">REAL WORKFLOWS</p><h2>Vision-language use cases: where DSpark helps—and where it does not</h2>
+  <p>DSpark's potential is highest when the existing <strong>LFM2.5-VL-3B</strong> model is already accurate enough for the task and output generation occupies a meaningful share of total latency. The following are proposed workflows to evaluate, <strong>not SXF-tested performance results</strong>.</p>
+  <div class="dspark-cards">
+    <article><span>IMAGE CAPTIONING</span><h3>Generate descriptions</h3><p>Give the parent VLM a photo and request a short or long caption. Use the same images and output lengths for both baseline and DSpark. Longer generated outputs may expose more decoding benefit.</p></article>
+    <article><span>CHART / OCR QUESTION ANSWERING</span><h3>Read visual evidence</h3><p>Ask questions about tables, charts or photographed documents. Validate the accuracy of the target's answer separately; faster decoding does not fix misread source data.</p></article>
+    <article><span>SCREEN &amp; UI UNDERSTANDING</span><h3>Understand screenshots</h3><p>The <a href="https://www.liquid.ai/blog/lfm2-5-vl-3b" target="_blank" rel="noopener noreferrer">parent model</a> was designed for interface understanding. Verify bounding boxes, element labels and multi-image grounding rather than assuming any new ability from the drafter.</p></article>
+    <article><span>EDGE ASSISTANTS</span><h3>Reduce response latency</h3><p>For local devices, profile image preprocessing, prompt prefill and decode separately. DSpark is less helpful when the image encoder dominates wall-clock time.</p></article>
+  </div>
+  <h3>DSpark versus another small vision model</h3>
+  <div class="dspark-table-wrap"><table><caption>Different comparisons answer different questions</caption><thead><tr><th scope="col">Comparison</th><th scope="col">What changes?</th><th scope="col">How to evaluate fairly</th></tr></thead><tbody>
+    <tr><th scope="row">LFM2.5-VL-3B alone vs + DSpark</th><td>Same vision target; different decoding path</td><td>Measure latency, accepted draft tokens, peak memory and output equivalence on identical inputs</td></tr>
+    <tr><th scope="row">LFM2.5-VL-3B vs Qwen3.5-4B</th><td>Different model weights and vision capability</td><td>Use target model benchmark tables and reproduce tests; DSpark speeds are not quality scores</td></tr>
+    <tr><th scope="row">LFM2.5-VL-3B vs Gemma 4 E4B</th><td>Different vision and deployment characteristics</td><td>Compare VQA/OCR/grounding accuracy, hardware, prompt and sampling settings</td></tr>
+  </tbody></table></div>
+  <p>Liquid AI's <a href="https://www.liquid.ai/blog/lfm2-5-vl-3b" target="_blank" rel="noopener noreferrer">parent-model evaluation</a> publishes comparative quality figures. For example, it reports <strong>80.7 average ScreenSpot-v2</strong> for LFM2.5-VL-3B and <strong>61.5 BLINK</strong> for multi-image reasoning in its evaluation setup. Those are <strong>target-model</strong> results, not DSpark accuracy scores or independent SXF measurements.</p>
+</section>
+
+<section class="dspark-panel" id="limitations">
+  <p class="eyebrow">HONEST LIMITATIONS</p><h2>Limitations, accuracy and licensing</h2>
+  <ul>
+    <li><strong>Not a standalone VLM:</strong> requires a compatible LFM2.5-VL-3B target plus the vision stack.</li>
+    <li><strong>Only decode is accelerated:</strong> vision encoding and prefill still dominate some edge workloads. Gains vary with prompt/image complexity and output length.</li>
+    <li><strong>Acceptance rate matters:</strong> at higher sampling temperatures the target and drafter can diverge more often, potentially reducing throughput.</li>
+    <li><strong>No extrapolation to quantized models:</strong> released benchmark results use 16-bit inference and do not establish 4-bit or other quantized acceleration.</li>
+    <li><strong>Vendor benchmarks:</strong> reported gains are from Liquid AI; SXF has not independently reproduced them.</li>
+    <li><strong>License is not a legal conclusion:</strong> Hugging Face labels the checkpoint <code>lfm1.0</code>. Read the <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">complete license terms</a> for your use case.</li>
+  </ul>
+</section>
+
+<section class="dspark-panel" id="faq">
+  <p class="eyebrow">SEARCH QUESTIONS</p><h2>LFM2.5-VL-DSpark FAQs</h2>
+  <div class="dspark-faq">
+    <details><summary>What is LFM2.5-VL-DSpark?</summary><p>Liquid AI's experimental 279.5M-parameter speculative-decoding companion for LFM2.5-VL-3B. It proposes output tokens and relies on the parent VLM for image understanding and final verification.</p></details>
+    <details><summary>Can DSpark process an image on its own?</summary><p>No. Load the compatible LFM2.5-VL-3B target and vision processor; DSpark is a decoder acceleration component.</p></details>
+    <details><summary>Is it 3.13× faster at everything?</summary><p>No. 3.13× is Liquid AI's highest reported decode speedup on M5 Max for a tested task. End-to-end gains are smaller and vary by hardware and workload.</p></details>
+    <details><summary>How many parameters and what file size?</summary><p>The drafter has 279.5M parameters; the separate F16 GGUF drafter is listed as 567 MB. Full runtime memory is higher because the target and vision components are loaded too.</p></details>
+    <details><summary>Does it work with llama.cpp, SGLang and MLX-VLM?</summary><p>Those integrations are documented. Use their compatible versions and match the target checkpoint to the drafter format.</p></details>
+    <details><summary>Does speculative decoding lower model quality?</summary><p>With greedy target verification the same target output is preserved; with correctly matched stochastic sampling the distribution is preserved. The parent model's underlying error modes remain.</p></details>
+    <details><summary>Can I run it on a laptop with 8GB RAM?</summary><p>The sources do not confirm an 8GB minimum or a supported configuration. Check total target-plus-drafter-plus-vision weight and runtime requirements on your specific hardware.</p></details>
+    <details><summary>Can I expect the same gain with 4-bit GGUF?</summary><p>No verified promise. Published benchmark results used 16-bit processing; quantized-model acceleration was outside the release's evaluation scope.</p></details>
+  </div>
+</section>
+
+<section class="dspark-panel" id="sources">
+  <p class="eyebrow">EVIDENCE REGISTER</p><h2>Official sources and verification notes</h2>
+  <p>Last editorial source review: <strong>November 1, 2026</strong>. The release date is September 24, 2026. Every performance or size claim above is grounded in official model documentation; the Amdahl calculator and deployment checklist are SXF's own analysis.</p>
+  <div class="dspark-sources">
+    <a href="https://www.liquid.ai/blog/lfm2-5-vl-dspark" target="_blank" rel="noopener noreferrer"><strong>Liquid AI release announcement</strong><span>Speculation method, speed, scope, limitations ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark" target="_blank" rel="noopener noreferrer"><strong>Official Hugging Face drafter card</strong><span>279.5M breakdown, measured tasks, commands and license ↗</span></a>
+    <a href="https://huggingface.co/LiquidAI/LFM2.5-VL-3B-DSpark-GGUF" target="_blank" rel="noopener noreferrer"><strong>Official GGUF checkpoint card</strong><span>F16 drafter file, target pairing, llama.cpp integration ↗</span></a>
+    <a href="https://www.liquid.ai/blog/lfm2-5-vl-3b" target="_blank" rel="noopener noreferrer"><strong>Parent LFM2.5-VL-3B model report</strong><span>Image understanding, benchmark comparisons and use cases ↗</span></a>
+    <a href="https://huggingface.co/blog/liquidai/lfm2-5-vl-dspark" target="_blank" rel="noopener noreferrer"><strong>Liquid AI technical write-up on Hugging Face</strong><span>Training, stages and inference methodology ↗</span></a>
+  </div>
+  <p class="dspark-next">Explore related SXF resources: <a href="/models/">AI models</a> · <a href="/guides/open-source-ai-models/">Open-source AI model guide</a> · <a href="/guides/run-ai-models-locally/">Run AI models locally</a> · <a href="/guides/llm-quantization-explained/">Quantization guide</a> · <a href="/signals/accelerating-vision-language-models-with-lfm2-5-vl-dspark-ea150f6/">Original SXF release signal</a>.</p>
+</section>
+</div></div>
+"""
+
+
+def render_page(items, *, page_head, page_header, page_footer):
+    """Return the complete HTML page with verified sources and local tools."""
+    head = page_head(TITLE, DESCRIPTION, URL, schema(), "article",
+                     "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1")
+    head = head.replace("</head>", '<link rel="stylesheet" href="/assets/lfm25-vl-dspark.css" /></head>', 1)
+    # Keep a dynamically linked feed item after the authored analysis without
+    # replacing it with generic AI-news boilerplate on future ingest.
+    latest = items[0] if items else None
+    news = ""
+    if latest:
+        title = escape(latest.get("title", "Latest model news"))
+        slug = escape(latest["signal_slug"], quote=True)
+        news = (f'<section class="shell dspark-recent"><p class="eyebrow">SXF SIGNAL HISTORY</p>'
+                f'<h2>Latest LFM2.5-VL-DSpark release signal</h2><p>{title}</p>'
+                f'<a href="/signals/{slug}/">Read the dated source signal ↗</a></section>')
+    return (
+        '<!doctype html><html lang="en">' + head
+        + '<body class="intel-page model-page sxf-dspark">' + page_header("models")
+        + '<main id="main-content">' + ARTICLE + news + '</main>'
+        + page_footer()
+        + '<script src="/assets/lfm25-vl-dspark.js" defer></script></body></html>'
+    )
