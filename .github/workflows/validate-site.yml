@@ -71,6 +71,8 @@ jobs:
         run: python tests/test_signal_page_rendering.py
       - name: Signal article HTML and SEO regression tests
         run: python tests/test_signal_article_rendering.py
+      - name: LFM2.5-VL-DSpark model SEO and accuracy regression
+        run: python tests/test_lfm25_vl_dspark_model.py
       - name: GPT-6 Intelligent UI Signal SEO and content regression
         run: python tests/test_gpt6_intelligent_ui_signal.py
       - name: GitHub license-compliance page SEO and source integrity
