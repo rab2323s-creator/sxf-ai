@@ -1,0 +1,251 @@
+"""Source-verified, evergreen analysis for the October 7 GPT-6 Intelligent UI Signal.
+
+This authored content is rendered by signal_article_rendering.py on every rebuild.
+The original news URL and publication date remain unchanged.
+"""
+from __future__ import annotations
+
+SLUG = "/signals/gpt-6-and-intelligent-ui-for-everyone-0ca1450/"
+TITLE = "GPT-6 and Intelligent UI for Everyone: Features & Rollout | SXF"
+H1 = "GPT-6 and Intelligent UI for Everyone"
+DESCRIPTION = ("OpenAI launched GPT-6 Intelligent UI in ChatGPT on October 7, 2026. "
+               "See how it works, example tools, rollout by plan, Sol vs Luna and key limits.")
+UPDATED_AT = "2026-11-01T00:00:00Z"
+RELEASE = "https://openai.com/index/gpt-6-for-everyone/"
+NOTES = "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+SOURCES = [RELEASE, NOTES]
+KEYWORDS = [
+    "GPT-6 and Intelligent UI for everyone",
+    "GPT-6 Intelligent UI in ChatGPT",
+    "OpenAI Intelligent UI",
+    "GPT-6 Intelligent UI rollout",
+    "GPT-6 Sol vs GPT-6 Luna",
+    "ChatGPT interactive responses",
+]
+EDITORIAL = {
+    "what_changed": (
+        "On October 7, 2026, OpenAI introduced Intelligent UI in ChatGPT with GPT-6. "
+        "Instead of always returning plain text, ChatGPT can combine explanations, "
+        "visuals and usable controls such as charts, comparisons, calculators and forms. "
+        "The interface can appear progressively while the answer is still being created."
+    ),
+    "why_it_matters": (
+        "This changes the presentation and interaction layer, not just the underlying "
+        "model. A user can compare options side by side, explore a concept through an "
+        "interactive diagram or adjust a calculation without restarting the conversation. "
+        "The useful question is whether the interface helps a specific task become clearer "
+        "or easier to complete—not whether it looks more elaborate."
+    ),
+    "what_to_verify": (
+        "At the October 7 launch, Plus, Pro, Business and Enterprise began receiving GPT-6 "
+        "Sol in Chat; Free and Go followed October 8 with GPT-6 Luna. Workspace controls "
+        "and ongoing rollouts can affect access. The separate Pro reasoning option runs "
+        "Astra without Intelligent UI. This announcement did not change Work or Codex models "
+        "and did not promise the same interface through the standalone API."
+    ),
+}
+FAQ = [
+    ("What is GPT-6 Intelligent UI?",
+     "It is a ChatGPT response capability announced on October 7, 2026 that lets GPT-6 combine ordinary text with native visuals and interactive components, such as charts, diagrams, forms and task-specific tools."),
+    ("When did GPT-6 Intelligent UI launch?",
+     "OpenAI announced the rollout on October 7, 2026 for Plus, Pro, Business and Enterprise in ChatGPT Chat, with Free and Go expansion beginning October 8. Availability depends on rollout and workspace eligibility."),
+    ("Which GPT-6 model powers Intelligent UI?",
+     "OpenAI identifies GPT-6 Sol for Plus, Pro, Business and Enterprise Chat users and GPT-6 Luna for Free and Go. The separate Pro reasoning option uses GPT-6 Astra and does not support Intelligent UI."),
+    ("Is GPT-6 Intelligent UI available in Work, Codex or the API?",
+     "The October 7 announcement applies to the Chat experience in ChatGPT. OpenAI stated that the models powering Work and Codex did not change in that release; it did not announce an equivalent Intelligent UI API capability."),
+    ("Does GPT-6 always show buttons, charts or interactive tools?",
+     "No. The model chooses an appropriate response format and can still answer in plain text. An interactive interface is not necessary for every question."),
+    ("Is GPT-6 44% faster overall?",
+     "No such blanket claim follows from the announcement. OpenAI reported that GPT-6 Instant began answering web-search questions 44% sooner on average than GPT-5.6 Instant in an internal evaluation. That is a time-to-first-answer claim for a specified workload, not a universal total-completion benchmark."),
+]
+
+
+def faq_schema(canonical: str) -> dict:
+    return {
+        "@type": "FAQPage",
+        "@id": canonical + "#faq",
+        "mainEntityOfPage": {"@id": canonical + "#webpage"},
+        "mainEntity": [
+            {"@type": "Question", "name": question,
+             "acceptedAnswer": {"@type": "Answer", "text": answer}}
+            for question, answer in FAQ
+        ],
+    }
+
+
+BODY = r'''
+<section class="signal-deep-dive shell gpt6-ui-analysis" aria-labelledby="gpt6-ui-release">
+  <div class="intel-section-head">
+    <div><p class="eyebrow">SXF RELEASE ANALYSIS / VERIFIED PRIMARY SOURCES</p>
+    <h2 id="gpt6-ui-release">GPT-6 Intelligent UI: what actually changed?</h2></div>
+    <span>Reviewed November 1, 2026</span>
+  </div>
+  <div class="deep-dive-lead">
+    <p><strong>Quick answer:</strong> OpenAI's October 7, 2026 release brought <strong>Intelligent UI to ChatGPT</strong>: GPT-6 can assemble an answer using text, graphics and interactive controls rather than delivering every result as a static message. A comparison can become a side-by-side view, an explanation can become an interactive diagram, and a simple request can become a usable calculator. The model can still choose ordinary text when that is the best fit.</p>
+    <p>The distinguishing technical detail is <strong>progressive rendering</strong>. OpenAI describes a native component library and compiler that render parts of an interface while the model generates them. This article explains the launch, what it means in practice, who was included, and which performance claims are—and are not—supported by the release. <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" rel="noopener noreferrer">Read the original OpenAI announcement</a>.</p>
+  </div>
+  <nav class="gpt6-ui-toc" aria-label="In this analysis">
+    <a href="#gpt6-ui-examples">Examples</a><a href="#gpt6-ui-architecture">How it works</a>
+    <a href="#gpt6-ui-availability">Availability</a><a href="#gpt6-ui-speed">Speed evidence</a>
+    <a href="#gpt6-ui-demo">Try a demo</a><a href="#gpt6-ui-faq">FAQ</a>
+  </nav>
+
+  <div class="deep-dive-section" id="gpt6-ui-examples">
+    <p class="eyebrow">PRODUCT CHANGES / OCTOBER 7, 2026</p>
+    <h2>What can Intelligent UI do that plain chat cannot?</h2>
+    <p>The change is not that ChatGPT suddenly knows how to calculate or describe a map. It is that the answer can expose <strong>controls you use inside the conversation</strong>, without requiring a separate static webpage. These are examples documented by OpenAI; the precise appearance varies with the prompt, plan and client.</p>
+    <div class="deep-dive-grid gpt6-ui-grid">
+      <article><span>01 / COMPARE</span><h3>Side-by-side decisions</h3><p>Compare choices in columns or structured cards instead of decoding one long paragraph. This is useful when tradeoffs, specifications or constraints should stay visible together.</p></article>
+      <article><span>02 / EXPLORE</span><h3>Visual learning</h3><p>Work through a concept with a diagram or adjustable explanation. OpenAI demonstrates scientific and mathematical concepts and a selectable breakdown of a bicycle.</p></article>
+      <article><span>03 / ACT</span><h3>Small tools on demand</h3><p>Ask for a bill splitter, savings calculator or simple game and interact with it within ChatGPT. The UI supports changing inputs and seeing revised outputs.</p></article>
+    </div>
+    <p><strong>When not to use it:</strong> for a straightforward fact or short definition, a text answer may be clearer. Better UI is the format that helps a person complete the task with less confusion—not the one with the most controls.</p>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-architecture">
+    <p class="eyebrow">UNDER THE HOOD</p>
+    <h2>How does GPT-6 generate an interactive answer?</h2>
+    <div class="gpt6-ui-flow" role="list" aria-label="Simplified Intelligent UI generation flow">
+      <div role="listitem"><strong>1. Interpret the request</strong><span>Decide if plain text, a visual or an interaction best serves the question.</span></div>
+      <div role="listitem"><strong>2. Assemble components</strong><span>Compose native UI elements from OpenAI's streamable component library.</span></div>
+      <div role="listitem"><strong>3. Render progressively</strong><span>A compiler processes the generated interface so useful parts can appear before the whole response is finished.</span></div>
+    </div>
+    <p>This is a simplified reading of the <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" rel="noopener noreferrer">published architecture</a>, not a reverse-engineered implementation. OpenAI also says GPT-6 was trained to choose layouts and interactions for clarity, usefulness and completeness. It does <strong>not</strong> claim that every answer produces an app, that generated controls are infallible, or that the October release exposes the same component system to API developers.</p>
+    <div class="deep-dive-table-wrap"><table class="deep-dive-table">
+      <caption>Product-format comparison: a conceptual guide, not an independent benchmark</caption>
+      <thead><tr><th>Task</th><th>Conventional text response</th><th>Intelligent UI response</th></tr></thead>
+      <tbody>
+        <tr><th>Compare alternatives</th><td>Paragraphs or a static list</td><td>Side-by-side comparison or structured cards</td></tr>
+        <tr><th>Learn a concept</th><td>Written walkthrough</td><td>Visual, potentially adjustable explanation</td></tr>
+        <tr><th>Split a bill</th><td>Formula and one calculated result</td><td>Change the bill, tip or number of people in place</td></tr>
+        <tr><th>Short factual answer</th><td>Concise text</td><td>Concise text can still be the right choice</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-availability">
+    <p class="eyebrow">ROLLOUT & MODEL BOUNDARIES</p>
+    <h2>Who got GPT-6 Intelligent UI, and which model runs it?</h2>
+    <p>OpenAI announced a <strong>staged global ChatGPT Chat rollout</strong>, not a simultaneous switch for every user and every product. The table describes the <em>October 7 announcement</em>; for live access, the account's model selector, eligible subscription and workspace policies are authoritative.</p>
+    <div class="deep-dive-table-wrap"><table class="deep-dive-table">
+      <caption>Documented GPT-6 Intelligent UI launch plan, October 2026</caption>
+      <thead><tr><th>Plan or mode</th><th>GPT-6 model</th><th>Launch treatment</th></tr></thead>
+      <tbody>
+        <tr><th>Plus, Pro, Business, Enterprise — Chat</th><td><a href="/models/gpt-6-sol/">GPT-6 Sol</a></td><td>Rollout began October 7, 2026; enterprise access depends on admin settings</td></tr>
+        <tr><th>Free and Go — Chat</th><td><a href="/models/gpt-6-luna/">GPT-6 Luna</a></td><td>Rollout expansion began October 8, 2026</td></tr>
+        <tr><th>Pro reasoning option</th><td><a href="/models/gpt-6-astra/">GPT-6 Astra</a></td><td>OpenAI's release notes say this option does <strong>not</strong> support Intelligent UI</td></tr>
+        <tr><th>Work and Codex</th><td>Separate model choices</td><td>This October 7 Chat release did not change their underlying models</td></tr>
+      </tbody>
+    </table></div>
+    <p>The UI is available across eligible reasoning settings from Instant through Extra High according to <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener noreferrer">OpenAI's ChatGPT release notes</a>. <strong>ChatGPT UI, model access and standalone API usage are distinct things:</strong> this release should not be used as evidence of an Intelligent UI API endpoint or a new API pricing tier.</p>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-speed">
+    <p class="eyebrow">PERFORMANCE / WHAT WAS MEASURED</p>
+    <h2>Did GPT-6 get faster, or just start responding sooner?</h2>
+    <div class="gpt6-ui-stat"><strong>44%</strong><span>Earlier start of the answer, <em>on average</em>, for web-search questions: GPT-6 Instant versus GPT-5.6 Instant in an <strong>OpenAI internal evaluation</strong>.</span></div>
+    <p>OpenAI also reported that GPT-6 Extra High could begin answering as quickly as GPT-5.6 Medium in its everyday agentic-task test while scoring above GPT-5.6 Extra High overall. These are <strong>vendor-reported observations</strong>, not SXF-run reproducible measurements. The 44% figure measures <em>time until the answer begins</em> for the evaluated search workload; it does not establish a 44% reduction in total task duration, API latency or every user's waiting time.</p>
+    <p>For anyone evaluating the experience, test both <strong>time to first useful content</strong> and <strong>time to a correct finished answer</strong>, then check whether the controls remain usable on mobile and whether the interaction actually helps complete the task. A streamed interface can improve perceived responsiveness without improving the accuracy of every step.</p>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-demo">
+    <p class="eyebrow">ORIGINAL SXF INTERACTIVE EXAMPLE</p>
+    <h2>Try the idea: adjust a bill without asking again.</h2>
+    <p>OpenAI lists bill splitting as an example of an in-chat interactive task. This small <strong>SXF-built illustration</strong> runs directly on this page, not in ChatGPT and not on a GPT-6 model. It demonstrates the value of keeping inputs and the answer in the same interface.</p>
+    <div class="gpt6-ui-demo" data-sxf-bill-splitter>
+      <div class="gpt6-ui-fields">
+        <label>Bill total (USD)<input name="bill-total" type="number" min="0" max="1000000" step="0.01" value="84.00" inputmode="decimal" /></label>
+        <label>Tip (%)<input name="tip" type="number" min="0" max="100" step="1" value="10" inputmode="decimal" /></label>
+        <label>People<input name="people" type="number" min="1" max="30" step="1" value="4" inputmode="numeric" /></label>
+      </div>
+      <div class="gpt6-ui-result"><span>Each person pays</span><output data-sxf-per-person aria-live="polite" aria-atomic="true">$23.10</output><small>Illustrative USD calculation: (bill × (1 + tip%)) ÷ people. Rounding is to the nearest cent per person.</small></div>
+    </div>
+    <p class="deep-dive-note">Privacy: values are calculated locally in your browser; this demo sends no input to SXF or OpenAI. Change a field to update the result. For exact settlement, account for the possible rounding remainder across people.</p>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-test">
+    <p class="eyebrow">HOW TO EVALUATE IT YOURSELF</p>
+    <h2>Three useful prompts and a fair test.</h2>
+    <ol class="deep-dive-checklist">
+      <li><strong>Comparison:</strong> Ask, “Compare three laptops side by side by battery life, weight and price, and show tradeoffs for travel.” Supply real specifications; verify any missing or outdated prices.</li>
+      <li><strong>Concept:</strong> Ask, “Explain the central limit theorem with an adjustable sample-size example.” Check that the visual follows the mathematics as you change values.</li>
+      <li><strong>Task:</strong> Ask, “Build a bill splitter where I can change the amount, tip percentage and party size.” Check the numbers with an independent calculation.</li>
+    </ol>
+    <p><strong>Evaluation checklist:</strong> Did the answer choose an appropriate format? Are controls keyboard accessible? Are numerical results correct after several input changes? Does mobile layout remain readable? Are sources and limitations still visible? A visually impressive widget that produces the wrong decision is not a better answer.</p>
+  </div>
+
+  <div class="deep-dive-section">
+    <p class="eyebrow">EDITORIAL INTERPRETATION & LIMITS</p>
+    <h2>What the announcement does—and does not—prove.</h2>
+    <p><strong>Confirmed by OpenAI:</strong> Intelligent UI is a ChatGPT answer-format capability; its native components render progressively; rollout began on the dates and plans shown above; the company reported improved time to start certain answers. <strong>SXF's interpretation:</strong> this shifts some user workflows from “read instructions and navigate elsewhere” toward “inspect and change the answer in place.” That is a product-design implication, not an independently measured productivity gain.</p>
+    <p><strong>Not established:</strong> universal UI availability on every client, identical behavior across models, a public equivalent of this interface in the API, error-free generated tools, or independently reproduced 44% speed gains. OpenAI describes further work needed on design judgment. For production decisions, test correctness, access, accessibility and predictable fallbacks instead of extrapolating from launch demonstrations.</p>
+  </div>
+
+  <div class="deep-dive-section" id="gpt6-ui-faq">
+    <p class="eyebrow">QUESTIONS ANSWERED</p>
+    <h2>GPT-6 Intelligent UI FAQ</h2>
+    <div class="deep-dive-faq">
+      <details><summary>What is GPT-6 Intelligent UI?</summary><p>It is a ChatGPT response capability announced on October 7, 2026. GPT-6 can combine text with native visual and interactive elements—including charts, diagrams, forms and task-specific tools—when they serve the user's question.</p></details>
+      <details><summary>When did GPT-6 Intelligent UI launch?</summary><p>OpenAI began rolling it out to Plus, Pro, Business and Enterprise Chat users on October 7, 2026, and expanded the rollout to Free and Go on October 8. Workspace settings and rollout eligibility can affect access.</p></details>
+      <details><summary>Which GPT-6 model powers Intelligent UI?</summary><p>OpenAI identifies GPT-6 Sol for Plus, Pro, Business and Enterprise Chat, and GPT-6 Luna for Free and Go. The separate Pro reasoning option uses GPT-6 Astra and does not support Intelligent UI.</p></details>
+      <details><summary>Does this release also enable it in Work, Codex or the API?</summary><p>The announcement concerns ChatGPT's Chat experience. OpenAI explicitly said Work and Codex models did not change in this release and did not promise an equivalent Intelligent UI API capability.</p></details>
+      <details><summary>Will every ChatGPT reply become interactive?</summary><p>No. GPT-6 can select plain text when that is the clearest response. A prompt does not guarantee a chart, button or tool.</p></details>
+      <details><summary>Does OpenAI's 44% figure mean GPT-6 finishes everything 44% faster?</summary><p>No. The reported average covers how much sooner GPT-6 Instant started responding to web-search questions versus GPT-5.6 Instant in OpenAI's internal evaluation. It is not a universal end-to-end latency or independent benchmark claim.</p></details>
+    </div>
+  </div>
+
+  <div class="deep-dive-section">
+    <p class="eyebrow">VERIFICATION & RELATED SXF RESEARCH</p>
+    <h2>Primary sources and the right next reading.</h2>
+    <p><strong>Primary evidence:</strong> <a href="https://openai.com/index/gpt-6-for-everyone/" target="_blank" rel="noopener noreferrer">OpenAI's October 7 product announcement</a> documents Intelligent UI examples, architecture, rollout and internal evaluation statements. <a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener noreferrer">ChatGPT release notes</a> clarify the Pro Astra exception and reasoning-mode coverage. The demo and interpretation on this page are SXF's own additions.</p>
+    <p><strong>Keep the topics separate:</strong> use the <a href="/models/gpt-6/">GPT-6 model family reference</a> for model specifications and API economics, <a href="/models/gpt-6-sol/">GPT-6 Sol</a> or <a href="/models/gpt-6-luna/">GPT-6 Luna</a> for model-specific information, and <a href="/guides/how-to-choose-ai-model/">the SXF model-selection guide</a> for broader decision-making. This Signal is the dated <strong>Intelligent UI launch analysis</strong>, not an evergreen GPT-6 pricing guide.</p>
+    <p class="deep-dive-note">Source review: November 1, 2026. Original announcement: October 7, 2026. SXF did not run OpenAI's internal performance benchmark, and product availability can change after publication.</p>
+  </div>
+</section>
+<style>
+.gpt6-ui-analysis{--ui-border:rgba(157,188,226,.22);--ui-ink:#e6eefb}
+.gpt6-ui-analysis .gpt6-ui-toc{display:flex;flex-wrap:wrap;gap:.55rem 1rem;padding:1rem 0 1.35rem;border-bottom:1px solid var(--ui-border);margin:0 0 1.5rem}
+.gpt6-ui-analysis .gpt6-ui-toc a{color:#b7ddff;text-decoration:underline;text-underline-offset:3px;font-size:.92rem}
+.gpt6-ui-analysis .gpt6-ui-grid{margin:1.35rem 0}
+.gpt6-ui-analysis .gpt6-ui-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem;margin:1.1rem 0 1.5rem}
+.gpt6-ui-analysis .gpt6-ui-flow>div{border:1px solid var(--ui-border);border-radius:13px;padding:1.1rem;background:rgba(30,57,82,.28)}
+.gpt6-ui-analysis .gpt6-ui-flow strong{display:block;color:#ecf4ff;margin-bottom:.55rem}
+.gpt6-ui-analysis .gpt6-ui-flow span{display:block;color:#b9c9d9;font-size:.95rem;line-height:1.5}
+.gpt6-ui-analysis .gpt6-ui-stat{display:flex;align-items:center;gap:1.2rem;border:1px solid rgba(105,197,255,.43);background:linear-gradient(130deg,rgba(25,99,152,.22),rgba(14,29,47,.2));padding:1.2rem 1.5rem;border-radius:16px;margin:1rem 0}
+.gpt6-ui-analysis .gpt6-ui-stat>strong{font-size:clamp(2.4rem,6vw,4.1rem);color:#a9e0ff;line-height:1;white-space:nowrap}
+.gpt6-ui-analysis .gpt6-ui-stat>span{color:#e4eefc;line-height:1.6}
+.gpt6-ui-analysis .gpt6-ui-demo{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(220px,1fr);gap:1.1rem;border:1px solid var(--ui-border);border-radius:17px;background:rgba(17,35,52,.66);padding:1.15rem;margin:1rem 0}
+.gpt6-ui-analysis .gpt6-ui-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+.gpt6-ui-analysis .gpt6-ui-fields label{color:#d9e9fb;font-size:.85rem;font-weight:650;display:flex;flex-direction:column;gap:.55rem}
+.gpt6-ui-analysis .gpt6-ui-fields input{box-sizing:border-box;width:100%;border:1px solid #68819b;border-radius:9px;padding:.7rem .65rem;background:#0c1b2b;color:#fff;font:inherit;font-size:1rem;min-height:44px}
+.gpt6-ui-analysis .gpt6-ui-fields input:focus-visible,.gpt6-ui-analysis a:focus-visible,.gpt6-ui-analysis summary:focus-visible{outline:3px solid #7bd3ff;outline-offset:2px}
+.gpt6-ui-analysis .gpt6-ui-result{display:flex;flex-direction:column;justify-content:center;border-radius:12px;background:rgba(54,139,179,.16);padding:1rem}
+.gpt6-ui-analysis .gpt6-ui-result>span{color:#c1d3e7;font-size:.85rem}
+.gpt6-ui-analysis .gpt6-ui-result output{display:block;color:#c7f4e6;font-size:clamp(1.8rem,3vw,2.45rem);font-weight:750;padding:.35rem 0;line-height:1.15}
+.gpt6-ui-analysis .gpt6-ui-result small{color:#c6d4e3;font-size:.77rem;line-height:1.5}
+.gpt6-ui-analysis .deep-dive-section{scroll-margin-top:100px}
+.gpt6-ui-analysis .deep-dive-table a{color:#b7ddff}
+@media(max-width:820px){.gpt6-ui-analysis .gpt6-ui-flow{grid-template-columns:1fr}.gpt6-ui-analysis .gpt6-ui-demo{grid-template-columns:1fr}.gpt6-ui-analysis .gpt6-ui-fields{grid-template-columns:1fr 1fr}}
+@media(max-width:530px){.gpt6-ui-analysis .gpt6-ui-fields{grid-template-columns:1fr}.gpt6-ui-analysis .gpt6-ui-stat{display:block}.gpt6-ui-analysis .gpt6-ui-stat>strong{display:block;margin-bottom:.5rem}.gpt6-ui-analysis .gpt6-ui-demo{padding:.85rem}}
+</style>
+<script>
+(function(){
+  "use strict";
+  var root=document.querySelector("[data-sxf-bill-splitter]");
+  if(!root){return;}
+  var total=root.querySelector('[name="bill-total"]');
+  var tip=root.querySelector('[name="tip"]');
+  var people=root.querySelector('[name="people"]');
+  var result=root.querySelector("[data-sxf-per-person]");
+  var usd=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"});
+  function update(){
+    var amount=Math.max(0,Math.min(1000000,Number(total.value)||0));
+    var tipPct=Math.max(0,Math.min(100,Number(tip.value)||0));
+    var count=Math.max(1,Math.min(30,Math.round(Number(people.value)||1)));
+    result.textContent=usd.format(amount*(1+tipPct/100)/count);
+  }
+  root.addEventListener("input",update);
+  root.addEventListener("change",update);
+  update();
+})();
+</script>
