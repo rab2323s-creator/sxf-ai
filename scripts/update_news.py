@@ -2077,7 +2077,7 @@ def brief_issue_date(brief_html=None):
     if brief_html is None:
         brief_html = (BRIEF_DIR / "index.html").read_text(encoding="utf-8")
     blocks = re.findall(
-        r'<script[^>]*type=["\\\']application/ld\\+json["\\\'][^>]*>(.*?)</script>',
+        r"<script[^>]*type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>",
         brief_html, flags=re.I | re.S,
     )
     pages = []
