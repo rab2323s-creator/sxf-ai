@@ -27,6 +27,7 @@ class SitemapContext:
     catalog_owns_model_route: Callable
     model_page_indexable: Callable
     slugify: Callable
+    signal_indexable: Callable | None = None
 
 
 
@@ -122,6 +123,7 @@ def write_sitemap(items, context: SitemapContext):
     extract_models = context.extract_models
     comparison_registry_rows = context.comparison_registry_rows
     seo_signal_eligible = context.seo_signal_eligible
+    signal_indexable = context.signal_indexable
     parse_date = context.parse_date
     topic_groups = context.topic_groups
     topic_page_indexable = context.topic_page_indexable
@@ -283,7 +285,8 @@ def write_sitemap(items, context: SitemapContext):
         ))
 
     for item in items:
-        if not item.get("seo_eligible", seo_signal_eligible(item)):
+        if not (signal_indexable(item) if signal_indexable is not None
+                else item.get("seo_eligible", seo_signal_eligible(item))):
             continue
         modified = parse_date(item.get("modified_at", "")) or parse_date(item["published"])
         rows.append(sitemap_entry(item["signal_url"], modified.date().isoformat()))
