@@ -14,6 +14,10 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from editorial_approval import (read_decisions, read_legacy_urls, read_legacy_indexable_urls,
+    exact_decision, is_rejected, publication_decision, load_inbox, build_inbox,
+    approved_inbox_items, retire_unapproved_signal_routes)
+from signal_processing import partition_source_quality
 from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
@@ -78,6 +82,10 @@ MODEL_EVALUATIONS_PATH = ROOT / "data" / "model-evaluations.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 EDITORIAL_REVIEW_QUEUE_PATH = ROOT / "data" / "editorial-review-queue.json"
+EDITORIAL_DECISIONS_PATH = ROOT / "data" / "editorial-decisions.json"
+EDITORIAL_BASELINE_PATH = ROOT / "data" / "editorial-legacy-published.json"
+EDITORIAL_INDEX_BASELINE_PATH = ROOT / "data" / "editorial-legacy-indexable.json"
+EDITORIAL_INBOX_PATH = ROOT / "data" / "editorial-inbox.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -950,6 +958,9 @@ def load_source_registry():
             raise RuntimeError(f"{name}: shadow sources must have max_current=0")
         if status == "disabled" and max_current != 0:
             raise RuntimeError(f"{name}: disabled sources must have max_current=0")
+        quality_gate = source.get("quality_gate")
+        if quality_gate not in {None, "seo-signal-v1"}:
+            raise RuntimeError(f"{name}: unsupported source quality gate {quality_gate!r}")
         adapter = source.get("adapter")
         if adapter not in {"rss", "pending", "anthropic-sitemap", "meta-blog", "xai-news"}:
             raise RuntimeError(f"{name}: unsupported adapter {adapter!r}")
@@ -1932,7 +1943,7 @@ def source_accepts_item(source_config, title, summary):
     raise RuntimeError(f"Unknown source filter: {filter_name}")
 
 
-def parse_feed_with_metrics(source, body):
+def parse_feed_with_metrics(source, body, *, rejected_rows=None):
     root = ET.fromstring(body)
     rows = []
     for item in root.findall(".//item"):
@@ -1963,6 +1974,15 @@ def parse_feed_with_metrics(source, body):
     for title, link, published, summary in rows:
         if not source_accepts_item(source_config, title, summary):
             relevance_rejected += 1
+            if rejected_rows is not None:
+                category = categorize(title, source)
+                rejected_rows.append({
+                    "title": title, "url": link, "source": source,
+                    "published": published.isoformat().replace("+00:00", "Z"),
+                    "category": category, "tags": classify_tags(title, source, category),
+                    "summary": summary, "rejection_stage": "source_topic",
+                    "rejection_reason": "source_filter",
+                })
             continue
         category = categorize(title, source)
         output.append({
@@ -2335,6 +2355,44 @@ def section_cards_html(items):
     """Compatibility entrypoint for category section cards."""
     return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
+def editorial_public_decision(row):
+    return publication_decision(
+        row, read_decisions(EDITORIAL_DECISIONS_PATH),
+        read_legacy_urls(EDITORIAL_BASELINE_PATH), assess_editorial_news,
+    )
+
+
+def previously_manually_published_signal(item):
+    """Respect explicit pre-existing editorial promotions, not auto-ranked news."""
+    review_path = ROOT / "data" / "ai-enrichment-review.json"
+    if not review_path.is_file():
+        return False
+    ledger = json.loads(review_path.read_text(encoding="utf-8"))
+    if ledger.get("version") != "sxf-ai-enrichment-review-v1":
+        raise RuntimeError("Unsupported prior manually reviewed signal ledger")
+    return any(
+        row.get("signal_slug") == item.get("signal_slug")
+        and row.get("signal_url") == item.get("signal_url")
+        and row.get("review_status") == "approved"
+        and row.get("approved_for_publish") is True
+        and row.get("index_decision") == "index"
+        and row.get("approved_at")
+        for row in ledger.get("items", [])
+    )
+
+
+def is_approved_indexable_signal(item):
+    """Preserve already-indexed URLs; explicit human holds/rejections win."""
+    decisions = read_decisions(EDITORIAL_DECISIONS_PATH)
+    if is_rejected(item, decisions) or exact_decision(item, decisions) == "hold":
+        return False
+    if item.get("url", "") in read_legacy_indexable_urls(EDITORIAL_INDEX_BASELINE_PATH):
+        return True
+    return (bool(item.get("seo_eligible", seo_signal_eligible(item)))
+            and (exact_decision(item, decisions) == "approved"
+                 or previously_manually_published_signal(item)))
+
+
 def discoverable_news(items):
     """Keep only editorially accepted items in public discovery surfaces.
 
@@ -2344,7 +2402,7 @@ def discoverable_news(items):
     """
     return [
         item for item in items
-        if assess_editorial_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
+        if editorial_public_decision(item).status == "accept"
     ]
 
 
@@ -2832,7 +2890,15 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
-        assess_news=assess_editorial_news,
+        # Approval is an independent gate; the SEO-quality check uses the
+        # prepared record separately and remains mandatory at publication.
+        assess_news=lambda title, summary, source, url:
+            publication_decision(
+                {"title": title, "summary": summary, "source": source,
+                 "url": url, "seo_eligible": True},
+                read_decisions(EDITORIAL_DECISIONS_PATH),
+                read_legacy_urls(EDITORIAL_BASELINE_PATH), assess_editorial_news,
+            ),
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -3966,8 +4032,9 @@ def signal_article_context():
 
 
 def signal_page_html(item, items):
-    """Compatibility entrypoint for rendered Signal article routes."""
-    return render_signal_article(item, items, signal_article_context())
+    """Render retained URLs with robots directives matching human approval."""
+    row = {**item, "seo_eligible": is_approved_indexable_signal(item)}
+    return render_signal_article(row, items, signal_article_context())
 
 
 def signals_index_html(items):
@@ -10904,9 +10971,11 @@ def superintelligence_hub_with_explosion_link(items, current_items):
 
 
 def build_discovery_pages(items, current_items):
-    # Keep all historic signal route files (and their current SEO metadata).
-    # Curate every *listing and recommendation* from approved news only.
+    # Keep historic URLs for deindexing; only owner-approved pages remain
+    # crawlable with index,follow or linked from the public directory.
     legacy_items = items
+    indexable_legacy_items = [row for row in legacy_items
+                              if is_approved_indexable_signal(row)]
     # Model reference pages are durable, evidence-backed records, not the
     # high-impact news feed. Keep their existing relevance-approved history
     # so a stricter current-news policy never deindexes established models.
@@ -10990,7 +11059,7 @@ def build_discovery_pages(items, current_items):
     super_agents_guide_path = GUIDES_DIR / "ai-super-agents"
     super_agents_guide_path.mkdir(parents=True, exist_ok=True)
     (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
-    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=legacy_items), encoding="utf-8")
+    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=indexable_legacy_items), encoding="utf-8")
     groups = topic_groups(items)
     (TOPICS_DIR / "index.html").write_text(topics_index_html(groups), encoding="utf-8")
     for slug, (topic, matched) in groups.items():
@@ -11021,6 +11090,12 @@ def build_discovery_pages(items, current_items):
         path = SIGNALS_DIR / item["signal_slug"]
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
+
+    # Earlier builds left signal routes which no longer exist in the current
+    # archive. Demote those as well, or they could stay indexed indefinitely.
+    retire_unapproved_signal_routes(
+        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items}
+    )
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
@@ -11085,6 +11160,10 @@ def content_lastmod(items, fallback="2026-09-26"):
 def update_sitemap(items):
     from sitemap_generation import SitemapContext, write_sitemap
 
+    # Sitemap must never expose editorial-review or rejected signals.
+    # Other static site pages and model references retain their own policies.
+    # Preserve model/topic discovery from the full *published* archive.
+    # Human approval restricts only which Signal URLs enter the sitemap.
     return write_sitemap(items, SitemapContext(
         base_url=BASE_URL,
         sitemap_path=SITEMAP,
@@ -11094,6 +11173,7 @@ def update_sitemap(items):
         extract_models=extract_models,
         comparison_registry_rows=comparison_registry_rows,
         seo_signal_eligible=seo_signal_eligible,
+        signal_indexable=is_approved_indexable_signal,
         parse_date=parse_date,
         topic_groups=topic_groups,
         topic_page_indexable=topic_page_indexable,
@@ -11227,11 +11307,16 @@ def main():
     from model_history import sync_model_history_file
     history_result = sync_model_history_file(MODEL_PRICING_PATH, MODEL_HISTORY_PATH)
 
+    human_decisions = read_decisions(EDITORIAL_DECISIONS_PATH)
+    legacy_urls = read_legacy_urls(EDITORIAL_BASELINE_PATH)
+    previous_inbox = load_inbox(EDITORIAL_INBOX_PATH)
     incoming = []
     errors = []
     source_metrics = {}
     shadow_candidates = []
     shadow_rejections = []
+    live_quality_rejections = []
+    topic_rejected_candidates = []
     now = datetime.now(timezone.utc)
 
     for source_config in SOURCE_CONFIGS:
@@ -11271,7 +11356,10 @@ def main():
 
         try:
             if adapter == "rss":
-                parsed, parse_metrics = parse_feed_with_metrics(source, fetch(source_config["url"]))
+                parsed, parse_metrics = parse_feed_with_metrics(
+                    source, fetch(source_config["url"]),
+                    rejected_rows=topic_rejected_candidates,
+                )
             else:
                 raw_items, adapter_diagnostics = run_source_adapter(
                     source_config,
@@ -11289,6 +11377,12 @@ def main():
                 for item in raw_items:
                     if not source_accepts_item(source_config, item["title"], item.get("summary", "")):
                         relevance_rejected += 1
+                        rejected = dict(item)
+                        rejected["category"] = categorize(rejected["title"], source)
+                        rejected["tags"] = classify_tags(rejected["title"], source, rejected["category"])
+                        rejected["rejection_stage"] = "source_topic"
+                        rejected["rejection_reason"] = "source_filter"
+                        topic_rejected_candidates.append(rejected)
                         continue
                     row = dict(item)
                     row["category"] = categorize(row["title"], source)
@@ -11322,22 +11416,23 @@ def main():
                     continue
                 fresh_candidates.append(item)
 
+            # Promotion from Shadow must not weaken the original SEO-quality
+            # evidence gate; editorial accept/review/reject still runs later.
+            accepted_candidates, quality_rejected = partition_source_quality(
+                fresh_candidates, source_config, prepare_items
+            )
+            metrics["quality_rejection_count"] = len(quality_rejected)
+            metrics["quality_accepted_count"] = len(accepted_candidates)
+            metrics["accepted_candidate_count"] = len(accepted_candidates)
             if status == "shadow":
-                prepared_shadow = prepare_items(fresh_candidates)
-                accepted_shadow = [item for item in prepared_shadow if item.get("seo_eligible")]
-                rejected_shadow = [item for item in prepared_shadow if not item.get("seo_eligible")]
-                metrics["quality_rejection_count"] = len(rejected_shadow)
-                metrics["quality_accepted_count"] = len(accepted_shadow)
-                metrics["accepted_candidate_count"] = len(accepted_shadow)
-                shadow_candidates.extend(accepted_shadow)
+                shadow_candidates.extend(accepted_candidates)
                 shadow_rejections.extend(
                     shadow_quality_rejection_record(item, now.isoformat().replace("+00:00", "Z"))
-                    for item in rejected_shadow
+                    for item in quality_rejected
                 )
             else:
-                metrics["quality_accepted_count"] = len(fresh_candidates)
-                metrics["accepted_candidate_count"] = len(fresh_candidates)
-                incoming.extend(fresh_candidates)
+                incoming.extend(accepted_candidates)
+                live_quality_rejections.extend(quality_rejected)
 
             metrics["rejected_candidate_count"] = (
                 metrics["relevance_rejection_count"]
@@ -11363,10 +11458,35 @@ def main():
         if parse_date(item.get("published", "")) is not None and parse_date(item["published"]) >= ingest_cutoff
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
+    inbox_candidates = (list(incoming) + list(shadow_candidates)
+                        + list(shadow_rejections) + list(live_quality_rejections)
+                        + list(topic_rejected_candidates))
+    incoming.extend(approved_inbox_items(
+        previous_inbox, human_decisions, legacy_urls, prepare_items, parse_date,
+        now - timedelta(days=INITIAL_ARCHIVE_DAYS),
+    ))
+    updated_inbox = build_inbox(
+        previous_inbox, inbox_candidates, now=now.isoformat().replace("+00:00", "Z"),
+        decisions=human_decisions, legacy_urls=legacy_urls,
+        assess=assess_editorial_news, prepare=prepare_items,
+    )
+    EDITORIAL_INBOX_PATH.write_text(json.dumps({
+        "version": "sxf-editorial-inbox-v1",
+        "updated_at": now.isoformat().replace("+00:00", "Z"),
+        "items": updated_inbox,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    # Human approval requires a complete, quality-scored source record.
+    incoming = prepare_items(incoming)
     # Reject noise BEFORE adding new articles to the archive or sitemap.
     # Previously published URLs are preserved separately as legacy records.
-    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming, assess_editorial_news)
+    incoming, review_candidates, rejected_candidates = partition_news_rows(
+        incoming, lambda title, summary, source, url: publication_decision(
+            next((row for row in incoming if row["url"] == url), {
+                "url": url, "title": title, "source": source, "summary": summary,
+            }), human_decisions, legacy_urls, assess_editorial_news,
+        ),
+    )
     print(
         f"Editorial ingestion gate: accepted={len(incoming)}, "
         f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
@@ -11414,6 +11534,8 @@ def main():
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
     current = select_current_items(archive, cutoff)
+    current = [row for row in current if publication_decision(
+        row, human_decisions, legacy_urls, assess_editorial_news).status == "accept"]
     if not current:
         raise RuntimeError("No AI-relevant current signals: refusing to publish unrelated archive fallback")
 
