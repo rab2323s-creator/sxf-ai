@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T11:19:03.169527Z",
+  "updated_at": "2026-11-02T13:09:48.183074Z",
   "items": [
     {
       "title": "Community safety report and new protections for teens",
@@ -483,21 +483,29 @@
   "source_lifecycle_version": "sxf-source-lifecycle-v1",
   "source_health": {
     "configured": 9,
-    "publishing_configured": 5,
+    "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
       "OpenAI": 164,
       "Google AI": 24,
       "Hugging Face": 61,
       "GitHub": 101,
-      "Google Research": 16
+      "Google Research": 16,
+      "Anthropic": 0,
+      "Meta": 0,
+      "xAI": 0,
+      "Microsoft": 0
     },
     "current_counts": {
       "OpenAI": 11,
       "Google AI": 1,
       "Hugging Face": 15,
       "GitHub": 8,
-      "Google Research": 3
+      "Google Research": 3,
+      "Anthropic": 0,
+      "Meta": 0,
+      "xAI": 0,
+      "Microsoft": 0
     },
     "sources": {
       "OpenAI": {
@@ -520,7 +528,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "Google AI": {
@@ -543,7 +551,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "Hugging Face": {
@@ -566,7 +574,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "GitHub": {
@@ -589,7 +597,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "Google Research": {
@@ -612,22 +620,22 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "Anthropic": {
-        "status": "shadow",
+        "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
         "parsed_candidate_count": 29,
         "relevance_accepted_count": 29,
-        "quality_accepted_count": 1,
-        "accepted_candidate_count": 1,
-        "rejected_candidate_count": 28,
+        "quality_accepted_count": 2,
+        "accepted_candidate_count": 2,
+        "rejected_candidate_count": 27,
         "duplicate_count": 0,
-        "age_rejection_count": 23,
+        "age_rejection_count": 17,
         "relevance_rejection_count": 0,
-        "quality_rejection_count": 5,
+        "quality_rejection_count": 10,
         "publish_count": 0,
         "adapter": "anthropic-sitemap",
         "adapter_contract_version": "sxf-source-adapter-v1",
@@ -635,13 +643,13 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
       },
       "Meta": {
-        "status": "shadow",
+        "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
         "parsed_candidate_count": 30,
@@ -660,20 +668,20 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "xAI": {
-        "status": "shadow",
+        "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
         "parsed_candidate_count": 20,
         "relevance_accepted_count": 20,
-        "quality_accepted_count": 1,
-        "accepted_candidate_count": 1,
-        "rejected_candidate_count": 19,
+        "quality_accepted_count": 3,
+        "accepted_candidate_count": 3,
+        "rejected_candidate_count": 17,
         "duplicate_count": 0,
-        "age_rejection_count": 17,
+        "age_rejection_count": 15,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 2,
         "publish_count": 0,
@@ -683,11 +691,11 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       },
       "Microsoft": {
-        "status": "shadow",
+        "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
         "parsed_candidate_count": 10,
@@ -696,9 +704,9 @@
         "accepted_candidate_count": 1,
         "rejected_candidate_count": 9,
         "duplicate_count": 0,
-        "age_rejection_count": 3,
+        "age_rejection_count": 2,
         "relevance_rejection_count": 4,
-        "quality_rejection_count": 2,
+        "quality_rejection_count": 3,
         "publish_count": 0,
         "adapter": "rss",
         "adapter_contract_version": null,
@@ -706,7 +714,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-02T11:18:19.825754Z",
+        "last_successful_fetch": "2026-11-02T13:09:22.464845Z",
         "errors": []
       }
     },
