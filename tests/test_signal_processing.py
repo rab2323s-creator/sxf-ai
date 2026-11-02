@@ -92,7 +92,44 @@ def main():
         path.write_text(json.dumps({"items": rows}))
         assert len(load_items(path)) == 6
 
-    print("PASS: signal preprocessing, canonical aliases, archive history and source quotas")
+    # Reaching live must not silently bypass the source's SEO quality gate.
+    from signal_processing import partition_source_quality
+    candidates = [
+        {"url": "https://test.test/high", "summary": "Verified primary-source event"},
+        {"url": "https://test.test/low", "summary": "Thin announcement"},
+    ]
+    raw_copy = [dict(item) for item in candidates]
+
+    def prepare_for_quality(rows):
+        return [{**item, "seo_eligible": item["url"].endswith("/high")} for item in rows]
+
+    for status in ("shadow", "canary", "live"):
+        allowed, blocked = partition_source_quality(
+            candidates, {"status": status, "quality_gate": "seo-signal-v1"},
+            prepare_for_quality,
+        )
+        assert [item["url"] for item in allowed] == ["https://test.test/high"]
+        assert [item["url"] for item in blocked] == ["https://test.test/low"]
+    shadow_allowed, shadow_blocked = partition_source_quality(
+        candidates, {"status": "shadow"}, prepare_for_quality,
+    )
+    assert len(shadow_allowed) == len(shadow_blocked) == 1
+    ordinary, ordinary_blocked = partition_source_quality(
+        candidates, {"status": "live"}, prepare_for_quality,
+    )
+    assert ordinary == candidates and not ordinary_blocked
+    assert candidates == raw_copy, "Source quality partition must not mutate input"
+
+    source_config = json.loads(
+        (Path(__file__).resolve().parents[1] / "data" / "source-config.json").read_text(encoding="utf-8")
+    )
+    promoted = {s["name"]: s for s in source_config["sources"] if s["name"] in
+                {"Anthropic", "Meta", "xAI", "Microsoft"}}
+    assert len(promoted) == 4
+    assert all(s["status"] == "live" and s["quality_gate"] == "seo-signal-v1"
+               and s["max_current"] == 10 for s in promoted.values())
+
+    print("PASS: signal preprocessing, source promotion quality gates, aliases and quotas")
 
 
 if __name__ == "__main__":

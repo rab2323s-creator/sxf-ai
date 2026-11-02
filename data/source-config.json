@@ -1,6 +1,11 @@
 {
   "version": "sxf-source-lifecycle-v1",
-  "statuses": ["shadow", "canary", "live", "disabled"],
+  "statuses": [
+    "shadow",
+    "canary",
+    "live",
+    "disabled"
+  ],
   "sources": [
     {
       "name": "OpenAI",
@@ -45,8 +50,8 @@
       "url": "https://www.anthropic.com/sitemap.xml",
       "official_page": "https://www.anthropic.com/news",
       "adapter": "anthropic-sitemap",
-      "status": "shadow",
-      "max_current": 0,
+      "status": "live",
+      "max_current": 10,
       "quality_gate": "seo-signal-v1",
       "discovery_days": 45,
       "max_discovery": 30
@@ -56,8 +61,8 @@
       "url": "https://ai.meta.com/blog/",
       "official_page": "https://ai.meta.com/blog/",
       "adapter": "meta-blog",
-      "status": "shadow",
-      "max_current": 0,
+      "status": "live",
+      "max_current": 10,
       "quality_gate": "seo-signal-v1",
       "discovery_pages": 3,
       "max_discovery": 30
@@ -67,8 +72,8 @@
       "url": "https://x.ai/news",
       "official_page": "https://x.ai/news",
       "adapter": "xai-news",
-      "status": "shadow",
-      "max_current": 0,
+      "status": "live",
+      "max_current": 10,
       "quality_gate": "seo-signal-v1",
       "max_discovery": 20
     },
@@ -77,8 +82,8 @@
       "url": "https://blogs.microsoft.com/feed/",
       "official_page": "https://blogs.microsoft.com/",
       "adapter": "rss",
-      "status": "shadow",
-      "max_current": 0,
+      "status": "live",
+      "max_current": 10,
       "filter": "microsoft-ai",
       "quality_gate": "seo-signal-v1"
     }
