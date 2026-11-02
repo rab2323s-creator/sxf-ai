@@ -2403,7 +2403,6 @@ def discoverable_news(items):
     return [
         item for item in items
         if editorial_public_decision(item).status == "accept"
-        or is_approved_indexable_signal(item)
     ]
 
 
