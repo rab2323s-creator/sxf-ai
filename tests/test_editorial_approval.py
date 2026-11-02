@@ -53,14 +53,14 @@ def main():
         assert publication_decision({**row, "seo_eligible": True}, ledger, {row["url"]}, assess).status == expected
     ledger[row["url"]]["decision"] = "approved"
 
-    inbox = build_inbox([], [row], now="2026-11-02T10:00:00Z",
+    inbox = build_inbox([], [row], now=datetime.now(timezone.utc).isoformat(),
                         decisions={}, legacy_urls=set(), assess=assess, prepare=prepare)
     assert len(inbox) == 1 and inbox[0]["decision"] == "pending"
     assert inbox[0]["editorial_status"] == "accept", "Filter accept is a recommendation, not publication"
-    again = build_inbox(inbox, [{**row, "summary": ""}], now="2026-11-03T10:00:00Z",
+    again = build_inbox(inbox, [{**row, "summary": ""}], now=datetime.now(timezone.utc).isoformat(),
                         decisions=ledger, legacy_urls=set(), assess=assess, prepare=prepare)
     assert again == [], "Approved stories leave the temporary inbox immediately"
-    assert build_inbox([], [row], now="2026-11-02T10:00:00Z",
+    assert build_inbox([], [row], now=datetime.now(timezone.utc).isoformat(),
                        decisions={}, legacy_urls={row["url"]}, assess=assess, prepare=prepare) == []
     cutoff = datetime.now(timezone.utc) - timedelta(days=35)
     assert len(approved_inbox_items(inbox, ledger, set(), prepare, parse_date, cutoff)) == 1
