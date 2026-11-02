@@ -107,6 +107,18 @@ def main():
             page.locator("#token").fill("fixture-token-only")
             page.locator("#connect").click()
             page.get_by_text("Decision: rejected", exact=True).first.wait_for()
+            # A rejected story can be reopened; its blocking SHA is removed
+            # in the same compare-and-swap GitHub ledger update as approval.
+            page.locator(".approve").first.click()
+            page.get_by_text("Decision: approved", exact=True).first.wait_for()
+            assert written[-1]["rejected_fingerprints"] == []
+            assert written[-1]["decisions"][0]["decision"] == "approved"
+            page.locator(".reject").first.click()
+            page.get_by_text("Decision: rejected", exact=True).first.wait_for()
+            page.locator(".hold").first.click()
+            page.get_by_text("Decision: hold", exact=True).first.wait_for()
+            assert written[-1]["rejected_fingerprints"] == []
+            assert written[-1]["decisions"][0]["decision"] == "hold"
             browser.close()
     finally:
         server.shutdown()
