@@ -90,6 +90,12 @@ def test_historical_indexing_snapshot():
     assert len(frozen) == 89 and frozen <= published
     assert frozen <= by_url.keys()
     sitemap = SITEMAP.read_text(encoding="utf-8")
+    historic = json.loads((ROOT / "data" / "editorial-legacy-sitemap-urls.json").read_text())
+    assert historic["version"] == "sxf-preapproval-non-signal-sitemap-v1"
+    assert len(historic["urls"]) == 250
+    present = set(re.findall(r"<loc>(https://sxf\\.si/[^<]+)</loc>", sitemap))
+    missing = set(historic["urls"]) - present
+    assert not missing, "Historical non-Signal sitemap pages dropped: " + repr(sorted(missing)[:12])
     for url in frozen:
         row = by_url[url]
         assert is_approved_indexable_signal(row), "Formerly indexed source was deindexed: " + url
