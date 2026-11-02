@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Microsoft MAI-DxO: 83% Accuracy in AI Diagnosis Tests | SXF / AI</title>
+<meta name="description" content="Microsoft MAI-DxO reached 83.2% accuracy in a Science study. Explore how sequential AI diagnosis works, benchmark costs, physician comparisons and limitations." />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<meta name="theme-color" content="#07090d" />
+<link rel="canonical" href="https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/" />
+<link rel="alternate" hreflang="en" href="https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/" />
+<link rel="alternate" hreflang="x-default" href="https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="article" /><meta property="og:site_name" content="SXF / AI" />
+<meta property="og:title" content="Microsoft's AI Diagnosed 83% of Complex Cases. What Did It Actually Prove?" />
+<meta property="og:description" content="Microsoft MAI-DxO reached 83.2% accuracy in a Science study. Explore how sequential AI diagnosis works, benchmark costs, physician comparisons and limitations." /><meta property="og:url" content="https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/" />
+<meta name="twitter:card" content="summary" /><meta name="twitter:title" content="Microsoft's AI Diagnosed 83% of Complex Cases. What Did It Actually Prove?" />
+<meta name="twitter:description" content="Microsoft MAI-DxO reached 83.2% accuracy in a Science study. Explore how sequential AI diagnosis works, benchmark costs, physician comparisons and limitations." />
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Article","TechArticle"],"@id":"https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/#article","url":"https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/","mainEntityOfPage":"https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/","headline":"Microsoft's AI Diagnosed 83% of Complex Cases. What Did It Actually Prove?","alternativeHeadline":"Microsoft MAI-DxO vs Doctors: The Science Study, Costs and Limitations","description":"Microsoft MAI-DxO reached 83.2% accuracy in a Science study. Explore how sequential AI diagnosis works, benchmark costs, physician comparisons and limitations.","datePublished":"2026-11-02","dateModified":"2026-11-02","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"publishingPrinciples":"https://sxf.si/about/#method","articleSection":"AI Research","keywords":["Microsoft MAI-DxO","MAI Diagnostic Orchestrator","AI diagnosis","Microsoft AI doctors","sequential diagnosis benchmark","SDBench","AI medical diagnosis Science study","medical AI agents","AI versus physicians","MIMIC-IV-ED"],"citation":["https://www.science.org/doi/10.1126/science.aeh7930","https://pubmed.ncbi.nlm.nih.gov/42912144/","https://microsoft.ai/news/building-medical-superintelligence/","https://erichorvitz.com/sequential_diagnosis_LM.pdf","https://microsoft.github.io/SDBench/"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://sxf.si/research/"},{"@type":"ListItem","position":3,"name":"Microsoft MAI-DxO","item":"https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Microsoft MAI-DxO?","acceptedAnswer":{"@type":"Answer","text":"MAI-DxO is Microsoft AI's Diagnostic Orchestrator, a system that coordinates a virtual panel of clinical reasoning roles to ask questions, order tests, challenge hypotheses and produce a diagnosis in a sequential simulation."}},{"@type":"Question","name":"Did Microsoft AI beat doctors in the Science study?","acceptedAnswer":{"@type":"Answer","text":"In a controlled text-only diagnostic benchmark, MAI-DxO scored 83.2% on complex NEJM cases and 80.3% on emergency admissions, compared with generalist-physician averages of 36.1% and 46.8%. These findings are not evidence of superiority in actual bedside care or over specialist teams."}},{"@type":"Question","name":"How many cases were used to evaluate MAI-DxO?","acceptedAnswer":{"@type":"Answer","text":"SDBench included 304 difficult NEJM case-conference cases and 325 MIMIC-IV-ED emergency-to-admission cases. Physician performance on the NEJM arm was assessed on a 56-case held-out subset, rather than all 304 cases."}},{"@type":"Question","name":"Was MAI-DxO cheaper than doctors?","acceptedAnswer":{"@type":"Answer","text":"Not in every configuration. On NEJM cases the unconstrained GPT-5-based MAI-DxO incurred an estimated $5,430 per workup versus $4,725 for open-book physicians, but cost-constrained variants recorded lower estimated test costs. Cost is modeled diagnostic testing expense, not a real hospital bill."}},{"@type":"Question","name":"Can patients use MAI-DxO to diagnose themselves?","acceptedAnswer":{"@type":"Answer","text":"The Science study evaluated historical cases in a controlled simulation, not patients seeking care. It does not establish clinical safety or support substituting MAI-DxO for a licensed clinician."}}]}]}</script>
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/intelligence.css" />
+<style>
+.dxo-page .guide-article-hero h1 span{color:#8ff5da}
+.dxo-page .guide-article-hero h1{max-width:1050px}
+.dxo-page .guide-reading{margin-top:34px}
+.dxo-quote{margin:27px 0;padding:21px 23px;background:rgba(143,245,218,.055);border-left:3px solid #8ff5da;border-radius:0 14px 14px 0}
+.dxo-quote p{font-size:1.3rem;font-weight:650;line-height:1.5;margin:0 0 10px}.dxo-quote span{font-size:.84rem;color:#94a4b4}
+.dxo-note{padding:19px 21px;margin:23px 0;border:1px solid rgba(143,245,218,.26);background:rgba(143,245,218,.04);border-radius:14px;line-height:1.8}
+.dxo-note strong{display:block;margin-bottom:4px}
+.dxo-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:25px 0}
+.dxo-flow>div{border:1px solid rgba(255,255,255,.1);border-radius:15px;background:rgba(255,255,255,.025);padding:18px;display:flex;flex-direction:column;gap:6px}
+.dxo-flow b{color:#8ff5da;font-size:.8rem;letter-spacing:.1em}
+.dxo-flow strong{font-size:1.06rem}
+.dxo-flow span{font-size:.94rem;line-height:1.6;color:#a8b5c5}
+.dxo-score{padding:23px 22px;margin:24px 0;border-radius:20px;border:1px solid rgba(143,245,218,.22);background:#0b1119}
+.dxo-score>p:first-child{margin:0 0 22px}.dxo-score small{display:block;font-size:.83rem;color:#9baabb;margin-top:6px}
+.dxo-chart-row{display:grid;grid-template-columns:minmax(130px,210px) minmax(0,1fr) 65px;gap:12px;align-items:center;margin:14px 0}
+.dxo-chart-label{font-size:.83rem;line-height:1.3;color:#dce8f1}
+.dxo-chart-track{height:15px;background:rgba(255,255,255,.075);overflow:hidden;border-radius:99px}
+.dxo-chart-track span{height:100%;background:#8ff5da;display:block;border-radius:99px}
+.dxo-chart-row.muted .dxo-chart-track span{background:#72859b}
+.dxo-chart-row b{text-align:right;font-size:.9rem;font-variant-numeric:tabular-nums}
+.dxo-score .dxo-chart-note{font-size:.77rem;color:#93a3b5;margin:21px 0 0;line-height:1.6}
+.dxo-disclosure{font-size:.91rem;line-height:1.8;margin-top:24px;color:#a8b6c6}
+@media(max-width:760px){.dxo-flow{grid-template-columns:1fr}.dxo-chart-row{grid-template-columns:minmax(95px,135px) minmax(0,1fr) 54px;gap:8px}.dxo-chart-label{font-size:.73rem}}
+</style>
+</head><body class="intel-page guide-article-page dxo-page">
+<header class="site-header"><div class="header-inner">
+<a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/" aria-current="page">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+<div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+</div></header>
+<main><article>
+<header class="guide-article-hero shell">
+<nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/research/">Research</a><span>/</span><span>Microsoft MAI-DxO</span></nav>
+<p class="eyebrow">SXF RESEARCH / MEDICAL AI / DIAGNOSTIC BENCHMARKS</p>
+<h1>Microsoft's AI Diagnosed <span>83% of Complex Cases.</span><br>What Did It Actually Prove?</h1>
+<p class="guide-deck">A Microsoft system built around a virtual panel of doctors outperformed generalist physicians in a new <em>Science</em> benchmark. Its more important advance may be the way it asks for evidence before answering. Here is what the study measured, what its headline percentages conceal and where medical AI must go next.</p>
+<div class="guide-byline"><div><span>Published</span><strong>November 2, 2026</strong></div><div><span>Evidence</span><strong>Science · Oct 22, 2026</strong></div><div><span>Reading time</span><strong>13 min</strong></div><div><span>Method</span><strong>Primary-source analysis</strong></div></div>
+</header>
+
+<section class="guide-answer shell" id="quick-answer">
+<div class="guide-answer-label">THE FINDING IN CONTEXT</div>
+<div><h2>83.2% versus 36.1% is a striking result. It is not a clinical trial — and it does not mean an AI doctor is ready to replace a physician.</h2><p>Microsoft's MAI Diagnostic Orchestrator (MAI-DxO) used step-by-step questioning and testing to diagnose challenging written cases. Its GPT-5-based configuration scored 83.2% on 304 <em>New England Journal of Medicine</em> cases, while generalist doctors using non-generative medical references averaged 36.1% on the 56-case physician test set. It scored 80.3% versus 46.8% in an emergency-admissions benchmark. The published paper, the testing protocol and Microsoft's own deployment plans all point to the same distinction: <strong>a convincing result in a simulation is not evidence of safer outcomes in a hospital.</strong> See the <a href="https://www.science.org/doi/10.1126/science.aeh7930" target="_blank" rel="noopener noreferrer">peer-reviewed Science paper</a> and <a href="https://microsoft.ai/news/building-medical-superintelligence/" target="_blank" rel="noopener noreferrer">Microsoft AI's October 22 announcement</a>.</p></div>
+</section>
+
+<div class="guide-reading shell">
+<aside class="guide-toc"><span>IN THIS ANALYSIS</span>
+<a href="#case">The case behind the numbers</a>
+<a href="#what-happened">What Microsoft published</a>
+<a href="#how-it-works">How MAI-DxO reasons</a>
+<a href="#numbers">Results in two datasets</a>
+<a href="#comparison">Was the comparison fair?</a>
+<a href="#costs">The diagnostic cost question</a>
+<a href="#science">What the benchmark proves</a>
+<a href="#limits">What it does not prove</a>
+<a href="#why-it-matters">Why the architecture matters</a>
+<a href="#next">What happens next</a>
+<a href="#faq">Questions answered</a>
+<a href="#sources">Original sources</a>
+<a class="guide-toc-top" href="#top">Back to top ↑</a></aside>
+<div class="guide-prose" id="top">
+
+<section id="case">
+<p class="eyebrow">ONE PATIENT, TWO REASONING PATHS</p>
+<h2>The clue was not hidden in a scan. It was in the patient's story.</h2>
+<p>A patient had been falling for months. There was weakness in the legs, unexplained bruising, bleeding gums and lost teeth. A previous gastric bypass and a diet poor in fruit provided another clue. It was the kind of presentation where several serious explanations could seem reasonable.</p>
+<p>In a case described by the Microsoft researchers, a directly prompted GPT-5 model pursued a broad series of neurological and other investigations. It missed the decisive diagnosis. MAI-DxO, using the same base model but a different reasoning process, connected the bleeding and dietary history to <strong>scurvy</strong>, then selected a plasma vitamin C test. The researchers estimated the model's workup at <strong>$8,806</strong> versus <strong>$1,161</strong> for the orchestrated approach, which reached the recorded diagnosis.</p>
+<p>This is a <strong>research example reconstructed from the authors' report, not a new patient interview or a real-time hospital encounter</strong>. It does not prove that a deployed system would behave the same way with a living patient. But it captures the paper's central question: could AI improve diagnosis not by knowing more answers, but by choosing better questions? Details: <a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer">authors' detailed manuscript</a>, results discussion.</p>
+<div class="dxo-quote"><p>“Although these findings were obtained in a controlled benchmark setting”</p><span>— Nori et al., <em>Science</em> (2026), abstract; a crucial qualifier to the reported accuracy figures.</span></div>
+</section>
+
+<section id="what-happened">
+<p class="eyebrow">THE NEWS / OCTOBER 22, 2026</p>
+<h2>What Microsoft announced — and why <em>Science</em> matters</h2>
+<p>On October 22, 2026, researchers from Microsoft published <em>Sequential diagnosis with language models</em> in <em>Science</em> (DOI: <a href="https://doi.org/10.1126/science.aeh7930">10.1126/science.aeh7930</a>). An earlier version of the work circulated in 2025; the October publication brought the sequential-diagnosis results into a peer-reviewed journal. The team's work is notable for examining the <em>path</em> to a diagnosis rather than presenting an AI system with the full case and asking for a multiple-choice answer.</p>
+<p>The company calls its system <strong>MAI-DxO</strong>, short for Microsoft AI Diagnostic Orchestrator. It is not a newly trained medical foundation model or a single chatbot with a special medical prompt. It is a reasoning workflow arranged around foundation models, virtual specialist roles, a controlled information interface and a cost calculation. That difference is the story behind the press headline. The <a href="https://www.science.org/doi/10.1126/science.aeh7930" target="_blank" rel="noopener noreferrer">peer-reviewed Science paper</a>, <a href="https://microsoft.ai/news/building-medical-superintelligence/" target="_blank" rel="noopener noreferrer">Microsoft AI's October 22 announcement</a> and <a href="https://pubmed.ncbi.nlm.nih.gov/42912144/" target="_blank" rel="noopener noreferrer">PubMed record</a> establish the publication and results.</p>
+</section>
+
+<section id="how-it-works">
+<p class="eyebrow">INSIDE THE SYSTEM</p>
+<h2>From a symptom to a diagnosis: a process, not a one-shot answer</h2>
+<p>Think of the traditional medical-AI quiz: the model sees the patient's history, examination, imaging and laboratory results all at once, then chooses a diagnosis. Real clinical reasoning rarely works like that. A doctor starts with incomplete information. Each new answer can make the next test more valuable — or less necessary.</p>
+<div class="dxo-flow" aria-label="MAI-DxO sequential diagnostic process">
+<div><b>01</b><strong>Start small</strong><span>A short clinical presentation, without the answer or full test record.</span></div>
+<div><b>02</b><strong>Ask and investigate</strong><span>Request symptoms, history, examination details and specific tests.</span></div>
+<div><b>03</b><strong>Reveal evidence</strong><span>A Gatekeeper returns information supported by the source case, sometimes synthesizing plausible missing findings.</span></div>
+<div><b>04</b><strong>Challenge assumptions</strong><span>Virtual physician roles maintain competing explanations and question premature conclusions.</span></div>
+<div><b>05</b><strong>Assess test value</strong><span>Consider what the next investigation adds relative to its estimated cost.</span></div>
+<div><b>06</b><strong>Commit and score</strong><span>A final diagnosis is judged against the recorded case; requested tests are costed.</span></div>
+</div>
+<p>The benchmark, <strong>SDBench</strong>, supplies the surrounding simulation. A language-model <strong>Gatekeeper</strong> controls what information becomes visible. A separate <strong>Judge</strong> grades the diagnosis using a physician-designed rubric. A <strong>Cost Estimator</strong> assigns standardized estimated prices to the requested workup. Meanwhile, MAI-DxO coordinates a virtual panel with roles such as hypothesis tracking, skeptical challenge and resource stewardship. The “panel” is <strong>AI-simulated reasoning roles, not a team of independently practicing doctors</strong>.</p>
+<p>That architecture matters. It offers a possible way to reduce anchoring: the tendency to settle on an appealing first diagnosis and seek evidence that supports it. Yet multiple agents do not automatically create independence or safety. Their judgments can share biases because they run on related underlying models and information. Full design details appear in the <a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer">authors' detailed manuscript</a> and the <a href="https://microsoft.ai/news/building-medical-superintelligence/" target="_blank" rel="noopener noreferrer">Microsoft AI's October 22 announcement</a>.</p>
+</section>
+
+<section id="numbers">
+<p class="eyebrow">TWO DATASETS / TWO CLAIMS</p>
+<h2>The results: 83.2% on complex teaching cases, 80.3% on emergency records</h2>
+<p>The study used two distinct sets of retrospective cases: <strong>304</strong> difficult clinicopathological conference cases published in the <em>New England Journal of Medicine</em> and <strong>325</strong> emergency-department-to-admission cases from <strong>MIMIC-IV-ED</strong>. The second set is closer to routine hospital documentation, although it still consists of selected admissions presented through a simulated interface.</p>
+<div class="dxo-score" role="figure" aria-label="Accuracy reported in the Science study. NEJM: MAI-DxO 83.2%, generalists with references 36.1%. Emergency: MAI-DxO 80.3%, generalists 46.8%.">
+<p><strong>Diagnostic accuracy in the reported benchmark</strong><small>Percent of cases judged correctly diagnosed — not a measure of patient outcomes.</small></p>
+<div class="dxo-chart-row"><div class="dxo-chart-label">NEJM · MAI-DxO</div><div class="dxo-chart-track"><span style="width:83.2%"></span></div><b>83.2%</b></div>
+<div class="dxo-chart-row muted"><div class="dxo-chart-label">NEJM · physicians with references</div><div class="dxo-chart-track"><span style="width:36.1%"></span></div><b>36.1%</b></div>
+<div class="dxo-chart-row"><div class="dxo-chart-label">Emergency · MAI-DxO</div><div class="dxo-chart-track"><span style="width:80.3%"></span></div><b>80.3%</b></div>
+<div class="dxo-chart-row muted"><div class="dxo-chart-label">Emergency · physicians</div><div class="dxo-chart-track"><span style="width:46.8%"></span></div><b>46.8%</b></div>
+<p class="dxo-chart-note">SXF visualization of reported figures; samples and human comparison conditions differ. Source: Nori et al., <em>Science</em> (2026).</p>
+</div>
+<p>That is roughly <strong>2.3 times the reported physician accuracy on the NEJM task</strong> and <strong>1.7 times on the emergency dataset</strong>. But these are ratios of success rates, not “2.3 times better doctors” in everyday practice. Clinical skill includes examining patients, managing uncertainty, discussing treatment options, communicating risk and following outcomes over time. The <a href="https://www.science.org/doi/10.1126/science.aeh7930" target="_blank" rel="noopener noreferrer">peer-reviewed Science paper</a> addresses only a narrower diagnostic task.</p>
+</section>
+
+<section id="comparison">
+<p class="eyebrow">WHAT THE HEADLINE LEAVES OUT</p>
+<h2>Were the doctors and the AI tested on equal terms?</h2>
+<p>The comparison contains thoughtful design choices — and important asymmetries. The authors recruited practicing generalist physicians, with a median of 12 years' experience in both initial physician groups. In the NEJM arm, <strong>21 physicians</strong> participated without external references and <strong>19 different physicians</strong> participated with access to non-generative medical references including UpToDate and clinical guidelines. A further <strong>16 physicians</strong> completed the emergency evaluation. Generative-AI assistance was not available to the physicians.</p>
+<p>Crucially, the NEJM physician experiment used <strong>56 held-out cases</strong>, while the widely quoted MAI-DxO figure is reported for the <strong>full 304-case collection</strong>; the authors also examined performance on the held-out subset to assess generalization. The headline percentages should not be mistaken for every person having evaluated exactly the same 304 cases. The human study produced multiple diagnoses per case because physicians worked through overlapping subsets, and the physician figures represent averages.</p>
+<p>The comparator was an <em>individual generalist</em>, not a multidisciplinary team of infectious-disease experts, oncologists, radiologists and other specialists. That distinction matters particularly for NEJM teaching cases selected because they are unusual and difficult. At the same time, the emergency set strengthens the paper because the pattern of advantage was not confined to rare educational puzzles.</p>
+<p>These limitations do not erase the result. They define what the result means. For audit details, including the physician groups, held-out split and test interface, see the <a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer">authors' detailed manuscript</a>, methodology and results.</p>
+</section>
+
+<section id="costs">
+<p class="eyebrow">THE ECONOMICS / A CONDITIONAL ADVANTAGE</p>
+<h2>Was Microsoft's AI cheaper than doctors? Not in every configuration.</h2>
+<p>Cost is where the usual summary can become misleading. On the complex NEJM cases, the authors report <strong>$5,430</strong> in average estimated tests for unconstrained MAI-DxO built on GPT-5, compared with <strong>$8,409</strong> for directly prompted GPT-5. This is a meaningful improvement in both modeled spending and diagnostic accuracy over the un-orchestrated model.</p>
+<p>But the <strong>open-book physician</strong> group averaged <strong>$4,725</strong> in estimated tests. In that particular standard configuration, MAI-DxO was <em>more</em> expensive than the human comparator, even though it was much more accurate. Changing the AI's cost constraint changes the picture: the researchers describe a configuration with <strong>80.9% accuracy at $2,241</strong>, and another with <strong>79.6% at $1,302</strong> on the NEJM cases. Accuracy and cost have to be discussed together, using the same configuration.</p>
+<div class="dxo-note"><strong>Read the cost numbers carefully.</strong> They are standardized estimates for tests ordered <em>inside the simulated workup</em>, not real invoices, hospital savings, payer reimbursement or proof of improved health outcomes. The paper says its model does not account fully for patient discomfort, test availability, waiting time or other clinical burdens. See the <a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer">authors' detailed manuscript</a>, cost methods and limitations.</div>
+<p>The operational insight may matter more than the dollar figure: an AI system that evaluates the likely information gained from a question or test could support a more disciplined diagnostic workup. Whether it actually reduces spending or unnecessary testing in a real hospital remains unproven.</p>
+</section>
+
+<section id="science">
+<p class="eyebrow">WHY THIS RESEARCH IS SCIENTIFICALLY USEFUL</p>
+<h2>The new benchmark measures the search for evidence, not just the final guess</h2>
+<p>Traditional medical question-answering evaluations often reveal all relevant facts in advance. SDBench instead makes the diagnostic agent request information step by step. It asks three different questions: <strong>Did the system reach the recorded diagnosis? What evidence did it request to get there? What was the estimated cost?</strong></p>
+<p>That shift is genuinely useful for evaluating AI agents. It exposes systems that guess too early, order expensive tests indiscriminately or cannot update their working hypotheses when new information contradicts their original view. It also makes comparisons across model families possible: the authors report that their orchestration methods improved multiple underlying model families, although the magnitude varied.</p>
+<p>Researchers can inspect the released SDBench resources for selected NEJM cases through <a href="https://microsoft.github.io/SDBench/" target="_blank" rel="noopener noreferrer">Microsoft's benchmark project</a>. The value of a public evaluation framework depends on careful external replication, dataset governance and reporting of model versions and test settings, not just on one impressive bar chart.</p>
+</section>
+
+<section id="limits">
+<p class="eyebrow">THE MOST IMPORTANT SCIENTIFIC CAVEATS</p>
+<h2>A simulated patient answers differently from a real patient</h2>
+<p>Both physicians and AI interacted with a <strong>text-only Gatekeeper</strong>, not a person in front of them. That controls the experiment, but it strips away real clinical signals: the hesitations in a patient's story, incomplete records, conflicting measurements, visual inspection of an image, physical findings and changes over hours or days.</p>
+<p>The Gatekeeper could also generate <strong>plausible synthetic findings</strong> when the original record lacked a requested detail. The research team evaluated its behavior, but synthetic answers still mean that parts of the interaction were a model-generated approximation rather than an observed medical fact. This issue was especially prominent in the shorter and less standardized emergency records.</p>
+<p>Neither dataset sampled healthy people or ordinary benign presentations, so the disease mix does not represent routine primary care. A system could be skilled at resolving difficult cases and still order inappropriate investigations when a patient is probably healthy. The study also focused on a final diagnostic label, not on safe treatment choices, communication, longitudinal follow-up or whether a patient's health improved.</p>
+<p>There are also open questions for external validation: whether future systems maintain performance on unseen hospitals, languages and patient populations; whether the automated judge agrees with independent clinical panels in difficult disagreements; and whether gains persist against specialists working as teams. The study's authors explicitly identify the simulation and individual-physician comparison as limitations in the <a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer">authors' detailed manuscript</a>.</p>
+<div class="dxo-quote"><p>“Benchmarks matter, but the true test is performance in real clinical environments.”</p><span>— Microsoft AI, October 22, 2026. Source: <a href="https://microsoft.ai/news/building-medical-superintelligence/" target="_blank" rel="noopener noreferrer">Microsoft AI's October 22 announcement</a>.</span></div>
+</section>
+
+<section id="why-it-matters">
+<p class="eyebrow">THE LARGER AI STORY</p>
+<h2>This may be as much an AI-agent architecture result as a medical-model result</h2>
+<p>MAI-DxO's most interesting contribution is its approach to <em>orchestration</em>. Rather than assuming a larger model will always perform better when asked one question, the system assigns complementary cognitive jobs: propose, challenge, investigate, estimate cost and revise. The authors report gains when the orchestration is paired with several model families, including models introduced after the original system was designed.</p>
+<p>That is relevant beyond healthcare. In software engineering, an agent can test a hypothesis before changing code. In scientific research, it can request the experiment that most reduces uncertainty. In medical diagnosis, those same ideas confront much higher safety stakes. <strong>More steps and more virtual agents are not themselves proof of reliability</strong>; each additional stage needs independent validation, traceable evidence and a clear way to stop or escalate.</p>
+<p>For the framework behind those concerns, read SXF's <a href="/research/ai-agent-reliability/">AI Agent Reliability research</a>, <a href="/guides/ai-model-benchmarks-explained/">guide to AI model benchmarks</a> and <a href="/guides/what-is-agentic-ai/">introduction to agentic AI</a>. MAI-DxO is an unusually consequential case study in the difference between <em>answer accuracy</em> and <em>system behavior</em>.</p>
+</section>
+
+<section id="next">
+<p class="eyebrow">FROM PAPER TO PRACTICE</p>
+<h2>The next meaningful test is not another record-breaking benchmark</h2>
+<p>Microsoft has announced plans to collaborate with <strong>Beth Israel Deaconess Medical Center</strong> in Boston on prospective evaluations across hospital settings. Its announcement describes patient interaction and comparisons against clinicians' independent assessments. These plans are not published proof of successful clinical deployment; those results have yet to be demonstrated in the sources reviewed here.</p>
+<p>The questions for prospective evaluation are practical and measurable: Does the system help clinicians catch otherwise missed conditions? How often does it recommend unnecessary or unsafe investigations? Can it recognize uncertainty and defer appropriately? How does it handle incomplete data, demographic differences, privacy requirements and audit trails? Does it improve <em>patient outcomes</em> rather than just the percentage of cases with the right label?</p>
+<p><strong>SXF's assessment:</strong> The study provides credible evidence that sequential, cost-aware AI orchestration can outperform single generalist physicians on the tested written diagnostic tasks. It does <strong>not</strong> justify a claim that an autonomous AI doctor is clinically ready. The most promising near-term hypothesis is carefully governed clinical decision support — an additional source of diagnostic possibilities and evidence checks under physician oversight — subject to prospective safety and effectiveness testing.</p>
+</section>
+
+<section id="faq">
+<p class="eyebrow">FREQUENT QUESTIONS</p>
+<h2>What readers should know about Microsoft's AI diagnostic study</h2>
+<h3>What is Microsoft MAI-DxO?</h3><p>MAI-DxO is a diagnostic orchestration system. It uses a foundation model with virtual clinical reasoning roles and iterative access to case information, rather than producing a diagnosis from one complete prompt.</p>
+<h3>Did it really beat doctors?</h3><p>It scored higher than participating generalist physicians on the two controlled benchmark datasets reported in <em>Science</em>. The experiment did not compare it against specialist teams caring for actual patients.</p>
+<h3>How many medical cases did Microsoft test?</h3><p>The benchmark contained 304 complex NEJM teaching cases and 325 emergency-to-admission cases. The NEJM physician comparison used a held-out 56-case subset, not all 304.</p>
+<h3>Was the AI cheaper?</h3><p>It was cheaper than directly prompted GPT-5 in the cited unconstrained NEJM comparison; that same setting was not cheaper than the open-book physician group's estimated test spending. Cost-controlled variants were less expensive in the simulation.</p>
+<h3>Can I use this system for my own medical diagnosis?</h3><p>This publication is not evidence that the research system is safe or available for personal clinical use. Symptoms and treatment decisions need appropriate licensed clinical care, particularly for urgent or worsening conditions.</p>
+</section>
+
+<section id="sources">
+<p class="eyebrow">SOURCE TRANSPARENCY</p>
+<h2>Read the original research, not just the headline</h2>
+<p>This is SXF editorial analysis of a peer-reviewed study and the authors' related technical materials. SXF did not run the benchmark or independently test the diagnostic system. The paper's accuracy and cost measures are reported findings, not SXF-generated experimental results.</p>
+<div class="model-sources">
+<a href="https://www.science.org/doi/10.1126/science.aeh7930" target="_blank" rel="noopener noreferrer"><span>Science (Oct 22, 2026) · Sequential diagnosis with language models · DOI: 10.1126/science.aeh7930</span><b>↗</b></a>
+<a href="https://pubmed.ncbi.nlm.nih.gov/42912144/" target="_blank" rel="noopener noreferrer"><span>PubMed · Peer-reviewed abstract, authors and publication record</span><b>↗</b></a>
+<a href="https://erichorvitz.com/sequential_diagnosis_LM.pdf" target="_blank" rel="noopener noreferrer"><span>Authors' technical manuscript · Detailed methods, cases, cost estimates and limitations (2025 version)</span><b>↗</b></a>
+<a href="https://microsoft.ai/news/building-medical-superintelligence/" target="_blank" rel="noopener noreferrer"><span>Microsoft AI · Building Medical Superintelligence (Oct 22, 2026)</span><b>↗</b></a>
+<a href="https://microsoft.github.io/SDBench/" target="_blank" rel="noopener noreferrer"><span>Microsoft · SDBench benchmark resources</span><b>↗</b></a>
+</div>
+<p class="dxo-disclosure">Editorial methodology: source links are provided adjacent to central claims; differences between simulations and clinical care are stated explicitly. This page offers technology research analysis, not medical advice. <a href="/about/#method">How SXF evaluates sources →</a></p>
+</section>
+
+<section class="related-signals"><div class="intel-section-head"><div><p class="eyebrow">EXPLORE THE UNDERLYING IDEAS</p><h2>Continue through SXF.</h2></div><a href="/research/">All research ↗</a></div><div class="guide-choice-grid">
+<article><span>AI Agent Reliability</span><p>Why benchmark success cannot be treated as clinical or production reliability.</p><div class="tool-links"><a href="/research/ai-agent-reliability/">Read reliability research ↗</a></div></article>
+<article><span>What Is Agentic AI?</span><p>How goal-directed models gather evidence, use tools and revise their plans.</p><div class="tool-links"><a href="/guides/what-is-agentic-ai/">Explore agent architecture ↗</a></div></article>
+<article><span>AI Model Benchmarks</span><p>What benchmark scores measure and how test design can distort conclusions.</p><div class="tool-links"><a href="/guides/ai-model-benchmarks-explained/">Understand benchmarks ↗</a></div></article>
+</div></section>
+
+</div></div>
+</article></main>
+<footer class="footer shell">
+<div class="footer-main">
+<div class="footer-identity">
+<a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+<p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+<p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+<a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+</div>
+<nav class="footer-nav" aria-label="Footer navigation">
+<div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+<div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+<div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a><a href="https://vivamediacreative.com/">Viva Media Creative <span>↗</span></a></div>
+</nav>
+</div>
+<div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body></html>
