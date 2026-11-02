@@ -579,6 +579,225 @@
           "source": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign"
         }
       ]
+    },
+    "introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-t-2ce02f1": {
+      "reviewed_at": "2026-11-02",
+      "seo_title": "Microsoft Copilot Harness in Foundry: Preview, Tools & Cost | SXF",
+      "h1": "Microsoft Copilot Harness in Foundry: how it works and what costs",
+      "meta_description": "Microsoft Copilot Harness brings managed multi-model agents to Foundry. Explore preview limits, skills, tools, model choice and December 2026 pricing.",
+      "source_name": "Microsoft",
+      "primary_source": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/",
+      "summary": "Microsoft introduced the Copilot harness in Microsoft Foundry Agent Service as a public preview on October 28, 2026. Teams can configure agents using reusable skills, connected tools and MCP integrations while Foundry runs the agent loop and sandbox. The preview differs from the generally available long-running resilience feature for hosted agents, and the harness has its own regional, model and billing constraints.",
+      "editorial": {
+        "what_changed": "Microsoft brought its GitHub-built, multi-model Copilot agent harness to Foundry Agent Service in public preview. Instead of operating a separate agent execution loop, developers can define instructions, reusable skills and connected tools while Microsoft manages orchestration and sandbox execution. The Foundry announcement separately says long-running resilience for hosted agents is generally available; that does not make the harness itself generally available.",
+        "why_it_matters": "The practical question for AI agent teams is what to build versus buy: a managed harness can reduce the engineering needed for tool calls, multi-step workflows and execution environments. It does not remove the need to evaluate supported models, tool permissions, data governance, task success and operating cost. This update gives teams a new deployment option, not proof that every workload gets cheaper or more accurate.",
+        "what_to_verify": "Check whether your Foundry region and model support the harness, whether your application needs preview features or a custom hosted agent, and how tool approvals and MCP credentials work. Microsoft says the harness is chosen when a prompt agent is created and cannot yet be switched on an existing agent. Runtime billing starts December 1, 2026, while separate model and tool charges can apply earlier."
+      },
+      "evidence": [
+        {
+          "label": "Availability and launch",
+          "fact": "Copilot harness in Foundry Agent Service entered public preview on October 28, 2026; hosted-agent long-running resilience was separately announced as generally available.",
+          "source": "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/"
+        },
+        {
+          "label": "Managed runtime boundary",
+          "fact": "Foundry manages the agent execution loop and sandbox; customers supply agent instructions, skills, tools and model choices.",
+          "source": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/"
+        },
+        {
+          "label": "Preview restrictions",
+          "fact": "The harness is optional for prompt agents and preview features have no production SLA; supported regions, models and tools are constrained.",
+          "source": "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/use-tools-skills-copilot-harness"
+        },
+        {
+          "label": "Model and orchestration scope",
+          "fact": "Microsoft says its shared harness supports many model families, reusable skills, MCP-connected tools and execution/delegation workflows.",
+          "source": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/"
+        },
+        {
+          "label": "Pricing and start date",
+          "fact": "Foundry blog lists sandbox rates from December 1, 2026: $0.0994 per vCPU-hour and $0.0118 per GiB-hour, with regional and agreement variation; inference and tools can cost extra.",
+          "source": "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/"
+        }
+      ],
+      "analysis": [
+        {
+          "heading": "What a managed agent harness actually replaces",
+          "source": "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
+          "paragraphs": [
+            "An AI model produces individual responses; a harness handles the surrounding system needed to finish a task. That includes keeping state between tool calls, giving the model the right working context, executing tools, moving files, and deciding what to do next. Microsoft's Foundry preview makes these capabilities available as a managed runtime instead of requiring each developer team to implement and maintain the same orchestration code. The underlying prompt agent remains the deployment object rather than becoming a new model.",
+            "This distinction matters when comparing a simple chatbot with a multi-step coding or research agent. Reusable skills package task procedures; MCP tool connections supply external capabilities; execution and delegation let an agent perform steps in a controlled environment. The actual business value depends on whether those parts complete an organization's own tasks reliably, not merely whether the agent can call more tools."
+          ]
+        },
+        {
+          "heading": "Managed harness versus hosted agents: a practical choice",
+          "source": "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/use-tools-skills-copilot-harness",
+          "paragraphs": [
+            "Foundry's documentation draws an explicit boundary. A prompt agent without this harness works for straightforward instructions and supported tool use. A prompt agent with the harness is intended for multi-step execution involving tools, files, skills or commands without operating the harness yourself. A hosted agent remains the better fit if you must bring your own orchestration framework, middleware, runtime dependencies or custom process model.",
+            "The Copilot harness is a preview, not a blanket production recommendation. Its support varies by region, model and tool integration, and Microsoft says the selection happens when the prompt agent is created. Existing agents are unchanged and cannot simply be toggled onto this harness. Before migrating a workflow, compare evaluation success rate, tool permission boundaries, latency and recovery from failed or interrupted tasks under the exact configuration that will ship."
+          ]
+        },
+        {
+          "heading": "Cost, security and adoption checklist",
+          "source": "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
+          "paragraphs": [
+            "Microsoft says Copilot harness runtime billing in Foundry begins December 1, 2026. Its announced sandbox rates are USD $0.0994 per vCPU-hour and $0.0118 per GiB-hour, subject to region and agreement; model inference and separately billed tools are not free just because the harness runtime is temporarily free. Measure actual sandbox lifetime and memory allocation on a representative workload before estimating monthly spend.",
+            "Start with a narrow, permission-limited pilot. Confirm the tool and MCP approval requirements, test prompts that attempt to change execution scope, log model and tool usage, and define a human handoff for consequential actions. Compare the harness with your current stack on completion quality and total cost rather than treating a vendor's broad model support or internal performance claims as an independent benchmark."
+          ]
+        }
+      ],
+      "limitations": "Microsoft's preview announcements and product docs are first-party sources; they do not independently demonstrate better task completion or lower cost across real workloads. Preview support, eligible regions, model availability and pricing may change. The separate hosted-agent long-running resilience GA claim must not be confused with harness GA.",
+      "sources": [
+        "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/",
+        "https://devblogs.microsoft.com/foundry/microsoft-copilot-harness-in-foundry/",
+        "https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/use-tools-skills-copilot-harness"
+      ]
+    },
+    "github-intelligence-puts-your-code-context-and-history-to-work-3a09379": {
+      "reviewed_at": "2026-11-02",
+      "seo_title": "GitHub Copilot Memory & Dreaming: GA, Preview, Setup | SXF",
+      "h1": "GitHub Copilot Memory and Dreaming: what's GA, what's preview",
+      "meta_description": "GitHub Copilot Memory is generally available on paid plans while Dreaming remains in preview. See repository memories, cross-session context and controls.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/",
+      "summary": "GitHub announced that Copilot Memory is generally available for paid Copilot plans on October 28, 2026. The GitHub intelligence release also introduces Copilot Dreaming in public preview, which can refine memories and propose repository instruction updates, plus contextual code search across repositories. The three capabilities differ in availability, opt-in requirements and administrative controls; they should not be described as one universally enabled feature.",
+      "editorial": {
+        "what_changed": "GitHub's October 28 intelligence launch combines three related but distinct capabilities: Copilot Memory is generally available on paid plans, Copilot Dreaming is a public preview, and contextual code search helps agents find relevant code and history across repository boundaries. Memory can reuse personal preferences and repository conventions between sessions rather than starting from scratch each time.",
+        "why_it_matters": "Developers repeatedly spend time giving coding agents the same test commands, architecture assumptions and team conventions. Shared, reviewable repository memories and search across codebases may reduce that repeated setup. Dreaming also raises a governance question: automatically refreshed instructions can become stale or incorrect, so review boundaries and access permissions matter as much as convenience.",
+        "what_to_verify": "Confirm the paid plan and enterprise policies for your Copilot surfaces; memory availability and settings can differ across clients. Dreaming requires opt-in and is still a preview. Review which repositories Copilot can access, whether instruction changes arrive as pull requests, and whether any vendor-reported improvement percentages generalize to your team's workflow."
+      },
+      "evidence": [
+        {
+          "label": "GA versus public preview",
+          "fact": "GitHub's October 28 release states Copilot Memory is generally available on paid Copilot plans while Copilot Dreaming is in public preview.",
+          "source": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/"
+        },
+        {
+          "label": "Two kinds of memory",
+          "fact": "GitHub documentation describes repository-level facts and user-level personal preferences, with distinct scope and controls.",
+          "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory"
+        },
+        {
+          "label": "Dreaming workflow",
+          "fact": "Dreaming can curate memories and propose changes to checked-in repository skills or instructions for review.",
+          "source": "https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/prompting-and-context/copilot-dreaming"
+        },
+        {
+          "label": "Code search",
+          "fact": "GitHub describes exact, regex and semantic cross-repository search to give agents code and development history relevant to a task.",
+          "source": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/"
+        },
+        {
+          "label": "Vendor preview observations",
+          "fact": "GitHub reports 93% improved preference adherence and 42% more efficient workflows among reviewed CLI preview sessions using memory; these are vendor-observed figures, not an independent benchmark.",
+          "source": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/"
+        }
+      ],
+      "analysis": [
+        {
+          "heading": "Memory versus Dreaming versus code search",
+          "source": "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/",
+          "paragraphs": [
+            "Copilot Memory stores what an agent has learned about a project or developer. Repository memories concern conventions such as which command runs tests or where a service's configuration lives; personal memories capture a developer's own preferences. The central promise is continuity between sessions and, subject to policy and surface availability, across Copilot products. That is different from the model permanently learning new weights.",
+            "Dreaming is a separate process for maintaining context. GitHub says it can examine eligible previous sessions and accepted review feedback, update stale personal or repository memories, and propose changes to checked-in skills or instructions through pull requests. Code search addresses another problem: locating symbols, documentation and implementation patterns across services without cloning every repository. A team may need one capability without enabling the others."
+          ]
+        },
+        {
+          "heading": "What changed for coding teams on October 28",
+          "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory",
+          "paragraphs": [
+            "The GA milestone matters because paid Copilot users can evaluate memory as a normal workflow capability rather than as a limited experiment. A developer can ask Copilot to respect repository tests or coding conventions, then inspect whether subsequent sessions follow those details. Organization and enterprise policy remains a separate layer: paying for a plan does not guarantee that every workspace or surface permits all memory types.",
+            "The release also makes claims about preview outcomes. GitHub says 93% of the reviewed Copilot CLI sessions that used memory showed better adherence to preferences and 42% showed more efficient workflows. Because the figures are drawn from a vendor-reviewed subset of preview sessions, they are useful hypotheses for an internal trial, not proof of universal speedups. A responsible adoption test should record the baseline and a repeatable task set."
+          ]
+        },
+        {
+          "heading": "Privacy, policy and repository safety",
+          "source": "https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/prompting-and-context/copilot-dreaming",
+          "paragraphs": [
+            "Treat memories as editable operational context rather than an authority on repository truth. They may reflect outdated test scripts, misunderstood code paths or preferences that should not be shared with a team. GitHub distinguishes personal preferences from repository-wide facts, and administrator access controls matter where private repositories or organizational policy are involved. Review current memory and dreaming settings for the specific subscription and client.",
+            "Copilot Dreaming is opt-in and still in public preview. If it proposes updates to checked-in skills or instructions, those changes should receive the same human pull-request review as any other change to developer workflow controls. Measure false memory reuse, outdated instructions, privacy boundaries and tool-access scope alongside coding completion metrics before enabling it across a company."
+          ]
+        }
+      ],
+      "limitations": "The GA statement applies to Copilot Memory on eligible paid plans, not Copilot Dreaming, which remains a public preview. Feature access varies by settings, product surface and enterprise policies. GitHub's reported 93% and 42% observations are not controlled independent benchmarks and should not be presented as guaranteed gains.",
+      "sources": [
+        "https://github.blog/changelog/2026-10-28-github-intelligence-puts-your-code-context-and-history-to-work/",
+        "https://docs.github.com/en/copilot/concepts/prompting-and-context/copilot-memory",
+        "https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/prompting-and-context/copilot-dreaming"
+      ]
+    },
+    "expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1": {
+      "reviewed_at": "2026-11-02",
+      "seo_title": "Claude Government Discount: 40% GSA OneGov API Deal | SXF",
+      "h1": "Claude government pricing: 40% GSA OneGov discount explained",
+      "meta_description": "Anthropic and GSA expanded OneGov access with 40% off eligible Claude API token usage and no minimum order. Compare eligibility, timing and limits.",
+      "source_name": "Anthropic and US General Services Administration",
+      "primary_source": "https://www.anthropic.com/news/expanding-partnership-gsa",
+      "summary": "Anthropic and the U.S. General Services Administration expanded their OneGov agreement on October 27, 2026, offering a 40% discount on eligible consumption-based Claude model and API usage for government organizations. GSA confirms no minimum purchase commitment and access across federal, state, local and tribal governments, through approved procurement routes. Anthropic separately describes expanded enterprise and government product discounts; buyers must verify the exact applicable offer and channel.",
+      "editorial": {
+        "what_changed": "Anthropic announced an expanded OneGov agreement with the U.S. General Services Administration on October 27, 2026. GSA confirms a 40% reduction in eligible consumption-based Claude model token usage, no minimum purchase commitment and government eligibility spanning federal, state, local and tribal entities. Anthropic also describes discounts across Claude Enterprise, Claude for Government and API offerings.",
+        "why_it_matters": "For government teams, model costs and procurement are deployment constraints as significant as benchmark scores. A discount without minimum orders can enable smaller pilots and allow teams to budget for real usage rather than a large upfront commitment. The announcement also raises practical questions about data handling, authorization level, cloud marketplace availability and whether a discount applies to a particular product or order.",
+        "what_to_verify": "Check the current GSA OneGov offer, eligible government entity, purchasing vehicle and contract term before budgeting. GSA's token-discount offer is not the same as older temporary per-user promotional deals. FedRAMP authorization depends on the particular product and deployment; the agreement does not make every Claude service or model suitable for every sensitive workload."
+      },
+      "evidence": [
+        {
+          "label": "Independent government confirmation",
+          "fact": "GSA announced a 40% discount on consumption-based access to eligible Claude models for government, with zero minimum purchase requirement.",
+          "source": "https://www.gsa.gov/about-gsa/newsroom/news-releases/gsa-anthropic-reach-onegov-agreement-on-discounted-consumptionbased-pricing-10272026"
+        },
+        {
+          "label": "Government eligibility",
+          "fact": "GSA says federal, state, local and tribal government organizations can buy through approved routes including resellers and supported clouds.",
+          "source": "https://www.gsa.gov/about-gsa/newsroom/news-releases/gsa-anthropic-reach-onegov-agreement-on-discounted-consumptionbased-pricing-10272026"
+        },
+        {
+          "label": "Anthropic product scope",
+          "fact": "Anthropic says the expanded agreement covers Claude Enterprise, Claude for Government and Claude API offers, including additional purchasing paths.",
+          "source": "https://www.anthropic.com/news/expanding-partnership-gsa"
+        },
+        {
+          "label": "Published offer details",
+          "fact": "GSA's OneGov listings describe the Claude token discount as a distinct offer from earlier seat-based promotions, with a listed January 31, 2029 expiration date.",
+          "source": "https://itvmo.gsa.gov/onegov/"
+        },
+        {
+          "label": "Security and claims",
+          "fact": "Anthropic reports selected government deployment examples and FedRAMP status for specified services; these are vendor descriptions, not universal accreditation.",
+          "source": "https://www.anthropic.com/news/expanding-partnership-gsa"
+        }
+      ],
+      "analysis": [
+        {
+          "heading": "What the 40% discount does and does not cover",
+          "source": "https://www.gsa.gov/about-gsa/newsroom/news-releases/gsa-anthropic-reach-onegov-agreement-on-discounted-consumptionbased-pricing-10272026",
+          "paragraphs": [
+            "The procurement change is concrete: eligible government organizations can buy consumption-based access to Claude models at a 40% discount and are not required to commit to a minimum purchase. The GSA statement describes token-based usage through approved purchasing routes. Anthropic's announcement also discusses enterprise and government product offerings, but buyers should not assume a single rate automatically applies to every user seat, model, reseller or cloud SKU.",
+            "An illustrative calculation: if an eligible workload had a $10,000 undiscounted token bill before this offer, a straight 40% reduction would yield $6,000 for the same eligible token usage. This is a mathematical example, not a published quote or guaranteed end-to-end saving; tools, storage, integration effort and marketplace terms can still affect the total deployment cost."
+          ]
+        },
+        {
+          "heading": "Eligibility and procurement: check the contract, not the headline",
+          "source": "https://itvmo.gsa.gov/onegov/",
+          "paragraphs": [
+            "GSA describes the access as available to federal, state, local and tribal government organizations through designated purchasing channels, including direct procurement, approved resellers and supported cloud marketplaces. The OneGov catalog also contains distinct, older per-seat offers. In particular, do not confuse the new consumption-based API model deal with a different temporary $1-per-user promotion. The dates, eligibility and product scope differ.",
+            "GSA's current OneGov listing gives a January 31, 2029 expiration for the Claude token-discount offer. Procurement personnel should verify the active agreement and contract schedule at ordering time, and compare projected input, cached-input and output usage under the actual negotiated terms. A discount's value depends on a known workload, not vendor pricing screenshots alone."
+          ]
+        },
+        {
+          "heading": "Security, FedRAMP and deployment risk",
+          "source": "https://www.anthropic.com/news/expanding-partnership-gsa",
+          "paragraphs": [
+            "Anthropic says Claude for Government supports sensitive unclassified tasks and describes FedRAMP High status for particular offerings. It also identifies access to Claude through platforms such as Amazon Bedrock and Google Cloud Vertex AI with service-specific authorization details. Those qualifications matter: a model name, API availability or government discount does not by itself make an arbitrary application FedRAMP-authorized or suitable for classified information.",
+            "A useful pilot pairs cost modeling with access-control and audit testing. Establish exactly which Claude product and environment will process government data, require least-privilege credentials, log tool actions and verify retention and procurement requirements. Anthropic cites roughly 500 government organizations using Claude and estimates up to $1 billion in savings; these are company-reported counts and projections, not guaranteed savings or an independent deployment audit."
+          ]
+        }
+      ],
+      "limitations": "The 40% deal and no-minimum terms are confirmed by GSA. The 500-organization count and $1 billion savings estimate come from Anthropic and have not been independently audited here. Offer expiration, procurement vehicles, product scope, FedRAMP authorizations and unit prices must be verified against the active contract and environment before purchase.",
+      "sources": [
+        "https://www.anthropic.com/news/expanding-partnership-gsa",
+        "https://www.gsa.gov/about-gsa/newsroom/news-releases/gsa-anthropic-reach-onegov-agreement-on-discounted-consumptionbased-pricing-10272026",
+        "https://itvmo.gsa.gov/onegov/"
+      ]
     }
   }
 }
