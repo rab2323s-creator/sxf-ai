@@ -106,7 +106,10 @@ def main():
     from editorial_approval import DecisionLedger, rejection_fingerprint
     rejected = DecisionLedger({}, {rejection_fingerprint(row["url"])})
     assert publication_decision(row, rejected, set(), assess).status == "reject"
-    assert build_inbox([], [row], now=datetime.now(timezone.utc).isoformat(), decisions=rejected, legacy_urls=set(), assess=assess, prepare=prepare) == []
+    retained = build_inbox([], [row], now=datetime.now(timezone.utc).isoformat(),
+                           decisions=rejected, legacy_urls=set(), assess=assess, prepare=prepare)
+    assert len(retained) == 1 and retained[0]["decision"] == "rejected"
+    assert publication_decision({**row, "seo_eligible": True}, rejected, set(), assess).status == "reject"
     print("PASS: human approval, stale identity, holds, quality checks, legacy feed")
 
 
