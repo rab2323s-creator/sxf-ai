@@ -37,6 +37,7 @@ jobs:
         run: |
           python tests/test_signal_processing.py
           python tests/test_editorial_approval.py
+          python tests/test_editorial_journey.py
       - name: Editorial news relevance and importance tests
         run: |
           python tests/test_news_relevance.py
