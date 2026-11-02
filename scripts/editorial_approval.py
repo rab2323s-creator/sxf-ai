@@ -89,6 +89,10 @@ def read_decisions(path: Path):
         if url in indexed:
             raise EditorialConfigError(f"Duplicate editorial URL: {url}")
         indexed[url] = entry
+    # A URL cannot simultaneously be blocked and approved/held. Reject
+    # reversal must clear its fingerprint in the same GitHub CAS write.
+    if any(rejection_fingerprint(url) in hashes for url in indexed):
+        raise EditorialConfigError("Conflicting approval/hold and rejected fingerprint")
     return DecisionLedger(indexed, hashes)
 
 
@@ -165,7 +169,12 @@ def load_inbox(path: Path):
 
 def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
                 prepare, maximum=INBOX_LIMIT, window_hours=INBOX_MAX_AGE_HOURS):
-    """Preserve held candidates; all automated decisions remain reviewable."""
+    """Retain rejected and held rows for reversible, auditable owner decisions.
+
+    Rejected stories stay private to the noindex admin inbox; they NEVER
+    enter the publication feed. The normal quota and age window only limit
+    undecided stories, not owner decisions. The ledger remains authoritative.
+    """
     observed = datetime.fromisoformat(now.replace("Z", "+00:00"))
     cutoff = observed - timedelta(hours=window_hours)
     by_url = {}
@@ -174,7 +183,8 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
             continue
         url = row["url"]
         state = exact_decision(row, decisions)
-        if url in legacy_urls or is_rejected(row, decisions) or state == "approved":
+        rejected = is_rejected(row, decisions)
+        if url in legacy_urls or state == "approved":
             continue
         if not isinstance(row.get("title"), str) or not row["title"].strip():
             continue
@@ -185,7 +195,7 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
         except (KeyError, TypeError, ValueError, AttributeError):
             continue
         if (published.tzinfo is None or published > observed + timedelta(hours=1)
-                or (published < cutoff and state != "hold")):
+                or (published < cutoff and state != "hold" and not rejected)):
             continue
         old = by_url.get(url, {})
         doc = dict(old)
@@ -200,13 +210,18 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
                 doc[key] = row[key]
         doc["first_seen"] = old.get("first_seen") or row.get("first_seen") or now
         doc["last_seen"] = now
-        doc["decision"] = state or "pending"
+        doc["decision"] = "rejected" if rejected else (state or "pending")
         by_url[url] = doc
     selected = []
+    pending_count = 0
     for row in sorted(by_url.values(), key=lambda r:
-                      (r["decision"] == "hold", r["published"], r["url"]), reverse=True):
-        if len(selected) >= maximum and row["decision"] != "hold":
-            continue
+                      (r["decision"] != "pending", r["published"], r["url"]), reverse=True):
+        # Keep all owner-reviewed Hold/Reject records even when the fresh
+        # pending queue is full. This supports reversal months later.
+        if row["decision"] == "pending":
+            if pending_count >= maximum:
+                continue
+            pending_count += 1
         verdict = assess(row["title"], row.get("summary", ""), row["source"], row["url"])
         quality = prepare([row])[0]
         row["editorial_status"] = verdict.status
