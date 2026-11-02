@@ -11163,8 +11163,9 @@ def update_sitemap(items):
 
     # Sitemap must never expose editorial-review or rejected signals.
     # Other static site pages and model references retain their own policies.
-    approved_items = [item for item in items if is_approved_indexable_signal(item)]
-    return write_sitemap(approved_items, SitemapContext(
+    # Preserve model/topic discovery from the full *published* archive.
+    # Human approval restricts only which Signal URLs enter the sitemap.
+    return write_sitemap(items, SitemapContext(
         base_url=BASE_URL,
         sitemap_path=SITEMAP,
         model_pricing_catalog=MODEL_PRICING_CATALOG,
@@ -11173,6 +11174,7 @@ def update_sitemap(items):
         extract_models=extract_models,
         comparison_registry_rows=comparison_registry_rows,
         seo_signal_eligible=seo_signal_eligible,
+        signal_indexable=is_approved_indexable_signal,
         parse_date=parse_date,
         topic_groups=topic_groups,
         topic_page_indexable=topic_page_indexable,
