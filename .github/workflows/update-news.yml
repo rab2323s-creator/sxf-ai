@@ -50,6 +50,8 @@ jobs:
         run: python tests/test_html_shell.py
       - name: Homepage decision pathways and SEO regression
         run: python tests/test_homepage_decision_pathways.py
+      - name: Daily Brief featured card styling, issue-date and SEO tests
+        run: python tests/test_featured_daily_brief.py
       - name: Benchmarks guide content-consistency regression
         run: python tests/test_ai_model_benchmarks_guide.py
       - name: Signals index HTML and SEO regression tests
@@ -169,6 +171,7 @@ jobs:
         run: |
           python tests/test_editorial_indexing.py --post-build
           python tests/test_three_editorial_launches.py --post-build
+          python tests/test_featured_daily_brief.py --post-build
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
