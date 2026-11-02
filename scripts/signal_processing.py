@@ -75,6 +75,22 @@ def prepare_items(items, context: SignalProcessingContext):
     return prepared
 
 
+
+def partition_source_quality(items, source_config, prepare):
+    """Keep SEO evidence checks active after a Shadow source becomes live.
+
+    Existing live feeds without a configured quality gate retain their
+    original ingestion behavior; Shadow candidates always pass the gate.
+    """
+    gate = source_config.get("quality_gate")
+    if source_config.get("status") != "shadow" and gate != "seo-signal-v1":
+        return list(items), []
+    prepared = prepare(items)
+    accepted = [item for item in prepared if item.get("seo_eligible")]
+    rejected = [item for item in prepared if not item.get("seo_eligible")]
+    return accepted, rejected
+
+
 def load_items(path):
     if not path.exists():
         return []

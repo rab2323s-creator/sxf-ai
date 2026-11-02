@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from signal_processing import partition_source_quality
 from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
@@ -950,6 +951,9 @@ def load_source_registry():
             raise RuntimeError(f"{name}: shadow sources must have max_current=0")
         if status == "disabled" and max_current != 0:
             raise RuntimeError(f"{name}: disabled sources must have max_current=0")
+        quality_gate = source.get("quality_gate")
+        if quality_gate not in {None, "seo-signal-v1"}:
+            raise RuntimeError(f"{name}: unsupported source quality gate {quality_gate!r}")
         adapter = source.get("adapter")
         if adapter not in {"rss", "pending", "anthropic-sitemap", "meta-blog", "xai-news"}:
             raise RuntimeError(f"{name}: unsupported adapter {adapter!r}")
@@ -11322,22 +11326,22 @@ def main():
                     continue
                 fresh_candidates.append(item)
 
+            # Promotion from Shadow must not weaken the original SEO-quality
+            # evidence gate; editorial accept/review/reject still runs later.
+            accepted_candidates, quality_rejected = partition_source_quality(
+                fresh_candidates, source_config, prepare_items
+            )
+            metrics["quality_rejection_count"] = len(quality_rejected)
+            metrics["quality_accepted_count"] = len(accepted_candidates)
+            metrics["accepted_candidate_count"] = len(accepted_candidates)
             if status == "shadow":
-                prepared_shadow = prepare_items(fresh_candidates)
-                accepted_shadow = [item for item in prepared_shadow if item.get("seo_eligible")]
-                rejected_shadow = [item for item in prepared_shadow if not item.get("seo_eligible")]
-                metrics["quality_rejection_count"] = len(rejected_shadow)
-                metrics["quality_accepted_count"] = len(accepted_shadow)
-                metrics["accepted_candidate_count"] = len(accepted_shadow)
-                shadow_candidates.extend(accepted_shadow)
+                shadow_candidates.extend(accepted_candidates)
                 shadow_rejections.extend(
                     shadow_quality_rejection_record(item, now.isoformat().replace("+00:00", "Z"))
-                    for item in rejected_shadow
+                    for item in quality_rejected
                 )
             else:
-                metrics["quality_accepted_count"] = len(fresh_candidates)
-                metrics["accepted_candidate_count"] = len(fresh_candidates)
-                incoming.extend(fresh_candidates)
+                incoming.extend(accepted_candidates)
 
             metrics["rejected_candidate_count"] = (
                 metrics["relevance_rejection_count"]
