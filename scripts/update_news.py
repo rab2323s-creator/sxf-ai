@@ -11258,6 +11258,7 @@ def main():
     source_metrics = {}
     shadow_candidates = []
     shadow_rejections = []
+    live_quality_rejections = []
     now = datetime.now(timezone.utc)
 
     for source_config in SOURCE_CONFIGS:
@@ -11364,6 +11365,7 @@ def main():
                 )
             else:
                 incoming.extend(accepted_candidates)
+                live_quality_rejections.extend(quality_rejected)
 
             metrics["rejected_candidate_count"] = (
                 metrics["relevance_rejection_count"]
@@ -11389,7 +11391,8 @@ def main():
         if parse_date(item.get("published", "")) is not None and parse_date(item["published"]) >= ingest_cutoff
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
-    inbox_candidates = list(incoming) + list(shadow_candidates) + list(shadow_rejections)
+    inbox_candidates = (list(incoming) + list(shadow_candidates)
+                        + list(shadow_rejections) + list(live_quality_rejections)
     incoming.extend(approved_inbox_items(
         previous_inbox, human_decisions, legacy_urls, prepare_items, parse_date,
         now - timedelta(days=INITIAL_ARCHIVE_DAYS),
