@@ -11389,7 +11389,7 @@ def main():
         if parse_date(item.get("published", "")) is not None and parse_date(item["published"]) >= ingest_cutoff
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
-    inbox_candidates = list(incoming) + list(shadow_candidates)
+    inbox_candidates = list(incoming) + list(shadow_candidates) + list(shadow_rejections)
     incoming.extend(approved_inbox_items(
         previous_inbox, human_decisions, legacy_urls, prepare_items, parse_date,
         now - timedelta(days=INITIAL_ARCHIVE_DAYS),
