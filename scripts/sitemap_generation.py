@@ -188,6 +188,7 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-evaluation-checklist/", "2026-10-12"),
         sitemap_entry(f"{BASE_URL}/guides/ai-agent-cost/", "2026-10-10"),
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
+        sitemap_entry(f"{BASE_URL}/research/microsoft-mai-dxo-ai-diagnosis-science/", "2026-11-02"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-reliability/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-memory/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-payment-negotiation/", "2026-10-20"),
