@@ -23,6 +23,10 @@ def test_page_headers():
     noindex = enforce_noindex_on_html(markup)
     assert noindex.count('content="noindex,follow"') == 2
     assert enforce_noindex_on_html(noindex) == noindex, "Noindex must be idempotent"
+    without_googlebot = '<head><meta name="robots" content="index,follow" /></head>'
+    repaired = enforce_noindex_on_html(without_googlebot)
+    assert 'name="robots" content="noindex,follow"' in repaired
+    assert 'name="googlebot" content="noindex,follow"' in repaired
     for bad in ('<head></head>', '<meta name="robots" content="index,follow" />'):
         try:
             enforce_noindex_on_html(bad)
