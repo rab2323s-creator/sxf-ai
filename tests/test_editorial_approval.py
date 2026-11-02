@@ -100,7 +100,6 @@ def main():
     baseline = read_legacy_urls(ROOT / "data" / "editorial-legacy-published.json")
     archive = json.loads((ROOT / "data" / "archive.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "data" / "news.json").read_text(encoding="utf-8"))
-    from editorial_approval import exact_decision
     assert all(
         row["url"] in baseline or (
             exact_decision(row, live_decisions) == "approved"
