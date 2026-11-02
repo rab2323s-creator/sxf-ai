@@ -1783,7 +1783,7 @@ def validate_editorial_news_indexing(archive):
     signal_root = ROOT / "signals"
     site = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     indexed = {
-        url for url in re.findall(r"<loc>(https://sxf\\.si/signals/[^<]+)</loc>", site)
+        url for url in re.findall(r"<loc>(https://sxf\.si/signals/[^<]+)</loc>", site)
         if url != "https://sxf.si/signals/"
     }
     expected = set()
