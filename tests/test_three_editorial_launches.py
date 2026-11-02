@@ -24,7 +24,13 @@ def main():
     sitemap = (ROOT / "sitemap.xml").read_text()
     post = "--post-build" in sys.argv
     for url, slug in SOURCES.items():
-        source_row = next(x for x in inbox if x["url"] == url)
+        source_row = next((x for x in inbox if x["url"] == url), None)
+        if post:
+            # Accepted stories are intentionally removed from the review inbox.
+            assert source_row is None, "Published story must leave review inbox"
+            source_row = live[url]
+        else:
+            assert source_row is not None, "Missing candidate in pre-build inbox"
         assert decisions[url]["decision"] == "approved"
         assert all(decisions[url][x] == source_row[x] for x in ("url", "title", "source"))
         review = REVIEWS[slug]
