@@ -16,9 +16,10 @@ from urllib.parse import urlparse
 DECISIONS_VERSION = "sxf-editorial-decisions-v1"
 INBOX_VERSION = "sxf-editorial-inbox-v1"
 BASELINE_VERSION = "sxf-editorial-legacy-v1"
+INDEX_BASELINE_VERSION = "sxf-editorial-legacy-indexable-v1"
 DECISION_STATES = {"approved", "hold"}
-INBOX_LIMIT = 200
-INBOX_MAX_AGE_HOURS = 36
+INBOX_LIMIT = 500
+INBOX_MAX_AGE_HOURS = 168
 
 
 class EditorialConfigError(ValueError):
@@ -105,6 +106,19 @@ def read_legacy_urls(path: Path):
     return frozenset(urls)
 
 
+def read_legacy_indexable_urls(path: Path):
+    if not path.is_file():
+        raise EditorialConfigError(f"Missing historical indexable baseline: {path}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or payload.get("version") != INDEX_BASELINE_VERSION:
+        raise EditorialConfigError("Invalid historical indexable baseline")
+    urls = payload.get("urls")
+    if (not isinstance(urls, list) or len(urls) != len(set(urls))
+            or not all(valid_http_url(url) for url in urls)):
+        raise EditorialConfigError("Invalid historical indexable source URLs")
+    return frozenset(urls)
+
+
 def exact_decision(row, decisions):
     """A changed title or publisher cannot inherit approval for the same URL."""
     entry = decisions.get(row.get("url", ""))
@@ -151,12 +165,7 @@ def load_inbox(path: Path):
 
 def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
                 prepare, maximum=INBOX_LIMIT, window_hours=INBOX_MAX_AGE_HOURS):
-    """Bounded rolling daily queue: no permanent pile of undecided stories.
-
-    Previously published, approved and rejected stories are never queued.
-    Unreviewed items expire after a short time; updates from feeds cannot
-    artificially reset the story's publication timestamp.
-    """
+    """Preserve held candidates; all automated decisions remain reviewable."""
     observed = datetime.fromisoformat(now.replace("Z", "+00:00"))
     cutoff = observed - timedelta(hours=window_hours)
     by_url = {}
@@ -164,7 +173,8 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
         if not isinstance(row, dict) or not valid_http_url(row.get("url")):
             continue
         url = row["url"]
-        if url in legacy_urls or url in decisions or is_rejected(row, decisions):
+        state = exact_decision(row, decisions)
+        if url in legacy_urls or is_rejected(row, decisions) or state == "approved":
             continue
         if not isinstance(row.get("title"), str) or not row["title"].strip():
             continue
@@ -174,7 +184,8 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
             published = datetime.fromisoformat(row["published"].replace("Z", "+00:00"))
         except (KeyError, TypeError, ValueError, AttributeError):
             continue
-        if published.tzinfo is None or published < cutoff or published > observed + timedelta(hours=1):
+        if (published.tzinfo is None or published > observed + timedelta(hours=1)
+                or (published < cutoff and state != "hold")):
             continue
         old = by_url.get(url, {})
         doc = dict(old)
@@ -184,22 +195,27 @@ def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
             doc["summary"] = row["summary"]
         elif not doc.get("summary"):
             doc["summary"] = ""
+        for key in ("rejection_stage", "rejection_reason"):
+            if row.get(key):
+                doc[key] = row[key]
         doc["first_seen"] = old.get("first_seen") or row.get("first_seen") or now
         doc["last_seen"] = now
+        doc["decision"] = state or "pending"
         by_url[url] = doc
     selected = []
-    for row in sorted(by_url.values(), key=lambda r: (r["published"], r["url"]), reverse=True):
+    for row in sorted(by_url.values(), key=lambda r:
+                      (r["decision"] == "hold", r["published"], r["url"]), reverse=True):
+        if len(selected) >= maximum and row["decision"] != "hold":
+            continue
         verdict = assess(row["title"], row.get("summary", ""), row["source"], row["url"])
         quality = prepare([row])[0]
         row["editorial_status"] = verdict.status
         row["editorial_reason"] = verdict.reason
         row["seo_eligible"] = bool(quality.get("seo_eligible"))
         row["seo_quality_score"] = quality.get("seo_quality_score", 0)
-        row["decision"] = "pending"
         selected.append(row)
-        if len(selected) >= maximum:
-            break
     return selected
+
 
 def approved_inbox_items(inbox, decisions, legacy_urls, prepare, parse_date, cutoff):
     """Re-ingest an approved, previously discovered story even if RSS moved on."""
