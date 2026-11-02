@@ -6,6 +6,11 @@
   const API = "https://api.github.com/repos/" + REPO + "/contents/";
   const RAW = "https://raw.githubusercontent.com/" + REPO + "/main/data/editorial-inbox.json";
   let token = "", user = "", inbox = [], decisions = [], rejectedFingerprints = [], ledgerSha = "", busy = false;
+  let fingerprints = new Map();
+  async function fingerprintFor(url) {
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(url));
+    return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+  }
   const $ = id => document.getElementById(id);
   const message = (value, error = false) => {
     $("message").textContent = value;
@@ -49,10 +54,14 @@
     if (payload.version !== "sxf-editorial-inbox-v1" || !Array.isArray(payload.items))
       throw Error("Editorial inbox format mismatch");
     inbox = payload.items;
+    fingerprints = new Map(await Promise.all(inbox.map(async row =>
+      [row.url, await fingerprintFor(row.url)]
+    )));
     if (token) await loadLedger();
     render();
   }
   function decisionFor(row) {
+    if (rejectedFingerprints.includes(fingerprints.get(row.url))) return "rejected";
     const found = decisions.find(d => d.url === row.url &&
       d.title === row.title && d.source === row.source);
     return found ? found.decision : "pending";
@@ -106,9 +115,7 @@
       await loadLedger(); // CAS: always fetch current commit state before PUT
       const previous = decisions.findIndex(d => d.url === row.url);
       if (status === "rejected") {
-        const bytes = new TextEncoder().encode(row.url);
-        const digest = await crypto.subtle.digest("SHA-256", bytes);
-        const fingerprint = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+        const fingerprint = await fingerprintFor(row.url);
         if (!rejectedFingerprints.includes(fingerprint)) rejectedFingerprints.push(fingerprint);
         if (previous >= 0) decisions.splice(previous, 1);
       }
