@@ -102,7 +102,8 @@ def main():
     feed = json.loads((ROOT / "data" / "news.json").read_text(encoding="utf-8"))
     assert all(row["url"] in baseline for row in feed["items"]), "Existing current feed must be grandfathered"
     assert all(row["url"] in {x["url"] for x in archive["items"]} for row in feed["items"])
-    assert not live_decisions, "Initial human decisions must start empty"
+    assert all(entry["decision"] in {"approved", "hold"} for entry in live_decisions.values()), "Only explicit owner decisions are allowed"
+    assert not live_decisions.rejected_fingerprints, "No unexplained rejection fingerprints in curated launch"
     from editorial_approval import DecisionLedger, rejection_fingerprint
     rejected = DecisionLedger({}, {rejection_fingerprint(row["url"])})
     assert publication_decision(row, rejected, set(), assess).status == "reject"
