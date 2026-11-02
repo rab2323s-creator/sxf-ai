@@ -31,8 +31,10 @@ jobs:
         run: python tests/test_generator_definitions.py
       - name: Offline snapshot rendering unit tests
         run: python tests/test_snapshot_rendering.py
-      - name: Signal processing regression tests
-        run: python tests/test_signal_processing.py
+      - name: Signal processing and human approval regressions
+        run: |
+          python tests/test_signal_processing.py
+          python tests/test_editorial_approval.py
       - name: Editorial news relevance and importance tests
         run: |
           python tests/test_news_relevance.py
