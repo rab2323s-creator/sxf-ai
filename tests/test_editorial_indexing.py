@@ -93,7 +93,7 @@ def test_historical_indexing_snapshot():
     historic = json.loads((ROOT / "data" / "editorial-legacy-sitemap-urls.json").read_text())
     assert historic["version"] == "sxf-preapproval-non-signal-sitemap-v1"
     assert len(historic["urls"]) == 250
-    present = set(re.findall(r"<loc>(https://sxf\\.si/[^<]+)</loc>", sitemap))
+    present = set(re.findall(r"<loc>(https://sxf\.si/[^<]+)</loc>", sitemap))
     missing = set(historic["urls"]) - present
     assert not missing, "Historical non-Signal sitemap pages dropped: " + repr(sorted(missing)[:12])
     for url in frozen:
