@@ -227,7 +227,7 @@ def enforce_noindex_on_html(html):
     """
     for name in ("robots", "googlebot"):
         expression = re.compile(
-            r'(<meta\\s+name="' + name + r'"\\s+content=")[^"]*(" ?/>)',
+            r'(<meta\s+name="' + name + r'"\s+content=")[^"]*(" ?/>)',
             re.I,
         )
         updated, matches = expression.subn(
