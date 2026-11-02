@@ -53,12 +53,14 @@ def main():
     assert source.index('class="research-jump shell"') < source.index('id="featured-research-title"')
     assert source.count('class="research-faq-item"') == 3
     assert source.count('class="research-featured-card research-featured-card-lead"') == 1
-    assert source.count('class="research-featured-card"') == 3
+    assert source.count('class="research-featured-card"') == 4
+    assert source.count('class="research-featured-grid"') == 1
     assert '/research/ai-agent-payment-negotiation/' in p.links
     assert '<details class="research-method-disclosure">' in source
     for required in (
         "/research/ai-agent-memory/",
         "/research/ai-agent-reliability/",
+        "/research/microsoft-mai-dxo-ai-diagnosis-science/",
         "/research/ai-coding-agent-architecture/",
         "/evaluations/",
         "/evaluations/explorer/",
@@ -85,7 +87,11 @@ def main():
     collection = next(x for x in schemas[0]["@graph"] if x.get("@type") == "CollectionPage")
     assert collection["url"] == "https://sxf.si/research/"
     featured = next(x for x in schemas[0]["@graph"] if x.get("@id", "").endswith("#featured-research"))
-    assert featured["numberOfItems"] == 4
+    assert featured["numberOfItems"] == 5
+    assert len(featured["itemListElement"]) == 5
+    assert [row["position"] for row in featured["itemListElement"]] == list(range(1, 6))
+    assert all(row["url"].replace("https://sxf.si", "") in p.links for row in featured["itemListElement"]), "Indexed research articles must also be linked from visible cards"
+    assert any("microsoft-mai-dxo-ai-diagnosis-science" in row["url"] for row in featured["itemListElement"])
     assert any("ai-agent-payment-negotiation" in row["url"] for row in featured["itemListElement"])
     assert any(x.get("@id", "").endswith("#featured-research") for x in schemas[0]["@graph"])
     assert schemas[1]["@type"] == "ItemList"
