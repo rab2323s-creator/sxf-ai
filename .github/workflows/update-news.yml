@@ -38,6 +38,7 @@ jobs:
           python tests/test_signal_processing.py
           python tests/test_editorial_approval.py
           python tests/test_editorial_journey.py
+          python tests/test_three_editorial_launches.py
       - name: Editorial news relevance and importance tests
         run: |
           python tests/test_news_relevance.py
@@ -165,7 +166,9 @@ jobs:
       - name: Intelligence explosion reference regression
         run: python tests/test_intelligence_explosion_guide.py
       - name: Verify approved-only news sitemap and crawler directives
-        run: python tests/test_editorial_indexing.py --post-build
+        run: |
+          python tests/test_editorial_indexing.py --post-build
+          python tests/test_three_editorial_launches.py --post-build
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
