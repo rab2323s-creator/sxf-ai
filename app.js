@@ -64,20 +64,8 @@ function cardMarkup(item,index){
     <span class="sr-only">Signal ${n}</span>
   </a>`;
 }
-function updateHeroSignal(item){
-  if(!item)return;
-  const link=document.getElementById('heroSignalLink');
-  const source=document.getElementById('heroSignalSource');
-  const time=document.getElementById('heroSignalTime');
-  const title=document.getElementById('heroSignalTitle');
-  const category=document.getElementById('heroSignalCategory');
-  if(link)link.href=item.signal_url||item.url||'#latest';
-  if(link){link.removeAttribute('target');link.removeAttribute('rel')}
-  if(source)source.textContent=item.source||'Primary source';
-  if(time)time.textContent=relativeTime(item.published)||'recent';
-  if(title)title.textContent=item.title||'Latest AI signal';
-  if(category)category.textContent=item.category||'Signal';
-}
+// The Hero is the editorial Brief, not a feed story. Never replace its link,
+// title, issue date or label when news.json loads.
 
 function render(){
   // Keep pre-rendered homepage cards when the API feed is unavailable.
@@ -115,7 +103,7 @@ fetch('./data/news.json',{cache:'no-cache'})
     }
 
     document.getElementById('lastUpdated').textContent=data.updated_at?relativeTime(data.updated_at):'automatic';
-    updateHeroSignal(state.items[0]);
+    // Leave the published SXF Brief hero unchanged.
     feedLoaded=true;
     render();
   })

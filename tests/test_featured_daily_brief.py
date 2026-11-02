@@ -58,6 +58,16 @@ def main():
     if "--post-build" in sys.argv or actual_date == date.today():
         assert first["item"]["name"] == update_news.brief_featured_title(actual_date)
     assert [row["position"] for row in structured["itemListElement"]] == list(range(1, 9))
+    # The actual above-the-fold radar Hero must use the same dated Brief.
+    hero = re.search(r'<a class="hero-live-signal" id="heroSignalLink"[^>]*>.*?</a>', page, re.S)
+    assert hero, "Missing the actual top Hero card"
+    assert hero.group(0) == update_news.hero_brief_html(actual_date), "Radar Hero must use the issue date"
+    assert 'href="/brief/"' in hero.group(0)
+    assert 'DAILY AI BRIEF' in hero.group(0)
+    assert '5 STORIES' in hero.group(0)
+    js = (ROOT / "app.js").read_text(encoding="utf-8")
+    assert "updateHeroSignal(" not in js, "Client script must never overwrite radar Hero from news feed"
+    assert "state.items[0]" not in js.split("function render()", 1)[1].split("function render()", 1)[0] or "updateHeroSignal(" not in js
     print("PASS: Brief Hero same markup, dated correctly, no stale signal, JSON-LD synchronized")
 
 if __name__ == "__main__":
