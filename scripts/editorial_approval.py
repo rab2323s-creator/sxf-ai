@@ -220,32 +220,38 @@ def approved_inbox_items(inbox, decisions, legacy_urls, prepare, parse_date, cut
 
 
 def enforce_noindex_on_html(html):
-    """Demote old news pages even when their historical head lacks googlebot.
+    """Safely normalize legacy Signal heads for both search crawlers.
 
-    The robots directive must appear exactly once. A missing googlebot tag
-    is added to the head; duplicates or malformed heads fail closed.
+    Historic routes have inconsistent markup; reject duplicate directives
+    while adding missing directives. Keep pages fetchable for deindexing.
     """
+    if len(re.findall(r"<head\b[^>]*>", html, flags=re.I)) != 1:
+        raise EditorialConfigError("Legacy Signal HTML must contain one <head>")
+    if len(re.findall(r"</head\s*>", html, flags=re.I)) != 1:
+        raise EditorialConfigError("Legacy Signal HTML must contain one </head>")
+
     for name in ("robots", "googlebot"):
-        expression = re.compile(
-            r'(<meta\s+name="' + name + r'"\s+content=")[^"]*(" ?/>)',
-            re.I,
-        )
-        updated, matches = expression.subn(
-            lambda match: match.group(1) + "noindex,follow" + match.group(2), html,
-        )
-        if matches > 1:
+        # Match a full meta element, then examine its attributes. Older pages
+        # can use single quotes, reorder the attributes, or lack content.
+        tags = []
+        for tag in re.finditer(r"<meta\b[^>]*>", html, flags=re.I):
+            if re.search(r"\bname\s*=\s*(['\"])" + re.escape(name) + r"\1", tag.group(), flags=re.I):
+                tags.append(tag)
+        if len(tags) > 1:
             raise EditorialConfigError(f"Duplicate {name} directives in legacy Signal HTML")
-        if matches == 0:
-            if name == "robots":
-                raise EditorialConfigError("Legacy Signal HTML missing robots directive")
-            if not re.search(r"</head>", updated, re.I):
-                raise EditorialConfigError("Legacy Signal HTML missing head closing tag")
-            updated = re.sub(
-                r"</head>",
-                '<meta name="googlebot" content="noindex,follow" />\n</head>',
-                updated, count=1, flags=re.I,
-            )
-        html = updated
+        if not tags:
+            html = re.sub(r"</head\s*>",
+                f'<meta name="{name}" content="noindex,follow" />\n</head>',
+                html, count=1, flags=re.I)
+            continue
+        tag = tags[0]
+        old_tag = tag.group()
+        content_attribute = re.compile(r"\bcontent\s*=\s*(['\"])[^'\"]*\1", flags=re.I)
+        new_tag, replacements = content_attribute.subn('content="noindex,follow"', old_tag)
+        if replacements != 1:
+            # Existing malformed/attribute-less directives become canonical.
+            new_tag = f'<meta name="{name}" content="noindex,follow" />'
+        html = html[:tag.start()] + new_tag + html[tag.end():]
     return html
 
 def retire_unapproved_signal_routes(directory, allowed_slugs):
