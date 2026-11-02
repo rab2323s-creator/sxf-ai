@@ -14,8 +14,9 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
-from editorial_approval import (read_decisions, read_legacy_urls, publication_decision,
-    load_inbox, build_inbox, approved_inbox_items, retire_unapproved_signal_routes)
+from editorial_approval import (read_decisions, read_legacy_urls, read_legacy_indexable_urls,
+    exact_decision, is_rejected, publication_decision, load_inbox, build_inbox,
+    approved_inbox_items, retire_unapproved_signal_routes)
 from signal_processing import partition_source_quality
 from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
@@ -83,6 +84,7 @@ SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 EDITORIAL_REVIEW_QUEUE_PATH = ROOT / "data" / "editorial-review-queue.json"
 EDITORIAL_DECISIONS_PATH = ROOT / "data" / "editorial-decisions.json"
 EDITORIAL_BASELINE_PATH = ROOT / "data" / "editorial-legacy-published.json"
+EDITORIAL_INDEX_BASELINE_PATH = ROOT / "data" / "editorial-legacy-indexable.json"
 EDITORIAL_INBOX_PATH = ROOT / "data" / "editorial-inbox.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
@@ -1941,7 +1943,7 @@ def source_accepts_item(source_config, title, summary):
     raise RuntimeError(f"Unknown source filter: {filter_name}")
 
 
-def parse_feed_with_metrics(source, body):
+def parse_feed_with_metrics(source, body, *, rejected_rows=None):
     root = ET.fromstring(body)
     rows = []
     for item in root.findall(".//item"):
@@ -1972,6 +1974,15 @@ def parse_feed_with_metrics(source, body):
     for title, link, published, summary in rows:
         if not source_accepts_item(source_config, title, summary):
             relevance_rejected += 1
+            if rejected_rows is not None:
+                category = categorize(title, source)
+                rejected_rows.append({
+                    "title": title, "url": link, "source": source,
+                    "published": published.isoformat().replace("+00:00", "Z"),
+                    "category": category, "tags": classify_tags(title, source, category),
+                    "summary": summary, "rejection_stage": "source_topic",
+                    "rejection_reason": "source_filter",
+                })
             continue
         category = categorize(title, source)
         output.append({
@@ -2371,9 +2382,14 @@ def previously_manually_published_signal(item):
 
 
 def is_approved_indexable_signal(item):
-    """New items need approval; historic manual promotions remain indexable."""
+    """Preserve already-indexed URLs; explicit human holds/rejections win."""
+    decisions = read_decisions(EDITORIAL_DECISIONS_PATH)
+    if is_rejected(item, decisions) or exact_decision(item, decisions) == "hold":
+        return False
+    if item.get("url", "") in read_legacy_indexable_urls(EDITORIAL_INDEX_BASELINE_PATH):
+        return True
     return (bool(item.get("seo_eligible", seo_signal_eligible(item)))
-            and (editorial_public_decision(item).status == "accept"
+            and (exact_decision(item, decisions) == "approved"
                  or previously_manually_published_signal(item)))
 
 
@@ -2387,6 +2403,7 @@ def discoverable_news(items):
     return [
         item for item in items
         if editorial_public_decision(item).status == "accept"
+        or is_approved_indexable_signal(item)
     ]
 
 
@@ -11298,6 +11315,7 @@ def main():
     shadow_candidates = []
     shadow_rejections = []
     live_quality_rejections = []
+    topic_rejected_candidates = []
     now = datetime.now(timezone.utc)
 
     for source_config in SOURCE_CONFIGS:
@@ -11337,7 +11355,10 @@ def main():
 
         try:
             if adapter == "rss":
-                parsed, parse_metrics = parse_feed_with_metrics(source, fetch(source_config["url"]))
+                parsed, parse_metrics = parse_feed_with_metrics(
+                    source, fetch(source_config["url"]),
+                    rejected_rows=topic_rejected_candidates,
+                )
             else:
                 raw_items, adapter_diagnostics = run_source_adapter(
                     source_config,
@@ -11355,6 +11376,12 @@ def main():
                 for item in raw_items:
                     if not source_accepts_item(source_config, item["title"], item.get("summary", "")):
                         relevance_rejected += 1
+                        rejected = dict(item)
+                        rejected["category"] = categorize(rejected["title"], source)
+                        rejected["tags"] = classify_tags(rejected["title"], source, rejected["category"])
+                        rejected["rejection_stage"] = "source_topic"
+                        rejected["rejection_reason"] = "source_filter"
+                        topic_rejected_candidates.append(rejected)
                         continue
                     row = dict(item)
                     row["category"] = categorize(row["title"], source)
@@ -11431,7 +11458,8 @@ def main():
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
     inbox_candidates = (list(incoming) + list(shadow_candidates)
-                        + list(shadow_rejections) + list(live_quality_rejections))
+                        + list(shadow_rejections) + list(live_quality_rejections)
+                        + list(topic_rejected_candidates))
     incoming.extend(approved_inbox_items(
         previous_inbox, human_decisions, legacy_urls, prepare_items, parse_date,
         now - timedelta(days=INITIAL_ARCHIVE_DAYS),
