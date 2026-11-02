@@ -48,7 +48,7 @@ def main():
     assert exact_decision({**row, "title": "Unverified change"}, ledger) is None
     assert publication_decision({**row, "seo_eligible": True}, ledger, set(), assess).status == "accept"
     assert publication_decision({**row, "seo_eligible": False}, ledger, set(), assess).status == "review"
-    for state, expected in (("hold", "review"), ("rejected", "reject")):
+    for state, expected in (("hold", "review"),):
         ledger[row["url"]]["decision"] = state
         assert publication_decision({**row, "seo_eligible": True}, ledger, {row["url"]}, assess).status == expected
     ledger[row["url"]]["decision"] = "approved"
@@ -59,15 +59,13 @@ def main():
     assert inbox[0]["editorial_status"] == "accept", "Filter accept is a recommendation, not publication"
     again = build_inbox(inbox, [{**row, "summary": ""}], now="2026-11-03T10:00:00Z",
                         decisions=ledger, legacy_urls=set(), assess=assess, prepare=prepare)
-    assert len(again) == 1 and again[0]["decision"] == "approved"
-    assert again[0]["summary"] == row["summary"]
-    assert again[0]["first_seen"] == "2026-11-02T10:00:00Z"
+    assert again == [], "Approved stories leave the temporary inbox immediately"
     assert build_inbox([], [row], now="2026-11-02T10:00:00Z",
                        decisions={}, legacy_urls={row["url"]}, assess=assess, prepare=prepare) == []
     cutoff = datetime.now(timezone.utc) - timedelta(days=35)
-    assert len(approved_inbox_items(again, ledger, set(), prepare, parse_date, cutoff)) == 1
-    assert approved_inbox_items(again, ledger, {row["url"]}, prepare, parse_date, cutoff) == []
-    assert approved_inbox_items(again, {}, set(), prepare, parse_date, cutoff) == []
+    assert len(approved_inbox_items(inbox, ledger, set(), prepare, parse_date, cutoff)) == 1
+    assert approved_inbox_items(inbox, ledger, {row["url"]}, prepare, parse_date, cutoff) == []
+    assert approved_inbox_items(inbox, {}, set(), prepare, parse_date, cutoff) == []
     thin = [{**row, "summary": "Too short"}]
     assert approved_inbox_items(thin, ledger, set(), prepare, parse_date, cutoff) == []
 
@@ -105,6 +103,10 @@ def main():
     assert all(row["url"] in baseline for row in feed["items"]), "Existing current feed must be grandfathered"
     assert all(row["url"] in {x["url"] for x in archive["items"]} for row in feed["items"])
     assert not live_decisions, "Initial human decisions must start empty"
+    from editorial_approval import DecisionLedger, rejection_fingerprint
+    rejected = DecisionLedger({}, {rejection_fingerprint(row["url"])})
+    assert publication_decision(row, rejected, set(), assess).status == "reject"
+    assert build_inbox([], [row], now=datetime.now(timezone.utc).isoformat(), decisions=rejected, legacy_urls=set(), assess=assess, prepare=prepare) == []
     print("PASS: human approval, stale identity, holds, quality checks, legacy feed")
 
 
