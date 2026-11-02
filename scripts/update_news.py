@@ -2109,6 +2109,27 @@ def brief_featured_title(issued, *, today=None):
     )
 
 
+def hero_brief_html(issued, *, today=None):
+    """Refresh the top radar Hero using the independently published Brief date."""
+    heading = brief_featured_title(issued, today=today)
+    label = issued.strftime("%b %d, %Y").replace(" 0", " ").upper()
+    return f'''<a class="hero-live-signal" id="heroSignalLink" href="/brief/">
+            <div class="hero-live-top">
+              <span>DAILY AI BRIEF</span>
+              <b><i></i> 5 STORIES</b>
+            </div>
+            <div class="hero-live-source">
+              <strong id="heroSignalSource">SXF BRIEF</strong>
+              <span id="heroSignalTime">{escape(label)}</span>
+            </div>
+            <h3 id="heroSignalTitle">{escape(heading)}</h3>
+            <div class="hero-live-foot">
+              <span class="category-pill" id="heroSignalCategory">AI NEWS</span>
+              <span>Explore the brief ↗</span>
+            </div>
+          </a>'''
+
+
 def brief_featured_html(issued, *, today=None):
     """Keep the exact existing Featured card classes, linking to the daily Brief."""
     heading = brief_featured_title(issued, today=today)
@@ -2384,6 +2405,13 @@ def update_index(items):
     issued = brief_issue_date()
     brief_title = brief_featured_title(issued)
     page = INDEX.read_text(encoding="utf-8")
+    # Replace only the radar Hero link, keeping its existing surrounding layout.
+    hero_pattern = re.compile(
+        r'<a class="hero-live-signal" id="heroSignalLink"[^>]*>.*?</a>', re.S
+    )
+    page, hero_count = hero_pattern.subn(lambda _: hero_brief_html(issued), page, count=1)
+    if hero_count != 1:
+        raise RuntimeError("Missing top radar Hero card")
     page = replace_block(page, "<!-- SXF:WHAT_CHANGED_START -->", "<!-- SXF:WHAT_CHANGED_END -->", homepage_change_cards())
     page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", brief_featured_html(issued))
     page = replace_block(page, "<!-- SXF:FEED_START -->", "<!-- SXF:FEED_END -->", cards_html(homepage_items[1:]))
