@@ -71,7 +71,7 @@ def main():
                     result = {"content": {"sha": "test-sha" + str(len(written))}}
                 else:
                     result = {"content": base64.b64encode(
-                        (json.dumps(ledger)+"\\n").encode()).decode(),
+                        (json.dumps(ledger)+"\n").encode()).decode(),
                         "sha": "test-sha" + str(len(written))}
                 route.fulfill(status=200, content_type="application/json",
                               headers=headers, body=json.dumps(result))
