@@ -100,7 +100,14 @@ def main():
     baseline = read_legacy_urls(ROOT / "data" / "editorial-legacy-published.json")
     archive = json.loads((ROOT / "data" / "archive.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "data" / "news.json").read_text(encoding="utf-8"))
-    assert all(row["url"] in baseline for row in feed["items"]), "Existing current feed must be grandfathered"
+    archive_by_url = {row["url"]: row for row in archive["items"]}
+    assert all(
+        row["url"] in baseline or (
+            exact_decision(row, live_decisions) == "approved"
+            and archive_by_url.get(row["url"], {}).get("seo_eligible") is True
+        )
+        for row in feed["items"]
+    ), "Current feed must be grandfathered or explicitly human-approved and SEO-qualified"
     assert all(row["url"] in {x["url"] for x in archive["items"]} for row in feed["items"])
     assert all(entry["decision"] in {"approved", "hold"} for entry in live_decisions.values()), "Only explicit owner decisions are allowed"
     assert not live_decisions.rejected_fingerprints, "No unexplained rejection fingerprints in curated launch"

@@ -30,7 +30,10 @@ def main():
             assert source_row is None, "Published story must leave review inbox"
             source_row = live[url]
         else:
-            assert source_row is not None, "Missing candidate in pre-build inbox"
+            # An already-published, approved story no longer appears in inbox.
+            # Pre-build CI must accept the persisted published archive identity.
+            source_row = source_row or live.get(url)
+            assert source_row is not None, "Approved story absent from inbox and archive"
         assert decisions[url]["decision"] == "approved"
         assert all(decisions[url][x] == source_row[x] for x in ("url", "title", "source"))
         review = REVIEWS[slug]

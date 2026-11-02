@@ -8,7 +8,7 @@ import re
 import urllib.request
 import time
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone, timedelta
+from datetime import date, datetime, timezone, timedelta
 from html import escape, unescape
 from pathlib import Path
 from urllib.parse import urlparse
@@ -2068,6 +2068,63 @@ def featured_html(item):
     """Compatibility entrypoint for the featured homepage card."""
     return render_featured_card(item, FeedCardContext(relative_time=relative_time))
 
+def brief_issue_date(brief_html=None):
+    """Read the edited issue's date from the canonical Brief JSON-LD.
+
+    Never infer the issue date from feed timestamps or the site build time.
+    The Brief is a separately curated publication.
+    """
+    if brief_html is None:
+        brief_html = (BRIEF_DIR / "index.html").read_text(encoding="utf-8")
+    blocks = re.findall(
+        r"<script[^>]*type=[\"']application/ld\+json[\"'][^>]*>(.*?)</script>",
+        brief_html, flags=re.I | re.S,
+    )
+    pages = []
+    for block in blocks:
+        payload = json.loads(block)
+        nodes = payload.get("@graph", [payload])
+        pages.extend(
+            node for node in nodes
+            if isinstance(node, dict)
+            and node.get("@type") == "CollectionPage"
+            and node.get("url") == BASE_URL + "/brief/"
+        )
+    if len(pages) != 1:
+        raise RuntimeError("Expected exactly one canonical SXF Brief CollectionPage")
+    raw_date = pages[0].get("datePublished")
+    try:
+        issued = date.fromisoformat(raw_date)
+    except (TypeError, ValueError) as exc:
+        raise RuntimeError("SXF Brief requires an ISO issue date in its JSON-LD") from exc
+    return issued
+
+
+def brief_featured_title(issued, *, today=None):
+    today = today or datetime.now(timezone.utc).date()
+    return (
+        "The 5 AI Stories That Matter Today"
+        if issued == today else
+        "5 Essential AI Stories — Latest Brief"
+    )
+
+
+def brief_featured_html(issued, *, today=None):
+    """Keep the exact existing Featured card classes, linking to the daily Brief."""
+    heading = brief_featured_title(issued, today=today)
+    label = issued.strftime("%b %d, %Y").replace(" 0", " ").upper()
+    return f'''<a class="featured-story" href="{BASE_URL}/brief/">
+  <div class="featured-main">
+    <div>
+      <div class="featured-topline"><strong>SXF BRIEF</strong><i></i><span>{escape(label)}</span></div>
+      <h3 class="featured-title">{escape(heading)}</h3>
+    </div>
+    <div class="featured-footer"><span class="category-pill">5 ESSENTIAL STORIES</span><span class="open-label">Explore the brief <b>↗</b></span></div>
+  </div>
+  <div class="featured-visual" aria-hidden="true"><span class="signal-cross">+</span><span class="signal-number">05</span></div>
+</a>'''
+
+
 def cards_html(items):
     """Compatibility entrypoint for the homepage story cards."""
     return render_story_cards(items, FeedCardContext(relative_time=relative_time))
@@ -2324,26 +2381,35 @@ def update_index(items):
     if not homepage_items:
         return
 
+    issued = brief_issue_date()
+    brief_title = brief_featured_title(issued)
     page = INDEX.read_text(encoding="utf-8")
     page = replace_block(page, "<!-- SXF:WHAT_CHANGED_START -->", "<!-- SXF:WHAT_CHANGED_END -->", homepage_change_cards())
-    page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", featured_html(homepage_items[0]))
+    page = replace_block(page, "<!-- SXF:FEATURED_START -->", "<!-- SXF:FEATURED_END -->", brief_featured_html(issued))
     page = replace_block(page, "<!-- SXF:FEED_START -->", "<!-- SXF:FEED_END -->", cards_html(homepage_items[1:]))
     item_list = {
         "@context": "https://schema.org",
         "@type": "ItemList",
         "@id": "https://sxf.si/#latest-signals",
-        "name": "Featured AI model, agent and research signals",
-        "description": "A curated list of current AI model, agent and research signals tracked by SXF / AI.",
+        "name": "SXF Daily Brief and featured AI signals",
+        "description": "Five curated AI news stories in the daily SXF Brief, followed by featured AI model, agent and research signals.",
         "itemListOrder": "https://schema.org/ItemListOrderDescending",
         "mainEntityOfPage": {"@id": "https://sxf.si/#webpage"},
         "numberOfItems": len(homepage_items),
         "itemListElement": [
             {
                 "@type": "ListItem",
-                "position": i + 1,
-                "item": {"@type": "Thing", "name": item["title"], "url": item.get("signal_url", item["url"])},
-            }
-            for i, item in enumerate(homepage_items)
+                "position": 1,
+                "item": {"@type": "CollectionPage", "name": brief_title, "url": BASE_URL + "/brief/"},
+            },
+            *[
+                {
+                    "@type": "ListItem",
+                    "position": i + 2,
+                    "item": {"@type": "Thing", "name": item["title"], "url": item.get("signal_url", item["url"])},
+                }
+                for i, item in enumerate(homepage_items[1:])
+            ],
         ],
     }
     schema = '<script type="application/ld+json" id="latest-signals-schema">' + json.dumps(item_list, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
