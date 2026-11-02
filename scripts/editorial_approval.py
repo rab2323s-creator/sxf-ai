@@ -32,7 +32,7 @@ def rejection_fingerprint(url):
 
 
 def is_rejected(row, decisions):
-    return rejection_fingerprint(row.get("url", "")) in decisions.rejected_fingerprints
+    return rejection_fingerprint(row.get("url", "")) in getattr(decisions, "rejected_fingerprints", frozenset())
 
 
 class DecisionLedger(dict):
