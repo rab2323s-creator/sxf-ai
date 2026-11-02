@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
@@ -216,3 +217,39 @@ def approved_inbox_items(inbox, decisions, legacy_urls, prepare, parse_date, cut
                          ("title", "url", "source", "published", "summary", "category", "tags")
                          if key in row})
     return eligible
+
+
+def enforce_noindex_on_html(html):
+    """Demote stale legacy signal HTML from indexable to noindex in-place.
+
+    Require both crawler directives: silently leaving a stale page indexable
+    would violate owner approval even if sitemap discovery is blocked.
+    """
+    for name in ("robots", "googlebot"):
+        expression = re.compile(
+            r'(<meta\\s+name="' + name + r'"\\s+content=")[^"]*(" ?/>)',
+            re.I,
+        )
+        updated, matches = expression.subn(
+            lambda match: match.group(1) + "noindex,follow" + match.group(2), html,
+        )
+        if matches != 1:
+            raise EditorialConfigError(
+                f"Expected exactly one {name} directive on orphan Signal page, saw {matches}"
+            )
+        html = updated
+    return html
+
+
+def retire_unapproved_signal_routes(directory, allowed_slugs):
+    """Keep existing URLs crawlable as noindex to support search deindexing."""
+    count = 0
+    for page in sorted(directory.glob("*/index.html")):
+        if page.parent.name in allowed_slugs:
+            continue
+        original = page.read_text(encoding="utf-8")
+        updated = enforce_noindex_on_html(original)
+        if original != updated:
+            page.write_text(updated, encoding="utf-8")
+            count += 1
+    return count

@@ -59,6 +59,8 @@ jobs:
         run: python tests/test_snapshot_rendering.py
       - name: Editorial admin JavaScript syntax
         run: node --check admin/editorial.js
+      - name: Editorial robots and indexing unit tests
+        run: python tests/test_editorial_indexing.py
       - name: Signal processing and human approval regressions
         run: |
           python tests/test_signal_processing.py
@@ -179,6 +181,8 @@ jobs:
         run: node tests/test_vibe_coding_lab.cjs
       - name: Intelligence explosion reference regression
         run: python tests/test_intelligence_explosion_guide.py
+      - name: Verify approved-only news sitemap and crawler directives
+        run: python tests/test_editorial_indexing.py --post-build
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift

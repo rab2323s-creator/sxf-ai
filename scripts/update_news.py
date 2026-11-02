@@ -14,7 +14,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
-from editorial_approval import read_decisions, read_legacy_urls, publication_decision, load_inbox, build_inbox, approved_inbox_items
+from editorial_approval import (read_decisions, read_legacy_urls, publication_decision,
+    load_inbox, build_inbox, approved_inbox_items, retire_unapproved_signal_routes)
 from signal_processing import partition_source_quality
 from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
@@ -2350,6 +2351,12 @@ def editorial_public_decision(row):
     )
 
 
+def is_approved_indexable_signal(item):
+    """Only published, SEO-qualified news may be indexed by crawlers."""
+    return (bool(item.get("seo_eligible", seo_signal_eligible(item)))
+            and editorial_public_decision(item).status == "accept")
+
+
 def discoverable_news(items):
     """Keep only editorially accepted items in public discovery surfaces.
 
@@ -3989,8 +3996,9 @@ def signal_article_context():
 
 
 def signal_page_html(item, items):
-    """Compatibility entrypoint for rendered Signal article routes."""
-    return render_signal_article(item, items, signal_article_context())
+    """Render retained URLs with robots directives matching human approval."""
+    row = {**item, "seo_eligible": is_approved_indexable_signal(item)}
+    return render_signal_article(row, items, signal_article_context())
 
 
 def signals_index_html(items):
@@ -10927,9 +10935,11 @@ def superintelligence_hub_with_explosion_link(items, current_items):
 
 
 def build_discovery_pages(items, current_items):
-    # Keep all historic signal route files (and their current SEO metadata).
-    # Curate every *listing and recommendation* from approved news only.
+    # Keep historic URLs for deindexing; only owner-approved pages remain
+    # crawlable with index,follow or linked from the public directory.
     legacy_items = items
+    indexable_legacy_items = [row for row in legacy_items
+                              if is_approved_indexable_signal(row)]
     # Model reference pages are durable, evidence-backed records, not the
     # high-impact news feed. Keep their existing relevance-approved history
     # so a stricter current-news policy never deindexes established models.
@@ -11013,7 +11023,7 @@ def build_discovery_pages(items, current_items):
     super_agents_guide_path = GUIDES_DIR / "ai-super-agents"
     super_agents_guide_path.mkdir(parents=True, exist_ok=True)
     (super_agents_guide_path / "index.html").write_text(ai_super_agents_guide_html(items), encoding="utf-8")
-    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=legacy_items), encoding="utf-8")
+    (SIGNALS_DIR / "index.html").write_text(render_signals_index_html(items, signal_page_context(), legacy_items=indexable_legacy_items), encoding="utf-8")
     groups = topic_groups(items)
     (TOPICS_DIR / "index.html").write_text(topics_index_html(groups), encoding="utf-8")
     for slug, (topic, matched) in groups.items():
@@ -11044,6 +11054,12 @@ def build_discovery_pages(items, current_items):
         path = SIGNALS_DIR / item["signal_slug"]
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
+
+    # Earlier builds left signal routes which no longer exist in the current
+    # archive. Demote those as well, or they could stay indexed indefinitely.
+    retire_unapproved_signal_routes(
+        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items}
+    )
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
 
@@ -11108,7 +11124,10 @@ def content_lastmod(items, fallback="2026-09-26"):
 def update_sitemap(items):
     from sitemap_generation import SitemapContext, write_sitemap
 
-    return write_sitemap(items, SitemapContext(
+    # Sitemap must never expose editorial-review or rejected signals.
+    # Other static site pages and model references retain their own policies.
+    approved_items = discoverable_news(items)
+    return write_sitemap(approved_items, SitemapContext(
         base_url=BASE_URL,
         sitemap_path=SITEMAP,
         model_pricing_catalog=MODEL_PRICING_CATALOG,

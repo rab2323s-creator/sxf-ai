@@ -42,7 +42,9 @@ def main():
         assert prepared["editorial"] == review["editorial"]
         assert prepared["seo_eligible"], slug
         html = update_news.signal_page_html(prepared, [prepared])
-        assert '<meta name="robots" content="index,follow' in html
+        expected_indexable = update_news.is_approved_indexable_signal(prepared)
+        robots = 'index,follow' if expected_indexable else 'noindex,follow'
+        assert f'<meta name="robots" content="{robots}' in html
         assert '<h1>' + review["h1"] + '</h1>' in unescape(html)
         assert 'signal-evidence" aria-labelledby="signal-evidence-title"' in html
         assert review["limitations"] in unescape(html)
