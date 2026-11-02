@@ -6,20 +6,41 @@ The frozen legacy allowlist preserves already-published historical signals.
 """
 from __future__ import annotations
 
+import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
 
 DECISIONS_VERSION = "sxf-editorial-decisions-v1"
 INBOX_VERSION = "sxf-editorial-inbox-v1"
 BASELINE_VERSION = "sxf-editorial-legacy-v1"
-DECISION_STATES = {"approved", "rejected", "hold"}
-INBOX_LIMIT = 500
+DECISION_STATES = {"approved", "hold"}
+INBOX_LIMIT = 200
+INBOX_MAX_AGE_HOURS = 36
 
 
 class EditorialConfigError(ValueError):
     """Invalid editorial files must fail closed, not make new items public."""
+
+
+def rejection_fingerprint(url):
+    """One-way URL identifier only: do not retain rejected title or summary."""
+    if not valid_http_url(url):
+        raise EditorialConfigError("Cannot fingerprint invalid URL")
+    return hashlib.sha256(url.encode("utf-8")).hexdigest()
+
+
+def is_rejected(row, decisions):
+    return rejection_fingerprint(row.get("url", "")) in decisions.rejected_fingerprints
+
+
+class DecisionLedger(dict):
+    """Approval decisions plus content-free rejected URL fingerprints."""
+
+    def __init__(self, entries, rejected_fingerprints=()):
+        super().__init__(entries)
+        self.rejected_fingerprints = frozenset(rejected_fingerprints)
 
 
 def identity(row):
@@ -41,6 +62,11 @@ def read_decisions(path: Path):
     if not isinstance(payload, dict) or payload.get("version") != DECISIONS_VERSION:
         raise EditorialConfigError("Unsupported editorial decision ledger version")
     entries = payload.get("decisions")
+    hashes = payload.get("rejected_fingerprints", [])
+    if (not isinstance(hashes, list) or len(hashes) != len(set(hashes)) or
+            not all(isinstance(value, str) and len(value) == 64 and
+                    all(c in "0123456789abcdef" for c in value) for value in hashes)):
+        raise EditorialConfigError("Rejected fingerprints must be unique SHA-256 strings")
     if not isinstance(entries, list):
         raise EditorialConfigError("Editorial decisions must be an array")
     indexed = {}
@@ -61,7 +87,7 @@ def read_decisions(path: Path):
         if url in indexed:
             raise EditorialConfigError(f"Duplicate editorial URL: {url}")
         indexed[url] = entry
-    return indexed
+    return DecisionLedger(indexed, hashes)
 
 
 def read_legacy_urls(path: Path):
@@ -95,7 +121,7 @@ def publication_decision(row, decisions, legacy_urls, assess):
     from news_relevance import NewsDecision
 
     state = exact_decision(row, decisions)
-    if state == "rejected":
+    if is_rejected(row, decisions):
         return NewsDecision("reject", "human_rejected")
     if state == "hold":
         return NewsDecision("review", "human_hold")
@@ -123,54 +149,56 @@ def load_inbox(path: Path):
 
 
 def build_inbox(existing, candidates, *, now, decisions, legacy_urls, assess,
-                prepare, maximum=INBOX_LIMIT):
-    """Merge candidate evidence without losing old pending decisions.
+                prepare, maximum=INBOX_LIMIT, window_hours=INBOX_MAX_AGE_HOURS):
+    """Bounded rolling daily queue: no permanent pile of undecided stories.
 
-    New fetched content supersedes stale summary/quality data; existing
-    candidates remain reviewable even if a feed drops an older article.
+    Previously published, approved and rejected stories are never queued.
+    Unreviewed items expire after a short time; updates from feeds cannot
+    artificially reset the story's publication timestamp.
     """
+    observed = datetime.fromisoformat(now.replace("Z", "+00:00"))
+    cutoff = observed - timedelta(hours=window_hours)
     by_url = {}
-    for row in existing:
+    for row in list(existing) + list(candidates):
         if not isinstance(row, dict) or not valid_http_url(row.get("url")):
             continue
-        if row.get("url") in legacy_urls:
+        url = row["url"]
+        if url in legacy_urls or url in decisions or is_rejected(row, decisions):
             continue
-        by_url[row["url"]] = dict(row)
-    for row in candidates:
-        if not isinstance(row, dict) or not valid_http_url(row.get("url")):
+        if not isinstance(row.get("title"), str) or not row["title"].strip():
             continue
-        if not row.get("title") or not row.get("source") or not row.get("published"):
+        if not isinstance(row.get("source"), str) or not row["source"].strip():
             continue
-        if row["url"] in legacy_urls:
+        try:
+            published = datetime.fromisoformat(row["published"].replace("Z", "+00:00"))
+        except (KeyError, TypeError, ValueError, AttributeError):
             continue
-        before = by_url.get(row["url"], {})
-        doc = dict(before)
-        doc.update({k: row[k] for k in ("url", "title", "source", "published")})
-        # Never erase a substantive summary with a later empty feed snippet.
+        if published.tzinfo is None or published < cutoff or published > observed + timedelta(hours=1):
+            continue
+        old = by_url.get(url, {})
+        doc = dict(old)
+        for key in ("url", "title", "source", "published"):
+            doc[key] = row[key]
         if row.get("summary"):
             doc["summary"] = row["summary"]
         elif not doc.get("summary"):
             doc["summary"] = ""
-        doc["first_seen"] = before.get("first_seen") or now
+        doc["first_seen"] = old.get("first_seen") or row.get("first_seen") or now
         doc["last_seen"] = now
-        by_url[row["url"]] = doc
-    ordered = sorted(by_url.values(), key=lambda row: (row.get("published") or "", row["url"]), reverse=True)
+        by_url[url] = doc
     selected = []
-    for row in ordered:
+    for row in sorted(by_url.values(), key=lambda r: (r["published"], r["url"]), reverse=True):
         verdict = assess(row["title"], row.get("summary", ""), row["source"], row["url"])
         quality = prepare([row])[0]
-        # Shadow/other adapter data must retain the warning even when its
-        # body is too thin for a public SEO page.
         row["editorial_status"] = verdict.status
         row["editorial_reason"] = verdict.reason
         row["seo_eligible"] = bool(quality.get("seo_eligible"))
         row["seo_quality_score"] = quality.get("seo_quality_score", 0)
-        row["decision"] = exact_decision(row, decisions) or "pending"
+        row["decision"] = "pending"
         selected.append(row)
         if len(selected) >= maximum:
             break
     return selected
-
 
 def approved_inbox_items(inbox, decisions, legacy_urls, prepare, parse_date, cutoff):
     """Re-ingest an approved, previously discovered story even if RSS moved on."""
