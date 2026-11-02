@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
+from editorial_approval import read_decisions, read_legacy_urls, publication_decision, load_inbox, build_inbox, approved_inbox_items
 from signal_processing import partition_source_quality
 from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
@@ -79,6 +80,9 @@ MODEL_EVALUATIONS_PATH = ROOT / "data" / "model-evaluations.json"
 SOURCE_CONFIG_PATH = ROOT / "data" / "source-config.json"
 SOURCE_SHADOW_PATH = ROOT / "data" / "source-shadow.json"
 EDITORIAL_REVIEW_QUEUE_PATH = ROOT / "data" / "editorial-review-queue.json"
+EDITORIAL_DECISIONS_PATH = ROOT / "data" / "editorial-decisions.json"
+EDITORIAL_BASELINE_PATH = ROOT / "data" / "editorial-legacy-published.json"
+EDITORIAL_INBOX_PATH = ROOT / "data" / "editorial-inbox.json"
 INDEX = ROOT / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 SECTION_PAGES = {
@@ -2339,6 +2343,13 @@ def section_cards_html(items):
     """Compatibility entrypoint for category section cards."""
     return render_section_cards(items, FeedCardContext(relative_time=relative_time))
 
+def editorial_public_decision(row):
+    return publication_decision(
+        row, read_decisions(EDITORIAL_DECISIONS_PATH),
+        read_legacy_urls(EDITORIAL_BASELINE_PATH), assess_editorial_news,
+    )
+
+
 def discoverable_news(items):
     """Keep only editorially accepted items in public discovery surfaces.
 
@@ -2348,7 +2359,7 @@ def discoverable_news(items):
     """
     return [
         item for item in items
-        if assess_editorial_news(item.get("title", ""), item.get("summary", ""), item.get("source", ""), item.get("url", "")).status == "accept"
+        if editorial_public_decision(item).status == "accept"
     ]
 
 
@@ -11231,6 +11242,9 @@ def main():
     from model_history import sync_model_history_file
     history_result = sync_model_history_file(MODEL_PRICING_PATH, MODEL_HISTORY_PATH)
 
+    human_decisions = read_decisions(EDITORIAL_DECISIONS_PATH)
+    legacy_urls = read_legacy_urls(EDITORIAL_BASELINE_PATH)
+    previous_inbox = load_inbox(EDITORIAL_INBOX_PATH)
     incoming = []
     errors = []
     source_metrics = {}
@@ -11367,10 +11381,31 @@ def main():
         if parse_date(item.get("published", "")) is not None and parse_date(item["published"]) >= ingest_cutoff
     ]
     enriched = enrich_summaries(incoming, existing_by_url)
+    inbox_candidates = list(incoming) + list(shadow_candidates)
+    incoming.extend(approved_inbox_items(
+        previous_inbox, human_decisions, legacy_urls, prepare_items, parse_date,
+        now - timedelta(days=INITIAL_ARCHIVE_DAYS),
+    ))
+    updated_inbox = build_inbox(
+        previous_inbox, inbox_candidates, now=now.isoformat().replace("+00:00", "Z"),
+        decisions=human_decisions, legacy_urls=legacy_urls,
+        assess=assess_editorial_news, prepare=prepare_items,
+    )
+    EDITORIAL_INBOX_PATH.write_text(json.dumps({
+        "version": "sxf-editorial-inbox-v1",
+        "updated_at": now.isoformat().replace("+00:00", "Z"),
+        "items": updated_inbox,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # Reject noise BEFORE adding new articles to the archive or sitemap.
     # Previously published URLs are preserved separately as legacy records.
-    incoming, review_candidates, rejected_candidates = partition_news_rows(incoming, assess_editorial_news)
+    incoming, review_candidates, rejected_candidates = partition_news_rows(
+        incoming, lambda title, summary, source, url: publication_decision(
+            next((row for row in incoming if row["url"] == url), {
+                "url": url, "title": title, "source": source, "summary": summary,
+            }), human_decisions, legacy_urls, assess_editorial_news,
+        ),
+    )
     print(
         f"Editorial ingestion gate: accepted={len(incoming)}, "
         f"review={len(review_candidates)}, rejected={len(rejected_candidates)}"
@@ -11418,6 +11453,8 @@ def main():
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=MAX_AGE_DAYS)
     current = select_current_items(archive, cutoff)
+    current = [row for row in current if publication_decision(
+        row, human_decisions, legacy_urls, assess_editorial_news).status == "accept"]
     if not current:
         raise RuntimeError("No AI-relevant current signals: refusing to publish unrelated archive fallback")
 
