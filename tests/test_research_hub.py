@@ -92,6 +92,11 @@ def main():
     assert [row["position"] for row in featured["itemListElement"]] == list(range(1, 6))
     assert all(row["url"].replace("https://sxf.si", "") in p.links for row in featured["itemListElement"]), "Indexed research articles must also be linked from visible cards"
     assert any("microsoft-mai-dxo-ai-diagnosis-science" in row["url"] for row in featured["itemListElement"])
+    article_url = "https://sxf.si/research/microsoft-mai-dxo-ai-diagnosis-science/"
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    assert sitemap.count("<loc>" + article_url + "</loc>") == 1, "Published MAI-DxO article must appear exactly once in sitemap"
+    generator = (ROOT / "scripts" / "sitemap_generation.py").read_text(encoding="utf-8")
+    assert "/research/microsoft-mai-dxo-ai-diagnosis-science/" in generator, "Sitemap generator must preserve article URL"
     assert any("ai-agent-payment-negotiation" in row["url"] for row in featured["itemListElement"])
     assert any(x.get("@id", "").endswith("#featured-research") for x in schemas[0]["@graph"])
     assert schemas[1]["@type"] == "ItemList"
