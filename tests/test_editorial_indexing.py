@@ -27,7 +27,21 @@ def test_page_headers():
     repaired = enforce_noindex_on_html(without_googlebot)
     assert 'name="robots" content="noindex,follow"' in repaired
     assert 'name="googlebot" content="noindex,follow"' in repaired
-    for bad in ('<head></head>', '<meta name="robots" content="index,follow" />'):
+    # Old pages can omit BOTH directives or use alternate meta syntax.
+    missing_both = '<head><title>Legacy source</title></head>'
+    repaired_both = enforce_noindex_on_html(missing_both)
+    assert repaired_both.count('content="noindex,follow"') == 2
+    assert enforce_noindex_on_html(repaired_both) == repaired_both
+    single_quote = "<head><meta content='index,follow' name='robots'></head>"
+    assert 'content="noindex,follow"' in enforce_noindex_on_html(single_quote)
+    duplicate = '<head><meta name="robots" content="index" /><meta name="robots" content="follow" /></head>'
+    try:
+        enforce_noindex_on_html(duplicate)
+    except EditorialConfigError:
+        pass
+    else:
+        raise AssertionError("Duplicated crawler policies must fail closed")
+    for bad in ('<head></head><head></head>', '<meta name="robots" content="index,follow" />'):
         try:
             enforce_noindex_on_html(bad)
         except EditorialConfigError:
