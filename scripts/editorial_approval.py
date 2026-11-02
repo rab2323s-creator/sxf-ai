@@ -220,26 +220,33 @@ def approved_inbox_items(inbox, decisions, legacy_urls, prepare, parse_date, cut
 
 
 def enforce_noindex_on_html(html):
-    """Demote stale legacy signal HTML from indexable to noindex in-place.
+    """Demote old news pages even when their historical head lacks googlebot.
 
-    Require both crawler directives: silently leaving a stale page indexable
-    would violate owner approval even if sitemap discovery is blocked.
+    The robots directive must appear exactly once. A missing googlebot tag
+    is added to the head; duplicates or malformed heads fail closed.
     """
     for name in ("robots", "googlebot"):
         expression = re.compile(
-            r'(<meta\s+name="' + name + r'"\s+content=")[^"]*(" ?/>)',
+            r'(<meta\\s+name="' + name + r'"\\s+content=")[^"]*(" ?/>)',
             re.I,
         )
         updated, matches = expression.subn(
             lambda match: match.group(1) + "noindex,follow" + match.group(2), html,
         )
-        if matches != 1:
-            raise EditorialConfigError(
-                f"Expected exactly one {name} directive on orphan Signal page, saw {matches}"
+        if matches > 1:
+            raise EditorialConfigError(f"Duplicate {name} directives in legacy Signal HTML")
+        if matches == 0:
+            if name == "robots":
+                raise EditorialConfigError("Legacy Signal HTML missing robots directive")
+            if not re.search(r"</head>", updated, re.I):
+                raise EditorialConfigError("Legacy Signal HTML missing head closing tag")
+            updated = re.sub(
+                r"</head>",
+                '<meta name="googlebot" content="noindex,follow" />\\n</head>',
+                updated, count=1, flags=re.I,
             )
         html = updated
     return html
-
 
 def retire_unapproved_signal_routes(directory, allowed_slugs):
     """Keep existing URLs crawlable as noindex to support search deindexing."""
