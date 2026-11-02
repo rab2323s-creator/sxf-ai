@@ -100,10 +100,11 @@ def main():
     baseline = read_legacy_urls(ROOT / "data" / "editorial-legacy-published.json")
     archive = json.loads((ROOT / "data" / "archive.json").read_text(encoding="utf-8"))
     feed = json.loads((ROOT / "data" / "news.json").read_text(encoding="utf-8"))
+    archive_by_url = {row["url"]: row for row in archive["items"]}
     assert all(
         row["url"] in baseline or (
             exact_decision(row, live_decisions) == "approved"
-            and row.get("seo_eligible") is True
+            and archive_by_url.get(row["url"], {}).get("seo_eligible") is True
         )
         for row in feed["items"]
     ), "Current feed must be grandfathered or explicitly human-approved and SEO-qualified"
