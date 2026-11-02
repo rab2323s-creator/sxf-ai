@@ -5,7 +5,7 @@
   const REPO = "rab2323s-creator/sxf-ai";
   const API = "https://api.github.com/repos/" + REPO + "/contents/";
   const RAW = "https://raw.githubusercontent.com/" + REPO + "/main/data/editorial-inbox.json";
-  let token = "", user = "", inbox = [], decisions = [], ledgerSha = "", busy = false;
+  let token = "", user = "", inbox = [], decisions = [], rejectedFingerprints = [], ledgerSha = "", busy = false;
   const $ = id => document.getElementById(id);
   const message = (value, error = false) => {
     $("message").textContent = value;
@@ -39,6 +39,7 @@
     if (ledger.version !== "sxf-editorial-decisions-v1" || !Array.isArray(ledger.decisions))
       throw Error("Approval ledger format mismatch");
     decisions = ledger.decisions;
+    rejectedFingerprints = ledger.rejected_fingerprints || [];
     ledgerSha = file.sha;
   }
   async function reload() {
@@ -104,12 +105,21 @@
     try {
       await loadLedger(); // CAS: always fetch current commit state before PUT
       const previous = decisions.findIndex(d => d.url === row.url);
+      if (status === "rejected") {
+        const bytes = new TextEncoder().encode(row.url);
+        const digest = await crypto.subtle.digest("SHA-256", bytes);
+        const fingerprint = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, "0")).join("");
+        if (!rejectedFingerprints.includes(fingerprint)) rejectedFingerprints.push(fingerprint);
+        if (previous >= 0) decisions.splice(previous, 1);
+      }
       const entry = {url: row.url, title: row.title, source: row.source,
         decision: status, reviewed_by: "github:" + user,
         reviewed_at: new Date().toISOString()};
-      if (previous < 0) decisions.push(entry);
-      else decisions[previous] = entry;
-      const payload = {version:"sxf-editorial-decisions-v1",decisions};
+      if (status !== "rejected") {
+        if (previous < 0) decisions.push(entry);
+        else decisions[previous] = entry;
+      }
+      const payload = {version:"sxf-editorial-decisions-v1",decisions,rejected_fingerprints:rejectedFingerprints};
       await request(API + "data/editorial-decisions.json", {
         method: "PUT", headers: {"Content-Type":"application/json"},
         body: JSON.stringify({message:"editorial: " + status + " " + row.title.slice(0, 65),
@@ -134,7 +144,7 @@
       await reload();
     } catch (error) {token = "";user = "";$("disconnect").disabled = true;message(error.message, true);}
   };
-  $("disconnect").onclick = () => {token = "";user = "";decisions = [];ledgerSha = "";
+  $("disconnect").onclick = () => {token = "";user = "";decisions = [];rejectedFingerprints = [];ledgerSha = "";
     $("disconnect").disabled = true;message("Disconnected. Close this tab to clear the session.");render();};
   $("reload").onclick = () => reload().catch(e => message(e.message,true));
   $("filter").onchange = render;
