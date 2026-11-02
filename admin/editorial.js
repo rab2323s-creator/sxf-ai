@@ -109,15 +109,23 @@
       message("Approval blocked: this article failed SEO evidence checks. Request a better source summary first.", true);
       return;
     }
-    if (!confirm("Record " + status + " for " + row.title + "?")) return;
+    const reverse = decisionFor(row) === "rejected" && status !== "rejected";
+    const prompt = reverse
+      ? "Undo the rejection and record " + status + " for " + row.title +
+        "? This removes the blocking fingerprint in the same GitHub commit."
+      : "Record " + status + " for " + row.title + "?";
+    if (!confirm(prompt)) return;
     busy = true;render();message("Saving decision via authenticated GitHub API...");
     try {
       await loadLedger(); // CAS: always fetch current commit state before PUT
       const previous = decisions.findIndex(d => d.url === row.url);
+      const fingerprint = await fingerprintFor(row.url);
       if (status === "rejected") {
-        const fingerprint = await fingerprintFor(row.url);
         if (!rejectedFingerprints.includes(fingerprint)) rejectedFingerprints.push(fingerprint);
         if (previous >= 0) decisions.splice(previous, 1);
+      } else {
+        // Reject reversal is atomic with the new owner decision in one CAS PUT.
+        rejectedFingerprints = rejectedFingerprints.filter(value => value !== fingerprint);
       }
       const entry = {url: row.url, title: row.title, source: row.source,
         decision: status, reviewed_by: "github:" + user,
