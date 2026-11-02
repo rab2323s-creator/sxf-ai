@@ -66,8 +66,36 @@ def main():
         rejected = ledger([], [rejection_fingerprint(story["url"])])
         assert publication_decision({**story, "seo_eligible": True}, rejected,
                                     set(), assess).status == "reject"
-        assert build_inbox(pending, [], now=now, decisions=rejected,
-                           legacy_urls=set(), assess=assess, prepare=prepare) == []
+        rejected_inbox = build_inbox(pending, [], now=now, decisions=rejected,
+                                     legacy_urls=set(), assess=assess, prepare=prepare)
+        assert len(rejected_inbox) == 1 and rejected_inbox[0]["decision"] == "rejected"
+        # Rejected records remain visible past the pending expiry window.
+        older = {**story, "published": (timestamp-timedelta(days=40)).isoformat()}
+        old_rejected = build_inbox([older], [], now=now, decisions=rejected,
+                                   legacy_urls=set(), assess=assess, prepare=prepare)
+        assert len(old_rejected) == 1 and old_rejected[0]["decision"] == "rejected"
+        # A reversal writes the new decision AND removes the fingerprint atomically.
+        reversed_hold = ledger([{**base, "decision": "hold"}])
+        assert publication_decision({**story, "seo_eligible": True}, reversed_hold,
+                                    set(), assess).status == "review"
+        assert build_inbox(rejected_inbox, [], now=now, decisions=reversed_hold,
+                           legacy_urls=set(), assess=assess, prepare=prepare)[0]["decision"] == "hold"
+        reversed_approval = ledger([{**base, "decision": "approved"}])
+        assert publication_decision({**story, "seo_eligible": True}, reversed_approval,
+                                    set(), assess).status == "accept"
+        assert publication_decision({**story, "seo_eligible": False}, reversed_approval,
+                                    set(), assess).status != "accept"
+        # A malformed ledger must fail closed, not accidentally un-reject a URL.
+        path.write_text(json.dumps({"version": "sxf-editorial-decisions-v1",
+            "decisions": [{**base, "decision": "approved"}],
+            "rejected_fingerprints": [rejection_fingerprint(story["url"])]}))
+        from editorial_approval import EditorialConfigError
+        try:
+            read_decisions(path)
+        except EditorialConfigError:
+            pass
+        else:
+            raise AssertionError("Conflicting rejection + approval must fail closed")
     frozen = read_legacy_indexable_urls(ROOT / "data" / "editorial-legacy-indexable.json")
     assert len(frozen) == 89, "Frozen historical indexable routes changed"
     print("PASS: source-filtered RSS -> pending -> held -> approved with SEO gate -> rejected")
