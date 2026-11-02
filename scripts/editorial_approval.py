@@ -227,7 +227,7 @@ def enforce_noindex_on_html(html):
     """
     for name in ("robots", "googlebot"):
         expression = re.compile(
-            r'(<meta\\s+name="' + name + r'"\\s+content=")[^"]*(" ?/>)',
+            r'(<meta\s+name="' + name + r'"\s+content=")[^"]*(" ?/>)',
             re.I,
         )
         updated, matches = expression.subn(
@@ -242,7 +242,7 @@ def enforce_noindex_on_html(html):
                 raise EditorialConfigError("Legacy Signal HTML missing head closing tag")
             updated = re.sub(
                 r"</head>",
-                '<meta name="googlebot" content="noindex,follow" />\\n</head>',
+                '<meta name="googlebot" content="noindex,follow" />\n</head>',
                 updated, count=1, flags=re.I,
             )
         html = updated
