@@ -65,6 +65,7 @@ jobs:
         run: |
           python tests/test_signal_processing.py
           python tests/test_editorial_approval.py
+          python tests/test_editorial_journey.py
       - name: Feed card rendering regression tests
         run: python tests/test_feed_card_rendering.py
       - name: Shared HTML shell and SEO regression tests
