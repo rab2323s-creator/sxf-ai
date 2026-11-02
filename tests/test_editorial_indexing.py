@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import json
 import sys
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -77,6 +78,25 @@ def test_publication():
     assert publication_decision(item, DecisionLedger({}), set(), assess).status != "accept"
 
 
+def test_historical_indexing_snapshot():
+    """The 89 previously indexed source URLs must remain published."""
+    from editorial_approval import read_legacy_indexable_urls, read_legacy_urls
+    from update_news import (ARCHIVE_OUT, SITEMAP, EDITORIAL_BASELINE_PATH,
+                             EDITORIAL_INDEX_BASELINE_PATH, is_approved_indexable_signal)
+    archived = json.loads(ARCHIVE_OUT.read_text(encoding="utf-8"))["items"]
+    frozen = read_legacy_indexable_urls(EDITORIAL_INDEX_BASELINE_PATH)
+    published = read_legacy_urls(EDITORIAL_BASELINE_PATH)
+    by_url = {row["url"]: row for row in archived}
+    assert len(frozen) == 89 and frozen <= published
+    assert frozen <= by_url.keys()
+    sitemap = SITEMAP.read_text(encoding="utf-8")
+    for url in frozen:
+        row = by_url[url]
+        assert is_approved_indexable_signal(row), "Formerly indexed source was deindexed: " + url
+        assert "<loc>" + row["signal_url"] + "</loc>" in sitemap, (
+            "Formerly indexed signal removed from sitemap: " + url)
+
+
 def test_generated_sitemap():
     from update_news import (
         ARCHIVE_OUT, SITEMAP, SIGNALS_DIR,
@@ -111,4 +131,5 @@ if __name__ == "__main__":
     # --post-build is run only after source regeneration on CI.
     if "--post-build" in sys.argv:
         test_generated_sitemap()
+        test_historical_indexing_snapshot()
     print("PASS: human-only signal indexability, sitemap and orphan noindex policies")
