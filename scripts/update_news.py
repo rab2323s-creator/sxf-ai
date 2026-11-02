@@ -2351,10 +2351,30 @@ def editorial_public_decision(row):
     )
 
 
+def previously_manually_published_signal(item):
+    """Respect explicit pre-existing editorial promotions, not auto-ranked news."""
+    review_path = ROOT / "data" / "ai-enrichment-review.json"
+    if not review_path.is_file():
+        return False
+    ledger = json.loads(review_path.read_text(encoding="utf-8"))
+    if ledger.get("version") != "sxf-ai-enrichment-review-v1":
+        raise RuntimeError("Unsupported prior manually reviewed signal ledger")
+    return any(
+        row.get("signal_slug") == item.get("signal_slug")
+        and row.get("signal_url") == item.get("signal_url")
+        and row.get("review_status") == "approved"
+        and row.get("approved_for_publish") is True
+        and row.get("index_decision") == "index"
+        and row.get("approved_at")
+        for row in ledger.get("items", [])
+    )
+
+
 def is_approved_indexable_signal(item):
-    """Only published, SEO-qualified news may be indexed by crawlers."""
+    """New items need approval; historic manual promotions remain indexable."""
     return (bool(item.get("seo_eligible", seo_signal_eligible(item)))
-            and editorial_public_decision(item).status == "accept")
+            and (editorial_public_decision(item).status == "accept"
+                 or previously_manually_published_signal(item)))
 
 
 def discoverable_news(items):
@@ -11126,7 +11146,7 @@ def update_sitemap(items):
 
     # Sitemap must never expose editorial-review or rejected signals.
     # Other static site pages and model references retain their own policies.
-    approved_items = discoverable_news(items)
+    approved_items = [item for item in items if is_approved_indexable_signal(item)]
     return write_sitemap(approved_items, SitemapContext(
         base_url=BASE_URL,
         sitemap_path=SITEMAP,
