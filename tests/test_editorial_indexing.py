@@ -67,7 +67,7 @@ def test_generated_sitemap():
     import json
     archive = json.loads(ARCHIVE_OUT.read_text(encoding="utf-8"))["items"]
     document = SITEMAP.read_text(encoding="utf-8")
-    indexed = set(re.findall(r"<loc>(https://sxf\\.si/signals/[^<]+)</loc>", document))
+    indexed = set(re.findall(r"<loc>(https://sxf\.si/signals/[^<]+)</loc>", document))
     indexed.discard("https://sxf.si/signals/")
     expected = {row["signal_url"] for row in archive
                 if is_approved_indexable_signal(row)}
