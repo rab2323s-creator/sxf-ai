@@ -1776,8 +1776,48 @@ def validate_source_expansion(news, archive):
 
 
 
+def validate_editorial_news_indexing(archive):
+    """Catch any published news URL that bypasses human editorial approval."""
+    from update_news import is_approved_indexable_signal
+
+    signal_root = ROOT / "signals"
+    site = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    indexed = {
+        url for url in re.findall(r"<loc>(https://sxf\.si/signals/[^<]+)</loc>", site)
+        if url != "https://sxf.si/signals/"
+    }
+    expected = set()
+    archive_slugs = set()
+    for row in archive.get("items", []):
+        approved = is_approved_indexable_signal(row)
+        slug = row.get("signal_slug")
+        if not slug:
+            fail("Archive signal missing slug")
+        archive_slugs.add(slug)
+        page_path = signal_root / slug / "index.html"
+        if not page_path.is_file():
+            fail(f"Signal page missing: {slug}")
+        content = page_path.read_text(encoding="utf-8")
+        if approved:
+            expected.add(row["signal_url"])
+            if 'name="robots" content="index,follow' not in content:
+                fail(f"Approved signal is not indexable: {slug}")
+        elif not re.search(r'<meta name="robots" content="noindex,follow"', content):
+            fail(f"Unapproved signal remains indexable: {slug}")
+    if indexed != expected:
+        fail(f"News sitemap contains unapproved or missing URLs: "
+             f"unexpected={len(indexed - expected)}, missing={len(expected - indexed)}")
+    for orphan in signal_root.glob("*/index.html"):
+        if orphan.parent.name not in archive_slugs:
+            content = orphan.read_text(encoding="utf-8")
+            if not re.search(r'<meta name="robots" content="noindex,follow"', content):
+                fail(f"Orphaned, unapproved news URL remains indexable: {orphan}")
+
+
 def validate_indexable_signal_graph(archive):
-    eligible = [item for item in archive.get("items", []) if item.get("seo_eligible")]
+    from update_news import is_approved_indexable_signal
+    eligible = [item for item in archive.get("items", [])
+                if is_approved_indexable_signal(item)]
     if not eligible:
         return
 
@@ -2170,6 +2210,7 @@ def main():
         fail("archive must contain at least current feed items")
     validate_topic_relevance(archive)
     validate_source_expansion(news, archive)
+    validate_editorial_news_indexing(archive)
     validate_indexable_signal_graph(archive)
     validate_site_shell()
     validate_ai_security_authority_page()

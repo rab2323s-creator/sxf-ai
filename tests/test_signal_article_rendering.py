@@ -146,7 +146,10 @@ def main():
     assert wrapper_schema[1]["datePublished"] == normal["published"]
     assert wrapper_schema[1]["dateModified"] == normal["modified_at"]
     assert '<link rel="canonical" href="' + normal["signal_url"] + '" />' in wrapper_html
-    assert '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />' in wrapper_html
+    # The pure renderer may render an SEO-qualified item directly, but the
+    # production wrapper must block indexing until a human approves it.
+    assert '<meta name="robots" content="noindex,follow" />' in wrapper_html
+    assert '<meta name="googlebot" content="noindex,follow" />' in wrapper_html
     assert len(schema_from(update_news.signal_page_html(special, [special]))["@graph"]) == 4
 
     # Source summaries are included for discovery, but they must never become

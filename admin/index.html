@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Editorial approvals · SXF</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b101a;color:#e7edf8}
+*{box-sizing:border-box}body{margin:0 auto;max-width:1100px;padding:24px}a{color:#94bfff}
+h1{font-size:clamp(24px,4vw,38px);margin:8px 0 6px}p{color:#aab7cc;line-height:1.5}
+header{padding-bottom:24px;border-bottom:1px solid #2b3546}nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
+main{padding-top:24px}.panel,.story{background:#151e2c;border:1px solid #2f3b4d;border-radius:13px;padding:18px;margin-bottom:16px}
+label{font-size:14px;display:block;margin:12px 0 6px}input,select,button{font:inherit;border-radius:8px;padding:10px;border:1px solid #50647c}
+input,select{background:#0d1420;color:#e7edf8}button{background:#334e77;color:#fff;cursor:pointer}button:hover{filter:brightness(1.18)}
+button:disabled{opacity:.35;cursor:default}.approve{background:#176b53}.reject{background:#804047}.hold{background:#6b5a30}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.grow{flex:1;min-width:180px}
+small,.metadata{color:#91a4bf}strong{color:#fff}.meta{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}.tag{border:1px solid #61748d;padding:2px 7px;border-radius:8px;font-size:12px}
+.summary{color:#becbe0}#message{min-height:18px}#message.error{color:#ff9797}
+.visually-hidden{position:absolute;left:-9999px}
+</style></head>
+<body><header><nav><a href="/">SXF / HOME</a><span>PRIVATE EDITORIAL WORKSPACE</span></nav><h1>Review AI news</h1>
+<p>Only explicit, verified owner decisions can publish a new story. Quality and provenance checks remain mandatory.</p></header>
+<main><section class="panel" aria-label="GitHub authentication"><strong>Connect your GitHub account</strong>
+<p>Use a fine-grained GitHub token with <strong>Contents: Read and write</strong> access to <code>rab2323s-creator/sxf-ai</code>. This page keeps the token in memory only; it never stores it or puts it in a URL. Do not use a broad personal token.</p>
+<div class="row"><div class="grow"><label for="token">Temporary GitHub token</label><input style="width:100%" id="token" type="password" autocomplete="off" spellcheck="false" placeholder="GitHub fine-grained token"></div><button id="connect">Connect</button><button id="disconnect" disabled>Disconnect</button></div>
+<p id="message" role="status" aria-live="polite"></p></section>
+<div class="row"><label for="filter">Show</label><select id="filter"><option value="pending">Pending</option><option value="approved">Approved</option><option value="hold">Hold</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+<button id="reload">Refresh</button><span id="counts" class="metadata"></span></div>
+<section id="stories" aria-live="polite"></section></main>
+<script src="/admin/editorial.js" defer></script></body></html>
