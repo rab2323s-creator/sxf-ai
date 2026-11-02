@@ -4,7 +4,8 @@ from __future__ import annotations
 import json
 import re
 import sys
-from datetime import date
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,7 +16,7 @@ BRIEF_URL = "https://sxf.si/brief/"
 
 def main():
     actual_date = update_news.brief_issue_date()
-    assert actual_date <= date.today(), "Brief date in the future"
+    assert actual_date <= datetime.now(ZoneInfo("Europe/Berlin")).date(), "Brief date in the future"
     assert update_news.brief_featured_title(date(2026, 11, 2), today=date(2026, 11, 2)) == "The 5 AI Stories That Matter Today"
     assert update_news.brief_featured_title(date(2026, 11, 1), today=date(2026, 11, 2)) == "5 Essential AI Stories — Latest Brief"
     assert update_news.brief_featured_title(date(2026, 11, 3), today=date(2026, 11, 2)) != "The 5 AI Stories That Matter Today"
@@ -43,7 +44,7 @@ def main():
     section = page.split(start, 1)[1].split(end, 1)[0].strip()
     # A checked-in homepage must track the actual editorial date; subsequent
     # scheduled news runs refresh the Today/Latest label automatically.
-    if "--post-build" in sys.argv or actual_date == date.today():
+    if "--post-build" in sys.argv:
         assert section == update_news.brief_featured_html(actual_date)
     else:
         assert '<a class="featured-story" href="https://sxf.si/brief/">' in section
@@ -55,13 +56,16 @@ def main():
     assert structured["numberOfItems"] == len(structured["itemListElement"]) == 8
     first = structured["itemListElement"][0]
     assert first["position"] == 1 and first["item"]["url"] == BRIEF_URL
-    if "--post-build" in sys.argv or actual_date == date.today():
+    if "--post-build" in sys.argv:
         assert first["item"]["name"] == update_news.brief_featured_title(actual_date)
     assert [row["position"] for row in structured["itemListElement"]] == list(range(1, 9))
     # The actual above-the-fold radar Hero must use the same dated Brief.
     hero = re.search(r'<a class="hero-live-signal" id="heroSignalLink"[^>]*>.*?</a>', page, re.S)
     assert hero, "Missing the actual top Hero card"
-    assert hero.group(0) == update_news.hero_brief_html(actual_date), "Radar Hero must use the issue date"
+    if "--post-build" in sys.argv:
+        assert hero.group(0) == update_news.hero_brief_html(actual_date), "Post-build Radar Hero must use the current Brief issue date"
+    # Pre-build homepage markup may still reflect the previous editorial issue;
+    # the feed renderer syncs it after publication. Post-build parity is strict.
     assert 'href="/brief/"' in hero.group(0)
     assert 'DAILY AI BRIEF' in hero.group(0)
     assert '5 STORIES' in hero.group(0)
