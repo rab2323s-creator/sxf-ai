@@ -2847,7 +2847,15 @@ def signal_processing_context():
     return SignalProcessingContext(
         clean_summary=clean_summary,
         categorize=categorize,
-        assess_news=assess_editorial_news,
+        # Approval is an independent gate; the SEO-quality check uses the
+        # prepared record separately and remains mandatory at publication.
+        assess_news=lambda title, summary, source, url:
+            publication_decision(
+                {"title": title, "summary": summary, "source": source,
+                 "url": url, "seo_eligible": True},
+                read_decisions(EDITORIAL_DECISIONS_PATH),
+                read_legacy_urls(EDITORIAL_BASELINE_PATH), assess_editorial_news,
+            ),
         classify_tags=classify_tags,
         slug_aliases=SLUG_ALIASES,
         signal_slug=signal_slug,
@@ -11397,6 +11405,8 @@ def main():
         "items": updated_inbox,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    # Human approval requires a complete, quality-scored source record.
+    incoming = prepare_items(incoming)
     # Reject noise BEFORE adding new articles to the archive or sitemap.
     # Previously published URLs are preserved separately as legacy records.
     incoming, review_candidates, rejected_candidates = partition_news_rows(
