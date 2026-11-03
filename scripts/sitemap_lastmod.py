@@ -157,7 +157,7 @@ def current_brief_issue_date(root: Path, base_url: str) -> str:
     """Read the canonical Brief's real issue date from its published JSON-LD."""
     html = (root / "brief" / "index.html").read_text(encoding="utf-8")
     blocks = re.findall(
-        r'<script[^>]*type="application/ld\\+json"[^>]*>(.*?)</script>',
+        r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',
         html, flags=re.I | re.S,
     )
     for raw in blocks:
