@@ -13,6 +13,7 @@ from datetime import date, datetime, timezone
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 
@@ -146,6 +147,28 @@ def _date(value: str, fallback: str) -> str:
         return fallback
 
 
+def berlin_day(when: datetime | None = None) -> str:
+    """Return the SXF editorial calendar date (Europe/Berlin)."""
+    moment = when if when is not None else datetime.now(timezone.utc)
+    return moment.astimezone(ZoneInfo("Europe/Berlin")).date().isoformat()
+
+
+def current_brief_issue_date(root: Path, base_url: str) -> str:
+    """Read the canonical Brief's real issue date from its published JSON-LD."""
+    html = (root / "brief" / "index.html").read_text(encoding="utf-8")
+    blocks = re.findall(
+        r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',
+        html, flags=re.I | re.S,
+    )
+    for raw in blocks:
+        data = json.loads(raw)
+        for node in data.get("@graph", [data]):
+            if (isinstance(node, dict) and node.get("@type") == "CollectionPage"
+                    and node.get("url") == base_url + "/brief/"):
+                return date.fromisoformat(node["datePublished"]).isoformat()
+    raise ValueError("Current SXF Brief needs a canonical CollectionPage with datePublished")
+
+
 def synchronize_lastmod(rows: list[str], sitemap_path: Path, base_url: str, *, today: str | None = None) -> list[str]:
     """Resolve every sitemap date against the saved content fingerprint."""
     root = sitemap_path.parent
@@ -157,8 +180,10 @@ def synchronize_lastmod(rows: list[str], sitemap_path: Path, base_url: str, *, t
     saved = prior.get("pages", {})
     if not isinstance(saved, dict):
         raise ValueError("Invalid sitemap lastmod state")
+    explicit_today = today is not None
     today = today or datetime.now(timezone.utc).date().isoformat()
     today = _date(today, "")
+    brief_today = today if explicit_today else berlin_day()
     if not today:
         raise ValueError("Invalid current date")
     pages = {}
@@ -179,7 +204,19 @@ def synchronize_lastmod(rows: list[str], sitemap_path: Path, base_url: str, *, t
         else:
             # First run: preserve published dates; never mark every old page as new.
             stamp = _date(old_dates.get(url) or proposed, today)
-        if stamp > today:
+        if url == base_url + "/brief/":
+            # Brief uses Berlin's publication calendar, not the CI runner's UTC
+            # date. Repair a stale prior date even if its content hash matches.
+            issued = current_brief_issue_date(root, base_url)
+            if issued > brief_today:
+                raise ValueError("Brief issue date is in the future in Europe/Berlin")
+            if previous and previous.get("hash") != fingerprint:
+                stamp = brief_today
+            else:
+                stamp = max(stamp, issued)
+            if stamp > brief_today:
+                stamp = brief_today
+        elif stamp > today:
             stamp = today
         pages[url] = {"hash": fingerprint, "lastmod": stamp}
         updated_rows.append(row[:match.start(2)] + stamp + row[match.end(2):])
