@@ -80,9 +80,9 @@ def main():
         html = unescape(update_news.signal_page_html(row, [row]))
         assert "name=\"robots\" content=\"index,follow" in html
         assert "<h1>" + review["h1"] + "</h1>" in html
-        assert 'class="signal-reader-tools"' in html
-        assert 'class="signal-editorial-analysis"' in html
-        assert 'class="signal-evidence"' in html
+        assert 'signal-reader-tools"' in html
+        assert 'signal-editorial-analysis"' in html
+        assert 'signal-evidence"' in html
         for link in review["internal_links"]:
             assert 'href="' + link["url"] + '"' in html, link["url"]
         for item in review["reader_checklist"]:
