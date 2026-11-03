@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "a9e7178f017f3946088f1e79886eab45c94f208822437304ea85df9a817722e2",
+  "snapshot_hash": "b6b93667d4c7ead3c865585239b976b010f856d87474118715a058b3b9248447",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -527,6 +527,81 @@
     },
     {
       "rank": 6,
+      "signal_slug": "ai-for-science-expands-to-foundations-and-research-institutions-ad10900",
+      "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
+      "title": "AI for Science expands to foundations and research institutions",
+      "source": "Anthropic",
+      "category": "Research",
+      "published": "2026-10-28T00:00:00Z",
+      "priority_score": 143,
+      "evidence_hash": "f3ea165382e1bc7c2c0b7724669451309daa0d126d875505be8d1cb6e5cf2791",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "AI for Science expands to foundations and research institutions",
+          "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+          "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
+          "source": "Anthropic",
+          "published": "2026-10-28T00:00:00Z",
+          "category": "Research",
+          "tags": [
+            "Research"
+          ],
+          "summary": "Anthropic expanded AI for Science on October 28, 2026, highlighting 20 foundations, research institutions and scientific groups receiving or distributing Claude credits. The initiative supports access to AI tools and projects across several scientific fields; it does not establish that a new drug, cure or scientific breakthrough has been validated.",
+          "signal_score": 50,
+          "seo_quality_score": 78,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "durable-intelligence-layer",
+            "high-value-topic",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 7,
       "signal_slug": "gpt-6-1-terra-in-github-copilot-344482f",
       "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
       "title": "GPT-6.1 Terra in GitHub Copilot",
@@ -741,7 +816,80 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 8,
+      "signal_slug": "introducing-the-grid-protectors-program-19244c7",
+      "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
+      "title": "Introducing the Grid Protectors Program",
+      "source": "OpenAI",
+      "category": "Tools",
+      "published": "2026-11-02T15:00:00Z",
+      "priority_score": 136,
+      "evidence_hash": "27566c2960bfc1f8c3d989c29b143de039187fbacd6c8de18cf7256eb4d8dbb6",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing the Grid Protectors Program",
+          "url": "https://openai.com/index/grid-protectors-program",
+          "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
+          "source": "OpenAI",
+          "published": "2026-11-02T15:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "OpenAI announced Grid Protectors on November 2, 2026, outlining how future compute campuses could reduce electricity demand during grid stress. Its Effingham County agreement with Georgia Power includes up to 1,000 MW of flexible demand response, but campus operation, savings and customer-rate effects remain future claims subject to implementation.",
+          "signal_score": 46,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/grid-protectors-program"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 9,
       "signal_slug": "expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1",
       "signal_url": "https://sxf.si/signals/expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1/",
       "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
@@ -811,7 +959,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 10,
       "signal_slug": "securing-our-frontier-model-training-environment-48e2274",
       "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
       "title": "Securing our frontier model training environment",
@@ -849,259 +997,6 @@
         "models": [],
         "source_urls": [
           "https://openai.com/index/securing-our-frontier-model-training-environment"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
-      "signal_slug": "using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62",
-      "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
-      "title": "Using thousands of AI agents to uncover new leads in biological data",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-21T04:50:00Z",
-      "priority_score": 126,
-      "evidence_hash": "f2f727decbda6b2db342236ff2110157e0aa842204b29165c26d83e6d7eb58a2",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
-        },
-        "signal": {
-          "title": "Using thousands of AI agents to uncover new leads in biological data",
-          "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data",
-          "signal_url": "https://sxf.si/signals/using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62/",
-          "source": "OpenAI",
-          "published": "2026-10-21T04:50:00Z",
-          "category": "Research",
-          "tags": [
-            "AI Agents",
-            "OpenAI"
-          ],
-          "summary": "OpenAI, PerturbAI and Scripps Research used thousands of GPT-Rosalind agents to interrogate a whole-brain mouse CRISPR atlas spanning millions of cells in 32 minutes. Distributed analysis brought together gene perturbations, literature and hypotheses; a controlled comparison showed over 700 literature references versus 11 from a single agent at the largest workload.",
-          "signal_score": 41,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [
-          {
-            "model_id": "gpt-rosalind-research",
-            "provider": "OpenAI",
-            "family": "GPT-Rosalind",
-            "model": "GPT-Rosalind Research",
-            "context_window": null,
-            "max_output": null,
-            "knowledge_cutoff": null,
-            "reasoning": {
-              "type": "specialized reasoning",
-              "levels": [
-                "supported"
-              ],
-              "default": null
-            },
-            "modalities": {
-              "input": [
-                "text"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "OpenAI specialized reasoning model for approved life-sciences research workflows and scientific tool use.",
-            "pricing_standard": {
-              "start": "2026-10-05",
-              "end": null,
-              "input": 5,
-              "cached_input": 0.5,
-              "output": 25
-            },
-            "pricing_long_context": null,
-            "verified_at": "2026-10-07",
-            "official_sources": [
-              "https://openai.com/gpt-rosalind/",
-              "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-              "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 66,
-                "type": "model_added",
-                "model_id": "gpt-rosalind-research",
-                "verified_at": "2026-10-07",
-                "previous_event_hash": "467461da2aadc5385c11c91bfe282c3d9be09a92529ccbd49d0fac92f529ccbf",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-Rosalind",
-                  "model": "GPT-Rosalind Research",
-                  "context_window": null,
-                  "max_output": null,
-                  "knowledge_cutoff": null,
-                  "reasoning": {
-                    "type": "specialized reasoning",
-                    "levels": [
-                      "supported"
-                    ],
-                    "default": null
-                  },
-                  "modalities": {
-                    "input": [
-                      "text"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-10-05",
-                        "end": null,
-                        "input": 5,
-                        "cached_input": 0.5,
-                        "output": 25
-                      }
-                    ]
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/pricing",
-                  "family": "https://developers.openai.com/api/docs/pricing",
-                  "model": "https://developers.openai.com/api/docs/pricing",
-                  "context_window": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "max_output": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "knowledge_cutoff": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "reasoning": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-                  "modalities": "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_cc9f559b418146fb12e3",
-                "event_hash": "cc9f559b418146fb12e372e285e4711298f9d9716beb9d4ce37f8d127cebbc24"
-              }
-            ]
-          }
-        ],
-        "source_urls": [
-          "https://developers.openai.com/api/docs/pricing",
-          "https://help.openai.com/en/articles/20001193-gpt-rosalind-for-life-sciences-research",
-          "https://openai.com/gpt-rosalind/",
-          "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
-          "https://openai.com/index/scaling-ai-research-for-complex-biological-data"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "repository-plugin-defaults-and-enterprise-plugin-controls-generally-av-eb90692",
-      "signal_url": "https://sxf.si/signals/repository-plugin-defaults-and-enterprise-plugin-controls-generally-av-eb90692/",
-      "title": "Repository plugin defaults and enterprise plugin controls generally available",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-28T15:33:00Z",
-      "priority_score": 125,
-      "evidence_hash": "4d70636f58bd3223583ad853ec03f03fc22a9bc015b95ab949b5555376ea9cfe",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Repository plugin defaults and enterprise plugin controls generally available",
-          "url": "https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available",
-          "signal_url": "https://sxf.si/signals/repository-plugin-defaults-and-enterprise-plugin-controls-generally-av-eb90692/",
-          "source": "GitHub",
-          "published": "2026-10-28T15:33:00Z",
-          "category": "Tools",
-          "tags": [
-            "Coding AI"
-          ],
-          "summary": "Repository plugin defaults and enterprise-managed plugin controls are now generally available in VS Code, Copilot CLI, and the GitHub Copilot app. Trusted repositories can install and enable default plugins for…",
-          "signal_score": 38,
-          "seo_quality_score": 67,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "high-value-topic"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-10-28-repository-plugin-defaults-and-enterprise-plugin-controls-generally-available"
         ]
       },
       "requested_output": {

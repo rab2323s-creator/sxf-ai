@@ -1,0 +1,110 @@
+<!doctype html><html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>OpenAI Pando: Git Scaling for Codex Agents</title>
+      <meta name="description" content="OpenAI built Pando, a Git-compatible backend for Codex-scale development. Understand 5x lower median push latency, trade-offs, architecture and limits." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/signals/scaling-git-at-openai-de4cf53/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/signals/scaling-git-at-openai-de4cf53/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/signals/scaling-git-at-openai-de4cf53/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="OpenAI Pando: Git Scaling for Codex Agents" />
+      <meta property="og:description" content="OpenAI built Pando, a Git-compatible backend for Codex-scale development. Understand 5x lower median push latency, trade-offs, architecture and limits." />
+      <meta property="og:url" content="https://sxf.si/signals/scaling-git-at-openai-de4cf53/" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="OpenAI Pando: Git Scaling for Codex Agents" />
+      <meta name="twitter:description" content="OpenAI built Pando, a Git-compatible backend for Codex-scale development. Understand 5x lower median push latency, trade-offs, architecture and limits." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/#webpage","url":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/","name":"OpenAI Pando: Git Scaling for Codex Agents","description":"OpenAI built Pando, a Git-compatible backend for Codex-scale development. Understand 5x lower median push latency, trade-offs, architecture and limits.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/#article"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","inLanguage":"en"},{"@type":"NewsArticle","@id":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/#article","headline":"OpenAI Pando explained: why Codex needed Git at agent scale","description":"OpenAI built Pando, a Git-compatible backend for Codex-scale development. Understand 5x lower median push latency, trade-offs, architecture and limits.","datePublished":"2026-11-02T15:30:00Z","dateModified":"2026-11-03T15:48:31.631836Z","mainEntityOfPage":{"@id":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/#webpage"},"url":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/","articleSection":"Tools","isPartOf":{"@id":"https://sxf.si/#website"},"author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","citation":["https://openai.com/index/scaling-git-at-openai"],"keywords":["OpenAI Pando","Pando Git backend","Codex source control","AI coding agents Git scaling","Git push latency"],"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://sxf.si/signals/scaling-git-at-openai-de4cf53/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Signals","item":"https://sxf.si/signals/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://sxf.si/tools/"}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page signal-page">
+      <a class="skip-link" href="#signal-main">Skip to signal</a>
+      <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+      <header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header>
+      <main id="signal-main">
+        <section class="intel-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="/tools/">Tools</a></nav>
+          <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / TOOLS</div>
+          <h1>OpenAI Pando explained: why Codex needed Git at agent scale</h1>
+          <div class="signal-meta-strip">
+            <div><span>SOURCE</span><strong>OpenAI</strong></div>
+            <div><span>PUBLISHED</span><strong>November 2, 2026</strong></div>
+            <div><span>LAYER</span><strong>Tools</strong></div>
+            <div><span>SIGNAL SCORE</span><strong>28/100</strong></div>
+          </div>
+        </section>
+        <section class="signal-layout shell">
+          <article class="signal-brief">
+            <p class="eyebrow">SXF VERIFIED BRIEF</p>
+            <p class="signal-summary">OpenAI published engineering details about Pando, its Git-compatible repository backend for scaling writes and reads as Codex increases parallel development. The company reports approximately fivefold lower median push latency and close to a petabyte of daily Git data served in production.</p>
+            <div class="signal-context"><span>WHY IT MATTERS</span><p>Agent-assisted software engineering can amplify ordinary infrastructure bottlenecks: many branches, frequent pushes, CI clones and simultaneous fetches. Pando illustrates that agent performance depends not just on model quality, but also on reliable version control, caching and concurrency.</p></div>
+            <div class="signal-context"><span>WHAT TO VERIFY</span><p>The figures are OpenAI measurements from one demanding monorepo and are not a general claim that replacing Git is necessary or beneficial for every team. Evaluate consistency semantics, maintenance complexity and end-to-end CI performance before considering similar architecture.</p></div>
+          </article>
+          <aside class="source-card">
+            <span class="source-card-label">SOURCE OF RECORD</span><strong>OpenAI</strong>
+            <p>Read the original publication for the complete context behind this signal.</p>
+            <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
+          </aside>
+        </section>
+        
+        <section class="signal-deep-dive shell signal-editorial-analysis" aria-labelledby="signal-technical-analysis-title"><div class="intel-section-head"><div><p class="eyebrow">SXF RESEARCH EXPLAINER</p><h2 id="signal-technical-analysis-title">What the technical evidence means.</h2></div><span>Source-grounded analysis</span></div><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 01</p><h2>Why coding agents expose hidden Git bottlenecks</h2><p>More powerful coding assistants can produce multiple proposed changes in parallel, each of which may trigger a push, clone, pull request, build and review. Source control then becomes part of the agent&#x27;s critical path. OpenAI says its monorepo suffered slow fetches, pushes and failed merges as this activity grew, with reliability at times dropping below 90 percent. That makes the infrastructure story worth studying independently of Codex&#x27;s model benchmark scores.</p><p>Pando does not replace the Git protocol developers use. Instead, it replaces the backend that stores and serves Git objects and references. The design addresses two pressures separately: high concurrency when many agents update unrelated branches, and high throughput when build systems fetch similar repository content. Keeping the client protocol familiar limits disruption to engineers and existing tools.</p><p>The larger lesson is operational: adding more AI-generated code can move a team&#x27;s bottleneck into shared systems. Teams should observe branch-update contention, clone time and CI queueing before assuming that another coding model will make the workflow faster.</p><p><a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 02</p><h2>The architectural trade-off behind the speedup</h2><p>Git stores content as immutable objects and maps branch names to commits through references. Pando lets updates to distinct branches proceed independently, rather than placing all repository writes behind a single global ordering point. That improves concurrency, but OpenAI notes that a reader looking at multiple branches may observe slightly different points in time. Consumers needing a coherent cross-branch snapshot must account for that behavior.</p><p>For reads, Pando reuses prepared packfiles across clients rather than building a customized pack for every fetch. This can trade some redundant bytes for significantly less server-side computation and greater cache effectiveness. The right choice depends on bandwidth, pack reuse, object locality and how frequently CI agents request overlapping history.</p><p>OpenAI reports nearly a fivefold reduction in median push latency and almost a petabyte of Git data served each day. These are valuable operational observations, not a promise that every Git server can reproduce them. Monorepo shape, replication topology and hardware matter.</p><p><a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 03</p><h2>What an engineering team should measure first</h2><p>Before redesigning repository storage, measure the total time from an agent proposing a patch to a reviewed, green build. Break that down into write admission, push acknowledgement, fetch and clone time, CI scheduling, cache hits, test runtime and human review. A server-only median can conceal tail latency that is more important to a team waiting on builds.</p><p>Do not discard correctness questions in pursuit of throughput. Test concurrent updates to the same ref, unrelated-branch writes, repository recovery after failure, access-control checks and how CI handles force pushes or missing objects. Consistency guarantees must be explicit in tooling and dashboards.</p><p>SXF&#x27;s operational recommendation is to pilot smaller improvements first: reuse CI workspaces, avoid redundant full clones, cache stable artifacts and inspect whether serial branch-update queues are the true limiting factor. Pando is consequential because it demonstrates infrastructure adapting to agents, not because every company suddenly needs to recreate a Git service.</p><p><a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article></section>
+        <section class="signal-deep-dive shell signal-evidence" aria-labelledby="signal-evidence-title"><div class="intel-section-head"><div><p class="eyebrow">PRIMARY-SOURCE FACTS</p><h2 id="signal-evidence-title">What the evidence establishes.</h2></div><span>Reviewed 2026-11-03</span></div><div class="deep-dive-facts"><div><strong>Deployment</strong><p>OpenAI says Pando now powers development in its internal monorepo while retaining the normal Git protocol and client workflows. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Push metric</strong><p>OpenAI reports that median push latency in production fell by nearly five times after deploying Pando. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Data throughput</strong><p>The report says Pando serves nearly a petabyte of Git repository data per day. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Prior reliability</strong><p>OpenAI describes periods when its earlier source-control infrastructure reliability fell below 90% under the growing workload. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Write model</strong><p>Pando coordinates reference updates independently by branch, enabling unrelated branches to be pushed in parallel. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Read model</strong><p>The design reuses packfiles across concurrent fetches, exchanging extra downloaded objects for cheaper shared serving. <a href="https://openai.com/index/scaling-git-at-openai" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div></div><div class="deep-dive-section" style="margin-top:24px"><p class="eyebrow">LIMITATIONS</p><p>Pando is an internal system described in a vendor engineering article; no public benchmark demonstrates the same speedup for arbitrary repositories. Per-branch causal consistency is a conscious trade-off, and the backend is not equivalent to a new Git client or a product generally available to adopt.</p></div></section>
+        <section class="signal-deep-dive shell signal-reader-tools" aria-labelledby="signal-reader-tools-title"><div class="intel-section-head"><div><p class="eyebrow">PRACTICAL TAKEAWAYS</p><h2 id="signal-reader-tools-title">What readers can check next.</h2></div></div><div class="deep-dive-section"><h3>Verification checklist</h3><ol><li>Measure end-to-end patch-to-green latency, including p95 and p99, not only median push time.</li><li>Validate reference consistency and failed-transaction recovery under concurrent agents.</li><li>Quantify cache hit rates and clone/fetch duplication before making backend changes.</li><li>Avoid treating provider monorepo numbers as independent Git server benchmarks.</li></ol></div><div class="deep-dive-section"><h3>Read the related SXF guides</h3><ul><li><a href="/guides/deploy-ai-agents-production/">Deploying AI agents to production</a><p>Approval and observability for agent-assisted operations.</p></li><li><a href="/research/ai-agent-reliability/">AI agent reliability research</a><p>Why outcomes and failure modes matter beyond agent benchmarks.</p></li><li><a href="/guides/llm-gateway/">LLM gateway engineering guide</a><p>Infrastructure-level controls when building AI-heavy developer systems.</p></li></ul></div></section>
+        <section class="signal-taxonomy shell">
+          <div><span>TOPICS</span><a href="/topics/openai/">OpenAI</a></div>
+          <div><span>MODELS</span><small>No named model detected</small></div>
+        </section>
+        <nav class="signal-archive-navigation shell" aria-label="Signal archive navigation"><a rel="prev" href="/signals/transformers-model-integration-contracts-fec0e46/"><span>Previous signal</span><strong>Transformers Model Integration Contracts</strong></a><a rel="next" href="/signals/introducing-the-grid-protectors-program-19244c7/"><span>Next signal</span><strong>Introducing the Grid Protectors Program</strong></a></nav>
+        <section class="related-signals shell">
+          <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
+          <div class="signal-list"><a class="signal-row" href="/signals/introducing-the-grid-protectors-program-19244c7/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-11-02T15:00:00Z">November 2, 2026</time></div>
+      <h3>Introducing the Grid Protectors Program</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/lifeval-ed4b582/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-11-02T09:00:00Z">November 2, 2026</time></div>
+      <h3>LifeVal</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/build-more-responsive-apps-with-the-decisions-api-27825e3/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-10-22T19:00:00Z">October 22, 2026</time></div>
+      <h3>Build more responsive apps with the Decisions API</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/patch-the-planet-global-response-coordination-as-agents-uncover-critic-d3f5195/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-10-21T07:00:00Z">October 21, 2026</time></div>
+      <h3>Patch the Planet: global response coordination as agents uncover critical vulnerabilities</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/gpt-6-and-intelligent-ui-for-everyone-0ca1450/">
+      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-10-07T00:00:00Z">October 7, 2026</time></div>
+      <h3>GPT-6 and Intelligent UI for everyone</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a></div>
+        </section>
+      </main>
+      <footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+    </body></html>

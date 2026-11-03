@@ -1,6 +1,56 @@
 {
-  "updated_at": "2026-11-03T13:16:25.770996Z",
+  "updated_at": "2026-11-03T15:48:32.600393Z",
   "items": [
+    {
+      "title": "Transformers Model Integration Contracts",
+      "summary": "Hugging Face outlined Model Integration Contracts (MICs) on November 3, 2026, proposing small architecture-aware model fixtures, runnable usage paths and human-reviewed baselines for faster CI checks. A retrospective UMT5 replay caught a real regression, but the MIC job is currently advisory and full-checkpoint testing still matters.",
+      "url": "https://huggingface.co/blog/transformers-mic",
+      "signal_url": "https://sxf.si/signals/transformers-model-integration-contracts-fec0e46/",
+      "source": "Hugging Face",
+      "published": "2026-11-03T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 42
+    },
+    {
+      "title": "Scaling Git at OpenAI",
+      "summary": "OpenAI described Pando on November 2, 2026, a Git-compatible backend serving its monorepo under heavy Codex-driven concurrent development. OpenAI reports nearly fivefold lower median push latency and close to a petabyte of Git data delivered daily, but the figures describe its production environment rather than independent benchmarks for other teams.",
+      "url": "https://openai.com/index/scaling-git-at-openai",
+      "signal_url": "https://sxf.si/signals/scaling-git-at-openai-de4cf53/",
+      "source": "OpenAI",
+      "published": "2026-11-02T15:30:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "Introducing the Grid Protectors Program",
+      "summary": "OpenAI announced Grid Protectors on November 2, 2026, outlining how future compute campuses could reduce electricity demand during grid stress. Its Effingham County agreement with Georgia Power includes up to 1,000 MW of flexible demand response, but campus operation, savings and customer-rate effects remain future claims subject to implementation.",
+      "url": "https://openai.com/index/grid-protectors-program",
+      "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
+      "source": "OpenAI",
+      "published": "2026-11-02T15:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 46
+    },
+    {
+      "title": "LifeVal",
+      "summary": "OpenAI introduced LifeVal on November 2, 2026 to assess AI assistance on practical tasks such as childcare, household administration, personal finance and public services. Its task selection draws on time-use research and a 3,995-person survey; published examples are evaluation results, not guarantees of real-world completion.",
+      "url": "https://openai.com/index/lifeval",
+      "signal_url": "https://sxf.si/signals/lifeval-ed4b582/",
+      "source": "OpenAI",
+      "published": "2026-11-02T09:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
     {
       "title": "Community safety report and new protections for teens",
       "summary": "OpenAI is strengthening violence prevention in ChatGPT with expanded safeguards, earlier interventions, and a new commitment to public safety reporting.",
@@ -128,6 +178,19 @@
         "GitHub Copilot"
       ],
       "signal_score": 38
+    },
+    {
+      "title": "AI for Science expands to foundations and research institutions",
+      "summary": "Anthropic expanded AI for Science on October 28, 2026, highlighting 20 foundations, research institutions and scientific groups receiving or distributing Claude credits. The initiative supports access to AI tools and projects across several scientific fields; it does not establish that a new drug, cure or scientific breakthrough has been validated.",
+      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
+      "source": "Anthropic",
+      "published": "2026-10-28T00:00:00Z",
+      "category": "Research",
+      "tags": [
+        "Research"
+      ],
+      "signal_score": 50
     },
     {
       "title": "The sleep framework: A new way for LLMs to retain knowledge in continual learning",
@@ -510,23 +573,23 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 164,
+      "OpenAI": 167,
       "Google AI": 24,
-      "Hugging Face": 61,
+      "Hugging Face": 62,
       "GitHub": 102,
       "Google Research": 16,
-      "Anthropic": 1,
+      "Anthropic": 2,
       "Meta": 0,
       "xAI": 0,
       "Microsoft": 1
     },
     "current_counts": {
-      "OpenAI": 11,
+      "OpenAI": 14,
       "Google AI": 1,
-      "Hugging Face": 15,
+      "Hugging Face": 16,
       "GitHub": 8,
       "Google Research": 3,
-      "Anthropic": 1,
+      "Anthropic": 2,
       "Meta": 0,
       "xAI": 0,
       "Microsoft": 1
@@ -545,14 +608,14 @@
         "age_rejection_count": 1263,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 11,
+        "publish_count": 14,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "Google AI": {
@@ -575,7 +638,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "Hugging Face": {
@@ -591,14 +654,14 @@
         "age_rejection_count": 868,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 15,
+        "publish_count": 16,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "GitHub": {
@@ -621,7 +684,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "Google Research": {
@@ -644,7 +707,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "Anthropic": {
@@ -660,14 +723,14 @@
         "age_rejection_count": 17,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 9,
-        "publish_count": 1,
+        "publish_count": 2,
         "adapter": "anthropic-sitemap",
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter_discovered_count": 30,
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -692,7 +755,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "xAI": {
@@ -715,7 +778,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       },
       "Microsoft": {
@@ -738,7 +801,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-03T13:15:51.529741Z",
+        "last_successful_fetch": "2026-11-03T15:47:41.305383Z",
         "errors": []
       }
     },
