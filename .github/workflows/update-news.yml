@@ -120,6 +120,8 @@ jobs:
         run: python scripts/update_news.py
       - name: Ensure original SXF Agent Lab evidence survives generated site builds
         run: python tests/test_ai_agent_lab_persistence.py
+      - name: Verify original Agent Lab search metadata and sitemap discovery
+        run: python tests/test_agent_lab_seo.py
       - name: Verify all source-cited editorial briefs after ingestion
         run: python tests/test_reviewed_signal_editorial.py --post-ingest
       - name: Research hub SEO, accessibility and internal-link regressions
