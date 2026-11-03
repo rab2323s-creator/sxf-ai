@@ -6811,7 +6811,9 @@ def open_source_ai_models_guide_html(items):
 def best_ai_agents_guide_html(items):
     canonical = f"{BASE_URL}/guides/best-ai-agents/"
     published = "2026-09-26"
-    verified = "2026-09-26"
+    verified = "2026-11-03"  # Last substantive edit, not vendor-pricing verification
+    lab_section_html = (ROOT / "data" / "guide-content" / "ai-agent-lab-section.html").read_text(encoding="utf-8")
+    lab_section_html = (ROOT / "data" / "guide-content" / "ai-agent-lab-section.html").read_text(encoding="utf-8")
     title = "Best AI Agents in 2026: Work, Research, Coding & Automation | SXF / AI"
     description = "Compare the best AI agents in 2026: ChatGPT Work, Claude Cowork, Manus, Zapier Agents and Devin Desktop by autonomy, browser and computer use, integrations, pricing and best use."
 
@@ -6867,6 +6869,7 @@ def best_ai_agents_guide_html(items):
         ("what-is-an-ai-agent","What is an AI agent?"),
         ("comparison","AI agent comparison"),
         ("how-we-evaluate","How we evaluate agents"),
+        ("sxf-hands-on-tests","SXF hands-on tests"),
         ("chatgpt-work","ChatGPT Work"),
         ("claude-cowork","Claude Cowork"),
         ("manus","Manus"),
@@ -6960,6 +6963,7 @@ def best_ai_agents_guide_html(items):
           <div class="guide-byline">
             <div><span>Published</span><strong>September 26, 2026</strong></div>
             <div><span>Last verified</span><strong>September 26, 2026</strong></div>
+            <div><span>Hands-on lab</span><strong>November 3, 2026</strong></div>
             <div><span>Reading time</span><strong>25 min</strong></div>
             <div><span>Research standard</span><strong>Primary-source first</strong></div>
           </div>
@@ -7013,6 +7017,7 @@ def best_ai_agents_guide_html(items):
               <p>SXF does not publish a single numerical score here because these systems are not interchangeable. A Zapier agent that executes a reliable CRM workflow and a Devin agent that fixes a repository issue solve different classes of work.</p>
             </section>
 
+            {lab_section_html}
             <section class="tool-review" id="chatgpt-work">
               <div class="tool-review-head"><span>01</span><div><p class="eyebrow">OPENAI</p><h2>ChatGPT Work: best general-purpose AI agent for multi-step knowledge work</h2></div></div>
               <p>OpenAI describes ChatGPT Work as an agent for longer, multi-step work and finished deliverables. It can gather information across connected apps and files, use a cloud computer and browser for supported web workflows, and produce documents, spreadsheets, presentations, reports and web outputs rather than stopping at a chat response.</p>

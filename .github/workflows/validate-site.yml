@@ -142,6 +142,8 @@ jobs:
         run: python scripts/patch_nullable_evaluation_context.py
       - name: Build site from current data and primary-source feeds
         run: python scripts/update_news.py
+      - name: Ensure original SXF Agent Lab evidence survives generated site builds
+        run: python tests/test_ai_agent_lab_persistence.py
       - name: Open Source topic, page and filter regressions
         run: |
           python tests/test_open_source_signals.py
