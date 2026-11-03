@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
-from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis
+from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis, render_review_reader_tools
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
@@ -104,7 +104,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                 "inLanguage": "en",
             },
             {
-                "@type": ["Article", "TechArticle"] if (is_async_merge_deep_dive or is_license_deep_dive or is_sol_copilot_deep_dive or is_intelligent_ui_deep_dive) else "Article",
+                "@type": review.get("schema_type", "NewsArticle") if review else (["Article", "TechArticle"] if (is_async_merge_deep_dive or is_license_deep_dive or is_sol_copilot_deep_dive or is_intelligent_ui_deep_dive) else "Article"),
                 "@id": canonical + "#article",
                 "headline": page_h1,
                 "description": description,
@@ -131,6 +131,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
                     "GitHub REST API",
                 ] if is_async_merge_deep_dive else license_reference.KEYWORDS if is_license_deep_dive else sol_copilot.KEYWORDS if is_sol_copilot_deep_dive else intelligent_ui.KEYWORDS if is_intelligent_ui_deep_dive else None,
                 "inLanguage": "en",
+                **({"keywords": review["keywords"]} if review and review.get("keywords") else {}),
             },
             {
                 "@type": "BreadcrumbList",
@@ -303,6 +304,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     editorial = intelligent_ui.EDITORIAL if is_intelligent_ui_deep_dive else sol_copilot.EDITORIAL if is_sol_copilot_deep_dive else license_reference.EDITORIAL if is_license_deep_dive else review["editorial"] if review else item.get("editorial") or editorial_units(item)
     evidence_html = render_review_evidence(review)
     analysis_html = render_review_analysis(review)
+    reader_tools_html = render_review_reader_tools(review)
     if is_license_deep_dive:
         deep_dive_html = license_reference.BODY_HTML
     if is_sol_copilot_deep_dive:
@@ -346,6 +348,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
         {deep_dive_html}
         {analysis_html}
         {evidence_html}
+        {reader_tools_html}
         <section class="signal-taxonomy shell">
           <div><span>TOPICS</span>{topic_links or '<small>No topic tag yet</small>'}</div>
           <div><span>MODELS</span>{model_links or '<small>No named model detected</small>'}</div>
