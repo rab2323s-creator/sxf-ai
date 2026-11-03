@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 import sys
 import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from sitemap_lastmod import (
-    content_fingerprint, refresh_existing_sitemap, synchronize_lastmod,
+    berlin_day, content_fingerprint, refresh_existing_sitemap, synchronize_lastmod,
     validate_sitemap_state,
 )
 
@@ -106,6 +107,46 @@ def main():
             assert "Duplicate" in str(e)
         else:
             raise AssertionError("Duplicate URL must be rejected")
+
+    # The issue published after UTC midnight's offset crossover must be dated
+    # according to SXF's Berlin publication day, not GitHub Actions UTC.
+    assert berlin_day(datetime(2026, 11, 2, 23, 30, tzinfo=timezone.utc)) == "2026-11-03"
+    with tempfile.TemporaryDirectory() as d:
+        root = Path(d)
+        (root / "data").mkdir()
+        brief = root / "brief" / "index.html"
+        brief.parent.mkdir(parents=True)
+        brief.write_text(
+            '<html><head><title>November 3 SXF Brief</title>'
+            '<script type="application/ld+json">'
+            '{"@graph":[{"@type":"CollectionPage","url":"https://sxf.si/brief/",'
+            '"datePublished":"2026-11-03"}]}</script></head>'
+            '<body><main><h1>Five real November 3 news reports</h1></main></body></html>',
+            encoding="utf-8",
+        )
+        brief_url = BASE + "/brief/"
+        sitemap = root / "sitemap.xml"
+        sitemap.write_text(xml([row(brief_url, "2026-11-02")]), encoding="utf-8")
+        # Simulate the erroneous 2 November fingerprint stored by the UTC build.
+        (root / "data" / "sitemap-lastmod-state.json").write_text(
+            json.dumps({"version": 1, "pages": {
+                brief_url: {"hash": content_fingerprint(root, brief_url, BASE),
+                            "lastmod": "2026-11-02"}
+            }}), encoding="utf-8",
+        )
+        updated = synchronize_lastmod([row(brief_url, "2026-11-02")],
+                                      sitemap, BASE, today="2026-11-03")
+        assert updated == [row(brief_url, "2026-11-03")], updated
+        sitemap.write_text(xml(updated), encoding="utf-8")
+        validate_sitemap_state(sitemap, BASE)
+        # Unchanged content must not manufacture another new modification date.
+        assert synchronize_lastmod(updated, sitemap, BASE, today="2026-11-04") == updated
+        try:
+            synchronize_lastmod(updated, sitemap, BASE, today="2026-11-02")
+        except ValueError as exc:
+            assert "future" in str(exc)
+        else:
+            raise AssertionError("Future issue dates must fail closed")
 
     print("PASS: content-based lastmod is persistent, stable and validated")
 
