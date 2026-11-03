@@ -16,6 +16,12 @@ BRIEF_URL = "https://sxf.si/brief/"
 
 def main():
     actual_date = update_news.brief_issue_date()
+    from datetime import datetime, timezone
+    from unittest.mock import patch
+    from zoneinfo import ZoneInfo
+    # The date seen by the Brief must follow Berlin after UTC midnight crossover.
+    assert datetime(2026, 11, 3, 23, 46, tzinfo=timezone.utc).astimezone(ZoneInfo("Europe/Berlin")).date() == date(2026, 11, 4)
+    assert update_news.brief_featured_title(date(2026, 11, 4), today=date(2026, 11, 4)) == "The 5 AI Stories That Matter Today"
     assert actual_date <= datetime.now(ZoneInfo("Europe/Berlin")).date(), "Brief date in the future"
     assert update_news.brief_featured_title(date(2026, 11, 2), today=date(2026, 11, 2)) == "The 5 AI Stories That Matter Today"
     assert update_news.brief_featured_title(date(2026, 11, 1), today=date(2026, 11, 2)) == "5 Essential AI Stories — Latest Brief"
