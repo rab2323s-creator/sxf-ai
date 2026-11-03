@@ -1,0 +1,11 @@
+task_id,task,owner,status,due_date,remaining_hours_stated,hours_counted_in_workload,is_unfinished,is_overdue,is_blocked,is_due_today,baseline_owner,baseline_status,baseline_due_date,updates_applied
+T201,Landing page QA,Rana,In Progress,2026-11-01,6,6,true,true,false,false,Rana,In Progress,2026-11-01,
+T202,SEO audit,Sara,Done,2026-11-02,4,0,false,false,false,false,Sara,Open,2026-11-02,"Status: Open -> Done (row 6, 2026-11-03 09:00Z)"
+T203,Pricing review,Sam,Open,2026-11-05,2,2,true,false,false,false,Sam,Open,2026-11-05,
+T204,Fix broken links,Rana,Blocked,2026-11-06,5,5,true,false,true,false,Rana,Blocked,2026-11-01,"Due date: 2026-11-01 -> 2026-11-06 (row 5, 2026-11-02 16:00Z)"
+T205,Newsletter integration,Sara,Blocked,2026-11-02,3,3,true,true,true,false,Sara,In Progress,2026-11-02,"Status: In Progress -> Blocked (row 2, 2026-11-03 08:00Z)"
+T206,Customer survey,Sam,In Progress,2026-11-03,7,7,true,false,false,true,Sam,In Progress,2026-11-03,
+T207,Release notes,Sara,Done,2026-11-02,0,0,false,false,false,false,Sara,Done,2026-11-02,
+T208,Analytics dashboard,Rana,Open,2026-11-04,8,8,true,false,false,false,Sam,Open,2026-11-04,"Owner: Sam -> Rana (row 7, 2026-11-03 10:30Z)"
+T209,Email automation,Rana,Open,2026-11-02,4,4,true,true,false,false,Rana,Open,2026-11-05,"Due date: 2026-11-05 -> 2026-11-02 (row 8, 2026-11-03 10:00Z)"
+T210,API integration,Sam,In Progress,2026-11-03,6,6,true,false,false,true,Sam,Blocked,2026-11-03,"Status: Blocked -> In Progress (row 4, 2026-11-03 11:00Z)"
