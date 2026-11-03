@@ -87,7 +87,7 @@ def main():
             assert 'href="' + link["url"] + '"' in html, link["url"]
         for item in review["reader_checklist"]:
             assert item in html
-        match = re.search(r'<script type="application/ld\\+json">(.*?)</script>', html, re.S)
+        match = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
         assert match, "Schema absent"
         graph = json.loads(match.group(1))["@graph"]
         article = next(x for x in graph if x.get("@id", "").endswith("#article"))
