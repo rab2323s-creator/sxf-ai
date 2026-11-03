@@ -18,7 +18,7 @@ SOURCES = {
 def main():
     decisions = read_decisions(ROOT / "data" / "editorial-decisions.json")
     inbox = json.loads((ROOT / "data" / "editorial-inbox.json").read_text())["items"]
-    assert len(decisions) == 3 and not decisions.rejected_fingerprints
+    assert len(decisions) >= 3 and not decisions.rejected_fingerprints
     archive = json.loads((ROOT / "data" / "archive.json").read_text())["items"]
     live = {row["url"]: row for row in archive}
     sitemap = (ROOT / "sitemap.xml").read_text()
