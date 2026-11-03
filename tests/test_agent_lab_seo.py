@@ -24,7 +24,7 @@ assert '/research/ai-agent-hands-on-2026-11/' in guide, "Comparison guide must l
 assert 'sitemap_entry(f"{BASE_URL}/research/ai-agent-hands-on-2026-11/"' in generator
 rows = [v.text for v in ET.fromstring(sitemap).iter() if v.tag.endswith('loc')]
 assert rows.count(URL) == 1, "Original study must appear exactly once in sitemap"
-match = re.search(r'<script type="application/ld[+]json">([\\s\\S]*?)</script>', study)
+match = re.search(r'<script type="application/ld[+]json">(.*?)</script>', study, re.S)
 assert match, "Missing JSON-LD article metadata"
 obj = json.loads(match.group(1))
 assert any(x.get("@type") == "TechArticle" for x in obj["@graph"])
