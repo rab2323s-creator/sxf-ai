@@ -1,0 +1,317 @@
+{
+  "title": "SXF / AI Marketing Agent Lab — operator-transcribed responses",
+  "date": "2026-11-04",
+  "data_type": "synthetic_fixture",
+  "source_note": "Responses were copied into the SXF research conversation by the test operator. These are transcriptions, not provider-signed execution logs, screenshots, or independently retrieved API records.",
+  "model_details": {
+    "make": "Make AI Agent; Make's AI Provider (default); Medium selected",
+    "zapier": "Zapier Agent Management Hub; underlying model/version not captured"
+  },
+  "test03": [
+    {
+      "platform": "Zapier Agents",
+      "run": 1,
+      "operator_local_time": "2026-11-03 23:47",
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CVR_DROP_25PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 5,
+      "false_flags": 2,
+      "missed_flags": 1
+    },
+    {
+      "platform": "Zapier Agents",
+      "run": 2,
+      "operator_local_time": "2026-11-04 00:10",
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0,
+      "format_note": "Visible agent message contained calculation narrative in addition to JSON."
+    },
+    {
+      "platform": "Zapier Agents",
+      "run": 3,
+      "operator_local_time": "2026-11-04 00:22",
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0,
+      "format_note": "Visible agent message contained calculation narrative in addition to JSON."
+    },
+    {
+      "platform": "Make AI Agent",
+      "run": 1,
+      "reasoning_seconds_reported": 17.7,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0
+    },
+    {
+      "platform": "Make AI Agent",
+      "run": 2,
+      "reasoning_seconds_reported": 15.1,
+      "credits_reported": 2.04,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0
+    },
+    {
+      "platform": "Make AI Agent",
+      "run": 3,
+      "reasoning_seconds_reported": 16,
+      "credits_reported": 2.11,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 5,
+      "false_flags": 0,
+      "missed_flags": 1
+    }
+  ],
+  "test04": [
+    {
+      "platform": "Make AI Agent",
+      "runs": 1,
+      "reasoning_seconds_reported": 14.9,
+      "credits_reported": 2.12,
+      "response": {
+        "recommendations": [
+          {
+            "channel": "Nonbrand Search",
+            "priority": "HIGH",
+            "evidence": [
+              "CPC increased from 1.20 to 1.90 (+58.33%)",
+              "CVR decreased from 3.00% to 2.00% (-33.33%)",
+              "ROAS decreased from 2.50 to 1.05 (-58.89%)"
+            ],
+            "next_checks": [
+              "Check for any changes in conversion attribution window or data discrepancies between baseline and current period",
+              "Review keyword-level performance and landing page experience to identify potential quality issues"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: A shift in audience quality or intent could be contributing to the observed declines without changing the campaign structure"
+          },
+          {
+            "channel": "Organic Search",
+            "priority": "MEDIUM",
+            "evidence": [
+              "CTR decreased from 0.0800 to 0.0700 (-12.50%)"
+            ],
+            "next_checks": [
+              "Compare organic visit quality and engagement metrics (time on site, pages per session) between baseline and current",
+              "Verify there were no changes in organic ranking signals or tracking definition for organic traffic"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: A temporary shift in organic query mix could be driving lower CTR without changes to paid channels"
+          },
+          {
+            "channel": "Meta Prospecting",
+            "priority": "HIGH",
+            "evidence": [
+              "CVR decreased from 3.00% to 1.33% (-55.56%)",
+              "ROAS decreased from 2.40 to 1.00 (-58.33%)"
+            ],
+            "next_checks": [
+              "Inspect audience targeting overlap and creative freshness to assess potential fatigue or mismatch",
+              "Analyze landing page relevance and funnel drop-offs for prospects versus previous period"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Changes in audience provisioning or creative relevance could be impacting conversion rates without altering budget"
+          }
+        ]
+      },
+      "notes": [
+        "All three qualifying channels included; correct priorities; valid JSON-only response.",
+        "Nonbrand Search ROAS decline written as 58.89%, while unrounded calculation is approximately 57.89%."
+      ]
+    },
+    {
+      "platform": "Zapier Agents",
+      "runs": 1,
+      "operator_local_time": "2026-11-04 01:22",
+      "response": {
+        "recommendations": [
+          {
+            "channel": "Nonbrand Search",
+            "priority": "HIGH",
+            "evidence": [
+              "CPC increased 58.3% ($1.20 to $1.90)",
+              "CVR decreased 33.3% (3.0% to 2.0%)",
+              "ROAS decreased 58% (2.5 to 1.05)"
+            ],
+            "next_checks": [
+              "Review keyword-level performance to identify which terms are driving higher costs and lower conversion rates",
+              "Audit landing page relevance and load times for current traffic to determine if quality score or user experience degradation is contributing to cost increases"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Increased competition on high-intent keywords may be raising bid prices while lower-quality traffic from broader match types is reducing conversion efficiency."
+          },
+          {
+            "channel": "Meta Prospecting",
+            "priority": "HIGH",
+            "evidence": [
+              "CVR decreased 55.7% (3.0% to 1.33%)",
+              "ROAS decreased 58.3% (2.4 to 1.0)"
+            ],
+            "next_checks": [
+              "Analyze audience segment performance to identify if the expanded audience is lower-intent or misaligned with product offering",
+              "Review creative performance and ad fatigue metrics to determine if ad relevance or messaging resonance has declined"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Audience expansion or creative rotation may have introduced lower-converting segments or messaging that does not resonate with the prospecting audience."
+          },
+          {
+            "channel": "Organic Search",
+            "priority": "MEDIUM",
+            "evidence": [
+              "CTR decreased 12.5% (8.0% to 7.0%)"
+            ],
+            "next_checks": [
+              "Check search rankings and SERP position changes for top-performing keywords to identify if ranking drops are causing lower click-through rates",
+              "Review search query reports and title/meta tag performance to assess whether recent content or on-page optimization changes affected visibility"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Ranking position decline or increased SERP competition may be reducing organic click-through rates despite stable or increased impressions."
+          }
+        ]
+      },
+      "notes": [
+        "All three qualifying channels included; correct priorities.",
+        "Visible output included long analysis before JSON, contrary to JSON-only instruction.",
+        "Some percentages rounded; Meta Prospecting CVR written as 55.7% vs exact ~55.56%."
+      ]
+    }
+  ]
+}
