@@ -2,11 +2,12 @@
   "title": "SXF / AI Marketing Agent Lab — operator-transcribed responses",
   "date": "2026-11-04",
   "data_type": "synthetic_fixture",
-  "source_note": "Responses were copied into the SXF research conversation by the test operator. These are transcriptions, not provider-signed execution logs, screenshots, or independently retrieved API records.",
+  "source_note": "Responses were copied into the SXF research conversation by the test operator. These are transcriptions, not provider-signed execution logs, screenshots, or independently retrieved API records. Dify responses were also pasted by the operator; the original UI sessions and backend execution metadata have not been independently exported.",
   "model_details": {
     "make": "Make AI Agent; Make's AI Provider (default); Medium selected",
     "zapier": "Zapier Agent Management Hub; underlying model/version not captured",
-    "n8n": "n8n Cloud Manual Trigger → AI Agent node → OpenAI Chat Model (gpt-4.1-mini). User-selected model name recorded; credential screen displayed '$2.00 left'. No advertising, CRM, or external tool integration was exercised. Exact model parameters, latency, cost and underlying gateway configuration were not captured."
+    "n8n": "n8n Cloud Manual Trigger → AI Agent node → OpenAI Chat Model (gpt-4.1-mini). User-selected model name recorded; credential screen displayed '$2.00 left'. No advertising, CRM, or external tool integration was exercised. Exact model parameters, latency, cost and underlying gateway configuration were not captured.",
+    "dify": "Dify workspace Agent configured in UI; model labeled 'Gemini 3.5 Flash' in the user-guided setup. Runs were operator-pasted responses from Preview, described as new Preview conversations for repeated Test 03. No skills, files, tools, knowledge integrations, live campaign access, model parameter export, or provider-signed logs were captured. 'AI credits' model access is not a cost measurement."
   },
   "test03": [
     {
@@ -313,6 +314,108 @@
       "missed_flags": 0,
       "source": "Operator-pasted n8n output table; JSON payload transcribed and scored against test03-gold.json",
       "visible_wrapper": "Markdown code fence appeared in pasted Output table; origin not established"
+    },
+    {
+      "platform": "Dify Agent",
+      "run": 1,
+      "response": {
+        "issues": [
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0,
+      "source": "Operator-pasted Dify Preview response in the SXF research conversation. The first run returned the same set in a different order; order is not scored.",
+      "format_note": "The pasted response is a JSON object with no surrounding prose or Markdown fences."
+    },
+    {
+      "platform": "Dify Agent",
+      "run": 2,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0,
+      "source": "Operator-pasted Dify Preview response in the SXF research conversation. The first run returned the same set in a different order; order is not scored.",
+      "format_note": "The pasted response is a JSON object with no surrounding prose or Markdown fences."
+    },
+    {
+      "platform": "Dify Agent",
+      "run": 3,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 0,
+      "missed_flags": 0,
+      "source": "Operator-pasted Dify Preview response in the SXF research conversation. The first run returned the same set in a different order; order is not scored.",
+      "format_note": "The pasted response is a JSON object with no surrounding prose or Markdown fences."
     }
   ],
   "test04": [
@@ -492,7 +595,63 @@
         "Exactly two diagnostic checks and an explicitly UNVERIFIED HYPOTHESIS per included channel; these do not validate the speculative causes.",
         "Operator-pasted Test 04 response was presented as JSON without visible narrative; no independently exported raw execution log available."
       ]
+    },
+    {
+      "platform": "Dify Agent",
+      "runs": 1,
+      "model_reported": "Gemini 3.5 Flash",
+      "response": {
+        "recommendations": [
+          {
+            "channel": "Nonbrand Search",
+            "priority": "HIGH",
+            "evidence": [
+              "CPC increased by 58.33% from $1.20 to $1.90",
+              "CVR decreased by 33.33% from 3.00% (0.0300) to 2.00% (0.0200)",
+              "ROAS decreased by 57.89% from 2.50 to 1.05"
+            ],
+            "next_checks": [
+              "Check search term performance reports to identify if specific keyword cost-per-click metrics increased.",
+              "Check landing page conversion rate analytics and event tracking logs for Nonbrand Search traffic."
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Increased auction competition or search engine keyword targeting shifts may have driven up cost-per-click while lower-intent search queries reduced landing page conversion rates."
+          },
+          {
+            "channel": "Meta Prospecting",
+            "priority": "HIGH",
+            "evidence": [
+              "CVR decreased by 55.56% from 3.00% (0.0300) to 1.33% (0.0133)",
+              "ROAS decreased by 58.33% from 2.40 to 1.00"
+            ],
+            "next_checks": [
+              "Check conversion funnel analytics and landing page performance for traffic coming from Meta Prospecting ad sets.",
+              "Check ad creative breakdown metrics and demographic targeting performance in ad reporting."
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Audience fatigue or creative saturation across prospecting audiences may have led to lower landing page engagement and reduced conversion rates."
+          },
+          {
+            "channel": "Organic Search",
+            "priority": "MEDIUM",
+            "evidence": [
+              "CTR decreased by 12.50% from 8.00% (0.0800) to 7.00% (0.0700)"
+            ],
+            "next_checks": [
+              "Check search console rankings and click-through rates by query and landing page.",
+              "Check search engine result page snippet presentation, page titles, and meta descriptions."
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Changes in search engine result page layout or position ranking drops for key terms may have reduced search result click-through rates."
+          }
+        ]
+      },
+      "source": "Operator-pasted Dify agent Preview response in the SXF research conversation; not a direct Dify export.",
+      "notes": [
+        "Three true qualifying channels, no extra channels; correct HIGH, HIGH, MEDIUM priorities.",
+        "All six triggering metrics reported with accurate rounded relative percentage changes and two numeric endpoints each. Values are rounded; original fixture and gold key determine thresholds.",
+        "Exactly two diagnostic checks and one explicitly UNVERIFIED HYPOTHESIS per channel.",
+        "The pasted Test 04 output was valid JSON without extraneous narrative. Hypotheses are not evidence of causes."
+      ]
     }
   ],
-  "n8n_format_note": "The operator pasted Test 03 results as an n8n Output table showing Markdown ```json fences around the JSON. The source of those fences (model output versus UI rendering) is not independently established. Parsed response objects are transcribed here, not raw provider exports."
+  "n8n_format_note": "The operator pasted Test 03 results as an n8n Output table showing Markdown ```json fences around the JSON. The source of those fences (model output versus UI rendering) is not independently established. Parsed response objects are transcribed here, not raw provider exports.",
+  "dify_method_note": "Dify was added as an additional exploratory platform, not one of the eight editorial tools in the companion buyer's guide. Its model differs from the other tested platform configurations. Model identity and run isolation are based on the operator-guided conversation, not independently retrieved execution metadata."
 }
