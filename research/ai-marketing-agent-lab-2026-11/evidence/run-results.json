@@ -5,7 +5,8 @@
   "source_note": "Responses were copied into the SXF research conversation by the test operator. These are transcriptions, not provider-signed execution logs, screenshots, or independently retrieved API records.",
   "model_details": {
     "make": "Make AI Agent; Make's AI Provider (default); Medium selected",
-    "zapier": "Zapier Agent Management Hub; underlying model/version not captured"
+    "zapier": "Zapier Agent Management Hub; underlying model/version not captured",
+    "n8n": "n8n Cloud Manual Trigger → AI Agent node → OpenAI Chat Model (gpt-4.1-mini). User-selected model name recorded; credential screen displayed '$2.00 left'. No advertising, CRM, or external tool integration was exercised. Exact model parameters, latency, cost and underlying gateway configuration were not captured."
   },
   "test03": [
     {
@@ -204,6 +205,114 @@
       "correct_flags": 5,
       "false_flags": 0,
       "missed_flags": 1
+    },
+    {
+      "platform": "n8n AI Agent",
+      "run": 1,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CVR_DROP_25PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 2,
+      "missed_flags": 0,
+      "source": "Operator-pasted n8n output table; JSON payload transcribed and scored against test03-gold.json",
+      "visible_wrapper": "Markdown code fence appeared in pasted Output table; origin not established"
+    },
+    {
+      "platform": "n8n AI Agent",
+      "run": 2,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CVR_DROP_25PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 2,
+      "missed_flags": 0,
+      "source": "Operator-pasted n8n output table; JSON payload transcribed and scored against test03-gold.json",
+      "visible_wrapper": "Markdown code fence appeared in pasted Output table; origin not established"
+    },
+    {
+      "platform": "n8n AI Agent",
+      "run": 3,
+      "response": {
+        "issues": [
+          {
+            "channel": "Nonbrand Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CPC_RISE_30PCT",
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Meta Prospecting",
+            "issue_codes": [
+              "CVR_DROP_25PCT",
+              "ROAS_DROP_40PCT"
+            ]
+          },
+          {
+            "channel": "Organic Search",
+            "issue_codes": [
+              "CTR_DROP_10PCT",
+              "CVR_DROP_25PCT"
+            ]
+          }
+        ]
+      },
+      "correct_flags": 6,
+      "false_flags": 2,
+      "missed_flags": 0,
+      "source": "Operator-pasted n8n output table; JSON payload transcribed and scored against test03-gold.json",
+      "visible_wrapper": "Markdown code fence appeared in pasted Output table; origin not established"
     }
   ],
   "test04": [
@@ -312,6 +421,78 @@
         "Visible output included long analysis before JSON, contrary to JSON-only instruction.",
         "Some percentages rounded; Meta Prospecting CVR written as 55.7% vs exact ~55.56%."
       ]
+    },
+    {
+      "platform": "n8n AI Agent",
+      "runs": 1,
+      "model": "gpt-4.1-mini",
+      "response": {
+        "recommendations": [
+          {
+            "channel": "Nonbrand Search",
+            "priority": "HIGH",
+            "evidence": [
+              "CTR decreased from 4.00% to 3.66% (-8.56%)",
+              "CPC increased from $1.20 to $1.90 (+58.33%)",
+              "CVR decreased from 3.00% to 2.00% (-33.33%)",
+              "ROAS decreased from 2.50 to 1.05 (-57.89%)"
+            ],
+            "next_checks": [
+              "Review recent changes in ad copy or keyword targeting",
+              "Check for shifts in audience segments or targeting parameters"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Reduced conversion or revenue efficiency may reflect less relevant traffic or shifts in audience intent."
+          },
+          {
+            "channel": "Meta Prospecting",
+            "priority": "HIGH",
+            "evidence": [
+              "CVR decreased from 3.00% to 1.33% (-55.56%)",
+              "ROAS decreased from 2.40 to 1.00 (-58.33%)"
+            ],
+            "next_checks": [
+              "Analyze creative performance for significant drops in user engagement",
+              "Check delivery breakdowns by demographic or placement for irregularities"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: A rapid decline in conversions and revenue may indicate increased impressions to less responsive audiences."
+          },
+          {
+            "channel": "Meta Retargeting",
+            "priority": "MEDIUM",
+            "evidence": [
+              "CVR decreased from 6.00% to 5.98% (-26.63%)"
+            ],
+            "next_checks": [
+              "Compare retargeting audience size and overlap with prior period",
+              "Review creative fatigue or frequency metrics over time"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Slightly lower conversion efficiency could relate to audience saturation."
+          },
+          {
+            "channel": "Organic Search",
+            "priority": "HIGH",
+            "evidence": [
+              "CTR decreased from 8.00% to 7.00% (-12.50%)",
+              "CVR decreased from 4.00% to 3.60% (-25.00%)"
+            ],
+            "next_checks": [
+              "Investigate ranking changes for top converting keywords",
+              "Check for changes in landing page experience or site speed"
+            ],
+            "unverified_hypothesis": "UNVERIFIED HYPOTHESIS: Organic performance may reflect changes in search ranking for high-intent queries."
+          }
+        ]
+      },
+      "notes": [
+        "Three correct qualifying channels found (Nonbrand Search, Meta Prospecting, Organic Search), plus one incorrect extra channel (Meta Retargeting).",
+        "All six true qualifying metric alerts represented, but three extra nonqualifying metric claims (Nonbrand CTR, Organic CVR, Meta Retargeting CVR).",
+        "Nonbrand CTR relative change is -8.5366%, below 10% alert threshold; the output also rounded it as -8.56%.",
+        "Organic CVR relative change is -10%, not -25%; its priority should be MEDIUM, not HIGH.",
+        "Meta Retargeting CVR relative change is -0.4065%, not -26.63%; channel should be excluded.",
+        "Exactly two diagnostic checks and an explicitly UNVERIFIED HYPOTHESIS per included channel; these do not validate the speculative causes.",
+        "Operator-pasted Test 04 response was presented as JSON without visible narrative; no independently exported raw execution log available."
+      ]
     }
-  ]
+  ],
+  "n8n_format_note": "The operator pasted Test 03 results as an n8n Output table showing Markdown ```json fences around the JSON. The source of those fences (model output versus UI rendering) is not independently established. Parsed response objects are transcribed here, not raw provider exports."
 }
