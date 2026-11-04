@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from datetime import date, datetime, timezone, timedelta
 from html import escape, unescape
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 
 from source_adapters import ADAPTER_CONTRACT_VERSION, run_source_adapter
@@ -2101,7 +2102,8 @@ def brief_issue_date(brief_html=None):
 
 
 def brief_featured_title(issued, *, today=None):
-    today = today or datetime.now(timezone.utc).date()
+    # Brief's editorial publication date is Europe/Berlin, not CI runner UTC.
+    today = today or datetime.now(ZoneInfo("Europe/Berlin")).date()
     return (
         "The 5 AI Stories That Matter Today"
         if issued == today else
