@@ -1,0 +1,110 @@
+<!doctype html><html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="color-scheme" content="dark" />
+      <title>CWE-bench v2: Which AI Model Can Fix Code Security Bugs?</title>
+      <meta name="description" content="CWE-bench v2 tests 100 security repair tasks. Compare model pass rates, attempt budgets, test limitations and real-world AI patch-review requirements." />
+      <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+      <meta name="theme-color" content="#07090d" />
+      <link rel="canonical" href="https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/" />
+      <link rel="alternate" hreflang="en" href="https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/" />
+      <link rel="alternate" hreflang="x-default" href="https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/" />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content="SXF / AI" />
+      <meta property="og:title" content="CWE-bench v2: Which AI Model Can Fix Code Security Bugs?" />
+      <meta property="og:description" content="CWE-bench v2 tests 100 security repair tasks. Compare model pass rates, attempt budgets, test limitations and real-world AI patch-review requirements." />
+      <meta property="og:url" content="https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content="CWE-bench v2: Which AI Model Can Fix Code Security Bugs?" />
+      <meta name="twitter:description" content="CWE-bench v2 tests 100 security repair tasks. Compare model pass rates, attempt budgets, test limitations and real-world AI patch-review requirements." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/#webpage","url":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/","name":"CWE-bench v2: Which AI Model Can Fix Code Security Bugs?","description":"CWE-bench v2 tests 100 security repair tasks. Compare model pass rates, attempt budgets, test limitations and real-world AI patch-review requirements.","isPartOf":{"@id":"https://sxf.si/#website"},"mainEntity":{"@id":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/#article"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","inLanguage":"en"},{"@type":"NewsArticle","@id":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/#article","headline":"CWE-bench v2 results: can AI agents repair real security flaws?","description":"CWE-bench v2 tests 100 security repair tasks. Compare model pass rates, attempt budgets, test limitations and real-world AI patch-review requirements.","datePublished":"2026-11-03T00:00:00Z","dateModified":"2026-11-04T10:57:24.224374Z","mainEntityOfPage":{"@id":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/#webpage"},"url":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/","articleSection":"Tools","isPartOf":{"@id":"https://sxf.si/#website"},"author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"publishingPrinciples":"https://sxf.si/about/#method","citation":["https://huggingface.co/blog/cwe-bench","https://huggingface.co/datasets/collinear-ai/cwe-bench"],"keywords":["CWE-bench v2","AI vulnerability fixing benchmark","Gemini 4 Argon security code","Claude Opus 5.5 cybersecurity","AI coding agents security"],"inLanguage":"en"},{"@type":"BreadcrumbList","@id":"https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Signals","item":"https://sxf.si/signals/"},{"@type":"ListItem","position":3,"name":"Tools","item":"https://sxf.si/tools/"}]}]}</script>
+      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href="/intelligence.css" />
+    </head>
+    <body class="intel-page signal-page">
+      <a class="skip-link" href="#signal-main">Skip to signal</a>
+      <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+      <header class="site-header"><div class="header-inner">
+      <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+      <nav class="top-nav" aria-label="Primary navigation"><a href="/models/">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
+      <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
+    </div></header>
+      <main id="signal-main">
+        <section class="intel-hero shell">
+          <nav class="intel-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF</a><span>/</span><a href="/signals/">Signals</a><span>/</span><a href="/tools/">Tools</a></nav>
+          <div class="intel-kicker"><span class="pulse-dot"></span> SIGNAL / TOOLS</div>
+          <h1>CWE-bench v2 results: can AI agents repair real security flaws?</h1>
+          <div class="signal-meta-strip">
+            <div><span>SOURCE</span><strong>Collinear AI / Hugging Face</strong></div>
+            <div><span>PUBLISHED</span><strong>November 3, 2026</strong></div>
+            <div><span>LAYER</span><strong>Tools</strong></div>
+            <div><span>SIGNAL SCORE</span><strong>28/100</strong></div>
+          </div>
+        </section>
+        <section class="signal-layout shell">
+          <article class="signal-brief">
+            <p class="eyebrow">SXF VERIFIED BRIEF</p>
+            <p class="signal-summary">Collinear AI released CWE-bench v2, a 100-task security-code repair evaluation with public programmatic graders and 11 tested models. The release provides reproducible testing material and cost-performance comparisons for agent-driven patches.</p>
+            <div class="signal-context"><span>WHY IT MATTERS</span><p>An agent that names a flaw is different from an agent that repairs real code without breaking other behavior. Runnable verifiers allow more meaningful comparisons, but the same checks can overlook untested vulnerabilities and implementation details.</p></div>
+            <div class="signal-context"><span>WHAT TO VERIFY</span><p>Pass@1 and pass@4 use different attempt budgets. The scores reflect a curated task set and particular harness. Automated verification cannot certify that an agent&#x27;s patch is safe for production; independent tests and review remain necessary.</p></div>
+          </article>
+          <aside class="source-card">
+            <span class="source-card-label">SOURCE OF RECORD</span><strong>Collinear AI / Hugging Face</strong>
+            <p>Read the original publication for the complete context behind this signal.</p>
+            <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Open original source <b>↗</b></a>
+          </aside>
+        </section>
+        
+        <section class="signal-deep-dive shell signal-editorial-analysis" aria-labelledby="signal-technical-analysis-title"><div class="intel-section-head"><div><p class="eyebrow">SXF RESEARCH EXPLAINER</p><h2 id="signal-technical-analysis-title">What the technical evidence means.</h2></div><span>Source-grounded analysis</span></div><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 01</p><h2>What does CWE-bench v2 measure?</h2><p>CWE-bench v2 gives a coding agent a checkout of an open-source repository and a concrete security issue to address. A submitted patch is judged by executable verification, not by how convincingly the agent explains its answer. This is a practical advance over tests that evaluate only multiple-choice knowledge of security categories.</p><p>The authors describe 100 tasks with human review and public graders. A replayable task makes it possible to inspect what changed and which test reported a success. Yet no published test suite covers every adjacent vulnerability, unforeseen input or production-specific setting.</p><p><a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 02</p><h2>How to interpret model scores and costs</h2><p>In the source&#x27;s comparison, Gemini 4 Argon scores 67.8% pass@1 while Claude Opus 5.5 reaches 67.3%. With more attempts, both report higher pass@4 results. Because additional tries can improve the chance of eventual success, reports should state the attempt budget rather than promote the larger number without its conditions.</p><p>DeepSeek V4.1 Flash has a lower reported cost per run and a lower pass@1 score in the study. Real-world expense also includes tool calls, human audit, retries and consequences of missed regressions. Model choice should therefore depend on the actual patch workflow rather than a single percentage.</p><p><a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article><article class="deep-dive-section"><p class="eyebrow">TECHNICAL ANALYSIS / 03</p><h2>A release checklist for agent-written security fixes</h2><p>Test security patches using the benchmark&#x27;s verifier, the application&#x27;s wider regression suite, static analysis and deliberately adversarial inputs. Review the diff for permission handling, authentication paths, dependency updates and accidental data exposure. A different reviewer should confirm the underlying vulnerability has actually been addressed.</p><p>The lasting contribution of CWE-bench v2 is a public set of tasks that developers can rerun and challenge. It gives teams a better way to evaluate candidates, but not permission to bypass approvals for high-impact code changes.</p><p><a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Check primary-source evidence ↗</a></p></article></section>
+        <section class="signal-deep-dive shell signal-evidence" aria-labelledby="signal-evidence-title"><div class="intel-section-head"><div><p class="eyebrow">PRIMARY-SOURCE FACTS</p><h2 id="signal-evidence-title">What the evidence establishes.</h2></div><span>Reviewed 2026-11-04</span></div><div class="deep-dive-facts"><div><strong>Task count</strong><p>The authors publish 100 tasks derived from security problems in real open-source repositories. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Grading</strong><p>Tasks use runnable programmatic verifiers with human-reviewed specifications. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Gemini comparison</strong><p>Gemini 4 Argon reached a reported 67.8% pass@1 and 81.0% pass@4. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Claude comparison</strong><p>Claude Opus 5.5 is reported at 67.3% pass@1 and 78.0% pass@4. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Cost example</strong><p>DeepSeek V4.1 Flash is reported at 57.0% pass@1 and $0.04 per rollout. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Combined task result</strong><p>The authors say 95 tasks were solved by at least one tested model. <a href="https://huggingface.co/blog/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div><div><strong>Open research materials</strong><p>A dataset is available through Hugging Face with applicable access terms. <a href="https://huggingface.co/datasets/collinear-ai/cwe-bench" target="_blank" rel="noopener noreferrer">Primary evidence ↗</a></p></div></div><div class="deep-dive-section" style="margin-top:24px"><p class="eyebrow">LIMITATIONS</p><p>All leaderboard numbers are benchmark-specific and author-reported. Deterministic tests can miss real exploit paths, and a passing patch may still be unsafe. A pass@4 figure cannot be compared directly with pass@1, and per-run costs vary outside the published setup.</p></div></section>
+        <section class="signal-deep-dive shell signal-reader-tools" aria-labelledby="signal-reader-tools-title"><div class="intel-section-head"><div><p class="eyebrow">PRACTICAL TAKEAWAYS</p><h2 id="signal-reader-tools-title">What readers can check next.</h2></div></div><div class="deep-dive-section"><h3>Verification checklist</h3><ol><li>Use equal attempt budgets when comparing benchmark results.</li><li>Inspect graders and verify what constitutes a security fix.</li><li>Run separate application security tests and human review.</li><li>Include retry and review costs before comparing deployed systems.</li></ol></div><div class="deep-dive-section"><h3>Read the related SXF guides</h3><ul><li><a href="/signals/statebench-long-context-ai-memory-tracking/">StateBench: a complementary evaluation of model reliability</a><p>Why exact problem conditions shape reported model outcomes.</p></li><li><a href="/signals/openai-astra-cad-pcb-hardware-design/">Astra hardware design and validation</a><p>AI-generated artifacts still require independent checks.</p></li><li><a href="/guides/ai-agent-security/">AI agent security guide</a><p>Threat models, boundaries and safety tests.</p></li><li><a href="/guides/prompt-injection/">Prompt injection guide</a><p>Review untrusted inputs to coding agents.</p></li><li><a href="/signals/transformers-model-integration-contracts-fec0e46/">Transformers model integration contracts</a><p>Fast regression tests with explicit coverage limits.</p></li></ul></div></section>
+        <section class="signal-taxonomy shell">
+          <div><span>TOPICS</span><small>No topic tag yet</small></div>
+          <div><span>MODELS</span><a href="/models/claude-opus-5-5/">Claude Opus 5.5</a><a href="/models/gemini-4/">Gemini 4</a></div>
+        </section>
+        <nav class="signal-archive-navigation shell" aria-label="Signal archive navigation"><a rel="prev" href="/signals/transformers-model-integration-contracts-fec0e46/"><span>Previous signal</span><strong>Transformers Model Integration Contracts</strong></a><a rel="next" href="/signals/scaling-git-at-openai-de4cf53/"><span>Next signal</span><strong>Scaling Git at OpenAI</strong></a></nav>
+        <section class="related-signals shell">
+          <div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Keep the context connected.</h2></div><a href="/signals/">All signals ↗</a></div>
+          <div class="signal-list"><a class="signal-row" href="/signals/statebench-long-context-ai-memory-tracking/">
+      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-11-03T17:15:21Z">November 3, 2026</time></div>
+      <h3>StateBench: Testing how language models track state changes over long documents</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/transformers-model-integration-contracts-fec0e46/">
+      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-11-03T00:00:00Z">November 3, 2026</time></div>
+      <h3>Transformers Model Integration Contracts</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/nvidia-kumo-relational-outperforms-supervised-machine-learning-on-rela-7104bc5/">
+      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-10-21T18:26:30Z">October 21, 2026</time></div>
+      <h3>NVIDIA Kumo Relational Outperforms Supervised Machine Learning on Relational Data, No Training Required</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/how-specializing-the-vocabulary-of-slms-can-cut-inference-cost-by-77-i-354f89a/">
+      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-10-21T17:35:36Z">October 21, 2026</time></div>
+      <h3>How Specializing the Vocabulary of SLMs Can Cut Inference Cost by 77% in Real Applications</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a><a class="signal-row" href="/signals/granite-speech-5-0-transcribe-translate-and-attribute-more-accurately--9b35c0b/">
+      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-10-21T14:58:18Z">October 21, 2026</time></div>
+      <h3>Granite Speech 5.0: Transcribe, Translate, and Attribute more Accurately and Faster</h3>
+      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
+    </a></div>
+        </section>
+      </main>
+      <footer class="footer shell">
+      <div class="footer-main">
+        <div class="footer-identity">
+          <a class="brand footer-brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
+          <p class="footer-statement">AI intelligence,<br><span>mapped in motion.</span></p>
+          <p class="footer-description">Primary-source signals, model intelligence, expert guides and research context — organized for fast understanding.</p>
+          <a class="footer-contact" href="mailto:info@sxf.si" aria-label="Email SXF at info@sxf.si"><span class="footer-contact-dot" aria-hidden="true"></span><span class="footer-contact-label">CONTACT</span><strong>info@sxf.si</strong><b aria-hidden="true">↗</b></a>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <div class="footer-nav-group"><p>INTELLIGENCE</p><a href="/models/">Models <span>↗</span></a><a href="/models/pricing/">Model Pricing <span>↗</span></a><a href="/signals/">Signals <span>↗</span></a><a href="/topics/">Topics <span>↗</span></a><a href="/research/">Research <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>EXPLORE</p><a href="/compare/">Compare Models <span>↗</span></a><a href="/guides/">Guides <span>↗</span></a><a href="/superintelligence/">Superintelligence <span>↗</span></a><a href="/open-source/">Open Source <span>↗</span></a><a href="/brief/">SXF Brief <span>↗</span></a></div>
+          <div class="footer-nav-group"><p>SXF</p><a href="/about/">About & Method <span>↗</span></a><a href="mailto:info@sxf.si">Contact <span>↗</span></a></div>
+        </nav>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+    </body></html>

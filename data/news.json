@@ -1,6 +1,54 @@
 {
-  "updated_at": "2026-11-04T10:15:40.681366Z",
+  "updated_at": "2026-11-04T10:57:25.196297Z",
   "items": [
+    {
+      "title": "StateBench: Testing how language models track state changes over long documents",
+      "summary": "Ai2 published StateBench on November 3, 2026 to study how language models track changing facts through long sequences of assignments. Its researchers report major failures for frontier models on the hardest general-finite tests, with accuracy of 13% or below at the longest tested lengths in that specific experimental setup.",
+      "url": "https://huggingface.co/blog/allenai/statebench",
+      "signal_url": "https://sxf.si/signals/statebench-long-context-ai-memory-tracking/",
+      "source": "Hugging Face",
+      "published": "2026-11-03T17:15:21Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "OpenAI Says ChatGPT Search-Like Queries Are About 20% of Google's",
+      "summary": "In a first-hand interview published November 3, 2026, OpenAI consumer product lead Adam Fry estimated that ChatGPT handles search-like questions at roughly one-fifth of Google's query volume. OpenAI did not publish an independent comparison dataset, and the statement cannot be treated as a confirmed 20% search-market share or web referral figure.",
+      "url": "https://www.bigtechnology.com/p/openai-chatgpt-search-is-about-20",
+      "signal_url": "https://sxf.si/signals/chatgpt-search-volume-google-20-percent/",
+      "source": "Big Technology",
+      "published": "2026-11-03T15:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "Google Announces K-12 AI Search Controls and Guided Learning",
+      "summary": "Google announced on November 3, 2026 that Search, Gemini, Gemini Notebook and Gemini in Classroom will be off by default for managed K-12 student accounts until an administrator enables access. Guided Learning is available globally in Classroom, while a separate Search pilot is planned for selected U.S. schools later in November.",
+      "url": "https://blog.google/products-and-platforms/products/education/ai-learning-era-updates-2026/",
+      "signal_url": "https://sxf.si/signals/google-ai-search-schools-k12-controls/",
+      "source": "Google AI",
+      "published": "2026-11-03T14:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "Google AI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "Accelerating engineering for the physical world",
+      "summary": "OpenAI reported on November 3, 2026 that two employees used GPT-6 Astra to design a Codex-connected hardware prototype, including enclosure, printed circuit board, interface and firmware, in under a week. A manufacturer made a small batch within a month, but human reviews and changes were still necessary to handle real manufacturing constraints.",
+      "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world",
+      "signal_url": "https://sxf.si/signals/openai-astra-cad-pcb-hardware-design/",
+      "source": "OpenAI",
+      "published": "2026-11-03T12:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
     {
       "title": "Transformers Model Integration Contracts",
       "summary": "Hugging Face outlined Model Integration Contracts (MICs) on November 3, 2026, proposing small architecture-aware model fixtures, runnable usage paths and human-reviewed baselines for faster CI checks. A retrospective UMT5 replay caught a real regression, but the MIC job is currently advisory and full-checkpoint testing still matters.",
@@ -11,6 +59,17 @@
       "category": "Tools",
       "tags": [],
       "signal_score": 42
+    },
+    {
+      "title": "CWE-bench v2: More coverage, quality, and transparency",
+      "summary": "Collinear AI introduced CWE-bench v2 on November 3, 2026, using 100 runnable tasks from real open-source projects to evaluate agent-written security fixes. Its report compares 11 models and lists Gemini 4 Argon at 67.8% pass@1 and Claude Opus 5.5 at 67.3%, within the benchmark's specific testing setup rather than all real-world vulnerability repair.",
+      "url": "https://huggingface.co/blog/cwe-bench",
+      "signal_url": "https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/",
+      "source": "Hugging Face",
+      "published": "2026-11-03T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
     },
     {
       "title": "Scaling Git at OpenAI",
@@ -547,9 +606,9 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 167,
-      "Google AI": 24,
-      "Hugging Face": 62,
+      "OpenAI": 168,
+      "Google AI": 25,
+      "Hugging Face": 64,
       "GitHub": 102,
       "Google Research": 16,
       "Anthropic": 2,
@@ -558,9 +617,9 @@
       "Microsoft": 1
     },
     "current_counts": {
-      "OpenAI": 14,
-      "Google AI": 0,
-      "Hugging Face": 16,
+      "OpenAI": 15,
+      "Google AI": 1,
+      "Hugging Face": 18,
       "GitHub": 7,
       "Google Research": 3,
       "Anthropic": 2,
@@ -575,21 +634,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1354,
         "relevance_accepted_count": 1354,
-        "quality_accepted_count": 87,
-        "accepted_candidate_count": 87,
-        "rejected_candidate_count": 1267,
+        "quality_accepted_count": 86,
+        "accepted_candidate_count": 86,
+        "rejected_candidate_count": 1268,
         "duplicate_count": 2,
-        "age_rejection_count": 1265,
+        "age_rejection_count": 1266,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 14,
+        "publish_count": 15,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "Google AI": {
@@ -605,14 +664,14 @@
         "age_rejection_count": 14,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 0,
+        "publish_count": 1,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "Hugging Face": {
@@ -628,14 +687,14 @@
         "age_rejection_count": 869,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 16,
+        "publish_count": 18,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "GitHub": {
@@ -658,7 +717,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "Google Research": {
@@ -681,7 +740,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "Anthropic": {
@@ -704,7 +763,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -729,7 +788,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "xAI": {
@@ -752,7 +811,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       },
       "Microsoft": {
@@ -775,7 +834,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T10:14:58.899030Z",
+        "last_successful_fetch": "2026-11-04T10:56:44.132472Z",
         "errors": []
       }
     },
