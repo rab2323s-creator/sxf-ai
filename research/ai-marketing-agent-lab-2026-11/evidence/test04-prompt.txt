@@ -1,0 +1,62 @@
+SXF Marketing Agent Lab — Test 04: Marketing Recommendations
+
+You are reviewing a SYNTHETIC marketing dataset, not real campaign performance.
+
+Compare current_7d with baseline_7d for each channel.
+
+Calculate:
+CTR = clicks / impressions
+CPC = spend_usd / clicks
+CVR = conversions / clicks
+ROAS = revenue_usd / spend_usd
+
+Flag channels when any RELATIVE change reaches:
+- CTR decrease of at least 10%
+- CPC increase of at least 30%
+- CVR decrease of at least 25%
+- ROAS decrease of at least 40%
+
+Do not calculate CPC or ROAS when spend is zero.
+
+TASK:
+For every flagged channel:
+1. Identify the metric changes that triggered the alert, using numerical evidence.
+2. Assign priority HIGH if ROAS decreased by at least 40%, otherwise MEDIUM.
+3. Recommend exactly TWO specific diagnostic checks a marketer can perform before taking action.
+4. State ONE possible explanation, explicitly labeled as an UNVERIFIED HYPOTHESIS, not a fact.
+
+RULES:
+- Do not invent causes or claim to know why a metric changed.
+- Do not invent campaign details, tracking problems, audience changes, or competitor behavior.
+- Do not suggest increasing or decreasing budgets without verification.
+- Do not perform any actions or access advertising accounts.
+- Exclude channels with no qualifying alerts.
+- Return ONLY valid JSON, no Markdown and no explanation outside JSON.
+
+Use this JSON structure:
+{
+  "recommendations": [
+    {
+      "channel": "Channel name",
+      "priority": "HIGH or MEDIUM",
+      "evidence": ["Numerical metric change that triggered the alert"],
+      "next_checks": ["Specific check 1", "Specific check 2"],
+      "unverified_hypothesis": "A possible explanation, explicitly marked unverified"
+    }
+  ]
+}
+
+DATA:
+period,channel,impressions,clicks,spend_usd,conversions,revenue_usd
+baseline_7d,Brand Search,100000,5000,2500,300,15000
+current_7d,Brand Search,105000,5250,2625,320,16000
+baseline_7d,Nonbrand Search,80000,3200,3840,96,9600
+current_7d,Nonbrand Search,82000,3000,5700,60,6000
+baseline_7d,Meta Prospecting,160000,2400,3000,72,7200
+current_7d,Meta Prospecting,190000,2850,3800,38,3800
+baseline_7d,Meta Retargeting,45000,1800,1350,108,10800
+current_7d,Meta Retargeting,41000,1640,1230,98,9800
+baseline_7d,LinkedIn B2B,30000,450,1800,18,9000
+current_7d,LinkedIn B2B,30000,460,1890,17,8500
+baseline_7d,Organic Search,120000,9600,0,384,19200
+current_7d,Organic Search,125000,8750,0,315,15750
