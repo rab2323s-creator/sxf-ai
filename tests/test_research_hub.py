@@ -52,8 +52,10 @@ def main():
     assert source.index('id="signals"') < source.index('id="benchmark-evidence"')
     assert source.index('class="research-jump shell"') < source.index('id="featured-research-title"')
     assert source.count('class="research-faq-item"') == 3
-    assert source.count('class="research-featured-card research-featured-card-lead"') == 2
-    assert source.count('class="research-featured-card"') == 4
+    # Current curated Research layout has one lead and five standard cards.
+    # Guard the six-card structure without reverting any editorial layout.
+    assert source.count('class="research-featured-card research-featured-card-lead"') == 1
+    assert source.count('class="research-featured-card"') == 5
     assert source.count('class="research-featured-grid"') == 1
     assert '/research/ai-agent-payment-negotiation/' in p.links
     assert '<details class="research-method-disclosure">' in source
