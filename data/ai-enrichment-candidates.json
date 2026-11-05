@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "b6b93667d4c7ead3c865585239b976b010f856d87474118715a058b3b9248447",
+  "snapshot_hash": "6a23a4435f2205fa0ac774b903c5a5234604b389bbbe407f14d32633f7afa8fc",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -380,6 +380,81 @@
     },
     {
       "rank": 4,
+      "signal_slug": "github-copilot-xcode-coding-assistant",
+      "signal_url": "https://sxf.si/signals/github-copilot-xcode-coding-assistant/",
+      "title": "GitHub Copilot is now available in Xcode’s coding assistant",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-11-04T19:10:40Z",
+      "priority_score": 149,
+      "evidence_hash": "6cdddcbbc0eda2d214aab930b4191335ede4cdc0c3bee93b51eb76dee186ce4a",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "GitHub Copilot is now available in Xcode’s coding assistant",
+          "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant",
+          "signal_url": "https://sxf.si/signals/github-copilot-xcode-coding-assistant/",
+          "source": "GitHub",
+          "published": "2026-11-04T19:10:40Z",
+          "category": "Tools",
+          "tags": [
+            "GitHub Copilot",
+            "Coding AI"
+          ],
+          "summary": "GitHub announced on November 4, 2026 that GitHub Copilot is available in public preview in Xcode's built-in coding assistant, expanding the AI coding workflow for Apple-platform developers. The changelog describes an integration and its preview availability; it does not establish that every developer can access it or that generated apps are reliable without testing.",
+          "signal_score": 56,
+          "seo_quality_score": 73,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "high-value-topic",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 5,
       "signal_slug": "github-copilot-app-universe-releases-f3aa6db",
       "signal_url": "https://sxf.si/signals/github-copilot-app-universe-releases-f3aa6db/",
       "title": "GitHub Copilot app, Universe releases",
@@ -452,7 +527,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 6,
       "signal_slug": "github-copilot-in-vs-code-universe-releases-00c85ac",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-universe-releases-00c85ac/",
       "title": "GitHub Copilot in VS Code, Universe releases",
@@ -526,7 +601,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 7,
       "signal_slug": "ai-for-science-expands-to-foundations-and-research-institutions-ad10900",
       "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
       "title": "AI for Science expands to foundations and research institutions",
@@ -601,7 +676,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 8,
       "signal_slug": "gpt-6-1-terra-in-github-copilot-344482f",
       "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
       "title": "GPT-6.1 Terra in GitHub Copilot",
@@ -816,7 +891,80 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 9,
+      "signal_slug": "introducing-images-2-6",
+      "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
+      "title": "Introducing Images 2.6",
+      "source": "OpenAI",
+      "category": "Tools",
+      "published": "2026-11-04T00:00:00Z",
+      "priority_score": 136,
+      "evidence_hash": "69f7c1f62131266bcd1709a99616dd4ff8b37b6379534fc6c02d858bbb721a25",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing Images 2.6",
+          "url": "https://openai.com/index/introducing-images-2-6",
+          "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
+          "source": "OpenAI",
+          "published": "2026-11-04T00:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
+          "signal_score": 46,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/introducing-images-2-6"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
       "signal_slug": "introducing-the-grid-protectors-program-19244c7",
       "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
       "title": "Introducing the Grid Protectors Program",
@@ -854,149 +1002,6 @@
         "models": [],
         "source_urls": [
           "https://openai.com/index/grid-protectors-program"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
-      "signal_slug": "expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1",
-      "signal_url": "https://sxf.si/signals/expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1/",
-      "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
-      "source": "Anthropic",
-      "category": "Tools",
-      "published": "2026-10-27T00:00:00Z",
-      "priority_score": 132,
-      "evidence_hash": "548e94d5c0c41837dbf985f045ccb73a29b51b4688169b9979e694927e8210de",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
-          "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
-          "signal_url": "https://sxf.si/signals/expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1/",
-          "source": "Anthropic",
-          "published": "2026-10-27T00:00:00Z",
-          "category": "Tools",
-          "tags": [],
-          "summary": "Anthropic and the U.S. General Services Administration expanded their OneGov agreement on October 27, 2026, offering a 40% discount on eligible consumption-based Claude model and API usage for government organizations. GSA confirms no minimum purchase commitment and access across federal, state, local and tribal governments, through approved procurement routes. Anthropic separately describes expanded enterprise and government product discounts; buyers must verify the exact applicable offer and channel.",
-          "signal_score": 42,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://www.anthropic.com/news/expanding-partnership-gsa"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "securing-our-frontier-model-training-environment-48e2274",
-      "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
-      "title": "Securing our frontier model training environment",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-10-23T10:00:00Z",
-      "priority_score": 130,
-      "evidence_hash": "be66596467a978f613a2455934750371798cc349ee799fdf33ec0cf1373fc0e3",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Securing our frontier model training environment",
-          "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
-          "signal_url": "https://sxf.si/signals/securing-our-frontier-model-training-environment-48e2274/",
-          "source": "OpenAI",
-          "published": "2026-10-23T10:00:00Z",
-          "category": "Research",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "OpenAI describes defense-in-depth controls for frontier model training and evaluation: an offline cached web environment, container-plus-microVM isolation, monitoring and network boundaries. A high-compute red team found real sandbox escapes and egress paths, leading to patches before RL training resumed on October 1.",
-          "signal_score": 45,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/securing-our-frontier-model-training-environment"
         ]
       },
       "requested_output": {

@@ -1,6 +1,70 @@
 {
-  "updated_at": "2026-11-05T16:59:46.505134Z",
+  "updated_at": "2026-11-05T17:14:28.217208Z",
   "items": [
+    {
+      "title": "A Closer Look at Phonon TTS. Launching High-Quality On-Device Speech That Tops the Benchmarks.",
+      "summary": "A November 5, 2026 Hugging Face article introduced Phonon TTS, a small text-to-speech model family developed for local or on-device generation. It describes streaming speech, voice characteristics and comparative quality evaluations. These are the authors' claims and examples, not evidence of identical real-time performance, quality or licensing on every device.",
+      "url": "https://huggingface.co/blog/phonon-tts",
+      "signal_url": "https://sxf.si/signals/phonon-tts-on-device-speech-benchmarks/",
+      "source": "Hugging Face",
+      "published": "2026-11-05T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "GitHub Copilot is now available in Xcode’s coding assistant",
+      "summary": "GitHub announced on November 4, 2026 that GitHub Copilot is available in public preview in Xcode's built-in coding assistant, expanding the AI coding workflow for Apple-platform developers. The changelog describes an integration and its preview availability; it does not establish that every developer can access it or that generated apps are reliable without testing.",
+      "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant",
+      "signal_url": "https://sxf.si/signals/github-copilot-xcode-coding-assistant/",
+      "source": "GitHub",
+      "published": "2026-11-04T19:10:40Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot",
+        "Coding AI"
+      ],
+      "signal_score": 56
+    },
+    {
+      "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+      "summary": "OpenAI announced on November 4, 2026 that it intends to acquire Pierre Computer Company, Inc., describing the move as a way to expand developer tools for building, understanding and reviewing code through Codex. The announcement does not establish that the transaction has closed or that a combined product is already available.",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "signal_url": "https://sxf.si/signals/openai-acquire-pierre-codex-developer-tools/",
+      "source": "OpenAI",
+      "published": "2026-11-04T14:30:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "A thousand fewer paths to root",
+      "summary": "OpenAI reported on November 4, 2026 that an autonomous security research pipeline screened 2,308 candidate findings in selected Linux kernel code, dynamically reproduced 1,724 and developed distinct patches for 948 local privilege-escalation issues. The single research campaign used roughly $1.21 million in API credits. These are provider-reported results, not 948 already merged upstream fixes.",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+      "signal_url": "https://sxf.si/signals/a-thousand-fewer-paths-to-root/",
+      "source": "OpenAI",
+      "published": "2026-11-04T08:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "Introducing Images 2.6",
+      "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
+      "url": "https://openai.com/index/introducing-images-2-6",
+      "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
+      "source": "OpenAI",
+      "published": "2026-11-04T00:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 46
+    },
     {
       "title": "StateBench: Testing how language models track state changes over long documents",
       "summary": "Ai2 published StateBench on November 3, 2026 to study how language models track changing facts through long sequences of assignments. Its researchers report major failures for frontier models on the hardest general-finite tests, with accuracy of 13% or below at the longest tested lengths in that specific experimental setup.",
@@ -570,10 +634,10 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 168,
+      "OpenAI": 171,
       "Google AI": 25,
-      "Hugging Face": 64,
-      "GitHub": 102,
+      "Hugging Face": 65,
+      "GitHub": 103,
       "Google Research": 16,
       "Anthropic": 2,
       "Meta": 0,
@@ -581,10 +645,10 @@
       "Microsoft": 1
     },
     "current_counts": {
-      "OpenAI": 15,
+      "OpenAI": 18,
       "Google AI": 1,
-      "Hugging Face": 15,
-      "GitHub": 7,
+      "Hugging Face": 16,
+      "GitHub": 8,
       "Google Research": 3,
       "Anthropic": 2,
       "Meta": 0,
@@ -598,21 +662,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1360,
         "relevance_accepted_count": 1360,
-        "quality_accepted_count": 90,
-        "accepted_candidate_count": 90,
-        "rejected_candidate_count": 1270,
+        "quality_accepted_count": 89,
+        "accepted_candidate_count": 89,
+        "rejected_candidate_count": 1271,
         "duplicate_count": 2,
-        "age_rejection_count": 1268,
+        "age_rejection_count": 1269,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 15,
+        "publish_count": 18,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "Google AI": {
@@ -621,11 +685,11 @@
         "fetch_failure": false,
         "parsed_candidate_count": 20,
         "relevance_accepted_count": 20,
-        "quality_accepted_count": 6,
-        "accepted_candidate_count": 6,
-        "rejected_candidate_count": 14,
+        "quality_accepted_count": 7,
+        "accepted_candidate_count": 7,
+        "rejected_candidate_count": 13,
         "duplicate_count": 0,
-        "age_rejection_count": 14,
+        "age_rejection_count": 13,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 1,
@@ -635,7 +699,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "Hugging Face": {
@@ -651,14 +715,14 @@
         "age_rejection_count": 869,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 15,
+        "publish_count": 16,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "GitHub": {
@@ -674,14 +738,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 7,
+        "publish_count": 8,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "Google Research": {
@@ -704,7 +768,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "Anthropic": {
@@ -727,7 +791,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -752,7 +816,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "xAI": {
@@ -775,7 +839,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       },
       "Microsoft": {
@@ -798,7 +862,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-05T16:59:11.216312Z",
+        "last_successful_fetch": "2026-11-05T17:13:51.015112Z",
         "errors": []
       }
     },
