@@ -1943,6 +1943,139 @@
         "Maintain an explicit source-linked ledger for important changes.",
         "Always label benchmark difficulty and input length near performance percentages."
       ]
+    },
+    "introducing-images-2-6": {
+      "reviewed_at": "2026-11-05",
+      "seo_title": "ChatGPT Images 2.6: GIFs, Flare vs Sunburst, API Guide",
+      "h1": "ChatGPT Images 2.6 explained: GIFs, speed and Flare vs Sunburst",
+      "meta_description": "OpenAI Images 2.6 adds GIF creation, faster edits, Flare and Sunburst models, SVG output and API controls. Compare availability, limits and real use cases.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/introducing-images-2-6",
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
+      "keywords": [
+        "ChatGPT Images 2.6",
+        "GPT Image 2.6 Flare vs Sunburst",
+        "ChatGPT GIF generator",
+        "OpenAI image generation API",
+        "GPT Image 2.6 SVG"
+      ],
+      "editorial": {
+        "what_changed": "Images 2.6 adds GIF generation, markup-directed edits, improved consistency across revisions and separate API controls for visual quality and task complexity. Developers can select Flare for speed or Sunburst for detail.",
+        "why_it_matters": "Teams can move beyond producing one attractive graphic to repeatable editing workflows that preserve product details and create short loops. These capabilities could reduce design iteration, but output reliability depends on the task and requires review.",
+        "what_to_verify": "OpenAI's 50% speed claim and Flare's as-little-as-six-seconds example reflect selected provider conditions. SVG is documented through the API rather than a universal consumer-app export. GIF quality, detail fidelity, price and access vary by model and settings."
+      },
+      "evidence": [
+        {
+          "label": "Availability",
+          "fact": "OpenAI announced Images 2.6 for ChatGPT, Codex and the API on November 4, 2026.",
+          "source": "https://openai.com/index/introducing-images-2-6"
+        },
+        {
+          "label": "Speed claim",
+          "fact": "OpenAI reports 50% faster generation than before and says low-quality Flare can take as little as six seconds.",
+          "source": "https://openai.com/index/introducing-images-2-6"
+        },
+        {
+          "label": "Model choice",
+          "fact": "Flare is positioned for quick iteration; Sunburst is positioned for higher detail and better editing consistency.",
+          "source": "https://openai.com/index/introducing-images-2-6"
+        },
+        {
+          "label": "Animated format",
+          "fact": "The release supports generating GIF loops from prompts and visual concepts.",
+          "source": "https://openai.com/index/introducing-images-2-6"
+        },
+        {
+          "label": "Vector export",
+          "fact": "The official API guide documents SVG output and markup-guided editing.",
+          "source": "https://developers.openai.com/api/docs/guides/image-generation"
+        },
+        {
+          "label": "Planning control",
+          "fact": "Developers can choose low, medium or high complexity separately from visual-quality settings.",
+          "source": "https://developers.openai.com/api/docs/guides/image-generation"
+        },
+        {
+          "label": "Safety review",
+          "fact": "OpenAI published a system card with evaluations of the new models and additional GIF safeguards.",
+          "source": "https://deploymentsafety.openai.com/chatgpt-images-2-6/safety-evaluations"
+        },
+        {
+          "label": "Edit methodology",
+          "fact": "The official prompting guide recommends specifying the object to change and what should remain untouched.",
+          "source": "https://developers.openai.com/api/docs/guides/image-prompting"
+        }
+      ],
+      "limitations": "Generation-speed and editing improvements are OpenAI-reported rather than independently established across all creative workloads. Six seconds is a selected low-quality Flare case, not a service guarantee. GIF continuity and SVG usefulness vary by output, and image rights, product claims and brand consistency still require review.",
+      "sources": [
+        "https://openai.com/index/introducing-images-2-6",
+        "https://developers.openai.com/api/docs/guides/image-generation",
+        "https://deploymentsafety.openai.com/chatgpt-images-2-6/safety-evaluations",
+        "https://developers.openai.com/api/docs/guides/image-prompting"
+      ],
+      "analysis": [
+        {
+          "heading": "What's new beyond faster image generation?",
+          "paragraphs": [
+            "The central change is from making a standalone picture to controlling a sequence of revisions. OpenAI says Images 2.6 better preserves characters, product features and brand details when an editor changes part of a scene. This is particularly relevant for campaigns: a single good product shot is not enough if the packaging, logo or proportions change whenever the background is replaced.",
+            "GIF output also introduces motion as a deliverable. Short animated brand graphics and character reactions can now be part of the image workflow, but the format is not a replacement for fully editable video timelines. Inspect frame-by-frame consistency, unwanted motion and compression before publishing. The OpenAI system card describes why animated outputs needed additional safety evaluations.",
+            "The release spans three surfaces: ChatGPT for conversational creative work, Codex for supported development workflows, and dedicated API models for software integration. A feature appearing in one interface does not mean its exact parameters or output formats are exposed in every other interface."
+          ],
+          "source": "https://openai.com/index/introducing-images-2-6"
+        },
+        {
+          "heading": "Flare or Sunburst: a useful comparison for real teams",
+          "paragraphs": [
+            "OpenAI positions Flare for fast drafts, while Sunburst prioritizes fidelity and controlled revisions. The company claims 50% faster generation relative to the preceding release and says a low-quality Flare output can arrive in as little as six seconds. Those claims depend on the exact workload and are not independent benchmark averages.",
+            "To choose a model, use identical inputs and evaluate the completed work rather than latency alone. Ask each model to update only a highlighted detail in a poster while leaving text, product shape and brand palette unchanged. Measure time to an approved result, number of corrections, unwanted visual changes and cost per accepted output.",
+            "The developer API distinguishes image quality from task complexity. Low complexity can help with straightforward edits; higher complexity may help with dense scenes or multiple interacting constraints. A team should test these controls on its own assets rather than assuming that the highest settings always produce better throughput."
+          ],
+          "source": "https://developers.openai.com/api/docs/guides/image-generation"
+        },
+        {
+          "heading": "GIF, SVG and markup: how SXF would test production readiness",
+          "paragraphs": [
+            "A production test should cover three cases: generating a new campaign hero, editing one marked region and producing a short loop. Keep the initial reference and compare every version with acceptance criteria. Generated text and pictograms can be subtle sources of errors, especially where legibility and product claims matter.",
+            "SVG support is an API capability useful for some web and design outputs. It does not imply every generated raster image is automatically a perfectly structured vector file. Likewise, GIF creation offers compact animation, not unrestricted frame-accurate cinema or video editing. Validate the actual delivered format in the software that will consume it.",
+            "The useful editorial conclusion is conditional. Images 2.6 broadens creative workflows, but quality claims should be assessed using repeatable reference prompts, detailed human review and transparent reporting of failures. SXF readers can use the checklist below to make their own comparisons rather than relying only on release demonstrations."
+          ],
+          "source": "https://developers.openai.com/api/docs/guides/image-prompting"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Best AI image generators compared",
+          "url": "/guides/best-ai-image-generators/",
+          "description": "Compare tools by use case, editing needs and workflow."
+        },
+        {
+          "title": "How to tell if an image is AI-generated",
+          "url": "/guides/how-to-tell-if-an-image-is-ai-generated/",
+          "description": "Understand disclosure and visual-verification limits."
+        },
+        {
+          "title": "ChatGPT Images 2.5: the previous release",
+          "url": "/signals/introducing-chatgpt-images-2-5-3161274/",
+          "description": "Context for what the latest generation changes."
+        },
+        {
+          "title": "Generate images directly in GitHub Copilot",
+          "url": "/signals/generate-and-edit-images-directly-in-copilot-05a87e9/",
+          "description": "A related product integration for images in development."
+        },
+        {
+          "title": "Best text-to-speech models",
+          "url": "/guides/best-ai-text-to-speech-models/",
+          "description": "Explore the voice side of creative production."
+        }
+      ],
+      "reader_checklist": [
+        "Test Flare and Sunburst against identical reference assets and constraints.",
+        "Measure time to an acceptable edit, not only generation latency.",
+        "Verify output-format support in the exact ChatGPT or API workflow.",
+        "Inspect text, brand identity, GIF frames and licensing before publication."
+      ]
     }
   }
 }
