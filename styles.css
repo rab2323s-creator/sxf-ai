@@ -755,3 +755,6 @@ button,input{font:inherit}
 
 /* Visible keyboard focus for source-led Signal research and cross-article links. */
 .signal-reader-tools a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:3px}
+
+/* Clear keyboard focus for primary-source citations in published SXF Signals. */
+.signal-evidence a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:3px}
