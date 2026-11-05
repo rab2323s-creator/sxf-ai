@@ -164,6 +164,8 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/tools/ai-model-cost-calculator/", MODEL_PRICING_CATALOG["source_verified"]),
         sitemap_entry(f"{BASE_URL}/tools/local-llm-vram-finder/", generated_today),
         sitemap_entry(f"{BASE_URL}/research/", category_lastmod["Research"]),
+        sitemap_entry(f"{BASE_URL}/research/google-ai-mode-vs-chatgpt-search/", "2026-11-05"),
+        sitemap_entry(f"{BASE_URL}/research/google-ai-mode-vs-chatgpt-search/full-study/", "2026-11-05"),
         sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
         sitemap_entry(f"{BASE_URL}/signals/", global_lastmod),
         sitemap_entry(f"{BASE_URL}/topics/", global_lastmod),

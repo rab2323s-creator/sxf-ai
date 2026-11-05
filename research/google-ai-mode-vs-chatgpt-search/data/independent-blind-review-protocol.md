@@ -27,9 +27,9 @@
 This is a purposefully selected 14-query, one-run-per-product *exploratory pilot*. It cannot measure general accuracy or error frequency. Multiple runs with recorded product settings and source timestamps constitute a separate follow-up experiment.
 
 ## Public pages and data
-- [Main article](https://sxf.si/research/google-ai-mode-vs-chatgpt-search-2026/)
-- [Research appendix](https://sxf.si/research/google-ai-mode-vs-chatgpt-search-2026/full-study/)
-- [Exact prompt CSV](https://sxf.si/research/google-ai-mode-vs-chatgpt-search-2026/data/prompts.csv)
-- [First-pass score CSV](https://sxf.si/research/google-ai-mode-vs-chatgpt-search-2026/data/initial-editorial-scores.csv)
+- [Main article](https://sxf.si/research/google-ai-mode-vs-chatgpt-search/)
+- [Research appendix](https://sxf.si/research/google-ai-mode-vs-chatgpt-search/full-study/)
+- [Exact prompt CSV](https://sxf.si/research/google-ai-mode-vs-chatgpt-search/data/prompts.csv)
+- [First-pass score CSV](https://sxf.si/research/google-ai-mode-vs-chatgpt-search/data/initial-editorial-scores.csv)
 
 **This page describes a protocol, not a completed independent review.**
