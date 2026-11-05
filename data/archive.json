@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T23:44:02.824581Z",
+  "updated_at": "2026-11-05T06:37:02.646824Z",
   "items": [
     {
       "title": "StateBench: Testing how language models track state changes over long documents",
@@ -30,7 +30,7 @@
         "what_to_verify": "The reported 13%-or-lower accuracy concerns the longest general-finite cases, not all tasks or general model quality. Synthetic variable sequences and small direct-training experiments deliberately isolate a failure mode, so applications need additional real-world testing."
       },
       "first_seen": "2026-11-04T10:57:24.224374Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "OpenAI Says ChatGPT Search-Like Queries Are About 20% of Google's",
@@ -127,7 +127,7 @@
         "what_to_verify": "The report says manufacturing required iterations with people because model-generated designs overlooked production constraints. A 23-fold increase in hardware-team token use does not prove a 23-fold productivity gain. BenchCAD 2.0 remains an internal evaluation."
       },
       "first_seen": "2026-11-04T10:57:24.224374Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "Transformers Model Integration Contracts",
@@ -160,7 +160,7 @@
         "what_to_verify": "The proof is retrospective, covering UMT5 commits over a defined period. Hugging Face says MIC checks currently do not block pull requests, coverage is partial and small fixtures miss some defects only exposed by full checkpoints."
       },
       "first_seen": "2026-11-03T15:48:31.631836Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "CWE-bench v2: More coverage, quality, and transparency",
@@ -191,7 +191,7 @@
         "what_to_verify": "Pass@1 and pass@4 use different attempt budgets. The scores reflect a curated task set and particular harness. Automated verification cannot certify that an agent's patch is safe for production; independent tests and review remain necessary."
       },
       "first_seen": "2026-11-04T10:57:24.224374Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "Scaling Git at OpenAI",
@@ -224,7 +224,7 @@
         "what_to_verify": "The figures are OpenAI measurements from one demanding monorepo and are not a general claim that replacing Git is necessary or beneficial for every team. Evaluate consistency semantics, maintenance complexity and end-to-end CI performance before considering similar architecture."
       },
       "first_seen": "2026-11-03T15:48:31.631836Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "Introducing the Grid Protectors Program",
@@ -260,7 +260,7 @@
         "what_to_verify": "The project is still in development. The utility's stated demand-response capacity is not a measured reduction already delivered, and separate portfolio-wide rate projections must not be attributed solely to OpenAI. Look for regulator filings, realized curtailment events and actual customer billing changes."
       },
       "first_seen": "2026-11-03T15:48:31.631836Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "LifeVal",
@@ -293,7 +293,7 @@
         "what_to_verify": "The announcement offers example task percentages, but these figures belong to OpenAI's evaluation setup. Examine the rubrics, task constraints, permitted tools and whether an action was completed or left awaiting a person's approval before treating a score as practical reliability."
       },
       "first_seen": "2026-11-03T15:48:31.631836Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "nemotron-halloween",
@@ -364,7 +364,7 @@
       "summary": "OpenAI is strengthening violence prevention in ChatGPT with expanded safeguards, earlier interventions, and a new commitment to public safety reporting.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "community-safety-report-and-new-protections-for-teens-c7606af",
@@ -428,7 +428,7 @@
       "summary": "OpenAI’s updated Model Spec outlines five core values to guide more capable AI toward sound judgment, human agency, and faithfulness to human intent.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "an-updated-model-spec-for-more-capable-and-beneficial-ai-7bf0065",
@@ -488,7 +488,7 @@
       "summary": "OpenAI uses layered monitoring to detect frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "how-we-detect-frontier-model-misalignment-d28967f",
@@ -616,7 +616,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-31T15:40:45.676551Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "welcome-le-chonk-mistral-large-4-on-hugging-face-a1765f4",
@@ -646,7 +646,7 @@
       "summary_origin": "reviewed-primary-source",
       "first_seen": "2026-10-31T16:07:01.594079Z",
       "modified_at": "2026-10-31T16:07:01.594079Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752",
@@ -708,7 +708,7 @@
         "what_to_verify": "Check whether your Foundry region and model support the harness, whether your application needs preview features or a custom hosted agent, and how tool approvals and MCP credentials work. Microsoft says the harness is chosen when a prompt agent is created and cannot yet be switched on an existing agent. Runtime billing starts December 1, 2026, while separate model and tool charges can apply earlier."
       },
       "first_seen": "2026-11-02T14:41:48.918715Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "Route and orchestrate models with GitHub Copilot Fusion",
@@ -1154,7 +1154,7 @@
         "what_to_verify": "The announcement is about partnerships and resources, not independently reproduced discoveries. Check each project's governance, data-use rules, reproducible outcomes and whether public deliverables actually appear. A research-preview hardware standard is not a generally deployed autonomous laboratory."
       },
       "first_seen": "2026-11-03T15:48:31.631836Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "The sleep framework: A new way for LLMs to retain knowledge in continual learning",
@@ -1166,7 +1166,7 @@
       "summary": "Education Innovation",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_measurable_technical_advance",
       "signal_slug": "the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continua-91ab09b",
@@ -1198,7 +1198,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "build-specialized-multimodal-models-with-lfm3-db98bf5",
@@ -1389,7 +1389,7 @@
         "what_to_verify": "Check the current GSA OneGov offer, eligible government entity, purchasing vehicle and contract term before budgeting. GSA's token-discount offer is not the same as older temporary per-user promotional deals. FedRAMP authorization depends on the particular product and deployment; the agreement does not make every Claude service or model suitable for every sensitive workload."
       },
       "first_seen": "2026-11-02T14:41:48.918715Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z"
+      "last_seen": "2026-11-05T06:37:01.391992Z"
     },
     {
       "title": "GitHub Copilot assisted permissions generally available",
@@ -1507,7 +1507,7 @@
       "summary": "Delivering fast and capable computer use at scale",
       "first_seen": "2026-10-26T20:32:59.632065Z",
       "modified_at": "2026-11-03T23:27:54.338417Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "introducing-gpt-6-1-terra-1758535",
@@ -1570,7 +1570,7 @@
       "summary": "OpenAI shares model results on the Kakeya conjecture, Exponential Time Hypothesis, and quantum chromodynamics—and how researchers can verify and build on them.",
       "first_seen": "2026-10-27T00:02:20.792585Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "working-with-academic-communities-to-build-scientific-understanding-f16aefe",
@@ -1602,7 +1602,7 @@
       "summary": "CodeRabbit uses GPT-6.1 Sol to investigate security risks across complex codebases. Its security agent helps developers review findings and proposed fixes.",
       "first_seen": "2026-10-27T00:02:20.792585Z",
       "modified_at": "2026-10-27T00:02:20.792585Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "gpt-6-1-sol-helps-coderabbit-strengthen-security-across-complex-codeba-1a1d4bf",
@@ -1760,7 +1760,7 @@
       "summary": "Generative AI",
       "first_seen": "2026-10-23T21:28:28.640610Z",
       "modified_at": "2026-10-23T21:28:28.640610Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_research",
       "signal_slug": "bringing-foundational-models-to-the-front-lines-of-tb-screening-3c115b0",
@@ -1820,7 +1820,7 @@
       "summary": "OpenAI describes defense-in-depth controls for frontier model training and evaluation: an offline cached web environment, container-plus-microVM isolation, monitoring and network boundaries. A high-compute red team found real sandbox escapes and egress paths, leading to patches before RL training resumed on October 1.",
       "first_seen": "2026-10-23T21:28:28.640610Z",
       "modified_at": "2026-11-02T11:19:03.074795Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "securing-our-frontier-model-training-environment-48e2274",
@@ -1924,7 +1924,7 @@
       "summary": "Anima expands what care teams can do with OpenAI models, giving them more capacity to respond to patients.",
       "first_seen": "2026-10-31T14:38:00.343151Z",
       "modified_at": "2026-10-31T14:38:00.343151Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_named_model_event",
       "signal_slug": "anima-helps-clinics-cut-call-waits-by-75-with-gpt-6-and-gpt-live-c6099fc",
@@ -2059,7 +2059,7 @@
       "summary": "OpenAI's Decisions API is generally available for bounded decision questions using GPT-6 Luna. It supports predicate probabilities, predefined choices and ordered scores, with text, image or JSON context; up to 400 questions can be sent per request. Vendor and customer speed claims should not be treated as independent benchmarks.",
       "first_seen": "2026-10-22T19:54:27.598597Z",
       "modified_at": "2026-11-02T11:19:03.074795Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "build-more-responsive-apps-with-the-decisions-api-27825e3",
@@ -2267,7 +2267,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-22T11:02:10.972684Z",
       "modified_at": "2026-10-22T11:02:10.972684Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_measurable_technical_advance",
       "signal_slug": "how-specializing-the-vocabulary-of-slms-can-cut-inference-cost-by-77-i-354f89a",
@@ -2504,7 +2504,7 @@
       "summary": "Patch the Planet connects security researchers, maintainers, and incident responders to help address critical vulnerabilities across open source.",
       "first_seen": "2026-10-22T11:02:10.972684Z",
       "modified_at": "2026-10-22T11:02:10.972684Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "importance_specific_safety_development",
       "signal_slug": "patch-the-planet-global-response-coordination-as-agents-uncover-critic-d3f5195",
@@ -2568,7 +2568,7 @@
       "summary": "OpenAI, PerturbAI and Scripps Research used thousands of GPT-Rosalind agents to interrogate a whole-brain mouse CRISPR atlas spanning millions of cells in 32 minutes. Distributed analysis brought together gene perturbations, literature and hypotheses; a controlled comparison showed over 700 literature references versus 11 from a single agent at the largest workload.",
       "first_seen": "2026-10-22T11:02:10.972684Z",
       "modified_at": "2026-11-02T11:19:03.074795Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "using-thousands-of-ai-agents-to-uncover-new-leads-in-biological-data-1de8e62",
@@ -2827,7 +2827,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-31T15:40:45.676551Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "hugging-face-torchtpu-tpus-natively-84cd8d4",
@@ -2856,7 +2856,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-31T15:40:45.676551Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "relevance_status": "accept",
       "relevance_reason": "individually_reviewed_source",
       "signal_slug": "mps-in-pytorch-2-15-3eb18e5",
@@ -3015,7 +3015,7 @@
       "summary": "Google Research reported three building blocks for human-supervised autonomous wet labs: VERID's robot-aware digital twin, iterative aptamer design with real assay feedback, and agent-guided protein binders. Reported final aptamer hit rates reached 33.5% and 42.1% for two test targets; binder affinity is not clinical efficacy.",
       "first_seen": "2026-10-16T23:41:21.947330Z",
       "modified_at": "2026-11-02T11:19:03.074795Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3",
       "signal_url": "https://sxf.si/signals/grounding-ai-agents-in-biological-reality-building-blocks-for-autonomo-83945f3/",
       "signal_score": 41,
@@ -3180,7 +3180,7 @@
       "summary_origin": "reviewed-primary-source",
       "first_seen": "2026-10-16T16:44:03.388172Z",
       "modified_at": "2026-10-18T00:00:00Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423",
       "signal_url": "https://sxf.si/signals/welcome-beam-a-501b-open-model-you-can-own-customize-and-scale-849b423/",
       "signal_score": 46,
@@ -3599,7 +3599,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-15T14:38:03.862839Z",
       "modified_at": "2026-10-15T14:38:03.862839Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "apertus-1-5-release-notes-e3c36d4",
       "signal_url": "https://sxf.si/signals/apertus-1-5-release-notes-e3c36d4/",
       "signal_score": 50,
@@ -3666,7 +3666,7 @@
       "summary_origin": "reviewed-primary-source",
       "first_seen": "2026-10-15T20:48:50.684336Z",
       "modified_at": "2026-10-31T00:00:00Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac",
       "signal_url": "https://sxf.si/signals/welcome-muse-spark-open-open-weight-frontier-multimodal-mixture-of-exp-9d251ac/",
       "signal_score": 44,
@@ -4176,7 +4176,7 @@
       "summary": "We’re giving developers, enterprises, scientists, and consumers access to Gemini 4 Argon, our latest frontier model.",
       "first_seen": "2026-10-13T16:12:42.463126Z",
       "modified_at": "2026-10-13T16:12:42.463126Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc",
       "signal_url": "https://sxf.si/signals/gemini-4-argon-built-to-solve-your-hardest-problems-c1e94fc/",
       "signal_score": 46,
@@ -4601,7 +4601,7 @@
       "summary": "Using GPT-6 Astra in Codex, Asana made its browser agent 76x cheaper and 5x faster in tests to offer customers more capable models.",
       "first_seen": "2026-10-09T22:09:07.475483Z",
       "modified_at": "2026-10-09T22:09:07.475483Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7",
       "signal_url": "https://sxf.si/signals/asana-cuts-model-costs-76x-in-browser-tests-with-gpt-6-1-sol-90995f7/",
       "signal_score": 46,
@@ -4877,7 +4877,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-08T22:25:45.329728Z",
       "modified_at": "2026-10-17T01:04:14.659846Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4",
       "signal_url": "https://sxf.si/signals/the-model-that-didn-t-exist-so-you-made-it-yourself-0f05fd4/",
       "signal_score": 46,
@@ -5074,7 +5074,7 @@
       "summary_origin": "source-meta",
       "first_seen": "2026-10-07T13:31:12.574149Z",
       "modified_at": "2026-10-17T00:27:31.425487Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "introducing-falcon-asr-91ed3eb",
       "signal_url": "https://sxf.si/signals/introducing-falcon-asr-91ed3eb/",
       "signal_score": 50,
@@ -5230,7 +5230,7 @@
       "summary": "GPT‑6 is rolling out globally in ChatGPT with Intelligent UI, delivering faster responses with visuals and interactive experiences you can explore and use directly.",
       "first_seen": "2026-10-07T20:40:01.905375Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "gpt-6-and-intelligent-ui-for-everyone-0ca1450",
       "signal_url": "https://sxf.si/signals/gpt-6-and-intelligent-ui-for-everyone-0ca1450/",
       "signal_score": 42,
@@ -5357,7 +5357,7 @@
       "summary": "Earth AI",
       "first_seen": "2026-10-06T15:59:26.755289Z",
       "modified_at": "2026-10-31T15:40:45.676551Z",
-      "last_seen": "2026-11-04T23:44:01.556594Z",
+      "last_seen": "2026-11-05T06:37:01.391992Z",
       "signal_slug": "unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c",
       "signal_url": "https://sxf.si/signals/unlocking-earth-ai-s-planetary-geospatial-foundation-models-for-global-0ec0c3c/",
       "signal_score": 31,
@@ -12079,7 +12079,7 @@
     "current_counts": {
       "OpenAI": 15,
       "Google AI": 1,
-      "Hugging Face": 17,
+      "Hugging Face": 16,
       "GitHub": 7,
       "Google Research": 3,
       "Anthropic": 2,
@@ -12092,13 +12092,13 @@
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 1358,
-        "relevance_accepted_count": 1358,
+        "parsed_candidate_count": 1359,
+        "relevance_accepted_count": 1359,
         "quality_accepted_count": 90,
         "accepted_candidate_count": 90,
-        "rejected_candidate_count": 1268,
+        "rejected_candidate_count": 1269,
         "duplicate_count": 2,
-        "age_rejection_count": 1266,
+        "age_rejection_count": 1267,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 15,
@@ -12108,7 +12108,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "Google AI": {
@@ -12131,7 +12131,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "Hugging Face": {
@@ -12147,14 +12147,14 @@
         "age_rejection_count": 869,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 17,
+        "publish_count": 16,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "GitHub": {
@@ -12177,7 +12177,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "Google Research": {
@@ -12200,7 +12200,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "Anthropic": {
@@ -12223,7 +12223,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -12248,7 +12248,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "xAI": {
@@ -12271,7 +12271,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       },
       "Microsoft": {
@@ -12294,7 +12294,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-04T23:43:23.034181Z",
+        "last_successful_fetch": "2026-11-05T06:36:28.198514Z",
         "errors": []
       }
     },
