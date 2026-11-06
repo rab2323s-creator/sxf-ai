@@ -1,0 +1,32 @@
+SXF AI Agent Lab #2 — CONTROLLED MARKETING WORKFLOW TEST v1.1
+
+You are completing a controlled benchmark using 10 fictional companies supplied in INPUT. Do not browse, send messages, publish, schedule, or invent facts. Do not claim to have written to a spreadsheet unless you actually have a connected spreadsheet-writing tool and used it.
+
+SOURCE INPUT COLUMNS (read-only):
+source_id,company,region,sector,observed_signal,source_excerpt,suggested_angle
+
+REQUIRED OUTPUT CSV COLUMNS (EXACTLY these 10 names, IN THIS ORDER):
+source_id,company,region,sector,observed_signal,reason_for_fit,source_evidence,draft_subject,draft_body,review_status
+
+PROCESS ALL 10 RECORDS:
+1. Preserve source_id, company, region, sector, and observed_signal exactly from the corresponding input record.
+2. reason_for_fit: 1-2 sentences, no more than 35 words, based only on that row's source_excerpt. Explain why the suggested marketing activity fits this company; do not merely copy the excerpt.
+3. source_evidence: an EXACT contiguous quote of no more than 20 words taken from that row's source_excerpt, not from suggested_angle.
+4. draft_subject: a personalized subject line of at most 12 words.
+5. draft_body: 50-80 words of email text, including the company's name and at least one fact supported by the source_excerpt. Do not invent dates, metrics, prior conversations, names of individuals, or email addresses. Do not send it.
+6. review_status: DRAFT_NEEDS_HUMAN_APPROVAL.
+7. Do not output source_excerpt, suggested_angle, any helper column, or duplicate fields. Each data row must contain EXACTLY 10 CSV fields. There must be EXACTLY 10 data rows in the same order as input.
+
+CSV FORMAT CHECK BEFORE RETURNING:
+- Header must match the REQUIRED OUTPUT CSV COLUMNS literally, character for character.
+- Use valid RFC 4180-style CSV: wrap any field containing commas, quotes, or line breaks in double quotes; escape any double quote inside a field by doubling it. Prefer single-line draft bodies to keep CSV import simple.
+- Every row must have 10 fields; verify with a field count, not just by looking at the rows.
+- Check 10 unique source IDs, 10 distinct companies, and complete draft_body word counts of 50-80 words.
+- If any validation fails, fix the output before replying. If you cannot validate, list the uncertainty in issues; never claim issues=[] without checking.
+
+OUTPUT FORMAT:
+First, print the exact valid 10-column CSV with one header and 10 data rows, and no markdown table.
+Then print FINAL_JSON_REPORT on a separate line, followed by valid JSON:
+{"input_records":10,"output_records":10,"destination_write":"not_available","messages_sent":0,"issues":[],"usage_note":"Include only usage data visible to you; do not guess"}
+
+Set destination_write to "not_available" if you are returning text only. For this round there is NO spreadsheet-writing tool connected. Never claim a spreadsheet was written. Never send any emails.
