@@ -42,6 +42,7 @@ jobs:
           python tests/test_five_editorial_launches.py
           python tests/test_nov04_editorial_launches.py
           python tests/test_nov05_editorial_launches.py
+          python tests/test_nov06_editorial_launches.py
       - name: Editorial news relevance and importance tests
         run: |
           python tests/test_news_relevance.py
@@ -181,6 +182,7 @@ jobs:
           python tests/test_five_editorial_launches.py --post-build
           python tests/test_nov04_editorial_launches.py --post-build
           python tests/test_nov05_editorial_launches.py --post-build
+          python tests/test_nov06_editorial_launches.py --post-build
           python tests/test_featured_daily_brief.py --post-build
       - name: Validate generated site
         run: python scripts/validate_site.py
