@@ -105,6 +105,11 @@ jobs:
         run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
+      - name: Mistral OCR 4.1 SEO, pricing calculator, documents and RAG links
+        run: |
+          python -m py_compile scripts/mistral_ocr41_model_page.py models/mistral-ocr-4-1/sxf-ocr-eval.py
+          node --check assets/mistral-ocr41-cost.js
+          python tests/test_mistral_ocr41_seo.py
       - name: Llama 4 Scout 109B/10M SEO, licensing, VRAM and long-context research
         run: |
           python -m py_compile scripts/llama4_scout_model_page.py models/llama-4-scout/sxf-scout-eval.py
