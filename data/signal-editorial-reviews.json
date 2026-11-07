@@ -3222,6 +3222,136 @@
         "Separate voluntary company pledges from enacted local, state or federal rules.",
         "Do not count the prior 1,000 MW Georgia agreement as a new measured national benefit."
       ]
+    },
+    "biobasicsbench-ai-wet-lab-data-benchmark": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "BioBasicsBench: Can GPT-6 Astra Analyze Real Lab Data?",
+      "h1": "BioBasicsBench explained: can AI interpret raw lab results?",
+      "meta_description": "BioBasicsBench tests AI on 100 wet-lab tasks. Explore GPT-6 Astra's 66.7% rubric score, how the study works and why that does not mean autonomous science.",
+      "source_name": "OpenAI Research",
+      "primary_source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+      "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
+      "keywords": [
+        "BioBasicsBench",
+        "GPT-6 Astra wet lab benchmark",
+        "AI laboratory data analysis",
+        "OpenAI BioBasicsBench 66.7 percent",
+        "AI scientist experiments"
+      ],
+      "schema_type": "NewsArticle",
+      "editorial": {
+        "what_changed": "OpenAI and Ligo developed a 100-task benchmark built from gels, microscopy, plates, sequencing files, instrument readings and laboratory protocols, testing whether agents recognize ambiguous or failed experiments rather than only interpreting polished published figures.",
+        "why_it_matters": "Routine lab work depends on detecting bad controls, inconsistent readings and unsupported conclusions. A grounded benchmark can reveal whether AI assists with these difficult judgments or simply produces fluent explanations without verifying evidence.",
+        "what_to_verify": "The reported 66.7% for GPT-6 Astra is mean rubric reward at the xhigh reasoning setting, not a 66.7% rate of fully correct or autonomously executed experiments. The benchmark and results are developer-reported and cannot establish biosafety, reliability in every lab or discovery of treatments."
+      },
+      "evidence": [
+        {
+          "label": "Benchmark breadth",
+          "fact": "The release contains 100 tasks across protein methods, imaging and cytometry, quantification and assays, nucleic-acid methods and molecular cloning.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Raw evidence",
+          "fact": "Inputs include gel and blot images, agar plates, microscope stacks, sequencing files, instrument readouts, handwritten lab notes and videos of routine bench procedures.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Expert rubrics",
+          "fact": "Ligo scientists wrote tasks and grading rubrics; each underwent additional internal and independent PhD-level wet-lab review.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Evaluation design",
+          "fact": "Seven model families were assessed across 37 reasoning settings, with five attempts per task for a total of 18,500 model outputs.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-6 Astra",
+          "fact": "At xhigh effort Astra received 66.7% mean rubric credit, with a reported 95% confidence interval of 60.3–73.1%.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-5.6 Sol",
+          "fact": "The comparison GPT-5.6 Sol scored 43.8% mean reward with a 95% interval of 37.6–50.0%.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-6.1 Sol",
+          "fact": "Another model, GPT-6.1 Sol, received 62.0% mean reward at xhigh effort.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Token cost clue",
+          "fact": "At the same displayed reasoning-effort label, the table lists 4,704 output tokens per task for Astra and 9,099 for GPT-5.6 Sol, not a complete deployment-cost measure.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        }
+      ],
+      "limitations": "The small curated benchmark and provider-run evaluation cannot establish general scientific competence. Mean rubric scores are partial credit rather than task completion rates; some skill tags and input categories overlap. A real lab needs independent held-out data, validation of sample provenance, safety controls and expert final sign-off.",
+      "sources": [
+        "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+      ],
+      "analysis": [
+        {
+          "heading": "Why BioBasicsBench tests a different type of AI science skill",
+          "paragraphs": [
+            "Scientific papers often show carefully selected images and charts that make an experiment's result relatively easy to interpret. A real laboratory produces mislabeled lanes, blurred images, inconsistent controls and ambiguous instruments. BioBasicsBench deliberately includes these raw materials and asks whether an agent can read them, spot methodological problems and know when the evidence does not justify an answer.",
+            "The 100 questions span five wet-lab domains. They may involve microscopy, protein gels, plasmid maps or raw sequencing files. A rubric can award credit for an appropriate measurement, the correct reasoning or an explicit warning that a sample is inconclusive. Because one task may use several kinds of data, category subtotals overlap; adding them would exaggerate the number of independent experiments.",
+            "Ligo researchers supplied experimental materials and expert-defined grading criteria. Multiple review rounds improve the clarity of the tasks, but they do not turn an author-created evaluation into a universal measure of experimental reliability."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "heading": "GPT-6 Astra scores 66.7%: what does that number actually measure?",
+          "paragraphs": [
+            "OpenAI reports that Astra earned 66.7% of the points available from expert rubrics at xhigh reasoning effort, while GPT-5.6 Sol earned 43.8%. The reported 95% whole-task bootstrap intervals are 60.3–73.1% and 37.6–50.0%. This is a meaningful comparison in the chosen dataset, not proof that Astra can complete two out of every three experiments by itself.",
+            "The article details seven model families, 37 model-effort configurations and five attempts for each of 100 questions. That produces 18,500 outputs rather than 18,500 unique scientific tasks. The same table lists output tokens per task, with Astra at 4,704 and GPT-5.6 Sol at 9,099. Token counts are not total cost: tools, human checking and reruns can be much more consequential.",
+            "Results should be interpreted at the relevant skill level. One laboratory might care about identifying inadequate controls, while another needs accurate numerical plate-reader analysis. A mean score could hide rare but serious mistakes on the particular samples the team intends to process."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "heading": "An SXF method for testing AI assistants in a real lab",
+          "paragraphs": [
+            "A practical pilot should reserve unseen samples that include failed runs, poor lighting, mixed cultures and contradictory observations. Two reviewers can score whether the assistant identifies the underlying evidence, expresses uncertainty and refuses unsupported conclusions. Measure the frequency of dangerous confidence as well as correctness on straightforward examples.",
+            "Keep the agent's role narrow at first: summarize possible interpretations, point to the supporting frame or lane and flag what additional test would resolve uncertainty. Human laboratory staff remain responsible for experimental design, biosafety, reagent handling and published conclusions. Operational value should include time saved after correction and fewer missed problems, not merely higher rubric points.",
+            "Readers can compare this benchmark with SXF's LifeVal report on everyday assistant tasks and StateBench on tracking evolving information. These are different evaluations and should not be combined into a single universal model ranking. The advance in BioBasicsBench is the attention given to messy experimental evidence and the need to recognize what that evidence cannot establish."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "LifeVal's real-world AI task benchmark",
+          "url": "/signals/lifeval-ed4b582/",
+          "description": "Compare this lab evaluation with a benchmark of everyday agent tasks."
+        },
+        {
+          "title": "StateBench and long-context reliability",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "How models lose track of changing evidence."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Understand partial credit, confidence intervals and benchmark limits."
+        },
+        {
+          "title": "Google Agile Deliberation and uncertain image labels",
+          "url": "/signals/google-agile-deliberation-image-classification/",
+          "description": "Another human-guided approach to resolving ambiguous data."
+        },
+        {
+          "title": "SXF research hub",
+          "url": "/research/",
+          "description": "Further AI research, evaluation and methodology."
+        }
+      ],
+      "reader_checklist": [
+        "Do not mistake rubric credit for a rate of autonomous laboratory success.",
+        "Test samples with failed controls and missing information, not only clean demos.",
+        "Evaluate domain-specific failure modes and independently reviewed held-out data.",
+        "Require qualified scientific review and biosafety oversight."
+      ]
     }
   }
 }
