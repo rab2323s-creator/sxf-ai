@@ -30,6 +30,7 @@ from signal_article_rendering import SignalArticleContext, signal_page_html as r
 from open_source_signals import select_open_source_signals
 from model_provider_index_rendering import ProviderIndexContext, provider_index_html as render_provider_index_html
 from gemini_live_extended_page import enrich_gemini_live_extended_page
+from gemini_38_live_model_page import enrich_gemini_38_live_page
 from lfm25_vl_dspark_model_page import render_page as render_lfm25_vl_dspark_page
 from lfm3_model_page import render_page as render_lfm3_model_page
 from lfm25_24b_model_page import render_page as render_lfm25_24b_model_page
@@ -5570,6 +5571,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_gemini_38_flash_tts_page(page)
     if model_id == "gemini-3.8-live-extended-thinking":
         page = enrich_gemini_live_extended_page(page)
+    if model_id == "gemini-3.8-live":
+        page = enrich_gemini_38_live_page(page)
     if model_id == "gen4.5":
         page = enrich_runway_gen45_page(page)
     if model_id == "flux-2-max":
