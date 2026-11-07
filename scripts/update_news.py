@@ -65,6 +65,7 @@ from gpt6_luna_model_page import enrich_gpt6_luna_page
 from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
 from flux2_klein_9b_model_page import enrich_flux2_klein_9b_page
+from voxtral_mini_transcribe_2_page import enrich_voxtral_mini_transcribe_2_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
@@ -5579,6 +5580,19 @@ def render_catalog_model_page(model_id, items):
         page = enrich_flux2_max_page(page)
     if model_id == "flux-2-klein-9b":
         page = enrich_flux2_klein_9b_page(page)
+    if model_id == "voxtral-mini-2602":
+        page = enrich_voxtral_mini_transcribe_2_page(page)
+    if model_id == "voxtral-mini-transcribe-realtime-2602":
+        # Contextual reciprocal link: distinguish offline V2 transcription from
+        # its separate realtime offering, also preserved on regenerated pages.
+        page = inject_before_main_end(page, '''<section class="model-compare-bridge shell" data-voxtral2-offline-bridge>
+          <div class="intel-section-head"><div><p class="eyebrow">RELATED MISTRAL SPEECH TO TEXT</p>
+          <h2>Need recorded-file transcription instead of realtime captions?</h2></div></div>
+          <p>Voxtral Mini Transcribe Realtime handles live streaming. For prerecorded files, version-pinned Python and cURL calls, diarization, historical $0.003/min transcription, word timestamps, and the 2026 Voxtral 3 migration, use the dedicated offline guide.</p>
+          <div class="model-related-links"><a href="/models/voxtral-mini-transcribe-2/"><span>OFFLINE MODEL</span>
+          <strong>Voxtral Mini Transcribe 2: API, pricing and migration guide</strong><b>↗</b></a></div>
+          </section>''')
+
     if model_id == "gemini-3-pro-image":
         page = enrich_nano_banana_pro_page(page)
     if model_id == "gemini-nano-banana-2.1":
