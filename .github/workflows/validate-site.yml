@@ -105,6 +105,11 @@ jobs:
         run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
+      - name: Llama 4 Scout 109B/10M SEO, licensing, VRAM and long-context research
+        run: |
+          python -m py_compile scripts/llama4_scout_model_page.py models/llama-4-scout/sxf-scout-eval.py
+          node --check assets/llama4-scout-memory.js
+          python tests/test_llama4_scout_seo.py
       - name: Claude Haiku 4.5 SEO, token economics, migration and reciprocal linking
         run: |
           python -m py_compile scripts/claude_haiku_45_model_page.py models/claude-haiku-4-5/sxf-haiku45-eval.py
