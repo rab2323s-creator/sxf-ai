@@ -3,7 +3,7 @@
           <div class="model-section-head"><p class="eyebrow">COHERE COMMAND A+ / DIRECT ANSWER</p><h2>What is Cohere Command A Plus?</h2></div>
           <p><strong>Cohere Command A+ (Command A Plus)</strong> is a <strong>multilingual, vision-enabled Mixture-of-Experts (MoE) language model</strong> released on <strong>May 20, 2026</strong>. Its exact Cohere API model ID is <code>command-a-plus-05-2026</code>. It combines text and image understanding, reasoning, tool calling, structured output and citations for enterprise agents and RAG applications.</p>
           <p>The model has <strong>218 billion total parameters</strong>, with <strong>25 billion active parameters</strong> during inference, a <strong>128,000-token context window</strong> and a <strong>64,000-token maximum output</strong>. Cohere lists <strong>48 languages</strong>, including Arabic and all official EU languages. It is distributed as open weights under <strong>Apache 2.0</strong>, with official W4A4 configurations designed for <strong>one NVIDIA B200 or two H100 GPUs</strong>.</p>
-          <div class="sxf-caplus-notice" role="note"><strong>Pricing distinction — verified November 8, 2026</strong><p>Cohere's shared Chat API lists <strong>Command A+ as free until rate limits are reached</strong> for trial and production keys; this is <em>not unlimited free production capacity</em>. The company separately lists <strong>Model Vault managed instances at $17.50/hour (L) and $32.50/hour (XL)</strong>, subject to access, tier and commercial commitment. Downloading Apache-2.0 weights does not make GPU infrastructure free. No universal Cohere paid input/output token rate is published for this API model, so SXF does not invent one.</p></div>
+          <div class="sxf-caplus-notice" role="note"><strong>Pricing distinction — verified November 8, 2026</strong><p>Cohere's shared Chat API lists <strong>Command A+ as free until rate limits are reached</strong> for trial and production keys; this is <em>not unlimited free production capacity</em>. The company separately lists <strong>Model Vault Command A+ XL instances at $57.50/hour</strong>; the public pricing table does not list a Command A+ L rate, subject to access, tier and commercial commitment. Downloading Apache-2.0 weights does not make GPU infrastructure free. No universal Cohere paid input/output token rate is published for this API model, so SXF does not invent one.</p></div>
           <nav class="model-related-links" aria-label="Jump to Cohere Command A Plus details">
             <a href="#caplus-pricing"><span>COSTS</span><strong>Free API vs Vault pricing</strong><b>↗</b></a>
             <a href="#caplus-code"><span>API</span><strong>Python, cURL and reasoning</strong><b>↗</b></a>
@@ -25,18 +25,18 @@
         </section>
 
         <section class="model-deep-section" id="caplus-pricing">
-          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL INSTANCE ECONOMICS</p><h2>Cohere Command A+ pricing: free API limits vs Model Vault $17.50/hour.</h2></div>
-          <p>There are <strong>three distinct ways to obtain this model</strong>. Cohere's shared Chat API offers access up to published rate limits. Cohere's <strong>Standard Model Vault</strong> uses per-instance-hour L or XL managed capacity, usually with a waitlist and monthly/annual Fixed or Flex commitments. Apache-2.0 open weights can be self-hosted, where the GPU bill, operations and security are paid separately. <strong>Do not copy the $2.50/$10 per million-token pricing for the older Command A model into Command A+.</strong></p>
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL INSTANCE ECONOMICS</p><h2>Cohere Command A+ pricing: free API vs Model Vault XL $57.50/hour.</h2></div>
+          <p>There are <strong>three distinct ways to obtain this model</strong>. Cohere's shared Chat API offers access up to published rate limits. Cohere's <strong>Standard Model Vault</strong> lists managed XL capacity for this specific model, usually with a waitlist and monthly/annual Fixed or Flex commitments. Apache-2.0 open weights can be self-hosted, where the GPU bill, operations and security are paid separately. <strong>Do not copy the $2.50/$10 per million-token pricing for the older Command A model into Command A+.</strong></p>
           <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>Verified Cohere access and billing models, not interchangeable unit prices</caption><thead><tr><th scope="col">Deployment option</th><th scope="col">Published pricing basis</th><th scope="col">Important limitation</th></tr></thead><tbody>
             <tr><th scope="row">Cohere shared API</th><td>Free until request/rate limits</td><td>No universal paid Command A+ token price or unlimited throughput is promised</td></tr>
-            <tr><th scope="row">Standard Model Vault · L</th><td><strong>$17.50 per instance-hour</strong></td><td>Dedicated managed capacity; access, waitlist, contractual billing and commitments apply</td></tr>
-            <tr><th scope="row">Standard Model Vault · XL</th><td><strong>$32.50 per instance-hour</strong></td><td>Different performance tier; do not assume exactly proportional throughput</td></tr>
+            <tr><th scope="row">Standard Model Vault · L</th><td><strong>Not listed for Command A+</strong></td><td>Do not infer a rate from another model tier</td></tr>
+            <tr><th scope="row">Standard Model Vault · XL</th><td><strong>$57.50 per instance-hour</strong></td><td>Managed dedicated capacity; waitlist and contractual commitments apply</td></tr>
             <tr><th scope="row">Self-hosted Apache-2.0 weights</th><td>GPU capacity, storage, networking and operations</td><td>Weight license is not a free hosting or hardware entitlement</td></tr>
           </tbody></table></div>
-          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>SXF-derived hourly-rate multiplication only (not quoted monthly Cohere subscription prices)</caption><thead><tr><th scope="col">Illustrative managed instance hours</th><th scope="col">L · $17.50/hour</th><th scope="col">XL · $32.50/hour</th></tr></thead><tbody>
-            <tr><th scope="row">8 instance-hours</th><td>$140</td><td>$260</td></tr>
-            <tr><th scope="row">176 instance-hours</th><td>$3,080</td><td>$5,720</td></tr>
-            <tr><th scope="row">720 instance-hours</th><td>$12,600</td><td>$23,400</td></tr>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>SXF-derived hourly-rate multiplication only (not quoted monthly Cohere subscription prices)</caption><thead><tr><th scope="col">Illustrative managed instance hours</th><th scope="col">Command A+ XL · $57.50/hour</th><th scope="col">Commitment note</th></tr></thead><tbody>
+            <tr><th scope="row">8 instance-hours</th><td>$460</td><td>Hourly-rate multiplication only</td></tr>
+            <tr><th scope="row">176 instance-hours</th><td>$10,120</td><td>Not a quoted monthly contract</td></tr>
+            <tr><th scope="row">720 instance-hours</th><td>$41,400</td><td>Actual billed terms may differ</td></tr>
           </tbody></table></div>
           <p>The figures above multiply <em>public hourly rates × chosen hours</em>; they do not replace quoted monthly/annual commitments, minimum capacity, autoscaling rules, overages or enterprise invoices. Consult <a href="https://docs.cohere.com/docs/model-vault/standard/pricing" target="_blank" rel="noopener noreferrer">Cohere's Standard Vault pricing page</a> and validate regional tier availability before budgeting.</p>
 
@@ -44,18 +44,18 @@
             <h3>SXF Model Vault cost-per-accepted-task calculator</h3>
             <p>Estimate a managed instance workload using your <em>assumed</em> throughput and acceptance rate. This is original SXF scenario math, not measured Cohere throughput or an account-specific price quote. It runs entirely in your browser.</p>
             <div class="sxf-caplus-fields">
-              <label for="caplus-tier">Model Vault tier<select id="caplus-tier" data-caplus-tier><option value="L">L · $17.50/instance-hour</option><option value="XL">XL · $32.50/instance-hour</option></select></label>
+              <p class="sxf-caplus-note">Published Command A+ tier: XL · $57.50/instance-hour. An L tier price is not listed.</p>
               <label for="caplus-instances">Concurrent instances<input id="caplus-instances" type="number" min="0" max="10000" step="1" value="1" data-caplus-instances></label>
               <label for="caplus-hours">Billed hours per instance<input id="caplus-hours" type="number" min="0" max="8760" step="1" value="176" data-caplus-hours></label>
               <label for="caplus-throughput">Completed tasks per instance-hour (assumption)<input id="caplus-throughput" type="number" min="0" max="1000000" step="1" value="100" data-caplus-throughput></label>
               <label for="caplus-pass">Human-accepted tasks (%)<input id="caplus-pass" type="number" min="0" max="100" step="1" value="90" data-caplus-pass></label>
             </div>
             <div class="sxf-caplus-results" role="status" aria-live="polite">
-              <div><span>Estimated instance charges</span><strong data-caplus-cost>$3,080.00</strong></div>
+              <div><span>Estimated instance charges</span><strong data-caplus-cost>$10,120.00</strong></div>
               <div><span>Assumed accepted tasks</span><strong data-caplus-accepted>15,840</strong></div>
-              <div><span>Spend per accepted task</span><strong data-caplus-unit>$0.1944</strong></div>
+              <div><span>Spend per accepted task</span><strong data-caplus-unit>$0.6389</strong></div>
             </div>
-            <p class="sxf-caplus-note" data-caplus-explain>1 L instance × 176 billed hours × $17.50/hour; 100 tasks/hour and a 90% acceptance assumption.</p>
+            <p class="sxf-caplus-note" data-caplus-explain>1 XL instance × 176 billed hours × $57.50/hour; 100 tasks/hour and a 90% acceptance assumption.</p>
             <p class="sxf-caplus-note">Missing or zero accepted-task counts display N/A instead of dividing by zero. Excludes ancillary services, tool fees, audit labor, taxes, minimum contracted capacity, pausing behavior and provider-specific billing rules. No input values are sent to a server.</p>
           </div>
         </section>
@@ -69,7 +69,7 @@
             <tr><th scope="row">Data location</th><td>Hosted service terms</td><td>Selected managed deployment options</td><td>Your deployment perimeter and controls</td></tr>
             <tr><th scope="row">Decision metric</th><td>Successful tasks within limits</td><td>Cost per accepted task at target p95 latency</td><td>Full infrastructure + staff cost per accepted task</td></tr>
           </tbody></table></div>
-          <p>For example, at 176 billed instance-hours and $17.50/hour, an L tier costs <strong>$3,080 in the illustrative hourly-rate scenario</strong>. If a separately benchmarked application handled 100 tasks per instance-hour with 90% passing human review, it would generate 15,840 accepted tasks at about <strong>$0.1944 per accepted task</strong>, before any other expense. <strong>Neither throughput nor quality in this sentence is a measured Command A+ result.</strong></p>
+          <p>For example, at 176 billed instance-hours and $57.50/hour, one XL instance costs <strong>$10,120 in the illustrative hourly-rate scenario</strong>. If a separately benchmarked application handled 100 tasks per instance-hour with 90% passing human review, it would generate 15,840 accepted tasks at about <strong>$0.6389 per accepted task</strong>, before any other expense. <strong>Neither throughput nor quality in this sentence is a measured Command A+ result.</strong></p>
         </section>
 
         <section class="model-deep-section" id="caplus-code">
@@ -141,8 +141,8 @@ for block in response.message.content:
             <tr><th scope="row">Context / output max</th><td>128K / 64K</td><td>256K / 32K</td></tr>
             <tr><th scope="row">Image inputs</th><td>Yes; documented vision</td><td>Model documentation lists image inputs; check exact supported workflow</td></tr>
             <tr><th scope="row">Supported languages</th><td>48</td><td>23</td></tr>
-            <tr><th scope="row">Model Vault L tier</th><td>$17.50 per instance-hour</td><td>$48 per instance-hour</td></tr>
-            <tr><th scope="row">Model Vault XL tier</th><td>$32.50 per instance-hour</td><td>$57.50 per instance-hour</td></tr>
+            <tr><th scope="row">Model Vault L tier</th><td>Not listed</td><td>$48 per instance-hour</td></tr>
+            <tr><th scope="row">Model Vault XL tier</th><td>$57.50 per instance-hour</td><td>$57.50 per instance-hour</td></tr>
           </tbody></table></div>
           <p>The shared figures above are provider card/price-list statements, <strong>not equivalent throughput, instance hardware or identical SLA guarantees</strong>. For selection, compare tool-call validity, multilingual factual accuracy, failure modes, privacy controls, p95 latency and accepted outcomes on the same corpus. The older model has a longer published context limit, which can matter even when a newer model performs better on selected provider benchmarks.</p>
         </section>
@@ -164,7 +164,7 @@ for block in response.message.content:
           <div class="model-section-head"><p class="eyebrow">DIRECT SEARCH QUESTIONS</p><h2>Command A Plus FAQ: price, model ID, context, license and GPUs.</h2></div>
           <div class="sxf-caplus-faq">
             <details><summary>What is the Cohere Command A+ API model ID?</summary><p>Use <code>command-a-plus-05-2026</code> with the Cohere Chat v2 endpoint <code>/v2/chat</code> or official ClientV2 Python SDK.</p></details>
-            <details><summary>Is Command A+ free or paid?</summary><p>The shared Cohere API is free until rate limits are reached for both trial and production keys. Standard Model Vault charges per managed instance-hour; published L and XL rates are $17.50 and $32.50 respectively, subject to access and commitments.</p></details>
+            <details><summary>Is Command A+ free or paid?</summary><p>The shared Cohere API is free until rate limits are reached for both trial and production keys. Standard Model Vault charges per managed instance-hour; the published Command A+ XL rate is $57.50/hour (no L rate listed), subject to access and commitments.</p></details>
             <details><summary>What is the Command A+ context window and output limit?</summary><p>Cohere documents a 128,000-token context window and 64,000 maximum output tokens. Real request limits and available headroom depend on settings and platform.</p></details>
             <details><summary>Is Command A Plus open source?</summary><p>Yes. Cohere released downloadable Command A+ weights under Apache 2.0. The model can be self-hosted on supported hardware but GPU, serving and operations costs remain separate.</p></details>
             <details><summary>How much GPU memory does Command A+ need?</summary><p>Cohere documents a W4A4 configuration on one B200 or two H100 GPUs. The raw ideal 4-bit 218B checkpoint requires about 109 decimal GB of weight data before runtime overhead; a 25B-active parameter count does not imply dense 25B memory needs.</p></details>
