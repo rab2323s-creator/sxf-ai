@@ -30,7 +30,7 @@ QUESTIONS=[
     ("Is Cohere Command A+ free?",
      "The shared Cohere API is free until rate limits are reached. Managed Model Vault capacity is separately billed by instance-hour, subject to availability and commitments."),
     ("How much does Command A+ Model Vault cost?",
-     "Cohere lists Standard Model Vault L at $17.50 per instance-hour and XL at $32.50 per instance-hour. Check current tiers and contractual monthly/annual commitments."),
+     "Cohere lists Standard Model Vault Command A+ XL at $57.50 per instance-hour. No Command A+ L rate is listed; check the pricing table, waitlist and contractual commitments."),
     ("What is Command A+ context and output capacity?",
      "Cohere documents 128,000 context tokens and 64,000 maximum output tokens."),
     ("Is Command A+ available under an open source license?",
@@ -80,7 +80,7 @@ def enrich_command_a_plus_page(page:str)->str:
               "shared access")
     page=once(page,
               '<div><span>OUTPUT RATE</span><strong>—</strong><small>per 1 million tokens</small></div>',
-              '<div><span>MODEL VAULT L</span><strong>$17.50/hour</strong><small>managed instance, subject to terms</small></div>',
+              '<div><span>MODEL VAULT XL</span><strong>$57.50/hour</strong><small>managed instance, subject to terms</small></div>',
               "managed price")
     page=once(page,
               '<article><span>REASONING</span><h3>supported</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>',
