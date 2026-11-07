@@ -1,0 +1,156 @@
+<!-- SXF editorial reference, regenerated from data/model-page-content/gemini-3-8-live-seo.html -->
+        <section class="model-deep-section" id="g38-live-overview" data-g38-live-guide>
+          <div class="model-section-head"><p class="eyebrow">GEMINI 3.8 LIVE / QUICK ANSWER</p><h2>What is Gemini 3.8 Live?</h2></div>
+          <p><strong>Gemini 3.8 Live</strong> is Google's <strong>real-time native-audio model</strong> for two-way spoken conversations, voice agents and visual assistance. Use the <strong>Gemini Live API</strong> with the exact model ID <code>gemini-3.8-live</code> to stream speech, accept text and visual inputs and call tools while a conversation continues. It is optimized for responsiveness, not for lengthy background planning.</p>
+          <p>The developer API model card documents <strong>131,072 input tokens</strong> and <strong>65,536 output tokens</strong>. Paid rates begin at <strong>$0.75/1M text input tokens</strong> and <strong>$4.50/1M text output tokens</strong>, but a spoken session uses separately billed <strong>audio</strong>. Google lists approximate audio equivalents of <strong>$0.005 per input minute</strong> and <strong>$0.018 per generated minute</strong>. Those minute figures are reference estimates, not a universal per-call price.</p>
+          <nav class="model-related-links" aria-label="Jump to Gemini 3.8 Live guide sections">
+            <a href="#g38-live-pricing"><span>PRICING</span><strong>Audio costs and SXF estimator</strong><b>↗</b></a>
+            <a href="#g38-live-api"><span>DEVELOPER SETUP</span><strong>Python Live API quickstart</strong><b>↗</b></a>
+            <a href="#g38-live-comparison"><span>MODEL CHOICE</span><strong>Live vs Extended Thinking</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-features">
+          <div class="model-section-head"><p class="eyebrow">VERIFIED CAPABILITIES</p><h2>Gemini 3.8 Live specs and real-time voice features.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL ID / API</span><h3>gemini-3.8-live</h3><p>Stable Live API endpoint using a persistent bidirectional WebSocket session; distinct from Gemini 3.8 Flash and Live Extended Thinking.</p></article>
+            <article><span>CONTEXT / OUTPUT</span><h3>131K / 65K tokens</h3><p>131,072 input and 65,536 output tokens in Google's Gemini Developer API reference. Session duration and connection lifetime are separate limits.</p></article>
+            <article><span>MODALITIES</span><h3>Speech + text + vision</h3><p>Accepts text, image, audio and video input; delivers streamed native audio and optional transcripts/text. This is not an image-generation model.</p></article>
+            <article><span>TOOL CALLING</span><h3>Non-blocking by default</h3><p>Async function calls can run while speech continues. Blocking mode is available when explicitly declared; protect writes and side effects with server-side authorization.</p></article>
+            <article><span>TURN-TAKING</span><h3>Barge-in and streaming</h3><p>Native audio and live input let users interrupt and correct a request. Measure actual first-audio latency and accidental interruptions on your own hardware.</p></article>
+            <article><span>REASONING CONFIG</span><h3>No thinking_level parameter</h3><p>Google describes interleaved reasoning but explicitly says not to send <code>thinking_config</code> or <code>thinking_level</code> for standard 3.8 Live.</p></article>
+          </div>
+          <p>Google's September 2026 announcement reports multilingual switching across 97 languages and near-real-time visual grounding. Those are <strong>provider-reported capabilities</strong>, not independent SXF measurements. Speech accuracy, tool reliability and language coverage should be verified on a representative workload. <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/" target="_blank" rel="noopener noreferrer">Read Google's release and qualification</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-pricing">
+          <div class="model-section-head"><p class="eyebrow">GEMINI LIVE API PRICING</p><h2>Gemini 3.8 Live pricing: text, input audio, output audio and video.</h2></div>
+          <p>The paid Gemini Developer API prices below are <strong>modality-specific</strong> Standard rates. Do not multiply a text-token price by all speech tokens or combine the per-minute equivalent with the same audio's token charges; the latter would count one workload twice. The free tier has separate quotas and terms. <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Check Google's current Gemini 3.8 Live price table</a>.</p>
+          <div class="sxf-g38-table-wrap"><table class="sxf-g38-table"><caption>Google Standard paid rates for Gemini 3.8 Live (USD)</caption><thead><tr><th scope="col">Modality</th><th scope="col">Input / 1M tokens</th><th scope="col">Output / 1M tokens</th><th scope="col">Google's approximate minute rate</th></tr></thead><tbody>
+            <tr><th scope="row">Text</th><td>$0.75</td><td>$4.50</td><td>Not applicable</td></tr>
+            <tr><th scope="row">Audio</th><td>$3.00</td><td>$12.00</td><td>Input ~$0.005/min; output ~$0.018/min</td></tr>
+            <tr><th scope="row">Image/video input</th><td>$1.00</td><td>—</td><td>~$0.002/min image/video equivalent (Google listing)</td></tr>
+          </tbody></table></div>
+          <p><strong>What's excluded:</strong> telephony provider charges, recording and storage, transport, engineering, user authentication, failed attempts, extra tools and billable Search grounding beyond the applicable allowance. Cached tokens and Batch pricing should not be assumed: Google's model card lists caching and Batch as unsupported for this model.</p>
+
+          <div class="sxf-g38-calculator" data-g38-calculator>
+            <h3>SXF original voice-session cost estimator</h3>
+            <p>Estimate the audio-and-video portion of a voice-agent workload using Google's <em>approximate per-minute equivalents</em>. Input minutes mean audio sent by the user; output minutes mean audio generated by the model. Idle connected time is not automatically the same as generated audio time.</p>
+            <div class="sxf-g38-calculator-fields">
+              <label for="g38-in-min">User audio minutes per session<input id="g38-in-min" type="number" min="0" max="10000" step="0.5" value="5" data-g38-in></label>
+              <label for="g38-out-min">Model audio minutes per session<input id="g38-out-min" type="number" min="0" max="10000" step="0.5" value="3" data-g38-out></label>
+              <label for="g38-video-min">Video-input minutes per session<input id="g38-video-min" type="number" min="0" max="10000" step="0.5" value="0" data-g38-video></label>
+              <label for="g38-sessions">Monthly completed sessions<input id="g38-sessions" type="number" min="0" max="10000000" step="1" value="100" data-g38-sessions></label>
+            </div>
+            <div class="sxf-g38-results" role="status" aria-live="polite">
+              <div><span>Approx. media cost / session</span><strong data-g38-per>$0.0790</strong></div>
+              <div><span>Approx. media cost / month</span><strong data-g38-total>$7.90</strong></div>
+            </div>
+            <p class="sxf-g38-footnote" data-g38-breakdown>5 × $0.005 + 3 × $0.018 + 0 × $0.002 = $0.0790 per session.</p>
+            <p class="sxf-g38-footnote">This calculator runs locally in the browser; no session data is sent to SXF. It is a <strong>budget model, not a live invoice</strong>. Video equivalents, non-audio text usage and actual token metering can change the billed amount. Review usage metadata before deployment.</p>
+          </div>
+          <p><strong>Worked example:</strong> five minutes of user speech and three minutes of generated speech cost approximately <strong>$0.079 per completed session</strong>, or <strong>$7.90 for 100 sessions</strong>, considering only those two audio components. If users retry a conversation twice, the actual usage can exceed this simple one-session estimate. For total agent operating costs, consult the <a href="/guides/ai-agent-cost/">SXF agent cost guide</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-api">
+          <div class="model-section-head"><p class="eyebrow">IMPLEMENTATION / PYTHON</p><h2>How to use Gemini 3.8 Live API: WebSocket and Google GenAI SDK.</h2></div>
+          <p>The simplest supported developer workflow is a server-to-server session through the official <code>google-genai</code> Python package. Install it with <code>pip install -U google-genai</code>, provision a Gemini API key as an environment variable and choose the exact model string. The example below sends text and reads native audio chunks; it is a minimal integration illustration, <strong>not a deployed phone-service implementation</strong>.</p>
+          <pre class="sxf-g38-code"><code>import asyncio
+import os
+from google import genai
+
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+async def main():
+    async with client.aio.live.connect(
+        model="gemini-3.8-live",
+        config={"response_modalities": ["AUDIO"]},
+    ) as session:
+        await session.send_realtime_input(
+            text="Give me a short spoken greeting for a visitor."
+        )
+        audio_chunks = []
+        async for message in session.receive():
+            content = message.server_content
+            if content and content.model_turn:
+                for part in content.model_turn.parts:
+                    if part.inline_data and part.inline_data.data:
+                        audio_chunks.append(part.inline_data.data)
+            if content and content.turn_complete:
+                break
+        print("Received", len(audio_chunks), "audio chunks")
+        # Decode/play as 24 kHz PCM in a real application.
+
+asyncio.run(main())</code></pre>
+          <p>For microphone input, send raw 16-bit little-endian PCM chunks using <code>session.send_realtime_input(audio=...)</code> and a MIME type such as <code>audio/pcm;rate=16000</code>; output is 24 kHz PCM. A real client needs microphone capture, playback buffering, cancellation, tool response handling and robust reconnect logic. See Google's <a href="https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk" target="_blank" rel="noopener noreferrer">Live API SDK walkthrough</a>.</p>
+          <p><strong>Security:</strong> keep production API keys on a backend. For direct browser-to-Google connections, use short-lived <a href="https://ai.google.dev/gemini-api/docs/ephemeral-tokens" target="_blank" rel="noopener noreferrer">ephemeral tokens</a>; never embed a permanent credential in frontend HTML or JavaScript.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-migration">
+          <div class="model-section-head"><p class="eyebrow">MIGRATION AND VOICE OPERATIONS</p><h2>Gemini 3.8 Live migration, async tools, interruptions and session limits.</h2></div>
+          <ol class="sxf-g38-steps">
+            <li><strong>Change the model ID:</strong> move from <code>gemini-3.1-flash-live-preview</code> to <code>gemini-3.8-live</code>, and confirm the account and API path support the new endpoint.</li>
+            <li><strong>Remove unsupported reasoning settings:</strong> omit <code>thinking_config</code> and <code>thinking_level</code>. Those controls belong to other models, including Extended Thinking.</li>
+            <li><strong>Declare tool behavior deliberately:</strong> <code>NON_BLOCKING</code> is the default; <code>BLOCKING</code> can be set for sequential calls. For payments, bookings or record edits, enforce authorization, deduplication and human confirmation in the application.</li>
+            <li><strong>Handle interruption:</strong> automatic voice activity detection and client speech can interrupt model output. Track partial audio and never mark an interrupted tool action successful merely because a phrase was spoken.</li>
+            <li><strong>Manage session state:</strong> plan for connection termination and resumption; tune context compression for longer conversations. A large token context is not a guarantee of uninterrupted live connections.</li>
+            <li><strong>Inspect both forms of output:</strong> streamed audio chunks and transcription events can differ. Monitor spoken output completion, silence, dropped connections and retry behavior in real calls.</li>
+          </ol>
+          <p>Google's <a href="https://ai.google.dev/gemini-api/docs/live-api/session-management" target="_blank" rel="noopener noreferrer">session-management guide</a> describes connection lifetime, resumption and compression. These are infrastructure concerns separate from the 131K-token model limit. Default turn coverage may include live video frames; send visual input only when it improves task quality and justifies cost.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-comparison">
+          <div class="model-section-head"><p class="eyebrow">MODEL SELECTION</p><h2>Gemini 3.8 Live vs Extended Thinking vs Flash TTS.</h2></div>
+          <div class="sxf-g38-table-wrap"><table class="sxf-g38-table"><caption>Choose by task architecture rather than confusing model names</caption><thead><tr><th scope="col">Google model</th><th scope="col">Primary purpose</th><th scope="col">Important distinction</th></tr></thead><tbody>
+            <tr><th scope="row">Gemini 3.8 Live</th><td>Fast, interactive voice agents</td><td>Native streaming audio and async tools; <code>thinking_level</code> unsupported</td></tr>
+            <tr><th scope="row"><a href="/models/gemini-3-8-live-extended-thinking/">Gemini 3.8 Live Extended Thinking</a></th><td>Complex, multi-step voice-agent work</td><td>Configurable background reasoning and interaction-status lifecycle</td></tr>
+            <tr><th scope="row"><a href="/models/gemini-3-8-flash-tts/">Gemini 3.8 Flash TTS</a></th><td>Generate expressive speech from text</td><td>Not a drop-in replacement for an always-on bidirectional Live API conversation</td></tr>
+            <tr><th scope="row"><a href="/models/gemini-3-5-transcribe/">Gemini 3.5 Transcribe</a></th><td>Speech-to-text and transcripts</td><td>Focuses on transcription, not complete spoken agent dialogue</td></tr>
+          </tbody></table></div>
+          <p>Both Gemini 3.8 Live variants appear in the same Google pricing group, but their <strong>reasoning behavior, session-state signals and preferred tasks differ</strong>. Use the focused <a href="/compare/gemini-3-8-live-extended-thinking-vs-gemini-3-8-live/">SXF Extended Thinking vs Live comparison</a> for a side-by-side decision. For voice-agent buying and implementation choices, continue to the <a href="/guides/ai-receptionist/">AI receptionist guide</a> and <a href="/providers/google/">Google model portfolio</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-lab">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL TEST DESIGN</p><h2>SXF live-voice agent evaluation protocol: six tests beyond a demo.</h2></div>
+          <p>Provider benchmark announcements do not establish an independent SXF performance result. Instead, the following is an <strong>original repeatable evaluation framework</strong> for teams comparing 3.8 Live with an alternative. It is a <strong>proposed test plan, not a claim that SXF has executed measured voice calls</strong>.</p>
+          <div class="sxf-g38-table-wrap"><table class="sxf-g38-table"><caption>Six reproducible trials and acceptance evidence</caption><thead><tr><th scope="col">Trial</th><th scope="col">Fixed test prompt or condition</th><th scope="col">What to log</th></tr></thead><tbody>
+            <tr><th scope="row">First audio</th><td>Same greeting prompt; repeat 20 times per configuration</td><td>p50/p95 time to first playable audio, including network</td></tr>
+            <tr><th scope="row">Interruption</th><td>User says “stop” halfway through the model reply</td><td>Unwanted speech tail, interrupt recovery and response quality</td></tr>
+            <tr><th scope="row">Tool task</th><td>Look up an invented order ID via a sandboxed tool</td><td>Tool-call arguments, correctness, retries, side effects</td></tr>
+            <tr><th scope="row">Language switch</th><td>Switch English → Spanish → English without reconnecting</td><td>Meaning preservation and unintended language drift</td></tr>
+            <tr><th scope="row">Visual evidence</th><td>Discuss a predefined image while speaking</td><td>Grounded description errors and extra modality cost</td></tr>
+            <tr><th scope="row">Long session</th><td>Run a controlled 20-minute transcript with reconnection</td><td>Resumption success, repeated utterances, missing state</td></tr>
+          </tbody></table></div>
+          <p>For every trial, keep anonymized input fixtures, model ID, SDK version, region, sampling parameters, VAD settings, raw audio duration, text tokens, tool traces and actual provider usage data. Score <strong>task success, latency and cost per successful completed conversation</strong> independently; do not create a single ungrounded “best model” score. For deeper reliability checks, see <a href="/guides/ai-agent-evaluation-checklist/">SXF's 25-test evaluation checklist</a>, <a href="/guides/ai-agent-observability/">agent observability guide</a> and <a href="/guides/ai-agent-security/">agent security practices</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-faq">
+          <div class="model-section-head"><p class="eyebrow">COMMON DEVELOPER QUESTIONS</p><h2>Gemini 3.8 Live FAQ: API, pricing and voice agents.</h2></div>
+          <div class="sxf-g38-faq">
+            <details><summary>What is the Gemini 3.8 Live API model ID?</summary><p>The exact stable Gemini Developer API model identifier is <code>gemini-3.8-live</code>. It connects through the Gemini Live API rather than a plain text-generation-only workflow.</p></details>
+            <details><summary>Is Gemini 3.8 Live free?</summary><p>Google lists a free tier with applicable limits. Paid Standard rates differ across text, audio and image/video modalities. Check current eligibility and quotas in Google AI Studio.</p></details>
+            <details><summary>How much does a Gemini 3.8 Live voice session cost?</summary><p>Google's audio equivalents are approximately $0.005 per input minute and $0.018 per output minute. Five input minutes and three output minutes therefore total about $0.079 for audio alone, before other usage and service costs.</p></details>
+            <details><summary>Can Gemini 3.8 Live call tools without interrupting speech?</summary><p>Yes. Non-blocking asynchronous function calls are supported and are the default mode. Apps still need robust tool authorization, result matching and error handling.</p></details>
+            <details><summary>Can I set thinking_level on Gemini 3.8 Live?</summary><p>No. Google's model migration guide says <code>thinking_level</code> and <code>thinking_config</code> are unsupported in standard 3.8 Live; use Extended Thinking when configurable reasoning is required.</p></details>
+            <details><summary>Is Gemini 3.8 Live the same as Gemini 3.8 Flash TTS?</summary><p>No. Live is for conversational streaming speech with real-time input and tool calls; Flash TTS is for producing expressive audio from text.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="g38-live-sources">
+          <div class="model-section-head"><p class="eyebrow">SOURCES / BOUNDARIES</p><h2>Official references, calculations and what SXF did not measure.</h2></div>
+          <p>Provider API specifications and prices were checked against Google's documentation on November 7, 2026. The cost estimator and six-trial protocol were prepared by SXF as <strong>transparent analytical tools</strong>; no independent latency, quality or failure-rate scores are asserted. The page's original model catalog and append-only history continue to record their own verified baseline separately from this editorial update.</p>
+          <ul class="sxf-g38-sources">
+            <li><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live" target="_blank" rel="noopener noreferrer">Google — Gemini 3.8 Live model card, limits and migration</a></li>
+            <li><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Google — official Gemini Live model pricing</a></li>
+            <li><a href="https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk" target="_blank" rel="noopener noreferrer">Google — official Python Live API quickstart</a></li>
+            <li><a href="https://ai.google.dev/gemini-api/docs/live-api/capabilities" target="_blank" rel="noopener noreferrer">Google — Live API capabilities and streams</a></li>
+            <li><a href="https://ai.google.dev/gemini-api/docs/live-api/session-management" target="_blank" rel="noopener noreferrer">Google — session lifetimes, compression and resumption</a></li>
+            <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/" target="_blank" rel="noopener noreferrer">Google — launch announcement and provider-reported voice capabilities</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="Related SXF Gemini resources">
+            <a href="/models/gemini-3-8-live-extended-thinking/"><span>DEEPER REASONING</span><strong>Gemini Live Extended Thinking</strong><b>↗</b></a>
+            <a href="/compare/gemini-3-8-live-extended-thinking-vs-gemini-3-8-live/"><span>DIRECT MATCHUP</span><strong>Compare both Gemini Live models</strong><b>↗</b></a>
+            <a href="/guides/ai-receptionist/"><span>IMPLEMENTATION</span><strong>AI receptionist deployment guide</strong><b>↗</b></a>
+          </nav>
+        </section>
+

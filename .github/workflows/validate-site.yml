@@ -105,6 +105,8 @@ jobs:
         run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
+      - name: Gemini 3.8 Live SEO, API pricing and voice-agent regression
+        run: python tests/test_gemini_38_live_model.py
       - name: FLUX.2 Klein 9B reference SEO, pricing and linking regression
         run: python tests/test_flux2_klein_9b_model.py
       - name: GPT-Realtime-2.1 model editorial and SEO regression
