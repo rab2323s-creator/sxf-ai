@@ -63,6 +63,7 @@ from gpt61_release_page import enrich_gpt61_release_page
 from gpt6_luna_model_page import enrich_gpt6_luna_page
 from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
+from flux2_klein_9b_model_page import enrich_flux2_klein_9b_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
@@ -5573,6 +5574,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_runway_gen45_page(page)
     if model_id == "flux-2-max":
         page = enrich_flux2_max_page(page)
+    if model_id == "flux-2-klein-9b":
+        page = enrich_flux2_klein_9b_page(page)
     if model_id == "gemini-3-pro-image":
         page = enrich_nano_banana_pro_page(page)
     if model_id == "gemini-nano-banana-2.1":
