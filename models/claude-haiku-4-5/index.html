@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Claude Haiku 4.5 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Claude Haiku 4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <title>Claude Haiku 4.5: API Pricing, Context &amp; Python Guide | SXF</title>
+      <meta name="description" content="Claude Haiku 4.5 API: $1 input/$5 output per million tokens, 200K context, Python examples, caching calculator, extended thinking and Haiku 5.5 comparison." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Claude Haiku 4.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Claude Haiku 4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <meta property="og:title" content="Claude Haiku 4.5: API Pricing, Context &amp; Python Guide | SXF" />
+      <meta property="og:description" content="Claude Haiku 4.5 API: $1 input/$5 output per million tokens, 200K context, Python examples, caching calculator, extended thinking and Haiku 5.5 comparison." />
       <meta property="og:url" content="https://sxf.si/models/claude-haiku-4-5/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,11 +23,12 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Claude Haiku 4.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Claude Haiku 4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-haiku-4-5/#article","headline":"Claude Haiku 4.5 — API Specs, Context & Pricing","description":"Claude Haiku 4.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources.","url":"https://sxf.si/models/claude-haiku-4-5/","dateModified":"2026-09-27","about":{"@type":"Thing","name":"Claude Haiku 4.5"},"citation":["https://platform.claude.com/docs/en/models/haiku-4-5/overview","https://platform.claude.com/docs/en/about-claude/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 4.5","item":"https://sxf.si/models/claude-haiku-4-5/"}]}]}</script>
+      <meta name="twitter:title" content="Claude Haiku 4.5: API Pricing, Context &amp; Python Guide | SXF" />
+      <meta name="twitter:description" content="Claude Haiku 4.5 API: $1 input/$5 output per million tokens, 200K context, Python examples, caching calculator, extended thinking and Haiku 5.5 comparison." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-haiku-4-5/#article","headline":"Claude Haiku 4.5: API Pricing, Context & Python Guide","description":"Claude Haiku 4.5 API: $1 input/$5 output per million tokens, 200K context, Python examples, caching calculator, extended thinking and Haiku 5.5 comparison.","url":"https://sxf.si/models/claude-haiku-4-5/","dateModified":"2026-11-07","about":{"@type":"Thing","name":"Claude Haiku 4.5"},"citation":["https://platform.claude.com/docs/en/models/haiku-4-5/overview","https://platform.claude.com/docs/en/about-claude/pricing","https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide","https://platform.claude.com/docs/en/models/haiku-5-5/overview","https://platform.claude.com/docs/en/about-claude/model-deprecations","https://platform.claude.com/docs/en/build-with-claude/prompt-caching","https://platform.claude.com/docs/en/build-with-claude/extended-thinking","https://platform.claude.com/docs/en/api/messages"],"inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/claude-haiku-4-5/"},"author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"keywords":["Claude Haiku 4.5","claude haiku api price","claude-haiku-4-5-20251001","Claude Haiku 4.5 pricing","Claude Haiku 4.5 Python API","Claude Haiku 4.5 prompt caching","Claude Haiku 4.5 vs 5.5"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 4.5","item":"https://sxf.si/models/claude-haiku-4-5/"}]},{"@type":"FAQPage","@id":"https://sxf.si/models/claude-haiku-4-5/#faq","url":"https://sxf.si/models/claude-haiku-4-5/#haiku45-faq","mainEntity":[{"@type":"Question","name":"What is the Claude Haiku 4.5 model ID?","acceptedAnswer":{"@type":"Answer","text":"The pinned Claude API model ID is claude-haiku-4-5-20251001. Anthropic also provides the alias claude-haiku-4-5."}},{"@type":"Question","name":"How much does Claude Haiku 4.5 cost?","acceptedAnswer":{"@type":"Answer","text":"Anthropic prices direct Standard API usage at $1 per million input tokens and $5 per million output tokens. Cache reads cost $0.10, five-minute writes $1.25, and one-hour writes $2 per million tokens."}},{"@type":"Question","name":"What are Haiku 4.5's context and output limits?","acceptedAnswer":{"@type":"Answer","text":"Its context window is 200,000 tokens, and its maximum output limit is 64,000 tokens."}},{"@type":"Question","name":"Does Claude Haiku 4.5 support extended thinking?","acceptedAnswer":{"@type":"Answer","text":"Yes. Haiku 4.5 uses manual extended thinking, with thinking.type enabled and a budget_tokens allocation."}},{"@type":"Question","name":"Is Claude Haiku 4.5 still active?","acceptedAnswer":{"@type":"Answer","text":"Anthropic's model reference lists it as active, with a retirement commitment no sooner than October 15, 2026. That date does not itself mean the model was retired."}},{"@type":"Question","name":"What is different about Claude Haiku 5.5?","acceptedAnswer":{"@type":"Answer","text":"Haiku 5.5 offers 1M context, adaptive thinking and prompt-length-dependent pricing, plus a different tokenizer. Check migration requirements before replacing 4.5."}},{"@type":"Question","name":"Can Claude Haiku 4.5 accept images?","acceptedAnswer":{"@type":"Answer","text":"Yes. It accepts both text and image inputs and generates text output."}},{"@type":"Question","name":"Is Anthropic's Batch API available for Haiku 4.5?","acceptedAnswer":{"@type":"Answer","text":"The Haiku 4.5 model card lists a 50 percent discount for Batch API input and output pricing. Batch workflows are asynchronous."}}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
+    <link rel="stylesheet" href="/assets/haiku45-guide.css" />
     </head>
     <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
@@ -37,11 +38,11 @@
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Claude Haiku 4.5</span></nav>
         <p class="eyebrow">MODEL REFERENCE / ANTHROPIC</p>
-        <h1>Claude Haiku 4.5<br><span>verified model reference.</span></h1>
-        <p>Fastest Claude tier for latency-sensitive and high-volume workloads.</p>
+        <h1>Claude Haiku 4.5<br><span>API pricing, 200K context &amp; Python.</span></h1>
+        <p>Claude Haiku 4.5: exact Anthropic model ID, $1/$5 token pricing, 200K context, caching, extended thinking, API examples and Haiku 5.5 migration.</p>
         <div class="collection-stats">
-          <div><strong>200,000</strong><span>context tokens</span></div>
-          <div><strong>64,000</strong><span>max output</span></div>
+          <div><strong>200K</strong><span>context tokens</span></div>
+          <div><strong>$1 / $5</strong><span>input / output per MTok</span></div>
           <div><strong>2026-09-27</strong><span>last verified</span></div>
         </div>
       </section>
@@ -66,7 +67,7 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
           <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>manual budget</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>EXTENDED THINKING</span><h3>Manual budget</h3><p>Use thinking.type=enabled with budget_tokens and reserve output space for the final answer.</p></article>
             <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
             <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
           </div>
@@ -75,12 +76,218 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
           <div class="model-split">
-            <div><p>$1.00 input · $0.10 cached · $5.00 output per 1 million tokens.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <div><p>$1.00 input · $0.10 cached · $5.00 output per 1 million tokens.</p><p>Standard input, output, cached read and cache-write tokens have different prices. SXF&#x27;s original calculator below models them separately and distinguishes asynchronous Batch costs.</p></div>
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Eligible</strong><p>This model has calculator-compatible generative token input/output rates.</p></aside>
           </div>
         </section>
 
         
+
+        <!-- SXF original editorial research: Haiku 4.5, pricing, migration and reproducible methodology -->
+        <section class="model-deep-section" id="haiku45-intro" data-haiku45-guide>
+          <div class="model-section-head"><p class="eyebrow">CLAUDE HAIKU 4.5 / DEVELOPER ANSWER</p><h2>What is Claude Haiku 4.5?</h2></div>
+          <p><strong>Claude Haiku 4.5</strong> is Anthropic's October 15, 2025 small, fast Claude model for <strong>high-volume text, document extraction, support automation, tool use and focused code tasks</strong>. Its exact, pinned Claude API model ID is <code>claude-haiku-4-5-20251001</code>; <code>claude-haiku-4-5</code> is Anthropic's convenience alias for the same snapshot. It accepts <strong>text and images as input</strong> and produces text, with a <strong>200,000-token context window</strong>, up to <strong>64,000 output tokens</strong> and manually configured extended thinking.</p>
+          <p>Anthropic's published base API prices are <strong>$1 per million input tokens</strong> and <strong>$5 per million output tokens</strong>; cached reads can cost <strong>$0.10 per million tokens</strong> under qualifying prompt-caching requests. These prices refer to the direct Claude API, not necessarily Bedrock, Vertex AI or other cloud providers. Haiku 4.5 is an <strong>earlier-generation model that remains active</strong>; Anthropic's current small-model successor is <a href="/models/claude-haiku-5-5/">Claude Haiku 5.5</a>. A legacy label is <em>not</em> evidence that requests to 4.5 already fail.</p>
+          <div class="sxf-h45-notice"><strong>Version clarity (checked November 7, 2026)</strong><p>Haiku 4.5 still uses <code>thinking: {"type":"enabled","budget_tokens":N}</code> for deliberate reasoning. Haiku 5.5 uses <code>thinking: {"type":"adaptive"}</code> instead, a different tokenizer and prompt-length-based pricing. See the <a href="#haiku45-migration">migration checklist</a>; do not move an API integration by changing only the model string.</p></div>
+          <nav class="model-related-links" aria-label="Jump to Claude Haiku 4.5 guide">
+            <a href="#haiku45-pricing"><span>API PRICING</span><strong>Tokens, caching and Batch</strong><b>↗</b></a>
+            <a href="#haiku45-code"><span>QUICKSTART</span><strong>Python and cURL API examples</strong><b>↗</b></a>
+            <a href="#haiku45-migration"><span>UPGRADE</span><strong>Haiku 4.5 → Haiku 5.5</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-specs">
+          <div class="model-section-head"><p class="eyebrow">ANTHROPIC MODEL CARD</p><h2>Claude Haiku 4.5 specs: context, output, thinking and availability.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>PINNED MODEL ID</span><h3>claude-haiku-4-5-20251001</h3><p>The pinned Claude API snapshot; alias <code>claude-haiku-4-5</code> resolves to this model.</p></article>
+            <article><span>CONTEXT AND OUTPUT</span><h3>200K / 64K</h3><p>200,000 context tokens and 64,000 maximum output tokens. A 200K context is not a promise that every document fits without image/token overhead.</p></article>
+            <article><span>REASONING</span><h3>Manual extended thinking</h3><p>Use <code>thinking.type="enabled"</code> and set a <code>budget_tokens</code> target. This is not the adaptive-thinking interface of Haiku 5.5.</p></article>
+            <article><span>INPUT / OUTPUT</span><h3>Text + image → text</h3><p>Vision is input-only. Audio and video are not listed as native input modalities on this model card.</p></article>
+            <article><span>KNOWLEDGE CUTOFF</span><h3>February 2025</h3><p>Reliable knowledge cutoff reported by Anthropic. Training data cutoff is July 2025, a different field.</p></article>
+            <article><span>MODEL LIFECYCLE</span><h3>Active</h3><p>Released October 15, 2025. Retirement was promised no earlier than October 15, 2026; that date is a floor, not proof of retirement.</p></article>
+          </div>
+          <p>Find the model on <a href="https://platform.claude.com/docs/en/models/haiku-4-5/overview" target="_blank" rel="noopener noreferrer">Anthropic's official Haiku 4.5 reference</a>. Availability varies by platform. Anthropic lists model identifiers for the direct Claude API, Amazon Bedrock, Google Cloud and Microsoft Foundry; <strong>do not paste a Bedrock model ID into a Claude API request</strong>.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL UNIT ECONOMICS</p><h2>Claude Haiku 4.5 API pricing: $1 input, $5 output, cached tokens and Batch.</h2></div>
+          <p>Anthropic publishes these base rates in USD <strong>per one million tokens</strong>. A <strong>cached read</strong> is not the same as an ordinary input token, and a cache <strong>write</strong> can cost more than uncached input. The 50%-discount Batch API is for asynchronous requests, not an instant-response option. <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Recheck Anthropic's live pricing reference before deployment</a>.</p>
+          <div class="sxf-h45-table-wrap"><table class="sxf-h45-table"><caption>Claude Haiku 4.5 direct API rates — official Anthropic list prices</caption><thead><tr><th scope="col">Usage type</th><th scope="col">USD / 1M tokens</th><th scope="col">When it applies</th></tr></thead><tbody>
+            <tr><th scope="row">Standard input</th><td><strong>$1.00</strong></td><td>Regular non-cached prompt tokens</td></tr>
+            <tr><th scope="row">Standard output</th><td><strong>$5.00</strong></td><td>Generated output, including billed thinking tokens when enabled</td></tr>
+            <tr><th scope="row">Cache read / refresh</th><td>$0.10</td><td>Eligible cache hit on previously stored prompt prefix</td></tr>
+            <tr><th scope="row">5-minute cache write</th><td>$1.25</td><td>Write eligible reusable prompt prefix with five-minute lifetime</td></tr>
+            <tr><th scope="row">1-hour cache write</th><td>$2.00</td><td>Write eligible reusable prefix with one-hour lifetime</td></tr>
+            <tr><th scope="row">Batch input</th><td>$0.50</td><td>Batch API, without assuming cache discounts stack identically</td></tr>
+            <tr><th scope="row">Batch output</th><td>$2.50</td><td>Batch API, asynchronous delivery</td></tr>
+          </tbody></table></div>
+          <p><strong>SXF cost equation:</strong> <code>(uncached_input × $1 + cache_read × $0.10 + cache_write_5m × $1.25 + cache_write_1h × $2 + output × $5) / 1,000,000</code>. Inputs are token counts, and cached tokens should <em>not</em> also be counted as ordinary input. This is a planning model for standard direct-API usage, excluding service/tool charges, taxes, cloud platform premiums and provider-specific rounding.</p>
+          <div class="sxf-h45-table-wrap"><table class="sxf-h45-table"><caption>SXF-derived direct-API workload examples, excluding external costs</caption><thead><tr><th scope="col">Example task volume</th><th scope="col">Tokens / request</th><th scope="col">Estimated model bill</th></tr></thead><tbody>
+            <tr><th scope="row">1,000 short classifications</th><td>2,000 uncached input + 500 output</td><td><strong>$4.50</strong></td></tr>
+            <tr><th scope="row">10,000 short classifications</th><td>2,000 uncached input + 500 output</td><td><strong>$45.00</strong></td></tr>
+            <tr><th scope="row">1,000 with 50% input cache hits</th><td>1,000 uncached + 1,000 cached read + 500 output</td><td><strong>$3.60</strong></td></tr>
+            <tr><th scope="row">1,000 requests, Batch (no caching)</th><td>2,000 input + 500 output</td><td><strong>$2.25</strong></td></tr>
+          </tbody></table></div>
+          <p>The 50%-cache-hit scenario assumes the same workload and ignores initial cache writes for simplicity; include those writes in a real estimate. Numbers are original SXF calculations from published rates, <strong>not observed platform invoices or independently measured output volumes</strong>.</p>
+
+          <div class="sxf-h45-cost-lab" data-h45-cost-lab>
+            <h3>SXF interactive Claude Haiku 4.5 token and cache cost calculator</h3>
+            <p>Enter average usage <strong>per request</strong> and monthly request volume. Unlike a single $/million-token multiplier, this calculator distinguishes cache writes and reads from fresh input. It does not transmit values or make API calls.</p>
+            <div class="sxf-h45-fields">
+              <label for="h45-requests">Monthly requests<input id="h45-requests" type="number" min="0" max="10000000" step="1" value="1000" data-h45-requests></label>
+              <label for="h45-input">Uncached input tokens / request<input id="h45-input" type="number" min="0" max="200000" step="100" value="2000" data-h45-input></label>
+              <label for="h45-output">Output tokens / request<input id="h45-output" type="number" min="0" max="64000" step="50" value="500" data-h45-output></label>
+              <label for="h45-cache-read">Cached-read tokens / request<input id="h45-cache-read" type="number" min="0" max="200000" step="100" value="0" data-h45-read></label>
+              <label for="h45-write5">5-minute cache-write tokens / request<input id="h45-write5" type="number" min="0" max="200000" step="100" value="0" data-h45-write5></label>
+              <label for="h45-write60">1-hour cache-write tokens / request<input id="h45-write60" type="number" min="0" max="200000" step="100" value="0" data-h45-write60></label>
+              <label for="h45-batch">Billing workflow<select id="h45-batch" data-h45-mode><option value="standard">Standard (synchronous)</option><option value="batch">Batch (uncached input + output)</option></select></label>
+            </div>
+            <div class="sxf-h45-results" role="status" aria-live="polite">
+              <div><span>Estimated charge / request</span><strong data-h45-each>$0.0045</strong></div>
+              <div><span>Estimated monthly API charge</span><strong data-h45-month>$4.50</strong></div>
+            </div>
+            <p data-h45-explain class="sxf-h45-note">Estimate: 2,000 input × $1/MTok + 500 output × $5/MTok.</p>
+            <p class="sxf-h45-note">In Batch mode the calculator intentionally <strong>ignores cache-read/write inputs and uses the listed 50%-discount base rates</strong>, because combining discounts requires separate eligibility checks. Output tokens include any billed extended thinking. For live metering, use Anthropic's response <code>usage</code> values, not only this forecast.</p>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-cache">
+          <div class="model-section-head"><p class="eyebrow">ORIGINAL SXF BREAK-EVEN ANALYSIS</p><h2>When does Claude Haiku 4.5 prompt caching actually save money?</h2></div>
+          <p>A repeated system prompt or reference document can be cached only when it meets Anthropic's request and reuse rules. The main economic nuance is the <strong>higher write cost</strong> versus the cheap read cost. The following example isolates a <strong>1 million-token reusable prefix</strong> purely to compare unit rates; it is a rate-normalized illustration, not a feasible single Haiku 4.5 request (the model's context limit is 200K). The same relationship scales down to a valid 10K or 50K prefix.</p>
+          <div class="sxf-h45-table-wrap"><table class="sxf-h45-table"><caption>SXF reusable-prompt economics per 1M equivalent prefix tokens (no output tokens)</caption><thead><tr><th scope="col">Same prefix served</th><th scope="col">No cache</th><th scope="col">5m cache (write + reads)</th><th scope="col">1h cache (write + reads)</th></tr></thead><tbody>
+            <tr><th scope="row">First request only</th><td>$1.00</td><td>$1.25</td><td>$2.00</td></tr>
+            <tr><th scope="row">2 requests total</th><td>$2.00</td><td>$1.35</td><td>$2.10</td></tr>
+            <tr><th scope="row">3 requests total</th><td>$3.00</td><td>$1.45</td><td>$2.20</td></tr>
+            <tr><th scope="row">10 requests total</th><td>$10.00</td><td>$2.15</td><td>$2.90</td></tr>
+          </tbody></table></div>
+          <p><strong>Derived threshold:</strong> at the listed prices, a five-minute cache can be cheaper once the reusable prefix is served <strong>twice</strong> (one write and one read), while a one-hour cache becomes cheaper from <strong>three</strong> services. This only applies if actual cache hits occur before expiration, without extra writes or changed prefixes. Always include the non-cached suffix, outputs and tool costs in a full workload estimate. See <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching" target="_blank" rel="noopener noreferrer">Anthropic's caching conditions and invalidation rules</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-code">
+          <div class="model-section-head"><p class="eyebrow">DEVELOPER QUICKSTART</p><h2>How to use Claude Haiku 4.5 via the Anthropic API: Python and cURL.</h2></div>
+          <p>Use the <strong>Messages API</strong> with the pinned snapshot if reproducibility matters. This example reads <code>ANTHROPIC_API_KEY</code> from the server environment and avoids assuming that the first returned block must be text when extended thinking is active.</p>
+          <h3>Python SDK: simple inference</h3>
+          <pre class="sxf-h45-code"><code>import os
+import anthropic
+
+client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+result = client.messages.create(
+    model="claude-haiku-4-5-20251001",
+    max_tokens=512,
+    messages=[{
+        "role": "user",
+        "content": "Extract a JSON object with topic and priority from: "
+                   "Our billing page is down and customers cannot pay."
+    }],
+)
+
+for block in result.content:
+    if block.type == "text":
+        print(block.text)
+print(result.usage)  # Inspect metered tokens and cache usage.</code></pre>
+          <h3>cURL: direct Messages API request</h3>
+          <pre class="sxf-h45-code"><code>curl https://api.anthropic.com/v1/messages \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "content-type: application/json" \
+  -d '{
+    "model":"claude-haiku-4-5-20251001",
+    "max_tokens":512,
+    "messages":[{"role":"user","content":"Classify this ticket: refund request"}]
+  }'</code></pre>
+          <p>Install with <code>pip install anthropic</code> or use the Messages HTTP endpoint. The example asks for JSON but <strong>does not guarantee schema validation</strong>; validate responses in application code and use provider-supported structured output modes where appropriate. Store API keys outside browsers and static HTML. Consult the <a href="https://platform.claude.com/docs/en/api/messages" target="_blank" rel="noopener noreferrer">Anthropic Messages API reference</a> for active request fields, usage counters and SDK compatibility.</p>
+          <h3>Manual extended thinking in Haiku 4.5</h3>
+          <pre class="sxf-h45-code"><code>result = client.messages.create(
+    model="claude-haiku-4-5-20251001",
+    max_tokens=4096,
+    thinking={"type": "enabled", "budget_tokens": 2048},
+    messages=[{"role":"user","content":"Compare two solution plans and list risks."}],
+)</code></pre>
+          <p>The thinking budget must leave room for the final answer inside <code>max_tokens</code>, and thinking uses billable output tokens. Set <code>max_tokens</code> deliberately; more thinking may improve a difficult task but can increase latency and spend. Don't copy this manual budget configuration to Haiku 5.5. <a href="https://platform.claude.com/docs/en/build-with-claude/extended-thinking" target="_blank" rel="noopener noreferrer">Read Anthropic's extended-thinking rules</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-migration">
+          <div class="model-section-head"><p class="eyebrow">CURRENT GENERATION / 2026</p><h2>Claude Haiku 4.5 vs Haiku 5.5: price, context and breaking API changes.</h2></div>
+          <p><strong>Claude Haiku 5.5</strong> is Anthropic's newer Haiku generation. Its standard direct-API price depends on <strong>prompt length per request</strong>: up to 100K input prompt tokens, $0.10 input/$0.50 output per MTok; above 100K, $0.50 input/$2.50 output. This is <em>not</em> a flat rate across all prompt sizes, and caching and cloud routing have their own rules. The newer model also uses a tokenizer that produces <strong>approximately 30% more tokens from the same text</strong> according to Anthropic; token-rate comparisons should therefore not masquerade as measured savings on a real dataset.</p>
+          <div class="sxf-h45-table-wrap"><table class="sxf-h45-table"><caption>Anthropic-published 4.5 vs 5.5 API characteristics (not independent quality scores)</caption><thead><tr><th scope="col">Criterion</th><th scope="col">Claude Haiku 4.5</th><th scope="col">Claude Haiku 5.5</th></tr></thead><tbody>
+            <tr><th scope="row">Claude API ID</th><td><code>claude-haiku-4-5-20251001</code></td><td><code>claude-haiku-5-5</code></td></tr>
+            <tr><th scope="row">Model status</th><td>Active, earlier generation</td><td>Current generation</td></tr>
+            <tr><th scope="row">Context window</th><td>200K tokens</td><td>1M tokens</td></tr>
+            <tr><th scope="row">Max output</th><td>64K tokens</td><td>128K tokens</td></tr>
+            <tr><th scope="row">Base input / output per MTok</th><td>$1 / $5</td><td>$0.10 / $0.50 (≤100K prompt); $0.50 / $2.50 (over 100K)</td></tr>
+            <tr><th scope="row">Thinking configuration</th><td><code>enabled</code> + <code>budget_tokens</code></td><td><code>adaptive</code> + optional effort control</td></tr>
+            <tr><th scope="row">Tokenizer</th><td>Previous generation</td><td>About 30% more text tokens for equivalent content, workload-dependent</td></tr>
+          </tbody></table></div>
+          <h3>Haiku 4.5 to 5.5 migration checklist</h3>
+          <ol class="sxf-h45-steps">
+            <li>Replace the pinned Claude API model ID with <code>claude-haiku-5-5</code>; platform IDs vary, so verify Bedrock or Google Cloud names separately.</li>
+            <li>Recount tokens and revise limits, cost alerts and image budgets; Anthropic documents a changed tokenizer and higher visual-token usage in many cases.</li>
+            <li>Switch manual <code>thinking: {"type":"enabled","budget_tokens":N}</code> to <code>thinking: {"type":"adaptive"}</code>, or omit the field. Optionally configure <code>output_config.effort</code>.</li>
+            <li>Read content blocks by <code>type</code>, not <code>content[0]</code>, and account for summarized/signature-only thinking changes.</li>
+            <li>Remove unsupported sampling parameters such as <code>temperature</code>, <code>top_p</code> and <code>top_k</code> on the new model, and avoid assistant message prefill.</li>
+            <li>Run regression tests for tool calling, response schemas, refusals, prompt injection defenses, p95 latency and quality per dollar before moving production traffic.</li>
+          </ol>
+          <p>Use Anthropic's <a href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide" target="_blank" rel="noopener noreferrer">official Haiku 5.5 migration guide</a> for the full list of restrictions. For side-by-side model selection, see the <a href="/models/claude-haiku-5-5/">SXF Haiku 5.5 model reference</a>, <a href="/compare/claude-haiku-5-5-vs-claude-sonnet-5-5/">Haiku 5.5 vs Sonnet 5.5</a> and <a href="/models/claude-sonnet-5-5/">Sonnet 5.5</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-decisions">
+          <div class="model-section-head"><p class="eyebrow">REAL WORKLOAD CHOICE</p><h2>When should you use Claude Haiku 4.5 for coding, classification and agents?</h2></div>
+          <div class="model-capability-grid">
+            <article><span>CLASSIFICATION</span><h3>High-volume routing</h3><p>Short, bounded labels and spam detection can be cheap to process if you include malformed outputs and retries in the total cost.</p></article>
+            <article><span>EXTRACTION</span><h3>Document and support triage</h3><p>Extract fields from text or images, but measure missing-value honesty and exact string/number preservation on your real forms.</p></article>
+            <article><span>FOCUSED CODING</span><h3>Well-scoped edits</h3><p>Use for small patches and repetitive code changes. Measure test-pass rate and human corrections before assuming parity with larger Claude models.</p></article>
+            <article><span>SUBAGENTS</span><h3>Constrained delegated work</h3><p>Good candidate for narrowly defined subprocesses with tool permissions, cost caps and auditable outputs rather than unrestricted autonomous actions.</p></article>
+            <article><span>NOT RECOMMENDED</span><h3>Unreviewed high-stakes work</h3><p>Medical, legal, safety and financial decisions require domain validation and human oversight; a low per-token price is not an assurance of correctness.</p></article>
+            <article><span>NOT RECOMMENDED</span><h3>Unbounded 2026 agents</h3><p>Evaluate Haiku 5.5 or Sonnet 5.5 for new deployments, especially when 1M context, adaptive thinking or more advanced tool behavior matter.</p></article>
+          </div>
+          <p>Anthropic's 2025 launch reported strong coding and agent benchmarks for Haiku 4.5, but those are <strong>provider-reported evaluations</strong> under specific datasets and settings; they do not establish a current independent win over Haiku 5.5. SXF's existing evaluation cards below retain their benchmark names, revisions and external provenance. See <a href="/guides/ai-agent-cost/">the SXF AI agent cost guide</a> and <a href="/guides/ai-agent-security/">agent security controls</a> for system-level decisions.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-lab">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL EVALUATION DESIGN</p><h2>SXF research method: 24-task Haiku 4.5 quality-per-dollar evaluation.</h2></div>
+          <p><strong>This is an original, reproducible experiment specification—not a claim that SXF has executed API calls or measured model accuracy.</strong> To compare legacy Haiku 4.5 against Haiku 5.5 or Sonnet 5.5 fairly, preregister 24 consented or synthetic tasks across four work categories, six cases each: structured extraction, support routing, focused coding, and tool-assisted workflow decisions.</p>
+          <div class="sxf-h45-table-wrap"><table class="sxf-h45-table"><caption>Original SXF evaluation plan; metrics defined before testing</caption><thead><tr><th scope="col">Task group</th><th scope="col">Six-case test design</th><th scope="col">Primary metric</th></tr></thead><tbody>
+            <tr><th scope="row">Data extraction</th><td>Mixed dates, missing fields, conflicting invoices and image/text evidence</td><td>Field-level precision, recall and hallucinated fields</td></tr>
+            <tr><th scope="row">Support triage</th><td>Urgent, ambiguous, multilingual and negative-control tickets</td><td>Macro F1 and costly false negatives</td></tr>
+            <tr><th scope="row">Focused coding</th><td>Six isolated patches with hidden regression tests</td><td>Test-pass rate, review edits and wall-clock time</td></tr>
+            <tr><th scope="row">Tool choices</th><td>Approved vs unauthorized tool calls, malformed inputs and cancellations</td><td>Correct routing, authorization violations and task completion</td></tr>
+          </tbody></table></div>
+          <p>For each task, fix the evidence and rubrics, run three trials per model and capture actual token use, cache hits/writes, batch eligibility, tool fees, retries and measured latency. Anthropic's newer tokenizer requires <strong>model-specific usage accounting</strong>: count each model's tokens separately rather than copying Haiku 4.5 counts into the 5.5 pricing formula. Report <code>total bill / successful accepted tasks</code> and <code>cost per 100% correct case</code>, with confidence and failure examples. Include failure clusters in the results; a single average can hide security- or accuracy-critical problems.</p>
+          <p>Start with the original SXF <a href="/models/claude-haiku-4-5/sxf-haiku45-eval.py">evaluation scorer (Python)</a> and <a href="/models/claude-haiku-4-5/sxf-haiku45-fixture.jsonl">12 synthetic classification fixtures (JSONL)</a>. The fixtures are <strong>invented validation strings, not results returned by Anthropic or executed paid tasks</strong>; the scorer can be reused for your own labeled outcomes. For broader methodology, see the <a href="/guides/ai-agent-evaluation-checklist/">AI agent evaluation checklist</a>, <a href="/guides/ai-agent-observability/">agent monitoring guide</a> and <a href="/evaluations/">SXF evaluation registry</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-faq">
+          <div class="model-section-head"><p class="eyebrow">COMMON SEARCH QUESTIONS</p><h2>Claude Haiku 4.5 FAQ: model ID, price, context, thinking and availability.</h2></div>
+          <div class="sxf-h45-faq">
+            <details><summary>What is the Claude Haiku 4.5 model ID?</summary><p>Use <code>claude-haiku-4-5-20251001</code> for a pinned Claude API snapshot. The alias <code>claude-haiku-4-5</code> points to that same model. Bedrock and Google Cloud use platform-specific IDs.</p></details>
+            <details><summary>How much does Claude Haiku 4.5 cost per million tokens?</summary><p>Anthropic's direct Standard API price is $1 per million input tokens and $5 per million output tokens. Cache reads are $0.10/MTok, 5-minute writes $1.25/MTok, one-hour writes $2/MTok; Batch offers a 50% base input/output discount.</p></details>
+            <details><summary>What is the Haiku 4.5 context window and maximum output?</summary><p>The published model card lists 200,000 context tokens and a 64,000-token maximum output. Image inputs consume tokens within the request budget.</p></details>
+            <details><summary>Does Claude Haiku 4.5 support extended thinking?</summary><p>Yes: manual extended thinking uses <code>thinking.type="enabled"</code> and a <code>budget_tokens</code> setting. Adaptive thinking and effort controls belong to newer Claude models such as Haiku 5.5.</p></details>
+            <details><summary>Is Claude Haiku 4.5 still available in 2026?</summary><p>Anthropic currently lists it as active. The statement “not sooner than October 15, 2026” is a retirement commitment, not proof that the model stopped working on that date. Verify the live deprecations list.</p></details>
+            <details><summary>Is Haiku 4.5 cheaper than Haiku 5.5?</summary><p>No on published short-prompt base token rates: Haiku 5.5 begins at $0.10 input/$0.50 output per million, while Haiku 4.5 is $1/$5. The 5.5 price changes above 100K prompt tokens, and its tokenizer produces more tokens for equivalent text. Compare actual model-specific usage and quality before choosing.</p></details>
+            <details><summary>Does Haiku 4.5 support images or native audio?</summary><p>It supports text and image input and text output. Its official model card does not list native audio or video input; use a separate speech service for transcription.</p></details>
+            <details><summary>Should I use Claude Haiku 4.5 for AI agents?</summary><p>It can support constrained tool-based tasks, but test task completion, unauthorized actions, timeout handling, cost and quality. For new projects, review the current Haiku 5.5 and Sonnet 5.5 options as well.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="haiku45-sources">
+          <div class="model-section-head"><p class="eyebrow">VERIFIED SOURCES AND ORIGINAL WORK</p><h2>Anthropic documentation, source dates and SXF research limitations.</h2></div>
+          <p>SXF checked Anthropic's model card, pricing, migration and lifecycle documentation on <strong>November 7, 2026</strong>. The original catalog verification dated September 27, 2026 and append-only change ledger remain untouched. The cache break-even model, workloads, client-side calculator and 24-task test specification are authored by SXF from public rate inputs. No imaginary latency or quality winner is asserted, and the included benchmark starter does not imply that SXF ran 24 paid tasks.</p>
+          <ul class="sxf-h45-sources">
+            <li><a href="https://platform.claude.com/docs/en/models/haiku-4-5/overview" target="_blank" rel="noopener noreferrer">Anthropic — Claude Haiku 4.5 exact model ID, specifications, status and reasoning</a></li>
+            <li><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic — token prices, prompt caching and Batch discounts</a></li>
+            <li><a href="https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide" target="_blank" rel="noopener noreferrer">Anthropic — Haiku 4.5 to Haiku 5.5 migration checklist and tokenization</a></li>
+            <li><a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" target="_blank" rel="noopener noreferrer">Anthropic — deprecation and retirement states</a></li>
+            <li><a href="https://platform.claude.com/docs/en/build-with-claude/extended-thinking" target="_blank" rel="noopener noreferrer">Anthropic — manual extended-thinking rules</a></li>
+            <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching" target="_blank" rel="noopener noreferrer">Anthropic — cache write/read and expiration behavior</a></li>
+            <li><a href="https://platform.claude.com/docs/en/api/messages" target="_blank" rel="noopener noreferrer">Anthropic — Messages API request and usage fields</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="Related Claude intelligence on SXF">
+            <a href="/models/claude-haiku-5-5/"><span>SUCCESSOR</span><strong>Claude Haiku 5.5 verified model</strong><b>↗</b></a>
+            <a href="/providers/anthropic/"><span>CLAUDE DIRECTORY</span><strong>Anthropic models and pricing</strong><b>↗</b></a>
+            <a href="/compare/claude-haiku-5-5-vs-claude-sonnet-5-5/"><span>MODEL SELECTION</span><strong>Haiku 5.5 vs Sonnet 5.5</strong><b>↗</b></a>
+          </nav>
+        </section>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
@@ -178,4 +385,5 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script src="/assets/haiku45-cost-lab.js" defer></script>
+    </body></html>
