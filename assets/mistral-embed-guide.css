@@ -1,0 +1,32 @@
+/* Scoped SXF Mistral Embed research; retain main visual system. */
+[data-membed-guide],[id^="membed-"]{scroll-margin-top:6rem}
+.sxf-me-notice{border:1px solid rgba(184,141,83,.53);background:rgba(174,131,71,.1);border-radius:1rem;padding:1.2rem;margin:1.3rem 0}
+.sxf-me-notice p{margin:.6rem 0 0;line-height:1.7}
+.sxf-me-table-wrap{border:1px solid rgba(143,170,194,.32);border-radius:.85rem;overflow-x:auto;margin:1.1rem 0 1.5rem}
+.sxf-me-table{width:100%;min-width:660px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sxf-me-table caption{text-align:left;padding:.9rem 1rem;font-size:.89rem}
+.sxf-me-table td,.sxf-me-table th{text-align:left;vertical-align:top;border-top:1px solid rgba(143,170,194,.26);padding:.85rem 1rem;line-height:1.67}
+.sxf-me-table th{font-weight:650}
+.sxf-me-table thead{background:rgba(91,126,151,.14)}
+.sxf-me-table a{text-decoration:underline;text-underline-offset:3px}
+.sxf-me-calculator{border:1px solid rgba(143,170,194,.38);border-radius:1rem;background:rgba(84,125,153,.1);padding:1.3rem;margin:1.2rem 0}
+.sxf-me-calculator h3{margin:0 0 .7rem}
+.sxf-me-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0}
+.sxf-me-fields label{display:flex;flex-direction:column;gap:.5rem;font-size:.9rem;line-height:1.55}
+.sxf-me-fields input{width:100%;box-sizing:border-box;border:1px solid rgba(143,170,194,.6);background:#101a26;color:inherit;border-radius:.6rem;padding:.7rem;font:inherit}
+.sxf-me-fields input:focus-visible{outline:2px solid #7ec7e9;outline-offset:2px}
+.sxf-me-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1.2rem 0}
+.sxf-me-results>div{border:1px solid rgba(143,170,194,.33);border-radius:.8rem;padding:.9rem;display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.sxf-me-results span{font-size:.84rem;line-height:1.5}
+.sxf-me-results strong{font-size:1.3rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.sxf-me-small{font-size:.9rem;opacity:.84;line-height:1.65}
+.sxf-me-code{background:#111923;border:1px solid rgba(143,170,194,.31);border-radius:.8rem;padding:1rem;white-space:pre;overflow-x:auto;font-size:.81rem;line-height:1.75}
+.sxf-me-steps{padding-left:1.5rem;line-height:1.75}
+.sxf-me-steps li{margin-bottom:.7rem}
+.sxf-me-faq details{padding:.9rem 0;border-top:1px solid rgba(143,170,194,.27)}
+.sxf-me-faq summary{cursor:pointer;font-weight:650;line-height:1.55}
+.sxf-me-faq details p{margin:.65rem 0 0}
+.sxf-me-sources{padding-left:1.5rem;overflow-wrap:anywhere}
+.sxf-me-sources li{margin-bottom:.7rem}
+@media(max-width:760px){.sxf-me-results{grid-template-columns:1fr}}
+@media(max-width:640px){.sxf-me-fields{grid-template-columns:1fr}.sxf-me-code{font-size:.73rem}.sxf-me-table td,.sxf-me-table th{padding:.7rem}}
