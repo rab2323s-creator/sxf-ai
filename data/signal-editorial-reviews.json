@@ -3222,6 +3222,673 @@
         "Separate voluntary company pledges from enacted local, state or federal rules.",
         "Do not count the prior 1,000 MW Georgia agreement as a new measured national benefit."
       ]
+    },
+    "biobasicsbench-ai-wet-lab-data-benchmark": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "BioBasicsBench: Can GPT-6 Astra Analyze Real Lab Data?",
+      "h1": "BioBasicsBench explained: can AI interpret raw lab results?",
+      "meta_description": "BioBasicsBench tests AI on 100 wet-lab tasks. Explore GPT-6 Astra's 66.7% rubric score, how the study works and why that does not mean autonomous science.",
+      "source_name": "OpenAI Research",
+      "primary_source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+      "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
+      "keywords": [
+        "BioBasicsBench",
+        "GPT-6 Astra wet lab benchmark",
+        "AI laboratory data analysis",
+        "OpenAI BioBasicsBench 66.7 percent",
+        "AI scientist experiments"
+      ],
+      "schema_type": "NewsArticle",
+      "editorial": {
+        "what_changed": "OpenAI and Ligo developed a 100-task benchmark built from gels, microscopy, plates, sequencing files, instrument readings and laboratory protocols, testing whether agents recognize ambiguous or failed experiments rather than only interpreting polished published figures.",
+        "why_it_matters": "Routine lab work depends on detecting bad controls, inconsistent readings and unsupported conclusions. A grounded benchmark can reveal whether AI assists with these difficult judgments or simply produces fluent explanations without verifying evidence.",
+        "what_to_verify": "The reported 66.7% for GPT-6 Astra is mean rubric reward at the xhigh reasoning setting, not a 66.7% rate of fully correct or autonomously executed experiments. The benchmark and results are developer-reported and cannot establish biosafety, reliability in every lab or discovery of treatments."
+      },
+      "evidence": [
+        {
+          "label": "Benchmark breadth",
+          "fact": "The release contains 100 tasks across protein methods, imaging and cytometry, quantification and assays, nucleic-acid methods and molecular cloning.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Raw evidence",
+          "fact": "Inputs include gel and blot images, agar plates, microscope stacks, sequencing files, instrument readouts, handwritten lab notes and videos of routine bench procedures.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Expert rubrics",
+          "fact": "Ligo scientists wrote tasks and grading rubrics; each underwent additional internal and independent PhD-level wet-lab review.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Evaluation design",
+          "fact": "Seven model families were assessed across 37 reasoning settings, with five attempts per task for a total of 18,500 model outputs.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-6 Astra",
+          "fact": "At xhigh effort Astra received 66.7% mean rubric credit, with a reported 95% confidence interval of 60.3–73.1%.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-5.6 Sol",
+          "fact": "The comparison GPT-5.6 Sol scored 43.8% mean reward with a 95% interval of 37.6–50.0%.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "GPT-6.1 Sol",
+          "fact": "Another model, GPT-6.1 Sol, received 62.0% mean reward at xhigh effort.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "label": "Token cost clue",
+          "fact": "At the same displayed reasoning-effort label, the table lists 4,704 output tokens per task for Astra and 9,099 for GPT-5.6 Sol, not a complete deployment-cost measure.",
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        }
+      ],
+      "limitations": "The small curated benchmark and provider-run evaluation cannot establish general scientific competence. Mean rubric scores are partial credit rather than task completion rates; some skill tags and input categories overlap. A real lab needs independent held-out data, validation of sample provenance, safety controls and expert final sign-off.",
+      "sources": [
+        "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+      ],
+      "analysis": [
+        {
+          "heading": "Why BioBasicsBench tests a different type of AI science skill",
+          "paragraphs": [
+            "Scientific papers often show carefully selected images and charts that make an experiment's result relatively easy to interpret. A real laboratory produces mislabeled lanes, blurred images, inconsistent controls and ambiguous instruments. BioBasicsBench deliberately includes these raw materials and asks whether an agent can read them, spot methodological problems and know when the evidence does not justify an answer.",
+            "The 100 questions span five wet-lab domains. They may involve microscopy, protein gels, plasmid maps or raw sequencing files. A rubric can award credit for an appropriate measurement, the correct reasoning or an explicit warning that a sample is inconclusive. Because one task may use several kinds of data, category subtotals overlap; adding them would exaggerate the number of independent experiments.",
+            "Ligo researchers supplied experimental materials and expert-defined grading criteria. Multiple review rounds improve the clarity of the tasks, but they do not turn an author-created evaluation into a universal measure of experimental reliability."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "heading": "GPT-6 Astra scores 66.7%: what does that number actually measure?",
+          "paragraphs": [
+            "OpenAI reports that Astra earned 66.7% of the points available from expert rubrics at xhigh reasoning effort, while GPT-5.6 Sol earned 43.8%. The reported 95% whole-task bootstrap intervals are 60.3–73.1% and 37.6–50.0%. This is a meaningful comparison in the chosen dataset, not proof that Astra can complete two out of every three experiments by itself.",
+            "The article details seven model families, 37 model-effort configurations and five attempts for each of 100 questions. That produces 18,500 outputs rather than 18,500 unique scientific tasks. The same table lists output tokens per task, with Astra at 4,704 and GPT-5.6 Sol at 9,099. Token counts are not total cost: tools, human checking and reruns can be much more consequential.",
+            "Results should be interpreted at the relevant skill level. One laboratory might care about identifying inadequate controls, while another needs accurate numerical plate-reader analysis. A mean score could hide rare but serious mistakes on the particular samples the team intends to process."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        },
+        {
+          "heading": "An SXF method for testing AI assistants in a real lab",
+          "paragraphs": [
+            "A practical pilot should reserve unseen samples that include failed runs, poor lighting, mixed cultures and contradictory observations. Two reviewers can score whether the assistant identifies the underlying evidence, expresses uncertainty and refuses unsupported conclusions. Measure the frequency of dangerous confidence as well as correctness on straightforward examples.",
+            "Keep the agent's role narrow at first: summarize possible interpretations, point to the supporting frame or lane and flag what additional test would resolve uncertainty. Human laboratory staff remain responsible for experimental design, biosafety, reagent handling and published conclusions. Operational value should include time saved after correction and fewer missed problems, not merely higher rubric points.",
+            "Readers can compare this benchmark with SXF's LifeVal report on everyday assistant tasks and StateBench on tracking evolving information. These are different evaluations and should not be combined into a single universal model ranking. The advance in BioBasicsBench is the attention given to messy experimental evidence and the need to recognize what that evidence cannot establish."
+          ],
+          "source": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "LifeVal's real-world AI task benchmark",
+          "url": "/signals/lifeval-ed4b582/",
+          "description": "Compare this lab evaluation with a benchmark of everyday agent tasks."
+        },
+        {
+          "title": "StateBench and long-context reliability",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "How models lose track of changing evidence."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Understand partial credit, confidence intervals and benchmark limits."
+        },
+        {
+          "title": "Google Agile Deliberation and uncertain image labels",
+          "url": "/signals/google-agile-deliberation-image-classification/",
+          "description": "Another human-guided approach to resolving ambiguous data."
+        },
+        {
+          "title": "SXF research hub",
+          "url": "/research/",
+          "description": "Further AI research, evaluation and methodology."
+        }
+      ],
+      "reader_checklist": [
+        "Do not mistake rubric credit for a rate of autonomous laboratory success.",
+        "Test samples with failed controls and missing information, not only clean demos.",
+        "Evaluate domain-specific failure modes and independently reviewed held-out data.",
+        "Require qualified scientific review and biosafety oversight."
+      ]
+    },
+    "ai2-toyblocks-robot-learning-sim-to-real": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "Ai2 ToyBlocks: 85,336 Robot Demos and Sim-to-Real Tests",
+      "h1": "ToyBlocks robotics benchmark: can robots generalize?",
+      "meta_description": "Ai2 ToyBlocks releases 85,336 robot demonstrations and controlled simulation tests. Explore four skills, world-model evaluation, sim-to-real results and limits.",
+      "source_name": "Allen Institute for AI (Ai2)",
+      "primary_source": "https://huggingface.co/blog/allenai/toyblocks",
+      "summary": "Ai2 introduced ToyBlocks on November 6, 2026 as a controllable simulated world for robot learning and evaluation. The release reports 85,336 demonstrations containing almost 1,600 hours and 144 million frames, spanning block-manipulation tasks and tests of generalization. Its simulated and limited physical-arm evaluations do not prove reliable manipulation in uncontrolled environments.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "Ai2 ToyBlocks",
+        "ToyBlocks robotics benchmark",
+        "85,336 robot demonstrations",
+        "robot sim-to-real generalization",
+        "FoundationWorlds toyblocks"
+      ],
+      "editorial": {
+        "what_changed": "Ai2 released ToyBlocks, the first controlled block-manipulation environment in its FoundationWorlds research program, with demonstrations, procedural variations, model-evaluation data and physical-robot checks.",
+        "why_it_matters": "Highly produced robot videos can conceal narrow training conditions. A testbed that varies location, task chain and object layout can reveal which behaviors generalize and which fail when the environment changes.",
+        "what_to_verify": "The 85,336 demonstrations and 144 million frames indicate published data volume, not success rates. The physical test includes just 30 real-world scene configurations. Integrated reinforcement learning support is described as future work rather than an already released full training system."
+      },
+      "evidence": [
+        {
+          "label": "FoundationWorlds",
+          "fact": "ToyBlocks is Ai2's first controlled environment in its FoundationWorlds project.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Four skills",
+          "fact": "The system tests Stack, Unstack, Flip and Rotate operations with variable block labels, layouts and sequences.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Data scale",
+          "fact": "The release describes 85,336 long-horizon demonstrations, nearly 1,600 hours and 144 million frames.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Generalization tests",
+          "fact": "The authors distinguish interpolation within trained ranges from extrapolation to unseen spatial positions and configurations.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Model comparisons",
+          "fact": "Experiments include ManiFlow, π0.5 and MolmoAct 2, identifying limitations in generalization despite pretraining.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "World-model trajectories",
+          "fact": "The reported action-conditioned video set includes 900 trajectories for each of four skills, with successful and failed attempts.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Physical system",
+          "fact": "The team tests a Franka FR3 robot with a Robotiq gripper in 30 physical scene configurations.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Developer assets",
+          "fact": "The release provides simulation models, procedural generators, checkpoints, evaluation data and training material.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "label": "Future capability",
+          "fact": "The blog describes integrated reinforcement learning training support as planned, not part of the first release.",
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        }
+      ],
+      "limitations": "A controllable simulation is deliberately simpler than a real home, warehouse or factory. Dataset size does not measure physical success. Performance depends on task distribution and robot embodiment; experiments on one arm across a few dozen configurations cannot establish general robotic reliability or safety.",
+      "sources": [
+        "https://huggingface.co/blog/allenai/toyblocks"
+      ],
+      "analysis": [
+        {
+          "heading": "What is ToyBlocks, and why test robots with colored blocks?",
+          "paragraphs": [
+            "ToyBlocks is a small simulated world designed to expose specific failures in robot learning. Blocks vary by image, letter, position and arrangement, while the robot must stack, unstack, rotate or flip them according to instructions. These operations combine perception, sequence planning and control, but avoid many hard-to-measure variables present in a full warehouse or kitchen.",
+            "The point is not that stacking blocks solves robotics. Controlled variations let researchers train on certain numbers or positions and then ask whether a policy works outside those settings. A model can seem competent if it memorizes the center of a table, yet fail when the same block appears at its edge. ToyBlocks aims to make this weakness measurable.",
+            "Source code, sample demonstrations and procedural generation allow laboratories to use consistent tasks. Results can be compared with the same environmental parameters instead of relying on a few successful videos."
+          ],
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "heading": "What do 85,336 demonstrations and the sim-to-real checks tell us?",
+          "paragraphs": [
+            "Ai2 reports 85,336 long-horizon demonstrations, almost 1,600 hours and 144 million frames. These numbers define the size of the research material, not the number of tasks that a physical robot independently mastered. Many demonstrations consist of multiple short moves, and both successful and unsuccessful behavior can be valuable for studying error recovery.",
+            "The project compares models including ManiFlow, π0.5 and MolmoAct 2 in settings that test spatial interpolation and extrapolation. Generalization outside a familiar training region is a more demanding test than repeating a known arrangement. The source describes failures under some changed spatial conditions rather than presenting a universal high success rate.",
+            "Real-world checks were performed with a Franka FR3 arm and Robotiq gripper across 30 physical configurations. That matters as a limited reality check, but it is not proof that the approach generalizes across untested robots, objects, lighting or human interactions. Any deployment conclusion must state that limitation."
+          ],
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        },
+        {
+          "heading": "An SXF evaluation plan for robot policies and world models",
+          "paragraphs": [
+            "The release includes action-conditioned world-model data built with 900 trajectories for each of four short skills, intentionally including failures. A predictive model should represent what happens after a mistimed grip or a dropped block, not only imitate ideal trajectories. This makes error analysis more informative than comparing single-frame visual quality.",
+            "NVIDIA Cosmos 3, which SXF covered recently, also explores action-conditioned observations but targets driving and multi-camera simulation among other workflows. ToyBlocks supplies a simpler controlled reference state for asking whether predicted movements respect the task dynamics. The correct comparison is policy behavior and physical state consistency, not merely whether two videos look realistic.",
+            "Researchers can use held-out positions, new object sequences and physical verification to audit progress. Report simulation success, transfer success and failure recovery separately. Ai2 says integrated reinforcement learning support is planned for a later release; the public package should be evaluated on what it contains today."
+          ],
+          "source": "https://huggingface.co/blog/allenai/toyblocks"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "NVIDIA Cosmos 3 interactive world simulation",
+          "url": "/signals/nvidia-cosmos-3-world-models-simulation/",
+          "description": "A related approach to action-conditioned model-generated sensor observations."
+        },
+        {
+          "title": "OpenAI Astra and physical engineering validation",
+          "url": "/signals/openai-astra-cad-pcb-hardware-design/",
+          "description": "How digital artifacts still need real-world verification."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Interpret test distributions, task difficulty and held-out conditions."
+        },
+        {
+          "title": "BioBasicsBench: measuring AI on lab evidence",
+          "url": "/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
+          "description": "Another controlled testbed that captures difficult real-world tasks."
+        },
+        {
+          "title": "Run AI models locally",
+          "url": "/guides/run-ai-models-locally/",
+          "description": "Understand local hardware and inference trade-offs."
+        }
+      ],
+      "reader_checklist": [
+        "Distinguish demonstrated data volume from measured robot success.",
+        "Test held-out locations and longer task chains, not just familiar scenes.",
+        "Compare simulation outcomes with measurements on a real robot.",
+        "Read the release notes before assuming planned reinforcement-learning features are available."
+      ]
+    },
+    "github-copilot-slack-teams-general-availability": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "GitHub Copilot in Slack and Teams: Setup and GA Guide",
+      "h1": "GitHub Copilot in Slack and Teams: what's generally available?",
+      "meta_description": "@GitHub is now generally available in Slack and Teams. Learn how it turns chat into issues and pull requests, what Teams Canvas adds and where controls matter.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
+      "summary": "GitHub announced general availability of the @GitHub coding-agent integration in Slack and Microsoft Teams on November 6, 2026. Team members can discuss bugs, initiate coding tasks, create issues and open pull requests from chat. Teams Canvas adds an in-conversation area for plans, diffs and previews. The feature does not grant unrestricted repository permissions or eliminate human code review.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "GitHub Copilot Slack",
+        "GitHub Copilot Microsoft Teams",
+        "@GitHub Slack setup",
+        "GitHub Copilot Teams Canvas",
+        "AI pull requests from Slack"
+      ],
+      "editorial": {
+        "what_changed": "GitHub moved @GitHub's Slack and Teams developer-agent workflow to general availability and added Teams Canvas, faster repository selection and clearer attribution of changes generated from conversations.",
+        "why_it_matters": "Engineering teams increasingly organize work inside communication tools. Turning a discussion into a traceable issue or reviewed pull request can reduce manual handoffs, but it creates a security boundary between conversational instructions and repository-changing automation.",
+        "what_to_verify": "General availability refers to the announcement's supported integration, not unlimited use on every plan or unconfigured workspace. The experience still follows GitHub app permissions, organization policies and cloud-agent entitlements. A pull request created from chat is not automatically merged or safe to deploy."
+      },
+      "evidence": [
+        {
+          "label": "Release status",
+          "fact": "GitHub published a general-availability announcement for @GitHub in Slack and Microsoft Teams on November 6, 2026.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "What agents can do",
+          "fact": "The integration can investigate bugs, create issues, implement code changes and open pull requests from conversations.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Teams Canvas",
+          "fact": "The new Teams Canvas feature presents implementation plans, code changes and previews for discussion with colleagues.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Onboarding change",
+          "fact": "GitHub says repository identification is now inferred from the message when possible, avoiding repeat repository selection.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Follow-up reliability",
+          "fact": "The release describes a fix for conversations that previously failed to respond to follow-up messages.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Attribution",
+          "fact": "New issues and pull requests can indicate that work began in Slack or Teams and identify the originating user.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Earlier policy model",
+          "fact": "The earlier Slack preview described Copilot Business/Enterprise access, organization agent policy, installation and account-linking requirements.",
+          "source": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+        },
+        {
+          "label": "Human approval boundary",
+          "fact": "GitHub's earlier setup guidance explains that repository administrators can require additional review before Copilot-generated pull requests merge.",
+          "source": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+        }
+      ],
+      "limitations": "GitHub's changelog is a product release announcement rather than evidence that generated code is correct, secure or faster to deliver. Exact current entitlements, availability across tenants and app permissions must be checked in the organization's own configuration. Teams Canvas provides review context, not a replacement for repository branch protections.",
+      "sources": [
+        "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
+        "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+      ],
+      "analysis": [
+        {
+          "heading": "What can @GitHub do inside Slack and Microsoft Teams?",
+          "paragraphs": [
+            "GitHub's November 6 update makes the @GitHub agent experience generally available in supported Slack and Teams environments. A developer can mention the assistant during a bug discussion and ask it to inspect the issue, prepare changes or create a pull request. The experience is designed to carry the original conversation into GitHub work so the context and reason for a change remain visible.",
+            "The practical advantage is avoiding a translation gap between a discussion and a formal issue. Instead of opening a separate editor to rewrite a bug report, participants can hand the task to an agent from the thread. Yet this is still a repository-affecting workflow: incorrect assumptions in chat can reach code, so the resulting diff and tests must be reviewed before any merge.",
+            "GitHub previously offered similar agent capabilities in preview, so the story is not the invention of code-from-chat. The relevant changes are broader availability, richer review context and practical reliability improvements."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "heading": "What Teams Canvas adds, and why attribution matters",
+          "paragraphs": [
+            "Teams Canvas is the main new collaboration surface. GitHub says teammates can inspect plans, code changes and previews alongside the discussion, give feedback and refine the proposed implementation. That can improve visibility into what the agent intends to change before anyone approves it. It is not a guarantee that previews catch every bug or that a user has authority to approve code.",
+            "The announcement also says onboarding is shorter because @GitHub can identify a repository from the message, and follow-up messages are handled more reliably. Issues and pull requests carry attribution to their originating Slack or Teams conversation and user. This trace can help a reviewer determine where a task came from and whom to ask about a requirement.",
+            "Clear provenance still needs access boundaries. The chat participant must have the right account and organization settings, and repositories should preserve protection rules. GitHub's earlier preview documentation described team-plan entitlements and agent-policy configuration. Organizations should consult the latest account guidance rather than assume every workspace is enabled by default."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "heading": "How to test value without giving a chat assistant too much authority",
+          "paragraphs": [
+            "Run a narrow trial with a low-risk bug: ask the agent to explain the issue, propose a change, open a PR and provide evidence from the project's tests. Track time from discussion to reviewed PR, number of comments needed and any changes that should have been rejected. A shorter path to a pull request is not itself faster delivery if review and correction take longer.",
+            "Security teams should validate which chat content the app can read, what repository permissions are granted and whether an untrusted message can introduce instructions the agent should ignore. Review approval, CI checks and merge restrictions should apply equally to AI-initiated and human-initiated changes.",
+            "SXF's editorial view is that useful automation makes intent and evidence easier to inspect. Linking a conversation, issue, patch and test result is more valuable than an unreviewed code-generation demonstration. Keep the assistant responsible for proposals and humans accountable for acceptance."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "GitHub Copilot inside Xcode",
+          "url": "/signals/github-copilot-xcode-coding-assistant/",
+          "description": "A parallel integration that brings Copilot into an established developer workspace."
+        },
+        {
+          "title": "OpenAI Pierre acquisition and Codex workflows",
+          "url": "/signals/openai-acquire-pierre-codex-developer-tools/",
+          "description": "How AI coding vendors are integrating planning, development and review."
+        },
+        {
+          "title": "Best AI coding tools",
+          "url": "/guides/best-ai-coding-tools/",
+          "description": "Compare assistants based on review workflow rather than demos."
+        },
+        {
+          "title": "AI agent security guide",
+          "url": "/guides/ai-agent-security/",
+          "description": "Permissions, prompt injection and auditability of agent actions."
+        },
+        {
+          "title": "AI agents in production",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Approval gates and operational reliability for tool-using agents."
+        }
+      ],
+      "reader_checklist": [
+        "Confirm GitHub account, app installation and organization agent policy before enabling.",
+        "Test from a clearly identified repository and keep branch protections enabled.",
+        "Review AI-created issues, diffs, test outputs and attribution independently.",
+        "Measure time to accepted change, including correction and review effort."
+      ]
+    },
+    "open-asr-egyptian-nigerian-english-benchmark": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "Open ASR Adds Egyptian and Nigerian English Speech Tests",
+      "h1": "Open ASR: how accurate is speech AI for Egyptian and Nigerian English?",
+      "meta_description": "The Open ASR Leaderboard adds private Egyptian and Nigerian English tests. See the 1.34h and 1.55h datasets, accent gaps, word error rates and test limits.",
+      "source_name": "Hugging Face / Liva AI",
+      "primary_source": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "summary": "Hugging Face and Liva AI announced on November 6, 2026 that the Open ASR Leaderboard's private test set now includes spontaneous Egyptian-accented and Nigerian-accented English speech. The added conversational datasets are 1.34 and 1.55 hours respectively, and the leaderboard introduces comparisons between U.S., non-U.S. and international accent groupings. This improves evaluation coverage but does not prove speech systems are equally accurate across accents.",
+      "keywords": [
+        "Egyptian English speech recognition",
+        "Nigerian English speech recognition",
+        "Open ASR Leaderboard",
+        "speech-to-text accent bias",
+        "ASR word error rate English accents"
+      ],
+      "schema_type": "NewsArticle",
+      "editorial": {
+        "what_changed": "Hugging Face expanded the private Open ASR evaluation with new conversational Egyptian and Nigerian English datasets provided by Liva AI, and a more detailed accent breakdown for model comparisons.",
+        "why_it_matters": "Speech transcription is often tested on familiar U.S. or U.K. speech while product users speak many forms of English. New held-out, naturally conversational accents can expose uneven errors that an overall leaderboard score hides.",
+        "what_to_verify": "Egyptian and Nigerian English are English accent test sets, not benchmarks for transcription in the Arabic or Nigerian languages generally. Their 1.34-hour and 1.55-hour sizes are limited; the release does not establish that any model has solved accent bias or that all regional speech communities are represented."
+      },
+      "evidence": [
+        {
+          "label": "Release",
+          "fact": "Hugging Face published the Liva AI accent expansion on November 6, 2026.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Egyptian English",
+          "fact": "The private Liva AI Conversational EG split contains 1.34 hours of spontaneous English speech with Egyptian accents.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Nigerian English",
+          "fact": "The private Liva AI Conversational NG split contains 1.55 hours of spontaneous English speech with Nigerian accents.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Transcription labels",
+          "fact": "The new splits use punctuated, cased transcripts retaining speech disfluencies.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Previous private coverage",
+          "fact": "Earlier private data included 11 Appen and DataOceanAI splits across five accents, then an Indian-accented English split with Voice Arena.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Comparisons",
+          "fact": "The leaderboard now groups U.S. against non-U.S. accents including U.K., Australia, Canada, India, Nigeria and Egypt.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Additional grouping",
+          "fact": "It also compares Inner Circle English accents with Outer and Expanding Circle accents, following the study's described linguistic framework.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Private evaluation intent",
+          "fact": "Hidden test material is intended to reduce benchmark-specific optimization or overfitting to public samples.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "WER context",
+          "fact": "The existing leaderboard uses word error rate among other measurements, but no universal new model-ranking improvement is established by adding the splits.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard"
+        }
+      ],
+      "limitations": "The two new splits together contain only 2.89 hours and cannot capture all speakers, settings or languages within either country. Private data support held-out evaluation but reduce independent access to inspect individual samples. A change in leaderboard score may reflect the test distribution rather than a model's underlying accuracy changing.",
+      "sources": [
+        "https://huggingface.co/blog/open-asr-leaderboard-liva",
+        "https://huggingface.co/blog/open-asr-leaderboard"
+      ],
+      "analysis": [
+        {
+          "heading": "Why Egyptian and Nigerian English matter for speech-to-text",
+          "paragraphs": [
+            "Automatic speech recognition converts spoken audio into text, but performance depends on accent, speaking rate, microphone, background noise and vocabulary. Systems that perform well on familiar broadcast U.S. English may mishear casual speech from people with different pronunciation patterns. The new Open ASR test material focuses on spontaneous English conversation from speakers with Egyptian and Nigerian accents.",
+            "The distinction between accent and language is important. The announced datasets are not comprehensive Arabic speech-recognition sets or evaluations of all Nigerian languages. Both test varieties of English. Calling them national language coverage would exaggerate what the researchers released and mislead people shopping for multilingual transcription tools.",
+            "Each split retains disfluencies in the reference transcript, which can affect word error rate. Real speech includes hesitation, repetition and conversational fragments, so using only polished scripts may conceal the errors users experience every day."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "heading": "What the new private evaluation measures and what it misses",
+          "paragraphs": [
+            "Liva AI contributed 1.34 hours of Egyptian-accented English and 1.55 hours of Nigerian-accented English. These are meaningful held-out additions but small samples relative to the diversity of each population. The Open ASR Leaderboard already used private test data for other accents, and the new release extends rather than replaces that work.",
+            "The benchmark now exposes more informative accent breakdowns, comparing U.S. against non-U.S. speech and one set of English-speaking regions against another. A single global average can obscure a model that performs well on one group and poorly on another. Showing disaggregated results can help teams select a recognizer appropriate for their actual users.",
+            "Keeping evaluation audio private can discourage training on the exact test files. That protects the validity of comparisons but makes independent reproduction more difficult. Responsible reporting should recognize both sides, rather than describing any private test set as perfectly bias-free."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "heading": "A practical SXF checklist for choosing an accent-aware transcription model",
+          "paragraphs": [
+            "Build a representative test corpus with the speakers and acoustic conditions your product actually serves. Include varied ages, microphones, conversational interruptions and specialized vocabulary, with participants' consent. Compare not just total word error rate but errors by accent, speaker and domain. Names, amounts and key instructions often deserve extra review because a single substitution can change meaning.",
+            "When comparing systems, ensure that text normalization is consistent across reference and predictions. Punctuation, fillers and capitalization can otherwise create score differences unrelated to whether the message was understood. A lower word error rate on one test split does not guarantee the lowest cost or latency for a real-time call center.",
+            "SXF's takeaway is that accurate speech technology needs geographically and socially representative evidence. The new test splits make a hidden weakness easier to notice, while the small sample size is a reason to expand independent evaluations rather than pronounce any model universally fair."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Phonon TTS: speech generation on devices",
+          "url": "/signals/phonon-tts-on-device-speech-benchmarks/",
+          "description": "The complementary output side of speech AI and its practical limits."
+        },
+        {
+          "title": "Introducing Falcon ASR",
+          "url": "/signals/introducing-falcon-asr-91ed3eb/",
+          "description": "A related speech-recognition model release."
+        },
+        {
+          "title": "Open ASR Leaderboard's earlier evaluation work",
+          "url": "/signals/the-open-asr-leaderboard-adds-its-first-global-south-language-b0b2c2d/",
+          "description": "How the speech benchmark's representation has expanded."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "How dataset composition changes the meaning of a score."
+        },
+        {
+          "title": "Google Agile Deliberation and human labels",
+          "url": "/signals/google-agile-deliberation-image-classification/",
+          "description": "A complementary issue: how human-defined labels affect evaluation."
+        }
+      ],
+      "reader_checklist": [
+        "Confirm whether a claimed benchmark measures an English accent or an entirely different language.",
+        "Check per-accent errors instead of relying on a single mean WER.",
+        "Compare models using identical transcription normalization and test conditions.",
+        "Use representative, consented real speech when validating a product."
+      ]
+    },
+    "google-agile-deliberation-image-classification": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "Google Agile Deliberation: AI Image Classifier With Humans",
+      "h1": "Google Agile Deliberation: how human feedback improves image AI",
+      "meta_description": "Google Agile Deliberation tests human-guided image classification in 18 live sessions. See borderline examples, prompt optimization and study limitations.",
+      "source_name": "Google Research",
+      "primary_source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/",
+      "schema_type": "NewsArticle",
+      "summary": "Google Research introduced Agile Deliberation on November 4, 2026, a framework that helps people define subjective image categories through discussion, difficult borderline examples and automatic prompt refinement. Eighteen live, 90-minute user sessions suggested improved classification and reduced effort compared with manual approaches in two domains. The study does not establish universally objective definitions for concepts such as healthy food or misleading promotional images.",
+      "keywords": [
+        "Google Agile Deliberation",
+        "human in the loop image classification",
+        "subjective image classifier",
+        "AI content moderation ambiguous images",
+        "Google vision language model feedback"
+      ],
+      "editorial": {
+        "what_changed": "Google Research published a system that turns vague subjective image labels into explicit positive and negative boundaries. It asks humans to judge difficult edge-case pictures and automatically updates classifier prompts using the feedback.",
+        "why_it_matters": "Image classifiers can encode hidden assumptions about health, art or misleading advertising. Making a category's contested boundaries visible gives human reviewers a way to clarify intended policy instead of pretending a single fixed label is neutral.",
+        "what_to_verify": "The evaluation reports 18 live sessions of 1.5 hours in two subjective domains. It is an author-led prototype study, not evidence of a fully deployed moderation product, universal fairness or objective agreement among all people."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "Google Research researchers Otilia Stretcu and Leijie Wang published the method on November 4, 2026.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "First stage",
+          "fact": "Concept scoping asks users to list positive subcategories and explicit exclusions.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Second stage",
+          "fact": "Concept iteration brings borderline images to the user to reveal unclear decision boundaries.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Automatic optimization",
+          "fact": "A vision-language model searches for edge cases and an LLM-driven process updates classification prompts from human feedback.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Live study",
+          "fact": "The research compared workflows in 18 user sessions lasting 90 minutes each.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Domains",
+          "fact": "The two study settings were Healthy Food and Pay-to-Play imagery, including misleading reward promises in game-related advertising.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Baselines",
+          "fact": "Comparisons included zero-shot classification, an autonomous modeling collaborator and manual prompt deliberation.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Reported outcomes",
+          "fact": "The team reports improvements in label consistency, classifier results and participant effort compared with standard methods.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Artifacts",
+          "fact": "Researchers released implementation code and a demo to support further experiments.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        }
+      ],
+      "limitations": "The evaluation contains 18 sessions and only two application domains; larger and more diverse studies are needed before generalizing. A person's evolving label definitions may be coherent but are not necessarily objectively accurate or equitable across communities. The research reports user-experience and test outcomes, not a large-scale production audit.",
+      "sources": [
+        "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+      ],
+      "analysis": [
+        {
+          "heading": "Why subjective image labels are difficult for ordinary AI classifiers",
+          "paragraphs": [
+            "Identifying a traffic sign usually has a relatively stable visual definition. Deciding whether a food is healthy, an advertisement is misleading or an artwork is inspiring depends on values and context. A dataset may contain inconsistent labels because the humans who created them disagreed or discovered exceptions only after examining difficult cases. Larger models alone cannot settle a policy whose boundaries were never agreed upon.",
+            "Agile Deliberation changes the workflow. Rather than requiring someone to invent a perfect classifier instruction at the start, the system helps them name accepted categories and explicit exclusions, then presents confusing examples that force choices. A picture of a fruit smoothie might qualify because it contains fruit, but fail someone's criteria because of added sugar. The process surfaces that distinction rather than hiding it inside an opaque model.",
+            "Google's researchers frame the user as a partner who refines a definition over time. That may be useful for curation and moderation, though the final standard should remain reviewable by the people affected by it."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "heading": "How concept scoping and iteration shape the AI system",
+          "paragraphs": [
+            "First, the user breaks a broad idea into named subcategories and out-of-scope cases. Then a vision-language system searches for images that sit near the current boundary and asks for feedback. Each human choice updates an automatic prompt-optimization loop that rebuilds the classifier instruction. The method is designed to discover surprising blind spots before a final rule is put into production.",
+            "This is different from an AI agent that independently writes all the rules. The user can resolve borderline cases, challenge an assumption and see how the meaning of the target category changes. That is a more accountable approach, provided the organization retains a history of decisions and checks whether refinements create new false positives elsewhere.",
+            "The method is not a magic route to objective labels: when multiple reviewers disagree, the organization still needs a policy for whose choices matter and how appeals are handled. Technical improvement cannot replace the legitimacy of human governance."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "heading": "What the 18-session user study does and does not prove",
+          "paragraphs": [
+            "Google evaluated the approach in 18 randomized-order live user sessions, each lasting 90 minutes, focused on Healthy Food and Pay-to-Play pictures. The authors report more consistent labels, better classifier performance and less fatigue and anxiety than manual prompt editing. These are meaningful prototype findings, particularly because manual refinement can cause people to worry that fixing one error will break other labels.",
+            "However, a small participant study across two domains cannot establish accuracy for every culture, language or high-stakes moderation policy. The result is also sensitive to how user intent and the evaluation target are defined. A model that closely follows one person's preference is not necessarily fair to others.",
+            "SXF recommends testing with a second independent reviewer, retaining borderline examples, measuring false positives and false negatives, and verifying that performance persists on unseen data after each change. The real contribution is making ambiguous human intent explicit and revisable, not claiming that an algorithm has discovered an objective definition of a subjective concept."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "BioBasicsBench and interpretation of difficult evidence",
+          "url": "/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
+          "description": "Another setting in which human judgment and incomplete data affect evaluation."
+        },
+        {
+          "title": "StateBench: how models lose track of changes",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "A related failure mode when rules and reference facts evolve."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Understand task selection and how benchmarks shape results."
+        },
+        {
+          "title": "Identifying AI-generated images",
+          "url": "/guides/how-to-tell-if-an-image-is-ai-generated/",
+          "description": "Why visual classification claims need carefully defined evidence."
+        },
+        {
+          "title": "Open ASR accent evaluation",
+          "url": "/signals/open-asr-egyptian-nigerian-english-benchmark/",
+          "description": "How selecting representative examples affects a model's perceived quality."
+        }
+      ],
+      "reader_checklist": [
+        "Define both positive examples and excluded edge cases before building a classifier.",
+        "Have humans review difficult examples and record reasons for any policy change.",
+        "Check false positives, false negatives and holdout results after optimization.",
+        "Distinguish alignment with one user's preference from universally fair classification."
+      ]
     }
   }
 }
