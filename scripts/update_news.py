@@ -5569,6 +5569,16 @@ def render_catalog_model_page(model_id, items):
         page = enrich_gpt6_luna_page(page, MODEL_PRICING_BY_ID)
     if model_id == "claude-haiku-4-5-20251001":
         page = enrich_claude_haiku_45_page(page)
+    if model_id == "claude-haiku-5-5":
+        # Durable reciprocal editorial link to the previous Haiku generation.
+        page = inject_before_main_end(page, '''<section class="model-compare-bridge shell" data-haiku45-legacy-bridge>
+          <div class="intel-section-head"><div><p class="eyebrow">HAIKU GENERATION COMPARISON</p>
+          <h2>Migrating from Claude Haiku 4.5?</h2></div></div>
+          <p>Compare the Haiku 4.5 pinned API ID, manual extended thinking, $1/$5 per-million-token rates and 200K context with Haiku 5.5's adaptive thinking, new tokenizer and prompt-length-tiered prices. The legacy-reference page includes an original caching break-even analysis and a token-cost simulator.</p>
+          <div class="model-related-links"><a href="/models/claude-haiku-4-5/">
+          <span>PREVIOUS GENERATION</span><strong>Claude Haiku 4.5: API pricing and migration guide</strong><b>↗</b></a></div>
+          </section>''')
+
     if model_id == "gemini-3.8-flash-lite-tts":
         page = enrich_gemini_38_flash_lite_tts_page(page, MODEL_PRICING_BY_ID)
     if model_id == "gemini-3.8-flash-tts":
