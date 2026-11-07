@@ -3487,6 +3487,137 @@
         "Compare simulation outcomes with measurements on a real robot.",
         "Read the release notes before assuming planned reinforcement-learning features are available."
       ]
+    },
+    "github-copilot-slack-teams-general-availability": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "GitHub Copilot in Slack and Teams: Setup and GA Guide",
+      "h1": "GitHub Copilot in Slack and Teams: what's generally available?",
+      "meta_description": "@GitHub is now generally available in Slack and Teams. Learn how it turns chat into issues and pull requests, what Teams Canvas adds and where controls matter.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
+      "summary": "GitHub announced general availability of the @GitHub coding-agent integration in Slack and Microsoft Teams on November 6, 2026. Team members can discuss bugs, initiate coding tasks, create issues and open pull requests from chat. Teams Canvas adds an in-conversation area for plans, diffs and previews. The feature does not grant unrestricted repository permissions or eliminate human code review.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "GitHub Copilot Slack",
+        "GitHub Copilot Microsoft Teams",
+        "@GitHub Slack setup",
+        "GitHub Copilot Teams Canvas",
+        "AI pull requests from Slack"
+      ],
+      "editorial": {
+        "what_changed": "GitHub moved @GitHub's Slack and Teams developer-agent workflow to general availability and added Teams Canvas, faster repository selection and clearer attribution of changes generated from conversations.",
+        "why_it_matters": "Engineering teams increasingly organize work inside communication tools. Turning a discussion into a traceable issue or reviewed pull request can reduce manual handoffs, but it creates a security boundary between conversational instructions and repository-changing automation.",
+        "what_to_verify": "General availability refers to the announcement's supported integration, not unlimited use on every plan or unconfigured workspace. The experience still follows GitHub app permissions, organization policies and cloud-agent entitlements. A pull request created from chat is not automatically merged or safe to deploy."
+      },
+      "evidence": [
+        {
+          "label": "Release status",
+          "fact": "GitHub published a general-availability announcement for @GitHub in Slack and Microsoft Teams on November 6, 2026.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "What agents can do",
+          "fact": "The integration can investigate bugs, create issues, implement code changes and open pull requests from conversations.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Teams Canvas",
+          "fact": "The new Teams Canvas feature presents implementation plans, code changes and previews for discussion with colleagues.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Onboarding change",
+          "fact": "GitHub says repository identification is now inferred from the message when possible, avoiding repeat repository selection.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Follow-up reliability",
+          "fact": "The release describes a fix for conversations that previously failed to respond to follow-up messages.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Attribution",
+          "fact": "New issues and pull requests can indicate that work began in Slack or Teams and identify the originating user.",
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "label": "Earlier policy model",
+          "fact": "The earlier Slack preview described Copilot Business/Enterprise access, organization agent policy, installation and account-linking requirements.",
+          "source": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+        },
+        {
+          "label": "Human approval boundary",
+          "fact": "GitHub's earlier setup guidance explains that repository administrators can require additional review before Copilot-generated pull requests merge.",
+          "source": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+        }
+      ],
+      "limitations": "GitHub's changelog is a product release announcement rather than evidence that generated code is correct, secure or faster to deliver. Exact current entitlements, availability across tenants and app permissions must be checked in the organization's own configuration. Teams Canvas provides review context, not a replacement for repository branch protections.",
+      "sources": [
+        "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
+        "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack/"
+      ],
+      "analysis": [
+        {
+          "heading": "What can @GitHub do inside Slack and Microsoft Teams?",
+          "paragraphs": [
+            "GitHub's November 6 update makes the @GitHub agent experience generally available in supported Slack and Teams environments. A developer can mention the assistant during a bug discussion and ask it to inspect the issue, prepare changes or create a pull request. The experience is designed to carry the original conversation into GitHub work so the context and reason for a change remain visible.",
+            "The practical advantage is avoiding a translation gap between a discussion and a formal issue. Instead of opening a separate editor to rewrite a bug report, participants can hand the task to an agent from the thread. Yet this is still a repository-affecting workflow: incorrect assumptions in chat can reach code, so the resulting diff and tests must be reviewed before any merge.",
+            "GitHub previously offered similar agent capabilities in preview, so the story is not the invention of code-from-chat. The relevant changes are broader availability, richer review context and practical reliability improvements."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "heading": "What Teams Canvas adds, and why attribution matters",
+          "paragraphs": [
+            "Teams Canvas is the main new collaboration surface. GitHub says teammates can inspect plans, code changes and previews alongside the discussion, give feedback and refine the proposed implementation. That can improve visibility into what the agent intends to change before anyone approves it. It is not a guarantee that previews catch every bug or that a user has authority to approve code.",
+            "The announcement also says onboarding is shorter because @GitHub can identify a repository from the message, and follow-up messages are handled more reliably. Issues and pull requests carry attribution to their originating Slack or Teams conversation and user. This trace can help a reviewer determine where a task came from and whom to ask about a requirement.",
+            "Clear provenance still needs access boundaries. The chat participant must have the right account and organization settings, and repositories should preserve protection rules. GitHub's earlier preview documentation described team-plan entitlements and agent-policy configuration. Organizations should consult the latest account guidance rather than assume every workspace is enabled by default."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        },
+        {
+          "heading": "How to test value without giving a chat assistant too much authority",
+          "paragraphs": [
+            "Run a narrow trial with a low-risk bug: ask the agent to explain the issue, propose a change, open a PR and provide evidence from the project's tests. Track time from discussion to reviewed PR, number of comments needed and any changes that should have been rejected. A shorter path to a pull request is not itself faster delivery if review and correction take longer.",
+            "Security teams should validate which chat content the app can read, what repository permissions are granted and whether an untrusted message can introduce instructions the agent should ignore. Review approval, CI checks and merge restrictions should apply equally to AI-initiated and human-initiated changes.",
+            "SXF's editorial view is that useful automation makes intent and evidence easier to inspect. Linking a conversation, issue, patch and test result is more valuable than an unreviewed code-generation demonstration. Keep the assistant responsible for proposals and humans accountable for acceptance."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "GitHub Copilot inside Xcode",
+          "url": "/signals/github-copilot-xcode-coding-assistant/",
+          "description": "A parallel integration that brings Copilot into an established developer workspace."
+        },
+        {
+          "title": "OpenAI Pierre acquisition and Codex workflows",
+          "url": "/signals/openai-acquire-pierre-codex-developer-tools/",
+          "description": "How AI coding vendors are integrating planning, development and review."
+        },
+        {
+          "title": "Best AI coding tools",
+          "url": "/guides/best-ai-coding-tools/",
+          "description": "Compare assistants based on review workflow rather than demos."
+        },
+        {
+          "title": "AI agent security guide",
+          "url": "/guides/ai-agent-security/",
+          "description": "Permissions, prompt injection and auditability of agent actions."
+        },
+        {
+          "title": "AI agents in production",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Approval gates and operational reliability for tool-using agents."
+        }
+      ],
+      "reader_checklist": [
+        "Confirm GitHub account, app installation and organization agent policy before enabling.",
+        "Test from a clearly identified repository and keep branch protections enabled.",
+        "Review AI-created issues, diffs, test outputs and attribution independently.",
+        "Measure time to accepted change, including correction and review effort."
+      ]
     }
   }
 }
