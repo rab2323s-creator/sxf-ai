@@ -1,0 +1,31 @@
+/* Claude Haiku 4.5 scoped research modules; preserve existing SXF design. */
+[data-haiku45-guide],[id^="haiku45-"] { scroll-margin-top: 6rem; }
+.sxf-h45-notice { border:1px solid rgba(167,143,93,.6);background:rgba(167,143,93,.1);border-radius:1rem;padding:1.2rem;margin:1.4rem 0; }
+.sxf-h45-notice p { line-height:1.75;margin:.65rem 0 0; }
+.sxf-h45-table-wrap { border:1px solid rgba(140,165,185,.28);border-radius:.85rem;overflow-x:auto;margin:1.2rem 0 1.6rem; }
+.sxf-h45-table { width:100%;min-width:640px;border-collapse:collapse;font-variant-numeric:tabular-nums; }
+.sxf-h45-table caption { text-align:left;padding:.9rem 1rem;font-size:.91rem; }
+.sxf-h45-table th,.sxf-h45-table td { text-align:left;vertical-align:top;border-top:1px solid rgba(140,165,185,.23);padding:.85rem 1rem;line-height:1.6; }
+.sxf-h45-table th { font-weight:650; }
+.sxf-h45-table thead { background:rgba(88,117,143,.15); }
+.sxf-h45-table a { text-decoration:underline;text-underline-offset:3px; }
+.sxf-h45-cost-lab { border:1px solid rgba(140,165,185,.38);border-radius:1rem;padding:1.4rem;margin:1.5rem 0;background:rgba(88,117,143,.1); }
+.sxf-h45-cost-lab h3 { margin:0 0 .6rem; }
+.sxf-h45-fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2rem 0; }
+.sxf-h45-fields label { font-size:.9rem;display:flex;flex-direction:column;gap:.45rem;line-height:1.5; }
+.sxf-h45-fields input,.sxf-h45-fields select { box-sizing:border-box;width:100%;font:inherit;color:inherit;background:#111a25;border:1px solid rgba(148,173,193,.55);border-radius:.6rem;padding:.75rem; }
+.sxf-h45-fields input:focus-visible,.sxf-h45-fields select:focus-visible { outline:2px solid #81d1ff;outline-offset:2px; }
+.sxf-h45-results { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.2rem 0; }
+.sxf-h45-results>div { display:flex;flex-direction:column;gap:.5rem;padding:1rem;border:1px solid rgba(140,165,185,.33);border-radius:.8rem; }
+.sxf-h45-results span { font-size:.89rem; }
+.sxf-h45-results strong { font-size:1.45rem;font-variant-numeric:tabular-nums; }
+.sxf-h45-note { font-size:.88rem;line-height:1.75;opacity:.88; }
+.sxf-h45-code { white-space:pre;overflow-x:auto;background:#111923;border:1px solid rgba(140,165,185,.3);border-radius:.85rem;padding:1.1rem;font-size:.82rem;line-height:1.75; }
+.sxf-h45-steps { padding-left:1.5rem;line-height:1.75; }
+.sxf-h45-steps li { margin-bottom:.8rem;padding-left:.3rem; }
+.sxf-h45-faq details { border-top:1px solid rgba(140,165,185,.26);padding:.85rem 0; }
+.sxf-h45-faq summary { cursor:pointer;font-weight:650;line-height:1.55; }
+.sxf-h45-faq details p { margin:.6rem 0 0; }
+.sxf-h45-sources { padding-left:1.4rem;overflow-wrap:anywhere; }
+.sxf-h45-sources li { margin-bottom:.65rem; }
+@media(max-width:640px) { .sxf-h45-fields,.sxf-h45-results{grid-template-columns:1fr;} .sxf-h45-code{font-size:.74rem;} .sxf-h45-table th,.sxf-h45-table td{padding:.65rem;} }
