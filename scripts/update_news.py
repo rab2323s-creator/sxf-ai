@@ -70,6 +70,7 @@ from claude_haiku_45_model_page import enrich_claude_haiku_45_page
 from llama4_scout_model_page import enrich_llama_4_scout_page
 from mistral_ocr41_model_page import enrich_mistral_ocr_41_page
 from command_a_plus_page import enrich_command_a_plus_page
+from mistral_embed_model_page import enrich_mistral_embed_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
@@ -5578,6 +5579,10 @@ def render_catalog_model_page(model_id, items):
         page = enrich_mistral_ocr_41_page(page)
     if model_id == "command-a-plus-05-2026":
         page = enrich_command_a_plus_page(page)
+    if model_id == "mistral-embed-2312":
+        page = enrich_mistral_embed_page(page)
+    if model_id == "codestral-embed-2505":
+        page = inject_before_main_end(page, "<section class=\"model-compare-bridge shell\" data-membed-code-bridge>\n  <div class=\"intel-section-head\"><div><p class=\"eyebrow\">RELATED MISTRAL EMBEDDING MODELS</p>\n  <h2>Need general text retrieval instead of code embeddings?</h2></div></div>\n  <p>Codestral Embed targets source code, but Mistral Embed is the separate 8K context, $0.10/MTok general text embedding model. Compare vector dimensions, Python API calls, RAG pipelines and an original SXF indexing and raw storage cost calculator before choosing a searchable embedding space.</p>\n  <div class=\"model-related-links\"><a href=\"/models/mistral-embed/\">\n  <span>GENERAL TEXT EMBEDDINGS</span><strong>Mistral Embed: 1024-d vectors, API pricing and RAG</strong><b>↗</b></a></div>\n</section>")
     if model_id == "command-a-reasoning-08-2025":
         # Reciprocal topical link to Cohere's newer MoE and pricing research.
         page = inject_before_main_end(page, '''<section class="model-compare-bridge shell" data-caplus-reasoning-bridge>
