@@ -1,0 +1,128 @@
+<!-- SXF-authored, primary-source-grounded editorial layer: keep in data/model-page-content. -->
+        <section class="model-deep-section" id="flux2-klein-overview" data-flux2-klein-guide>
+          <div class="model-section-head"><p class="eyebrow">FLUX.2 KLEIN 9B / DIRECT ANSWER</p><h2>What is FLUX.2 Klein 9B?</h2></div>
+          <p><strong>FLUX.2 [klein] 9B</strong> is Black Forest Labs' nine-billion-parameter, step-distilled image model for <strong>text-to-image generation, image editing and multi-reference composition</strong>. The distilled version uses four inference steps; the undistilled <em>9B Base</em> is a different checkpoint intended for customization and fine-tuning. It is not a text chatbot and has no meaningful publicly specified token context window.</p>
+          <p>For developers, the important choices are <strong>hosted API versus local weights</strong>, <strong>distilled versus Base</strong>, and whether a roughly 20–24 GB GPU budget is available. The hosted BFL API starts at <strong>$0.015 for the first billed output megapixel</strong>; local 9B weights carry a <strong>FLUX Non-Commercial License</strong>. BFL lists <strong>19.6 GB</strong> VRAM for its distilled 9B reference configuration, but advises planning around <strong>24 GB</strong> for local use. These are different claims, not a universal minimum.</p>
+          <nav class="model-related-links" aria-label="Jump to FLUX.2 Klein 9B answers">
+            <a href="#flux2-klein-pricing"><span>PRICING</span><strong>API cost per image</strong><b>↗</b></a>
+            <a href="#flux2-klein-comfyui"><span>LOCAL SETUP</span><strong>ComfyUI and GPU requirements</strong><b>↗</b></a>
+            <a href="#flux2-klein-license"><span>RIGHTS</span><strong>Commercial license explained</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-specs">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL MODEL FACTS</p><h2>FLUX.2 Klein 9B specs: steps, image editing and VRAM.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL / WEIGHTS</span><h3>9B distilled</h3><p>Four-step distilled checkpoint. Separate 9B Base weights are undistilled and intended for tuning.</p></article>
+            <article><span>INPUT → OUTPUT</span><h3>Text + images → image</h3><p>Generate images from prompts or edit with one or multiple visual references. BFL's Klein API guide describes up to four references.</p></article>
+            <article><span>BFL REFERENCE VRAM</span><h3>19.6 GB</h3><p>Provider's published table for distilled 9B; its 9B Base table lists 21.7 GB. Actual peak memory varies with encoders, offloading, precision and resolution.</p></article>
+            <article><span>REFERENCE LATENCY</span><h3>~0.5s / ~2s</h3><p>BFL reports roughly 0.5 seconds on GB200 and 2 seconds on RTX 5090 for distilled 9B. These are vendor configurations, not SXF-measured results.</p></article>
+            <article><span>LOCAL LICENSE</span><h3>Non-commercial</h3><p>Downloadable does not mean Apache 2.0 for 9B. Commercial use of self-hosted weights requires appropriate BFL rights.</p></article>
+            <article><span>HOSTED API</span><h3>flux-2-klein-9b</h3><p>Official request route: <code>POST /v1/flux-2-klein-9b</code>. Billed by image megapixels, not language-model input/output tokens.</p></article>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL COST ANALYSIS</p><h2>FLUX.2 Klein 9B API pricing: cost per image and 1,000-image scenarios.</h2></div>
+          <p>Black Forest Labs publishes three separate components for the hosted Klein 9B image API: <strong>$0.015</strong> for the first billed output megapixel, <strong>$0.002</strong> for each additional billed output megapixel, and <strong>$0.002</strong> per billed reference-image input megapixel. A starting rate is not a flat price for every resolution or editing request. <a href="https://bfl.ai/pricing?category=flux.2" target="_blank" rel="noopener noreferrer">Verify the current rate on BFL's pricing page</a>.</p>
+          <div class="sxf-klein-formula"><strong>SXF cost model</strong><p>Estimated API charge = $0.015 + ($0.002 × additional billed output MP) + ($0.002 × billed reference input MP), for an output containing at least one billed MP.</p><small>Arithmetic derived by SXF from BFL's published rate components. Billed MP values—not raw pixel counts—are used below. Excludes retries, taxes, storage, engineering and third-party platform fees.</small></div>
+          <div class="sxf-klein-table-wrap"><table class="sxf-klein-table"><caption>SXF illustrative FLUX.2 Klein 9B hosted API cost scenarios, USD</caption><thead><tr><th scope="col">Scenario</th><th scope="col">Billed output MP</th><th scope="col">Reference input MP</th><th scope="col">Per image</th><th scope="col">1,000 images</th></tr></thead><tbody>
+            <tr><th scope="row">Small text-to-image</th><td>1</td><td>0</td><td>$0.015</td><td>$15</td></tr>
+            <tr><th scope="row">Larger text-to-image</th><td>2</td><td>0</td><td>$0.017</td><td>$17</td></tr>
+            <tr><th scope="row">Four-MP output</th><td>4</td><td>0</td><td>$0.021</td><td>$21</td></tr>
+            <tr><th scope="row">2-MP edited output, two 1-MP references</th><td>2</td><td>2</td><td>$0.021</td><td>$21</td></tr>
+          </tbody></table></div>
+          <p><strong>Practical conclusion:</strong> the difference between a $0.015 and $0.021 request is modest per image but becomes meaningful at scale. Measure <em>cost per approved image</em>, not simply cost per generation: if a workflow needs two attempts on average, its generation-only expense doubles. Reference images may be resized or billed differently depending on API rules; confirm the actual billed dimensions instead of assuming that a nominal 1024 × 1024 image is exactly one billable MP.</p>
+          <p>For the broader picture, compare <a href="/models/pricing/">SXF's model pricing directory</a>, the <a href="/models/flux-2-pro/">FLUX.2 Pro model page</a> and the <a href="/models/flux-2-max/">FLUX.2 Max premium image model</a>. Do not use the site's token-cost calculator for these per-image rates.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-api">
+          <div class="model-section-head"><p class="eyebrow">DEVELOPER QUICKSTART</p><h2>How to use the FLUX.2 Klein 9B API.</h2></div>
+          <p>Create a Black Forest Labs API key, send a text prompt to the <code>flux-2-klein-9b</code> endpoint, then follow the asynchronous result flow described in the official API documentation. A basic request has the following shape:</p>
+          <pre class="sxf-klein-code"><code>curl -X POST "https://api.bfl.ai/v1/flux-2-klein-9b" \
+  -H "x-key: $BFL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"prompt":"Studio product photograph of a ceramic mug on a neutral backdrop, soft side lighting","width":1024,"height":1024}'</code></pre>
+          <p>The API key must stay on the server; never expose it in client-side JavaScript or a public repository. Confirm accepted dimensions, reference-image fields, status polling and delivery URLs in the <a href="https://api.bfl.ai/docs" target="_blank" rel="noopener noreferrer">live BFL API reference</a>. An image-editing workflow adds an input image and an explicit instruction to retain or change named details; source-image size can affect cost.</p>
+          <p><strong>Example editing prompt:</strong> “Replace the background with a bright kitchen, retain the mug's exact handle shape, logo and ceramic texture, and preserve its original viewing angle.” Evaluate logo accuracy and object preservation before accepting the result; prompt text cannot guarantee pixel-perfect consistency.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-comfyui">
+          <div class="model-section-head"><p class="eyebrow">LOCAL INSTALLATION</p><h2>FLUX.2 Klein 9B in ComfyUI: weights, files and setup.</h2></div>
+          <p>For local ComfyUI use, update ComfyUI, obtain the licensed 9B checkpoint from <a href="https://huggingface.co/black-forest-labs/FLUX.2-klein-9B" target="_blank" rel="noopener noreferrer">BFL's Hugging Face model repository</a>, accept the repository's access terms and follow <a href="https://docs.comfy.org/tutorials/flux/flux-2-klein" target="_blank" rel="noopener noreferrer">ComfyUI's FLUX.2 Klein workflow tutorial</a>. Choose the <strong>9B</strong> workflow rather than accidentally mixing 4B text encoders and diffusion files.</p>
+          <div class="sxf-klein-table-wrap"><table class="sxf-klein-table"><caption>Files identified in ComfyUI's official 9B workflow documentation</caption><thead><tr><th scope="col">ComfyUI folder</th><th scope="col">Example 9B file</th><th scope="col">Role</th></tr></thead><tbody>
+            <tr><th scope="row"><code>models/diffusion_models/</code></th><td><code>flux-2-klein-9b-fp8.safetensors</code></td><td>Fast distilled checkpoint</td></tr>
+            <tr><th scope="row"><code>models/text_encoders/</code></th><td><code>qwen_3_8b_fp8mixed.safetensors</code></td><td>9B workflow text encoder</td></tr>
+            <tr><th scope="row"><code>models/vae/</code></th><td><code>flux2-vae.safetensors</code></td><td>Image encoder/decoder</td></tr>
+          </tbody></table></div>
+          <ol class="sxf-klein-steps">
+            <li>Start with the official FLUX.2 Klein 9B text-to-image workflow, and verify the file names against your ComfyUI version.</li>
+            <li>Place model, encoder and VAE files in their documented folders; load the matching workflow and resolve any missing nodes.</li>
+            <li>Generate a fixed prompt at one resolution with the distilled four-step configuration. Record peak VRAM and wall-clock latency on your own GPU.</li>
+            <li>Load the 9B image-editing workflow separately and compare source preservation; do not treat the Base checkpoint as the same performance profile.</li>
+          </ol>
+          <p><strong>Can 9B run on 8 GB VRAM?</strong> Not as a documented standard full-GPU configuration. The manufacturer's reference table lists 19.6 GB for distilled 9B; support guidance suggests a ~24 GB GPU budget. Quantization, CPU offload and third-party workflows can change feasibility and speed, but should be treated as separate configurations, not guaranteed 8 GB support. If hardware is tight, investigate the <strong>4B Apache-licensed</strong> variant or the newer <a href="/guides/flux-3-image-klein/">FLUX 3 Image Klein local setup guide</a> rather than conflating generations.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-license">
+          <div class="model-section-head"><p class="eyebrow">LEGAL / DEPLOYMENT CHOICE</p><h2>Is FLUX.2 Klein 9B free for commercial use?</h2></div>
+          <p><strong>No—not merely because its weights are downloadable.</strong> Black Forest Labs makes the FLUX.2 Klein <strong>9B local weights</strong> available under the <strong>FLUX Non-Commercial License</strong>. For commercial use of self-hosted 9B weights, obtain the proper BFL license. BFL says commercial rights are included when using its paid hosted API, subject to the applicable terms. By contrast, the <strong>Klein 4B weights</strong> use Apache 2.0. <a href="https://help.bfl.ai/articles/9272590838-self-serve-dev-license-overview-pricing" target="_blank" rel="noopener noreferrer">Read BFL's licensing explainer</a>.</p>
+          <p>Before deploying, document whether you are calling the API or shipping weights, whether outputs enter client work or model training, and which license applies. Training on generated outputs may require separate synthetic-data rights. See the site's <a href="/guides/ai-model-licensing/">AI model licensing due-diligence guide</a> for a broader verification checklist. This is an operational summary, not legal advice.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-comparison">
+          <div class="model-section-head"><p class="eyebrow">MODEL SELECTION</p><h2>FLUX.2 Klein 9B vs 4B vs Pro vs Max: which should you choose?</h2></div>
+          <div class="sxf-klein-table-wrap"><table class="sxf-klein-table"><caption>Officially documented positioning and starting direct BFL API rates</caption><thead><tr><th scope="col">Model</th><th scope="col">Best starting use case</th><th scope="col">First output MP</th><th scope="col">Local weights</th></tr></thead><tbody>
+            <tr><th scope="row">FLUX.2 Klein 9B</th><td>Quality-focused fast iteration; local experimentation with enough VRAM</td><td>$0.015</td><td>Yes; non-commercial license</td></tr>
+            <tr><th scope="row">FLUX.2 Klein 4B</th><td>Lower VRAM and latency; flexible self-hosting</td><td>$0.014</td><td>Yes; Apache 2.0</td></tr>
+            <tr><th scope="row"><a href="/models/flux-2-pro/">FLUX.2 Pro</a></th><td>Hosted production image workflows</td><td>$0.03</td><td>Not a published Klein-weight release</td></tr>
+            <tr><th scope="row"><a href="/models/flux-2-max/">FLUX.2 Max</a></th><td>Premium visual fidelity and complex compositions</td><td>$0.07</td><td>Hosted API</td></tr>
+          </tbody></table></div>
+          <p>These are <strong>product-positioning and price comparisons, not an independent quality leaderboard</strong>. A fair comparison must fix prompts, output size, reference inputs and acceptance criteria. Read the focused <a href="/compare/flux-2-pro-vs-flux-2-klein-9b/">FLUX.2 Pro vs Klein 9B comparison</a> or the broader <a href="/guides/best-ai-image-generators/">AI image-generator guide</a> before selecting by headline price alone.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-lab">
+          <div class="model-section-head"><p class="eyebrow">SXF REPRODUCIBLE EVALUATION METHOD</p><h2>How SXF recommends testing Klein 9B quality, cost and latency.</h2></div>
+          <p>We do <strong>not</strong> publish a fabricated SXF speed test, fidelity score or benchmark winner. Instead, this is an original <strong>six-task evaluation protocol</strong> a team can replay against Klein 9B, 4B and Pro to decide whether a lower per-image fee produces cheaper <em>usable</em> output:</p>
+          <ol class="sxf-klein-steps">
+            <li><strong>Prompt fidelity:</strong> produce a three-object studio scene with specified materials, positions and background; check every named constraint.</li>
+            <li><strong>Typography:</strong> render a short, fixed five-word sign; record exact spelling, punctuation and placement.</li>
+            <li><strong>Product consistency:</strong> edit a supplied product photo; score logo, geometry, color and texture preservation.</li>
+            <li><strong>Two-reference compositing:</strong> combine a product reference and a background reference without unintended identity changes.</li>
+            <li><strong>Latency:</strong> repeat each task at fixed output dimensions and capture end-to-end p50/p95 time, including any polling and downloads.</li>
+            <li><strong>Economics:</strong> retain failed generations and retries; compute <code>total generation spend / accepted outputs</code> instead of per-attempt price.</li>
+          </ol>
+          <p>Record model/checkpoint version, seed where supported, hardware, precision, inference steps, input images, dimensions, prompt, acceptance rubric and all failures. Keep model-generated outputs and external reviewer judgments separate. Results from BFL's own hardware are <em>vendor-reported reference measurements</em> until independently reproduced. This protocol is guidance, <strong>not a claim that SXF has already executed the benchmark</strong>.</p>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-faq">
+          <div class="model-section-head"><p class="eyebrow">COMMON QUESTIONS</p><h2>FLUX.2 Klein 9B FAQ: API, ComfyUI, GPU and license.</h2></div>
+          <div class="sxf-klein-faq">
+            <details><summary>How much does FLUX.2 Klein 9B cost per image?</summary><p>Direct BFL API billing starts at $0.015 for the first billed output megapixel; further output MP and reference-image input MP cost $0.002 each at the published rate. The full price varies by billed image dimensions.</p></details>
+            <details><summary>What is the FLUX.2 Klein 9B API endpoint?</summary><p>Use <code>POST https://api.bfl.ai/v1/flux-2-klein-9b</code> and authenticate with an <code>x-key</code> API key header. Consult the official API documentation for request parameters and asynchronous result handling.</p></details>
+            <details><summary>Does FLUX.2 Klein 9B work in ComfyUI?</summary><p>Yes. ComfyUI publishes dedicated FLUX.2 Klein 9B text-to-image and image-editing workflows and lists the matching diffusion, Qwen3 8B text-encoder and VAE files.</p></details>
+            <details><summary>How much VRAM does Klein 9B need?</summary><p>BFL's distilled model table lists 19.6 GB in its reference configuration and its local-use support guidance suggests around 24 GB. CPU offloading, quantization and workload configuration can alter requirements.</p></details>
+            <details><summary>Is the 9B model open source and free for commercial use?</summary><p>Its weights can be downloaded, but their license is FLUX Non-Commercial, not Apache 2.0. Commercial local deployment requires appropriate rights; BFL's hosted API includes commercial usage rights under its terms.</p></details>
+            <details><summary>What is the difference between Klein 9B and Klein 9B Base?</summary><p>9B is the four-step distilled model for fast inference. 9B Base is the undistilled checkpoint designed for fine-tuning and greater control, with different speed and memory characteristics.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="flux2-klein-sources">
+          <div class="model-section-head"><p class="eyebrow">EVIDENCE AND LIMITS</p><h2>Primary sources and verification boundaries.</h2></div>
+          <p>This SXF editorial explanation uses published BFL pricing, licensing, model and weights documentation, plus ComfyUI's own workflow instructions. Price examples are SXF calculations, not invoices or measured workloads. No synthetic image-quality ranking is presented. The catalog's <strong>October 12, 2026</strong> baseline remains separate from this editorial update (November 7, 2026).</p>
+          <ul class="sxf-klein-sources">
+            <li><a href="https://bfl.ai/pricing?category=flux.2" target="_blank" rel="noopener noreferrer">BFL — current FLUX.2 API pricing</a></li>
+            <li><a href="https://bfl.ai/models/flux-2-klein" target="_blank" rel="noopener noreferrer">BFL — Klein model variants, vendor VRAM and latency</a></li>
+            <li><a href="https://help.bfl.ai/articles/7592221790-how-do-i-generate-quickly-with-flux-2-klein" target="_blank" rel="noopener noreferrer">BFL — local memory and reference-image guidance</a></li>
+            <li><a href="https://help.bfl.ai/articles/9272590838-self-serve-dev-license-overview-pricing" target="_blank" rel="noopener noreferrer">BFL — open-weights and commercial licenses</a></li>
+            <li><a href="https://huggingface.co/black-forest-labs/FLUX.2-klein-9B" target="_blank" rel="noopener noreferrer">BFL's official 9B weights and model card</a></li>
+            <li><a href="https://docs.comfy.org/tutorials/flux/flux-2-klein" target="_blank" rel="noopener noreferrer">ComfyUI — official FLUX.2 Klein installation workflows</a></li>
+            <li><a href="https://api.bfl.ai/docs" target="_blank" rel="noopener noreferrer">BFL — API reference</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="More SXF FLUX model research">
+            <a href="/providers/black-forest-labs/"><span>MODEL PROVIDER</span><strong>All Black Forest Labs models</strong><b>↗</b></a>
+            <a href="/compare/flux-2-pro-vs-flux-2-klein-9b/"><span>DIRECT COMPARISON</span><strong>Pro vs Klein 9B</strong><b>↗</b></a>
+            <a href="/guides/flux-3-image-klein/"><span>NEXT GENERATION</span><strong>FLUX 3 Klein hardware and licensing</strong><b>↗</b></a>
+          </nav>
+        </section>
+
