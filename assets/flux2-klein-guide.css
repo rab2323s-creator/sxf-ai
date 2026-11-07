@@ -1,0 +1,27 @@
+/* FLUX.2 Klein 9B editorial enhancements; shared SXF shell remains unchanged. */
+[data-flux2-klein-guide] { scroll-margin-top: 6rem; }
+#flux2-klein-overview, #flux2-klein-specs, #flux2-klein-pricing, #flux2-klein-api,
+#flux2-klein-comfyui, #flux2-klein-license, #flux2-klein-comparison, #flux2-klein-lab,
+#flux2-klein-faq, #flux2-klein-sources { scroll-margin-top: 6rem; }
+.model-deep-section .sxf-klein-formula { background: rgba(91, 119, 145, .12); border: 1px solid rgba(131, 161, 190, .28); padding: 1.2rem; border-radius: 1rem; margin: 1.25rem 0; }
+.sxf-klein-formula p { font-size: 1.075rem; line-height: 1.65; margin: .5rem 0; }
+.sxf-klein-formula small { display: block; line-height: 1.7; opacity: .8; }
+.sxf-klein-table-wrap { overflow-x: auto; margin: 1.2rem 0 1.6rem; border: 1px solid rgba(139,163,180,.25); border-radius: .85rem; }
+.sxf-klein-table { border-collapse: collapse; width: 100%; min-width: 620px; font-variant-numeric: tabular-nums; }
+.sxf-klein-table caption { text-align: left; padding: .9rem 1rem; color: inherit; font-size: .9rem; }
+.sxf-klein-table th, .sxf-klein-table td { text-align: left; padding: .9rem 1rem; border-top: 1px solid rgba(139,163,180,.2); vertical-align: top; }
+.sxf-klein-table thead th { background: rgba(91,119,145,.15); font-weight: 700; }
+.sxf-klein-table tbody th { font-weight: 650; }
+.sxf-klein-table a { text-decoration: underline; text-underline-offset: 3px; }
+.sxf-klein-code { overflow-x:auto; white-space:pre; border:1px solid rgba(139,163,180,.25); background: #111923; border-radius:.85rem; padding: 1rem; line-height: 1.8; margin: 1.25rem 0; font-size: .83rem; }
+.sxf-klein-steps { counter-reset: index; list-style: decimal; padding-left: 1.5rem; margin: 1rem 0; }
+.sxf-klein-steps li { margin-bottom: .8rem; line-height:1.75; padding-left: .2rem; }
+.sxf-klein-faq details { border-top: 1px solid rgba(139,163,180,.27); padding: .9rem 0; }
+.sxf-klein-faq summary { cursor:pointer; font-weight:650; line-height: 1.5; }
+.sxf-klein-faq details p { margin: .65rem 0 0; }
+.sxf-klein-sources { margin: 1rem 0 1.4rem; padding-left:1.5rem; }
+.sxf-klein-sources li { margin-bottom:.7rem; overflow-wrap:anywhere; }
+@media (max-width:640px) {
+  .sxf-klein-table th,.sxf-klein-table td { padding:.7rem .8rem; }
+  .sxf-klein-code { font-size:.75rem; }
+}
