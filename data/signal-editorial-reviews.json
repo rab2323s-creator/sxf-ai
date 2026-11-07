@@ -3618,6 +3618,142 @@
         "Review AI-created issues, diffs, test outputs and attribution independently.",
         "Measure time to accepted change, including correction and review effort."
       ]
+    },
+    "open-asr-egyptian-nigerian-english-benchmark": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "Open ASR Adds Egyptian and Nigerian English Speech Tests",
+      "h1": "Open ASR: how accurate is speech AI for Egyptian and Nigerian English?",
+      "meta_description": "The Open ASR Leaderboard adds private Egyptian and Nigerian English tests. See the 1.34h and 1.55h datasets, accent gaps, word error rates and test limits.",
+      "source_name": "Hugging Face / Liva AI",
+      "primary_source": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "summary": "Hugging Face and Liva AI announced on November 6, 2026 that the Open ASR Leaderboard's private test set now includes spontaneous Egyptian-accented and Nigerian-accented English speech. The added conversational datasets are 1.34 and 1.55 hours respectively, and the leaderboard introduces comparisons between U.S., non-U.S. and international accent groupings. This improves evaluation coverage but does not prove speech systems are equally accurate across accents.",
+      "keywords": [
+        "Egyptian English speech recognition",
+        "Nigerian English speech recognition",
+        "Open ASR Leaderboard",
+        "speech-to-text accent bias",
+        "ASR word error rate English accents"
+      ],
+      "schema_type": "NewsArticle",
+      "editorial": {
+        "what_changed": "Hugging Face expanded the private Open ASR evaluation with new conversational Egyptian and Nigerian English datasets provided by Liva AI, and a more detailed accent breakdown for model comparisons.",
+        "why_it_matters": "Speech transcription is often tested on familiar U.S. or U.K. speech while product users speak many forms of English. New held-out, naturally conversational accents can expose uneven errors that an overall leaderboard score hides.",
+        "what_to_verify": "Egyptian and Nigerian English are English accent test sets, not benchmarks for transcription in the Arabic or Nigerian languages generally. Their 1.34-hour and 1.55-hour sizes are limited; the release does not establish that any model has solved accent bias or that all regional speech communities are represented."
+      },
+      "evidence": [
+        {
+          "label": "Release",
+          "fact": "Hugging Face published the Liva AI accent expansion on November 6, 2026.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Egyptian English",
+          "fact": "The private Liva AI Conversational EG split contains 1.34 hours of spontaneous English speech with Egyptian accents.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Nigerian English",
+          "fact": "The private Liva AI Conversational NG split contains 1.55 hours of spontaneous English speech with Nigerian accents.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Transcription labels",
+          "fact": "The new splits use punctuated, cased transcripts retaining speech disfluencies.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Previous private coverage",
+          "fact": "Earlier private data included 11 Appen and DataOceanAI splits across five accents, then an Indian-accented English split with Voice Arena.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Comparisons",
+          "fact": "The leaderboard now groups U.S. against non-U.S. accents including U.K., Australia, Canada, India, Nigeria and Egypt.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Additional grouping",
+          "fact": "It also compares Inner Circle English accents with Outer and Expanding Circle accents, following the study's described linguistic framework.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "Private evaluation intent",
+          "fact": "Hidden test material is intended to reduce benchmark-specific optimization or overfitting to public samples.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "label": "WER context",
+          "fact": "The existing leaderboard uses word error rate among other measurements, but no universal new model-ranking improvement is established by adding the splits.",
+          "source": "https://huggingface.co/blog/open-asr-leaderboard"
+        }
+      ],
+      "limitations": "The two new splits together contain only 2.89 hours and cannot capture all speakers, settings or languages within either country. Private data support held-out evaluation but reduce independent access to inspect individual samples. A change in leaderboard score may reflect the test distribution rather than a model's underlying accuracy changing.",
+      "sources": [
+        "https://huggingface.co/blog/open-asr-leaderboard-liva",
+        "https://huggingface.co/blog/open-asr-leaderboard"
+      ],
+      "analysis": [
+        {
+          "heading": "Why Egyptian and Nigerian English matter for speech-to-text",
+          "paragraphs": [
+            "Automatic speech recognition converts spoken audio into text, but performance depends on accent, speaking rate, microphone, background noise and vocabulary. Systems that perform well on familiar broadcast U.S. English may mishear casual speech from people with different pronunciation patterns. The new Open ASR test material focuses on spontaneous English conversation from speakers with Egyptian and Nigerian accents.",
+            "The distinction between accent and language is important. The announced datasets are not comprehensive Arabic speech-recognition sets or evaluations of all Nigerian languages. Both test varieties of English. Calling them national language coverage would exaggerate what the researchers released and mislead people shopping for multilingual transcription tools.",
+            "Each split retains disfluencies in the reference transcript, which can affect word error rate. Real speech includes hesitation, repetition and conversational fragments, so using only polished scripts may conceal the errors users experience every day."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "heading": "What the new private evaluation measures and what it misses",
+          "paragraphs": [
+            "Liva AI contributed 1.34 hours of Egyptian-accented English and 1.55 hours of Nigerian-accented English. These are meaningful held-out additions but small samples relative to the diversity of each population. The Open ASR Leaderboard already used private test data for other accents, and the new release extends rather than replaces that work.",
+            "The benchmark now exposes more informative accent breakdowns, comparing U.S. against non-U.S. speech and one set of English-speaking regions against another. A single global average can obscure a model that performs well on one group and poorly on another. Showing disaggregated results can help teams select a recognizer appropriate for their actual users.",
+            "Keeping evaluation audio private can discourage training on the exact test files. That protects the validity of comparisons but makes independent reproduction more difficult. Responsible reporting should recognize both sides, rather than describing any private test set as perfectly bias-free."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        },
+        {
+          "heading": "A practical SXF checklist for choosing an accent-aware transcription model",
+          "paragraphs": [
+            "Build a representative test corpus with the speakers and acoustic conditions your product actually serves. Include varied ages, microphones, conversational interruptions and specialized vocabulary, with participants' consent. Compare not just total word error rate but errors by accent, speaker and domain. Names, amounts and key instructions often deserve extra review because a single substitution can change meaning.",
+            "When comparing systems, ensure that text normalization is consistent across reference and predictions. Punctuation, fillers and capitalization can otherwise create score differences unrelated to whether the message was understood. A lower word error rate on one test split does not guarantee the lowest cost or latency for a real-time call center.",
+            "SXF's takeaway is that accurate speech technology needs geographically and socially representative evidence. The new test splits make a hidden weakness easier to notice, while the small sample size is a reason to expand independent evaluations rather than pronounce any model universally fair."
+          ],
+          "source": "https://huggingface.co/blog/open-asr-leaderboard-liva"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Phonon TTS: speech generation on devices",
+          "url": "/signals/phonon-tts-on-device-speech-benchmarks/",
+          "description": "The complementary output side of speech AI and its practical limits."
+        },
+        {
+          "title": "Introducing Falcon ASR",
+          "url": "/signals/introducing-falcon-asr-91ed3eb/",
+          "description": "A related speech-recognition model release."
+        },
+        {
+          "title": "Open ASR Leaderboard's earlier evaluation work",
+          "url": "/signals/the-open-asr-leaderboard-adds-its-first-global-south-language-b0b2c2d/",
+          "description": "How the speech benchmark's representation has expanded."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "How dataset composition changes the meaning of a score."
+        },
+        {
+          "title": "Google Agile Deliberation and human labels",
+          "url": "/signals/google-agile-deliberation-image-classification/",
+          "description": "A complementary issue: how human-defined labels affect evaluation."
+        }
+      ],
+      "reader_checklist": [
+        "Confirm whether a claimed benchmark measures an English accent or an entirely different language.",
+        "Check per-accent errors instead of relying on a single mean WER.",
+        "Compare models using identical transcription normalization and test conditions.",
+        "Use representative, consented real speech when validating a product."
+      ]
     }
   }
 }
