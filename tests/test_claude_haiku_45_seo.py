@@ -26,7 +26,7 @@ def validate():
     assert "Manual budget" in page
     assert "200,000" in page and "64,000" in page
     assert "SXF ORIGINAL UNIT ECONOMICS" in page
-    assert "SXF ORIGINAL BREAK-EVEN ANALYSIS" in page
+    assert "ORIGINAL SXF BREAK-EVEN ANALYSIS" in page
     assert "SXF ORIGINAL EVALUATION DESIGN" in page
     assert "not a claim that SXF has executed API calls" in page
     assert len(re.findall(r"<h2\b",page))>=18
