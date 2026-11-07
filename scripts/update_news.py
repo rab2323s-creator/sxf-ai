@@ -66,6 +66,7 @@ from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
 from flux2_klein_9b_model_page import enrich_flux2_klein_9b_page
 from voxtral_mini_transcribe_2_page import enrich_voxtral_mini_transcribe_2_page
+from claude_haiku_45_model_page import enrich_claude_haiku_45_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
@@ -5566,6 +5567,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_amazon_nova_2_lite(page, model)
     if model_id == "gpt-6-luna":
         page = enrich_gpt6_luna_page(page, MODEL_PRICING_BY_ID)
+    if model_id == "claude-haiku-4-5-20251001":
+        page = enrich_claude_haiku_45_page(page)
     if model_id == "gemini-3.8-flash-lite-tts":
         page = enrich_gemini_38_flash_lite_tts_page(page, MODEL_PRICING_BY_ID)
     if model_id == "gemini-3.8-flash-tts":
