@@ -16,9 +16,9 @@ CONTENT = ROOT / "data/model-page-content/voxtral-mini-transcribe-2-seo.html"
 CANONICAL = "https://sxf.si/models/voxtral-mini-transcribe-2/"
 TITLE = "Voxtral Mini Transcribe 2: API, Pricing & Diarization | SXF"
 DESCRIPTION = (
-    "Voxtral Mini Transcribe 2 guide: $0.003/min transcription pricing, "
-    "Python API, speaker diarization, word timestamps, languages, Voxtral 3 "
-    "migration and original SXF cost calculator."
+    "Voxtral Mini Transcribe 2: $0.003/min pricing, Python API, "
+    "speaker diarization, word timestamps and Voxtral 3 migration. "
+    "Includes SXF cost calculator."
 )
 SOURCES = [
     "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
