@@ -9527,6 +9527,16 @@ def generic_comparison_page_html(comparison):
             '<span>Published facts · no synthetic ranking</span></div>'
             f'<div class="compare-v2-decision-grid">{specialists}</div></section>'
         )
+    scout_guide_link = ""
+    if comparison["slug"] == "llama-4-scout-vs-llama-4-maverick":
+        scout_guide_link = '''<section class="model-compare-bridge shell" data-scout-comparison-guide>
+          <div class="intel-section-head"><div><p class="eyebrow">DEEP DIVE / VERIFIED SCOUT DEPLOYMENT</p>
+          <h2>Llama 4 Scout GPU memory, 10M-context limits and EU license.</h2></div></div>
+          <p>Scout's 17B active and 109B total parameters determine different runtime limits. The SXF Scout model guide includes theoretical INT4/FP8/BF16 weight budgets, an interactive memory sensitivity model, Meta's 512-GPU long-context evaluation boundary, licensing restrictions and a reproducible source-retrieval test.</p>
+          <div class="model-related-links"><a href="/models/llama-4-scout/">
+          <span>ORIGINAL SXF MODEL RESEARCH</span><strong>Read Llama 4 Scout: 109B specs, 10M context and GPU VRAM</strong><b>↗</b></a></div>
+          </section>'''
+
     source_links = "".join(
         f'<a href="{escape(model["provenance"]["evidence"]["model_identity"], quote=True)}" target="_blank" rel="noopener noreferrer"><span>{escape(model["model"])} official specs</span><b>↗</b></a>'
         for model in (left, right)
@@ -9601,8 +9611,9 @@ def generic_comparison_page_html(comparison):
       </section>
       {compare_live_facts_html(model_ids)}
       {specialist_html}
+      {scout_guide_link}
 
-      <section class="compare-v2-decisions shell">
+      <section class="compare-v2-decisions shell>
         <div class="intel-section-head"><div><p class="eyebrow">DECISION FACTORS</p><h2>What materially changes the choice.</h2></div><span>No synthetic winner score</span></div>
         <div class="compare-v2-decision-grid">{decisions_html}</div>
       </section>
