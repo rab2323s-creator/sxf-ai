@@ -1,0 +1,196 @@
+<!-- SXF original analytical guide: all provider claims linked to primary references -->
+        <section class="model-deep-section" id="caplus-overview" data-caplus-guide>
+          <div class="model-section-head"><p class="eyebrow">COHERE COMMAND A+ / DIRECT ANSWER</p><h2>What is Cohere Command A Plus?</h2></div>
+          <p><strong>Cohere Command A+ (Command A Plus)</strong> is a <strong>multilingual, vision-enabled Mixture-of-Experts (MoE) language model</strong> released on <strong>May 20, 2026</strong>. Its exact Cohere API model ID is <code>command-a-plus-05-2026</code>. It combines text and image understanding, reasoning, tool calling, structured output and citations for enterprise agents and RAG applications.</p>
+          <p>The model has <strong>218 billion total parameters</strong>, with <strong>25 billion active parameters</strong> during inference, a <strong>128,000-token context window</strong> and a <strong>64,000-token maximum output</strong>. Cohere lists <strong>48 languages</strong>, including Arabic and all official EU languages. It is distributed as open weights under <strong>Apache 2.0</strong>, with official W4A4 configurations designed for <strong>one NVIDIA B200 or two H100 GPUs</strong>.</p>
+          <div class="sxf-caplus-notice" role="note"><strong>Pricing distinction — verified November 8, 2026</strong><p>Cohere's shared Chat API lists <strong>Command A+ as free until rate limits are reached</strong> for trial and production keys; this is <em>not unlimited free production capacity</em>. The company separately lists <strong>Model Vault Command A+ XL instances at $57.50/hour</strong>; the public pricing table does not list a Command A+ L rate, subject to access, tier and commercial commitment. Downloading Apache-2.0 weights does not make GPU infrastructure free. No universal Cohere paid input/output token rate is published for this API model, so SXF does not invent one.</p></div>
+          <nav class="model-related-links" aria-label="Jump to Cohere Command A Plus details">
+            <a href="#caplus-pricing"><span>COSTS</span><strong>Free API vs Vault pricing</strong><b>↗</b></a>
+            <a href="#caplus-code"><span>API</span><strong>Python, cURL and reasoning</strong><b>↗</b></a>
+            <a href="#caplus-hardware"><span>OPEN WEIGHTS</span><strong>218B model GPU requirements</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="caplus-specifications">
+          <div class="model-section-head"><p class="eyebrow">COHERE PRIMARY-SOURCE FACTS</p><h2>Command A+ specs: 128K context, 64K output, 218B MoE and 48 languages.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>PINNED API ID</span><h3>command-a-plus-05-2026</h3><p>Use Cohere Chat v2 <code>POST /v2/chat</code> or the official <code>cohere.ClientV2</code>. Cloud routing may require different deployment identifiers.</p></article>
+            <article><span>CONTEXT / OUTPUT</span><h3>128K / 64K tokens</h3><p>128,000 context tokens and up to 64,000 generated tokens. Do not imply the maximum output is always available on top of a fully occupied input window.</p></article>
+            <article><span>EXPERTS / WEIGHTS</span><h3>25B active / 218B total</h3><p>MoE activates a subset of its stored weights per token. Hardware capacity planning is based on the total checkpoint, not only the active size.</p></article>
+            <article><span>INPUT / OUTPUT</span><h3>Text + image → text</h3><p>Vision and text are input modalities. Command A+ is not a native audio transcription or text-to-speech endpoint.</p></article>
+            <article><span>REASONING / TOOLS</span><h3>Configurable thinking</h3><p>Cohere documents reasoning control, multistep tool use, citations and structured outputs. Tools execute in your application, not autonomously outside your authorization.</p></article>
+            <article><span>TRAINING CUTOFF</span><h3>April 1, 2025</h3><p>Official knowledge cutoff. Recent facts require retrieval, verified tools or new data; fluent answers do not establish freshness.</p></article>
+          </div>
+          <p>See <a href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer">Cohere's Command A+ model documentation</a> and <a href="https://docs.cohere.com/docs/models" target="_blank" rel="noopener noreferrer">the live model directory</a>. The language list includes Arabic, English, German, French, Spanish, Chinese, Hindi, Japanese, Persian, Urdu and others, but language <em>support</em> does not mean equal performance on every dialect, document type or business domain.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL INSTANCE ECONOMICS</p><h2>Cohere Command A+ pricing: free API vs Model Vault XL $57.50/hour.</h2></div>
+          <p>There are <strong>three distinct ways to obtain this model</strong>. Cohere's shared Chat API offers access up to published rate limits. Cohere's <strong>Standard Model Vault</strong> lists managed XL capacity for this specific model, usually with a waitlist and monthly/annual Fixed or Flex commitments. Apache-2.0 open weights can be self-hosted, where the GPU bill, operations and security are paid separately. <strong>Do not copy the $2.50/$10 per million-token pricing for the older Command A model into Command A+.</strong></p>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>Verified Cohere access and billing models, not interchangeable unit prices</caption><thead><tr><th scope="col">Deployment option</th><th scope="col">Published pricing basis</th><th scope="col">Important limitation</th></tr></thead><tbody>
+            <tr><th scope="row">Cohere shared API</th><td>Free until request/rate limits</td><td>No universal paid Command A+ token price or unlimited throughput is promised</td></tr>
+            <tr><th scope="row">Standard Model Vault · L</th><td><strong>Not listed for Command A+</strong></td><td>Do not infer a rate from another model tier</td></tr>
+            <tr><th scope="row">Standard Model Vault · XL</th><td><strong>$57.50 per instance-hour</strong></td><td>Managed dedicated capacity; waitlist and contractual commitments apply</td></tr>
+            <tr><th scope="row">Self-hosted Apache-2.0 weights</th><td>GPU capacity, storage, networking and operations</td><td>Weight license is not a free hosting or hardware entitlement</td></tr>
+          </tbody></table></div>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>SXF-derived hourly-rate multiplication only (not quoted monthly Cohere subscription prices)</caption><thead><tr><th scope="col">Illustrative managed instance hours</th><th scope="col">Command A+ XL · $57.50/hour</th><th scope="col">Commitment note</th></tr></thead><tbody>
+            <tr><th scope="row">8 instance-hours</th><td>$460</td><td>Hourly-rate multiplication only</td></tr>
+            <tr><th scope="row">176 instance-hours</th><td>$10,120</td><td>Not a quoted monthly contract</td></tr>
+            <tr><th scope="row">720 instance-hours</th><td>$41,400</td><td>Actual billed terms may differ</td></tr>
+          </tbody></table></div>
+          <p>The figures above multiply <em>public hourly rates × chosen hours</em>; they do not replace quoted monthly/annual commitments, minimum capacity, autoscaling rules, overages or enterprise invoices. Consult <a href="https://docs.cohere.com/docs/model-vault/standard/pricing" target="_blank" rel="noopener noreferrer">Cohere's Standard Vault pricing page</a> and validate regional tier availability before budgeting.</p>
+
+          <div class="sxf-caplus-calculator" data-caplus-calculator>
+            <h3>SXF Model Vault cost-per-accepted-task calculator</h3>
+            <p>Estimate a managed instance workload using your <em>assumed</em> throughput and acceptance rate. This is original SXF scenario math, not measured Cohere throughput or an account-specific price quote. It runs entirely in your browser.</p>
+            <div class="sxf-caplus-fields">
+              <p class="sxf-caplus-note">Published Command A+ tier: XL · $57.50/instance-hour. An L tier price is not listed.</p>
+              <label for="caplus-instances">Concurrent instances<input id="caplus-instances" type="number" min="0" max="10000" step="1" value="1" data-caplus-instances></label>
+              <label for="caplus-hours">Billed hours per instance<input id="caplus-hours" type="number" min="0" max="8760" step="1" value="176" data-caplus-hours></label>
+              <label for="caplus-throughput">Completed tasks per instance-hour (assumption)<input id="caplus-throughput" type="number" min="0" max="1000000" step="1" value="100" data-caplus-throughput></label>
+              <label for="caplus-pass">Human-accepted tasks (%)<input id="caplus-pass" type="number" min="0" max="100" step="1" value="90" data-caplus-pass></label>
+            </div>
+            <div class="sxf-caplus-results" role="status" aria-live="polite">
+              <div><span>Estimated instance charges</span><strong data-caplus-cost>$10,120.00</strong></div>
+              <div><span>Assumed accepted tasks</span><strong data-caplus-accepted>15,840</strong></div>
+              <div><span>Spend per accepted task</span><strong data-caplus-unit>$0.6389</strong></div>
+            </div>
+            <p class="sxf-caplus-note" data-caplus-explain>1 XL instance × 176 billed hours × $57.50/hour; 100 tasks/hour and a 90% acceptance assumption.</p>
+            <p class="sxf-caplus-note">Missing or zero accepted-task counts display N/A instead of dividing by zero. Excludes ancillary services, tool fees, audit labor, taxes, minimum contracted capacity, pausing behavior and provider-specific billing rules. No input values are sent to a server.</p>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="caplus-cost-method">
+          <div class="model-section-head"><p class="eyebrow">SXF INDEPENDENT COMPARISON METHOD</p><h2>How to compare a free LLM API, dedicated Model Vault and self-hosting fairly.</h2></div>
+          <p>Per-token and per-hour costs should <strong>not</strong> be compared before workload normalization. For a fixed test corpus, count valid accepted answers, billed compute capacity, queueing, retries, tool use, reasoning tokens, retrieval processing and human review. The relevant denominator is <strong>approved tasks completed within an agreed latency SLA</strong>, not raw generated tokens.</p>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>SXF decision table: which cost variables actually transfer between deployments?</caption><thead><tr><th scope="col">Metric</th><th scope="col">Shared API</th><th scope="col">Model Vault</th><th scope="col">Self-hosted GPUs</th></tr></thead><tbody>
+            <tr><th scope="row">Primary published bill</th><td>Free within rate limits</td><td>Managed instance-hours and commitments</td><td>Reserved or consumed infrastructure</td></tr>
+            <tr><th scope="row">Capacity constraint</th><td>Account rate limits and service rules</td><td>Instance count and service tier SLO</td><td>GPU memory, batch size, serving engine</td></tr>
+            <tr><th scope="row">Data location</th><td>Hosted service terms</td><td>Selected managed deployment options</td><td>Your deployment perimeter and controls</td></tr>
+            <tr><th scope="row">Decision metric</th><td>Successful tasks within limits</td><td>Cost per accepted task at target p95 latency</td><td>Full infrastructure + staff cost per accepted task</td></tr>
+          </tbody></table></div>
+          <p>For example, at 176 billed instance-hours and $57.50/hour, one XL instance costs <strong>$10,120 in the illustrative hourly-rate scenario</strong>. If a separately benchmarked application handled 100 tasks per instance-hour with 90% passing human review, it would generate 15,840 accepted tasks at about <strong>$0.6389 per accepted task</strong>, before any other expense. <strong>Neither throughput nor quality in this sentence is a measured Command A+ result.</strong></p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-code">
+          <div class="model-section-head"><p class="eyebrow">EXACT MODEL-ID DEVELOPER GUIDE</p><h2>How to call Command A+ with the Cohere Chat v2 API in Python and cURL.</h2></div>
+          <p>Install the official <code>cohere</code> Python package, set <code>CO_API_KEY</code> server-side, and pin <code>command-a-plus-05-2026</code>. The official model documentation lists <strong>Chat v2</strong>, Chat Completions and legacy Chat v1 access. New integration examples should use <code>/v2/chat</code> rather than copying old <code>/v1/chat</code> request formats into the newer endpoint.</p>
+          <h3>Python: basic multilingual task</h3>
+          <pre class="sxf-caplus-code"><code>import os
+import cohere
+
+co = cohere.ClientV2(api_key=os.environ["CO_API_KEY"])
+response = co.chat(
+    model="command-a-plus-05-2026",
+    messages=[{
+        "role": "user",
+        "content": "Summarize the following support ticket in Arabic: "
+                   "A customer cannot access their invoice portal."
+    }],
+    max_tokens=400,
+    thinking={"type": "disabled"}
+)
+for block in response.message.content:
+    if block.type == "text":
+        print(block.text)</code></pre>
+          <p>The example disables thinking to demonstrate a simple response; Cohere's reasoning documentation says thinking is enabled by default for reasoning-capable models. The <code>thinking</code> configuration also accepts a <code>token_budget</code> in supported requests. Set a useful response budget and measure real task accuracy and latency—these calls are documentation-based templates, not paid calls executed by SXF.</p>
+          <h3>cURL: direct Chat v2 request</h3>
+          <pre class="sxf-caplus-code"><code>curl "https://api.cohere.com/v2/chat" \
+  -H "Authorization: Bearer $CO_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "command-a-plus-05-2026",
+    "messages": [
+      {"role": "user", "content": "Explain mixture-of-experts in two sentences."}
+    ],
+    "max_tokens": 300
+  }'</code></pre>
+          <p>Use Cohere's <a href="https://docs.cohere.com/reference/chat" target="_blank" rel="noopener noreferrer">Chat API reference</a> for current syntax and <a href="https://docs.cohere.com/docs/reasoning" target="_blank" rel="noopener noreferrer">reasoning controls</a> for thinking configuration. For structured JSON, verify <code>response_format</code> restrictions: the API docs warn that JSON mode does not combine with all tool/document configurations. Application-side schema validation remains necessary.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-agentic">
+          <div class="model-section-head"><p class="eyebrow">ENTERPRISE AGENT ARCHITECTURE</p><h2>Command A+ tool calling, citations, RAG, images and safe reasoning.</h2></div>
+          <p>Command A+ is designed for retrieval-augmented question answering, multilingual tool use, document and image interpretation, and agentic workflows. Cohere's Chat v2 interface can return <strong>tool-call requests</strong>, but <strong>your application must validate and execute them</strong> under least-privilege authorization. A model-selected tool name is not proof of permission to spend money, publish records or access a restricted tenant.</p>
+          <div class="model-capability-grid">
+            <article><span>RETRIEVAL</span><h3>Citations with source checks</h3><p>Validate that cited text actually supports each claim; source offsets and tool results are not independent proof of factual accuracy.</p></article>
+            <article><span>AGENTS</span><h3>Authorized tools only</h3><p>Keep allowlists, schemas, human approval and audit logs outside the model. Reject unexpected tool parameters and cross-tenant identifiers.</p></article>
+            <article><span>VISION</span><h3>Image + text prompts</h3><p>Useful for visual document review, but verify numbers and tables on the original source before performing consequential actions.</p></article>
+            <article><span>TRANSLATION</span><h3>48 languages</h3><p>Provider-supported multilingual tasks include Arabic; check domain terminology and regional language quality before automation.</p></article>
+          </div>
+          <p>An end-to-end enterprise pattern can combine <a href="/models/embed-v5-0-pro/">Cohere Embed 5 Pro</a> for representations, <a href="/models/rerank-4-pro/">Rerank 4 Pro</a> for candidate relevance, <a href="/models/parse-v5-0/">Parse 5</a> for PDF ingestion, and Command A+ for grounded agent responses. Those are <strong>different services with different billing units</strong>; do not conflate their prices or assume Command A+ replaces embedding/reranking infrastructure. Read <a href="/guides/vector-database-for-rag/">SXF's vector database RAG guide</a>, <a href="/guides/ai-agent-security/">AI agent security</a> and <a href="/guides/deploy-ai-agents-production/">production deployment</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-hardware">
+          <div class="model-section-head"><p class="eyebrow">OPEN-WEIGHT DEPLOYMENT / ORIGINAL SXF MATH</p><h2>Command A+ GPU requirements: 218B MoE, W4A4, B200, H100 and Apache 2.0.</h2></div>
+          <p>Cohere released downloadable checkpoints under <strong>Apache 2.0</strong>. Its model card lists <strong>one NVIDIA B200 or two H100 GPUs at W4A4</strong> as a supported minimum inference configuration, depending on software/hardware compatibility. Other quantizations require additional accelerators: do not treat a generic “25B local LLM” VRAM estimate as sufficient. The 25B active weights describe per-token compute; <strong>all 218B model parameters still require weight storage or sharding</strong>.</p>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>Original SXF lower-bound weight-payload estimates; 218B total parameters only, before scaling and KV memory</caption><thead><tr><th scope="col">Idealized precision</th><th scope="col">Decimal GB</th><th scope="col">Binary GiB</th><th scope="col">Meaning</th></tr></thead><tbody>
+            <tr><th scope="row">4-bit</th><td><strong>109 GB</strong></td><td>101.51 GiB</td><td>Theoretical full-model payload; mixed precision and quantization metadata are extra</td></tr>
+            <tr><th scope="row">8-bit</th><td><strong>218 GB</strong></td><td>203.03 GiB</td><td>Weight bytes only, not a one-card deployment claim</td></tr>
+            <tr><th scope="row">BF16 / 16-bit</th><td><strong>436 GB</strong></td><td>406.06 GiB</td><td>Ideal uncompressed payload, before runtime and activation/KV memory</td></tr>
+          </tbody></table></div>
+          <p>These estimates use the simple formula <code>218,000,000,000 parameters × bits / 8</code>. Real models contain special-precision components, quantization scale metadata, processor overhead, activations, attention cache and deployment fragmentation. <strong>No actual Command A+ GPU benchmark or single-card memory measurement has been performed by SXF for this guide.</strong></p>
+          <p>Official weights: <a href="https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16" target="_blank" rel="noopener noreferrer">CohereLabs BF16 model</a> and <a href="https://huggingface.co/CohereLabs/command-a-plus-05-2026-fp8" target="_blank" rel="noopener noreferrer">FP8 model</a>. Check the model cards for supported runtimes, W4A4 variants, model-specific tokenizer and minimum GPUs. For local deployment concepts, see <a href="/guides/llm-quantization-explained/">the SXF quantization guide</a> and <a href="/guides/run-ai-models-locally/">running open models locally</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-comparison">
+          <div class="model-section-head"><p class="eyebrow">MODEL FAMILY COMPARISON</p><h2>Command A+ vs Command A Reasoning: vision, context, parameters and Vault cost.</h2></div>
+          <p>Command A+ succeeds earlier Command variants, but the most important difference is <strong>not just benchmark performance</strong>. Command A+ combines vision and a wider 48-language specification with MoE deployment, but offers a shorter published context window than Command A Reasoning. Its direct API rate remains free until rate limits, and their <strong>managed instance-hour prices are not identical</strong>.</p>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>Cohere documented model features, not SXF-run head-to-head performance results</caption><thead><tr><th scope="col">Dimension</th><th scope="col">Command A+</th><th scope="col"><a href="/models/command-a-reasoning/">Command A Reasoning</a></th></tr></thead><tbody>
+            <tr><th scope="row">Model ID</th><td><code>command-a-plus-05-2026</code></td><td><code>command-a-reasoning-08-2025</code></td></tr>
+            <tr><th scope="row">Total/active params</th><td>218B total, 25B active (MoE)</td><td>111B dense family; no separate active MoE count</td></tr>
+            <tr><th scope="row">Context / output max</th><td>128K / 64K</td><td>256K / 32K</td></tr>
+            <tr><th scope="row">Image inputs</th><td>Yes; documented vision</td><td>Model documentation lists image inputs; check exact supported workflow</td></tr>
+            <tr><th scope="row">Supported languages</th><td>48</td><td>23</td></tr>
+            <tr><th scope="row">Model Vault L tier</th><td>Not listed</td><td>$48 per instance-hour</td></tr>
+            <tr><th scope="row">Model Vault XL tier</th><td>$57.50 per instance-hour</td><td>$57.50 per instance-hour</td></tr>
+          </tbody></table></div>
+          <p>The shared figures above are provider card/price-list statements, <strong>not equivalent throughput, instance hardware or identical SLA guarantees</strong>. For selection, compare tool-call validity, multilingual factual accuracy, failure modes, privacy controls, p95 latency and accepted outcomes on the same corpus. The older model has a longer published context limit, which can matter even when a newer model performs better on selected provider benchmarks.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-lab">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL REPRODUCIBLE EVALUATION DESIGN</p><h2>How to benchmark Command A+ on multilingual agents and RAG without fake scores.</h2></div>
+          <p>This is an <strong>original SXF proposed 24-task test protocol</strong>, <strong>not results from executed Command A+ calls</strong>. Prepare six consented/synthetic tasks per category, covering: Arabic/English customer support routing, citation-grounded retrieval, image-based document extraction, and safe tool selection. Pin both model IDs and request settings; do not reuse a competitor's hidden prompt or benchmark data to imply equivalent conditions.</p>
+          <div class="sxf-caplus-table-wrap"><table class="sxf-caplus-table"><caption>SXF preregistered 24-case evaluation: metrics are defined, not measured</caption><thead><tr><th scope="col">Group (6 cases)</th><th scope="col">Primary metric</th><th scope="col">Failure to flag</th></tr></thead><tbody>
+            <tr><th scope="row">Multilingual support</th><td>Macro F1 of routed tickets, by language</td><td>Incorrect escalation and invented customer policy</td></tr>
+            <tr><th scope="row">RAG and citations</th><td>Exact source-ID match and unsupported assertions</td><td>Quoted evidence that does not actually support answer</td></tr>
+            <tr><th scope="row">Vision document review</th><td>Critical numeric-field match and rejection of unreadable inputs</td><td>Wrong invoice amount, date, or missing field</td></tr>
+            <tr><th scope="row">Tool calls and authorization</th><td>Allowed-action precision and unauthorized-call count</td><td>Prompt injection, cross-tenant tools or irreversible action without approval</td></tr>
+          </tbody></table></div>
+          <p>Record <strong>three repeated runs per case</strong> for each model, along with actual inference times, tool costs, token/instance usage, response validity, retries and manual corrections. In a real production decision, report <code>cost per human-accepted task</code>, latency and failure distributions, not only average model accuracy. For tests involving sensitive customer data, use consent, anonymization and application-side tool authorization.</p>
+          <p><strong>Original SXF downloadable test starter:</strong> <a href="/models/command-a-plus/sxf-command-a-plus-eval.py">offline evaluation scorer (Python)</a> and <a href="/models/command-a-plus/sxf-command-a-plus-synthetic.jsonl">12 synthetic fixture records (JSONL)</a>. These sample predictions are <strong>invented by SXF to demonstrate scoring, not Cohere model outputs</strong>. Use real labeled outcomes before making any claim about model quality. Related: <a href="/guides/ai-agent-evaluation-checklist/">agent evaluation checklist</a> and <a href="/evaluations/">SXF evaluation registry</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="caplus-faq">
+          <div class="model-section-head"><p class="eyebrow">DIRECT SEARCH QUESTIONS</p><h2>Command A Plus FAQ: price, model ID, context, license and GPUs.</h2></div>
+          <div class="sxf-caplus-faq">
+            <details><summary>What is the Cohere Command A+ API model ID?</summary><p>Use <code>command-a-plus-05-2026</code> with the Cohere Chat v2 endpoint <code>/v2/chat</code> or official ClientV2 Python SDK.</p></details>
+            <details><summary>Is Command A+ free or paid?</summary><p>The shared Cohere API is free until rate limits are reached for both trial and production keys. Standard Model Vault charges per managed instance-hour; the published Command A+ XL rate is $57.50/hour (no L rate listed), subject to access and commitments.</p></details>
+            <details><summary>What is the Command A+ context window and output limit?</summary><p>Cohere documents a 128,000-token context window and 64,000 maximum output tokens. Real request limits and available headroom depend on settings and platform.</p></details>
+            <details><summary>Is Command A Plus open source?</summary><p>Yes. Cohere released downloadable Command A+ weights under Apache 2.0. The model can be self-hosted on supported hardware but GPU, serving and operations costs remain separate.</p></details>
+            <details><summary>How much GPU memory does Command A+ need?</summary><p>Cohere documents a W4A4 configuration on one B200 or two H100 GPUs. The raw ideal 4-bit 218B checkpoint requires about 109 decimal GB of weight data before runtime overhead; a 25B-active parameter count does not imply dense 25B memory needs.</p></details>
+            <details><summary>Does Command A+ support Arabic and vision?</summary><p>Yes. Cohere lists 48 supported languages, including Arabic and EU official languages, with image and text inputs and text output.</p></details>
+            <details><summary>Can Command A+ use reasoning and tools?</summary><p>Yes. Cohere's Chat API supports configurable thinking and tool calls with citation options. Tools must be executed and authorized by the application; safety and structured-output combinations require validation.</p></details>
+            <details><summary>Command A+ or Command A Reasoning: which is better?</summary><p>Command A+ adds vision, 48 languages and a 218B/25B MoE structure but has a 128K context window; Command A Reasoning lists 256K context and 32K max output. Choose using your own quality, security, latency and cost tests, not a generic winner claim.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="caplus-sources">
+          <div class="model-section-head"><p class="eyebrow">SOURCE PROVENANCE / SXF INDEPENDENCE</p><h2>Official Cohere sources, scenario assumptions and research limitations.</h2></div>
+          <p>Verified November 8, 2026 from Cohere's model card, official API reference, pricing and Hugging Face checkpoint. The existing SXF model catalog's October 6 baseline, pricing status and append-only history remain unchanged. The Vault cost arithmetic, weight-size estimates, in-browser calculator and experimental protocol are <strong>original SXF analysis</strong>, not published Cohere test results, paid invoices, a GPU deployment benchmark or a claim of measured model superiority.</p>
+          <ul class="sxf-caplus-sources">
+            <li><a href="https://docs.cohere.com/docs/command-a-plus" target="_blank" rel="noopener noreferrer">Cohere — Command A+ exact ID, token limits, modalities and free API status</a></li>
+            <li><a href="https://docs.cohere.com/docs/model-vault/standard/pricing" target="_blank" rel="noopener noreferrer">Cohere — Model Vault Standard L/XL instance pricing</a></li>
+            <li><a href="https://docs.cohere.com/reference/chat" target="_blank" rel="noopener noreferrer">Cohere — Chat v2 Python and REST reference</a></li>
+            <li><a href="https://docs.cohere.com/docs/reasoning" target="_blank" rel="noopener noreferrer">Cohere — thinking controls and token budgets</a></li>
+            <li><a href="https://docs.cohere.com/docs/tool-use-overview" target="_blank" rel="noopener noreferrer">Cohere — tool use and citation integration</a></li>
+            <li><a href="https://cohere.com/blog/command-a-plus" target="_blank" rel="noopener noreferrer">Cohere — May 2026 Command A+ release and Apache-2.0 weights</a></li>
+            <li><a href="https://huggingface.co/CohereLabs/command-a-plus-05-2026-bf16" target="_blank" rel="noopener noreferrer">CohereLabs — BF16 checkpoint, deployment and license</a></li>
+            <li><a href="https://docs.cohere.com/docs/command-a-reasoning" target="_blank" rel="noopener noreferrer">Cohere — Command A Reasoning reference for comparison</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="Related Cohere research on SXF">
+            <a href="/providers/cohere/"><span>PROVIDER</span><strong>Full Cohere model and cost directory</strong><b>↗</b></a>
+            <a href="/models/command-a-reasoning/"><span>COMPARISON</span><strong>Command A Reasoning model reference</strong><b>↗</b></a>
+            <a href="/guides/deploy-ai-agents-production/"><span>OPERATIONS</span><strong>Deploy AI agents safely in production</strong><b>↗</b></a>
+          </nav>
+        </section>
+

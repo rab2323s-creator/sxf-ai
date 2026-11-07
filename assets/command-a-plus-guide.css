@@ -1,0 +1,30 @@
+/* SXF Command A+ original research modules: preserve global identity. */
+[data-caplus-guide],[id^="caplus-"]{scroll-margin-top:6rem}
+.sxf-caplus-notice{border:1px solid rgba(183,142,84,.58);border-radius:1rem;padding:1.1rem;background:rgba(183,142,84,.1);margin:1.1rem 0}
+.sxf-caplus-notice p{line-height:1.75;margin:.6rem 0 0}
+.sxf-caplus-table-wrap{border:1px solid rgba(139,168,193,.33);border-radius:.85rem;overflow-x:auto;margin:1.15rem 0 1.55rem}
+.sxf-caplus-table{width:100%;min-width:650px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sxf-caplus-table caption{font-size:.89rem;text-align:left;padding:.85rem 1rem}
+.sxf-caplus-table th,.sxf-caplus-table td{text-align:left;vertical-align:top;line-height:1.65;padding:.85rem 1rem;border-top:1px solid rgba(139,168,193,.24)}
+.sxf-caplus-table thead{background:rgba(105,148,172,.14)}
+.sxf-caplus-table th{font-weight:650}
+.sxf-caplus-table a{text-decoration:underline;text-underline-offset:3px}
+.sxf-caplus-calculator{border:1px solid rgba(139,168,193,.39);border-radius:1rem;padding:1.25rem;background:rgba(94,127,153,.11);margin:1.4rem 0}
+.sxf-caplus-calculator h3{margin:0 0 .65rem}
+.sxf-caplus-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.1rem 0}
+.sxf-caplus-fields label{display:flex;flex-direction:column;gap:.5rem;font-size:.9rem;line-height:1.5}
+.sxf-caplus-fields input,.sxf-caplus-fields select{width:100%;box-sizing:border-box;background:#101b26;color:inherit;font:inherit;border:1px solid rgba(139,168,193,.65);border-radius:.6rem;padding:.75rem}
+.sxf-caplus-fields input:focus-visible,.sxf-caplus-fields select:focus-visible{outline:2px solid #86cbeb;outline-offset:2px}
+.sxf-caplus-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;margin:1.1rem 0}
+.sxf-caplus-results>div{min-width:0;border:1px solid rgba(139,168,193,.32);border-radius:.8rem;padding:.9rem;display:flex;flex-direction:column;gap:.5rem}
+.sxf-caplus-results span{font-size:.85rem;line-height:1.45}
+.sxf-caplus-results strong{font-size:1.23rem;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.sxf-caplus-note{font-size:.89rem;line-height:1.7;opacity:.85}
+.sxf-caplus-code{background:#0f1823;border:1px solid rgba(139,168,193,.33);border-radius:.8rem;padding:1.1rem;overflow-x:auto;white-space:pre;line-height:1.7;font-size:.83rem}
+.sxf-caplus-faq details{padding:.9rem 0;border-top:1px solid rgba(139,168,193,.26)}
+.sxf-caplus-faq summary{cursor:pointer;font-weight:650;line-height:1.5}
+.sxf-caplus-faq details p{margin:.6rem 0 0}
+.sxf-caplus-sources{padding-left:1.5rem;overflow-wrap:anywhere}
+.sxf-caplus-sources li{margin-bottom:.7rem}
+@media(max-width:760px){.sxf-caplus-results{grid-template-columns:1fr}}
+@media(max-width:620px){.sxf-caplus-fields{grid-template-columns:1fr}.sxf-caplus-table td,.sxf-caplus-table th{padding:.68rem}.sxf-caplus-code{font-size:.74rem}}
