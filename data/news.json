@@ -1,6 +1,56 @@
 {
-  "updated_at": "2026-11-07T13:10:48.341564Z",
+  "updated_at": "2026-11-07T13:16:52.923428Z",
   "items": [
+    {
+      "title": "@GitHub in Slack and Teams is generally available and more",
+      "summary": "GitHub announced general availability of the @GitHub coding-agent integration in Slack and Microsoft Teams on November 6, 2026. Team members can discuss bugs, initiate coding tasks, create issues and open pull requests from chat. Teams Canvas adds an in-conversation area for plans, diffs and previews. The feature does not grant unrestricted repository permissions or eliminate human code review.",
+      "url": "https://github.blog/changelog/2026-11-06-github-copilot-in-slack-and-teams-is-generally-available",
+      "signal_url": "https://sxf.si/signals/github-copilot-slack-teams-general-availability/",
+      "source": "GitHub",
+      "published": "2026-11-06T20:31:08Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "ToyBlocks: A controlled world for robot learning and evaluation",
+      "summary": "Ai2 introduced ToyBlocks on November 6, 2026 as a controllable simulated world for robot learning and evaluation. The release reports 85,336 demonstrations containing almost 1,600 hours and 144 million frames, spanning block-manipulation tasks and tests of generalization. Its simulated and limited physical-arm evaluations do not prove reliable manipulation in uncontrolled environments.",
+      "url": "https://huggingface.co/blog/allenai/toyblocks",
+      "signal_url": "https://sxf.si/signals/ai2-toyblocks-robot-learning-sim-to-real/",
+      "source": "Hugging Face",
+      "published": "2026-11-06T14:00:48Z",
+      "category": "Research",
+      "tags": [
+        "Research"
+      ],
+      "signal_score": 43
+    },
+    {
+      "title": "Measuring how AI agents handle everyday wet-lab science",
+      "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
+      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+      "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
+      "source": "OpenAI",
+      "published": "2026-11-06T00:00:00Z",
+      "category": "Research",
+      "tags": [
+        "AI Agents",
+        "Research",
+        "OpenAI"
+      ],
+      "signal_score": 53
+    },
+    {
+      "title": "Egyptian and Nigerian English join the Open ASR Leaderboard",
+      "summary": "Hugging Face and Liva AI announced on November 6, 2026 that the Open ASR Leaderboard's private test set now includes spontaneous Egyptian-accented and Nigerian-accented English speech. The added conversational datasets are 1.34 and 1.55 hours respectively, and the leaderboard introduces comparisons between U.S., non-U.S. and international accent groupings. This improves evaluation coverage but does not prove speech systems are equally accurate across accents.",
+      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "signal_url": "https://sxf.si/signals/open-asr-egyptian-nigerian-english-benchmark/",
+      "source": "Hugging Face",
+      "published": "2026-11-06T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
     {
       "title": "New NVIDIA Cosmos 3 Open Models for Interactive World Simulation",
       "summary": "NVIDIA published four specialized Cosmos 3 Nano checkpoints on November 5, 2026 for interactive simulation: Transfer-Auto, Sim-Auto, Sim-Transfer and Sim-Bimanual. They target multi-camera driving data, synchronized LiDAR, simulator-to-video rendering and two-arm robot interactions. The weights are available under OpenMDW1.1 terms, but publication does not validate autonomous driving or robot safety.",
@@ -88,6 +138,17 @@
         "Coding AI"
       ],
       "signal_score": 56
+    },
+    {
+      "title": "Agile Deliberation: How AI helps humans define the gray areas",
+      "summary": "Google Research introduced Agile Deliberation on November 4, 2026, a framework that helps people define subjective image categories through discussion, difficult borderline examples and automatic prompt refinement. Eighteen live, 90-minute user sessions suggested improved classification and reduced effort compared with manual approaches in two domains. The study does not establish universally objective definitions for concepts such as healthy food or misleading promotional images.",
+      "url": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/",
+      "signal_url": "https://sxf.si/signals/google-agile-deliberation-image-classification/",
+      "source": "Google Research",
+      "published": "2026-11-04T18:07:05Z",
+      "category": "Research",
+      "tags": [],
+      "signal_score": 31
     },
     {
       "title": "OpenAI to acquire Pierre Computer Company, Inc.",
@@ -649,22 +710,22 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 173,
+      "OpenAI": 174,
       "Google AI": 26,
-      "Hugging Face": 66,
-      "GitHub": 103,
-      "Google Research": 17,
+      "Hugging Face": 68,
+      "GitHub": 104,
+      "Google Research": 18,
       "Anthropic": 2,
       "Meta": 0,
       "xAI": 0,
       "Microsoft": 1
     },
     "current_counts": {
-      "OpenAI": 20,
+      "OpenAI": 21,
       "Google AI": 2,
-      "Hugging Face": 15,
-      "GitHub": 7,
-      "Google Research": 3,
+      "Hugging Face": 17,
+      "GitHub": 8,
+      "Google Research": 4,
       "Anthropic": 2,
       "Meta": 0,
       "xAI": 0,
@@ -684,14 +745,14 @@
         "age_rejection_count": 1271,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 20,
+        "publish_count": 21,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "Google AI": {
@@ -714,7 +775,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "Hugging Face": {
@@ -730,14 +791,14 @@
         "age_rejection_count": 870,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 15,
+        "publish_count": 17,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "GitHub": {
@@ -753,14 +814,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 7,
+        "publish_count": 8,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "Google Research": {
@@ -776,14 +837,14 @@
         "age_rejection_count": 55,
         "relevance_rejection_count": 37,
         "quality_rejection_count": 0,
-        "publish_count": 3,
+        "publish_count": 4,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "Anthropic": {
@@ -806,7 +867,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -831,7 +892,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "xAI": {
@@ -854,7 +915,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       },
       "Microsoft": {
@@ -877,7 +938,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-07T13:10:02.773114Z",
+        "last_successful_fetch": "2026-11-07T13:16:27.423841Z",
         "errors": []
       }
     },
