@@ -3754,6 +3754,141 @@
         "Compare models using identical transcription normalization and test conditions.",
         "Use representative, consented real speech when validating a product."
       ]
+    },
+    "google-agile-deliberation-image-classification": {
+      "reviewed_at": "2026-11-07",
+      "seo_title": "Google Agile Deliberation: AI Image Classifier With Humans",
+      "h1": "Google Agile Deliberation: how human feedback improves image AI",
+      "meta_description": "Google Agile Deliberation tests human-guided image classification in 18 live sessions. See borderline examples, prompt optimization and study limitations.",
+      "source_name": "Google Research",
+      "primary_source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/",
+      "schema_type": "NewsArticle",
+      "summary": "Google Research introduced Agile Deliberation on November 4, 2026, a framework that helps people define subjective image categories through discussion, difficult borderline examples and automatic prompt refinement. Eighteen live, 90-minute user sessions suggested improved classification and reduced effort compared with manual approaches in two domains. The study does not establish universally objective definitions for concepts such as healthy food or misleading promotional images.",
+      "keywords": [
+        "Google Agile Deliberation",
+        "human in the loop image classification",
+        "subjective image classifier",
+        "AI content moderation ambiguous images",
+        "Google vision language model feedback"
+      ],
+      "editorial": {
+        "what_changed": "Google Research published a system that turns vague subjective image labels into explicit positive and negative boundaries. It asks humans to judge difficult edge-case pictures and automatically updates classifier prompts using the feedback.",
+        "why_it_matters": "Image classifiers can encode hidden assumptions about health, art or misleading advertising. Making a category's contested boundaries visible gives human reviewers a way to clarify intended policy instead of pretending a single fixed label is neutral.",
+        "what_to_verify": "The evaluation reports 18 live sessions of 1.5 hours in two subjective domains. It is an author-led prototype study, not evidence of a fully deployed moderation product, universal fairness or objective agreement among all people."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "Google Research researchers Otilia Stretcu and Leijie Wang published the method on November 4, 2026.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "First stage",
+          "fact": "Concept scoping asks users to list positive subcategories and explicit exclusions.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Second stage",
+          "fact": "Concept iteration brings borderline images to the user to reveal unclear decision boundaries.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Automatic optimization",
+          "fact": "A vision-language model searches for edge cases and an LLM-driven process updates classification prompts from human feedback.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Live study",
+          "fact": "The research compared workflows in 18 user sessions lasting 90 minutes each.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Domains",
+          "fact": "The two study settings were Healthy Food and Pay-to-Play imagery, including misleading reward promises in game-related advertising.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Baselines",
+          "fact": "Comparisons included zero-shot classification, an autonomous modeling collaborator and manual prompt deliberation.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Reported outcomes",
+          "fact": "The team reports improvements in label consistency, classifier results and participant effort compared with standard methods.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "label": "Artifacts",
+          "fact": "Researchers released implementation code and a demo to support further experiments.",
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        }
+      ],
+      "limitations": "The evaluation contains 18 sessions and only two application domains; larger and more diverse studies are needed before generalizing. A person's evolving label definitions may be coherent but are not necessarily objectively accurate or equitable across communities. The research reports user-experience and test outcomes, not a large-scale production audit.",
+      "sources": [
+        "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+      ],
+      "analysis": [
+        {
+          "heading": "Why subjective image labels are difficult for ordinary AI classifiers",
+          "paragraphs": [
+            "Identifying a traffic sign usually has a relatively stable visual definition. Deciding whether a food is healthy, an advertisement is misleading or an artwork is inspiring depends on values and context. A dataset may contain inconsistent labels because the humans who created them disagreed or discovered exceptions only after examining difficult cases. Larger models alone cannot settle a policy whose boundaries were never agreed upon.",
+            "Agile Deliberation changes the workflow. Rather than requiring someone to invent a perfect classifier instruction at the start, the system helps them name accepted categories and explicit exclusions, then presents confusing examples that force choices. A picture of a fruit smoothie might qualify because it contains fruit, but fail someone's criteria because of added sugar. The process surfaces that distinction rather than hiding it inside an opaque model.",
+            "Google's researchers frame the user as a partner who refines a definition over time. That may be useful for curation and moderation, though the final standard should remain reviewable by the people affected by it."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "heading": "How concept scoping and iteration shape the AI system",
+          "paragraphs": [
+            "First, the user breaks a broad idea into named subcategories and out-of-scope cases. Then a vision-language system searches for images that sit near the current boundary and asks for feedback. Each human choice updates an automatic prompt-optimization loop that rebuilds the classifier instruction. The method is designed to discover surprising blind spots before a final rule is put into production.",
+            "This is different from an AI agent that independently writes all the rules. The user can resolve borderline cases, challenge an assumption and see how the meaning of the target category changes. That is a more accountable approach, provided the organization retains a history of decisions and checks whether refinements create new false positives elsewhere.",
+            "The method is not a magic route to objective labels: when multiple reviewers disagree, the organization still needs a policy for whose choices matter and how appeals are handled. Technical improvement cannot replace the legitimacy of human governance."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        },
+        {
+          "heading": "What the 18-session user study does and does not prove",
+          "paragraphs": [
+            "Google evaluated the approach in 18 randomized-order live user sessions, each lasting 90 minutes, focused on Healthy Food and Pay-to-Play pictures. The authors report more consistent labels, better classifier performance and less fatigue and anxiety than manual prompt editing. These are meaningful prototype findings, particularly because manual refinement can cause people to worry that fixing one error will break other labels.",
+            "However, a small participant study across two domains cannot establish accuracy for every culture, language or high-stakes moderation policy. The result is also sensitive to how user intent and the evaluation target are defined. A model that closely follows one person's preference is not necessarily fair to others.",
+            "SXF recommends testing with a second independent reviewer, retaining borderline examples, measuring false positives and false negatives, and verifying that performance persists on unseen data after each change. The real contribution is making ambiguous human intent explicit and revisable, not claiming that an algorithm has discovered an objective definition of a subjective concept."
+          ],
+          "source": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "BioBasicsBench and interpretation of difficult evidence",
+          "url": "/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
+          "description": "Another setting in which human judgment and incomplete data affect evaluation."
+        },
+        {
+          "title": "StateBench: how models lose track of changes",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "A related failure mode when rules and reference facts evolve."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Understand task selection and how benchmarks shape results."
+        },
+        {
+          "title": "Identifying AI-generated images",
+          "url": "/guides/how-to-tell-if-an-image-is-ai-generated/",
+          "description": "Why visual classification claims need carefully defined evidence."
+        },
+        {
+          "title": "Open ASR accent evaluation",
+          "url": "/signals/open-asr-egyptian-nigerian-english-benchmark/",
+          "description": "How selecting representative examples affects a model's perceived quality."
+        }
+      ],
+      "reader_checklist": [
+        "Define both positive examples and excluded edge cases before building a classifier.",
+        "Have humans review difficult examples and record reasons for any policy change.",
+        "Check false positives, false negatives and holdout results after optimization.",
+        "Distinguish alignment with one user's preference from universally fair classification."
+      ]
     }
   }
 }
