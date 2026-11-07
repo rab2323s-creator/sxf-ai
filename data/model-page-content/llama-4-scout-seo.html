@@ -1,0 +1,196 @@
+<!-- SXF editorial evidence layer: original unit arithmetic and reproducible research design -->
+        <section class="model-deep-section" id="scout-overview" data-sxf-scout-guide>
+          <div class="model-section-head"><p class="eyebrow">LLAMA 4 SCOUT / DIRECT ANSWER</p><h2>What is Llama 4 Scout (17B-16E)?</h2></div>
+          <p><strong>Meta Llama 4 Scout</strong> is an <strong>open-weight, natively multimodal Mixture-of-Experts (MoE) model</strong>, first released April 5, 2025, for text understanding, visual question answering and very long-document analysis. It has <strong>17 billion active parameters</strong>, <strong>16 experts</strong> and <strong>109 billion total parameters</strong>. These three numbers describe different parts of the model; <strong>Scout is not a dense 17B model</strong>.</p>
+          <p>Meta advertises a <strong>10-million-token maximum context window</strong> for the instruction-tuned Scout variant, with <strong>text and up to five image inputs</strong> and text output. But the 10M figure is a published architectural/evaluation capacity, <strong>not proof that one H100 or every hosted inference endpoint accepts ten million tokens</strong>. Meta's 10M context evaluation used 512 GPUs with 5D parallelism; separately, a single 80GB H100 can run a limited-context, INT4-quantized Scout configuration. These are distinct workloads.</p>
+          <div class="sxf-scout-notice" role="note">
+            <strong>License and access caution — checked November 7, 2026</strong>
+            <p>Scout's weights use the <strong>Llama 4 Community License</strong>, not Apache 2.0 or an unrestricted OSI open-source license. Meta's acceptable-use policy explicitly withholds certain license rights for <strong>EU-domiciled people and EU-headquartered organizations</strong> using its multimodal Llama 4 models (with an integrated-product end-user exception). Check the <a href="#scout-license">license section and official legal documents</a> before downloading or deploying. An open-weight model is not automatically licensed for every location or use.</p>
+          </div>
+          <nav class="model-related-links" aria-label="Jump to Scout technical details">
+            <a href="#scout-vram"><span>GPU / VRAM</span><strong>109B weight memory explained</strong><b>↗</b></a>
+            <a href="#scout-context"><span>LONG CONTEXT</span><strong>10M-token limitations and tests</strong><b>↗</b></a>
+            <a href="#scout-comparison"><span>MODEL CHOICE</span><strong>Scout vs Llama 4 Maverick</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="scout-specs">
+          <div class="model-section-head"><p class="eyebrow">PRIMARY-SOURCE SPECIFICATION</p><h2>Llama 4 Scout specs: 109B parameters, 16 experts, 10M context and vision.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL / CHECKPOINT</span><h3>17B-16E Instruct</h3><p>Use <code>meta-llama/Llama-4-Scout-17B-16E-Instruct</code> when an instruction-following assistant is intended. Original/pretrained variants are different checkpoints.</p></article>
+            <article><span>MODEL WEIGHTS</span><h3>109B total</h3><p>About 17B parameters are active per token, while ~109B parameters exist across the model and its experts. Memory planning must account for total stored weights.</p></article>
+            <article><span>MAXIMUM CONTEXT</span><h3>10,000,000 tokens</h3><p>Published for Scout Instruct. Actual serving limits vary by hardware, checkpoint, runtime configuration and hosted provider; the Original model differs.</p></article>
+            <article><span>SUPPORTED INPUT</span><h3>Text + up to five images</h3><p>Meta's Llama 4 documentation lists text and image input and text output. Image understanding is documented as English-only.</p></article>
+            <article><span>TEXT LANGUAGES</span><h3>12 supported</h3><p>Arabic, English, French, German, Hindi, Indonesian, Italian, Portuguese, Spanish, Tagalog, Thai and Vietnamese.</p></article>
+            <article><span>KNOWLEDGE CUTOFF</span><h3>August 2024</h3><p>Published by Meta. The model does not independently know later changes without retrieval or updated data.</p></article>
+          </div>
+          <p><strong>Why MoE matters:</strong> the <em>active parameter count</em> is useful for understanding compute per token, but the <em>total parameter count</em> determines the raw weight-storage floor. A purported “17B GPU requirement” based only on active weights is misleading. For a broader explanation of low-bit memory trade-offs, see the <a href="/guides/llm-quantization-explained/">SXF 4-bit vs 8-bit quantization guide</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-vram">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL ENGINEERING MATH</p><h2>Llama 4 Scout VRAM requirements: H100, INT4, FP8 and BF16 explained.</h2></div>
+          <p>Meta publishes the Scout model as BF16 weights and documents a <strong>single 80GB H100</strong> serving configuration via <strong>INT4 on-the-fly quantization</strong>. Its official reference also describes an FP8 mixed inference recipe needing <strong>two 80GB GPUs</strong>. This does <strong>not</strong> mean an ordinary 16GB or 24GB consumer card can load the full Scout checkpoint. CPU offload, expert placement and alternate quantization may change the setup but require independent verification.</p>
+          <div class="sxf-scout-table-wrap"><table class="sxf-scout-table"><caption>SXF theoretical weight-payload arithmetic: 109B parameters × bits / 8, before mixed precision, metadata, runtime and KV cache</caption><thead><tr><th scope="col">Nominal precision</th><th scope="col">Raw stored-weight floor</th><th scope="col">In binary GiB</th><th scope="col">Interpretation</th></tr></thead><tbody>
+            <tr><th scope="row">4-bit (INT4)</th><td><strong>54.5 GB</strong></td><td>50.76 GiB</td><td>Theoretical 4-bit payload, not actual mixed-precision checkpoint VRAM</td></tr>
+            <tr><th scope="row">8-bit (FP8/INT8)</th><td><strong>109 GB</strong></td><td>101.51 GiB</td><td>Raw 8-bit payload; can exceed one 80GB H100</td></tr>
+            <tr><th scope="row">16-bit (BF16)</th><td><strong>218 GB</strong></td><td>203.03 GiB</td><td>Unquantized raw weight payload, before runtime overhead</td></tr>
+          </tbody></table></div>
+          <p>These are <strong>lower-bound mathematical payload estimates</strong>, not measured VRAM use, disk size, or official deployment requirements. Scales, unquantized layers, activation memory, software buffers, routing, concurrent batches and attention/KV cache can substantially increase consumption. Some memory is distributed across GPUs or kept on CPU, depending on the runtime. The 17B <em>active</em> parameters must not replace 109B in this equation.</p>
+
+          <div class="sxf-scout-lab" data-scout-memory-lab>
+            <h3>SXF interactive Scout weight + context memory planner</h3>
+            <p>Explore how quantization and a hypothetical cache-footprint assumption affect memory. This is an <strong>engineering sensitivity model, not a guarantee the configuration fits or runs</strong>. KV bytes per token must be measured for your actual runtime: the sample value below is illustrative, not a Meta specification.</p>
+            <div class="sxf-scout-fields">
+              <label for="scout-precision">Illustrative weight precision<select id="scout-precision" data-scout-bits><option value="4">4-bit theoretical</option><option value="8">8-bit theoretical</option><option value="16">16-bit theoretical</option></select></label>
+              <label for="scout-overhead">Additional weight/runtime allowance (%)<input id="scout-overhead" type="number" min="0" max="300" step="5" value="20" data-scout-overhead></label>
+              <label for="scout-tokens">Prompt/context tokens for one session<input id="scout-tokens" type="number" min="0" max="10000000" step="1024" value="8192" data-scout-tokens></label>
+              <label for="scout-kv">Hypothetical KV-cache KiB per token<input id="scout-kv" type="number" min="0" max="1024" step="1" value="32" data-scout-kv></label>
+            </div>
+            <div class="sxf-scout-results" role="status" aria-live="polite">
+              <div><span>Raw weight payload</span><strong data-scout-weights>54.50 GB</strong></div>
+              <div><span>Illustrative KV memory</span><strong data-scout-kv-result>0.27 GB</strong></div>
+              <div><span>Combined planning figure</span><strong data-scout-total>65.67 GB</strong></div>
+            </div>
+            <p class="sxf-scout-note" data-scout-formula>109B parameters × 4 bits + 20% allowance + 8,192 tokens × 32 KiB/token.</p>
+            <p class="sxf-scout-note">Changing the hypothetical cache factor changes the budget; it is <strong>not</strong> an assertion about Scout's exact KV-cache implementation. The formula omits dynamic peaks, mixed-precision details, sharding fragmentation and runtime ceilings. It does not test your GPU and makes no network requests.</p>
+          </div>
+          <p><strong>How large is 10M context?</strong> Even a hypothetical <strong>32 KiB per token</strong> KV footprint would produce <strong>327.68 GB</strong> of additional memory at ten million tokens, before weight memory and overhead. This deliberately illustrates scale; it is <em>not</em> a measured Scout cache requirement. Meta states the headline long-context evaluation used <strong>512 GPUs with 5D parallelism</strong>. An INT4 H100 startup example and the 10M-context evaluation are not the same configuration.</p>
+          <p>For hardware-specific next steps, explore <a href="/tools/local-llm-vram-finder/">SXF's local LLM GPU selector</a> and <a href="/guides/llm-quantization-explained/">quantization methods</a>; validate the supported Scout checkpoint and actual GPU settings rather than treating a generic 17B memory band as accurate.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-context">
+          <div class="model-section-head"><p class="eyebrow">LONG-CONTEXT EVIDENCE</p><h2>Is Llama 4 Scout really a 10-million-token model?</h2></div>
+          <p><strong>Yes, for the published instruction-tuned Scout context capability</strong>—but this number needs three qualifiers. First, Hugging Face's Llama 4 release documentation distinguishes the <strong>256K-context pretrained/original</strong> variant from the longer-context <strong>Scout Instruct</strong> variant. Second, Meta says the 10M evaluation used a large 512-GPU configuration. Third, <strong>hosted APIs can impose far lower endpoint limits</strong>; a provider's advertised “Llama 4 Scout” does not automatically expose Meta's full theoretical window.</p>
+          <p>A context window is the number of tokens the model can receive, not a measurement of <strong>retrieval accuracy at 10M tokens</strong>. Evidence buried in the middle of a very large prompt can still be missed or cited incorrectly. Run evaluation at the exact requested window, on the exact serving endpoint, with source-preservation checks. Also measure prefill time, memory peaks, dollars per successful answer and refusal/hallucination rate.</p>
+          <div class="sxf-scout-table-wrap"><table class="sxf-scout-table"><caption>Scout long-context claims: evidence grade and deployment impact</caption><thead><tr><th scope="col">Claim</th><th scope="col">Source-backed status</th><th scope="col">What an application must verify</th></tr></thead><tbody>
+            <tr><th scope="row">10M Scout Instruct maximum</th><td>Official Meta model family documentation</td><td>Your host/runtime's maximum prompt length and actual acceptance of the input</td></tr>
+            <tr><th scope="row">256K original/pretrained context</th><td>Hugging Face Llama 4 release architecture comparison</td><td>The exact downloaded checkpoint and configured RoPE/attention settings</td></tr>
+            <tr><th scope="row">Single H100 weight deployment</th><td>Meta INT4 recipe, small-serving configuration</td><td>Working prompt length, quantization and concurrency on your H100</td></tr>
+            <tr><th scope="row">Reliable citations at large depth</th><td>Not proven by context length alone</td><td>Blind retrieval tasks across beginning, middle and end of a document</td></tr>
+          </tbody></table></div>
+          <p><strong>Multimodal caution:</strong> Meta lists text and up to five image inputs and text output for the model family. Its language guidance specifically limits image understanding to English, even though text use spans 12 listed languages. Image tokenization and visual-input handling vary by runtime; include these costs when testing multimodal prompts.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-install">
+          <div class="model-section-head"><p class="eyebrow">ACCESS AND DEPLOYMENT</p><h2>How to download and run Llama 4 Scout locally with Transformers or vLLM.</h2></div>
+          <p>For assistant-style applications, use Meta's official gated <a href="https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct" target="_blank" rel="noopener noreferrer">Llama 4 Scout 17B-16E Instruct checkpoint</a>, not a generic “17B dense” file. Review and accept its license and access conditions first. A supported deployment path requires a runtime version that implements Llama 4's multimodal MoE layers, correct tokenizer/chat template, quantization method and enough accelerator memory.</p>
+          <h3>Reference checklist for INT4 serving on server GPUs</h3>
+          <ol class="sxf-scout-steps">
+            <li><strong>Legal access:</strong> confirm the Llama 4 license, usage policy, your jurisdiction and third-party hosting terms before obtaining weights.</li>
+            <li><strong>Checkpoint:</strong> use <code>meta-llama/Llama-4-Scout-17B-16E-Instruct</code> for conversational instruction following, and verify you are not loading an Original base checkpoint by mistake.</li>
+            <li><strong>Start from a known runtime:</strong> Meta's <a href="https://github.com/meta-llama/llama-models" target="_blank" rel="noopener noreferrer">official inference repository</a> describes <code>int4_mixed</code> on one 80GB H100 and <code>fp8_mixed</code> on two 80GB accelerators; follow its versioned requirements rather than assuming support for a consumer GPU.</li>
+            <li><strong>Serving and quantization:</strong> vLLM's published Llama 4 notes provide serving options. Pin a compatible vLLM and Transformers version, tokenizer, model revision, precision and accelerator architecture; consult the <a href="https://vllm-project.github.io/2025/04/05/llama4.html" target="_blank" rel="noopener noreferrer">vLLM Scout serving guide</a>.</li>
+            <li><strong>Start small:</strong> test 8K or 16K input tokens at batch size one; monitor real VRAM, out-of-memory errors, prefill duration and output correctness. Increase context only after repeatable tests.</li>
+            <li><strong>Document the endpoint limit:</strong> log <code>max_model_len</code>, input token counts, concurrent requests and the provider's real caps. A model-card “10M” number does not configure the serving stack automatically.</li>
+          </ol>
+          <h3>Illustrative Python usage after a compatible setup</h3>
+          <pre class="sxf-scout-code"><code>import torch
+from transformers import AutoProcessor, Llama4ForConditionalGeneration
+
+model_id = "meta-llama/Llama-4-Scout-17B-16E-Instruct"
+processor = AutoProcessor.from_pretrained(model_id)
+model = Llama4ForConditionalGeneration.from_pretrained(
+    model_id, torch_dtype=torch.bfloat16, device_map="auto"
+)
+
+messages = [{"role": "user", "content": [
+    {"type": "text", "text": "Summarize the following in two sentences: ..."}
+]}]
+inputs = processor.apply_chat_template(
+    messages, add_generation_prompt=True, tokenize=True,
+    return_tensors="pt", return_dict=True
+).to(model.device)
+with torch.no_grad():
+    ids = model.generate(**inputs, max_new_tokens=150)
+print(processor.decode(ids[0][inputs["input_ids"].shape[-1]:], skip_special_tokens=True))</code></pre>
+          <p>This is an <strong>illustrative Hugging Face API shape, not an SXF-tested one-GPU launch recipe</strong>. Plain BF16 loads need large accelerator resources (raw weights alone are about 218 decimal GB). For an 80GB H100 follow Meta's <em>quantized</em> recipe; the BF16 snippet above is intentionally unquantized and should not be assumed to fit there. Check the current <a href="https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct" target="_blank" rel="noopener noreferrer">model card and library compatibility</a> before executing.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-license">
+          <div class="model-section-head"><p class="eyebrow">LEGAL AND COMMERCIAL CONTROLS</p><h2>Is Llama 4 Scout open source and free for commercial use?</h2></div>
+          <p><strong>Llama 4 Scout provides downloadable weights subject to a custom license.</strong> It is <em>open-weight</em> but not an unconditional Apache 2.0 or MIT open-source release. The <a href="https://dev.meta.ai/llama/llama4/license" target="_blank" rel="noopener noreferrer">Llama 4 Community License</a> permits a range of research and commercial uses under its terms, requires attribution and compliance with the acceptable-use policy, and has an additional license condition for organizations above <strong>700 million monthly active users</strong> at the specified time.</p>
+          <p><strong>EU limitation:</strong> Meta's <a href="https://dev.meta.ai/llama/llama4/use-policy" target="_blank" rel="noopener noreferrer">Llama 4 Acceptable Use Policy</a> states that Section 1(a) license rights for multimodal Llama 4 models are <strong>not granted to EU-domiciled individuals or EU-headquartered organizations</strong>. It separately carves out end users of products integrating such models. This is a substantive restriction and <strong>must not be hidden by a generic “commercially free” label</strong>. Host/platform terms may impose further conditions.</p>
+          <p>Before shipping a product, verify the actual entity using the weights, the location and permitted rights, distribution and attribution obligations, use restrictions, and any service-provider conditions. This is an editorial checklist, not legal advice or a claim of clearance. For broader model-governance questions, explore the <a href="/guides/ai-model-licensing/">SXF AI model licensing guide</a> and <a href="/guides/ai-agent-security/">AI agent security practices</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-pricing">
+          <div class="model-section-head"><p class="eyebrow">PROVIDER-NEUTRAL ECONOMICS</p><h2>How much does Llama 4 Scout cost? API pricing vs self-hosting.</h2></div>
+          <p><strong>Meta does not publish a universal direct Standard API token rate for the downloadable Scout weights.</strong> SXF therefore does not invent a Meta price. Hosted providers may meter <em>input/output tokens</em>, charge per hosted GPU-hour, restrict context lengths and price multimodal inputs differently. An API price from one cloud is not an intrinsic cost of the model or necessarily valid at another cloud.</p>
+          <div class="sxf-scout-formula">
+            <strong>SXF original break-even framework</strong>
+            <p><code>Hosted API cost = input_MToks × provider_input_rate + output_MToks × provider_output_rate + provider extras</code></p>
+            <p><code>Self-host cost = reserved_gpu_hours × cost_per_gpu_hour + engineering + storage + monitoring</code></p>
+            <p><code>Cost per accepted answer = total workflow spend / approved answers</code></p>
+            <small>The symbols are scenario inputs. SXF has not inferred missing first-party Meta pricing or operated a paid Scout cluster for this page.</small>
+          </div>
+          <div class="sxf-scout-table-wrap"><table class="sxf-scout-table"><caption>Which factors a valid comparison must hold constant</caption><thead><tr><th scope="col">Dimension</th><th scope="col">Third-party API</th><th scope="col">Self-hosting</th></tr></thead><tbody>
+            <tr><th scope="row">Token/context limit</th><td>Provider-specific cap; may be far below 10M</td><td>Actual server memory, runtime config and long-context quality</td></tr>
+            <tr><th scope="row">Compute spend</th><td>Metered token charges plus provider fees</td><td>GPU-hours, idle capacity and throughput</td></tr>
+            <tr><th scope="row">Quality</th><td>Endpoint version, quantization and prompt template</td><td>Weights, quantization, batching and reproducibility</td></tr>
+            <tr><th scope="row">Governance</th><td>Provider retention and compliance terms</td><td>Direct license eligibility plus your security controls</td></tr>
+          </tbody></table></div>
+          <p>When evaluating a hosted endpoint, capture its published input/output charges and effective context cap. For local deployments, first test memory at the intended concurrency and retrieval depth, then estimate sustained GPU utilization. See <a href="/models/pricing/">SXF's verified model pricing directory</a> and the <a href="/tools/ai-model-cost-calculator/">AI model cost calculator</a> for price-metering concepts; do not use a random first-party “Llama Scout” price not documented by Meta.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-comparison">
+          <div class="model-section-head"><p class="eyebrow">SXF MODEL SELECTION</p><h2>Llama 4 Scout vs Maverick: experts, context, weights and hardware.</h2></div>
+          <div class="sxf-scout-table-wrap"><table class="sxf-scout-table"><caption>Meta's documented Llama 4 variants; not a fabricated independent quality ranking</caption><thead><tr><th scope="col">Specification</th><th scope="col">Llama 4 Scout</th><th scope="col"><a href="/models/llama-4-maverick/">Llama 4 Maverick</a></th></tr></thead><tbody>
+            <tr><th scope="row">Active parameters</th><td>17 billion</td><td>17 billion</td></tr>
+            <tr><th scope="row">Total parameters</th><td><strong>109 billion</strong></td><td>400 billion</td></tr>
+            <tr><th scope="row">Experts</th><td>16</td><td>128</td></tr>
+            <tr><th scope="row">Maximum Instruct context</th><td><strong>10 million tokens</strong></td><td>1 million tokens</td></tr>
+            <tr><th scope="row">Multimodal inputs</th><td>Text + images</td><td>Text + images</td></tr>
+            <tr><th scope="row">Single H100 configuration</th><td>INT4 recipe documented</td><td>Not Meta's stated single-GPU configuration</td></tr>
+            <tr><th scope="row">Weights / license</th><td>Open-weight; Llama 4 Community License</td><td>Open-weight; Llama 4 Community License</td></tr>
+          </tbody></table></div>
+          <p><strong>Pick Scout</strong> when a verified Scout endpoint and its lighter total-weight footprint fit the task, especially for extensive text retrieval and simpler serving topologies. <strong>Evaluate Maverick</strong> when its larger total expert capacity suits your accuracy requirements and your compute budget permits it. The table does <strong>not</strong> claim Scout wins a benchmark or that Maverick is always more accurate. Compare actual task quality, latency, memory, compliance and total operating cost on the same samples.</p>
+          <p>Read the <a href="/compare/llama-4-scout-vs-llama-4-maverick/">SXF direct Scout vs Maverick comparison</a>, the <a href="/providers/meta/">Meta model directory</a> and the cross-family <a href="/compare/llama-4-maverick-vs-gemini-3-8-flash/">Maverick vs Gemini Flash comparison</a> for alternative deployment paths.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-evaluation">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL EVALUATION DESIGN</p><h2>How to benchmark Llama 4 Scout's 10M context without overstating accuracy.</h2></div>
+          <p><strong>SXF has not run an independent ten-million-token Scout inference benchmark for this page.</strong> Instead, the following is an original preregisterable <strong>24-case research protocol</strong> to evaluate real retrieval accuracy and operational cost in four context bands (8K, 32K, 128K and 1M tokens), six conditions per band. Test 10M only after a runtime successfully accepts that window and resources permit it; record that configuration separately.</p>
+          <div class="sxf-scout-table-wrap"><table class="sxf-scout-table"><caption>Original SXF 24-task long-context evaluation matrix (six tasks per context length)</caption><thead><tr><th scope="col">Context band</th><th scope="col">Evidence placement</th><th scope="col">Required scoring</th></tr></thead><tbody>
+            <tr><th scope="row">8K tokens</th><td>Two tests each at start, middle and end</td><td>Source-ID exact match, unsupported citations and time-to-first-token</td></tr>
+            <tr><th scope="row">32K tokens</th><td>Two tests each at start, middle and end</td><td>Position-aware retrieval precision and verification time</td></tr>
+            <tr><th scope="row">128K tokens</th><td>Two tests each at start, middle and end</td><td>Lost-in-middle failures, hallucinations and peak VRAM</td></tr>
+            <tr><th scope="row">1M tokens</th><td>Two tests each at start, middle and end</td><td>Successful request rate, correct citations and cost per accepted answer</td></tr>
+          </tbody></table></div>
+          <p>Each task should ask for <strong>one exact passage or fact with a stable source ID</strong>, include distractors with near-duplicate identifiers and require an abstention when evidence is missing. Fix tokenizer, checkpoint, quantization, context size, sampling settings, GPU type, prompt template, evaluation rubric and any retrieval preprocessing. Repeat runs and report the number of failures: <strong>advertised context length alone is not a result</strong>.</p>
+          <p><strong>Reproducible SXF research starter:</strong> the <a href="/models/llama-4-scout/sxf-scout-eval.py">offline citation-selection evaluation script</a> and <a href="/models/llama-4-scout/sxf-scout-fixtures.jsonl">12 clearly synthetic fixtures</a> show how to compute source-ID accuracy by context depth and citation placement. The example responses are manually invented for test validation, <strong>not actual Llama 4 Scout outputs</strong>. For independent evaluation conventions, consult <a href="/evaluations/">the SXF evaluation registry</a> and <a href="/guides/ai-agent-evaluation-checklist/">evaluation checklist</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="scout-faq">
+          <div class="model-section-head"><p class="eyebrow">DIRECT SEARCH ANSWERS</p><h2>Llama 4 Scout FAQ: 17B, 109B, 10M tokens, GPU and license.</h2></div>
+          <div class="sxf-scout-faq">
+            <details><summary>Is Llama 4 Scout a 17B or 109B model?</summary><p>It is a Mixture-of-Experts model with about 17 billion active parameters, 16 experts and 109 billion total parameters. Compute-active size and stored-weight size are different.</p></details>
+            <details><summary>Can Llama 4 Scout really accept 10 million tokens?</summary><p>Meta documents a 10M-token maximum for Scout Instruct and evaluated this scale on 512 GPUs. Your hosted API or local runtime may support a much smaller context. Verify the precise checkpoint and serving cap.</p></details>
+            <details><summary>How much VRAM does Llama 4 Scout need?</summary><p>Meta documents a single 80GB H100 INT4 configuration, not a 16GB consumer GPU setup. Raw 109B weights alone are approximately 54.5 decimal GB at ideal 4-bit precision and 218GB at BF16, before runtime and KV-cache overhead.</p></details>
+            <details><summary>Where can I download Llama 4 Scout Instruct?</summary><p>Use the gated official meta-llama/Llama-4-Scout-17B-16E-Instruct Hugging Face repository, subject to Meta's license, access rules and applicable law.</p></details>
+            <details><summary>Is Llama 4 Scout free for commercial use?</summary><p>Weights are distributed under the custom Llama 4 Community License, not a general-purpose OSI open-source license. Commercial use is subject to license terms, attribution, additional rights for very large services and a multimodal EU restriction in Meta's acceptable-use policy.</p></details>
+            <details><summary>Does Llama 4 Scout support images?</summary><p>Meta describes text and up to five image inputs with text output. The official model page specifies that image understanding is English-only.</p></details>
+            <details><summary>What is the difference between Scout and Maverick?</summary><p>Both use 17B active parameters. Scout contains 109B total parameters with 16 experts and a published 10M Instruct context, while Maverick contains 400B total parameters with 128 experts and a 1M Instruct context.</p></details>
+            <details><summary>Does Meta publish an official Scout API price per token?</summary><p>There is no universal direct Standard Meta token price for downloadable Scout weights in the SXF catalog. Hosted provider fees and context limits vary; self-hosting requires hardware and operational expense.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="scout-sources">
+          <div class="model-section-head"><p class="eyebrow">EVIDENCE AND DISCLOSURE</p><h2>Primary sources, mathematical assumptions and SXF verification boundaries.</h2></div>
+          <p>This guide was reviewed against Meta's model documentation, official weights and license materials, and Hugging Face/vLLM deployment notes on <strong>November 7, 2026</strong>. The model catalog's previous October 3 verification and append-only change history remain untouched. <strong>SXF authored the weight-memory arithmetic, scenario calculator and long-context benchmark specification</strong>; the page does not claim original measured Scout throughput, WER or model-quality rankings, and synthetic fixtures are clearly identified.</p>
+          <ul class="sxf-scout-sources">
+            <li><a href="https://dev.meta.ai/llama/docs/model-cards-and-prompt-formats/llama4" target="_blank" rel="noopener noreferrer">Meta — Scout vs Maverick specs, 10M evaluation and supported inputs</a></li>
+            <li><a href="https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md" target="_blank" rel="noopener noreferrer">Meta — versioned Llama 4 official model card</a></li>
+            <li><a href="https://github.com/meta-llama/llama-models" target="_blank" rel="noopener noreferrer">Meta — H100 INT4 and FP8 inference recipe</a></li>
+            <li><a href="https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct" target="_blank" rel="noopener noreferrer">Meta on Hugging Face — exact Scout Instruct weights</a></li>
+            <li><a href="https://github.com/huggingface/blog/blob/main/llama4-release.md" target="_blank" rel="noopener noreferrer">Hugging Face — pretrained vs instruction-tuned context comparison</a></li>
+            <li><a href="https://dev.meta.ai/llama/llama4/license" target="_blank" rel="noopener noreferrer">Meta — Llama 4 Community License</a></li>
+            <li><a href="https://dev.meta.ai/llama/llama4/use-policy" target="_blank" rel="noopener noreferrer">Meta — Llama 4 Acceptable Use Policy and EU multimodal restriction</a></li>
+            <li><a href="https://vllm-project.github.io/2025/04/05/llama4.html" target="_blank" rel="noopener noreferrer">vLLM — practical Llama 4 deployment guidance</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="Related Llama deployment resources">
+            <a href="/models/llama-4-maverick/"><span>OTHER LLAMA 4 MODEL</span><strong>Llama 4 Maverick reference</strong><b>↗</b></a>
+            <a href="/compare/llama-4-scout-vs-llama-4-maverick/"><span>DIRECT COMPARISON</span><strong>Scout vs Maverick analysis</strong><b>↗</b></a>
+            <a href="/tools/local-llm-vram-finder/"><span>DEPLOYMENT TOOLS</span><strong>Find a GPU for local models</strong><b>↗</b></a>
+          </nav>
+        </section>
+
