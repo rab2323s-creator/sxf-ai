@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Voxtral Mini Transcribe 2 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Voxtral Mini Transcribe 2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sour" />
+      <title>Voxtral Mini Transcribe 2: API, Pricing &amp; Diarization | SXF</title>
+      <meta name="description" content="Voxtral Mini Transcribe 2 guide: $0.003/min transcription pricing, Python API, speaker diarization, word timestamps, languages, Voxtral 3 migration and original SXF cost calculator." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Voxtral Mini Transcribe 2 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Voxtral Mini Transcribe 2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sour" />
+      <meta property="og:title" content="Voxtral Mini Transcribe 2: API, Pricing &amp; Diarization | SXF" />
+      <meta property="og:description" content="Voxtral Mini Transcribe 2 guide: $0.003/min transcription pricing, Python API, speaker diarization, word timestamps, languages, Voxtral 3 migration and original SXF cost calculator." />
       <meta property="og:url" content="https://sxf.si/models/voxtral-mini-transcribe-2/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,11 +23,12 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Voxtral Mini Transcribe 2 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Voxtral Mini Transcribe 2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sour" />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/voxtral-mini-transcribe-2/#article","headline":"Voxtral Mini Transcribe 2 — API Specs, Context & Pricing","description":"Voxtral Mini Transcribe 2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources.","url":"https://sxf.si/models/voxtral-mini-transcribe-2/","dateModified":"2026-10-06","about":{"@type":"Thing","name":"Voxtral Mini Transcribe 2"},"citation":["https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02","https://docs.mistral.ai/inference/pricing","https://docs.mistral.ai/models"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Voxtral Mini Transcribe 2","item":"https://sxf.si/models/voxtral-mini-transcribe-2/"}]}]}</script>
+      <meta name="twitter:title" content="Voxtral Mini Transcribe 2: API, Pricing &amp; Diarization | SXF" />
+      <meta name="twitter:description" content="Voxtral Mini Transcribe 2 guide: $0.003/min transcription pricing, Python API, speaker diarization, word timestamps, languages, Voxtral 3 migration and original SXF cost calculator." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/voxtral-mini-transcribe-2/#article","headline":"Voxtral Mini Transcribe 2: API, Pricing & Diarization","description":"Voxtral Mini Transcribe 2 guide: $0.003/min transcription pricing, Python API, speaker diarization, word timestamps, languages, Voxtral 3 migration and original SXF cost calculator.","url":"https://sxf.si/models/voxtral-mini-transcribe-2/","dateModified":"2026-11-07","about":{"@type":"Thing","name":"Voxtral Mini Transcribe 2"},"citation":["https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02","https://docs.mistral.ai/inference/pricing","https://docs.mistral.ai/studio/audio/deprecated/speech_to_text/offline_transcription","https://docs.mistral.ai/studio/audio/deprecated/overview","https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2","https://docs.mistral.ai/models/voxtral-mini-transcribe-3-0","https://docs.mistral.ai/models","https://mistral.ai/news/voxtral-transcribe-2/"],"inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/voxtral-mini-transcribe-2/"},"author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"keywords":["Voxtral Mini Transcribe 2","Voxtral Mini Transcribe V2","Voxtral Mini Transcribe 2.0","voxtral-mini-2602","Voxtral Mini Transcribe 2 pricing","Voxtral API transcription","Mistral speaker diarization","Voxtral 2 vs Voxtral 3"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Voxtral Mini Transcribe 2","item":"https://sxf.si/models/voxtral-mini-transcribe-2/"}]},{"@type":"FAQPage","@id":"https://sxf.si/models/voxtral-mini-transcribe-2/#faq","url":"https://sxf.si/models/voxtral-mini-transcribe-2/#vox2-faq","mainEntity":[{"@type":"Question","name":"What is the API model ID for Voxtral Mini Transcribe 2?","acceptedAnswer":{"@type":"Answer","text":"The pinned Mistral ID is voxtral-mini-2602 for the /v1/audio/transcriptions endpoint, subject to deprecated-model availability."}},{"@type":"Question","name":"How much does Voxtral Mini Transcribe 2 cost?","acceptedAnswer":{"@type":"Answer","text":"The published historical Standard rate is $0.003 per audio minute ($0.18 per hour). Mistral separately lists an eligible Batch rate of $0.0003 per minute."}},{"@type":"Question","name":"Does Voxtral Mini Transcribe 2 support Arabic?","acceptedAnswer":{"@type":"Answer","text":"Yes. Arabic is among 13 documented languages; accuracy depends on dialect, noise, overlapping voices and recording conditions."}},{"@type":"Question","name":"Does Voxtral Mini Transcribe 2 support speaker diarization?","acceptedAnswer":{"@type":"Answer","text":"Yes, it can assign speaker labels to prerecorded audio, but those labels do not identify a person and require verification."}},{"@type":"Question","name":"Does Voxtral 2 support word-level timestamps?","acceptedAnswer":{"@type":"Answer","text":"Yes. Its legacy interface supports word-level timestamps, which Voxtral 3 removes in favor of segment-level timestamps."}},{"@type":"Question","name":"Is Voxtral Mini Transcribe 2 open source?","acceptedAnswer":{"@type":"Answer","text":"No downloadable open weights are listed for this Premier transcription-only endpoint. The separately named Voxtral Realtime 2 release has a different license."}},{"@type":"Question","name":"Has Voxtral Mini Transcribe 2 been replaced by Voxtral 3?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mistral introduced Voxtral 3 on October 20, 2026 and lists the February 2026 model as deprecated. The documented replacement ID is voxtral-mini-transcribe-3-0."}},{"@type":"Question","name":"What changes when migrating from Voxtral 2 to 3?","acceptedAnswer":{"@type":"Answer","text":"Change the model ID, replace word-level timestamp requests with segment-level timestamps, check overlapping segments and re-evaluate context-bias configuration."}}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
+    <link rel="stylesheet" href="/assets/voxtral-2-guide.css" />
     </head>
     <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
@@ -37,11 +38,11 @@
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Voxtral Mini Transcribe 2</span></nav>
         <p class="eyebrow">MODEL REFERENCE / MISTRAL AI</p>
-        <h1>Voxtral Mini Transcribe 2<br><span>verified model reference.</span></h1>
-        <p>GA Mistral audio specialist optimized exclusively for transcription with timestamp support.</p>
+        <h1>Voxtral Mini Transcribe 2<br><span>API, pricing, diarization &amp; migration.</span></h1>
+        <p>Mistral Voxtral Mini Transcribe 2 (V2): $0.003/min speech-to-text, speaker diarization, word timestamps, Python API and Voxtral 3 migration.</p>
         <div class="collection-stats">
-          <div><strong>Not published</strong><span>context not published</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
+          <div><strong>$0.003</strong><span>historical Standard / audio minute</span></div>
+          <div><strong>13</strong><span>documented V2 languages</span></div>
           <div><strong>2026-10-06</strong><span>last verified</span></div>
         </div>
       </section>
@@ -55,18 +56,18 @@
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>voxtral-mini-2602</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>Not published</strong></div>
-            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
-            <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
+            <div><span>RELEASE</span><strong>February 2026</strong><small>superseded by Voxtral 3</small></div>
+            <div><span>OUTPUT</span><strong>Transcript</strong><small>timestamps and speaker labels optional</small></div>
+            <div><span>LIFECYCLE</span><strong>Deprecated</strong><small>Mistral recommends Voxtral 3</small></div>
             <div><span>STANDARD RATE</span><strong>$0.003</strong><small>per minute</small></div>
-            <div><span>OUTPUT RATE</span><strong>—</strong><small>official-paid</small></div>
+            <div><span>HISTORICAL BATCH RATE</span><strong>$0.0003</strong><small>per audio minute; eligible jobs only</small></div>
           </div>
         </div>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
           <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>Not published</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>TRANSCRIPTION CONTROLS</span><h3>Diarization + timestamps</h3><p>The original V2 interface can separate speakers and supply word or segment timestamps for prerecorded audio.</p></article>
             <article><span>INPUT</span><h3>audio</h3><p>Input modalities come from the cited official model documentation.</p></article>
             <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
           </div>
@@ -75,9 +76,212 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
           <div class="model-split">
-            <div><p>$0.003 per minute.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <div><p>$0.003 per minute.</p><p>V2 transcription is charged by audio duration, not by language-model text tokens. The SXF pricing section compares historic Standard/Batch rates and models human review costs transparently.</p></div>
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
           </div>
+        </section>
+
+        <!-- SXF original editorial research: sourced to official Mistral docs, not vendor copy -->
+        <section class="model-deep-section" id="vox2-overview" data-voxtral2-guide>
+          <div class="model-section-head"><p class="eyebrow">DIRECT ANSWER / FEBRUARY 2026 VERSION</p><h2>What is Voxtral Mini Transcribe 2?</h2></div>
+          <p><strong>Voxtral Mini Transcribe 2</strong> (also called <strong>Voxtral Mini Transcribe V2</strong> or <strong>2.0</strong>) is Mistral AI's <strong>file-based speech-to-text model</strong>, released on February 4, 2026. Its pinned API ID is <code>voxtral-mini-2602</code>. It transcribes recordings rather than chatting with them and, in its original interface, supports <strong>speaker diarization, word-level timestamps and custom vocabulary</strong> across 13 languages.</p>
+          <p><strong>Historical direct API pricing:</strong> <strong>$0.003 per audio minute</strong>, equivalent to <strong>$0.18 per recorded hour</strong>. Mistral separately lists a <strong>$0.0003/min Batch tier</strong> for eligible asynchronous jobs. These are transcription API charges, not the labor cost of reviewing and correcting transcripts. The model is a <strong>Premier hosted service</strong>; do not confuse it with the downloadable, Apache-2.0 Voxtral Realtime 2 model.</p>
+          <div class="sxf-vox2-notice" role="note">
+            <strong>Version and migration notice — verified November 7, 2026</strong>
+            <p>Mistral introduced <strong>Voxtral 3 on October 20, 2026</strong> and now lists this 2026-02 edition under deprecated models. The replacement for <code>voxtral-mini-2602</code> is <code>voxtral-mini-transcribe-3-0</code>. This page remains the dedicated reference for version 2 and its documented behavior; it does <em>not</em> promise ongoing API access or treat the V2 price as the current price for V3. See <a href="#vox2-migration">what breaks when migrating to Voxtral 3</a> or <a href="https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2" target="_blank" rel="noopener noreferrer">Mistral's official migration checklist</a>.</p>
+          </div>
+          <nav class="model-related-links" aria-label="Jump to Voxtral Mini Transcribe 2 answers">
+            <a href="#vox2-pricing"><span>PRICING</span><strong>Per-minute and Batch costs</strong><b>↗</b></a>
+            <a href="#vox2-api"><span>API</span><strong>Python and cURL requests</strong><b>↗</b></a>
+            <a href="#vox2-migration"><span>2026 UPDATE</span><strong>Voxtral 2 to Voxtral 3</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="vox2-features">
+          <div class="model-section-head"><p class="eyebrow">PROVIDER-DOCUMENTED FACTS</p><h2>Voxtral Mini Transcribe 2 specs, diarization, timestamps and 13 languages.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL / ACCESS</span><h3>voxtral-mini-2602</h3><p>General-availability v26.02 model in Mistral's hosted Premier tier, for transcription-only workloads. Verify account-level availability before migration or new builds.</p></article>
+            <article><span>API ENDPOINT</span><h3>/v1/audio/transcriptions</h3><p>Send a prerecorded audio file using the native Mistral SDK or multipart HTTP. This is not the live-audio WebSocket endpoint.</p></article>
+            <article><span>SPEAKER ATTRIBUTION</span><h3>Diarization</h3><p>Speaker-labeled transcriptions help distinguish participants in interviews, meeting notes and call recordings. Speaker IDs do not prove a person's identity.</p></article>
+            <article><span>TIMING</span><h3>Word and segment</h3><p>Historical V2 documentation supports <code>timestamp_granularities</code> values <code>word</code> and <code>segment</code>. In V3, <code>word</code> is removed.</p></article>
+            <article><span>CUSTOM TERMS</span><h3>Up to 100 bias entries</h3><p>V2's <code>context_bias</code> can guide spelling of names, products and technical vocabulary. Mistral notes strongest optimization for English; test other languages.</p></article>
+            <article><span>RECORDING LIMIT</span><h3>Up to 3 hours</h3><p>Mistral's archived V2 audio documentation describes files up to three hours per request. Split longer recordings and preserve segment offsets across chunks.</p></article>
+          </div>
+          <p><strong>Supported V2 languages:</strong> English, Chinese, Hindi, Spanish, <strong>Arabic</strong>, French, Portuguese, Russian, German, Japanese, Korean, Italian and Dutch. The 13-language list comes from <a href="https://docs.mistral.ai/studio/audio/deprecated/speech_to_text" target="_blank" rel="noopener noreferrer">Mistral's archived Voxtral 2 documentation</a>, not from a newly measured SXF language-quality study. A language being supported is not a guarantee of equal word error rate across accents, code-switching or noisy recordings.</p>
+          <p>Unlike language-model pages, the original V2 model card does not publish a comparable token context window or a text-generation output cap. The 3-hour recording guidance should not be converted into an invented token-context number.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL ECONOMICS ANALYSIS</p><h2>Voxtral Mini Transcribe 2 pricing: cost per minute, hour and 1,000 hours.</h2></div>
+          <p>Mistral's published rates for the <em>version-2 model</em> are <strong>$0.003 per audio minute (Standard)</strong> and <strong>$0.0003 per audio minute (Batch)</strong>, for eligible batch processing. These rates depend on the provider continuing to offer the deprecated endpoint and the selected billing tier. <a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Verify model and tier availability on the official pricing page</a>. All USD calculations below are original SXF arithmetic, not observed invoices.</p>
+          <div class="sxf-vox2-table-wrap"><table class="sxf-vox2-table"><caption>SXF derived transcription API charges for version 2 (not including review or add-ons)</caption><thead><tr><th scope="col">Recorded audio</th><th scope="col">Standard · $0.003/min</th><th scope="col">Batch · $0.0003/min</th><th scope="col">Difference</th></tr></thead><tbody>
+            <tr><th scope="row">10 minutes</th><td>$0.030</td><td>$0.003</td><td>$0.027</td></tr>
+            <tr><th scope="row">1 hour (60 min)</th><td>$0.18</td><td>$0.018</td><td>$0.162</td></tr>
+            <tr><th scope="row">10 hours</th><td>$1.80</td><td>$0.18</td><td>$1.62</td></tr>
+            <tr><th scope="row">100 hours</th><td>$18.00</td><td>$1.80</td><td>$16.20</td></tr>
+            <tr><th scope="row">1,000 hours</th><td>$180.00</td><td>$18.00</td><td>$162.00</td></tr>
+          </tbody></table></div>
+          <div class="sxf-vox2-formula"><strong>SXF transcription cost model</strong><p><code>API cost = audio minutes × price per minute × (1 + expected retry fraction)</code></p><p><code>Total workflow budget = API cost + review hours × hourly review rate</code></p><small>Expected retries represent estimated repeated audio processing, not a documented Mistral automatic retry charge. Manual review time is a separate user-supplied assumption.</small></div>
+
+          <div class="sxf-vox2-lab" data-vox2-cost-lab>
+            <h3>Interactive SXF transcription cost and review estimator</h3>
+            <p>Model real workflows, not only the model's low headline price. Adjust the number and duration of recordings, the service tier, hypothetical reprocessing and human review time. Calculations run locally in your browser.</p>
+            <div class="sxf-vox2-fields">
+              <label for="vox2-count">Number of recordings<input id="vox2-count" type="number" min="0" max="1000000" step="1" value="10" data-vox2-count></label>
+              <label for="vox2-length">Minutes per recording<input id="vox2-length" type="number" min="0" max="180" step="1" value="60" data-vox2-minutes></label>
+              <label for="vox2-tier">V2 billing tier<select id="vox2-tier" data-vox2-tier><option value="standard">Standard · $0.003/min</option><option value="batch">Batch · $0.0003/min</option></select></label>
+              <label for="vox2-retries">Expected reprocessed audio (%)<input id="vox2-retries" type="number" min="0" max="500" step="1" value="5" data-vox2-retries></label>
+              <label for="vox2-review">Review minutes / recorded hour<input id="vox2-review" type="number" min="0" max="600" step="1" value="15" data-vox2-review></label>
+              <label for="vox2-hourly">Human reviewer cost (USD/hour)<input id="vox2-hourly" type="number" min="0" max="10000" step="1" value="25" data-vox2-hourly></label>
+            </div>
+            <div class="sxf-vox2-results" aria-live="polite" role="status">
+              <div><span>Audio processed</span><strong data-vox2-audio>600 min</strong></div>
+              <div><span>Estimated API charges</span><strong data-vox2-api>$1.89</strong></div>
+              <div><span>Estimated manual review</span><strong data-vox2-human>$62.50</strong></div>
+              <div><span>Total illustrative workflow</span><strong data-vox2-total>$64.39</strong></div>
+            </div>
+            <p class="sxf-vox2-note" data-vox2-details>10 × 60 minutes, with 5% expected reprocessing; 2.5 reviewer hours at $25/hour.</p>
+            <p class="sxf-vox2-note">SXF scenario assumptions, not Mistral benchmark results. Provider billing, queue availability, minimum units, storage, transcription failures, taxes and privacy costs may change actual expenditure. No audio, billing information or form values leave your browser.</p>
+          </div>
+          <p><strong>Why this matters:</strong> the illustrative 10-hour archive above has just <strong>$1.89</strong> in API processing but <strong>$62.50</strong> of human verification. Even a very low word error rate can be costly if names, numbers or legal details need careful human correction. Measuring <em>cost per approved transcript</em> is more useful than comparing the per-minute charge in isolation. For other providers, use <a href="/models/pricing/">SXF's normalized model pricing explorer</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-api">
+          <div class="model-section-head"><p class="eyebrow">VERSION-PINNED DEVELOPER EXAMPLES</p><h2>Voxtral Mini Transcribe 2 API: Python SDK and cURL transcription.</h2></div>
+          <p>V2 historically uses <code>POST https://api.mistral.ai/v1/audio/transcriptions</code> and pinned model ID <code>voxtral-mini-2602</code>. Do not assume <code>voxtral-mini-latest</code> still points to V2: the migration guide names new explicit V3 aliases. These examples are documentation-backed integration templates; **availability of the deprecated V2 ID must be confirmed on your Mistral workspace**.</p>
+          <h3>Python: transcribe a local WAV file using the Mistral SDK</h3>
+          <pre class="sxf-vox2-code"><code>import os
+from mistralai.client import Mistral
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+
+with open("meeting.wav", "rb") as audio:
+    result = client.audio.transcriptions.complete(
+        model="voxtral-mini-2602",  # Pin V2; check access first
+        file={"content": audio, "file_name": "meeting.wav"},
+    )
+
+print(result.text)</code></pre>
+          <p>Install the official <code>mistralai</code> package and store the key server-side. Validate MIME type, duration, access permissions, file retention and response fields before writing the transcript to a user-facing system.</p>
+          <h3>cURL: request segment timestamps and speaker labels</h3>
+          <pre class="sxf-vox2-code"><code>curl "https://api.mistral.ai/v1/audio/transcriptions" \
+  -H "Authorization: Bearer $MISTRAL_API_KEY" \
+  -F "model=voxtral-mini-2602" \
+  -F "file=@meeting.wav" \
+  -F "timestamp_granularities=segment" \
+  -F "diarize=true"</code></pre>
+          <p>Mistral's archived V2 documentation also allows <code>timestamp_granularities=word</code> for word-level timing and <code>context_bias</code> for terms. Not every option is valid in every combination: the historical docs warn against combining an explicit <code>language</code> with timestamps. Always validate the actual response schema. The <a href="https://docs.mistral.ai/studio/audio/deprecated/speech_to_text/offline_transcription" target="_blank" rel="noopener noreferrer">archived V2 SDK guide</a> and <a href="https://docs.mistral.ai/api/endpoint/audio/transcriptions" target="_blank" rel="noopener noreferrer">API specification</a> document these request fields.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-diarization">
+          <div class="model-section-head"><p class="eyebrow">OUTPUT INTERPRETATION</p><h2>How word timestamps, speaker diarization and context biasing work in Voxtral 2.</h2></div>
+          <p><strong>Word timestamps</strong> associate recognized words with times in the recording and can support subtitle editing, searching recordings and audit review. <strong>Speaker diarization</strong> groups speech by speaker, but a label such as <code>speaker_1</code> is not verified identity. <strong>Context biasing</strong> supplies expected spelling of names and acronyms without changing the underlying audio.</p>
+          <div class="sxf-vox2-table-wrap"><table class="sxf-vox2-table"><caption>Common transcription requirements and the right test</caption><thead><tr><th scope="col">Requirement</th><th scope="col">V2 setting / approach</th><th scope="col">Critical limitation</th></tr></thead><tbody>
+            <tr><th scope="row">Meeting speaker turns</th><td><code>diarize=true</code> with segment output</td><td>Overlapping or similar voices need human checks</td></tr>
+            <tr><th scope="row">Subtitle timing</th><td><code>timestamp_granularities=word</code> in V2</td><td>V3 does not accept <code>word</code>; migrate the subtitle pipeline</td></tr>
+            <tr><th scope="row">Brand/product names</th><td><code>context_bias</code> with curated terms</td><td>Can still hallucinate or miss names; validate against reference audio</td></tr>
+            <tr><th scope="row">Multilingual interviews</th><td>Language detection or pinned language</td><td>Evaluate Arabic, German, English and accents separately</td></tr>
+            <tr><th scope="row">Sensitive recordings</th><td>Server-side access and retention controls</td><td>Speaker labels do not verify consent or identity</td></tr>
+          </tbody></table></div>
+          <p>Consider the difference between <em>speaker attribution</em> (“which voice spoke?”), <em>speech recognition</em> (“which words were spoken?”) and <em>word alignment</em> (“when did each word occur?”). A transcript can be perfectly spelled yet assign critical statements to the wrong speaker. This is why SXF recommends evaluating them with different scoring methods.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-migration">
+          <div class="model-section-head"><p class="eyebrow">2026 VERSION MIGRATION</p><h2>Voxtral Mini Transcribe 2 vs Voxtral 3: pricing, API IDs and breaking changes.</h2></div>
+          <p>On <strong>October 20, 2026</strong>, Mistral announced Voxtral 3. Its <a href="https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2" target="_blank" rel="noopener noreferrer">migration guide</a> maps the old pinned ID <code>voxtral-mini-2602</code> to <code>voxtral-mini-transcribe-3-0</code> (with alias <code>voxtral-mini-transcribe-3</code>). This does not make V2 and V3 drop-in equivalents.</p>
+          <div class="sxf-vox2-table-wrap"><table class="sxf-vox2-table"><caption>Primary-source-documented version comparison, as of Nov 7, 2026</caption><thead><tr><th scope="col">Item</th><th scope="col">Voxtral Mini Transcribe 2</th><th scope="col">Voxtral Mini Transcribe 3</th></tr></thead><tbody>
+            <tr><th scope="row">API model ID</th><td><code>voxtral-mini-2602</code></td><td><code>voxtral-mini-transcribe-3-0</code></td></tr>
+            <tr><th scope="row">Current directory status</th><td>Listed as deprecated</td><td>Public Preview, released Oct 20</td></tr>
+            <tr><th scope="row">Standard list price</th><td>$0.003 per min</td><td>$0.0035 per min</td></tr>
+            <tr><th scope="row">Word timestamps</th><td>Supported by archived V2 interface</td><td>Not supported; segment timing only</td></tr>
+            <tr><th scope="row">Context bias entries</th><td>Up to 100 historical entries</td><td>Not a fixed 100-item cap; shared context and input size apply</td></tr>
+            <tr><th scope="row">Diarization</th><td>Speaker labels for file transcripts</td><td>Speaker labels with segment timestamps; handle overlaps</td></tr>
+          </tbody></table></div>
+          <p><strong>SXF price delta:</strong> for 100 recorded hours, V2's historical Standard price computes to <strong>$18.00</strong>; V3's published $0.0035/min computes to <strong>$21.00</strong>, or <strong>$3.00 more (16.7%)</strong> before tier differences. It is not a controlled quality comparison; the newer model might reduce correction labor or change output behavior. The economic question is whether those changes lower <em>cost per accepted hour</em>.</p>
+          <ol class="sxf-vox2-steps">
+            <li>Replace your pinned V2 model string with the V3 model ID in a staging environment.</li>
+            <li>Change <code>timestamp_granularities=word</code> to <code>segment</code>; V3 returns an error for word-level timestamp requests.</li>
+            <li>Recheck your diarization parser and handle segments that overlap in time.</li>
+            <li>Revisit <code>context_bias</code> and audio length, and retest previously misspelled names.</li>
+            <li>Re-run a fixed corpus and compare WER, term accuracy, speaker attribution, timing quality and cost.</li>
+            <li>Verify access, pricing tier, privacy handling and your V2 retirement schedule against current Mistral docs.</li>
+          </ol>
+          <p><strong>Separate the products:</strong> the historic <a href="/models/voxtral-mini-transcribe-realtime/">Voxtral Mini Transcribe Realtime</a> route covers streaming rather than file transcription, and it has its <em>own</em> V3 successor. Likewise, neither release should be mistaken for <a href="/models/gemini-3-5-transcribe/">Gemini 3.5 Transcribe</a> or <a href="/models/gpt-transcribe/">GPT-Transcribe</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-compare">
+          <div class="model-section-head"><p class="eyebrow">SPEECH-TO-TEXT SELECTION</p><h2>Voxtral 2 vs Deepgram Nova-3, ElevenLabs Scribe v2 and realtime STT.</h2></div>
+          <p>Selection starts with <strong>offline audio vs live microphone input</strong>, then transcript requirements and the provider's actual billing unit. A recorded-call archive can benefit from a Batch API; a live receptionist cannot wait for queued batch work. Speaker labels, word timing and glossary controls are as consequential as headline dollars per minute.</p>
+          <div class="sxf-vox2-table-wrap"><table class="sxf-vox2-table"><caption>Qualitative workflow comparison — not a measured accuracy leaderboard</caption><thead><tr><th scope="col">SXF reference</th><th scope="col">Typical workload</th><th scope="col">Decision variable</th></tr></thead><tbody>
+            <tr><th scope="row">Voxtral Mini Transcribe 2</th><td>Legacy batch file transcription</td><td>V2 word timestamps and low historical API price; deprecated lifecycle</td></tr>
+            <tr><th scope="row"><a href="/models/voxtral-mini-transcribe-realtime/">Voxtral Mini Realtime 2</a></th><td>Legacy live captions and streaming</td><td>WebSocket latency and separately maintained V3 migration path</td></tr>
+            <tr><th scope="row"><a href="/models/scribe-v2/">ElevenLabs Scribe v2</a></th><td>Pre-recorded speech to text</td><td>Speaker annotation and provider-native audio billing</td></tr>
+            <tr><th scope="row"><a href="/models/scribe-v2-realtime/">Scribe v2 Realtime</a></th><td>Live transcription</td><td>Partial vs committed events, network latency and per-minute service costs</td></tr>
+            <tr><th scope="row"><a href="/models/gpt-transcribe/">GPT-Transcribe</a></th><td>API-based transcription</td><td>Language support, formatting and actual billing basis</td></tr>
+          </tbody></table></div>
+          <p>For a two-provider evaluation protocol and an existing SXF research lab, read <a href="/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/">Deepgram Nova-3 vs ElevenLabs Scribe v2</a>. Different vendors' advertised “accuracy” claims are not directly comparable unless they share audio files, reference transcripts, scoring normalization and review conditions.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-lab">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL REPRODUCIBLE RESEARCH DESIGN</p><h2>How to evaluate Voxtral 2 transcription quality: a 12-clip evidence protocol.</h2></div>
+          <p>This SXF protocol is an <strong>original proposed experiment</strong>, not a claim that SXF has run paid model calls or determined the most accurate provider. Run the same human-approved reference audio on a version-pinned V2 endpoint (if still accessible), V3 and any competitor. Build a small local benchmark with <strong>12 short consented clips</strong>: four languages (English, Arabic, German, Spanish) crossed with three conditions (clean speech, background noise, two overlapping speakers). Retain source consent and anonymize private details.</p>
+          <div class="sxf-vox2-table-wrap"><table class="sxf-vox2-table"><caption>SXF preregistered assessment — metrics are defined, not reported as model scores</caption><thead><tr><th scope="col">Dimension</th><th scope="col">How to measure it</th><th scope="col">Why it matters</th></tr></thead><tbody>
+            <tr><th scope="row">Word error rate (WER)</th><td>(Substitutions + deletions + insertions) / reference words</td><td>Base transcription accuracy after a fixed normalization protocol</td></tr>
+            <tr><th scope="row">Character error rate (CER)</th><td>Character edit distance / reference characters</td><td>Useful for names, scripts, languages without reliable whitespace segmentation</td></tr>
+            <tr><th scope="row">Critical terms</th><td>Exact preservation of preregistered names, numbers and medication terms</td><td>Catches high-risk mistakes hidden by a modest overall WER</td></tr>
+            <tr><th scope="row">Speaker attribution</th><td>Human-verified speaker turns and confusion counts</td><td>Separates “right words, wrong speaker” from speech-recognition error</td></tr>
+            <tr><th scope="row">Word/segment timing</th><td>Boundary offsets in milliseconds and missing segment count</td><td>Detects subtitle drift and migration regressions</td></tr>
+            <tr><th scope="row">End-to-end economics</th><td>API charges + failed retries + reviewer effort / approved audio hour</td><td>Compares total usable output cost, not an advertisement rate</td></tr>
+          </tbody></table></div>
+          <p>Repeat each model under the <strong>same input normalization, sample rate, reference text, vocabulary and acceptance rubric</strong>. Keep at least two human reviewers blind to model identity for disputed words, and log unresolved disagreements. Report results by language and acoustic condition rather than hiding failures in a single average. For V3, record the loss of word timestamps as a <em>feature difference</em>, not a direct word-timestamp accuracy failure.</p>
+          <p><strong>Download the SXF evaluation starter:</strong> <a href="/models/voxtral-mini-transcribe-2/sxf-stt-score.py">reproducible WER/CER Python scorecard</a> and <a href="/models/voxtral-mini-transcribe-2/sxf-stt-example.jsonl">labeled synthetic fixture JSONL</a>. The script accepts your own <code>reference</code> and <code>hypothesis</code> transcripts. Its example data are <strong>invented test strings, not actual model outputs</strong>. This allows independent evaluation without fabricating an SXF leaderboard.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-use-cases">
+          <div class="model-section-head"><p class="eyebrow">DEPLOYMENT DECISIONS</p><h2>Best Voxtral 2 use cases — and when not to choose it.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MEETINGS</span><h3>Speaker-aware notes</h3><p>Use diarization to segment meeting turns, then manually verify names and action items. Do not treat speaker labels as identity verification.</p></article>
+            <article><span>MEDIA ARCHIVES</span><h3>Subtitle preparation</h3><p>Word timestamps can seed caption timing, but subtitle readability, line breaks and synchronization still require quality control. V3 timing changes are material here.</p></article>
+            <article><span>CONTACT CENTERS</span><h3>Recorded calls</h3><p>Track who spoke and review sensitive terms. Consent, access controls, retention rules and confidentiality matter before upload.</p></article>
+            <article><span>RESEARCH</span><h3>Interview indexing</h3><p>Transcripts can accelerate qualitative coding and search. Keep audio excerpts for verification and separate quotes from analysis.</p></article>
+            <article><span>NOT SUITABLE</span><h3>Live streaming voice agents</h3><p>Version 2's file model isn't a real-time streaming recognizer. Choose a realtime endpoint and test turn latency separately.</p></article>
+            <article><span>NOT SUITABLE</span><h3>Unsupported chat or free weights</h3><p>Its published contract is hosted transcription, not chat generation. The Premier model should not be described as freely self-hostable.</p></article>
+          </div>
+          <p>Operationally, encrypt audio at rest and in transit, define a retention period, avoid logging raw credentials or unredacted transcript content, and add human approval for medical, legal or financial records. Provider capability does not replace consent, accuracy validation or jurisdiction-specific compliance checks. For agent-related risks, see <a href="/guides/ai-agent-security/">AI agent security practices</a> and <a href="/guides/ai-agent-observability/">agent observability and monitoring</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="vox2-faq">
+          <div class="model-section-head"><p class="eyebrow">DIRECT-ANSWER SEARCH QUESTIONS</p><h2>Voxtral Mini Transcribe 2 FAQ: price, languages, API and migration.</h2></div>
+          <div class="sxf-vox2-faq">
+            <details><summary>What is the API model ID for Voxtral Mini Transcribe 2?</summary><p>Use the pinned ID <code>voxtral-mini-2602</code> with Mistral's <code>/v1/audio/transcriptions</code> endpoint, subject to the deprecated model's continuing availability. Do not rely on a mutable <code>latest</code> alias to remain on V2.</p></details>
+            <details><summary>How much does Voxtral Mini Transcribe 2 cost?</summary><p>Mistral's version-2 model card lists $0.003 per audio minute Standard ($0.18 per hour); its pricing table also lists $0.0003 per minute in the Batch tier. Check whether the deprecated endpoint is still offered in your workspace.</p></details>
+            <details><summary>Does Voxtral Mini Transcribe V2 support Arabic?</summary><p>Yes. Arabic is one of the 13 languages documented for V2. Actual transcription accuracy varies with dialect, speakers, noise and recording conditions.</p></details>
+            <details><summary>Can Voxtral Mini Transcribe 2 separate speakers?</summary><p>Yes. It supports speaker diarization for prerecorded audio. Speaker labels are not evidence of verified personal identity, and overlaps need manual checking.</p></details>
+            <details><summary>Can Voxtral 2 return word-level timestamps?</summary><p>Yes, in its archived V2 transcription interface. Word-level timestamps are removed in Voxtral 3, where you must request segment-level timing instead.</p></details>
+            <details><summary>Is Voxtral Mini Transcribe 2 open source or self-hostable?</summary><p>No open weights are listed for the Premier Mini Transcribe 2 model. The distinct Voxtral Realtime 2 checkpoint is the Apache-2.0 release; do not conflate the two.</p></details>
+            <details><summary>Is Voxtral 2 still the newest Mistral transcription model?</summary><p>No. Mistral released the Voxtral 3 family on October 20, 2026 and lists Mini Transcribe 2 in its deprecated model directory. Check the official migration document for replacement IDs and availability.</p></details>
+            <details><summary>What changed in the Voxtral 2 to Voxtral 3 API migration?</summary><p>The model ID changes from <code>voxtral-mini-2602</code> to <code>voxtral-mini-transcribe-3-0</code>; word-level timestamps are no longer available, some context-bias rules change, and applications must handle overlapping segments appropriately.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="vox2-sources">
+          <div class="model-section-head"><p class="eyebrow">RESEARCH PROVENANCE</p><h2>Primary sources, verification date and what SXF has not tested.</h2></div>
+          <p>This editorial guide was verified against <strong>Mistral's versioned model card, historical V2 feature docs, official pricing table and October 2026 V3 migration guidance</strong> on November 7, 2026. Its rates are source-listed prices, its price comparisons and quality scorecard are original SXF calculations and methods, and the JSONL samples are synthetic. No provider-run WER claims are presented as independent SXF results. The existing SXF model catalog baseline dated October 6 is preserved as an audit artifact, not silently overwritten.</p>
+          <ul class="sxf-vox2-sources">
+            <li><a href="https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02" target="_blank" rel="noopener noreferrer">Mistral model card — Voxtral Mini Transcribe 2 (v26.02)</a></li>
+            <li><a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Mistral pricing — Standard and Batch audio rates</a></li>
+            <li><a href="https://docs.mistral.ai/studio/audio/deprecated/speech_to_text/offline_transcription" target="_blank" rel="noopener noreferrer">Mistral archived V2 file transcription, SDK and word timestamps</a></li>
+            <li><a href="https://docs.mistral.ai/studio/audio/deprecated/overview" target="_blank" rel="noopener noreferrer">Mistral archived V2 language and recording limit reference</a></li>
+            <li><a href="https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2" target="_blank" rel="noopener noreferrer">Mistral — Voxtral 2 to 3 migration and breaking changes</a></li>
+            <li><a href="https://docs.mistral.ai/models/voxtral-mini-transcribe-3-0" target="_blank" rel="noopener noreferrer">Mistral — Voxtral Mini Transcribe 3 model card</a></li>
+            <li><a href="https://docs.mistral.ai/models" target="_blank" rel="noopener noreferrer">Mistral model directory — current and deprecated lifecycle</a></li>
+            <li><a href="https://mistral.ai/news/voxtral-transcribe-2/" target="_blank" rel="noopener noreferrer">Mistral — February 2026 release announcement</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="More speech model research on SXF">
+            <a href="/providers/mistral-ai/"><span>PROVIDER</span><strong>Mistral AI model directory</strong><b>↗</b></a>
+            <a href="/models/voxtral-mini-transcribe-realtime/"><span>STREAMING</span><strong>Voxtral Mini Realtime legacy profile</strong><b>↗</b></a>
+            <a href="/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/"><span>BENCHMARK DESIGN</span><strong>STT evaluation and pricing comparison</strong><b>↗</b></a>
+          </nav>
         </section>
 
         <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Mistral documents the model as GA Premier v26.02 and optimized for transcription purposes only.</p></div><div><span>02</span><p>The official model card displays no context value, so context_window remains null rather than inferred.</p></div><div><span>03</span><p>Standard transcription pricing is $0.003 per minute; the lower batch rate is intentionally excluded.</p></div></div></section>
@@ -126,4 +330,5 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script src="/assets/voxtral-2-cost-lab.js" defer></script>
+    </body></html>
