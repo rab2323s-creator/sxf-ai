@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900" role="img" aria-labelledby="t d">
+<title id="t">NVIDIA Cosmos 3 — World models for physical AI, mobile edition</title>
+<desc id="d">Original vertical SXF concept artwork of an autonomous car and robot arm with the four Cosmos 3 open-weight checkpoints.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07121e"/><stop offset=".57" stop-color="#092431"/><stop offset="1" stop-color="#07111b"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#6dfcc3" stop-opacity=".25"/><stop offset="1" stop-color="#6dfcc3" stop-opacity="0"/></radialGradient>
+<linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e4fff4"/><stop offset="1" stop-color="#42637a"/></linearGradient>
+<linearGradient id="accent"><stop stop-color="#ccff6c"/><stop offset="1" stop-color="#48e8d1"/></linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#62edce" stroke-opacity=".12"/></pattern>
+</defs>
+<rect width="720" height="900" rx="26" fill="url(#bg)"/>
+<rect x="0" y="300" width="720" height="320" fill="url(#grid)"/>
+<circle cx="430" cy="450" r="275" fill="url(#glow)"/>
+<g font-family="Inter,Segoe UI,Arial,sans-serif">
+  <text x="43" y="66" font-size="31" font-weight="850" fill="#f6fffa">SXF<tspan fill="#55a9ff"> / AI</tspan></text>
+  <rect x="43" y="104" rx="17" width="256" height="35" fill="#b6fa7e" fill-opacity=".1" stroke="#abf88a" stroke-opacity=".6"/>
+  <text x="66" y="127" font-size="16" font-weight="800" letter-spacing="1" fill="#cfff9c">EDITORIAL EXPLAINER</text>
+  <text x="43" y="208" font-size="37" font-weight="800" fill="#cde5e9">NVIDIA</text>
+  <text x="39" y="300" font-size="89" font-weight="850" letter-spacing="-5" fill="#f5fffb">COSMOS <tspan fill="url(#accent)">3</tspan></text>
+  <path d="M44 323H237" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+  <text x="44" y="364" font-size="25" fill="#e3f9f0" font-weight="600">World models for physical AI</text>
+  <text x="44" y="393" font-size="16" fill="#a2bfcb">Driving · Sensor simulation · Robotics</text>
+</g>
+<g transform="translate(0 60)">
+<circle cx="379" cy="459" r="153" fill="none" stroke="#74ffbb" stroke-opacity=".35" stroke-width="2" stroke-dasharray="5 12"/>
+<circle cx="379" cy="459" r="104" fill="none" stroke="#70dfff" stroke-opacity=".3"/>
+<path d="M170 459H592M379 290V620" stroke="#76efd2" stroke-opacity=".25"/>
+<g stroke-linecap="round" stroke-linejoin="round">
+<path d="M523 471L563 431L580 368L616 350" stroke="#081e27" stroke-width="42" fill="none"/>
+<path d="M523 471L563 431L580 368L616 350" stroke="#bcdee1" stroke-width="25" fill="none"/>
+<circle cx="563" cy="431" r="24" fill="#153641" stroke="#b2ffe0" stroke-width="5"/>
+<circle cx="580" cy="368" r="25" fill="#153641" stroke="#b2ffe0" stroke-width="5"/>
+<path d="M616 350L651 321L677 300" stroke="#d0f7e7" stroke-width="19" fill="none"/>
+<path d="M679 296L695 277M679 306L699 323" stroke="#71ffbd" stroke-width="9"/>
+</g>
+<g transform="translate(74 428)">
+<ellipse cx="242" cy="121" rx="245" ry="38" fill="#0b0e19" opacity=".8"/>
+<path d="M21 98L69 76L134 25Q151 7 186 8H323Q354 9 381 41L440 77Q461 85 465 104L457 134H12L9 112Z" fill="url(#car)" stroke="#8cffcf" stroke-width="3"/>
+<path d="M137 28Q154 21 192 21H315Q340 22 361 47L384 76H86Z" fill="#164b62" stroke="#d9ffed" stroke-opacity=".8" stroke-width="2"/>
+<path d="M242 21V77" stroke="#cafcf2" stroke-opacity=".5" stroke-width="2"/>
+<path d="M30 98H448L453 127H14L12 108Z" fill="#1b3343"/>
+<path d="M23 105H99L93 117H23M383 103H445L450 118H392" fill="#bafff3"/>
+<path d="M117 130H359" stroke="#69edce" stroke-width="5"/>
+<circle cx="113" cy="137" r="33" fill="#06151d" stroke="#2a4352" stroke-width="9"/>
+<circle cx="113" cy="137" r="13" fill="#b9dbe0" stroke="#86ffbe" stroke-width="5"/>
+<circle cx="365" cy="137" r="33" fill="#06151d" stroke="#2a4352" stroke-width="9"/>
+<circle cx="365" cy="137" r="13" fill="#b9dbe0" stroke="#86ffbe" stroke-width="5"/>
+<path d="M239 8V-22" stroke="#8cf7ce" stroke-width="6"/>
+<rect x="221" y="-36" width="36" height="18" rx="5" fill="#163c49" stroke="#c0ffd1" stroke-width="3"/>
+<path d="M235 -36L192 -81M245 -36L301 -80" fill="none" stroke="#86fbc5" stroke-opacity=".5" stroke-dasharray="6 9" stroke-width="2"/>
+</g></g>
+<g font-family="Inter,Segoe UI,Arial,sans-serif" font-weight="750">
+<rect x="43" y="667" width="310" height="65" rx="14" fill="#102d34" stroke="#65e7b6" stroke-opacity=".6"/>
+<text x="67" y="707" font-size="25" fill="#d2ffa2">Transfer-Auto</text>
+<rect x="368" y="667" width="308" height="65" rx="14" fill="#102d34" stroke="#65e7b6" stroke-opacity=".6"/>
+<text x="392" y="707" font-size="25" fill="#d2ffa2">Sim-Auto</text>
+<rect x="43" y="746" width="310" height="65" rx="14" fill="#102d34" stroke="#65e7b6" stroke-opacity=".6"/>
+<text x="67" y="786" font-size="24" fill="#d2ffa2">Sim-Transfer</text>
+<rect x="368" y="746" width="308" height="65" rx="14" fill="#102d34" stroke="#65e7b6" stroke-opacity=".6"/>
+<text x="392" y="786" font-size="24" fill="#d2ffa2">Sim-Bimanual</text>
+</g>
+<text x="43" y="857" font-family="Arial,sans-serif" font-size="13" fill="#83a1aa">SXF ORIGINAL CONCEPT ART — NOT SIMULATION OUTPUT</text>
+<rect x="1.5" y="1.5" width="717" height="897" rx="24" fill="none" stroke="#86e9d6" stroke-opacity=".28" stroke-width="3"/>
+</svg>

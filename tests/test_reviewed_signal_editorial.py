@@ -62,6 +62,13 @@ def main():
         for evidence in review["evidence"]:
             assert evidence["label"] in unescape(html)
         schema = json.loads(html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0])["@graph"]
+        if slug == "nvidia-cosmos-3-world-models-simulation":
+            assert 'class="signal-artwork"' in html
+            assert 'src="/assets/signals/nvidia-cosmos-3-world-models.svg"' in html
+            assert 'srcset="/assets/signals/nvidia-cosmos-3-world-models-mobile.svg"' in html
+            assert 'name="twitter:card" content="summary_large_image"' in html
+            assert schema[1]["image"]["@id"].endswith("#primaryimage")
+            assert any(node.get("@type") == "ImageObject" and node.get("width") == 1200 for node in schema)
         assert schema[1]["citation"] == review["sources"]
         assert schema[1]["dateModified"] >= review["reviewed_at"]
         assert "This signal may affect how the model" not in html

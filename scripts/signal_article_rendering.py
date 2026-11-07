@@ -52,6 +52,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     page_header = context.page_header
     page_footer = context.page_footer
     canonical = item["signal_url"]
+    is_cosmos = canonical.endswith("/nvidia-cosmos-3-world-models-simulation/")
     review = get_review(item)
     is_async_merge_deep_dive = canonical.endswith("/github-async-merge-api-generally-available-2bced9c/")
     is_license_deep_dive = canonical.endswith(license_reference.SLUG)
@@ -144,6 +145,15 @@ def signal_page_html(item, items, context: SignalArticleContext):
             },
         ],
     }
+    if is_cosmos:
+        image_id = canonical + "#primaryimage"
+        image_data = {"@type": "ImageObject", "@id": image_id,
+                      "url": "https://sxf.si/assets/signals/nvidia-cosmos-3-world-models.svg", "contentUrl": "https://sxf.si/assets/signals/nvidia-cosmos-3-world-models.svg",
+                      "width": 1200, "height": 630,
+                      "caption": "SXF concept illustration of NVIDIA Cosmos 3 driving and robotic world models"}
+        schema["@graph"][0]["primaryImageOfPage"] = {"@id": image_id}
+        schema["@graph"][1]["image"] = {"@id": image_id}
+        schema["@graph"].append(image_data)
     if is_async_merge_deep_dive:
         schema["@graph"].append({
             "@type": "FAQPage",
@@ -314,8 +324,30 @@ def signal_page_html(item, items, context: SignalArticleContext):
     source_name = review["source_name"] if review else item["source"]
     source_url = review["primary_source"] if review else item["url"]
     summary_label = "SXF technical brief" if (is_license_deep_dive or is_sol_copilot_deep_dive or is_intelligent_ui_deep_dive) else "SXF verified brief" if review else "Source summary" if item.get("summary") else "SXF signal note"
+    hero_html = """<section class="signal-artwork-shell shell" aria-label="NVIDIA Cosmos 3 editorial illustration">
+          <figure class="signal-artwork">
+            <picture>
+              <source media="(max-width: 700px)" srcset="/assets/signals/nvidia-cosmos-3-world-models-mobile.svg" width="720" height="900" type="image/svg+xml" />
+              <img src="/assets/signals/nvidia-cosmos-3-world-models.svg" width="1200" height="630" alt="SXF infographic illustrating NVIDIA Cosmos 3 and its four checkpoints: Transfer-Auto, Sim-Auto, Sim-Transfer and Sim-Bimanual, with a concept robot arm and sensor-equipped car." fetchpriority="high" loading="eager" decoding="async" />
+            </picture>
+            <figcaption>SXF original editorial concept art · An illustration, not actual NVIDIA model output or benchmark evidence.</figcaption>
+          </figure>
+        </section>""" if is_cosmos else ""
+    head_html = page_head(page_title, description, canonical, schema, "article", robots)
+    if is_cosmos:
+        head_html = head_html.replace(
+            '<meta name="twitter:card" content="summary" />',
+            """<meta property="og:image" content="https://sxf.si/assets/signals/nvidia-cosmos-3-world-models.svg" />
+      <meta property="og:image:type" content="image/svg+xml" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="NVIDIA Cosmos 3 world models — original SXF editorial illustration" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://sxf.si/assets/signals/nvidia-cosmos-3-world-models.svg" />
+      <meta name="twitter:image:alt" content="NVIDIA Cosmos 3: world models for robotics and autonomous driving" />""",
+        )
     page = f'''<!doctype html><html lang="en">
-    {page_head(page_title, description, canonical, schema, "article", robots)}
+    {head_html}
     <body class="intel-page signal-page">
       <a class="skip-link" href="#signal-main">Skip to signal</a>
       <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
@@ -332,6 +364,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
             <div><span>SIGNAL SCORE</span><strong>{item.get("signal_score", 0):02d}/100</strong></div>
           </div>
         </section>
+        {hero_html}
         <section class="signal-layout shell">
           <article class="signal-brief">
             <p class="eyebrow">{summary_label.upper()}</p>

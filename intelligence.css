@@ -1405,3 +1405,17 @@
 .signal-page .tmr-sources a{font-size:13px}
 @media(max-width:820px){.signal-page .tmr-metrics,.signal-page .tmr-architecture{grid-template-columns:repeat(2,minmax(0,1fr))}.signal-page .tmr-content-grid{grid-template-columns:1fr}}
 @media(max-width:540px){.signal-page .tmr-research{margin-top:30px;padding:22px 17px}.signal-page .tmr-metrics{gap:7px}.signal-page .tmr-metrics div{padding:16px 10px}.signal-page .tmr-metrics strong{font-size:25px}.signal-page .tmr-metrics span{font-size:10px}.signal-page .tmr-architecture{grid-template-columns:1fr 1fr}}
+
+
+/* Verified NVIDIA Cosmos 3 illustration: responsive, readable on laptop and phone. */
+.signal-artwork-shell{padding-top:28px}
+.signal-artwork{position:relative;margin:0;overflow:hidden;isolation:isolate;border:1px solid rgba(111,232,192,.26);border-radius:24px;background:#071723;box-shadow:0 26px 80px rgba(0,0,0,.26)}
+.signal-artwork picture{display:block;aspect-ratio:40 / 21}
+.signal-artwork img{display:block;width:100%;height:100%;object-fit:cover}
+.signal-artwork figcaption{padding:12px 22px 14px;color:#9baab5;background:#0b161f;font-size:12px;line-height:1.55;letter-spacing:.005em}
+@media(max-width:700px){
+  .signal-artwork-shell{padding-top:20px}
+  .signal-artwork{border-radius:18px}
+  .signal-artwork picture{aspect-ratio:4 / 5}
+  .signal-artwork figcaption{padding:12px 14px;font-size:11px}
+}
