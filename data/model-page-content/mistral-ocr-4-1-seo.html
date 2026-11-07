@@ -1,0 +1,213 @@
+<!-- SXF authored evidence layer: primary-source model facts, original economics and reproducible evaluation method -->
+        <section class="model-deep-section" id="mocr41-overview" data-mocr41-guide>
+          <div class="model-section-head"><p class="eyebrow">MISTRAL OCR 4.1 / DIRECT ANSWER</p><h2>What is Mistral OCR 4.1?</h2></div>
+          <p><strong>Mistral OCR 4.1</strong> is Mistral AI's generally available, hosted <strong>Document AI optical character recognition API</strong> for turning PDFs and images into searchable text and structured document content. Its pinned model ID is <code>mistral-ocr-4-1</code>, available through <code>POST /v1/ocr</code> or <code>client.ocr.process()</code>. It handles <strong>tables, headings, formulas, images, layout regions and multilingual documents</strong> rather than acting as a general conversational model.</p>
+          <p>The defining OCR 4.1 features are <strong>paragraph-level bounding boxes</strong>, document <strong>block-type labels</strong> and <strong>page-, block- or word-level confidence scores</strong>. Standard OCR processing is published at <strong>$4 per 1,000 pages ($0.004/page)</strong>; the OCR 4.1 model card separately lists <strong>$5 per 1,000 annotated pages ($0.005/page)</strong>. Those are distinct published processing categories, not a flat fee per chat token.</p>
+          <div class="sxf-mocr41-factbar">
+            <div><span>Exact model</span><strong><code>mistral-ocr-4-1</code></strong></div>
+            <div><span>API</span><strong><code>/v1/ocr</code></strong></div>
+            <div><span>Standard</span><strong>$0.004 / page</strong></div>
+            <div><span>Annotated page</span><strong>$0.005 / page</strong></div>
+          </div>
+          <nav class="model-related-links" aria-label="Jump to Mistral OCR 4.1 guide">
+            <a href="#mocr41-pricing"><span>PRICING</span><strong>Per-page costs and calculator</strong><b>↗</b></a>
+            <a href="#mocr41-api"><span>DEVELOPER SETUP</span><strong>Python API PDF extraction</strong><b>↗</b></a>
+            <a href="#mocr41-blocks"><span>STRUCTURE</span><strong>Tables, boxes and confidence</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-features">
+          <div class="model-section-head"><p class="eyebrow">OFFICIAL FEATURE CONTRACT</p><h2>Mistral OCR 4.1 features: PDF, tables, block labels and multilingual extraction.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>DOCUMENTS</span><h3>PDF + image input</h3><p>OCR accepts PDF and supported office/image files using the appropriate <code>document_url</code> or <code>image_url</code> input type. Source access and format limits still apply.</p></article>
+            <article><span>OUTPUT</span><h3>Markdown + layout metadata</h3><p>Each returned page can contain <code>markdown</code>, extracted <code>tables</code>, <code>images</code>, links, dimensions and optional structural blocks.</p></article>
+            <article><span>TABLES</span><h3>Markdown or HTML</h3><p><code>table_format="markdown"</code> or <code>"html"</code> returns separate tables; the default inline behavior differs. Inspect the placeholder references.</p></article>
+            <article><span>LAYOUT</span><h3>Bounding boxes</h3><p>Set <code>include_blocks=True</code> to receive page region labels and coordinates for paragraphs, headings, tables, equations and more.</p></article>
+            <article><span>UNCERTAINTY</span><h3>Page / block / word scores</h3><p><code>confidence_scores_granularity</code> selects scoring detail. Scores can prioritize human review but do not prove factual correctness.</p></article>
+            <article><span>LANGUAGES</span><h3>40+ multilingual support</h3><p>Mistral describes OCR support across more than 40 languages. Evaluate scripts, fonts, handwriting and scan quality on your own corpus.</p></article>
+          </div>
+          <p>Mistral's <a href="https://docs.mistral.ai/studio/document-processing/basic_ocr" target="_blank" rel="noopener noreferrer">official OCR processor guide</a> documents the available request fields and response. <strong>No directly comparable LLM token context window, output-token limit or knowledge cutoff is published for this OCR service.</strong> The original SXF model catalog correctly leaves those values unspecified.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL COST ANALYSIS</p><h2>Mistral OCR 4.1 pricing: $4/1,000 pages, annotated pages and review costs.</h2></div>
+          <p>Mistral lists <strong>$4 per 1,000 standard OCR pages</strong> on its public price card and <strong>$5 per 1,000 annotated pages</strong> on the OCR 4.1 model card. For cost planning below, each line treats the selected page-processing category as a separate scenario—not as an automatic $4 + $5 charge. Confirm which tasks count as annotated pages and the effective invoice before combining request features. <a href="https://docs.mistral.ai/models/ocr-4-1" target="_blank" rel="noopener noreferrer">Check the current model card</a> and <a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">pricing reference</a>.</p>
+          <div class="sxf-mocr41-table-wrap"><table class="sxf-mocr41-table"><caption>SXF arithmetic from Mistral's published price points (USD; zero retries and no human review)</caption><thead><tr><th scope="col">Processed pages</th><th scope="col">Standard OCR, $0.004/page</th><th scope="col">Annotated page, $0.005/page</th><th scope="col">Illustrative difference</th></tr></thead><tbody>
+            <tr><th scope="row">25</th><td>$0.10</td><td>$0.125</td><td>$0.025</td></tr>
+            <tr><th scope="row">250</th><td>$1.00</td><td>$1.25</td><td>$0.25</td></tr>
+            <tr><th scope="row">1,000</th><td>$4.00</td><td>$5.00</td><td>$1.00</td></tr>
+            <tr><th scope="row">10,000</th><td>$40.00</td><td>$50.00</td><td>$10.00</td></tr>
+            <tr><th scope="row">100,000</th><td>$400.00</td><td>$500.00</td><td>$100.00</td></tr>
+          </tbody></table></div>
+          <p><strong>SXF cost equation:</strong> <code>(processed_pages × rate_per_page × (1 + reprocessing_fraction)) + (pages_reviewed × reviewer_minutes_per_page / 60 × hourly_review_rate)</code>. It distinguishes OCR processing spend from quality-control labor. Actual billed page units, optional Batch pricing, quotas, special enterprise terms, image uploads, cloud storage and other services may change the invoice. The page's existing verified Standard rate remains <strong>$0.004 per page</strong>; the separate annotated rate is editorial context and does not overwrite the catalog.</p>
+
+          <div class="sxf-mocr41-calc" data-mocr41-calculator>
+            <h3>SXF interactive OCR page and human-review cost estimator</h3>
+            <p>Estimate a real document pipeline rather than comparing only API list prices. No input values are uploaded or tracked; calculations run entirely in your browser.</p>
+            <div class="sxf-mocr41-fields">
+              <label for="mocr41-docs">Documents<input id="mocr41-docs" type="number" min="0" max="1000000" step="1" value="100" data-mocr41-docs></label>
+              <label for="mocr41-pages">Average pages per document<input id="mocr41-pages" type="number" min="0" max="100000" step="1" value="10" data-mocr41-pages></label>
+              <label for="mocr41-mode">Processing scenario<select id="mocr41-mode" data-mocr41-mode><option value="ocr">Standard OCR · $0.004/page</option><option value="annotated">Annotated-page scenario · $0.005/page</option></select></label>
+              <label for="mocr41-retry">Estimated reprocessing (%)<input id="mocr41-retry" type="number" min="0" max="300" step="1" value="5" data-mocr41-retry></label>
+              <label for="mocr41-audit">Pages manually reviewed (%)<input id="mocr41-audit" type="number" min="0" max="100" step="1" value="10" data-mocr41-audit></label>
+              <label for="mocr41-minutes">Review minutes per selected page<input id="mocr41-minutes" type="number" min="0" max="600" step="0.5" value="2" data-mocr41-minutes></label>
+              <label for="mocr41-rate">Human reviewer rate ($/hour)<input id="mocr41-rate" type="number" min="0" max="10000" step="1" value="30" data-mocr41-rate></label>
+            </div>
+            <div class="sxf-mocr41-results" role="status" aria-live="polite">
+              <div><span>Document pages</span><strong data-mocr41-count>1,000</strong></div>
+              <div><span>Estimated OCR API</span><strong data-mocr41-api>$4.20</strong></div>
+              <div><span>Human QA labor</span><strong data-mocr41-human>$100.00</strong></div>
+              <div><span>Estimated total</span><strong data-mocr41-total>$104.20</strong></div>
+            </div>
+            <p class="sxf-mocr41-note" data-mocr41-explain>1,000 pages, 5% reprocessing, 100 review pages at 2 min each and $30/hour.</p>
+            <p class="sxf-mocr41-note">SXF hypothetical scenario. Labor can dominate OCR cost, but the review fraction and time are input assumptions, not independently measured Mistral error rates. A lower-confidence page is not necessarily an incorrect page.</p>
+          </div>
+
+          <p>At the default 1,000-page scenario, Mistral's list rate would give <strong>$4.20</strong> in illustrative OCR reprocessing charges but <strong>$100</strong> in assumed verification labor. That is why purchasing decisions should compare <strong>cost per accepted document</strong>, not just per-page OCR fees. See <a href="/models/pricing/">SXF's verified pricing directory</a> and the <a href="/guides/ai-agent-cost/">AI agent cost and operations guide</a> for adjacent operating-cost frameworks.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-api">
+          <div class="model-section-head"><p class="eyebrow">VERSION-PINNED API QUICKSTART</p><h2>How to use Mistral OCR 4.1 API with Python for PDF and image extraction.</h2></div>
+          <p>Install the official <code>mistralai</code> Python SDK and configure <code>MISTRAL_API_KEY</code> on your server. For reproducibility, pin <code>mistral-ocr-4-1</code> rather than relying on the mutable <code>mistral-ocr-latest</code> alias. The documented method is <code>client.ocr.process()</code> through the <code>/v1/ocr</code> service.</p>
+          <pre class="sxf-mocr41-code"><code>import os
+from mistralai.client import Mistral
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+
+response = client.ocr.process(
+    model="mistral-ocr-4-1",
+    document={
+        "type": "document_url",
+        "document_url": "https://arxiv.org/pdf/2201.04234"
+    },
+    table_format="html",
+    include_blocks=True,
+    confidence_scores_granularity="block"
+)
+
+for page in response.pages:
+    print(f"PAGE {page.index}")
+    print(page.markdown)
+    for block in (page.blocks or []):
+        print(block.type, block.content)
+
+print(response.usage_info)</code></pre>
+          <p>This example uses a <strong>public test PDF URL</strong>; it is not a benchmark run. For private files use Mistral's upload or permitted Base64 request paths instead of publishing a private PDF at a public URL. Never embed an API secret in client-side JavaScript. Verify MIME types, document permission and the actual response schema before automating downstream actions.</p>
+          <h3>cURL: raw OCR with the pinned model</h3>
+          <pre class="sxf-mocr41-code"><code>curl -X POST "https://api.mistral.ai/v1/ocr" \
+  -H "Authorization: Bearer $MISTRAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral-ocr-4-1",
+    "document": {
+      "type": "document_url",
+      "document_url": "https://arxiv.org/pdf/2201.04234"
+    },
+    "include_blocks": true,
+    "confidence_scores_granularity": "block",
+    "table_format": "html"
+  }'</code></pre>
+          <p>For complete request and upload details, consult <a href="https://docs.mistral.ai/studio/document-processing/basic_ocr" target="_blank" rel="noopener noreferrer">Mistral's OCR quickstart</a> and the <a href="https://docs.mistral.ai/api/endpoint/ocr" target="_blank" rel="noopener noreferrer">OCR endpoint reference</a>. In production, inspect each page's <code>markdown</code>, <code>tables</code>, <code>images</code>, <code>blocks</code> and <code>usage_info</code> independently—do not assume an OCR call creates a validated business record.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-blocks">
+          <div class="model-section-head"><p class="eyebrow">DOCUMENT STRUCTURE</p><h2>OCR 4.1 bounding boxes, confidence scores, tables and reading order.</h2></div>
+          <p>OCR 4.1 can return a <code>blocks</code> array when <code>include_blocks=True</code>. Mistral documents coordinates <code>top_left_x</code>, <code>top_left_y</code>, <code>bottom_right_x</code> and <code>bottom_right_y</code>, the <code>type</code> label, and <code>content</code>. Available labels include <code>text</code>, <code>title</code>, <code>list</code>, <code>table</code>, <code>image</code>, <code>equation</code>, <code>caption</code>, <code>code</code>, <code>references</code>, <code>aside_text</code>, <code>header</code>, <code>footer</code> and <code>signature</code>.</p>
+          <div class="sxf-mocr41-table-wrap"><table class="sxf-mocr41-table"><caption>How to choose OCR 4.1 extraction settings and verify output</caption><thead><tr><th scope="col">Requirement</th><th scope="col">Request setting</th><th scope="col">What the response actually proves</th></tr></thead><tbody>
+            <tr><th scope="row">Paragraph and title coordinates</th><td><code>include_blocks=True</code></td><td>Predicted region locations; not guaranteed reading-order correctness</td></tr>
+            <tr><th scope="row">Tables as separate objects</th><td><code>table_format="html"</code> or <code>"markdown"</code></td><td>Structured table content; check row spans, columns and numerical values</td></tr>
+            <tr><th scope="row">Document header/footer</th><td><code>extract_header=True</code>, <code>extract_footer=True</code></td><td>Fields returned separately; confirm nothing meaningful was omitted</td></tr>
+            <tr><th scope="row">Page-level uncertainty</th><td><code>confidence_scores_granularity="page"</code></td><td>Aggregate scores only; no cell-by-cell factual guarantee</td></tr>
+            <tr><th scope="row">Block confidence</th><td><code>"block"</code> with <code>include_blocks=True</code></td><td>Block average/minimum content and block-type scores where defined</td></tr>
+            <tr><th scope="row">Word confidence</th><td><code>"word"</code></td><td>Word-level scores on pages/tables; different from block-score mode</td></tr>
+          </tbody></table></div>
+          <p><strong>Confidence is not accuracy:</strong> a high score can still accompany an incorrect invoice amount, omitted negative sign or merged table cell. Conversely, some non-text regions can have <code>null</code> content confidence. Use human-reviewed thresholds calibrated on your own scanned documents, not a universal “above 90% = correct” rule.</p>
+          <h3>Why Markdown-only OCR can lose important evidence</h3>
+          <p>Mistral's Markdown output may include placeholders such as <code>![img-0.jpeg](img-0.jpeg)</code> or <code>[tbl-3.html](tbl-3.html)</code>. Resolve the accompanying <code>images</code> and <code>tables</code> arrays before indexing; otherwise retrieval may silently lose charts or tables. For document-search architecture, keep page ID, bounding box, original file ID and parsed content tied together. Related: <a href="/guides/vector-database-for-rag/">SXF vector databases for RAG</a> and <a href="/guides/rag-vs-fine-tuning-vs-long-context/">RAG vs fine-tuning vs long-context design</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-annotations">
+          <div class="model-section-head"><p class="eyebrow">DOCUMENT AI VS BASIC OCR</p><h2>Basic OCR vs annotated document extraction: what should you pay for?</h2></div>
+          <p><strong>Basic OCR</strong> transcribes a page and extracts document structure. <strong>Document annotations</strong> add schema-guided information extraction, for example returning an invoice number, due date, currency and supplier as validated application fields. Mistral's <a href="https://docs.mistral.ai/studio/document-processing/annotations" target="_blank" rel="noopener noreferrer">annotations guide</a> distinguishes document annotations from box annotations (region-level interpretation such as charts).</p>
+          <p><strong>Do not assume <code>include_blocks=True</code> automatically means the annotated-page price.</strong> The model card lists a separate annotated-page amount, but the actual billing basis for combinations of OCR and annotation requests must be checked against the API and account invoice. In a production workflow, validate all schema fields and currency/number formats; document OCR and document understanding are stages, not equivalent guarantees.</p>
+          <div class="sxf-mocr41-table-wrap"><table class="sxf-mocr41-table"><caption>SXF decision rubric — choose the least complex validated output</caption><thead><tr><th scope="col">Document task</th><th scope="col">Start with</th><th scope="col">Human validation focus</th></tr></thead><tbody>
+            <tr><th scope="row">Search and archive PDFs</th><td>Basic Markdown plus page IDs</td><td>Missing text and broken paragraphs</td></tr>
+            <tr><th scope="row">Retrieve financial tables</th><td>OCR + separate table formatting</td><td>Totals, decimal points, row/column alignment</td></tr>
+            <tr><th scope="row">Map documents to a typed record</th><td>OCR + structured annotations</td><td>Required fields, false assumptions, missing values</td></tr>
+            <tr><th scope="row">Grounding and citations</th><td>OCR with blocks, boxes and provenance</td><td>Source location, reading order, page mapping</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-migration">
+          <div class="model-section-head"><p class="eyebrow">VERSION CONTROL / 2026</p><h2>Mistral OCR 4.1 vs OCR 4.0: upgrades, migration and API aliases.</h2></div>
+          <p>Mistral released OCR 4.1 on <strong>July 16, 2026</strong> and marked it generally available on <strong>August 31, 2026</strong>. The provider's September 29 changelog lists OCR 4.0 (<code>mistral-ocr-4-0</code>) as deprecated with a September 30 retirement date and recommends OCR 4.1. The alias <code>mistral-ocr-latest</code> points to OCR 4.1 as of this verification date, but aliases may change; pin <code>mistral-ocr-4-1</code> for reproducible pipelines. <a href="https://docs.mistral.ai/resources/changelogs" target="_blank" rel="noopener noreferrer">Official version timeline</a>.</p>
+          <div class="sxf-mocr41-table-wrap"><table class="sxf-mocr41-table"><caption>Documented version features and lifecycle — verified November 7, 2026</caption><thead><tr><th scope="col">Question</th><th scope="col">OCR 4.0</th><th scope="col">OCR 4.1</th></tr></thead><tbody>
+            <tr><th scope="row">Versioned model string</th><td><code>mistral-ocr-4-0</code></td><td><code>mistral-ocr-4-1</code></td></tr>
+            <tr><th scope="row">Provider lifecycle</th><td>Deprecated; retirement listed September 30</td><td>GA Premier; current Document AI OCR service</td></tr>
+            <tr><th scope="row">Structural block extraction</th><td>Introduced with OCR 4.0</td><td>Available, with block confidence scores</td></tr>
+            <tr><th scope="row">Confidence-granularity update</th><td>Page/word scoring already documented</td><td>Added <code>block</code> scoring granularity</td></tr>
+            <tr><th scope="row">Standard list price</th><td>$4/1,000 pages</td><td>$4/1,000 pages</td></tr>
+          </tbody></table></div>
+          <p><strong>Upgrade checklist:</strong> change the pinned model ID, enable block extraction only if needed, request block confidence with <code>confidence_scores_granularity="block"</code>, update parsers to tolerate missing or <code>null</code> scores, and regression-test reading order and table fidelity. Compare the same source documents; changing model version alone does not prove an improvement on your corpus.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-rag">
+          <div class="model-section-head"><p class="eyebrow">PRACTICAL DOCUMENT PIPELINES</p><h2>Using Mistral OCR 4.1 for searchable PDFs, invoices and RAG.</h2></div>
+          <ol class="sxf-mocr41-steps">
+            <li><strong>Ingest and authorize:</strong> receive a PDF with explicit access rights, validate its file type and size, and store a stable document ID.</li>
+            <li><strong>Run OCR:</strong> use pinned <code>mistral-ocr-4-1</code>, preserving page indices and handling failed or skipped pages explicitly.</li>
+            <li><strong>Preserve structure:</strong> map tables, formulas, images and bounding boxes back to source pages; do not index Markdown placeholders as if they were the extracted content.</li>
+            <li><strong>Normalize and review:</strong> check dates, amount signs, currency, identifiers, redacted content and selected low-confidence regions against the original scan.</li>
+            <li><strong>Chunk and retrieve:</strong> embed chunks with page IDs and access-control tags; apply tenant filters before semantic/vector search and log provenance for final answers.</li>
+            <li><strong>Measure:</strong> separately report text accuracy, table-cell fidelity, missing-data rate, processing latency and total cost per approved document.</li>
+          </ol>
+          <p>OCR extraction is a <em>preprocessing step</em>, not a substitute for provenance-aware retrieval. If OCR output is later sent to an AI agent, treat text recovered from third-party documents as <strong>untrusted content</strong>, not as system instructions. Apply authentication, authorization and the controls in the <a href="/guides/prompt-injection/">SXF prompt injection guide</a> and <a href="/guides/ai-agent-security/">AI agent security guide</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-research">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL REPRODUCIBLE RESEARCH DESIGN</p><h2>SXF 24-document OCR evaluation protocol: text, tables, layout and confidence.</h2></div>
+          <p><strong>This is an original SXF proposed research method—not a completed Mistral OCR 4.1 benchmark.</strong> Build a consented or synthetic corpus of <strong>24 documents</strong>, with six examples each of invoices/receipts, research papers with tables/equations, multilingual forms, and low-quality scanned pages. Use manually reviewed ground truth for exact text, critical field values, block types and, where possible, page-region coordinates.</p>
+          <div class="sxf-mocr41-table-wrap"><table class="sxf-mocr41-table"><caption>Prespecified OCR evaluation dimensions; no measured scores are claimed</caption><thead><tr><th scope="col">Group (6 documents)</th><th scope="col">Measure</th><th scope="col">Failure mode to log</th></tr></thead><tbody>
+            <tr><th scope="row">Invoices and receipts</th><td>Critical-field exact match and number-value integrity</td><td>Wrong currency, subtotal, decimal separator or invoice ID</td></tr>
+            <tr><th scope="row">Research tables and formulas</th><td>Normalized character error rate and table-cell match</td><td>Swapped cells, merged columns and missing mathematical symbols</td></tr>
+            <tr><th scope="row">Multilingual forms</th><td>WER/CER by language, script and scan quality</td><td>Diacritic loss, name corruption or language mixing</td></tr>
+            <tr><th scope="row">Degraded scans</th><td>Missing regions, page/block confidence calibration</td><td>False high confidence or skipped text blocks</td></tr>
+          </tbody></table></div>
+          <p>Hold image resolution and preprocessing constant, include raw/clean/noisy conditions, pin model IDs and request flags, and keep reviewers blind to provider identity. Compare OCR 4.1 with a documented alternative using the same materials. Define acceptable error rates <em>before</em> testing, and track confidence versus actual errors instead of treating confidence as proof.</p>
+          <p><strong>Reproduce SXF's scoring method:</strong> download the <a href="/models/mistral-ocr-4-1/sxf-ocr-eval.py">offline OCR/CER/critical-field scorer</a> and the <a href="/models/mistral-ocr-4-1/sxf-ocr-synthetic.jsonl">12 synthetic JSONL examples</a>. The examples are invented, contain no real client data, and <strong>are not Mistral API outputs or independent performance measurements</strong>. Replace the ground-truth/prediction strings with your own measured records to calculate meaningful scores.</p>
+          <p>For broader experiment design, see <a href="/guides/ai-model-benchmarks-explained/">SXF model benchmarking standards</a> and <a href="/evaluations/">independent evaluation evidence</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-faq">
+          <div class="model-section-head"><p class="eyebrow">DEVELOPER SEARCH QUESTIONS</p><h2>Mistral OCR 4.1 FAQ: model ID, PDF API, page price and bounding boxes.</h2></div>
+          <div class="sxf-mocr41-faq">
+            <details><summary>What is the Mistral OCR 4.1 API model ID?</summary><p>Use <code>mistral-ocr-4-1</code> via <code>client.ocr.process()</code> or <code>POST /v1/ocr</code>. The alias <code>mistral-ocr-latest</code> currently resolves to OCR 4.1, but it may change over time.</p></details>
+            <details><summary>How much does Mistral OCR 4.1 cost per page?</summary><p>Mistral publishes $4 per 1,000 Standard OCR pages ($0.004/page) and separately lists $5 per 1,000 annotated pages ($0.005/page). Confirm your actual annotation and Batch billing eligibility.</p></details>
+            <details><summary>Can Mistral OCR 4.1 extract tables from PDF?</summary><p>Yes. Set <code>table_format="markdown"</code> or <code>"html"</code> to return separate table structures. Check row, column and value accuracy against the source.</p></details>
+            <details><summary>Does OCR 4.1 return bounding boxes and coordinates?</summary><p>Yes. With <code>include_blocks=True</code>, page blocks include structural labels, bounding box coordinates and extracted content in reading order.</p></details>
+            <details><summary>What confidence scores does OCR 4.1 support?</summary><p>Use <code>confidence_scores_granularity</code> with <code>"page"</code>, <code>"block"</code> or <code>"word"</code>. Block scores require <code>include_blocks=True</code>; scores guide review but are not accuracy guarantees.</p></details>
+            <details><summary>Is Mistral OCR 4.1 an open-source model?</summary><p>No. Mistral presents OCR 4.1 as a generally available Premier hosted service. Do not conflate its Document AI API with Mistral's separately licensed open-weight language models.</p></details>
+            <details><summary>What changed from OCR 4.0 to OCR 4.1?</summary><p>OCR 4.1 adds block-granularity confidence scores. Mistral's changelog lists OCR 4.0 as deprecated, recommends OCR 4.1, and states the same Standard page price.</p></details>
+            <details><summary>Can OCR 4.1 power a RAG PDF search system?</summary><p>Yes, as the text-and-structure extraction stage. A reliable RAG system must additionally preserve provenance, validate tables, control user permissions and evaluate retrieval quality.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="mocr41-sources">
+          <div class="model-section-head"><p class="eyebrow">SOURCE RECORD AND LIMITATIONS</p><h2>Mistral primary documentation and SXF's original calculations.</h2></div>
+          <p>Verified against Mistral's official documentation on <strong>November 7, 2026</strong>. The existing SXF model catalog's October 6 baseline, Standard price and append-only history are preserved. This editorial layer adds provider-attributed features, derived per-page arithmetic, an interactive scenario estimator and a reproducible test protocol. <strong>SXF has not fabricated OCR 4.1 accuracy, throughput, measured page confidence, dataset results or paid invoices.</strong></p>
+          <ul class="sxf-mocr41-sources">
+            <li><a href="https://docs.mistral.ai/models/ocr-4-1" target="_blank" rel="noopener noreferrer">Mistral — OCR 4.1 model card, lifecycle and per-page prices</a></li>
+            <li><a href="https://docs.mistral.ai/studio/document-processing/basic_ocr" target="_blank" rel="noopener noreferrer">Mistral — PDF OCR processor, tables, blocks and confidence</a></li>
+            <li><a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Mistral — official API rate card</a></li>
+            <li><a href="https://docs.mistral.ai/studio/document-processing/annotations" target="_blank" rel="noopener noreferrer">Mistral — structured document annotations</a></li>
+            <li><a href="https://docs.mistral.ai/resources/changelogs" target="_blank" rel="noopener noreferrer">Mistral — 2026 OCR 4.0/4.1 release and deprecation dates</a></li>
+            <li><a href="https://docs.mistral.ai/api/endpoint/ocr" target="_blank" rel="noopener noreferrer">Mistral — OCR HTTP endpoint contract</a></li>
+            <li><a href="https://docs.mistral.ai/studio/document-processing/document_qna" target="_blank" rel="noopener noreferrer">Mistral — Document Q&amp;A pipeline separation</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="SXF related research and guides">
+            <a href="/providers/mistral-ai/"><span>PROVIDER</span><strong>Mistral AI model directory</strong><b>↗</b></a>
+            <a href="/guides/vector-database-for-rag/"><span>DOCUMENT SEARCH</span><strong>Vector databases and RAG integration</strong><b>↗</b></a>
+            <a href="/guides/rag-vs-fine-tuning-vs-long-context/"><span>ARCHITECTURE</span><strong>Choose RAG or long-context design</strong><b>↗</b></a>
+          </nav>
+        </section>
+

@@ -68,6 +68,7 @@ from flux2_klein_9b_model_page import enrich_flux2_klein_9b_page
 from voxtral_mini_transcribe_2_page import enrich_voxtral_mini_transcribe_2_page
 from claude_haiku_45_model_page import enrich_claude_haiku_45_page
 from llama4_scout_model_page import enrich_llama_4_scout_page
+from mistral_ocr41_model_page import enrich_mistral_ocr_41_page
 from nano_banana_pro_model_page import enrich_nano_banana_pro_page
 from nano_banana_21_model_page import enrich_nano_banana_21_page
 from deepseek_v4_pro_model_page import enrich_deepseek_v4_pro_page
@@ -5572,6 +5573,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_claude_haiku_45_page(page)
     if model_id == "llama-4-scout":
         page = enrich_llama_4_scout_page(page)
+    if model_id == "mistral-ocr-4-1":
+        page = enrich_mistral_ocr_41_page(page)
     if model_id == "llama-4-maverick":
         page = inject_before_main_end(page, "<section class=\"model-compare-bridge shell\" data-scout-reciprocal-link>\n  <div class=\"intel-section-head\"><div><p class=\"eyebrow\">LLAMA 4 SCOUT AND MAVERICK</p>\n  <h2>Compare Scout's 10M context and smaller 109B total-weight footprint.</h2></div></div>\n  <p>Maverick contains 400B total parameters with 128 experts, while Llama 4 Scout contains 109B total and 16 experts. Both activate 17B parameters per token. For 80GB H100 INT4 constraints, EU license eligibility, theoretical VRAM math and a reproducible long-context testing protocol, read the dedicated Scout reference.</p>\n  <div class=\"model-related-links\"><a href=\"/models/llama-4-scout/\"><span>LONG CONTEXT / GPU</span><strong>Llama 4 Scout: 109B weights, 10M context and VRAM</strong><b>↗</b></a></div>\n</section>")
     if model_id == "claude-haiku-5-5":
