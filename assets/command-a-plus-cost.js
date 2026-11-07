@@ -4,7 +4,6 @@
   const root=document.querySelector("[data-caplus-calculator]");
   if(!root)return;
   const fields={
-    tier:root.querySelector("[data-caplus-tier]"),
     instances:root.querySelector("[data-caplus-instances]"),
     hours:root.querySelector("[data-caplus-hours]"),
     throughput:root.querySelector("[data-caplus-throughput]"),
@@ -27,8 +26,8 @@
   }).format(n);
   const number=n=>new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n);
   function update(){
-    const tier=fields.tier.value==="XL"?"XL":"L";
-    const hourly=tier==="XL"?32.5:17.5;
+    const tier="XL";
+    const hourly=57.5;
     const instances=Math.floor(read(fields.instances,10000));
     const hours=read(fields.hours,8760);
     const throughput=read(fields.throughput,1000000);
