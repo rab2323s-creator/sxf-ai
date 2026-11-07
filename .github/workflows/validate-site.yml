@@ -105,6 +105,11 @@ jobs:
         run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
+      - name: Claude Haiku 4.5 SEO, token economics, migration and reciprocal linking
+        run: |
+          python -m py_compile scripts/claude_haiku_45_model_page.py models/claude-haiku-4-5/sxf-haiku45-eval.py
+          node --check assets/haiku45-cost-lab.js
+          python tests/test_claude_haiku_45_seo.py
       - name: Voxtral Mini Transcribe 2 SEO, economics and source-backed research
         run: |
           python -m py_compile scripts/voxtral_mini_transcribe_2_page.py models/voxtral-mini-transcribe-2/sxf-stt-score.py
