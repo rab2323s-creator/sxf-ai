@@ -408,4 +408,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/github-copilot-weekly-releases-september-21-6edfaac/"):
         from copilot_sep21_signal_page import enrich
         return enrich(page)
+    if canonical.endswith("/introducing-playground-create-and-play-custom-games-22643d6/"):
+        from google_playground_signal_page import enrich
+        return enrich(page)
     return page
