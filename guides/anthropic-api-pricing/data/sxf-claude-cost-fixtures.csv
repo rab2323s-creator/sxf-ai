@@ -1,0 +1,8 @@
+scenario_id,model,requests,uncached_input_tokens_per_request,output_tokens_per_request,shared_prefix_tokens,initial_cache_write_5m_tokens,subsequent_cache_read_tokens_per_request,assumed_successful_cache_reads,status
+SXF01-haiku,claude-haiku-5-5,100000,2500,300,0,0,0,0,hypothetical
+SXF01-sonnet,claude-sonnet-5-5,100000,2500,300,0,0,0,0,hypothetical
+SXF01-opus,claude-opus-5-5,100000,2500,300,0,0,0,0,hypothetical
+SXF02-haiku,claude-haiku-5-5,10000,20000,6000,0,0,0,0,hypothetical
+SXF02-sonnet,claude-sonnet-5-5,10000,20000,6000,0,0,0,0,hypothetical
+SXF02-opus,claude-opus-5-5,10000,20000,6000,0,0,0,0,hypothetical
+SXF03-sonnet,claude-sonnet-5-5,1000,2000,1000,40000,40000,40000,999,idealized-unmeasured

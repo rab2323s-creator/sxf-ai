@@ -100,4 +100,8 @@ def render_anthropic_provider_html(ctx, items):
       <div class="model-related-links">{official(docs, "Models overview")}{official(pricing_url, "Pricing")}{official(lifecycle, "Deprecations")}{official(tools_url, "Tools")}{official(code_url, "Claude Code")}<a href="/models/">Model directory ↗</a><a href="/compare/">Comparison hub ↗</a></div>
     </section>
     </main>{footer}</body></html>'''
-    return enrich_anthropic_provider_page(page, models, verified)
+    rendered = enrich_anthropic_provider_page(page, models, verified)
+    pricing_lab_link = '<aside class="shell related-guide" aria-label="Claude API pricing research"><a href="/guides/anthropic-api-pricing/">Claude API Pricing Calculator: caching, Batch API, Haiku tiers and original SXF economics</a></aside>'
+    if '/guides/anthropic-api-pricing/' not in rendered:
+        rendered = rendered.replace("</main>", pricing_lab_link + "</main>", 1)
+    return rendered

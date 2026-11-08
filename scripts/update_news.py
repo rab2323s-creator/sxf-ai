@@ -8018,6 +8018,17 @@ def guides_index_html(items, current_items):
             "read_time": "16 min",
         },
         {
+            "href": "/guides/anthropic-api-pricing/",
+            "category": "Model Economics · API Pricing · Research",
+            "categories": ["models", "tools", "research"],
+            "kicker": "ANTHROPIC API PRICING · ORIGINAL SXF COST LAB",
+            "title": "Anthropic API Pricing (2026): Claude Cost Calculator, Cache & Batch",
+            "description": "Compare current Claude API rates, calculate caching and Batch discounts, and audit three original SXF cost scenarios.",
+            "meta": "Claude API pricing · Opus · Sonnet · Haiku · Cache · Batch",
+            "updated": "Nov 8, 2026",
+            "read_time": "17 min",
+        },
+        {
             "href": "/guides/ai-receptionist/",
             "category": "Voice Agents · Business Automation · Phone AI",
             "categories": ["agents", "tools", "research", "models"],
@@ -11195,7 +11206,11 @@ def build_discovery_pages(items, current_items):
         (provider_path / "index.html").write_text(provider_page_html(provider, items), encoding="utf-8")
 
     (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_hub_with_explosion_link(items, current_items), encoding="utf-8")
-    (PRICING_DIR / "index.html").write_text(model_pricing_page_html(), encoding="utf-8")
+    pricing_reference_page = model_pricing_page_html()
+    pricing_deep_dive_link = '<aside class="shell related-guide" aria-label="Anthropic API pricing guide"><a href="/guides/anthropic-api-pricing/">Anthropic API pricing: Claude prompt caching, Batch discounts and SXF cost lab</a></aside>'
+    if '/guides/anthropic-api-pricing/' not in pricing_reference_page:
+        pricing_reference_page = pricing_reference_page.replace("</main>", pricing_deep_dive_link + "</main>", 1)
+    (PRICING_DIR / "index.html").write_text(pricing_reference_page, encoding="utf-8")
     (GUIDES_DIR / "index.html").write_text(guides_index_html(items, current_items), encoding="utf-8")
     from ai_receptionist_guide import guide_html as render_receptionist_guide
     receptionist_dir = GUIDES_DIR / "ai-receptionist"
