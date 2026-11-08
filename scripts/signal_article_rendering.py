@@ -429,4 +429,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/claude-haiku-5-5-in-github-copilot-86f546d/"):
         from claude_haiku_55_copilot_editorial import enrich
         return enrich(page)
+    if canonical.endswith("/node-20-is-no-longer-available-in-github-actions-2343bfa/"):
+        from github_actions_node24_migration_editorial import enrich
+        return enrich(page)
     return page
