@@ -414,4 +414,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/how-jump-trading-is-scaling-quant-research-with-chatgpt-342677a/"):
         from jump_trading_quant_signal_page import enrich
         return enrich(page)
+    if canonical.endswith("/airbnb-widens-access-to-gpt-6-astra-and-openai-frontier-models-ea9ea2f/"):
+        from airbnb_astra_editorial import enrich
+        return enrich(page)
     return page
