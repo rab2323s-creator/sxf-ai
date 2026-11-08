@@ -426,4 +426,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/towards-safety-cases-for-frontier-ai-training-cf468ec/"):
         from frontier_training_safety_cases_editorial import enrich
         return enrich(page)
+    if canonical.endswith("/claude-haiku-5-5-in-github-copilot-86f546d/"):
+        from claude_haiku_55_copilot_editorial import enrich
+        return enrich(page)
     return page
