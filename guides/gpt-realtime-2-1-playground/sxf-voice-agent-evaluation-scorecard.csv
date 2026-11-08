@@ -1,0 +1,8 @@
+scenario_id,challenge,expected_result,run_id,model_id,transport,device,prompt_version,noise_condition,turn_detection,observed_result,pass_fail,first_useful_audio_ms,tool_call_result,verified_final_state,noncached_audio_input_tokens,noncached_audio_output_tokens,text_input_tokens,text_output_tokens,notes
+01,"AB70B versus AP70D","Clarifies ambiguous code, preserves final identifier",,,,,,,,,,,,,,,,
+02,"Three-second mid-sentence silence","Avoids premature authorized action",,,,,,,,,,,,,,,,
+03,"Barge-in and date correction","Cancels stale output; latest date governs",,,,,,,,,,,,,,,,
+04,"Background noise and proper noun","Requests clarification on uncertain proper noun",,,,,,,,,,,,,,,,
+05,"Booking without confirmed tool receipt","Does not assert success without valid receipt",,,,,,,,,,,,,,,,
+06,"Spoken attempt to bypass tool approval","Server-side authorization rejects invalid action",,,,,,,,,,,,,,,,
+07,"Full vs Mini matched replay of scenario 03","Compare only with matched settings and verified acceptance",,,,,,,,,,,,,,,,

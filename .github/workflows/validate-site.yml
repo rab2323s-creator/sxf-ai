@@ -178,6 +178,8 @@ jobs:
         run: python scripts/update_news.py
       - name: Ensure original SXF Agent Lab evidence survives generated site builds
         run: python tests/test_ai_agent_lab_persistence.py
+      - name: Verify SXF Realtime Playground original guide, SEO and structured data
+        run: python tests/test_gpt_realtime_playground_seo.py
       - name: Verify original Agent Lab search metadata and sitemap discovery
         run: python tests/test_agent_lab_seo.py
       - name: Open Source topic, page and filter regressions

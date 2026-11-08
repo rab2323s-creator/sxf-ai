@@ -8007,6 +8007,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/gpt-realtime-2-1-playground/",
+            "category": "Voice AI · Realtime API · Applied Testing",
+            "categories": ["agents", "tools", "research", "models"],
+            "kicker": "GPT-REALTIME-2.1 PLAYGROUND · ORIGINAL SXF LAB",
+            "title": "GPT-Realtime-2.1 Playground: Setup, Voice Tests & API Cost",
+            "description": "A step-by-step voice test, WebRTC setup, model vs Mini token calculator and original seven-scenario SXF evaluation scorecard.",
+            "meta": "GPT-Realtime-2.1 · Playground · Voice AI · WebRTC · API cost",
+            "updated": "Nov 8, 2026",
+            "read_time": "16 min",
+        },
+        {
             "href": "/guides/ai-receptionist/",
             "category": "Voice Agents · Business Automation · Phone AI",
             "categories": ["agents", "tools", "research", "models"],
@@ -11189,7 +11200,11 @@ def build_discovery_pages(items, current_items):
     from ai_receptionist_guide import guide_html as render_receptionist_guide
     receptionist_dir = GUIDES_DIR / "ai-receptionist"
     receptionist_dir.mkdir(parents=True, exist_ok=True)
-    (receptionist_dir / "index.html").write_text(render_receptionist_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer}), encoding="utf-8")
+    receptionist_page = render_receptionist_guide({"page_head": page_head, "page_header": page_header, "page_footer": page_footer})
+    receptionist_crosslink = '<aside class="shell related-guide"><a href="/guides/gpt-realtime-2-1-playground/">GPT-Realtime-2.1 Playground: live voice setup and evaluation lab</a></aside>'
+    if '/guides/gpt-realtime-2-1-playground/' not in receptionist_page:
+        receptionist_page = receptionist_page.replace("</main>", receptionist_crosslink + "</main>", 1)
+    (receptionist_dir / "index.html").write_text(receptionist_page, encoding="utf-8")
     from best_ai_image_generators_guide import guide_html as render_image_generators_guide
     image_guide_dir = GUIDES_DIR / "best-ai-image-generators"
     image_guide_dir.mkdir(parents=True, exist_ok=True)
@@ -11253,6 +11268,14 @@ def build_discovery_pages(items, current_items):
 
     build_catalog_model_pages(model_evidence_items)
     ensure_catalog_model_histories()
+    # SXF: durable discovery link to the independent Realtime Playground field guide.
+    realtime_field_guide = ROOT / "models" / "gpt-realtime-2-1" / "index.html"
+    if realtime_field_guide.exists():
+        source_page = realtime_field_guide.read_text(encoding="utf-8")
+        snippet = '<aside class="shell related-guide" aria-label="GPT-Realtime Playground guide"><a href="/guides/gpt-realtime-2-1-playground/">GPT-Realtime-2.1 Playground: setup, SXF voice tests and API cost calculator</a></aside>'
+        if '/guides/gpt-realtime-2-1-playground/' not in source_page:
+            source_page = source_page.replace("</main>", snippet + "</main>", 1)
+            realtime_field_guide.write_text(source_page, encoding="utf-8")
 
     # Render articles only after model routes exist. Model links are based on
     # existing model pages; rendering earlier makes the second pass different.
