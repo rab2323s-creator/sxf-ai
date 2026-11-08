@@ -6,6 +6,8 @@ Maintained through Signals rebuilding; no user workflows are modified.
 import json
 import re
 from html import escape
+from pathlib import Path
+from sitemap_lastmod import MainContent
 CANONICAL = "https://sxf.si/signals/node-20-is-no-longer-available-in-github-actions-2343bfa/"
 TITLE = "Node 20 Removed from GitHub Actions: Node 24 Migration | SXF"
 H1 = "Node 20 Removed from GitHub Actions: How to Migrate to Node 24"
@@ -209,6 +211,19 @@ def enrich(page: str) -> str:
     marker = 'data-sxf-node24-migration="2026-11-08"'
     if marker in page:
         return page
+    # This editorial is an authored document. The feed should not silently
+    # replace it with a generated excerpt, or lose content used by sitemap.
+    authored_file = (Path(__file__).resolve().parents[1] / 'signals' /
+                     'node-20-is-no-longer-available-in-github-actions-2343bfa' /
+                     'index.html')
+    if authored_file.is_file():
+        authored_html = authored_file.read_text(encoding='utf-8')
+        if marker in authored_html:
+            parsed = MainContent()
+            parsed.feed(authored_html)
+            if not parsed.has_main or not parsed.parts:
+                raise ValueError('Authored Node 24 migration article is not sitemap parseable')
+            return authored_html
     needed = ['class="intel-page signal-page"',
               '<h1>Node 20 is no longer available in GitHub Actions</h1>',
               '<section class="signal-layout shell">',
