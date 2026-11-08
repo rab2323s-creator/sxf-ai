@@ -105,6 +105,11 @@ jobs:
         run: python tests/test_ai_receptionist_guide.py
       - name: Best AI image generators guide and schema regression
         run: python tests/test_best_ai_image_generators_guide.py
+      - name: Mistral Embed SEO, indexing economics, retrieval scorer and RAG backlinks
+        run: |
+          python -m py_compile scripts/mistral_embed_model_page.py models/mistral-embed/sxf-mistral-embed-retrieval.py
+          node --check assets/mistral-embed-cost.js
+          python tests/test_mistral_embed_seo.py
       - name: Cohere Command A+ SEO, Model Vault rates, research and inbound links
         run: |
           python -m py_compile scripts/command_a_plus_page.py models/command-a-plus/sxf-command-a-plus-eval.py

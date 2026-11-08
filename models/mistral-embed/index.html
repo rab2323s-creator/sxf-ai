@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Mistral Embed — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Mistral Embed reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
+      <title>Mistral Embed: API Pricing, 1024 Dimensions &amp; RAG | SXF</title>
+      <meta name="description" content="Mistral Embed guide: $0.10/1M tokens, 8K context, 1024-dimension vectors, Python API, cosine similarity, RAG costs and SXF embedding calculator." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Mistral Embed — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Mistral Embed reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
+      <meta property="og:title" content="Mistral Embed: API Pricing, 1024 Dimensions &amp; RAG | SXF" />
+      <meta property="og:description" content="Mistral Embed guide: $0.10/1M tokens, 8K context, 1024-dimension vectors, Python API, cosine similarity, RAG costs and SXF embedding calculator." />
       <meta property="og:url" content="https://sxf.si/models/mistral-embed/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,11 +23,12 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Mistral Embed — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Mistral Embed reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/mistral-embed/#article","headline":"Mistral Embed — API Specs, Context & Pricing","description":"Mistral Embed reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources.","url":"https://sxf.si/models/mistral-embed/","dateModified":"2026-10-06","about":{"@type":"Thing","name":"Mistral Embed"},"citation":["https://docs.mistral.ai/models/mistral-embed-23-12","https://docs.mistral.ai/api/endpoint/embeddings","https://docs.mistral.ai/models"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Mistral Embed","item":"https://sxf.si/models/mistral-embed/"}]}]}</script>
+      <meta name="twitter:title" content="Mistral Embed: API Pricing, 1024 Dimensions &amp; RAG | SXF" />
+      <meta name="twitter:description" content="Mistral Embed guide: $0.10/1M tokens, 8K context, 1024-dimension vectors, Python API, cosine similarity, RAG costs and SXF embedding calculator." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/mistral-embed/#article","headline":"Mistral Embed: API Pricing, 1024 Dimensions & RAG","description":"Mistral Embed guide: $0.10/1M tokens, 8K context, 1024-dimension vectors, Python API, cosine similarity, RAG costs and SXF embedding calculator.","url":"https://sxf.si/models/mistral-embed/","dateModified":"2026-11-08","about":{"@type":"Thing","name":"Mistral Embed"},"citation":["https://docs.mistral.ai/models/mistral-embed-23-12","https://docs.mistral.ai/studio/search/search-toolkit/concepts/embedding-model","https://docs.mistral.ai/inference/embeddings/text_embeddings","https://docs.mistral.ai/api/endpoint/embeddings","https://docs.mistral.ai/inference/quickstarts/create-embeddings","https://docs.mistral.ai/inference/embeddings/code_embeddings","https://docs.mistral.ai/models/codestral-embed-25-05","https://docs.mistral.ai/inference/embeddings"],"inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/mistral-embed/"},"author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"keywords":["Mistral Embed","mistral-embed","mistral-embed-2312","Mistral Embed pricing","Mistral Embed dimensions","Mistral Embed Python API","Mistral embedding 1024","Mistral Embed vector database","Mistral Embed RAG"]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Mistral Embed","item":"https://sxf.si/models/mistral-embed/"}]},{"@type":"FAQPage","@id":"https://sxf.si/models/mistral-embed/#faq","url":"https://sxf.si/models/mistral-embed/#membed-faq","mainEntity":[{"@type":"Question","name":"What is the Mistral Embed model ID?","acceptedAnswer":{"@type":"Answer","text":"The versioned model card is mistral-embed-2312, while Mistral's Python and REST API examples use mistral-embed."}},{"@type":"Question","name":"What is the price of Mistral Embed?","acceptedAnswer":{"@type":"Answer","text":"The Standard rate is $0.10 per million input tokens, with no separately published text-generation output rate. Vector storage and RAG answer generation are additional costs."}},{"@type":"Question","name":"How many dimensions does Mistral Embed produce?","acceptedAnswer":{"@type":"Answer","text":"Mistral's Search Toolkit documents a 1024-dimension cosine-distance configuration for mistral-embed. Check response array length on your endpoint before creating an index."}},{"@type":"Question","name":"What is the Mistral Embed context limit?","acceptedAnswer":{"@type":"Answer","text":"The official Mistral Embed model card lists an 8000-token input context. Split longer documents into chunks."}},{"@type":"Question","name":"Can Mistral Embed generate chat answers?","acceptedAnswer":{"@type":"Answer","text":"No. It produces numerical embeddings from input text. Use a separate language model for generation."}},{"@type":"Question","name":"Is Mistral Embed open source?","acceptedAnswer":{"@type":"Answer","text":"The cited release is a hosted Premier embedding API, not a downloadable open-weights release."}},{"@type":"Question","name":"How does Mistral Embed compare with Codestral Embed?","acceptedAnswer":{"@type":"Answer","text":"Mistral Embed targets general text, while Codestral Embed targets code retrieval and has distinct dimensions, features and pricing. Evaluate quality on your data."}},{"@type":"Question","name":"Can Mistral Embed be used with a vector database?","acceptedAnswer":{"@type":"Answer","text":"Yes. Store the vectors with the correct dimensions, distance function, IDs and access permissions; use the same compatible embedding model for queries and documents."}}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
+    <link rel="stylesheet" href="/assets/mistral-embed-guide.css" />
     </head>
     <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
@@ -37,11 +38,11 @@
       <section class="collection-hero shell">
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Mistral Embed</span></nav>
         <p class="eyebrow">MODEL REFERENCE / MISTRAL AI</p>
-        <h1>Mistral Embed<br><span>verified model reference.</span></h1>
-        <p>Mistral GA text embedding model for retrieval, semantic search, clustering, classification, and similarity workflows.</p>
+        <h1>Mistral Embed<br><span>API, $0.10 pricing, 1024-d RAG vectors.</span></h1>
+        <p>Mistral Embed API for semantic search and RAG: 8K context, 1024-d vectors, $0.10/1M tokens, Python, cosine similarity and original SXF cost analysis.</p>
         <div class="collection-stats">
           <div><strong>8,000</strong><span>context tokens</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
+          <div><strong>1,024</strong><span>Search Toolkit vector dimensions</span></div>
           <div><strong>2026-10-06</strong><span>last verified</span></div>
         </div>
       </section>
@@ -56,8 +57,8 @@
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>mistral-embed-2312</strong></div>
             <div><span>CONTEXT WINDOW</span><strong>8,000</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
-            <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
+            <div><span>OUTPUT</span><strong>Embedding vectors</strong><small>not generated chat tokens</small></div>
+            <div><span>MODEL STATUS</span><strong>GA Premier</strong><small>hosted embedding API</small></div>
             <div><span>STANDARD INPUT</span><strong>$0.10</strong><small>per 1 million tokens</small></div>
             <div><span>STANDARD OUTPUT</span><strong>—</strong><small>per 1 million tokens</small></div>
           </div>
@@ -66,7 +67,7 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
           <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>Not published</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
+            <article><span>VECTOR MODEL</span><h3>1024-d cosine retrieval</h3><p>Generates numerical embeddings rather than text or reasoning. Mistral documents 1,024-d cosine vectors for its Mistral Embed Search Toolkit preset.</p></article>
             <article><span>INPUT</span><h3>text</h3><p>Input modalities come from the cited official model documentation.</p></article>
             <article><span>OUTPUT</span><h3>embedding</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
           </div>
@@ -75,9 +76,201 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
           <div class="model-split">
-            <div><p>$0.10 input per 1 million tokens.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <div><p>$0.10 input per 1 million tokens.</p><p>Mistral Embed charges $0.10 per million input tokens, not output tokens. SXF keeps it outside the generative token calculator and provides a specialist embedding, reindexing and vector-storage estimator below.</p></div>
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
           </div>
+        </section>
+
+        <!-- SXF original editorial guide: source-attributed Mistral facts, independent calculations and reproducible test design -->
+        <section class="model-deep-section" id="membed-overview" data-membed-guide>
+          <div class="model-section-head"><p class="eyebrow">MISTRAL EMBED / DEVELOPER ANSWER</p><h2>What is Mistral Embed and when should you use it?</h2></div>
+          <p><strong>Mistral Embed</strong> is Mistral AI's general-purpose <strong>text embedding model</strong> for semantic search, retrieval-augmented generation (RAG), clustering, similarity and document classification. It accepts text and returns numerical <strong>embedding vectors</strong>, not natural-language answers. The December 2023 version is identified as <code>mistral-embed-2312</code> in Mistral's model card, while its <a href="https://docs.mistral.ai/inference/embeddings/text_embeddings" target="_blank" rel="noopener noreferrer">embedding API examples</a> call <code>mistral-embed</code>. For practical SDK examples below we follow that documented API name and keep the versioned model-card ID distinct.</p>
+          <p>Mistral documents an <strong>8,000-token input context</strong>, a Standard list price of <strong>$0.10 per million input tokens</strong>, and a <strong>1,024-dimensional</strong> <code>mistral-embed</code> vector configuration in its Search Toolkit. Those figures describe an embedding service. No text-generation output-token rate, reasoning budget or conversational maximum output length applies. <strong>Mistral Embed is a Premier hosted API model, not an Apache-2.0 downloadable weight checkpoint.</strong></p>
+          <div class="sxf-me-notice"><strong>Model selection warning — verified November 8, 2026</strong><p><strong>Mistral Embed</strong> is for general text similarity, while <a href="/models/codestral-embed/">Codestral Embed</a> is a separate model developed for source-code retrieval and offers documented output dimension/type controls. Do not reuse its $0.15/MTok price or adjustable dimensions as if they were guaranteed for Mistral Embed. For text RAG, the supported <code>mistral-embed</code> Search Toolkit preset uses 1,024 dimensions and cosine distance; verify your actual endpoint output before defining a persistent vector index.</p></div>
+          <nav class="model-related-links" aria-label="Jump to Mistral Embed research">
+            <a href="#membed-pricing"><span>PRICING</span><strong>API cost, indexing and storage</strong><b>↗</b></a>
+            <a href="#membed-api"><span>PYTHON</span><strong>Get embeddings and compare similarity</strong><b>↗</b></a>
+            <a href="#membed-evaluation"><span>RESEARCH</span><strong>SXF original retrieval evaluation</strong><b>↗</b></a>
+          </nav>
+        </section>
+
+        <section class="model-deep-section" id="membed-specs">
+          <div class="model-section-head"><p class="eyebrow">PRIMARY-SOURCE FACTS</p><h2>Mistral Embed specifications: 8K context, 1024 dimensions, API ID and pricing.</h2></div>
+          <div class="model-capability-grid">
+            <article><span>MODEL CARD VERSION</span><h3>mistral-embed-2312</h3><p>GA Premier release dated December 11, 2023. The documentation's working API examples use <code>mistral-embed</code>.</p></article>
+            <article><span>CONTEXT WINDOW</span><h3>8,000 tokens</h3><p>Input-token ceiling stated by the provider. Split long documents into coherent, overlapping chunks rather than submitting an oversized whole book.</p></article>
+            <article><span>VECTOR SIZE</span><h3>1,024 dimensions</h3><p>Mistral Search Toolkit's <code>MISTRAL_EMBED_DIM_1024</code> preset corresponds to model name <code>mistral-embed</code>, with cosine distance.</p></article>
+            <article><span>INPUT / OUTPUT</span><h3>Text → vector</h3><p>One numeric embedding per accepted input text. There is no generated chat response or an output token rate to estimate.</p></article>
+            <article><span>LIST PRICE</span><h3>$0.10 / 1M input tokens</h3><p>Standard Mistral API price, before any separate vector store, network, retries or downstream LLM inference charges.</p></article>
+            <article><span>ENDPOINT</span><h3>POST /v1/embeddings</h3><p>Accepts <code>input</code> text or a list of texts, returns vectors and API usage. Batching multiple texts in one request is supported.</p></article>
+          </div>
+          <p>The <a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer">Mistral Embed model card</a> and <a href="https://docs.mistral.ai/studio/search/search-toolkit/concepts/embedding-model" target="_blank" rel="noopener noreferrer">Search Toolkit embedding preset specification</a> provide the exact provenance. Mistral also offers separate 128- and 256-dimensional embedding configurations in its toolkit; these carry <em>distinct model names</em> and must not be assumed to be configurable output sizes of the original 1,024-dimensional Mistral Embed endpoint.</p>
+        </section>
+
+        <section class="model-deep-section" id="membed-pricing">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL EMBEDDING ECONOMICS</p><h2>Mistral Embed pricing: $0.10 per million tokens, indexing costs and queries.</h2></div>
+          <p>Embedding a document creates a vector. The <strong>input tokens</strong> needed for the initial corpus and subsequent user queries are billable inputs, but the model's vector output does not have a separate advertised generated-token fee. Below, SXF derives transparent direct-model API costs from Mistral's published <strong>$0.10 / 1,000,000 input tokens</strong>, without pretending to have a paid invoice or assuming extra discounts for Batch mode.</p>
+          <div class="sxf-me-table-wrap"><table class="sxf-me-table"><caption>SXF arithmetic: direct Mistral Embed model cost only (USD, Standard API)</caption><thead><tr><th scope="col">Workload</th><th scope="col">Input tokens billed</th><th scope="col">Estimated model cost</th><th scope="col">What it excludes</th></tr></thead><tbody>
+            <tr><th scope="row">100 documents × 500 tokens</th><td>50,000</td><td><strong>$0.005</strong></td><td>Vector storage and retrieval</td></tr>
+            <tr><th scope="row">10,000 chunks × 500 tokens</th><td>5,000,000</td><td><strong>$0.50</strong></td><td>Retries, duplicated text and index overhead</td></tr>
+            <tr><th scope="row">100,000 chunks × 500 tokens</th><td>50,000,000</td><td><strong>$5.00</strong></td><td>Database, inference and human review</td></tr>
+            <tr><th scope="row">1M chunks × 500 tokens</th><td>500,000,000</td><td><strong>$50.00</strong></td><td>Approximately 4.096 GB of float32 vector payload</td></tr>
+            <tr><th scope="row">100,000 queries × 20 tokens</th><td>2,000,000</td><td><strong>$0.20</strong></td><td>Search service and response generator</td></tr>
+          </tbody></table></div>
+          <p><strong>SXF formula:</strong> <code>embedding API cost = total input tokens × $0.10 / 1,000,000</code>. To budget a recurring system, also count <em>new chunks</em>, any <em>re-embedded percentage</em> after edits, repeated user queries and input retries. Every token amount in these examples is an <strong>assumption</strong>, not a measured token count for arbitrary documents. Use the returned API <code>usage</code> fields for actual metering and consult the <a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer">current model rate</a> before contracting.</p>
+          <h3>How much space does a 1024-dimensional vector use?</h3>
+          <p>A 1,024-dimensional embedding encoded as <strong>32-bit floats</strong> has a theoretical numeric payload of <strong>1,024 × 4 = 4,096 bytes per vector</strong>. That is <strong>4.096 GB for one million vectors</strong> in decimal units, before document IDs, metadata, storage indexing, HNSW edges, replicas and database compression. This is independent mathematical analysis from SXF, not a measurement of any provider's vector database. Changing storage precision, sharding, indexing strategy or metadata can change actual footprint substantially.</p>
+          <div class="sxf-me-table-wrap"><table class="sxf-me-table"><caption>SXF vector-only theoretical storage, not a hosted vector database invoice</caption><thead><tr><th scope="col">1024-d vectors</th><th scope="col">Float32 raw payload</th><th scope="col">Binary GiB</th></tr></thead><tbody>
+            <tr><th scope="row">10,000</th><td>40.96 MB</td><td>0.038 GiB</td></tr>
+            <tr><th scope="row">100,000</th><td>409.6 MB</td><td>0.381 GiB</td></tr>
+            <tr><th scope="row">1,000,000</th><td>4.096 GB</td><td>3.815 GiB</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section class="model-deep-section" id="membed-calculator">
+          <div class="model-section-head"><p class="eyebrow">SXF INTERACTIVE ORIGINAL COST MODEL</p><h2>Mistral Embed cost calculator: documents, tokens, re-indexing and vector storage.</h2></div>
+          <div class="sxf-me-calculator" data-membed-calculator>
+            <h3>Plan a text RAG indexing workload</h3>
+            <p>Estimate initial API processing, monthly changed-chunk re-embedding, query vectors and <strong>theoretical float32 vector storage</strong>. This calculator is a locally executed sensitivity analysis; it sends no text or inputs to external services.</p>
+            <div class="sxf-me-fields">
+              <label for="me-chunks">Indexed chunks<input id="me-chunks" data-me-chunks type="number" min="0" max="100000000" step="1000" value="100000"></label>
+              <label for="me-tokens">Average tokens per chunk<input id="me-tokens" data-me-tokens type="number" min="0" max="8000" step="50" value="500"></label>
+              <label for="me-reindex">Chunks re-indexed per month (%)<input id="me-reindex" data-me-reindex type="number" min="0" max="300" step="1" value="5"></label>
+              <label for="me-queries">User queries per month<input id="me-queries" data-me-queries type="number" min="0" max="100000000" step="1000" value="100000"></label>
+              <label for="me-query-tokens">Average query tokens<input id="me-query-tokens" data-me-query-tokens type="number" min="0" max="8000" step="5" value="20"></label>
+              <label for="me-retries">Extra billed retries (%)<input id="me-retries" data-me-retries type="number" min="0" max="300" step="1" value="0"></label>
+            </div>
+            <div class="sxf-me-results" role="status" aria-live="polite">
+              <div><span>Initial embedding API cost</span><strong data-me-initial>$5.00</strong></div>
+              <div><span>Monthly re-index + query API cost</span><strong data-me-month>$0.45</strong></div>
+              <div><span>Raw float32 vector payload</span><strong data-me-storage>409.60 MB</strong></div>
+            </div>
+            <p class="sxf-me-small" data-me-explain>100,000 chunks × 500 tokens; 5% monthly re-indexing; 100,000 queries × 20 tokens.</p>
+            <p class="sxf-me-small">Does not include vector database storage/compute bills, RAG generator tokens, metadata, query expansion, embedding cache, sales taxes or minimum charges. Changing model or dimensions requires rebuilding a compatible index.</p>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="membed-api">
+          <div class="model-section-head"><p class="eyebrow">COPYABLE DEVELOPER QUICKSTART</p><h2>How to use the Mistral Embed API in Python and cURL.</h2></div>
+          <p>Use the officially documented <code>mistral-embed</code> name with <code>client.embeddings.create()</code>. Keep your Mistral API key in server environment variables, not in public HTML or client JavaScript. An SDK returns <code>data</code> vectors and <code>usage</code> counters; vector dimensions should be checked before writing persistent indexes.</p>
+          <h3>Python: embed documents and a query, then rank by cosine similarity</h3>
+          <pre class="sxf-me-code"><code>import math
+import os
+from mistralai.client import Mistral
+
+documents = [
+    "Refunds are available within 30 days.",
+    "Support is available from 9 AM to 6 PM.",
+    "Invoices are issued on the first of each month.",
+]
+query = "Can I return my subscription payment?"
+
+client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+result = client.embeddings.create(
+    model="mistral-embed", inputs=documents + [query]
+)
+vectors = [item.embedding for item in result.data]
+query_vector = vectors[-1]
+
+def cosine(left, right):
+    dot = sum(a * b for a, b in zip(left, right))
+    norm = math.sqrt(sum(a * a for a in left))
+    norm *= math.sqrt(sum(b * b for b in right))
+    return dot / norm if norm else 0.0
+
+ranking = sorted(
+    ((cosine(query_vector, vec), text)
+     for vec, text in zip(vectors[:-1], documents)),
+    reverse=True
+)
+for score, text in ranking:
+    print(f"{score:.4f}  {text}")
+print("Dimension:", len(query_vector))
+print("API usage:", result.usage)</code></pre>
+          <p>This example is an <strong>executable method</strong> based on official SDK patterns, but SXF has not run a paid embedding call for this page. Actual similarity scores depend on the model version and inputs and are <em>not</em> promised here. In production, map every vector to stable document/chunk IDs, enforce access filters and measure retrieval outcomes against labeled relevance judgments.</p>
+          <h3>cURL: POST /v1/embeddings</h3>
+          <pre class="sxf-me-code"><code>curl "https://api.mistral.ai/v1/embeddings" \
+  -H "Authorization: Bearer $MISTRAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "mistral-embed",
+    "input": [
+      "Find the invoice policy.",
+      "What are the refund rules?"
+    ]
+  }'</code></pre>
+          <p>Mistral's <a href="https://docs.mistral.ai/api/endpoint/embeddings" target="_blank" rel="noopener noreferrer">REST endpoint</a> uses <code>input</code>, while the current Python SDK uses <code>inputs</code>. Keep these differences separate. The REST interface offers optional <code>output_dimension</code> and <code>output_dtype</code> only <em>where the selected model supports them</em>; their presence in a shared schema does not guarantee that the 2023 Mistral Embed supports arbitrary dimensions or 8-bit output. Use <a href="https://docs.mistral.ai/inference/embeddings/text_embeddings" target="_blank" rel="noopener noreferrer">Mistral's text embeddings examples</a> to check syntax.</p>
+        </section>
+
+        <section class="model-deep-section" id="membed-rag">
+          <div class="model-section-head"><p class="eyebrow">PRODUCTION RETRIEVAL ARCHITECTURE</p><h2>Build a document RAG pipeline with Mistral Embed and a vector database.</h2></div>
+          <ol class="sxf-me-steps">
+            <li><strong>Extract documents with provenance.</strong> Parse PDFs and scans first, retaining page and source IDs. For scans, <a href="/models/mistral-ocr-4-1/">Mistral OCR 4.1</a> is a separate Document AI extraction service with per-page fees.</li>
+            <li><strong>Split content intentionally.</strong> Chunk by section, heading or sentence with limited overlap. Keep chunks within the 8K input limit, count tokens with supported tooling and avoid unnecessary overlap-driven token multiplication.</li>
+            <li><strong>Embed consistently.</strong> Embed document chunks and user queries with the same versioned/configured embedding space. Confirm expected 1,024-d output for <code>mistral-embed</code> in your environment.</li>
+            <li><strong>Store, filter, retrieve.</strong> Store vectors with tenant permissions and document IDs. Perform authorization filtering before revealing neighbors; combine cosine vector search with keyword/BM25 and a reranker when supported by measurements.</li>
+            <li><strong>Generate only after retrieval.</strong> Pass permission-checked, cited source passages to the separate answer model. Embedding similarity itself is not evidence that an answer is accurate or current.</li>
+            <li><strong>Evaluate and monitor.</strong> Measure recall@k, MRR, nDCG when graded judgments exist, citation validity, cold/warm latency and cost per accepted answer. Version the index and re-embed on model changes.</li>
+          </ol>
+          <p>Review the <a href="/guides/vector-database-for-rag/">SXF vector database architecture and filtering guide</a>, <a href="/guides/rag-vs-fine-tuning-vs-long-context/">RAG vs fine-tuning vs long-context trade-offs</a>, and <a href="/guides/best-embedding-models-for-rag/">embedding model comparison</a>. All three decisions—embedding model, retrieval storage and downstream generator—need independent measurement.</p>
+        </section>
+
+        <section class="model-deep-section" id="membed-compare">
+          <div class="model-section-head"><p class="eyebrow">NO FABRICATED BENCHMARK WINNERS</p><h2>Mistral Embed vs Codestral Embed vs Gemini Embedding 001.</h2></div>
+          <p>These models serve related but different applications. <strong>Mistral Embed</strong> targets general text embeddings; <a href="/models/codestral-embed/">Codestral Embed</a> is optimized for source-code search; <a href="/models/gemini-embedding-001/">Gemini Embedding 001</a> is an external provider alternative with its own API, dimensionality controls and pricing. Their embedding vectors are <strong>not interchangeable</strong>: mixing them into one index invalidates naive distance comparisons even when vector dimensions match.</p>
+          <div class="sxf-me-table-wrap"><table class="sxf-me-table"><caption>Published capabilities and prices; quality must be benchmarked on your corpus</caption><thead><tr><th scope="col">Model</th><th scope="col">Best initial use</th><th scope="col">Documented context</th><th scope="col">Model's input price</th></tr></thead><tbody>
+            <tr><th scope="row">Mistral Embed</th><td>General text, multilingual search and RAG</td><td>8K tokens</td><td><strong>$0.10 / 1M input tokens</strong></td></tr>
+            <tr><th scope="row"><a href="/models/codestral-embed/">Codestral Embed</a></th><td>Source code and repository retrieval</td><td>8K tokens</td><td>$0.15 / 1M input tokens</td></tr>
+            <tr><th scope="row"><a href="/models/gemini-embedding-001/">Gemini Embedding 001</a></th><td>General-purpose external-model comparison</td><td>Check Google model card</td><td>Check its current pricing route</td></tr>
+          </tbody></table></div>
+          <p>Model cards and published prices alone cannot prove superiority in Arabic, legal PDFs, software repositories or specialized entity matching. Use your own labeled query–document pairs, stable chunking, identical search parameters and measured relevance. Codestral's code-centric features, adjustable embedding dimensions and separate $0.15 price must not silently be applied to Mistral Embed.</p>
+        </section>
+
+        <section class="model-deep-section" id="membed-evaluation">
+          <div class="model-section-head"><p class="eyebrow">SXF ORIGINAL REPRODUCIBLE EVALUATION DESIGN</p><h2>SXF 24-query retrieval study: Recall@k, MRR, languages and hard negatives.</h2></div>
+          <p><strong>This is a preregistered-style original SXF test specification, not measured Mistral embedding performance.</strong> To establish whether Mistral Embed is a useful default for your corpus, prepare <strong>24 human-labeled retrieval queries</strong> in four groups of six: English support policy search, Arabic/French multilingual retrieval, numerical/identifier-heavy documents and adversarial near-duplicate passages.</p>
+          <div class="sxf-me-table-wrap"><table class="sxf-me-table"><caption>Proposed SXF evaluation plan; task quality results intentionally not invented</caption><thead><tr><th scope="col">Six-query group</th><th scope="col">Question to test</th><th scope="col">Primary scoring focus</th></tr></thead><tbody>
+            <tr><th scope="row">English support policies</th><td>Does a paraphrased question retrieve the correct policy?</td><td>Recall@5 and MRR of ground-truth document</td></tr>
+            <tr><th scope="row">Multilingual questions</th><td>Does Arabic/French search locate the authorized equivalent?</td><td>Recall@5 by language and paraphrase category</td></tr>
+            <tr><th scope="row">Critical numbers and IDs</th><td>Are exact amounts, invoice IDs and dates preserved?</td><td>False positives vs exact-match/BM25 baseline</td></tr>
+            <tr><th scope="row">Near-duplicate distractors</th><td>Will a similar but outdated policy outrank the current source?</td><td>MRR and correct revision selection</td></tr>
+          </tbody></table></div>
+          <p>Keep dataset, chunk sizes, overlap, top-k and query text fixed for each candidate embedding model. Use a <strong>separate index per embedding model</strong>, because cross-model cosine scores have no common scale. Add a BM25 baseline, measure total embedding and vector-search expense, and log authorization failures independently of retrieval relevance. When multiple sources are relevant, report graded metrics such as nDCG in addition to single-positive MRR.</p>
+          <p><strong>Original SXF offline evaluation resources:</strong> <a href="/models/mistral-embed/sxf-mistral-embed-retrieval.py">Python Recall@k and MRR scorer</a> and <a href="/models/mistral-embed/sxf-mistral-embed-synthetic.jsonl">12 clearly synthetic query/ranking fixtures</a>. These are invented example rankings, <strong>not vectors or search results returned by Mistral</strong>. Replace them with real model-produced ranked IDs and independently labeled relevant IDs to obtain meaningful performance evidence. For methodology, see <a href="/guides/ai-model-benchmarks-explained/">SXF benchmark guidance</a> and <a href="/evaluations/">the evaluation registry</a>.</p>
+        </section>
+
+        <section class="model-deep-section" id="membed-faq">
+          <div class="model-section-head"><p class="eyebrow">SEARCH INTENT FAQ</p><h2>Mistral Embed FAQ: API pricing, 1024 dimensions, context, Python and RAG.</h2></div>
+          <div class="sxf-me-faq">
+            <details><summary>What is the Mistral Embed API model ID?</summary><p>The model card names the December 2023 release <code>mistral-embed-2312</code>. Mistral's Python and REST embedding examples use <code>mistral-embed</code>.</p></details>
+            <details><summary>How much does Mistral Embed cost per million tokens?</summary><p>The published Standard Mistral Embed rate is $0.10 per million input tokens, with no separately published generated-text output-token rate. Vector database and RAG answer-model costs are separate.</p></details>
+            <details><summary>How many dimensions does Mistral Embed produce?</summary><p>Mistral's Search Toolkit pairs <code>mistral-embed</code> with a 1,024-dimensional cosine-distance vector preset. Check the returned array length in your own endpoint response before defining an index.</p></details>
+            <details><summary>What is Mistral Embed's maximum context?</summary><p>The official versioned model card lists 8,000 tokens per input. Use document chunking for texts longer than the limit.</p></details>
+            <details><summary>Is Mistral Embed a text generation or reasoning model?</summary><p>No. It maps text inputs into embedding vectors; it does not return chat answers, generated articles or reasoning token streams.</p></details>
+            <details><summary>Is Mistral Embed open source and runnable locally?</summary><p>The cited model is classified as a GA Premier embedding API, not an openly downloadable model-weight release. Do not confuse the hosted endpoint with Mistral's separate open-weight models.</p></details>
+            <details><summary>Mistral Embed or Codestral Embed: which is better for RAG?</summary><p>Start with Mistral Embed for general text search and Codestral Embed for code-specific retrieval. Benchmark actual query relevance, languages, cost and downstream answer quality rather than assuming one is universally better.</p></details>
+            <details><summary>Can I use Mistral Embed with pgvector, Qdrant or Pinecone?</summary><p>Yes. Store the model's vectors in a compatible index with the correct dimension and distance function. Use the same embedding model for document and query vectors and enforce access controls.</p></details>
+          </div>
+        </section>
+
+        <section class="model-deep-section" id="membed-sources">
+          <div class="model-section-head"><p class="eyebrow">SOURCES AND EDITORIAL INDEPENDENCE</p><h2>Mistral documentation, verified facts and SXF analysis disclosures.</h2></div>
+          <p>Source review date: <strong>November 8, 2026</strong>. Mistral's official card and SDK documentation support the published $0.10 rate, 8K input context, endpoint, model names and vector representation. Its Search Toolkit documents the 1,024-dimension configuration. The source-of-truth SXF model catalog and its October 6 verification/history are left unchanged. <strong>SXF authored the indexing cost arithmetic, float32 storage model, interactive estimator and retrieval evaluation protocol</strong>. Neither model accuracy nor actual API requests were measured or falsely attributed here.</p>
+          <ul class="sxf-me-sources">
+            <li><a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer">Mistral — Mistral Embed v23.12 model card, 8K context and pricing</a></li>
+            <li><a href="https://docs.mistral.ai/studio/search/search-toolkit/concepts/embedding-model" target="_blank" rel="noopener noreferrer">Mistral — 1024-dimensional embedding preset and cosine distance</a></li>
+            <li><a href="https://docs.mistral.ai/inference/embeddings/text_embeddings" target="_blank" rel="noopener noreferrer">Mistral — text embeddings Python/SDK examples</a></li>
+            <li><a href="https://docs.mistral.ai/api/endpoint/embeddings" target="_blank" rel="noopener noreferrer">Mistral — REST POST /v1/embeddings request schema and usage</a></li>
+            <li><a href="https://docs.mistral.ai/inference/quickstarts/create-embeddings" target="_blank" rel="noopener noreferrer">Mistral — official cosine similarity retrieval quickstart</a></li>
+            <li><a href="https://docs.mistral.ai/inference/embeddings/code_embeddings" target="_blank" rel="noopener noreferrer">Mistral — distinct Codestral code embedding controls</a></li>
+            <li><a href="https://docs.mistral.ai/models/codestral-embed-25-05" target="_blank" rel="noopener noreferrer">Mistral — Codestral Embed pricing and model card</a></li>
+            <li><a href="https://docs.mistral.ai/inference/embeddings" target="_blank" rel="noopener noreferrer">Mistral — embedding applications and RAG separation</a></li>
+          </ul>
+          <nav class="model-related-links" aria-label="Related embedding and RAG pages on SXF">
+            <a href="/guides/best-embedding-models-for-rag/"><span>MODEL CHOICE</span><strong>Best embedding models for RAG</strong><b>↗</b></a>
+            <a href="/guides/vector-database-for-rag/"><span>RAG ENGINEERING</span><strong>Vector databases and retrieval design</strong><b>↗</b></a>
+            <a href="/models/codestral-embed/"><span>SPECIALIZED OPTION</span><strong>Codestral Embed for code retrieval</strong><b>↗</b></a>
+          </nav>
         </section>
 
         <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Mistral lists Mistral Embed as a current GA Premier embedding model with an 8k context window.</p></div><div><span>02</span><p>The official model card publishes $0.10 per 1M input tokens.</p></div><div><span>03</span><p>The model is excluded from the generative token calculator because embeddings have no output-token price dimension.</p></div></div></section>
@@ -126,4 +319,5 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script src="/assets/mistral-embed-cost.js" defer></script>
+    </body></html>
