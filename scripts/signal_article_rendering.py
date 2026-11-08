@@ -405,4 +405,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/claude-sonnet-5-5-in-github-copilot-c579283/"):
         from claude_sonnet_55_signal_page import enrich
         return enrich(page)
+    if canonical.endswith("/github-copilot-weekly-releases-september-21-6edfaac/"):
+        from copilot_sep21_signal_page import enrich
+        return enrich(page)
     return page
