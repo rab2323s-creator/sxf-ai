@@ -423,4 +423,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/a-model-guide-for-the-gpt-6-family-8e206c4/"):
         from gpt6_family_guide_signal_page import enrich
         return enrich(page)
+    if canonical.endswith("/towards-safety-cases-for-frontier-ai-training-cf468ec/"):
+        from frontier_training_safety_cases_editorial import enrich
+        return enrich(page)
     return page
