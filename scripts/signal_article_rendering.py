@@ -417,4 +417,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     if canonical.endswith("/airbnb-widens-access-to-gpt-6-astra-and-openai-frontier-models-ea9ea2f/"):
         from airbnb_astra_editorial import enrich
         return enrich(page)
+    if canonical.endswith("/chatgpt-ads-expands-to-southeast-asia-and-taiwan-f5b0ef0/"):
+        from chatgpt_ads_asia_editorial import enrich
+        return enrich(page)
     return page
