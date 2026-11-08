@@ -402,4 +402,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
         return enrich_open_tts_leaderboard_signal(page)
     if canonical.endswith('/how-third-moment-research-runs-10-000-agents-for-36-hours-e181547/'):
         return enrich_third_moment_signal(page)
+    if canonical.endswith("/claude-sonnet-5-5-in-github-copilot-c579283/"):
+        from claude_sonnet_55_signal_page import enrich
+        return enrich(page)
     return page
