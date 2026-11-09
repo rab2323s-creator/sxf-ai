@@ -24,6 +24,7 @@ from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
 from topics_hub import render_topics_hub
+from topic_crosslinks import apply_topic_crosslinks
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
 from signal_page_rendering import SignalPageContext, signal_row as render_signal_row, signals_index_html as render_signals_index_html
@@ -11464,6 +11465,7 @@ def render_site(archive, current):
     build_discovery_pages(archive, current)
     normalize_static_shells()
     normalize_primary_navigation()
+    apply_topic_crosslinks(ROOT)
     update_sitemap(archive)
 
 

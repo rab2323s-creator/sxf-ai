@@ -19,6 +19,8 @@ def main():
     assert default_header.count('aria-current="page"') == 0
     assert models_header.count('aria-current="page"') == 1
     assert '<a href="/models/" aria-current="page">Models</a>' in models_header
+    assert '<a href="/topics/">Topics</a>' in default_header
+    assert '<a href="/topics/" aria-current="page">Topics</a>' in page_header("topics")
     assert '<nav class="top-nav" aria-label="Primary navigation">' in models_header
     assert '<a class="brand" href="/" aria-label="SXF AI home">' in default_header
     assert update_news.page_header("models") == models_header

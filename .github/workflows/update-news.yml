@@ -55,7 +55,10 @@ jobs:
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
       - name: Topics discovery hub, link and structured data regression
-        run: python tests/test_topics_hub.py
+        run: |
+          python tests/test_topics_hub.py
+          python -m py_compile scripts/topic_crosslinks.py
+          node --check assets/topic-navigation.js
       - name: Homepage decision pathways and SEO regression
         run: python tests/test_homepage_decision_pathways.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
