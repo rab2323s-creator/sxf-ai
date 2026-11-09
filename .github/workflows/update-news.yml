@@ -186,6 +186,8 @@ jobs:
           python tests/test_nov06_editorial_launches.py --post-build
           python tests/test_nov07_editorial_launches.py --post-build
           python tests/test_featured_daily_brief.py --post-build
+      - name: Protect authored Mistral Medium 3.5 dossier and structured data
+        run: python tests/test_mistral_medium35_dossier.py
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
