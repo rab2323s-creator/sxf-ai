@@ -5517,6 +5517,21 @@ def model_comparison_links_html(model_id, limit=4):
 
 
 def render_catalog_model_page(model_id, items):
+    if model_id == "mistral-medium-3-5":
+        # Authored model dossier is the durable source, not a generated thin
+        # catalog fallback. The source lives under scripts/ to keep it out of
+        # the deployed static assets and avoid a duplicate public page.
+        source = ROOT / "scripts" / "mistral_medium35_dossier.html"
+        page = source.read_text(encoding="utf-8")
+        if (
+            page.count("<h1") != 1
+            or 'data-mm35-calculator' not in page
+            or '"@type":"TechArticle"' not in page
+            or 'data-model-history' not in page
+            or 'data-model-evaluations' not in page
+        ):
+            raise RuntimeError("Mistral Medium 3.5 editorial source invalid; refusing generated fallback")
+        return page
     if model_id == "grok-4.3":
         source = ROOT / "models" / "grok-4-3" / "editorial.html"
         html = source.read_text(encoding="utf-8")
