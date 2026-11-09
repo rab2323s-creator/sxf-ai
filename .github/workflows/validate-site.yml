@@ -71,6 +71,8 @@ jobs:
         run: python tests/test_feed_card_rendering.py
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
+      - name: Topics discovery hub, link and structured data regression
+        run: python tests/test_topics_hub.py
       - name: Homepage decision pathways and SEO regression
         run: python tests/test_homepage_decision_pathways.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
