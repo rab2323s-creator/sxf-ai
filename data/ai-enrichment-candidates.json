@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "6cda9a55a086e01024e20105f1baacb3ca5689bcfd8fdbf69fedfb24d0cf0875",
+  "snapshot_hash": "1ddeda194b01f8ac6baee56cc0ee04259196195ef3f8ab448863c56eb925c108",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -857,221 +857,6 @@
     },
     {
       "rank": 9,
-      "signal_slug": "gpt-6-1-terra-in-github-copilot-344482f",
-      "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
-      "title": "GPT-6.1 Terra in GitHub Copilot",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-10-26T19:15:53Z",
-      "priority_score": 142,
-      "evidence_hash": "fde95fa4722f13dfcbef002074ab42c6b1aa2067a7779f882162980ce5fad44f",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
-        },
-        "signal": {
-          "title": "GPT-6.1 Terra in GitHub Copilot",
-          "url": "https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot",
-          "signal_url": "https://sxf.si/signals/gpt-6-1-terra-in-github-copilot-344482f/",
-          "source": "GitHub",
-          "published": "2026-10-26T19:15:53Z",
-          "category": "Tools",
-          "tags": [
-            "GitHub Copilot"
-          ],
-          "summary": "GPT-6.1 Terra, OpenAI’s newest model, is now generally available in GitHub Copilot. It is designed for everyday agentic coding and terminal work at a lower cost than GPT-6.1 Sol. In…",
-          "signal_score": 52,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "named-model",
-            "high-value-topic"
-          ]
-        },
-        "models": [
-          {
-            "model_id": "gpt-6.1-sol",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6.1 Sol",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-30",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Near-Astra GPT-6 tier for complex coding, computer use and professional work at lower cost.",
-            "pricing_standard": {
-              "start": "2026-09-29",
-              "end": null,
-              "input": 2,
-              "cached_input": 0.1,
-              "cache_write": 2.5,
-              "output": 10
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-10-07",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-              "https://developers.openai.com/api/docs/pricing",
-              "https://developers.openai.com/api/docs/changelog",
-              "https://openai.com/index/introducing-gpt-6-1-sol/",
-              "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
-              "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex"
-            ],
-            "history": [
-              {
-                "sequence": 52,
-                "type": "model_added",
-                "model_id": "gpt-6.1-sol",
-                "verified_at": "2026-10-07",
-                "previous_event_hash": "158b79ef9613bc7b207407ed429d2c8d8615ed7e1868dbf04bd6c843d3f42cec",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6.1 Sol",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-30",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-29",
-                        "end": null,
-                        "input": 2,
-                        "cached_input": 0.1,
-                        "cache_write": 2.5,
-                        "output": 10
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_ff5b5dc7ca29d0c60578",
-                "event_hash": "ff5b5dc7ca29d0c6057849395de1dc3505d84fa01aa1c42d1d88b4af4f4d45a7"
-              }
-            ]
-          }
-        ],
-        "source_urls": [
-          "https://deploymentsafety.openai.com/gpt-6-1-sol/respecting-auto-review",
-          "https://developers.openai.com/api/docs/changelog",
-          "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
-          "https://developers.openai.com/api/docs/pricing",
-          "https://github.blog/changelog/2026-10-26-gpt-6-1-terra-in-github-copilot",
-          "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
-          "https://openai.com/index/introducing-gpt-6-1-sol/"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
       "signal_slug": "biobasicsbench-ai-wet-lab-data-benchmark",
       "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
       "title": "Measuring how AI agents handle everyday wet-lab science",
@@ -1523,6 +1308,79 @@
           "key_facts",
           "pricing_or_capability_impact",
           "before_vs_after",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "introducing-images-2-6",
+      "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
+      "title": "Introducing Images 2.6",
+      "source": "OpenAI",
+      "category": "Tools",
+      "published": "2026-11-04T00:00:00Z",
+      "priority_score": 136,
+      "evidence_hash": "69f7c1f62131266bcd1709a99616dd4ff8b37b6379534fc6c02d858bbb721a25",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing Images 2.6",
+          "url": "https://openai.com/index/introducing-images-2-6",
+          "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
+          "source": "OpenAI",
+          "published": "2026-11-04T00:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
+          "signal_score": 46,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/introducing-images-2-6"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
           "who_should_care",
           "what_to_verify",
           "faq",
