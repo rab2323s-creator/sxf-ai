@@ -3889,6 +3889,143 @@
         "Check false positives, false negatives and holdout results after optimization.",
         "Distinguish alignment with one user's preference from universally fair classification."
       ]
+    },
+    "amazon-hope-moe-expert-pruning-benchmark": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "Amazon HOPE: Cut 50% of MoE Experts Without Losing Accuracy?",
+      "h1": "Amazon HOPE explained: can 50% MoE pruning preserve coding accuracy?",
+      "meta_description": "Amazon's HOPE prunes mixture-of-experts models using expert interactions. Compare 50% pruning, SWE-Bench Pro scores, memory savings and practical limits.",
+      "source_name": "Amazon Research / Hugging Face",
+      "primary_source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "summary": "Amazon researchers published HOPE (Higher-Order Pruning of Experts) on November 9, 2026, a technique that selects experts to remove from mixture-of-experts language models while accounting for how pairs of experts cooperate. The team reports the best mean ranking among five pruning methods and an illustrative SWE-Bench Pro result of 42.3 after 50% pruning versus 41.8 for the original model. Those scores apply to specified models and tasks, not a guaranteed 50% reduction in total production costs.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "HOPE MoE pruning",
+        "Higher-Order Pruning of Experts",
+        "Amazon AI model compression",
+        "mixture of experts pruning 50 percent",
+        "HOPE SWE-Bench Pro"
+      ],
+      "editorial": {
+        "what_changed": "Amazon introduced HOPE, a method for pruning mixture-of-experts models that measures pairwise expert co-activation rather than ranking every expert independently. The team shared a paper, open code and a calibration–solve–prune workflow.",
+        "why_it_matters": "Large MoE models keep many expert weights in memory even when each token activates only a fraction. Cutting model weights may let developers run longer contexts or reduce hardware requirements, but inaccurate pruning can damage reasoning and coding behavior.",
+        "what_to_verify": "The 50% figure is the fraction of experts pruned, not a proven 50% reduction in overall server cost, latency or power use. The coding benchmark numbers were produced under the authors' evaluation settings, and HOPE's advantage is smaller at light pruning levels."
+      },
+      "evidence": [
+        {
+          "label": "Release and research",
+          "fact": "Amazon published its HOPE research explanation on November 9, 2026 and linked the accompanying paper.",
+          "source": "https://arxiv.org/abs/2609.18916"
+        },
+        {
+          "label": "Memory example",
+          "fact": "The authors cite Qwen3.5-122B with 256 experts in each of 48 layers, eight experts selected per token and around 95% of an approximately 250 GB parameter footprint in expert MLPs.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Method",
+          "fact": "HOPE scores pairwise cooperation with a calibrated interaction matrix, then uses quadratic optimization to choose experts to remove.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Comparison design",
+          "fact": "The evaluation covers three models, two calibration datasets, four first-order baselines and 10–50% pruning rates.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Overall ranking",
+          "fact": "HOPE's reported mean rank is 2.07 among five methods, finishing first in 39% and top two in 67% of evaluated conditions.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "High pruning",
+          "fact": "At 50% pruning its mean rank is 1.58, versus 2.42 for REAP, the reported next-best method.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Coding example",
+          "fact": "On Qwen3.5-35B-A3B at 50% pruning, SWE-Bench Pro scores are reported as HOPE 42.3, unpruned 41.8 and REAP 36.2.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Implementation",
+          "fact": "The open package documents calibration, a QP solve and writing a pruned checkpoint; it has been tested on Qwen3, Qwen3-Next, Qwen3.5 and GLM-4.5.",
+          "source": "https://github.com/awslabs/HOPE"
+        },
+        {
+          "label": "Research boundary",
+          "fact": "The authors say lower 10–20% pruning levels offer smaller gains and cross-layer pruning remains preliminary.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        }
+      ],
+      "limitations": "HOPE is evaluated on a specified set of MoE architectures, tasks and calibration traces. A 50% expert count reduction does not automatically imply the same reduction in total VRAM, electricity, inference latency or ownership cost, since attention weights, KV cache and serving overhead remain. Pairwise interactions omit higher-order and cross-layer effects, and the paper's benchmark improvements are not independently verified for every workload.",
+      "sources": [
+        "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+        "https://arxiv.org/abs/2609.18916",
+        "https://github.com/awslabs/HOPE"
+      ],
+      "analysis": [
+        {
+          "heading": "Why mixture-of-experts models consume memory even when experts sit idle",
+          "paragraphs": [
+            "A mixture-of-experts (MoE) model routes each input token to a small subset of specialized feed-forward networks. This lowers active computation compared with executing every expert, but the server still typically holds the expert parameters in memory. Amazon's example is Qwen3.5-122B: its report describes 256 experts in each of 48 layers, with eight used for a given token, while expert MLPs account for most of the parameter footprint.",
+            "Deleting unused or less useful experts can permanently shrink a model without training it again. Yet the obvious technique—score each expert individually and remove the lowest-ranked ones—assumes the expert's contribution is independent of its partners. That assumption can fail. Two experts frequently selected together might cooperate to solve a task, and eliminating one changes the function of both.",
+            "The search question 'Can I cut a 122B MoE model in half?' needs a careful answer: pruning half the experts is not the same as making total hardware needs or running expenses exactly half as large. Memory outside the expert weights, request-specific cache and runtime overhead still matter."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "heading": "How HOPE selects experts and what the 50% benchmark actually shows",
+          "paragraphs": [
+            "HOPE uses calibration data to record how experts are activated and how their outputs combine. It builds a matrix whose diagonal records individual contributions while its off-diagonal terms represent pairwise co-operation. Instead of deleting experts one by one, the system approximates a joint selection problem and solves a relaxed quadratic optimization before writing a new checkpoint.",
+            "The researchers compare HOPE with REAP, MAN, EAN and Frequency pruning on three model families across two calibration datasets and multiple pruning rates. They report the best average ranking for HOPE overall and a stronger advantage when removing around half of experts. The reported 50% pruning mean rank is 1.58 versus 2.42 for REAP.",
+            "One highlighted example uses Qwen3.5-35B-A3B on SWE-Bench Pro. HOPE scored 42.3 versus 41.8 for the unpruned model, while REAP reached 36.2 in that setup. This does not prove that pruning improves every model; retained score can depend heavily on which tasks appear in calibration and evaluation. The authors themselves note reduced advantage at 10–20% pruning."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "heading": "A deployment checklist: benchmark quality, VRAM and total cost",
+          "paragraphs": [
+            "For an engineer considering HOPE, begin with a baseline checkpoint, a representative calibration set and a held-out test that reflects the actual production task. Run the published calibrate, solve and prune workflow, then measure factual accuracy, agent task success, first-token latency, tokens per second, memory high-water mark and cost under identical serving conditions.",
+            "Do not assume a promising coding benchmark means the same performance on multilingual instruction following, safety-relevant answers or tool-use policies. Measure reliability at realistic context lengths and compare against both the original checkpoint and simpler pruning methods. Independent repeatability matters more than a headline that a 50% model is 'just as smart.'",
+            "HOPE's practical contribution is a more informed selection of which experts to keep. Its code and research paper make that hypothesis testable, while the limitations—pairwise approximation, independent layer pruning and architecture-specific behavior—make it a research tool rather than a universal model-shrinking guarantee."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "How to interpret score comparisons and evaluation design."
+        },
+        {
+          "title": "Run AI models locally",
+          "url": "/guides/run-ai-models-locally/",
+          "description": "VRAM, architecture and serving considerations."
+        },
+        {
+          "title": "Open-source AI models and licensing",
+          "url": "/guides/open-source-ai-models/",
+          "description": "Understand what released model weights and code do and do not permit."
+        },
+        {
+          "title": "Choose the right AI model",
+          "url": "/guides/how-to-choose-ai-model/",
+          "description": "Match model capabilities to workload and deployment cost."
+        },
+        {
+          "title": "StateBench long-context tracking",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "An example of capability that can degrade independently of a coding score."
+        }
+      ],
+      "reader_checklist": [
+        "Check actual VRAM and KV-cache usage, not just fraction of experts removed.",
+        "Use held-out benchmarks beyond the calibration data and intended workload.",
+        "Compare latency, throughput and quality under identical hardware settings.",
+        "Read the released research and license before using a pruned model commercially."
+      ]
     }
   }
 }
