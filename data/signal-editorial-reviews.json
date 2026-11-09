@@ -3889,6 +3889,657 @@
         "Check false positives, false negatives and holdout results after optimization.",
         "Distinguish alignment with one user's preference from universally fair classification."
       ]
+    },
+    "amazon-hope-moe-expert-pruning-benchmark": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "Amazon HOPE: Cut 50% of MoE Experts Without Losing Accuracy?",
+      "h1": "Amazon HOPE explained: can 50% MoE pruning preserve coding accuracy?",
+      "meta_description": "Amazon's HOPE prunes mixture-of-experts models using expert interactions. Compare 50% pruning, SWE-Bench Pro scores, memory savings and practical limits.",
+      "source_name": "Amazon Research / Hugging Face",
+      "primary_source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "summary": "Amazon researchers published HOPE (Higher-Order Pruning of Experts) on November 9, 2026, a technique that selects experts to remove from mixture-of-experts language models while accounting for how pairs of experts cooperate. The team reports the best mean ranking among five pruning methods and an illustrative SWE-Bench Pro result of 42.3 after 50% pruning versus 41.8 for the original model. Those scores apply to specified models and tasks, not a guaranteed 50% reduction in total production costs.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "HOPE MoE pruning",
+        "Higher-Order Pruning of Experts",
+        "Amazon AI model compression",
+        "mixture of experts pruning 50 percent",
+        "HOPE SWE-Bench Pro"
+      ],
+      "editorial": {
+        "what_changed": "Amazon introduced HOPE, a method for pruning mixture-of-experts models that measures pairwise expert co-activation rather than ranking every expert independently. The team shared a paper, open code and a calibration–solve–prune workflow.",
+        "why_it_matters": "Large MoE models keep many expert weights in memory even when each token activates only a fraction. Cutting model weights may let developers run longer contexts or reduce hardware requirements, but inaccurate pruning can damage reasoning and coding behavior.",
+        "what_to_verify": "The 50% figure is the fraction of experts pruned, not a proven 50% reduction in overall server cost, latency or power use. The coding benchmark numbers were produced under the authors' evaluation settings, and HOPE's advantage is smaller at light pruning levels."
+      },
+      "evidence": [
+        {
+          "label": "Release and research",
+          "fact": "Amazon published its HOPE research explanation on November 9, 2026 and linked the accompanying paper.",
+          "source": "https://arxiv.org/abs/2609.18916"
+        },
+        {
+          "label": "Memory example",
+          "fact": "The authors cite Qwen3.5-122B with 256 experts in each of 48 layers, eight experts selected per token and around 95% of an approximately 250 GB parameter footprint in expert MLPs.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Method",
+          "fact": "HOPE scores pairwise cooperation with a calibrated interaction matrix, then uses quadratic optimization to choose experts to remove.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Comparison design",
+          "fact": "The evaluation covers three models, two calibration datasets, four first-order baselines and 10–50% pruning rates.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Overall ranking",
+          "fact": "HOPE's reported mean rank is 2.07 among five methods, finishing first in 39% and top two in 67% of evaluated conditions.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "High pruning",
+          "fact": "At 50% pruning its mean rank is 1.58, versus 2.42 for REAP, the reported next-best method.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Coding example",
+          "fact": "On Qwen3.5-35B-A3B at 50% pruning, SWE-Bench Pro scores are reported as HOPE 42.3, unpruned 41.8 and REAP 36.2.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "label": "Implementation",
+          "fact": "The open package documents calibration, a QP solve and writing a pruned checkpoint; it has been tested on Qwen3, Qwen3-Next, Qwen3.5 and GLM-4.5.",
+          "source": "https://github.com/awslabs/HOPE"
+        },
+        {
+          "label": "Research boundary",
+          "fact": "The authors say lower 10–20% pruning levels offer smaller gains and cross-layer pruning remains preliminary.",
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        }
+      ],
+      "limitations": "HOPE is evaluated on a specified set of MoE architectures, tasks and calibration traces. A 50% expert count reduction does not automatically imply the same reduction in total VRAM, electricity, inference latency or ownership cost, since attention weights, KV cache and serving overhead remain. Pairwise interactions omit higher-order and cross-layer effects, and the paper's benchmark improvements are not independently verified for every workload.",
+      "sources": [
+        "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+        "https://arxiv.org/abs/2609.18916",
+        "https://github.com/awslabs/HOPE"
+      ],
+      "analysis": [
+        {
+          "heading": "Why mixture-of-experts models consume memory even when experts sit idle",
+          "paragraphs": [
+            "A mixture-of-experts (MoE) model routes each input token to a small subset of specialized feed-forward networks. This lowers active computation compared with executing every expert, but the server still typically holds the expert parameters in memory. Amazon's example is Qwen3.5-122B: its report describes 256 experts in each of 48 layers, with eight used for a given token, while expert MLPs account for most of the parameter footprint.",
+            "Deleting unused or less useful experts can permanently shrink a model without training it again. Yet the obvious technique—score each expert individually and remove the lowest-ranked ones—assumes the expert's contribution is independent of its partners. That assumption can fail. Two experts frequently selected together might cooperate to solve a task, and eliminating one changes the function of both.",
+            "The search question 'Can I cut a 122B MoE model in half?' needs a careful answer: pruning half the experts is not the same as making total hardware needs or running expenses exactly half as large. Memory outside the expert weights, request-specific cache and runtime overhead still matter."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "heading": "How HOPE selects experts and what the 50% benchmark actually shows",
+          "paragraphs": [
+            "HOPE uses calibration data to record how experts are activated and how their outputs combine. It builds a matrix whose diagonal records individual contributions while its off-diagonal terms represent pairwise co-operation. Instead of deleting experts one by one, the system approximates a joint selection problem and solves a relaxed quadratic optimization before writing a new checkpoint.",
+            "The researchers compare HOPE with REAP, MAN, EAN and Frequency pruning on three model families across two calibration datasets and multiple pruning rates. They report the best average ranking for HOPE overall and a stronger advantage when removing around half of experts. The reported 50% pruning mean rank is 1.58 versus 2.42 for REAP.",
+            "One highlighted example uses Qwen3.5-35B-A3B on SWE-Bench Pro. HOPE scored 42.3 versus 41.8 for the unpruned model, while REAP reached 36.2 in that setup. This does not prove that pruning improves every model; retained score can depend heavily on which tasks appear in calibration and evaluation. The authors themselves note reduced advantage at 10–20% pruning."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        },
+        {
+          "heading": "A deployment checklist: benchmark quality, VRAM and total cost",
+          "paragraphs": [
+            "For an engineer considering HOPE, begin with a baseline checkpoint, a representative calibration set and a held-out test that reflects the actual production task. Run the published calibrate, solve and prune workflow, then measure factual accuracy, agent task success, first-token latency, tokens per second, memory high-water mark and cost under identical serving conditions.",
+            "Do not assume a promising coding benchmark means the same performance on multilingual instruction following, safety-relevant answers or tool-use policies. Measure reliability at realistic context lengths and compare against both the original checkpoint and simpler pruning methods. Independent repeatability matters more than a headline that a 50% model is 'just as smart.'",
+            "HOPE's practical contribution is a more informed selection of which experts to keep. Its code and research paper make that hypothesis testable, while the limitations—pairwise approximation, independent layer pruning and architecture-specific behavior—make it a research tool rather than a universal model-shrinking guarantee."
+          ],
+          "source": "https://huggingface.co/blog/amazon/higher-order-pruning-experts"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "How to interpret score comparisons and evaluation design."
+        },
+        {
+          "title": "Run AI models locally",
+          "url": "/guides/run-ai-models-locally/",
+          "description": "VRAM, architecture and serving considerations."
+        },
+        {
+          "title": "Open-source AI models and licensing",
+          "url": "/guides/open-source-ai-models/",
+          "description": "Understand what released model weights and code do and do not permit."
+        },
+        {
+          "title": "Choose the right AI model",
+          "url": "/guides/how-to-choose-ai-model/",
+          "description": "Match model capabilities to workload and deployment cost."
+        },
+        {
+          "title": "StateBench long-context tracking",
+          "url": "/signals/statebench-long-context-ai-memory-tracking/",
+          "description": "An example of capability that can degrade independently of a coding score."
+        }
+      ],
+      "reader_checklist": [
+        "Check actual VRAM and KV-cache usage, not just fraction of experts removed.",
+        "Use held-out benchmarks beyond the calibration data and intended workload.",
+        "Compare latency, throughput and quality under identical hardware settings.",
+        "Read the released research and license before using a pruned model commercially."
+      ]
+    },
+    "openai-hacktron-cybersecurity-partnership": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "OpenAI and Hacktron: AI Security Testing Partnership",
+      "h1": "OpenAI and Hacktron: how AI agents will test connected services",
+      "meta_description": "OpenAI partners with Hacktron to test third-party integrations using frontier AI through Daybreak Red. Explore the scope, evidence and security limits.",
+      "source_name": "OpenAI / Hacktron",
+      "primary_source": "https://openai.com/index/partnering-with-hacktron",
+      "summary": "OpenAI announced a partnership with Hacktron on November 6, 2026 to investigate security weaknesses in OpenAI systems, particularly where they connect to third-party services. Hacktron gains expanded access to frontier security models through Daybreak Red. This is an authorized research collaboration, not proof that a specific vulnerability count has been discovered or that all connected systems have been fixed.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "OpenAI Hacktron partnership",
+        "Hacktron cybersecurity",
+        "Daybreak Red security",
+        "AI penetration testing integrations",
+        "OpenAI vulnerability research"
+      ],
+      "editorial": {
+        "what_changed": "OpenAI and Hacktron agreed to identify priority targets together, building on Hacktron's earlier contributions through OpenAI's bug-bounty program and expanding its access to security models.",
+        "why_it_matters": "AI agents can combine repositories, credentials and third-party applications. Vulnerabilities at the interface of these systems may be missed by checks that examine a single component.",
+        "what_to_verify": "The companies did not announce a number of newly confirmed vulnerabilities, a completed audit or a measurable reduction in incidents. Daybreak Red is restricted to approved security research, not public offensive testing."
+      },
+      "evidence": [
+        {
+          "label": "New partnership",
+          "fact": "OpenAI published the arrangement on November 6, 2026.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Scope",
+          "fact": "OpenAI engineers and Hacktron researchers will jointly prioritize vulnerable areas to investigate.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Integration risks",
+          "fact": "Testing focuses on how OpenAI products interact with external services.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Restricted models",
+          "fact": "Hacktron gets expanded access through Daybreak Red.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Existing relationship",
+          "fact": "OpenAI says Hacktron previously submitted bug-bounty research.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Tooling",
+          "fact": "Hacktron builds agents for code review, penetration testing and red teaming.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "label": "Independent confirmation",
+          "fact": "Hacktron published a short statement confirming the same collaboration.",
+          "source": "https://www.hacktron.ai/blog/openai-partnership"
+        },
+        {
+          "label": "Parallel safeguards",
+          "fact": "OpenAI mentions separate increases to bug-bounty incentives and a planned internal security sprint.",
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        }
+      ],
+      "limitations": "A partnership announcement is not a reproducible penetration-test report. It cannot demonstrate how many flaws were patched or the severity of any unreported issues. Responsible disclosures may remain private until fixes are ready.",
+      "sources": [
+        "https://openai.com/index/partnering-with-hacktron",
+        "https://www.hacktron.ai/blog/openai-partnership"
+      ],
+      "analysis": [
+        {
+          "heading": "Why connected AI agents need a different security audit",
+          "paragraphs": [
+            "When an assistant reads data from one service and takes action in another, privileges and identities cross trust boundaries. A misconfigured token or agent connector can expose information even though individual APIs appear secure. OpenAI says these relationships between systems are the focus of its new testing with Hacktron.",
+            "The researchers have an established relationship through OpenAI's bug-bounty program. The new agreement is about organized defensive testing of selected systems. Readers should not confuse it with a disclosure of a new breach or an unsanctioned hacking campaign."
+          ],
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "heading": "What Daybreak Red contributes—and what it cannot prove",
+          "paragraphs": [
+            "Giving qualified researchers greater access to frontier cyber models may help them explore complex code, generate test plans and investigate service interactions. Yet a model can produce incorrect hypotheses or misattribute a result to the wrong cause. Human-directed testing, explicit scope and independent reproduction are required before a report becomes a trustworthy vulnerability finding.",
+            "The announcement provides no public success metric specific to the Hacktron partnership. Other OpenAI announcements about rewards or security sprints cannot legitimately be added to invent a total of issues found or resolved."
+          ],
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        },
+        {
+          "heading": "SXF checklist for protecting AI-powered service integrations",
+          "paragraphs": [
+            "An organization should inventory every connected app, record its token privileges, test revocation, limit the scope of permitted tools and audit where information flows. Security reviewers must consider malicious instructions arriving through emails, repository files or external pages that an agent is asked to read.",
+            "Report the stages separately: suspected weakness, independent reproduction, accepted patch and deployed remediation. Track validation and closure time rather than counting only hypotheses. The broader lesson is that agent connectors need the same rigor as critical infrastructure, whether or not they are built around a state-of-the-art AI model."
+          ],
+          "source": "https://openai.com/index/partnering-with-hacktron"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "GPT-6 Cyber and authorized research",
+          "url": "/signals/gpt-6-cyber-security-benchmarks-access/",
+          "description": "The restricted cyber model and its testing limits."
+        },
+        {
+          "title": "OpenAI Linux vulnerability research",
+          "url": "/signals/a-thousand-fewer-paths-to-root/",
+          "description": "Why candidate flaws and deployed fixes are different."
+        },
+        {
+          "title": "AI agent security",
+          "url": "/guides/ai-agent-security/",
+          "description": "Permission boundaries and safe tool use."
+        },
+        {
+          "title": "Prompt injection explained",
+          "url": "/guides/prompt-injection/",
+          "description": "How external content may redirect agents."
+        },
+        {
+          "title": "CWE-bench v2",
+          "url": "/signals/cwe-bench-v2-ai-security-code-benchmark/",
+          "description": "Testing whether model-proposed fixes work."
+        }
+      ],
+      "reader_checklist": [
+        "Demand written authorization and target scope.",
+        "Inspect every third-party connector and credential.",
+        "Reproduce claims independently.",
+        "Count deployed patches separately from findings."
+      ]
+    },
+    "github-copilot-code-review-api-settings-2026": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "Copilot Code Review API: Settings, Attribution, Effort",
+      "h1": "GitHub Copilot Code Review API: controls, access and review quality",
+      "meta_description": "GitHub expands Copilot code review REST and GraphQL settings, attribution and review-effort data. Learn access rules, setup limits and safe review checks.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates",
+      "summary": "GitHub's November 6, 2026 Copilot Code Review update added REST and GraphQL configuration controls from enterprise policy to repositories, clearer attribution of AI review comments and review-effort metadata. New review summaries also group skipped or excluded files. These are product-management capabilities; they do not mean AI approval is a replacement for human code review or security testing.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "GitHub Copilot code review API",
+        "Copilot review REST GraphQL",
+        "Copilot review attribution",
+        "Copilot review effort settings",
+        "GitHub automated code review"
+      ],
+      "editorial": {
+        "what_changed": "GitHub extended code-review settings to APIs, exposed explicit attribution and metadata, and improved review overviews, feedback, billing visibility and reliability.",
+        "why_it_matters": "Review automation is most useful when teams can tell which comments came from AI, what tools and effort were used, which files were skipped and who can change organization policy.",
+        "what_to_verify": "Enterprise and organization settings endpoints do not support GitHub Apps or fine-grained personal access tokens; repository endpoints require Administration read or write. The release covers specified Copilot plans. AI reviews may still miss critical vulnerabilities."
+      },
+      "evidence": [
+        {
+          "label": "Release",
+          "fact": "GitHub announced the changes November 6, 2026.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "API control",
+          "fact": "REST and GraphQL now manage Copilot review configuration from enterprise policies to repository settings.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Attribution",
+          "fact": "AI-originated reviews and comments have explicit attribution fields.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Tool trace",
+          "fact": "Review metadata may identify skills, MCP servers or custom instructions used.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Admin hierarchy",
+          "fact": "Enterprise policies can restrict lower-level changes; organization administrators set default effort and runners.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Token limits",
+          "fact": "Enterprise and organization settings endpoints do not support GitHub Apps or fine-grained PATs.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Repo permissions",
+          "fact": "Repository settings require Administration read to inspect or Administration write to change.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Overview change",
+          "fact": "Skipped files and excluded content are grouped into Files not reviewed.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "label": "Review behavior",
+          "fact": "Balanced effort now uses three reviewer models plus a synthesizing model, according to GitHub.",
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        }
+      ],
+      "limitations": "API metadata is not a security certification or assurance of reviewer correctness. Actual availability depends on plan and permissions. A file omitted due to exclusions or timeouts may still contain vulnerabilities. Other source code checks remain necessary.",
+      "sources": [
+        "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+      ],
+      "analysis": [
+        {
+          "heading": "What's new in the GitHub Copilot code review API?",
+          "paragraphs": [
+            "GitHub now lets administrators inspect and configure Copilot code-review behavior programmatically through REST and GraphQL. The release also includes clear attribution fields for AI comments and, when available, the review effort and source materials such as skills, MCP servers or instructions. This information can help teams audit how a recommendation was produced.",
+            "For a developer searching how to manage Copilot reviews, the critical distinction is between requesting a review and changing organization policy. The API adds management controls, but the available operations and authentication depend on role and endpoint."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "heading": "Permissions, hierarchy and excluded-file visibility",
+          "paragraphs": [
+            "Enterprise administrators can enforce broad policy, while organizations manage defaults and repositories may set their own review effort or integration options within those limits. GitHub explicitly warns that the enterprise and organization settings endpoints reject GitHub Apps and fine-grained personal access tokens. Repository endpoints support them only with the relevant Administration permissions.",
+            "Review overviews now place skipped and excluded files together, so a team has a clearer picture of what the assistant did not inspect. This is as valuable as the generated findings: a green-looking review that omits an important module must not be interpreted as whole-repository validation."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        },
+        {
+          "heading": "A practical audit workflow before accepting AI reviews",
+          "paragraphs": [
+            "Capture the PR revision, configured review effort, model and tool attribution when available, excluded-file list and human disposition of each important comment. GitHub also reports improved retry behavior and visibility into credits consumed; these features are useful for operations but do not establish higher security accuracy.",
+            "Teams should test whether a reviewer catches seeded defects and follows local coding policies. Require branch protection, CI and human review before merging. The key SXF takeaway is better governance and traceability, not an unfounded promise that an API-managed AI review guarantees safe code."
+          ],
+          "source": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "GitHub Copilot in Xcode",
+          "url": "/signals/github-copilot-xcode-coding-assistant/",
+          "description": "Another extension of coding assistance."
+        },
+        {
+          "title": "GitHub Copilot in Slack and Teams",
+          "url": "/signals/github-copilot-slack-teams-general-availability/",
+          "description": "Tracing work from a conversation to a reviewed PR."
+        },
+        {
+          "title": "CWE-bench v2 AI security fixes",
+          "url": "/signals/cwe-bench-v2-ai-security-code-benchmark/",
+          "description": "Benchmarking AI-generated fixes."
+        },
+        {
+          "title": "AI agent security guide",
+          "url": "/guides/ai-agent-security/",
+          "description": "Manage privileges and audit tool actions."
+        },
+        {
+          "title": "Best AI coding tools",
+          "url": "/guides/best-ai-coding-tools/",
+          "description": "Compare code-review tools by actual workflow."
+        }
+      ],
+      "reader_checklist": [
+        "Check plan and token type for each admin endpoint.",
+        "Inspect every file excluded from review.",
+        "Preserve AI attribution and review configuration.",
+        "Maintain CI and human review before merging."
+      ]
+    },
+    "dependabot-apm-agent-skills-update-guide": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "Dependabot for APM: Update AI Agent Skills and Prompts",
+      "h1": "Dependabot APM: how to update AI agent skills safely",
+      "meta_description": "GitHub Dependabot now updates APM skills and prompts from apm.yml and existing lockfiles. Learn setup, supported changes and why security alerts aren't incl",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager",
+      "summary": "GitHub added Agent Package Manager (APM) support to Dependabot version updates on November 3, 2026. It can open pull requests for supported Git-based skills, prompts and agent instruction dependencies declared in apm.yml, refreshing apm.lock.yaml if that file exists. This is version-update support only—not automatic vulnerability alerts or proof that updated agent instructions are safe.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "Dependabot Agent Package Manager",
+        "Dependabot apm.yml",
+        "update AI agent skills",
+        "apm.lock.yaml",
+        "Dependabot prompt dependencies"
+      ],
+      "editorial": {
+        "what_changed": "Dependabot now monitors supported APM Git dependencies and proposes new versions through pull requests under a schedule defined in .github/dependabot.yml.",
+        "why_it_matters": "Agent prompts and skills are increasingly shared dependency artifacts. Updates through reviewable pull requests reduce configuration drift but can change tool permissions or agent behavior unexpectedly.",
+        "what_to_verify": "GitHub explicitly says security updates are not supported for APM. An apm.lock.yaml file is regenerated when already present, not promised to be created for every repository. The feature is GA on github.com across plans, with Enterprise Server 3.24 future availability."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "GitHub added APM version-update support November 3, 2026.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Manifest",
+          "fact": "Supported Git dependencies are declared in apm.yml.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Settings",
+          "fact": "Add an apm package ecosystem entry with directory and schedule to .github/dependabot.yml.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Pull request workflow",
+          "fact": "Dependabot proposes updates rather than silently installing a new skill.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Existing lockfile",
+          "fact": "It regenerates apm.lock.yaml when that file exists.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Coverage limit",
+          "fact": "The feature currently handles version updates, not security updates.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Availability",
+          "fact": "GitHub.com supports all plans; GitHub Enterprise Server support is announced for 3.24.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "label": "Security review",
+          "fact": "Updating a prompt or skill can change tool-use behavior even if its version number is valid.",
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        }
+      ],
+      "limitations": "The feature is not vulnerability remediation. Support only applies to eligible APM dependencies and setups; users should inspect actual update PRs before enabling agent code. An APM lockfile is not an independent guarantee against malicious instructions or unsafe upstream content.",
+      "sources": [
+        "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+      ],
+      "analysis": [
+        {
+          "heading": "What is Agent Package Manager and what does Dependabot now change?",
+          "paragraphs": [
+            "Agent Package Manager tracks reusable instruction and skill packages used by coding agents. A project declares its supported Git-hosted dependencies in apm.yml. GitHub's new Dependabot integration proposes version changes, bringing familiar dependency-update review to agent prompts and instructions.",
+            "Developers do not gain a universal scanner for every prompt file. The update depends on supported dependencies and the proper manifest. The automatic output is a pull request that humans and tests can examine before it affects an agent's production behavior."
+          ],
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "heading": "How to configure updates and read the lockfile behavior",
+          "paragraphs": [
+            "Add a package-ecosystem entry for apm in .github/dependabot.yml, point its directory setting at the folder containing apm.yml and choose a regular update schedule. With an existing apm.lock.yaml, GitHub says Dependabot regenerates it as part of supported updates. Without that file, do not assume a lockfile will be manufactured automatically.",
+            "Version-update support is generally available on github.com for every plan and expected in GitHub Enterprise Server 3.24. Consult current GitHub documentation for exact configuration options and compatibility before copying settings into a production repository."
+          ],
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        },
+        {
+          "heading": "Why updating agent instructions is a supply-chain decision",
+          "paragraphs": [
+            "A skill may contain tool instructions, network access patterns or assumptions that affect how an AI agent operates. Upgrading such a dependency could change more than text: it may expand permissions, introduce new commands or alter how an agent handles confidential data.",
+            "GitHub says this feature does not provide security updates. Organizations should review changes to each skill or prompt, test representative agent tasks in a sandbox, pin trustworthy versions and preserve the previous dependency state for rollback. SXF's recommendation is to treat prompt packages like software packages: review the diff, monitor provenance and do not auto-merge untrusted behavior changes."
+          ],
+          "source": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent security guide",
+          "url": "/guides/ai-agent-security/",
+          "description": "Protect tool permissions and external instructions."
+        },
+        {
+          "title": "Prompt injection explained",
+          "url": "/guides/prompt-injection/",
+          "description": "How malicious instructions can compromise agents."
+        },
+        {
+          "title": "Deploy AI agents in production",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Controls and rollback plans for agent changes."
+        },
+        {
+          "title": "Model Context Protocol explained",
+          "url": "/guides/model-context-protocol-mcp/",
+          "description": "Understand the tool servers skills may use."
+        },
+        {
+          "title": "GitHub Copilot Code Review API",
+          "url": "/signals/github-copilot-code-review-api-settings-2026/",
+          "description": "Review governance for automation-related PRs."
+        }
+      ],
+      "reader_checklist": [
+        "Verify the update manifest and existing lockfile.",
+        "Review the exact skill or instruction diff before merging.",
+        "Don't confuse version PRs with security remediation.",
+        "Test agent privileges and behavior after updates."
+      ]
+    },
+    "franklin-templeton-openai-equity-research-codex": {
+      "reviewed_at": "2026-11-09",
+      "seo_title": "Franklin Templeton and OpenAI: AI Equity Research Explained",
+      "h1": "How Franklin Templeton uses OpenAI for equity research",
+      "meta_description": "Franklin Templeton is developing Codex-assisted equity research workflows to compare investment views and risk. See the human-review model and evidence gaps",
+      "source_name": "OpenAI / Franklin Templeton",
+      "primary_source": "https://openai.com/index/franklin-templeton",
+      "summary": "Franklin Templeton described work with OpenAI tools on November 5, 2026 to support its investment research, initially concentrating on equities. Teams are developing workflows to compare viewpoints, test investment risks and bring continuously updated context to portfolio managers. The source is a corporate customer case study, not a controlled demonstration of improved investment returns or a launch of an autonomous trading system.",
+      "schema_type": "NewsArticle",
+      "keywords": [
+        "Franklin Templeton OpenAI",
+        "AI equity research",
+        "Codex investment research",
+        "AI portfolio manager workflow",
+        "AI investment research risks"
+      ],
+      "editorial": {
+        "what_changed": "Franklin Templeton is building AI-supported research tools that consolidate market perspectives and expose the assumptions and risks behind investment theses.",
+        "why_it_matters": "Investment analysis involves comparing conflicting evidence under time pressure. AI may speed information synthesis but can also invent facts, mishandle dates and create false confidence around valuation or financial results.",
+        "what_to_verify": "The case study does not publish audited portfolio performance, a controlled productivity comparison, return improvements or evidence of AI-directed trades. Human investment judgment remains part of the described approach."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "OpenAI published the Franklin Templeton customer story November 5, 2026.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Initial domain",
+          "fact": "The work starts with equity research rather than all asset classes.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "User group",
+          "fact": "The workflows aim to support portfolio managers and research teams.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Tools",
+          "fact": "Codex is among several OpenAI-related tools the teams are using.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Research task",
+          "fact": "The stated goal includes comparing distinct research perspectives.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Risk analysis",
+          "fact": "The tools aim to surface assumptions and risks behind an investment idea.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Human role",
+          "fact": "Franklin Templeton describes combining AI-produced intelligence with human judgment.",
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "label": "Unreported result",
+          "fact": "The publication does not give an independently verified increase in returns or a numerical trading advantage.",
+          "source": "https://openai.com/index/franklin-templeton"
+        }
+      ],
+      "limitations": "This is a customer-reported project, not peer-reviewed evidence or investment advice. Details about source coverage, controls, model error rates and actual business outcomes are limited. Readers should not infer that AI generated trades, outperformed analysts or improved returns.",
+      "sources": [
+        "https://openai.com/index/franklin-templeton"
+      ],
+      "analysis": [
+        {
+          "heading": "What is Franklin Templeton actually building with OpenAI?",
+          "paragraphs": [
+            "Franklin Templeton says its investment teams are developing AI-supported research workflows, starting with equities. The focus is comparing opinions, studying assumptions and making risk information more accessible to portfolio managers. Codex is one of the tools involved.",
+            "This is not an announcement that the asset manager has handed buying and selling decisions to a chatbot. The stated objective is a continuous research layer whose information is combined with professional judgment. Neither the exact production coverage nor independent measured benefits are provided."
+          ],
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "heading": "How an AI equity research assistant can add value—and introduce errors",
+          "paragraphs": [
+            "A useful research assistant can map a company's valuation assumptions, compare an optimistic thesis with skeptical analysis and point to conflicting financial disclosures. That may help analysts identify questions they would otherwise overlook. But a plausible summary is not reliable evidence unless its numbers, dates and sources are traceable.",
+            "Portfolio decisions depend on timely filings, accounting definitions, corporate actions and risk constraints. Language models can cite outdated figures or confuse management guidance with realized results. A robust workflow should connect every material claim to the original filing and require an analyst to approve the assumptions."
+          ],
+          "source": "https://openai.com/index/franklin-templeton"
+        },
+        {
+          "heading": "An SXF evaluation framework for financial research AI",
+          "paragraphs": [
+            "Compare the AI-supported process with normal research using the same companies and filing periods. Record time to a source-checked memo, material factual errors, missing risk factors and the number of independent perspectives captured. Test whether the system notices stale data and conflicts of interest.",
+            "Report operational efficiency separately from investment outcomes. Even if an AI assistant helps create a better-documented memo, that does not establish superior portfolio returns. The compelling news is the development of analyst-facing tools, while any claimed financial impact must await auditable results."
+          ],
+          "source": "https://openai.com/index/franklin-templeton"
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent evaluation checklist",
+          "url": "/guides/ai-agent-evaluation-checklist/",
+          "description": "Assess factual and operational performance."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Why a vendor case study is not a controlled benchmark."
+        },
+        {
+          "title": "Deploy AI agents in production",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Human authorization and monitoring."
+        },
+        {
+          "title": "LifeVal real-world tasks",
+          "url": "/signals/lifeval-ed4b582/",
+          "description": "Compare practical agent completion with claimed automation benefits."
+        },
+        {
+          "title": "SXF research coverage",
+          "url": "/research/",
+          "description": "Evidence-led reporting across applied AI."
+        }
+      ],
+      "reader_checklist": [
+        "Require linked original financial filings and timestamped facts.",
+        "Separate research assistance from authorized trading decisions.",
+        "Compare error rates and reviewed outcomes against an existing workflow.",
+        "Do not interpret customer claims as investment return evidence."
+      ]
     }
   }
 }
