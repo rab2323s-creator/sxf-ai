@@ -1481,3 +1481,6 @@
 @media(max-width:1000px){.topics-hub-grid,.topics-hub-paths{grid-template-columns:repeat(2,minmax(0,1fr))}.topics-hub-hero-layout{grid-template-columns:minmax(0,1.25fr) minmax(230px,.75fr);gap:34px}}
 @media(max-width:750px){.topics-hub-page .topics-hub-hero{padding-top:36px;padding-bottom:63px}.topics-hub-breadcrumb{margin-bottom:40px}.topics-hub-hero-layout,.topics-hub-method-layout{grid-template-columns:1fr;gap:34px}.topics-hub-hero h1{font-size:clamp(54px,11vw,88px)}.topics-hub-promise{padding-top:20px}.topics-hub-promise strong{margin:15px 0}.topics-hub-section{padding-top:64px;padding-bottom:70px}.topics-hub-heading{align-items:start}.topics-hub-section-count{display:none}.topics-hub-grid,.topics-hub-paths{grid-template-columns:1fr}.topics-hub-card,.topics-hub-grid-platforms .topics-hub-card{min-height:235px;padding:23px}.topics-hub-card h3{margin-top:24px}.topics-hub-card p{margin-bottom:19px}.topics-hub-outro{padding-bottom:66px;align-items:start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.topics-hub-card,.topics-hub-actions a{transition:none}.topics-hub-card:hover{transform:none}}
+
+/* Descriptive topic card footers replace volatile signal-count badges. */
+.topics-hub-card-foot>span:first-child{color:#a2b2bc;line-height:1.55;max-width:70%}

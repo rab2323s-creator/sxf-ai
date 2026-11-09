@@ -15,6 +15,18 @@ DESCRIPTION = (
 )
 CANONICAL = "https://sxf.si/topics/"
 
+CARD_FOCUS = {
+    "ai-agents": "Guides · Research · Developments",
+    "coding-ai": "Tools · Workflows · Developments",
+    "ai-security": "Threats · Controls · Resources",
+    "open-source-ai": "Models · Runtimes · Releases",
+    "multimodal-ai": "Vision · Audio · Video",
+    "ai-safety": "Alignment · Evaluation · Risks",
+    "openai": "Models · Products · Research",
+    "google-ai": "Models · Products · Research",
+    "github-copilot": "Features · Workflows · Integrations"
+}
+
 SUBJECT_ORDER = (
     "ai-agents", "coding-ai", "ai-security",
     "open-source-ai", "multimodal-ai", "ai-safety",
@@ -87,7 +99,7 @@ def topic_card(slug: str, topic: dict, items: list) -> str:
         f'<span class="topics-hub-card-label">{escape(label)}</span>'
         f'<h3>{escape(topic["name"])}</h3>'
         f'<p>{escape(summary)}</p>'
-        f'<span class="topics-hub-card-foot"><span>{len(items)} tracked signals</span>'
+        f'<span class="topics-hub-card-foot"><span>{escape(CARD_FOCUS.get(slug, "Explore the coverage"))}</span>'
         f'<b>Explore topic <span aria-hidden="true">↗</span></b></span></a>'
     )
 
@@ -154,6 +166,7 @@ def render_topics_hub(groups: dict, *, page_head: Callable, page_header: Callabl
         '<!doctype html><html lang="en">'
         + page_head(TITLE, DESCRIPTION, CANONICAL, topic_schema(groups))
         + '<body class="intel-page topics-page topics-hub-page">'
-        + page_header() + '<main id="main-content">' + main
-        + '</main>' + page_footer() + '</body></html>'
+        + page_header("topics") + '<main id="main-content">' + main
+        + '</main>' + page_footer()
+        + '<script src="/assets/topic-navigation.js" defer></script></body></html>'
     )

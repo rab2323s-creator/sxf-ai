@@ -17,6 +17,7 @@ AI_ENRICHMENT_CANDIDATES_PATH = ROOT / "data" / "ai-enrichment-candidates.json"
 EXPECTED_PRIMARY_NAV = [
     "/models/",
     "/compare/",
+    "/topics/",
     "/tools/",
     "/research/",
     "/open-source/",

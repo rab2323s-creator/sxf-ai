@@ -758,3 +758,28 @@ button,input{font:inherit}
 
 /* Clear keyboard focus for primary-source citations in published SXF Signals. */
 .signal-evidence a:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:3px}
+
+
+
+/* Primary Topics navigation: prominent while keeping the ten links accessible. */
+.site-header .top-nav{gap:clamp(12px,1.45vw,22px)}
+.site-header .top-nav a[href="/topics/"]{font-weight:750;color:#d4dfc4}
+.site-header .top-nav a[href="/topics/"]:hover,
+.site-header .top-nav a[href="/topics/"][aria-current="page"]{color:var(--accent)}
+@media(min-width:721px) and (max-width:1190px){
+  .site-header .header-inner{grid-template-columns:auto minmax(0,1fr) auto;column-gap:16px}
+  .site-header .top-nav{min-width:0;overflow-x:auto;white-space:nowrap;gap:16px;scrollbar-width:none;justify-content:flex-start}
+  .site-header .top-nav::-webkit-scrollbar{display:none}
+  .site-header .top-nav a{flex:0 0 auto}
+}
+@media(max-width:720px){.site-header .top-nav{gap:20px}}
+
+/* Compact, source-aware topic links within evergreen Guides and Research. */
+.topic-context-block{margin:44px auto 66px;border-top:1px solid #314235;border-bottom:1px solid #26363a;padding-top:27px;padding-bottom:27px}
+.topic-context-label{font:10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.11em;color:#c8ff4d}
+.topic-context-heading{font-size:clamp(20px,2.6vw,30px);letter-spacing:-.035em;margin:11px 0 10px}
+.topic-context-explain{font-size:14px;line-height:1.7;color:#a4b2be;margin:0 0 22px;max-width:750px}
+.topic-context-links{display:flex;gap:10px;flex-wrap:wrap}
+.topic-context-links a{border:1px solid #415044;border-radius:8px;padding:12px 15px;color:#e6f0df;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:18px}
+.topic-context-links a:hover{border-color:#c8ff4d;color:#c8ff4d}
+.topic-context-links a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}

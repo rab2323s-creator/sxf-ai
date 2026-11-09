@@ -13,6 +13,7 @@ def page_header(active=""):
     links = [
         ("/models/", "Models", "models"),
         ("/compare/", "Compare", "compare"),
+        ("/topics/", "Topics", "topics"),
         ("/tools/", "Tools", "tools"),
         ("/research/", "Research", "research"),
         ("/open-source/", "Open Source", "open-source"),

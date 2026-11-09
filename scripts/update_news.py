@@ -4046,6 +4046,38 @@ def page_footer(home=False):
     """Compatibility entrypoint for the site footer."""
     return render_page_footer(home=home)
 
+
+
+def normalize_primary_navigation():
+    """Keep the shared menu consistent across generated and authored public routes."""
+    nav_pattern = re.compile(
+        r'<nav class="top-nav" aria-label="Primary navigation">.*?</nav>', re.S
+    )
+    active_sections = {
+        "models", "compare", "topics", "tools", "research", "open-source",
+        "guides", "superintelligence", "brief", "about",
+    }
+    for path in sorted(ROOT.rglob("index.html")):
+        relative = path.relative_to(ROOT)
+        if any(part in {".git", ".github", "tests", "docs", "data", "scripts"}
+               for part in relative.parts[:-1]):
+            continue
+        html = path.read_text(encoding="utf-8")
+        if 'class="top-nav"' not in html:
+            continue
+        active = relative.parts[0] if len(relative.parts) > 1 else ""
+        if active not in active_sections:
+            active = ""
+        desired = nav_pattern.search(page_header(active))
+        if desired is None:
+            raise RuntimeError("Shared primary navigation template is missing")
+        updated, count = nav_pattern.subn(lambda _match: desired.group(0), html, count=1)
+        if count != 1:
+            raise RuntimeError(f"Unrecognized primary navigation in {relative}")
+        if updated != html:
+            path.write_text(updated, encoding="utf-8")
+
+
 def normalize_static_shells():
     header_pattern = re.compile(r'<header class="site-header">.*?</header>', re.S)
     footer_script = re.escape('<script>document.getElementById("year").textContent=new Date().getFullYear();</script>')
@@ -11431,6 +11463,7 @@ def render_site(archive, current):
     update_section_pages(current, archive)
     build_discovery_pages(archive, current)
     normalize_static_shells()
+    normalize_primary_navigation()
     update_sitemap(archive)
 
 
