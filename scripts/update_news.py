@@ -23,6 +23,7 @@ from news_relevance import assess_news, primary_category, partition_news_rows
 from news_importance import assess_editorial_news
 from editorial_review import reviewed_category
 from ai_security_topic_template import AI_SECURITY_DESCRIPTION, AI_SECURITY_MAIN_TEMPLATE, AI_SECURITY_STYLES, AI_SECURITY_TITLE
+from topics_hub import render_topics_hub
 from feed_card_rendering import FeedCardContext, featured_html as render_featured_card, cards_html as render_story_cards, section_cards_html as render_section_cards
 from html_shell import page_header as render_page_header, page_footer as render_page_footer, page_head as render_page_head
 from signal_page_rendering import SignalPageContext, signal_row as render_signal_row, signals_index_html as render_signals_index_html
@@ -4276,18 +4277,8 @@ def topic_page_html(topic, items):
     </main>{page_footer()}</body></html>'''
 
 def topics_index_html(groups):
-    canonical = f"{BASE_URL}/topics/"
-    description = "Explore SXF / AI topic intelligence across companies, agents, coding AI, multimodal systems, safety and open-source AI."
-    schema = {"@context":"https://schema.org","@type":"CollectionPage","name":"AI Topics | SXF / AI","url":canonical,"isPartOf":{"@id":"https://sxf.si/#website"},"inLanguage":"en"}
-    cards = "".join(
-        f'''<a class="topic-card" href="/topics/{escape(slug, quote=True)}/"><span>{len(items):02d}</span><h2>{escape(topic["name"])}</h2><p>{escape(topic["description"])}</p><b>Open topic ↗</b></a>'''
-        for slug,(topic,items) in groups.items()
-    )
-    return f'''<!doctype html><html lang="en">{page_head("AI Topics — Companies, Agents, Safety & Open Source | SXF / AI", description, canonical, schema)}
-    <body class="intel-page topics-page">{page_header()}<main>
-    <section class="collection-hero shell"><p class="eyebrow">TOPIC MAP</p><h1>Follow the subject,<br><span>not just the headline.</span></h1><p>Persistent topic pages turn individual releases into a navigable signal history.</p></section>
-    <section class="topic-grid shell">{cards}</section></main>{page_footer()}</body></html>'''
-
+    # Durable intent-led directory; never edit the generated HTML in isolation.
+    return render_topics_hub(groups, page_head=page_head, page_header=page_header, page_footer=page_footer)
 
 
 def claude_fable_51_reference_html(items):
