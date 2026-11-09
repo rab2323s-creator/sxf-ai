@@ -5517,6 +5517,23 @@ def model_comparison_links_html(model_id, limit=4):
 
 
 def render_catalog_model_page(model_id, items):
+    if model_id == "scribe_v2":
+        # This model is a native audio-hour speech recognition service, not
+        # a generative token-priced model. Preserve the authored SXF dossier
+        # through scheduled catalog/news regeneration.
+        source = ROOT / "scripts" / "scribe_v2_dossier.html"
+        page = source.read_text(encoding="utf-8")
+        if (
+            page.count("<h1") != 1
+            or 'data-sv2-lab' not in page
+            or '"@type":"TechArticle"' not in page
+            or '"@type":"FAQPage"' not in page
+            or 'data-model-history' not in page
+            or 'data-model-comparisons' not in page
+            or 'rel="canonical" href="https://sxf.si/models/scribe-v2/"' not in page
+        ):
+            raise RuntimeError("Scribe v2 editorial dossier invalid; refusing catalog fallback")
+        return page
     if model_id == "mistral-medium-3-5":
         # Authored model dossier is the durable source, not a generated thin
         # catalog fallback. The source lives under scripts/ to keep it out of
