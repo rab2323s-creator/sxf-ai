@@ -3,6 +3,7 @@ const category=body.dataset.category||'';
 const isOpenSource=category==='Open Source';
 const isResearch=category==='Research';
 const resultsStatus=document.getElementById('researchResultsCount');
+const openResultsStatus=document.getElementById('openSourceResultsStatus');
 let feedReady=false;
 const feed=document.getElementById('sectionFeed');
 const empty=document.getElementById('sectionEmpty');
@@ -45,11 +46,13 @@ function render(){
   empty.hidden=visible.length!==0;
   if(count)count.textContent=isOpenSource?visible.length:items.length;
   if(resultsStatus)resultsStatus.textContent=visible.length+' of '+items.length+' live research updates shown.';
+  if(openResultsStatus)openResultsStatus.textContent=visible.length+' of '+items.length+' reviewed updates shown.';
 }
 lenses.forEach(b=>b.addEventListener('click',()=>{
   lenses.forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
-  if(isResearch)lenses.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  if(isResearch||isOpenSource)lenses.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+
   activeKeywords=b.dataset.keywords||'';
   render();
 }));
@@ -66,4 +69,5 @@ fetch(source,{cache:'no-cache'})
   .catch(()=>{
     // Keep server-rendered links indexable and usable during network failures.
     if(resultsStatus)resultsStatus.textContent='Live filtering unavailable. The latest research links below remain available.';
+    if(openResultsStatus)openResultsStatus.textContent='Showing server-rendered updates; live filtering unavailable.';
   });

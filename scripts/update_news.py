@@ -2577,6 +2577,15 @@ def update_section_pages(items, archive=None):
         }
         schema_html = '<script type="application/ld+json" id="section-signals-schema">' + json.dumps(schema, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c") + "</script>"
         page = replace_block(page, "<!-- SXF:SECTION_SCHEMA_START -->", "<!-- SXF:SECTION_SCHEMA_END -->", schema_html)
+        if category == "Open Source":
+            # Server-rendered fallback must match feed emptiness even without JS.
+            page, empty_updates = re.subn(
+                r'(<div id="sectionEmpty" class="open-hub-empty")(?: hidden)?(>)',
+                lambda match: match.group(1) + (" hidden" if filtered else "") + match.group(2),
+                page, count=1,
+            )
+            if empty_updates != 1:
+                raise RuntimeError("Open Source page is missing its accessible empty state")
         if category == "Models":
             page = replace_block(page, "<!-- SXF:MODEL_EXPLORER_START -->", "<!-- SXF:MODEL_EXPLORER_END -->", model_explorer_html())
             page = replace_block(page, "<!-- SXF:TRACKED_MODELS_START -->", "<!-- SXF:TRACKED_MODELS_END -->", tracked_models_html(items))

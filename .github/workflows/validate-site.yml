@@ -194,6 +194,7 @@ jobs:
       - name: Open Source topic, page and filter regressions
         run: |
           python tests/test_open_source_signals.py
+          python tests/test_open_source_hub.py
           node tests/test_open_source_filters.cjs
       - name: Verify offline HTML/SEO rebuild parity
         run: python tests/test_snapshot_rendering.py --parity

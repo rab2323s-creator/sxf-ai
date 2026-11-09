@@ -17,7 +17,7 @@ async function section(){
     'framework transformers gradio library','local mlx ollama llama.cpp',
     'github repository repo open source'];
   const lenses=keys.map(key=>({dataset:{keywords:key},
-    classList:{remove(){},add(){}},addEventListener:(_,fn)=>{this._unused=fn}}));
+    classList:{remove(){},add(){}},setAttribute(){},addEventListener:(_,fn)=>{this._unused=fn}}));
   lenses.forEach((b,i)=>{b.addEventListener=(_event,cb)=>b.click=cb;});
   const nodes={sectionFeed:feed,sectionEmpty:empty,sectionSearch:search,
     sectionCount:count,year:{textContent:''}};
