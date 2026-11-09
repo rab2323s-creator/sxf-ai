@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>ElevenLabs Scribe v2 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="ElevenLabs Scribe v2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official ElevenLabs sources." />
+      <title>ElevenLabs Scribe v2: API, Pricing, Languages &amp; Transcription | SXF / AI</title>
+      <meta name="description" content="Expert ElevenLabs Scribe v2 guide: $0.22/hour pricing, 90+ languages, diarization, word timestamps, file limits, API examples and original SXF cost calculator." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="ElevenLabs Scribe v2 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="ElevenLabs Scribe v2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official ElevenLabs sources." />
+      <meta property="og:title" content="ElevenLabs Scribe v2: API, Pricing, Languages &amp; Transcription | SXF / AI" />
+      <meta property="og:description" content="Expert ElevenLabs Scribe v2 guide: $0.22/hour pricing, 90+ languages, diarization, word timestamps, file limits, API examples and original SXF cost calculator." />
       <meta property="og:url" content="https://sxf.si/models/scribe-v2/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,81 +23,184 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="ElevenLabs Scribe v2 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="ElevenLabs Scribe v2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official ElevenLabs sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/scribe-v2/#article","headline":"ElevenLabs Scribe v2 — API Specs, Context & Pricing","description":"ElevenLabs Scribe v2 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official ElevenLabs sources.","url":"https://sxf.si/models/scribe-v2/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"ElevenLabs Scribe v2"},"citation":["https://elevenlabs.io/docs/api-reference/speech-to-text/convert","https://elevenlabs.io/pricing/api"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"ElevenLabs Scribe v2","item":"https://sxf.si/models/scribe-v2/"}]}]}</script>
+      <meta name="twitter:title" content="ElevenLabs Scribe v2: API, Pricing, Languages &amp; Transcription | SXF / AI" />
+      <meta name="twitter:description" content="Expert ElevenLabs Scribe v2 guide: $0.22/hour pricing, 90+ languages, diarization, word timestamps, file limits, API examples and original SXF cost calculator." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://sxf.si/#organization","name":"SXF / AI","url":"https://sxf.si/"},{"@type":"WebSite","@id":"https://sxf.si/#website","url":"https://sxf.si/","name":"SXF / AI","publisher":{"@id":"https://sxf.si/#organization"}},{"@type":"TechArticle","@id":"https://sxf.si/models/scribe-v2/#article","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/scribe-v2/"},"headline":"ElevenLabs Scribe v2: Speech-to-Text API, Pricing, Diarization and Engineering Guide","description":"Expert ElevenLabs Scribe v2 guide: $0.22/hour pricing, 90+ languages, diarization, word timestamps, file limits, API examples and original SXF cost calculator.","url":"https://sxf.si/models/scribe-v2/","image":"https://sxf.si/assets/og/sxf-ai-social.webp","inLanguage":"en","isAccessibleForFree":true,"author":{"@id":"https://sxf.si/#organization"},"publisher":{"@id":"https://sxf.si/#organization"},"dateModified":"2026-11-09","about":{"@type":"SoftwareApplication","name":"ElevenLabs Scribe v2","applicationCategory":"SpeechRecognitionApplication","url":"https://elevenlabs.io/"},"citation":["https://elevenlabs.io/docs/api-reference/speech-to-text/convert","https://elevenlabs.io/pricing/api","https://elevenlabs.io/docs/overview/capabilities/speech-to-text","https://elevenlabs.io/docs/eleven-api/guides/cookbooks/speech-to-text/quickstart","https://elevenlabs.io/docs/api-reference/speech-to-text/realtime","https://sxf.si/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/"]},{"@type":"FAQPage","@id":"https://sxf.si/models/scribe-v2/#faq","mainEntity":[{"@type":"Question","name":"What is ElevenLabs Scribe v2?","acceptedAnswer":{"@type":"Answer","text":"Scribe v2 is a multilingual speech-to-text model for transcribing recorded audio and video. The API model ID is scribe_v2 and the file-transcription endpoint is POST /v1/speech-to-text. It is not a text-to-speech or live-streaming model."}},{"@type":"Question","name":"How much does Scribe v2 cost?","acceptedAnswer":{"@type":"Answer","text":"The public ElevenLabs API pricing page lists $0.22 per audio hour for Scribe v2, $0.05 per hour for optional keyterm prompting and $0.07 per hour for transcript editing. Multichannel processing bills each channel separately at the full audio duration. Verify your plan and current rates."}},{"@type":"Question","name":"Does Scribe v2 support speaker diarization?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set diarize=true to request speaker annotations. The API supports num_speakers from 1 to 32. Speaker IDs indicate inferred speaker turns and should be reviewed on overlapping speech."}},{"@type":"Question","name":"Can Scribe v2 generate word-level timestamps?","acceptedAnswer":{"@type":"Answer","text":"Yes. The API supports word-level timestamps and a character-level option. The response can include start and end time per word, which can support subtitles and audio search."}},{"@type":"Question","name":"Which languages does Scribe v2 support?","acceptedAnswer":{"@type":"Answer","text":"ElevenLabs advertises support for more than 90 languages. Actual recognition accuracy varies by language, accent, recording conditions, vocabulary and code-switching; evaluate on representative samples."}},{"@type":"Question","name":"What are the file upload limits?","acceptedAnswer":{"@type":"Answer","text":"The current POST /v1/speech-to-text reference states that a direct file must be under 5 GB and audio must be at least 100 ms. Check the current documentation for source URLs, plan limits and other constraints."}},{"@type":"Question","name":"How does Scribe v2 compare with Scribe v2 Realtime?","acceptedAnswer":{"@type":"Answer","text":"Scribe v2 targets recorded-file transcription via POST /v1/speech-to-text, at a listed $0.22 per audio hour. Scribe v2 Realtime is a separate streaming model with a distinct WebSocket flow and a listed $0.39 per audio hour."}},{"@type":"Question","name":"What is keyterm prompting and when should I use it?","acceptedAnswer":{"@type":"Answer","text":"The keyterms field lets you supply specialized words and names to bias recognition. The documented limit is 1000 keyterms, each at most 50 characters or five words. Test term recall and false positives against a control set; it is a paid option."}},{"@type":"Question","name":"Can Scribe v2 transcribe multiple audio channels?","acceptedAnswer":{"@type":"Answer","text":"Yes. use_multi_channel=true transcribes up to five channels independently. You can receive separate channel transcripts or a combined time-sorted result. Billing scales with channel count and transcript editing cannot be combined with multichannel mode."}},{"@type":"Question","name":"How can I evaluate transcription accuracy fairly?","acceptedAnswer":{"@type":"Answer","text":"Measure word error rate on human-reviewed reference transcripts, plus speaker attribution, timestamps, entity handling, language-specific errors, latency and cost. Compare the same audio corpus and preprocessing settings for every candidate."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"ElevenLabs Scribe v2","item":"https://sxf.si/models/scribe-v2/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
+      <link rel="stylesheet" href="/assets/scribe-v2-dossier.css" />
     </head>
-    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+    <body class="intel-page model-page sv2-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
-      <section class="collection-hero shell">
-        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>ElevenLabs Scribe v2</span></nav>
-        <p class="eyebrow">MODEL REFERENCE / ELEVENLABS</p>
-        <h1>ElevenLabs Scribe v2<br><span>verified model reference.</span></h1>
-        <p>ElevenLabs multilingual speech recognition for file transcripts, subtitle creation, speaker identification and keyterm-prompted transcription.</p>
-        <div class="collection-stats">
-          <div><strong>Not published</strong><span>context not published</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
-          <div><strong>2026-10-12</strong><span>last verified</span></div>
+<section class="sv2-hero shell" id="sv2-overview">
+  <nav class="sv2-crumbs" aria-label="Breadcrumb"><a href="/">SXF / AI</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Scribe v2</span></nav>
+  <span class="sv2-eyebrow"><i></i>SXF RESEARCH / SPEECH INTELLIGENCE</span>
+  <h1>ElevenLabs Scribe v2<span>Transcription, decoded.</span></h1>
+  <p class="sv2-lead">A practitioner-grade guide to multilingual speech recognition: what Scribe v2 can transcribe, how to use the API, what its features actually cost, and how to evaluate reliability instead of trusting a headline accuracy claim.</p>
+  <div class="sv2-stamp"><strong>SXF / AI Research Desk</strong><b></b><span>Reviewed 9 November 2026</span><b></b><span>Evidence-first · no sponsored ranking</span></div>
+  <div class="sv2-quicklinks"><a class="sv2-action sv2-action-primary" href="#sv2-calculator">Estimate audio cost ↘</a><a class="sv2-action" href="#sv2-api">API example</a><a class="sv2-action" href="#sv2-evaluation">Evaluation framework</a><a class="sv2-action" href="#sv2-sources">Sources &amp; verification</a></div>
+  <div class="sv2-facts" aria-label="Scribe v2 key facts">
+    <div><span>Batch speech to text</span><strong>90+ languages</strong><small>Provider-stated coverage; accuracy varies</small></div>
+    <div><span>Base API price</span><strong>$0.22</strong><small>USD per recorded audio hour</small></div>
+    <div><span>Speaker labeling</span><strong>Up to 32</strong><small>Speakers via diarization parameter</small></div>
+    <div><span>File upload</span><strong>&lt; 5 GB</strong><small>Current documented direct-file limit</small></div>
+  </div>
+  <div class="sv2-waveframe" aria-label="Abstract transcription signal graphic"><span>SXF / SIGNAL VIEW<br>Speech → language → structured evidence</span><div class="sv2-wave" aria-hidden="true"><i style="--h:0.18" aria-hidden="true"></i><i style="--h:0.48" aria-hidden="true"></i><i style="--h:0.77" aria-hidden="true"></i><i style="--h:0.3" aria-hidden="true"></i><i style="--h:0.92" aria-hidden="true"></i><i style="--h:0.46" aria-hidden="true"></i><i style="--h:0.74" aria-hidden="true"></i><i style="--h:0.22" aria-hidden="true"></i><i style="--h:0.53" aria-hidden="true"></i><i style="--h:0.99" aria-hidden="true"></i><i style="--h:0.34" aria-hidden="true"></i><i style="--h:0.67" aria-hidden="true"></i><i style="--h:0.87" aria-hidden="true"></i><i style="--h:0.25" aria-hidden="true"></i><i style="--h:0.58" aria-hidden="true"></i><i style="--h:0.95" aria-hidden="true"></i><i style="--h:0.4" aria-hidden="true"></i><i style="--h:0.71" aria-hidden="true"></i><i style="--h:0.33" aria-hidden="true"></i><i style="--h:0.83" aria-hidden="true"></i><i style="--h:0.56" aria-hidden="true"></i><i style="--h:0.16" aria-hidden="true"></i><i style="--h:0.86" aria-hidden="true"></i><i style="--h:0.69" aria-hidden="true"></i><i style="--h:0.42" aria-hidden="true"></i><i style="--h:0.91" aria-hidden="true"></i><i style="--h:0.32" aria-hidden="true"></i><i style="--h:0.75" aria-hidden="true"></i><i style="--h:0.49" aria-hidden="true"></i><i style="--h:0.21" aria-hidden="true"></i><i style="--h:0.98" aria-hidden="true"></i><i style="--h:0.65" aria-hidden="true"></i><i style="--h:0.31" aria-hidden="true"></i><i style="--h:0.8" aria-hidden="true"></i><i style="--h:0.47" aria-hidden="true"></i><i style="--h:0.94" aria-hidden="true"></i><i style="--h:0.28" aria-hidden="true"></i><i style="--h:0.63" aria-hidden="true"></i><i style="--h:0.37" aria-hidden="true"></i><i style="--h:0.88" aria-hidden="true"></i></div><span>MODEL: <code>scribe_v2</code></span></div>
+</section>
+<div class="sv2-structure shell">
+  <nav class="sv2-toc" aria-label="Table of contents"><h2>In this dossier</h2><a href="#sv2-verdict">SXF assessment</a><a href="#sv2-specs">Technical specifications</a><a href="#sv2-features">Capabilities</a><a href="#sv2-calculator">Pricing lab</a><a href="#sv2-api">API integration</a><a href="#sv2-evaluation">Accuracy protocol</a><a href="#sv2-comparison">Alternatives</a><a href="#sv2-privacy">Privacy &amp; limits</a><a href="#sv2-faq">Questions &amp; answers</a><a href="#sv2-sources">Research sources</a></nav>
+  <article class="sv2-body" aria-label="Scribe v2 technical reference">
+    <section class="sv2-block" id="sv2-verdict"><p class="sv2-kicker">01 / THE SXF VERDICT</p><h2>Excellent features on paper. Prove transcript quality on your audio.</h2>
+      <p><strong>ElevenLabs Scribe v2</strong> is the provider's multilingual <strong>recorded-file speech-to-text</strong> model. Its API provides transcript text, word timing, optional speaker diarization and audio-event labels. It also supports keyterm prompting for specialist vocabulary and processing workflows for recorded meetings, interviews, podcasts and video. The documented identifier is <code>scribe_v2</code> at <code>POST /v1/speech-to-text</code>.</p>
+      <div class="sv2-callout"><strong>SXF / DECISION NOTE</strong><p>Choose a batch model when you need an annotated transcript <strong>after</strong> recording. Choose a real-time model when you need streaming recognition during the call. If your audio is clinical or contains regulated information, review the separate <strong>Scribe v2 Medical</strong> model and account-level protections rather than assuming Scribe v2 is designed for your compliance requirements.</p></div>
+      <p>The published marketing claim of <em>over 98% transcription accuracy</em> is <strong>provider-reported</strong>. It is not a guarantee for accented dialogue, Arabic dialects, noisy calls, specialist terms or overlapping speakers. SXF recommends evaluating <strong>WER, speaker assignment and timestamp drift</strong> on an annotated, representative test set before procurement.</p>
+      <div class="sv2-pill-row"><span>Provider specs cited</span><span>Costs modelled in audio-hours</span><span>Independent test plan, not invented scores</span></div>
+    </section>
+    <section class="sv2-block" id="sv2-specs"><p class="sv2-kicker">02 / SPECIFICATIONS</p><h2>The facts developers actually need.</h2>
+      <p>Unlike a text-generation model, Scribe v2 does not have a meaningful advertised <em>token context window</em> for pricing comparisons. Its native unit is recorded audio. This reference deliberately separates <strong>API constraints</strong> from model performance claims.</p>
+      <div class="sv2-table"><table><caption>Verified technical and commercial properties · 9 November 2026</caption><thead><tr><th>Property</th><th>Current reference</th><th>Qualification</th></tr></thead><tbody>
+        <tr><td>Product / model ID</td><td><code>scribe_v2</code></td><td>ElevenLabs Speech-to-Text API</td></tr>
+        <tr><td>Request endpoint</td><td><code>POST /v1/speech-to-text</code></td><td>Multipart file or documented URL input</td></tr>
+        <tr><td>Core task</td><td>Audio or video → text</td><td>Recorded transcription; not TTS or live speech generation</td></tr>
+        <tr><td>Language coverage</td><td><strong>90+ languages</strong></td><td>Provider-stated; test dialect and domain coverage</td></tr>
+        <tr><td>Direct upload size</td><td><strong>Less than 5 GB</strong></td><td>Current direct-file API limit; differs from source URL constraints</td></tr>
+        <tr><td>Minimum audio</td><td>100 milliseconds</td><td>API reference</td></tr>
+        <tr><td>Speaker diarization</td><td><strong>Up to 32 speakers</strong></td><td>Optional; set <code>diarize=true</code></td></tr>
+        <tr><td>Word timing</td><td>Word / character / none</td><td>Configurable via <code>timestamps_granularity</code></td></tr>
+        <tr><td>Multiple channels</td><td>Up to 5 independent channels</td><td>Each channel billed for full duration</td></tr>
+        <tr><td>File input alternatives</td><td>File / <code>source_url</code></td><td><code>cloud_storage_url</code> is marked deprecated</td></tr>
+        <tr><td>Base API price</td><td><strong>$0.22 / audio hour</strong></td><td>Public USD price; confirm plan inclusions</td></tr>
+        <tr><td>Keyterm prompting</td><td>$0.05 / audio hour</td><td>Optional surcharge; API describes +20% of base</td></tr>
+        <tr><td>Transcript editing</td><td>$0.07 / audio hour</td><td>Optional surcharge; API describes +30% of base</td></tr>
+      </tbody></table></div>
+      <p class="sv2-small">Note: the public pricing table rounds keyterm prompting and transcript editing to $0.05 and $0.07 per hour, respectively. Their API parameter descriptions express them as 20% and 30% surcharges; these methods can differ slightly after rounding. The SXF lab uses published price-table rates as an estimate, not an exact invoice.</p>
+    </section>
+    <section class="sv2-block" id="sv2-features"><p class="sv2-kicker">03 / WORKFLOW FEATURES</p><h2>What makes the raw transcript useful.</h2>
+      <div class="sv2-cards">
+        <div class="sv2-card"><span>01 · TRANSCRIPT TIMING</span><h3>Word-level alignment</h3><p>Receive start and end times for individual words. This enables subtitle editors, click-to-play transcripts and searchable speech archives. Verify alignment at speaker changes and after long pauses.</p></div>
+        <div class="sv2-card"><span>02 · CONVERSATIONS</span><h3>Speaker diarization</h3><p>Assign labels to speaker segments with <code>diarize=true</code>. The API accepts a known maximum of 1–32 speakers. Diarization identifies speaker turns; it does not establish a real person's identity.</p></div>
+        <div class="sv2-card"><span>03 · DOMAIN VOCABULARY</span><h3>Keyterm prompting</h3><p>Supply product names, medical vocabulary or technical terms as hints. Up to 1,000 entries are documented, with per-term constraints. Measure both correct recall and accidental over-insertion.</p></div>
+        <div class="sv2-card"><span>04 · AUDIO CONTEXT</span><h3>Non-speech event tags</h3><p>Optional audio event labels can annotate laughter or other sounds. Editorially review tags before using them as ground truth in legal, investigative or sensitive content.</p></div>
+        <div class="sv2-card"><span>05 · CHANNEL ISOLATION</span><h3>Multichannel recordings</h3><p>Transcribe up to five input channels independently and request separate or time-sorted combined output. This can simplify call-center recordings where each party is recorded on its own channel.</p></div>
+        <div class="sv2-card"><span>06 · OPERATIONS</span><h3>Asynchronous workflows</h3><p>Send longer jobs to configured webhooks where appropriate. Correlate results with request metadata and implement secure verification and retry handling in your server.</p></div>
+      </div>
+      <h3>Which audio should be tested first?</h3><p>Start with low-quality phone audio, speakers interrupting each other, multilingual conversations and industry-specific names. These cases expose errors that a clean podcast sample may hide. Test language hints against automatic detection, and decide whether to keep verbatim filler words using <code>no_verbatim</code>.</p>
+    </section>
+    <section class="sv2-block" id="sv2-calculator"><p class="sv2-kicker">04 / THE SXF COST LAB</p><h2>Model audio economics without converting hours into fake tokens.</h2>
+      <p>The public base rate is <strong>$0.22 per audio hour</strong>, with optional <strong>$0.05/hour keyterms</strong> and <strong>$0.07/hour transcript editing</strong>. A five-channel hour can incur five audio channel-hours. The calculator models these units transparently and makes no network requests.</p>
+      <div class="sv2-calculator" data-sv2-lab>
+        <header><div><p class="sv2-kicker">ORIGINAL SXF / AUDIO COST ESTIMATOR</p><h3>Calculate your recording workload</h3></div><small>Estimated USD usage cost, before taxes, plan entitlements and third-party expenses.</small></header>
+        <div class="sv2-calculator-grid">
+          <label for="sv2-minutes">Length per recording (minutes)<input id="sv2-minutes" data-sv2-minutes type="number" min="0" max="600" step="1" inputmode="decimal" value="30"></label>
+          <label for="sv2-recordings">Recordings per month<input id="sv2-recordings" data-sv2-recordings type="number" min="0" max="10000000" step="1" inputmode="numeric" value="1000"></label>
+          <label for="sv2-channels">Channels per recording<select id="sv2-channels" data-sv2-channels><option value="1">1 — mono or mixed</option><option value="2">2 — separate speakers</option><option value="3">3 channels</option><option value="4">4 channels</option><option value="5">5 channels</option></select></label>
         </div>
-      </section>
-
-      <section class="model-reference model-reference-deep shell">
-        <div class="model-reference-intro">
-          <div class="model-reference-copy">
-            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
-            <h2>ElevenLabs Scribe v2 at a glance.</h2>
-            <p>ElevenLabs does not publish a token context window for this service. Input modalities: audio. Output: text. Pricing status: Official paid API.</p>
-          </div>
-          <div class="model-fact-grid">
-            <div><span>MODEL ID</span><strong>scribe_v2</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>Not published</strong></div>
-            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
-            <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
-            <div><span>STANDARD RATE</span><strong>$0.22</strong><small>per 60 audio minutes (hourly API rate; add-ons extra)</small></div>
-            <div><span>OUTPUT RATE</span><strong>—</strong><small>official-paid</small></div>
-          </div>
+        <div class="sv2-options">
+          <label for="sv2-keyterms"><input id="sv2-keyterms" data-sv2-keyterms type="checkbox">Keyterm prompting (+$0.05/h)</label>
+          <label for="sv2-editing"><input id="sv2-editing" data-sv2-editing type="checkbox">Transcript editing (+$0.07/h)</label>
         </div>
+        <div class="sv2-results" role="status" aria-live="polite"><div><span>Estimated billed audio</span><strong data-sv2-hours>500 h</strong></div><div class="sv2-total"><span>Estimated monthly spend</span><strong data-sv2-monthly>$110.00</strong></div><div><span>12 months, same volume</span><strong data-sv2-annual>$1,320.00</strong></div></div>
+        <p class="sv2-small" data-sv2-details>Hourly estimate: $0.22 base transcription.</p><p class="sv2-warning" data-sv2-alert aria-live="polite">Illustrative duration-based estimate. Silence and pauses count toward billed audio.</p>
+        <p class="sv2-small">Formula: (minutes × files × channels ÷ 60) × applicable published hourly rates. This is an engineering planning model; ignores account allowances, taxes, rounding, minimum-billed seconds, transcription retries and separately billed processing. Transcript editing is disabled in multichannel mode because the API disallows this combination.</p>
+      </div>
+      <h3>Three worked pricing examples</h3>
+      <div class="sv2-table"><table><caption>Illustrative calculations at $0.22 per audio hour, with no add-ons</caption><thead><tr><th>Audio workload</th><th>Billable volume</th><th>Estimated spend</th></tr></thead><tbody>
+        <tr><td>One 30-minute interview (mono)</td><td>0.5 hour</td><td class="sv2-number">$0.11</td></tr>
+        <tr><td>100 one-hour podcast episodes (mono)</td><td>100 hours</td><td class="sv2-number">$22.00</td></tr>
+        <tr><td>1,000 thirty-minute two-channel calls</td><td>1,000 channel-hours</td><td class="sv2-number">$220.00</td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="sv2-block" id="sv2-api"><p class="sv2-kicker">05 / API INTEGRATION</p><h2>From recorded file to timestamped transcript.</h2>
+      <p>ElevenLabs provides a <strong>multipart POST</strong> endpoint with the model ID <code>scribe_v2</code>. Keep the API key on your server. The minimal example below uses an existing file named <code>interview.mp3</code> and enables speaker labels; it does not require a client-side key or upload audio to SXF.</p>
+      <pre class="sv2-code"><code>export ELEVENLABS_API_KEY="YOUR_SERVER_SIDE_API_KEY"
 
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
-          <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>Not published</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
-            <article><span>INPUT</span><h3>audio</h3><p>Input modalities come from the cited official model documentation.</p></article>
-            <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
-          </div>
-        </section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
-          <div class="model-split">
-            <div><p>$0.22 per 60 audio minutes (hourly API rate; add-ons extra).</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
-            <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
-          </div>
-        </section>
-
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>ElevenLabs official Speech to Text API model ID is scribe_v2, used at POST /v1/speech-to-text.</p></div><div><span>02</span><p>Official API pricing lists $0.22 per input audio hour, equivalent to $0.0036667/minute; catalog rate retains the native $0.22 PER HOUR, not a synthetic generative token rate.</p></div><div><span>03</span><p>Optional entity detection and keyterm prompting are charged separately (published $0.07/hour and $0.05/hour respectively). Supported media, rate limits and language support depend on endpoint.</p></div><div><span>04</span><p>Output is text transcription, not generated speech. Generic text-token calculator is disabled.</p></div></div></section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
-          <div class="model-related-links">
-            <a href="/providers/elevenlabs/"><span>PROVIDER</span><strong>ElevenLabs model portfolio</strong><b>↗</b></a>
-            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
-            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
-          </div>
-        </section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
-          <div class="model-sources"><a href="https://elevenlabs.io/docs/api-reference/speech-to-text/convert" target="_blank" rel="noopener noreferrer"><span>elevenlabs.io/docs/api-reference/speech-to-text/convert</span><b>↗</b></a><a href="https://elevenlabs.io/pricing/api" target="_blank" rel="noopener noreferrer"><span>elevenlabs.io/pricing/api</span><b>↗</b></a></div>
-        </section>
-      </section>
-
-      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="scribe_v2">
+curl -X POST "https://api.elevenlabs.io/v1/speech-to-text" \
+  -H "xi-api-key: $ELEVENLABS_API_KEY" \
+  -F "file=@interview.mp3" \
+  -F "model_id=scribe_v2" \
+  -F "diarize=true" \
+  -F "timestamps_granularity=word"</code></pre>
+      <p class="sv2-small">Example syntax follows the public create-transcript endpoint. Protect credentials in environment secrets; do not put a permanent API key in front-end code or a publicly shared document.</p>
+      <h3>How to interpret the response</h3>
+      <p>The response includes the transcript text and can include a <code>words</code> array with word-level <code>start</code>, <code>end</code>, <code>text</code> and <code>speaker_id</code> fields. The simplified sample below demonstrates the data shape, <strong>not an actual recorded API result</strong>.</p>
+      <pre class="sv2-code"><code>{
+  "language_code": "en",
+  "text": "Welcome to the demo.",
+  "words": [
+    {
+      "text": "Welcome",
+      "start": 0.0,
+      "end": 0.52,
+      "speaker_id": "speaker_0",
+      "type": "word"
+    }
+  ]
+}</code></pre>
+      <h3>Production processing checklist</h3>
+      <ol class="sv2-protocol">
+        <li><strong>Normalize metadata.</strong> Capture duration, sample rate, channel count, source language assumptions and consent information without needlessly copying sensitive content.</li>
+        <li><strong>Choose the right ingestion mode.</strong> Use a direct upload or the documented <code>source_url</code>. Avoid newly building on the deprecated <code>cloud_storage_url</code> parameter.</li>
+        <li><strong>Set features deliberately.</strong> Select diarization, timestamps and domain vocabulary only where justified. Some combinations are mutually exclusive.</li>
+        <li><strong>Validate the result.</strong> Check response shape, missing timestamps, speaker consistency, hallucinated tokens during silence and incorrect named entities.</li>
+        <li><strong>Store responsibly.</strong> Protect transcript access, enforce deletion or retention policy, and avoid embedding speaker identity assumptions into automation.</li>
+        <li><strong>Track operational errors.</strong> Instrument retries, throughput, p95 completion time, failures by language, downstream correction effort and cost per accepted transcript.</li>
+      </ol>
+    </section>
+    <section class="sv2-block" id="sv2-evaluation"><p class="sv2-kicker">06 / SXF ORIGINAL EVALUATION DESIGN</p><h2>How to test recognition quality without invented benchmarks.</h2>
+      <p>A credible speech-recognition recommendation requires reproducible measurements on the <strong>same audio</strong>, not vendor benchmarks pasted into a table. SXF's proposed evaluation protocol below is a transparent research design; the page does <strong>not</strong> claim SXF has run independent experiments or established superiority.</p>
+      <div class="sv2-callout"><strong>EVIDENCE STATUS: REPRODUCIBLE TEST DESIGN, NOT MEASURED RESULTS</strong><p>Collect a consented, human-checked set of recordings. Run each candidate with pinned versions and identical preprocessing. Score raw accuracy and downstream usability separately. Publish corpus characteristics, date, language mix and statistical uncertainty with any future results.</p></div>
+      <div class="sv2-table"><table><caption>SXF proposed scorecard for a controlled transcription trial</caption><thead><tr><th>Metric</th><th>Calculation or procedure</th><th>Why it matters</th></tr></thead><tbody>
+        <tr><td><strong>Word error rate (WER)</strong></td><td>(Substitutions + deletions + insertions) / reference word count</td><td>Transcript fidelity; lower is better</td></tr>
+        <tr><td>Character error rate</td><td>Edit distance / reference character count</td><td>Useful with inflection and writing-system normalization choices</td></tr>
+        <tr><td>Speaker attribution error</td><td>Compare diarized segments against annotated speakers</td><td>Meetings and call center accuracy</td></tr>
+        <tr><td>Timestamp drift</td><td>Absolute timing error on held-out word boundaries</td><td>Subtitles and searchable playback</td></tr>
+        <tr><td>Named-entity recall</td><td>Matched terminology / manually annotated terminology</td><td>Names, products and technical vocabulary</td></tr>
+        <tr><td>Total cost / approved hour</td><td>API bill + correction labor + retries, divided by accepted audio hours</td><td>Economic outcome, not just API sticker price</td></tr>
+        <tr><td>Operational turnaround</td><td>p50/p95 time until final reviewed transcript</td><td>Workflow suitability at production scale</td></tr>
+      </tbody></table></div>
+      <h3>Suggested sample design</h3>
+      <p>Use separate groups for clean studio interviews, noisy mobile audio, regional accents, cross-talk, domain jargon and mixed-language recordings. Maintain a blind manual reference and pre-register normalization rules for punctuation, numerals and filler words. Measure per-language results rather than hiding underperforming groups in a global mean. Report sample size and confidence intervals when publishing comparative numbers.</p>
+    </section>
+    <section class="sv2-block" id="sv2-comparison"><p class="sv2-kicker">07 / DECISION MATRIX</p><h2>Scribe v2 vs Realtime vs specialized alternatives.</h2>
+      <p>Compare based on input mode and workflow rather than brand. <strong>Scribe v2</strong> and <strong>Scribe v2 Realtime</strong> are different products with distinct integration paths and billing rates. A medically sensitive pipeline must separately evaluate data handling, compliance eligibility and domain accuracy.</p>
+      <div class="sv2-table"><table><caption>Product positioning from published APIs and pricing; not a performance ranking</caption><thead><tr><th>Choice</th><th>Primary workflow</th><th>Public base price</th><th>Key distinction</th></tr></thead><tbody>
+        <tr class="sv2-highlight"><td><strong>Scribe v2</strong></td><td>Batch / recorded-file STT</td><td>$0.22 / h</td><td>Word timestamps, diarization, keyterms, multichannel files</td></tr>
+        <tr><td><a href="/models/scribe-v2-realtime/">Scribe v2 Realtime</a></td><td>Live audio streaming</td><td>$0.39 / h</td><td>Realtime model and WebSocket ingestion; not the same endpoint</td></tr>
+        <tr><td>Scribe v2 Medical</td><td>Clinical speech recognition</td><td>$0.22 / h</td><td>Separately optimized and marketed for clinical audio; review eligibility</td></tr>
+      </tbody></table></div>
+      <p>Want a cross-vendor comparison? Read <a href="/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/">Deepgram Nova-3 vs ElevenLabs Scribe v2</a> and use the <a href="/compare/">SXF model comparison hub</a>. Price and capabilities are not enough to rank transcript quality across accents, audio devices and languages.</p>
+    </section>
+    <section class="sv2-block" id="sv2-privacy"><p class="sv2-kicker">08 / SECURITY &amp; LIMITATIONS</p><h2>Accurate transcription is only one part of a trustworthy pipeline.</h2>
+      <div class="sv2-cards">
+        <div class="sv2-card"><span>DATA HANDLING</span><h3>Privacy and retention</h3><p>Voice recordings may contain personal or regulated information. Review retention terms, encryption, deletion policy, access logs and any required data-processing agreement. The API documents <code>enable_logging=false</code> zero-retention mode for eligible enterprise users.</p></div>
+        <div class="sv2-card"><span>OUTPUT LIMITATIONS</span><h3>Attribution is not identity</h3><p>A speaker label is an algorithmic segment label, not authentication. Avoid high-stakes attribution based only on diarization. Human-review confidence and overlap cases.</p></div>
+        <div class="sv2-card"><span>CONTENT CONTROL</span><h3>Verbatim versus edited</h3><p>Keep the untouched raw transcript for auditability where appropriate. <code>no_verbatim</code> may omit fillers, and transcript editing changes the output; the two are not neutral evidence-preserving operations.</p></div>
+        <div class="sv2-card"><span>PRODUCTION SAFETY</span><h3>Resilience and exceptions</h3><p>Use server-side authentication, bounded retries, webhook signature checks, upload limits, rate limiting and redaction controls. Ensure transcription errors cannot trigger destructive actions without review.</p></div>
+      </div>
+      <div class="sv2-callout sv2-warn"><strong>IMPORTANT PRODUCT DISTINCTION</strong><p>Scribe v2 performs speech recognition. It does not generate a spoken voice. For synthesis, examine ElevenLabs' text-to-speech line; for live speech recognition, examine the separate Realtime model. For legal or clinical records, human verification and applicable governance are essential.</p></div>
+    </section>
+    <section class="sv2-block" id="sv2-faq"><p class="sv2-kicker">09 / FREQUENT QUESTIONS</p><h2>Scribe v2 questions answered directly.</h2>
+      <div class="sv2-qa"><details><summary>What is ElevenLabs Scribe v2?</summary><p>Scribe v2 is a multilingual speech-to-text model for transcribing recorded audio and video. The API model ID is scribe_v2 and the file-transcription endpoint is POST /v1/speech-to-text. It is not a text-to-speech or live-streaming model.</p></details><details><summary>How much does Scribe v2 cost?</summary><p>The public ElevenLabs API pricing page lists $0.22 per audio hour for Scribe v2, $0.05 per hour for optional keyterm prompting and $0.07 per hour for transcript editing. Multichannel processing bills each channel separately at the full audio duration. Verify your plan and current rates.</p></details><details><summary>Does Scribe v2 support speaker diarization?</summary><p>Yes. Set diarize=true to request speaker annotations. The API supports num_speakers from 1 to 32. Speaker IDs indicate inferred speaker turns and should be reviewed on overlapping speech.</p></details><details><summary>Can Scribe v2 generate word-level timestamps?</summary><p>Yes. The API supports word-level timestamps and a character-level option. The response can include start and end time per word, which can support subtitles and audio search.</p></details><details><summary>Which languages does Scribe v2 support?</summary><p>ElevenLabs advertises support for more than 90 languages. Actual recognition accuracy varies by language, accent, recording conditions, vocabulary and code-switching; evaluate on representative samples.</p></details><details><summary>What are the file upload limits?</summary><p>The current POST /v1/speech-to-text reference states that a direct file must be under 5 GB and audio must be at least 100 ms. Check the current documentation for source URLs, plan limits and other constraints.</p></details><details><summary>How does Scribe v2 compare with Scribe v2 Realtime?</summary><p>Scribe v2 targets recorded-file transcription via POST /v1/speech-to-text, at a listed $0.22 per audio hour. Scribe v2 Realtime is a separate streaming model with a distinct WebSocket flow and a listed $0.39 per audio hour.</p></details><details><summary>What is keyterm prompting and when should I use it?</summary><p>The keyterms field lets you supply specialized words and names to bias recognition. The documented limit is 1000 keyterms, each at most 50 characters or five words. Test term recall and false positives against a control set; it is a paid option.</p></details><details><summary>Can Scribe v2 transcribe multiple audio channels?</summary><p>Yes. use_multi_channel=true transcribes up to five channels independently. You can receive separate channel transcripts or a combined time-sorted result. Billing scales with channel count and transcript editing cannot be combined with multichannel mode.</p></details><details><summary>How can I evaluate transcription accuracy fairly?</summary><p>Measure word error rate on human-reviewed reference transcripts, plus speaker attribution, timestamps, entity handling, language-specific errors, latency and cost. Compare the same audio corpus and preprocessing settings for every candidate.</p></details></div>
+    </section>
+    <section class="sv2-block" id="sv2-sources"><p class="sv2-kicker">10 / SXF EVIDENCE LEDGER</p><h2>Primary sources, editorial method and accountability.</h2>
+      <p><strong>Published by SXF / AI Research Desk.</strong> This technical reference prioritizes official endpoint documentation, price tables and clearly labeled original engineering analysis. Published provider marketing claims are marked as such. Prices are dated public snapshots, and no undocumented first-hand test results are represented as independent measurements.</p>
+      <ul class="sv2-sources">
+        <li><a href="https://elevenlabs.io/docs/api-reference/speech-to-text/convert" target="_blank" rel="noopener noreferrer">ElevenLabs — Create transcript API reference</a><small>Canonical request/response, speaker count, timestamps, direct-upload size, channel billing, keyterm limits and incompatibilities.</small></li>
+        <li><a href="https://elevenlabs.io/pricing/api" target="_blank" rel="noopener noreferrer">ElevenLabs — API pricing</a><small>Public rate card: $0.22/h base, $0.05/h keyterms, $0.07/h transcript editing, $0.39/h realtime.</small></li>
+        <li><a href="https://elevenlabs.io/docs/overview/capabilities/speech-to-text" target="_blank" rel="noopener noreferrer">ElevenLabs — Speech-to-text overview</a><small>Multilingual product capabilities, transcript workflows and use cases.</small></li>
+        <li><a href="https://elevenlabs.io/docs/api-reference/speech-to-text/realtime" target="_blank" rel="noopener noreferrer">ElevenLabs — Realtime speech-to-text reference</a><small>Separate real-time streaming interface, not the same as batch Scribe v2.</small></li>
+        <li><a href="/models/scribe-v2-realtime/">SXF / AI — Scribe v2 Realtime technical guide</a><small>Internal related guide for live transcription decisions.</small></li>
+        <li><a href="/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/">SXF / AI — Deepgram Nova-3 vs Scribe v2</a><small>Cross-provider capability comparison without a fabricated universal winner.</small></li>
+      </ul>
+      <div class="sv2-callout"><strong>OUR EDITORIAL STANDARD</strong><p>SXF separates provider-stated features from measured outcomes and from its own reproducible evaluation design. Missing measurements are not filled with guesses. The cost tool is a transparent mathematical calculator, not a live provider invoice. Report corrections or source changes at <a href="mailto:info@sxf.si">info@sxf.si</a>.</p></div>
+      <p class="sv2-small">Source review: 9 November 2026. Pricing and endpoint availability may change; verify the currently published provider documents and your ElevenLabs account before production use. Audio files are never uploaded to or processed by this SXF page.</p>
+    </section>
+  </article>
+</div>
+<section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="scribe_v2">
           <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>ElevenLabs Scribe v2: what changed.</h2><p>No post-baseline factual changes recorded for ElevenLabs Scribe v2 since 2026-10-12.</p></div>
           <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>2026-10-12</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
         </section>
@@ -110,36 +213,7 @@
             </article></div>
       <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 77b0ad167e15…</p>
     </section>
-      <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">RELATED SIGNALS</p><h2>Recent ElevenLabs Scribe v2 signals.</h2></div><a href="/signals/">All signals ↗</a></div><div class="signal-list"><a class="signal-row" href="/signals/phonon-tts-on-device-speech-benchmarks/">
-      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-11-05T00:00:00Z">November 5, 2026</time></div>
-      <h3>A Closer Look at Phonon TTS. Launching High-Quality On-Device Speech That Tops the Benchmarks.</h3>
-      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/github-copilot-xcode-coding-assistant/">
-      <div class="signal-row-meta"><span>GitHub</span><time datetime="2026-11-04T19:10:40Z">November 4, 2026</time></div>
-      <h3>GitHub Copilot is now available in Xcode’s coding assistant</h3>
-      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/scaling-git-at-openai-de4cf53/">
-      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-11-02T15:30:00Z">November 2, 2026</time></div>
-      <h3>Scaling Git at OpenAI</h3>
-      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/expanding-our-partnership-with-gsa-to-bring-claude-to-all-levels-of-go-16faca1/">
-      <div class="signal-row-meta"><span>Anthropic</span><time datetime="2026-10-27T00:00:00Z">October 27, 2026</time></div>
-      <h3>Expanding our partnership with GSA to bring Claude to all levels of government</h3>
-      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/securing-our-frontier-model-training-environment-48e2274/">
-      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-10-23T10:00:00Z">October 23, 2026</time></div>
-      <h3>Securing our frontier model training environment</h3>
-      <div class="signal-row-foot"><span>Research</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/granite-speech-5-0-transcribe-translate-and-attribute-more-accurately--9b35c0b/">
-      <div class="signal-row-meta"><span>Hugging Face</span><time datetime="2026-10-21T14:58:18Z">October 21, 2026</time></div>
-      <h3>Granite Speech 5.0: Transcribe, Translate, and Attribute more Accurately and Faster</h3>
-      <div class="signal-row-foot"><span>Tools</span><b>Open signal ↗</b></div>
-    </a><a class="signal-row" href="/signals/disrupting-a-coordinated-model-distillation-campaign-6a91381/">
-      <div class="signal-row-meta"><span>OpenAI</span><time datetime="2026-09-30T10:30:00Z">September 30, 2026</time></div>
-      <h3>Disrupting a coordinated model-distillation campaign</h3>
-      <div class="signal-row-foot"><span>Research</span><b>Open signal ↗</b></div>
-    </a></div></section>
-    <section class="model-compare-bridge shell" data-model-comparisons="scribe_v2">
+      <section class="model-compare-bridge shell" data-model-comparisons="scribe_v2">
       <div class="intel-section-head"><div><p class="eyebrow">COMPARE ELEVENLABS SCRIBE V2</p><h2>Put this model in context.</h2></div><a href="/compare/">Open Compare Engine ↗</a></div>
       <div class="model-related-links"><a href="/compare/deepgram-nova-3-vs-elevenlabs-scribe-v2/">
           <span>Multilingual audio transcription</span>
@@ -160,4 +234,4 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script defer src="/assets/scribe-v2-economics.js"></script></body></html>
