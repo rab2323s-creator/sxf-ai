@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Mistral Medium 3.5 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Mistral Medium 3.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
+      <title>Mistral Medium 3.5: Specs, Pricing, Benchmarks &amp; Deprecation | SXF / AI</title>
+      <meta name="description" content="Independent Mistral Medium 3.5 guide: 256K context, $1.50/$7.50 API pricing, features, benchmark caveats, cost calculator, deprecation status and migration to Large 4." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Mistral Medium 3.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Mistral Medium 3.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
+      <meta property="og:title" content="Mistral Medium 3.5: Specs, Pricing, Benchmarks &amp; Deprecation | SXF / AI" />
+      <meta property="og:description" content="Independent Mistral Medium 3.5 guide: 256K context, $1.50/$7.50 API pricing, features, benchmark caveats, cost calculator, deprecation status and migration to Large 4." />
       <meta property="og:url" content="https://sxf.si/models/mistral-medium-3-5/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,79 +23,178 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Mistral Medium 3.5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Mistral Medium 3.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/mistral-medium-3-5/#article","headline":"Mistral Medium 3.5 — API Specs, Context & Pricing","description":"Mistral Medium 3.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Mistral AI sources.","url":"https://sxf.si/models/mistral-medium-3-5/","dateModified":"2026-10-06","about":{"@type":"Thing","name":"Mistral Medium 3.5"},"citation":["https://docs.mistral.ai/models/mistral-medium-3-5-26-04","https://docs.mistral.ai/inference/pricing","https://docs.mistral.ai/studio/conversations/reasoning","https://docs.mistral.ai/resources/changelogs"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Mistral Medium 3.5","item":"https://sxf.si/models/mistral-medium-3-5/"}]}]}</script>
+      <meta name="twitter:title" content="Mistral Medium 3.5: Specs, Pricing, Benchmarks &amp; Deprecation | SXF / AI" />
+      <meta name="twitter:description" content="Independent Mistral Medium 3.5 guide: 256K context, $1.50/$7.50 API pricing, features, benchmark caveats, cost calculator, deprecation status and migration to Large 4." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://sxf.si/#organization","name":"SXF / AI","url":"https://sxf.si/"},{"@type":"WebSite","@id":"https://sxf.si/#website","url":"https://sxf.si/","name":"SXF / AI","publisher":{"@id":"https://sxf.si/#organization"}},{"@type":"TechArticle","@id":"https://sxf.si/models/mistral-medium-3-5/#article","mainEntityOfPage":{"@type":"WebPage","@id":"https://sxf.si/models/mistral-medium-3-5/"},"headline":"Mistral Medium 3.5: Specifications, Pricing, Benchmarks and Deprecation","description":"SXF / AI's technical reference to Mistral Medium 3.5: documented 256K context and API prices, model capabilities, benchmark methodology, deprecation timeline, cost economics and a migration checklist.","url":"https://sxf.si/models/mistral-medium-3-5/","image":"https://sxf.si/assets/og/sxf-ai-social.webp","inLanguage":"en","author":{"@id":"https://sxf.si/#organization"},"publisher":{"@id":"https://sxf.si/#organization"},"dateModified":"2026-11-09","datePublished":"2026-10-06","about":{"@type":"Thing","name":"Mistral Medium 3.5"},"citation":["https://docs.mistral.ai/models/mistral-medium-3-5-26-04","https://docs.mistral.ai/models","https://docs.mistral.ai/inference/model-lifecycle","https://docs.mistral.ai/inference/pricing","https://docs.mistral.ai/studio/conversations/reasoning","https://mistral.ai/news/mistral-large-4/","https://legal.mistral.ai/ai-governance/models/mistral-medium-3/"]},{"@type":"FAQPage","@id":"https://sxf.si/models/mistral-medium-3-5/#faq","mainEntity":[{"@type":"Question","name":"Is Mistral Medium 3.5 deprecated?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mistral's API model directory marks Mistral Medium 3.5 deprecated with a deprecation date of October 31, 2026, and recommends Mistral Large 4 for new integrations. Deprecated is not the same as retired."}},{"@type":"Question","name":"What is the context window of Mistral Medium 3.5?","acceptedAnswer":{"@type":"Answer","text":"The official Mistral Medium 3.5 model card specifies 256k tokens. This is a context window, not a guaranteed maximum output length."}},{"@type":"Question","name":"How much does Mistral Medium 3.5 cost?","acceptedAnswer":{"@type":"Answer","text":"The provider model card lists $1.50 per million input tokens and $7.50 per million output tokens. The SXF catalog also records $0.15 per million cached input tokens; verify current billing eligibility in Mistral Studio before relying on that tier."}},{"@type":"Question","name":"Is Mistral Medium 3.5 open weight?","acceptedAnswer":{"@type":"Answer","text":"Mistral describes this release as open weights under a Modified MIT license. Open weights do not imply zero-cost hosted inference, unrestricted redistribution or that every deployment has identical behavior."}},{"@type":"Question","name":"Can Mistral Medium 3.5 understand images and documents?","acceptedAnswer":{"@type":"Answer","text":"The model card presents a multimodal model and documents Document QnA as an available feature. Text and image inputs with text output are reported in the SXF model record; validate the actual API endpoint and format for your integration."}},{"@type":"Question","name":"Should I migrate from Mistral Medium 3.5 to Mistral Large 4?","acceptedAnswer":{"@type":"Answer","text":"For new API integrations, Mistral recommends Large 4. Existing users should compare quality, token consumption, latency, price and safety on their own task set before switching."}},{"@type":"Question","name":"How do I compare benchmark scores fairly?","acceptedAnswer":{"@type":"Answer","text":"Compare results only when the benchmark version, evaluator, test harness, tool settings and comparable group match. Do not combine scores from different tasks into a universal ranking."}},{"@type":"Question","name":"Does deprecation mean the API is already unavailable?","acceptedAnswer":{"@type":"Answer","text":"No. Mistral's lifecycle policy says a deprecated model remains accessible during its notice period; after retirement, its identifiers can return HTTP 404. Check the current status and test your deployed model ID."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Mistral Medium 3.5","item":"https://sxf.si/models/mistral-medium-3-5/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
+      <link rel="stylesheet" href="/assets/mistral-medium35-guide.css" />
     </head>
-    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+    <body class="intel-page model-page mm35-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
     </div></header><main>
-      <section class="collection-hero shell">
-        <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Mistral Medium 3.5</span></nav>
-        <p class="eyebrow">MODEL REFERENCE / MISTRAL AI</p>
-        <h1>Mistral Medium 3.5<br><span>verified model reference.</span></h1>
-        <p>Frontier-class open-weight multimodal Mistral model optimized for agentic and coding workloads with adjustable reasoning.</p>
-        <div class="collection-stats">
-          <div><strong>256,000</strong><span>context tokens</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
-          <div><strong>2026-10-06</strong><span>last verified</span></div>
+
+  <section class="mm35-top shell" id="mm35-overview">
+    <nav class="mm35-breadcrumb" aria-label="Breadcrumb"><a href="/">SXF / AI</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Mistral Medium 3.5</span></nav>
+    <p class="mm35-kicker">SXF / AI · MODEL INTELLIGENCE DOSSIER</p>
+    <h1>Mistral Medium 3.5<span>Specs, real costs &amp; what comes next.</span></h1>
+    <p class="mm35-flag">API model deprecated · 31 October 2026</p>
+    <p class="mm35-lede">An evidence-led technical reference to Mistral Medium 3.5 (v26.04): the 256K-token multimodal model, documented API economics, practical capabilities, evaluation evidence and the migration decision now facing developers.</p>
+    <div class="mm35-byline"><strong>SXF / AI Research Desk</strong><i></i><span>Updated 9 November 2026</span><i></i><span>Primary-source checked</span><i></i><span>No sponsored ranking</span></div>
+    <div class="mm35-jump"><a class="mm35-pill mm35-pill-primary" href="#mm35-pricing">Calculate API cost ↘</a><a class="mm35-pill" href="#mm35-specifications">Verified specifications</a><a class="mm35-pill" href="#mm35-migration">Migration playbook</a><a class="mm35-pill" href="#mm35-sources">Source ledger</a></div>
+    <div class="mm35-snapshot" aria-label="Key model facts">
+      <div><span>Context window</span><strong>256K</strong><small>Tokens · provider model card</small></div>
+      <div><span>Input price</span><strong>$1.50</strong><small>USD / 1M tokens · model card</small></div>
+      <div><span>Output price</span><strong>$7.50</strong><small>USD / 1M tokens · model card</small></div>
+      <div><span>API lifecycle</span><strong>Deprecated</strong><small>New integrations: evaluate Large 4</small></div>
+    </div>
+  </section>
+  <div class="mm35-grid shell">
+    <nav class="mm35-toc" aria-label="On this page">
+      <h2>Explore the dossier</h2>
+      <a href="#mm35-verdict">Editorial verdict</a><a href="#mm35-specifications">Verified specifications</a><a href="#mm35-features">Capabilities</a><a href="#mm35-pricing">Cost calculator</a><a href="#mm35-benchmarks">Benchmark evidence</a><a href="#mm35-migration">Migration guide</a><a href="#mm35-integration">API implementation</a><a href="#mm35-faq">FAQs</a><a href="#mm35-sources">Sources &amp; methodology</a>
+    </nav>
+    <article class="mm35-article" aria-label="Mistral Medium 3.5 expert guide">
+      <section class="mm35-section" id="mm35-verdict">
+        <p class="mm35-kicker">01 / THE SXF ASSESSMENT</p><h2>The model is capable. Its lifecycle is now the deciding factor.</h2>
+        <p>Mistral Medium 3.5 is a frontier-class open-weight multimodal model positioned for coding and agentic tasks. It brings a documented 256K context window, structured-output and function-calling support, and transparent token-based API pricing. The important 2026 update is operational: Mistral's <a href="https://docs.mistral.ai/models" target="_blank" rel="noopener noreferrer">API model directory</a> lists the model as deprecated as of <strong>31 October 2026</strong> and names <strong>Mistral Large 4</strong> as the replacement for new integrations.</p>
+        <div class="mm35-callout"><strong>SXF DECISION BRIEF · NOVEMBER 2026</strong><p><strong>New API project?</strong> Evaluate Mistral Large 4 first, as the vendor directs. <strong>Existing Medium 3.5 production system?</strong> Do not assume an immediate shutdown; test a migration and confirm the contractual retirement date before changing traffic. <strong>Open-weight deployment?</strong> Treat model licensing, hosting costs and deployment requirements separately from hosted API pricing.</p></div>
+        <p>The <a href="https://legal.mistral.ai/ai-governance/models/mistral-medium-3/" target="_blank" rel="noopener noreferrer">Mistral legal-governance register</a> still calls this model version <em>Active</em> with no retirement date listed. That record describes governance status; the API catalog explicitly flags <em>Deprecated</em>. SXF reports both instead of silently treating them as interchangeable.</p>
+        <div class="mm35-verification"><span>Provider specifications distinguished from analysis</span><span>No invented output cap</span><span>Benchmark comparability enforced</span></div>
+      </section>
+      <section class="mm35-section" id="mm35-specifications">
+        <p class="mm35-kicker">02 / SPECIFICATION SHEET</p><h2>What is actually documented?</h2>
+        <p>A technical model page is only useful when <strong>confirmed facts and unknowns stay separate</strong>. The figures below reflect Mistral's published model card and the dated SXF model record, not inferred model capabilities.</p>
+        <div class="mm35-data"><table><caption>Model specifications · evidence checked 9 November 2026</caption><thead><tr><th scope="col">Field</th><th scope="col">Value</th><th scope="col">Evidence / qualification</th></tr></thead><tbody>
+          <tr><td>Model / version</td><td><code>mistral-medium-3-5</code> · v26.04</td><td>Official Mistral model card</td></tr>
+          <tr><td>Original release</td><td>April 2026</td><td>Official model card dated 28 April 2026; legal register lists 29 April 2026</td></tr>
+          <tr><td>Context capacity</td><td><strong>256K tokens</strong></td><td>Provider model card; no claim that every token allocation works identically</td></tr>
+          <tr><td>Input / output</td><td>Text and image in; text out</td><td>SXF catalog record; verify endpoint-specific support</td></tr>
+          <tr><td>Output-token maximum</td><td><strong>Not published in verified source</strong></td><td>Do not confuse context window with generation limit</td></tr>
+          <tr><td>Knowledge cutoff</td><td><strong>Not published in verified source</strong></td><td>No assumed cutoff date</td></tr>
+          <tr><td>Weights / license</td><td>Open weights · Modified MIT</td><td>Provider model card; inspect terms before redistribution</td></tr>
+          <tr><td>API model status</td><td>Deprecated from 31 Oct 2026</td><td>Mistral API model directory; replacement: Large 4</td></tr>
+          <tr><td>Governance status</td><td>Active</td><td>Mistral legal-governance register; distinct from API lifecycle</td></tr>
+          <tr><td>Standard input</td><td><strong>$1.50 / 1M tokens</strong></td><td>USD · provider model card snapshot</td></tr>
+          <tr><td>Standard output</td><td><strong>$7.50 / 1M tokens</strong></td><td>USD · provider model card snapshot</td></tr>
+          <tr><td>Cached input</td><td>$0.15 / 1M tokens</td><td>SXF pricing catalog snapshot; current eligibility must be checked</td></tr>
+        </tbody></table></div>
+        <p class="mm35-note">Evidence quality: provider-documented values are labeled separately from SXF catalog values and recommendations. Pricing and availability can change; check <a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">current official billing guidance</a> and your Mistral Studio account before production estimates.</p>
+      </section>
+      <section class="mm35-section" id="mm35-features">
+        <p class="mm35-kicker">03 / ENGINEERING CAPABILITIES</p><h2>Capabilities that matter in real applications.</h2>
+        <div class="mm35-cards">
+          <div class="mm35-card"><span>01 · Reliable structures</span><h3>Structured outputs</h3><p>Mistral's model card lists structured outputs. Use schema-constrained responses where supported, and still validate application-side JSON types, required fields and semantic correctness.</p></div>
+          <div class="mm35-card"><span>02 · System integration</span><h3>Function calling &amp; agents</h3><p>The documented feature set includes function calling, agents and built-in tools. Measure tool-selection accuracy, argument validity, retry rate and permissions instead of counting tool calls as success.</p></div>
+          <div class="mm35-card"><span>03 · Working with evidence</span><h3>Multimodal &amp; Document QnA</h3><p>Text/image input and provider-listed Document QnA make the model relevant to document-centric pipelines. Evaluate OCR quality, citation grounding and retrieval separately from reasoning.</p></div>
+          <div class="mm35-card"><span>04 · Throughput operations</span><h3>Batching &amp; predicted outputs</h3><p>Both are listed in the provider's features. Check availability, latency and cost for the exact endpoints used in your environment; feature support does not guarantee identical behavior across deployment modes.</p></div>
+        </div>
+        <h3>Where Medium 3.5 can still make sense</h3>
+        <p>For a system already tuned to this version, retaining a pinned deployment while running a controlled migration can avoid regression. For long-context analysis, the 256K limit is a capacity figure, not evidence that recall or factual accuracy remains stable across the full window. For agents, monitor completion quality under realistic budgets and tool permissions.</p>
+        <h3>What not to infer from a model card</h3>
+        <ul><li>Do not assume “open weights” means free managed API inference or unrestricted use.</li><li>Do not equate 256K context with 256K output tokens.</li><li>Do not assume support for a listed feature implies its availability on every endpoint, pricing tier or region.</li><li>Do not promote a benchmark score into a universal best-model claim without compatible measurement conditions.</li></ul>
+      </section>
+      <section class="mm35-section" id="mm35-pricing">
+        <p class="mm35-kicker">04 / UNIT ECONOMICS</p><h2>Mistral Medium 3.5 pricing, modeled transparently.</h2>
+        <p>Mistral's published model card lists <strong>$1.50 per million input tokens</strong> and <strong>$7.50 per million output tokens</strong>. The SXF catalog records a <strong>$0.15 cached-input tier</strong>; this calculator separates cached from uncached input to avoid double counting. Treat pricing as a dated estimate, not a live invoice or guarantee of current API availability.</p>
+        <div class="mm35-calc" data-mm35-calculator>
+          <div class="mm35-calc-title"><div><p class="mm35-kicker">SXF COST LAB / INTERACTIVE</p><h3>Estimate an API workload</h3></div><small>USD estimates · exclusive token categories · monthly volume</small></div>
+          <div class="mm35-calc-grid">
+            <label for="mm35-input">Uncached input tokens / request<input id="mm35-input" data-mm35-input type="number" min="0" max="1000000000" step="100" inputmode="numeric" value="3000"></label>
+            <label for="mm35-cached">Cached input tokens / request<input id="mm35-cached" data-mm35-cached type="number" min="0" max="1000000000" step="100" inputmode="numeric" value="0"></label>
+            <label for="mm35-output">Output tokens / request<input id="mm35-output" data-mm35-output type="number" min="0" max="1000000000" step="100" inputmode="numeric" value="1000"></label>
+            <label for="mm35-requests">Requests / month<input id="mm35-requests" data-mm35-requests type="number" min="0" max="1000000000" step="100" inputmode="numeric" value="10000"></label>
+          </div>
+          <div class="mm35-calc-results" role="status" aria-live="polite"><div><span>Cost / request</span><strong data-mm35-once>$0.012000</strong></div><div class="mm35-calc-total"><span>Est. monthly API cost</span><strong data-mm35-total>$120.00</strong></div><div><span>12 months at same volume</span><strong data-mm35-yearly>$1,440.00</strong></div></div>
+          <p class="mm35-note" data-mm35-breakdown>Uncached input $0.004500 + cached input $0 + output $0.007500 per request.</p>
+          <p class="mm35-note">This is a deterministic model, not a live billing quote. Excludes taxes, provider minimums, retries, tool infrastructure, hosting, discounts and any other billing items. Cached rate applies only when caching is eligible. Estimates remain illustrative while this API model is deprecated.</p>
+        </div>
+        <h3>Example workloads: where costs come from</h3>
+        <div class="mm35-data"><table><caption>Illustrative arithmetic at $1.50 input / $7.50 output per 1M tokens; no caching</caption><thead><tr><th scope="col">Usage scenario</th><th scope="col">Input / output tokens</th><th scope="col">Cost / request</th><th scope="col">10,000 requests</th></tr></thead><tbody>
+          <tr><td>Short support reply</td><td>1,000 / 250</td><td class="mm35-num">$0.003375</td><td class="mm35-num">$33.75</td></tr>
+          <tr><td>Agent tool summary</td><td>3,000 / 1,000</td><td class="mm35-num">$0.012000</td><td class="mm35-num">$120.00</td></tr>
+          <tr><td>Long document extraction</td><td>40,000 / 2,000</td><td class="mm35-num">$0.075000</td><td class="mm35-num">$750.00</td></tr>
+          <tr><td>Research synthesis</td><td>100,000 / 5,000</td><td class="mm35-num">$0.187500</td><td class="mm35-num">$1,875.00</td></tr>
+        </tbody></table></div>
+        <p class="mm35-note">Equation: cost = (uncached input tokens × $1.50 + cached input tokens × $0.15 + output tokens × $7.50) ÷ 1,000,000. The displayed scenarios are <strong>mathematical illustrations</strong>, not measured workloads or performance claims.</p>
+      </section>
+      <section class="mm35-section" id="mm35-benchmarks">
+        <p class="mm35-kicker">05 / EVALUATION WITHOUT HYPE</p><h2>Benchmark scores are evidence, not a universal ranking.</h2>
+        <p>The SXF evaluations dataset contains independent observations for Medium 3.5 from Artificial Analysis, including intelligence index, knowledge work and long-context reasoning. Results have different units, harnesses and evaluation protocols, and some records may be under review.</p>
+        <div class="mm35-data"><table><caption>Selected stored observations · SXF evaluation snapshot, verified 8 October 2026</caption><thead><tr><th scope="col">Benchmark</th><th scope="col">Recorded result</th><th scope="col">Read it correctly</th></tr></thead><tbody>
+          <tr><td>Artificial Analysis Intelligence Index v4.3.2</td><td class="mm35-num">14</td><td>Composite index on its published scale; do not treat as a percentage</td></tr>
+          <tr><td>AA-Briefcase v1.1</td><td class="mm35-num">523 Elo</td><td>Relative rating inside that evaluator's specific test</td></tr>
+          <tr><td>AA-LCR v1.1</td><td class="mm35-num">69.0%</td><td>Long-context reasoning result, not generic 256K recall accuracy</td></tr>
+          <tr><td>AutomationBench-AA</td><td class="mm35-num">6.0%</td><td>Task-specific automation outcome; not a coding accuracy proxy</td></tr>
+        </tbody></table></div>
+        <p><strong>SXF interpretation:</strong> Benchmark gaps can be more informative than a single headline score. Before using these results, pin benchmark versions, check comparability groups, inspect the primary evaluator's methodology, verify configurations and repeat representative workloads.</p>
+        <p>Explore the <a href="/evaluations/explorer/">interactive evaluation explorer</a>, the <a href="/evaluations/">benchmark methodology hub</a>, and the <a href="/guides/ai-model-benchmarks-explained/">guide to evaluating AI model benchmarks</a>. Historic snapshots do not prove current accuracy or comparative leadership.</p>
+      </section>
+      <section class="mm35-section" id="mm35-migration">
+        <p class="mm35-kicker">06 / PRODUCT DECISION</p><h2>Migrate deliberately: Medium 3.5 → Large 4.</h2>
+        <p>The official Mistral model directory recommends <strong>Mistral Large 4</strong> for new integrations. That is a lifecycle recommendation, <strong>not</strong> an SXF claim that Large 4 wins every task, runs cheaper or has identical contracts. A production migration should be treated as an engineering change with measurable acceptance criteria.</p>
+        <div class="mm35-warning mm35-callout"><strong>DEPRECATION IS NOT RETIREMENT</strong><p>Mistral's lifecycle policy states that deprecated models remain accessible during the notice period; after retirement, requests to retired model identifiers may return HTTP 404. The governance register may still show the version as Active. Verify current API access and the retirement notice directly with Mistral before committing to a cutoff date.</p></div>
+        <ol class="mm35-steps">
+          <li><strong>Inventory usage.</strong> Find all exact model IDs, aliases, fallbacks, prompts, tools and contractual dependencies. Avoid silent alias upgrades in controlled workloads.</li>
+          <li><strong>Build a representative evaluation set.</strong> Include real coding tasks, document workloads, long-context retrieval, edge cases, safety behavior and tool-call validity.</li>
+          <li><strong>Run an A/B evaluation.</strong> Hold the task, tool schema, evaluation harness and acceptance rubric constant. Record quality, p50/p95 latency, errors and cost per completed task.</li>
+          <li><strong>Check output contracts.</strong> Revalidate structured JSON, refusal behavior, long replies, tool parameters, context truncation and multimodal request formats.</li>
+          <li><strong>Roll out with safeguards.</strong> Start with a small traffic slice, set budget and quality thresholds, instrument regressions and keep a tested fallback.</li>
+          <li><strong>Document the decision.</strong> Record the source dates, chosen model identifier, benchmark build, billing assumptions and owner for future revalidation.</li>
+        </ol>
+        <div class="mm35-cards"><div class="mm35-card"><span>New deployments</span><h3>Start with current models</h3><p>Review <a href="/models/mistral-large-4/">Mistral Large 4</a> and <a href="/models/mistral-small-4/">Mistral Small 4</a> on your specific quality, capacity, economics and operational constraints.</p></div><div class="mm35-card"><span>Existing deployments</span><h3>Retest before changing</h3><p>Use <a href="/models/pricing/">SXF pricing comparisons</a>, the <a href="/compare/">model comparison hub</a> and task-level evaluations. No model is declared an unconditional winner.</p></div></div>
+      </section>
+      <section class="mm35-section" id="mm35-integration">
+        <p class="mm35-kicker">07 / DEVELOPER NOTES</p><h2>Implementation checks for production systems.</h2>
+        <p>Pin the model version explicitly and read the <a href="https://docs.mistral.ai/inference/model-lifecycle" target="_blank" rel="noopener noreferrer">official lifecycle policy</a> before you deploy. Mistral distinguishes stable version IDs from rolling aliases; aliases can change behavior or pricing. Since Medium 3.5 is deprecated, test a fresh authenticated request in your own account rather than assuming that historic model documentation proves availability.</p>
+        <h3>Request budget template</h3>
+        <pre class="mm35-code"><code>MODEL_ID = "mistral-medium-3-5"  # legacy; evaluate Large 4
+uncached_input_tokens = 3000
+cached_input_tokens   = 0
+output_tokens         = 1000
+cost_usd = (
+    uncached_input_tokens * 1.50
+    + cached_input_tokens * 0.15
+    + output_tokens * 7.50
+) / 1_000_000
+# Example: $0.012 per request
+# Verify live pricing + model availability with Mistral.</code></pre>
+        <h3>Minimum observability checklist</h3>
+        <ul><li><strong>Reliability:</strong> end-to-end task success rate, invalid structured outputs, failed tool calls and retry multiplier.</li><li><strong>Performance:</strong> request latency distributions, input/output token counts and truncated or timed-out generations.</li><li><strong>Quality:</strong> groundedness, source attribution, answer completeness and long-context recall on your own benchmark.</li><li><strong>Security:</strong> prompt-injection testing, scoped tool permissions, private-data leakage and human review for high-stakes actions.</li><li><strong>Economics:</strong> cost per successful outcome, cached-token eligibility, tokens consumed by tool loops and post-processing overhead.</li></ul>
+      </section>
+      <section class="mm35-section" id="mm35-faq">
+        <p class="mm35-kicker">08 / ANSWERS FIRST</p><h2>Frequently asked questions.</h2>
+        <div class="mm35-qa">
+          <details><summary>Is Mistral Medium 3.5 deprecated?</summary><p>Yes. Mistral's API model directory marks Mistral Medium 3.5 deprecated with a deprecation date of October 31, 2026, and recommends Mistral Large 4 for new integrations. Deprecated is not the same as retired.</p></details>
+          <details><summary>What is the context window of Mistral Medium 3.5?</summary><p>The official Mistral Medium 3.5 model card specifies 256k tokens. This is a context window, not a guaranteed maximum output length.</p></details>
+          <details><summary>How much does Mistral Medium 3.5 cost?</summary><p>The provider model card lists $1.50 per million input tokens and $7.50 per million output tokens. The SXF catalog also records $0.15 per million cached input tokens; verify current billing eligibility in Mistral Studio before relying on that tier.</p></details>
+          <details><summary>Is Mistral Medium 3.5 open weight?</summary><p>Mistral describes this release as open weights under a Modified MIT license. Open weights do not imply zero-cost hosted inference, unrestricted redistribution or that every deployment has identical behavior.</p></details>
+          <details><summary>Can Mistral Medium 3.5 understand images and documents?</summary><p>The model card presents a multimodal model and documents Document QnA as an available feature. Text and image inputs with text output are reported in the SXF model record; validate the actual API endpoint and format for your integration.</p></details>
+          <details><summary>Should I migrate from Mistral Medium 3.5 to Mistral Large 4?</summary><p>For new API integrations, Mistral recommends Large 4. Existing users should compare quality, token consumption, latency, price and safety on their own task set before switching.</p></details>
+          <details><summary>How do I compare benchmark scores fairly?</summary><p>Compare results only when the benchmark version, evaluator, test harness, tool settings and comparable group match. Do not combine scores from different tasks into a universal ranking.</p></details>
+          <details><summary>Does deprecation mean the API is already unavailable?</summary><p>No. Mistral's lifecycle policy says a deprecated model remains accessible during its notice period; after retirement, its identifiers can return HTTP 404. Check the current status and test your deployed model ID.</p></details>
         </div>
       </section>
-
-      <section class="model-reference model-reference-deep shell">
-        <div class="model-reference-intro">
-          <div class="model-reference-copy">
-            <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
-            <h2>Mistral Medium 3.5 at a glance.</h2>
-            <p>Mistral AI documents a 256,000-token context window. Input modalities: text + image. Output: text. Pricing status: Official paid API.</p>
-          </div>
-          <div class="model-fact-grid">
-            <div><span>MODEL ID</span><strong>mistral-medium-3-5</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>256,000</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
-            <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
-            <div><span>STANDARD INPUT</span><strong>$1.50</strong><small>per 1 million tokens</small></div>
-            <div><span>STANDARD OUTPUT</span><strong>$7.50</strong><small>per 1 million tokens</small></div>
-          </div>
-        </div>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
-          <div class="model-capability-grid">
-            <article><span>REASONING</span><h3>none · high</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
-            <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
-            <article><span>OUTPUT</span><h3>text</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
-          </div>
-        </section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
-          <div class="model-split">
-            <div><p>$1.50 input · $0.15 cached · $7.50 output per 1 million tokens.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
-            <aside class="model-side-note"><span>CALCULATOR</span><strong>Eligible</strong><p>This model has calculator-compatible generative token input/output rates.</p></aside>
-          </div>
-        </section>
-
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Mistral publishes the context window as 256k tokens; SXF stores this as 256,000 for normalized numeric filtering.</p></div><div><span>02</span><p>No separate max-output token cap or knowledge cutoff is published in the cited model card, so those fields remain unknown.</p></div><div><span>03</span><p>Mistral Medium 3.5 is GA and released as open weights under a Modified MIT license.</p></div></div></section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
-          <div class="model-related-links">
-            <a href="/providers/mistral-ai/"><span>PROVIDER</span><strong>Mistral AI model portfolio</strong><b>↗</b></a>
-            <a href="/models/pricing/"><span>PRICING</span><strong>Compare verified API economics</strong><b>↗</b></a>
-            <a href="/compare/"><span>COMPARE</span><strong>Model comparison hub</strong><b>↗</b></a>
-          </div>
-        </section>
-
-        <section class="model-deep-section">
-          <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
-          <div class="model-sources"><a href="https://docs.mistral.ai/models/mistral-medium-3-5-26-04" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/models/mistral-medium-3-5-26-04</span><b>↗</b></a><a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/inference/pricing</span><b>↗</b></a><a href="https://docs.mistral.ai/studio/conversations/reasoning" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/studio/conversations/reasoning</span><b>↗</b></a><a href="https://docs.mistral.ai/resources/changelogs" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/resources/changelogs</span><b>↗</b></a></div>
-        </section>
+      <section class="mm35-section" id="mm35-sources">
+        <p class="mm35-kicker">09 / THE SXF EVIDENCE STANDARD</p><h2>Sources, methodology &amp; editorial accountability.</h2>
+        <p><strong>Published by SXF / AI.</strong> This page is a source-traceable technical reference, not a provider advertisement. Provider claims are attributed to the primary source; cost tables are labeled as arithmetic; independent benchmark snapshots are separated from vendor claims. Unknown parameters remain unknown.</p>
+        <ul class="mm35-sources">
+          <li><a href="https://docs.mistral.ai/models/mistral-medium-3-5-26-04" target="_blank" rel="noopener noreferrer">Mistral Medium 3.5 model card</a><small>Model identity, context, prices, documented features, open weights and Modified MIT</small></li>
+          <li><a href="https://docs.mistral.ai/models" target="_blank" rel="noopener noreferrer">Mistral API model directory</a><small>Deprecated designation, 31 October 2026 deprecation and replacement guidance</small></li>
+          <li><a href="https://docs.mistral.ai/inference/model-lifecycle" target="_blank" rel="noopener noreferrer">Mistral model lifecycle policy</a><small>Deprecation, retirement and model ID versus alias behavior</small></li>
+          <li><a href="https://legal.mistral.ai/ai-governance/models/mistral-medium-3/" target="_blank" rel="noopener noreferrer">Mistral legal-governance model register</a><small>Governance status, model release chronology; independent of the API deprecation flag</small></li>
+          <li><a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Mistral pricing reference</a><small>Current pricing mechanics; verify before relying on dated SXF rates</small></li>
+          <li><a href="https://mistral.ai/news/mistral-large-4/" target="_blank" rel="noopener noreferrer">Mistral Large 4 announcement</a><small>Vendor introduction of the replacement-generation model</small></li>
+          <li><a href="/evaluations/explorer/">SXF AI Evaluation Explorer</a><small>Evaluation methodology and observations; original evaluator links are preserved in the detailed records</small></li>
+          <li><a href="/data/model-evaluations.json">SXF downloadable evaluation evidence</a><small>Raw dated observations and comparable-group policy</small></li>
+        </ul>
+        <div class="mm35-callout"><strong>HOW SXF EVALUATES AN AI MODEL</strong><p>We separate <em>vendor-published specifications</em> from <em>third-party measurements</em> and <em>editorial engineering guidance</em>. We do not infer undocumented output limits, claim that release marketing proves real-world performance, or convert incomparable scores into a universal leaderboard. Every material lifecycle conclusion here has a provider source. Questions or factual corrections: <a href="mailto:info@sxf.si">info@sxf.si</a>.</p></div>
+        <p class="mm35-note">Editorial verification: 9 November 2026. Historic benchmark and internal pricing snapshots may predate this update; those dates are stated explicitly. This article does not claim firsthand benchmarking unless the cited data actually contains it. Recheck hosted service availability and pricing before procurement.</p>
       </section>
+    </article>
+  </div>
 
       <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="mistral-medium-3-5">
           <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Mistral Medium 3.5: what changed.</h2><p>No post-baseline factual changes recorded for Mistral Medium 3.5 since 2026-10-06.</p></div>
@@ -178,4 +277,4 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script defer src="/assets/mistral-medium35-cost.js"></script></body></html>
