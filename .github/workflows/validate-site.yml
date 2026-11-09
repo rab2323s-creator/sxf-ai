@@ -236,6 +236,8 @@ jobs:
           python tests/test_featured_daily_brief.py --post-build
       - name: Protect authored Mistral Medium 3.5 dossier and structured data
         run: python tests/test_mistral_medium35_dossier.py
+      - name: Verify authored Scribe v2 research dossier and audio economics
+        run: python tests/test_scribe_v2_dossier.py
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Block cross-page pricing drift
