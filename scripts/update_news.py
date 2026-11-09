@@ -4060,6 +4060,9 @@ def normalize_primary_navigation():
     }
     for path in sorted(ROOT.rglob("index.html")):
         relative = path.relative_to(ROOT)
+        # These two model dossiers are byte-identical copies of authored sources.
+        if relative.as_posix() in {"models/mistral-medium-3-5/index.html", "models/scribe-v2/index.html"}:
+            continue
         if any(part in {".git", ".github", "tests", "docs", "data", "scripts"}
                for part in relative.parts[:-1]):
             continue
