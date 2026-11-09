@@ -1,6 +1,31 @@
 {
-  "updated_at": "2026-11-09T14:28:47.334348Z",
+  "updated_at": "2026-11-09T15:27:07.515730Z",
   "items": [
+    {
+      "title": "Your Experts Have Partners. There's HOPE for Keeping Them Together",
+      "summary": "Amazon researchers published HOPE (Higher-Order Pruning of Experts) on November 9, 2026, a technique that selects experts to remove from mixture-of-experts language models while accounting for how pairs of experts cooperate. The team reports the best mean ranking among five pruning methods and an illustrative SWE-Bench Pro result of 42.3 after 50% pruning versus 41.8 for the original model. Those scores apply to specified models and tasks, not a guaranteed 50% reduction in total production costs.",
+      "url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "signal_url": "https://sxf.si/signals/amazon-hope-moe-expert-pruning-benchmark/",
+      "source": "Hugging Face",
+      "published": "2026-11-09T12:34:29Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "Copilot code review: API management and review overview updates",
+      "summary": "GitHub's November 6, 2026 Copilot Code Review update added REST and GraphQL configuration controls from enterprise policy to repositories, clearer attribution of AI review comments and review-effort metadata. New review summaries also group skipped or excluded files. These are product-management capabilities; they do not mean AI approval is a replacement for human code review or security testing.",
+      "url": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates",
+      "signal_url": "https://sxf.si/signals/github-copilot-code-review-api-settings-2026/",
+      "source": "GitHub",
+      "published": "2026-11-07T00:27:19Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot",
+        "Coding AI"
+      ],
+      "signal_score": 38
+    },
     {
       "title": "@GitHub in Slack and Teams is generally available and more",
       "summary": "GitHub announced general availability of the @GitHub coding-agent integration in Slack and Microsoft Teams on November 6, 2026. Team members can discuss bugs, initiate coding tasks, create issues and open pull requests from chat. Teams Canvas adds an in-conversation area for plans, diffs and previews. The feature does not grant unrestricted repository permissions or eliminate human code review.",
@@ -24,6 +49,19 @@
         "Research"
       ],
       "signal_score": 43
+    },
+    {
+      "title": "Partnering with Hacktron to find vulnerabilities in OpenAI’s systems",
+      "summary": "OpenAI announced a partnership with Hacktron on November 6, 2026 to investigate security weaknesses in OpenAI systems, particularly where they connect to third-party services. Hacktron gains expanded access to frontier security models through Daybreak Red. This is an authorized research collaboration, not proof that a specific vulnerability count has been discovered or that all connected systems have been fixed.",
+      "url": "https://openai.com/index/partnering-with-hacktron",
+      "signal_url": "https://sxf.si/signals/openai-hacktron-cybersecurity-partnership/",
+      "source": "OpenAI",
+      "published": "2026-11-06T08:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
     },
     {
       "title": "Measuring how AI agents handle everyday wet-lab science",
@@ -126,6 +164,20 @@
       "signal_score": 28
     },
     {
+      "title": "Franklin Templeton uses OpenAI to support investment research",
+      "summary": "Franklin Templeton described work with OpenAI tools on November 5, 2026 to support its investment research, initially concentrating on equities. Teams are developing workflows to compare viewpoints, test investment risks and bring continuously updated context to portfolio managers. The source is a corporate customer case study, not a controlled demonstration of improved investment returns or a launch of an autonomous trading system.",
+      "url": "https://openai.com/index/franklin-templeton",
+      "signal_url": "https://sxf.si/signals/franklin-templeton-openai-equity-research-codex/",
+      "source": "OpenAI",
+      "published": "2026-11-05T00:00:00Z",
+      "category": "Research",
+      "tags": [
+        "Research",
+        "OpenAI"
+      ],
+      "signal_score": 43
+    },
+    {
       "title": "GitHub Copilot is now available in Xcode’s coding assistant",
       "summary": "GitHub announced on November 4, 2026 that GitHub Copilot is available in public preview in Xcode's built-in coding assistant, expanding the AI coding workflow for Apple-platform developers. The changelog describes an integration and its preview availability; it does not establish that every developer can access it or that generated apps are reliable without testing.",
       "url": "https://github.blog/changelog/2026-11-04-github-copilot-is-now-available-in-xcodes-coding-assistant",
@@ -188,6 +240,19 @@
         "OpenAI"
       ],
       "signal_score": 46
+    },
+    {
+      "title": "Dependabot version updates support Agent Package Manager",
+      "summary": "GitHub added Agent Package Manager (APM) support to Dependabot version updates on November 3, 2026. It can open pull requests for supported Git-based skills, prompts and agent instruction dependencies declared in apm.yml, refreshing apm.lock.yaml if that file exists. This is version-update support only—not automatic vulnerability alerts or proof that updated agent instructions are safe.",
+      "url": "https://github.blog/changelog/2026-11-03-dependabot-version-updates-support-agent-package-manager",
+      "signal_url": "https://sxf.si/signals/dependabot-apm-agent-skills-update-guide/",
+      "source": "GitHub",
+      "published": "2026-11-03T20:24:07Z",
+      "category": "Tools",
+      "tags": [
+        "AI Agents"
+      ],
+      "signal_score": 38
     },
     {
       "title": "StateBench: Testing how language models track state changes over long documents",
@@ -710,10 +775,10 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 174,
+      "OpenAI": 176,
       "Google AI": 26,
-      "Hugging Face": 68,
-      "GitHub": 104,
+      "Hugging Face": 69,
+      "GitHub": 106,
       "Google Research": 18,
       "Anthropic": 2,
       "Meta": 0,
@@ -721,10 +786,10 @@
       "Microsoft": 1
     },
     "current_counts": {
-      "OpenAI": 21,
+      "OpenAI": 23,
       "Google AI": 2,
-      "Hugging Face": 17,
-      "GitHub": 8,
+      "Hugging Face": 18,
+      "GitHub": 10,
       "Google Research": 4,
       "Anthropic": 2,
       "Meta": 0,
@@ -738,21 +803,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1368,
         "relevance_accepted_count": 1368,
-        "quality_accepted_count": 94,
-        "accepted_candidate_count": 94,
-        "rejected_candidate_count": 1274,
+        "quality_accepted_count": 93,
+        "accepted_candidate_count": 93,
+        "rejected_candidate_count": 1275,
         "duplicate_count": 2,
-        "age_rejection_count": 1272,
+        "age_rejection_count": 1273,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 21,
+        "publish_count": 23,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "Google AI": {
@@ -775,7 +840,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "Hugging Face": {
@@ -791,14 +856,14 @@
         "age_rejection_count": 871,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 17,
+        "publish_count": 18,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "GitHub": {
@@ -814,14 +879,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 8,
+        "publish_count": 10,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "Google Research": {
@@ -844,7 +909,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "Anthropic": {
@@ -867,7 +932,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -892,7 +957,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "xAI": {
@@ -915,7 +980,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       },
       "Microsoft": {
@@ -938,7 +1003,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-09T14:28:20.216571Z",
+        "last_successful_fetch": "2026-11-09T15:26:25.134147Z",
         "errors": []
       }
     },
