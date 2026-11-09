@@ -42,7 +42,7 @@ class TopicsHubTests(unittest.TestCase):
                 "<head><title>" + title + "</title>"
                 + '<script type="application/ld+json">' + json.dumps(schema) + "</script></head>"
             ),
-            page_header=lambda: "<header></header>",
+            page_header=lambda active="": "<header></header>",
             page_footer=lambda: "<footer></footer>",
         )
         self.assertEqual(len(re.findall(r"<h1\b", result)), 1)
