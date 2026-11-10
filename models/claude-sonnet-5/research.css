@@ -68,3 +68,11 @@
 @media(max-width:760px){.cs5-cards,.cs5-findings{grid-template-columns:repeat(2,minmax(0,1fr))}.cs5-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.cs5-dossier{width:calc(100% - 28px);gap:14px;margin:22px auto 42px}.cs5-intro,.cs5-specs,.cs5-panel{padding:clamp(15px,4.5vw,20px);border-radius:15px}.cs5-intro h2{font-size:clamp(28px,8vw,37px)}.cs5-dossier h2{font-size:clamp(25px,6.5vw,33px)}.cs5-dossier h3{font-size:20px}.cs5-dossier p,.cs5-dossier li{font-size:13.5px}.cs5-specs{grid-template-columns:minmax(0,1fr)}.cs5-cards,.cs5-findings,.cs5-inputs,.cs5-results{grid-template-columns:minmax(0,1fr)}.cs5-jump a{font-size:11.5px;padding:9px 12px}.cs5-tool{padding:13px}.cs5-results strong{font-size:25px}.cs5-code{font-size:11.5px;padding:13px}}
 @media(max-width:360px){.cs5-dossier{width:calc(100% - 22px)}.cs5-intro,.cs5-specs,.cs5-panel{padding:13px}}
+
+/* Keep inherited catalog cards, dated source links and evaluation cards from forcing viewport width. */
+.cs5-page :is(.model-reference-intro,.model-capability-grid,.model-related-links,.model-history-grid,.evaluation-card-grid,.model-fact-grid,.model-split,.change-watch-empty){min-width:0}
+.cs5-page :is(.model-related-links strong,.model-sources span,.model-capability-grid h3,.collection-hero h1,.model-fact-grid strong,.model-history-event,.evaluation-card-grid article){min-width:0;overflow-wrap:anywhere}
+.cs5-page .model-related-links{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cs5-page .model-related-links a{min-width:0;grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:900px){.cs5-page .model-related-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.cs5-page .model-related-links{grid-template-columns:minmax(0,1fr)}}
