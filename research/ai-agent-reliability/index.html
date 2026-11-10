@@ -25,7 +25,7 @@
 <meta name="twitter:image" content="https://sxf.si/research/ai-agent-reliability/images/ai-agent-reliability-framework.svg" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"TechArticle","@id":"https://sxf.si/research/ai-agent-reliability/#article","url":"https://sxf.si/research/ai-agent-reliability/","mainEntityOfPage":"https://sxf.si/research/ai-agent-reliability/","headline":"AI Agent Reliability: 12 Metrics Beyond Benchmarks (2026)","alternativeHeadline":"How to Measure AI Agent Reliability Beyond Benchmark Scores","description":"AI agent reliability in 2026: learn 12 metrics beyond benchmark scores, from consistency and robustness to predictability, safety and agent testing.","image":"https://sxf.si/research/ai-agent-reliability/images/ai-agent-reliability-framework.svg","datePublished":"2026-10-01","dateModified":"2026-10-01","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Research","keywords":["AI agent reliability","AI agent evaluation","AI agent benchmark","AI agent reliability metrics","agent reliability 2026","AI agent testing","AI agent consistency","AI agent robustness","AI agent safety","agent evals","pass^k"],"citation":["https://proceedings.mlr.press/v306/rabanser26a.html","https://metr.org/time-horizons/","https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems","https://www.nist.gov/publications/aria-evaluation-planning-manual-elements-aria-style-ai-evaluations","https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents","https://developers.openai.com/api/docs/guides/agent-evals","https://os-world.github.io/","https://www.swebench.com/verified.html","https://arxiv.org/abs/2601.06112"],"inLanguage":"en"},
+{"@type":"TechArticle","@id":"https://sxf.si/research/ai-agent-reliability/#article","url":"https://sxf.si/research/ai-agent-reliability/","mainEntityOfPage":"https://sxf.si/research/ai-agent-reliability/","headline":"AI Agent Reliability: 12 Metrics Beyond Benchmarks (2026)","alternativeHeadline":"How to Measure AI Agent Reliability Beyond Benchmark Scores","description":"AI agent reliability in 2026: learn 12 metrics beyond benchmark scores, from consistency and robustness to predictability, safety and agent testing.","image":"https://sxf.si/research/ai-agent-reliability/images/ai-agent-reliability-framework.svg","datePublished":"2026-10-01","dateModified":"2026-11-10","author":{"@id":"https://vivamediacreative.com/labs/#organization"},"creator":{"@id":"https://vivamediacreative.com/labs/#organization"},"publisher":{"@id":"https://vivamediacreative.com/labs/#organization"},"isPartOf":{"@id":"https://sxf.si/#website"},"articleSection":"AI Research","keywords":["AI agent reliability","AI agent evaluation","AI agent benchmark","AI agent reliability metrics","agent reliability 2026","AI agent testing","AI agent consistency","AI agent robustness","AI agent safety","agent evals","pass^k"],"citation":["https://proceedings.mlr.press/v306/rabanser26a.html","https://metr.org/time-horizons/","https://www.nist.gov/artificial-intelligence/ai-research/tevv-athlon-framework-evaluating-ai-systems","https://www.nist.gov/publications/aria-evaluation-planning-manual-elements-aria-style-ai-evaluations","https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents","https://developers.openai.com/api/docs/guides/agent-evals","https://os-world.github.io/","https://www.swebench.com/verified.html","https://arxiv.org/abs/2601.06112","https://docs.langchain.com/langsmith/evaluation","https://arize.com/docs/phoenix/"],"inLanguage":"en"},
 {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://sxf.si/research/"},{"@type":"ListItem","position":3,"name":"AI Agent Reliability","item":"https://sxf.si/research/ai-agent-reliability/"}]},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Are AI agents reliable in 2026?","acceptedAnswer":{"@type":"Answer","text":"AI agents can be reliable for bounded tasks under tested conditions, but reliability is not a universal property of an agent or model. It depends on the task, tools, environment, permissions, run length and failure tolerance. A high benchmark score alone does not establish production reliability."}},
@@ -63,7 +63,7 @@
 <p class="guide-deck">AI agents can write code, browse websites, operate software and execute multi-step workflows. But “it passed the benchmark” is not the same as “you can depend on it.” This research-backed field guide separates capability from reliability and shows how to measure whether an agent succeeds repeatedly, survives changed conditions, recognizes its limits and fails without creating unacceptable damage.</p>
 <div class="guide-byline">
 <div><span>Published</span><strong>October 1, 2026</strong></div>
-<div><span>Last verified</span><strong>October 1, 2026</strong></div>
+<div><span>Last updated</span><strong>November 10, 2026</strong></div>
 <div><span>Reading time</span><strong>32 min</strong></div>
 <div><span>Method</span><strong>Research synthesis</strong></div>
 </div>
@@ -92,6 +92,7 @@
 <a href="#predictability">Predictability & escalation</a>
 <a href="#safety">Safety & containment</a>
 <a href="#benchmarks">Which benchmarks matter</a>
+<a href="#reliability-tools">Tools to measure reliability</a>
 <a href="#production-test">Production test protocol</a>
 <a href="#failure-taxonomy">Failure taxonomy</a>
 <a href="#trust">When should you trust an agent?</a>
@@ -222,6 +223,21 @@
 <p>Benchmark contamination is another reason to avoid treating leaderboards as production guarantees. NIST and Google DeepMind have both highlighted methods for reducing contamination or evaluation gaming. A benchmark can be technically valid and still be insufficient for your use case; it can also become less informative as systems optimize against it.</p>
 </section>
 
+<section id="reliability-tools">
+<p class="eyebrow">EVALUATION TOOLS · PRACTICAL COMPARISON</p>
+<h2>Which tools measure AI agent reliability and correctness?</h2>
+<p>Different tools answer different reliability questions. <strong>Agent evaluation platforms</strong> help score outputs and execution traces against test cases; <strong>observability tools</strong> expose what happened during a run; and <strong>research benchmarks</strong> test behavior under repeatable stress conditions. None of these, on its own, proves that an agent is correct or safe in your production environment.</p>
+<div class="guide-table-wrap"><table class="guide-table" aria-label="Tools and benchmarks for measuring AI agent reliability and correctness">
+<thead><tr><th scope="col">Tool or benchmark</th><th scope="col">What it helps measure or investigate</th></tr></thead>
+<tbody>
+<tr><th scope="row">OpenAI Agent Evals <span class="guide-fact-note">(evaluation platform)</span></th><td>End-to-end traces, tool calls and handoffs, with graders and evaluation runs to check workflow behavior against defined criteria.</td></tr>
+<tr><th scope="row">LangSmith <span class="guide-fact-note">(evaluation and observability platform)</span></th><td>Offline and online evaluations using datasets and evaluators, comparison of agent runs, regression detection and production traces.</td></tr>
+<tr><th scope="row">Arize Phoenix <span class="guide-fact-note">(open-source observability and evaluation)</span></th><td>Trace and span inspection, debugging, response and retrieval evaluations, and experiments that help locate errors across an agent workflow.</td></tr>
+<tr><th scope="row">ReliabilityBench <span class="guide-fact-note">(research benchmark)</span></th><td>Repeated-run consistency (pass^k), robustness to equivalent task variations, and fault tolerance under controlled tool/API failures such as timeouts and rate limits.</td></tr>
+</tbody></table></div>
+<p><strong>Which should you use?</strong> Start with datasets and graders to measure task correctness; use tracing to diagnose failures; then add repeated runs and fault injection to test robustness. A good trace is evidence of what happened, not proof that the final outcome was correct. For a detailed comparison of tracing, monitoring and debugging platforms, read SXF's <a href="/guides/ai-agent-observability/">AI Agent Observability guide</a>; for concrete pre-release checks, use the <a href="/guides/ai-agent-evaluation-checklist/">AI Agent Evaluation Checklist</a>.</p>
+</section>
+
 <section id="production-test">
 <p class="eyebrow">PRACTICAL PROTOCOL</p>
 <h2>How to test an AI agent before you trust it in production</h2>
@@ -302,6 +318,8 @@
 <a href="https://www.nist.gov/publications/challenges-monitoring-deployed-ai-systems-center-ai-standards-and-innovation" target="_blank" rel="noopener noreferrer"><span>NIST · Challenges to Monitoring Deployed AI Systems</span><b>↗</b></a>
 <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer"><span>Anthropic · Demystifying Evals for AI Agents</span><b>↗</b></a>
 <a href="https://developers.openai.com/api/docs/guides/agent-evals" target="_blank" rel="noopener noreferrer"><span>OpenAI · Evaluate Agent Workflows</span><b>↗</b></a>
+<a href="https://docs.langchain.com/langsmith/evaluation" target="_blank" rel="noopener noreferrer"><span>LangSmith · Agent Evaluation Documentation</span><b>↗</b></a>
+<a href="https://arize.com/docs/phoenix/" target="_blank" rel="noopener noreferrer"><span>Arize Phoenix · Observability and Evaluation Documentation</span><b>↗</b></a>
 <a href="https://os-world.github.io/" target="_blank" rel="noopener noreferrer"><span>OSWorld · Benchmarking Agents in Real Computer Environments</span><b>↗</b></a>
 <a href="https://www.swebench.com/verified.html" target="_blank" rel="noopener noreferrer"><span>SWE-bench Verified · Human-Validated Software Tasks</span><b>↗</b></a>
 <a href="https://deepmind.google/blog/piloting-the-worlds-first-double-blind-ai-evaluations/" target="_blank" rel="noopener noreferrer"><span>Google DeepMind · Double-Blind AI Evaluations</span><b>↗</b></a>
