@@ -9586,6 +9586,26 @@ def evaluations_index_html():
 
 
 def generic_comparison_page_html(comparison):
+    if comparison["slug"] == "claude-haiku-5-5-vs-claude-sonnet-5-5":
+        # The specialist comparison has its own editorial source of truth.
+        # Never replace it with the generic comparison template on feed rebuilds.
+        template = COMPARE_DIR / comparison["slug"] / "editorial.html"
+        result = template.read_text(encoding="utf-8")
+        required = (
+            "Claude Haiku 5.5 vs Sonnet 5.5",
+            'data-compare-contract',
+            'data-model-ids="claude-haiku-5-5,claude-sonnet-5-5"',
+            'id="hs-cost-form"',
+            'id="hs-haiku-total"',
+            'id="hs-sonnet-total"',
+            'data-what-changed',
+            "INDEPENDENT EVALUATIONS",
+            "RELATED MATCHUPS",
+            '/assets/claude-haiku-sonnet-cost.js',
+        )
+        if any(fragment not in result for fragment in required):
+            raise RuntimeError("Haiku vs Sonnet specialist comparison source is incomplete")
+        return result
     if comparison["slug"] == "gpt-image-2-vs-gpt-image-2-5-flare":
         template = COMPARE_DIR / comparison["slug"] / "editorial.html"
         result = template.read_text(encoding="utf-8")

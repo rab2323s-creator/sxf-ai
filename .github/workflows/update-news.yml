@@ -54,6 +54,11 @@ jobs:
         run: python tests/test_feed_card_rendering.py
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
+      - name: Claude Haiku 5.5 vs Sonnet 5.5 specialist comparison SEO and costs
+        run: |
+          python tests/test_claude_haiku_sonnet_comparison.py
+          node --check assets/claude-haiku-sonnet-cost.js
+          node tests/test_claude_haiku_sonnet_cost.cjs
       - name: Topics discovery hub, link and structured data regression
         run: |
           python tests/test_topics_hub.py
