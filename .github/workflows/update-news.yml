@@ -56,6 +56,8 @@ jobs:
           node tests/test_news_frontend_filters.cjs
       - name: Feed card rendering regression tests
         run: python tests/test_feed_card_rendering.py
+      - name: GPT-6 Astra original research and SEO contract
+        run: python tests/test_gpt6_astra_research.py
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
       - name: Claude Haiku 5.5 vs Sonnet 5.5 specialist comparison SEO and costs
