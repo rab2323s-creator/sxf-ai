@@ -2,6 +2,7 @@
 """GPT-5.6 Sol source-driven SEO / model-study contract."""
 from __future__ import annotations
 import json,re,sys,csv
+from html import escape
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
@@ -30,7 +31,7 @@ assert "gpt56-sol-cache-economics-2026-11.csv" in rendered
 assert "{{" not in rendered
 assert "not a model inference run" in rendered
 for q,answer in FAQ:
- assert q in rendered and answer in rendered,(q,answer)
+ assert escape(q) in rendered and escape(answer) in rendered,(q,answer)
 schema=re.search(r'<script type="application/ld\+json">(.+?)</script>',rendered,re.S)
 assert schema
 nodes=json.loads(schema.group(1))["@graph"]
