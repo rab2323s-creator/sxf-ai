@@ -1285,9 +1285,9 @@
       }
     },
     "claude-sonnet-5-5": {
-      "last_event_verified_at": "2026-10-06",
-      "last_event_id": "evt_4dfd60fb6593193adad5",
-      "snapshot_hash": "1406d09e16d5897b39d8df3afed375959d8ec2efeeceb8f5f5898f0bde1205a4",
+      "last_event_verified_at": "2026-11-10",
+      "last_event_id": "evt_5cb61a0bb057b9410366",
+      "snapshot_hash": "51145ee4f5b75c31283aee3ac0ab1bd13a51f3376c6a4348234666e7ca183db8",
       "snapshot": {
         "provider": "Anthropic",
         "family": "Claude 5",
@@ -1316,9 +1316,18 @@
           "standard": [
             {
               "start": "2026-09-28",
-              "end": null,
+              "end": "2026-10-06",
               "input": 2,
               "cached_input": 0.2,
+              "cache_write_5m": 2.5,
+              "cache_write_1h": 4,
+              "output": 10
+            },
+            {
+              "start": "2026-10-07",
+              "end": null,
+              "input": 2,
+              "cached_input": 0.1,
               "cache_write_5m": 2.5,
               "cache_write_1h": 4,
               "output": 10
@@ -9407,7 +9416,58 @@
       },
       "event_id": "evt_77b0ad167e1577fc5df3",
       "event_hash": "77b0ad167e1577fc5df3946f18c27e09b086fb9b9650717d3bf8314a48e3aee7"
+    },
+    {
+      "sequence": 104,
+      "type": "model_changed",
+      "model_id": "claude-sonnet-5-5",
+      "verified_at": "2026-11-10",
+      "previous_event_hash": "77b0ad167e1577fc5df3946f18c27e09b086fb9b9650717d3bf8314a48e3aee7",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-09-28",
+                "end": null,
+                "input": 2,
+                "cached_input": 0.2,
+                "cache_write_5m": 2.5,
+                "cache_write_1h": 4,
+                "output": 10
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-06",
+                "input": 2,
+                "cached_input": 0.2,
+                "cache_write_5m": 2.5,
+                "cache_write_1h": 4,
+                "output": 10
+              },
+              {
+                "start": "2026-10-07",
+                "end": null,
+                "input": 2,
+                "cached_input": 0.1,
+                "cache_write_5m": 2.5,
+                "cache_write_1h": 4,
+                "output": 10
+              }
+            ]
+          },
+          "source_url": "https://platform.claude.com/docs/en/about-claude/pricing"
+        }
+      ],
+      "event_id": "evt_5cb61a0bb057b9410366",
+      "event_hash": "5cb61a0bb057b9410366f6a55ebb9d845de829bca58f4dcbacf395c52d27d73a"
     }
   ],
-  "chain_head": "77b0ad167e1577fc5df3946f18c27e09b086fb9b9650717d3bf8314a48e3aee7"
+  "chain_head": "5cb61a0bb057b9410366f6a55ebb9d845de829bca58f4dcbacf395c52d27d73a"
 }
