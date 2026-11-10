@@ -5,7 +5,7 @@
  const $=k=>root.querySelector('[name="'+k+'"]'),out=k=>root.querySelector('[data-cost="'+k+'"]');
  const get=(name)=>({input:Number(root.dataset[name+"Input"]),cached:Number(root.dataset[name+"Cached"]),five:Number(root.dataset[name+"Write5"]),hour:Number(root.dataset[name+"Write1"]),output:Number(root.dataset[name+"Output"])});
  const model5=get("p5"),model55=get("p55");
- const money=x=>"$"+x.toFixed(6);
+ const money=x=>"$"+(Math.abs(x)>=0.01?x.toFixed(2):x.toFixed(4));
  const quote=(m,prefix,fresh,output,kind)=>(prefix*(kind==="uncached"?m.input:m[kind])+fresh*m.input+output*m.output)/1e6;
  const total=(m,prefix,fresh,output,n,kind)=>kind==="uncached"?n*quote(m,prefix,fresh,output,"uncached"):quote(m,prefix,fresh,output,kind)+(n-1)*quote(m,prefix,fresh,output,"cached");
  function update(){
