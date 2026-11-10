@@ -140,6 +140,7 @@ def enrich_claude_sonnet5_page(page,by_id):
   (r'<body class="intel-page model-page">','<body class="intel-page model-page cs5-page">'),
  ):
   page=replace_one(page,pattern,v)
+ page=replace_one(page,r'(?=<section class="model-change-watch shell")',markup+"\n      ")
  # Eliminate the redundant generic model fact sheet only for this researched route:
  # its source facts, vendor links and status are incorporated into the dossier.
  page=replace_one(page,
@@ -154,7 +155,7 @@ def enrich_claude_sonnet5_page(page,by_id):
  page=replace_one(page,
   r'(<section class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5")',
   '<section id="cs5-benchmark-observations" class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5"')
- page=replace_one(page,r'(?=<section class="model-change-watch shell")',markup+"\n      ")
+
  page=replace_one(page,r'(?=</head>)','<link rel="stylesheet" href="/models/claude-sonnet-5/research.css?v=20261110-b" />\n      ')
  page=replace_one(page,r'(?=</body>)','<script defer src="/models/claude-sonnet-5/research.js?v=20261110-b"></script>')
  if page.count("<h1>")!=1 or "data-model-history" not in page:raise ValueError("Original reference and historical ledger must survive")
