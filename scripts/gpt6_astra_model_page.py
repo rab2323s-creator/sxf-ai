@@ -146,7 +146,7 @@ def enrich_gpt6_astra_page(page, models_by_id):
         if float(row["sol_usd"]) != round(calculate(sol,current,new,cached,write,output),5):
             raise ValueError("SXF public Sol CSV cost differs from catalog calculation")
     a_rate,s_rate = _rate(astra,current),_rate(sol,current)
-    tokens={"LAB_ROWS":"".join(rows),"FAQ_HTML":"".join(
+    tokens={"SOURCE_CHECKED_DATE":escape(astra["provenance"]["verified_at"]),"LAB_ROWS":"".join(rows),"FAQ_HTML":"".join(
         "<details><summary>"+escape(q)+"</summary><p>"+escape(a)+"</p></details>" for q,a in FAQ)}
     for label,rates in (("ASTRA",a_rate),("SOL",s_rate)):
         for suffix,field in (("INPUT","input"),("CACHED","cached_input"),("WRITE","cache_write"),("OUTPUT","output")):
