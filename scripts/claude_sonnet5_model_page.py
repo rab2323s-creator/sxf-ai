@@ -90,14 +90,17 @@ def enrich_claude_sonnet5_page(page,by_id):
   # Published CSV values use six decimal places: tolerate only half a micro-dollar.
   if any(abs(float(row[k])-v)>5.01e-7 for k,v in zip(fields,computed)):
    raise ValueError("Original Sonnet 5 dataset diverged from official rates")
+  def visible_money(value):
+   # Source CSV preserves six decimals; the reader-facing table stays legible.
+   return "$"+(f"{value:,.2f}" if abs(value)>=0.01 else f"{value:,.4f}")
   rows.append("<tr><th scope='row'>"+f"{prefix:,}"+"</th><td>"+str(n)+"</td>"+
-    "".join("<td>$"+f"{v:.6f}"+"</td>" for v in (amounts[0],amounts[1],amounts[2],amounts[0]-amounts[1]))+"</tr>")
+    "".join("<td>"+visible_money(v)+"</td>" for v in (amounts[0],amounts[1],amounts[2],amounts[0]-amounts[1]))+"</tr>")
  sample=scenarios(a,100000,2000,4000,10)
  markup=TEMPLATE.read_text(encoding="utf-8")
  def dollars(x):return "$"+f"{x:.2f}"
  tokens={"SOURCE_VERIFIED":five["provenance"]["verified_at"],"LAB_ROWS":"".join(rows),
   "FAQ_HTML":"".join("<details><summary>"+escape(q)+"</summary><p>"+escape(v)+"</p></details>" for q,v in FAQ),
-  "EXAMPLE_NO":"$"+f"{sample[0]:.6f}","EXAMPLE_5M":"$"+f"{sample[1]:.6f}"}
+  "EXAMPLE_NO":"$"+f"{sample[0]:.2f}","EXAMPLE_5M":"$"+f"{sample[1]:.2f}"}
  for name,rate in (("FIVE",a),("NEXT",b)):
   for suffix,key in (("INPUT","input"),("OUTPUT","output"),("CACHED","cached_input"),("WRITE5","cache_write_5m"),("WRITE1H","cache_write_1h")):
    tokens[name+"_"+suffix]=dollars(rate[key])
@@ -137,6 +140,20 @@ def enrich_claude_sonnet5_page(page,by_id):
   (r'<body class="intel-page model-page">','<body class="intel-page model-page cs5-page">'),
  ):
   page=replace_one(page,pattern,v)
+ # Eliminate the redundant generic model fact sheet only for this researched route:
+ # its source facts, vendor links and status are incorporated into the dossier.
+ page=replace_one(page,
+  r'<section class="model-reference model-reference-deep shell">[\s\S]*?(?=<section class="cs5-dossier shell")',
+  "")
+ page=replace_one(page,
+  r'<h1>Claude Sonnet 5<br><span>verified model reference\.</span></h1>',
+  '<h1>Claude Sonnet 5<br><span>API Pricing, Specs &amp; Benchmarks</span></h1>')
+ page=replace_one(page,
+  r'<p>Balanced Claude tier combining speed and intelligence for coding, agents, and production knowledge work\.</p>',
+  '<p>Official model specifications, clear API pricing and an independently reproducible 20-scenario SXF cache-cost study.</p>')
+ page=replace_one(page,
+  r'(<section class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5")',
+  '<section id="cs5-benchmark-observations" class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5"')
  page=replace_one(page,r'(?=<section class="model-change-watch shell")',markup+"\n      ")
  page=replace_one(page,r'(?=</head>)','<link rel="stylesheet" href="/models/claude-sonnet-5/research.css?v=20261110-a" />\n      ')
  page=replace_one(page,r'(?=</body>)','<script defer src="/models/claude-sonnet-5/research.js?v=20261110-a"></script>')
