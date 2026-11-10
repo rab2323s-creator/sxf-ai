@@ -131,7 +131,7 @@ def enrich_gpt6_astra_page(page, models_by_id):
         s = calculate(sol,current,new,cached,write,output)
         rows.append("<tr><th scope='row'>"+escape(label)+"</th>"+
                     "".join(f"<td>{v:,}</td>" for v in (new,cached,write,output))+
-                    f"<td>\${a:.5f}</td><td>\${s:.5f}</td></tr>")
+                    f"<td>${a:.5f}</td><td>${s:.5f}</td></tr>")
     # Verify the public CSV and visible table derive from the same scenario contract.
     import csv
     with (ROOT / "data/research/gpt6-astra-cost-lab-2026-11.csv").open(newline="",encoding="utf-8") as f:
