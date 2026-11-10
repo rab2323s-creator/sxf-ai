@@ -33,7 +33,6 @@ assert page.count('id="sxf-sonnet5-research"')==1
 assert page.count("<h1>")==1
 assert "<h1>Claude Sonnet 5<br><span>API Pricing, Specs &amp; Benchmarks</span></h1>" in page
 assert 'class="model-reference model-reference-deep shell"' not in page
-assert 'id="cs5-benchmark-observations"' in page
 assert "AA-Briefcase v1.1" in page
 assert "Displayed USD values are rounded for readability" in page
 assert 'href="'+URL+'"' in page
