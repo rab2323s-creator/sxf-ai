@@ -1,0 +1,10 @@
+scenario_id,scenario,uncached_input,cached_input,cache_write_input,output_tokens,original_sol_usd,sol_6_1_usd,saving_usd,tier
+minimal,Focused code review,20000,0,0,2000,0.060000,0.060000,0.000000,short
+cache-heavy,200K repeated context,12000,200000,0,4000,0.104000,0.084000,0.020000,short
+cache-write,Cache write first turn,12000,0,200000,4000,0.564000,0.564000,0.000000,short
+boundary-exact,Exactly 272K input,272000,0,0,4000,0.584000,0.584000,0.000000,short
+boundary-plus-one,272K + one input token,272001,0,0,4000,1.148004,1.148004,0.000000,long
+long-cache,Long-context cache-heavy agent,120000,200000,0,8000,0.680000,0.640000,0.040000,long
+long-new,Long document summarization,400000,0,0,20000,1.900000,1.900000,0.000000,long
+all-cached,Fully cached short context,0,250000,0,2000,0.070000,0.045000,0.025000,short
+research-write,Research cache construction,90000,50000,50000,18000,0.495000,0.490000,0.005000,short

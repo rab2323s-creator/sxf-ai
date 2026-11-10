@@ -67,6 +67,7 @@ from gpt6_family_model_page import enrich_gpt6_family_page
 from gpt61_release_page import enrich_gpt61_release_page
 from gpt6_luna_model_page import enrich_gpt6_luna_page
 from gpt6_astra_model_page import enrich_gpt6_astra_page
+from gpt6_sol_model_page import enrich_gpt6_sol_page
 from runway_gen45_model_page import enrich_runway_gen45_page
 from flux2_max_model_page import enrich_flux2_max_page
 from flux2_klein_9b_model_page import enrich_flux2_klein_9b_page
@@ -5644,6 +5645,8 @@ def render_catalog_model_page(model_id, items):
         page = enrich_gpt6_luna_page(page, MODEL_PRICING_BY_ID)
     if model_id == "gpt-6-astra":
         page = enrich_gpt6_astra_page(page, MODEL_PRICING_BY_ID)
+    if model_id == "gpt-6-sol":
+        page = enrich_gpt6_sol_page(page, MODEL_PRICING_BY_ID)
     if model_id == "claude-haiku-4-5-20251001":
         page = enrich_claude_haiku_45_page(page)
     if model_id == "llama-4-scout":

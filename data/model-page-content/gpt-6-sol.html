@@ -1,0 +1,165 @@
+<section class="sol-dossier shell" id="sxf-sol-dossier" aria-labelledby="sol-dossier-heading">
+  <header class="sol-lead" id="sol-overview">
+    <div class="sol-lead-copy">
+      <p class="eyebrow">SXF / AI ORIGINAL RESEARCH · OPENAI MODEL DOSSIER · NOVEMBER 2026</p>
+      <h2 id="sol-dossier-heading">GPT-6 Sol: a developer-grade reference, not just a model card.</h2>
+      <p class="sol-lede">The original <strong>GPT-6 Sol</strong> (<code>gpt-6-sol</code>) is OpenAI's September 2026 reasoning model for complex coding and tool-using agents. It supports a <strong>1,050,000-token context window</strong>, <strong>128,000 maximum output tokens</strong>, text and image input, and configurable reasoning from <code>none</code> to <code>max</code>.</p>
+      <p>This page gives direct answers on <strong>API pricing, long-context fees, prompt caching, the Responses API, benchmark evidence and GPT-6 Sol vs GPT-6.1 Sol</strong>—plus a reproducible SXF cost experiment using the exact published rate schedules. It does not mislabel supplier benchmark claims as independently tested results.</p>
+      <p class="sol-verify">Editorial technical/source review: <time datetime="2026-11-10">November 10, 2026</time> · Standard API list prices in USD · Original model introduced September 22, 2026 · The original API ID remains distinct from <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a>.</p>
+    </div>
+    <aside class="sol-identity" aria-label="GPT-6 Sol verified facts">
+      <p class="sol-identity-kicker">ORIGINAL SOL / VERIFIED IDENTITY</p>
+      <div><span>API MODEL ID</span><strong><code>gpt-6-sol</code></strong></div>
+      <div><span>CONTEXT WINDOW</span><strong>1,050,000 <small>tokens</small></strong></div>
+      <div><span>MAXIMUM OUTPUT</span><strong>128,000 <small>tokens</small></strong></div>
+      <div><span>KNOWLEDGE CUTOFF</span><strong>April 20, 2026</strong></div>
+      <div><span>STANDARD INPUT / OUTPUT</span><strong>$2 / $10 <small>per 1M tokens</small></strong></div>
+    </aside>
+  </header>
+
+  <nav class="sol-jump" aria-label="GPT-6 Sol reference navigation">
+    <a href="#sol-specs">Specs &amp; features</a>
+    <a href="#sol-pricing">Pricing</a>
+    <a href="#sol-original-lab">SXF original lab</a>
+    <a href="#sol-calculator">Cost calculator</a>
+    <a href="#sol-vs-new">Sol vs 6.1 Sol</a>
+    <a href="#sol-benchmarks">Benchmarks</a>
+    <a href="#sol-api">API guide</a>
+    <a href="#sol-faq">FAQ</a>
+  </nav>
+
+  <section class="sol-panel" id="sol-specs" aria-labelledby="sol-specs-title">
+    <div class="sol-section-heading"><p class="eyebrow">TECHNICAL FACT SHEET · PRIMARY SOURCES</p><h2 id="sol-specs-title">GPT-6 Sol specs: 1.05M context, reasoning and tool support.</h2></div>
+    <p>OpenAI documents <strong>text and image input, text output</strong>, streaming, structured outputs and function calling. GPT-6 Sol accepts <code>none</code>, <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code> and <code>max</code> reasoning effort; the default is <code>medium</code>. The knowledge cutoff is <strong>April 20, 2026</strong>, not its release date. A 1.05M context limit is capacity, not a guarantee of equal accuracy throughout long inputs.</p>
+    <div class="sol-three-cards">
+      <article><small>DEVELOPER MODE</small><h3>Responses API</h3><p>OpenAI's recommended path for built-in tools and function calls, including web/file search and computer use where enabled for the account.</p></article>
+      <article><small>LEGACY WORKFLOWS</small><h3>Chat Completions</h3><p>Function calling with original GPT-6 Sol is documented only with <code>reasoning_effort=none</code>. Check migration constraints before switching model IDs.</p></article>
+      <article><small>DEPLOYMENT</small><h3>Availability &amp; residency</h3><p>The model is listed on the OpenAI API and has a separate Bedrock provider ID <code>openai.gpt-6-sol</code>. EU residency eligibility depends on processing mode; verify current provider requirements.</p></article>
+    </div>
+    <p class="sol-cite-line">Primary evidence: <a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">OpenAI GPT-6 Sol model documentation</a>. API, ChatGPT, Codex and third-party hosting are separate offerings; a model card is not a guarantee of access in any particular plan.</p>
+  </section>
+
+  <section class="sol-panel" id="sol-pricing" aria-labelledby="sol-pricing-title">
+    <div class="sol-section-heading"><p class="eyebrow">DIRECT SEARCH ANSWER · USD PER MILLION TEXT TOKENS</p><h2 id="sol-pricing-title">GPT-6 Sol API pricing: input, cached tokens, cache writes and output.</h2></div>
+    <p>For a Standard API request with <strong>272,000 or fewer input tokens</strong>, original GPT-6 Sol costs <strong>$2 input, $0.20 cached reads, $2.50 cache writes and $10 generated output</strong> per million tokens. Above 272,000 input tokens, input and cache rates double and the output rate increases by 50% <strong>for the whole request</strong>. The number of input tokens includes uncached input, cached reads and cache writes in the SXF cost scenarios.</p>
+    <div class="sol-table-wrap" tabindex="0" role="region" aria-label="GPT-6 Sol Standard API price tiers">
+      <table><thead><tr><th scope="col">Billable category</th><th scope="col">Input ≤272K</th><th scope="col">Input >272K</th></tr></thead><tbody>
+        <tr><th scope="row">New input</th><td>{{SOL_SHORT_INPUT}}</td><td>{{SOL_LONG_INPUT}}</td></tr>
+        <tr><th scope="row">Cached input read</th><td>{{SOL_SHORT_CACHED}}</td><td>{{SOL_LONG_CACHED}}</td></tr>
+        <tr><th scope="row">Cache-write input</th><td>{{SOL_SHORT_WRITE}}</td><td>{{SOL_LONG_WRITE}}</td></tr>
+        <tr><th scope="row">Generated output</th><td>{{SOL_SHORT_OUTPUT}}</td><td>{{SOL_LONG_OUTPUT}}</td></tr>
+      </tbody></table>
+    </div>
+    <p><strong>Do not confuse the rates:</strong> a cache read is cheaper than a new input, while a cache write is more expensive. A new request does not automatically achieve a cache hit. Batch/Flex, Fast, tools and regional charges have separate policies and are deliberately excluded from this table. Check <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">the current OpenAI API pricing reference</a> and <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer">prompt-caching guidance</a> before production budgeting.</p>
+  </section>
+
+  <section class="sol-panel sol-panel-lab" id="sol-original-lab" aria-labelledby="sol-lab-title">
+    <div class="sol-section-heading"><p class="eyebrow">SXF ORIGINAL INVESTIGATION · REPRODUCIBLE TOKEN ECONOMICS</p><h2 id="sol-lab-title">SXF Cache Migration Lab: what changes when you move from GPT-6 Sol to GPT-6.1 Sol?</h2></div>
+    <p>SXF assembled <strong>nine fixed, hypothetical workload scenarios</strong>, priced each with the official OpenAI Standard rate schedule, and published the exact inputs as a <a href="/data/research/gpt6-sol-cache-migration-2026-11.csv">reproducible CSV dataset</a>. This is an original <strong>billing arithmetic study</strong>, not a paid model-inference run, real usage log, benchmark of model intelligence or promise of identical responses.</p>
+    <div class="sol-finding-grid">
+      <article class="sol-finding"><small>FINDING 01 · CACHE ECONOMICS</small><strong>50% less per cached token</strong><p>The newer GPT-6.1 Sol lists <strong>$0.10</strong> per million cached-input reads versus <strong>$0.20</strong> for original Sol, while their Standard uncached input, cache-write and output unit rates match. Per-request savings depend on the share of cached reads.</p></article>
+      <article class="sol-finding sol-finding-emphasis"><small>FINDING 02 · THE 272K CLIFF</small><strong>$0.584 → $1.148004</strong><p>With 4,000 output tokens, <strong>272,000</strong> new input tokens cost $0.584 in original Sol. Increase input to <strong>272,001</strong> and the predicted cost jumps to $1.148004 because higher rates apply to the entire request.</p></article>
+    </div>
+    <div class="sol-table-wrap" tabindex="0" role="region" aria-label="SXF original GPT-6 Sol pricing experiments">
+      <table class="sol-lab-table"><thead><tr><th scope="col">SXF scenario</th><th scope="col">New input</th><th scope="col">Cached read</th><th scope="col">Write</th><th scope="col">Output</th><th scope="col">Original Sol</th><th scope="col">6.1 Sol</th><th scope="col">Difference</th></tr></thead><tbody>{{LAB_ROWS}}</tbody></table>
+    </div>
+    <p class="sol-data-line"><a href="/data/research/gpt6-sol-cache-migration-2026-11.csv" download>Download all nine scenarios (CSV)</a> · <a href="#sol-method">Inspect the calculation method</a> · <a href="#sol-calculator">Edit token counts</a></p>
+    <div class="sol-method" id="sol-method"><h3>Transparent methodology and limitations</h3>
+      <p>Input tokens = new input + cache reads + cache writes. For each category, multiply the number of tokens by the matching published <strong>USD-per-million</strong> rate and divide by 1,000,000. If input tokens are strictly greater than 272,000, multiply all input/cache rates by 2 and the output rate by 1.5. The same formula is applied to both model IDs, with each model's own rates.</p>
+      <p>The CSV records all counts, calculated costs and the pricing tier used. The site-build test independently recalculates the study from the repository's versioned provider catalog and rejects pricing drift. Outcomes here show <strong>potential list-rate cost differences only</strong>. Real economics include response length, cache hits/misses, retries, tool calls, quality validation, regional processing, latency and processing mode. There is no measured success-rate or latency advantage claimed.</p>
+    </div>
+  </section>
+
+  <section class="sol-panel" id="sol-calculator" aria-labelledby="sol-calculator-title">
+    <div class="sol-section-heading"><p class="eyebrow">INTERACTIVE SXF COST TOOL · WORKS LOCALLY IN THE BROWSER</p><h2 id="sol-calculator-title">GPT-6 Sol cost calculator: estimate old Sol vs 6.1 Sol for your workload.</h2></div>
+    <p>Enter hypothetical token usage and monthly request volume. The calculator compares original Sol with newer 6.1 Sol at <strong>Standard API rates</strong> and automatically applies long-context pricing to every relevant token once total input passes 272K. This tool does not contact OpenAI or upload any inputs.</p>
+    <form class="sol-calculator" id="sol-cost-calculator" data-sol-input="{{RATE_SOL_INPUT}}" data-sol-cached="{{RATE_SOL_CACHED}}" data-sol-write="{{RATE_SOL_WRITE}}" data-sol-output="{{RATE_SOL_OUTPUT}}" data-new-input="{{RATE_NEW_INPUT}}" data-new-cached="{{RATE_NEW_CACHED}}" data-new-write="{{RATE_NEW_WRITE}}" data-new-output="{{RATE_NEW_OUTPUT}}" novalidate>
+      <div class="sol-fields">
+        <label>Uncached input tokens<input name="new" type="number" min="0" max="1050000" step="1000" value="12000" inputmode="numeric"></label>
+        <label>Cached input reads<input name="cached" type="number" min="0" max="1050000" step="1000" value="200000" inputmode="numeric"></label>
+        <label>Cache-write tokens<input name="write" type="number" min="0" max="1050000" step="1000" value="0" inputmode="numeric"></label>
+        <label>Output tokens<input name="output" type="number" min="0" max="128000" step="500" value="4000" inputmode="numeric"></label>
+        <label>Requests per month<input name="requests" type="number" min="1" max="10000000" step="100" value="1000" inputmode="numeric"></label>
+      </div>
+      <div class="sol-calc-results" aria-live="polite">
+        <article><small>PRICING TIER</small><strong data-result="tier">Short context</strong></article>
+        <article><small>ORIGINAL SOL / REQUEST</small><strong data-result="sol">$0.104000</strong></article>
+        <article><small>6.1 SOL / REQUEST</small><strong data-result="new">$0.084000</strong></article>
+        <article class="sol-calc-accent"><small>POTENTIAL MONTHLY DIFFERENCE</small><strong data-result="difference">$20.00</strong></article>
+      </div>
+      <p class="sol-calc-message" data-result="message" role="status">Illustrative Standard token rates only; output and actual cache use depend on the application.</p>
+    </form>
+  </section>
+
+  <section class="sol-panel" id="sol-vs-new" aria-labelledby="sol-vs-new-title">
+    <div class="sol-section-heading"><p class="eyebrow">MODEL NAMING &amp; MIGRATION · IMPORTANT FOR SEARCHERS</p><h2 id="sol-vs-new-title">GPT-6 Sol vs GPT-6.1 Sol: which model is newer, cheaper and compatible?</h2></div>
+    <p><strong>GPT-6 Sol</strong> is the original September 22, 2026 model (<code>gpt-6-sol</code>). <strong>GPT-6.1 Sol</strong> arrived September 29, 2026 (<code>gpt-6.1-sol</code>) as the newer Sol offering. They are distinct API endpoints, with different knowledge cutoffs, cached-input prices and supported reasoning/tool configurations. A keyword like “gpt sol” is ambiguous: this page deliberately identifies both IDs rather than treating them as interchangeable.</p>
+    <div class="sol-table-wrap" tabindex="0" role="region" aria-label="Original Sol versus 6.1 Sol comparison">
+      <table><thead><tr><th scope="col">Specification</th><th scope="col">GPT-6 Sol (original)</th><th scope="col">GPT-6.1 Sol (newer)</th></tr></thead><tbody>
+        <tr><th scope="row">Model ID</th><td><code>gpt-6-sol</code></td><td><code>gpt-6.1-sol</code></td></tr>
+        <tr><th scope="row">First release</th><td>September 22, 2026</td><td>September 29, 2026</td></tr>
+        <tr><th scope="row">Context / max output</th><td>1,050,000 / 128,000</td><td>1,050,000 / 128,000</td></tr>
+        <tr><th scope="row">Knowledge cutoff</th><td>April 20, 2026</td><td>April 30, 2026</td></tr>
+        <tr><th scope="row">Standard new input / 1M</th><td>{{SOL_SHORT_INPUT}}</td><td>{{NEW_SHORT_INPUT}}</td></tr>
+        <tr><th scope="row">Standard cached read / 1M</th><td>{{SOL_SHORT_CACHED}}</td><td>{{NEW_SHORT_CACHED}}</td></tr>
+        <tr><th scope="row">Standard output / 1M</th><td>{{SOL_SHORT_OUTPUT}}</td><td>{{NEW_SHORT_OUTPUT}}</td></tr>
+        <tr><th scope="row">Reasoning effort = none</th><td>Supported</td><td>Not supported</td></tr>
+        <tr><th scope="row">Chat Completions tool calls</th><td>Documented with effort=none</td><td>Use Responses for tool calling</td></tr>
+      </tbody></table>
+    </div>
+    <div class="sol-three-cards">
+      <article><small>CONSIDER KEEPING ORIGINAL SOL</small><h3>Compatibility-first</h3><p>Existing integrations that specifically need <code>reasoning.effort=none</code> or Chat Completions function calls at that setting should verify migration before changing IDs.</p></article>
+      <article><small>BENCHMARK 6.1 SOL</small><h3>Cache-heavy agents</h3><p>For repeated conversations with eligible cached prefixes, the lower cached-input unit rate can reduce list-price cost. Test the real hit rate and task quality.</p></article>
+      <article><small>ESCALATE TO ASTRA</small><h3>Hardest tasks</h3><p><a href="/models/gpt-6-astra/">GPT-6 Astra</a> uses higher Standard token rates and is positioned for especially demanding reasoning. Compare cost per accepted task, not price or context length alone.</p></article>
+    </div>
+    <p>Explore <a href="/models/gpt-6-1-sol/">the standalone GPT-6.1 Sol reference</a>, <a href="/models/gpt-6/">the complete GPT-6 family guide</a>, and <a href="/compare/gpt-6-astra-vs-sol-vs-luna/">SXF's Astra / Sol / Luna comparison</a>. OpenAI's <a href="https://developers.openai.com/api/docs/models/compare?model=gpt-6-sol&model=gpt-6.1-sol" target="_blank" rel="noopener noreferrer">official model comparison</a> is the source of record for changing API specifics.</p>
+  </section>
+
+  <section class="sol-panel" id="sol-benchmarks" aria-labelledby="sol-benchmarks-title">
+    <div class="sol-section-heading"><p class="eyebrow">EVALUATION EVIDENCE · VENDOR-REPORTED, NOT SXF INFERENCE TESTS</p><h2 id="sol-benchmarks-title">GPT-6 Sol benchmarks: what OpenAI's launch tests showed.</h2></div>
+    <p>OpenAI's September 22 announcement reports <strong>33.2% on AutomationBench 1.0.6 at xhigh effort</strong>, <strong>56.4% on Agents' Last Exam V1 at max effort</strong>, and <strong>68.8% on DeepSWE v1.1 at max effort</strong> for original Sol. The metrics cover different task domains and evaluation conditions; these percentages cannot be averaged into one intelligence score. SXF did not reproduce those model runs.</p>
+    <div class="sol-table-wrap" tabindex="0" role="region" aria-label="OpenAI reported GPT-6 Sol launch benchmarks">
+      <table><thead><tr><th scope="col">Evaluation</th><th scope="col">Reported Sol score</th><th scope="col">Effort</th><th scope="col">Domain</th></tr></thead><tbody>
+        <tr><th scope="row">AutomationBench 1.0.6</th><td>33.2%</td><td>xhigh</td><td>Cross-application business automation</td></tr>
+        <tr><th scope="row">Agents' Last Exam V1</th><td>56.4%</td><td>max</td><td>Long-horizon professional agent tasks</td></tr>
+        <tr><th scope="row">DeepSWE v1.1</th><td>68.8%</td><td>max</td><td>Long-running software engineering</td></tr>
+      </tbody></table>
+    </div>
+    <p><strong>Evidence quality:</strong> This is first-party release evidence and is labelled accordingly. Scores depend on harness, prompts, inference settings, allowed tools, and the date measured. Use the <a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener noreferrer">OpenAI launch report and its methodology notes</a> to interpret each benchmark. For independent and configuration-labelled observations, see <a href="/evaluations/">SXF's evaluation evidence index</a>. Never infer your own project's pass rate from these numbers alone.</p>
+  </section>
+
+  <section class="sol-panel" id="sol-api" aria-labelledby="sol-api-title">
+    <div class="sol-section-heading"><p class="eyebrow">COPYABLE DEVELOPER START · NO PRIVATE KEYS ON THE PAGE</p><h2 id="sol-api-title">How to call GPT-6 Sol using the OpenAI Responses API.</h2></div>
+    <p>Use the exact original model ID <code>gpt-6-sol</code> and choose an available reasoning effort. Example below uses a short text prompt; adapt it for testing with real unit tests and human review. The SDK reads <code>OPENAI_API_KEY</code> from the environment. This snippet is illustrative and was not executed against a paid API as part of the SXF pricing study.</p>
+    <pre class="sol-code"><code>from openai import OpenAI
+
+client = OpenAI()  # reads OPENAI_API_KEY
+result = client.responses.create(
+    model="gpt-6-sol",
+    reasoning={"effort": "medium"},
+    input="Review this code change. List risks and specific regression tests."
+)
+print(result.output_text)</code></pre>
+    <h3>How should production teams evaluate it?</h3>
+    <ol class="sol-steps"><li>Build a representative held-out set of tasks with explicit acceptance criteria and hard failure cases.</li><li>Record prompt, model ID, reasoning effort, tool configuration, version and output for each run.</li><li>Measure task success, human corrections, end-to-end latency, actual input/cache/output usage and retry frequency.</li><li>Run the same workload on GPT-6.1 Sol and Astra. Compare cost per validated result; keep provider launch benchmarks separate from your measurements.</li></ol>
+    <p>For tool calling, prefer the Responses API per <a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">OpenAI's original Sol model card</a>. For prompts with reusable prefixes, follow the <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer">current prompt-caching guidelines</a>. Do not expose API keys in client-side code or GitHub commits.</p>
+  </section>
+
+  <section class="sol-panel" id="sol-faq" aria-labelledby="sol-faq-title">
+    <div class="sol-section-heading"><p class="eyebrow">DIRECT-ANSWER SEARCH INTENTS</p><h2 id="sol-faq-title">GPT-6 Sol FAQ: pricing, usage, ChatGPT, coding and migration.</h2></div>
+    <div class="sol-faq">{{FAQ_HTML}}</div>
+  </section>
+
+  <section class="sol-panel sol-sources" id="sol-sources" aria-labelledby="sol-sources-title">
+    <div class="sol-section-heading"><p class="eyebrow">AUDIT TRAIL · PRIMARY SOURCES AND ORIGINAL DATA</p><h2 id="sol-sources-title">Sources, dataset, limitations and corrections.</h2></div>
+    <ul>
+      <li><a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">OpenAI GPT-6 Sol model card</a> — original ID, pricing, capabilities, endpoints and knowledge cutoff</li>
+      <li><a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">OpenAI GPT-6.1 Sol model card</a> — newer model ID, pricing and reasoning support</li>
+      <li><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI API pricing</a> — Standard token rates, context tiers and processing-mode exclusions</li>
+      <li><a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer">OpenAI prompt caching guidance</a> — cache read vs write and prefix reuse</li>
+      <li><a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener noreferrer">OpenAI Sol/Luna launch report</a> — launch timeline and attributed benchmark observations</li>
+      <li><a href="/data/research/gpt6-sol-cache-migration-2026-11.csv">SXF original cost scenario CSV</a> — exact hypothetical inputs, both model estimates and reproducibility</li>
+    </ul>
+    <p class="sol-verify">Research published November 10, 2026. SXF original component: deterministic pricing experiments and workflow analysis. Benchmark percentages are explicitly attributed provider reports, not independent SXF model tests. Text token calculations exclude tools, special processing, regional fees, latency and model-quality outcomes. Questions or factual corrections: <a href="/about/">SXF editorial contact and policies</a>.</p>
+  </section>
+</section>
