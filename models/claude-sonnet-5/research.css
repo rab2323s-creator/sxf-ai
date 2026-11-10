@@ -1,0 +1,78 @@
+/* Scoped SXF Sonnet 5 research UI — mobile-first and no document-level overflow */
+.cs5-dossier{width:min(calc(100% - 36px),var(--max));max-width:100%;margin:32px auto 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.cs5-dossier,.cs5-dossier *{box-sizing:border-box}
+.cs5-dossier :is(section,article,header,aside,div,form,nav,pre){min-width:0}
+.cs5-dossier :is(h2,h3,p,a,li,strong,summary){overflow-wrap:anywhere}
+.cs5-dossier h2{font-size:clamp(26px,3vw,45px);line-height:1.13;letter-spacing:-.04em;color:#f0f7ff;margin:12px 0 18px}
+.cs5-dossier h3{font-size:clamp(19px,1.8vw,24px);line-height:1.25;letter-spacing:-.02em;color:#f3f9ff;margin:12px 0}
+.cs5-dossier p,.cs5-dossier li{color:#b9cbd8;font-size:clamp(13px,1.1vw,15px);line-height:1.75}
+.cs5-dossier strong{color:#eaf8fc}
+.cs5-dossier .eyebrow{color:#9fe4dc;font-weight:850;font-size:11px;letter-spacing:.09em}
+.cs5-dossier a{color:#8ee8dc;text-underline-offset:3px}
+.cs5-dossier code{color:#a3ecdd;overflow-wrap:anywhere}
+.cs5-hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.65fr);gap:18px}
+.cs5-intro,.cs5-specs,.cs5-panel{padding:clamp(20px,3vw,34px);border:1px solid #294653;background:linear-gradient(140deg,#102132,#09141e);border-radius:20px}
+.cs5-intro{background:radial-gradient(circle at 70% 0%,rgba(89,205,193,.12),transparent 25rem),linear-gradient(140deg,#142132,#0a111b)}
+.cs5-intro h2{font-size:clamp(31px,3.5vw,53px)}
+.cs5-intro .cs5-lead{font-size:clamp(15px,1.3vw,18px)}
+.cs5-provenance,.cs5-disclaimer{font-size:12px!important;color:#95aeba!important}
+.cs5-specs{border-color:#52787a;display:flex;flex-direction:column;justify-content:center}
+.cs5-specs>div{padding:12px 0;border-top:1px solid #2a4552;display:grid;gap:6px}
+.cs5-specs small{font-size:10px;color:#a7becb;letter-spacing:.08em;font-weight:800}
+.cs5-specs strong{font-size:clamp(18px,1.9vw,26px);font-variant-numeric:tabular-nums}
+.cs5-specs em{font-size:12px;font-style:normal;color:#a6c5c8}
+.cs5-specs .cs5-kicker{font-size:11px;font-weight:850;letter-spacing:.08em;color:#98e7da}
+.cs5-specs .cs5-note{border:1px solid #426565;border-radius:10px;padding:12px;background:#102a2c;font-size:12px}
+.cs5-jump{display:flex;flex-wrap:wrap;gap:8px;padding:5px 0}
+.cs5-jump a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;background:#10202d;border:1px solid #385b68;border-radius:99px;font-size:12px;font-weight:700;text-decoration:none;color:#cbdfdd}
+.cs5-jump a:hover,.cs5-jump a:focus-visible{background:#1a4144;color:#fff;border-color:#8fe5da}
+.cs5-panel{scroll-margin-top:120px}
+.cs5-cards,.cs5-findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.cs5-cards article,.cs5-findings article{padding:18px;border:1px solid #325462;border-radius:14px;background:#0b1c27}
+.cs5-cards small,.cs5-findings small,.cs5-results small{display:block;font-size:10px;letter-spacing:.08em;color:#94e4d9;font-weight:800}
+.cs5-cards p,.cs5-findings p{font-size:13px}
+.cs5-findings article{border-color:#408276;background:#113030}
+.cs5-findings strong{display:block;margin:13px 0;font-size:clamp(22px,2.5vw,33px);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.cs5-lab{border-color:#417c77}
+.cs5-scroll{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;margin:18px 0;border:1px solid #385765;border-radius:13px;background:#081823}
+.cs5-scroll table{border-collapse:collapse;min-width:660px;width:100%;max-width:none}
+.cs5-scroll table.cs5-wide{min-width:790px}
+.cs5-scroll th,.cs5-scroll td{padding:12px 14px;text-align:left;border-bottom:1px solid #314954;white-space:nowrap;font-size:12px;line-height:1.5}
+.cs5-scroll thead th{background:#173440;color:#b8eee5;font-size:11px}
+.cs5-scroll tbody th{font-weight:700;color:#d5eaf2}
+.cs5-scroll tbody td{color:#c5dadd;font-variant-numeric:tabular-nums}
+.cs5-scroll tbody tr:last-child th,.cs5-scroll tbody tr:last-child td{border-bottom:0}
+.cs5-actions{display:flex;gap:15px;flex-wrap:wrap;font-size:13px!important}
+.cs5-tool{padding:20px;border:1px solid #497b78;border-radius:15px;background:#0d232e;margin-top:20px}
+.cs5-inputs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}
+.cs5-inputs label{color:#ccdee2;font-size:12px;font-weight:800;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cs5-inputs :is(input,select){width:100%;min-width:0;max-width:100%;background:#071620;color:#f0fafc;border:1px solid #477180;border-radius:8px;height:47px;padding:8px 10px;font:inherit;font-size:16px}
+.cs5-inputs :is(input,select):focus-visible{outline:2px solid #8deadd;outline-offset:2px}
+.cs5-results{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:16px 0}
+.cs5-results article{border:1px solid #36586a;background:#163442;border-radius:11px;padding:14px}
+.cs5-results strong{display:block;margin-top:9px;font-size:clamp(18px,1.7vw,25px);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.cs5-results .cs5-accent{border-color:#69b5a0;background:#114438}
+.cs5-message{font-size:12px!important;margin-bottom:0}
+.cs5-code{white-space:pre;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:18px;max-width:100%;border:1px solid #355460;border-radius:12px;background:#05131b;font-size:12px;line-height:1.7}
+.cs5-code code{white-space:pre;overflow-wrap:normal;color:#d2eae4}
+.cs5-faq details{border-bottom:1px solid #36525e;padding:16px 0}
+.cs5-faq details:first-child{border-top:1px solid #36525e}
+.cs5-faq summary{color:#ecf9fc;font-weight:750;line-height:1.5;cursor:pointer}
+.cs5-faq p{margin-bottom:0}
+.cs5-sources{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.cs5-sources p{flex-basis:100%}
+.cs5-sources a{display:inline-flex;align-items:center;min-height:44px;border:1px solid #3a5a61;border-radius:10px;padding:10px 13px;background:#0c2430;font-size:12px}
+.cs5-page :is(.model-reference-intro,.model-fact-grid,.model-capability-grid,.model-related-links,.model-history-grid,.evaluation-card-grid,.model-split){min-width:0}
+.cs5-page :is(.model-fact-grid strong,.model-related-links strong,.model-capability-grid h3){overflow-wrap:anywhere}
+@media(max-width:1050px){.cs5-hero{grid-template-columns:minmax(0,1fr)}.cs5-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px}.cs5-specs>p{grid-column:1/-1}.cs5-inputs{grid-template-columns:repeat(3,minmax(0,1fr))}.cs5-results{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.cs5-cards,.cs5-findings{grid-template-columns:repeat(2,minmax(0,1fr))}.cs5-inputs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.cs5-dossier{width:calc(100% - 28px);gap:14px;margin:22px auto 42px}.cs5-intro,.cs5-specs,.cs5-panel{padding:clamp(15px,4.5vw,20px);border-radius:15px}.cs5-intro h2{font-size:clamp(28px,8vw,37px)}.cs5-dossier h2{font-size:clamp(25px,6.5vw,33px)}.cs5-dossier h3{font-size:20px}.cs5-dossier p,.cs5-dossier li{font-size:13.5px}.cs5-specs{grid-template-columns:minmax(0,1fr)}.cs5-cards,.cs5-findings,.cs5-inputs,.cs5-results{grid-template-columns:minmax(0,1fr)}.cs5-jump a{font-size:11.5px;padding:9px 12px}.cs5-tool{padding:13px}.cs5-results strong{font-size:25px}.cs5-code{font-size:11.5px;padding:13px}}
+@media(max-width:360px){.cs5-dossier{width:calc(100% - 22px)}.cs5-intro,.cs5-specs,.cs5-panel{padding:13px}}
+
+/* Keep inherited catalog cards, dated source links and evaluation cards from forcing viewport width. */
+.cs5-page :is(.model-reference-intro,.model-capability-grid,.model-related-links,.model-history-grid,.evaluation-card-grid,.model-fact-grid,.model-split,.change-watch-empty){min-width:0}
+.cs5-page :is(.model-related-links strong,.model-sources span,.model-capability-grid h3,.collection-hero h1,.model-fact-grid strong,.model-history-event,.evaluation-card-grid article){min-width:0;overflow-wrap:anywhere}
+.cs5-page .model-related-links{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cs5-page .model-related-links a{min-width:0;grid-template-columns:minmax(0,1fr) auto}
+@media(max-width:900px){.cs5-page .model-related-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.cs5-page .model-related-links{grid-template-columns:minmax(0,1fr)}}
