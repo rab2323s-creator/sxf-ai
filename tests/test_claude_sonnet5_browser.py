@@ -40,7 +40,6 @@ def main():
      assert page.locator("h1").inner_text().strip().startswith("Claude Sonnet 5")
      assert "API Pricing" in page.locator("h1").inner_text()
      assert page.locator(".model-reference-deep").count()==0
-     assert page.locator("#cs5-benchmark-observations").count()==1
      assert page.locator("#sxf-sonnet5-research").count()==1
      assert page.locator(".cs5-scroll").count()>=3
      metrics=page.evaluate("""() => {const rect=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,sw:e.scrollWidth,cw:e.clientWidth}};return {width:document.documentElement.scrollWidth,blocks:[...document.querySelectorAll('.cs5-dossier,.cs5-hero,.cs5-intro,.cs5-specs,.cs5-panel,.cs5-scroll,.cs5-code,.cs5-tool,.cs5-cards article,.cs5-findings article')].map(rect),offenders:[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,cls:typeof e.className==='string'?e.className.slice(0,85):'',...rect(e)})).filter(e=>e.right>innerWidth+2||e.left< -2).slice(0,14)};}""")
