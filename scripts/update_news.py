@@ -12,6 +12,7 @@ from datetime import date, datetime, timezone, timedelta
 from html import escape, unescape
 from pathlib import Path
 from content_ownership import preserve_authored_pages
+from model_editorial_guard import protect_model_pages
 from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 
@@ -11512,7 +11513,7 @@ def render_site(archive, current):
         raise RuntimeError("No editorially approved current news; refusing to render")
     # Author-edited page HTML is the source of truth. Automatic news updates
     # can change generated signals/catalogs, but not already-authored guides.
-    with preserve_authored_pages(ROOT):
+    with preserve_authored_pages(ROOT), protect_model_pages(ROOT):
         update_index(current)
         update_section_pages(current, archive)
         build_discovery_pages(archive, current)
