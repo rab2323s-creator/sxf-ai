@@ -29,6 +29,8 @@ jobs:
         run: python tests/test_single_entrypoint.py
       - name: Generator definition regression
         run: python tests/test_generator_definitions.py
+      - name: Verify authored page ownership and preservation
+        run: python tests/test_content_ownership.py
       - name: Offline snapshot rendering unit tests
         run: python tests/test_snapshot_rendering.py
       - name: Editorial robots and indexing unit tests
@@ -211,6 +213,8 @@ jobs:
         run: |
           python tests/test_pricing_regression.py
           python tests/test_qwen_tiered_pricing.py
+      - name: Block accidental authored page SEO/content overwrites
+        run: python scripts/content_ownership.py --assert-clean
       - name: Commit generated changes
         if: github.event_name != 'pull_request'
         run: |

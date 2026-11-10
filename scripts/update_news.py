@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from datetime import date, datetime, timezone, timedelta
 from html import escape, unescape
 from pathlib import Path
+from content_ownership import preserve_authored_pages
 from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 
@@ -11309,7 +11310,8 @@ def build_discovery_pages(items, current_items):
         provider_path.mkdir(parents=True, exist_ok=True)
         (provider_path / "index.html").write_text(provider_page_html(provider, items), encoding="utf-8")
 
-    (SUPERINTELLIGENCE_DIR / "index.html").write_text(superintelligence_hub_with_explosion_link(items, current_items), encoding="utf-8")
+    # /superintelligence/ is an authored topic hub: the news generator must not
+    # overwrite its title, meta description, vetted sources or social image.
     pricing_reference_page = model_pricing_page_html()
     pricing_deep_dive_link = '<aside class="shell related-guide" aria-label="Anthropic API pricing guide"><a href="/guides/anthropic-api-pricing/">Anthropic API pricing: Claude prompt caching, Batch discounts and SXF cost lab</a></aside>'
     if '/guides/anthropic-api-pricing/' not in pricing_reference_page:
@@ -11508,12 +11510,15 @@ def render_site(archive, current):
     current = discoverable_news(current)
     if not current:
         raise RuntimeError("No editorially approved current news; refusing to render")
-    update_index(current)
-    update_section_pages(current, archive)
-    build_discovery_pages(archive, current)
-    normalize_static_shells()
-    normalize_primary_navigation()
-    apply_topic_crosslinks(ROOT)
+    # Author-edited page HTML is the source of truth. Automatic news updates
+    # can change generated signals/catalogs, but not already-authored guides.
+    with preserve_authored_pages(ROOT):
+        update_index(current)
+        update_section_pages(current, archive)
+        build_discovery_pages(archive, current)
+        normalize_static_shells()
+        normalize_primary_navigation()
+        apply_topic_crosslinks(ROOT)
     update_sitemap(archive)
 
 
