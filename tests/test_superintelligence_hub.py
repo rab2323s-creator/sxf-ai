@@ -2,6 +2,7 @@
 """Guard authored superintelligence SEO, content, internal links, schema and layout."""
 from __future__ import annotations
 
+import ast
 import json
 import re
 from pathlib import Path
@@ -28,7 +29,28 @@ assert part.count('data-label="AGI"') == 4 and part.count('data-label="ASI"') ==
 assert 'role="region" aria-label="AGI versus ASI comparison"' in part
 assert 'stacked cards on phones' in css and 'content:attr(data-label)' in css
 assert '(SUPERINTELLIGENCE_DIR / "index.html").write_text' not in source
-assert 'with preserve_authored_pages(ROOT):' in source
+# Inspect the renderer's syntax tree instead of matching a formatting-specific
+# "with" string: both editorial ownership and model-page protection are required.
+render_functions = [
+    node for node in ast.parse(source).body
+    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    and node.name == "render_site"
+]
+assert len(render_functions) == 1, "Expected exactly one site renderer"
+guarded_blocks = [
+    {
+        item.context_expr.func.id
+        for item in node.items
+        if isinstance(item.context_expr, ast.Call)
+        and isinstance(item.context_expr.func, ast.Name)
+    }
+    for node in ast.walk(render_functions[0])
+    if isinstance(node, ast.With)
+]
+assert any(
+    {"preserve_authored_pages", "protect_model_pages"} <= guards
+    for guards in guarded_blocks
+), "Site renderer must preserve authored pages and validate model pages together"
 
 ld = re.search(r'<script type="application/ld\+json">([\s\S]*?)</script>', page)
 assert ld, "Missing JSON-LD"
