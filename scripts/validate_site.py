@@ -278,6 +278,10 @@ def validate_model_history():
     # Regression: factual changes require a newer verified_at.
     stale_catalog = copy.deepcopy(catalog)
     stale_catalog["models"][0]["context_window"] += 1
+    # A provenance-only recheck can be newer than the last immutable ledger event.
+    # Anchor this negative test to the ledger event, not the new source-check date.
+    stale_model_id = stale_catalog["models"][0]["model_id"]
+    stale_catalog["models"][0]["provenance"]["verified_at"] = history["state"][stale_model_id]["last_event_verified_at"]
     try:
         sync_history(stale_catalog, history)
     except RuntimeError as exc:
