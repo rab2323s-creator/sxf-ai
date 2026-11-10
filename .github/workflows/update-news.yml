@@ -228,6 +228,7 @@ jobs:
       - name: Block accidental authored page SEO/content overwrites
         run: python scripts/content_ownership.py --assert-clean
       - name: Commit generated changes
+        id: generated
         if: github.event_name != 'pull_request'
         run: |
           git config user.name "sxf-ai-bot"
@@ -239,4 +240,16 @@ jobs:
             git commit -m "chore: refresh AI feed and SEO"
             git pull --rebase origin main
             git push origin HEAD:main
+            echo "committed=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: Deploy generated HTML via Cloudflare Workers Builds
+        if: ${{ github.event_name != 'pull_request' && steps.generated.outputs.committed == 'true' }}
+        env:
+          CLOUDFLARE_DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$CLOUDFLARE_DEPLOY_HOOK_URL" ]; then
+            echo "::warning::CLOUDFLARE_DEPLOY_HOOK_URL not configured; generated GitHub Actions commits may not trigger a Workers Build."
+            exit 0
+          fi
+          response="$(curl --silent --show-error --fail-with-body --max-time 30 --request POST "$CLOUDFLARE_DEPLOY_HOOK_URL")"
+          RESPONSE="$response" python -c 'import json,os; obj=json.loads(os.environ["RESPONSE"]); assert obj.get("success") is True, "Cloudflare hook rejected deployment"; print("Cloudflare Workers Build triggered for generated site")'
