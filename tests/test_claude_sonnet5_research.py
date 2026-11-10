@@ -31,12 +31,17 @@ if 'id="sxf-sonnet5-research"' not in page:
  page=enrich_claude_sonnet5_page(page,models)
 assert page.count('id="sxf-sonnet5-research"')==1
 assert page.count("<h1>")==1
+assert "<h1>Claude Sonnet 5<br><span>API Pricing, Specs &amp; Benchmarks</span></h1>" in page
+assert 'class="model-reference model-reference-deep shell"' not in page
+assert 'id="cs5-benchmark-observations"' in page
+assert "AA-Briefcase v1.1" in page
+assert "Displayed USD values are rounded for readability" in page
 assert 'href="'+URL+'"' in page
 assert "cs5-page" in page
 assert "<title>"+escape(TITLE)+"</title>" in page
 assert escape(DESCRIPTION,quote=True) in page
-assert "research.css?v=20261110-a" in page
-assert "research.js?v=20261110-a" in page
+assert "research.css?v=20261110-b" in page
+assert "research.js?v=20261110-b" in page
 assert "HISTORICAL BASELINE" in page
 assert '<strong>2026-11-10</strong><span>last verified</span>' in page
 assert "data-model-history" in page and "data-model-evaluations" in page
