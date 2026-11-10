@@ -37,17 +37,18 @@ def main():
      page.on("pageerror",lambda error: errors.append(str(error)))
      page.goto("http://127.0.0.1:"+str(server.server_port)+"/models/claude-sonnet-5/",wait_until="networkidle")
      assert page.locator("body.cs5-page").count()==1
+     assert page.locator("h1").inner_text().strip().startswith("Claude Sonnet 5")
      assert page.locator("#sxf-sonnet5-research").count()==1
      assert page.locator(".cs5-scroll").count()>=3
      metrics=page.evaluate("""() => {const rect=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,sw:e.scrollWidth,cw:e.clientWidth}};return {width:document.documentElement.scrollWidth,blocks:[...document.querySelectorAll('.cs5-dossier,.cs5-hero,.cs5-intro,.cs5-specs,.cs5-panel,.cs5-scroll,.cs5-code,.cs5-tool,.cs5-cards article,.cs5-findings article')].map(rect),offenders:[...document.querySelectorAll('body *')].map(e=>({tag:e.tagName,cls:typeof e.className==='string'?e.className.slice(0,85):'',...rect(e)})).filter(e=>e.right>innerWidth+2||e.left< -2).slice(0,14)};}""")
      assert metrics["width"]<=width+2,f"Document horizontal overflow {width}px {metrics}"
      assert all(b["left"]>=-2 and b["right"]<=width+2 for b in metrics["blocks"]),f"Research component overflow {width}px {metrics}"
      assert not errors,(width,errors)
-     assert "$2.440000" in page.locator('[data-cost="five-uncached"]').inner_text()
-     assert "$0.870000" in page.locator('[data-cost="five-cached"]').inner_text()
-     assert "$0.780000" in page.locator('[data-cost="next-cached"]').inner_text()
+     assert "$2.44" in page.locator('[data-cost="five-uncached"]').inner_text()
+     assert "$0.87" in page.locator('[data-cost="five-cached"]').inner_text()
+     assert "$0.78" in page.locator('[data-cost="next-cached"]').inner_text()
      page.locator('#cs5-price-tool [name="ttl"]').select_option("hour")
-     assert "$1.020000" in page.locator('[data-cost="five-cached"]').inner_text()
+     assert "$1.02" in page.locator('[data-cost="five-cached"]').inner_text()
      page.locator('#cs5-price-tool [name="calls"]').fill("1")
      assert page.locator('[data-cost="saving"]').inner_text().startswith("$-")
      page.locator(".cs5-faq summary").first.click()

@@ -2,7 +2,7 @@
   <header class="cs5-hero">
     <div class="cs5-intro">
       <p class="eyebrow">SXF / AI ORIGINAL MODEL RESEARCH · 10 NOVEMBER 2026</p>
-      <h2 id="cs5-research-heading">Claude Sonnet 5: verified specs, API costs, benchmarks and an original cache economics study.</h2>
+      <h2 id="cs5-research-heading">Research-backed Claude Sonnet 5 guide and SXF Cache Economics Lab.</h2>
       <p class="cs5-lead">Claude Sonnet 5 is Anthropic's June 30, 2026 balanced model for coding, professional workflows and agents. This reference separates <strong>primary-source model facts</strong>, <strong>attributed independent evaluation evidence</strong> and <strong>SXF's own reproducible 20-case token-cost research</strong>.</p>
       <p><strong>Model ID:</strong> <code>claude-sonnet-5</code>. It is <strong>not Claude Sonnet 5.5</strong>, the later release with a distinct API ID. The names “Sonnet 5”, “Claude 5 Sonnet” and “Claude Sonnet 5 API” refer to the earlier release, not to a generic current Claude subscription tier.</p>
       <p class="cs5-provenance">Provider specification recheck: <strong>{{SOURCE_VERIFIED}}</strong> · Original SXF cost study: 10 November 2026 · Anthropic references linked in the <a href="#cs5-method">methodology</a>.</p>
@@ -30,6 +30,7 @@
       <article><small>MODEL SIZE</small><h3>Parameters not disclosed</h3><p>Anthropic does <strong>not</strong> publish an official parameter count or downloadable model weights for Sonnet 5. A 1M-token context window is not a parameter count.</p></article>
     </div>
     <p><strong>Current-generation note:</strong> Claude Sonnet 5.5 launched on September 28, 2026. This is a Sonnet 5 reference page, not a claim that Sonnet 5 is Anthropic's latest release.</p>
+    <p class="cs5-small">Explore <a href="/providers/anthropic/">SXF's Anthropic model portfolio</a> or jump directly to <a href="#cs5-pricing">the verified API pricing breakdown</a>.</p>
   </section>
 
   <section class="cs5-panel" id="cs5-pricing">
@@ -61,6 +62,7 @@
     <div class="cs5-scroll" role="region" aria-label="All twenty Sonnet 5 cost research scenarios" tabindex="0">
       <table class="cs5-wide"><thead><tr><th scope="col">Reusable prefix</th><th scope="col">Calls</th><th scope="col">No cache</th><th scope="col">5-min</th><th scope="col">1-hour</th><th scope="col">Saving, 5-min</th></tr></thead><tbody>{{LAB_ROWS}}</tbody></table>
     </div>
+    <p class="cs5-table-note">Displayed USD values are rounded for readability; the downloadable source CSV keeps six-decimal precision.</p>
     <p class="cs5-actions"><a href="/data/research/claude-sonnet-5-cache-reuse-2026-11.csv" download>Download full original CSV</a><a href="#cs5-method">Study methodology</a><a href="#cs5-calculator">Run your own scenario</a></p>
     <p class="cs5-disclaimer"><strong>Study boundary:</strong> this is independently reproducible API billing arithmetic, <em>not</em> a paid model-performance benchmark, live cache-hit measurement, latency experiment or real invoice. For comparisons to be fair, both models are assigned the same hypothetical input and output counts.</p>
   </section>
@@ -112,13 +114,10 @@
     <p class="eyebrow">BENCHMARK TRANSPARENCY · INDEPENDENT PROVIDER ATTRIBUTION</p>
     <h2>Claude Sonnet 5 benchmarks: what independent evaluations can—and cannot—tell you.</h2>
     <p>The <a href="/evaluations/">SXF evaluation registry</a> includes versioned observations from <a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high" target="_blank" rel="noopener noreferrer">Artificial Analysis</a>. Each reported score requires the evaluator, benchmark version and reasoning configuration. <strong>None of these are original SXF inference test scores.</strong></p>
-    <div class="cs5-scroll" role="region" aria-label="Attributed Artificial Analysis benchmark observations">
-      <table><thead><tr><th scope="col">Evaluation</th><th scope="col">Sonnet 5 · high effort</th><th scope="col">Meaning</th></tr></thead><tbody>
-        <tr><th scope="row">AA-Briefcase v1.1</th><td>1,176 Elo</td><td>Agentic knowledge-work rating; not a percentage</td></tr>
-        <tr><th scope="row">AA-LCR v1.1</th><td>77.0%</td><td>Long-context reasoning on the evaluator's test set</td></tr>
-        <tr><th scope="row">AutomationBench-AA</th><td>32.0%</td><td>Business automation test tasks</td></tr>
-        <tr><th scope="row">Artificial Analysis Intelligence Index v4.3.2</th><td>32</td><td>Composite index score, not 32% reliability</td></tr>
-      </tbody></table>
+    <div class="cs5-evidence-method">
+      <h3>How to interpret the independently reported benchmarks</h3>
+      <p>Artificial Analysis scores should be evaluated alongside their benchmark versions, harness settings and model effort. An Elo rating is not a percentage, a composite index is not a task pass rate, and a score cannot guarantee real-world reliability.</p>
+      <p>See the <strong>Evaluation Evidence</strong> cards below the historical ledger for all eight versioned measurements and their original source links. We show the numerical results there once instead of repeating the same numbers in multiple sections.</p>
     </div>
     <p><strong>What is not claimed:</strong> a guaranteed SWE-bench pass rate, a private SXF paid inference run or universal agent reliability. Scores vary with evaluator settings, time and benchmark version. Current direct evidence should be checked at the linked evaluator, not interpreted as live measurements.</p>
   </section>
