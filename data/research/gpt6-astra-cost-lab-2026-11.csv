@@ -1,0 +1,7 @@
+case_id,scenario,uncached_input,cached_input,cache_write_input,output_tokens,astra_usd,sol_usd,tier
+short-qa,Short technical Q&A,20000,0,0,4000,0.40000,0.08000,short
+cached-agent,Cached agent workflow,12000,200000,0,4000,0.52000,0.08400,short
+cache-write,First-turn cache write,12000,0,200000,4000,2.82000,0.56400,short
+boundary-at,272K exact boundary,272000,0,0,4000,2.92000,0.58400,short
+boundary-above,272K plus one token,272001,0,0,4000,5.74002,1.14800,long
+long-research,Long-context cached research,120000,200000,0,8000,3.40000,0.64000,long
