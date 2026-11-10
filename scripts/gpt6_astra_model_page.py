@@ -157,7 +157,8 @@ def enrich_gpt6_astra_page(page, models_by_id):
             raise ValueError("Astra missing/duplicate template token "+token)
         authored=authored.replace(token,value)
     page = _replace_once(page,r'(?=<section class="model-change-watch shell")', authored+"\n      ")
-    page = _replace_once(page,r"(?=</head>)",'<link rel="stylesheet" href="/models/gpt-6-astra/research.css" />\n      ')
+    page = _replace_once(page,r'<body class="intel-page model-page">','<body class="intel-page model-page astra-research-page">')
+    page = _replace_once(page,r"(?=</head>)",'<link rel="stylesheet" href="/models/gpt-6-astra/research.css?v=20261110-mobile" />\n      ')
     page = _replace_once(page,r"(?=</body>)",'<script src="/models/gpt-6-astra/research.js" defer></script>')
     if "data-model-history" not in page or "data-model-evaluations" not in page:
         # Evaluations link is injected downstream by the main site generator.

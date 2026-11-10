@@ -286,6 +286,8 @@ jobs:
         run: python tests/test_ai_agent_use_cases_browser.py
       - name: Test Research mobile, tablet and desktop experience
         run: python tests/test_research_browser.py
+      - name: Test GPT-6 Astra mobile containment and interactive research lab
+        run: python tests/test_gpt6_astra_mobile_browser.py
       - name: Keep browser screenshots for review
         if: always()
         uses: actions/upload-artifact@v4
