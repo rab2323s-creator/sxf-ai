@@ -152,9 +152,6 @@ def enrich_claude_sonnet5_page(page,by_id):
  page=replace_one(page,
   r'<p>Balanced Claude tier combining speed and intelligence for coding, agents, and production knowledge work\.</p>',
   '<p>Official model specifications, clear API pricing and an independently reproducible 20-scenario SXF cache-cost study.</p>')
- page=replace_one(page,
-  r'(<section class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5")',
-  '<section id="cs5-benchmark-observations" class="evaluation-model-bridge shell" data-model-evaluations="claude-sonnet-5"')
 
  page=replace_one(page,r'(?=</head>)','<link rel="stylesheet" href="/models/claude-sonnet-5/research.css?v=20261110-b" />\n      ')
  page=replace_one(page,r'(?=</body>)','<script defer src="/models/claude-sonnet-5/research.js?v=20261110-b"></script>')
