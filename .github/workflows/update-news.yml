@@ -172,6 +172,8 @@ jobs:
           python scripts/ensure_compare_v2.py
           python scripts/ensure_model_evaluation_sections.py
           python scripts/prepare_ai_enrichment.py
+      - name: Check generated AGI vs ASI comparison remains accessible
+        run: python tests/test_superintelligence_hub.py
       - name: Render reviewed AI preview
         run: python scripts/render_ai_enrichment_preview.py
       - name: Review preview safeguards

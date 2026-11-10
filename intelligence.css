@@ -1523,3 +1523,18 @@
 .si-compare-source a:focus-visible{outline:2px solid #c8ff4d;outline-offset:3px}
 .si-compare .si-compare-scroll-hint{display:none}
 @media(max-width:700px){.si-compare{padding:16px;margin-top:18px}.si-compare-table{min-width:620px}.si-compare-table th,.si-compare-table td{padding:13px 14px}.si-compare .si-compare-scroll-hint{display:block;margin:8px 0 0;color:#9bacb9;font-size:12px}.si-compare .si-compare-source{margin-top:10px}}
+
+/* ASI AGI-vs-ASI comparison: stacked cards on phones, standard columns on laptops */
+@media(max-width:700px){
+.si-compare-scroll{overflow:visible;border:0;background:transparent}
+.si-compare-table{display:block;width:100%;min-width:0}
+.si-compare-table thead{position:absolute;clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
+.si-compare-table tbody{display:grid;gap:11px}
+.si-compare-table tbody tr{display:block;overflow:hidden;border:1px solid rgba(176,196,210,.2);border-radius:11px;background:#0b1117}
+.si-compare-table tbody th,.si-compare-table tbody td{display:block;padding:11px 13px;font-size:14px;line-height:1.55}
+.si-compare-table tbody th{background:#19252b;font-size:14px}
+.si-compare-table tbody td:before{content:attr(data-label);display:block;margin-bottom:3px;color:#c8ff4d;font-size:11px;font-weight:750;letter-spacing:.055em;text-transform:uppercase}
+.si-compare-table tbody tr+tr th,.si-compare-table tbody tr+tr td{border-top:0}
+.si-compare-table tbody td:first-of-type,.si-compare-table tbody td+td{border-top:1px solid rgba(176,196,210,.12)}
+.si-compare .si-compare-scroll-hint{display:none}
+}
