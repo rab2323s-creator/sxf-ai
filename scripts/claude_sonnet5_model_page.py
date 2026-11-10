@@ -87,7 +87,8 @@ def enrich_claude_sonnet5_page(page,by_id):
   fields=("sonnet5_uncached_usd","sonnet5_cache5m_usd","sonnet5_cache1h_usd",
           "sonnet55_uncached_usd","sonnet55_cache5m_usd","sonnet55_cache1h_usd",
           "sonnet5_cache5m_savings_usd","sonnet55_read_savings_vs_sonnet5_usd")
-  if any(abs(float(row[k])-v)>1e-8 for k,v in zip(fields,computed)):
+  # Published CSV values use six decimal places: tolerate only half a micro-dollar.
+  if any(abs(float(row[k])-v)>5.01e-7 for k,v in zip(fields,computed)):
    raise ValueError("Original Sonnet 5 dataset diverged from official rates")
   rows.append("<tr><th scope='row'>"+f"{prefix:,}"+"</th><td>"+str(n)+"</td>"+
     "".join("<td>$"+f"{v:.6f}"+"</td>" for v in (amounts[0],amounts[1],amounts[2],amounts[0]-amounts[1]))+"</tr>")
