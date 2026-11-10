@@ -1,0 +1,44 @@
+/* GPT-6 Astra original research: scoped styles, deliberately no third-party assets */
+.astra-study{margin-top:32px;margin-bottom:48px;display:grid;gap:20px}
+.astra-study-head,.astra-panel{background:linear-gradient(145deg,#111a27,#0b1019);border:1px solid #293648;border-radius:18px;padding:clamp(20px,3.5vw,38px);color:#e2eaf4}
+.astra-study h2{font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.2;margin:.4rem 0 1rem;color:#fff;max-width:850px}
+.astra-study h3{font-size:1.1rem;margin:1.5rem 0 .6rem;color:#fff}
+.astra-study p,.astra-study li{line-height:1.73;color:#b8c9dd;margin:.6rem 0}
+.astra-study strong{color:#f0f6ff}
+.astra-study a{color:#91c5ff;text-underline-offset:3px}
+.astra-study code{color:#b9eeff;overflow-wrap:anywhere}
+.astra-study .eyebrow{color:#6ee0d4;letter-spacing:.1em;font-size:.75rem;font-weight:750}
+.astra-source-line{font-size:.88rem}
+.astra-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.astra-jump a{display:inline-flex;padding:9px 13px;border:1px solid #38536c;border-radius:100px;text-decoration:none;color:#d8eaff;font-size:.86rem}
+.astra-jump a:hover,.astra-jump a:focus-visible{background:#23354a}
+.astra-scroll{overflow:auto;max-width:100%;border:1px solid #324255;border-radius:12px;margin:16px 0}
+.astra-scroll table{width:100%;min-width:620px;border-collapse:collapse;font-size:.88rem}
+.astra-scroll th,.astra-scroll td{padding:13px 14px;border-bottom:1px solid #293648;text-align:left;white-space:nowrap}
+.astra-scroll th{color:#e1ecf8;font-weight:650}
+.astra-scroll td{color:#bfe8e3}
+.astra-scroll thead{background:#1a2c3c}
+.astra-scroll tbody tr:last-child td,.astra-scroll tbody tr:last-child th{border-bottom:0}
+.astra-finding{border:1px solid #347e79;background:rgba(29,126,117,.13);padding:18px 20px;border-radius:14px}
+.astra-finding span{display:block;color:#8de9d3;font-size:.74rem;letter-spacing:.07em}
+.astra-finding>strong{display:block;font-size:clamp(1.5rem,3vw,2rem);font-variant-numeric:tabular-nums;margin:.45rem 0}
+.astra-calculator{border:1px solid #416078;background:#101f2e;border-radius:14px;padding:20px;margin-top:20px}
+.astra-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-top:12px}
+.astra-inputs label{display:grid;gap:6px;font-size:.82rem;color:#c4d9e8}
+.astra-inputs input{width:100%;min-width:0;border:1px solid #486077;border-radius:8px;background:#09131e;color:#fff;padding:10px;font:inherit}
+.astra-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
+.astra-results article{border:1px solid #374b60;border-radius:10px;padding:12px;background:#172a3d}
+.astra-results small{display:block;color:#a2bdcf;letter-spacing:.06em;font-size:.68rem}
+.astra-results strong{font-size:1.45rem;display:block;margin-top:8px;font-variant-numeric:tabular-nums}
+.astra-warning{color:#ffd8a0!important}
+.astra-code{white-space:pre;overflow:auto;background:#060d15;border:1px solid #33465a;padding:18px;border-radius:12px;font-size:.86rem;line-height:1.6}
+.astra-code code{color:#d6f0ff;white-space:pre}
+.astra-decision-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:12px 0}
+.astra-decision-grid article{padding:18px;border:1px solid #31475f;border-radius:12px;background:#142434}
+.astra-decision-grid small{color:#73dfcf;font-size:.7rem;letter-spacing:.08em;font-weight:700}
+.astra-decision-grid h3{margin:.7rem 0}
+.astra-faq details{padding:14px 4px;border-bottom:1px solid #354454}
+.astra-faq summary{cursor:pointer;color:#f1f7ff;font-weight:650}
+.astra-faq details p{margin-bottom:0}
+.astra-sources{padding-left:20px}
+@media(max-width:600px){.astra-study-head,.astra-panel{padding:18px;border-radius:13px}.astra-scroll th,.astra-scroll td{padding:11px}.astra-jump a{padding:7px 10px}}
