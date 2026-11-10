@@ -64,3 +64,93 @@
   <div class="g56-cliff-values"><span>272,000 input tokens</span><strong>{{BOUNDARY_AT}}</strong><span>272,001 input tokens</span><strong>{{BOUNDARY_ABOVE}}</strong></div>
  </div>
 </section>
+
+<section class="g56-panel" id="g56-calculator">
+ <p class="eyebrow">SXF INTERACTIVE RESEARCH TOOL / NO NETWORK REQUESTS</p><h2>GPT-5.6 Sol cache calculator: 30-minute vs 12-hour cost.</h2>
+ <p>Enter a repeated input prefix, fresh tokens per request, output tokens and the number of calls. The calculator models one initial cache write, then successful reads for subsequent requests, all within the chosen retention period. It automatically adjusts prices above 272K total input tokens. Your inputs stay in this browser.</p>
+ <form class="g56-form" id="g56-cache-calculator" data-input="{{RATE_INPUT}}" data-cached="{{RATE_CACHED}}" data-write30="{{RATE_WRITE30}}" data-write12="{{RATE_WRITE12}}" data-output="{{RATE_OUTPUT}}" novalidate>
+  <div class="g56-inputs">
+   <label>Repeated prefix<input name="prefix" type="number" min="0" max="1050000" step="1000" value="100000" inputmode="numeric"></label>
+   <label>Fresh input / call<input name="new" type="number" min="0" max="1050000" step="100" value="2000" inputmode="numeric"></label>
+   <label>Output / call<input name="output" type="number" min="0" max="128000" step="100" value="4000" inputmode="numeric"></label>
+   <label>Number of calls<input name="calls" type="number" min="1" max="100000" step="1" value="10" inputmode="numeric"></label>
+  </div>
+  <div class="g56-output" aria-live="polite">
+   <article><small>PRICE TIER</small><strong data-result="tier">Short ≤272K</strong></article>
+   <article><small>NO CACHE</small><strong data-result="uncached">{{TEN_NO}}</strong></article>
+   <article><small>30-MIN CACHE</small><strong data-result="thirty">{{TEN_30}}</strong></article>
+   <article><small>12-HOUR CACHE</small><strong data-result="twelve">{{TEN_12}}</strong></article>
+   <article class="g56-outcome"><small>30-MIN SAVING</small><strong data-result="saving">{{TEN_SAVING}}</strong></article>
+  </div>
+  <p class="g56-status" data-result="message" role="status">Illustrative Standard list-price estimates; assume a cache hit and valid prefix retention.</p>
+ </form>
+</section>
+<section class="g56-panel" id="g56-comparison">
+ <p class="eyebrow">SEARCHER COMPARISON / 5.6 SOL VS 6 SOL VS 6.1 SOL</p><h2>GPT-5.6 Sol vs GPT-6 Sol vs GPT-6.1 Sol: what's actually different?</h2>
+ <p>The models use distinct, versioned API IDs: <code>gpt-5.6-sol</code>, <code>gpt-6-sol</code> and <code>gpt-6.1-sol</code>. The query <strong>“5.6 Sol vs 6.1 Sol”</strong> is a cross-generation comparison, not a model alias. All three list a 1,050,000-token context limit, yet serving limits do not prove equal reasoning or coding accuracy. In particular, GPT-6.1 Sol does not offer <code>reasoning.effort=none</code>, unlike GPT-5.6 Sol and GPT-6 Sol.</p>
+ <div class="g56-scroll" tabindex="0" role="region" aria-label="GPT-5.6 Sol vs GPT-6 Sol and GPT-6.1 Sol">
+  <table><thead><tr><th scope="col">Metric</th><th scope="col">GPT-5.6 Sol</th><th scope="col">GPT-6 Sol</th><th scope="col">GPT-6.1 Sol</th></tr></thead><tbody>
+   <tr><th scope="row">Exact model ID</th><td><code>gpt-5.6-sol</code></td><td><code>gpt-6-sol</code></td><td><code>gpt-6.1-sol</code></td></tr>
+   <tr><th scope="row">Uncached input / 1M</th><td>{{SOL_INPUT}}*</td><td>{{G6_INPUT}}</td><td>{{G61_INPUT}}</td></tr>
+   <tr><th scope="row">Cached read / 1M</th><td>{{SOL_CACHED}}*</td><td>{{G6_CACHED}}</td><td>{{G61_CACHED}}</td></tr>
+   <tr><th scope="row">Output / 1M</th><td>{{SOL_OUTPUT}}*</td><td>{{G6_OUTPUT}}</td><td>{{G61_OUTPUT}}</td></tr>
+   <tr><th scope="row">Input context / output cap</th><td>1.05M / 128K</td><td>1.05M / 128K</td><td>1.05M / 128K</td></tr>
+   <tr><th scope="row">Knowledge cutoff</th><td>Feb 16, 2026</td><td>Apr 20, 2026</td><td>Apr 30, 2026</td></tr>
+   <tr><th scope="row">Reasoning “none”</th><td>Yes</td><td>Yes</td><td>No</td></tr>
+   <tr><th scope="row">Model reference</th><td>Here</td><td><a href="/models/gpt-6-sol/">GPT-6 Sol</a></td><td><a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a></td></tr>
+  </tbody></table>
+ </div>
+ <p class="g56-small">* GPT-5.6 Sol Standard rates are promotional through November 30, 2026. For model migration, compare results on held-out representative tasks plus cost per accepted outcome. A newer release and lower input cost do not prove a specific performance gain.</p>
+ <div class="g56-cards"><article><small>QUERY: GPT 5.6</small><h3>Identity matters</h3><p>The unsuffixed <code>gpt-5.6</code> API alias currently routes to GPT-5.6 Sol, not any GPT-6 release.</p></article><article><small>QUERY: SOL VS 6.1 SOL</small><h3>Migration review</h3><p>Check reasoning and tool-call compatibility. Save baseline outputs, prompts and acceptance scores before switching IDs.</p></article><article><small>QUERY: API COST</small><h3>Price ≠ value</h3><p>Test successful tasks, tool calls, retry rates and latency—not only the per-token list price.</p></article></div>
+ <p>Also see <a href="/compare/gpt-5-6-sol-vs-gpt-6-sol/">the direct GPT-5.6 vs GPT-6 comparison</a>, <a href="/models/gpt-5-6/">GPT-5.6 family guide</a>, <a href="/models/gpt-6/">GPT-6 family guide</a> and <a href="/models/pricing/">SXF model pricing</a>.</p>
+</section>
+<section class="g56-panel" id="g56-benchmarks">
+ <p class="eyebrow">LAUNCH BENCHMARK EVIDENCE / PROVIDER-REPORTED</p><h2>GPT-5.6 Sol benchmarks: coding, computer use and research.</h2>
+ <p>OpenAI's <a href="https://openai.com/index/gpt-5-6/" target="_blank" rel="noopener noreferrer">July 2026 launch evaluation tables</a> report scores for specific harnesses and model settings. These are <strong>vendor-reported results</strong>, not independently replicated SXF inference tests. The scores are deliberately not combined into a single universal intelligence rating.</p>
+ <div class="g56-scroll" tabindex="0" role="region" aria-label="OpenAI launch benchmark results for GPT-5.6 Sol">
+  <table><thead><tr><th scope="col">Benchmark</th><th scope="col">OpenAI-reported GPT-5.6 Sol</th><th scope="col">What it evaluates</th></tr></thead><tbody>
+   <tr><th scope="row">SWE-Bench Pro</th><td>64.6%</td><td>Versioned software-engineering tasks</td></tr>
+   <tr><th scope="row">Terminal-Bench 2.1</th><td>88.8%</td><td>Terminal-based agent workflows; Sol Ultra is a different configuration</td></tr>
+   <tr><th scope="row">OSWorld 2.0</th><td>62.6%</td><td>Computer-use tasks, not real-world pass-rate guarantees</td></tr>
+   <tr><th scope="row">BrowseComp</th><td>90.4%</td><td>Browsing tasks; do not substitute the Sol Ultra score</td></tr>
+   <tr><th scope="row">GPQA Diamond</th><td>94.6%</td><td>Specialized scientific questions</td></tr>
+  </tbody></table>
+ </div>
+ <p><strong>Interpretation:</strong> these scores can help select tasks worth piloting, but cannot predict accuracy, latency or security for your deployment. Compare like-for-like test versions and allowed tools. See <a href="/evaluations/">SXF evaluations</a> for separately labelled benchmark records.</p>
+</section>
+<section class="g56-panel" id="g56-api">
+ <p class="eyebrow">DIRECT API SETUP / DEVELOPER EXAMPLE</p><h2>How to call GPT-5.6 Sol with the OpenAI Responses API.</h2>
+ <p>Use the exact model ID <code>gpt-5.6-sol</code> and select a documented reasoning setting. The example below is an illustrative API request, not a live paid inference executed by SXF. Keep credentials in environment variables; never publish them in browser JavaScript or your Git repository.</p>
+ <pre class="g56-code"><code>from openai import OpenAI
+
+client = OpenAI()  # reads OPENAI_API_KEY securely
+response = client.responses.create(
+    model="gpt-5.6-sol",
+    reasoning={"effort": "medium"},
+    input="Audit this Python patch. Explain risks and propose tests."
+)
+print(response.output_text)</code></pre>
+ <h3>Evidence-first evaluation checklist</h3>
+ <ol><li>Create a held-out, representative task set with clear acceptance criteria and negative controls.</li><li>Record exact prompt version, model ID, reasoning effort, available tools and tool outputs.</li><li>Measure accepted results, errors, human corrections, latency, billed input and output, cache writes/reads and retry count.</li><li>Repeat with GPT-6 Sol or GPT-6.1 Sol, keeping evaluation configuration comparable; calculate cost per accepted task.</li></ol>
+ <p>Read <a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer">the official API model card</a> and <a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer">prompt caching guidance</a> for supported requests and caching rules.</p>
+</section>
+<section class="g56-panel" id="g56-faq">
+ <p class="eyebrow">SEARCH QUERY ANSWERS / FAQ</p><h2>GPT-5.6 Sol frequently asked questions.</h2>
+ <div class="g56-faq">{{FAQ_HTML}}</div>
+</section>
+<section class="g56-panel" id="g56-method">
+ <p class="eyebrow">ORIGINAL DATA / METHODOLOGY / CORRECTIONS</p><h2>How SXF reproduced the 20-case pricing study.</h2>
+ <p>The experiment crosses prefix sizes 10K, 100K, 260K and 300K with call counts of 1, 2, 3, 10 and 100. Each call adds 2,000 fresh input tokens and 4,000 output tokens. For uncached requests the whole prefix is billed as new input each time. For cache scenarios the first call writes the prefix for 30 minutes or 12 hours; subsequent calls read the prefix from cache. <strong>All cache writes and reads are hypothetical billable events, assuming cache eligibility and successful reuse within retention time.</strong></p>
+ <p>Each call uses Standard published unit rates. Above 272,000 total input tokens, input/cache rates double and output rates increase by 1.5× across the entire call. The pricing engine reads <a href="/data/model-pricing.json">SXF's primary-source-backed canonical model ledger</a>; 12-hour writes are twice the 30-minute write price, as specified on the <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">official OpenAI pricing table</a>. OpenAI's advertised $4/$20 rates are promotional through November 30, 2026, so this is a dated study, <em>not a forward price guarantee</em>.</p>
+ <p>The complete <a href="/data/research/gpt56-sol-cache-economics-2026-11.csv">public CSV dataset</a> contains the exact counts and modelled total costs. CI checks all 20 scenarios against the versioned catalog. This study does not measure cache-hit probability, API latency, task accuracy or model benchmark performance, and it excludes fees for tools, non-Standard processing and regional processing.</p>
+ <ul class="g56-sources">
+  <li><a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noopener noreferrer">OpenAI GPT-5.6 Sol model card</a>: ID, alias, 1.05M context, output ceiling, reasoning and promotional period</li>
+  <li><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI API pricing</a>: Standard rates, 30-minute/12-hour cache writes and long-context tiers</li>
+  <li><a href="https://developers.openai.com/api/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer">OpenAI prompt caching guide</a>: eligibility, reuse and retention</li>
+  <li><a href="https://openai.com/index/gpt-5-6/" target="_blank" rel="noopener noreferrer">OpenAI GPT-5.6 release report</a>: July 2026 announcement and attributed benchmarks</li>
+  <li><a href="https://developers.openai.com/api/docs/models/gpt-6-sol" target="_blank" rel="noopener noreferrer">GPT-6 Sol model card</a> and <a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol model card</a>: model comparison facts</li>
+  <li><a href="/data/research/gpt56-sol-cache-economics-2026-11.csv">SXF original 20-case dataset</a>: auditable token counts and calculated costs</li>
+ </ul>
+ <p class="g56-small">SXF / AI independent calculation study, published November 10, 2026. Provider benchmark figures are explicitly attributed. Source corrections: <a href="/about/">SXF editorial policy and contact</a>. Structured data reflects visible page content and does not promise search ranking or FAQ rich results.</p>
+</section>
+</section>
