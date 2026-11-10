@@ -1502,3 +1502,24 @@
 .si-hero h1,.si-core,.si-path-grid,.si-personal-grid,.si-research-grid,.si-glossary-grid{min-width:0}
 @media(max-width:800px){.si-jump-links{gap:8px}.si-research-context{font-size:14px}.si-glossary-grid article{gap:8px}}
 @media(max-width:620px){.si-hero h1{font-size:clamp(33px,9vw,42px);overflow-wrap:break-word}.si-core{max-width:min(100%,310px)}.si-jump-links a{font-size:12px;min-height:44px}.si-path{min-height:0}.si-research-card,.si-guide-card{min-height:0}.si-research-card h3{margin-top:25px}.si-glossary-grid article{padding:16px 0}.si-research-context{line-height:1.65}}
+
+
+/* ASI comparison table: a concise, accessible companion to the continuum cards */
+.si-compare{margin:22px 0 0;padding:23px;border:1px solid rgba(200,255,77,.19);border-radius:18px;background:linear-gradient(140deg,rgba(200,255,77,.035),rgba(13,19,25,.55))}
+.si-compare h3{margin:0 0 10px;color:#eef4f5;font-size:clamp(22px,2.7vw,29px);line-height:1.2;letter-spacing:-.035em}
+.si-compare>p{max-width:900px;margin:0 0 17px;color:#b8c5d0;font-size:14px;line-height:1.7}
+.si-compare-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;border:1px solid rgba(176,196,210,.19);border-radius:12px;background:#0b1117;scrollbar-color:#778d9b #141d25}
+.si-compare-scroll:focus-visible{outline:2px solid #c8ff4d;outline-offset:4px}
+.si-compare-table{border-collapse:separate;border-spacing:0;width:100%;min-width:620px;text-align:left}
+.si-compare-table th,.si-compare-table td{padding:15px 17px;vertical-align:top;font-size:14px;line-height:1.6}
+.si-compare-table thead th{background:#19252b;color:#eaf3eb;font-weight:760;border-bottom:1px solid rgba(176,196,210,.2)}
+.si-compare-table thead th:first-child{width:21%}
+.si-compare-table thead th span{display:block;margin-top:3px;color:#aebbcb;font-size:11px;font-weight:500;line-height:1.5}
+.si-compare-table tbody th{color:#d4e2cc;font-weight:700;background:#121b20}
+.si-compare-table tbody td{color:#c3ced8}
+.si-compare-table tbody tr+tr th,.si-compare-table tbody tr+tr td{border-top:1px solid rgba(176,196,210,.12)}
+.si-compare .si-compare-source{margin:13px 0 0;color:#a8b8c5;font-size:12px}
+.si-compare-source a{color:#d5ff89;text-decoration:underline;text-underline-offset:3px}
+.si-compare-source a:focus-visible{outline:2px solid #c8ff4d;outline-offset:3px}
+.si-compare .si-compare-scroll-hint{display:none}
+@media(max-width:700px){.si-compare{padding:16px;margin-top:18px}.si-compare-table{min-width:620px}.si-compare-table th,.si-compare-table td{padding:13px 14px}.si-compare .si-compare-scroll-hint{display:block;margin:8px 0 0;color:#9bacb9;font-size:12px}.si-compare .si-compare-source{margin-top:10px}}
