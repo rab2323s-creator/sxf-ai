@@ -1301,7 +1301,7 @@ def model_change_watch_html(model_ids, heading="What changed"):
         names = ", ".join(model_names)
         return f'''<section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="{escape(",".join(model_ids), quote=True)}">
           <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>{escape(heading)}</h2><p>No post-baseline factual changes recorded for {escape(names)} since {escape(baseline)}.</p></div>
-          <div class="change-watch-status"><span>VERIFIED BASELINE</span><strong>{escape(baseline)}</strong><small>Current facts remain aligned with the SXF ledger.</small></div></div>
+          <div class="change-watch-status"><span>HISTORICAL BASELINE</span><strong>{escape(baseline)}</strong><small>Original ledger snapshot, not the latest source check. See Last verified above.</small></div></div>
         </section>'''
 
     cards = []
