@@ -11,11 +11,11 @@
   },
   "summary": {
     "total": 100,
-    "fresh": 48,
+    "fresh": 49,
     "due": 0,
-    "overdue": 52,
+    "overdue": 51,
     "critical": 3,
-    "high": 49
+    "high": 48
   },
   "items": [
     {
@@ -165,31 +165,6 @@
       "source_urls": [
         "https://platform.claude.com/docs/en/about-claude/pricing",
         "https://platform.claude.com/docs/en/models/opus-5-5/overview"
-      ]
-    },
-    {
-      "model_id": "claude-sonnet-5",
-      "provider": "Anthropic",
-      "model": "Claude Sonnet 5",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-09-27",
-      "age_days": 44,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-10-27",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 14,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://platform.claude.com/docs/en/about-claude/pricing",
-        "https://platform.claude.com/docs/en/models/sonnet-5/overview"
       ]
     },
     {
@@ -2453,6 +2428,31 @@
       "source_urls": [
         "https://kling.ai/document-api/apiReference/model/textToVideo",
         "https://kling.ai/quickstart/klingai-video-3-model-user-guide"
+      ]
+    },
+    {
+      "model_id": "claude-sonnet-5",
+      "provider": "Anthropic",
+      "model": "Claude Sonnet 5",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-11-10",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-12-10",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/sonnet-5/overview"
       ]
     },
     {
