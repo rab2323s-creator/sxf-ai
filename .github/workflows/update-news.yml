@@ -219,6 +219,8 @@ jobs:
         run: python tests/test_scribe_v2_dossier.py
       - name: Validate generated site
         run: python scripts/validate_site.py
+      - name: Confirm current source checks and historical ledger baselines
+        run: python tests/test_featured_model_verification_dates.py
       - name: Block cross-page pricing drift
         run: |
           python tests/test_pricing_regression.py

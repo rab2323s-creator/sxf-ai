@@ -11,11 +11,11 @@
   },
   "summary": {
     "total": 100,
-    "fresh": 45,
+    "fresh": 48,
     "due": 0,
-    "overdue": 55,
+    "overdue": 52,
     "critical": 3,
-    "high": 52
+    "high": 49
   },
   "items": [
     {
@@ -243,31 +243,6 @@
       ]
     },
     {
-      "model_id": "gpt-5.6-sol",
-      "provider": "OpenAI",
-      "model": "GPT-5.6 Sol",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-09-27",
-      "age_days": 44,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-10-27",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 14,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-        "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
       "model_id": "gpt-5.6-terra",
       "provider": "OpenAI",
       "model": "GPT-5.6 Terra",
@@ -293,31 +268,6 @@
       ]
     },
     {
-      "model_id": "gpt-6-astra",
-      "provider": "OpenAI",
-      "model": "GPT-6 Astra",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-09-27",
-      "age_days": 44,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-10-27",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 14,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://developers.openai.com/api/docs/models/gpt-6-astra",
-        "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
       "model_id": "gpt-6-luna",
       "provider": "OpenAI",
       "model": "GPT-6 Luna",
@@ -339,31 +289,6 @@
       ],
       "source_urls": [
         "https://developers.openai.com/api/docs/models/gpt-6-luna",
-        "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
-      "model_id": "gpt-6-sol",
-      "provider": "OpenAI",
-      "model": "GPT-6 Sol",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-09-27",
-      "age_days": 44,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-10-27",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 14,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://developers.openai.com/api/docs/models/gpt-6-sol",
         "https://developers.openai.com/api/docs/pricing"
       ]
     },
@@ -2553,6 +2478,81 @@
       "source_urls": [
         "https://platform.claude.com/docs/en/about-claude/pricing",
         "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      ]
+    },
+    {
+      "model_id": "gpt-5.6-sol",
+      "provider": "OpenAI",
+      "model": "GPT-5.6 Sol",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-11-10",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-12-10",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-6-astra",
+      "provider": "OpenAI",
+      "model": "GPT-6 Astra",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-11-10",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-12-10",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "gpt-6-sol",
+      "provider": "OpenAI",
+      "model": "GPT-6 Sol",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-11-10",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-12-10",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "https://developers.openai.com/api/docs/pricing"
       ]
     }
   ]
