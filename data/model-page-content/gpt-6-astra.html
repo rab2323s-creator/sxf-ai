@@ -1,0 +1,88 @@
+<section class="astra-study shell" id="sxf-astra-study" aria-labelledby="astra-study-title">
+  <div class="astra-study-head">
+    <p class="eyebrow">SXF ORIGINAL RESEARCH · 10 NOVEMBER 2026 · REPRODUCIBLE PRICING STUDY</p>
+    <h2 id="astra-study-title">GPT-6 Astra: pricing, benchmarks, API usage and the cost of long context.</h2>
+    <p>OpenAI positions <strong>GPT-6 Astra</strong> as its highest-capability model for difficult coding, computer use, professional research and multi-step work. This independent SXF reference separates <strong>provider-published specifications</strong>, <strong>vendor-reported benchmark results</strong> and an <strong>original, reproducible billing experiment</strong>. The study does not claim to measure actual Astra accuracy, latency or reliability.</p>
+    <p class="astra-source-line">Technical editorial review: 10 November 2026 · Pricing: OpenAI Standard API list rates, USD · Provider specs last verified in SXF's model ledger: 27 September 2026.</p>
+    <nav class="astra-jump" aria-label="Jump to GPT-6 Astra research sections"><a href="#astra-pricing">API pricing</a><a href="#astra-lab">SXF experiment</a><a href="#astra-benchmarks">Benchmarks</a><a href="#astra-api">API example</a><a href="#astra-choice">When to use</a><a href="#astra-faq">Questions</a></nav>
+  </div>
+
+  <section class="astra-panel" id="astra-pricing" aria-labelledby="astra-pricing-title">
+    <p class="eyebrow">EXACT-MATCH SEARCH ANSWERS</p>
+    <h2 id="astra-pricing-title">How much does GPT-6 Astra cost per million tokens?</h2>
+    <p>OpenAI lists <strong>$10 uncached input, $1 cached-input read, $12.50 cache write and $50 output</strong> per million text tokens in Standard mode for prompts with up to 272,000 input tokens. For prompts with <strong>more than 272,000 input tokens</strong>, the entire request uses $20 input, $2 cached read, $25 cache write and $75 output per million tokens. The boundary is strictly <em>greater than</em> 272,000, not greater than or equal to it.</p>
+    <div class="astra-scroll" tabindex="0" role="region" aria-label="GPT-6 Astra API pricing"><table><thead><tr><th scope="col">Standard API / 1M text tokens</th><th scope="col">≤272K input</th><th scope="col">>272K input</th></tr></thead><tbody>
+    <tr><th scope="row">Uncached input</th><td>$10</td><td>$20</td></tr>
+    <tr><th scope="row">Cached input read</th><td>$1</td><td>$2</td></tr>
+    <tr><th scope="row">Cache write</th><td>$12.50</td><td>$25</td></tr>
+    <tr><th scope="row">Generated output</th><td>$50</td><td>$75</td></tr></tbody></table></div>
+    <p>Model ID: <code>gpt-6-astra</code>. Context window: <strong>1,050,000 tokens</strong>. Max output: <strong>128,000 tokens</strong>. Knowledge cutoff: <strong>30 April 2026</strong>. Reasoning levels: <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>, <code>max</code>. Inputs: text and images; output: text. Check the <a href="https://developers.openai.com/api/docs/models/gpt-6-astra" rel="noopener noreferrer" target="_blank">official model card</a> and <a href="https://developers.openai.com/api/docs/pricing" rel="noopener noreferrer" target="_blank">API rate table</a> before budgeting. Tool charges, batch/flex/fast modes and region-specific surcharges are excluded here.</p>
+  </section>
+
+  <section class="astra-panel" id="astra-lab" aria-labelledby="astra-lab-title">
+    <p class="eyebrow">SXF ORIGINAL TEST · PUBLIC INPUTS AND OUTPUTS</p>
+    <h2 id="astra-lab-title">SXF billing boundary lab: does one extra input token change the total price?</h2>
+    <p>We designed <strong>six controlled, hypothetical token workloads</strong> and recomputed their list-price cost for Astra and <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> using the documented rates, including cache reads and cache writes. The dataset is <a href="/data/research/gpt6-astra-cost-lab-2026-11.csv">downloadable as CSV</a> with exact token counts and results. This is a reproducible <strong>pricing-model calculation</strong>, not an inference call or a claim about either model's output quality.</p>
+    <div class="astra-finding"><span>RESEARCH FINDING · PRECISE THRESHOLD</span><strong>$2.92000 → $5.74002</strong><p>A request with 272,000 uncached input tokens plus 4,000 output tokens costs $2.92. Increasing input to 272,001 tokens raises estimated cost to $5.74002 because the higher rates apply to <em>all</em> request tokens, not only the additional token. This illustrates a discontinuity in published list-price billing; actual usage and fees may differ.</p></div>
+    <div class="astra-scroll" tabindex="0" role="region" aria-label="SXF reproducible cost scenarios"><table><thead><tr><th scope="col">SXF test scenario</th><th scope="col">New input</th><th scope="col">Cached read</th><th scope="col">Cache write</th><th scope="col">Output</th><th scope="col">Astra</th><th scope="col">6.1 Sol</th></tr></thead><tbody>
+    {{LAB_ROWS}}
+    </tbody></table></div>
+    <h3>Method and reproducibility</h3>
+    <p>For each request, <code>input_total = new_input + cached_read + cache_write</code>. If <code>input_total &gt; 272000</code>, multiply all input and cache rates by 2 and the output rate by 1.5. Otherwise use short-context rates. Multiply each token count by its applicable per-million price and sum. The dataset contains modelled scenarios, not customer invoices. Cache-write counts assume those tokens are billed as writes; whether a request actually hits or writes cache depends on the serving system.</p>
+    <p>These scenarios deliberately fix output token counts. They do not predict reasoning-token consumption, completion quality, tool usage, failed retries or human-review costs. Read the <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">source pricing policy</a> alongside the CSV to reproduce the arithmetic.</p>
+    <div class="astra-calculator" id="astra-calculator" data-astra-input="{{ASTRA_INPUT}}" data-astra-cached="{{ASTRA_CACHED}}" data-astra-write="{{ASTRA_WRITE}}" data-astra-output="{{ASTRA_OUTPUT}}" data-sol-input="{{SOL_INPUT}}" data-sol-cached="{{SOL_CACHED}}" data-sol-write="{{SOL_WRITE}}" data-sol-output="{{SOL_OUTPUT}}">
+      <h3>Try your own input/output budget — SXF calculator</h3>
+      <p>Change the four token counts; the calculations run locally in your browser. No data is sent to a server.</p>
+      <div class="astra-inputs"><label>New input tokens<input type="number" min="0" max="1050000" step="1000" data-tokens="input" value="12000"></label><label>Cached reads<input type="number" min="0" max="1050000" step="1000" data-tokens="cached" value="200000"></label><label>Cache writes<input type="number" min="0" max="1050000" step="1000" data-tokens="write" value="0"></label><label>Output tokens<input type="number" min="0" max="128000" step="1000" data-tokens="output" value="4000"></label></div>
+      <div class="astra-results" aria-live="polite"><article><small>CONTEXT PRICE TIER</small><strong data-result="tier">Short ≤272K</strong></article><article><small>ASTRA ESTIMATE</small><strong data-result="astra">$0.52000</strong></article><article><small>GPT-6.1 SOL ESTIMATE</small><strong data-result="sol">$0.08400</strong></article></div>
+      <p class="astra-warning" data-result="warning" role="status"></p>
+    </div>
+  </section>
+
+  <section class="astra-panel" id="astra-benchmarks" aria-labelledby="astra-benchmarks-title">
+    <p class="eyebrow">ATTRIBUTED LAUNCH EVIDENCE · NOT AN SXF MODEL-RUN</p>
+    <h2 id="astra-benchmarks-title">GPT-6 Astra benchmarks: what do published results actually show?</h2>
+    <p>In OpenAI's September 2026 release report, <strong>OSWorld 2.0</strong> is 72.6% for Astra versus 65.7% for GPT-5.6 Sol; <strong>Agents' Last Exam</strong> is 59.3% versus 53.6%; and <strong>BenchCAD</strong> is 95.9% versus 83.3%. These are <strong>OpenAI-reported comparisons</strong> at the configurations defined by its launch report—not independent SXF measurements, universal pass rates or evidence that every real workflow will improve.</p>
+    <div class="astra-scroll" tabindex="0" role="region" aria-label="OpenAI launch benchmark results"><table><thead><tr><th scope="col">Benchmark (OpenAI launch report)</th><th scope="col">Astra</th><th scope="col">GPT-5.6 Sol</th><th scope="col">Measures</th></tr></thead><tbody>
+      <tr><th scope="row">OSWorld 2.0</th><td>72.6%</td><td>65.7%</td><td>Computer-use tasks · offline partial score</td></tr>
+      <tr><th scope="row">Agents' Last Exam</th><td>59.3%</td><td>53.6%</td><td>Professional software workflows</td></tr>
+      <tr><th scope="row">BenchCAD</th><td>95.9%</td><td>83.3%</td><td>Computer-aided design tasks</td></tr>
+    </tbody></table></div>
+    <p><strong>Interpretation:</strong> These results support further evaluation for difficult computer-use and technical tasks, but cannot tell you an Astra success rate for your own application. SXF separately tracks <a href="/evaluations/">evaluator-labelled, versioned benchmark observations</a>; compare like-for-like settings, not incompatible scoreboards. <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener noreferrer">Read the release results and methodological footnotes</a>.</p>
+  </section>
+
+  <section class="astra-panel" id="astra-api" aria-labelledby="astra-api-title">
+    <p class="eyebrow">DEVELOPER REFERENCE</p>
+    <h2 id="astra-api-title">How to use GPT-6 Astra with the OpenAI Responses API</h2>
+    <p>Set the exact <code>gpt-6-astra</code> model ID, choose a documented reasoning effort and validate the response before acting on real systems. Tool calling and structured outputs are supported; a model's output still requires independent checking for consequential work.</p>
+    <pre class="astra-code"><code>from openai import OpenAI
+
+client = OpenAI()  # uses OPENAI_API_KEY from environment
+response = client.responses.create(
+    model="gpt-6-astra",
+    reasoning={"effort": "high"},
+    input="Review this migration plan. Identify assumptions, risks, and tests."
+)
+print(response.output_text)</code></pre>
+    <p>For prompt-heavy workflows, observe actual billed new input, cached reads, cache writes and output tokens before using the SXF estimator as a budget. Also evaluate task accuracy, retries and human validation. See <a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">model capabilities</a> and <a href="https://developers.openai.com/api/docs/guides/latest-model" target="_blank" rel="noopener noreferrer">GPT-6 development guidance</a>.</p>
+  </section>
+
+  <section class="astra-panel" id="astra-choice" aria-labelledby="astra-choice-title">
+    <p class="eyebrow">DECISION FRAMEWORK</p>
+    <h2 id="astra-choice-title">GPT-6 Astra vs GPT-6.1 Sol: when is Astra worth paying for?</h2>
+    <p>At short-context Standard list rates, Astra's uncached input and output tokens are <strong>five times</strong> GPT-6.1 Sol's. The price multiple is not a performance multiple. Start with a labelled evaluation set of your own tasks, then compare <strong>cost per accepted result</strong> rather than cost per token alone.</p>
+    <div class="astra-decision-grid"><article><small>CHOOSE ASTRA TO TEST</small><h3>Failure is costly</h3><p>Complex computer use, multi-step coding, expert research and high-stakes document work where measured error reduction may offset more expensive tokens.</p></article><article><small>CHOOSE SOL AS BASELINE</small><h3>Throughput and value matter</h3><p>Routine-to-complex development and agent tasks with clearly testable acceptance criteria. Use <a href="/models/gpt-6-1-sol/">GPT-6.1 Sol</a> to benchmark economics before upgrading.</p></article><article><small>BEFORE DEPLOYMENT</small><h3>Run a task-level pilot</h3><p>Use held-out cases, record success and failure reasons, version the prompts and measure latency, API usage, tool charges and human corrections.</p></article></div>
+    <p>Continue with the <a href="/models/gpt-6/">GPT-6 model-family decision guide</a>, <a href="/compare/gpt-6-astra-vs-sol-vs-luna/">Astra vs Sol vs Luna comparison</a>, <a href="/models/pricing/">live model-pricing catalog</a> and <a href="/guides/ai-agent-evaluation-checklist/">AI agent evaluation checklist</a>.</p>
+  </section>
+
+  <section class="astra-panel" id="astra-faq" aria-labelledby="astra-faq-title">
+    <p class="eyebrow">SEARCH-INTENT FAQ</p><h2 id="astra-faq-title">GPT-6 Astra frequently asked questions</h2>
+    <div class="astra-faq">{{FAQ_HTML}}</div>
+  </section>
+
+  <section class="astra-panel" id="astra-sources">
+    <p class="eyebrow">METHOD, SOURCES & LIMITATIONS</p><h2>Where the evidence comes from</h2>
+    <ul class="astra-sources"><li><a href="https://developers.openai.com/api/docs/models/gpt-6-astra" target="_blank" rel="noopener noreferrer">OpenAI GPT-6 Astra model card</a> — model ID, context, output limit, modalities, features and pricing notes</li><li><a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI API pricing</a> — Standard context tiers, cache reads/writes and processing modes</li><li><a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener noreferrer">OpenAI GPT-6 Astra launch report</a> — vendor-reported benchmarks and comparison methodology</li><li><a href="https://developers.openai.com/api/docs/models/gpt-6.1-sol" target="_blank" rel="noopener noreferrer">OpenAI GPT-6.1 Sol model card</a> — comparator specs and rate references</li><li><a href="/data/research/gpt6-astra-cost-lab-2026-11.csv">SXF original scenario dataset (CSV)</a> — complete token inputs and deterministic price calculations</li></ul>
+    <p class="reference-note">Editorial scope: reproducible paper calculation of official price schedules, not live API billing, a paid inference experiment, or a standalone model-quality benchmark. Published 10 November 2026. For corrections, see <a href="/about/">SXF editorial policy and contact</a>.</p>
+  </section>
+</section>
