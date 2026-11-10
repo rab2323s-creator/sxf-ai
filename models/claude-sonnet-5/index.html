@@ -2,8 +2,8 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="color-scheme" content="dark" />
-      <title>Claude Sonnet 5 — API Specs, Context &amp; Pricing | SXF / AI</title>
-      <meta name="description" content="Claude Sonnet 5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <title>Claude Sonnet 5: API Pricing, Benchmarks &amp; Sonnet 5.5 | SXF</title>
+      <meta name="description" content="Claude Sonnet 5 API pricing, specs, 1M context, benchmarks and Sonnet 5.5 comparison. Test SXF&#x27;s original 20-case prompt cache cost study." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#07090d" />
@@ -13,8 +13,8 @@
       <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="SXF / AI" />
-      <meta property="og:title" content="Claude Sonnet 5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta property="og:description" content="Claude Sonnet 5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
+      <meta property="og:title" content="Claude Sonnet 5: API Pricing, Benchmarks &amp; Sonnet 5.5 | SXF" />
+      <meta property="og:description" content="Claude Sonnet 5 API pricing, specs, 1M context, benchmarks and Sonnet 5.5 comparison. Test SXF&#x27;s original 20-case prompt cache cost study." />
       <meta property="og:url" content="https://sxf.si/models/claude-sonnet-5/" />
       <meta property="og:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta property="og:image:width" content="1200" />
@@ -23,13 +23,14 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content="https://sxf.si/assets/og/sxf-ai-social.webp" />
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
-      <meta name="twitter:title" content="Claude Sonnet 5 — API Specs, Context &amp; Pricing | SXF / AI" />
-      <meta name="twitter:description" content="Claude Sonnet 5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-sonnet-5/#article","headline":"Claude Sonnet 5 — API Specs, Context & Pricing","description":"Claude Sonnet 5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources.","url":"https://sxf.si/models/claude-sonnet-5/","dateModified":"2026-09-27","about":{"@type":"Thing","name":"Claude Sonnet 5"},"citation":["https://platform.claude.com/docs/en/models/sonnet-5/overview","https://platform.claude.com/docs/en/about-claude/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Sonnet 5","item":"https://sxf.si/models/claude-sonnet-5/"}]}]}</script>
+      <meta name="twitter:title" content="Claude Sonnet 5: API Pricing, Benchmarks &amp; Sonnet 5.5 | SXF" />
+      <meta name="twitter:description" content="Claude Sonnet 5 API pricing, specs, 1M context, benchmarks and Sonnet 5.5 comparison. Test SXF&#x27;s original 20-case prompt cache cost study." />
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-sonnet-5/#article","headline":"Claude Sonnet 5: API Pricing, Benchmarks & Sonnet 5.5","description":"Claude Sonnet 5 API pricing, specs, 1M context, benchmarks and Sonnet 5.5 comparison. Test SXF's original 20-case prompt cache cost study.","url":"https://sxf.si/models/claude-sonnet-5/","dateModified":"2026-11-10","about":{"@type":"Thing","name":"Claude Sonnet 5"},"citation":["https://platform.claude.com/docs/en/models/sonnet-5/overview","https://platform.claude.com/docs/en/models/sonnet-5-5/overview","https://platform.claude.com/docs/en/about-claude/pricing","https://www.anthropic.com/news/claude-sonnet-5","https://www.anthropic.com/news/claude-sonnet-5-5","https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high","https://sxf.si/data/research/claude-sonnet-5-cache-reuse-2026-11.csv"],"inLanguage":"en","mainEntityOfPage":"https://sxf.si/models/claude-sonnet-5/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Sonnet 5","item":"https://sxf.si/models/claude-sonnet-5/"}]},{"@type":"FAQPage","@id":"https://sxf.si/models/claude-sonnet-5/#faq","mainEntity":[{"@type":"Question","name":"What is Claude Sonnet 5?","acceptedAnswer":{"@type":"Answer","text":"Claude Sonnet 5 is Anthropic's June 30, 2026 balanced model for coding, agentic workflows, research and professional knowledge work. Its exact API model ID is claude-sonnet-5."}},{"@type":"Question","name":"How much does Claude Sonnet 5 cost per million tokens?","acceptedAnswer":{"@type":"Answer","text":"Standard Claude Sonnet 5 API pricing is $2 uncached input, $0.20 cached input read and $10 output per million tokens, as rechecked on November 10, 2026. Special service options and tools can have separate fees."}},{"@type":"Question","name":"Is Claude Sonnet 5 API pricing promotional?","acceptedAnswer":{"@type":"Answer","text":"No. Anthropic announced the $2 input and $10 output Standard rates as permanent on August 10, 2026. Published rates can still change in the future."}},{"@type":"Question","name":"What is the Claude Sonnet 5 model ID?","acceptedAnswer":{"@type":"Answer","text":"Use claude-sonnet-5 as the versioned model ID in the Anthropic Messages API."}},{"@type":"Question","name":"What is Claude Sonnet 5's context window?","acceptedAnswer":{"@type":"Answer","text":"Anthropic documents a 1,000,000-token context window and 128,000 maximum output tokens for Claude Sonnet 5. These are serving limits, not performance guarantees."}},{"@type":"Question","name":"What is the Claude Sonnet 5 knowledge cutoff?","acceptedAnswer":{"@type":"Answer","text":"The official Sonnet 5 model card lists January 2026 as its knowledge cutoff. This is not the page update date."}},{"@type":"Question","name":"How many parameters does Claude Sonnet 5 have?","acceptedAnswer":{"@type":"Answer","text":"Anthropic has not published a verified parameter count or downloadable weights for Claude Sonnet 5. Context tokens are not model parameters."}},{"@type":"Question","name":"Is Claude Sonnet 5 open source?","acceptedAnswer":{"@type":"Answer","text":"No. Claude Sonnet 5 is a proprietary hosted Anthropic model; an official model-weights download is not provided."}},{"@type":"Question","name":"What is the difference between Claude Sonnet 5 and 5.5?","acceptedAnswer":{"@type":"Answer","text":"Claude Sonnet 5 and 5.5 are distinct API model IDs. Sonnet 5.5 launched on September 28, 2026 and lists a newer knowledge cutoff and a lower cached-read rate than Sonnet 5."}},{"@type":"Question","name":"Is Claude Sonnet 5 the latest Sonnet model?","acceptedAnswer":{"@type":"Answer","text":"No. Anthropic released Claude Sonnet 5.5 on September 28, 2026. Check the official model directory for the latest availability."}},{"@type":"Question","name":"How much do Claude Sonnet 5 prompt cache writes cost?","acceptedAnswer":{"@type":"Answer","text":"Standard five-minute cache writes cost $2.50 and one-hour writes cost $4 per million input tokens; subsequent eligible cached reads cost $0.20 per million tokens."}},{"@type":"Question","name":"When does Sonnet 5 prompt caching save money?","acceptedAnswer":{"@type":"Answer","text":"For identical eligible reusable prefixes, SXF's dated hypothetical pricing study finds a five-minute cache write plus one successful cached read costs less than two all-uncached calls. Real cache hits are not guaranteed."}},{"@type":"Question","name":"Does Claude Sonnet 5 support images?","acceptedAnswer":{"@type":"Answer","text":"Yes. The official model specification documents text and image input with text output."}},{"@type":"Question","name":"How to call Claude Sonnet 5 in Python?","acceptedAnswer":{"@type":"Answer","text":"Use the Anthropic Python SDK Messages API with model='claude-sonnet-5', a max_tokens value and a messages array, and keep ANTHROPIC_API_KEY in secure server environment variables."}},{"@type":"Question","name":"Is Claude Sonnet 5 available in GitHub Copilot?","acceptedAnswer":{"@type":"Answer","text":"GitHub Copilot model availability and plan conditions are separate from Anthropic's direct API. Check GitHub's current model list rather than inferring access from the API model ID."}},{"@type":"Question","name":"Did SXF independently benchmark Claude Sonnet 5?","acceptedAnswer":{"@type":"Answer","text":"SXF's original research is a 20-scenario reproducible billing simulation for prompt caching, not a live model inference or latency benchmark. Performance scores are explicitly attributed to Artificial Analysis."}}]},{"@type":"Dataset","@id":"https://sxf.si/data/research/claude-sonnet-5-cache-reuse-2026-11.csv#dataset","name":"SXF Claude Sonnet 5 vs 5.5 prompt cache economics: 20 reproducible scenarios","description":"Reproducible Standard token-cost simulation comparing five-minute and one-hour cache writes, all-uncached runs and successful cached reads. Not a paid model performance test.","url":"https://sxf.si/data/research/claude-sonnet-5-cache-reuse-2026-11.csv","datePublished":"2026-11-10","creator":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},"isBasedOn":"https://platform.claude.com/docs/en/about-claude/pricing","measurementTechnique":"Deterministic token arithmetic under explicit cache-hit and fixed-token-count assumptions.","distribution":{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://sxf.si/data/research/claude-sonnet-5-cache-reuse-2026-11.csv"}}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
-    </head>
-    <body class="intel-page model-page"><header class="site-header"><div class="header-inner">
+    <link rel="stylesheet" href="/models/claude-sonnet-5/research.css?v=20261110-a" />
+      </head>
+    <body class="intel-page model-page cs5-page"><header class="site-header"><div class="header-inner">
       <a class="brand" href="/" aria-label="SXF AI home"><span class="brand-mark">SXF</span><span class="brand-divider">/</span><span class="brand-ai">AI</span></a>
       <nav class="top-nav" aria-label="Primary navigation"><a href="/models/" aria-current="page">Models</a><a href="/compare/">Compare</a><a href="/topics/">Topics</a><a href="/tools/">Tools</a><a href="/research/">Research</a><a href="/open-source/">Open Source</a><a href="/guides/">Guides</a><a href="/superintelligence/">Superintelligence</a><a href="/brief/">Brief</a><a href="/about/">About</a></nav>
       <div class="header-status"><span class="pulse-dot"></span>LIVE</div>
@@ -42,7 +43,7 @@
         <div class="collection-stats">
           <div><strong>1,000,000</strong><span>context tokens</span></div>
           <div><strong>128,000</strong><span>max output</span></div>
-          <div><strong>2026-09-27</strong><span>last verified</span></div>
+          <div><strong>2026-11-10</strong><span>last verified</span></div>
         </div>
       </section>
 
@@ -97,6 +98,171 @@
         </section>
       </section>
 
+      <section class="cs5-dossier shell" id="sxf-sonnet5-research" aria-labelledby="cs5-research-heading">
+  <header class="cs5-hero">
+    <div class="cs5-intro">
+      <p class="eyebrow">SXF / AI ORIGINAL MODEL RESEARCH · 10 NOVEMBER 2026</p>
+      <h2 id="cs5-research-heading">Claude Sonnet 5: verified specs, API costs, benchmarks and an original cache economics study.</h2>
+      <p class="cs5-lead">Claude Sonnet 5 is Anthropic's June 30, 2026 balanced model for coding, professional workflows and agents. This reference separates <strong>primary-source model facts</strong>, <strong>attributed independent evaluation evidence</strong> and <strong>SXF's own reproducible 20-case token-cost research</strong>.</p>
+      <p><strong>Model ID:</strong> <code>claude-sonnet-5</code>. It is <strong>not Claude Sonnet 5.5</strong>, the later release with a distinct API ID. The names “Sonnet 5”, “Claude 5 Sonnet” and “Claude Sonnet 5 API” refer to the earlier release, not to a generic current Claude subscription tier.</p>
+      <p class="cs5-provenance">Provider specification recheck: <strong>2026-11-10</strong> · Original SXF cost study: 10 November 2026 · Anthropic references linked in the <a href="#cs5-method">methodology</a>.</p>
+    </div>
+    <aside class="cs5-specs" aria-label="Claude Sonnet 5 quick specifications">
+      <p class="cs5-kicker">SOURCE-VERIFIED TECHNICAL FACTS</p>
+      <div><small>MODEL ID</small><strong><code>claude-sonnet-5</code></strong></div>
+      <div><small>CONTEXT WINDOW</small><strong>1,000,000 <em>tokens</em></strong></div>
+      <div><small>MAX OUTPUT</small><strong>128,000 <em>tokens</em></strong></div>
+      <div><small>STANDARD INPUT</small><strong>$2.00 <em>/ 1M</em></strong></div>
+      <div><small>STANDARD OUTPUT</small><strong>$10.00 <em>/ 1M</em></strong></div>
+      <div><small>CACHED INPUT READ</small><strong>$0.20 <em>/ 1M</em></strong></div>
+      <p class="cs5-note">USD per million tokens. Anthropic announced these as permanent Standard rates on August 10, 2026; check the current pricing page before purchasing API credits.</p>
+    </aside>
+  </header>
+  <nav class="cs5-jump" aria-label="Page research navigation"><a href="#cs5-overview">Direct answers</a><a href="#cs5-pricing">Pricing</a><a href="#cs5-lab">SXF study</a><a href="#cs5-calculator">Calculator</a><a href="#cs5-comparison">Sonnet 5.5 comparison</a><a href="#cs5-benchmarks">Benchmarks</a><a href="#cs5-api">API example</a><a href="#cs5-faq">FAQ</a><a href="#cs5-method">Sources</a></nav>
+
+  <section class="cs5-panel" id="cs5-overview">
+    <p class="eyebrow">DIRECT SEARCH ANSWERS / CLAUDE SONNET 5</p>
+    <h2>What is Claude Sonnet 5? Release date, model ID, context and capabilities.</h2>
+    <p>Anthropic introduced <strong>Claude Sonnet 5 on June 30, 2026</strong>. Its exact API model identifier is <code>claude-sonnet-5</code>. Anthropic's published specifications list <strong>1 million input-context tokens</strong>, <strong>128,000 maximum output tokens</strong>, text-and-image input and text output. The model uses adaptive thinking with configurable effort and a documented <strong>January 2026 knowledge cutoff</strong>.</p>
+    <div class="cs5-cards">
+      <article><small>CORE USES</small><h3>Coding and agents</h3><p>Production software tasks, multi-step agents, tool use, research assistance and knowledge work. Validate outcomes on your own task distribution rather than inferring reliability from the context limit.</p></article>
+      <article><small>API ACCESS</small><h3>Official Anthropic API</h3><p>Use the Messages API and the pinned model ID <code>claude-sonnet-5</code>. Hosted availability, tools and account limits are provider-specific.</p></article>
+      <article><small>MODEL SIZE</small><h3>Parameters not disclosed</h3><p>Anthropic does <strong>not</strong> publish an official parameter count or downloadable model weights for Sonnet 5. A 1M-token context window is not a parameter count.</p></article>
+    </div>
+    <p><strong>Current-generation note:</strong> Claude Sonnet 5.5 launched on September 28, 2026. This is a Sonnet 5 reference page, not a claim that Sonnet 5 is Anthropic's latest release.</p>
+  </section>
+
+  <section class="cs5-panel" id="cs5-pricing">
+    <p class="eyebrow">CLAUDE SONNET 5 API PRICING / USD PER MILLION TOKENS</p>
+    <h2>How much does Claude Sonnet 5 API cost? Input, output and prompt caching.</h2>
+    <p>Anthropic's current Standard price for Claude Sonnet 5 is <strong>$2.00 per million new input tokens</strong>, <strong>$0.20 per million cache-read input tokens</strong> and <strong>$10.00 per million output tokens</strong>. Prompt caching has a separate initial-write charge: <strong>$2.50 per million for a 5-minute write</strong> and <strong>$4.00 per million for a 1-hour write</strong>.</p>
+    <div class="cs5-scroll" role="region" aria-label="Sonnet 5 and Sonnet 5.5 API pricing comparison" tabindex="0">
+      <table><thead><tr><th scope="col">Standard text-token operation</th><th scope="col">Sonnet 5</th><th scope="col">Sonnet 5.5</th></tr></thead><tbody>
+        <tr><th scope="row">Input / 1M</th><td>$2.00</td><td>$2.00</td></tr>
+        <tr><th scope="row">Cached read / 1M</th><td>$0.20</td><td>$0.10</td></tr>
+        <tr><th scope="row">5-minute cache write / 1M</th><td>$2.50</td><td>$2.50</td></tr>
+        <tr><th scope="row">1-hour cache write / 1M</th><td>$4.00</td><td>$4.00</td></tr>
+        <tr><th scope="row">Output / 1M</th><td>$10.00</td><td>$10.00</td></tr>
+      </tbody></table>
+    </div>
+    <p>Those are text-token API charges, not a Claude web subscription. Tool fees, Batch or alternative service tiers, nontext modalities, regional choices and other billing conditions are outside this simplified model. Cache hit eligibility and the duration of your requests affect whether the cached-read rate is achieved.</p>
+    <p><strong>Pricing history:</strong> the initial promotional Standard pricing became permanent on August 10, 2026; no “promotion expiring today” claim is made here. Confirm any later changes in <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic's live API pricing documentation</a>.</p>
+  </section>
+
+  <section class="cs5-panel cs5-lab" id="cs5-lab">
+    <p class="eyebrow">SXF ORIGINAL RESEARCH · REPRODUCIBLE 20-SCENARIO EXPERIMENT</p>
+    <h2>SXF Prompt Cache Lab: when does reusing a Sonnet 5 prompt actually save money?</h2>
+    <p>We designed an <strong>auditable deterministic experiment</strong> using four reusable prompt-prefix sizes (2,048, 16,000, 100,000 and 500,000 tokens) and five request counts (1, 2, 3, 10 and 100), for <strong>20 scenarios</strong>. Each call adds 2,000 new input tokens and 4,000 output tokens. We calculate no cache versus an initial 5-minute or 1-hour cache write followed by successful reads, for both Sonnet 5 and Sonnet 5.5.</p>
+    <div class="cs5-findings">
+      <article><small>100K PREFIX · 10 CALLS</small><strong>$2.440000 → $0.870000</strong><p>Illustrative Sonnet 5 list cost falls from all-uncached to a 5-minute cache-write scenario when nine subsequent reads hit the cache.</p></article>
+      <article><small>5-MINUTE CACHE BREAK-EVEN</small><strong>2 requests</strong><p>Under the study's idealized matching-prefix assumptions, a 5-minute cache write is cheaper than two uncached requests on the second call.</p></article>
+      <article><small>SONNET 5.5 · CACHED READ</small><strong>$0.10 / 1M</strong><p>Sonnet 5.5 currently lists a lower read rate than Sonnet 5; a lower rate does not by itself prove equal output quality or latency.</p></article>
+    </div>
+    <div class="cs5-scroll" role="region" aria-label="All twenty Sonnet 5 cost research scenarios" tabindex="0">
+      <table class="cs5-wide"><thead><tr><th scope="col">Reusable prefix</th><th scope="col">Calls</th><th scope="col">No cache</th><th scope="col">5-min</th><th scope="col">1-hour</th><th scope="col">Saving, 5-min</th></tr></thead><tbody><tr><th scope='row'>2,048</th><td>1</td><td>$0.048096</td><td>$0.049120</td><td>$0.052192</td><td>$-0.001024</td></tr><tr><th scope='row'>2,048</th><td>2</td><td>$0.096192</td><td>$0.093530</td><td>$0.096602</td><td>$0.002662</td></tr><tr><th scope='row'>2,048</th><td>3</td><td>$0.144288</td><td>$0.137939</td><td>$0.141011</td><td>$0.006349</td></tr><tr><th scope='row'>2,048</th><td>10</td><td>$0.480960</td><td>$0.448806</td><td>$0.451878</td><td>$0.032154</td></tr><tr><th scope='row'>2,048</th><td>100</td><td>$4.809600</td><td>$4.445670</td><td>$4.448742</td><td>$0.363930</td></tr><tr><th scope='row'>16,000</th><td>1</td><td>$0.076000</td><td>$0.084000</td><td>$0.108000</td><td>$-0.008000</td></tr><tr><th scope='row'>16,000</th><td>2</td><td>$0.152000</td><td>$0.131200</td><td>$0.155200</td><td>$0.020800</td></tr><tr><th scope='row'>16,000</th><td>3</td><td>$0.228000</td><td>$0.178400</td><td>$0.202400</td><td>$0.049600</td></tr><tr><th scope='row'>16,000</th><td>10</td><td>$0.760000</td><td>$0.508800</td><td>$0.532800</td><td>$0.251200</td></tr><tr><th scope='row'>16,000</th><td>100</td><td>$7.600000</td><td>$4.756800</td><td>$4.780800</td><td>$2.843200</td></tr><tr><th scope='row'>100,000</th><td>1</td><td>$0.244000</td><td>$0.294000</td><td>$0.444000</td><td>$-0.050000</td></tr><tr><th scope='row'>100,000</th><td>2</td><td>$0.488000</td><td>$0.358000</td><td>$0.508000</td><td>$0.130000</td></tr><tr><th scope='row'>100,000</th><td>3</td><td>$0.732000</td><td>$0.422000</td><td>$0.572000</td><td>$0.310000</td></tr><tr><th scope='row'>100,000</th><td>10</td><td>$2.440000</td><td>$0.870000</td><td>$1.020000</td><td>$1.570000</td></tr><tr><th scope='row'>100,000</th><td>100</td><td>$24.400000</td><td>$6.630000</td><td>$6.780000</td><td>$17.770000</td></tr><tr><th scope='row'>500,000</th><td>1</td><td>$1.044000</td><td>$1.294000</td><td>$2.044000</td><td>$-0.250000</td></tr><tr><th scope='row'>500,000</th><td>2</td><td>$2.088000</td><td>$1.438000</td><td>$2.188000</td><td>$0.650000</td></tr><tr><th scope='row'>500,000</th><td>3</td><td>$3.132000</td><td>$1.582000</td><td>$2.332000</td><td>$1.550000</td></tr><tr><th scope='row'>500,000</th><td>10</td><td>$10.440000</td><td>$2.590000</td><td>$3.340000</td><td>$7.850000</td></tr><tr><th scope='row'>500,000</th><td>100</td><td>$104.400000</td><td>$15.550000</td><td>$16.300000</td><td>$88.850000</td></tr></tbody></table>
+    </div>
+    <p class="cs5-actions"><a href="/data/research/claude-sonnet-5-cache-reuse-2026-11.csv" download>Download full original CSV</a><a href="#cs5-method">Study methodology</a><a href="#cs5-calculator">Run your own scenario</a></p>
+    <p class="cs5-disclaimer"><strong>Study boundary:</strong> this is independently reproducible API billing arithmetic, <em>not</em> a paid model-performance benchmark, live cache-hit measurement, latency experiment or real invoice. For comparisons to be fair, both models are assigned the same hypothetical input and output counts.</p>
+  </section>
+
+  <section class="cs5-panel" id="cs5-calculator">
+    <p class="eyebrow">SXF INTERACTIVE COST TOOL · NO NETWORK REQUESTS</p>
+    <h2>Claude Sonnet 5 vs 5.5 prompt caching calculator.</h2>
+    <p>Estimate total Standard token cost for repeated calls, including an initial write and subsequent cache hits. Select a 5-minute or 1-hour write, then compare Sonnet 5 with Sonnet 5.5. Values never leave your browser; the tool estimates, not invoices.</p>
+    <form id="cs5-price-tool" class="cs5-tool" data-p5-input="2" data-p5-cached="0.2" data-p5-write5="2.5" data-p5-write1="4" data-p5-output="10" data-p55-input="2" data-p55-cached="0.1" data-p55-write5="2.5" data-p55-write1="4" data-p55-output="10" novalidate>
+      <div class="cs5-inputs">
+        <label>Reusable prefix (tokens)<input name="prefix" type="number" min="2048" max="998000" step="1" inputmode="numeric" value="100000"></label>
+        <label>Fresh input per call<input name="new" type="number" min="0" max="997952" step="1" inputmode="numeric" value="2000"></label>
+        <label>Output per call<input name="output" type="number" min="0" max="128000" step="1" inputmode="numeric" value="4000"></label>
+        <label>Request count<input name="calls" type="number" min="1" max="100000" step="1" inputmode="numeric" value="10"></label>
+        <label>Initial cache retention<select name="ttl"><option value="five">5-minute cache</option><option value="hour">1-hour cache</option></select></label>
+      </div>
+      <div class="cs5-results" aria-live="polite">
+        <article><small>SONNET 5 · NO CACHE</small><strong data-cost="five-uncached">—</strong></article>
+        <article><small>SONNET 5 · WITH CACHE</small><strong data-cost="five-cached">—</strong></article>
+        <article><small>SONNET 5.5 · NO CACHE</small><strong data-cost="next-uncached">—</strong></article>
+        <article><small>SONNET 5.5 · WITH CACHE</small><strong data-cost="next-cached">—</strong></article>
+        <article class="cs5-accent"><small>SONNET 5 CACHE SAVING</small><strong data-cost="saving">—</strong></article>
+      </div>
+      <p class="cs5-message" data-cost="message" role="status">All scenarios assume the same repeated prefix and successful reuse within the chosen cache lifetime.</p>
+    </form>
+  </section>
+
+  <section class="cs5-panel" id="cs5-comparison">
+    <p class="eyebrow">EXACT-MATCH COMPARISON · SONNET 5 VS SONNET 5.5</p>
+    <h2>Claude Sonnet 5 vs Claude Sonnet 5.5: which model should developers use?</h2>
+    <p>Claude Sonnet 5.5 followed Sonnet 5 on September 28, 2026. The two have separate model identifiers, distinct knowledge cutoffs, and different published cached-read prices. For a production migration, compare the <strong>same held-out tasks</strong> with pinned model IDs and measure task acceptance rate, response consistency, latency, retry count and total billed tokens.</p>
+    <div class="cs5-scroll" role="region" aria-label="Sonnet 5 versus Sonnet 5.5 verified facts" tabindex="0">
+      <table><thead><tr><th scope="col">Verified fact</th><th scope="col">Claude Sonnet 5</th><th scope="col">Claude Sonnet 5.5</th></tr></thead><tbody>
+        <tr><th scope="row">API ID</th><td><code>claude-sonnet-5</code></td><td><code>claude-sonnet-5-5</code></td></tr>
+        <tr><th scope="row">Release</th><td>June 30, 2026</td><td>September 28, 2026</td></tr>
+        <tr><th scope="row">Context window</th><td>1,000,000 tokens</td><td>1,000,000 tokens</td></tr>
+        <tr><th scope="row">Maximum output</th><td>128,000 tokens</td><td>128,000 tokens</td></tr>
+        <tr><th scope="row">Knowledge cutoff</th><td>January 2026</td><td>June 2026</td></tr>
+        <tr><th scope="row">Uncached input</th><td>$2.00 / 1M</td><td>$2.00 / 1M</td></tr>
+        <tr><th scope="row">Cached read</th><td>$0.20 / 1M</td><td>$0.10 / 1M</td></tr>
+        <tr><th scope="row">Output</th><td>$10.00 / 1M</td><td>$10.00 / 1M</td></tr>
+        <tr><th scope="row">Read detailed guide</th><td>This page</td><td><a href="/models/claude-sonnet-5-5/">Sonnet 5.5 specifications</a></td></tr>
+      </tbody></table>
+    </div>
+    <p>For cross-provider pricing, see <a href="/guides/anthropic-api-pricing/">SXF's Anthropic API pricing guide</a> and <a href="/models/pricing/">SXF's full model pricing index</a>. For Sonnet use within Copilot, see our <a href="/guides/claude-sonnet-github-copilot/">Claude Sonnet and GitHub Copilot guide</a>; GitHub model availability and Anthropic API billing are distinct.</p>
+  </section>
+
+  <section class="cs5-panel" id="cs5-benchmarks">
+    <p class="eyebrow">BENCHMARK TRANSPARENCY · INDEPENDENT PROVIDER ATTRIBUTION</p>
+    <h2>Claude Sonnet 5 benchmarks: what independent evaluations can—and cannot—tell you.</h2>
+    <p>The <a href="/evaluations/">SXF evaluation registry</a> includes versioned observations from <a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high" target="_blank" rel="noopener noreferrer">Artificial Analysis</a>. Each reported score requires the evaluator, benchmark version and reasoning configuration. <strong>None of these are original SXF inference test scores.</strong></p>
+    <div class="cs5-scroll" role="region" aria-label="Attributed Artificial Analysis benchmark observations">
+      <table><thead><tr><th scope="col">Evaluation</th><th scope="col">Sonnet 5 · high effort</th><th scope="col">Meaning</th></tr></thead><tbody>
+        <tr><th scope="row">AA-Briefcase v1.1</th><td>1,176 Elo</td><td>Agentic knowledge-work rating; not a percentage</td></tr>
+        <tr><th scope="row">AA-LCR v1.1</th><td>77.0%</td><td>Long-context reasoning on the evaluator's test set</td></tr>
+        <tr><th scope="row">AutomationBench-AA</th><td>32.0%</td><td>Business automation test tasks</td></tr>
+        <tr><th scope="row">Artificial Analysis Intelligence Index v4.3.2</th><td>32</td><td>Composite index score, not 32% reliability</td></tr>
+      </tbody></table>
+    </div>
+    <p><strong>What is not claimed:</strong> a guaranteed SWE-bench pass rate, a private SXF paid inference run or universal agent reliability. Scores vary with evaluator settings, time and benchmark version. Current direct evidence should be checked at the linked evaluator, not interpreted as live measurements.</p>
+  </section>
+
+  <section class="cs5-panel" id="cs5-api">
+    <p class="eyebrow">DIRECT DEVELOPER ANSWER · ANTHROPIC MESSAGES API</p>
+    <h2>How to use Claude Sonnet 5 API: Python example and testing checklist.</h2>
+    <p>Call the Anthropic Messages API using <code>claude-sonnet-5</code>. Set <code>ANTHROPIC_API_KEY</code> securely in your backend environment. Do not expose credentials to browser code, public repositories or generated HTML. This code is an illustrative integration example, not an actual paid model call executed by SXF.</p>
+    <pre class="cs5-code"><code>import anthropic
+
+client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY
+message = client.messages.create(
+    model="claude-sonnet-5",
+    max_tokens=1024,
+    messages=[
+        {"role": "user",
+         "content": "Review this pull request for correctness and risk."}
+    ],
+)
+print(message.content[0].text)</code></pre>
+    <h3>How to compare before migrating to Sonnet 5.5</h3>
+    <ol><li>Version a held-out set of actual engineering and agent tasks, with explicit acceptance criteria.</li><li>Run the same prompts, tool policies and output-budget settings on the two exact IDs.</li><li>Record input, cache-write, cache-read and output token counts alongside latency and success rates.</li><li>Compare <strong>cost per accepted result</strong> and monitor the failure cases, rather than selecting models by the lowest input rate alone.</li></ol>
+    <p>Primary API reference: <a href="https://platform.claude.com/docs/en/models/sonnet-5/overview" target="_blank" rel="noopener noreferrer">Anthropic's official Sonnet 5 card</a> and <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic pricing</a>.</p>
+  </section>
+
+  <section class="cs5-panel" id="cs5-faq"><p class="eyebrow">DIRECT SEARCH ANSWERS / FREQUENT QUESTIONS</p><h2>Claude Sonnet 5 frequently asked questions.</h2><div class="cs5-faq"><details><summary>What is Claude Sonnet 5?</summary><p>Claude Sonnet 5 is Anthropic&#x27;s June 30, 2026 balanced model for coding, agentic workflows, research and professional knowledge work. Its exact API model ID is claude-sonnet-5.</p></details><details><summary>How much does Claude Sonnet 5 cost per million tokens?</summary><p>Standard Claude Sonnet 5 API pricing is $2 uncached input, $0.20 cached input read and $10 output per million tokens, as rechecked on November 10, 2026. Special service options and tools can have separate fees.</p></details><details><summary>Is Claude Sonnet 5 API pricing promotional?</summary><p>No. Anthropic announced the $2 input and $10 output Standard rates as permanent on August 10, 2026. Published rates can still change in the future.</p></details><details><summary>What is the Claude Sonnet 5 model ID?</summary><p>Use claude-sonnet-5 as the versioned model ID in the Anthropic Messages API.</p></details><details><summary>What is Claude Sonnet 5&#x27;s context window?</summary><p>Anthropic documents a 1,000,000-token context window and 128,000 maximum output tokens for Claude Sonnet 5. These are serving limits, not performance guarantees.</p></details><details><summary>What is the Claude Sonnet 5 knowledge cutoff?</summary><p>The official Sonnet 5 model card lists January 2026 as its knowledge cutoff. This is not the page update date.</p></details><details><summary>How many parameters does Claude Sonnet 5 have?</summary><p>Anthropic has not published a verified parameter count or downloadable weights for Claude Sonnet 5. Context tokens are not model parameters.</p></details><details><summary>Is Claude Sonnet 5 open source?</summary><p>No. Claude Sonnet 5 is a proprietary hosted Anthropic model; an official model-weights download is not provided.</p></details><details><summary>What is the difference between Claude Sonnet 5 and 5.5?</summary><p>Claude Sonnet 5 and 5.5 are distinct API model IDs. Sonnet 5.5 launched on September 28, 2026 and lists a newer knowledge cutoff and a lower cached-read rate than Sonnet 5.</p></details><details><summary>Is Claude Sonnet 5 the latest Sonnet model?</summary><p>No. Anthropic released Claude Sonnet 5.5 on September 28, 2026. Check the official model directory for the latest availability.</p></details><details><summary>How much do Claude Sonnet 5 prompt cache writes cost?</summary><p>Standard five-minute cache writes cost $2.50 and one-hour writes cost $4 per million input tokens; subsequent eligible cached reads cost $0.20 per million tokens.</p></details><details><summary>When does Sonnet 5 prompt caching save money?</summary><p>For identical eligible reusable prefixes, SXF&#x27;s dated hypothetical pricing study finds a five-minute cache write plus one successful cached read costs less than two all-uncached calls. Real cache hits are not guaranteed.</p></details><details><summary>Does Claude Sonnet 5 support images?</summary><p>Yes. The official model specification documents text and image input with text output.</p></details><details><summary>How to call Claude Sonnet 5 in Python?</summary><p>Use the Anthropic Python SDK Messages API with model=&#x27;claude-sonnet-5&#x27;, a max_tokens value and a messages array, and keep ANTHROPIC_API_KEY in secure server environment variables.</p></details><details><summary>Is Claude Sonnet 5 available in GitHub Copilot?</summary><p>GitHub Copilot model availability and plan conditions are separate from Anthropic&#x27;s direct API. Check GitHub&#x27;s current model list rather than inferring access from the API model ID.</p></details><details><summary>Did SXF independently benchmark Claude Sonnet 5?</summary><p>SXF&#x27;s original research is a 20-scenario reproducible billing simulation for prompt caching, not a live model inference or latency benchmark. Performance scores are explicitly attributed to Artificial Analysis.</p></details></div></section>
+
+  <section class="cs5-panel" id="cs5-method">
+    <p class="eyebrow">EVIDENCE / ORIGINAL DATA / LIMITATIONS</p>
+    <h2>Sources and SXF research method: reproduce our token-cost calculations.</h2>
+    <p>The SXF experiment applies Anthropic's dated Standard rate table to fixed hypothetical workloads. The repeated prefix sizes are 2,048, 16,000, 100,000 and 500,000 input tokens; request counts are 1, 2, 3, 10 and 100. Each request adds 2,000 new input tokens and 4,000 output tokens. A cache scenario bills the first prefix at the selected initial write rate and each later prefix at the published read rate. The uncached scenario bills each prefix at full input rates.</p>
+    <p><strong>Assumptions:</strong> identical cacheable prefixes, all calls inside retention, eligible cache creation, successful cache hits, the same token counts across both models and no optional paid tools or other tier fees. The modelled 1M context is a serving limit, not a claim that every 500K-token prompt will be reliable. The <a href="/data/research/claude-sonnet-5-cache-reuse-2026-11.csv">downloadable original dataset</a> publishes the numerical inputs, all six costs per scenario and the savings arithmetic. A source-backed automated test recomputes every row during site builds.</p>
+    <div class="cs5-sources"><p><strong>Official and third-party evidence:</strong></p>
+      <a href="https://platform.claude.com/docs/en/models/sonnet-5/overview" target="_blank" rel="noopener noreferrer">Anthropic Sonnet 5 specifications</a>
+      <a href="https://platform.claude.com/docs/en/models/sonnet-5-5/overview" target="_blank" rel="noopener noreferrer">Anthropic Sonnet 5.5 specifications</a>
+      <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic API pricing and caching</a>
+      <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener noreferrer">Anthropic June 2026 Sonnet 5 launch</a>
+      <a href="https://www.anthropic.com/news/claude-sonnet-5-5" target="_blank" rel="noopener noreferrer">Anthropic September 2026 Sonnet 5.5 launch</a>
+      <a href="https://artificialanalysis.ai/models/comparisons/claude-sonnet-5-5-high-vs-claude-sonnet-5-high" target="_blank" rel="noopener noreferrer">Artificial Analysis versioned observations</a>
+      <a href="/data/research/claude-sonnet-5-cache-reuse-2026-11.csv">SXF original data (CSV)</a>
+    </div>
+    <p class="cs5-disclaimer">Editorial review and source recheck: 2026-11-10. Historical baseline and source-change ledger appear below. Provider-reported benchmarks are clearly distinguished from original SXF billing arithmetic. Structured data accurately summarizes the visible research; Google does not guarantee ranking changes or search enhancements from markup.</p>
+  </section>
+</section>
       <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="claude-sonnet-5">
           <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Claude Sonnet 5: what changed.</h2><p>No post-baseline factual changes recorded for Claude Sonnet 5 since 2026-09-27.</p></div>
           <div class="change-watch-status"><span>HISTORICAL BASELINE</span><strong>2026-09-27</strong><small>Original ledger snapshot, not the latest source check. See Last verified above.</small></div></div>
@@ -182,4 +348,4 @@
         </nav>
       </div>
       <div class="footer-bottom"><span>© <span id="year"></span> SXF / AI</span><span>Curated AI intelligence · Built for signal.</span><span>Developed within <a href="/about/#origin-title">VMC Labs</a></span></div>
-    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script></body></html>
+    </footer><script>document.getElementById("year").textContent=new Date().getFullYear();</script><script defer src="/models/claude-sonnet-5/research.js?v=20261110-a"></script></body></html>
