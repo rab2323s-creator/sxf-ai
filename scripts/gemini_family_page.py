@@ -149,5 +149,11 @@ def add_gemini_discovery_links(root: Path) -> None:
             continue
         if html.count("</main>") != 1:
             raise RuntimeError(f"Gemini discovery target main tag changed: {rel}")
-        html = html.replace("</main>", snippet + "</main>", 1)
+        if rel in {"models/index.html", "providers/google/index.html"}:
+            # Put the family hub immediately after the page hero, not below huge tables.
+            if "</section>" not in html:
+                raise RuntimeError(f"Gemini discovery target hero missing: {rel}")
+            html = html.replace("</section>", "</section>" + snippet, 1)
+        else:
+            html = html.replace("</main>", snippet + "</main>", 1)
         path.write_text(html, encoding="utf-8")
