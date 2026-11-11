@@ -115,7 +115,7 @@ def enrich_gpt6_astra_page(page, models_by_id):
     rendered_schema = '<script type="application/ld+json">' + json.dumps(
         schema, ensure_ascii=False, separators=(",", ":")).replace("<", r"\u003c") + '</script>'
     page = _replace_once(page, r'<script type="application/ld\+json">.+?</script>', rendered_schema)
-    page = _replace_once(page, r'<h1>GPT-6 Astra verified model reference\.</h1>',
+    page = _replace_once(page, r'<h1>GPT-6 Astra<br><span>verified model reference\.</span></h1>',
                          '<h1>'+escape(H1)+'</h1>')
     for pattern, replacement in [
         (r"<title>.*?</title>", "<title>"+escape(TITLE)+"</title>"),
