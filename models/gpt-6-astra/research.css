@@ -128,3 +128,14 @@
   .astra-study-head,.astra-panel {padding:14px}
   .astra-finding > strong {font-size:1.13rem}
 }
+
+/* Original study visualization and accessible 30-minute / 12-hour cache tier. */
+.astra-boundary-figure{display:grid;gap:11px;margin:22px 0 18px;padding:14px;background:#101f2e;border:1px solid #35536c;border-radius:16px;min-width:0}
+.astra-boundary-figure img{display:block;width:100%;height:auto;max-width:100%;border-radius:10px}
+.astra-boundary-figure figcaption{font-size:.85rem;line-height:1.65;color:#b6c9dd}
+.astra-boundary-figure figcaption strong{color:#e9f4ff}
+.astra-cache-tier{display:grid;gap:9px;margin-top:18px;font-size:.86rem;color:#d6e7f5;font-weight:650}
+.astra-cache-tier select{box-sizing:border-box;display:block;width:100%;min-width:0;max-width:100%;border-radius:10px;border:1px solid #567590;background:#091724;color:#f2f8ff;padding:11px 14px;font:inherit;line-height:1.5}
+.astra-cache-tier select:focus-visible{outline:2px solid #81e5d9;outline-offset:3px}
+.astra-cache-help{font-size:.82rem;line-height:1.55;margin-top:7px!important}
+@media(max-width:600px){.astra-boundary-figure{padding:9px;border-radius:12px}.astra-boundary-figure figcaption{padding:3px 4px}}
