@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Contract tests for source-backed GPT-6 Astra research and scheduled regeneration."""
 from __future__ import annotations
+from html import escape
 import csv
 import json
 import re
@@ -66,7 +67,7 @@ assert (ROOT/"models/gpt-6-astra/research.js").is_file()
 
 # Persistent SEO and calculator contract: the checked-in page must agree with
 # the authored template and generator, and survive every scheduled build.
-assert '<h1>'+H1+'</h1>' in source
+assert '<h1>'+escape(H1)+'</h1>' in source
 assert 'data-cache-ttl' in source
 assert 'data-astra-write-12h="25.0"' in source
 assert 'data-sol-write-12h="5.0"' in source
