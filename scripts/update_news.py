@@ -13,6 +13,7 @@ from html import escape, unescape
 from pathlib import Path
 from content_ownership import preserve_authored_pages
 from model_editorial_guard import protect_model_pages
+from gemini_family_page import enrich_gemini_family_page, add_gemini_discovery_links
 from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 
@@ -4980,6 +4981,8 @@ def model_page_html(name, items):
       <aside class="source-card"><span class="source-card-label">MODEL TIMELINE</span><strong>{escape(name)}</strong><p>Tracked from {escape(first_date)} through {escape(latest_date)} across {source_count} primary source{"s" if source_count != 1 else ""}.</p></aside></section>
       <section class="related-signals shell"><div class="intel-section-head"><div><p class="eyebrow">MODEL TIMELINE</p><h2>Recent {escape(name)} signals.</h2></div><a href="/models/">All models ↗</a></div><div class="signal-list">{rows}</div></section>
     </main>{page_footer()}</body></html>'''
+    if name == "Gemini":
+        return enrich_gemini_family_page(page)
     if name == "GPT-6.1":
         return enrich_gpt61_release_page(page, MODEL_PRICING_BY_ID)
     return enrich_gpt6_family_page(page, MODEL_PRICING_BY_ID) if name == "GPT-6" else page
@@ -11532,6 +11535,7 @@ def render_site(archive, current):
         normalize_static_shells()
         normalize_primary_navigation()
         apply_topic_crosslinks(ROOT)
+        add_gemini_discovery_links(ROOT)
     update_sitemap(archive)
 
 
