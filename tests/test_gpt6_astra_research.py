@@ -77,7 +77,7 @@ assert 'name="robots" content="index,follow' in source
 assert '<link rel="canonical" href="'+CANONICAL+'"' in source
 assert 'research.js?v=20261111-cachettl' in source
 assert '<loc>'+CANONICAL+'</loc>' in (ROOT/'sitemap.xml').read_text(encoding='utf-8')
-metadata=re.search(r'<script type="application/ld\\+json">(.+?)</script>',source,re.S)
+metadata=re.search(r'<script type="application/ld\+json">(.+?)</script>',source,re.S)
 assert metadata
 graph=json.loads(metadata.group(1))['@graph']
 article=next(node for node in graph if node.get('@type')=='TechArticle')
