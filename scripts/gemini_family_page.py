@@ -13,9 +13,9 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = "https://sxf.si/models/gemini/"
-TITLE = "Google Gemini Models (2026): Compare Versions, API Pricing & Features | SXF / AI"
-DESCRIPTION = ("Compare Google Gemini 4, 3.8 Flash, Flash-Lite, Live, TTS, Nano Banana "
-               "and Embedding models. API prices, model IDs, use cases and SXF cost calculator.")
+TITLE = "Google Gemini Models: Versions, API Pricing & Features | SXF / AI"
+DESCRIPTION = ("Compare Google Gemini models by version, API pricing, context window and use case. "
+               "See Gemini 4, Flash, Live, TTS, embeddings and SXF cost estimates.")
 FAQ = [
     ("What is Google Gemini?", "Gemini is Google's family of multimodal AI models. Individual model endpoints differ in text reasoning, image creation, audio, embeddings, context windows, availability and API pricing."),
     ("Which Gemini model should I use?", "For a general-purpose text-output API start by testing Gemini 3.8 Flash. Test Gemini 4 Argon or Carbon for more difficult reasoning; use Flash-Lite for economical throughput. Use dedicated Live, TTS, image and embedding models for those output types."),
@@ -61,7 +61,7 @@ def enrich_gemini_family_page(page: str) -> str:
         page = re.sub(r'(<meta (?:name|property)="' + prop + r'" content=")[^"]*(")', lambda m: m.group(1) + escape(DESCRIPTION, quote=True) + m.group(2), page, count=1)
     graph = [
         {"@type": "CollectionPage", "@id": URL + "#webpage", "url": URL,
-         "name": "Google Gemini models, API pricing and comparisons | SXF / AI",
+         "name": "Google Gemini models: versions, API pricing and features | SXF / AI",
          "description": DESCRIPTION, "inLanguage": "en",
          "isPartOf": {"@id": "https://sxf.si/#website"},
          "about": {"@type": "Thing", "name": "Google Gemini",
@@ -102,8 +102,8 @@ def enrich_gemini_family_page(page: str) -> str:
     page = page.replace('</head>',
         '  <link rel="stylesheet" href="/assets/gemini-family.css" />\n</head>', 1)
     page = page.replace('<p class="eyebrow">MODEL INTELLIGENCE</p><h1>Gemini<br><span>release signals.</span></h1>',
-        '<p class="eyebrow">GOOGLE GEMINI MODEL FAMILY · SXF REFERENCE</p>'
-        '<h1>Google Gemini models<br><span>compared for 2026.</span></h1>', 1)
+        '<p class="eyebrow">GOOGLE GEMINI · MODEL FAMILY REFERENCE</p>'
+        '<h1>Google Gemini Models<br><span>Versions, Pricing, Features &amp; API</span></h1>', 1)
     page = page.replace('<section class="signal-layout shell">',
         content + '\n<section class="signal-layout shell">', 1)
     page = page.replace('<section class="related-signals shell">',

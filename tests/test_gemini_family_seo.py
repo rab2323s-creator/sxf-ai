@@ -39,6 +39,13 @@ def check():
     assert 'src="/assets/gemini-family.js"' in page
     assert 'class="signal-list"' in page, "Existing Gemini release signals removed"
     assert "data-what-changed" in page, "Model history guard missing"
+    assert "id=\"gemini-search-answers\"" in page
+    assert "id=\"gemini-checklist\"" in page
+    assert "Gemini 3.8 Flash vs 3.7 Flash: what changed?" in page
+    assert "Gemini Embedding 001 vs Embedding 2" in page
+    assert "Gemini 3.8 Flash TTS API" in page
+    assert "Google Gemini Models<br><span>Versions, Pricing, Features &amp; API</span>" in page
+    assert "compared for 2026." not in page
     assert "data-gemini-cost-lab" in page
     assert "Gemini 4 Carbon" in page and "Gemini 3.8 Flash" in page
     assert "November 11, 2026" in page
@@ -59,7 +66,7 @@ def check():
 
     links = Links()
     links.feed(page)
-    needed_ids = {"gemini-models", "gemini-comparison", "gemini-pricing", "gemini-cost-lab",
+    needed_ids = {"gemini-search-answers", "gemini-checklist", "gemini-models", "gemini-comparison", "gemini-pricing", "gemini-cost-lab",
                   "gemini-api", "gemini-capabilities", "gemini-compare-links",
                   "gemini-faq", "gemini-sources", "gemini-news"}
     assert needed_ids <= links.ids, sorted(needed_ids - links.ids)
