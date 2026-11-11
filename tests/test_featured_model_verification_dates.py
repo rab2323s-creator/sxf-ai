@@ -31,7 +31,9 @@ for model_id,path in paths.items():
   assert blocks,model_id
   nodes=json.loads(blocks[0])["@graph"]
   article=next(n for n in nodes if n["@type"]=="TechArticle")
-  assert article["dateModified"]=="2026-11-10",(model_id,article["dateModified"])
+  # Editorial revisions may postdate a provider model-card verification.
+  expected_modified = "2026-11-11" if model_id == "gpt-6-astra" else verified
+  assert article["dateModified"]==expected_modified,(model_id,article["dateModified"])
   assert model_id in history["state"],model_id
   assert history["state"][model_id]["last_event_verified_at"]=="2026-09-27",model_id
 g56=(ROOT/paths["gpt-5.6-sol"]).read_text(encoding="utf-8")

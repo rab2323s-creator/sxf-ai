@@ -15,13 +15,16 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "data/model-page-content/gpt-6-astra.html"
 CANONICAL = "https://sxf.si/models/gpt-6-astra/"
 DATASET = CANONICAL.replace("/models/gpt-6-astra/", "/data/research/gpt6-astra-cost-lab-2026-11.csv")
+BOUNDARY_CHART = CANONICAL + "astra-272k-cost-boundary.svg"
+H1 = "GPT-6 Astra: API Pricing, Benchmarks, Context Window & Performance"
 TITLE = "GPT-6 Astra: Pricing, Benchmarks, API & 1.05M Context | SXF"
 DESCRIPTION = ("GPT-6 Astra API pricing, 1.05M context, benchmark results, reasoning controls "
                "and SXF's original 272K-token billing experiment with cost calculator and CSV.")
 FAQ = [
     ("What is GPT-6 Astra?", "GPT-6 Astra is OpenAI's highest-capability GPT-6 tier for demanding reasoning, computer use, coding, research and professional work."),
     ("What is the GPT-6 Astra model ID?", "The official OpenAI API model ID is gpt-6-astra."),
-    ("How much does GPT-6 Astra cost per million tokens?", "At Standard short-context rates, GPT-6 Astra costs $10 per million uncached input tokens, $1 per million cached input reads, $12.50 per million cache-write tokens, and $50 per million output tokens. Longer prompts have higher rates."),
+    ("How much does GPT-6 Astra cost per million tokens?", "At Standard short-context rates, GPT-6 Astra costs $10 per million uncached input tokens, $1 per million cached input reads, $12.50 per million 30-minute cache writes, $25 for 12-hour cache writes, and $50 per million output tokens. Longer prompts have higher rates."),
+    ("What is the difference between 30-minute and 12-hour cache writes?", "For Standard short-context GPT-6 Astra, cache writes are $12.50 per million tokens for a 30-minute minimum cache lifetime and $25 for 12 hours. These are full write prices, not additional surcharges; cached reads cost the same for either duration."),
     ("What is the context window of GPT-6 Astra?", "The documented context window is 1,050,000 tokens, with a separate maximum output limit of 128,000 tokens."),
     ("When does long-context pricing start for GPT-6 Astra?", "For prompts exceeding 272,000 input tokens, all input and cache rates double and output rates rise by 1.5 times for the full request. Exactly 272,000 input tokens stays at short-context rates."),
     ("Does GPT-6 Astra accept images?", "Yes. OpenAI documents text and image input with text output."),
@@ -45,7 +48,9 @@ def _rate(model, current):
         raise ValueError("Astra: exactly one active Standard rate is required")
     return matches[0]
 
-def calculate(model, current, new=0, cached=0, write=0, output=0):
+def calculate(model, current, new=0, cached=0, write=0, output=0, cache_ttl="30m"):
+    if cache_ttl not in {"30m", "12h"}:
+        raise ValueError("Cache-write duration must be 30m or 12h")
     parts = (new, cached, write, output)
     if any(not isinstance(v, int) or v < 0 for v in parts):
         raise ValueError("Token counts must be non-negative integers")
@@ -58,7 +63,7 @@ def calculate(model, current, new=0, cached=0, write=0, output=0):
     factors = long_info["multipliers"] if long else {k: 1 for k in ("input","cached_input","cache_write","output")}
     return ((new * rates["input"] * factors["input"] +
              cached * rates["cached_input"] * factors["cached_input"] +
-             write * rates["cache_write"] * factors["cache_write"] +
+             write * rates["cache_write"] * (2 if cache_ttl == "12h" else 1) * factors["cache_write"] +
              output * rates["output"] * factors["output"]) / 1000000)
 
 def enrich_gpt6_astra_page(page, models_by_id):
@@ -81,12 +86,17 @@ def enrich_gpt6_astra_page(page, models_by_id):
     article = next(x for x in schema["@graph"] if x["@type"] == "TechArticle")
     article.update({"headline": TITLE.replace(" | SXF", ""),
                     "description": DESCRIPTION,
-                    "dateModified": current,
+                    "datePublished": "2026-11-10",
+                    "dateModified": max(current, "2026-11-11"),
+                    "author": {"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/about/"},
+                    "publisher": {"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
+                    "image": BOUNDARY_CHART,
                     "mainEntityOfPage": CANONICAL,
                     "isPartOf":{"@id":"https://sxf.si/#website"},
                     "citation":[
                        "https://developers.openai.com/api/docs/models/gpt-6-astra",
                        "https://developers.openai.com/api/docs/pricing",
+                       "https://developers.openai.com/api/docs/guides/prompt-caching",
                        "https://openai.com/index/gpt-6-astra/",
                        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
                        DATASET
@@ -105,6 +115,8 @@ def enrich_gpt6_astra_page(page, models_by_id):
     rendered_schema = '<script type="application/ld+json">' + json.dumps(
         schema, ensure_ascii=False, separators=(",", ":")).replace("<", r"\u003c") + '</script>'
     page = _replace_once(page, r'<script type="application/ld\+json">.+?</script>', rendered_schema)
+    page = _replace_once(page, r'<h1>GPT-6 Astra<br><span>verified model reference\.</span></h1>',
+                         '<h1>'+escape(H1)+'</h1>')
     for pattern, replacement in [
         (r"<title>.*?</title>", "<title>"+escape(TITLE)+"</title>"),
         (r'<meta name="description" content="[^"]*" />', '<meta name="description" content="'+escape(DESCRIPTION, quote=True)+'" />'),
@@ -151,6 +163,8 @@ def enrich_gpt6_astra_page(page, models_by_id):
     for label,rates in (("ASTRA",a_rate),("SOL",s_rate)):
         for suffix,field in (("INPUT","input"),("CACHED","cached_input"),("WRITE","cache_write"),("OUTPUT","output")):
             tokens[label+"_"+suffix]=str(rates[field])
+        # OpenAI's 12-hour write is 2.5x input vs 1.25x for 30-minute writes.
+        tokens[label+"_WRITE_12H"]=str(rates["cache_write"] * 2)
     for key,value in tokens.items():
         token="{{"+key+"}}"
         if authored.count(token) != 1:
@@ -158,8 +172,8 @@ def enrich_gpt6_astra_page(page, models_by_id):
         authored=authored.replace(token,value)
     page = _replace_once(page,r'(?=<section class="model-change-watch shell")', authored+"\n      ")
     page = _replace_once(page,r'<body class="intel-page model-page">','<body class="intel-page model-page astra-research-page">')
-    page = _replace_once(page,r"(?=</head>)",'<link rel="stylesheet" href="/models/gpt-6-astra/research.css?v=20261110-mobile" />\n      ')
-    page = _replace_once(page,r"(?=</body>)",'<script src="/models/gpt-6-astra/research.js" defer></script>')
+    page = _replace_once(page,r"(?=</head>)",'<link rel="stylesheet" href="/models/gpt-6-astra/research.css?v=20261111-cachettl" />\n      ')
+    page = _replace_once(page,r"(?=</body>)",'<script src="/models/gpt-6-astra/research.js?v=20261111-cachettl" defer></script>')
     if "data-model-history" not in page or "data-model-evaluations" not in page:
         # Evaluations link is injected downstream by the main site generator.
         if "data-model-history" not in page:

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="530" viewBox="0 0 1080 530" role="img" aria-labelledby="title desc">
+<title id="title">GPT-6 Astra price discontinuity after 272,000 input tokens</title>
+<desc id="desc">SXF's deterministic Standard API pricing calculation for two uncached requests with 4,000 output tokens. At 272,000 input tokens the price is $2.92000; at 272,001 input tokens the price is $5.74002, a 96.6 percent increase. Rates for the full request change at the threshold, not only for one extra token. Not a live invoice.</desc>
+<rect width="1080" height="530" rx="28" fill="#0b1421"/>
+<rect x="1" y="1" width="1078" height="528" rx="27" fill="none" stroke="#344d67" stroke-width="2"/>
+<text x="60" y="61" font-family="Arial,sans-serif" fill="#78e7d4" font-size="17" font-weight="700" letter-spacing="2">SXF / AI  ·  ORIGINAL PRICING MODEL</text>
+<text x="60" y="105" font-family="Arial,sans-serif" fill="#f5f8ff" font-size="30" font-weight="700">One extra input token, a different rate tier</text>
+<text x="60" y="142" font-family="Arial,sans-serif" fill="#b4cada" font-size="18">GPT-6 Astra  ·  Standard API  ·  4,000 output tokens  ·  no caching</text>
+<text x="60" y="211" font-family="Arial,sans-serif" fill="#d6e4f0" font-size="18" font-weight="700">Input tokens</text>
+<text x="357" y="211" font-family="Arial,sans-serif" fill="#d6e4f0" font-size="18" font-weight="700">Estimated request cost (USD)</text>
+<line x1="357" y1="227" x2="357" y2="402" stroke="#46617e" stroke-width="2"/>
+<line x1="357" y1="414" x2="957" y2="414" stroke="#46617e" stroke-width="2"/>
+<text x="60" y="279" font-family="Arial,sans-serif" fill="#f4f8fc" font-size="25" font-weight="700">272,000</text>
+<text x="60" y="304" font-family="Arial,sans-serif" fill="#9bb2c9" font-size="15">Short-context tier</text>
+<rect x="371" y="244" width="278" height="68" rx="11" fill="#3d9dab"/>
+<text x="668" y="288" font-family="Arial,sans-serif" fill="#f2f7fc" font-size="26" font-weight="700">$2.92000</text>
+<text x="60" y="374" font-family="Arial,sans-serif" fill="#f4f8fc" font-size="25" font-weight="700">272,001</text>
+<text x="60" y="399" font-family="Arial,sans-serif" fill="#9bb2c9" font-size="15">Long-context tier</text>
+<rect x="371" y="335" width="547" height="68" rx="11" fill="#69d9b7"/>
+<text x="930" y="379" font-family="Arial,sans-serif" fill="#f2f7fc" font-size="26" font-weight="700" text-anchor="end">$5.74002</text>
+<rect x="60" y="444" width="960" height="54" rx="13" fill="#152a39" stroke="#355973"/>
+<text x="84" y="477" font-family="Arial,sans-serif" fill="#e2f6ed" font-size="18" font-weight="700">+96.6% modelled cost: higher rates apply to the entire request.</text>
+<text x="1019" y="520" text-anchor="end" font-family="Arial,sans-serif" fill="#96abbf" font-size="12">Source: OpenAI published rate table · SXF CSV, 10 Nov 2026 · No API calls</text>
+</svg>
