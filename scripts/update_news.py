@@ -5744,6 +5744,12 @@ def render_catalog_model_page(model_id, items):
             page,
             model_history_html([model_id], f'{model["model"]} verified history.')
         )
+    if model_id == "gemini-3.8-flash" and 'data-gf-comparison-bridge' not in page:
+        page = inject_before_main_end(page, '''<aside class="shell" data-gf-comparison-bridge
+          aria-label="Gemini Flash generation comparison">
+          <div class="model-related-links"><a href="/compare/gemini-3-8-flash-vs-gemini-3-7-flash/">
+          <span>GEMINI FLASH UPGRADE</span><strong>Gemini 3.8 Flash vs 3.7 Flash:
+          pricing, benchmarks, coding and migration</strong><b>↗</b></a></div></aside>''')
     if "data-model-comparisons" not in page:
         page = inject_before_main_end(page, model_comparison_links_html(model_id))
     if "data-model-evaluations" not in page:
@@ -9716,6 +9722,18 @@ def generic_comparison_page_html(comparison):
         f'<a href="/compare/{escape(candidate["slug"], quote=True)}/"><span>{escape(candidate["kicker"])}</span><strong>{escape(candidate["title"])}</strong><b>↗</b></a>'
         for _, candidate in related[:4]
     )
+
+    if comparison["slug"] == "gemini-3-8-flash-vs-gemini-3-7-flash":
+        # A search-intent-focused article, owned by a durable authored template.
+        # Keep live catalog facts, external evaluations and history regenerated.
+        from gemini_flash_comparison import render_page as render_gemini_flash_comparison
+        return render_gemini_flash_comparison(
+            page_head=page_head, page_header=page_header, page_footer=page_footer,
+            live_facts=compare_live_facts_html(model_ids),
+            evaluations=comparison_evidence_html(model_ids),
+            changes=compare_change_watch_html(model_ids),
+            related_html=related_html, verified=verified,
+        )
 
     faq = [
         (f'Which has the larger context window: {left["model"]} or {right["model"]}?', compare_decision_items(model_ids)[0][1] if decision_items else "See the verified facts table."),

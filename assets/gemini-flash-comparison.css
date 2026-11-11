@@ -1,0 +1,68 @@
+/* Dedicated Gemini 3.8 / 3.7 decision article: responsive, mobile-first. */
+.gf-upgrade{--gf-border:rgba(134,173,203,.27);--gf-surface:rgba(16,28,44,.86);--gf-ink:#e3edf6;--gf-accent:#83d8e7;color:var(--gf-ink);padding-bottom:2rem}
+.gf-upgrade *{box-sizing:border-box}
+.gf-upgrade a{color:var(--gf-accent);text-underline-offset:3px;overflow-wrap:anywhere}
+.gf-upgrade h2,.gf-upgrade h3{color:#f2f9ff;letter-spacing:-.025em;line-height:1.24}
+.gf-upgrade p,.gf-upgrade li{line-height:1.7}
+.gf-upgrade .eyebrow{color:#8fd7e9;letter-spacing:.13em;font-size:.72rem;font-weight:750}
+.gf-answer{background:radial-gradient(ellipse at 95% 0,rgba(40,111,148,.3),transparent 60%),linear-gradient(135deg,#132b3f,#0b1929);padding:clamp(1.25rem,3vw,2.5rem);border:1px solid #417d96;border-radius:19px;margin-top:1.4rem}
+.gf-answer h2{font-size:clamp(1.5rem,3vw,2.25rem);margin:.5rem 0 1rem}
+.gf-answer>p{max-width:98ch}
+.gf-two-choices,.gf-proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.4rem 0}
+.gf-two-choices article,.gf-proof-grid article,.gf-cases article{background:var(--gf-surface);border:1px solid var(--gf-border);border-radius:14px;padding:1.1rem;min-width:0}
+.gf-two-choices span,.gf-proof-grid span{font-size:.7rem;letter-spacing:.1em;color:#9ddae8;font-weight:700}
+.gf-two-choices h3,.gf-proof-grid h3{font-size:1.1rem;margin:.55rem 0}
+.gf-two-choices p,.gf-proof-grid p{font-size:.92rem;color:#c5d7e4}
+.gf-two-choices a,.gf-proof-grid a{display:inline-block;margin:.3rem .7rem .25rem 0;font-size:.88rem;font-weight:700}
+.gf-verified,.gf-note{font-size:.85rem;color:#b4cada;margin:1rem 0 0}
+.gf-toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0 0}
+.gf-toc a{display:inline-flex;align-items:center;min-height:44px;border:1px solid var(--gf-border);background:#192e42;border-radius:100px;padding:.5rem .85rem;white-space:nowrap;text-decoration:none!important;color:#d6edfa;font-size:.82rem}
+.gf-toc a:hover,.gf-toc a:focus-visible{border-color:#92dbea;background:#25465c}
+.gf-section{padding:clamp(1.7rem,3.4vw,2.8rem) 0;border-bottom:1px solid var(--gf-border);scroll-margin-top:6rem}
+.gf-section-head{max-width:950px;margin-bottom:1.25rem}
+.gf-section-head h2{font-size:clamp(1.4rem,2.65vw,2.05rem);margin:.35rem 0 .7rem}
+.gf-section-head p{color:#c2d1df}
+.gf-table-scroll{max-width:100%;overflow:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch;border:1px solid var(--gf-border);border-radius:14px}
+.gf-table{width:100%;min-width:720px;border-collapse:collapse;font-size:.88rem;text-align:left;font-variant-numeric:tabular-nums}
+.gf-table thead{background:#20354c}
+.gf-table th,.gf-table td{padding:.86rem .85rem;vertical-align:top;border-bottom:1px solid rgba(145,178,208,.16)}
+.gf-table tbody tr:nth-child(even){background:rgba(34,53,73,.32)}
+.gf-table th[scope=row]{color:#eff8ff}
+.gf-table code{white-space:normal;overflow-wrap:anywhere;color:#b5e8f5;font-size:.83rem}
+.gf-price-example{padding:1rem 1.2rem;background:#14283b;border-left:3px solid #7ccfe1;border-radius:8px;margin-top:1.1rem}
+.gf-price-example p{margin:.5rem 0 0}
+.gf-lab{background:linear-gradient(120deg,rgba(23,60,87,.34),transparent);border:1px solid var(--gf-border);border-radius:18px;padding:clamp(1rem,3vw,1.7rem);margin-top:1.3rem}
+.gf-lab-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:1rem}
+.gf-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.gf-form label{color:#d5e5ef;font-size:.85rem;font-weight:700;min-width:0}
+.gf-form input,.gf-form select{width:100%;display:block;min-width:0;min-height:46px;margin-top:.45rem;background:#0b1b2a;color:white;border:1px solid #587a94;border-radius:9px;padding:.65rem .7rem;font:inherit;font-variant-numeric:tabular-nums}
+.gf-form input:focus-visible,.gf-form select:focus-visible{outline:2px solid #8cddeb;outline-offset:2px}
+.gf-results{background:#081a2a;border:1px solid #356278;border-radius:13px;padding:1.2rem;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.9rem}
+.gf-results-label{font-size:.74rem;letter-spacing:.08em;font-weight:750;color:#a7d9e7;margin:0}
+.gf-results>div{display:flex;justify-content:space-between;gap:.5rem;align-items:center;border-bottom:1px solid var(--gf-border);padding-bottom:.6rem}
+.gf-results span{font-size:.85rem}
+.gf-results strong{font-size:clamp(1rem,2.2vw,1.35rem);white-space:nowrap;color:white;font-variant-numeric:tabular-nums}
+.gf-results small{color:#aec5d7;line-height:1.6}
+.gf-results-diff strong{color:#9de5eb}
+.gf-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.gf-cases article>span{font-size:.8rem;color:#90ddeb;font-weight:800}
+.gf-cases h3{font-size:1.08rem;margin:.55rem 0}
+.gf-cases p{font-size:.92rem;color:#c6d7e4}
+.gf-code{background:#081723;border:1px solid #3b637d;border-radius:14px;overflow:hidden}
+.gf-code>div{display:flex;justify-content:space-between;gap:.8rem;flex-wrap:wrap;background:#192f45;padding:.85rem 1rem;font-size:.84rem;font-weight:750}
+.gf-code pre{padding:1.1rem;margin:0;max-width:100%;overflow:auto;color:#d8eef7;font-size:.82rem;line-height:1.6;tab-size:4}
+.gf-checklist{padding-left:1.4rem;display:grid;gap:.65rem;margin-top:1.4rem}
+.gf-checklist li{padding-left:.3rem}
+.gf-faq-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.gf-faq-list details{border:1px solid var(--gf-border);background:var(--gf-surface);border-radius:12px;padding:.9rem 1.1rem;min-width:0}
+.gf-faq-list summary{cursor:pointer;font-weight:750;line-height:1.5}
+.gf-faq-list details[open]{border-color:#79d6e8}
+.gf-faq-list p{color:#c4d6e3;font-size:.91rem}
+.gf-sources{padding-left:1.35rem;display:grid;gap:.6rem}
+.gf-sources li{padding:.2rem .4rem}
+.gf-sources span{display:block;font-size:.83rem;color:#b1c9db;margin-top:.2rem}
+@media(max-width:760px){.gf-answer{margin-top:1rem;border-radius:14px}.gf-two-choices,.gf-proof-grid,.gf-cases,.gf-lab-grid,.gf-faq-list{grid-template-columns:minmax(0,1fr)}.gf-form{grid-template-columns:minmax(0,1fr)}.gf-toc{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-bottom:.6rem}.gf-section{padding:1.6rem 0}.gf-table{font-size:.81rem}.gf-table th,.gf-table td{padding:.72rem}.gf-code pre{font-size:.73rem}}
+@media(prefers-reduced-motion:reduce){.gf-upgrade *{scroll-behavior:auto}}
+
+/* Keep auto-generated fact and external-evaluation grids within the article shell. */
+.gf-upgrade .compare-live-facts.shell,.gf-upgrade .evaluation-compare.shell{width:100%;max-width:none;padding-inline:0}

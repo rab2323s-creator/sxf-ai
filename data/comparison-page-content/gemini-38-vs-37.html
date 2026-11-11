@@ -1,0 +1,117 @@
+<div class="gf-upgrade shell" data-gemini-flash-upgrade="1">
+  <section class="gf-answer" id="gf-answer" aria-labelledby="gf-answer-title">
+    <p class="eyebrow">SXF DIRECT ANSWER · MODEL UPGRADE DECISION</p>
+    <h2 id="gf-answer-title">Gemini 3.8 Flash vs 3.7 Flash: which should you use?</h2>
+    <p><strong>Choose Gemini 3.8 Flash to test first for difficult coding, long-horizon software engineering, autonomous agents and multi-step reasoning.</strong> Google describes substantial improvements over Gemini 3.7 Flash in those workloads. <strong>Keep Gemini 3.7 Flash in consideration for already-reliable, efficiency-first deployments</strong> where 3.8's extra verification may not justify additional generated reasoning tokens. Google explicitly says 3.7 remains supported.</p>
+    <p>The models have the <strong>same published introductory Standard token rates</strong>, the same <strong>1,048,576 input / 65,536 output token limits</strong> and the same main input types. But identical per-token prices do <em>not</em> guarantee identical per-task costs: complex Gemini 3.8 work can generate more thinking tokens or use more tool iterations. This comparison is about <strong>successful-task cost, not just token price</strong>.</p>
+    <div class="gf-two-choices">
+      <article><span>TEST FIRST FOR COMPLEX WORK</span><h3>Gemini 3.8 Flash</h3><p>Long-running coding agents, difficult multi-file changes, deep verification and hard professional reasoning.</p><a href="/models/gemini-3-8-flash/">Gemini 3.8 Flash model specs ↗</a></article>
+      <article><span>COMPARE FOR EFFICIENCY</span><h3>Gemini 3.7 Flash</h3><p>Stable existing integrations, lower-effort tasks and workloads where extra thought or retries do not add measurable value.</p><a href="/models/gemini-3-7-flash/">Gemini 3.7 Flash API & pricing ↗</a></article>
+    </div>
+    <p class="gf-verified">No synthetic winner score. SXF reference reviewed <time datetime="2026-11-11">November 11, 2026</time>. Product claims are attributed to Google; independent scores are identified separately. <a href="#gf-sources">See official sources</a>.</p>
+  </section>
+  <nav class="gf-toc" aria-label="Gemini 3.8 versus 3.7 contents">
+    <a href="#gf-differences">Key differences</a><a href="#gf-pricing">Pricing</a><a href="#gf-cost-lab">SXF cost lab</a><a href="#gf-benchmarks">Benchmarks</a><a href="#gf-use-cases">Best use cases</a><a href="#gf-migration">Migration</a><a href="#gf-faq">FAQ</a><a href="#gf-sources">Sources</a>
+  </nav>
+  <!-- SXF_GEMINI_FLASH_LIVE_FACTS -->
+  <section class="gf-section" id="gf-differences" aria-labelledby="gf-differences-title">
+    <div class="gf-section-head"><p class="eyebrow">MODEL DIFFERENCES THAT MATTER</p><h2 id="gf-differences-title">Gemini 3.8 Flash vs Gemini 3.7 Flash: specs and capabilities</h2><p>Both are production text-output models with multimodal input. What most separates them is the intended difficulty and behavior of longer-running tasks, not the size of the context window.</p></div>
+    <div class="gf-table-scroll" role="region" aria-label="Gemini 3.8 and 3.7 specification comparison" tabindex="0"><table class="gf-table"><thead><tr><th scope="col">Feature</th><th scope="col">Gemini 3.8 Flash</th><th scope="col">Gemini 3.7 Flash</th><th scope="col">What it means</th></tr></thead><tbody>
+      <tr><th scope="row">API model ID</th><td><code>gemini-3.8-flash</code></td><td><code>gemini-3.7-flash</code></td><td>Use explicit IDs when testing a migration</td></tr>
+      <tr><th scope="row">Availability</th><td>Stable / GA</td><td>Stable / GA, still supported</td><td>No need to migrate solely because 3.8 exists</td></tr>
+      <tr><th scope="row">Input context</th><td>1,048,576 tokens</td><td>1,048,576 tokens</td><td>No context-size advantage</td></tr>
+      <tr><th scope="row">Maximum output</th><td>65,536 tokens</td><td>65,536 tokens</td><td>The ceiling is not a guarantee of generated quality</td></tr>
+      <tr><th scope="row">Inputs / output</th><td>Text, image, video, audio, PDF / text</td><td>Text, image, video, audio, PDF / text</td><td>Neither is an image/audio generation endpoint</td></tr>
+      <tr><th scope="row">Thinking levels</th><td>Low, medium (default), high</td><td>Low, medium (default), high</td><td>Test matched thinking levels before comparing costs or speed</td></tr>
+      <tr><th scope="row">Tools</th><td>Function calling, structured output, code execution, Search/Maps grounding</td><td>Function calling, structured output, code execution, Search/Maps grounding</td><td>Tool availability alone does not measure tool reliability</td></tr>
+      <tr><th scope="row">Computer use</th><td>Supported</td><td>Supported in preview</td><td>Check account/tier access and application safeguards</td></tr>
+      <tr><th scope="row">Main positioning</th><td>Long-horizon engineering and agents</td><td>Efficient everyday coding and agents</td><td>3.8 is a candidate for harder verification-heavy tasks</td></tr>
+    </tbody></table></div>
+    <p class="gf-note">Facts: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer">Google 3.8 model sheet</a> and <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash" target="_blank" rel="noopener noreferrer">Google 3.7 model sheet</a>. The capability matrix may evolve as Google updates its documentation.</p>
+  </section>
+  <section class="gf-section" id="gf-pricing" aria-labelledby="gf-pricing-title">
+    <div class="gf-section-head"><p class="eyebrow">GOOGLE API COST · DATE-AWARE</p><h2 id="gf-pricing-title">Gemini 3.8 vs 3.7 Flash pricing: are they the same?</h2><p><strong>Yes, the published paid Standard per-token rates match</strong> for these two models at the stated dates. These numbers are USD per 1 million tokens and apply to the stated pricing tier—not Gemini app subscriptions.</p></div>
+    <div class="gf-table-scroll" role="region" aria-label="Gemini 3.8 and 3.7 price comparison by effective date" tabindex="0"><table class="gf-table"><thead><tr><th scope="col">Paid Standard text tokens</th><th scope="col">3.8 until Dec 31, 2026</th><th scope="col">3.7 until Dec 31, 2026</th><th scope="col">Both from Jan 1, 2027</th></tr></thead><tbody>
+      <tr><th scope="row">Input per 1M</th><td>$0.75</td><td>$0.75</td><td>$1.50</td></tr>
+      <tr><th scope="row">Output per 1M (including thinking)</th><td>$3.75</td><td>$3.75</td><td>$7.50</td></tr>
+      <tr><th scope="row">Cached input per 1M</th><td>$0.075</td><td>$0.075</td><td>$0.15</td></tr>
+    </tbody></table></div>
+    <div class="gf-price-example"><strong>One identical-token example</strong><p>100,000 uncached input tokens + 10,000 billed output tokens = <strong>$0.1125 for either model</strong> at introductory Standard rates, excluding other charges. If 3.8 generates 12,000 billed output tokens for the same task, its estimated token bill becomes <strong>$0.1200</strong>—an arithmetic illustration, <em>not</em> measured evidence that it always uses 20% more tokens.</p></div>
+    <p class="gf-note">Actual billing can include cached input/storage, audio/video processing, tool grounding, retries and different inference tiers. The <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">official Google API pricing table</a> is authoritative for current rates. Explore other providers at <a href="/models/pricing/">SXF AI model pricing</a>.</p>
+  </section>
+  <section class="gf-section gf-lab" id="gf-cost-lab" data-gf-cost-lab aria-labelledby="gf-cost-lab-title">
+    <div class="gf-section-head"><p class="eyebrow">ORIGINAL SXF TOOL · PRIVATE IN-BROWSER MATH</p><h2 id="gf-cost-lab-title">Gemini 3.8 vs 3.7 cost-per-workload calculator</h2><p>Both models use the same token rates. The cost difference comes from how many billable tokens a real workflow generates. Model a scenario with equal input sizes and independently editable output usage; this tool does not guess the models' actual reasoning behavior.</p></div>
+    <div class="gf-lab-grid">
+      <div class="gf-form">
+        <label>Price period<select data-gf-period><option value="2026">Through December 2026</option><option value="2027">January 2027 onward</option></select></label>
+        <label>Requests per month<input data-gf-requests type="number" min="0" max="100000000" step="100" value="1000" inputmode="numeric"></label>
+        <label>Input tokens per request<input data-gf-input type="number" min="0" max="100000000" step="1000" value="10000" inputmode="numeric"></label>
+        <label>3.7 output tokens per request<input data-gf-out37 type="number" min="0" max="100000000" step="100" value="1000" inputmode="numeric"></label>
+        <label>3.8 output tokens per request<input data-gf-out38 type="number" min="0" max="100000000" step="100" value="1000" inputmode="numeric"></label>
+      </div>
+      <div class="gf-results" aria-live="polite" aria-atomic="true">
+        <p class="gf-results-label">Estimated monthly Standard token spend</p>
+        <div><span>Gemini 3.7 Flash</span><strong data-gf-total37>$11.2500</strong></div>
+        <div><span>Gemini 3.8 Flash</span><strong data-gf-total38>$11.2500</strong></div>
+        <div class="gf-results-diff"><span>3.8 minus 3.7</span><strong data-gf-diff>$0.0000</strong></div>
+        <small data-gf-assumptions>Default scenario: 1,000 requests, 10k input and 1k output each. Excludes caching, tool charges, storage, non-text inputs, taxes and retries.</small>
+      </div>
+    </div>
+    <p class="gf-note">This is an original SXF estimating interface—not an API connection, benchmark, or guarantee. Use <code>usage_metadata</code> from your own API requests to supply real input/output/reasoning totals. The calculator runs locally and makes no network requests.</p>
+  </section>
+  <section class="gf-section" id="gf-benchmarks" aria-labelledby="gf-benchmarks-title">
+    <div class="gf-section-head"><p class="eyebrow">BENCHMARKS · CLAIMS AND MEASUREMENTS SEPARATED</p><h2 id="gf-benchmarks-title">Is Gemini 3.8 Flash better than 3.7 in coding and reasoning?</h2><p><strong>Google reports improvements</strong> in long-horizon software engineering, autonomous-agent workflows and specialist multi-step reasoning for 3.8 Flash. That is useful evidence of intended progress, but vendor launch results are not equivalent to a reproducible SXF head-to-head on your own workload.</p></div>
+    <div class="gf-proof-grid">
+      <article><span>GOOGLE · PROVIDER-REPORTED</span><h3>Long-horizon coding gains</h3><p>Google positions 3.8 Flash as a more capable workhorse for complex engineering and cites its DeepSWE v1.1 and professional-domain evaluations. Reproduce with the same benchmark, settings and tool environment before treating the result as a production expectation.</p><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" rel="noopener noreferrer" target="_blank">Google's September 2026 release notes ↗</a></article>
+      <article><span>SXF CATALOG · INDEPENDENT OBSERVATION SNAPSHOT</span><h3>Artificial Analysis index 4.3.2</h3><p>SXF's current evaluation registry records a version-pinned 3.8-vs-3.7 score comparison in the comparable group <code>artificial-analysis-v4.3.2</code>. This is a version-specific snapshot—not a universal percentage, not an SXF-run test and not a latency comparison.</p><a href="/evaluations/">Review independent evaluation methodology ↗</a><a href="/data/model-evaluations.json">Inspect SXF evaluation data ↗</a></article>
+    </div>
+    <p class="gf-note"><strong>Interpretation:</strong> 3.8 is a reasonable first test for more demanding tasks; there is no defensible blanket claim that 3.8 is always faster, cheaper or better for every prompt. Treat thinking effort, tool access, benchmark version and hidden retries as part of the comparison.</p>
+  </section>
+  <section class="gf-section" id="gf-use-cases" aria-labelledby="gf-use-cases-title">
+    <div class="gf-section-head"><p class="eyebrow">DECISION FACTORS · DECIDE BY WORKLOAD</p><h2 id="gf-use-cases-title">When to choose Gemini 3.8 Flash or stay with 3.7 Flash</h2></div>
+    <div class="gf-cases">
+      <article><span>01</span><h3>Multi-file coding agent</h3><p><strong>Try 3.8 first.</strong> Compare completion rate and review time for long-running tasks, then price every successful patch including tool calls and retries.</p></article>
+      <article><span>02</span><h3>Extraction, classification and short answers</h3><p><strong>Keep 3.7 as a baseline.</strong> If both pass the same validation tests, choose based on latency, generated tokens and operating stability rather than the larger version number.</p></article>
+      <article><span>03</span><h3>Research and regulated-domain workflows</h3><p><strong>Evaluate 3.8 carefully.</strong> Google reports stronger reasoning, but independently verify sources, human review and factual accuracy. Model capability does not substitute for professional validation.</p></article>
+      <article><span>04</span><h3>Existing 3.7 production deployment</h3><p><strong>No forced migration.</strong> Pin your model ID, capture current metrics and migrate gradually only if 3.8 offers measurable wins on your own acceptance suite.</p></article>
+    </div>
+  </section>
+  <section class="gf-section" id="gf-migration" aria-labelledby="gf-migration-title">
+    <div class="gf-section-head"><p class="eyebrow">DEVELOPER MIGRATION GUIDE</p><h2 id="gf-migration-title">How to migrate from Gemini 3.7 Flash to 3.8 Flash</h2><p>The simplest smoke test changes the explicit model ID. More complex integrations must also validate thinking, function calls, tool responses and structured outputs.</p></div>
+    <div class="gf-code"><div><span>Python · official Google Gen AI SDK</span><a href="https://ai.google.dev/gemini-api/docs/quickstart" target="_blank" rel="noopener noreferrer">SDK quickstart ↗</a></div><pre><code>pip install -U google-genai
+
+# Set GEMINI_API_KEY in the server environment.
+from google import genai
+
+client = genai.Client()
+for model_id in ("gemini-3.7-flash", "gemini-3.8-flash"):
+    response = client.models.generate_content(
+        model=model_id,
+        contents="Summarize three risks of a long-running coding agent.",
+    )
+    print(model_id, response.text)
+    print(response.usage_metadata)</code></pre></div>
+    <ol class="gf-checklist">
+      <li><strong>Pin model IDs:</strong> test both stable endpoints with the same prompt set, tools, safety rules and rate-limit conditions.</li>
+      <li><strong>Compare thinking settings:</strong> low, medium (default) and high are supported; <code>minimal</code> is not. Compare like with like, and record billed thinking tokens.</li>
+      <li><strong>Audit configuration:</strong> Google's Gemini 3 migration documentation calls for removing deprecated <code>temperature</code>, <code>top_p</code>, <code>top_k</code>, <code>candidate_count</code> and legacy <code>thinking_budget</code> usage where applicable. Validate your exact API and SDK version.</li>
+      <li><strong>Validate tool and turn state:</strong> preserve thought signatures, review function-call matching and test multi-turn agent history.</li>
+      <li><strong>Use quality gates:</strong> replay real tasks; record accuracy, pass rate, retries, latency, output-token usage and human corrections.</li>
+      <li><strong>Roll out with a fallback:</strong> shadow traffic or canary-route to 3.8, monitor regressions and retain 3.7 where it remains the better operational choice.</li>
+    </ol>
+    <p class="gf-note">Follow Google's <a href="https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8" target="_blank" rel="noopener noreferrer">Gemini 3.8 change and migration guidance</a> and <a href="https://ai.google.dev/gemini-api/docs/deprecations" target="_blank" rel="noopener noreferrer">deprecation schedule</a> before shipping changes. An illustrative SDK call is not evidence that all integrations are drop-in compatible.</p>
+  </section>
+  {{GF_FAQ}}
+  <section class="gf-section" id="gf-sources" aria-labelledby="gf-sources-title">
+    <div class="gf-section-head"><p class="eyebrow">OFFICIAL SOURCES · FACT-CHECKED NOV 11, 2026</p><h2 id="gf-sources-title">Official Gemini 3.8 vs 3.7 sources and SXF methodology</h2><p>Published specifications and Standard paid rates come from Google. Release-performance claims are explicitly labelled provider-reported. The independent comparison score is taken from SXF's versioned external-evaluation registry; it is not presented as original SXF benchmark testing.</p></div>
+    <ol class="gf-sources">
+      <li><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash" target="_blank" rel="noopener noreferrer">Google — Gemini 3.8 Flash model specifications</a><span>Model ID, context, output limits, modalities, tools and thinking support</span></li>
+      <li><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash" target="_blank" rel="noopener noreferrer">Google — Gemini 3.7 Flash model specifications</a><span>Older Flash endpoint, production status and supported features</span></li>
+      <li><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Google — Gemini API pricing</a><span>Introductory and post-2026 Standard token rates, cache and serving tiers</span></li>
+      <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" target="_blank" rel="noopener noreferrer">Google — 3.8 Flash launch announcement, September 2, 2026</a><span>Developer positioning, vendor evidence and continued 3.7 support</span></li>
+      <li><a href="https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8" target="_blank" rel="noopener noreferrer">Google — What's new in Gemini 3.8 Flash</a><span>Thinking levels, integration caveats and supported API behavior</span></li>
+      <li><a href="/data/model-evaluations.json">SXF — versioned benchmark observations</a><span>External evaluator, source URLs, comparable group and configuration metadata</span></li>
+    </ol>
+    <p class="gf-note">SXF has not independently established that one model wins all tasks. Pricing is a dated snapshot, and Google may change endpoint availability or billing. Corrected facts should retain their source and verification date. For the wider portfolio, see <a href="/models/gemini/">Google Gemini model-family guide</a> or <a href="/providers/google/">Google's verified SXF model portfolio</a>.</p>
+  </section>
+</div>
