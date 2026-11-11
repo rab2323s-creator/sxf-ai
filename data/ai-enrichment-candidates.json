@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "4b25cd07551eb5b85d10fbb8c5f854e33f469cde6becea482c9518bd9e914d49",
+  "snapshot_hash": "23a0c0deaa20bb1e1f5198f829868b54d27962e0314db0b06cfe3318096f7780",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -15,6 +15,156 @@
   "candidates": [
     {
       "rank": 1,
+      "signal_slug": "google-gemini-healthcare-ehr-connectors-preview",
+      "signal_url": "https://sxf.si/signals/google-gemini-healthcare-ehr-connectors-preview/",
+      "title": "Google Cloud launches Gemini for healthcare.",
+      "source": "Google AI",
+      "category": "Models",
+      "published": "2026-11-10T13:00:00Z",
+      "priority_score": 228,
+      "evidence_hash": "0be0fb11cd5ea378580ca807568782b7a492635e9b2228370a86052f10010f68",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Google Cloud launches Gemini for healthcare.",
+          "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/",
+          "signal_url": "https://sxf.si/signals/google-gemini-healthcare-ehr-connectors-preview/",
+          "source": "Google AI",
+          "published": "2026-11-10T13:00:00Z",
+          "category": "Models",
+          "tags": [
+            "Google AI"
+          ],
+          "summary": "On November 10, 2026, Google Cloud announced a U.S. preview of Gemini for healthcare, an enterprise system that combines specialized healthcare skills, clinical record connectors, controlled agents and audit trails. Read integrations for Epic and Oracle Health are listed among partner capabilities. The product is aimed at providers and payers, not at replacing clinical judgment or becoming a general consumer diagnosis service.",
+          "signal_score": 64,
+          "seo_quality_score": 89,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "named-model",
+            "durable-intelligence-layer",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 2,
+      "signal_slug": "gemini-intelligence-android-pixel-10-features",
+      "signal_url": "https://sxf.si/signals/gemini-intelligence-android-pixel-10-features/",
+      "title": "Gemini Intelligence: New features, on more devices",
+      "source": "Google AI",
+      "category": "Models",
+      "published": "2026-11-10T19:00:00Z",
+      "priority_score": 194,
+      "evidence_hash": "6a9de66630b725a35a449c3f57ad75df44bf32045dfcdf2157368840774a950d",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Gemini Intelligence: New features, on more devices",
+          "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+          "signal_url": "https://sxf.si/signals/gemini-intelligence-android-pixel-10-features/",
+          "source": "Google AI",
+          "published": "2026-11-10T19:00:00Z",
+          "category": "Models",
+          "tags": [
+            "Google AI"
+          ],
+          "summary": "Google announced expanded Gemini Intelligence availability on November 10, 2026 for selected Pixel 10 models and Motorola signature 27, alongside Rambler speech cleanup, custom AI-generated widgets, device troubleshooting and expanded supported app task automation. Some features are planned over subsequent weeks and have restrictions on region, language, device generation, age and subscriptions.",
+          "signal_score": 53,
+          "seo_quality_score": 86,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "named-model",
+            "durable-intelligence-layer",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 3,
       "signal_slug": "introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752",
       "signal_url": "https://sxf.si/signals/introducing-anyspeechrecognizer-and-anydecisionmodel-open-models-for-s-85d9752/",
       "title": "Introducing AnySpeechRecognizer and AnyDecisionModel: Open Models for Speech and Decisions on Apple Platforms",
@@ -86,7 +236,79 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 2,
+      "rank": 4,
+      "signal_slug": "claude-fable-mythos-5-2-benchmarks-pricing",
+      "signal_url": "https://sxf.si/signals/claude-fable-mythos-5-2-benchmarks-pricing/",
+      "title": "Claude Fable 5.2 and Mythos 5.2",
+      "source": "Anthropic",
+      "category": "Models",
+      "published": "2026-11-09T00:00:00Z",
+      "priority_score": 171,
+      "evidence_hash": "efed97f7930c09b8b26af188ebfade23bdd132d480c9e1f00bd8ba625b7579cc",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Claude Fable 5.2 and Mythos 5.2",
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+          "signal_url": "https://sxf.si/signals/claude-fable-mythos-5-2-benchmarks-pricing/",
+          "source": "Anthropic",
+          "published": "2026-11-09T00:00:00Z",
+          "category": "Models",
+          "tags": [],
+          "summary": "Anthropic unveiled Claude Fable 5.2 and Mythos 5.2 on November 9, 2026. The company says both use the same underlying model, while Fable applies stronger cybersecurity and biological safeguards for broad access and Mythos uses verification programs for specialized work. Anthropic advertises $8 per million input tokens and $40 per million output tokens, with a higher-priced fast mode and company-run capability benchmarks.",
+          "signal_score": 46,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "named-model",
+            "durable-intelligence-layer",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://www.anthropic.com/claude-fable-and-mythos-5-2"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 5,
       "signal_slug": "gemini-omni-1-2-flash-video-pricing",
       "signal_url": "https://sxf.si/signals/gemini-omni-1-2-flash-video-pricing/",
       "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
@@ -160,7 +382,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 3,
+      "rank": 6,
       "signal_slug": "gpt-6-cyber-security-benchmarks-access",
       "signal_url": "https://sxf.si/signals/gpt-6-cyber-security-benchmarks-access/",
       "title": "GPT‑6 Cyber: Advancing the frontier of aligned cybersecurity agents",
@@ -484,7 +706,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 4,
+      "rank": 7,
       "signal_slug": "introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-t-2ce02f1",
       "signal_url": "https://sxf.si/signals/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-t-2ce02f1/",
       "title": "Introducing the Microsoft Copilot harness: Unlocking the potential of truly multi-model agentic work",
@@ -559,7 +781,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 8,
       "signal_slug": "github-copilot-xcode-coding-assistant",
       "signal_url": "https://sxf.si/signals/github-copilot-xcode-coding-assistant/",
       "title": "GitHub Copilot is now available in Xcode’s coding assistant",
@@ -634,7 +856,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 9,
       "signal_slug": "github-copilot-app-universe-releases-f3aa6db",
       "signal_url": "https://sxf.si/signals/github-copilot-app-universe-releases-f3aa6db/",
       "title": "GitHub Copilot app, Universe releases",
@@ -707,7 +929,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 10,
       "signal_slug": "github-copilot-in-vs-code-universe-releases-00c85ac",
       "signal_url": "https://sxf.si/signals/github-copilot-in-vs-code-universe-releases-00c85ac/",
       "title": "GitHub Copilot in VS Code, Universe releases",
@@ -746,626 +968,6 @@
         "models": [],
         "source_urls": [
           "https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 8,
-      "signal_slug": "biobasicsbench-ai-wet-lab-data-benchmark",
-      "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
-      "title": "Measuring how AI agents handle everyday wet-lab science",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-11-06T00:00:00Z",
-      "priority_score": 138,
-      "evidence_hash": "a596b973b0827fa60d83d5ca40ca379a05a72a491e36c8df95734b397b85add9",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
-        },
-        "signal": {
-          "title": "Measuring how AI agents handle everyday wet-lab science",
-          "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
-          "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
-          "source": "OpenAI",
-          "published": "2026-11-06T00:00:00Z",
-          "category": "Research",
-          "tags": [
-            "AI Agents",
-            "Research",
-            "OpenAI"
-          ],
-          "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
-          "signal_score": 53,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [
-          {
-            "model_id": "gpt-6-astra",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Astra",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-30",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
-            "pricing_standard": {
-              "start": "2026-09-03",
-              "end": null,
-              "input": 10,
-              "cached_input": 1,
-              "cache_write": 12.5,
-              "output": 50
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-astra",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 9,
-                "type": "baseline",
-                "model_id": "gpt-6-astra",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Astra",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-30",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-03",
-                        "end": null,
-                        "input": 10,
-                        "cached_input": 1,
-                        "cache_write": 12.5,
-                        "output": 50
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_cd339bfc38a22ab47b70",
-                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
-              }
-            ]
-          },
-          {
-            "model_id": "gpt-6-sol",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Sol",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-20",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "none",
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "General-purpose GPT-6 tier for complex coding and agentic workflows with lower unit cost than Astra.",
-            "pricing_standard": {
-              "start": "2026-09-22",
-              "end": null,
-              "input": 2,
-              "cached_input": 0.2,
-              "cache_write": 2.5,
-              "output": 10
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-sol",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 11,
-                "type": "baseline",
-                "model_id": "gpt-6-sol",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Sol",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-20",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "none",
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-22",
-                        "end": null,
-                        "input": 2,
-                        "cached_input": 0.2,
-                        "cache_write": 2.5,
-                        "output": 10
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_68d2a047223acf4b1353",
-                "event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
-              }
-            ]
-          },
-          {
-            "model_id": "gpt-5.6-sol",
-            "provider": "OpenAI",
-            "family": "GPT-5.6",
-            "model": "GPT-5.6 Sol",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-02-16",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "none",
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Flagship GPT-5.6 tier for complex professional work, coding, research, and agentic workflows.",
-            "pricing_standard": {
-              "start": "2026-07-09",
-              "end": null,
-              "input": 4,
-              "cached_input": 0.4,
-              "cache_write": 5,
-              "output": 20
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 7,
-                "type": "baseline",
-                "model_id": "gpt-5.6-sol",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "2c7c5b7821a2b51c547ef3a61ae749fef3eda7bbb69b1682018240e755cce233",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-5.6",
-                  "model": "GPT-5.6 Sol",
-                  "aliases": [
-                    "gpt-5.6"
-                  ],
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-02-16",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "none",
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-07-09",
-                        "end": null,
-                        "input": 4,
-                        "cached_input": 0.4,
-                        "cache_write": 5,
-                        "output": 20
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "aliases": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_7c44878fcb60b82e3adb",
-                "event_hash": "7c44878fcb60b82e3adb0e4c456c9144ae1fc2009f4933bad899912d6c91afaf"
-              }
-            ]
-          }
-        ],
-        "source_urls": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-          "https://developers.openai.com/api/docs/models/gpt-6-astra",
-          "https://developers.openai.com/api/docs/models/gpt-6-sol",
-          "https://developers.openai.com/api/docs/pricing",
-          "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
-      "signal_slug": "introducing-images-2-6",
-      "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
-      "title": "Introducing Images 2.6",
-      "source": "OpenAI",
-      "category": "Tools",
-      "published": "2026-11-04T00:00:00Z",
-      "priority_score": 136,
-      "evidence_hash": "69f7c1f62131266bcd1709a99616dd4ff8b37b6379534fc6c02d858bbb721a25",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing Images 2.6",
-          "url": "https://openai.com/index/introducing-images-2-6",
-          "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
-          "source": "OpenAI",
-          "published": "2026-11-04T00:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
-          "signal_score": 46,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/introducing-images-2-6"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "introducing-the-grid-protectors-program-19244c7",
-      "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
-      "title": "Introducing the Grid Protectors Program",
-      "source": "OpenAI",
-      "category": "Tools",
-      "published": "2026-11-02T15:00:00Z",
-      "priority_score": 136,
-      "evidence_hash": "27566c2960bfc1f8c3d989c29b143de039187fbacd6c8de18cf7256eb4d8dbb6",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing the Grid Protectors Program",
-          "url": "https://openai.com/index/grid-protectors-program",
-          "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
-          "source": "OpenAI",
-          "published": "2026-11-02T15:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "OpenAI announced Grid Protectors on November 2, 2026, outlining how future compute campuses could reduce electricity demand during grid stress. Its Effingham County agreement with Georgia Power includes up to 1,000 MW of flexible demand response, but campus operation, savings and customer-rate effects remain future claims subject to implementation.",
-          "signal_score": 46,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/grid-protectors-program"
         ]
       },
       "requested_output": {

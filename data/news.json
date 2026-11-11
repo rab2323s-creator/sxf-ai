@@ -1,6 +1,56 @@
 {
-  "updated_at": "2026-11-11T06:33:26.613243Z",
+  "updated_at": "2026-11-11T10:32:04.050303Z",
   "items": [
+    {
+      "title": "Gemini Intelligence: New features, on more devices",
+      "summary": "Google announced expanded Gemini Intelligence availability on November 10, 2026 for selected Pixel 10 models and Motorola signature 27, alongside Rambler speech cleanup, custom AI-generated widgets, device troubleshooting and expanded supported app task automation. Some features are planned over subsequent weeks and have restrictions on region, language, device generation, age and subscriptions.",
+      "url": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/",
+      "signal_url": "https://sxf.si/signals/gemini-intelligence-android-pixel-10-features/",
+      "source": "Google AI",
+      "published": "2026-11-10T19:00:00Z",
+      "category": "Models",
+      "tags": [
+        "Google AI"
+      ],
+      "signal_score": 53
+    },
+    {
+      "title": "Google Cloud launches Gemini for healthcare.",
+      "summary": "On November 10, 2026, Google Cloud announced a U.S. preview of Gemini for healthcare, an enterprise system that combines specialized healthcare skills, clinical record connectors, controlled agents and audit trails. Read integrations for Epic and Oracle Health are listed among partner capabilities. The product is aimed at providers and payers, not at replacing clinical judgment or becoming a general consumer diagnosis service.",
+      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/",
+      "signal_url": "https://sxf.si/signals/google-gemini-healthcare-ehr-connectors-preview/",
+      "source": "Google AI",
+      "published": "2026-11-10T13:00:00Z",
+      "category": "Models",
+      "tags": [
+        "Google AI"
+      ],
+      "signal_score": 64
+    },
+    {
+      "title": "Introducing Businesses in ChatGPT",
+      "summary": "OpenAI launched Businesses in ChatGPT beta on November 10, 2026. Eligible businesses can claim a profile in Business Hub, update their details and product feeds, and view aggregated data about mentions and website clicks. A separate Business Agent feature begins with eligible U.S. ecommerce and online-service organizations. Claiming a listing does not guarantee ranking in independent answers or access to a Business Agent.",
+      "url": "https://openai.com/index/introducing-businesses-chatgpt",
+      "signal_url": "https://sxf.si/signals/chatgpt-business-hub-claim-business-agents/",
+      "source": "OpenAI",
+      "published": "2026-11-10T10:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 46
+    },
+    {
+      "title": "Anthropic launches roadshow for proposed initial public offering",
+      "summary": "Anthropic launched the roadshow for its proposed Class A stock IPO on November 10, 2026. The company describes 825 million shares offered, an expected $70–$78 price range, and an application to trade on Nasdaq under ANT. The U.S. registration statement had not become effective at the announcement. Neither a final offering price nor a confirmed first trading date was established in the release.",
+      "url": "https://www.anthropic.com/news/roadshow-launch",
+      "signal_url": "https://sxf.si/signals/anthropic-ipo-roadshow-ant-stock-price/",
+      "source": "Anthropic",
+      "published": "2026-11-10T00:00:00Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 46
+    },
     {
       "title": "Your Experts Have Partners. There's HOPE for Keeping Them Together",
       "summary": "Amazon researchers published HOPE (Higher-Order Pruning of Experts) on November 9, 2026, a technique that selects experts to remove from mixture-of-experts language models while accounting for how pairs of experts cooperate. The team reports the best mean ranking among five pruning methods and an illustrative SWE-Bench Pro result of 42.3 after 50% pruning versus 41.8 for the original model. Those scores apply to specified models and tasks, not a guaranteed 50% reduction in total production costs.",
@@ -11,6 +61,17 @@
       "category": "Tools",
       "tags": [],
       "signal_score": 28
+    },
+    {
+      "title": "Claude Fable 5.2 and Mythos 5.2",
+      "summary": "Anthropic unveiled Claude Fable 5.2 and Mythos 5.2 on November 9, 2026. The company says both use the same underlying model, while Fable applies stronger cybersecurity and biological safeguards for broad access and Mythos uses verification programs for specialized work. Anthropic advertises $8 per million input tokens and $40 per million output tokens, with a higher-priced fast mode and company-run capability benchmarks.",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "signal_url": "https://sxf.si/signals/claude-fable-mythos-5-2-benchmarks-pricing/",
+      "source": "Anthropic",
+      "published": "2026-11-09T00:00:00Z",
+      "category": "Models",
+      "tags": [],
+      "signal_score": 46
     },
     {
       "title": "Copilot code review: API management and review overview updates",
@@ -700,20 +761,6 @@
         "AI Agents"
       ],
       "signal_score": 38
-    },
-    {
-      "title": "Patch the Planet: global response coordination as agents uncover critical vulnerabilities",
-      "summary": "Patch the Planet connects security researchers, maintainers, and incident responders to help address critical vulnerabilities across open source.",
-      "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities",
-      "signal_url": "https://sxf.si/signals/patch-the-planet-global-response-coordination-as-agents-uncover-critic-d3f5195/",
-      "source": "OpenAI",
-      "published": "2026-10-21T07:00:00Z",
-      "category": "Tools",
-      "tags": [
-        "AI Agents",
-        "OpenAI"
-      ],
-      "signal_score": 38
     }
   ],
   "feed_errors": [],
@@ -726,23 +773,23 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 176,
-      "Google AI": 26,
+      "OpenAI": 177,
+      "Google AI": 28,
       "Hugging Face": 69,
       "GitHub": 106,
       "Google Research": 18,
-      "Anthropic": 2,
+      "Anthropic": 4,
       "Meta": 0,
       "xAI": 0,
       "Microsoft": 1
     },
     "current_counts": {
       "OpenAI": 22,
-      "Google AI": 2,
+      "Google AI": 4,
       "Hugging Face": 16,
       "GitHub": 9,
       "Google Research": 4,
-      "Anthropic": 2,
+      "Anthropic": 4,
       "Meta": 0,
       "xAI": 0,
       "Microsoft": 1
@@ -752,13 +799,13 @@
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 1379,
-        "relevance_accepted_count": 1379,
+        "parsed_candidate_count": 1380,
+        "relevance_accepted_count": 1380,
         "quality_accepted_count": 99,
         "accepted_candidate_count": 99,
-        "rejected_candidate_count": 1280,
+        "rejected_candidate_count": 1281,
         "duplicate_count": 2,
-        "age_rejection_count": 1278,
+        "age_rejection_count": 1279,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 22,
@@ -768,7 +815,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "Google AI": {
@@ -777,21 +824,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 20,
         "relevance_accepted_count": 20,
-        "quality_accepted_count": 9,
-        "accepted_candidate_count": 9,
-        "rejected_candidate_count": 11,
+        "quality_accepted_count": 10,
+        "accepted_candidate_count": 10,
+        "rejected_candidate_count": 10,
         "duplicate_count": 0,
-        "age_rejection_count": 11,
+        "age_rejection_count": 10,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 2,
+        "publish_count": 4,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "Hugging Face": {
@@ -814,7 +861,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "GitHub": {
@@ -837,7 +884,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "Google Research": {
@@ -860,7 +907,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "Anthropic": {
@@ -876,14 +923,14 @@
         "age_rejection_count": 19,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 6,
-        "publish_count": 2,
+        "publish_count": 4,
         "adapter": "anthropic-sitemap",
         "adapter_contract_version": "sxf-source-adapter-v1",
         "adapter_discovered_count": 30,
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -908,7 +955,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "xAI": {
@@ -931,7 +978,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       },
       "Microsoft": {
@@ -954,7 +1001,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-11T06:33:00.496258Z",
+        "last_successful_fetch": "2026-11-11T10:31:23.551919Z",
         "errors": []
       }
     },
