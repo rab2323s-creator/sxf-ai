@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "87bd5e7ce9880a6dd1c5cc9d7c40ca8d77ddb3b6128ae9516876e57c0f7bd6d1",
+  "snapshot_hash": "4b25cd07551eb5b85d10fbb8c5f854e33f469cde6becea482c9518bd9e914d49",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -782,81 +782,6 @@
     },
     {
       "rank": 8,
-      "signal_slug": "ai-for-science-expands-to-foundations-and-research-institutions-ad10900",
-      "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
-      "title": "AI for Science expands to foundations and research institutions",
-      "source": "Anthropic",
-      "category": "Research",
-      "published": "2026-10-28T00:00:00Z",
-      "priority_score": 143,
-      "evidence_hash": "f3ea165382e1bc7c2c0b7724669451309daa0d126d875505be8d1cb6e5cf2791",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "AI for Science expands to foundations and research institutions",
-          "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
-          "signal_url": "https://sxf.si/signals/ai-for-science-expands-to-foundations-and-research-institutions-ad10900/",
-          "source": "Anthropic",
-          "published": "2026-10-28T00:00:00Z",
-          "category": "Research",
-          "tags": [
-            "Research"
-          ],
-          "summary": "Anthropic expanded AI for Science on October 28, 2026, highlighting 20 foundations, research institutions and scientific groups receiving or distributing Claude credits. The initiative supports access to AI tools and projects across several scientific fields; it does not establish that a new drug, cure or scientific breakthrough has been validated.",
-          "signal_score": 50,
-          "seo_quality_score": 78,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 9,
       "signal_slug": "biobasicsbench-ai-wet-lab-data-benchmark",
       "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
       "title": "Measuring how AI agents handle everyday wet-lab science",
@@ -1330,7 +1255,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "introducing-images-2-6",
       "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
       "title": "Introducing Images 2.6",
@@ -1368,6 +1293,79 @@
         "models": [],
         "source_urls": [
           "https://openai.com/index/introducing-images-2-6"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "introducing-the-grid-protectors-program-19244c7",
+      "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
+      "title": "Introducing the Grid Protectors Program",
+      "source": "OpenAI",
+      "category": "Tools",
+      "published": "2026-11-02T15:00:00Z",
+      "priority_score": 136,
+      "evidence_hash": "27566c2960bfc1f8c3d989c29b143de039187fbacd6c8de18cf7256eb4d8dbb6",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Introducing the Grid Protectors Program",
+          "url": "https://openai.com/index/grid-protectors-program",
+          "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
+          "source": "OpenAI",
+          "published": "2026-11-02T15:00:00Z",
+          "category": "Tools",
+          "tags": [
+            "OpenAI"
+          ],
+          "summary": "OpenAI announced Grid Protectors on November 2, 2026, outlining how future compute campuses could reduce electricity demand during grid stress. Its Effingham County agreement with Georgia Power includes up to 1,000 MW of flexible demand response, but campus operation, savings and customer-rate effects remain future claims subject to implementation.",
+          "signal_score": 46,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "search-worthy-event",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://openai.com/index/grid-protectors-program"
         ]
       },
       "requested_output": {
