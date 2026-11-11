@@ -35,11 +35,11 @@ def check():
     assert 'render_gemini_flash_comparison(' in generator
     assert 'data-gemini-flash-upgrade="1"' in html
     assert "data-gemini-flash-upgrade" in template
-    assert '<title>Gemini 3.8 vs 3.7 Flash:' in html
+    assert '<title>Gemini 3.8 Flash vs 3.7 Flash:' in html
     assert '<meta name="description" content="' in html and DESCRIPTION[:70] in html
     assert '<link rel="canonical" href="' + URL + '"' in html
     assert 'name="robots" content="index,follow' in html
-    assert html.count("<h1>") == 1 and "Differences, Pricing &amp; Which to Use" in html
+    assert html.count("<h1>") == 1 and "Pricing, Benchmarks &amp; Which to Choose" in html
     assert html.count('type="application/ld+json"') == 1
     assert html.count('<main>') == html.count('</main>') == 1
     assert 'class="compare-v2-decisions shell>' not in html
