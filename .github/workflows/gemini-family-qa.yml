@@ -1,0 +1,47 @@
+name: Gemini family SEO and regeneration quality gate
+
+on:
+  push:
+    paths:
+      - "models/gemini/**"
+      - "assets/gemini-family.*"
+      - "data/model-page-content/gemini-family.html"
+      - "scripts/gemini_family_page.py"
+      - "scripts/update_news.py"
+      - "tests/test_gemini_family_seo.py"
+      - ".github/workflows/gemini-family-qa.yml"
+  pull_request:
+    paths:
+      - "models/gemini/**"
+      - "assets/gemini-family.*"
+      - "data/model-page-content/gemini-family.html"
+      - "scripts/gemini_family_page.py"
+      - "scripts/update_news.py"
+      - "tests/test_gemini_family_seo.py"
+      - ".github/workflows/gemini-family-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gemini-family:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate Python and standalone Gemini calculator JavaScript
+        run: |
+          python -m py_compile scripts/gemini_family_page.py scripts/update_news.py tests/test_gemini_family_seo.py
+          node --check assets/gemini-family.js
+      - name: Gemini schema, FAQ, canonical, links, mobile and integrity
+        run: python tests/test_gemini_family_seo.py
+      - name: Existing model editorial preservation regression
+        run: python tests/test_model_editorial_guard.py
+      - name: Authored model route protection
+        run: python tests/test_authored_model_route_ownership.py
