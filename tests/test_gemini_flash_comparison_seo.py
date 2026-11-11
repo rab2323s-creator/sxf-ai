@@ -45,6 +45,31 @@ def check():
     assert 'class="compare-v2-decisions shell>' not in html
     assert 'data-compare-contract' in html and 'data-model-ids="gemini-3.8-flash,gemini-3.7-flash"' in html
     assert "data-evaluation-comparability" in html
+    # Archived index: distinct evaluator sources, evidence dates and matched High reasoning.
+    assert 'id="gf-benchmarks"' in template
+    assert 'v4.3.2' in template and '41 index points' in template and '39 index points' in template
+    assert '2026-10-04' in template and '2026-10-08' in template
+    assert 'artificial-analysis-v4.3.2' in template and 'source-verification dates' in template
+    assert 'id="gf-practical"' in html and 'id="gf-practical"' in template
+    for source in (template, html):
+        assert 'DeepSWE v1.1' in source and '73.7%' in source and '65.3%' in source
+        assert 'HLE-Verified' in source and '54.9%' in source and '53.6%' in source
+        assert 'CharXiv' in source and '86.2%' in source and '84.5%' in source
+        assert 'GDP.PDF' in source and '35.0%' in source and '34.0%' in source
+        assert 'provider-reported' in source or 'reported by Google DeepMind' in source
+        assert 'https://deepmind.google/models/model-cards/gemini-3-8-flash/' in source
+    for model_id, expected_score, expected_date in (
+        ('gemini-3.8-flash', 41, '2026-10-04'),
+        ('gemini-3.7-flash', 39, '2026-10-08'),
+    ):
+        observations = json.loads((ROOT / 'data/model-evaluations.json').read_text())['observations']
+        matches = [o for o in observations if o['model_id'] == model_id and
+                   o['benchmark_id'] == 'aa-intelligence-index-v4.3.2' and
+                   o['model_configuration']['reasoning_effort'] == 'high']
+        assert len(matches) == 1 and matches[0]['score'] == expected_score
+        assert matches[0]['observed_at'] == expected_date
+        assert matches[0]['comparable_group'] == 'artificial-analysis-v4.3.2'
+
     assert "data-what-changed" in html
     assert "2027" in html and "2026" in html
     assert "data-gf-cost-lab" in html and "data-gf-total37" in html and "data-gf-total38" in html
