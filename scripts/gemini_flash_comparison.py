@@ -87,6 +87,8 @@ def render_page(*, page_head, page_header, page_footer, live_facts, evaluations,
                     "https://ai.google.dev/gemini-api/docs/pricing",
                     "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
                     "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8",
+                    "https://deepmind.google/models/model-cards/gemini-3-8-flash/",
+                    "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
                 ],
             },
             {
