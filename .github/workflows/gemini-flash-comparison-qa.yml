@@ -1,0 +1,47 @@
+name: Gemini 3.8 vs 3.7 comparison SEO contract
+
+on:
+  push:
+    paths:
+      - "compare/gemini-3-8-flash-vs-gemini-3-7-flash/**"
+      - "data/comparison-page-content/gemini-38-vs-37.html"
+      - "scripts/gemini_flash_comparison.py"
+      - "assets/gemini-flash-comparison.*"
+      - "models/gemini-3-8-flash/index.html"
+      - "scripts/update_news.py"
+      - "tests/test_gemini_flash_comparison_seo.py"
+      - ".github/workflows/gemini-flash-comparison-qa.yml"
+  pull_request:
+    paths:
+      - "compare/gemini-3-8-flash-vs-gemini-3-7-flash/**"
+      - "data/comparison-page-content/gemini-38-vs-37.html"
+      - "scripts/gemini_flash_comparison.py"
+      - "assets/gemini-flash-comparison.*"
+      - "models/gemini-3-8-flash/index.html"
+      - "scripts/update_news.py"
+      - "tests/test_gemini_flash_comparison_seo.py"
+      - ".github/workflows/gemini-flash-comparison-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comparison:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Check Python renderer and browser calculator
+        run: |
+          python -m py_compile scripts/gemini_flash_comparison.py scripts/update_news.py tests/test_gemini_flash_comparison_seo.py
+          node --check assets/gemini-flash-comparison.js
+      - name: Gemini Flash search intent, source, JSON-LD, links and responsive contract
+        run: python tests/test_gemini_flash_comparison_seo.py
+      - name: Model editorial preservation regression
+        run: python tests/test_model_editorial_guard.py
