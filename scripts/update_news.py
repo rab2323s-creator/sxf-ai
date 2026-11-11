@@ -11469,6 +11469,8 @@ def build_discovery_pages(items, current_items):
         gpt6_sol_vs_gemini_38_flash_html(items),
         ["gpt-6-sol", "gemini-3.8-flash"],
     )
+    from sol_vs_gemini_comparison import enrich_sol_vs_gemini
+    sol_gemini_page = enrich_sol_vs_gemini(sol_gemini_page)
     (sol_gemini_path / "index.html").write_text(sol_gemini_page, encoding="utf-8")
 
     opus_gemini_path = COMPARE_DIR / CLAUDE_OPUS_GEMINI_COMPARE_SLUG

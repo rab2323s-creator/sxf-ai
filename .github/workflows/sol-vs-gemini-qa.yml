@@ -1,0 +1,40 @@
+name: Sol vs Gemini direct-search SEO checks
+on:
+  push:
+    paths:
+      - "compare/gpt-6-sol-vs-gemini-3-8-flash/**"
+      - "data/comparison-page-content/gpt6-sol-vs-gemini-38.html"
+      - "scripts/sol_vs_gemini_comparison.py"
+      - "scripts/update_news.py"
+      - "assets/sol-vs-gemini.*"
+      - "tests/test_sol_vs_gemini_comparison.py"
+      - ".github/workflows/sol-vs-gemini-qa.yml"
+  pull_request:
+    paths:
+      - "compare/gpt-6-sol-vs-gemini-3-8-flash/**"
+      - "data/comparison-page-content/gpt6-sol-vs-gemini-38.html"
+      - "scripts/sol_vs_gemini_comparison.py"
+      - "scripts/update_news.py"
+      - "assets/sol-vs-gemini.*"
+      - "tests/test_sol_vs_gemini_comparison.py"
+      - ".github/workflows/sol-vs-gemini-qa.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax checks
+        run: |
+          python -m py_compile scripts/sol_vs_gemini_comparison.py scripts/update_news.py tests/test_sol_vs_gemini_comparison.py
+          node --check assets/sol-vs-gemini.js
+      - name: SEO and enriched comparison contract
+        run: python tests/test_sol_vs_gemini_comparison.py
