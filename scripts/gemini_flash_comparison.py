@@ -12,7 +12,7 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = "https://sxf.si/compare/gemini-3-8-flash-vs-gemini-3-7-flash/"
-TITLE = "Gemini 3.8 vs 3.7 Flash: Differences, Pricing & Which to Use | SXF / AI"
+TITLE = "Gemini 3.8 Flash vs 3.7 Flash: Pricing & Differences | SXF / AI"
 DESCRIPTION = (
     "Gemini 3.8 Flash vs 3.7 Flash: compare coding, AI agents, benchmarks, "
     "1M context and API pricing. See which to use, migration advice and SXF cost lab."
@@ -124,7 +124,7 @@ def render_page(*, page_head, page_header, page_footer, live_facts, evaluations,
         + '<nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span>'
         + '<a href="/compare/">Compare</a><span>/</span><span>Gemini 3.8 vs 3.7 Flash</span></nav>'
         + '<p class="eyebrow">GOOGLE GEMINI FLASH API · HEAD-TO-HEAD</p>'
-        + '<h1>Gemini 3.8 Flash vs 3.7 Flash<br><span>Differences, Pricing &amp; Which to Use</span></h1>'
+        + '<h1>Gemini 3.8 Flash vs Gemini 3.7 Flash<br><span>Pricing, Benchmarks &amp; Which to Choose</span></h1>'
         + '<p>Compare Google Gemini Flash versions on coding, agents, 1M context, '
         + 'official API prices, evidence quality and migration tradeoffs. '
         + 'Use SXF’s scenario calculator to estimate real-workload token economics.</p>'
