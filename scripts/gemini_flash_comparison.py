@@ -135,7 +135,7 @@ def render_page(*, page_head, page_header, page_footer, live_facts, evaluations,
         + '</div></section>'
         + source + changes
         + '<section class="compare-v2-related shell">'
-        + '<div class="intel-section-head"><div><p class="eyebrow">RELATED GEMINI AND AI MODEL COMPARISONS</p>'
+        + '<div class="intel-section-head"><div><p class="eyebrow">RELATED MATCHUPS · GEMINI AND AI MODEL COMPARISONS</p>'
         + '<h2>Continue the model-selection decision.</h2></div><a href="/compare/">All comparisons ↗</a></div>'
         + '<div class="model-related-links">'
         + '<a href="/models/gemini/"><span>GEMINI FAMILY HUB</span><strong>Google Gemini versions, prices and API models</strong><b>↗</b></a>'
