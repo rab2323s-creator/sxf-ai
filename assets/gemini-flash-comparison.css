@@ -63,3 +63,6 @@
 .gf-sources span{display:block;font-size:.83rem;color:#b1c9db;margin-top:.2rem}
 @media(max-width:760px){.gf-answer{margin-top:1rem;border-radius:14px}.gf-two-choices,.gf-proof-grid,.gf-cases,.gf-lab-grid,.gf-faq-list{grid-template-columns:minmax(0,1fr)}.gf-form{grid-template-columns:minmax(0,1fr)}.gf-toc{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-bottom:.6rem}.gf-section{padding:1.6rem 0}.gf-table{font-size:.81rem}.gf-table th,.gf-table td{padding:.72rem}.gf-code pre{font-size:.73rem}}
 @media(prefers-reduced-motion:reduce){.gf-upgrade *{scroll-behavior:auto}}
+
+/* Keep auto-generated fact and external-evaluation grids within the article shell. */
+.gf-upgrade .compare-live-facts.shell,.gf-upgrade .evaluation-compare.shell{width:100%;max-width:none;padding-inline:0}
