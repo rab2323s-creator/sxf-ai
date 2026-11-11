@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from html.parser import HTMLParser
+from html import escape
 from pathlib import Path
 import json
 import re
@@ -31,7 +32,7 @@ def check():
     path = ROOT / "models/gemini/index.html"
     page = path.read_text(encoding="utf-8")
     assert 'data-sxf-gemini-guide' in page, "Gemini authored content missing from built output"
-    assert '<title>' + TITLE + '</title>' in page
+    assert '<title>' + escape(TITLE) + '</title>' in page
     assert 'name="robots" content="index,follow' in page
     assert '<link rel="canonical" href="https://sxf.si/models/gemini/"' in page
     assert 'href="/assets/gemini-family.css"' in page
