@@ -97,6 +97,11 @@ jobs:
         run: python tests/test_homepage_decision_pathways.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
         run: python tests/test_featured_daily_brief.py
+      - name: Procurement negotiation guide SEO and calculator integrity
+        run: |
+          python tests/test_procurement_negotiation_guide.py
+          node tests/test_procurement_roi_calculator.cjs
+          node --check guides/ai-procurement-negotiation-software/procurement.js
       - name: Benchmarks guide content-consistency regression
         run: python tests/test_ai_model_benchmarks_guide.py
       - name: Signals index HTML and SEO regression tests

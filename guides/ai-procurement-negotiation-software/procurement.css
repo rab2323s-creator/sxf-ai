@@ -1,0 +1,56 @@
+
+/* SXF Procurement Decision Lab — scoped; uses shared SXF article shell. */
+.procure-guide{overflow-x:clip}
+.procure-guide .proc-intro-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px auto 30px}
+.procure-guide .proc-intro-strip>div,.procure-guide .proc-card{border:1px solid #344238;background:#111b17;border-radius:14px;padding:18px}
+.procure-guide .proc-intro-strip strong{display:block;color:#d7ff75;font-size:1.28rem;line-height:1.3;margin:5px 0}
+.procure-guide .proc-intro-strip span{font-size:.8rem;color:#a8b8ae}
+.procure-guide .proc-callout{background:#14231b;border:1px solid #44543d;border-left:4px solid #c7fa62;border-radius:12px;padding:18px 21px;margin:24px 0}
+.procure-guide .proc-callout p:last-child,.procure-guide .proc-card p:last-child{margin-bottom:0}
+.procure-guide .proc-snippet{border-left:3px solid #cdf95c;padding:11px 15px;margin:17px 0 23px;background:#152019;color:#edf3e9;line-height:1.65}
+.procure-guide .proc-snippet strong{color:#d8ff8a}
+.procure-guide .proc-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;margin:18px 0 22px;border:1px solid #35453c;border-radius:12px}
+.procure-guide .proc-table{width:100%;min-width:730px;border-collapse:collapse;font-size:.91rem;line-height:1.6;background:#111a16}
+.procure-guide .proc-table th,.procure-guide .proc-table td{padding:13px 14px;border-bottom:1px solid #354239;vertical-align:top;text-align:left}
+.procure-guide .proc-table th{color:#d7ff75;background:#1a291d;font-weight:750}
+.procure-guide .proc-table tr:last-child td{border-bottom:none}
+.procure-guide .proc-table th:first-child{min-width:155px}
+.procure-guide .proc-table td a,.procure-guide .proc-card a{overflow-wrap:anywhere}
+.procure-guide .proc-pill{display:inline-block;border:1px solid #557147;background:#1d3020;border-radius:40px;color:#d7f6b4;font-size:.75rem;letter-spacing:.02em;padding:4px 9px}
+.procure-guide .proc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:16px 0 22px}
+.procure-guide .proc-grid h3{margin-top:0;font-size:1.12rem}
+.procure-guide .proc-grid p{margin-bottom:0}
+.procure-guide .proc-lab{background:linear-gradient(145deg,#111f18,#0b1111);border:1px solid #587147;border-radius:16px;padding:23px;margin:24px 0}
+.procure-guide .proc-lab h3{margin-top:0}
+.procure-guide .proc-lab .proc-lab-tag{color:#d7ff75;font-size:.74rem;letter-spacing:.12em;font-weight:700}
+.procure-guide .proc-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.procure-guide .proc-field{display:flex;flex-direction:column;gap:6px;color:#dce8da}
+.procure-guide .proc-field label{font-size:.9rem;font-weight:700}
+.procure-guide .proc-field small{color:#a9bdb0;line-height:1.4}
+.procure-guide .proc-field input{width:100%;min-height:46px;padding:10px 12px;background:#0a130f;border:1px solid #6a7a67;border-radius:9px;color:#fff;font:inherit;font-variant-numeric:tabular-nums}
+.procure-guide .proc-field input:focus-visible,.procure-guide button:focus-visible,.procure-guide summary:focus-visible{outline:3px solid #d2ff7c;outline-offset:3px}
+.procure-guide .proc-lab-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.procure-guide .proc-lab-results>div{padding:15px;background:#192821;border:1px solid #354a3a;border-radius:10px}
+.procure-guide .proc-lab-results span{display:block;color:#b9c9bd;font-size:.8rem}
+.procure-guide .proc-lab-results output{display:block;font-size:clamp(1rem,3vw,1.45rem);color:#e1ff8e;font-weight:800;margin-top:4px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.procure-guide .proc-lab-results .proc-net{grid-column:1/-1;background:#1a2d20}
+.procure-guide .proc-net.negative output{color:#ffc6a5}
+.procure-guide .proc-figure{margin:23px 0;border:1px solid #3b4d3d;background:#111a16;border-radius:14px;padding:16px}
+.procure-guide .proc-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.procure-guide .proc-flow>div{border:1px solid #3f5941;border-radius:10px;padding:13px;min-height:120px}
+.procure-guide .proc-flow b{display:block;color:#ddfb8d;font-size:.9rem}
+.procure-guide .proc-flow p{font-size:.8rem;line-height:1.48;margin:5px 0 0}
+.procure-guide figcaption{font-size:.79rem;color:#aec0af;margin-top:10px}
+.procure-guide .proc-faq{border:1px solid #34493a;border-radius:10px;margin:11px 0;background:#101b15;padding:0 16px}
+.procure-guide .proc-faq summary{cursor:pointer;font-weight:700;line-height:1.5;padding:16px 0;color:#e2f2d9}
+.procure-guide .proc-faq p{margin:0 0 17px;color:#d2dfd3}
+.procure-guide .proc-source-list{padding-left:24px;overflow-wrap:anywhere}
+.procure-guide .proc-source-list li{margin:10px 0}
+.procure-guide .proc-evidence{font-size:.86rem;color:#bad1be}
+.procure-guide .proc-method-note{color:#b7cbb8;font-size:.92rem;line-height:1.6}
+.procure-guide .proc-related a{display:block;border:1px solid #33483b;border-radius:9px;padding:12px 15px;margin:10px 0;color:#e0ff9b}
+.procure-guide .proc-related a:hover{background:#233b29}
+.procure-guide .proc-toc-line{font-size:.78rem;color:#b9c8bb;margin-bottom:12px}
+@media(max-width:900px){.procure-guide .proc-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.procure-guide .proc-intro-strip{grid-template-columns:1fr}}
+@media(max-width:620px){.procure-guide .proc-fields,.procure-guide .proc-grid,.procure-guide .proc-lab-results{grid-template-columns:1fr}.procure-guide .proc-lab-results .proc-net{grid-column:auto}.procure-guide .proc-flow{grid-template-columns:1fr}.procure-guide .proc-lab{padding:15px}.procure-guide .proc-intro-strip>div{padding:14px}.procure-guide .proc-table{font-size:.85rem}}
+@media(prefers-reduced-motion:reduce){.procure-guide *{scroll-behavior:auto!important}}
