@@ -81,6 +81,10 @@ jobs:
           python tests/test_three_editorial_launches.py
       - name: Feed card rendering regression tests
         run: python tests/test_feed_card_rendering.py
+      - name: AI agent testing guide structured data and synthetic fixture integrity
+        run: |
+          python tests/test_ai_agent_testing_tools.py
+          node --check guides/ai-agent-testing-tools/testing.js
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
       - name: Claude Haiku 5.5 vs Sonnet 5.5 specialist comparison SEO and costs
@@ -311,6 +315,8 @@ jobs:
         run: python tests/test_procurement_negotiation_browser.py
       - name: Test editorial owner approval and quality controls in Chromium
         run: python tests/test_editorial_admin_browser.py
+      - name: Verify AI agent testing guide desktop, mobile and no-JS experience
+        run: python tests/test_ai_agent_testing_tools_browser.py
       - name: Test local LLM selector on desktop and mobile Chromium
         run: python tests/test_best_local_llms_browser.py
       - name: Test Compare UI in desktop and mobile Chromium
