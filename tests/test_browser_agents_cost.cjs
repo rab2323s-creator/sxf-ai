@@ -1,0 +1,10 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {estimate}=require("../guides/ai-browser-agents-comparison/cost-lab.js");
+const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-6,String(a)+" != "+String(b));
+const v={tasks:1000,success:80,retries:25,model:.08,minutes:3,hourly:.12,proxy:.02,subscription:20,humanMinutes:.5,wage:30};
+const r=estimate(v);close(r.attempts,1250);close(r.success,800);close(r.model,100);close(r.infra,32.5);close(r.human,250);close(r.total,402.5);close(r.perSuccess,402.5/800);
+const z=estimate({...v,success:0});assert.ok(Number.isNaN(z.perSuccess));
+const no=estimate({...v,retries:0,subscription:0,humanMinutes:0,proxy:0});close(no.model,80);close(no.infra,6);
+close(estimate({...v,success:100}).success,1000);
+console.log("PASS browser-agent failure-adjusted cost, retries, human rescue and zero accepted tasks");

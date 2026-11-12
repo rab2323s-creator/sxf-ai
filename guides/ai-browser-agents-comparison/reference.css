@@ -1,0 +1,59 @@
+/* SXF Browser Agent Decision Lab — scoped to guide; shared SXF chrome and type */
+.browser-guide{overflow-x:clip}
+.browser-guide .ba-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:19px 0 31px}
+.browser-guide .ba-summary>div,.browser-guide .ba-card{min-width:0;border:1px solid #334738;border-radius:13px;padding:18px;background:#112018}
+.browser-guide .ba-summary strong{display:block;color:#d7ff81;font-size:1.24rem;line-height:1.35;margin:6px 0}
+.browser-guide .ba-summary small,.browser-guide .ba-summary span{display:block;color:#b5c9b6;font-size:.81rem;line-height:1.5}
+.browser-guide .ba-answer{background:#14241b;border-left:3px solid #cdf866;border-radius:3px 11px 11px 3px;padding:13px 18px;margin:18px 0 24px;color:#e1eddd;line-height:1.7;overflow-wrap:anywhere}
+.browser-guide .ba-answer strong{color:#e3ffad}
+.browser-guide .ba-table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain;border:1px solid #3a4e3e;border-radius:12px;margin:18px 0 24px}
+.browser-guide .ba-table{width:100%;min-width:760px;border-collapse:collapse;font-size:.9rem;line-height:1.56;background:#121d17}
+.browser-guide .ba-table th,.browser-guide .ba-table td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid #36473b}
+.browser-guide .ba-table th{color:#dcff9b;background:#1a2d1e;font-weight:750}
+.browser-guide .ba-table th:first-child{min-width:155px}
+.browser-guide .ba-table tr:last-child td{border:0}
+.browser-guide .ba-table :is(td,th){overflow-wrap:break-word}
+.browser-guide .ba-table a{overflow-wrap:anywhere}
+.browser-guide .ba-evidence{color:#b7cab9;font-size:.86rem;line-height:1.65;overflow-wrap:anywhere}
+.browser-guide .ba-figure{margin:22px 0;background:#101c15;border:1px solid #36523b;border-radius:13px;padding:16px}
+.browser-guide .ba-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.browser-guide .ba-flow>div{padding:14px;border:1px solid #405845;border-radius:10px;min-width:0}
+.browser-guide .ba-flow strong,.browser-guide .ba-flow span{display:block}
+.browser-guide .ba-flow strong{color:#deff91;font-size:.92rem}
+.browser-guide .ba-flow span{color:#c1d1bf;font-size:.8rem;line-height:1.5;margin-top:7px}
+.browser-guide .ba-figure figcaption{font-size:.8rem;color:#bfd0bd;margin-top:11px}
+.browser-guide .ba-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.browser-guide .ba-card h3{font-size:1.05rem;line-height:1.4;margin:0 0 9px}
+.browser-guide .ba-card p{margin:0;line-height:1.65}
+.browser-guide .ba-protocol{background:#121f18;border:1px solid #42613f;border-radius:14px;padding:19px;margin:20px 0}
+.browser-guide .ba-protocol h3{margin:2px 0 12px}
+.browser-guide .ba-lab{background:linear-gradient(135deg,#13291a,#0b1510);border:1px solid #658149;border-radius:15px;padding:24px;margin:22px 0}
+.browser-guide .ba-lab-tag{color:#d1fb74;font-size:.76rem;font-weight:800;letter-spacing:.1em}
+.browser-guide .ba-lab h3{margin:5px 0 18px}
+.browser-guide .ba-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.browser-guide .ba-field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.browser-guide .ba-field label{font-weight:700;color:#e2eedf;font-size:.88rem}
+.browser-guide .ba-field input{width:100%;min-width:0;min-height:46px;border:1px solid #6e8a70;border-radius:8px;padding:10px 12px;background:#0c1710;color:#fff;font:inherit;font-variant-numeric:tabular-nums}
+.browser-guide .ba-field small{color:#afc3b2;font-size:.76rem;line-height:1.5}
+.browser-guide .ba-lab button{min-height:44px;background:#cefb64;color:#142017;font-weight:750;border:0;padding:10px 16px;border-radius:9px;margin-top:17px;cursor:pointer}
+.browser-guide .ba-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:19px 0}
+.browser-guide .ba-results>div{min-width:0;border:1px solid #395941;border-radius:10px;background:#193123;padding:13px}
+.browser-guide .ba-results small{display:block;font-size:.77rem;color:#b5c9b8}
+.browser-guide .ba-results output{display:block;font-size:clamp(1.1rem,2.5vw,1.45rem);font-variant-numeric:tabular-nums;color:#e3ff91;font-weight:800;overflow-wrap:anywhere}
+.browser-guide .ba-results .ba-primary{grid-column:1/-1;background:#28432a}
+.browser-guide .ba-resources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.browser-guide .ba-resources a{display:flex;align-items:center;color:#ddff98;background:#203927;border:1px solid #42613f;border-radius:10px;padding:13px;overflow-wrap:anywhere;text-decoration:none}
+.browser-guide .ba-resources a:hover{background:#294d32}
+.browser-guide .ba-faq{border:1px solid #355039;border-radius:10px;margin:11px 0;padding:0 16px;background:#101c16}
+.browser-guide .ba-faq summary{cursor:pointer;padding:15px 0;color:#e6f7db;font-weight:750;line-height:1.55}
+.browser-guide .ba-faq p{color:#d3e0d1;margin:0 0 17px}
+.browser-guide .ba-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.browser-guide .ba-related a{border:1px solid #3e573d;border-radius:9px;padding:13px;color:#dcffae;text-decoration:none}
+.browser-guide .ba-related b,.browser-guide .ba-related span{display:block;overflow-wrap:anywhere}
+.browser-guide .ba-related span{font-size:.83rem;color:#b9cdbc;margin-top:5px}
+.browser-guide .ba-source-list{padding-left:25px;overflow-wrap:anywhere}
+.browser-guide .ba-source-list li{margin:10px 0}
+.browser-guide :is(a,button,input,summary,[tabindex]):focus-visible{outline:3px solid #dcff74;outline-offset:3px}
+@media(max-width:900px){.browser-guide .ba-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.browser-guide .ba-summary{grid-template-columns:1fr}}
+@media(max-width:640px){.browser-guide .ba-fields,.browser-guide .ba-results,.browser-guide .ba-cards,.browser-guide .ba-related,.browser-guide .ba-resources{grid-template-columns:1fr}.browser-guide .ba-results .ba-primary{grid-column:auto}.browser-guide .ba-flow{grid-template-columns:1fr}.browser-guide .ba-lab{padding:15px}.browser-guide .ba-table{font-size:.83rem}}
+@media(prefers-reduced-motion:reduce){.browser-guide *{scroll-behavior:auto!important}}
