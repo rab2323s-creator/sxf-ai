@@ -1,0 +1,59 @@
+/* SXF Open-Weight LLM Hosting — scoped reference page */
+.host-guide{overflow-x:clip}
+.host-guide .host-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0 29px}
+.host-guide .host-facts>div,.host-guide .host-card{border:1px solid #344438;border-radius:13px;background:#121c17;padding:18px;min-width:0}
+.host-guide .host-facts small{display:block;color:#b9c9be;font-size:.78rem}
+.host-guide .host-facts strong{display:block;color:#d8ff87;font-size:1.23rem;margin:5px 0;line-height:1.35}
+.host-guide .host-facts span{font-size:.78rem;color:#b8cbb8}
+.host-guide .host-answer{border-left:3px solid #c8ff4d;border-radius:3px 10px 10px 3px;padding:14px 17px;margin:15px 0 23px;color:#e7f0e4;background:#14221b;line-height:1.68;overflow-wrap:anywhere}
+.host-guide .host-answer strong{color:#dcff90}
+.host-guide .host-table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain;border:1px solid #394b3b;border-radius:12px;margin:18px 0 24px}
+.host-guide .host-table{width:100%;min-width:760px;border-collapse:collapse;line-height:1.55;background:#121b16;font-size:.9rem}
+.host-guide .host-table th,.host-guide .host-table td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid #334337}
+.host-guide .host-table th{color:#d9ff88;background:#1a2a1c;font-weight:750}
+.host-guide .host-table tr:last-child td{border:0}
+.host-guide .host-table th:first-child{min-width:145px}
+.host-guide .host-table td a{overflow-wrap:anywhere}
+.host-guide .host-note{font-size:.88rem;color:#bfd0bf;line-height:1.7;overflow-wrap:anywhere}
+.host-guide .host-principle{border-left:4px solid #bfe864;background:#18271c;padding:17px 20px;border-radius:10px;margin:20px 0}
+.host-guide .host-principle b{color:#ddff99}
+.host-guide .host-principle p{margin:5px 0 0}
+.host-guide .host-figure{border:1px solid #354c3b;background:#101b15;border-radius:13px;padding:17px;margin:24px 0}
+.host-guide .host-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.host-guide .host-flow>div{border:1px solid #405540;padding:13px;border-radius:9px;min-width:0}
+.host-guide .host-flow b{display:block;color:#d5f881;font-size:.9rem;margin:0 0 7px}
+.host-guide .host-flow span{color:#cadbc9;font-size:.83rem;line-height:1.5}
+.host-guide .host-figure figcaption{color:#afc6b0;font-size:.82rem;margin-top:12px}
+.host-guide .host-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:23px 0}
+.host-guide .host-card h3{font-size:1.13rem;line-height:1.35;margin:0 0 9px}
+.host-guide .host-card p{margin:0}
+.host-guide .host-lab{background:linear-gradient(135deg,#101b16,#0c1010);border:1px solid #577141;border-radius:16px;padding:24px;margin:24px 0}
+.host-guide .host-lab-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:#c8fd71}
+.host-guide .host-lab h3{margin:4px 0 15px}
+.host-guide .host-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:16px}
+.host-guide .host-field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.host-guide .host-field label{color:#e6f0e4;font-weight:700;font-size:.88rem}
+.host-guide .host-field small{color:#abc1ab;line-height:1.45;font-size:.74rem}
+.host-guide .host-field input{min-height:45px;border:1px solid #778878;border-radius:9px;background:#0d1711;padding:10px 12px;color:#fff;width:100%;min-width:0;font:inherit;font-variant-numeric:tabular-nums}
+.host-guide :is(input,button,summary,a,[tabindex]):focus-visible{outline:3px solid #d2ff77;outline-offset:2px}
+.host-guide .host-action{border:0;background:#c8ff4d;color:#0b170e;font-weight:800;border-radius:9px;min-height:46px;padding:11px 19px;cursor:pointer}
+.host-guide .host-output{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:20px 0}
+.host-guide .host-output>div{border:1px solid #34493a;border-radius:10px;background:#16271c;padding:14px;min-width:0}
+.host-guide .host-output small{color:#b5c9b5;font-size:.77rem;line-height:1.4;display:block}
+.host-guide .host-output output{display:block;color:#e0ff99;font-size:clamp(1.08rem,2.6vw,1.42rem);font-weight:800;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;margin-top:5px}
+.host-guide .host-output .host-summary{grid-column:1/-1;background:#1d3424}
+.host-guide .host-faq{border:1px solid #3d513e;border-radius:10px;padding:0 16px;margin:12px 0;background:#101b15}
+.host-guide .host-faq summary{cursor:pointer;padding:15px 0;color:#e4f6dc;font-weight:750;line-height:1.55}
+.host-guide .host-faq p{margin:0 0 17px;color:#d4dfd3}
+.host-guide .host-source-list{padding-left:24px;overflow-wrap:anywhere}
+.host-guide .host-source-list li{margin:11px 0}
+.host-guide .host-research-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}
+.host-guide .host-research-actions a{display:flex;align-items:center;background:#1b3021;border:1px solid #536b49;border-radius:10px;color:#e6ffb5;padding:14px;text-decoration:none;overflow-wrap:anywhere;font-size:.85rem;line-height:1.6}
+.host-guide .host-research-actions a:hover,.host-guide .host-related a:hover{background:#26402b}
+.host-guide .host-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.host-guide .host-related a{border:1px solid #344d37;border-radius:9px;padding:14px;color:#dfffb2;text-decoration:none;min-width:0}
+.host-guide .host-related b,.host-guide .host-related span{display:block;overflow-wrap:anywhere}
+.host-guide .host-related span{font-size:.85rem;color:#b9d3bc;margin-top:6px}
+@media(max-width:920px){.host-guide .host-facts{grid-template-columns:1fr}.host-guide .host-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.host-guide .host-fields,.host-guide .host-cards,.host-guide .host-output,.host-guide .host-related,.host-guide .host-research-actions{grid-template-columns:1fr}.host-guide .host-output .host-summary{grid-column:auto}.host-guide .host-flow{grid-template-columns:1fr}.host-guide .host-lab{padding:15px}.host-guide .host-table{font-size:.85rem}.host-guide .host-figure{padding:12px}}
+@media(prefers-reduced-motion:reduce){.host-guide *{scroll-behavior:auto!important}}
