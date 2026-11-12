@@ -10,7 +10,7 @@ schema=json.loads(re.search(r'<script type="application/ld\+json">([\s\S]*?)</sc
 graph=schema["@graph"]
 get=lambda t:next(item for item in graph if item["@type"]==t)
 assert article.count("<h1")==1
-assert all(q in article.lower() for q in ("best ai agent testing tools","langsmith","braintrust","deepeval","phoenix","ai agent reliability","agent correctness"))
+assert all(q in article.lower() for q in ("best ai agent testing tools","langsmith","braintrust","deepeval","phoenix","ai agent reliability","tool correctness"))
 assert "https://sxf.si/guides/ai-agent-testing-tools/" in article and article.count('rel="canonical"')==1
 assert get("TechArticle")["datePublished"]=="2026-11-12"
 assert get("TechArticle")["image"]["@id"]==get("ImageObject")["@id"]
