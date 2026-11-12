@@ -90,6 +90,11 @@ jobs:
           python guides/local-ai-workstations/sxf-capacity-screen.py
           python tests/test_local_ai_workstations.py
           node --check guides/local-ai-workstations/workstation.js
+      - name: AI Leaderboards 2026 SEO, methodology audit and independent research
+        run: |
+          python guides/ai-leaderboards-compared/audit_claims.py
+          python tests/test_ai_leaderboards_compared.py
+          node --check guides/ai-leaderboards-compared/leaderboards.js
       - name: Shared HTML shell and SEO regression tests
         run: python tests/test_html_shell.py
       - name: Claude Haiku 5.5 vs Sonnet 5.5 specialist comparison SEO and costs
@@ -324,6 +329,8 @@ jobs:
         run: python tests/test_ai_agent_testing_tools_browser.py
       - name: Local AI workstations mobile, desktop and no-JavaScript browser QA
         run: python tests/test_local_ai_workstations_browser.py
+      - name: AI leaderboards responsive Chromium and no-JavaScript verification
+        run: python tests/test_ai_leaderboards_compared_browser.py
       - name: Test local LLM selector on desktop and mobile Chromium
         run: python tests/test_best_local_llms_browser.py
       - name: Test Compare UI in desktop and mobile Chromium

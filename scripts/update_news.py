@@ -8135,6 +8135,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-leaderboards-compared/",
+            "category": "Models · Benchmarks · Research",
+            "categories": ["models", "research", "tools"],
+            "kicker": "AI LEADERBOARDS · ORIGINAL SXF CLAIM AUDIT",
+            "title": "AI Leaderboards Compared (2026): Artificial Analysis vs LMArena vs LiveBench",
+            "description": "Compare the AA Intelligence Index v5, Arena Bradley–Terry ratings and LiveBench 2.0; inspect SXF's 12-case claim audit and version-change research.",
+            "meta": "AA Benchmark · LMArena · LiveBench 2.0 · Index v5",
+            "updated": "Nov 13, 2026",
+            "read_time": "20 min",
+        },
+        {
             "href": "/guides/local-ai-workstations/",
             "category": "Open Source · Local AI · Hardware",
             "categories": ["open-source", "models", "research", "tools"],

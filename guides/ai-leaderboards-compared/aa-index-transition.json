@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "project": "SXF / AI",
+    "reviewed_at": "2026-11-13",
+    "kind": "source-verifiable benchmark methodology transition",
+    "warning": "The comparison is about methodology versions, not time-series model performance; no model scores inferred.",
+    "aa_v43_source": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3",
+    "aa_v5_source": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5/"
+  },
+  "versions": [
+    {
+      "version": "v4.3",
+      "released": "2026-09-07",
+      "evaluations": 10,
+      "category_weights_pct": {
+        "Agents": 30,
+        "Coding": 20,
+        "General": 30,
+        "Scientific reasoning": 20
+      },
+      "private_evaluation_weight_pct": 45,
+      "source": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-3"
+    },
+    {
+      "version": "v5.0.1",
+      "released": "2026-10-27 (v5 introduction); v5.0.1 as reviewed 2026-11-13",
+      "evaluations": 9,
+      "category_weights_pct": {
+        "Knowledge Work": 25,
+        "Coding": 25,
+        "Science": 25,
+        "General": 25
+      },
+      "private_evaluation_weight_pct": 60,
+      "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking"
+    }
+  ],
+  "v5_changes": {
+    "new": [
+      "FrontierCode 2.0",
+      "Terminal-Bench-Science 0.1.0"
+    ],
+    "retired_from_index": [
+      "GDPval-AA v2.1",
+      "SciCode",
+      "AA-LCR v1.1"
+    ],
+    "upgraded": [
+      "HLE-Diamond",
+      "AA-Omniscience v1.1",
+      "CritPt v2 hard subset"
+    ],
+    "retained": [
+      "AA-Briefcase v1.1",
+      "AutomationBench-AA",
+      "GDP.pdf",
+      "Terminal-Bench 4.0"
+    ],
+    "source": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5/"
+  }
+}
