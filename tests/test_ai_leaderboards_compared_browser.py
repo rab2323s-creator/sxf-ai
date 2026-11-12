@@ -26,7 +26,8 @@ try:
    assert "CONDITIONALLY VALID" in p.locator(".lb-outcome").inner_text()
    assert p.locator('a[href="sxf-leaderboard-claim-audit.csv"]').count()>=1
    assert p.locator(".lb-table").count()>=3
-   assert p.locator("main img").first.evaluate("(e)=>e.complete && e.naturalWidth>0")
+   p.locator("main img").first.scroll_into_view_if_needed()
+   p.wait_for_function("() => {const e=document.querySelector(\'main img\'); return e && e.complete && e.naturalWidth > 0}",timeout=10000)
    size=p.evaluate("({scroll:document.documentElement.scrollWidth,viewport:innerWidth})")
    assert size["scroll"]<=width+2,(width,size)
    print("PASS: AI leaderboard guide Chromium",width)
