@@ -36,7 +36,8 @@ generator=(root/"scripts/update_news.py").read_text(encoding="utf-8")
 assert '"href": "/guides/open-weight-llm-hosting/"' in generator
 assert 'ROOT / "guides" / "open-weight-llm-hosting" / "index.html"' in generator
 assert "add_hosting_buyer_path" in generator
-assert f'href="/guides/{slug}/"' in (root/"guides/llm-gateway/index.html").read_text(encoding="utf-8")
+for linked in ["guides/llm-gateway/index.html","guides/open-source-ai-models/index.html","guides/run-ai-models-locally/index.html"]:
+ assert f'href="/guides/{slug}/"' in (root/linked).read_text(encoding="utf-8"),linked
 urls=[x.text for x in ET.fromstring((root/"sitemap.xml").read_text(encoding="utf-8")).iter() if x.tag.endswith("loc")]
 assert urls.count(url)==1
 print("PASS SXF open-weight LLM hosting SEO, schema, prices, generator, inbound links, sitemap")
