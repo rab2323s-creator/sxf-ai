@@ -10,7 +10,7 @@ assert h.count('rel="canonical"')==1
 assert 'https://sxf.si/guides/ai-leaderboards-compared/' in h
 for q in ("ai leaderboards compared","artificial analysis vs lmarena vs livebench","aa benchmark","intelligence index v5","livebench 2.0","bradley"):assert q in h.lower(),q
 assert "9/12 and 3/12 counts describe the constructed examples only" in h
-assert "not a measured industry error rate" in h
+assert "not an observed industry error rate" in h
 schema=json.loads(re.search(r'<script type="application/ld\+json">([\s\S]*?)</script>',h).group(1))["@graph"]
 get=lambda t:next(x for x in schema if x["@type"]==t)
 assert get("TechArticle")["datePublished"]=="2026-11-13"
