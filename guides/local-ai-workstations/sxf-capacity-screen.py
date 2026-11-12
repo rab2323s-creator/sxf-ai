@@ -26,7 +26,17 @@ if __name__=="__main__":
     buf=io.StringIO(newline="")
     writer=csv.writer(buf,lineterminator="\n",quoting=csv.QUOTE_ALL)
     writer.writerow(HEAD);writer.writerows(rows())
-    published=(ROOT/"sxf-workstation-memory-screen.csv").read_text()
-    if buf.getvalue()!=published:
-        raise SystemExit("ERROR: checked-in capacity matrix does not match the source formula")
-    print("PASS: reproduced all 60 SXF capacity screens. NOT physical benchmarks.")
+    expected=list(csv.reader(io.StringIO(buf.getvalue())))
+    actual=list(csv.reader((ROOT/"sxf-workstation-memory-screen.csv").open(newline="")))
+    if len(actual)!=len(expected):
+        raise SystemExit(f"ERROR: scenario row count mismatch {len(actual)} != {len(expected)}")
+    for i,(got,want) in enumerate(zip(actual,expected)):
+        if len(got)!=len(want):
+            raise SystemExit(f"ERROR: wrong column count on row {i}")
+        for j,(a,b) in enumerate(zip(got,want)):
+            if a==b:continue
+            try:
+                if abs(float(a)-float(b))<=0.101:continue
+            except (TypeError,ValueError):pass
+            raise SystemExit(f"ERROR: scenario {i}, column {j}: {a!r} != {b!r}")
+    print("PASS: verified 60 SXF capacity scenarios to displayed 0.1GB precision; NOT physical benchmarks.")

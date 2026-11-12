@@ -31,7 +31,7 @@ python guides/local-ai-workstations/sxf-capacity-screen.py
 python tests/test_local_ai_workstations.py
 ```
 
-The Python script verifies byte-for-byte reproduction of `sxf-workstation-memory-screen.csv`, with no external packages. The interactive JavaScript calculator uses the same parameters and formula while allowing the user to change assumed memory share and context reserve. It does not upload data or require API keys.
+The Python script verifies source-to-CSV rows and numeric values to the displayed 0.1GB precision of `sxf-workstation-memory-screen.csv`, with no external packages. The interactive JavaScript calculator uses the same parameters and formula while allowing the user to change assumed memory share and context reserve. It does not upload data or require API keys.
 
 ## Attribution and cautions
 
