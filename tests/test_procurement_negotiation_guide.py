@@ -37,7 +37,7 @@ for p in ('guides/index.html','guides/ai-negotiation-agents/index.html','researc
     assert f'href="/guides/{slug}/"' in (ROOT/p).read_text(encoding='utf-8')
 hub=(ROOT/'guides/index.html').read_text(encoding='utf-8')
 assert hub.count('class="guide-library-card"')>=45
-assert int(re.search(r'id="guideVisibleCount">(\\d+)<', hub).group(1)) == hub.count('class="guide-library-card"')
+assert int(re.search(r'id="guideVisibleCount">([0-9]+)<', hub).group(1)) == hub.count('class="guide-library-card"')
 hmatch=re.search(r'<script type="application/ld[+]json">([\s\S]*?)</script>',hub)
 hgraph=json.loads(hmatch.group(1))['@graph']
 assert any(url==x.get('url') for a in hgraph if a.get('@type')=='ItemList' for x in a.get('itemListElement',[]))
