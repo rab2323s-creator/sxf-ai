@@ -25,7 +25,7 @@ with (P/"sxf-workstation-memory-screen.csv").open(newline="") as f:
 assert len(rows)==60 and len(set((r["system"],r["model"],r["format"]) for r in rows))==60
 assert all(r["capacity_screen_only"] in ("borderline","over indicative budget","fits indicative budget") for r in rows)
 with (P/"independent-benchmark-extract.csv").open(newline="") as f:benchmark=list(csv.DictReader(f))
-assert len(benchmark)==4 and all("BAEM1N" not in r["source"] and "github.com/BAEM1N/llm-bench" in r["source"] for r in benchmark)
+assert len(benchmark)==4 and all("github.com/BAEM1N/llm-bench" in r["source"] for r in benchmark)
 for link in ("guides/open-source-ai-models","guides/run-ai-models-locally","guides/llm-quantization-explained","tools/local-llm-vram-finder","guides/open-weight-llm-hosting"):
  assert 'href="/'+link+'/"' in h,link
 for anchor in re.findall(r'href="#([^"]+)"',h):assert 'id="'+anchor+'"' in h,anchor
