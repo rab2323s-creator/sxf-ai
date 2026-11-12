@@ -130,6 +130,7 @@ STATIC_SHELL_PAGES = {
     ROOT / "guides" / "ai-shutdown-resistance" / "index.html": "guides",
     ROOT / "guides" / "can-ai-replicate-itself" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-collusion-secret-communication" / "index.html": "guides",
+    ROOT / "guides" / "open-weight-llm-hosting" / "index.html": "guides",
     ROOT / "guides" / "ai-procurement-negotiation-software" / "index.html": "guides",
     ROOT / "guides" / "ai-negotiation-agents" / "index.html": "guides",
     ROOT / "guides" / "ai-agent-authorization" / "index.html": "guides",
@@ -8110,6 +8111,24 @@ def add_evergreen_guide_crosslink(html, topic):
     return html.replace(anchor, box + anchor, 1)
 
 
+
+def add_hosting_buyer_path(html):
+    """Keep source-led hosting buyer links in regenerated local and open model guides."""
+    route = "/guides/open-weight-llm-hosting/"
+    if f'href="{route}"' in html:
+        return html
+    anchor = '<div class="guide-reading shell">'
+    if anchor not in html:
+        return html
+    box = ('<aside class="shell" aria-label="Open-weight LLM hosting" '
+           'style="padding:18px 21px;margin:21px auto;background:#12241a;'
+           'border-left:3px solid #c8ff4d;border-radius:10px">'
+           '<a href="' + route + '" style="color:#d8ff90">'
+           'Best Open-Weight LLM Hosting: Together vs Fireworks vs Runpod vs Modal, prices and cost calculator'
+           '</a></aside>')
+    return html.replace(anchor, box + anchor, 1)
+
+
 def guides_index_html(items, current_items):
     canonical = f"{BASE_URL}/guides/"
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
@@ -8245,6 +8264,17 @@ def guides_index_html(items, current_items):
             "meta": "ASI · Recursive improvement · Takeoff",
             "updated": "Oct 16, 2026",
             "read_time": "19 min",
+        },
+        {
+            "href": "/guides/open-weight-llm-hosting/",
+            "category": "Open Models · Inference Hosting · Cost",
+            "categories": ["open-source","models","tools","research"],
+            "kicker": "SXF OPEN-WEIGHT HOSTING LAB",
+            "title": "Best Open-Weight LLM Hosting Platforms (2026): Together vs Fireworks vs Runpod vs Modal",
+            "description": "Compare GPT-OSS serverless prices, H100 worker economics, an original break-even calculator and a reproducible evaluation protocol.",
+            "meta": "Together AI · Fireworks · Runpod · Modal · GPU Economics",
+            "updated": "Nov 12, 2026",
+            "read_time": "22 min",
         },
         {
             "href": "/guides/run-ai-models-locally/",
@@ -11383,7 +11413,7 @@ def build_discovery_pages(items, current_items):
     from local_inference_guide import render_local_inference_guide
     local_guide_dir = GUIDES_DIR / "run-ai-models-locally"
     local_guide_dir.mkdir(parents=True, exist_ok=True)
-    (local_guide_dir / "index.html").write_text(add_evergreen_guide_crosslink(render_local_inference_guide(), "local"), encoding="utf-8")
+    (local_guide_dir / "index.html").write_text(add_hosting_buyer_path(add_evergreen_guide_crosslink(render_local_inference_guide(), "local")), encoding="utf-8")
     from best_ai_tts_guide import guide_html as render_tts_guide
     tts_guide_dir = GUIDES_DIR / "best-ai-text-to-speech-models"
     tts_guide_dir.mkdir(parents=True, exist_ok=True)
@@ -11404,7 +11434,7 @@ def build_discovery_pages(items, current_items):
     (model_guide_path / "index.html").write_text(gpt6_vs_claude_guide_html(items), encoding="utf-8")
     open_models_guide_path = GUIDES_DIR / "open-source-ai-models"
     open_models_guide_path.mkdir(parents=True, exist_ok=True)
-    (open_models_guide_path / "index.html").write_text(add_evergreen_guide_crosslink(open_source_ai_models_guide_with_local_link(items), "open_source"), encoding="utf-8")
+    (open_models_guide_path / "index.html").write_text(add_hosting_buyer_path(add_evergreen_guide_crosslink(open_source_ai_models_guide_with_local_link(items), "open_source")), encoding="utf-8")
     agents_guide_path = GUIDES_DIR / "best-ai-agents"
     agents_guide_path.mkdir(parents=True, exist_ok=True)
     (agents_guide_path / "index.html").write_text(best_ai_agents_guide_html(items), encoding="utf-8")

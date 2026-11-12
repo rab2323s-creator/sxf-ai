@@ -97,6 +97,12 @@ jobs:
         run: python tests/test_homepage_decision_pathways.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
         run: python tests/test_featured_daily_brief.py
+      - name: Open-weight hosting schema and calculator QA
+        run: |
+          python tests/test_open_weight_llm_hosting.py
+          node --check guides/open-weight-llm-hosting/hosting.js
+          node tests/test_open_weight_llm_hosting.cjs
+          python -m py_compile guides/open-weight-llm-hosting/hosting_probe.py
       - name: Procurement negotiation guide SEO and calculator integrity
         run: |
           python tests/test_procurement_negotiation_guide.py
@@ -289,6 +295,8 @@ jobs:
         run: |
           python -m pip install playwright==1.56.0
           python -m playwright install --with-deps chromium
+      - name: Open-weight hosting Chromium mobile and desktop smoke
+        run: python tests/test_open_weight_llm_hosting_browser.py
       - name: Test AI procurement guide in mobile and laptop Chromium
         run: python tests/test_procurement_negotiation_browser.py
       - name: Test editorial owner approval and quality controls in Chromium

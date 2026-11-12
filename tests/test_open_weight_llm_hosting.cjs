@@ -1,0 +1,12 @@
+"use strict";
+const assert=require("node:assert/strict");
+const {estimate}=require("../guides/open-weight-llm-hosting/hosting.js");
+const close=(x,y)=>assert.ok(Math.abs(x-y)<1e-4,String(x)+" != "+String(y));
+const v={requests:100000,input:1000,output:250,inputRate:.15,outputRate:.60,gpuRate:5.39,hours:120,overhead:15,accept:95};
+const z=estimate(v);close(z.token,30);close(z.gpu,743.82);close(z.difference,713.82);
+close(z.tokenAccepted,30/95000*1000);close(z.gpuAccepted,743.82/95000*1000);
+close(z.breakEven,30/(5.39*1.15));close(z.neededTps,25000000/(z.breakEven*3600));
+close(estimate({...v,output:0}).token,15);
+close(estimate({...v,requests:10,input:0,output:0}).token,0);
+close(estimate({...v,accept:100}).tokenAccepted,.3);
+console.log("PASS hosted LLM unit normalization and cost-frontier cases");
