@@ -97,6 +97,12 @@ jobs:
         run: python tests/test_homepage_decision_pathways.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
         run: python tests/test_featured_daily_brief.py
+      - name: Browser agent comparison metadata, cost units and research fixtures
+        run: |
+          python tests/test_browser_agents_guide.py
+          node --check guides/ai-browser-agents-comparison/cost-lab.js
+          node tests/test_browser_agents_cost.cjs
+          python -m py_compile guides/ai-browser-agents-comparison/run_fixture_baseline.py
       - name: Open-weight hosting schema and calculator QA
         run: |
           python tests/test_open_weight_llm_hosting.py
@@ -295,6 +301,10 @@ jobs:
         run: |
           python -m pip install playwright==1.56.0
           python -m playwright install --with-deps chromium
+      - name: Browser agent comparison responsive Chromium and synthetic task lab
+        run: |
+          python tests/test_browser_agents_browser.py
+          python guides/ai-browser-agents-comparison/run_fixture_baseline.py
       - name: Open-weight hosting Chromium mobile and desktop smoke
         run: python tests/test_open_weight_llm_hosting_browser.py
       - name: Test AI procurement guide in mobile and laptop Chromium
