@@ -5,7 +5,7 @@ R=Path(__file__).resolve().parents[1]
 P=R/"guides/ai-leaderboards-compared"
 h=(P/"index.html").read_text(encoding="utf-8")
 assert h.count("<h1")==1
-assert len(re.findall(r"<h2(?:\\s|>)",h))>=11
+assert len(re.findall(r"<h2(?:\s|>)",h))>=11
 assert h.count('rel="canonical"')==1
 assert 'https://sxf.si/guides/ai-leaderboards-compared/' in h
 for q in ("ai leaderboards compared","artificial analysis vs lmarena vs livebench","aa benchmark","intelligence index v5","livebench 2.0","bradley"):assert q in h.lower(),q
