@@ -8135,6 +8135,28 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/local-ai-workstations/",
+            "category": "Open Source · Local AI · Hardware",
+            "categories": ["open-source", "models", "research", "tools"],
+            "kicker": "LOCAL AI WORKSTATIONS · SXF CAPACITY LAB",
+            "title": "Best Local AI Workstations (2026): DGX Spark vs Mac Studio vs Ryzen AI Max",
+            "description": "Verified 2026 prices, independent Qwen3.5 benchmark evidence, and SXF's original 60-scenario workstation memory-fit calculator.",
+            "meta": "DGX Spark · Mac Studio M5 · Ryzen AI Max · 128GB · Local LLM",
+            "updated": "Nov 13, 2026",
+            "read_time": "19 min",
+        },
+        {
+            "href": "/guides/ai-agent-testing-tools/",
+            "category": "Agents · Evaluation · Tools",
+            "categories": ["agents", "research", "tools"],
+            "kicker": "AGENT TESTING · SXF EVALUATION LAB",
+            "title": "Best AI Agent Testing Tools (2026): LangSmith vs Braintrust vs DeepEval vs Phoenix",
+            "description": "Compare platform pricing, tool correctness, traces, regression gates and a reproducible 12-case SXF agent failure audit.",
+            "meta": "Agent Testing · Reliability · Evaluation · CI",
+            "updated": "Nov 12, 2026",
+            "read_time": "19 min",
+        },
+        {
             "href": "/guides/gpt-realtime-2-1-playground/",
             "category": "Voice AI · Realtime API · Applied Testing",
             "categories": ["agents", "tools", "research", "models"],
