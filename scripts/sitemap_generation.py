@@ -168,6 +168,12 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/research/google-ai-mode-vs-chatgpt-search/full-study/", "2026-11-05"),
         sitemap_entry(f"{BASE_URL}/open-source/", category_lastmod["Open Source"]),
         sitemap_entry(f"{BASE_URL}/signals/", global_lastmod),
+        # Permanently approved, independently authored service-incident report.
+        sitemap_image_entry(
+            f"{BASE_URL}/signals/microsoft-365-outage-outlook-teams-copilot-2026/",
+            "2026-11-13",
+            f"{BASE_URL}/assets/signals/microsoft-365-outage-2026.svg",
+        ),
         sitemap_entry(f"{BASE_URL}/topics/", global_lastmod),
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
