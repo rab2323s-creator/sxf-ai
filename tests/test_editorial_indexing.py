@@ -115,10 +115,26 @@ def test_generated_sitemap():
     indexed.discard("https://sxf.si/signals/")
     expected = {row["signal_url"] for row in archive
                 if is_approved_indexable_signal(row)}
+    authored_payload = json.loads((ROOT / "data" / "editorial-authored-signals.json").read_text(encoding="utf-8"))
+    assert authored_payload["version"] == "sxf-authored-signals-v1"
+    approved_authored = {
+        row["slug"]: row["canonical_url"]
+        for row in authored_payload["editorially_approved"]
+        if row["decision"] == "approved"
+    }
+    for slug, canonical in approved_authored.items():
+        assert canonical == f"https://sxf.si/signals/{slug}/"
+        page = SIGNALS_DIR / slug / "index.html"
+        assert page.is_file(), "Approved authored signal page missing"
+        page_html = page.read_text(encoding="utf-8")
+        assert 'name="robots" content="index,follow' in page_html
+        assert 'name="googlebot" content="index,follow' in page_html
+        assert 'content="noindex' not in page_html
+    expected.update(approved_authored.values())
     assert indexed == expected, (
         f"Signal sitemap approval drift: missing={expected-indexed}, extra={indexed-expected}"
     )
-    archived_slugs = {row["signal_slug"] for row in archive}
+    archived_slugs = {row["signal_slug"] for row in archive} | set(approved_authored)
     for row in archive:
         path = SIGNALS_DIR / row["signal_slug"] / "index.html"
         contents = path.read_text(encoding="utf-8")
