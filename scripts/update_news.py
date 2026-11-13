@@ -11575,7 +11575,21 @@ def build_discovery_pages(items, current_items):
     outage_route = "/signals/microsoft-365-outage-outlook-teams-copilot-2026/"
     outage_page = SIGNALS_DIR / outage_slug / "index.html"
     if outage_page.is_file():
-        from html import escape as _escape_outage
+        # This article is explicitly owner-approved in data/editorial-authored-signals.json.
+        # Older build runs may have written noindex; repair both directives on every build.
+        authored = json.loads((ROOT / "data" / "editorial-authored-signals.json").read_text(encoding="utf-8"))
+        approved_slugs = {
+            entry["slug"] for entry in authored.get("editorially_approved", [])
+            if entry.get("decision") == "approved"
+        }
+        if outage_slug not in approved_slugs:
+            raise RuntimeError("Unapproved authored outage route cannot be indexable")
+        outage_html = outage_page.read_text(encoding="utf-8")
+        for meta_name in ("robots", "googlebot"):
+            old_meta = f'<meta name="{meta_name}" content="noindex,follow">'
+            new_meta = f'<meta name="{meta_name}" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">'
+            outage_html = outage_html.replace(old_meta, new_meta)
+        outage_page.write_text(outage_html, encoding="utf-8")
         outage_context = (
             '<section class="signal-deep-dive shell" aria-label="Related Microsoft 365 incident analysis">'
             '<div class="intel-section-head"><div><p class="eyebrow">RELATED SXF COVERAGE</p>'
