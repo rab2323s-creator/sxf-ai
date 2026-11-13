@@ -47,7 +47,18 @@ def check_archive() -> None:
         assert title.endswith(" | SXF Brief"), (slug, title)
         assert 45 <= len(title) <= 90, (slug, len(title))
         assert "AI News Today" not in title, slug
-        assert displayed in h1 and "Top 5 Stories" in h1, (slug, h1)
+        if issue_date >= date(2026, 11, 1):
+            # Dated, indexable issues name their primary real stories in H1,
+            # rather than duplicating the generic "Top 5 Stories" archive H1.
+            topic = title.split(": ", 1)[1].removesuffix(" | SXF Brief")
+            assert h1 == f"AI News — {displayed}: {topic}", (slug, h1, title)
+            assert 'class="sxbf-cover-issue-title"' in html, slug
+            assert 'class="sxbf-cover-brand">SXF <span>Brief</span></div><h1' in html, slug
+            assert '<section class="sxbf-cover sxbf-cover-dated">' in html, slug
+            assert "SXF Brief" not in h1, (slug, h1)
+        else:
+            # Historical noindex editions keep their existing dated summary H1.
+            assert displayed in h1 and "Top 5 Stories" in h1, (slug, h1)
         assert "AI News Today" not in h1, slug
         assert 90 <= len(description) <= 185, (slug, len(description))
         assert "AI news today" not in description.lower(), slug

@@ -52,3 +52,14 @@
 .sxbf-backtop{display:inline-block;margin-top:28px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brief-gold)!important}
 @media(max-width:850px){.sxbf-full-edition{margin-top:30px}.sxbf-full-article{padding:30px 22px}.sxbf-full-meta{font-size:9px}.sxbf-full-introcopy p,.sxbf-full-subsection p{font-size:15px}}
 @media(max-width:580px){.sxbf-full-intro h2{font-size:38px}.sxbf-full-intro>p:not(.sxbf-eyebrow){font-size:14px}.sxbf-full-article{padding:26px 17px}.sxbf-full-article>h2{font-size:33px}.sxbf-full-dek{font-size:18px}.sxbf-full-facts h3,.sxbf-full-subsection h3,.sxbf-full-limits h3{font-size:23px}.sxbf-full-facts ul{font-size:13px}.sxbf-full-links{gap:12px}.sxbf-story-jump a{flex:1 1 44%;text-align:center;font-size:10px}.sxbf-full-introcopy p,.sxbf-full-subsection p{font-size:14px;line-height:1.75}}
+
+
+/* Archived Brief issues: visible publisher masthead, separate descriptive H1.
+   Keeps the daily /brief/ design and all legacy noindex archives unchanged. */
+.sxbf-cover-dated .sxbf-cover-brand{font:500 clamp(64px,7vw,100px)/1.08 Georgia,'Times New Roman',serif;letter-spacing:-.035em;margin:7px 0 3px}
+.sxbf-cover-dated .sxbf-cover-brand span{color:var(--brief-bright)}
+.sxbf-cover-dated h1.sxbf-cover-issue-title{font:500 clamp(20px,2.2vw,30px)/1.24 Georgia,'Times New Roman',serif;letter-spacing:-.018em;color:#e1ddd5;max-width:950px;overflow-wrap:break-word;margin:5px 0 9px}
+@media(max-width:580px){
+  .sxbf-cover-dated .sxbf-cover-brand{font-size:clamp(53px,15vw,78px);margin:12px 0 6px}
+  .sxbf-cover-dated h1.sxbf-cover-issue-title{font-size:clamp(18px,5vw,23px)}
+}
