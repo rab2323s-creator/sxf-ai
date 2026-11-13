@@ -28,7 +28,7 @@ assert "Reuters" in html and "Associated Press" in html
 assert "/research/ai-coding-agent-architecture/" in html
 assert "/guides/deploy-ai-agents-production/" in html
 
-schema = json.loads(re.search(r'<script type="application/ld\\+json">(.+?)</script>', html).group(1))
+schema = json.loads(html.split('<script type="application/ld+json">', 1)[1].split('</script>', 1)[0])
 graph = {entry["@type"]: entry for entry in schema["@graph"]}
 assert {"WebPage", "NewsArticle", "ImageObject", "BreadcrumbList", "FAQPage"} <= graph.keys()
 assert graph["NewsArticle"]["articleSection"] == "Tools"
