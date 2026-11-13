@@ -5,7 +5,6 @@ import json
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from html.parser import HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = "microsoft-365-outage-outlook-teams-copilot-2026"
@@ -22,7 +21,8 @@ assert "@media(max-width:590px)" in html and "@media(max-width:930px)" in html
 assert html.count("<main ") == 1 and html.count("</main>") == 1
 assert html.endswith("</body></html>")
 assert "74 countries" in html and "MO1550821" in html and "EX1550543" in html
-assert "09:57 UTC" in html and "not a continuously updating live status" in html
+visible_text = re.sub(r"<[^>]+>", "", html)
+assert "09:57 UTC" in visible_text and "not a continuously updating live status" in visible_text
 assert "no evidence of malicious activity" in html
 assert "Reuters" in html and "Associated Press" in html
 assert "/research/ai-coding-agent-architecture/" in html
