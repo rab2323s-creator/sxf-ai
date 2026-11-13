@@ -11569,10 +11569,76 @@ def build_discovery_pages(items, current_items):
                 encoding="utf-8",
             )
 
+    # Editor-approved breaking-news route: static, primary-source reviewed and
+    # deliberately NOT regenerated from RSS or subject to automatic noindex.
+    outage_slug = "microsoft-365-outage-outlook-teams-copilot-2026"
+    outage_route = "/signals/microsoft-365-outage-outlook-teams-copilot-2026/"
+    outage_page = SIGNALS_DIR / outage_slug / "index.html"
+    if outage_page.is_file():
+        from html import escape as _escape_outage
+        outage_context = (
+            '<section class="signal-deep-dive shell" aria-label="Related Microsoft 365 incident analysis">'
+            '<div class="intel-section-head"><div><p class="eyebrow">RELATED SXF COVERAGE</p>'
+            '<h2>Microsoft 365 outage: Outlook, Teams and Copilot</h2></div></div>'
+            '<p>Read SXF’s verified November 12–13, 2026 service timeline,'
+            ' Microsoft incident IDs, AI connector effects and recovery caveats.'
+            ' <a href="' + outage_route + '">Explore the outage report →</a></p>'
+            '</section>'
+        )
+        for related_slug in (
+            "microsoft-idc-ai-roi-frontier-firms-2026",
+            "microsoft-copilot-idc-ai-roi-frontier-firms-2026",
+        ):
+            related_page = SIGNALS_DIR / related_slug / "index.html"
+            if related_page.is_file():
+                related_html = related_page.read_text(encoding="utf-8")
+                if outage_route not in related_html:
+                    related_page.write_text(
+                        related_html.replace("</main>", outage_context + "</main>", 1),
+                        encoding="utf-8",
+                    )
+        signals_index = SIGNALS_DIR / "index.html"
+        if signals_index.is_file():
+            index_html = signals_index.read_text(encoding="utf-8")
+            if outage_route not in index_html:
+                outage_spotlight = (
+                    '<section class="shell signals-snapshot" aria-label="Featured Microsoft 365 outage report">'
+                    '<div class="intel-section-head"><div><p class="eyebrow">BREAKING SERVICE COVERAGE</p>'
+                    '<h2>Microsoft 365 outage: verified global disruption</h2>'
+                    '<p>Outlook, Exchange Online, Teams features and Copilot were affected'
+                    ' November 12–13, 2026. Read the verified incident timeline and'
+                    ' SXF’s analysis of AI connector dependencies.</p>'
+                    '</div><a href="' + outage_route + '">Read verified report →</a></div>'
+                    '</section>'
+                )
+                index_html = index_html.replace(
+                    '<section class="signals-snapshot shell"',
+                    outage_spotlight + '<section class="signals-snapshot shell"', 1
+                )
+                signals_index.write_text(index_html, encoding="utf-8")
+        tools_index = ROOT / "tools" / "index.html"
+        if tools_index.is_file():
+            tools_html = tools_index.read_text(encoding="utf-8")
+            if outage_route not in tools_html:
+                tools_spotlight = (
+                    '<section class="shell" aria-label="Microsoft 365 reliability incident"'
+                    ' style="padding:25px 0">'
+                    '<div class="intel-section-head"><div><p class="eyebrow">TOOLS / INCIDENT REPORT</p>'
+                    '<h2>Microsoft 365 outage: Outlook, Teams and Copilot</h2>'
+                    '<p>Follow the November 2026 Microsoft 365 incident,'
+                    ' recovery updates, user impact and AI connector dependencies.</p>'
+                    '</div><a href="' + outage_route + '">Read the analysis →</a></div>'
+                    '</section>'
+                )
+                tools_index.write_text(
+                    tools_html.replace("</main>", tools_spotlight + "</main>", 1),
+                    encoding="utf-8",
+                )
+
     # Earlier builds left signal routes which no longer exist in the current
     # archive. Demote those as well, or they could stay indexed indefinitely.
     retire_unapproved_signal_routes(
-        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items}
+        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items} | {"microsoft-365-outage-outlook-teams-copilot-2026"}
     )
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
