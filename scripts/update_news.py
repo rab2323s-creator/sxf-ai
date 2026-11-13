@@ -11526,6 +11526,49 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         (path / "index.html").write_text(signal_page_html(item, items), encoding="utf-8")
 
+    # Keep the source-verified Mythos/AMD editorial guide discoverable after each
+    # automated rebuild. The guide itself is authored and never rewritten here.
+    mythos_amd_route = "/guides/claude-mythos-amd-nvidia-cuda/"
+    mythos_amd_link = (
+        '<section class="signal-deep-dive shell" aria-label="Related technical investigation">'
+        '<div class="intel-section-head"><div><p class="eyebrow">RELATED SXF ANALYSIS</p>'
+        '<h2>Claude Mythos, AMD GPUs and Nvidia CUDA</h2></div></div>'
+        '<p>What Anthropic actually achieved in three days on MI355X, what prompt'
+        ' processing covers, and why the CUDA switching barrier is more than kernels.'
+        ' <a href="' + mythos_amd_route + '">Read the verified Mythos–AMD'
+        ' GPU analysis →</a></p></section>'
+    )
+    for linked_slug in (
+        "anthropic-ipo-roadshow-ant-stock-price",
+        "claude-fable-mythos-5-2-benchmarks-pricing",
+    ):
+        linked_page = SIGNALS_DIR / linked_slug / "index.html"
+        if linked_page.is_file():
+            linked_html = linked_page.read_text(encoding="utf-8")
+            if mythos_amd_route not in linked_html:
+                linked_page.write_text(
+                    linked_html.replace("</main>", mythos_amd_link + "</main>", 1),
+                    encoding="utf-8",
+                )
+    guides_page = GUIDES_DIR / "index.html"
+    if guides_page.is_file():
+        guides_html = guides_page.read_text(encoding="utf-8")
+        if mythos_amd_route not in guides_html:
+            discovery_card = (
+                '<section class="shell" aria-label="Featured AI hardware analysis"'
+                ' style="padding-top:22px;padding-bottom:26px">'
+                '<div class="intel-section-head"><div><p class="eyebrow">FEATURED RESEARCH GUIDE</p>'
+                '<h2>Claude Mythos and AMD GPUs: is Nvidia CUDA at risk?</h2>'
+                '<p>Read the primary-source analysis of Anthropic’s three-day MI355X'
+                ' prompt-processing claim, limitations and implications for GPU portability.</p>'
+                '</div><a href="' + mythos_amd_route + '">Read the analysis →</a>'
+                '</div></section>'
+            )
+            guides_page.write_text(
+                guides_html.replace("</main>", discovery_card + "</main>", 1),
+                encoding="utf-8",
+            )
+
     # Earlier builds left signal routes which no longer exist in the current
     # archive. Demote those as well, or they could stay indexed indefinitely.
     retire_unapproved_signal_routes(
