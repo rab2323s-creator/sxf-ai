@@ -78,6 +78,8 @@ jobs:
           node --check assets/topic-navigation.js
       - name: Homepage decision pathways and SEO regression
         run: python tests/test_homepage_decision_pathways.py
+      - name: Guard dated Brief archive SEO and canonical metadata
+        run: python tests/test_brief_archive_seo.py
       - name: Daily Brief featured card styling, issue-date and SEO tests
         run: python tests/test_featured_daily_brief.py
       - name: Benchmarks guide content-consistency regression

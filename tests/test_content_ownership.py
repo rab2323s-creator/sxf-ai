@@ -24,11 +24,13 @@ def main() -> None:
         "guides/ai-agent-evaluation-checklist/index.html",
         "guides/best-ai-agents/index.html", "about/index.html",
         "tools/my-authored-guide/index.html",
+        "brief/2026-11-07/index.html",
     )
     generated = (
         "signals/latest/index.html", "topics/ai-agents/index.html",
         "models/some-new-model/index.html", "research/index.html", "guides/index.html",
         "index.html", "tools/index.html",
+        "brief/index.html",
     )
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)

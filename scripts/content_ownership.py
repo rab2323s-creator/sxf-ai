@@ -8,6 +8,7 @@ Routes explicitly owned by live generators remain mutable.
 from __future__ import annotations
 
 import argparse
+import re
 import subprocess
 from contextlib import contextmanager
 from pathlib import Path
@@ -31,6 +32,10 @@ def is_authored_html(relative_path: Path) -> bool:
         return False
     if any(part.startswith(".") for part in relative_path.parts):
         return False
+    # Published dated Brief issues are editorial artifacts, never generated feeds.
+    # Keep /brief/index.html mutable so the current daily issue can be refreshed.
+    if re.fullmatch(r"brief/\d{4}-\d{2}-\d{2}/index\.html", relative_path.as_posix()):
+        return True
     return (relative_path.parts[0] not in GENERATED_ROUTE_ROOTS
             and relative_path.as_posix() not in GENERATED_ENTRYPOINTS)
 
