@@ -221,6 +221,8 @@ jobs:
         run: python tests/test_mistral_medium35_dossier.py
       - name: Verify authored Scribe v2 research dossier and audio economics
         run: python tests/test_scribe_v2_dossier.py
+      - name: Verify Microsoft 365 outage SEO, status limitations and discovery
+        run: python tests/test_microsoft_365_outage_editorial.py
       - name: Validate generated site
         run: python scripts/validate_site.py
       - name: Confirm current source checks and historical ledger baselines
