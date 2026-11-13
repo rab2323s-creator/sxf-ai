@@ -1,6 +1,57 @@
 {
-  "updated_at": "2026-11-13T11:07:18.063549Z",
+  "updated_at": "2026-11-13T11:51:07.838708Z",
   "items": [
+    {
+      "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
+      "summary": "Google announced the global integration of Gemini 4 Hydrogen into Search on November 12, 2026, aiming to interpret complex, multi-part queries and present more visual, structured results with links to relevant sources. A separate model launch establishes Hydrogen's developer positioning and published pricing. SXF separates the consumer Search experience from paid API access, examines what the launch can and cannot establish about traffic referrals, and offers a verifiable query-testing checklist for publishers.",
+      "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/",
+      "signal_url": "https://sxf.si/signals/google-search-gemini-4-hydrogen-upgrade/",
+      "source": "Google AI",
+      "published": "2026-11-12T18:00:00Z",
+      "category": "Models",
+      "tags": [
+        "Google AI"
+      ],
+      "signal_score": 46
+    },
+    {
+      "title": "Scaling AI value without losing control: Lessons from Frontier Firms",
+      "summary": "Microsoft published findings from a commissioned IDC survey in November 2026 involving 5,204 IT and business leaders across 28 industries. The top maturity group reported average AI returns of 4x versus 2.7x among the bottom 30%, but these are leader-reported figures and do not establish that maturity caused the difference. SXF separates survey outcomes from causal claims and provides a practical framework for auditing measured AI value, agent controls and workforce readiness.",
+      "url": "https://blogs.microsoft.com/blog/2026/11/12/scaling-ai-value-without-losing-control-lessons-from-frontier-firms/",
+      "signal_url": "https://sxf.si/signals/microsoft-idc-ai-roi-frontier-firms-2026/",
+      "source": "Microsoft",
+      "published": "2026-11-12T16:00:02Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 28
+    },
+    {
+      "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+      "summary": "Google introduced the Gemini Decisions API on November 11, 2026, powered by Gemini Decision 1, for probabilistic classification rather than general text generation. The announcement lists up to 1,000 questions per request, 256,000-token multimodal inputs and a $0.10 per million-input-token list price, with no output-token billing. SXF explains the difference between advertised model-compute speed and end-to-end latency and shows how to design human-review thresholds instead of treating a confidence score as proof.",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+      "signal_url": "https://sxf.si/signals/gemini-decisions-api-pricing-1000-questions/",
+      "source": "Google AI",
+      "published": "2026-11-11T18:00:00Z",
+      "category": "Models",
+      "tags": [
+        "Multimodal AI",
+        "Google AI"
+      ],
+      "signal_score": 56
+    },
+    {
+      "title": "Gemini 4 Carbon in GitHub Copilot",
+      "summary": "GitHub's November 10, 2026 changelog announces general availability of Google's Gemini 4 Carbon model inside Copilot, with support across VS Code, Visual Studio, CLI, GitHub, coding agents and major IDE integrations. Access is listed for Pro+, Max, Business and Enterprise tiers, under provider list pricing and usage-based billing, with a gradual rollout and admin model policies for organization plans. SXF explains the difference between availability and entitlement and adds an engineering review checklist for security-sensitive coding.",
+      "url": "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot",
+      "signal_url": "https://sxf.si/signals/gemini-4-carbon-github-copilot-availability/",
+      "source": "GitHub",
+      "published": "2026-11-10T19:26:51Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot"
+      ],
+      "signal_score": 52
+    },
     {
       "title": "Gemini Intelligence: New features, on more devices",
       "summary": "Google announced expanded Gemini Intelligence availability on November 10, 2026 for selected Pixel 10 models and Motorola signature 27, alongside Rambler speech cleanup, custom AI-generated widgets, device troubleshooting and expanded supported app task automation. Some features are planned over subsequent weeks and have restrictions on region, language, device generation, age and subscriptions.",
@@ -39,6 +90,19 @@
         "OpenAI"
       ],
       "signal_score": 46
+    },
+    {
+      "title": "Work at the Frontier: AI’s effect on freelance work",
+      "summary": "OpenAI and Upwork published a November 10, 2026 analysis comparing ChatGPT activity with freelance marketplace postings. Of 63 matched work categories, 43 followed a pattern in which activities common in ChatGPT lost share on Upwork while less common ones gained share; 20 did not. AI-related job posts combined more varied tasks and often involved larger fixed budgets, but the study cannot prove AI caused demand changes or show what happens to all workers. SXF translates the findings into a clearer brief-design and skills audit.",
+      "url": "https://openai.com/index/ai-effect-on-freelance-work",
+      "signal_url": "https://sxf.si/signals/openai-upwork-ai-freelance-jobs-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-10T07:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
     },
     {
       "title": "Anthropic launches roadshow for proposed initial public offering",
@@ -688,26 +752,26 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 177,
-      "Google AI": 28,
+      "OpenAI": 178,
+      "Google AI": 30,
       "Hugging Face": 69,
-      "GitHub": 106,
+      "GitHub": 107,
       "Google Research": 18,
       "Anthropic": 4,
       "Meta": 0,
       "xAI": 0,
-      "Microsoft": 1
+      "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 19,
-      "Google AI": 4,
+      "OpenAI": 20,
+      "Google AI": 6,
       "Hugging Face": 12,
-      "GitHub": 9,
+      "GitHub": 10,
       "Google Research": 4,
       "Anthropic": 4,
       "Meta": 0,
       "xAI": 0,
-      "Microsoft": 1
+      "Microsoft": 2
     },
     "sources": {
       "OpenAI": {
@@ -723,14 +787,14 @@
         "age_rejection_count": 1286,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 19,
+        "publish_count": 20,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "Google AI": {
@@ -746,14 +810,14 @@
         "age_rejection_count": 8,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 4,
+        "publish_count": 6,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "Hugging Face": {
@@ -776,7 +840,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "GitHub": {
@@ -792,14 +856,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 9,
+        "publish_count": 10,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "Google Research": {
@@ -822,7 +886,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "Anthropic": {
@@ -845,7 +909,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -870,7 +934,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "xAI": {
@@ -893,7 +957,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       },
       "Microsoft": {
@@ -902,21 +966,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 10,
         "relevance_accepted_count": 6,
-        "quality_accepted_count": 1,
-        "accepted_candidate_count": 1,
-        "rejected_candidate_count": 9,
+        "quality_accepted_count": 2,
+        "accepted_candidate_count": 2,
+        "rejected_candidate_count": 8,
         "duplicate_count": 0,
         "age_rejection_count": 1,
         "relevance_rejection_count": 4,
-        "quality_rejection_count": 4,
-        "publish_count": 1,
+        "quality_rejection_count": 3,
+        "publish_count": 2,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-13T11:06:13.139086Z",
+        "last_successful_fetch": "2026-11-13T11:50:17.060669Z",
         "errors": []
       }
     },
