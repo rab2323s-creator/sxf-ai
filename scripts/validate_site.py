@@ -1807,6 +1807,41 @@ def validate_editorial_news_indexing(archive):
                 fail(f"Approved signal is not indexable: {slug}")
         elif not re.search(r'<meta name="robots" content="noindex,follow"', content):
             fail(f"Unapproved signal remains indexable: {slug}")
+    # Owner-approved authored Signal articles are independent from RSS archive
+    # items. Their explicit approval record is authoritative for crawl policy.
+    authored_path = ROOT / "data" / "editorial-authored-signals.json"
+    if authored_path.is_file():
+        authored = json.loads(authored_path.read_text(encoding="utf-8"))
+        if authored.get("version") != "sxf-authored-signals-v1":
+            fail("Invalid authored Signal approval ledger version")
+        rows = authored.get("editorially_approved")
+        if not isinstance(rows, list):
+            fail("Authored Signal approval ledger entries must be a list")
+        for row in rows:
+            if not isinstance(row, dict) or row.get("decision") != "approved":
+                fail("Only explicitly approved authored Signals may enter the sitemap")
+            slug = row.get("slug", "")
+            canonical = row.get("canonical_url", "")
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+                fail("Authored Signal approval contains invalid slug")
+            if canonical != f"https://sxf.si/signals/{slug}/":
+                fail(f"Authored Signal approval canonical mismatch: {slug}")
+            if slug in archive_slugs:
+                fail(f"Authored Signal duplicates a feed-owned route: {slug}")
+            if slug in {url.rsplit("/", 2)[-2] for url in expected}:
+                fail(f"Duplicate authored Signal in sitemap: {slug}")
+            article = signal_root / slug / "index.html"
+            if not article.is_file():
+                fail(f"Approved authored Signal page is missing: {slug}")
+            html = article.read_text(encoding="utf-8")
+            if ('name="robots" content="index,follow' not in html
+                    or 'name="googlebot" content="index,follow' not in html
+                    or re.search(r'<meta[^>]+content=["\']noindex', html, re.I)):
+                fail(f"Approved authored Signal is blocked from indexing: {slug}")
+            if f'<link rel="canonical" href="{canonical}"' not in html:
+                fail(f"Authored Signal has inconsistent canonical: {slug}")
+            expected.add(canonical)
+            archive_slugs.add(slug)
     if indexed != expected:
         fail(f"News sitemap contains unapproved or missing URLs: "
              f"unexpected={len(indexed - expected)}, missing={len(expected - indexed)}")
