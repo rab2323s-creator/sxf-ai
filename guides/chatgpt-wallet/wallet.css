@@ -1,0 +1,76 @@
+/* SXF / AI — ChatGPT Wallet evergreen guide. Uses site-wide intelligence design tokens. */
+.chatgpt-wallet-guide{--cw-accent:#c8ff4d;--cw-text:#e7edf4;--cw-muted:#a3afbd;--cw-border:rgba(188,205,226,.17);--cw-panel:#0d141d;color:var(--cw-text)}
+.chatgpt-wallet-guide .cw-kicker{display:inline-flex;gap:8px;align-items:center;color:var(--cw-accent);font:800 11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;text-transform:uppercase;letter-spacing:.12em}
+.chatgpt-wallet-guide .cw-hero{padding-top:54px;padding-bottom:48px}
+.chatgpt-wallet-guide .cw-hero h1{max-width:1120px;font-size:clamp(40px,6.4vw,84px);letter-spacing:-.063em;line-height:1.025;margin:22px 0}
+.chatgpt-wallet-guide .cw-hero h1 span{color:var(--cw-accent)}
+.chatgpt-wallet-guide .cw-deck{max-width:970px;font-size:clamp(17px,1.85vw,21px);line-height:1.68;color:#bdc8d5}
+.chatgpt-wallet-guide .cw-byline{display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid var(--cw-border);border-bottom:1px solid var(--cw-border);padding:17px 0;margin-top:29px}
+.chatgpt-wallet-guide .cw-byline div{min-width:135px;padding-right:18px;border-right:1px solid var(--cw-border)}
+.chatgpt-wallet-guide .cw-byline div:last-child{border-right:0}
+.chatgpt-wallet-guide .cw-byline span{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#8898a8;margin-bottom:4px}
+.chatgpt-wallet-guide .cw-byline strong{font-size:13px;line-height:1.4}
+.chatgpt-wallet-guide .cw-answer{background:linear-gradient(118deg,rgba(200,255,77,.085),rgba(15,25,33,.62) 38%,rgba(15,25,33,.5));border-block:1px solid var(--cw-border);padding-top:36px;padding-bottom:36px}
+.chatgpt-wallet-guide .cw-answer-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px}
+.chatgpt-wallet-guide .cw-answer h2{font-size:clamp(23px,3vw,37px);letter-spacing:-.04em;margin:0 0 15px}
+.chatgpt-wallet-guide .cw-answer p{font-size:16px;line-height:1.72;max-width:940px;margin:9px 0;color:#d7e0e9}
+.chatgpt-wallet-guide .cw-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:30px 0 0}
+.chatgpt-wallet-guide .cw-status>div{background:#0c1119;border:1px solid var(--cw-border);border-radius:12px;padding:16px}
+.chatgpt-wallet-guide .cw-status small{display:block;color:#9aa8b6;font-size:11px;margin-bottom:5px}
+.chatgpt-wallet-guide .cw-status strong{font-size:15px}
+.chatgpt-wallet-guide .cw-layout{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,790px);gap:clamp(24px,4vw,64px);align-items:start;padding-top:44px;padding-bottom:65px}
+.chatgpt-wallet-guide .cw-toc{position:sticky;top:88px;max-height:calc(100vh - 103px);overflow:auto;scrollbar-width:thin;border-left:2px solid rgba(200,255,77,.4);padding-left:19px}
+.chatgpt-wallet-guide .cw-toc>span{font:800 11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em;color:var(--cw-accent)}
+.chatgpt-wallet-guide .cw-toc a{display:block;font-size:12.5px;color:#9faebd;padding:6px 0;text-decoration:none;line-height:1.42}
+.chatgpt-wallet-guide .cw-toc a:hover,.chatgpt-wallet-guide .cw-toc a:focus-visible{color:#fff}
+.chatgpt-wallet-guide .cw-prose{min-width:0;font-size:16px;line-height:1.8;color:#c9d4de}
+.chatgpt-wallet-guide .cw-prose section{scroll-margin-top:90px;margin-bottom:63px}
+.chatgpt-wallet-guide .cw-prose h2{font-size:clamp(29px,3.5vw,43px);line-height:1.16;letter-spacing:-.045em;color:#f1f5fa;margin:0 0 23px}
+.chatgpt-wallet-guide .cw-prose h3{font-size:clamp(20px,2.2vw,26px);line-height:1.28;color:#e9f0f8;margin:31px 0 12px;letter-spacing:-.027em}
+.chatgpt-wallet-guide .cw-prose h4{font-size:18px;color:#f2f7fb;margin:24px 0 7px}
+.chatgpt-wallet-guide .cw-prose p{margin:0 0 19px;max-width:78ch}
+.chatgpt-wallet-guide .cw-prose p a,.chatgpt-wallet-guide .cw-prose li a{color:#d1ff82;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(200,255,77,.35);overflow-wrap:anywhere}
+.chatgpt-wallet-guide .cw-prose ul,.chatgpt-wallet-guide .cw-prose ol{padding-left:1.35em;margin:12px 0 24px}
+.chatgpt-wallet-guide .cw-prose li{padding-left:4px;margin:10px 0}
+.chatgpt-wallet-guide .cw-prose strong{color:#eef4fb}
+.chatgpt-wallet-guide .cw-prose code{font:500 .9em ui-monospace,SFMono-Regular,Consolas,monospace;background:#182534;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}
+.chatgpt-wallet-guide .cw-section-tag{font:800 10px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--cw-accent);margin:0 0 10px!important}
+.chatgpt-wallet-guide .cw-callout{background:rgba(200,255,77,.05);border:1px solid rgba(200,255,77,.27);border-left:3px solid var(--cw-accent);padding:19px 22px;border-radius:8px;margin:25px 0}
+.chatgpt-wallet-guide .cw-callout p:last-child{margin-bottom:0}
+.chatgpt-wallet-guide .cw-callout strong{color:#d7ffa0}
+.chatgpt-wallet-guide .cw-note{border-left:3px solid #8695ac;background:rgba(145,161,184,.07);padding:15px 19px;margin:23px 0}
+.chatgpt-wallet-guide .cw-note p:last-child{margin:0}
+.chatgpt-wallet-guide .cw-figure{margin:32px 0;border:1px solid var(--cw-border);border-radius:14px;overflow:hidden;background:#0d1721}
+.chatgpt-wallet-guide .cw-figure .cw-image-stage{position:relative;aspect-ratio:16 / 9;display:flex;justify-content:center;align-items:center;background:radial-gradient(ellipse at 55% 42%,rgba(200,255,77,.095),transparent 65%),repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(255,255,255,.025) 32px),#0a1017}
+.chatgpt-wallet-guide .cw-figure img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.chatgpt-wallet-guide .cw-figure .cw-image-pending{padding:25px;color:#a9b8c6;text-align:center;max-width:410px}
+.chatgpt-wallet-guide .cw-image-pending b{display:block;letter-spacing:.14em;color:#d1ff82;font:800 10px/1.8 ui-monospace,monospace;margin-bottom:8px}
+.chatgpt-wallet-guide .cw-figure figcaption{padding:12px 17px;border-top:1px solid var(--cw-border);font-size:12px;line-height:1.55;color:#a1afbe}
+.chatgpt-wallet-guide .cw-table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin:23px 0 29px;border:1px solid var(--cw-border);border-radius:12px}
+.chatgpt-wallet-guide table{width:100%;min-width:560px;border-collapse:collapse;font-size:13px;line-height:1.6}
+.chatgpt-wallet-guide table th,.chatgpt-wallet-guide table td{border-bottom:1px solid rgba(200,213,226,.12);padding:13px 14px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.chatgpt-wallet-guide table th{color:#eaf2fa;font-weight:750}
+.chatgpt-wallet-guide table thead th{background:#14202b;color:#d3e3ec;letter-spacing:.01em;font-size:12px}
+.chatgpt-wallet-guide table tbody tr:last-child>*{border-bottom:0}
+.chatgpt-wallet-guide table tbody tr:nth-child(even){background:rgba(255,255,255,.018)}
+.chatgpt-wallet-guide .cw-steps{counter-reset:step;display:grid;gap:12px;margin:25px 0}
+.chatgpt-wallet-guide .cw-step{display:grid;grid-template-columns:44px 1fr;gap:14px;border:1px solid var(--cw-border);border-radius:12px;padding:16px;background:#0e1822}
+.chatgpt-wallet-guide .cw-step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font:800 17px ui-monospace,monospace;color:var(--cw-accent)}
+.chatgpt-wallet-guide .cw-step strong{display:block;margin-bottom:4px}
+.chatgpt-wallet-guide .cw-step p{margin:0;font-size:14px}
+.chatgpt-wallet-guide .cw-metric{font:700 24px ui-monospace,monospace;color:var(--cw-accent)}
+.chatgpt-wallet-guide details.cw-faq{border-bottom:1px solid var(--cw-border);padding:18px 0}
+.chatgpt-wallet-guide details.cw-faq summary{cursor:pointer;list-style:revert;color:#eaf0f6;font-size:17px;font-weight:700;line-height:1.45}
+.chatgpt-wallet-guide details.cw-faq[open] summary{color:#d2ff89}
+.chatgpt-wallet-guide details.cw-faq p{font-size:15px;margin:14px 0 0}
+.chatgpt-wallet-guide .cw-sources{font-size:13px;line-height:1.6}
+.chatgpt-wallet-guide .cw-sources li{margin:13px 0}
+.chatgpt-wallet-guide .cw-related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.chatgpt-wallet-guide .cw-related a{border:1px solid var(--cw-border);border-radius:12px;padding:17px;background:#101a23;color:#dbe6ef;text-decoration:none!important}
+.chatgpt-wallet-guide .cw-related small{color:#a3f76e;display:block;font-size:10px;letter-spacing:.1em;margin-bottom:8px}
+.chatgpt-wallet-guide .cw-related strong{display:block;line-height:1.4}
+.chatgpt-wallet-guide .cw-related a:hover{border-color:rgba(200,255,77,.6)}
+.chatgpt-wallet-guide a:focus-visible,.chatgpt-wallet-guide summary:focus-visible{outline:2px solid var(--cw-accent);outline-offset:3px}
+@media(max-width:1040px){.chatgpt-wallet-guide .cw-layout{grid-template-columns:1fr}.chatgpt-wallet-guide .cw-toc{position:static;max-height:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px;border:1px solid var(--cw-border);border-radius:12px;padding:18px}.chatgpt-wallet-guide .cw-toc>span{grid-column:1/-1;padding-bottom:10px}.chatgpt-wallet-guide .cw-prose{max-width:820px}}
+@media(max-width:650px){.chatgpt-wallet-guide .cw-hero{padding-top:25px;padding-bottom:30px}.chatgpt-wallet-guide .cw-hero h1{font-size:clamp(36px,10vw,57px)}.chatgpt-wallet-guide .cw-byline{gap:10px}.chatgpt-wallet-guide .cw-byline div{flex:1 1 40%;min-width:0;border-right:0}.chatgpt-wallet-guide .cw-answer-grid{grid-template-columns:1fr;gap:8px}.chatgpt-wallet-guide .cw-status{grid-template-columns:1fr 1fr}.chatgpt-wallet-guide .cw-layout{padding-top:27px}.chatgpt-wallet-guide .cw-toc{grid-template-columns:1fr}.chatgpt-wallet-guide .cw-prose{font-size:15px;line-height:1.74}.chatgpt-wallet-guide .cw-prose section{margin-bottom:48px}.chatgpt-wallet-guide .cw-prose h2{font-size:30px}.chatgpt-wallet-guide .cw-related{grid-template-columns:1fr}.chatgpt-wallet-guide table{min-width:0;display:block}.chatgpt-wallet-guide table thead{display:none}.chatgpt-wallet-guide table tbody{display:grid;gap:10px;padding:8px}.chatgpt-wallet-guide table tr{display:block;background:#101b26!important;border:1px solid var(--cw-border);border-radius:9px;padding:8px 12px}.chatgpt-wallet-guide table td,.chatgpt-wallet-guide table th{display:block;border:0;padding:7px 0;font-size:13px}.chatgpt-wallet-guide table td[data-label]::before{content:attr(data-label);display:block;color:#90a1b0;font:800 10px ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}.chatgpt-wallet-guide table th[scope=row]{color:#d1ff90;border-bottom:1px solid var(--cw-border);padding-bottom:8px}.chatgpt-wallet-guide .cw-table-scroll{overflow:visible}.chatgpt-wallet-guide .cw-status strong{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.chatgpt-wallet-guide *{scroll-behavior:auto!important}}
