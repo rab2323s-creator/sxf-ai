@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
-from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis, render_review_reader_tools
+from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis, render_review_reader_tools, render_review_special
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
@@ -145,6 +145,17 @@ def signal_page_html(item, items, context: SignalArticleContext):
             },
         ],
     }
+    if review and review.get("hero_image"):
+        image = review["hero_image"]
+        image_id = canonical + "#primaryimage"
+        image_uri = BASE_URL + image["path"]
+        schema["@graph"][1]["author"] = {"@type": "Organization", "name": "SXF / AI Editorial", "url": BASE_URL + "/about/"}
+        schema["@graph"][1]["publisher"] = {"@type": "Organization", "name": "SXF / AI", "url": BASE_URL + "/"}
+        schema["@graph"][0]["primaryImageOfPage"] = {"@id": image_id}
+        schema["@graph"][1]["image"] = {"@id": image_id}
+        schema["@graph"].append({"@type": "ImageObject", "@id": image_id, "url": image_uri,
+            "contentUrl": image_uri, "width": 1200, "height": 630,
+            "caption": image["caption"], "description": image["alt"]})
     if is_cosmos:
         image_id = canonical + "#primaryimage"
         image_data = {"@type": "ImageObject", "@id": image_id,
@@ -315,6 +326,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     evidence_html = render_review_evidence(review)
     analysis_html = render_review_analysis(review)
     reader_tools_html = render_review_reader_tools(review)
+    feature_html = render_review_special(review)
     if is_license_deep_dive:
         deep_dive_html = license_reference.BODY_HTML
     if is_sol_copilot_deep_dive:
@@ -333,7 +345,28 @@ def signal_page_html(item, items, context: SignalArticleContext):
             <figcaption>SXF original editorial concept art · An illustration, not actual NVIDIA model output or benchmark evidence.</figcaption>
           </figure>
         </section>""" if is_cosmos else ""
+    if review and review.get("hero_image"):
+        art = review["hero_image"]
+        if not art["path"].startswith("/assets/signals/") or not art["path"].endswith(".svg"):
+            raise ValueError("Invalid editorial illustration asset")
+        hero_html = ('<section class="signal-artwork-shell shell" aria-label="Article illustration">'
+                     '<figure class="signal-artwork"><img src="' + escape(art["path"], quote=True) +
+                     '" width="1200" height="630" alt="' + escape(art["alt"], quote=True) +
+                     '" fetchpriority="high" loading="eager" decoding="async" />'
+                     '<figcaption>' + escape(art["caption"]) + '</figcaption></figure></section>')
     head_html = page_head(page_title, description, canonical, schema, "article", robots)
+    if review and review.get("hero_image"):
+        art = review["hero_image"]
+        image_url = BASE_URL + art["path"]
+        head_html = head_html.replace('<meta name="twitter:card" content="summary" />',
+            '<meta property="og:image" content="' + escape(image_url, quote=True) + '" />' +
+            '<meta property="og:image:type" content="image/svg+xml" />' +
+            '<meta property="og:image:width" content="1200" />' +
+            '<meta property="og:image:height" content="630" />' +
+            '<meta property="og:image:alt" content="' + escape(art["alt"], quote=True) + '" />' +
+            '<meta name="twitter:card" content="summary_large_image" />' +
+            '<meta name="twitter:image" content="' + escape(image_url, quote=True) + '" />' +
+            '<meta name="twitter:image:alt" content="' + escape(art["alt"], quote=True) + '" />')
     if is_cosmos:
         head_html = head_html.replace(
             '<meta name="twitter:card" content="summary" />',
@@ -380,6 +413,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
         </section>
         {deep_dive_html}
         {analysis_html}
+        {feature_html}
         {evidence_html}
         {reader_tools_html}
         <section class="signal-taxonomy shell">
