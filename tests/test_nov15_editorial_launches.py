@@ -128,7 +128,7 @@ def main():
                      "sxf-ai-scan-deployment-lab")
             assert all(html.count('id="' + name + '"') == 1 for name in names)
             assert "X-GitHub-Api-Version: 2026-03-10" in html
-            assert "not live-tested" in html
+            assert "Documentation-derived, unexecuted examples." in html
         assert "signal-reader-tools" in html
         assert "signal-editorial-analysis" in html
         assert "signal-evidence" in html
