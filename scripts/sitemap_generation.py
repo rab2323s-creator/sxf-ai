@@ -178,6 +178,12 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/brief/", generated_today),
         sitemap_entry(f"{BASE_URL}/about/", "2026-09-26"),
         sitemap_entry(f"{BASE_URL}/guides/", guide_lastmod),
+        # Authored evergreen Wallet dossier: preserve both original WebP images in every feed regeneration.
+        sitemap_image_entry(
+            f"{BASE_URL}/guides/chatgpt-wallet/", "2026-11-15",
+            f"{BASE_URL}/guides/chatgpt-wallet/images/chatgpt-wallet-payment-flow.webp",
+            f"{BASE_URL}/guides/chatgpt-wallet/images/agentic-commerce-market-shift.webp",
+        ),
         sitemap_image_entry(f"{BASE_URL}/guides/why-does-ai-use-water/", "2026-10-27", f"{BASE_URL}/guides/why-does-ai-use-water/images/ai-water-footprint-explained.svg"),
         sitemap_image_entry(f"{BASE_URL}/guides/flux-3-image-klein/", "2026-10-27", f"{BASE_URL}/guides/flux-3-image-klein/images/flux3-klein-decision-card.webp"),
         sitemap_image_entry(f"{BASE_URL}/guides/ai-agent-use-cases/", "2026-10-22", f"{BASE_URL}/guides/ai-agent-use-cases/images/agent-decision-framework.svg", f"{BASE_URL}/guides/ai-agent-use-cases/images/sxf-workflow-fault-injection.svg"),
