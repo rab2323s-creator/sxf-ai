@@ -8135,6 +8135,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/chatgpt-wallet/",
+            "category": "Agents · Commerce · Payments",
+            "categories": ["agents", "research", "tools", "security"],
+            "kicker": "CHATGPT WALLET · SOURCE-VERIFIED COMMERCE REFERENCE",
+            "title": "ChatGPT Wallet Explained: How AI Agent Payments Work (2026)",
+            "description": "A primary-source guide to human-approved agent payments, payment architecture, merchant readiness, Apple Pay and Google Pay comparisons, refunds, and the economics of Google Shopping and Amazon.",
+            "meta": "ChatGPT Wallet · Agentic commerce · Apple Pay · Google Pay · Merchant readiness",
+            "updated": "Nov 15, 2026",
+            "read_time": "39 min",
+        },
+        {
             "href": "/guides/ai-leaderboards-compared/",
             "category": "Models · Benchmarks · Research",
             "categories": ["models", "research", "tools"],
