@@ -105,6 +105,10 @@ def main():
             assert len(review["funding_comparison"]["rows"]) == 5
             assert len(review["funding_comparison"]["sources"]) == 2
             assert "https://openai.com/index/teen-development-research-grants/" in review["sources"]
+        if slug == "github-ai-scan-repository-rest-api-setup":
+            assert "422" in review["seo_title"]
+            assert "repository_scan" in review["h1"]
+            assert len(review["sources"]) >= 5
         html = unescape(update_news.signal_page_html(item, [item]))
         assert 'name="robots" content="index,follow' in html
         assert "<h1>" + review["h1"] + "</h1>" in html
@@ -118,6 +122,13 @@ def main():
             assert "separate announced commitments" in html
             assert html.index("signal-funding-comparison") < html.index("signal-editorial-analysis")
             assert 'href="https://openai.com/index/teen-development-research-grants/"' in html
+        if slug == "github-ai-scan-repository-rest-api-setup":
+            names = ("sxf-ai-scan-api-examples", "sxf-ai-scan-policy-hierarchy",
+                     "sxf-ai-scan-errors", "sxf-ai-scan-tool-comparison",
+                     "sxf-ai-scan-deployment-lab")
+            assert all(html.count('id="' + name + '"') == 1 for name in names)
+            assert "X-GitHub-Api-Version: 2026-03-10" in html
+            assert "not live-tested" in html
         assert "signal-reader-tools" in html
         assert "signal-editorial-analysis" in html
         assert "signal-evidence" in html
@@ -158,6 +169,12 @@ def main():
                 assert "separate announced commitments" in rendered
                 assert 'href="https://openai.com/index/teen-development-research-grants/"' in rendered
                 assert review["h1"] in unescape(rendered)
+            if slug == "github-ai-scan-repository-rest-api-setup":
+                for name in ("sxf-ai-scan-api-examples", "sxf-ai-scan-policy-hierarchy",
+                             "sxf-ai-scan-errors", "sxf-ai-scan-tool-comparison",
+                             "sxf-ai-scan-deployment-lab"):
+                    assert rendered.count('id="' + name + '"') == 1
+                assert "X-GitHub-Api-Version: 2026-03-10" in rendered
             assert "signal-editorial-analysis" in rendered
             assert "signal-evidence" in rendered
             assert "signal-reader-tools" in rendered

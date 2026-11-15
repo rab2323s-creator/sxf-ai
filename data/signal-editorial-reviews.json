@@ -6631,31 +6631,37 @@
     },
     "github-ai-scan-repository-rest-api-setup": {
       "reviewed_at": "2026-11-15",
-      "seo_title": "GitHub AI Scan REST API: repository_scan Setup Guide",
-      "h1": "GitHub AI Scan REST API: enable repository scanning and understand policy",
-      "meta_description": "GitHub AI Scan adds repository_scan to REST settings. See org/repo PATCH routes, inheritance, 422 errors, permissions, manual scans and AI credit usage.",
+      "seo_title": "GitHub AI Scan REST API: Setup, Policy & 422 Errors (2026)",
+      "h1": "GitHub AI Scan REST API: repository_scan examples, policies and errors",
+      "meta_description": "Configure GitHub AI Scan repository_scan with REST GET/PATCH examples, policy inheritance, permissions, HTTP 422 troubleshooting, and AI credit controls.",
       "source_name": "GitHub",
       "primary_source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
       "sources": [
-        "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+        "https://docs.github.com/en/rest/code-scanning/code-scanning?apiVersion=2026-03-10",
+        "https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories",
+        "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/configure-dependabot-alerts",
+        "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning"
       ],
       "schema_type": "NewsArticle",
       "summary": "GitHub announced on November 13, 2026 a public-preview REST setting called repository_scan to manage AI Scan for repositories at organization and repository level. The update allows settings automation via GET and PATCH APIs but does not automatically run a scan; users with repository write access start scans on demand, consuming GitHub Code Security AI credits. SXF explains inheritance, enterprise policy, conflict errors and rollout checks, differentiating configuration from scanning results.",
       "keywords": [
-        "GitHub AI Scan API",
-        "repository_scan",
         "GitHub AI Scan REST API",
-        "code scanning AI credits",
-        "GitHub code scanning repository scan",
-        "GitHub AI Scan enablement"
+        "repository_scan GitHub",
+        "GitHub AI Scan 422 errors",
+        "GitHub AI Scan policy hierarchy",
+        "GitHub AI Scan permissions",
+        "GitHub AI Scan PATCH",
+        "GitHub AI Scan vs CodeQL",
+        "GitHub Code Security AI credits"
       ],
       "longtail_keywords": [
-        "PATCH repos owner repo code-scanning ai-scan repository_scan",
-        "GitHub AI Scan 422 enterprise policy",
-        "does enabling GitHub AI Scan start a scan",
-        "GitHub AI Scan credits repository"
+        "GitHub AI Scan GET PATCH repository_scan API 2026-03-10",
+        "GitHub AI Scan Enterprise policy 422",
+        "GitHub AI Scan repository permissions 403 404",
+        "GitHub AI Scan CodeQL Dependabot secret scanning"
       ],
-      "search_intent": "Developer/security administrator how-to: API endpoints, organization policy, credits and rollout safety.",
+      "search_intent": "Hands-on API and security administrator guide to repository_scan, permissions, policy inheritance, errors and a proposed controlled deployment lab.",
       "search_questions": [
         "Which endpoint enables repository_scan?",
         "Can a repository override an organization?",
@@ -6717,9 +6723,19 @@
           "label": "Eligibility",
           "fact": "Org-owned public repositories or eligible private/internal repositories with GitHub Code Security or Advanced Security may use the feature; GHES is unsupported.",
           "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "REST permissions",
+          "fact": "Documented organization settings use Administration read/write; repository read uses Code scanning alerts and write uses Administration permission.",
+          "source": "https://docs.github.com/en/rest/code-scanning/code-scanning?apiVersion=2026-03-10"
+        },
+        {
+          "label": "Manual scan coverage",
+          "fact": "Repository AI Scan is manually triggered, analyzes the default branch and consumes Code Security AI credits; it does not replace CodeQL.",
+          "source": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories"
         }
       ],
-      "limitations": "The API is in public preview and its eligibility and billing may change. The announcement does not provide a universal price per scan, an accuracy guarantee or an automatic scan schedule. Enabling AI Scan is not evidence that every repository has been scanned or that all vulnerabilities are identified.",
+      "limitations": "The API is in public preview and its eligibility and billing may change. The announcement does not provide a universal price per scan, an accuracy guarantee or an automatic scan schedule. Enabling AI Scan is not evidence that every repository has been scanned or that all vulnerabilities are identified. The SXF API examples are documentation-derived and not live-tested; HTTP 400 is general troubleshooting, not a documented AI Scan PATCH-specific status. The deployment lab is a proposed checklist, not measured results.",
       "analysis": [
         {
           "heading": "Which REST endpoints control GitHub AI Scan for repositories?",
