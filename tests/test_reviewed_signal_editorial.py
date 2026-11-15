@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from html import unescape
@@ -55,8 +56,10 @@ def main():
             assert all(len(block["paragraphs"]) >= 2 for block in review["analysis"]), slug
             for block in review["analysis"]:
                 assert block["heading"] in unescape(html), slug
+                # Inline contextual anchors are editorial markup, not missing prose.
+                rendered_text = unescape(re.sub(r"<[^>]+>", "", html))
                 for paragraph in block["paragraphs"]:
-                    assert paragraph in unescape(html), slug
+                    assert paragraph in rendered_text, slug
                 assert block["source"] in review["sources"], slug
 
         for evidence in review["evidence"]:
