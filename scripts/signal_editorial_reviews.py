@@ -39,7 +39,17 @@ def render_review_analysis(review):
     sections = []
     for i, section in enumerate(review["analysis"], 1):
         heading = escape(section["heading"])
-        paragraphs = "".join("<p>" + escape(paragraph) + "</p>" for paragraph in section["paragraphs"])
+        def link_paragraph(paragraph):
+            rendered = escape(paragraph)
+            for link in section.get("inline_links", []):
+                label = escape(link["text"])
+                href = link["url"]
+                if not href.startswith("/") or href.startswith("//") or '"' in href:
+                    raise ValueError("Invalid SXF inline link")
+                if label in rendered:
+                    rendered = rendered.replace(label, '<a href="' + escape(href, quote=True) + '">' + label + '</a>', 1)
+            return "<p>" + rendered + "</p>"
+        paragraphs = "".join(link_paragraph(paragraph) for paragraph in section["paragraphs"])
         source = escape(section["source"], quote=True)
         sections.append(
             '<article class="deep-dive-section">'
@@ -93,3 +103,45 @@ def render_review_reader_tools(review):
            + links_html + '</ul></div>' if links_html else '')
         + '</section>'
     )
+
+def render_review_special(review):
+    """Article-specific reported facts, methodology tables and human-readable FAQ.
+
+    Optional fields are authored in the editorial data. No FAQ structured-data
+    markup is emitted because snippets are not promised by Google.
+    """
+    if not review:
+        return ""
+    feature = review.get("sxf_feature")
+    parts = []
+    if feature:
+        source = feature["source"]
+        if not (source.startswith("https://") and source in review["sources"]):
+            raise ValueError("Feature must cite a listed primary source")
+        if feature["type"] == "matrix":
+            headings = "".join("<th scope='col'>" + escape(cell) + "</th>" for cell in feature["columns"])
+            rows = "".join("<tr>" + "".join(("<th scope='row'>" if i == 0 else "<td>") +
+                escape(str(cell)) + ("</th>" if i == 0 else "</td>") for i, cell in enumerate(row))
+                + "</tr>" for row in feature["rows"])
+            display = '<div class="deep-dive-table-wrap" tabindex="0" role="region" aria-label="' + escape(feature["heading"], quote=True) + '"><table class="deep-dive-table"><thead><tr>' + headings + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+        elif feature["type"] == "steps":
+            display = '<ol class="deep-dive-checklist">' + "".join("<li><strong>" +
+                escape(row["label"]) + "</strong> " + escape(row["detail"]) + "</li>"
+                for row in feature["steps"]) + "</ol>"
+        elif feature["type"] == "cards":
+            display = '<div class="deep-dive-facts">' + "".join("<div><strong>" +
+                escape(row["label"]) + "</strong><p>" + escape(row["detail"]) +
+                "</p></div>" for row in feature["cards"]) + "</div>"
+        else:
+            raise ValueError("Unknown review feature type")
+        parts.append('<section class="signal-deep-dive shell signal-research-feature" aria-label="Independent article context"><div class="deep-dive-section"><p class="eyebrow">' +
+                     escape(feature["eyebrow"]) + '</p><h2>' + escape(feature["heading"]) +
+                     '</h2><p>' + escape(feature["intro"]) + '</p>' + display + '<p>' +
+                     escape(feature["note"]) + ' <a href="' + escape(source, quote=True) +
+                     '" target="_blank" rel="noopener noreferrer">Check the original evidence ↗</a></p></div></section>')
+    if review.get("faq"):
+        faq = "".join("<details><summary>" + escape(x["question"]) + "</summary><p>" +
+                      escape(x["answer"]) + "</p></details>" for x in review["faq"])
+        parts.append('<section class="signal-deep-dive shell signal-reader-faq"><div class="deep-dive-section deep-dive-faq"><p class="eyebrow">READER QUESTIONS</p><h2>' +
+                     escape(review["faq_heading"]) + '</h2>' + faq + '</div></section>')
+    return "".join(parts)
