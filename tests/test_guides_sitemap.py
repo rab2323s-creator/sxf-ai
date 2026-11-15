@@ -48,6 +48,34 @@ def main():
         else:
             raise AssertionError("Canonical mismatch must fail validation")
 
+    # The generated Guides directory must retain authored Wallet coverage after
+    # every scheduled feed refresh. Manual edits to guides/index.html are overwritten.
+    wallet = BASE + "/guides/chatgpt-wallet/"
+    directory = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    generator = (ROOT / "scripts" / "update_news.py").read_text(encoding="utf-8")
+    assert 'href="/guides/chatgpt-wallet/"' in directory, "Wallet guide missing from rendered Guides directory"
+    assert '"href": "/guides/chatgpt-wallet/"' in generator, "Wallet guide missing from source catalog"
+    assert wallet in actual_list, "Wallet guide missing from sitemap"
+    page = (ROOT / "guides" / "chatgpt-wallet" / "index.html").read_text(encoding="utf-8")
+    assert '<link rel="canonical" href="' + wallet + '">' in page, "Wallet canonical changed"
+    image_urls = (
+        wallet + "images/chatgpt-wallet-payment-flow.webp",
+        wallet + "images/agentic-commerce-market-shift.webp",
+    )
+    sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
+    image_ns = "{http://www.google.com/schemas/sitemap-image/1.1}"
+    wallet_nodes = [
+        node for node in sitemap_root.findall("s:url", NS)
+        if node.findtext("s:loc", namespaces=NS) == wallet
+    ]
+    assert len(wallet_nodes) == 1, "Wallet sitemap page missing or duplicated"
+    actual_images = [
+        img.findtext(image_ns + "loc") for img in wallet_nodes[0].findall(image_ns + "image")
+    ]
+    assert all(url in actual_images for url in image_urls), "Wallet images missing from generated image sitemap"
+    for asset in image_urls:
+        assert (ROOT / asset.removeprefix(BASE + "/")).is_file(), "Wallet image file missing: " + asset
+
     print(f"PASS: all {len(expected)} indexable guide URLs are present exactly once")
 
 
