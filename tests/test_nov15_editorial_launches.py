@@ -99,6 +99,12 @@ def main():
             assert review["featured_guide"]["url"] == "/guides/chatgpt-wallet/"
             assert "2026" in review["meta_description"]
             assert review["search_intent"].startswith("News and release-status")
+        if slug == "openai-child-safety-research-funding-2026":
+            assert review["seo_title"].startswith("OpenAI's $2M")
+            assert "What It Means" in review["h1"]
+            assert len(review["funding_comparison"]["rows"]) == 5
+            assert len(review["funding_comparison"]["sources"]) == 2
+            assert "https://openai.com/index/teen-development-research-grants/" in review["sources"]
         html = unescape(update_news.signal_page_html(item, [item]))
         assert 'name="robots" content="index,follow' in html
         assert "<h1>" + review["h1"] + "</h1>" in html
@@ -106,6 +112,12 @@ def main():
             assert 'href="/guides/chatgpt-wallet/"' in html
             assert "<span>ROLLOUT STATUS</span>" in html
             assert "On November 13, 2026, OpenAI announced" in html
+        if slug == "openai-child-safety-research-funding-2026":
+            assert "signal-funding-comparison" in html
+            assert "OpenAI's AI Child Safety Research Funding: $2M vs $5M" in html
+            assert "separate announced commitments" in html
+            assert html.index("signal-funding-comparison") < html.index("signal-editorial-analysis")
+            assert 'href="https://openai.com/index/teen-development-research-grants/"' in html
         assert "signal-reader-tools" in html
         assert "signal-editorial-analysis" in html
         assert "signal-evidence" in html
@@ -140,6 +152,11 @@ def main():
             if slug == "chatgpt-wallet-payment-approval-safety":
                 assert 'href="/guides/chatgpt-wallet/"' in rendered
                 assert "<span>ROLLOUT STATUS</span>" in rendered
+                assert review["h1"] in unescape(rendered)
+            if slug == "openai-child-safety-research-funding-2026":
+                assert "signal-funding-comparison" in rendered
+                assert "separate announced commitments" in rendered
+                assert 'href="https://openai.com/index/teen-development-research-grants/"' in rendered
                 assert review["h1"] in unescape(rendered)
             assert "signal-editorial-analysis" in rendered
             assert "signal-evidence" in rendered

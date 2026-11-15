@@ -104,6 +104,46 @@ def render_review_reader_tools(review):
         + '</section>'
     )
 
+
+def render_review_funding_comparison(review):
+    """Show a source-backed comparison of separate research funding announcements."""
+    if not review or not review.get("funding_comparison"):
+        return ""
+    comparison = review["funding_comparison"]
+    references = comparison["sources"]
+    if len(references) < 2 or any(
+        not item["url"].startswith("https://") or item["url"] not in review["sources"]
+        for item in references
+    ):
+        raise ValueError("Funding comparison requires listed HTTPS primary sources")
+    if len(comparison["columns"]) != 3 or any(len(row) != 3 for row in comparison["rows"]):
+        raise ValueError("Funding comparison must have three columns")
+    headers = "".join("<th scope='col'>" + escape(cell) + "</th>" for cell in comparison["columns"])
+    rows = "".join(
+        "<tr>" + "".join(
+            ("<th scope='row'>" if i == 0 else "<td>") + escape(str(cell))
+            + ("</th>" if i == 0 else "</td>")
+            for i, cell in enumerate(row)
+        ) + "</tr>"
+        for row in comparison["rows"]
+    )
+    sources = " · ".join(
+        '<a href="' + escape(item["url"], quote=True)
+        + '" target="_blank" rel="noopener noreferrer">' + escape(item["label"]) + '</a>'
+        for item in references
+    )
+    return (
+        '<section class="signal-deep-dive shell signal-funding-comparison" aria-labelledby="signal-funding-comparison-title">'
+        '<div class="deep-dive-section"><p class="eyebrow">RESEARCH FUNDING / CONTEXT</p>'
+        '<h2 id="signal-funding-comparison-title">' + escape(comparison["heading"]) + '</h2>'
+        '<p>' + escape(comparison["intro"]) + '</p>'
+        '<div class="deep-dive-table-wrap" tabindex="0" role="region" aria-label="Research funding comparison">'
+        '<table class="deep-dive-table"><thead><tr>' + headers + '</tr></thead><tbody>'
+        + rows + '</tbody></table></div>'
+        '<p>' + escape(comparison["note"]) + '</p>'
+        '<p>Original announcements: ' + sources + '</p></div></section>'
+    )
+
 def render_review_special(review):
     """Article-specific reported facts, methodology tables and human-readable FAQ.
 

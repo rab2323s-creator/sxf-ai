@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html import escape
-from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis, render_review_reader_tools, render_review_special
+from signal_editorial_reviews import get_review, render_review_evidence, render_review_analysis, render_review_reader_tools, render_review_special, render_review_funding_comparison
 from copilot_oct5_signal_page import enrich_copilot_oct5_signal
 from atlassian_openai_signal_page import enrich_atlassian_openai_signal
 from open_tts_leaderboard_signal_page import enrich_open_tts_leaderboard_signal
@@ -325,6 +325,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
     editorial = intelligent_ui.EDITORIAL if is_intelligent_ui_deep_dive else sol_copilot.EDITORIAL if is_sol_copilot_deep_dive else license_reference.EDITORIAL if is_license_deep_dive else review["editorial"] if review else item.get("editorial") or editorial_units(item)
     evidence_html = render_review_evidence(review)
     analysis_html = render_review_analysis(review)
+    comparison_html = render_review_funding_comparison(review)
     reader_tools_html = render_review_reader_tools(review)
     feature_html = render_review_special(review)
     if is_license_deep_dive:
@@ -425,6 +426,7 @@ def signal_page_html(item, items, context: SignalArticleContext):
           </aside>
         </section>
         {deep_dive_html}
+        {comparison_html}
         {analysis_html}
         {feature_html}
         {evidence_html}

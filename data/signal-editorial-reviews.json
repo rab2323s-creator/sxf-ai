@@ -6846,13 +6846,14 @@
     },
     "openai-child-safety-research-funding-2026": {
       "reviewed_at": "2026-11-15",
-      "seo_title": "OpenAI Child Safety Research: $2M Pledge Explained",
-      "h1": "OpenAI's $2 million AI child safety research pledge: scope and safeguards",
-      "meta_description": "OpenAI pledges $2 million to child AI safety research. Examine the Paris charter, independent findings, risk measurement and what remains unproven.",
+      "seo_title": "OpenAI's $2M Child Safety Research Pledge Explained (2026)",
+      "h1": "OpenAI Commits $2 Million to AI Child Safety Research: What It Means",
+      "meta_description": "OpenAI pledged $2 million for AI child safety research. Explore the programme, research independence, safeguards and what the funding does not prove.",
       "source_name": "OpenAI",
       "primary_source": "https://openai.com/index/children-first-declaration",
       "sources": [
-        "https://openai.com/index/children-first-declaration"
+        "https://openai.com/index/children-first-declaration",
+        "https://openai.com/index/teen-development-research-grants/"
       ],
       "schema_type": "NewsArticle",
       "summary": "OpenAI announced on November 12, 2026 that it committed $2 million to a research network under the Coalition for Children's Rights and Protection in the Age of AI after signing a charter at the Paris Peace Forum. The announced goal is shared scientific measurement of AI's risks and opportunities for children, with researcher control over findings and publication of inconclusive or negative results. SXF explains what the commitment actually funds in principle and which independent checks are still necessary before claiming improved child safety.",
@@ -6861,7 +6862,9 @@
         "OpenAI 2 million children AI safety",
         "Paris Peace Forum safer AI charter",
         "AI safety for children research 2026",
-        "children AI safeguards measurement"
+        "children AI safeguards measurement",
+        "OpenAI $2M vs $5M child AI research",
+        "OpenAI teen development grants September 2026"
       ],
       "longtail_keywords": [
         "what is OpenAI 2 million child safety pledge",
@@ -6869,7 +6872,7 @@
         "AI risks opportunities for children measurement",
         "OpenAI Paris Peace Forum charter 2026"
       ],
-      "search_intent": "Source-grounded policy and research explainer for child safety, measurement and independence.",
+      "search_intent": "News analysis of OpenAI's November 2026 $2 million child-safety research pledge, contrasted with its separate September $5 million teen-development grant programme.",
       "search_questions": [
         "What did OpenAI pledge?",
         "What does the coalition research measure?",
@@ -6877,7 +6880,7 @@
         "Does this announcement show a safety improvement?"
       ],
       "editorial": {
-        "what_changed": "OpenAI signed an international children's AI safety charter and pledged $2 million to support research measuring the risks and opportunities of AI for young people.",
+        "what_changed": "On November 12, 2026, OpenAI said it signed an international children's AI safety charter and committed $2 million to shared research measuring AI risks and opportunities for children. This is a separate initiative from its $5 million teen-development research grants announced on September 8.",
         "why_it_matters": "Public concern about young people's AI use needs reproducible evidence, transparent publication and safeguards rather than relying solely on product announcements or industry promises.",
         "what_to_verify": "This is a funding commitment, not proof that a specific chatbot is already safer. The release outlines research independence and publishing negative results, but does not provide complete outcome data or an audited impact evaluation."
       },
@@ -6926,9 +6929,14 @@
           "label": "Jurisdiction",
           "fact": "OpenAI says it plans to engage European policymakers as the EU Kids Act develops.",
           "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Separate September commitment",
+          "fact": "OpenAI announced up to $5 million in independent research grants for the effects of generative AI on people ages 13–17 on September 8, 2026.",
+          "source": "https://openai.com/index/teen-development-research-grants/"
         }
       ],
-      "limitations": "The pledge is a company announcement, not audited evidence of an achieved safety improvement. The released summary does not quantify expected research impact, publish new clinical or developmental findings, or demonstrate the actual independence of every eventual study. The term 'safety' spans different risks and age groups; no single metric can establish it across contexts.",
+      "limitations": "The pledge is a company announcement, not audited evidence of an achieved safety improvement. The released summary does not quantify expected research impact, publish new clinical or developmental findings, or demonstrate the actual independence of every eventual study. The term 'safety' spans different risks and age groups; no single metric can establish it across contexts. The separate September $5 million teen-research grants and November $2 million child-safety network commitment must not be combined into a single grant programme or treated as disbursed funds.",
       "analysis": [
         {
           "heading": "What did OpenAI promise at the Paris Peace Forum?",
@@ -7055,6 +7063,53 @@
         "path": "/assets/signals/ai-child-safety-research-original.svg",
         "alt": "SXF original research-evidence ladder from funding pledge and charter to technical safeguards and independent child safety outcomes.",
         "caption": "SXF editorial evidence ladder explaining the difference between funding commitments and measured child safety outcomes."
+      },
+      "funding_comparison": {
+        "heading": "OpenAI's AI Child Safety Research Funding: $2M vs $5M",
+        "intro": "OpenAI announced two separate research funding initiatives in 2026. September focused on independent grants for studies of teenagers; November committed support to a scientific network developing shared child-safety measurements.",
+        "columns": [
+          "Comparison",
+          "September 8, 2026 — $5M",
+          "November 12, 2026 — $2M"
+        ],
+        "rows": [
+          [
+            "Funding",
+            "Up to $5 million in research grants; individual awards up to $1 million",
+            "$2 million pledged to support a scientific research network"
+          ],
+          [
+            "Population and focus",
+            "Teenagers ages 13–17; generative AI's effects on social and emotional development",
+            "Children more broadly; measuring AI risks and opportunities"
+          ],
+          [
+            "Research model",
+            "Independent researchers apply for project grants administered by OpenAI Group PBC",
+            "Research network under the Coalition for Children's Rights and Protection in the Age of AI"
+          ],
+          [
+            "Publication approach",
+            "Public release is strongly encouraged, but publication is not a funding condition",
+            "OpenAI says findings will be published, including negative or inconclusive results"
+          ],
+          [
+            "Evidence so far",
+            "Grant announcement and intended research; no safety outcome follows from funding alone",
+            "Research-network commitment and charter; not proof of measured safety improvement"
+          ]
+        ],
+        "note": "The $5 million and $2 million are separate announced commitments, not one $7 million programme or evidence that $7 million has already been disbursed.",
+        "sources": [
+          {
+            "label": "September 8 grant announcement",
+            "url": "https://openai.com/index/teen-development-research-grants/"
+          },
+          {
+            "label": "November 12 child-safety pledge",
+            "url": "https://openai.com/index/children-first-declaration"
+          }
+        ]
       }
     }
   }
