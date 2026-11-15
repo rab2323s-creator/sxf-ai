@@ -5938,6 +5938,1118 @@
         "Run unit, security and access-control tests before merging generated code.",
         "Measure cost per accepted change and review effort across models."
       ]
+    },
+    "chatgpt-wallet-payment-approval-safety": {
+      "reviewed_at": "2026-11-15",
+      "seo_title": "ChatGPT Wallet: How Payments, Approvals & Safety Work",
+      "h1": "ChatGPT Wallet explained: eligible users, payment approval and security",
+      "meta_description": "ChatGPT Wallet starts rolling out to eligible US Pro users in dots. Learn how biometrics, card tokens, disputes and merchant checkout safeguards work.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/introducing-chatgpt-wallet",
+      "sources": [
+        "https://openai.com/index/introducing-chatgpt-wallet",
+        "https://developers.openai.com/commerce",
+        "https://openai.com/index/introducing-businesses-chatgpt"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI announced ChatGPT Wallet on November 13, 2026 for agent-assisted purchases, initially through dots for eligible US ChatGPT Pro subscribers aged at least 18. A person approves every purchase with a security check; payment networks use tokenized card credentials so the agent and business do not receive the person's actual card details. SXF separates launch availability from future delegated buying, explains the authorization chain and maps the merchant and user checks needed for a safer rollout.",
+      "keywords": [
+        "ChatGPT Wallet",
+        "ChatGPT Wallet availability",
+        "ChatGPT Wallet security",
+        "ChatGPT Wallet payment approval",
+        "agentic payments tokens",
+        "ChatGPT Wallet US Pro dots"
+      ],
+      "longtail_keywords": [
+        "how does ChatGPT Wallet approve payments",
+        "is ChatGPT Wallet available for Plus users",
+        "does ChatGPT Wallet share card numbers with agents",
+        "can dots buy things with ChatGPT Wallet"
+      ],
+      "search_intent": "Informational product explainer: eligibility, authorization, card security and merchant readiness.",
+      "search_questions": [
+        "Who can use ChatGPT Wallet now?",
+        "Can agents pay without approval?",
+        "Are my real card details shared?",
+        "How can a merchant prepare for agent checkouts?"
+      ],
+      "editorial": {
+        "what_changed": "ChatGPT Wallet lets an eligible user place a card on file, review the items and amount, and authorize a payment performed by an agent in dots. OpenAI says card-network tokens replace the actual card details.",
+        "why_it_matters": "The hard part of agentic shopping is not finding a product but proving what the person agreed to buy and preserving the checkout, fulfilment and dispute responsibilities of the merchant.",
+        "what_to_verify": "The initial release is limited to US-based ChatGPT Pro adults with eligible US-issued cards and is being rolled out through dots. Fully delegated purchase rules and spending caps are future plans, not current blanket permission."
+      },
+      "evidence": [
+        {
+          "label": "Launch date",
+          "fact": "OpenAI announced ChatGPT Wallet on November 13, 2026.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Initial availability",
+          "fact": "The first rollout is in dots for Pro subscribers aged 18+ in the US with eligible US-issued cards.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "User approval",
+          "fact": "Each purchase requires users to review items, total and selected card and pass a security check, such as biometrics.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Credential handling",
+          "fact": "Networks create a payment token substituting for the real card details when an authorized charge is processed.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Partners",
+          "fact": "OpenAI lists American Express, Mastercard and Visa as payment-network partners.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Merchant contract",
+          "fact": "Businesses retain customer relationships, pricing, fulfilment, returns and service responsibilities.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Card protections",
+          "fact": "OpenAI says card rewards and existing protections for eligible disputes continue to apply.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Merchant compatibility",
+          "fact": "OpenAI advises businesses to maintain product data and avoid blocking valid signed agent requests in CDN or firewall settings.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Risk providers",
+          "fact": "The launch points to payment and fraud providers as part of avoiding accidental declines for legitimate agent purchases.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        },
+        {
+          "label": "Future delegation",
+          "fact": "Spending limits and advance authorization for some categories are described as prospective developments.",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet"
+        }
+      ],
+      "limitations": "The announcement describes design intentions and a limited rollout, not an independently audited fraud rate or a guarantee that every merchant accepts the wallet. Network tokenization alone does not prevent misleading merchant information, compromised accounts or purchase errors. Financial and dispute outcomes remain governed by the user's card and merchant terms; no future pre-approval feature should be presented as generally available.",
+      "analysis": [
+        {
+          "heading": "Who can use ChatGPT Wallet, and where is the payment made?",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet",
+          "paragraphs": [
+            "The product launches inside dots, OpenAI's proactive agent workflow, rather than as a universal checkout button in every ChatGPT session. Eligibility is narrow: US ChatGPT Pro subscribers at least 18 years old with a supported US-issued card, subject to rollout. A merchant should therefore not infer that every visitor or every browser agent can pay this way today.",
+            "The wallet is a payment layer, not a replacement for the merchant. The merchant still sells the goods or service, sets prices, handles delivery and returns, and remains the consumer's counterpart. The related SXF report on Businesses in ChatGPT explains the separate merchant-discovery surface; business listings are not themselves wallet payment approval."
+          ],
+          "inline_links": [
+            {
+              "text": "Businesses in ChatGPT",
+              "url": "/signals/chatgpt-business-hub-claim-business-agents/"
+            }
+          ]
+        },
+        {
+          "heading": "How does the approval and card-token flow work?",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet",
+          "paragraphs": [
+            "First, a user saves an eligible payment card. When an agent prepares to purchase, the person checks the actual items, total and card, then passes a security step such as Face ID or fingerprint verification. Only after that authorization does a payment network supply substitute card credentials for the transaction. OpenAI states that the agent and merchant do not receive the user's actual card details.",
+            "An authorization record is important, but it does not settle all possible disputes: a user still needs the merchant's order confirmation, refund path and card-provider process where relevant. The SXF agent-security guide describes why restricting what an agent can do, logging approvals and guarding against malicious page instructions remain separate controls from payment tokenization."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF agent-security guide",
+              "url": "/guides/ai-agent-security/"
+            }
+          ]
+        },
+        {
+          "heading": "What does a business need to change to accept agent-led purchases?",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet",
+          "paragraphs": [
+            "OpenAI asks merchants to keep accurate product facts and available inventory, to review whether their CDN and firewall inadvertently reject legitimate signed agent traffic, and to coordinate with fraud and payment processors. These are practical integration tasks: a successful payment token can still be declined by an antifraud rule that assumes every automated browser is hostile.",
+            "SXF's recommended prelaunch test is a controlled checkout matrix: a currently available item, a price change during checkout, out-of-stock rejection, a declined card, a refund request and a duplicated agent action. Record which actor approved each transaction and whether the order, billing and customer-support systems agree. Do not weaken bot protection globally just to make tests pass."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "SXF analysis: where does purchase authority end?",
+          "source": "https://openai.com/index/introducing-chatgpt-wallet",
+          "paragraphs": [
+            "The current approval boundary is a specific purchase with a visible total and payment choice. OpenAI also discusses future spending limits and categories for pre-authorized buying, but those ideas should be evaluated as future safeguards rather than assumed available now. A future delegation system would need ways to revoke authority, resolve ambiguous items and cap exposure when inventory or price changes.",
+            "A useful comparison is the difference between browsing, deciding and paying. An agent can research options without financial permission; a purchase still creates an order and payment obligations. For more complex workflows, the SXF production-agent guide sets out approvals and rollback patterns that can be adapted into merchant acceptance testing without claiming they guarantee a risk-free transaction."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF production-agent guide",
+              "url": "/guides/deploy-ai-agents-production/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Businesses in ChatGPT",
+          "url": "/signals/chatgpt-business-hub-claim-business-agents/",
+          "description": "Merchant discovery and claimed business listings are separate from payment authorization."
+        },
+        {
+          "title": "AI agent security",
+          "url": "/guides/ai-agent-security/",
+          "description": "Permission boundaries, malicious instructions and safe actions."
+        },
+        {
+          "title": "Production agent deployment",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Audits, retries, approvals and rollback."
+        },
+        {
+          "title": "AI agent use cases",
+          "url": "/guides/ai-agent-use-cases/",
+          "description": "Practical agent workflow distinctions."
+        },
+        {
+          "title": "AI safety research funding",
+          "url": "/signals/openai-child-safety-research-funding-2026/",
+          "description": "The separate evidence and governance discussion for AI safeguards."
+        }
+      ],
+      "reader_checklist": [
+        "Check plan, age, country and card eligibility before trying the feature.",
+        "Review every item, total, card and merchant before authorizing.",
+        "Keep merchant receipts and check your bank or card statement.",
+        "Test fraud, refunds, inventory changes and repeat requests in controlled environments.",
+        "Treat future delegated purchases as planned, not already enabled."
+      ],
+      "sxf_feature": {
+        "type": "steps",
+        "eyebrow": "PURCHASE AUTHORIZATION / EXPLAINED",
+        "heading": "The four checkpoints in an agent-assisted payment",
+        "intro": "A payment has distinct decision makers. This sequence separates OpenAI's described flow from SXF's additional operational check.",
+        "steps": [
+          {
+            "label": "1 · Prepare",
+            "detail": "Agent gathers the intended item, seller, price and total for the user to review."
+          },
+          {
+            "label": "2 · Approve",
+            "detail": "User examines the purchase details and passes the required security check."
+          },
+          {
+            "label": "3 · Tokenize",
+            "detail": "The network supplies substitute payment credentials rather than the actual stored card details."
+          },
+          {
+            "label": "4 · Fulfil and resolve",
+            "detail": "Merchant processes the order, handles delivery and manages returns or eligible disputes."
+          }
+        ],
+        "note": "This is a simplified explanation of the announced flow, not a certification of an individual merchant's implementation.",
+        "source": "https://openai.com/index/introducing-chatgpt-wallet"
+      },
+      "faq_heading": "ChatGPT Wallet: availability and safety questions",
+      "faq": [
+        {
+          "question": "Is ChatGPT Wallet available to ChatGPT Plus users?",
+          "answer": "The initial November 2026 rollout is described for eligible US ChatGPT Pro subscribers aged at least 18 using dots. OpenAI did not announce broad Plus availability."
+        },
+        {
+          "question": "Does an agent receive the actual card number?",
+          "answer": "OpenAI says the wallet uses card-network payment tokens so the agent and merchant do not receive the user's actual card details."
+        },
+        {
+          "question": "Can an agent make purchases without asking first?",
+          "answer": "The announced initial flow requires user review and a security check for every purchase. OpenAI describes wider pre-authorized delegation as future work."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/chatgpt-wallet-approval-original.svg",
+        "alt": "Original SXF payment-flow diagram showing agent cart, human approval, network payment token and merchant fulfillment.",
+        "caption": "SXF editorial process diagram based on OpenAI's November 2026 announcement; not a screenshot of the Wallet interface."
+      }
+    },
+    "llama-cpp-1-0-api-abi-stability-upgrade": {
+      "reviewed_at": "2026-11-15",
+      "seo_title": "llama.cpp v1.0.0: API Stability, ABI & Upgrade Guide",
+      "h1": "llama.cpp v1.0.0: what changed and how to prepare an upgrade",
+      "meta_description": "llama.cpp and ggml reach library v1.0.0 with semver rules for public C APIs. Explore breaking changes, supported backends and a migration checklist.",
+      "source_name": "ggml-org / Hugging Face",
+      "primary_source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+      "sources": [
+        "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+        "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+        "https://github.com/ggml-org/ggml/releases/tag/v1.0.0"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "The ggml-org team announced version 1.0.0 of the llama.cpp and ggml libraries on November 13, 2026, clarifying semantic-versioning contracts for public C interfaces. Future API or ABI-breaking changes trigger major-version increments, while compatible features and bug fixes use minor and patch increments. The milestone matters to application integrators and package maintainers; it is not a claim that all backends have identical behaviour or that throughput improved by a measured percentage.",
+      "keywords": [
+        "llama.cpp 1.0",
+        "llama.cpp v1.0.0",
+        "libllama API stability",
+        "ggml v1.0",
+        "llama.cpp semantic versioning",
+        "llama cpp upgrade checklist"
+      ],
+      "longtail_keywords": [
+        "llama.cpp v1.0.0 breaking changes C API",
+        "how to update libllama and libggml v1.0",
+        "is llama.cpp 1.0 faster",
+        "llama cpp v1 ABI compatibility"
+      ],
+      "search_intent": "Technical release explainer for local AI developers deciding when and how to upgrade.",
+      "search_questions": [
+        "What changed in llama.cpp v1.0.0?",
+        "Does 1.0 guarantee ABI compatibility?",
+        "How does semantic versioning work?",
+        "Which backends require regression tests?"
+      ],
+      "editorial": {
+        "what_changed": "llama.cpp and ggml libraries received a v1.0.0 release with a public versioning policy specifying major, minor and patch changes for C APIs.",
+        "why_it_matters": "An explicit compatibility promise allows projects embedding local models to plan dependency updates and build distribution pipelines without treating every upstream commit as a safe drop-in replacement.",
+        "what_to_verify": "A library 1.0 tag does not establish a stable model-output format, a fixed set of supported accelerators, or a measured performance boost. Compatibility still depends on build flags, linked backends and application behaviour."
+      },
+      "evidence": [
+        {
+          "label": "Date",
+          "fact": "The release article is dated November 13, 2026.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Core libraries",
+          "fact": "The project announces llama.cpp library v1.0.0 and ggml library v1.0.0.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Public API",
+          "fact": "The policy applies to interfaces exposed in project public headers under include directories.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Major rule",
+          "fact": "Breaking changes to the public C API require a major version bump.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Minor rule",
+          "fact": "Backward-compatible features, backend and model support or API additions trigger minor increments.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Patch rule",
+          "fact": "Bug fixes without API changes trigger patch increments.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Build platforms",
+          "fact": "The project describes distribution work across Linux, macOS, Windows, mobile operating systems and common package ecosystems.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Hardware abstraction",
+          "fact": "ggml uses dedicated compute backends that can be built as libraries and loaded optionally at runtime.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Architecture coverage",
+          "fact": "The maintainers claim support for more than 150 architecture variants; this is a project figure, not a measurement made by SXF.",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+        },
+        {
+          "label": "Release provenance",
+          "fact": "llama.cpp publishes the v1.0.0 tag in the maintainers' official release repository.",
+          "source": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0"
+        }
+      ],
+      "limitations": "Version 1.0.0 describes a library and public API contract, not a guarantee that every program, model format or accelerator remains backward compatible. A numerical release milestone does not independently demonstrate faster inference or lower RAM use. Project-reported architecture counts may change; consumers should verify specific model and backend combinations.",
+      "analysis": [
+        {
+          "heading": "What exactly is stable in llama.cpp 1.0?",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "paragraphs": [
+            "The key change is a versioned contract for C entry points exposed by libllama and libggml. A major increment communicates public incompatibility, a minor increment signals compatible features and model or backend support, and a patch increment covers fixes that do not modify the public API. This makes release selection more predictable for applications that compile or link against the libraries.",
+            "The promise has a defined scope: headers in the public include directory. It does not automatically guarantee byte-for-byte identical inference results across machines, stable private C++ internals, or identical behaviour after quantization and device-driver changes. An adopter should distinguish the published library interface from the broader runtime stack."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "Does llama.cpp 1.0 improve inference speed or model quality?",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "paragraphs": [
+            "The announcement is about maintenance discipline, package delivery and backend coverage. It does not provide a controlled benchmark showing a universal speed improvement in tokens per second, lower first-token latency or better answer accuracy. Any such performance claims need tests on named models, quantization formats, devices and comparable prompts.",
+            "SXF recommends two measured baselines before upgrading: prompt-processing throughput and generation throughput, paired with output consistency or task-accuracy tests. Hold model weights, prompt formatting, GPU drivers and context length constant wherever practical. A software milestone can reduce integration risk without necessarily improving the underlying model."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "How should library users migrate to v1.0.0?",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "paragraphs": [
+            "First pin both library dependencies, record the current public API functions and compile with warnings treated as failures in a staging environment. Run a small corpus of local inference tasks through each configured CPU or GPU backend, checking crashes, tokenization, batching behaviour, memory budgets and API return values before shipping a package update.",
+            "Next, document a rollback procedure and keep a short compatibility matrix for operating systems, architectures and model families. The SXF open-source collection provides additional implementation context; the goal is reproducible release engineering, not a claim that all 150-plus reported architecture variants have been independently verified by our newsroom."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF open-source collection",
+              "url": "/open-source/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: the difference between source stability and operational stability",
+          "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "paragraphs": [
+            "Semantic versioning is a useful signal for build-time compatibility, but production stability must also cover model conversion tools, packaging, accelerator selection and the shape of application outputs. A public API that still compiles can nonetheless behave differently when the hardware backend or model weights change.",
+            "Compare before-and-after versions along three axes: link/load success, representative task correctness and operational cost under the same workload. A good upgrade report records build identifiers, CPU or GPU model, memory, quantization, prompts and reasons for any rejected outputs. It avoids attributing performance changes to a 1.0 label rather than measured evidence."
+          ],
+          "inline_links": []
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "SXF open-source AI coverage",
+          "url": "/open-source/",
+          "description": "Local inference ecosystems and reproducible open-source releases."
+        },
+        {
+          "title": "Model pricing hub",
+          "url": "/models/pricing/",
+          "description": "Compare API economics with local hardware costs."
+        },
+        {
+          "title": "Best AI coding tools",
+          "url": "/guides/best-ai-coding-tools/",
+          "description": "Developer workflows and code-assistant alternatives."
+        },
+        {
+          "title": "Production agent deployment",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Monitoring and rollback procedures for AI software."
+        },
+        {
+          "title": "Gemini Hydrogen in Copilot",
+          "url": "/signals/gemini-4-hydrogen-github-copilot-availability/",
+          "description": "Hosted coding model availability, which differs from local library ABI guarantees."
+        }
+      ],
+      "reader_checklist": [
+        "Pin the libllama and libggml versions in your dependency manifest.",
+        "Verify public header/API compatibility in an automated build.",
+        "Run each actually deployed backend and model combination.",
+        "Compare inference latency and correctness against a recorded baseline.",
+        "Keep rollback assets and documented reproducible build settings."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "VERSIONING CONTRACT / RELEASE ENGINEERING",
+        "heading": "What MAJOR, MINOR and PATCH mean for library adopters",
+        "intro": "The project's stated semantic version contract tells maintainers how to interpret public-interface changes, not how to predict runtime performance.",
+        "columns": [
+          "Version change",
+          "Project contract",
+          "What an integrator should test"
+        ],
+        "rows": [
+          [
+            "MAJOR",
+            "Breaking public C API changes",
+            "Rebuild bindings and verify interface migrations"
+          ],
+          [
+            "MINOR",
+            "Compatible functionality or new backend/model support",
+            "Test new features plus existing workflows"
+          ],
+          [
+            "PATCH",
+            "Bug fix without public API change",
+            "Smoke-test affected code and model outputs"
+          ]
+        ],
+        "note": "The last column is SXF's recommended engineering process, not a benchmark or project warranty.",
+        "source": "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
+      },
+      "faq_heading": "llama.cpp v1.0.0 questions",
+      "faq": [
+        {
+          "question": "Is llama.cpp v1.0.0 a new large language model?",
+          "answer": "No. llama.cpp is an inference library for running model architectures; the release concerns its software and versioning contract."
+        },
+        {
+          "question": "Does version 1.0 mean every future release is backward compatible?",
+          "answer": "No. The maintainers promise to signal breaking changes with major version increments, not to avoid breaking changes indefinitely."
+        },
+        {
+          "question": "Is v1.0 guaranteed to run faster?",
+          "answer": "The launch article does not establish a universal measured speed gain. Benchmark your actual model and hardware before drawing that conclusion."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/llama-cpp-v1-versioning-original.svg",
+        "alt": "SXF original diagram distinguishing llama.cpp major, minor and patch releases and test responsibilities.",
+        "caption": "SXF explanatory versioning chart based on ggml-org's published v1.0.0 semantic-version rules."
+      }
+    },
+    "gemini-4-hydrogen-github-copilot-availability": {
+      "reviewed_at": "2026-11-15",
+      "seo_title": "Gemini 4 Hydrogen in GitHub Copilot: Plans & Access",
+      "h1": "Gemini 4 Hydrogen in GitHub Copilot: plans, editors and billing",
+      "meta_description": "GitHub adds Gemini 4 Hydrogen to Copilot Pro, Pro+, Max, Business and Enterprise. Check rollout, model selection, admin policy and usage billing.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+      "sources": [
+        "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+        "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot",
+        "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
+      "keywords": [
+        "Gemini 4 Hydrogen Copilot",
+        "Gemini 4 Hydrogen GitHub Copilot",
+        "Gemini 4 Hydrogen pricing Copilot",
+        "Gemini Hydrogen VS Code",
+        "enable Gemini 4 Hydrogen Copilot",
+        "Gemini 4 Hydrogen vs Carbon"
+      ],
+      "longtail_keywords": [
+        "how to enable Gemini 4 Hydrogen in GitHub Copilot",
+        "is Gemini 4 Hydrogen in Copilot Pro",
+        "Hydrogen versus Carbon for coding agents",
+        "GitHub Copilot Gemini Hydrogen model picker"
+      ],
+      "search_intent": "Developer product explainer: access, editor compatibility, usage billing and model selection.",
+      "search_questions": [
+        "Which Copilot plans include Gemini 4 Hydrogen?",
+        "How do I enable it?",
+        "Does it replace Gemini 3.8 Flash?",
+        "How is it billed compared with Carbon?"
+      ],
+      "editorial": {
+        "what_changed": "GitHub expanded the selectable Copilot model list with Gemini 4 Hydrogen on November 13, 2026, with support in IDEs, web, mobile, CLI, agents and SDK subject to rollout.",
+        "why_it_matters": "Developers now have a fast-oriented Gemini 4 option in an existing workflow, but plan permissions and cost-per-accepted-task remain more useful than unverified speed claims.",
+        "what_to_verify": "GitHub uses usage-based provider-list billing, so the price is not necessarily a fixed subscription-only inclusion. Gradual rollout and enterprise model policy can prevent a specific account from seeing the model immediately."
+      },
+      "evidence": [
+        {
+          "label": "Release date",
+          "fact": "GitHub announced Gemini 4 Hydrogen on November 13, 2026.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Target use",
+          "fact": "GitHub positions Hydrogen for efficient agentic coding, tool use and multi-step workflows.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Plan coverage",
+          "fact": "The announcement includes Copilot Pro, Pro+, Max, Business and Enterprise.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Editor support",
+          "fact": "VS Code, Visual Studio, JetBrains IDEs, Xcode and Eclipse are named.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Additional clients",
+          "fact": "GitHub also lists Copilot CLI, coding agent, app, GitHub web and mobile plus Copilot SDK.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Rollout qualifier",
+          "fact": "Availability is gradual, so an account may not see the picker option immediately.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Admin control",
+          "fact": "Enterprise and Business admins use the Copilot model policy to enable or block the option.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Billing method",
+          "fact": "The release uses provider list pricing with usage-based billing; it does not promise a universal fixed per-request amount.",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+        },
+        {
+          "label": "Carbon distinction",
+          "fact": "Gemini 4 Carbon was announced separately on November 10 for Pro+, Max, Business and Enterprise; base Pro is not on its release list.",
+          "source": "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot"
+        },
+        {
+          "label": "Retirement schedule",
+          "fact": "GitHub recommends Hydrogen as the alternative to Gemini 3.8 Flash before the December 14, 2026 deprecation.",
+          "source": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december"
+        }
+      ],
+      "limitations": "The announcement is not an independent evaluation of model quality or security. Copilot's billed rates and credit usage should be checked in live account pricing; Google's standalone API price is a different product. Hydrogen and Carbon have different availability and positioning, but no controlled SXF benchmark has been run.",
+      "analysis": [
+        {
+          "heading": "Who can enable Gemini 4 Hydrogen inside GitHub Copilot?",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+          "paragraphs": [
+            "GitHub lists Copilot Pro, Pro+, Max, Business and Enterprise as eligible plans, and describes availability across VS Code, Visual Studio, popular IDEs, CLI, the coding agent, GitHub web and mobile, and the Copilot SDK. Start by checking the model picker in the actual client you use; a feature being generally announced does not mean it appears simultaneously in every account.",
+            "On Business and Enterprise plans, a model policy can disable or permit a named model. If Hydrogen is missing, check your subscription, client release, rollout state and organization settings before troubleshooting local code. The Carbon article covers a different Gemini 4 option with narrower individual plan eligibility."
+          ],
+          "inline_links": [
+            {
+              "text": "Carbon article",
+              "url": "/signals/gemini-4-carbon-github-copilot-availability/"
+            }
+          ]
+        },
+        {
+          "heading": "Gemini 4 Hydrogen vs Gemini 4 Carbon: which should a developer test?",
+          "source": "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot",
+          "paragraphs": [
+            "Hydrogen is described as Google's Flash-oriented model for quick agentic coding and instruction following. Carbon is described as the more demanding coding and reasoning option, with a focus on security-oriented work. This is the vendors' product positioning, not measured proof that Hydrogen is cheaper for every accepted pull request or that Carbon always writes safer code.",
+            "SXF recommends a paired evaluation: attempt the same documented bug fix, repository question, multistep refactor and security review with both models where the plan permits. Record first useful answer, test-pass rate, manual edits, tool calls and final usage charges. The lower cost per accepted and reviewed change, not the model name, should guide routing."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "What does usage-based billing mean in Copilot?",
+          "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+          "paragraphs": [
+            "The announcement says Hydrogen uses provider list pricing under usage-based billing. That is not a per-request quote and is not interchangeable with a standalone Gemini API token rate. Copilot subscriptions, enterprise controls and user-specific spend policies determine how the charge appears in the billing system.",
+            "Before a team-wide rollout, verify current account pricing and limits, then run a small fixed workload while recording usage and accepted results. Compare model costs on identical tasks and set administrative spending or usage limits where supported, especially if agents can invoke tools repeatedly."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "SXF analysis: why Hydrogen is also a migration decision",
+          "source": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december",
+          "paragraphs": [
+            "GitHub separately announced that Gemini 3.8 Flash will be deprecated across Copilot experiences on December 14, 2026, with Hydrogen as the suggested alternative. Developers who pin a model in prompts or coding workflows therefore have a concrete migration deadline, independent from any general curiosity about a new model launch.",
+            "Create an inventory of workflows using the retiring identifier, test their prompts and agent commands with Hydrogen, update team documentation, and reserve time for review before the retirement date. This launch should not be confused with Gemini 4 Hydrogen in Google Search, whose consumer answers and referral implications follow a different product and billing path."
+          ],
+          "inline_links": [
+            {
+              "text": "Gemini 4 Hydrogen in Google Search",
+              "url": "/signals/google-search-gemini-4-hydrogen-upgrade/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Gemini 4 Carbon in Copilot",
+          "url": "/signals/gemini-4-carbon-github-copilot-availability/",
+          "description": "Compare model focus, supported plans and pricing caveats."
+        },
+        {
+          "title": "Gemini 4 Hydrogen Search upgrade",
+          "url": "/signals/google-search-gemini-4-hydrogen-upgrade/",
+          "description": "Consumer search is distinct from Copilot's model picker."
+        },
+        {
+          "title": "Best AI coding tools",
+          "url": "/guides/best-ai-coding-tools/",
+          "description": "Choose coding tools by measurable workflow fit."
+        },
+        {
+          "title": "GitHub Copilot alternatives",
+          "url": "/guides/github-copilot-alternatives/",
+          "description": "Other code-agent products and trade-offs."
+        },
+        {
+          "title": "GitHub AI Scan API",
+          "url": "/signals/github-ai-scan-repository-rest-api-setup/",
+          "description": "Separate security-scanning administration feature, not an LLM model selection."
+        }
+      ],
+      "reader_checklist": [
+        "Verify the Copilot plan and client before trying the model picker.",
+        "Ask your Business or Enterprise admin to check model policy.",
+        "Read Copilot billing rules rather than reusing Gemini API prices.",
+        "Benchmark accuracy, edits and cost per accepted code change.",
+        "Migrate Gemini 3.8 Flash workflows before the published retirement date."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "MODEL SELECTION / PRACTICAL COMPARISON",
+        "heading": "Hydrogen versus Carbon in Copilot: what is confirmed",
+        "intro": "The two official GitHub release notes establish different individual-plan access and intended tasks; they do not provide a head-to-head SXF benchmark.",
+        "columns": [
+          "Question",
+          "Gemini 4 Hydrogen",
+          "Gemini 4 Carbon"
+        ],
+        "rows": [
+          [
+            "Launch in Copilot",
+            "Nov 13, 2026",
+            "Nov 10, 2026"
+          ],
+          [
+            "Individual plans named",
+            "Pro, Pro+, Max",
+            "Pro+, Max"
+          ],
+          [
+            "Primary positioning",
+            "Fast agentic coding and tool use",
+            "Complex coding, reasoning and security work"
+          ],
+          [
+            "Business and Enterprise",
+            "Supported, admin policies apply",
+            "Supported, admin policies apply"
+          ],
+          [
+            "Billing approach",
+            "Provider list; usage-based",
+            "Provider list; usage-based"
+          ]
+        ],
+        "note": "Availability may be gradual; plans and live prices can change. Compare the same workload before selecting a team default.",
+        "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
+      },
+      "faq_heading": "Hydrogen in Copilot questions",
+      "faq": [
+        {
+          "question": "Is Gemini 4 Hydrogen available on Copilot Pro?",
+          "answer": "Yes, GitHub names Pro alongside Pro+, Max, Business and Enterprise in the November 13 release. Rollout is gradual."
+        },
+        {
+          "question": "Is Hydrogen the same as Gemini 4 Carbon?",
+          "answer": "No. They are separate selectable Copilot models with different intended uses and plan eligibility, according to GitHub's two release notes."
+        },
+        {
+          "question": "Will Gemini 3.8 Flash remain in Copilot?",
+          "answer": "GitHub announced a December 14, 2026 deprecation and names Gemini 4 Hydrogen as its suggested alternative."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/gemini-hydrogen-copilot-original.svg",
+        "alt": "Original SXF visual comparing Gemini 4 Hydrogen and Gemini 4 Carbon availability and coding focus in GitHub Copilot.",
+        "caption": "SXF comparison visual synthesized from GitHub's November 10 and November 13 model announcements; not a benchmark result."
+      }
+    },
+    "github-ai-scan-repository-rest-api-setup": {
+      "reviewed_at": "2026-11-15",
+      "seo_title": "GitHub AI Scan REST API: repository_scan Setup Guide",
+      "h1": "GitHub AI Scan REST API: enable repository scanning and understand policy",
+      "meta_description": "GitHub AI Scan adds repository_scan to REST settings. See org/repo PATCH routes, inheritance, 422 errors, permissions, manual scans and AI credit usage.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+      "sources": [
+        "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "GitHub announced on November 13, 2026 a public-preview REST setting called repository_scan to manage AI Scan for repositories at organization and repository level. The update allows settings automation via GET and PATCH APIs but does not automatically run a scan; users with repository write access start scans on demand, consuming GitHub Code Security AI credits. SXF explains inheritance, enterprise policy, conflict errors and rollout checks, differentiating configuration from scanning results.",
+      "keywords": [
+        "GitHub AI Scan API",
+        "repository_scan",
+        "GitHub AI Scan REST API",
+        "code scanning AI credits",
+        "GitHub code scanning repository scan",
+        "GitHub AI Scan enablement"
+      ],
+      "longtail_keywords": [
+        "PATCH repos owner repo code-scanning ai-scan repository_scan",
+        "GitHub AI Scan 422 enterprise policy",
+        "does enabling GitHub AI Scan start a scan",
+        "GitHub AI Scan credits repository"
+      ],
+      "search_intent": "Developer/security administrator how-to: API endpoints, organization policy, credits and rollout safety.",
+      "search_questions": [
+        "Which endpoint enables repository_scan?",
+        "Can a repository override an organization?",
+        "Does PATCH initiate a scan?",
+        "What causes a 422 response?"
+      ],
+      "editorial": {
+        "what_changed": "GitHub added repository_scan to existing org and repository AI Scan configuration APIs in public preview, enabling centrally scripted configuration.",
+        "why_it_matters": "Security teams can now manage the permission for repository-level AI scanning at scale, but must distinguish policy setup from scan execution, access rights and billable AI credits.",
+        "what_to_verify": "PATCH enables or disables a capability, not the scan itself. Enterprise restrictions can return HTTP 422, public preview contracts may change, and repository access depends on license and policy."
+      },
+      "evidence": [
+        {
+          "label": "Date",
+          "fact": "GitHub announced the feature in the November 13, 2026 changelog.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Release phase",
+          "fact": "The repository_scan setting is described as public preview.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Org routes",
+          "fact": "GET and PATCH /orgs/{org}/code-scanning/ai-scan control organization policy.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Repo routes",
+          "fact": "GET and PATCH /repos/{owner}/{repo}/code-scanning/ai-scan manage individual repository policy.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Setting values",
+          "fact": "repository_scan accepts enabled or disabled values, paralleling pr_scan.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Inheritance",
+          "fact": "An org-level disable prevents child repositories enabling the setting; with org enablement repos may opt out.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Policy conflict",
+          "fact": "Enterprise policy blocking AI Scan causes a 422 response when an enablement is requested.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Atomic updates",
+          "fact": "If either pr_scan or repository_scan is blocked in one request, GitHub returns 422 and neither change is applied.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Execution and credits",
+          "fact": "Enabling configuration does not start a scan; users with write access invoke scans and usage consumes GitHub Code Security AI credits.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        },
+        {
+          "label": "Eligibility",
+          "fact": "Org-owned public repositories or eligible private/internal repositories with GitHub Code Security or Advanced Security may use the feature; GHES is unsupported.",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        }
+      ],
+      "limitations": "The API is in public preview and its eligibility and billing may change. The announcement does not provide a universal price per scan, an accuracy guarantee or an automatic scan schedule. Enabling AI Scan is not evidence that every repository has been scanned or that all vulnerabilities are identified.",
+      "analysis": [
+        {
+          "heading": "Which REST endpoints control GitHub AI Scan for repositories?",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+          "paragraphs": [
+            "GitHub extends the existing AI Scan enablement routes for organizations and repositories. The organization endpoints are GET and PATCH /orgs/{org}/code-scanning/ai-scan, while the repository endpoints are GET and PATCH /repos/{owner}/{repo}/code-scanning/ai-scan. The new repository_scan property can be enabled or disabled, alongside the existing pr_scan setting.",
+            "This is a configuration API for authorized administrators, not a scan-execution command. The payload examples in this guide are conceptual field illustrations rather than live tested requests; use GitHub's current REST reference to confirm headers, API version, permissions and supported request bodies before automating production policy changes."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "What do org inheritance and HTTP 422 mean?",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+          "paragraphs": [
+            "If an organization disables repository scanning, an individual repository under it cannot enable the feature. If the organization enables scanning, repositories inherit that policy but may opt out. Enterprise rules sit above both, and GitHub says a disallowed enablement returns HTTP 422. A batch PATCH that includes pr_scan and repository_scan is atomic when one change is blocked: neither setting changes.",
+            "A rollout script should therefore read current effective policy, validate that the enterprise permits the setting, PATCH only intended fields, and read the settings again. Log any 422 as a policy conflict rather than retrying blindly or trying to bypass the enterprise control. An infrastructure-as-code workflow benefits from explicit desired state and a rollback record."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "Does turning on AI Scan automatically scan the repository?",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+          "paragraphs": [
+            "No. GitHub explicitly says that enabling AI Scan for repositories does not initiate a scan. Users with write access run repository scans on demand, and each one consumes GitHub Code Security AI credits. A dashboard displaying an enabled toggle is therefore not evidence that a security assessment has happened.",
+            "SXF's suggested acceptance test tracks three separate states: policy enabled, scan requested and scan completed with findings reviewed. This avoids conflating administrative configuration, queue processing and human remediation. Budget checks should use the live enterprise credit ledger rather than a fabricated per-run price."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "SXF security rollout: what teams should measure",
+          "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+          "paragraphs": [
+            "Pilot on a small set of eligible repositories representing different languages, sensitivity levels and maintainer groups. Check the effective organization and enterprise policy first, then enable repository_scan where appropriate. Run an authorized on-demand scan and review findings alongside existing static analysis. Record time to triage, false positives, fixes accepted and credit consumption.",
+            "Do not disable established SAST, dependency alerts or secret scanning because an AI feature is enabled. Connect your rollout with the SXF agent-security checklist for authorization boundaries and with the production-agent guide for auditability, retries and rollback. Review every automated finding in source context before changing production code."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF agent-security checklist",
+              "url": "/guides/ai-agent-security/"
+            },
+            {
+              "text": "production-agent guide",
+              "url": "/guides/deploy-ai-agents-production/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent security",
+          "url": "/guides/ai-agent-security/",
+          "description": "Threat modeling, scopes and approval boundaries."
+        },
+        {
+          "title": "Prompt injection protection",
+          "url": "/guides/prompt-injection/",
+          "description": "Security risks when AI processes repository content."
+        },
+        {
+          "title": "Deploy AI agents in production",
+          "url": "/guides/deploy-ai-agents-production/",
+          "description": "Monitoring, audit and rollback."
+        },
+        {
+          "title": "GPT-6 Cyber benchmark coverage",
+          "url": "/signals/gpt-6-cyber-security-benchmarks-access/",
+          "description": "A different security-model product, not GitHub AI Scan."
+        },
+        {
+          "title": "Gemini Hydrogen in Copilot",
+          "url": "/signals/gemini-4-hydrogen-github-copilot-availability/",
+          "description": "Coding model picker functionality is distinct from AI Scan policy."
+        }
+      ],
+      "reader_checklist": [
+        "Read enterprise and organization policy before sending a PATCH.",
+        "Verify repository entitlement and licensed security features.",
+        "Differentiate configuration enablement from executing a scan.",
+        "Budget and monitor AI credits for each actual scan.",
+        "Inspect findings with existing tools and log triage and remediation."
+      ],
+      "sxf_feature": {
+        "type": "cards",
+        "eyebrow": "POLICY LOGIC / ADMINISTRATOR REFERENCE",
+        "heading": "The three controls that decide whether AI Scan can run",
+        "intro": "An effective scan depends on permission at several layers; changing one value is not the same as ordering or completing a scan.",
+        "cards": [
+          {
+            "label": "Enterprise policy",
+            "detail": "If AI Scan is prohibited at enterprise level, an enablement request fails with a 422 response."
+          },
+          {
+            "label": "Organization and repository",
+            "detail": "Organization disablement blocks repository enablement. An enabled organization allows repository-level opt-outs."
+          },
+          {
+            "label": "Scan execution and credits",
+            "detail": "A user with write access initiates an on-demand scan, which consumes GitHub Code Security AI credits."
+          }
+        ],
+        "note": "These states summarize GitHub's public-preview release announcement; validate current APIs before operational changes.",
+        "source": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+      },
+      "faq_heading": "GitHub AI Scan REST API questions",
+      "faq": [
+        {
+          "question": "Which property enables AI Scan for repositories?",
+          "answer": "GitHub documents the repository_scan setting with values enabled or disabled on the organization and repository AI Scan endpoints."
+        },
+        {
+          "question": "Does enabling repository_scan trigger a full code scan?",
+          "answer": "No. The setting controls availability. Authorized users must request an actual scan, and the scan consumes AI credits."
+        },
+        {
+          "question": "What happens when a policy blocks a request?",
+          "answer": "GitHub describes an HTTP 422 response for disallowed enablement. When a combined pr_scan and repository_scan update is blocked, neither setting changes."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/github-ai-scan-policy-original.svg",
+        "alt": "SXF original GitHub AI Scan API policy diagram showing enterprise, organization, repository and on-demand scan decision levels.",
+        "caption": "SXF policy-flow illustration of GitHub's preview API; not a screenshot or a security scan result."
+      }
+    },
+    "openai-child-safety-research-funding-2026": {
+      "reviewed_at": "2026-11-15",
+      "seo_title": "OpenAI Child Safety Research: $2M Pledge Explained",
+      "h1": "OpenAI's $2 million AI child safety research pledge: scope and safeguards",
+      "meta_description": "OpenAI pledges $2 million to child AI safety research. Examine the Paris charter, independent findings, risk measurement and what remains unproven.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/children-first-declaration",
+      "sources": [
+        "https://openai.com/index/children-first-declaration"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI announced on November 12, 2026 that it committed $2 million to a research network under the Coalition for Children's Rights and Protection in the Age of AI after signing a charter at the Paris Peace Forum. The announced goal is shared scientific measurement of AI's risks and opportunities for children, with researcher control over findings and publication of inconclusive or negative results. SXF explains what the commitment actually funds in principle and which independent checks are still necessary before claiming improved child safety.",
+      "keywords": [
+        "OpenAI child safety research",
+        "OpenAI 2 million children AI safety",
+        "Paris Peace Forum safer AI charter",
+        "AI safety for children research 2026",
+        "children AI safeguards measurement"
+      ],
+      "longtail_keywords": [
+        "what is OpenAI 2 million child safety pledge",
+        "how independent is AI child safety research",
+        "AI risks opportunities for children measurement",
+        "OpenAI Paris Peace Forum charter 2026"
+      ],
+      "search_intent": "Source-grounded policy and research explainer for child safety, measurement and independence.",
+      "search_questions": [
+        "What did OpenAI pledge?",
+        "What does the coalition research measure?",
+        "Are independent results guaranteed?",
+        "Does this announcement show a safety improvement?"
+      ],
+      "editorial": {
+        "what_changed": "OpenAI signed an international children's AI safety charter and pledged $2 million to support research measuring the risks and opportunities of AI for young people.",
+        "why_it_matters": "Public concern about young people's AI use needs reproducible evidence, transparent publication and safeguards rather than relying solely on product announcements or industry promises.",
+        "what_to_verify": "This is a funding commitment, not proof that a specific chatbot is already safer. The release outlines research independence and publishing negative results, but does not provide complete outcome data or an audited impact evaluation."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "OpenAI published the commitment on November 12, 2026.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Amount",
+          "fact": "OpenAI pledged $2 million toward child AI safety research.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Forum",
+          "fact": "The company says it signed the Charter of Engagement for Safer AI for Children at the Paris Peace Forum.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Programme",
+          "fact": "The research network operates under the Coalition for Children's Rights and Protection in the Age of AI.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Research objective",
+          "fact": "The funding is intended for shared scientific tools to measure AI risks and opportunities for children.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Independence commitment",
+          "fact": "OpenAI says research teams retain control over conclusions.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Negative findings",
+          "fact": "The announcement says published results will include negative or inconclusive outcomes.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Policy proposals",
+          "fact": "OpenAI advocates default age-appropriate safeguards, parental tools, recurring risk assessments and accountability.",
+          "source": "https://openai.com/index/children-first-declaration"
+        },
+        {
+          "label": "Jurisdiction",
+          "fact": "OpenAI says it plans to engage European policymakers as the EU Kids Act develops.",
+          "source": "https://openai.com/index/children-first-declaration"
+        }
+      ],
+      "limitations": "The pledge is a company announcement, not audited evidence of an achieved safety improvement. The released summary does not quantify expected research impact, publish new clinical or developmental findings, or demonstrate the actual independence of every eventual study. The term 'safety' spans different risks and age groups; no single metric can establish it across contexts.",
+      "analysis": [
+        {
+          "heading": "What did OpenAI promise at the Paris Peace Forum?",
+          "source": "https://openai.com/index/children-first-declaration",
+          "paragraphs": [
+            "OpenAI says it signed a charter at the Paris Peace Forum and committed $2 million to research supporting the Coalition for Children's Rights and Protection in the Age of AI. The programme is framed around shared measurement tools for risks and opportunities rather than a direct grant for a new child-facing product.",
+            "That distinction matters: financing better measurement could help researchers compare systems and policies, but the announcement is not itself a peer-reviewed finding that children are safer. The size of the pledge also does not establish the adequacy or efficiency of the eventual studies."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "What would trustworthy AI child safety research measure?",
+          "source": "https://openai.com/index/children-first-declaration",
+          "paragraphs": [
+            "The announced programme calls for tools that enable risk and benefit measurement. A useful research design would specify age groups, tasks, recruitment safeguards, exposure intensity and outcomes beforehand; it would record failures and benefits as well as cases where there is no measurable effect. Those design elements are SXF's proposed criteria, not completed elements asserted by OpenAI.",
+            "Outcome reporting should distinguish harmful content exposure, inappropriate relational behaviour, privacy disclosure, educational assistance and access to creative tools. Aggregate headline scores can conceal age-specific effects or platform differences. Independent replication and accessible methodologies matter more than a single positive headline."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "Are the findings independent if an AI company contributes funding?",
+          "source": "https://openai.com/index/children-first-declaration",
+          "paragraphs": [
+            "OpenAI says the charter contains protections for research independence, that researchers retain control of conclusions, and that negative or inconclusive findings will be published. These are important announced principles, but publication and governance should be checked in practice as the network produces results.",
+            "SXF would look for named investigators, declared funding, conflict-of-interest disclosures, preregistered study methods where appropriate, access to non-sensitive aggregate results and visible corrections. This checklist does not imply that the coalition has failed these tests; it specifies what a reader needs to verify rather than accepting independence as a self-certifying label."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "SXF analysis: how to tell funding, standards and safety outcomes apart",
+          "source": "https://openai.com/index/children-first-declaration",
+          "paragraphs": [
+            "A funding announcement supports research capacity; a charter states principles; a product protection changes technical behaviour; and an independent evaluation measures whether those changes actually work. These are four separate kinds of evidence. Conflating them can overstate progress or dismiss legitimate efforts before any results are available.",
+            "For families, educators and policymakers the immediate practical approach is to check age suitability, privacy settings, parental controls, content-reporting options and how incidents are reviewed. The research may eventually improve such safeguards, but those future impacts should only be claimed after published evidence and independent checks."
+          ],
+          "inline_links": []
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent security guide",
+          "url": "/guides/ai-agent-security/",
+          "description": "Permissions, escalation and sensitive-context controls."
+        },
+        {
+          "title": "Google's AI deliberation study",
+          "url": "/signals/google-agile-deliberation-image-classification/",
+          "description": "A different research approach to complex human judgments."
+        },
+        {
+          "title": "AI agent use cases",
+          "url": "/guides/ai-agent-use-cases/",
+          "description": "Distinguish useful automation from safety-critical decisions."
+        },
+        {
+          "title": "SXF research collection",
+          "url": "/research/",
+          "description": "Research-led explanations with methodology."
+        },
+        {
+          "title": "ChatGPT Wallet safety overview",
+          "url": "/signals/chatgpt-wallet-payment-approval-safety/",
+          "description": "Another new product involving consent and user-approval boundaries."
+        }
+      ],
+      "reader_checklist": [
+        "Distinguish a funding pledge from completed scientific findings.",
+        "Check the published governance and independence procedures.",
+        "Look for age-specific methods and declared conflicts of interest.",
+        "Check whether negative and inconclusive results appear.",
+        "Evaluate real product safeguards separately from charter commitments."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "EVIDENCE LEVELS / CHILD SAFETY",
+        "heading": "Four kinds of evidence that should not be confused",
+        "intro": "A commitment, policy and observed outcome answer different questions. The final column identifies what would count as stronger public evidence.",
+        "columns": [
+          "Stage",
+          "What it establishes",
+          "What to request next"
+        ],
+        "rows": [
+          [
+            "Funding pledge",
+            "Resources committed to research",
+            "Named projects and budgets"
+          ],
+          [
+            "Charter",
+            "Principles for independence and protection",
+            "Published governance and disclosures"
+          ],
+          [
+            "Product safeguards",
+            "A technical control has been added",
+            "Auditable implementation and risk tests"
+          ],
+          [
+            "Independent outcomes",
+            "Observed effects under a study design",
+            "Methods, replication and limitations"
+          ]
+        ],
+        "note": "This is SXF's analytical framework; OpenAI has announced the first two stages, not demonstrated all the outcomes.",
+        "source": "https://openai.com/index/children-first-declaration"
+      },
+      "faq_heading": "OpenAI child safety research questions",
+      "faq": [
+        {
+          "question": "Did OpenAI announce a $2 million child safety grant?",
+          "answer": "OpenAI says it committed $2 million to a research network associated with the Coalition for Children's Rights and Protection in the Age of AI."
+        },
+        {
+          "question": "Will the research publish negative findings?",
+          "answer": "OpenAI states that researchers retain control over their conclusions and that negative or inconclusive findings will be published; the promise needs follow-up verification."
+        },
+        {
+          "question": "Does the announcement prove ChatGPT is safer for children?",
+          "answer": "No. A pledge and research charter are not an independent product-effectiveness study or a measured outcome."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/ai-child-safety-research-original.svg",
+        "alt": "SXF original research-evidence ladder from funding pledge and charter to technical safeguards and independent child safety outcomes.",
+        "caption": "SXF editorial evidence ladder explaining the difference between funding commitments and measured child safety outcomes."
+      }
     }
   }
 }
