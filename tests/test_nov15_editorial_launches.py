@@ -92,9 +92,20 @@ def main():
         ).status == "review", "Must never bypass quality gate"
         assert update_news.is_approved_indexable_signal(item)
 
+        if slug == "chatgpt-wallet-payment-approval-safety":
+            assert "launch" in review["seo_title"].lower()
+            assert "rollout" in review["h1"].lower()
+            assert review["brief_status_label"] == "ROLLOUT STATUS"
+            assert review["featured_guide"]["url"] == "/guides/chatgpt-wallet/"
+            assert "2026" in review["meta_description"]
+            assert review["search_intent"].startswith("News and release-status")
         html = unescape(update_news.signal_page_html(item, [item]))
         assert 'name="robots" content="index,follow' in html
         assert "<h1>" + review["h1"] + "</h1>" in html
+        if slug == "chatgpt-wallet-payment-approval-safety":
+            assert 'href="/guides/chatgpt-wallet/"' in html
+            assert "<span>ROLLOUT STATUS</span>" in html
+            assert "On November 13, 2026, OpenAI announced" in html
         assert "signal-reader-tools" in html
         assert "signal-editorial-analysis" in html
         assert "signal-evidence" in html
@@ -126,6 +137,10 @@ def main():
             assert 'name="robots" content="index,follow' in rendered
             assert 'rel="canonical" href="' + item["signal_url"] + '"' in rendered
             assert review["seo_title"] in unescape(rendered)
+            if slug == "chatgpt-wallet-payment-approval-safety":
+                assert 'href="/guides/chatgpt-wallet/"' in rendered
+                assert "<span>ROLLOUT STATUS</span>" in rendered
+                assert review["h1"] in unescape(rendered)
             assert "signal-editorial-analysis" in rendered
             assert "signal-evidence" in rendered
             assert "signal-reader-tools" in rendered

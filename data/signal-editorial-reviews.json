@@ -5941,9 +5941,9 @@
     },
     "chatgpt-wallet-payment-approval-safety": {
       "reviewed_at": "2026-11-15",
-      "seo_title": "ChatGPT Wallet: How Payments, Approvals & Safety Work",
-      "h1": "ChatGPT Wallet explained: eligible users, payment approval and security",
-      "meta_description": "ChatGPT Wallet starts rolling out to eligible US Pro users in dots. Learn how biometrics, card tokens, disputes and merchant checkout safeguards work.",
+      "seo_title": "ChatGPT Wallet Launch: US Pro Rollout in Dots | SXF",
+      "h1": "ChatGPT Wallet rollout begins in dots for eligible US Pro users",
+      "meta_description": "OpenAI announced ChatGPT Wallet on November 13, 2026. See what the limited US Pro rollout in dots confirms, who is eligible, and what remains planned.",
       "source_name": "OpenAI",
       "primary_source": "https://openai.com/index/introducing-chatgpt-wallet",
       "sources": [
@@ -5952,32 +5952,32 @@
         "https://openai.com/index/introducing-businesses-chatgpt"
       ],
       "schema_type": "NewsArticle",
-      "summary": "OpenAI announced ChatGPT Wallet on November 13, 2026 for agent-assisted purchases, initially through dots for eligible US ChatGPT Pro subscribers aged at least 18. A person approves every purchase with a security check; payment networks use tokenized card credentials so the agent and business do not receive the person's actual card details. SXF separates launch availability from future delegated buying, explains the authorization chain and maps the merchant and user checks needed for a safer rollout.",
+      "summary": "On November 13, 2026, OpenAI announced ChatGPT Wallet with an initial rollout in dots for eligible US ChatGPT Pro adults using supported US-issued cards. Purchases require the user to review the cart and approve the payment with a security check. The launch did not set dates for Plus or international availability, and fully pre-authorized buying was presented as future work.",
       "keywords": [
-        "ChatGPT Wallet",
-        "ChatGPT Wallet availability",
-        "ChatGPT Wallet security",
-        "ChatGPT Wallet payment approval",
-        "agentic payments tokens",
-        "ChatGPT Wallet US Pro dots"
+        "ChatGPT Wallet launch",
+        "ChatGPT Wallet rollout",
+        "ChatGPT Wallet US Pro",
+        "ChatGPT Wallet dots availability",
+        "OpenAI wallet November 2026",
+        "ChatGPT Wallet launch eligibility"
       ],
       "longtail_keywords": [
-        "how does ChatGPT Wallet approve payments",
-        "is ChatGPT Wallet available for Plus users",
-        "does ChatGPT Wallet share card numbers with agents",
-        "can dots buy things with ChatGPT Wallet"
+        "when did ChatGPT Wallet launch",
+        "who qualifies for the US ChatGPT Wallet rollout",
+        "is ChatGPT Wallet launching for Plus users",
+        "does ChatGPT Wallet launch internationally"
       ],
-      "search_intent": "Informational product explainer: eligibility, authorization, card security and merchant readiness.",
+      "search_intent": "News and release-status reporting: November 13 launch, initial US Pro rollout via dots, eligibility, and what has not been announced. The evergreen payments explainer lives at /guides/chatgpt-wallet/.",
       "search_questions": [
-        "Who can use ChatGPT Wallet now?",
-        "Can agents pay without approval?",
-        "Are my real card details shared?",
-        "How can a merchant prepare for agent checkouts?"
+        "When did OpenAI announce ChatGPT Wallet?",
+        "Who can access the initial rollout in dots?",
+        "Is a Plus or international release date confirmed?",
+        "Can an agent spend without asking at launch?"
       ],
       "editorial": {
-        "what_changed": "ChatGPT Wallet lets an eligible user place a card on file, review the items and amount, and authorize a payment performed by an agent in dots. OpenAI says card-network tokens replace the actual card details.",
-        "why_it_matters": "The hard part of agentic shopping is not finding a product but proving what the person agreed to buy and preserving the checkout, fulfilment and dispute responsibilities of the merchant.",
-        "what_to_verify": "The initial release is limited to US-based ChatGPT Pro adults with eligible US-issued cards and is being rolled out through dots. Fully delegated purchase rules and spending caps are future plans, not current blanket permission."
+        "what_changed": "On November 13, 2026, OpenAI announced ChatGPT Wallet and began a limited rollout through dots for eligible US ChatGPT Pro subscribers. This launch requires a person to review and approve each purchase; it does not make checkout available in every ChatGPT session.",
+        "why_it_matters": "The launch establishes a boundary between an AI agent finding an item and a person authorizing a payment. Card-network tokens protect actual card details, while merchants still handle the order, delivery, refunds and customer service.",
+        "what_to_verify": "At launch, eligible users are US-based ChatGPT Pro subscribers aged 18 or older with supported US-issued cards, subject to gradual rollout. OpenAI announced no general availability date for Plus or countries outside the US; pre-authorized spending rules remain future plans."
       },
       "evidence": [
         {
@@ -6034,11 +6034,11 @@
       "limitations": "The announcement describes design intentions and a limited rollout, not an independently audited fraud rate or a guarantee that every merchant accepts the wallet. Network tokenization alone does not prevent misleading merchant information, compromised accounts or purchase errors. Financial and dispute outcomes remain governed by the user's card and merchant terms; no future pre-approval feature should be presented as generally available.",
       "analysis": [
         {
-          "heading": "Who can use ChatGPT Wallet, and where is the payment made?",
+          "heading": "What OpenAI actually launched on November 13, 2026",
           "source": "https://openai.com/index/introducing-chatgpt-wallet",
           "paragraphs": [
-            "The product launches inside dots, OpenAI's proactive agent workflow, rather than as a universal checkout button in every ChatGPT session. Eligibility is narrow: US ChatGPT Pro subscribers at least 18 years old with a supported US-issued card, subject to rollout. A merchant should therefore not infer that every visitor or every browser agent can pay this way today.",
-            "The wallet is a payment layer, not a replacement for the merchant. The merchant still sells the goods or service, sets prices, handles delivery and returns, and remains the consumer's counterpart. The related SXF report on Businesses in ChatGPT explains the separate merchant-discovery surface; business listings are not themselves wallet payment approval."
+            "The announcement introduces ChatGPT Wallet as a payment feature rolling out through dots, not a universal purchase button in every ChatGPT conversation. The initial audience is eligible US-based ChatGPT Pro subscribers aged at least 18 who have supported US-issued cards. An announcement of a rollout is not proof that every account has access on day one.",
+            "The launch also keeps shopping discovery distinct from payment authorization. OpenAI says users review and approve each purchase, and the merchant remains responsible for the order and customer relationship. The related SXF report on Businesses in ChatGPT covers a separate merchant-discovery surface; a listing does not itself demonstrate wallet acceptance."
           ],
           "inline_links": [
             {
@@ -6164,6 +6164,12 @@
         "path": "/assets/signals/chatgpt-wallet-approval-original.svg",
         "alt": "Original SXF payment-flow diagram showing agent cart, human approval, network payment token and merchant fulfillment.",
         "caption": "SXF editorial process diagram based on OpenAI's November 2026 announcement; not a screenshot of the Wallet interface."
+      },
+      "brief_status_label": "ROLLOUT STATUS",
+      "featured_guide": {
+        "url": "/guides/chatgpt-wallet/",
+        "intro": "For the full explanation of payment security, refunds and merchant setup, see the",
+        "anchor": "complete ChatGPT Wallet guide"
       }
     },
     "llama-cpp-1-0-api-abi-stability-upgrade": {

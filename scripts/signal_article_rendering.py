@@ -333,6 +333,18 @@ def signal_page_html(item, items, context: SignalArticleContext):
         deep_dive_html = sol_copilot.BODY
     if is_intelligent_ui_deep_dive:
         deep_dive_html = intelligent_ui.BODY
+    featured_guide_html = ""
+    if review and review.get("featured_guide"):
+        guide = review["featured_guide"]
+        href = guide["url"]
+        if not href.startswith("/") or href.startswith("//") or '"' in href:
+            raise ValueError("Invalid featured guide URL")
+        featured_guide_html = (
+            '<div class="signal-context"><span>COMPLETE GUIDE</span><p>'
+            + escape(guide["intro"]) + ' <a href="' + escape(href, quote=True)
+            + '">' + escape(guide["anchor"]) + '</a>.</p></div>'
+        )
+    brief_status_label = review.get("brief_status_label", "WHAT TO VERIFY") if review else "WHAT TO VERIFY"
     source_name = review["source_name"] if review else item["source"]
     source_url = review["primary_source"] if review else item["url"]
     summary_label = "SXF technical brief" if (is_license_deep_dive or is_sol_copilot_deep_dive or is_intelligent_ui_deep_dive) else "SXF verified brief" if review else "Source summary" if item.get("summary") else "SXF signal note"
@@ -402,8 +414,9 @@ def signal_page_html(item, items, context: SignalArticleContext):
           <article class="signal-brief">
             <p class="eyebrow">{summary_label.upper()}</p>
             <p class="signal-summary">{escape(editorial["what_changed"])}</p>
+            {featured_guide_html}
             <div class="signal-context"><span>WHY IT MATTERS</span><p>{escape(editorial["why_it_matters"])}</p></div>
-            <div class="signal-context"><span>WHAT TO VERIFY</span><p>{escape(editorial["what_to_verify"])}</p></div>
+            <div class="signal-context"><span>{escape(brief_status_label)}</span><p>{escape(editorial["what_to_verify"])}</p></div>
           </article>
           <aside class="source-card">
             <span class="source-card-label">SOURCE OF RECORD</span><strong>{escape(source_name)}</strong>
