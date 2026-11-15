@@ -1,6 +1,56 @@
 {
-  "updated_at": "2026-11-15T16:25:59.269850Z",
+  "updated_at": "2026-11-15T19:41:36.410243Z",
   "items": [
+    {
+      "title": "Gemini 4 Hydrogen in GitHub Copilot",
+      "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
+      "url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+      "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
+      "source": "GitHub",
+      "published": "2026-11-13T18:23:48Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot"
+      ],
+      "signal_score": 52
+    },
+    {
+      "title": "Introducing ChatGPT Wallet",
+      "summary": "OpenAI announced ChatGPT Wallet on November 13, 2026 for agent-assisted purchases, initially through dots for eligible US ChatGPT Pro subscribers aged at least 18. A person approves every purchase with a security check; payment networks use tokenized card credentials so the agent and business do not receive the person's actual card details. SXF separates launch availability from future delegated buying, explains the authorization chain and maps the merchant and user checks needed for a safer rollout.",
+      "url": "https://openai.com/index/introducing-chatgpt-wallet",
+      "signal_url": "https://sxf.si/signals/chatgpt-wallet-payment-approval-safety/",
+      "source": "OpenAI",
+      "published": "2026-11-13T15:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 46
+    },
+    {
+      "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
+      "summary": "The ggml-org team announced version 1.0.0 of the llama.cpp and ggml libraries on November 13, 2026, clarifying semantic-versioning contracts for public C interfaces. Future API or ABI-breaking changes trigger major-version increments, while compatible features and bug fixes use minor and patch increments. The milestone matters to application integrators and package maintainers; it is not a claim that all backends have identical behaviour or that throughput improved by a measured percentage.",
+      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+      "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
+      "source": "Hugging Face",
+      "published": "2026-11-13T14:05:22Z",
+      "category": "Open Source",
+      "tags": [
+        "Open Source AI"
+      ],
+      "signal_score": 40
+    },
+    {
+      "title": "Manage AI Scan for repositories using the REST API",
+      "summary": "GitHub announced on November 13, 2026 a public-preview REST setting called repository_scan to manage AI Scan for repositories at organization and repository level. The update allows settings automation via GET and PATCH APIs but does not automatically run a scan; users with repository write access start scans on demand, consuming GitHub Code Security AI credits. SXF explains inheritance, enterprise policy, conflict errors and rollout checks, differentiating configuration from scanning results.",
+      "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+      "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
+      "source": "GitHub",
+      "published": "2026-11-13T12:22:41Z",
+      "category": "Tools",
+      "tags": [],
+      "signal_score": 38
+    },
     {
       "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
       "summary": "Google announced the global integration of Gemini 4 Hydrogen into Search on November 12, 2026, aiming to interpret complex, multi-part queries and present more visual, structured results with links to relevant sources. A separate model launch establishes Hydrogen's developer positioning and published pricing. SXF separates the consumer Search experience from paid API access, examines what the launch can and cannot establish about traffic referrals, and offers a verifiable query-testing checklist for publishers.",
@@ -24,6 +74,21 @@
       "category": "Tools",
       "tags": [],
       "signal_score": 28
+    },
+    {
+      "title": "Supporting research on AI and children’s safety",
+      "summary": "OpenAI announced on November 12, 2026 that it committed $2 million to a research network under the Coalition for Children's Rights and Protection in the Age of AI after signing a charter at the Paris Peace Forum. The announced goal is shared scientific measurement of AI's risks and opportunities for children, with researcher control over findings and publication of inconclusive or negative results. SXF explains what the commitment actually funds in principle and which independent checks are still necessary before claiming improved child safety.",
+      "url": "https://openai.com/index/children-first-declaration",
+      "signal_url": "https://sxf.si/signals/openai-child-safety-research-funding-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-12T00:00:00Z",
+      "category": "Research",
+      "tags": [
+        "Security",
+        "Research",
+        "OpenAI"
+      ],
+      "signal_score": 53
     },
     {
       "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
@@ -741,10 +806,10 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 178,
+      "OpenAI": 180,
       "Google AI": 30,
-      "Hugging Face": 69,
-      "GitHub": 107,
+      "Hugging Face": 70,
+      "GitHub": 109,
       "Google Research": 18,
       "Anthropic": 4,
       "Meta": 0,
@@ -752,10 +817,10 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 20,
+      "OpenAI": 22,
       "Google AI": 6,
-      "Hugging Face": 12,
-      "GitHub": 10,
+      "Hugging Face": 13,
+      "GitHub": 12,
       "Google Research": 3,
       "Anthropic": 4,
       "Meta": 0,
@@ -776,14 +841,14 @@
         "age_rejection_count": 1286,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 20,
+        "publish_count": 22,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "Google AI": {
@@ -806,7 +871,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "Hugging Face": {
@@ -822,14 +887,14 @@
         "age_rejection_count": 873,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 12,
+        "publish_count": 13,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "GitHub": {
@@ -845,14 +910,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 10,
+        "publish_count": 12,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "Google Research": {
@@ -875,7 +940,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "Anthropic": {
@@ -898,7 +963,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -923,7 +988,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "xAI": {
@@ -946,7 +1011,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       },
       "Microsoft": {
@@ -969,7 +1034,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-15T16:24:47.324359Z",
+        "last_successful_fetch": "2026-11-15T19:40:42.197921Z",
         "errors": []
       }
     },

@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "b226b04dff4277ca13521c84b96187f9b4b9e8f64e214bbb320b7e2451cd8510",
+  "snapshot_hash": "2d2703d463f6db5d33fce5871c2d7945c573e180d556d785c1d4c3c2a05812e0",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -860,14 +860,14 @@
     },
     {
       "rank": 9,
-      "signal_slug": "gemini-4-carbon-github-copilot-availability",
-      "signal_url": "https://sxf.si/signals/gemini-4-carbon-github-copilot-availability/",
-      "title": "Gemini 4 Carbon in GitHub Copilot",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-11-10T19:26:51Z",
-      "priority_score": 142,
-      "evidence_hash": "f7f8d8fb5c36d85e6f402f87ccfa7681bc714e091a687f3724fedfedfd78ada4",
+      "signal_slug": "llama-cpp-1-0-api-abi-stability-upgrade",
+      "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
+      "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
+      "source": "Hugging Face",
+      "category": "Open Source",
+      "published": "2026-11-13T14:05:22Z",
+      "priority_score": 145,
+      "evidence_hash": "be1083398d283a6e2e3dffe54b5070192a852c5877805ff802fe8af42748865d",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
@@ -876,28 +876,28 @@
           "source_urls": []
         },
         "signal": {
-          "title": "Gemini 4 Carbon in GitHub Copilot",
-          "url": "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot",
-          "signal_url": "https://sxf.si/signals/gemini-4-carbon-github-copilot-availability/",
-          "source": "GitHub",
-          "published": "2026-11-10T19:26:51Z",
-          "category": "Tools",
+          "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
+          "source": "Hugging Face",
+          "published": "2026-11-13T14:05:22Z",
+          "category": "Open Source",
           "tags": [
-            "GitHub Copilot"
+            "Open Source AI"
           ],
-          "summary": "GitHub's November 10, 2026 changelog announces general availability of Google's Gemini 4 Carbon model inside Copilot, with support across VS Code, Visual Studio, CLI, GitHub, coding agents and major IDE integrations. Access is listed for Pro+, Max, Business and Enterprise tiers, under provider list pricing and usage-based billing, with a gradual rollout and admin model policies for organization plans. SXF explains the difference between availability and entitlement and adds an engineering review checklist for security-sensitive coding.",
-          "signal_score": 52,
+          "summary": "The ggml-org team announced version 1.0.0 of the llama.cpp and ggml libraries on November 13, 2026, clarifying semantic-versioning contracts for public C interfaces. Future API or ABI-breaking changes trigger major-version increments, while compatible features and bug fixes use minor and patch increments. The milestone matters to application integrators and package maintainers; it is not a claim that all backends have identical behaviour or that throughput improved by a measured percentage.",
+          "signal_score": 40,
           "seo_quality_score": 70,
           "seo_quality_factors": [
             "substantive-source-summary",
-            "named-model",
+            "durable-intelligence-layer",
             "high-value-topic",
             "verified-editorial-evidence"
           ]
         },
         "models": [],
         "source_urls": [
-          "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot"
+          "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
         ]
       },
       "requested_output": {
@@ -934,442 +934,44 @@
     },
     {
       "rank": 10,
-      "signal_slug": "biobasicsbench-ai-wet-lab-data-benchmark",
-      "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
-      "title": "Measuring how AI agents handle everyday wet-lab science",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-11-06T00:00:00Z",
-      "priority_score": 138,
-      "evidence_hash": "a596b973b0827fa60d83d5ca40ca379a05a72a491e36c8df95734b397b85add9",
+      "signal_slug": "gemini-4-hydrogen-github-copilot-availability",
+      "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
+      "title": "Gemini 4 Hydrogen in GitHub Copilot",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-11-13T18:23:48Z",
+      "priority_score": 142,
+      "evidence_hash": "d5def5764fea4fc314fa94ac8cd797723226cce2cade2932d944fbeb72742f6e",
       "evidence": {
         "pricing_basis": {
           "currency": "USD",
-          "unit": "per 1 million tokens",
-          "scope": "Standard API token pricing unless a model-specific rule states otherwise",
-          "source_urls": [
-            "https://developers.openai.com/api/docs/pricing"
-          ]
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
         },
         "signal": {
-          "title": "Measuring how AI agents handle everyday wet-lab science",
-          "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
-          "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
-          "source": "OpenAI",
-          "published": "2026-11-06T00:00:00Z",
-          "category": "Research",
+          "title": "Gemini 4 Hydrogen in GitHub Copilot",
+          "url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
+          "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
+          "source": "GitHub",
+          "published": "2026-11-13T18:23:48Z",
+          "category": "Tools",
           "tags": [
-            "AI Agents",
-            "Research",
-            "OpenAI"
+            "GitHub Copilot"
           ],
-          "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
-          "signal_score": 53,
+          "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
+          "signal_score": 52,
           "seo_quality_score": 70,
           "seo_quality_factors": [
             "substantive-source-summary",
-            "durable-intelligence-layer",
+            "named-model",
             "high-value-topic",
             "verified-editorial-evidence"
           ]
         },
-        "models": [
-          {
-            "model_id": "gpt-6-astra",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Astra",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-30",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Highest-capability GPT-6 tier for demanding reasoning, coding, computer use, research, and document creation.",
-            "pricing_standard": {
-              "start": "2026-09-03",
-              "end": null,
-              "input": 10,
-              "cached_input": 1,
-              "cache_write": 12.5,
-              "output": 50
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-astra",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 9,
-                "type": "baseline",
-                "model_id": "gpt-6-astra",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "d047a80369f9bbfe9a743c0729ac3efa7eda38055e235711618dc4108e297f9f",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Astra",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-30",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-03",
-                        "end": null,
-                        "input": 10,
-                        "cached_input": 1,
-                        "cache_write": 12.5,
-                        "output": 50
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-astra",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_cd339bfc38a22ab47b70",
-                "event_hash": "cd339bfc38a22ab47b7029b7e66351c18f9fd1d2eac38a480d4e50f9fbfa2392"
-              }
-            ]
-          },
-          {
-            "model_id": "gpt-6-sol",
-            "provider": "OpenAI",
-            "family": "GPT-6",
-            "model": "GPT-6 Sol",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-04-20",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "none",
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "General-purpose GPT-6 tier for complex coding and agentic workflows with lower unit cost than Astra.",
-            "pricing_standard": {
-              "start": "2026-09-22",
-              "end": null,
-              "input": 2,
-              "cached_input": 0.2,
-              "cache_write": 2.5,
-              "output": 10
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-6-sol",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 11,
-                "type": "baseline",
-                "model_id": "gpt-6-sol",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "feb56ee653729cbc2b745308d3c932ad171e25e6a5961bb34211456a9270e62a",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-6",
-                  "model": "GPT-6 Sol",
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-04-20",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "none",
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-09-22",
-                        "end": null,
-                        "input": 2,
-                        "cached_input": 0.2,
-                        "cache_write": 2.5,
-                        "output": 10
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-6-sol",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_68d2a047223acf4b1353",
-                "event_hash": "68d2a047223acf4b1353f5bd88b06da4f62e0ce0e1a23c69281e1fd47afb8da1"
-              }
-            ]
-          },
-          {
-            "model_id": "gpt-5.6-sol",
-            "provider": "OpenAI",
-            "family": "GPT-5.6",
-            "model": "GPT-5.6 Sol",
-            "context_window": 1050000,
-            "max_output": 128000,
-            "knowledge_cutoff": "2026-02-16",
-            "reasoning": {
-              "type": "reasoning effort",
-              "levels": [
-                "none",
-                "low",
-                "medium",
-                "high",
-                "xhigh",
-                "max"
-              ],
-              "default": "medium"
-            },
-            "modalities": {
-              "input": [
-                "text",
-                "image"
-              ],
-              "output": [
-                "text"
-              ]
-            },
-            "positioning": "Flagship GPT-5.6 tier for complex professional work, coding, research, and agentic workflows.",
-            "pricing_standard": {
-              "start": "2026-07-09",
-              "end": null,
-              "input": 4,
-              "cached_input": 0.4,
-              "cache_write": 5,
-              "output": 20
-            },
-            "pricing_long_context": {
-              "threshold_input_tokens": 272000,
-              "condition": "total input tokens greater than 272000",
-              "applies_to_entire_request": true,
-              "multipliers": {
-                "input": 2,
-                "cached_input": 2,
-                "cache_write": 2,
-                "output": 1.5
-              }
-            },
-            "verified_at": "2026-11-10",
-            "official_sources": [
-              "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-              "https://developers.openai.com/api/docs/pricing"
-            ],
-            "history": [
-              {
-                "sequence": 7,
-                "type": "baseline",
-                "model_id": "gpt-5.6-sol",
-                "verified_at": "2026-09-27",
-                "previous_event_hash": "2c7c5b7821a2b51c547ef3a61ae749fef3eda7bbb69b1682018240e755cce233",
-                "snapshot": {
-                  "provider": "OpenAI",
-                  "family": "GPT-5.6",
-                  "model": "GPT-5.6 Sol",
-                  "aliases": [
-                    "gpt-5.6"
-                  ],
-                  "context_window": 1050000,
-                  "max_output": 128000,
-                  "knowledge_cutoff": "2026-02-16",
-                  "reasoning": {
-                    "type": "reasoning effort",
-                    "levels": [
-                      "none",
-                      "low",
-                      "medium",
-                      "high",
-                      "xhigh",
-                      "max"
-                    ],
-                    "default": "medium"
-                  },
-                  "modalities": {
-                    "input": [
-                      "text",
-                      "image"
-                    ],
-                    "output": [
-                      "text"
-                    ]
-                  },
-                  "pricing": {
-                    "standard": [
-                      {
-                        "start": "2026-07-09",
-                        "end": null,
-                        "input": 4,
-                        "cached_input": 0.4,
-                        "cache_write": 5,
-                        "output": 20
-                      }
-                    ],
-                    "long_context": {
-                      "threshold_input_tokens": 272000,
-                      "condition": "total input tokens greater than 272000",
-                      "applies_to_entire_request": true,
-                      "multipliers": {
-                        "input": 2,
-                        "cached_input": 2,
-                        "cache_write": 2,
-                        "output": 1.5
-                      }
-                    }
-                  }
-                },
-                "evidence": {
-                  "provider": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "family": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "model": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "aliases": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "context_window": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "max_output": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "knowledge_cutoff": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "reasoning": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "modalities": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-                  "pricing": "https://developers.openai.com/api/docs/pricing"
-                },
-                "event_id": "evt_7c44878fcb60b82e3adb",
-                "event_hash": "7c44878fcb60b82e3adb0e4c456c9144ae1fc2009f4933bad899912d6c91afaf"
-              }
-            ]
-          }
-        ],
+        "models": [],
         "source_urls": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
-          "https://developers.openai.com/api/docs/models/gpt-6-astra",
-          "https://developers.openai.com/api/docs/models/gpt-6-sol",
-          "https://developers.openai.com/api/docs/pricing",
-          "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science"
+          "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
         ]
       },
       "requested_output": {
@@ -1383,8 +985,6 @@
           "what_changed",
           "why_it_matters",
           "key_facts",
-          "pricing_or_capability_impact",
-          "before_vs_after",
           "who_should_care",
           "what_to_verify",
           "faq",
