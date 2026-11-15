@@ -6395,33 +6395,38 @@
     },
     "gemini-4-hydrogen-github-copilot-availability": {
       "reviewed_at": "2026-11-15",
-      "seo_title": "Gemini 4 Hydrogen in GitHub Copilot: Plans & Access",
-      "h1": "Gemini 4 Hydrogen in GitHub Copilot: plans, editors and billing",
-      "meta_description": "GitHub adds Gemini 4 Hydrogen to Copilot Pro, Pro+, Max, Business and Enterprise. Check rollout, model selection, admin policy and usage billing.",
+      "seo_title": "Gemini 4 Hydrogen in GitHub Copilot: Price & Setup (2026)",
+      "h1": "Gemini 4 Hydrogen in GitHub Copilot: pricing, setup and migration",
+      "meta_description": "Gemini 4 Hydrogen in GitHub Copilot: official token pricing, Pro access, VS Code setup, Carbon comparison and Gemini 3.8 Flash migration before Dec 14.",
       "source_name": "GitHub",
       "primary_source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
       "sources": [
         "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
         "https://github.blog/changelog/2026-11-10-gemini-4-carbon-in-github-copilot",
-        "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december"
+        "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december",
+        "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing",
+        "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/change-the-chat-model",
+        "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-default-models"
       ],
       "schema_type": "NewsArticle",
       "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
       "keywords": [
-        "Gemini 4 Hydrogen Copilot",
         "Gemini 4 Hydrogen GitHub Copilot",
         "Gemini 4 Hydrogen pricing Copilot",
-        "Gemini Hydrogen VS Code",
-        "enable Gemini 4 Hydrogen Copilot",
-        "Gemini 4 Hydrogen vs Carbon"
+        "Gemini 4 Hydrogen VS Code setup",
+        "Gemini 4 Hydrogen vs Carbon pricing",
+        "Gemini 4 Hydrogen not showing",
+        "Gemini 3.8 Flash replacement December 2026",
+        "Gemini Hydrogen Copilot Pro plans"
       ],
       "longtail_keywords": [
-        "how to enable Gemini 4 Hydrogen in GitHub Copilot",
-        "is Gemini 4 Hydrogen in Copilot Pro",
-        "Hydrogen versus Carbon for coding agents",
-        "GitHub Copilot Gemini Hydrogen model picker"
+        "how to enable Gemini 4 Hydrogen in Copilot VS Code",
+        "GitHub Copilot Gemini 4 Hydrogen price per million tokens",
+        "Gemini 4 Hydrogen versus Carbon cost December 2026",
+        "why Gemini 4 Hydrogen not in model picker",
+        "migrate Gemini 3.8 Flash to Gemini 4 Hydrogen by December 14"
       ],
-      "search_intent": "Developer product explainer: access, editor compatibility, usage billing and model selection.",
+      "search_intent": "Targeted Copilot developer guidance: plan eligibility, model picker troubleshooting, GitHub-hosted token pricing and time-sensitive Gemini 3.8 Flash migration, separate from the evergreen Gemini 4 model overview.",
       "search_questions": [
         "Which Copilot plans include Gemini 4 Hydrogen?",
         "How do I enable it?",
@@ -6483,9 +6488,29 @@
           "label": "Retirement schedule",
           "fact": "GitHub recommends Hydrogen as the alternative to Gemini 3.8 Flash before the December 14, 2026 deprecation.",
           "source": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december"
+        },
+        {
+          "label": "Hydrogen token pricing, verified November 15",
+          "fact": "GitHub's Copilot billing page lists Gemini 4 Hydrogen at $1.50 per 1M input, $0.075 per 1M cached input and $7.50 per 1M output tokens.",
+          "source": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"
+        },
+        {
+          "label": "Carbon price change December 1",
+          "fact": "GitHub's November Carbon promotional rates are $2/$0.10/$10 per million input/cached/output; it publishes a December 1 increase to $4/$0.20/$20.",
+          "source": "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing"
+        },
+        {
+          "label": "VS Code Chat picker",
+          "fact": "GitHub documents choosing the active model from the dropdown at the bottom of Copilot Chat in VS Code; this does not change inline suggestions.",
+          "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/change-the-chat-model"
+        },
+        {
+          "label": "Organization model policies",
+          "fact": "Organization owners can configure available Copilot models in Settings > Copilot > Models where enterprise policy delegates the choice.",
+          "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-default-models"
         }
       ],
-      "limitations": "The announcement is not an independent evaluation of model quality or security. Copilot's billed rates and credit usage should be checked in live account pricing; Google's standalone API price is a different product. Hydrogen and Carbon have different availability and positioning, but no controlled SXF benchmark has been run.",
+      "limitations": "The announcement is not an independent evaluation of model quality or security. Copilot's billed rates and credit usage should be checked in live account pricing; Google's standalone API price is a different product. Hydrogen and Carbon have different availability and positioning, but no controlled SXF benchmark has been run. GitHub Copilot token prices quoted here are a dated November 15, 2026 snapshot subject to later changes and plan allowances. The illustrative token-cost comparison and SXF migration checklist are not live account charges or measured model benchmarks.",
       "analysis": [
         {
           "heading": "Who can enable Gemini 4 Hydrogen inside GitHub Copilot?",
@@ -6559,6 +6584,11 @@
           "title": "GitHub AI Scan API",
           "url": "/signals/github-ai-scan-repository-rest-api-setup/",
           "description": "Separate security-scanning administration feature, not an LLM model selection."
+        },
+        {
+          "title": "Gemini 4 model family",
+          "url": "/models/gemini-4/",
+          "description": "General model-family context, separate from Copilot plan and billing specifics."
         }
       ],
       "reader_checklist": [
@@ -6566,7 +6596,9 @@
         "Ask your Business or Enterprise admin to check model policy.",
         "Read Copilot billing rules rather than reusing Gemini API prices.",
         "Benchmark accuracy, edits and cost per accepted code change.",
-        "Migrate Gemini 3.8 Flash workflows before the published retirement date."
+        "Migrate Gemini 3.8 Flash workflows before the published retirement date.",
+        "Compare official Hydrogen and Carbon token prices with your current Copilot plan's AI credit allowance.",
+        "Check VS Code Copilot Chat's model picker separately from inline completions."
       ],
       "sxf_feature": {
         "type": "matrix",
@@ -6608,7 +6640,7 @@
         "note": "Availability may be gradual; plans and live prices can change. Compare the same workload before selecting a team default.",
         "source": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
       },
-      "faq_heading": "Hydrogen in Copilot questions",
+      "faq_heading": "Gemini 4 Hydrogen Copilot: price, access and model selection FAQs",
       "faq": [
         {
           "question": "Is Gemini 4 Hydrogen available on Copilot Pro?",
@@ -6621,6 +6653,18 @@
         {
           "question": "Will Gemini 3.8 Flash remain in Copilot?",
           "answer": "GitHub announced a December 14, 2026 deprecation and names Gemini 4 Hydrogen as its suggested alternative."
+        },
+        {
+          "question": "How much does Gemini 4 Hydrogen cost in GitHub Copilot?",
+          "answer": "As checked November 15, 2026, GitHub lists $1.50 per million input tokens, $0.075 per million cached input tokens, and $7.50 per million output tokens, before plan-specific AI credits, budgets and usage effects. This is Copilot pricing, not Google's standalone Gemini API."
+        },
+        {
+          "question": "How do I select Gemini 4 Hydrogen in VS Code Copilot Chat?",
+          "answer": "Open Copilot Chat, use the model dropdown at the bottom of the Chat view and choose Gemini 4 Hydrogen if your plan, client, rollout and administrator policy allow it. Chat selection is separate from inline completion model settings."
+        },
+        {
+          "question": "Why is Gemini 4 Hydrogen missing from the Copilot model picker?",
+          "answer": "Check the Copilot subscription, client update, gradual release status and organization or enterprise model policy. GitHub does not promise every account sees a newly launched model immediately."
         }
       ],
       "hero_image": {

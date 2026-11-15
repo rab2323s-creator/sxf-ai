@@ -109,6 +109,11 @@ def main():
             assert "422" in review["seo_title"]
             assert "repository_scan" in review["h1"]
             assert len(review["sources"]) >= 5
+        if slug == "gemini-4-hydrogen-github-copilot-availability":
+            assert "Price & Setup" in review["seo_title"]
+            assert "pricing" in review["h1"]
+            assert "https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" in review["sources"]
+            assert len(review["faq"]) >= 6
         html = unescape(update_news.signal_page_html(item, [item]))
         assert 'name="robots" content="index,follow' in html
         assert "<h1>" + review["h1"] + "</h1>" in html
@@ -129,6 +134,16 @@ def main():
             assert all(html.count('id="' + name + '"') == 1 for name in names)
             assert "X-GitHub-Api-Version: 2026-03-10" in html
             assert "Documentation-derived, unexecuted examples." in html
+        if slug == "gemini-4-hydrogen-github-copilot-availability":
+            sections = ("sxf-hydrogen-model-picker", "sxf-hydrogen-copilot-pricing",
+                        "sxf-hydrogen-flash-migration")
+            assert all(html.count('id="' + part + '"') == 1 for part in sections)
+            assert 'QUICK ANSWER' in html
+            assert 'Dec 1, 2026' in html
+            assert 'December 14, 2026' in html
+            assert '$1.50' in html and '$7.50' in html
+            assert 'illustrative price calculation' in html
+            assert html.index(sections[0]) < html.index(sections[1]) < html.index(sections[2])
         assert "signal-reader-tools" in html
         assert "signal-editorial-analysis" in html
         assert "signal-evidence" in html
@@ -175,6 +190,13 @@ def main():
                              "sxf-ai-scan-deployment-lab"):
                     assert rendered.count('id="' + name + '"') == 1
                 assert "X-GitHub-Api-Version: 2026-03-10" in rendered
+            if slug == "gemini-4-hydrogen-github-copilot-availability":
+                for part in ("sxf-hydrogen-model-picker", "sxf-hydrogen-copilot-pricing",
+                             "sxf-hydrogen-flash-migration"):
+                    assert rendered.count('id="' + part + '"') == 1
+                assert "QUICK ANSWER" in rendered
+                assert "$1.50" in rendered and "$7.50" in rendered
+                assert review["seo_title"].replace("&", "&amp;") in rendered
             assert "signal-editorial-analysis" in rendered
             assert "signal-evidence" in rendered
             assert "signal-reader-tools" in rendered
