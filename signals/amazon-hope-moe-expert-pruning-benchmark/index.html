@@ -49,6 +49,7 @@
           <article class="signal-brief">
             <p class="eyebrow">SXF VERIFIED BRIEF</p>
             <p class="signal-summary">Amazon introduced HOPE, a method for pruning mixture-of-experts models that measures pairwise expert co-activation rather than ranking every expert independently. The team shared a paper, open code and a calibration–solve–prune workflow.</p>
+            
             <div class="signal-context"><span>WHY IT MATTERS</span><p>Large MoE models keep many expert weights in memory even when each token activates only a fraction. Cutting model weights may let developers run longer contexts or reduce hardware requirements, but inaccurate pruning can damage reasoning and coding behavior.</p></div>
             <div class="signal-context"><span>WHAT TO VERIFY</span><p>The 50% figure is the fraction of experts pruned, not a proven 50% reduction in overall server cost, latency or power use. The coding benchmark numbers were produced under the authors&#x27; evaluation settings, and HOPE&#x27;s advantage is smaller at light pruning levels.</p></div>
           </article>

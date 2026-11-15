@@ -49,6 +49,7 @@
           <article class="signal-brief">
             <p class="eyebrow">SXF VERIFIED BRIEF</p>
             <p class="signal-summary">Meta released Muse Spark Open checkpoints and inference guidance through Hugging Face. The model uses a sparse mixture-of-experts architecture, a context window of up to 1,048,576 tokens, and multimodal encoders for image, audio and video inputs, with text output and coding-agent use cases.</p>
+            
             <div class="signal-context"><span>WHY IT MATTERS</span><p>The 42B-active number affects computation per token, not how much weight memory a deployment must accommodate. With about 816B total parameters and a roughly 1.5 TB BF16 checkpoint, this is a distributed-serving model rather than a small consumer-device release. Quantized NVFP4 targets hardware such as NVIDIA Blackwell.</p></div>
             <div class="signal-context"><span>WHAT TO VERIFY</span><p>A 1M-token advertised window is not evidence of equal recall, speed or affordable memory use over that entire range. The open-weight label is distinct from an unrestricted software license; verify current repository terms, quantized quality and serving compatibility before planning deployment.</p></div>
           </article>
