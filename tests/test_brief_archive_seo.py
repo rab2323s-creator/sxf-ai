@@ -83,6 +83,25 @@ def check_archive() -> None:
         assert node.get("name") == title, (slug, "CollectionPage name")
         assert node.get("description") == description, (slug, "CollectionPage description")
         assert node.get("datePublished") == slug, (slug, "datePublished")
+        if issue_date >= date(2026, 11, 16):
+            # New editorial issues require all article and list URLs to remain
+            # pinned to their own dated route after any feed regeneration.
+            assert node.get("@id") == canonical + "#webpage", (slug, "CollectionPage @id")
+            assert require_one(r'<meta property="og:url" content="([^"]+)"', html, slug, "OG URL") == canonical
+            assert len(re.findall(r'class="sxbf-full-article" id="story-[1-5]"', html)) == 5, slug
+            assert len(re.findall(r'class="sxbf-story-image"', html)) == 4, slug
+            assert 'class="sxbf-cover-brand">SXF <span>Brief</span></div><h1' in html, slug
+            itemlists = [item for item in candidates if item.get("@type") == "ItemList"]
+            articles = [item for item in candidates if item.get("@type") == "NewsArticle"]
+            assert len(itemlists) == 1 and len(articles) == 5, (slug, "schema article counts")
+            assert itemlists[0].get("@id") == canonical + "#top-five"
+            for pos, entry in enumerate(itemlists[0]["itemListElement"], 1):
+                link = canonical + f"#story-{pos}"
+                assert entry["position"] == pos and entry["item"]["@id"] == link, (slug, pos)
+                assert articles[pos - 1]["@id"] == articles[pos - 1]["url"] == link, (slug, pos)
+                assert articles[pos - 1]["isPartOf"]["@id"] == canonical + "#webpage"
+                assert articles[pos - 1].get("citation", "").startswith("https://"), (slug, pos)
+                assert f'href="#story-{pos}"' in html and f'id="story-{pos}"' in html
         # Current issue is not an archive; historic issues must be immutable.
         assert page != ARCHIVE / "index.html"
     assert len(titles) == len(pages)
