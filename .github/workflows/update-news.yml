@@ -147,10 +147,16 @@ jobs:
         run: python scripts/patch_nullable_evaluation_context.py
       - name: Refresh effective-date model price index
         run: python scripts/build_model_index.py
+      - name: North Small Translate source, schema and regeneration contract
+        run: |
+          python tests/test_north_small_translate_page.py
+          node --check assets/north-small-translate-guide.js
       - name: Snapshot all existing model SEO and editorial sections
         run: python scripts/model_editorial_guard.py snapshot --file "$RUNNER_TEMP/sxf-model-editorial-baseline.json"
       - name: Build feed and SEO HTML
         run: python scripts/update_news.py
+      - name: North Small Translate must survive the scheduled rebuild
+        run: python tests/test_north_small_translate_page.py
       - name: Ensure original SXF Agent Lab evidence survives generated site builds
         run: python tests/test_ai_agent_lab_persistence.py
       - name: Verify original Agent Lab search metadata and sitemap discovery
