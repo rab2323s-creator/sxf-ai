@@ -1,0 +1,41 @@
+/* North Small Translate editorial guide; SXF's existing dark site shell remains authoritative. */
+[data-north-guide], [id^="north-"]{scroll-margin-top:5.5rem}
+#north-hero{padding-bottom:2rem}
+#north-hero>p{max-width:76ch;line-height:1.7}
+.north-small{font-size:.88rem;opacity:.8;line-height:1.75}
+.north-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.2rem}
+.north-actions a{display:inline-flex;padding:.75rem 1rem;border:1px solid rgba(150,190,214,.45);border-radius:8px;text-decoration:none;font-weight:650}
+.north-actions a.north-primary{background:#d9f3ff;color:#10212e}
+.north-jump{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:thin;padding:.75rem 0 1.3rem}
+.north-jump a{white-space:nowrap;font-size:.86rem;border:1px solid rgba(160,189,210,.35);border-radius:999px;padding:.5rem .75rem;text-decoration:none}
+.north-callout{background:rgba(87,137,161,.12);border-left:3px solid #8bd3ef;padding:1rem 1.3rem;margin:1rem 0;border-radius:0 .6rem .6rem 0}
+.north-callout p{margin:.4rem 0 0}
+.north-table-wrap{overflow-x:auto;border:1px solid rgba(151,182,205,.35);border-radius:.8rem;margin:1.15rem 0 1.3rem}
+.north-table{border-collapse:collapse;width:100%;min-width:570px;font-variant-numeric:tabular-nums}
+.north-table caption{text-align:left;padding:.8rem 1rem;font-size:.85rem;opacity:.85}
+.north-table th,.north-table td{text-align:left;padding:.8rem 1rem;border-top:1px solid rgba(151,182,205,.25);vertical-align:top;line-height:1.55}
+.north-table thead{background:rgba(137,180,208,.13)}
+.north-table th{font-weight:700}
+.north-table code,.north-code{overflow-wrap:anywhere}
+.north-language-grid,.north-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.north-language-grid>div,.north-steps>div{min-width:0;border:1px solid rgba(151,182,205,.32);border-radius:.75rem;padding:1rem;background:rgba(137,180,208,.06)}
+.north-language-grid h3{margin:0 0 .6rem}
+.north-language-grid p,.north-steps p{line-height:1.7;margin:.25rem 0}
+.north-code-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:1rem 0 0;padding:.65rem 1rem;border:1px solid rgba(151,182,205,.32);border-radius:.75rem .75rem 0 0}
+.north-code-head button{cursor:pointer;color:#dff6ff;background:#1b3c4e;border:1px solid #668fa6;border-radius:.4rem;padding:.5rem .8rem}
+.north-code{margin:0 0 1rem;padding:1rem;background:#0c1721;border:1px solid rgba(151,182,205,.32);border-top:0;border-radius:0 0 .75rem .75rem;overflow-x:auto;white-space:pre;font-size:.82rem;line-height:1.65}
+.north-code code{overflow-wrap:normal}
+.north-lab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem}
+.north-lab-grid label{display:flex;flex-direction:column;gap:.5rem;font-weight:600;line-height:1.45}
+.north-lab-grid input{width:100%;box-sizing:border-box;background:#101d2a;color:inherit;border:1px solid rgba(151,182,205,.6);border-radius:.5rem;padding:.75rem;font:inherit}
+.north-lab-grid input:focus-visible,.north-actions a:focus-visible,.north-jump a:focus-visible,.north-code-head button:focus-visible{outline:2px solid #9adcf6;outline-offset:2px}
+.north-lab-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.85rem;margin:1.2rem 0}
+.north-lab-results>div{border:1px solid rgba(151,182,205,.35);padding:1rem;border-radius:.65rem;min-width:0}
+.north-lab-results span{font-size:.83rem;display:block;margin-bottom:.6rem;line-height:1.55}
+.north-lab-results strong{font-variant-numeric:tabular-nums;font-size:clamp(1rem,2vw,1.5rem);overflow-wrap:anywhere}
+.north-faq details{border-top:1px solid rgba(151,182,205,.35);padding:1rem 0}
+.north-faq summary{cursor:pointer;font-weight:700;line-height:1.5}
+.north-faq details p{margin:.7rem 0 0;line-height:1.7}
+@media(max-width:760px){.north-language-grid,.north-steps,.north-lab-results{grid-template-columns:1fr}}
+@media(max-width:550px){.north-lab-grid{grid-template-columns:1fr}.north-table th,.north-table td{padding:.65rem}.north-code{font-size:.73rem}}
+@media(prefers-reduced-motion:reduce){.north-jump{scroll-behavior:auto}}

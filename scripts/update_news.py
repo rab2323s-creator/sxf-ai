@@ -5565,6 +5565,36 @@ def model_comparison_links_html(model_id, limit=4):
 
 
 def render_catalog_model_page(model_id, items):
+    if model_id == "north-small-translate-1-0":
+        # Canonical editorial HTML is durable across scheduled news/catalog
+        # regeneration. Never fall back to the generic model template.
+        source = ROOT / "models/north-small-translate-1-0/editorial.html"
+        page = source.read_text(encoding="utf-8")
+        canonical = "https://sxf.si/models/north-small-translate-1-0/"
+        if (
+            page.count("<h1") != 1
+            or page.count('data-north-guide') != 1
+            or 'id="north-benchmarks"' not in page
+            or 'id="north-faq"' not in page
+            or 'data-north-lab' not in page
+            or '"@type":"TechArticle"' not in page
+            or '"@type":"FAQPage"' not in page
+            or f'rel="canonical" href="{canonical}"' not in page
+        ):
+            raise RuntimeError("North Small Translate editorial source invalid; refusing thin catalog fallback")
+        page = inject_before_main_end(
+            page, model_change_watch_html([model_id], "North Small Translate: what changed.")
+        )
+        page = inject_before_main_end(
+            page, model_history_html([model_id], "North Small Translate verified history.")
+        )
+        comparisons = model_comparison_links_html(model_id)
+        if comparisons:
+            page = inject_before_main_end(page, comparisons)
+        evaluations = evaluation_model_block_html(model_id)
+        if evaluations:
+            page = inject_before_main_end(page, evaluations)
+        return page
     if model_id == "scribe_v2":
         # This model is a native audio-hour speech recognition service, not
         # a generative token-priced model. Preserve the authored SXF dossier
