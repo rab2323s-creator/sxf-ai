@@ -47,7 +47,7 @@ def assert_page(page: str, *, published: bool):
     for asset in ("north-small-translate-guide.css", "north-small-translate-guide.js"):
         assert asset in page
         assert (ROOT / "assets" / asset).is_file(), asset
-    schema_raw = re.search(r'<script type="application/ld\\+json">([^<]+)</script>', page)
+    schema_raw = re.search(r'<script type="application/ld\+json">([^<]+)</script>', page)
     assert schema_raw, "Missing JSON-LD"
     schema = json.loads(schema_raw.group(1))
     graph = schema["@graph"]
