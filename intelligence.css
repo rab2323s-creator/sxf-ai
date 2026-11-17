@@ -1538,3 +1538,21 @@
 .si-compare-table tbody td:first-of-type,.si-compare-table tbody td+td{border-top:1px solid rgba(176,196,210,.12)}
 .si-compare .si-compare-scroll-hint{display:none}
 }
+
+/* SXF source-backed signal comparisons: semantic desktop tables, readable mobile cards. */
+.signal-research-feature .sxf-compare-responsive{max-width:100%;scrollbar-gutter:stable;overflow-x:auto;overscroll-behavior-inline:contain}
+.signal-research-feature .sxf-compare-responsive .deep-dive-table{min-width:640px;width:100%}
+.signal-research-feature .sxf-compare-responsive th,.signal-research-feature .sxf-compare-responsive td{overflow-wrap:anywhere;word-break:normal;line-height:1.6}
+.signal-research-feature .sxf-compare-responsive th:focus-visible,.signal-research-feature .sxf-compare-responsive td:focus-visible{outline:2px solid var(--accent)}
+@media(max-width:700px){
+ .signal-research-feature .sxf-compare-responsive{overflow:visible;border:0;background:transparent;border-radius:0}
+ .signal-research-feature .sxf-compare-responsive .deep-dive-table{min-width:0;width:100%;border-collapse:separate;border-spacing:0 12px}
+ .signal-research-feature .sxf-compare-responsive thead{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+ .signal-research-feature .sxf-compare-responsive tbody,.signal-research-feature .sxf-compare-responsive tr{display:block;width:100%}
+ .signal-research-feature .sxf-compare-responsive tr{padding:13px 15px;border:1px solid var(--line);border-radius:16px;background:#101b29;box-sizing:border-box}
+ .signal-research-feature .sxf-compare-responsive th,.signal-research-feature .sxf-compare-responsive td{display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);gap:12px;align-items:start;width:100%;box-sizing:border-box;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+ .signal-research-feature .sxf-compare-responsive tr>:last-child{border-bottom:0}
+ .signal-research-feature .sxf-compare-responsive tr>:first-child{display:block;color:#e9f5ff;font-weight:750;font-size:16px;padding:5px 0 12px}
+ .signal-research-feature .sxf-compare-responsive tr>:not(:first-child)::before{content:attr(data-label);display:block;color:#b9ccd9;font-size:11px;font-weight:750;letter-spacing:.02em;overflow-wrap:anywhere}
+ .signal-research-feature .sxf-compare-responsive tr>:not(:first-child){color:#d1dfed}
+}
