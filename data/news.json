@@ -1,6 +1,72 @@
 {
-  "updated_at": "2026-11-17T07:48:57.650332Z",
+  "updated_at": "2026-11-17T13:28:56.130039Z",
   "items": [
+    {
+      "title": "Strengthening NATO and allied cyber defenses with AI",
+      "summary": "On November 17, 2026, OpenAI described its cyber defense work with NATO's Communications and Information Agency and allied public agencies, including authorized uses of Daybreak to investigate vulnerabilities, validate findings and prepare fixes. OpenAI reports NATO usage reaching up to 300 billion raw input and output tokens per month, and cites a Crossed Swords 2026 exercise organized by the NATO CCDCOE. SXF explains how to distinguish provider-reported operational activity, human-confirmed vulnerabilities and real security outcomes instead of assuming token volume is a defense effectiveness metric.",
+      "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai",
+      "signal_url": "https://sxf.si/signals/openai-daybreak-nato-cyber-defense-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-17T00:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "Security",
+        "OpenAI"
+      ],
+      "signal_score": 38
+    },
+    {
+      "title": "GitHub Copilot models deprecated on November 16, 2026",
+      "summary": "GitHub deprecated Claude Opus 4.8, Claude Opus 5 and GPT-5.6 Terra across most Copilot experiences on November 16, 2026. GitHub lists Claude Opus 5.5 for the first two and GPT-6.1 Sol or GPT-6 Luna for Terra, with specific exceptions for annual individual subscriptions and a runtime refusal fallback. SXF distinguishes removal from model pickers from legacy availability, and supplies a migration and permission-audit checklist for business and enterprise administrators.",
+      "url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026",
+      "signal_url": "https://sxf.si/signals/github-copilot-models-retired-november-2026/",
+      "source": "GitHub",
+      "published": "2026-11-16T20:25:20Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot"
+      ],
+      "signal_score": 38
+    },
+    {
+      "title": "VS Code retires the Local harness in February 2027",
+      "summary": "GitHub announced on November 16, 2026 that VS Code 1.146 deprecates the Local harness for Copilot agent sessions, with removal planned for February 2027. The built-in Copilot harness has been the default for new sessions since version 1.143. Local computer use remains possible; changing harness does not automatically move files into the cloud or enable sandboxing. SXF maps session-runtime differences and provides a migration test plan for developer teams and managed organizations.",
+      "url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027",
+      "signal_url": "https://sxf.si/signals/vs-code-local-harness-retirement-february-2027/",
+      "source": "GitHub",
+      "published": "2026-11-16T19:22:56Z",
+      "category": "Tools",
+      "tags": [
+        "Coding AI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "Broadening access to AI for scientists",
+      "summary": "OpenAI announced November 16, 2026 that ChatGPT for Academic Researchers is expanding from a 20,000-person pilot to a program intended to reach up to 200,000 researchers. Applications for 50,000 new first-come, first-served grants open November 23, with eligible recipients able to include up to two collaborators and receive free ChatGPT Plus. SXF separates grant awards from seats and compares the Plus-based new round with the pilot's Pro access, while explaining why surveyed time savings are not a controlled causal measurement.",
+      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
+      "signal_url": "https://sxf.si/signals/chatgpt-academic-researchers-grants-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-16T17:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "Hugging Face and OpenRouter join forces to make open-weight models easy to run",
+      "summary": "Hugging Face announced on November 16, 2026 that its Inference Providers language-model traffic now goes through OpenRouter rather than Hugging Face's previous custom router. The company says existing integrations can continue using Hugging Face tokens and APIs, with provider routing based on price, speed and reliability, retries on failure and conversation-aware caching. SXF explains the important exception: customers can no longer pass custom provider API keys for these language-model requests, while image and video provider-key behavior remains different.",
+      "url": "https://huggingface.co/blog/openrouter",
+      "signal_url": "https://sxf.si/signals/hugging-face-openrouter-inference-routing-guide/",
+      "source": "Hugging Face",
+      "published": "2026-11-16T00:00:00Z",
+      "category": "Open Source",
+      "tags": [
+        "Open Source AI"
+      ],
+      "signal_score": 30
+    },
     {
       "title": "Gemini 4 Hydrogen in GitHub Copilot",
       "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
@@ -742,10 +808,10 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 180,
+      "OpenAI": 182,
       "Google AI": 30,
-      "Hugging Face": 70,
-      "GitHub": 109,
+      "Hugging Face": 71,
+      "GitHub": 111,
       "Google Research": 18,
       "Anthropic": 4,
       "Meta": 0,
@@ -753,10 +819,10 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 19,
+      "OpenAI": 21,
       "Google AI": 6,
-      "Hugging Face": 13,
-      "GitHub": 11,
+      "Hugging Face": 14,
+      "GitHub": 13,
       "Google Research": 3,
       "Anthropic": 3,
       "Meta": 0,
@@ -770,21 +836,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1400,
         "relevance_accepted_count": 1400,
-        "quality_accepted_count": 112,
-        "accepted_candidate_count": 112,
-        "rejected_candidate_count": 1288,
+        "quality_accepted_count": 111,
+        "accepted_candidate_count": 111,
+        "rejected_candidate_count": 1289,
         "duplicate_count": 2,
-        "age_rejection_count": 1286,
+        "age_rejection_count": 1287,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 19,
+        "publish_count": 21,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "Google AI": {
@@ -807,7 +873,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "Hugging Face": {
@@ -823,14 +889,14 @@
         "age_rejection_count": 873,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 13,
+        "publish_count": 14,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "GitHub": {
@@ -846,14 +912,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 11,
+        "publish_count": 13,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "Google Research": {
@@ -876,7 +942,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "Anthropic": {
@@ -899,7 +965,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -924,7 +990,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "xAI": {
@@ -947,7 +1013,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       },
       "Microsoft": {
@@ -970,7 +1036,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-17T07:48:11.048118Z",
+        "last_successful_fetch": "2026-11-17T13:27:59.307694Z",
         "errors": []
       }
     },

@@ -1,7 +1,20 @@
 {
-  "updated_at": "2026-11-17T07:48:57.650332Z",
+  "updated_at": "2026-11-17T13:28:56.130039Z",
   "window_days": 21,
   "items": [
+    {
+      "title": "Hugging Face and OpenRouter join forces to make open-weight models easy to run",
+      "summary": "Hugging Face announced on November 16, 2026 that its Inference Providers language-model traffic now goes through OpenRouter rather than Hugging Face's previous custom router. The company says existing integrations can continue using Hugging Face tokens and APIs, with provider routing based on price, speed and reliability, retries on failure and conversation-aware caching. SXF explains the important exception: customers can no longer pass custom provider API keys for these language-model requests, while image and video provider-key behavior remains different.",
+      "url": "https://huggingface.co/blog/openrouter",
+      "signal_url": "https://sxf.si/signals/hugging-face-openrouter-inference-routing-guide/",
+      "source": "Hugging Face",
+      "published": "2026-11-16T00:00:00Z",
+      "category": "Open Source",
+      "tags": [
+        "Open Source AI"
+      ],
+      "signal_score": 30
+    },
     {
       "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
       "summary": "The ggml-org team announced version 1.0.0 of the llama.cpp and ggml libraries on November 13, 2026, clarifying semantic-versioning contracts for public C interfaces. Future API or ABI-breaking changes trigger major-version increments, while compatible features and bug fixes use minor and patch increments. The milestone matters to application integrators and package maintainers; it is not a claim that all backends have identical behaviour or that throughput improved by a measured percentage.",
