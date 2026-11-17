@@ -8165,6 +8165,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/remove-personal-information-online/",
+            "category": "Everyday AI · Privacy · Safety",
+            "categories": ["research", "security", "tools"],
+            "kicker": "PRIVACY REMOVAL · SXF FREE TRACKER",
+            "title": "How to Remove Personal Information Online (2026): Google, Data Brokers & AI",
+            "description": "A primary-source guide to removing addresses, phone numbers, people-search listings and AI account data, with free official links, templates and an original SXF tracker.",
+            "meta": "Remove Personal Information · Google · Data Brokers · ChatGPT · Privacy Rights",
+            "updated": "Nov 17, 2026",
+            "read_time": "19 min",
+        },
+        {
             "href": "/guides/chatgpt-wallet/",
             "category": "Agents · Commerce · Payments",
             "categories": ["agents", "research", "tools", "security"],

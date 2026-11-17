@@ -50,6 +50,23 @@ def main():
 
     # The generated Guides directory must retain authored Wallet coverage after
     # every scheduled feed refresh. Manual edits to guides/index.html are overwritten.
+    # Authored privacy field guide stays discoverable on every regenerated directory and sitemap.
+    privacy = BASE + "/guides/remove-personal-information-online/"
+    generator_text = (ROOT / "scripts" / "update_news.py").read_text(encoding="utf-8")
+    directory_text = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    assert privacy in actual_list, "Privacy removal guide missing from sitemap"
+    assert '"href": "/guides/remove-personal-information-online/"' in generator_text, "Privacy guide missing from source catalog"
+    assert 'href="/guides/remove-personal-information-online/"' in directory_text, "Privacy guide missing from rendered directory"
+    privacy_page = (ROOT / "guides/remove-personal-information-online/index.html").read_text(encoding="utf-8")
+    assert f'<link rel="canonical" href="{privacy}"' in privacy_page, "Privacy guide canonical changed"
+    assert privacy_page.count("<h1") == 1, "Privacy guide must have one H1"
+    for asset in ("personal-information-removal-map.svg", "google-search-removal-decision-tree.svg", "ai-chat-data-deletion-checklist.svg"):
+        assert (ROOT / "guides/remove-personal-information-online/images" / asset).exists(), "Missing privacy guide graphic: " + asset
+        assert asset in privacy_page, "Privacy guide figure is not referenced: " + asset
+    for inbound in ("how-to-tell-if-an-image-is-ai-generated", "why-does-chatgpt-make-things-up", "chatgpt-wallet"):
+        linked_page = (ROOT / "guides" / inbound / "index.html").read_text(encoding="utf-8")
+        assert 'href="/guides/remove-personal-information-online/"' in linked_page, "Missing inbound privacy guide link from " + inbound
+
     wallet = BASE + "/guides/chatgpt-wallet/"
     directory = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     generator = (ROOT / "scripts" / "update_news.py").read_text(encoding="utf-8")
