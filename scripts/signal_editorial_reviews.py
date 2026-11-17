@@ -160,10 +160,26 @@ def render_review_special(review):
             raise ValueError("Feature must cite a listed primary source")
         if feature["type"] == "matrix":
             headings = "".join("<th scope='col'>" + escape(cell) + "</th>" for cell in feature["columns"])
-            rows = "".join("<tr>" + "".join(("<th scope='row'>" if i == 0 else "<td>") +
-                escape(str(cell)) + ("</th>" if i == 0 else "</td>") for i, cell in enumerate(row))
-                + "</tr>" for row in feature["rows"])
-            display = '<div class="deep-dive-table-wrap" tabindex="0" role="region" aria-label="' + escape(feature["heading"], quote=True) + '"><table class="deep-dive-table"><thead><tr>' + headings + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+            # Optional, scoped responsive presentation: preserve the semantic table on desktop,
+            # expose column labels for readable stacked comparison cards on small screens.
+            responsive = bool(feature.get("mobile_stacked"))
+            if responsive:
+                if not (2 <= len(feature["columns"]) <= 4) or any(
+                    len(row) != len(feature["columns"]) for row in feature["rows"]
+                ):
+                    raise ValueError("Mobile comparison columns/rows must match")
+                rows = "".join("<tr>" + "".join(
+                    ("<th scope='row'" if i == 0 else "<td")
+                    + ' data-label="' + escape(feature["columns"][i], quote=True) + '">'
+                    + escape(str(cell)) + ("</th>" if i == 0 else "</td>")
+                    for i, cell in enumerate(row)
+                ) + "</tr>" for row in feature["rows"])
+            else:
+                rows = "".join("<tr>" + "".join(( "<th scope='row'>" if i == 0 else "<td>") +
+                    escape(str(cell)) + ("</th>" if i == 0 else "</td>") for i, cell in enumerate(row))
+                    + "</tr>" for row in feature["rows"])
+            wrap_class = "deep-dive-table-wrap sxf-compare-responsive" if responsive else "deep-dive-table-wrap"
+            display = '<div class="' + wrap_class + '" tabindex="0" role="region" aria-label="' + escape(feature["heading"], quote=True) + '"><table class="deep-dive-table"><thead><tr>' + headings + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
         elif feature["type"] == "steps":
             display = '<ol class="deep-dive-checklist">' + "".join("<li><strong>" +
                 escape(row["label"]) + "</strong> " + escape(row["detail"]) + "</li>"
