@@ -8165,6 +8165,17 @@ def guides_index_html(items, current_items):
     description = "In-depth AI guides covering models, coding tools, agents, open-source AI, research and superintelligence, built from primary sources and SXF intelligence."
     published = [
         {
+            "href": "/guides/ai-bubble-explained/",
+            "category": "Everyday AI · Economy · Research",
+            "categories": ["research", "models", "tools"],
+            "kicker": "AI BUBBLE 2026 · SXF ECONOMIC SCENARIO LAB",
+            "title": "AI Bubble 2026: Will It Burst? Jobs, Savings & Electricity Explained",
+            "description": "Primary-source 2026 AI capex and macroeconomic risk research, three SXF 2027–2030 scenarios, a six-indicator Bubble Monitor and a household exposure lab.",
+            "meta": "AI Bubble · AI Bubble Burst · Capex · AI Jobs · Retirement · Electricity Prices",
+            "updated": "Nov 17, 2026",
+            "read_time": "23 min",
+        },
+        {
             "href": "/guides/remove-personal-information-online/",
             "category": "Everyday AI · Privacy · Safety",
             "categories": ["research", "security", "tools"],

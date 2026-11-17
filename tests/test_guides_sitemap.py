@@ -50,6 +50,25 @@ def main():
 
     # The generated Guides directory must retain authored Wallet coverage after
     # every scheduled feed refresh. Manual edits to guides/index.html are overwritten.
+    # The economic guide must stay linked from the generated catalog and retain its original evidence lab.
+    bubble_url = BASE + "/guides/ai-bubble-explained/"
+    bubble_dir = ROOT / "guides/ai-bubble-explained"
+    assert bubble_url in actual_list, "SXF AI Bubble guide is missing from sitemap"
+    bubble_page = (bubble_dir / "index.html").read_text(encoding="utf-8")
+    assert f'<link rel="canonical" href="{bubble_url}"' in bubble_page, "AI Bubble canonical changed"
+    assert bubble_page.count("<h1") == 1, "AI Bubble guide must have one H1"
+    assert 'id="monitor"' in bubble_page and 'id="portfolio-lab"' in bubble_page, "SXF original research labs missing"
+    assert (bubble_dir / "bubble-monitor.js").is_file(), "Interactive SXF Bubble Monitor missing"
+    for figure in ("ai-bubble-economic-transmission-map.svg", "ai-bubble-2026-capex-evidence.svg", "ai-bubble-scenarios-2027-2030.svg"):
+        assert (bubble_dir / "images" / figure).is_file(), "Missing original AI Bubble graphic " + figure
+        assert figure in bubble_page, "Bubble guide does not reference its original figure " + figure
+    catalog_source = (ROOT / "scripts/update_news.py").read_text(encoding="utf-8")
+    directory = (ROOT / "guides/index.html").read_text(encoding="utf-8")
+    assert '"href": "/guides/ai-bubble-explained/"' in catalog_source, "Bubble guide missing from generator source"
+    assert 'href="/guides/ai-bubble-explained/"' in directory, "Bubble guide missing from generated Guides directory"
+    for slug in ("ai-agent-cost", "why-does-ai-use-water", "ai-agent-use-cases", "what-is-agentic-ai"):
+        assert 'href="/guides/ai-bubble-explained/"' in (ROOT / "guides" / slug / "index.html").read_text(encoding="utf-8"), "Missing backlink from " + slug
+
     # Authored privacy field guide stays discoverable on every regenerated directory and sitemap.
     privacy = BASE + "/guides/remove-personal-information-online/"
     generator_text = (ROOT / "scripts" / "update_news.py").read_text(encoding="utf-8")
