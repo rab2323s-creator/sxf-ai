@@ -1,0 +1,120 @@
+
+/* SXF / AI — privacy removal dossier. All styles scoped to .privacy-guide. */
+.privacy-guide{--pr-lime:#c8ff4d;--pr-ink:#e5f0ed;--pr-muted:#a3b9b7;--pr-border:#28433c;--pr-panel:#0c1917;color:var(--pr-ink);background:#070d0e}
+.privacy-guide .pr-wrap{width:min(1150px,calc(100% - 42px));margin-inline:auto}
+.privacy-guide .pr-hero{padding-top:42px;padding-bottom:35px}
+.privacy-guide .intel-breadcrumb{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--pr-muted);margin-bottom:36px}
+.privacy-guide .intel-breadcrumb a{color:#d5ebe1}
+.privacy-guide .pr-hero-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(270px,.82fr);gap:50px;align-items:center}
+.privacy-guide .pr-kicker,.privacy-guide .pr-eyebrow{font-size:11px;letter-spacing:.17em;font-weight:850;text-transform:uppercase;color:var(--pr-lime);margin:0 0 15px}
+.privacy-guide h1{font-size:clamp(2.6rem,5.1vw,5.3rem);line-height:1.03;letter-spacing:-.053em;margin:0 0 26px;color:#f4fff5;max-width:17ch}
+.privacy-guide h1 em{font-style:normal;color:var(--pr-lime)}
+.privacy-guide .pr-lead{font-size:clamp(1.06rem,1.7vw,1.26rem);line-height:1.75;color:#c0d5ce;max-width:750px;margin:0}
+.privacy-guide .pr-lead strong{color:#eaffde}
+.privacy-guide .pr-actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
+.privacy-guide .pr-btn{appearance:none;border:1px solid var(--pr-lime);background:var(--pr-lime);color:#07100b;font-weight:850;font-size:13px;line-height:1.3;letter-spacing:.01em;border-radius:8px;padding:13px 18px;text-decoration:none;cursor:pointer;display:inline-flex;justify-content:center;gap:9px;align-items:center}
+.privacy-guide .pr-btn:hover{filter:brightness(1.1)}
+.privacy-guide .pr-btn:focus-visible,.privacy-guide button:focus-visible,.privacy-guide a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.privacy-guide .pr-btn-ghost{background:transparent;color:#d8ffc2;border-color:#44634a}
+.privacy-guide .pr-byline{font-size:12px;color:#91aca2;line-height:1.75;margin:0 0 15px}
+.privacy-guide .pr-byline a{color:#d0edd2}
+.privacy-guide .pr-chips{display:flex;flex-wrap:wrap;gap:8px}
+.privacy-guide .pr-chips span{font-size:11px;font-weight:700;border:1px solid #2c4b42;padding:7px 10px;color:#b5d0c2;border-radius:6px}
+.privacy-guide .pr-hero-aside{background:linear-gradient(160deg,#173027,#0b1816 68%);border:1px solid #39634d;border-radius:16px;padding:27px;box-shadow:0 18px 60px #0005}
+.privacy-guide .pr-mini-label{font-size:10px;color:var(--pr-lime);letter-spacing:.18em;font-weight:850}
+.privacy-guide .pr-large-num{font-size:clamp(5rem,12vw,9rem);letter-spacing:-.085em;font-weight:900;line-height:1;margin:22px 0 10px}
+.privacy-guide .pr-large-num span{font-size:20px;letter-spacing:-.02em;color:#bce3cc;padding-left:12px}
+.privacy-guide .pr-hero-aside p{color:#c0d5cc;font-size:14px;line-height:1.75}
+.privacy-guide .pr-mini-stack{display:grid;gap:9px;margin-top:25px}
+.privacy-guide .pr-mini-stack span{display:block;padding:10px 12px;background:#1c3b2e94;border-left:2px solid var(--pr-lime);font-size:12px;color:#def6d8;font-weight:750}
+.privacy-guide .pr-answer{margin:20px 0 38px;background:linear-gradient(110deg,#172d24,#101e1b);border:1px solid #4b7856;border-radius:15px;padding:32px}
+.privacy-guide .pr-answer h2{margin:0 0 14px;font-size:clamp(1.6rem,3vw,2.25rem);line-height:1.2;letter-spacing:-.03em}
+.privacy-guide p{line-height:1.85}
+.privacy-guide .pr-answer p{font-size:16px;color:#d4e5da}
+.privacy-guide .pr-answer a,.privacy-guide .pr-main a:not(.pr-btn){color:#cbfba6;text-decoration:underline;text-underline-offset:3px}
+.privacy-guide .pr-source-note{margin-top:18px;font-size:13px!important;color:#9bbdad!important}
+.privacy-guide .pr-steps{counter-reset:steps;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0;margin:25px 0}
+.privacy-guide .pr-steps li{background:#0b1e17;border:1px solid #35513f;border-radius:10px;padding:14px;font-size:13px;line-height:1.65;color:#cbe4d0}
+.privacy-guide .pr-steps li::before{counter-increment:steps;content:"0" counter(steps);color:var(--pr-lime);font-weight:850;display:block;margin-bottom:8px;font-size:20px}
+.privacy-guide .pr-figure{margin:30px 0 38px;border:1px solid #2e4d41;background:#0b1518;padding:12px;border-radius:13px;overflow:hidden}
+.privacy-guide .pr-figure-wide{margin:20px 0 32px}
+.privacy-guide .pr-figure img{display:block;width:100%;height:auto;border-radius:7px;background:#101c22}
+.privacy-guide .pr-figure figcaption{font-size:12px;color:#a9c4b4;line-height:1.6;padding:10px 4px 4px}
+.privacy-guide .pr-figure figcaption b{color:#e3f7e8}
+.privacy-guide .pr-toc{border:1px solid #325044;border-radius:14px;padding:22px;margin:18px 0 35px;background:#0d1c19}
+.privacy-guide .pr-toc p{font-size:11px;font-weight:850;letter-spacing:.15em;color:var(--pr-lime);margin:0 0 12px}
+.privacy-guide .pr-toc div{display:flex;gap:9px 20px;flex-wrap:wrap}
+.privacy-guide .pr-toc a{color:#d8eee0;font-size:12px;line-height:1.7;text-decoration:none;border-bottom:1px solid #3a5e45}
+.privacy-guide .pr-toc a:hover{color:var(--pr-lime)}
+.privacy-guide .pr-layout{display:grid;grid-template-columns:208px minmax(0,1fr);gap:42px;align-items:start}
+.privacy-guide .pr-rail{position:sticky;top:18px}
+.privacy-guide .pr-rail-card{border:1px solid #325342;border-radius:11px;padding:19px;background:#0b1917}
+.privacy-guide .pr-rail-card p{font-size:10px;color:var(--pr-lime);letter-spacing:.13em;font-weight:850;margin:0 0 12px}
+.privacy-guide .pr-rail-card strong{display:block;line-height:1.5;font-size:17px}
+.privacy-guide .pr-rail-card span{display:block;margin-top:15px;color:#98b5a9;font-size:12px;line-height:1.8}
+.privacy-guide .pr-rail-link{font-size:12px;color:var(--pr-lime);display:inline-block;margin-top:20px}
+.privacy-guide .pr-main{min-width:0}
+.privacy-guide .pr-section{scroll-margin-top:30px;padding:8px 0 44px;margin-bottom:35px;border-bottom:1px solid #29433c}
+.privacy-guide .pr-main h2{font-size:clamp(1.75rem,3.1vw,2.8rem);line-height:1.13;letter-spacing:-.037em;margin:0 0 22px;color:#f2fff6}
+.privacy-guide .pr-main h3{font-size:clamp(1.16rem,2vw,1.5rem);line-height:1.35;margin:31px 0 11px;letter-spacing:-.019em;color:#e9ffe0}
+.privacy-guide .pr-main p{font-size:15.4px;line-height:1.93;color:#b8cbc4;margin:0 0 17px}
+.privacy-guide .pr-main strong{color:#f4fff2}
+.privacy-guide .pr-main code{padding:2px 4px;background:#1c3029;border-radius:4px}
+.privacy-guide .pr-procedure,.privacy-guide .pr-errors{counter-reset:prstep;list-style:none;padding:0;margin:23px 0}
+.privacy-guide .pr-procedure li,.privacy-guide .pr-errors li{position:relative;padding:0 0 17px 46px;min-height:33px;font-size:15px;line-height:1.85;color:#bed3c8}
+.privacy-guide .pr-procedure li::before,.privacy-guide .pr-errors li::before{counter-increment:prstep;content:counter(prstep);position:absolute;left:0;top:1px;width:27px;height:27px;display:grid;place-items:center;border-radius:50%;border:1px solid #6b916a;color:var(--pr-lime);font-weight:800;font-size:12px}
+.privacy-guide .pr-table-scroll{max-width:100%;overflow-x:auto;border-radius:10px;border:1px solid #35534b;margin:20px 0}
+.privacy-guide .pr-table{border-collapse:collapse;width:100%;min-width:660px;font-size:13px;text-align:left}
+.privacy-guide .pr-table caption{font-size:12px;text-align:left;color:#97b0a6;padding:14px;background:#10211c}
+.privacy-guide .pr-table th,.privacy-guide .pr-table td{padding:13px 12px;border-bottom:1px solid #29453b;vertical-align:top;line-height:1.6;color:#b8d0bf}
+.privacy-guide .pr-table thead{background:#20382e}
+.privacy-guide .pr-table thead th{color:#ecffe4;font-weight:800}
+.privacy-guide .pr-table tbody th{color:#e2f5dc;font-weight:750;background:#0e1e19}
+.privacy-guide .pr-table tr:last-child td,.privacy-guide .pr-table tr:last-child th{border-bottom:0}
+.privacy-guide .pr-keypoint{border-left:3px solid var(--pr-lime);background:#132820;padding:20px 22px;margin:24px 0;border-radius:0 9px 9px 0}
+.privacy-guide .pr-keypoint b{font-size:15px;color:#ecffe2}
+.privacy-guide .pr-keypoint p{margin:9px 0 0;color:#c5dccd}
+.privacy-guide .pr-template{margin:20px 0;border:1px solid #3a5749;border-radius:11px;overflow:hidden}
+.privacy-guide .pr-template-head{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#20352a;padding:12px 17px}
+.privacy-guide .pr-template-head span{font-weight:850;letter-spacing:.08em;font-size:10px;color:#cbebca}
+.privacy-guide .pr-template-head button{background:#c8ff4d;color:#0c1a11;border:0;border-radius:6px;padding:8px 12px;font-weight:850;cursor:pointer}
+.privacy-guide .pr-template pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:22px 20px;background:#0a1714;color:#d4e4d7;font:13px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace;max-width:100%;margin:0}
+.privacy-guide .pr-provider{border:1px solid #355147;padding:18px 23px;border-radius:12px;background:#101f1c;margin:18px 0}
+.privacy-guide .pr-provider h3{margin-top:4px}
+.privacy-guide .pr-provider ol{padding-left:24px;color:#c0d2c6;line-height:1.85;font-size:14px}
+.privacy-guide .pr-provider li{margin-bottom:10px}
+.privacy-guide .pr-tool{border:1px solid #5b8b64;border-radius:15px;background:#0d2018;overflow:hidden;box-shadow:0 12px 55px #0003;margin:21px 0}
+.privacy-guide .pr-tool-top{padding:19px 22px;background:#193323;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.privacy-guide .pr-tool-top strong{display:block;font-size:13px;letter-spacing:.05em}
+.privacy-guide .pr-tool-top span:not(.pr-local-badge){display:block;font-size:12px;line-height:1.55;color:#b0cdb8;margin-top:4px}
+.privacy-guide .pr-local-badge{color:#0e1d12;background:var(--pr-lime);font-weight:900;font-size:10px;letter-spacing:.08em;padding:6px 8px;border-radius:5px;white-space:nowrap}
+.privacy-guide .pr-tool-form{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;padding:19px 20px}
+.privacy-guide .pr-tool-form label{font-size:12px;color:#cfead0;font-weight:750;display:flex;flex-direction:column;gap:7px}
+.privacy-guide .pr-tool input,.privacy-guide .pr-tool select{font:inherit;color:#e9f9e9;background:#0c1815;border:1px solid #457052;border-radius:7px;padding:11px 10px;min-width:0;width:100%}
+.privacy-guide .pr-tool-form .pr-btn{grid-column:1/-1;justify-self:start}
+.privacy-guide .pr-tracker-summary{padding:0 20px;color:#bde9b5;font-size:12px;font-weight:750}
+.privacy-guide .pr-tool .pr-table-scroll{margin:15px 20px}
+.privacy-guide .pr-tracker-table{min-width:600px}
+.privacy-guide .pr-tracker-table button{border:1px solid #53715f;border-radius:4px;background:#183126;color:#d4eed5;padding:5px 8px;cursor:pointer}
+.privacy-guide .pr-tool-actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 20px 15px}
+.privacy-guide .pr-tool-foot{margin:0!important;padding:0 20px 21px;font-size:11px!important;color:#91b39f!important}
+.privacy-guide .pr-score-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:19px 0}
+.privacy-guide .pr-score-grid div{padding:18px;background:#10221b;border:1px solid #2c4c3b;border-radius:9px}
+.privacy-guide .pr-score-grid b{font-size:13px;color:#daf4d4}
+.privacy-guide .pr-score-grid p{font-size:13px;margin:9px 0 0}
+.privacy-guide .pr-faq{display:grid;gap:9px}
+.privacy-guide .pr-faq details{padding:15px 17px;border:1px solid #315144;border-radius:9px;background:#101e1a}
+.privacy-guide .pr-faq summary{font-weight:800;line-height:1.5;cursor:pointer;color:#e4f3de}
+.privacy-guide .pr-faq details p{margin:12px 0 0!important}
+.privacy-guide .pr-sources{padding-left:21px}
+.privacy-guide .pr-sources li{margin:0 0 12px;color:#b8d0c4;font-size:13px;line-height:1.75}
+.privacy-guide .pr-method{margin-top:26px;background:#10251e;padding:17px 20px;border-radius:9px}
+.privacy-guide .pr-method p{margin:0}
+.privacy-guide .pr-related{padding:16px 0 58px}
+.privacy-guide .pr-related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.privacy-guide .pr-related-grid a{display:block;padding:18px;background:#14271f;border:1px solid #345444;border-radius:9px;text-decoration:none!important}
+.privacy-guide .pr-related-grid a strong{display:block;line-height:1.35;font-size:14px;color:#e6ffdc}
+.privacy-guide .pr-related-grid a span{display:block;font-size:12px;line-height:1.65;margin-top:8px;color:#a9c7ad}
+@media(max-width:980px){.privacy-guide .pr-layout{grid-template-columns:1fr;gap:10px}.privacy-guide .pr-rail{display:none}.privacy-guide .pr-steps{grid-template-columns:repeat(2,1fr)}.privacy-guide .pr-hero-grid{grid-template-columns:1fr}.privacy-guide .pr-hero-aside{max-width:600px}}
+@media(max-width:580px){.privacy-guide .pr-wrap{width:min(100% - 30px,1150px)}.privacy-guide .pr-hero{padding-top:24px}.privacy-guide h1{font-size:clamp(2.4rem,10vw,3.2rem)}.privacy-guide .pr-answer{padding:20px}.privacy-guide .pr-steps{grid-template-columns:1fr}.privacy-guide .pr-toc{padding:15px}.privacy-guide .pr-related-grid,.privacy-guide .pr-score-grid{grid-template-columns:1fr}.privacy-guide .pr-tool-form{grid-template-columns:1fr}.privacy-guide .pr-tool-top{align-items:start;flex-direction:column}.privacy-guide .pr-template-head{align-items:flex-start;flex-direction:column}.privacy-guide .pr-provider{padding:16px}}
+@media(prefers-reduced-motion:reduce){.privacy-guide *{scroll-behavior:auto!important}}
