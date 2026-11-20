@@ -1,6 +1,47 @@
 {
-  "updated_at": "2026-11-20T11:47:58.991636Z",
+  "updated_at": "2026-11-20T11:58:50.572755Z",
   "items": [
+    {
+      "title": "Inside the Codex sandbox",
+      "summary": "OpenAI detailed the Codex sandbox on November 18, 2026. Its default :workspace profile allows edits inside the project, keeps certain control directories read-only, permits broader reads within operating-system access and blocks network connections. SXF explains why those boundaries are useful but not a complete security guarantee, compares permission designs and supplies a concrete least-privilege review procedure for developers and administrators.",
+      "url": "https://openai.com/index/inside-the-codex-sandbox",
+      "signal_url": "https://sxf.si/signals/codex-sandbox-security-permissions-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-18T08:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "Coding AI",
+        "Security",
+        "OpenAI"
+      ],
+      "signal_score": 28
+    },
+    {
+      "title": "GitHub Copilot Evals is now in public preview",
+      "summary": "GitHub introduced Copilot Evals in public preview on November 17, 2026. The tool creates and runs repeatable checks for Copilot skills, custom agents and MCP integrations, with human approval before each run and a local evaluation engine called Vally. SXF explains installation paths, a practical evaluation design and how to interpret failures and costs without mistaking demo results for evidence that an agent is safe or reliable in production.",
+      "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+      "signal_url": "https://sxf.si/signals/github-copilot-evals-setup-testing-2026/",
+      "source": "GitHub",
+      "published": "2026-11-17T18:00:33Z",
+      "category": "Tools",
+      "tags": [
+        "GitHub Copilot"
+      ],
+      "signal_score": 38
+    },
+    {
+      "title": "Introducing ChatGPT for Sales",
+      "summary": "OpenAI introduced ChatGPT for Sales on November 17, 2026, combining a dedicated Sales plugin with more than 30 new or expanded partner plugins. Sellers can bring CRM history, account research and meeting notes into supported ChatGPT workflows, with access dependent on plan, region and workspace policy. SXF compares those workflows with a conventional CRM and explains how to verify data access, human approval and actual sales outcomes rather than relying on vendor anecdotes.",
+      "url": "https://openai.com/index/introducing-chatgpt-for-sales",
+      "signal_url": "https://sxf.si/signals/chatgpt-for-sales-crm-workflows-2026/",
+      "source": "OpenAI",
+      "published": "2026-11-17T08:00:00Z",
+      "category": "Tools",
+      "tags": [
+        "OpenAI"
+      ],
+      "signal_score": 46
+    },
     {
       "title": "Strengthening NATO and allied cyber defenses with AI",
       "summary": "On November 17, 2026, OpenAI described its cyber defense work with NATO's Communications and Information Agency and allied public agencies, including authorized uses of Daybreak to investigate vulnerabilities, validate findings and prepare fixes. OpenAI reports NATO usage reaching up to 300 billion raw input and output tokens per month, and cites a Crossed Swords 2026 exercise organized by the NATO CCDCOE. SXF explains how to distinguish provider-reported operational activity, human-confirmed vulnerabilities and real security outcomes instead of assuming token volume is a defense effectiveness metric.",
@@ -630,10 +671,10 @@
     "publishing_configured": 9,
     "lifecycle_version": "sxf-source-lifecycle-v1",
     "archive_counts": {
-      "OpenAI": 182,
+      "OpenAI": 184,
       "Google AI": 30,
       "Hugging Face": 71,
-      "GitHub": 111,
+      "GitHub": 112,
       "Google Research": 18,
       "Anthropic": 4,
       "Meta": 0,
@@ -641,10 +682,10 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 18,
+      "OpenAI": 20,
       "Google AI": 6,
       "Hugging Face": 10,
-      "GitHub": 9,
+      "GitHub": 10,
       "Google Research": 2,
       "Anthropic": 2,
       "Meta": 0,
@@ -665,14 +706,14 @@
         "age_rejection_count": 1299,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 18,
+        "publish_count": 20,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "Google AI": {
@@ -695,7 +736,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "Hugging Face": {
@@ -718,7 +759,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "GitHub": {
@@ -734,14 +775,14 @@
         "age_rejection_count": 0,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 9,
+        "publish_count": 10,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "Google Research": {
@@ -764,7 +805,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "Anthropic": {
@@ -787,7 +828,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -812,7 +853,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "xAI": {
@@ -835,7 +876,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       },
       "Microsoft": {
@@ -858,7 +899,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-20T11:47:16.157347Z",
+        "last_successful_fetch": "2026-11-20T11:58:24.764374Z",
         "errors": []
       }
     },
