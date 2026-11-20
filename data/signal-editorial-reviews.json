@@ -8352,6 +8352,842 @@
         "alt": "SXF comparison diagram outlining 20,000 participant ChatGPT Pro pilot versus 50,000 Plus grants supporting up to 150,000 research seats.",
         "caption": "Original SXF eligibility and seat-count explainer from OpenAI's November 16 researcher-grant announcement."
       }
+    },
+    "chatgpt-for-sales-crm-workflows-2026": {
+      "reviewed_at": "2026-11-20",
+      "seo_title": "ChatGPT for Sales: CRM Plugins, Setup and Real Limits",
+      "h1": "ChatGPT for Sales explained: CRM integrations, setup and limitations",
+      "meta_description": "What is ChatGPT for Sales? Explore CRM plugins, setup, sales workflows, security checks and the limits of OpenAI's November 2026 launch.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/introducing-chatgpt-for-sales",
+      "sources": [
+        "https://openai.com/index/introducing-chatgpt-for-sales",
+        "https://openai.com/business/solutions/sales/"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI introduced ChatGPT for Sales on November 17, 2026, combining a dedicated Sales plugin with more than 30 new or expanded partner plugins. Sellers can bring CRM history, account research and meeting notes into supported ChatGPT workflows, with access dependent on plan, region and workspace policy. SXF compares those workflows with a conventional CRM and explains how to verify data access, human approval and actual sales outcomes rather than relying on vendor anecdotes.",
+      "keywords": [
+        "ChatGPT for Sales",
+        "ChatGPT Sales plugin",
+        "ChatGPT CRM integration",
+        "ChatGPT Salesforce HubSpot",
+        "AI sales assistant"
+      ],
+      "longtail_keywords": [
+        "how to install ChatGPT for Sales plugin",
+        "how ChatGPT for Sales works with Salesforce and HubSpot",
+        "ChatGPT for Sales pricing and availability 2026",
+        "ChatGPT for Sales vs CRM workflows",
+        "is ChatGPT for Sales safe for customer data"
+      ],
+      "search_intent": "Practical commercial and informational research: what the product does, compatibility, setup, governance and whether it improves a real selling workflow.",
+      "search_questions": [
+        "What is ChatGPT for Sales?",
+        "Which CRMs work with the Sales plugin?",
+        "How do workspace admins enable it?",
+        "Does ChatGPT for Sales replace a CRM?",
+        "What are the pricing and access restrictions?",
+        "How should a team measure its value?"
+      ],
+      "editorial": {
+        "what_changed": "OpenAI launched a sales-focused plugin and a collection of new or expanded partner integrations that connect research, CRM, meetings and follow-up in ChatGPT.",
+        "why_it_matters": "The buyer question shifts from whether an AI can draft a generic email to whether it can retrieve trustworthy account context and prepare accurate, approved updates.",
+        "what_to_verify": "Over 30 refers to new and expanded partner plugins across the announcement, not 30 CRMs or guaranteed integrations for every account. Product access varies by plan, region and workspace settings; vendor case studies are not independent effectiveness trials."
+      },
+      "evidence": [
+        {
+          "label": "Launch date",
+          "fact": "OpenAI dated the ChatGPT for Sales launch November 17, 2026.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Core product",
+          "fact": "The announcement introduces a dedicated Sales plugin with ready-to-use seller workflows.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Partner ecosystem",
+          "fact": "OpenAI says more than 30 partner plugins were newly introduced or expanded; this is not a count of CRMs.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "CRM examples",
+          "fact": "OpenAI names Salesforce, HubSpot, Close CRM and monday CRM for account context and next steps.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Prospecting tools",
+          "fact": "Apollo, Clay and Common Room are examples of plugins that can supplement account research.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Conversation context",
+          "fact": "Gong, Otter.ai and Granola are among tools listed for interpreting customer discussions.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Documents",
+          "fact": "Docusign, Ironclad and PandaDoc are among integrations listed for quoting and agreements.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Admin setup",
+          "fact": "ChatGPT Business and Enterprise admins can enable the Sales and partner plugins via workspace Admin Console > Plugins.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        },
+        {
+          "label": "Availability caveat",
+          "fact": "Partner plugin and feature availability differs by plan, region and workspace configuration.",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales"
+        }
+      ],
+      "limitations": "OpenAI does not publish a universal ChatGPT for Sales price, independent controlled time-saving trial, guaranteed CRM write permissions or a promise that each named integration is available in every workspace. Any customer success number is a testimonial rather than a measured general effect. A CRM remains the authoritative system of record until approved changes are written and audited there.",
+      "analysis": [
+        {
+          "heading": "What is ChatGPT for Sales, and what changed in November 2026?",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+          "paragraphs": [
+            "ChatGPT for Sales is an OpenAI sales-oriented experience built around a Sales plugin and partner integrations. The November 17 launch connects activities that sellers normally perform in separate systems: finding accounts, reading opportunity history, preparing a call, summarizing a conversation and proposing follow-up actions. It does not announce a new standalone CRM database or a requirement to migrate customer records away from the existing system.",
+            "The meaningful change is access to connected customer context while using conversational workflows. Earlier generic prompts could produce fluent pitch text from information pasted by a seller; this approach can use information from permitted third-party tools. That difference raises the value of current data, but also makes permissions, record freshness and source attribution more important than writing style. For background, see SXF's AI agent use cases guide."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent use cases guide",
+              "url": "/guides/ai-agent-use-cases/"
+            }
+          ]
+        },
+        {
+          "heading": "Which CRM and sales tools can ChatGPT for Sales connect to?",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+          "paragraphs": [
+            "OpenAI's published examples cover Salesforce, HubSpot, Close CRM and monday CRM for account history; Apollo, Clay and Common Room for prospect signals; Gong, Otter.ai and Granola for meeting context; and Docusign, Ironclad and PandaDoc for agreements. These are different workflow roles. A call-notes service may produce meeting evidence, while the CRM remains the location of the opportunity record; connecting both does not make those records automatically consistent.",
+            "The announced count of more than 30 covers new and expanded partner plugins, not a flat list of universally available connectors. An administrator should inspect the actual plugin permissions, authentication scope, write actions, freshness and missing fields for each service. A useful acceptance test is to compare an AI-produced account brief against the source CRM and the underlying meeting record, then review every proposed update before posting it."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "How do you install and configure the Sales plugin?",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+          "paragraphs": [
+            "OpenAI provides a Sales plugin installation entry point in the launch announcement. For Business and Enterprise organizations, an admin opens the Admin Console, chooses the workspace and enables Sales and approved partner plugins. Team members then complete any required account connection. Availability depends on plan, geography and workspace settings, so an absent plugin is not evidence that the entire Sales product has been withdrawn.",
+            "SXF recommends a narrow pilot: select one CRM, one meeting-notes provider and a small authorized account sample. Assign plugin owners, grant only necessary scopes, test which actions are read-only and which can alter records, and require human confirmation before outbound mail or opportunity-stage changes. The AI agent authorization guide explains how to design those permission boundaries before exposing live customer data."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent authorization guide",
+              "url": "/guides/ai-agent-authorization/"
+            }
+          ]
+        },
+        {
+          "heading": "ChatGPT for Sales vs a CRM: what should each system own?",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+          "paragraphs": [
+            "A CRM stores customer identities, opportunities, activity histories and business rules. ChatGPT for Sales can help interpret connected data and prepare workflows around that record. It is therefore better understood as an assistant across tools, not as a reliable replacement for the CRM's access controls, data validation, mandatory fields or audit history. A sales summary that sounds complete may still omit an objection mentioned in a call or confuse an older opportunity with a current deal.",
+            "For a practical comparison, test the same five representative seller tasks with the ordinary CRM workflow and with the Sales plugin: retrieve the right account, summarize a meeting accurately, draft follow-up, propose CRM field changes and flag an at-risk deal. Score citation to records, required human corrections, update correctness and minutes actually saved. The SXF marketing agent lab offers useful context on checking task completion rather than taking polished AI output as success."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF marketing agent lab",
+              "url": "/research/ai-marketing-agent-lab-2026-11/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: where could sales-agent automation create risk?",
+          "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+          "paragraphs": [
+            "The largest operational risk is not awkward prose but acting on inaccurate or overly broad data. A connector can expose sensitive contact notes, prior negotiations and private account context to an AI workflow. Before approving an external email or CRM mutation, verify the source account ID, contact permissions, factual claims, commercial figures and the intended recipient. Data quality defects may be amplified when a persuasive summary becomes a team decision.",
+            "Sales teams should keep a measurement ledger separating suggested actions from accepted ones and accepted ones from verified business results. Track reviewed briefs, seller edits, false account matches, missed commitments, duplicate CRM records and subsequent outcomes. The provider's public customer testimonials do not demonstrate causation for another team. A reasonable next step is a documented pilot with a rollback owner, not a forecast of guaranteed revenue growth."
+          ],
+          "inline_links": []
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent use cases",
+          "url": "/guides/ai-agent-use-cases/",
+          "description": "Identify appropriate tasks before connecting customer systems."
+        },
+        {
+          "title": "AI agent authorization",
+          "url": "/guides/ai-agent-authorization/",
+          "description": "Design approval and least-privilege rules for connected actions."
+        },
+        {
+          "title": "AI agent reliability research",
+          "url": "/research/ai-agent-reliability/",
+          "description": "Distinguish task completion evidence from confident answers."
+        },
+        {
+          "title": "SXF marketing agent lab",
+          "url": "/research/ai-marketing-agent-lab-2026-11/",
+          "description": "Consider testable outcomes for agentic marketing workflows."
+        }
+      ],
+      "reader_checklist": [
+        "Confirm which Sales and partner plugins are available in your plan, region and workspace.",
+        "Record the source system and allowed permission scopes for every connector.",
+        "Compare generated briefs and proposed CRM changes with authoritative records.",
+        "Require an accountable review before sending messages or changing opportunities.",
+        "Measure accepted, verified actions and corrections instead of vendor-only efficiency claims."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF ANALYSIS / WORKFLOW RESPONSIBILITY",
+        "heading": "ChatGPT for Sales versus the underlying CRM",
+        "source": "https://openai.com/index/introducing-chatgpt-for-sales",
+        "columns": [
+          "Seller task",
+          "Sales plugin contribution",
+          "What stays with the CRM / humans"
+        ],
+        "rows": [
+          [
+            "Find promising accounts",
+            "Combine authorized account signals and research",
+            "Validate qualification rules and source freshness"
+          ],
+          [
+            "Prepare a call",
+            "Summarize connected history and meeting notes",
+            "Confirm participants, open issues and private details"
+          ],
+          [
+            "Draft follow-up",
+            "Prepare a personalized next-step message",
+            "Approve recipient, pricing and claims before sending"
+          ],
+          [
+            "Update opportunity",
+            "Suggest or prepare record changes with supported plugins",
+            "Enforce schema, permissions and audit trail"
+          ],
+          [
+            "Spot deal risk",
+            "Explain signals from sales and pipeline data",
+            "Validate stage definitions and the decision to escalate"
+          ],
+          [
+            "Report team impact",
+            "Surface candidate improvements across the workflow",
+            "Measure accepted actions and actual outcomes"
+          ]
+        ],
+        "intro": "The comparison assigns responsibilities rather than assuming that connecting a plugin gives it every permission or replaces a source-of-truth system.",
+        "note": "Capabilities depend on installed plugins, entitlements and configured scopes; this is an SXF workflow evaluation, not a vendor benchmark.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "Questions sellers and CRM administrators ask",
+      "faq": [
+        {
+          "question": "What is ChatGPT for Sales?",
+          "answer": "It is OpenAI's November 2026 sales experience, with a dedicated Sales plugin and partner plugins for account research, CRM context, meeting preparation and next steps."
+        },
+        {
+          "question": "Does it integrate with Salesforce and HubSpot?",
+          "answer": "OpenAI lists Salesforce and HubSpot among supported partner examples, alongside Close CRM and monday CRM. Check the available plugin, account authentication and allowed actions in your own workspace."
+        },
+        {
+          "question": "Is ChatGPT for Sales available to every ChatGPT user?",
+          "answer": "No universal availability is established. OpenAI says integrations and features vary by plan, region and workspace settings; administrators may have to enable them."
+        },
+        {
+          "question": "Does it automatically write to my CRM?",
+          "answer": "Do not assume so. Functionality and write permissions depend on the connected app and authorization. Review any proposed update in the source system."
+        },
+        {
+          "question": "How much does it cost?",
+          "answer": "The November 17 announcement does not give a single universal Sales plugin price. Check your plan and each partner service's current terms before budgeting."
+        },
+        {
+          "question": "Does it replace Salesforce or another CRM?",
+          "answer": "No such replacement was announced. Treat the CRM as the system of record and use AI to help prepare and review authorized tasks."
+        },
+        {
+          "question": "How can a team evaluate results?",
+          "answer": "Use a repeatable pilot with record-level accuracy, accepted CRM updates, human editing time and verified outcomes, while documenting what would have happened without the AI workflow."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/chatgpt-for-sales-workflow-original.svg",
+        "alt": "SXF diagram: ChatGPT for Sales connects account research and CRM context to reviewed follow-ups, with the CRM as system of record.",
+        "caption": "SXF workflow map: connected account context is not the same as an approved CRM update."
+      }
+    },
+    "codex-sandbox-security-permissions-2026": {
+      "reviewed_at": "2026-11-20",
+      "seo_title": "Codex Sandbox: Permissions, Security and Setup (2026)",
+      "h1": "Codex sandbox security: file permissions, network rules and risks",
+      "meta_description": "How does the OpenAI Codex sandbox work? Understand workspace write access, network controls, permission profiles, hidden risks and safer setup.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/inside-the-codex-sandbox",
+      "sources": [
+        "https://openai.com/index/inside-the-codex-sandbox",
+        "https://learn.chatgpt.com/docs/permissions",
+        "https://learn.chatgpt.com/docs/enterprise/security-cookbook"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI detailed the Codex sandbox on November 18, 2026. Its default :workspace profile allows edits inside the project, keeps certain control directories read-only, permits broader reads within operating-system access and blocks network connections. SXF explains why those boundaries are useful but not a complete security guarantee, compares permission designs and supplies a concrete least-privilege review procedure for developers and administrators.",
+      "keywords": [
+        "Codex sandbox",
+        "Codex sandbox permissions",
+        "OpenAI Codex security",
+        "Codex workspace mode",
+        "Codex network sandbox"
+      ],
+      "longtail_keywords": [
+        "what files can Codex sandbox read outside workspace",
+        "how to block network access in Codex sandbox",
+        "Codex sandbox vs Docker container isolation",
+        "how to configure Codex permissions config.toml",
+        "why Codex workspace sandbox does not fully prevent secrets exposure"
+      ],
+      "search_intent": "Technical how-it-works and practical defensive configuration: understand the default boundary, permission inheritance, escalation and residual risks.",
+      "search_questions": [
+        "Does the Codex sandbox access files outside my project?",
+        "Can Codex use the internet by default?",
+        "What does :workspace allow?",
+        "What happens if a command needs elevated permissions?",
+        "Can Codex sandbox be used with MCP tools?",
+        "Is the sandbox equivalent to Docker?"
+      ],
+      "editorial": {
+        "what_changed": "OpenAI published an engineering-level explanation of how Codex enforces filesystem and network restrictions across operating systems, including permission profiles and escalation handling.",
+        "why_it_matters": "Teams must understand both the actions a coding agent can take and the data it can read; a workspace write boundary is not a guarantee that secrets elsewhere are invisible.",
+        "what_to_verify": "The default profile allows broad reads under existing OS permissions, disables network by default and still admits some downstream execution risks. Sandbox limits are defense in depth, not evidence that agent output is trustworthy or safe to execute outside the boundary."
+      },
+      "evidence": [
+        {
+          "label": "Publication",
+          "fact": "OpenAI published the engineering explanation November 18, 2026.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Workspace writes",
+          "fact": "The built-in :workspace profile permits writing within workspace roots and protects .git and .codex as read-only.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Read scope",
+          "fact": "The default allows broad local reads under the current operating-system user's permissions.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Default network",
+          "fact": "Direct network access is disabled under the :workspace profile.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Residual execution risk",
+          "fact": "OpenAI describes a malicious change to ignored node_modules that could be run later by an editor outside the sandbox.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Permission profile configuration",
+          "fact": "Named profiles in config.toml can extend :workspace and define read, write and deny rules.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Network controls",
+          "fact": "OpenAI explains disabled, direct and proxy-constrained network configurations and domain allow/deny rules.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Escalation",
+          "fact": "The harness evaluates requests for additional permissions or execution outside the default sandbox rather than blindly granting them.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        },
+        {
+          "label": "Operating systems",
+          "fact": "OpenAI describes native sandbox enforcement approaches for macOS, Linux and Windows rather than requiring a project container.",
+          "source": "https://openai.com/index/inside-the-codex-sandbox"
+        }
+      ],
+      "limitations": "A sandbox applies constraints to a particular executed process tree, not an independent audit of the model's instructions. Broad reads can expose sensitive files even when network is blocked. Later execution of modified dependencies or user-approved elevated commands can cross the security boundary. The published engineering explanation does not prove that every attack or configuration is covered on every platform.",
+      "analysis": [
+        {
+          "heading": "What does the default Codex :workspace sandbox actually allow?",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "The :workspace permission profile balances ordinary coding with conservative control over write access. It permits editing files beneath workspace roots but keeps directories such as .git and .codex read-only, reducing the ability of commands to rewrite hooks or the agent's own configuration. Network access is disabled by default. These limits matter because an agent can run real shell commands, not merely suggest edits in a chat.",
+            "The less obvious tradeoff is read permission. OpenAI says tools can read broadly outside the repository when the operating-system user could read those paths. Builds often need SDKs and libraries outside the checkout, but the same freedom may include configuration files containing credentials. A developer who needs stronger secrecy must explicitly deny sensitive paths or isolate credentials at the OS level; merely selecting :workspace does not make every non-project file invisible."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "How does Codex decide when to escalate a command?",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "Codex sends commands through its harness, which starts processes using a permission profile. Its documented command options distinguish using the current rules, requesting extra scoped access inside the sandbox and seeking an elevated execution outside it. The harness evaluates that request against settings and approval rules. A tool cannot assume that asking for more access makes the request authorized.",
+            "This division creates two audit questions: what was the configured default at the time, and who approved any deviation? A sensitive operation such as downloading code or changing protected files should be recorded with its purpose and scope. For organizational designs, compare those decisions with the SXF AI agent authorization guide, which treats authorization as a separate control from the model's confidence."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF AI agent authorization guide",
+              "url": "/guides/ai-agent-authorization/"
+            }
+          ]
+        },
+        {
+          "heading": "How do filesystem and network permission profiles work?",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "OpenAI documents named profiles under the permissions configuration in config.toml. A custom profile can extend :workspace, assign read or write access to specific paths, deny access to secrets and protect editor configuration. Workspace-root-relative rules let the same restrictions apply across relevant project folders. The effective policy can be layered with managed enterprise requirements, so a local profile is not necessarily the only controlling input.",
+            "For networking, distinguish no access, direct access and a restricted proxy. OpenAI shows domain allow and deny rules when a network proxy is enabled; an allowlist in a file should not be mistaken for enforcement if the proxy is off. For an initial secure pilot, prefer no network, then add only specific endpoints needed by the task. Inspect effective permissions after layering workspace and managed policies rather than reviewing just one config file."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "Codex sandbox versus containers: what is the real security boundary?",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "OpenAI deliberately uses native platform isolation instead of always moving work into a Docker image or VM, because developers may depend on host SDKs, compilers and simulators. That reduces friction but leaves the process sharing much of the user's development environment. The sandbox is a filesystem and network policy boundary around commands, not a claim that the entire host has become a disposable isolated machine.",
+            "Consider the risk OpenAI gives directly: an agent modifies an ignored dependency under node_modules. A later editor action can execute that changed package outside the original sandbox. The practical takeaway is to inspect untracked and ignored executable inputs, regenerate dependencies from known sources and run security-sensitive changes in an environment with minimized secrets. See SXF's prompt injection guide for why untrusted project text can also influence agent behavior."
+          ],
+          "inline_links": [
+            {
+              "text": "prompt injection guide",
+              "url": "/guides/prompt-injection/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: a safer permission review before running coding agents",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "Design a short threat-model test before giving the agent real code. First document the workspace roots and approved write destinations. Then attempt safe, non-sensitive probes confirming that protected configuration files cannot be changed, known secret directories cannot be read if denied and network connections do not pass under the intended profile. Record any requests for additional permissions and refuse broad escalation unless the task genuinely requires it.",
+            "After the session, review tracked changes and ignored executable paths, run tests with a separate account and ensure that generated scripts are not automatically executed by trusted editor actions. This is a proposed SXF control checklist, not evidence that we penetrated or independently benchmarked Codex. Organizations deploying similar agents should also use the production AI agents guide for logging, rollback and incident-response boundaries."
+          ],
+          "inline_links": [
+            {
+              "text": "production AI agents guide",
+              "url": "/guides/deploy-ai-agents-production/"
+            }
+          ]
+        },
+        {
+          "heading": "How is sandboxing different from evaluating a coding agent?",
+          "source": "https://openai.com/index/inside-the-codex-sandbox",
+          "paragraphs": [
+            "A security boundary answers what an agent's commands are allowed to touch, whereas an evaluation answers whether it performs the intended coding task correctly. Strong isolation cannot prove a patch is correct, and a high score on a test suite cannot prove that a process could not access credentials. Keep both control planes separate, with different acceptance criteria, reviewers and failure handling.",
+            "GitHub's new Copilot Evals workflow illustrates the evaluation side: repeatable checks for skills, agents and tools. The SXF Copilot Evals guide explains how to evaluate agent behavior without treating a pass/fail report as a sandbox. Comparing these products is useful for engineering governance, but they are not drop-in replacements for one another."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF Copilot Evals guide",
+              "url": "/signals/github-copilot-evals-setup-testing-2026/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent security",
+          "url": "/guides/ai-agent-security/",
+          "description": "Threat models, boundaries and least-privilege practices."
+        },
+        {
+          "title": "AI agent authorization",
+          "url": "/guides/ai-agent-authorization/",
+          "description": "Approval boundaries for high-impact commands."
+        },
+        {
+          "title": "Prompt injection",
+          "url": "/guides/prompt-injection/",
+          "description": "Understand malicious instructions in project sources."
+        },
+        {
+          "title": "AI coding agent architecture",
+          "url": "/research/ai-coding-agent-architecture/",
+          "description": "Review local coding-agent command and tool flows."
+        },
+        {
+          "title": "GitHub Copilot Evals setup",
+          "url": "/signals/github-copilot-evals-setup-testing-2026/",
+          "description": "Behavior evaluation complements security controls."
+        }
+      ],
+      "reader_checklist": [
+        "Identify the actual workspace roots, process user and protected files.",
+        "Keep direct network disabled until an authorized task specifically needs it.",
+        "Deny sensitive paths rather than assuming workspace mode prevents reads.",
+        "Review every elevated or extra-permission request with its purpose.",
+        "Inspect ignored executable dependencies and editor hooks after an agent session.",
+        "Run build and behavioral tests separately from sandbox permission checks."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF SECURITY MATRIX / PERMISSIONS",
+        "heading": "What the Codex sandbox protects, and what it does not",
+        "source": "https://openai.com/index/inside-the-codex-sandbox",
+        "columns": [
+          "Boundary",
+          "Documented :workspace behavior",
+          "Decision for a security reviewer"
+        ],
+        "rows": [
+          [
+            "Write files",
+            "Write inside workspace; .git and .codex read-only",
+            "Protect hooks and agent configuration"
+          ],
+          [
+            "Read local files",
+            "Broad read access under OS permissions",
+            "Deny credentials and sensitive host paths"
+          ],
+          [
+            "Network access",
+            "Disabled by default",
+            "Approve explicit proxy/domain needs, not blanket access"
+          ],
+          [
+            "Escalation",
+            "Requests pass through the harness",
+            "Log extra permissions and authorized overrides"
+          ],
+          [
+            "Ignored dependencies",
+            "Can still be modified within writable paths",
+            "Inspect node_modules and other later-executed code"
+          ],
+          [
+            "Host isolation",
+            "Native platform sandbox for commands",
+            "Do not assume container or VM isolation"
+          ]
+        ],
+        "intro": "File reads, file writes and network access are independent permissions. This table maps the published defaults to practical validation work.",
+        "note": "A secure posture depends on effective policy, operating-system permissions and later host actions; no row is a guarantee of exploit prevention.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "Codex sandbox questions",
+      "faq": [
+        {
+          "question": "Can Codex read files outside my workspace?",
+          "answer": "Under the documented default :workspace profile, broad local reads can be allowed if the OS user has access. Add explicit deny rules and handle credentials separately."
+        },
+        {
+          "question": "Can Codex access the internet by default?",
+          "answer": "The :workspace profile disables network access by default. Other permission profiles and approved requests may enable direct or proxy-limited access."
+        },
+        {
+          "question": "Is the .git directory writable by default?",
+          "answer": "OpenAI documents .git and .codex as read-only under :workspace. Verify the actual effective policy before relying on that boundary."
+        },
+        {
+          "question": "Does a Codex sandbox equal Docker or a virtual machine?",
+          "answer": "No. OpenAI describes using native sandboxing facilities around commands in the existing host environment, with different tradeoffs from a separate container or VM."
+        },
+        {
+          "question": "Are secrets automatically hidden from Codex?",
+          "answer": "Not necessarily. Default read permissions may include files with API keys. Explicit deny rules, OS isolation and secret hygiene are important."
+        },
+        {
+          "question": "Can the agent ask for more permissions?",
+          "answer": "Yes, but the harness evaluates scoped or elevated access against user preferences and approval controls; a request is not an automatic grant."
+        },
+        {
+          "question": "Does sandboxing guarantee secure AI-generated code?",
+          "answer": "No. It constrains command access, while code correctness, supply-chain risk and prompt injection need separate tests and review."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/codex-sandbox-boundaries-original.svg",
+        "alt": "SXF Codex sandbox security diagram showing workspace writes, wider file reads and network blocked by default, with residual risks.",
+        "caption": "SXF permission boundary illustration based on OpenAI's engineering explanation, not an independent penetration test."
+      }
+    },
+    "github-copilot-evals-setup-testing-2026": {
+      "reviewed_at": "2026-11-20",
+      "seo_title": "GitHub Copilot Evals: Setup, Examples and Limits",
+      "h1": "GitHub Copilot Evals guide: setup, test cases and what results mean",
+      "meta_description": "GitHub Copilot Evals is in public preview. Learn VS Code and CLI setup, test-case design, Vally, run approvals, score limitations and comparison methods.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+      "sources": [
+        "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+        "https://github.github.io/evals/getting-started/",
+        "https://github.github.io/evals/"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "GitHub introduced Copilot Evals in public preview on November 17, 2026. The tool creates and runs repeatable checks for Copilot skills, custom agents and MCP integrations, with human approval before each run and a local evaluation engine called Vally. SXF explains installation paths, a practical evaluation design and how to interpret failures and costs without mistaking demo results for evidence that an agent is safe or reliable in production.",
+      "keywords": [
+        "GitHub Copilot Evals",
+        "Copilot Evals setup",
+        "GitHub Copilot agent evaluation",
+        "GitHub Copilot skills testing",
+        "Vally eval tool"
+      ],
+      "longtail_keywords": [
+        "how to install GitHub Copilot Evals VS Code",
+        "Copilot Evals CLI plugin install github/evals",
+        "how to test Copilot custom agents with evals",
+        "how to compare Copilot Evals runs before after",
+        "GitHub Copilot Evals plans public preview November 2026"
+      ],
+      "search_intent": "Developer how-to and evaluation methodology: availability, installing, defining reproducible test cases and interpreting pass/fail reports.",
+      "search_questions": [
+        "What is GitHub Copilot Evals?",
+        "Which Copilot plans have public preview access?",
+        "How do I install Evals in VS Code and CLI?",
+        "How does the Vally evaluation engine work?",
+        "Does an eval pass certify a safe coding agent?",
+        "How can I compare two agent versions fairly?"
+      ],
+      "editorial": {
+        "what_changed": "GitHub introduced an accessible evaluation workflow for Copilot customization, with saved checks, approval-gated runs, failure inspection and before/after comparisons.",
+        "why_it_matters": "Teams changing agent instructions, skills or MCP tools need repeatable evidence of regressions instead of judging only one convincing demo.",
+        "what_to_verify": "Public preview availability is named for Copilot Individual, Business and Enterprise, not every plan. Runs can consume resources and execute tools; tests reflect chosen cases and checks, not general security or real-world reliability."
+      },
+      "evidence": [
+        {
+          "label": "Announcement date",
+          "fact": "GitHub posted the public preview on November 17, 2026.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Evaluated subjects",
+          "fact": "Evals can create test cases for a Copilot skill, custom agent or MCP tool.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Human approval",
+          "fact": "GitHub says each eval run requires user approval before it starts.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Review workflow",
+          "fact": "Users can inspect passed and failed checks and investigate failures.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Comparison",
+          "fact": "Saved results can be compared before and after customization changes.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Engine",
+          "fact": "GitHub identifies Vally as the extensible local eval engine.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "VS Code delivery",
+          "fact": "GitHub offers a Visual Studio Marketplace extension for VS Code.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "CLI and app delivery",
+          "fact": "GitHub documents a Copilot CLI plugin and github/evals marketplace installation in its Copilot app.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Preview entitlement",
+          "fact": "GitHub names Copilot Individual, Business and Enterprise plans for the public preview.",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview"
+        },
+        {
+          "label": "Execution warning",
+          "fact": "The official sample approval describes token or credit consumption and possible tool access to files or the network, depending on the execution environment.",
+          "source": "https://github.github.io/evals/"
+        }
+      ],
+      "limitations": "A saved evaluation checks the selected tasks and scoring rules, not all possible user prompts, security attacks or deployment contexts. The project's official demonstration includes a warning about resource use and local tool side effects. Preview availability, features and limits may change; no SXF first-party performance benchmarks were run for this article.",
+      "analysis": [
+        {
+          "heading": "What is GitHub Copilot Evals and why was it introduced?",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+          "paragraphs": [
+            "GitHub Copilot Evals is a public-preview workflow for testing Copilot customizations against saved scenarios. GitHub specifically includes skills, custom agents and MCP tools. Instead of looking at one successful AI answer, a developer can describe the expected behavior, run an evaluation, inspect which checks failed and repeat the same evaluation after modifying the relevant prompt or tool. The evaluation engine is an extensible local tool named Vally.",
+            "This addresses a genuine problem in agent engineering: an improved instruction for one case may break another. A single prompt is a demonstration, not a regression suite. The larger question is whether a changed skill still meets stated acceptance criteria on examples it has not been optimized solely to flatter. SXF's AI agent evaluation checklist provides broader principles for designing those checks."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent evaluation checklist",
+              "url": "/guides/ai-agent-evaluation-checklist/"
+            }
+          ]
+        },
+        {
+          "heading": "How do you install Copilot Evals in VS Code, CLI or the Copilot app?",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+          "paragraphs": [
+            "GitHub lists three starting paths in its announcement. In Visual Studio Code, install the GitHub Copilot Evals extension from the marketplace. In Copilot CLI, install the Evals plugin using the official getting-started instructions. In the GitHub Copilot app, open Customize, add the github/evals marketplace and install the plugin. The documented interface supports requests such as /eval as well as natural-language instructions.",
+            "This is a public preview for named Individual, Business and Enterprise plans. Access does not imply an identical setup on every managed machine; check organization policy, permitted extensions and the selected execution environment before beginning. GitHub's official getting-started guide is the authoritative source for current command syntax and supported environments. Avoid using unverified third-party install snippets copied from unrelated tutorials."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "What should a good Copilot eval test case contain?",
+          "source": "https://github.github.io/evals/",
+          "paragraphs": [
+            "Start with a task that has a verifiable expected result, such as a pull-request summary that must distinguish implemented changes from deferred work. Provide representative input and acceptance checks: required sections, absence of unsupported claims, preservation of test evidence and refusal to follow instructions inserted inside untrusted change notes. GitHub's own illustrative interface shows saved YAML cases and separate check outcomes, but those sample results are demonstrations, not published independent benchmark scores.",
+            "Build a small suite spanning normal, edge and adversarial situations. A case should not pass just because the agent writes fluent prose; it should pass for a clearly observed and reproducible outcome. For coding tasks, add conventional tests for syntax, behavior and security alongside the agent-specific checks. The SXF AI agent testing tools guide explains why multiple independent verification layers matter."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent testing tools guide",
+              "url": "/guides/ai-agent-testing-tools/"
+            }
+          ]
+        },
+        {
+          "heading": "How do you compare Copilot Evals runs without misleading yourself?",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+          "paragraphs": [
+            "A sensible before/after comparison fixes the task inputs, evaluation rules, authorized tools and environmental conditions as far as possible. Then change one factor at a time: for example, a skill instruction or a model choice. Record each case's pass/fail result, human corrections, resource consumption and observed side effects, and review failures rather than reporting only an aggregate success rate.",
+            "Repeated agent executions can vary, so one green test does not guarantee the same response on another run. When the agent uses an MCP tool, also verify external service state and whether the action was authorized. Report the test suite's coverage explicitly; a narrowly chosen test cannot establish general agent performance. See SXF's independent agent reliability research for the distinction between nominal success and repeated task completion."
+          ],
+          "inline_links": [
+            {
+              "text": "agent reliability research",
+              "url": "/research/ai-agent-reliability/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: evaluation results are not the same as runtime safety",
+          "source": "https://github.github.io/evals/",
+          "paragraphs": [
+            "GitHub's illustrative run-approval screen warns that an evaluation can consume model tokens or credits and that tool execution may access the file system or network; it even notes that cancellation cannot undo earlier writes. Treat the test harness as executable tooling. Use disposable environments, avoid production credentials, review test input and tool permissions, and estimate the cost of trial counts before launching a large suite.",
+            "Evaluation and containment solve different problems. An eval checks whether a customized agent performed a selected task; a sandbox constrains what a command can read or change. The SXF Codex sandbox security guide explains why a successful evaluation cannot substitute for file or network permissions. The strongest agent program combines bounded execution, task-level checks, audit logs and independent review, with no single indicator treated as a certificate of safety."
+          ],
+          "inline_links": [
+            {
+              "text": "SXF Codex sandbox security guide",
+              "url": "/signals/codex-sandbox-security-permissions-2026/"
+            }
+          ]
+        },
+        {
+          "heading": "How should a team decide whether to adopt Copilot Evals?",
+          "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+          "paragraphs": [
+            "Evals is most valuable when a team repeatedly edits the same skills, agent instructions or MCP behavior and can define observable expected outputs. It is less useful for one-off tasks without stable criteria, or when the team lacks a safe place to execute the tool calls being tested. Begin with a small, high-value skill, two success scenarios and two failure or malicious-input cases, then preserve the baseline results before changing anything.",
+            "After the pilot, judge whether the saved checks prevented a real regression, whether false passes required manual investigation and whether the evaluation effort was smaller than the errors it caught. This proposed adoption scorecard is an SXF methodology, not a claim that GitHub supplied those metrics. Public preview status also means teams should watch for documentation and interface changes before standardizing policy."
+          ],
+          "inline_links": []
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent evaluation checklist",
+          "url": "/guides/ai-agent-evaluation-checklist/",
+          "description": "Design test cases that reflect real operating requirements."
+        },
+        {
+          "title": "AI agent testing tools",
+          "url": "/guides/ai-agent-testing-tools/",
+          "description": "Combine regression checks with deterministic software tests."
+        },
+        {
+          "title": "Agent reliability research",
+          "url": "/research/ai-agent-reliability/",
+          "description": "Review repeatability and error measurement."
+        },
+        {
+          "title": "MCP protocol guide",
+          "url": "/guides/model-context-protocol-mcp/",
+          "description": "Understand tools whose behavior needs testing."
+        },
+        {
+          "title": "Codex sandbox security guide",
+          "url": "/signals/codex-sandbox-security-permissions-2026/",
+          "description": "Separate behavior scores from runtime permissions."
+        }
+      ],
+      "reader_checklist": [
+        "Verify plan access and install Evals through an official GitHub-supported path.",
+        "Save a representative input set and explicit pass/fail criteria before tuning the agent.",
+        "Approve each run only after checking tools, permissions and estimated usage.",
+        "Add failure and adversarial-input scenarios, not just happy paths.",
+        "Compare the same cases before and after each intentional change.",
+        "Keep sandbox, code tests and production review separate from eval scores."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF ANALYSIS / EVIDENCE TYPES",
+        "heading": "Copilot Evals vs manual checks and conventional CI",
+        "source": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview",
+        "columns": [
+          "Validation method",
+          "What it measures well",
+          "What it does not establish"
+        ],
+        "rows": [
+          [
+            "Manual demo",
+            "Human can inspect a real-looking example",
+            "Repeatability across changes or edge cases"
+          ],
+          [
+            "Copilot Evals",
+            "Saved skill/agent/MCP scenarios and specific check outcomes",
+            "General reliability or complete runtime safety"
+          ],
+          [
+            "Conventional CI tests",
+            "Deterministic code and integration assertions",
+            "Whether the agent followed nuanced task instructions"
+          ],
+          [
+            "Permission audit",
+            "Allowed filesystem, service and network actions",
+            "Correctness of the agent's answer"
+          ],
+          [
+            "Before/after trial",
+            "Regression under comparable test conditions",
+            "Causation if multiple variables changed together"
+          ],
+          [
+            "Production review",
+            "Approved actions with real context and consequences",
+            "Pre-deployment coverage of every future scenario"
+          ]
+        ],
+        "intro": "Each approach answers a different question. A defensible evaluation plan combines them without presenting any one score as universal model quality.",
+        "note": "The comparison is SXF editorial analysis; no laboratory test or numerical benchmark has been performed for these rows.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "GitHub Copilot Evals FAQs",
+      "faq": [
+        {
+          "question": "What can GitHub Copilot Evals test?",
+          "answer": "GitHub lists Copilot skills, custom agents and MCP tools. Tests are organized around saved scenarios and their check outcomes."
+        },
+        {
+          "question": "Is Copilot Evals generally available?",
+          "answer": "No. The November 17, 2026 release is a public preview for Copilot Individual, Business and Enterprise plans."
+        },
+        {
+          "question": "How do I install Copilot Evals in VS Code?",
+          "answer": "Install the official GitHub Copilot Evals extension from the Visual Studio Marketplace and follow the official getting-started workflow."
+        },
+        {
+          "question": "How is Copilot Evals installed in the Copilot app?",
+          "answer": "GitHub instructs users to open Customize, add the github/evals marketplace and install the Evals plugin."
+        },
+        {
+          "question": "What is Vally?",
+          "answer": "GitHub identifies Vally as the extensible local tool serving as the evaluation engine."
+        },
+        {
+          "question": "Do evaluation runs need approval?",
+          "answer": "GitHub says users approve each run before it begins. The official example also warns about usage and tool-execution effects."
+        },
+        {
+          "question": "Does passing an eval prove that my agent is safe?",
+          "answer": "No. It establishes that chosen checks passed in the evaluated scenario. Runtime permissions, code security, side effects and untested cases require separate controls."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/copilot-evals-lifecycle-original.svg",
+        "alt": "SXF diagram of a Copilot Evals lifecycle: define a test case, approve a run, inspect failures and compare iterations.",
+        "caption": "SXF illustration of the evaluation cycle, with preview and security limitations retained."
+      }
     }
   }
 }
