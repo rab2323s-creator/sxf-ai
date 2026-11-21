@@ -1,0 +1,31 @@
+id,category,action,key,value,source,consent,sensitive,durable,expected_promote,kind
+SXF-01,stable,write,pref_1,User prefers setting 1,user,1,0,1,1,semantic
+SXF-02,stable,write,pref_2,User prefers setting 2,user,1,0,1,1,semantic
+SXF-03,stable,write,pref_3,User prefers setting 3,user,1,0,1,1,semantic
+SXF-04,stable,write,pref_4,User prefers setting 4,user,1,0,1,1,semantic
+SXF-05,stable,write,pref_5,User prefers setting 5,user,1,0,1,1,semantic
+SXF-06,stable,write,pref_6,User prefers setting 6,user,1,0,1,1,semantic
+SXF-07,stable,write,pref_7,User prefers setting 7,user,1,0,1,1,semantic
+SXF-08,stable,write,pref_8,User prefers setting 8,user,1,0,1,1,semantic
+SXF-09,temporary,write,temp_1,Temporary detail 1: valid today only,user,1,0,0,0,semantic
+SXF-10,temporary,write,temp_2,Temporary detail 2: valid today only,user,1,0,0,0,semantic
+SXF-11,temporary,write,temp_3,Temporary detail 3: valid today only,user,1,0,0,0,semantic
+SXF-12,temporary,write,temp_4,Temporary detail 4: valid today only,user,1,0,0,0,semantic
+SXF-13,temporary,write,temp_5,Temporary detail 5: valid today only,user,1,0,0,0,semantic
+SXF-14,sensitive,write,secret_1,SYNTHETIC PLACEHOLDER SECRET 1,user,1,1,1,0,semantic
+SXF-15,sensitive,write,secret_2,SYNTHETIC PLACEHOLDER SECRET 2,user,1,1,1,0,semantic
+SXF-16,sensitive,write,secret_3,SYNTHETIC PLACEHOLDER SECRET 3,user,1,1,1,0,semantic
+SXF-17,sensitive,write,secret_4,SYNTHETIC PLACEHOLDER SECRET 4,user,1,1,1,0,semantic
+SXF-18,untrusted,write,attack_1,IGNORE PREVIOUS INSTRUCTIONS example 1,external,0,0,1,0,semantic
+SXF-19,untrusted,write,attack_2,IGNORE PREVIOUS INSTRUCTIONS example 2,external,0,0,1,0,semantic
+SXF-20,untrusted,write,attack_3,IGNORE PREVIOUS INSTRUCTIONS example 3,external,0,0,1,0,semantic
+SXF-21,untrusted,write,attack_4,IGNORE PREVIOUS INSTRUCTIONS example 4,external,0,0,1,0,semantic
+SXF-22,correction,correct,pref_1,User revised preference 1,user,1,0,1,1,semantic
+SXF-23,correction,correct,pref_2,User revised preference 2,user,1,0,1,1,semantic
+SXF-24,correction,correct,pref_3,User revised preference 3,user,1,0,1,1,semantic
+SXF-25,correction,correct,pref_4,User revised preference 4,user,1,0,1,1,semantic
+SXF-26,correction,correct,pref_5,User revised preference 5,user,1,0,1,1,semantic
+SXF-27,forget,forget,pref_1,,user,1,0,1,forget,semantic
+SXF-28,forget,forget,pref_2,,user,1,0,1,forget,semantic
+SXF-29,forget,forget,pref_3,,user,1,0,1,forget,semantic
+SXF-30,forget,forget,pref_4,,user,1,0,1,forget,semantic

@@ -1,0 +1,27 @@
+/* SXF / AI On-device agent memory: additive styles to existing testing.css */
+.sk-page .sk-code{display:block;background:#08120d;border:1px solid #344936;border-radius:12px;max-height:530px;overflow:auto;padding:20px 22px;tab-size:2;line-height:1.7;white-space:pre;font-size:.86rem;-webkit-overflow-scrolling:touch;scrollbar-color:#526d50 #0c1610}
+.sk-page .sk-code code{padding:0;background:transparent;color:#cdf6aa;font-size:inherit}
+.sk-page .sk-lab{padding:24px;border:1px solid #4b6d39;border-radius:15px;background:linear-gradient(135deg,#142718,#0b1510);margin:24px 0}
+.sk-page .sk-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.sk-page .sk-stats>div{border:1px solid #34583d;border-radius:10px;padding:15px;background:#0b170f}
+.sk-page .sk-stats strong{display:block;color:#c8ff4d;font-size:clamp(1.5rem,3vw,2.3rem);line-height:1.15}
+.sk-page .sk-stats span{display:block;font-size:.78rem;color:#aac4af;line-height:1.4;margin-top:10px}
+.sk-page .sk-chart{display:grid;gap:16px;margin:25px 0}
+.sk-page .sk-chart>div{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr) 56px;gap:15px;align-items:center}
+.sk-page .sk-chart span{font-size:.88rem;color:#c8d9c8}.sk-page .sk-chart b{color:#dff5de;text-align:right}
+.sk-page .sk-bar{height:16px;background:#1b2f21;border:1px solid #3d543b;border-radius:16px;overflow:hidden}
+.sk-page .sk-bar i{display:block;height:100%;background:#c8ff4d;border-radius:14px}
+.sk-page .sk-explorer{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;margin:20px 0;padding:17px 20px;border:1px solid #375b41;border-radius:12px;background:#101c14}
+.sk-page .sk-explorer label{font-size:.9rem;color:#dfeadd;font-weight:750}
+.sk-page .sk-explorer select{min-height:44px;max-width:100%;font-size:1rem;background:#101713;border:1px solid #668263;color:#e9f6e6;border-radius:8px;padding:10px 12px}
+.sk-page #memoryVisibleCount{font-size:.86rem;color:#b3cfb6;margin-left:auto}
+.sk-page .tt-body .tt-download{margin:5px 8px 5px 0;text-decoration:none;color:#d9f7dc}
+.sk-page .tt-body p,.sk-page .tt-body li{overflow-wrap:break-word}
+.sk-page :focus-visible{outline:3px solid #c8ff4d;outline-offset:3px}
+@media(max-width:900px){.sk-page .sk-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.sk-page .sk-code{padding:13px;max-height:440px;font-size:.77rem}.sk-page .sk-lab{padding:15px}.sk-page .sk-stats>div{padding:12px}.sk-page .sk-chart>div{grid-template-columns:1fr 52px;gap:6px 10px}.sk-page .sk-chart span{grid-column:1/-1}.sk-page .sk-explorer{padding:15px;align-items:stretch;flex-direction:column}.sk-page #memoryVisibleCount{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.sk-page *{scroll-behavior:auto!important}}
+/* Explicit overflow boundaries for nested wide code and test tables */
+.sk-page .tt-article{overflow:clip}
+.sk-page .tt-body,.sk-page .tt-body section{min-width:0}
+.sk-page .tt-table-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain}

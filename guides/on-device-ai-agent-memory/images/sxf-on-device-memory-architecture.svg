@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+<title id="title">SXF on-device AI agent memory: promote, store, retrieve, verify</title>
+<desc id="desc">User candidates pass a consent, trust and sensitivity gate before storing into a local SQLite memory database. Retrieval optionally supplies trusted context to Ollama, with feedback for correction and forgetting.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070e0b"/><stop offset="1" stop-color="#112419"/></linearGradient><linearGradient id="box" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b3425"/><stop offset="1" stop-color="#0d1b13"/></linearGradient></defs>
+<rect width="1200" height="675" fill="url(#bg)" rx="22"/>
+<text x="69" y="76" fill="#c8ff4d" font-size="22" font-family="Arial, sans-serif" font-weight="700" letter-spacing="3">SXF / AI · ORIGINAL SYSTEM DIAGRAM</text>
+<text x="69" y="150" fill="#e7f3e7" font-size="45" font-family="Arial, sans-serif" font-weight="750">On-device agent memory</text>
+<text x="69" y="199" fill="#afc6b4" font-size="22" font-family="Arial, sans-serif">Do not promote every observed fact into durable context.</text>
+<rect x="60" y="285" width="248" height="184" rx="18" fill="url(#box)" stroke="#446447" stroke-width="2"/>
+<text x="86" y="339" fill="#c8ff4d" font-size="19" font-family="Arial, sans-serif">01 / CANDIDATE</text>
+<text x="86" y="385" fill="#eef7ec" font-size="28" font-weight="700" font-family="Arial, sans-serif">User fact</text>
+<text x="86" y="419" fill="#adc6b4" font-size="17" font-family="Arial, sans-serif">source + consent</text>
+<rect x="358" y="285" width="248" height="184" rx="18" fill="url(#box)" stroke="#c8ff4d" stroke-width="2"/>
+<text x="384" y="339" fill="#c8ff4d" font-size="19" font-family="Arial, sans-serif">02 / PROMOTION</text>
+<text x="384" y="385" fill="#eef7ec" font-size="28" font-weight="700" font-family="Arial, sans-serif">Policy gate</text>
+<text x="384" y="419" fill="#adc6b4" font-size="17" font-family="Arial, sans-serif">reject risk + expiry</text>
+<rect x="656" y="285" width="248" height="184" rx="18" fill="url(#box)" stroke="#446447" stroke-width="2"/>
+<text x="682" y="339" fill="#c8ff4d" font-size="19" font-family="Arial, sans-serif">03 / STORAGE</text>
+<text x="682" y="385" fill="#eef7ec" font-size="28" font-weight="700" font-family="Arial, sans-serif">SQLite + FTS5</text>
+<text x="682" y="419" fill="#adc6b4" font-size="17" font-family="Arial, sans-serif">update + delete</text>
+<rect x="954" y="285" width="188" height="184" rx="18" fill="url(#box)" stroke="#446447" stroke-width="2"/>
+<text x="977" y="339" fill="#c8ff4d" font-size="19" font-family="Arial, sans-serif">04 / OPTIONAL</text>
+<text x="977" y="385" fill="#eef7ec" font-size="26" font-weight="700" font-family="Arial, sans-serif">Ollama</text>
+<text x="977" y="419" fill="#adc6b4" font-size="17" font-family="Arial, sans-serif">localhost chat</text>
+<path d="M312 376H351M343 368L351 376L343 384M610 376H649M641 368L649 376L641 384M908 376H947M939 368L947 376L939 384" fill="none" stroke="#c8ff4d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="60" y="518" width="1082" height="92" fill="#17271c" rx="14" stroke="#35553d"/>
+<text x="88" y="556" fill="#c8ff4d" font-size="19" font-family="Arial, sans-serif" font-weight="700">SXF POLICY AUDIT</text>
+<text x="88" y="586" fill="#cce3d0" font-size="18" font-family="Arial, sans-serif">30 synthetic events · 13 eligible writes · 4 forget events · no model-run claims</text>
+</svg>

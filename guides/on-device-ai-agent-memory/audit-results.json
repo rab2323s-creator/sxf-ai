@@ -1,0 +1,34 @@
+{
+  "method": "deterministic Python SQLite fixture; no LLM execution",
+  "cases": 30,
+  "eligible_writes": 13,
+  "negative_write_cases": 13,
+  "correct_events": 5,
+  "forget_events": 4,
+  "append_only": {
+    "rows_written": 26,
+    "write_precision": 0.5,
+    "unwanted_writes": 13,
+    "unresolved_corrections": 5,
+    "forget_requests_honored": 0
+  },
+  "sxf_gate": {
+    "rows_promoted": 13,
+    "write_precision": 1.0,
+    "unwanted_writes": 0,
+    "unresolved_corrections": 0,
+    "forget_requests_honored": 4,
+    "active_keys_after_sequence": 4,
+    "active_keys": [
+      "pref_5",
+      "pref_6",
+      "pref_7",
+      "pref_8"
+    ]
+  },
+  "caveats": [
+    "synthetic, pre-labeled cases",
+    "rules are given ground-truth fields",
+    "not semantic extraction, model accuracy, privacy proof, or performance benchmark"
+  ]
+}
