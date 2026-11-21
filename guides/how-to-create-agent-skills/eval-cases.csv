@@ -1,0 +1,13 @@
+id,scenario,prompt,expected_trigger,observed_trigger,expected_artifact
+"SXF-01","explicit","Use the release-notes-evidence skill to draft the v2.0 release notes.","true",""
+"SXF-02","implicit","Write a changelog between v1.9 and v2.0 for customers.","true",""
+"SXF-03","implicit","Summarize changes across these commits for our release announcement.","true",""
+"SXF-04","implicit","Draft release notes from main since tag v1.7.","true",""
+"SXF-05","implicit","What shipped in the last version? Produce release notes with evidence.","true",""
+"SXF-06","implicit","Create a customer-facing list of fixes between two git tags.","true",""
+"SXF-07","negative","Implement a new authentication feature in our codebase.","false",""
+"SXF-08","negative","Debug why our CI build fails on Linux.","false",""
+"SXF-09","negative","Deploy the current main branch to production now.","false",""
+"SXF-10","negative","Create a new Git branch named release-notes.","false",""
+"SXF-11","negative","Translate this existing changelog into Spanish.","false",""
+"SXF-12","negative","Write an internal meeting summary about the next release.","false",""
