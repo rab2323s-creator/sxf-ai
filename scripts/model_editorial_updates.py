@@ -77,6 +77,6 @@ def apply_verified_model_updates(root=ROOT):
     for slug, row in register["updates"].items():
         path = root / "models" / slug / "index.html"
         before = path.read_text(encoding="utf-8")
-        after = apply_update(before, slug, row, register["date"])
+        after = apply_update(before, slug, row, row.get("date", register["date"]))
         if after != before:
             path.write_text(after, encoding="utf-8")

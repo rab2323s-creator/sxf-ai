@@ -156,7 +156,7 @@ def main():
         check_rate(generator.active_standard_price(MODEL_ID, date), expected, "official Gemini " + date)
     check_fixture()
     mistral = next(m for m in CATALOG["models"] if m["model_id"] == "mistral-large-4")
-    for date, inp, out in [("2026-10-19", 0.68, 2.09), ("2026-10-20", 1.36, 4.18)]:
+    for date, inp, out in [("2026-10-19", 0.68, 2.09), ("2026-10-20", 1.36, 4.18), ("2026-11-04", 1.36, 4.18), ("2026-11-05", 0.70, 2.10), ("2026-11-24", 0.70, 2.10)]:
         rates = generator.catalog_period_for_date(mistral, date)
         check(rates["input"] == inp and rates["output"] == out, "Mistral transition drift")
     check_actual_views()

@@ -2250,9 +2250,9 @@
       }
     },
     "mistral-large-4": {
-      "last_event_verified_at": "2026-10-07",
-      "last_event_id": "evt_d7e9b3f11e37e47f5619",
-      "snapshot_hash": "8b6d827d0ff4eeb2ed645396cd9513ffc1a0f0550b9ded708e05821f3f1dbd62",
+      "last_event_verified_at": "2026-11-24",
+      "last_event_id": "evt_a66cb5b02927950478a7",
+      "snapshot_hash": "0bcb45ad19508713f7ba90ce56cb284a405890b325e6c3ee9621fda6338b51ae",
       "snapshot": {
         "provider": "Mistral AI",
         "family": "Mistral Large",
@@ -2260,7 +2260,15 @@
         "context_window": 1000000,
         "max_output": null,
         "knowledge_cutoff": null,
-        "reasoning": null,
+        "reasoning": {
+          "type": "reasoning_effort",
+          "levels": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "high"
+        },
         "modalities": {
           "input": [
             "text",
@@ -2281,10 +2289,17 @@
             },
             {
               "start": "2026-10-20",
-              "end": null,
+              "end": "2026-11-04",
               "input": 1.36,
               "cached_input": 0.14,
               "output": 4.18
+            },
+            {
+              "start": "2026-11-05",
+              "end": null,
+              "input": 0.7,
+              "cached_input": 0.07,
+              "output": 2.1
             }
           ]
         }
@@ -9467,7 +9482,81 @@
       ],
       "event_id": "evt_5cb61a0bb057b9410366",
       "event_hash": "5cb61a0bb057b9410366f6a55ebb9d845de829bca58f4dcbacf395c52d27d73a"
+    },
+    {
+      "sequence": 105,
+      "type": "model_changed",
+      "model_id": "mistral-large-4",
+      "verified_at": "2026-11-24",
+      "previous_event_hash": "5cb61a0bb057b9410366f6a55ebb9d845de829bca58f4dcbacf395c52d27d73a",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-19",
+                "input": 0.68,
+                "cached_input": 0.07,
+                "output": 2.09
+              },
+              {
+                "start": "2026-10-20",
+                "end": null,
+                "input": 1.36,
+                "cached_input": 0.14,
+                "output": 4.18
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-19",
+                "input": 0.68,
+                "cached_input": 0.07,
+                "output": 2.09
+              },
+              {
+                "start": "2026-10-20",
+                "end": "2026-11-04",
+                "input": 1.36,
+                "cached_input": 0.14,
+                "output": 4.18
+              },
+              {
+                "start": "2026-11-05",
+                "end": null,
+                "input": 0.7,
+                "cached_input": 0.07,
+                "output": 2.1
+              }
+            ]
+          },
+          "source_url": "https://docs.mistral.ai/inference/pricing"
+        },
+        {
+          "field": "reasoning",
+          "change_type": "reasoning_change",
+          "before": null,
+          "after": {
+            "type": "reasoning_effort",
+            "levels": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "default": "high"
+          },
+          "source_url": "https://docs.mistral.ai/resources/changelogs"
+        }
+      ],
+      "event_id": "evt_a66cb5b02927950478a7",
+      "event_hash": "a66cb5b02927950478a7de9b44309f3dfba1bd7e23366a9c0a1981718c075f25"
     }
   ],
-  "chain_head": "5cb61a0bb057b9410366f6a55ebb9d845de829bca58f4dcbacf395c52d27d73a"
+  "chain_head": "a66cb5b02927950478a7de9b44309f3dfba1bd7e23366a9c0a1981718c075f25"
 }

@@ -250,6 +250,390 @@
           "Lifecycle rechecked 2026-11-24: Mistral's model directory now marks this v26.02 hosted model deprecated; it was optimized for live transcription only."
         ]
       ]
+    },
+    "claude-fable-5-1": {
+      "title": "Fable 5.2 successor and migration requirements",
+      "text": "Anthropic released Fable 5.2 on November 9, 2026. Both generations retain 1M context and 128K maximum output with adaptive thinking. Fable 5.2 Standard rates are $8 input and $40 output per million tokens versus Fable 5.1's $10 and $50; these are successor rates, not a change to 5.1 billing. Before migrating, review enforced prefix checks for replayed thinking blocks, computer_toolset_20260801, advisor compatibility and the 30-day retention requirement. Fable 5.2 Fast mode is a separate $16/$80 tier. Fable 5.1 remains active; the September 1, 2027 retirement floor is not a shutdown announcement.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/release-notes/overview",
+          "Anthropic release notes — November 9, 2026"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+          "Claude model lifecycle"
+        ]
+      ],
+      "replacements": [
+        [
+          "Active / latest Fable",
+          "Active / previous Fable generation"
+        ],
+        [
+          "<span>STATUS</span><strong>Active / latest</strong>",
+          "<span>STATUS</span><strong>Active / previous generation</strong>"
+        ]
+      ],
+      "date": "2026-11-24"
+    },
+    "claude-mythos-5-1": {
+      "title": "Mythos 5.2 successor for verified organizations",
+      "text": "The November 9 release introduced Claude Mythos 5.2 for organizations approved through Anthropic verification programs. It offers 1M context, 128K maximum output and adaptive thinking; its published $8/$40 per million input/output tokens are distinct from Mythos 5.1's $10/$50 rates. Migration requires strict preserved-thinking prefix checks, newer computer-use toolset compatibility and account-specific access. Both generations require 30-day retention unless Anthropic expressly authorizes an exception. The release does not make Mythos publicly accessible.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/release-notes/overview",
+          "Anthropic release notes — November 9, 2026"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+          "Claude model lifecycle"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "gpt-live-1": {
+      "title": "GPT-Live-1.1, standby, SIP and native decisions",
+      "text": "OpenAI introduced GPT-Live-1.1 on November 19, 2026 with improved multilingual pronunciation, accent consistency and transcription. Both Live-1 and Live-1.1 WebRTC sessions can use standby to pause inference during inactivity. Outbound SIP calling became available to all organizations November 2; prompt-to-voice launched October 16 (voice creation is free, speech uses regular Live billing), along with additional localized voices. Native GPT-6 Luna Decisions delegation was added October 15. Retest voice interruptions and delegation when changing the model ID; backend model and tool charges remain separate from session billing.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/changelog",
+          "OpenAI API changelog"
+        ],
+        [
+          "https://developers.openai.com/api/docs/models/gpt-live-1",
+          "GPT-Live-1 model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/models/gpt-live-1.1",
+          "GPT-Live-1.1 model card"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "gpt-6-luna": {
+      "title": "Decisions API GA and background processing",
+      "text": "OpenAI made the Decisions API generally available on October 22 using gpt-6-luna. POST /v1/decisions accepts up to 400 typed questions, structured input_json, question-level images and shared-prefix prompt caching. Its input rate is $0.10 per million uncached tokens; output tokens are not billed on this endpoint. Cache charges and applicable regional or long-context premiums remain separate. This is not the ordinary Responses API output price. On November 17, OpenAI also introduced optional two-hour and eight-hour background completion windows in public beta, at 30% and 40% lower token rates than Standard.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/changelog",
+          "OpenAI API changelog — October 22 and November 17"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/decisions",
+          "Decisions API and pricing"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "gpt-6-1-sol": {
+      "title": "Ultrafast service tier and Healthcare configuration",
+      "text": "OpenAI enabled service_tier=ultrafast for GPT-6.1 Sol in the Responses API on October 8, with separate rate limits and support for global, US and EU processing. Persistent WebSockets are recommended for tool-heavy applications. On November 24 OpenAI introduced gpt-6.1-sol-healthcare, a distinct Responses API configuration using a medical-source search index when web search is used. GPT-6.2 Sol was released November 17 and is now the newer general-purpose Sol option. These service tiers and model configurations should not be conflated with the original GPT-6.1 Sol Standard rates or benchmark results.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/changelog",
+          "OpenAI API changelog — October 8 and November 24"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/ultrafast-mode",
+          "Ultrafast mode integration"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "gpt-image-2-5-sunburst": {
+      "title": "Markup-guided editing and GPT-Image-2.6",
+      "text": "OpenAI added markup-guided editing for supported GPT-Image-2.5 and 2.6 models in November. Use POST /v1/images/edits with the original image, a transparent PNG markup overlay matching the first image's dimensions, and a prompt describing the intended change. Regional edits through the Responses API instead use a mask. The new GPT-Image-2.6 Sunburst adds complexity controls, SVG and animated GIF generation; those 2.6-specific capabilities must not be assumed for 2.5. The current image-generation guide recommends 2.6 for new integrations. Preserve 2.5-specific prices and evaluate actual editing fidelity before switching.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/changelog",
+          "OpenAI API changelog — image generation update"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/image-generation",
+          "Image generation and markup editing guide"
+        ],
+        [
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst",
+          "Successor model card"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "gpt-image-2-5-flare": {
+      "title": "Markup-guided edits and the next Flare generation",
+      "text": "The updated Image API supports markup-guided editing on supported GPT-Image-2.5 and 2.6 models. Submit the original image and a matching transparent PNG annotation layer to POST /v1/images/edits, with instructions in the prompt. The Responses API uses masks for regional editing. GPT-Image-2.6 Flare is the newer model and introduces complexity settings, SVG and animated GIF generation; these are not automatically available on 2.5 Flare. OpenAI recommends the 2.6 family for new integrations. Benchmark generation latency, editing quality and actual billed token usage rather than assuming equal cost across generations.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/changelog",
+          "OpenAI API changelog — image generation update"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/image-generation",
+          "Image generation and markup editing guide"
+        ],
+        [
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare",
+          "Successor model card"
+        ]
+      ],
+      "replacements": [],
+      "date": "2026-11-24"
+    },
+    "mistral-medium-3-5": {
+      "title": "Hosted API deprecation and migration planning",
+      "text": "Mistral's current model directory identifies Medium 3.5 as deprecated and recommends Large 4 for new API integrations. The directory now displays retirement as 05/03/2027; confirm the date format and contractual access directly with Mistral before scheduling a cutoff. Earlier October deprecation dates are no longer asserted here because the current source record differs. The open-weight release and its license are separate from hosted API retirement. Test migration quality, token use, response schemas and reasoning parameters against the current Large 4 card.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models",
+          "Mistral model directory — deprecation and retirement"
+        ],
+        [
+          "https://docs.mistral.ai/inference/model-lifecycle",
+          "Model lifecycle policy"
+        ]
+      ],
+      "replacements": [
+        [
+          "31 October 2026",
+          "API lifecycle notice"
+        ],
+        [
+          "31 Oct 2026",
+          "provider notice"
+        ],
+        [
+          "October 31, 2026",
+          "the provider's published lifecycle notice"
+        ],
+        [
+          "API model deprecated · API lifecycle notice",
+          "API model deprecated · replacement Large 4"
+        ],
+        [
+          "deprecated as of <strong>API lifecycle notice</strong>",
+          "<strong>deprecated</strong>"
+        ],
+        [
+          "Deprecated from provider notice",
+          "Deprecated; retirement schedule published"
+        ],
+        [
+          "with a deprecation date of the provider's published lifecycle notice",
+          "as deprecated"
+        ],
+        [
+          "Deprecated designation, API lifecycle notice deprecation and replacement guidance",
+          "Deprecated designation and replacement guidance"
+        ],
+        [
+          "Updated 9 November 2026",
+          "Updated 24 November 2026"
+        ],
+        [
+          "evidence checked 9 November 2026",
+          "evidence reviewed 24 November 2026"
+        ],
+        [
+          "Editorial verification: 9 November 2026",
+          "Editorial verification: 24 November 2026"
+        ]
+      ],
+      "date": "2026-11-24"
+    },
+    "mistral-large-2512": {
+      "title": "Mistral Large 3 API deprecation and Apache 2.0 weights",
+      "text": "The current Mistral Large 3 card marks the hosted model deprecated and recommends Large 4 for new integrations. The original model remains a 675B-total, 41B-active multimodal MoE with 256K context and Apache 2.0 weights. The official card distinguishes hosted lifecycle from downloadable weights and lists an approximate 1,800–450 GB GPU RAM range from BF16 to FP4; this is a model-card estimate, not total memory for every serving configuration. The earlier $0.50/$1.50 token prices describe the historical hosted reference, not guaranteed future API availability.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/mistral-large-3",
+          "Current Mistral Large 3 model card"
+        ],
+        [
+          "https://docs.mistral.ai/models",
+          "Mistral model directory"
+        ],
+        [
+          "https://docs.mistral.ai/inference/model-lifecycle",
+          "API lifecycle policy"
+        ]
+      ],
+      "replacements": [
+        [
+          "State-of-the-art open-weight general-purpose multimodal Mixture-of-Experts model.",
+          "Open-weight multimodal Mixture-of-Experts model; hosted API deprecated, Large 4 recommended for new integrations."
+        ]
+      ],
+      "date": "2026-11-24"
+    },
+    "mistral-large-4": {
+      "title": "General availability, open weights and revised Standard rates",
+      "text": "Mistral published Large 4 weights on October 29, 2026. The November 5 model card lists GA and $0.70 input, $0.07 cached input, $2.10 output per million tokens. The older October rates remain historical; the GA card provides the dated evidence boundary, not an independently confirmed billing-transition date. The model now always reasons: low, medium and high (default), with none removed. The official 1T-A52B checkpoint uses Mistral Ecosystem Open Weight License, not Apache 2.0. Mistral reports 41% on Terminal-Bench 4.0 versus 28.3% at preview, and 48% on the Artificial Analysis Coding Agent Index; these are vendor-reported or attributed results, not new SXF measurements.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/mistral-large-latest",
+          "November 5 GA model card"
+        ],
+        [
+          "https://mistral.ai/news/mistral-large-4-oss/",
+          "October 29 open-weight release and reasoning controls"
+        ],
+        [
+          "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+          "Official checkpoint and license"
+        ],
+        [
+          "https://legal.mistral.ai/ai-governance/models/mistral-large-4/",
+          "Mistral governance register"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Official Standard pricing"
+        ],
+        [
+          "https://docs.mistral.ai/resources/changelogs",
+          "October 29 reasoning API changes"
+        ]
+      ],
+      "replacements": [
+        [
+          "Public-preview multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture.",
+          "Generally available open-weight multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture."
+        ],
+        [
+          "Released October 6, 2026 in Public Preview.",
+          "Public preview began October 6, 2026; the November 5 model card lists GA."
+        ],
+        [
+          "Open weights were announced but downloadable weight access is not asserted until directly verified.",
+          "Weights published October 29, 2026 under Mistral Ecosystem Open Weight License."
+        ],
+        [
+          "For buyers, the immediate decision is its <strong>limited launch discount</strong>, API quality on your own documents and agent workflows, and the risk of deploying a preview model that may change before General Availability. Open-weight availability has been <em>announced</em>, but downloadable weights should not be assumed to exist until Mistral actually publishes them.",
+          "For buyers, evaluate the current GA API and the October 29 open-weight release separately. The weights are available under Mistral Ecosystem Open Weight License; self-hosting requires suitable infrastructure and review of the license."
+        ],
+        [
+          "<span>API STATUS</span><strong>Public Preview</strong>",
+          "<span>API STATUS</span><strong>Generally available</strong>"
+        ],
+        [
+          "Mistral's reasoning guide documents <code>reasoning_effort</code> with <code>none</code> or <code>high</code> for Mistral Large 4.",
+          "Mistral documents <code>reasoning_effort</code> values <code>low</code>, <code>medium</code>, and <code>high</code> (default). The former <code>none</code> setting is no longer accepted."
+        ],
+        [
+          "Do not infer a maximum generated-output length, training-data cutoff, guaranteed requests per second, local GPU requirements, download URL or open-weight license from the 1M context figure or the preview announcement. These details depend on documented releases and serving configurations. As of this review, Mistral announced an open-weight release for later in October 2026; that is a <strong>forward-looking release plan, not proof that weights are already downloadable</strong>.",
+          "The 1M context figure does not establish a separate maximum output, training cutoff or universal GPU requirement. The released <a href=\"https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B\">official checkpoint</a> documents deployment and license terms; evaluate infrastructure and quantization separately."
+        ],
+        [
+          "The official reasoning documentation lists <code>reasoning_effort=\"high\"</code> for Mistral Large 4, with a <code>none</code> mode for minimal surfaced reasoning.",
+          "The current model always reasons. Use <code>reasoning_effort=\"low\"</code> for the least reasoning, <code>medium</code> for balanced tasks or <code>high</code> (default) for demanding tasks."
+        ],
+        [
+          "And because ML4 is still a preview, do not build irreversible compliance or safety-critical workflows around unverified performance claims.",
+          "General availability is not a performance or safety guarantee; validate production workflows."
+        ],
+        [
+          "Public Preview; multimodal MoE, tool use and reasoning",
+          "GA; multimodal MoE, tool use and reasoning"
+        ],
+        [
+          "Preview stability, promo window, agent quality",
+          "Serving stability, current rates, agent quality"
+        ],
+        [
+          "Medium 3.5 may be preferable where mature lifecycle support and shorter-context needs dominate.",
+          "Medium 3.5 is deprecated for hosted API use; assess a controlled migration."
+        ],
+        [
+          "Mistral Large 4 is Mistral AI's October 2026 multimodal Mixture-of-Experts model in Public Preview.",
+          "Mistral Large 4 is Mistral AI's October 2026 open-weight multimodal Mixture-of-Experts model, now generally available."
+        ],
+        [
+          "Launch-period Standard prices are $0.68 input, $0.07 cached input and $2.09 output per million tokens through October 19, 2026 in SXF's verified rate schedule. From October 20 the listed regular rates are $1.36, $0.14 and $4.18 respectively. Confirm current pricing with Mistral before purchase.",
+          "The November 5 GA model card lists $0.70 input, $0.07 cached input and $2.10 output per million tokens. The October launch and older regular rates are historical snapshots; the exact billing transition date is not separately documented. Confirm current pricing with Mistral."
+        ],
+        [
+          "The public-preview API is listed as mistral-large-4 in Mistral's launch changelog and model card. Reasoning documentation also mentions a versioned mistral-large-4-0 identifier.",
+          "The GA model is listed as mistral-large-4; the versioned model card is mistral-large-4-0."
+        ],
+        [
+          "Mistral announced open-weight plans for later in October 2026. At this review, the announcement is not proof of a downloadable release, and no license or hardware requirement should be assumed without an official weights publication.",
+          "Mistral released the weights on October 29, 2026 under Mistral Ecosystem Open Weight License. Download mistralai/Mistral-Large-4-1T-A52B from the official repository and review its terms and infrastructure requirements."
+        ],
+        [
+          "Mistral Large 4 is a newer Public Preview model with a 1M context window. Mistral Medium 3.5 is a generally available coding and agent model with a 256K window.",
+          "Mistral Large 4 is generally available with a 1M context window. Mistral Medium 3.5 has 256K context and is deprecated for hosted API use."
+        ],
+        [
+          "It is accessible as a public preview, but Mistral's lifecycle policy allows preview models to receive updates and does not guarantee a transition to general availability.",
+          "The November 5 model card lists GA, but production readiness still depends on the application and serving conditions."
+        ],
+        [
+          "50% launch offer, API Python examples",
+          "GA rates, open weights, API Python examples"
+        ],
+        [
+          "Editorial review: <strong>October 14, 2026</strong>",
+          "Editorial review: <strong>November 24, 2026</strong>"
+        ],
+        [
+          "Dates are not automatically proof of new model weights or new GA status.",
+          "The October 29 weight release and November 5 GA card are distinct source-backed milestones."
+        ],
+        [
+          "Public Preview lifecycle and availability caveats",
+          "Model lifecycle and availability caveats"
+        ],
+        [
+          "Mistral Large 4 pricing: launch discount vs regular rates.",
+          "Mistral Large 4 pricing: historical launch rates vs current GA rates."
+        ],
+        [
+          "Mistral announced a 50% discount for the first two weeks after the October 6 launch. Its official model card displays promotional rates of <strong>$0.68 per million input tokens</strong>, <strong>$0.07 per million cached input tokens</strong>, and <strong>$2.09 per million output tokens</strong>. The corresponding regular rates are <strong>$1.36 / $0.14 / $4.18</strong>. SXF's catalog schedules the launch rate through <strong>October 19, 2026</strong> and the regular rate from <strong>October 20, 2026</strong>, subject to Mistral's live pricing.",
+          "The October launch offer and subsequent regular rates below are historical records. The November 5 GA card now lists <strong>$0.70 / $0.07 / $2.10</strong> per million input / cached input / output tokens. SXF records the newer rate using the dated GA card as its evidence boundary; the exact provider billing-transition date is not separately documented."
+        ],
+        [
+          "<span>ILLUSTRATIVE REGULAR REQUEST</span><strong>$0.2876</strong>",
+          "<span>ILLUSTRATIVE HISTORICAL REGULAR REQUEST</span><strong>$0.2876</strong>"
+        ],
+        [
+          "or <strong>$0.2876 at standard regular prices</strong>.",
+          "or <strong>$0.2876 at the older regular prices</strong>, compared with <strong>$0.147 at the current GA card rates</strong>."
+        ],
+        [
+          "<td>$0.68</td><td>$1.36</td><td><strong>$1.36</strong></td>",
+          "<td>$0.68</td><td>$1.36</td><td><strong>$0.70</strong></td>"
+        ],
+        [
+          "<td>$0.07</td><td>$0.14</td><td><strong>$0.14</strong></td>",
+          "<td>$0.07</td><td>$0.14</td><td><strong>$0.07</strong></td>"
+        ],
+        [
+          "<td>$2.09</td><td>$4.18</td><td><strong>$4.18</strong></td>",
+          "<td>$2.09</td><td>$4.18</td><td><strong>$2.10</strong></td>"
+        ],
+        [
+          "Launch discount has ended; regular rates apply according to the tracked schedule.",
+          "Current GA model-card rates apply in the SXF estimate."
+        ],
+        [
+          "<span>STANDARD INPUT</span><strong>$1.36</strong>",
+          "<span>STANDARD INPUT</span><strong>$0.7</strong>"
+        ],
+        [
+          "<span>STANDARD OUTPUT</span><strong>$4.18</strong>",
+          "<span>STANDARD OUTPUT</span><strong>$2.1</strong>"
+        ],
+        [
+          "$1.36 input · $0.14 cached · $4.18 output per 1 million tokens.",
+          "$0.7 input · $0.07 cached · $2.1 output per 1 million tokens."
+        ]
+      ],
+      "date": "2026-11-24"
     }
   }
 }

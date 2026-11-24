@@ -35,7 +35,7 @@ def test_dossier() -> None:
         'data-model-history', 'data-what-changed',
         '/assets/mistral-medium35-guide.css',
         '/assets/mistral-medium35-cost.js',
-        "31 October 2026", "Mistral Large 4", "Modified MIT"
+        "retirement schedule published", "Mistral Large 4", "Modified MIT"
     ):
         assert required in source, required
 
@@ -46,7 +46,7 @@ def test_dossier() -> None:
     article = next(node for node in graph if node["@type"] == "TechArticle")
     faq = next(node for node in graph if node["@type"] == "FAQPage")
     assert article["mainEntityOfPage"]["@id"] == URL
-    assert article["dateModified"] == "2026-11-09"
+    assert article["dateModified"] == "2026-11-24"
     assert len(article["citation"]) >= 6
     assert len(faq["mainEntity"]) == 8
     assert all(item["acceptedAnswer"]["text"] for item in faq["mainEntity"])

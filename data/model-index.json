@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
-  "source_verified": "2026-11-10",
+  "source_verified": "2026-11-24",
   "model_count": 100,
   "provider_count": 21,
   "models": [
@@ -702,7 +702,7 @@
         "self_hostable": true
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
@@ -710,7 +710,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-24",
       "standard_rate": {
         "input": 1.5,
         "cached_input": 0.15,
@@ -1092,7 +1092,7 @@
         "self_hostable": true
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
@@ -1100,7 +1100,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-24",
       "standard_rate": {
         "input": 0.5,
         "cached_input": 0.05,
@@ -1842,6 +1842,7 @@
       "max_output": null,
       "capabilities": [
         "general",
+        "reasoning",
         "vision",
         "long-context",
         "agents",
@@ -1849,11 +1850,11 @@
       ],
       "access": {
         "official_api": true,
-        "open_weight": false,
-        "self_hostable": false
+        "open_weight": true,
+        "self_hostable": true
       },
       "lifecycle": {
-        "status": "preview"
+        "status": "current"
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
@@ -1861,11 +1862,11 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-07",
+      "verified_at": "2026-11-24",
       "standard_rate": {
-        "input": 1.36,
-        "cached_input": 0.14,
-        "output": 4.18
+        "input": 0.7,
+        "cached_input": 0.07,
+        "output": 2.1
       }
     },
     {

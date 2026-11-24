@@ -131,12 +131,13 @@
         "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/studio/conversations/reasoning",
-        "https://docs.mistral.ai/resources/changelogs"
+        "https://docs.mistral.ai/resources/changelogs",
+        "https://docs.mistral.ai/models"
       ],
       "notes": [
         "Mistral publishes the context window as 256k tokens; SXF stores this as 256,000 for normalized numeric filtering.",
         "No separate max-output token cap or knowledge cutoff is published in the cited model card, so those fields remain unknown.",
-        "Mistral Medium 3.5 is GA and released as open weights under a Modified MIT license."
+        "The open-weight release uses a Modified MIT license; the hosted API is listed as deprecated, with Large 4 recommended for new integrations."
       ],
       "pricing": {
         "standard": [
@@ -150,7 +151,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
@@ -161,7 +162,7 @@
           "modalities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
           "pricing": "https://docs.mistral.ai/inference/pricing",
           "access": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
-          "lifecycle": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04",
+          "lifecycle": "https://docs.mistral.ai/models",
           "capabilities": "https://docs.mistral.ai/models/mistral-medium-3-5-26-04"
         }
       },
@@ -173,7 +174,7 @@
         "self_hostable": true
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "capabilities": [
         "general",
@@ -542,11 +543,12 @@
           "text"
         ]
       },
-      "positioning": "State-of-the-art open-weight general-purpose multimodal Mixture-of-Experts model.",
+      "positioning": "Open-weight multimodal Mixture-of-Experts model; hosted API deprecated, Large 4 recommended for new integrations.",
       "sxf_url": "/models/mistral-large-2512/",
       "official_sources": [
         "https://docs.mistral.ai/models/mistral-large-3-25-12",
-        "https://docs.mistral.ai/inference/pricing"
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models"
       ],
       "pricing": {
         "standard": [
@@ -560,7 +562,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/mistral-large-3-25-12",
@@ -571,7 +573,7 @@
           "modalities": "https://docs.mistral.ai/models/mistral-large-3-25-12",
           "pricing": "https://docs.mistral.ai/inference/pricing",
           "access": "https://docs.mistral.ai/models/mistral-large-3-25-12",
-          "lifecycle": "https://docs.mistral.ai/models/mistral-large-3-25-12",
+          "lifecycle": "https://docs.mistral.ai/models",
           "capabilities": "https://docs.mistral.ai/models/mistral-large-3-25-12"
         }
       },
@@ -584,7 +586,7 @@
         "self_hostable": true
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "capabilities": [
         "general",
@@ -601,7 +603,10 @@
           "output"
         ],
         "display_unit": "per 1 million tokens"
-      }
+      },
+      "notes": [
+        "Hosted API listed under deprecated and retired models; open weights remain a separate deployment option. Listed rates are historical reference values; verify continued API access and billing."
+      ]
     },
     {
       "family": "Ministral 3",
@@ -1000,7 +1005,15 @@
       "context_window": 1000000,
       "max_output": null,
       "knowledge_cutoff": null,
-      "reasoning": null,
+      "reasoning": {
+        "type": "reasoning_effort",
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high"
+      },
       "modalities": {
         "input": [
           "text",
@@ -1010,18 +1023,21 @@
           "text"
         ]
       },
-      "positioning": "Public-preview multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture.",
+      "positioning": "Generally available open-weight multimodal Mistral flagship with a 1M context window and Mixture-of-Experts architecture.",
       "sxf_url": "/models/mistral-large-4/",
       "page_template": "catalog-reference",
       "official_sources": [
         "https://docs.mistral.ai/models/mistral-large-4",
         "https://docs.mistral.ai/resources/changelogs",
-        "https://docs.mistral.ai/inference/pricing"
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/mistral-large-latest",
+        "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
       ],
       "notes": [
-        "Released October 6, 2026 in Public Preview.",
+        "Public preview began October 6, 2026; the November 5 model card lists GA.",
         "Launch pricing is 50% off for two weeks; the catalog stores the promotional and post-launch Standard periods separately.",
-        "Open weights were announced but downloadable weight access is not asserted until directly verified."
+        "Weights published October 29, 2026 under Mistral Ecosystem Open Weight License.",
+        "The November 5 GA card lists $0.70 input, $0.07 cached input and $2.10 output per million tokens. November 5 is the dated evidence boundary used in the SXF schedule, not a separately confirmed billing-transition date."
       ],
       "pricing": {
         "standard": [
@@ -1034,41 +1050,49 @@
           },
           {
             "start": "2026-10-20",
-            "end": null,
+            "end": "2026-11-04",
             "input": 1.36,
             "cached_input": 0.14,
             "output": 4.18
+          },
+          {
+            "start": "2026-11-05",
+            "end": null,
+            "input": 0.7,
+            "cached_input": 0.07,
+            "output": 2.1
           }
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
-          "model_identity": "https://docs.mistral.ai/models/mistral-large-4",
-          "context_window": "https://docs.mistral.ai/models/mistral-large-4",
-          "max_output": "https://docs.mistral.ai/models/mistral-large-4",
-          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-4",
-          "reasoning": "https://docs.mistral.ai/models/mistral-large-4",
-          "modalities": "https://docs.mistral.ai/models/mistral-large-4",
-          "pricing": "https://docs.mistral.ai/models/mistral-large-4",
-          "access": "https://docs.mistral.ai/models/mistral-large-4",
-          "lifecycle": "https://docs.mistral.ai/resources/changelogs",
-          "capabilities": "https://docs.mistral.ai/models/mistral-large-4"
+          "model_identity": "https://docs.mistral.ai/models/mistral-large-latest",
+          "context_window": "https://docs.mistral.ai/models/mistral-large-latest",
+          "max_output": "https://docs.mistral.ai/models/mistral-large-latest",
+          "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-large-latest",
+          "reasoning": "https://docs.mistral.ai/resources/changelogs",
+          "modalities": "https://docs.mistral.ai/models/mistral-large-latest",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
+          "access": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+          "lifecycle": "https://docs.mistral.ai/models/mistral-large-latest",
+          "capabilities": "https://docs.mistral.ai/models/mistral-large-latest"
         }
       },
       "pricing_status": "official-paid",
       "calculator_eligible": true,
       "access": {
         "official_api": true,
-        "open_weight": false,
-        "self_hostable": false
+        "open_weight": true,
+        "self_hostable": true
       },
       "lifecycle": {
-        "status": "preview"
+        "status": "current"
       },
       "capabilities": [
         "general",
+        "reasoning",
         "vision",
         "long-context",
         "agents",

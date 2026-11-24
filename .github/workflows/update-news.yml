@@ -33,7 +33,7 @@ jobs:
         run: python tests/test_content_ownership.py
       - name: Test model SEO protection and simulated price/spec updates
         run: python tests/test_model_editorial_guard.py
-      - name: Verify ten source-backed model editorial updates
+      - name: Verify source-backed model editorial updates
         run: python tests/test_verified_model_updates.py
       - name: Offline snapshot rendering unit tests
         run: python tests/test_snapshot_rendering.py
