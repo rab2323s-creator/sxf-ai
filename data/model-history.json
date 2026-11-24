@@ -1680,9 +1680,9 @@
       }
     },
     "gemini-3.8-flash-lite-tts": {
-      "last_event_verified_at": "2026-10-06",
-      "last_event_id": "evt_d932457153cfa45b3c80",
-      "snapshot_hash": "599a18588c76266ffcc9fdaea8ac73104d46f2080995a78d06b75cfe248c8be3",
+      "last_event_verified_at": "2026-11-24",
+      "last_event_id": "evt_9c0f7100b92d51bc4e29",
+      "snapshot_hash": "c5cf6d6df49f4c1a12cc5b639632f0cb55032b21b59df3cd4fca568083e3d87a",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini 3",
@@ -1705,14 +1705,12 @@
               "start": "2026-09-22",
               "end": "2026-12-31",
               "input": 0.5,
-              "cached_input": 0.125,
               "output": 6
             },
             {
               "start": "2027-01-01",
               "end": null,
               "input": 1,
-              "cached_input": 0.25,
               "output": 12
             }
           ]
@@ -1720,9 +1718,9 @@
       }
     },
     "gemini-3.8-flash-tts": {
-      "last_event_verified_at": "2026-10-06",
-      "last_event_id": "evt_2fedf630e7576b3d8130",
-      "snapshot_hash": "ee7bdc23e646c79dfa76102c71ac8c8fa144f6cb4d36d33568f25c9d9436c22e",
+      "last_event_verified_at": "2026-11-24",
+      "last_event_id": "evt_6468b98f6e7400a7f6d4",
+      "snapshot_hash": "cc495e46650908712d65cd9c294fb3ec3f230fb88ba25ba9482e8bd4d1f06554",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini 3",
@@ -1745,14 +1743,12 @@
               "start": "2026-09-22",
               "end": "2026-12-31",
               "input": 0.5,
-              "cached_input": 0.125,
               "output": 9
             },
             {
               "start": "2027-01-01",
               "end": null,
               "input": 1,
-              "cached_input": 0.25,
               "output": 18
             }
           ]
@@ -3249,15 +3245,15 @@
       }
     },
     "gemini-omni-1.1-flash": {
-      "last_event_verified_at": "2026-10-12",
-      "last_event_id": "evt_f06edb7df3a127b49f5c",
-      "snapshot_hash": "b44254282f91280631bb81c461899b92d4edec51b2bbc4c20238c1b33a8c1cc4",
+      "last_event_verified_at": "2026-11-24",
+      "last_event_id": "evt_5c989f32149bf7d58bd2",
+      "snapshot_hash": "d6b29b9f39a1dcae1ced0ecf2b11bc6533c0ac9ffebcd1df97d6c8867744fc91",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini Omni",
         "model": "Gemini Omni Flash 1.1",
-        "context_window": 1048576,
-        "max_output": null,
+        "context_window": 131072,
+        "max_output": 65536,
         "knowledge_cutoff": null,
         "reasoning": null,
         "modalities": {
@@ -3274,9 +3270,15 @@
           "standard": [
             {
               "start": "2026-10-12",
-              "end": null,
+              "end": "2026-12-02",
               "input": 1.5,
               "output": 17.5
+            },
+            {
+              "start": "2026-12-03",
+              "end": null,
+              "input": 1.5,
+              "output": 12
             }
           ]
         }
@@ -9556,7 +9558,163 @@
       ],
       "event_id": "evt_a66cb5b02927950478a7",
       "event_hash": "a66cb5b02927950478a7de9b44309f3dfba1bd7e23366a9c0a1981718c075f25"
+    },
+    {
+      "sequence": 106,
+      "type": "model_changed",
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "verified_at": "2026-11-24",
+      "previous_event_hash": "a66cb5b02927950478a7de9b44309f3dfba1bd7e23366a9c0a1981718c075f25",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-09-22",
+                "end": "2026-12-31",
+                "input": 0.5,
+                "cached_input": 0.125,
+                "output": 6
+              },
+              {
+                "start": "2027-01-01",
+                "end": null,
+                "input": 1,
+                "cached_input": 0.25,
+                "output": 12
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-09-22",
+                "end": "2026-12-31",
+                "input": 0.5,
+                "output": 6
+              },
+              {
+                "start": "2027-01-01",
+                "end": null,
+                "input": 1,
+                "output": 12
+              }
+            ]
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      ],
+      "event_id": "evt_9c0f7100b92d51bc4e29",
+      "event_hash": "9c0f7100b92d51bc4e2910e55c2e9df5d7a6cd3b70217563265537acf24cf15e"
+    },
+    {
+      "sequence": 107,
+      "type": "model_changed",
+      "model_id": "gemini-3.8-flash-tts",
+      "verified_at": "2026-11-24",
+      "previous_event_hash": "9c0f7100b92d51bc4e2910e55c2e9df5d7a6cd3b70217563265537acf24cf15e",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-09-22",
+                "end": "2026-12-31",
+                "input": 0.5,
+                "cached_input": 0.125,
+                "output": 9
+              },
+              {
+                "start": "2027-01-01",
+                "end": null,
+                "input": 1,
+                "cached_input": 0.25,
+                "output": 18
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-09-22",
+                "end": "2026-12-31",
+                "input": 0.5,
+                "output": 9
+              },
+              {
+                "start": "2027-01-01",
+                "end": null,
+                "input": 1,
+                "output": 18
+              }
+            ]
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      ],
+      "event_id": "evt_6468b98f6e7400a7f6d4",
+      "event_hash": "6468b98f6e7400a7f6d42810e2668a2a7f4946471cf33d7fc6e8c4bbc1348d37"
+    },
+    {
+      "sequence": 108,
+      "type": "model_changed",
+      "model_id": "gemini-omni-1.1-flash",
+      "verified_at": "2026-11-24",
+      "previous_event_hash": "6468b98f6e7400a7f6d42810e2668a2a7f4946471cf33d7fc6e8c4bbc1348d37",
+      "changes": [
+        {
+          "field": "context_window",
+          "change_type": "context_change",
+          "before": 1048576,
+          "after": 131072,
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+        },
+        {
+          "field": "max_output",
+          "change_type": "output_limit_change",
+          "before": null,
+          "after": 65536,
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
+        },
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-10-12",
+                "end": null,
+                "input": 1.5,
+                "output": 17.5
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-10-12",
+                "end": "2026-12-02",
+                "input": 1.5,
+                "output": 17.5
+              },
+              {
+                "start": "2026-12-03",
+                "end": null,
+                "input": 1.5,
+                "output": 12
+              }
+            ]
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      ],
+      "event_id": "evt_5c989f32149bf7d58bd2",
+      "event_hash": "5c989f32149bf7d58bd2589595107bc6e26cfa24f42779c374b4819ac7667688"
     }
   ],
-  "chain_head": "a66cb5b02927950478a7de9b44309f3dfba1bd7e23366a9c0a1981718c075f25"
+  "chain_head": "5c989f32149bf7d58bd2589595107bc6e26cfa24f42779c374b4819ac7667688"
 }
