@@ -36,6 +36,22 @@ def main():
     assert 'data-lfm3-finder' in regenerated
     assert model.URL in regenerated
     assert '<meta name="robots" content="index,follow' in regenerated
+    assert graph[0]["dateModified"] == graph[1]["dateModified"] == model.MODIFIED
+    assert model.MODIFIED >= "2026-11-24"
+    contexts = {row[0]: row[4] for row in model.VARIANTS}
+    assert contexts["LFM3-Omni-2B"] == "32K"
+    assert contexts["d1-Omni-2B"] == "128K"
+    js = (ROOT / "assets/lfm3-model.js").read_text(encoding="utf-8")
+    assert '"32K tokens","Choose omni' in js
+    assert '"128K tokens","Choose this branch' in js
+    for page in (html, regenerated):
+        assert 'id="what-changed"' in page
+        assert '2.17B parameters' in page
+        assert 'ollama run lfm3' in page
+        assert 'd1.2-ultra' in page and 'OpenVINO' in page and 'NVFP4' in page
+        assert 'data-change-models=""' not in page
+        assert 'See model card</td>' not in page
+        assert f'"dateModified":"{model.MODIFIED}"' in page
     print("PASS: LFM3 model family, primary sources, SEO, UI, schema and regeneration")
 if __name__=="__main__":
     main()

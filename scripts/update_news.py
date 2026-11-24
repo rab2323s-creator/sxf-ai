@@ -11564,11 +11564,13 @@ def build_discovery_pages(items, current_items):
         path.mkdir(parents=True, exist_ok=True)
         page = model_page_html(name, matched)
         history_ids = catalog_model_ids_for_name(name)
-        page = inject_before_main_end(
-            page,
-            model_change_watch_html(history_ids, f"{name}: what changed.") +
-            model_history_html(history_ids, f"{name} verified history.")
-        )
+        # LFM3 has an authored, source-cited family change log; do not append an empty catalog ledger.
+        if history_ids or slugify(name) != "lfm3":
+            page = inject_before_main_end(
+                page,
+                model_change_watch_html(history_ids, f"{name}: what changed.") +
+                model_history_html(history_ids, f"{name} verified history.")
+            )
         (path / "index.html").write_text(page, encoding="utf-8")
 
     build_catalog_model_pages(model_evidence_items)
