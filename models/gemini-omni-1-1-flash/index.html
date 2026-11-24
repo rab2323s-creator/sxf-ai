@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="Gemini Omni Flash 1.1 — API Specs, Context &amp; Pricing | SXF / AI" />
       <meta name="twitter:description" content="Gemini Omni Flash 1.1 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Google sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gemini-omni-1-1-flash/#article","headline":"Gemini Omni Flash 1.1 — API Specs, Context & Pricing","description":"Gemini Omni Flash 1.1 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Google sources.","url":"https://sxf.si/models/gemini-omni-1-1-flash/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Gemini Omni Flash 1.1"},"citation":["https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash","https://ai.google.dev/gemini-api/docs/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Gemini Omni Flash 1.1","item":"https://sxf.si/models/gemini-omni-1-1-flash/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gemini-omni-1-1-flash/#article","headline":"Gemini Omni Flash 1.1 — API Specs, Context & Pricing","description":"Gemini Omni Flash 1.1 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Google sources.","url":"https://sxf.si/models/gemini-omni-1-1-flash/","dateModified":"2026-11-24","about":{"@type":"Thing","name":"Gemini Omni Flash 1.1"},"citation":["https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash","https://ai.google.dev/gemini-api/docs/pricing","https://ai.google.dev/gemini-api/docs/deprecations"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Gemini Omni Flash 1.1","item":"https://sxf.si/models/gemini-omni-1-1-flash/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -38,25 +38,26 @@
         <nav class="intel-breadcrumb"><a href="/">SXF</a><span>/</span><a href="/models/">Models</a><span>/</span><span>Gemini Omni Flash 1.1</span></nav>
         <p class="eyebrow">MODEL REFERENCE / GOOGLE</p>
         <h1>Gemini Omni Flash 1.1<br><span>verified model reference.</span></h1>
-        <p>Google stable multimodal conversational video-generation and editing model with video extension, upscaling and iteration through the Interactions API.</p>
+        <p>Google's previous-generation conversational video model; scheduled to route to Omni 1.2 Flash on December 3, 2026.</p>
         <div class="collection-stats">
-          <div><strong>1,048,576</strong><span>context tokens</span></div>
-          <div><strong>Not published</strong><span>max output</span></div>
-          <div><strong>2026-10-12</strong><span>last verified</span></div>
+          <div><strong>131,072</strong><span>context tokens</span></div>
+          <div><strong>65,536</strong><span>max output</span></div>
+          <div><strong>2026-11-24</strong><span>last verified</span></div>
         </div>
       </section>
+<section class="shell model-deep-section" id="sxf-verified-model-update" data-verified-model-update="gemini-omni-1-1-flash"><div class="model-section-head"><p class="eyebrow">SOURCE-VERIFIED EDITORIAL UPDATE · 2026-11-24</p><h2>Omni Flash 1.1: corrected serving limits and December migration</h2><p>Google specifies 131,072 input tokens and 65,536 output tokens, with 3–10-second video output for Omni 1.1. Starting December 3, 2026 requests to its ID route to Omni 1.2 Flash and use its billing: $1.50 per million text/image/video input tokens, $9 per million text output tokens and $12 per million video output tokens (approximately $0.07/second for 720p). The $17.50 video output rate applies before the switch. Omni 1.2 supports up to 15 seconds of video; verify feature-specific duration limits and media handling before migrating.</p></div><p class="reference-note">Primary sources: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash" target="_blank" rel="noopener noreferrer">Official model card</a> · <a href="https://ai.google.dev/gemini-api/docs/deprecations" target="_blank" rel="noopener noreferrer">Official lifecycle schedule</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Official pricing</a></p></section>
 
       <section class="model-reference model-reference-deep shell">
         <div class="model-reference-intro">
           <div class="model-reference-copy">
             <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
             <h2>Gemini Omni Flash 1.1 at a glance.</h2>
-            <p>Google documents a 1,048,576-token context window. Input modalities: text + image + video. Output: video. Pricing status: Official paid API.</p>
+            <p>Google documents a 131,072-token input limit and 65,536-token output limit. Input modalities: text + image + video. Output: video. Pricing status: Official paid API.</p>
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>gemini-omni-1.1-flash</strong></div>
-            <div><span>CONTEXT WINDOW</span><strong>1,048,576</strong><small>tokens</small></div>
-            <div><span>MAX OUTPUT</span><strong>Not published</strong></div>
+            <div><span>CONTEXT WINDOW</span><strong>131,072</strong><small>tokens</small></div>
+            <div><span>MAX OUTPUT</span><strong>65,536</strong></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>Not published</strong></div>
             <div><span>STANDARD INPUT</span><strong>$1.50</strong><small>per 1 million input / VIDEO output tokens (text output separate)</small></div>
             <div><span>STANDARD OUTPUT</span><strong>$17.50</strong><small>per 1 million input / VIDEO output tokens (text output separate)</small></div>
@@ -80,7 +81,7 @@
           </div>
         </section>
 
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Standard paid Gemini API input rate is $1.50 per 1 million input tokens across text/image/video/audio. Generated VIDEO output is $17.50 per 1 million VIDEO tokens; text output, when applicable, is $9.00 per 1 million text tokens.</p></div><div><span>02</span><p>Google specifies 5,792 tokens per second of 720p video, equivalent to approximately $0.10/second at the published Standard video-output rate. Other resolutions and input usage alter total cost.</p></div><div><span>03</span><p>Supports 3–10-second video output; video edit/extension inputs are limited to 10 seconds. The 1,048,576 context token window describes input capacity, not an output-video token quota.</p></div><div><span>04</span><p>Use provider-native ID gemini-omni-1.1-flash; Gemini Omni Flash is the product name. Text-only cost calculator disabled for mixed video/media pricing.</p></div></div></section>
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Through December 2, Omni 1.1 Standard text/image/video input is $1.50 per million tokens; video output is $17.50 and text output $9 per million tokens. From December 3, routed requests use Omni 1.2's $12 video output rate.</p></div><div><span>02</span><p>Google specifies 5,792 tokens per second of 720p video, equivalent to approximately $0.10/second at the published Standard video-output rate. Other resolutions and input usage alter total cost.</p></div><div><span>03</span><p>Omni 1.1 supports 3–10-second video output and up to 10-second video edit/extension inputs. Its serving limits are 131,072 input and 65,536 output tokens, distinct from video duration.</p></div><div><span>04</span><p>Use gemini-omni-1.2-flash for new integrations; the 1.1 identifier routes to 1.2 from December 3. Text-only calculator remains disabled.</p></div></div></section>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>

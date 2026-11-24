@@ -717,7 +717,9 @@
       "sxf_url": "/models/gpt-live-transcribe/",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/transcription",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "pricing": {
         "standard": [
@@ -731,7 +733,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
@@ -768,7 +770,10 @@
           "minute"
         ],
         "display_unit": "per minute"
-      }
+      },
+      "notes": [
+        "Use for live captions, not file streaming. Legacy transcription retirements are scheduled February 26, 2027."
+      ]
     },
     {
       "family": "GPT Transcription",
@@ -791,7 +796,9 @@
       "sxf_url": "/models/gpt-transcribe/",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-transcribe",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/transcription",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "pricing": {
         "standard": [
@@ -805,7 +812,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-transcribe",
@@ -842,7 +849,10 @@
           "minute"
         ],
         "display_unit": "per minute"
-      }
+      },
+      "notes": [
+        "Use for files and committed Realtime turns; verify response shapes before February 26, 2027 legacy transcription retirement."
+      ]
     },
     {
       "family": "GPT-5.6",
@@ -1075,11 +1085,13 @@
         "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
         "https://developers.openai.com/api/docs/pricing",
         "https://developers.openai.com/api/docs/changelog",
-        "https://developers.openai.com/api/docs/guides/realtime-translation"
+        "https://developers.openai.com/api/docs/guides/realtime-translation",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "notes": [
         "Released May 7, 2026.",
-        "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators."
+        "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators.",
+        "Use dedicated realtime translation sessions and wait for session.closed; older audio translations endpoint retires February 26, 2027."
       ],
       "pricing": {
         "standard": [
@@ -1093,7 +1105,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
@@ -1580,7 +1592,8 @@
       "notes": [
         "Displayed Standard prices are TEXT ONLY: $0.60 input, $0.06 cached and $2.40 output per 1M text tokens.",
         "AUDIO Standard prices: $10.00 input, $0.30 cached input and $20.00 output per 1M audio tokens. IMAGE input $0.80 and cached $0.08 per 1M image tokens.",
-        "For WebRTC, WebSocket or SIP voice sessions, text-only token pricing is not a reliable total-session estimate; the generic token calculator is disabled."
+        "For WebRTC, WebSocket or SIP voice sessions, text-only token pricing is not a reliable total-session estimate; the generic token calculator is disabled.",
+        "Recommended replacement for older TTS models retiring January 6, 2027 and older mini realtime models retiring January 20."
       ],
       "pricing": {
         "standard": [
@@ -1616,10 +1629,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
@@ -1739,11 +1753,12 @@
           "image"
         ]
       },
-      "positioning": "OpenAI fast, high-fidelity image generation and editing for production creatives, reference images and flexible output sizes.",
+      "positioning": "OpenAI's previous-generation image generation and editing API; deprecated with retirement scheduled for February 10, 2027.",
       "notes": [
         "OpenAI Standard image-token rates are $4.00 input, $1.00 cached image input, $15.00 generated IMAGE output per 1M tokens; TEXT prompt input is separately billed $2.50 and $0.625 cached per 1M TEXT tokens.",
-        "This model is not GPT-Image-2.5 Sunburst or Flare. All picture costs vary with image quality, resolution, prompt text and reference usage; do not interpret image-token rates as fixed prices per output image.",
-        "Text-only calculator excluded because image output token consumption is a different price dimension."
+        "This model is deprecated; migrate to GPT Image 2.6 Sunburst or Flare. Image costs vary by resolution, quality, prompt and reference usage; token rates are not fixed per-image prices.",
+        "Text-only calculator excluded because image output token consumption is a different price dimension.",
+        "Retirement scheduled February 10, 2027; migrate to GPT Image 2.6 Sunburst or Flare."
       ],
       "pricing": {
         "standard": [
@@ -1779,10 +1794,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-image-2",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2",
@@ -1793,7 +1809,7 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2",
           "pricing": "https://developers.openai.com/api/docs/pricing",
           "access": "https://developers.openai.com/api/docs/models/gpt-image-2",
-          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "lifecycle": "https://developers.openai.com/api/docs/deprecations",
           "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2"
         }
       },
@@ -1804,7 +1820,7 @@
         "self_hostable": false
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       }
     }
   ]

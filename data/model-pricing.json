@@ -2781,7 +2781,9 @@
       "sxf_url": "/models/gpt-live-transcribe/",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/transcription",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "pricing": {
         "standard": [
@@ -2795,7 +2797,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
@@ -2832,7 +2834,10 @@
           "minute"
         ],
         "display_unit": "per minute"
-      }
+      },
+      "notes": [
+        "Use for live captions, not file streaming. Legacy transcription retirements are scheduled February 26, 2027."
+      ]
     },
     {
       "provider": "OpenAI",
@@ -2856,7 +2861,9 @@
       "sxf_url": "/models/gpt-transcribe/",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-transcribe",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/guides/transcription",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "pricing": {
         "standard": [
@@ -2870,7 +2877,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-transcribe",
@@ -2907,7 +2914,10 @@
           "minute"
         ],
         "display_unit": "per minute"
-      }
+      },
+      "notes": [
+        "Use for files and committed Realtime turns; verify response shapes before February 26, 2027 legacy transcription retirement."
+      ]
     },
     {
       "provider": "Mistral AI",
@@ -3348,12 +3358,14 @@
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
         "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://ai.google.dev/gemini-api/docs/changelog"
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "notes": [
         "Google lists Gemini 3.8 Flash TTS as generally available as of September 22, 2026.",
         "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
-        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text.",
+        "The reviewed price table lists no separate cache price. Earlier $0.125 and $0.25 rates are historical evidence only."
       ],
       "pricing": {
         "standard": [
@@ -3361,20 +3373,18 @@
             "start": "2026-09-22",
             "end": "2026-12-31",
             "input": 0.5,
-            "cached_input": 0.125,
             "output": 9
           },
           {
             "start": "2027-01-01",
             "end": null,
             "input": 1,
-            "cached_input": 0.25,
             "output": 18
           }
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
@@ -3407,7 +3417,6 @@
         "quantity": 1000000,
         "dimensions": [
           "input",
-          "cached_input",
           "output"
         ],
         "display_unit": "per 1 million tokens"
@@ -3436,12 +3445,15 @@
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
         "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://ai.google.dev/gemini-api/docs/changelog"
+        "https://ai.google.dev/gemini-api/docs/changelog",
+        "https://ai.google.dev/gemini-api/docs/deprecations",
+        "https://ai.google.dev/gemini-api/docs/speech-generation"
       ],
       "notes": [
         "Google lists Gemini 3.8 Flash-Lite TTS as generally available as of September 22, 2026 and as the production replacement for gemini-3.1-flash-tts-preview.",
         "Standard pricing uses text input tokens and audio output tokens; audio output tokens correspond to 25 tokens per second.",
-        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text."
+        "The model is excluded from the generic generative token calculator because its output-token dimension represents audio rather than text.",
+        "The reviewed price table lists no separate cache price. Earlier $0.125 and $0.25 rates are historical evidence only."
       ],
       "pricing": {
         "standard": [
@@ -3449,20 +3461,18 @@
             "start": "2026-09-22",
             "end": "2026-12-31",
             "input": 0.5,
-            "cached_input": 0.125,
             "output": 6
           },
           {
             "start": "2027-01-01",
             "end": null,
             "input": 1,
-            "cached_input": 0.25,
             "output": 12
           }
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts",
@@ -3495,7 +3505,6 @@
         "quantity": 1000000,
         "dimensions": [
           "input",
-          "cached_input",
           "output"
         ],
         "display_unit": "per 1 million tokens"
@@ -4666,11 +4675,13 @@
         "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
         "https://developers.openai.com/api/docs/pricing",
         "https://developers.openai.com/api/docs/changelog",
-        "https://developers.openai.com/api/docs/guides/realtime-translation"
+        "https://developers.openai.com/api/docs/guides/realtime-translation",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "notes": [
         "Released May 7, 2026.",
-        "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators."
+        "Priced directly by realtime audio duration at $0.034 per minute and excluded from token calculators.",
+        "Use dedicated realtime translation sessions and wait for session.closed; older audio translations endpoint retires February 26, 2027."
       ],
       "pricing": {
         "standard": [
@@ -4684,7 +4695,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
@@ -6477,7 +6488,8 @@
       "notes": [
         "Displayed Standard prices are TEXT ONLY: $0.60 input, $0.06 cached and $2.40 output per 1M text tokens.",
         "AUDIO Standard prices: $10.00 input, $0.30 cached input and $20.00 output per 1M audio tokens. IMAGE input $0.80 and cached $0.08 per 1M image tokens.",
-        "For WebRTC, WebSocket or SIP voice sessions, text-only token pricing is not a reliable total-session estimate; the generic token calculator is disabled."
+        "For WebRTC, WebSocket or SIP voice sessions, text-only token pricing is not a reliable total-session estimate; the generic token calculator is disabled.",
+        "Recommended replacement for older TTS models retiring January 6, 2027 and older mini realtime models retiring January 20."
       ],
       "pricing": {
         "standard": [
@@ -6513,10 +6525,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
@@ -6574,7 +6587,8 @@
         "Shown Standard prices cover TEXT tokens only: $0.75 input and $4.50 output per 1M text tokens.",
         "AUDIO is billed at $3.00 input and $12.00 output per 1M audio tokens (Google also publishes approximate per-minute equivalents). IMAGE/VIDEO inputs cost $1.00 per 1M tokens.",
         "A free tier is listed by Google, but the catalog displays the paid-tier Standard text rates; mixed-modality voice costs are not comparable to text-only estimates.",
-        "Google documents no supported context caching or Batch API for this model. Its interleaved reasoning is designed to avoid reasoning-induced delay."
+        "Google documents no supported context caching or Batch API for this model. Its interleaved reasoning is designed to avoid reasoning-induced delay.",
+        "Google lists 3.1 Flash Live preview for retirement November 17; grounding beyond the shared allowance is billed per query."
       ],
       "pricing": {
         "standard": [
@@ -6609,7 +6623,8 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
         "verified_at": "2026-10-12",
@@ -7153,8 +7168,8 @@
       "family": "Gemini Omni",
       "model": "Gemini Omni Flash 1.1",
       "model_id": "gemini-omni-1.1-flash",
-      "context_window": 1048576,
-      "max_output": null,
+      "context_window": 131072,
+      "max_output": 65536,
       "knowledge_cutoff": null,
       "reasoning": null,
       "modalities": {
@@ -7167,20 +7182,27 @@
           "video"
         ]
       },
-      "positioning": "Google stable multimodal conversational video-generation and editing model with video extension, upscaling and iteration through the Interactions API.",
+      "positioning": "Google's previous-generation conversational video model; scheduled to route to Omni 1.2 Flash on December 3, 2026.",
       "notes": [
-        "Standard paid Gemini API input rate is $1.50 per 1 million input tokens across text/image/video/audio. Generated VIDEO output is $17.50 per 1 million VIDEO tokens; text output, when applicable, is $9.00 per 1 million text tokens.",
+        "Through December 2, Omni 1.1 Standard text/image/video input is $1.50 per million tokens; video output is $17.50 and text output $9 per million tokens. From December 3, routed requests use Omni 1.2's $12 video output rate.",
         "Google specifies 5,792 tokens per second of 720p video, equivalent to approximately $0.10/second at the published Standard video-output rate. Other resolutions and input usage alter total cost.",
-        "Supports 3–10-second video output; video edit/extension inputs are limited to 10 seconds. The 1,048,576 context token window describes input capacity, not an output-video token quota.",
-        "Use provider-native ID gemini-omni-1.1-flash; Gemini Omni Flash is the product name. Text-only cost calculator disabled for mixed video/media pricing."
+        "Omni 1.1 supports 3–10-second video output and up to 10-second video edit/extension inputs. Its serving limits are 131,072 input and 65,536 output tokens, distinct from video duration.",
+        "Use gemini-omni-1.2-flash for new integrations; the 1.1 identifier routes to 1.2 from December 3. Text-only calculator remains disabled.",
+        "Automatic routing and replacement billing scheduled December 3, 2026. Until then $17.50 per million video output tokens applies; routed output costs $12 per million."
       ],
       "pricing": {
         "standard": [
           {
             "start": "2026-10-12",
-            "end": null,
+            "end": "2026-12-02",
             "input": 1.5,
             "output": 17.5
+          },
+          {
+            "start": "2026-12-03",
+            "end": null,
+            "input": 1.5,
+            "output": 12
           }
         ]
       },
@@ -7188,8 +7210,7 @@
       "capabilities": [
         "vision",
         "video",
-        "video-generation",
-        "long-context"
+        "video-generation"
       ],
       "pricing_basis": {
         "meter": "tokens",
@@ -7204,10 +7225,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
@@ -7218,7 +7240,7 @@
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash"
         }
       },
@@ -7229,7 +7251,7 @@
         "self_hostable": false
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       }
     },
     {
@@ -7553,11 +7575,12 @@
           "image"
         ]
       },
-      "positioning": "OpenAI fast, high-fidelity image generation and editing for production creatives, reference images and flexible output sizes.",
+      "positioning": "OpenAI's previous-generation image generation and editing API; deprecated with retirement scheduled for February 10, 2027.",
       "notes": [
         "OpenAI Standard image-token rates are $4.00 input, $1.00 cached image input, $15.00 generated IMAGE output per 1M tokens; TEXT prompt input is separately billed $2.50 and $0.625 cached per 1M TEXT tokens.",
-        "This model is not GPT-Image-2.5 Sunburst or Flare. All picture costs vary with image quality, resolution, prompt text and reference usage; do not interpret image-token rates as fixed prices per output image.",
-        "Text-only calculator excluded because image output token consumption is a different price dimension."
+        "This model is deprecated; migrate to GPT Image 2.6 Sunburst or Flare. Image costs vary by resolution, quality, prompt and reference usage; token rates are not fixed per-image prices.",
+        "Text-only calculator excluded because image output token consumption is a different price dimension.",
+        "Retirement scheduled February 10, 2027; migrate to GPT Image 2.6 Sunburst or Flare."
       ],
       "pricing": {
         "standard": [
@@ -7593,10 +7616,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://developers.openai.com/api/docs/models/gpt-image-2",
-        "https://developers.openai.com/api/docs/pricing"
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://developers.openai.com/api/docs/models/gpt-image-2",
@@ -7607,7 +7631,7 @@
           "modalities": "https://developers.openai.com/api/docs/models/gpt-image-2",
           "pricing": "https://developers.openai.com/api/docs/pricing",
           "access": "https://developers.openai.com/api/docs/models/gpt-image-2",
-          "lifecycle": "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "lifecycle": "https://developers.openai.com/api/docs/deprecations",
           "capabilities": "https://developers.openai.com/api/docs/models/gpt-image-2"
         }
       },
@@ -7618,7 +7642,7 @@
         "self_hostable": false
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       }
     },
     {
@@ -8696,7 +8720,8 @@
         "Official API ID gemini-3.8-live-extended-thinking is distinct from gemini-3.8-live.",
         "Standard TEXT input/output $0.75/$4.50 per million text tokens; AUDIO input/output $3/$12 per million audio tokens; image/video input $1 per million tokens.",
         "Audio sessions use multiple native meters; text calculator disabled.",
-        "Only non-blocking async function calls supported. Clients must use interaction_status to detect a truly idle session."
+        "Only non-blocking async function calls supported. Clients must use interaction_status to detect a truly idle session.",
+        "Use interaction_status to detect idle state. MINIMAL thinking and disabling proactive audio are unsupported."
       ],
       "pricing": {
         "standard": [
@@ -8732,10 +8757,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-24",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",

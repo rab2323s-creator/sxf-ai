@@ -634,6 +634,313 @@
         ]
       ],
       "date": "2026-11-24"
+    },
+    "gpt-image-2": {
+      "title": "GPT Image 2: deprecation and migration deadline",
+      "text": "OpenAI announced on November 10, 2026 that gpt-image-2 and its April 21 snapshot will be retired on February 10, 2027. Migrate to gpt-image-2.6-sunburst or gpt-image-2.6-flare before that deadline. The image and text token prices below refer to the original model, not the replacement. Revalidate sizes, edit behavior, prompt adherence and actual usage.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-image-2",
+          "Official model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://developers.openai.com/api/docs/pricing",
+          "Official pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "OpenAI fast, high-fidelity image generation and editing for production creatives, reference images and flexible output sizes.",
+          "OpenAI's previous-generation image generation and editing API; deprecated with retirement scheduled for February 10, 2027."
+        ],
+        [
+          "This model is not GPT-Image-2.5 Sunburst or Flare. All picture costs vary with image quality, resolution, prompt text and reference usage; do not interpret image-token rates as fixed prices per output image.",
+          "This model is deprecated; migrate to GPT Image 2.6 Sunburst or Flare. Image costs vary by resolution, quality, prompt and reference usage; token rates are not fixed per-image prices."
+        ],
+        [
+          "<strong>2026-10-12</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gemini-omni-1-1-flash": {
+      "title": "Omni Flash 1.1: corrected serving limits and December migration",
+      "text": "Google specifies 131,072 input tokens and 65,536 output tokens, with 3–10-second video output for Omni 1.1. Starting December 3, 2026 requests to its ID route to Omni 1.2 Flash and use its billing: $1.50 per million text/image/video input tokens, $9 per million text output tokens and $12 per million video output tokens (approximately $0.07/second for 720p). The $17.50 video output rate applies before the switch. Omni 1.2 supports up to 15 seconds of video; verify feature-specific duration limits and media handling before migrating.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+          "Official model card"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Official pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "Google stable multimodal conversational video-generation and editing model with video extension, upscaling and iteration through the Interactions API.",
+          "Google's previous-generation conversational video model; scheduled to route to Omni 1.2 Flash on December 3, 2026."
+        ],
+        [
+          "Standard paid Gemini API input rate is $1.50 per 1 million input tokens across text/image/video/audio. Generated VIDEO output is $17.50 per 1 million VIDEO tokens; text output, when applicable, is $9.00 per 1 million text tokens.",
+          "Through December 2, Omni 1.1 Standard text/image/video input is $1.50 per million tokens; video output is $17.50 and text output $9 per million tokens. From December 3, routed requests use Omni 1.2's $12 video output rate."
+        ],
+        [
+          "Supports 3–10-second video output; video edit/extension inputs are limited to 10 seconds. The 1,048,576 context token window describes input capacity, not an output-video token quota.",
+          "Omni 1.1 supports 3–10-second video output and up to 10-second video edit/extension inputs. Its serving limits are 131,072 input and 65,536 output tokens, distinct from video duration."
+        ],
+        [
+          "Use provider-native ID gemini-omni-1.1-flash; Gemini Omni Flash is the product name. Text-only cost calculator disabled for mixed video/media pricing.",
+          "Use gemini-omni-1.2-flash for new integrations; the 1.1 identifier routes to 1.2 from December 3. Text-only calculator remains disabled."
+        ],
+        [
+          "Google documents a 1,048,576-token context window.",
+          "Google documents a 131,072-token input limit and 65,536-token output limit."
+        ],
+        [
+          "<strong>2026-10-12</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ],
+        [
+          "<strong>1,048,576</strong>",
+          "<strong>131,072</strong>"
+        ],
+        [
+          "<strong>Not published</strong><span>max output</span>",
+          "<strong>65,536</strong><span>max output</span>"
+        ],
+        [
+          "<span>MAX OUTPUT</span><strong>Not published</strong>",
+          "<span>MAX OUTPUT</span><strong>65,536</strong>"
+        ],
+        [
+          "<strong>1,048,576</strong><span>context tokens</span>",
+          "<strong>131,072</strong><span>context tokens</span>"
+        ]
+      ]
+    },
+    "gemini-3-8-live": {
+      "title": "Live API migration and per-query grounding billing",
+      "text": "Google lists November 17, 2026 for retirement of the 3.1 Flash Live preview, with gemini-3.8-live as its replacement. Use the stable model ID and retest interruptions, audio format, session resumption and tool handling. Standard modality rates remain $0.75/$4.50 per million text tokens and $3/$12 per million audio tokens. Search grounding is metered by individual search queries rather than user turns; its allowance is shared across eligible Gemini models.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Official pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "gemini-3-8-live-extended-thinking": {
+      "title": "Extended Thinking: asynchronous session contract",
+      "text": "Google documents low, medium and high thinking levels but not MINIMAL; proactive audio cannot be disabled. A completed audio turn does not prove that background processing is finished: wait for interaction_status IDLE and keep receiving tool calls and audio while IN_PROGRESS. Calls must be non-blocking, and client content with turn_complete=true interrupts active generation. The shared Live rate card includes thinking tokens in output charges.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking",
+          "Official model card"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Official pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Official lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "<strong>2026-10-12</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gemini-3-8-flash-tts": {
+      "title": "TTS migration and revised billing disclosure",
+      "text": "The 3.1 Flash TTS preview is listed for retirement on November 17, 2026; Google recommends Flash TTS or Flash-Lite TTS. Put sustained style and speaker labels in speech_metadata rather than the transcript; remove any legacy manual WAV header for default unary WAV output. Standard text/audio rates remain $0.50/$9 per million tokens through December 31 and $1/$18 from January 1, 2027. The reviewed rate table no longer lists a separate cache input or storage price for this SKU; do not assume a cache discount.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts",
+          "Official model card"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Official pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Official lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "Editorial source check: October 13, 2026.",
+          "Editorial source check: November 24, 2026."
+        ],
+        [
+          "<strong>2026-10-06</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gemini-3-8-flash-lite-tts": {
+      "title": "Flash-Lite TTS: migration and cache-price correction",
+      "text": "Google identifies this model as a replacement for the older 3.1 Flash TTS preview. Standard text/audio rates remain $0.50/$6 per million tokens through December 31 and $1/$12 from January 1, 2027. The reviewed price table does not list a separate cache input or storage rate for this SKU. The existing estimator correctly charges regular text input and generated audio separately. The model-card capability check remains subject to retrieval of the original model card.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Official pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/speech-generation",
+          "Official integration guide"
+        ]
+      ],
+      "replacements": [
+        [
+          "Editorial verification: October 13, 2026.",
+          "Editorial pricing and lifecycle verification: November 24, 2026."
+        ],
+        [
+          "Google's pricing page publishes a cached-input rate ($0.125/million through 2026 and $0.25 from 2027), but the Flash-Lite TTS model card currently marks the caching capability as <em>not supported</em>. Do not assume TTS request caching works merely because a price line exists.",
+          "The November 24 pricing review found no separate cached-input rate for this SKU. Earlier published cache figures are retained in the historical ledger, not used as current billing assumptions."
+        ],
+        [
+          "Google additionally lists cache storage fees on its pricing page; these are not included in the usage estimates. If using a paid service tier other than Standard, use its own rate and confirm any caching support independently.",
+          "The reviewed Flash-Lite TTS rate card does not list cache storage fees. If using another service tier, verify its own rate and actual billed usage."
+        ],
+        [
+          "The model card also lists caching as unsupported despite the cached-input line on the pricing page. Both pages are linked above.",
+          "The reviewed price table has no cached-input line for this SKU. Feature availability and billing are separate; do not infer a discount from earlier documentation."
+        ],
+        [
+          "<strong>2026-10-06</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gpt-realtime-2-1-mini": {
+      "title": "Realtime Mini: migration from older speech endpoints",
+      "text": "OpenAI's October 1 notice schedules tts-1, tts-1-hd and gpt-4o-mini-tts for shutdown on January 6, 2027, recommending GPT-Realtime-2.1 Mini. Older gpt-realtime-mini and gpt-4o-mini-realtime are scheduled for January 20. These migration paths do not guarantee identical voice or endpoint behavior. The mini model's 128,000 context and 32,000 max output limits, and $0.60/$0.06/$2.40 text-token rates are unchanged.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-realtime-2.1-mini",
+          "Official model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://developers.openai.com/api/docs/pricing",
+          "Official pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "<strong>2026-10-12</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gpt-transcribe": {
+      "title": "Transcription migration: recordings and committed realtime turns",
+      "text": "OpenAI's August 26 notice schedules Whisper and older GPT-4o transcription models for shutdown on February 26, 2027. GPT-Transcribe supports recorded files, file-streaming transcripts and completed Realtime turns over WebSocket; use GPT-Live-Transcribe for live incremental captions. The model card still lists $0.0045 per audio minute. Test context hints, response formats and timestamp or diarization requirements before switching.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-transcribe",
+          "Official model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/transcription",
+          "Official integration guide"
+        ],
+        [
+          "https://developers.openai.com/api/docs/deprecations",
+          "Official lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "<strong>2026-10-06</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
+    },
+    "gpt-live-transcribe": {
+      "title": "Realtime transcription: preserve workflow semantics during migration",
+      "text": "For the February 26, 2027 retirement of older transcription models, choose GPT-Live-Transcribe for incremental live captions and GPT-Transcribe for recordings or committed turns. OpenAI lists $0.017 per live audio minute and $0.0045 per minute for the file/committed-turn model. Before switching, validate supported context and language hints, item-based delta reconciliation and required response shapes. File-streaming is not equivalent to low-latency microphone transcription.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-live-transcribe",
+          "Official model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/transcription",
+          "Official integration guide"
+        ],
+        [
+          "https://developers.openai.com/api/docs/deprecations",
+          "Official lifecycle schedule"
+        ],
+        [
+          "https://developers.openai.com/api/docs/pricing",
+          "Official pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "REVIEWED NOVEMBER 1, 2026",
+          "REVIEWED NOVEMBER 24, 2026"
+        ],
+        [
+          "Sources reviewed November 1, 2026",
+          "Sources reviewed November 24, 2026"
+        ],
+        [
+          "SXF reviewed sources on <strong>November 1, 2026</strong>",
+          "SXF reviewed sources on <strong>November 24, 2026</strong>"
+        ]
+      ]
+    },
+    "gpt-realtime-translate": {
+      "title": "Realtime translation: dedicated endpoint and graceful closure",
+      "text": "OpenAI announced retirement of /v1/audio/translations on February 26, 2027. Use /v1/realtime/translations with gpt-realtime-translate, configure the target language in session.update, and stream audio continuously. At the end send session.close, then wait for session.closed to avoid losing queued audio or transcript deltas. Use one session per source stream and target language. The documented 16,000 context, 2,000 max output and $0.034/audio minute remain unchanged.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+          "Official model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/guides/realtime-translation",
+          "Official integration guide"
+        ],
+        [
+          "https://developers.openai.com/api/docs/deprecations",
+          "Official lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "<strong>2026-10-07</strong><span>last verified</span>",
+          "<strong>2026-11-24</strong><span>last verified</span>"
+        ]
+      ]
     }
   }
 }
