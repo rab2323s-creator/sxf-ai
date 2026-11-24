@@ -89,8 +89,8 @@
       </table>
     </div>
     <p><strong>About API tiers:</strong> Standard is the baseline for interactive and regular requests. Google's Batch and Flex rates are lower for suitable asynchronous or flexible workloads; Priority is priced higher. Available capacity, execution behavior and eligibility can vary. The <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">official rate card</a> also documents free-tier usage subject to limits.</p>
-    <p><strong>Important caching documentation caveat:</strong> Google's pricing page publishes a cached-input rate ({{LITE_2026_CACHE}}/million through 2026 and {{LITE_2027_CACHE}} from 2027), but the Flash-Lite TTS model card currently marks the caching capability as <em>not supported</em>. Do not assume TTS request caching works merely because a price line exists. The calculator below conservatively treats all supplied transcript input as regular text input, and does not claim cache discounts. <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts" target="_blank" rel="noopener noreferrer">Verify feature availability at the provider ↗</a></p>
-    <p>Google additionally lists cache storage fees on its pricing page; these are not included in the usage estimates. If using a paid service tier other than Standard, use its own rate and confirm any caching support independently.</p>
+    <p><strong>Important caching documentation caveat:</strong> The November 24 pricing review found no separate cached-input rate for this SKU. Earlier published cache figures are retained in the historical ledger, not used as current billing assumptions. The calculator below conservatively treats all supplied transcript input as regular text input, and does not claim cache discounts. <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts" target="_blank" rel="noopener noreferrer">Verify feature availability at the provider ↗</a></p>
+    <p>The reviewed Flash-Lite TTS rate card does not list cache storage fees. If using another service tier, verify its own rate and actual billed usage.</p>
   </section>
 
   <section class="lite-section" id="lite-calculator">
@@ -197,7 +197,7 @@ with open("lite-tts-output.wav", "wb") as audio_file:
   <section class="lite-section" id="lite-limitations">
     <div class="model-section-head"><p class="eyebrow">TECHNICAL LIMITATIONS</p><h2>What Flash-Lite TTS does not do.</h2></div>
     <p>Google's model card lists audio generation as supported, but not general-purpose <strong>function calling, code execution, search grounding, structured text output, image generation, thinking or Live API</strong> for this model. It is a speech generation endpoint: connect separate models or tools when you need a fully conversational voice agent, retrieval or planning.</p>
-    <p>The model card also lists caching as unsupported despite the cached-input line on the pricing page. Both pages are linked above. For trustworthy estimates and production decisions, use verified billed usage and do not assume every listed billing dimension can currently be enabled for this TTS SKU.</p>
+    <p>The reviewed price table has no cached-input line for this SKU. Feature availability and billing are separate; do not infer a discount from earlier documentation. For trustworthy estimates and production decisions, use verified billed usage and do not assume every listed billing dimension can currently be enabled for this TTS SKU.</p>
     <p>The serving limits are not a promise of an arbitrary uninterrupted audiobook in one request. For substantial narration, split into multiple manageable inputs and test silence, pronunciation, continuity and voice consistency between outputs.</p>
   </section>
 
