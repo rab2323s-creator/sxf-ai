@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Editorial safety checks for the Nov 2026 Microsoft 365 outage report."""
 from __future__ import annotations
+import ast
 import json
 import re
 import xml.etree.ElementTree as ET
@@ -49,6 +50,24 @@ for p in ("signals/index.html", "tools/index.html",
 
 generator = (ROOT / "scripts/update_news.py").read_text(encoding="utf-8")
 assert 'outage_slug = "' + SLUG + '"' in generator
-assert '| {"' + SLUG + '"}' in generator
+# The protected route set can include multiple independently authored signals.
+# Inspect the actual argument to the retirement function instead of matching
+# a singleton set literal (which breaks whenever another report is added).
+tree = ast.parse(generator)
+retirement_calls = [
+    node for node in ast.walk(tree)
+    if isinstance(node, ast.Call)
+    and isinstance(node.func, ast.Name)
+    and node.func.id == "retire_unapproved_signal_routes"
+    and len(node.args) >= 2
+]
+assert any(
+    isinstance(call.args[1], ast.BinOp)
+    and isinstance(call.args[1].op, ast.BitOr)
+    and isinstance(call.args[1].right, ast.Set)
+    and any(isinstance(item, ast.Constant) and item.value == SLUG
+            for item in call.args[1].right.elts)
+    for call in retirement_calls
+), "Microsoft 365 outage route must remain protected from automated retirement"
 assert SLUG in (ROOT / "scripts/sitemap_generation.py").read_text(encoding="utf-8")
 print("PASS: Microsoft 365 outage content, SEO, links and regeneration safeguards")
