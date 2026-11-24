@@ -32,6 +32,9 @@ def is_authored_html(relative_path: Path) -> bool:
         return False
     if any(part.startswith(".") for part in relative_path.parts):
         return False
+    # Independently authored Optimus report must survive every feed rebuild.
+    if relative_path.as_posix() == "signals/tesla-optimus-robot-ai5-price-release-date/index.html":
+        return True
     # Published dated Brief issues are editorial artifacts, never generated feeds.
     # Keep /brief/index.html mutable so the current daily issue can be refreshed.
     if re.fullmatch(r"brief/\d{4}-\d{2}-\d{2}/index\.html", relative_path.as_posix()):

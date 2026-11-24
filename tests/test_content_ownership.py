@@ -25,6 +25,7 @@ def main() -> None:
         "guides/best-ai-agents/index.html", "about/index.html",
         "tools/my-authored-guide/index.html",
         "brief/2026-11-07/index.html",
+        "signals/tesla-optimus-robot-ai5-price-release-date/index.html",
     )
     generated = (
         "signals/latest/index.html", "topics/ai-agents/index.html",

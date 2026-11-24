@@ -11712,10 +11712,19 @@ def build_discovery_pages(items, current_items):
                     encoding="utf-8",
                 )
 
+    # Keep the independently authored Optimus report discoverable after regeneration.
+    optimus_route = "/signals/tesla-optimus-robot-ai5-price-release-date/"
+    optimus_index = SIGNALS_DIR / "index.html"
+    if (SIGNALS_DIR / "tesla-optimus-robot-ai5-price-release-date" / "index.html").is_file() and optimus_index.is_file():
+        optimus_html = optimus_index.read_text(encoding="utf-8")
+        if optimus_route not in optimus_html:
+            optimus_spotlight = "<section class=\"shell signals-snapshot\" aria-label=\"Featured Tesla Optimus report\"><div class=\"intel-section-head\"><div><p class=\"eyebrow\">ROBOTICS / NEWS ANALYSIS · NOVEMBER 24, 2026</p><h2>Tesla Optimus robot: Musk targets home chores in 12–18 months as AI5 plan advances</h2><p>Elon Musk targets household chores by 2027–28 for Tesla Optimus. What AI5, the $20,000–$30,000 target, industrial rollout and safety evidence really mean.</p></div><a href=\"/signals/tesla-optimus-robot-ai5-price-release-date/\">Read verified report →</a></div></section>"
+            optimus_index.write_text(optimus_html.replace('<section class="signals-snapshot shell"', optimus_spotlight + '<section class="signals-snapshot shell"', 1), encoding="utf-8")
+
     # Earlier builds left signal routes which no longer exist in the current
     # archive. Demote those as well, or they could stay indexed indefinitely.
     retire_unapproved_signal_routes(
-        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items} | {"microsoft-365-outage-outlook-teams-copilot-2026"}
+        SIGNALS_DIR, {row["signal_slug"] for row in indexable_legacy_items} | {"microsoft-365-outage-outlook-teams-copilot-2026", "tesla-optimus-robot-ai5-price-release-date"}
     )
 
     (COMPARE_DIR / "index.html").write_text(compare_index_html(items), encoding="utf-8")
