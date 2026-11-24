@@ -138,7 +138,7 @@ def enrich_gemini_38_flash_lite_tts_page(page, models_by_id):
       "@context":"https://schema.org",
       "@graph":[
         {"@type":"TechArticle","@id":URL+"#article","headline":TITLE,"description":DESCRIPTION,
-         "url":URL,"dateModified":"2026-10-13","inLanguage":"en",
+         "url":URL,"dateModified":"2026-11-24","inLanguage":"en",
          "mainEntityOfPage":{"@id":URL+"#webpage"},"about":{"@id":URL+"#model"},
          "author":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},
          "publisher":{"@type":"Organization","name":"SXF / AI","url":"https://sxf.si/"},

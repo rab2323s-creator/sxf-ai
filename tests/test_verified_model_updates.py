@@ -43,6 +43,13 @@ def main():
         stripped = re.sub(r'<section\b[^>]*' + re.escape(marker) + r'[^>]*>.*?</section>', '', page, count=1, flags=re.S)
         rebuilt = apply_update(stripped, slug, row, stamp)
         assert rebuilt.count(marker) == 1, slug
+    # Partial catalog rebuilds run before the guarded full site build.
+    for slug, expected in (
+        ("gemini-3-8-flash-tts", "Editorial source check: November 24, 2026."),
+        ("gemini-3-8-flash-lite-tts", "Editorial pricing and lifecycle verification: November 24, 2026."),
+    ):
+        template = (ROOT / "data/model-page-content" / f"{slug}.html").read_text(encoding="utf-8")
+        assert expected in template, slug
     pricing = json.loads((ROOT / "data/model-pricing.json").read_text(encoding="utf-8"))
     index = json.loads((ROOT / "data/model-index.json").read_text(encoding="utf-8"))
     for data in (pricing, index):
