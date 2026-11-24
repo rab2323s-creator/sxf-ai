@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T12:57:29.451787Z",
+  "updated_at": "2026-11-24T00:32:29.989361Z",
   "items": [
     {
       "title": "Inside the Codex sandbox",
@@ -598,54 +598,6 @@
         "OpenAI"
       ],
       "signal_score": 28
-    },
-    {
-      "title": "Transformers Model Integration Contracts",
-      "summary": "Hugging Face outlined Model Integration Contracts (MICs) on November 3, 2026, proposing small architecture-aware model fixtures, runnable usage paths and human-reviewed baselines for faster CI checks. A retrospective UMT5 replay caught a real regression, but the MIC job is currently advisory and full-checkpoint testing still matters.",
-      "url": "https://huggingface.co/blog/transformers-mic",
-      "signal_url": "https://sxf.si/signals/transformers-model-integration-contracts-fec0e46/",
-      "source": "Hugging Face",
-      "published": "2026-11-03T00:00:00Z",
-      "category": "Tools",
-      "tags": [],
-      "signal_score": 42
-    },
-    {
-      "title": "CWE-bench v2: More coverage, quality, and transparency",
-      "summary": "Collinear AI introduced CWE-bench v2 on November 3, 2026, using 100 runnable tasks from real open-source projects to evaluate agent-written security fixes. Its report compares 11 models and lists Gemini 4 Argon at 67.8% pass@1 and Claude Opus 5.5 at 67.3%, within the benchmark's specific testing setup rather than all real-world vulnerability repair.",
-      "url": "https://huggingface.co/blog/cwe-bench",
-      "signal_url": "https://sxf.si/signals/cwe-bench-v2-ai-security-code-benchmark/",
-      "source": "Hugging Face",
-      "published": "2026-11-03T00:00:00Z",
-      "category": "Tools",
-      "tags": [],
-      "signal_score": 28
-    },
-    {
-      "title": "Scaling Git at OpenAI",
-      "summary": "OpenAI described Pando on November 2, 2026, a Git-compatible backend serving its monorepo under heavy Codex-driven concurrent development. OpenAI reports nearly fivefold lower median push latency and close to a petabyte of Git data delivered daily, but the figures describe its production environment rather than independent benchmarks for other teams.",
-      "url": "https://openai.com/index/scaling-git-at-openai",
-      "signal_url": "https://sxf.si/signals/scaling-git-at-openai-de4cf53/",
-      "source": "OpenAI",
-      "published": "2026-11-02T15:30:00Z",
-      "category": "Tools",
-      "tags": [
-        "OpenAI"
-      ],
-      "signal_score": 28
-    },
-    {
-      "title": "Introducing the Grid Protectors Program",
-      "summary": "OpenAI announced Grid Protectors on November 2, 2026, outlining how future compute campuses could reduce electricity demand during grid stress. Its Effingham County agreement with Georgia Power includes up to 1,000 MW of flexible demand response, but campus operation, savings and customer-rate effects remain future claims subject to implementation.",
-      "url": "https://openai.com/index/grid-protectors-program",
-      "signal_url": "https://sxf.si/signals/introducing-the-grid-protectors-program-19244c7/",
-      "source": "OpenAI",
-      "published": "2026-11-02T15:00:00Z",
-      "category": "Tools",
-      "tags": [
-        "OpenAI"
-      ],
-      "signal_score": 46
     }
   ],
   "feed_errors": [],
@@ -669,9 +621,9 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 19,
+      "OpenAI": 17,
       "Google AI": 6,
-      "Hugging Face": 10,
+      "Hugging Face": 8,
       "GitHub": 10,
       "Google Research": 2,
       "Anthropic": 2,
@@ -684,23 +636,23 @@
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 1422,
-        "relevance_accepted_count": 1422,
-        "quality_accepted_count": 119,
-        "accepted_candidate_count": 119,
-        "rejected_candidate_count": 1303,
+        "parsed_candidate_count": 1425,
+        "relevance_accepted_count": 1425,
+        "quality_accepted_count": 121,
+        "accepted_candidate_count": 121,
+        "rejected_candidate_count": 1304,
         "duplicate_count": 2,
-        "age_rejection_count": 1301,
+        "age_rejection_count": 1302,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 19,
+        "publish_count": 17,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "Google AI": {
@@ -709,11 +661,11 @@
         "fetch_failure": false,
         "parsed_candidate_count": 20,
         "relevance_accepted_count": 20,
-        "quality_accepted_count": 16,
-        "accepted_candidate_count": 16,
-        "rejected_candidate_count": 4,
+        "quality_accepted_count": 17,
+        "accepted_candidate_count": 17,
+        "rejected_candidate_count": 3,
         "duplicate_count": 0,
-        "age_rejection_count": 4,
+        "age_rejection_count": 3,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 6,
@@ -723,30 +675,30 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "Hugging Face": {
         "status": "live",
         "fetch_success": true,
         "fetch_failure": false,
-        "parsed_candidate_count": 915,
-        "relevance_accepted_count": 915,
-        "quality_accepted_count": 36,
-        "accepted_candidate_count": 36,
-        "rejected_candidate_count": 879,
+        "parsed_candidate_count": 916,
+        "relevance_accepted_count": 916,
+        "quality_accepted_count": 34,
+        "accepted_candidate_count": 34,
+        "rejected_candidate_count": 882,
         "duplicate_count": 0,
-        "age_rejection_count": 879,
+        "age_rejection_count": 882,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 10,
+        "publish_count": 8,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "GitHub": {
@@ -769,7 +721,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "Google Research": {
@@ -777,13 +729,13 @@
         "fetch_success": true,
         "fetch_failure": false,
         "parsed_candidate_count": 100,
-        "relevance_accepted_count": 60,
-        "quality_accepted_count": 5,
-        "accepted_candidate_count": 5,
-        "rejected_candidate_count": 95,
+        "relevance_accepted_count": 61,
+        "quality_accepted_count": 6,
+        "accepted_candidate_count": 6,
+        "rejected_candidate_count": 94,
         "duplicate_count": 0,
         "age_rejection_count": 55,
-        "relevance_rejection_count": 40,
+        "relevance_rejection_count": 39,
         "quality_rejection_count": 0,
         "publish_count": 2,
         "adapter": "rss",
@@ -792,7 +744,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "Anthropic": {
@@ -815,7 +767,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -840,7 +792,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "xAI": {
@@ -853,9 +805,9 @@
         "accepted_candidate_count": 2,
         "rejected_candidate_count": 18,
         "duplicate_count": 0,
-        "age_rejection_count": 14,
+        "age_rejection_count": 15,
         "relevance_rejection_count": 0,
-        "quality_rejection_count": 4,
+        "quality_rejection_count": 3,
         "publish_count": 0,
         "adapter": "xai-news",
         "adapter_contract_version": "sxf-source-adapter-v1",
@@ -863,7 +815,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       },
       "Microsoft": {
@@ -876,9 +828,9 @@
         "accepted_candidate_count": 2,
         "rejected_candidate_count": 8,
         "duplicate_count": 0,
-        "age_rejection_count": 0,
+        "age_rejection_count": 1,
         "relevance_rejection_count": 5,
-        "quality_rejection_count": 3,
+        "quality_rejection_count": 2,
         "publish_count": 1,
         "adapter": "rss",
         "adapter_contract_version": null,
@@ -886,7 +838,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-23T12:56:43.475122Z",
+        "last_successful_fetch": "2026-11-24T00:31:54.206056Z",
         "errors": []
       }
     },
