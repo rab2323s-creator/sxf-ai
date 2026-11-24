@@ -54,7 +54,7 @@ def validate():
     graph=json.loads(schema.group(1))["@graph"]
     article=next(x for x in graph if x.get("@type")=="TechArticle")
     faq=next(x for x in graph if x.get("@type")=="FAQPage")
-    assert article["dateModified"]=="2026-11-07"
+    assert article["dateModified"]=="2026-11-24"
     assert article["mainEntityOfPage"]["@id"]==URL
     assert len(article["citation"])>=7 and len(faq["mainEntity"])==8
     # Published Anthropic rate math: 1k requests at 2k input + 500 output.

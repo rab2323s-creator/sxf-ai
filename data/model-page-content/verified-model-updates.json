@@ -1,0 +1,255 @@
+{
+  "date": "2026-11-24",
+  "updates": {
+    "gemini-3-7-flash": {
+      "title": "Gemini 3.7 Flash is now a compatibility endpoint",
+      "text": "Google deprecated Gemini 3.7 Flash on October 8, 2026. It is no longer selectable in Google AI Studio; requests using gemini-3.7-flash are routed to gemini-3.8-flash. Update model IDs and validate function calls, reasoning controls, output schemas and effective costs against the replacement. Earlier 3.7 specifications, benchmarks and prices describe the original release, not an independently selectable model today.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google release notes — October 8, 2026"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google model lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8",
+          "Gemini 3.8 migration guide"
+        ]
+      ],
+      "replacements": [
+        [
+          "Gemini 3.7 Flash is Google's stable, generally available Flash model released in August 2026 for coding, agentic workflows, multimodal reasoning and reliable multi-step execution.",
+          "Gemini 3.7 Flash was Google's stable Flash model released in August 2026 for coding, agentic workflows and multimodal reasoning. Since October 8, its API requests route to Gemini 3.8 Flash."
+        ],
+        [
+          "Yes. Google explicitly says Gemini 3.7 Flash remains fully supported. Gemini 3.8 Flash is the newer Flash generation and should be evaluated first for long-horizon software engineering and autonomous-agent workloads.",
+          "No longer as an independent endpoint: Google deprecated Gemini 3.7 Flash on October 8, 2026. Requests now route to Gemini 3.8 Flash. Migrate the model ID and retest your integration."
+        ],
+        [
+          "Google's stable high-speed Flash model for coding, multimodal reasoning, agentic tool use and reliable multi-step execution — verified against primary Google sources.",
+          "Google's former high-speed Flash model for coding, multimodal reasoning and agentic tool use — historical reference; requests now route to Gemini 3.8 Flash."
+        ],
+        [
+          "Its current strategic advantage is not that it is the newest Flash model — Gemini 3.8 Flash now holds that role. The advantage is that 3.7 remains fully supported, has the same published introductory Standard token prices as 3.8, and can be a sensible efficiency-first target when a workflow does not benefit from 3.8's heavier long-horizon reasoning behavior.",
+          "At launch, 3.7 was an efficiency-oriented Flash option. Google deprecated it on October 8, 2026 and automatically routes requests to 3.8 Flash. The earlier specification and pricing tables remain useful for historical comparisons, not for choosing an independently served 3.7 deployment."
+        ],
+        [
+          "Stable, GA and still fully supported.",
+          "Deprecated; API calls route to 3.8 Flash."
+        ],
+        [
+          "Gemini 3.8 Flash is newer. Google explicitly says 3.7 remains supported for workloads that do not need 3.8's extra long-horizon verification.",
+          "Google AI Studio no longer offers 3.7 Flash as a selectable model. Update API clients to gemini-3.8-flash and validate migration requirements."
+        ],
+        [
+          "3.8 is newer; 3.7 remains an efficiency-first option.",
+          "3.7 vs 3.8: historical comparison and migration."
+        ],
+        [
+          "Google now calls Gemini 3.8 Flash its most intelligent Flash model and positions it for long-horizon software engineering, autonomous agents and complex enterprise workflows. It also explicitly says Gemini 3.7 Flash remains fully supported.",
+          "At launch Google positioned Gemini 3.8 Flash for long-horizon software engineering and complex agents. Its predecessor 3.7 was deprecated on October 8 and now routes to 3.8."
+        ],
+        [
+          "Stable / fully supported",
+          "Deprecated / routes to 3.8"
+        ],
+        [
+          "If your workload benefits from that extra persistence, test 3.8 first. If it does not, 3.7 can remain attractive because Google continues to support it and explicitly presents it as an alternative for workloads that do not need that level of verification.",
+          "Test the actual 3.8 endpoint and measure cost per accepted task. Do not use the historical 3.7 benchmark as a measurement of today's routed requests."
+        ],
+        [
+          "Gemini 3.7 Flash pricing now — and after the introductory period.",
+          "Original Gemini 3.7 Flash pricing reference and scheduled rates."
+        ],
+        [
+          "What typical Gemini 3.7 Flash requests cost at current Standard rates.",
+          "Historical cost examples at published Standard rates."
+        ],
+        [
+          "Where Gemini 3.7 Flash makes the strongest case.",
+          "Original Gemini 3.7 Flash release workloads."
+        ]
+      ]
+    },
+    "gemini-3-8-flash": {
+      "title": "Migration from Gemini 3.7 Flash and 2.5 Pro",
+      "text": "Since October 8, 2026, requests to gemini-3.7-flash route to Gemini 3.8 Flash. Google announced that gemini-2.5-pro requests will route to gemini-3.8-flash and use its rates beginning December 1, 2026. Change the model ID before that date and review breaking changes including thought signatures, thinking_level instead of thinking_budget, sampling controls and prefilled turns. Google made the Computer Use tool generally available on October 30 across GenerateContent and Interactions. For newer coding workflows, also evaluate Gemini 4 Hydrogen (GA November 12); do not assume it replaces every 3.8 endpoint.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google API release notes — October 8, October 30, November 2 and November 12"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google lifecycle and migration schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8",
+          "Gemini 3.8 migration guide"
+        ]
+      ],
+      "replacements": [
+        [
+          "Gemini 3.8 Flash is Google’s recommended model for computer use, with the capability currently marked preview on the model page.",
+          "Gemini 3.8 Flash supports the Computer Use tool; Google announced its general availability across GenerateContent and Interactions on October 30, 2026."
+        ]
+      ]
+    },
+    "gemini-3-6-flash": {
+      "title": "Gemini 3.5 Flash migration and endpoint routing",
+      "text": "Google announced on October 8, 2026 that gemini-3.5-flash is deprecated and calls to that endpoint are automatically routed to gemini-3.6-flash. Use gemini-3.6-flash explicitly (or assess Gemini 3.8 Flash) and retest token usage, function calls and generation settings rather than treating legacy benchmark results as measurements of the routed endpoint. Google's lifecycle schedule lists no announced shutdown date for gemini-3.6-flash.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google release notes — October 8, 2026"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google deprecation schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6",
+          "Gemini 3.6 migration guide"
+        ]
+      ],
+      "replacements": []
+    },
+    "gemini-3-5-flash-lite": {
+      "title": "Gemini 2.5 Flash migration deadline: December 1, 2026",
+      "text": "Google announced on November 2 that gemini-2.5-flash is deprecated and will route to gemini-3.5-flash-lite at the latter model's rates from December 1, 2026. The change is scheduled, not yet in effect on the date of this review. Update the model string and validate function calls, thought signatures, thinking_level, sampling controls and prefilled turns. This notice does not deprecate the separate gemini-2.5-flash-lite endpoint.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google release notes — November 2, 2026"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6",
+          "Gemini Flash-Lite migration guide"
+        ]
+      ],
+      "replacements": []
+    },
+    "gemini-embedding-001": {
+      "title": "Plan the transition to Gemini Embedding 2",
+      "text": "Google's deprecation schedule lists May 14, 2028 as the earliest shutdown date for gemini-embedding-001, with gemini-embedding-2 as the recommended successor. This is a planning date, not an announcement that the older endpoint is already offline. Embedding 001 and Embedding 2 use different vector spaces: regenerate stored vectors and query vectors with the replacement and validate retrieval quality before switching production traffic.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google embedding model lifecycle schedule"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/embeddings",
+          "Google embeddings and migration guide"
+        ]
+      ],
+      "replacements": []
+    },
+    "gemini-embedding-2": {
+      "title": "Preview-to-GA migration does not require re-indexing",
+      "text": "On November 6, 2026, Google deprecated gemini-embedding-2-preview and began routing requests to gemini-embedding-2 at the stable model's rates. Google states that the preview and GA endpoints share the API schema and embedding space, so changing the model string does not require regenerating the vector index. This exception does not apply to a migration from Gemini Embedding 001, which uses a different embedding space.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google release notes — November 6, 2026"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Google embedding model lifecycle schedule"
+        ]
+      ],
+      "replacements": []
+    },
+    "gemini-3-5-transcribe": {
+      "title": "Voice-driven editing added on November 17, 2026",
+      "text": "Google added voice editing to both gemini-3.5-transcribe and gemini-3.5-transcribe-live on November 17. Spoken instructions can edit, rewrite or format dictated text or an existing source_text value. The non-streaming and Live endpoints remain distinct integrations. For verbatim captions, evaluate transcription-only and editing workflows separately so spoken edit instructions are not mistaken for literal transcript content.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/changelog",
+          "Google release notes — November 17, 2026"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/transcribe#voice-editing",
+          "Audio transcription: voice editing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/live-api/live-transcribe#voice-editing",
+          "Live transcription: voice editing"
+        ]
+      ],
+      "replacements": []
+    },
+    "claude-haiku-4-5": {
+      "title": "Text watermark and current API lifecycle",
+      "text": "Anthropic announced on November 16, 2026 that Haiku 4.5 generated text carries its text watermark on supported platforms. Non-default temperature, top_p or top_k settings may result in text without the watermark. The watermark announcement does not change the API's token price or context specification. Anthropic's lifecycle table still lists claude-haiku-4-5-20251001 as active; October 15, 2026 was the earliest possible retirement date, not an actual retirement.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/release-notes/overview",
+          "Anthropic release notes — November 16, 2026"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+          "Anthropic model lifecycle table"
+        ]
+      ],
+      "replacements": []
+    },
+    "voxtral-mini-transcribe-2": {
+      "title": "Deprecated V2 endpoint and explicit V3 aliases",
+      "text": "Mistral lists the February 2026 batch transcription model as deprecated and recommends Voxtral Mini Transcribe 3 for new integrations. The version-pinned replacement is voxtral-mini-transcribe-3-0; the migration guide also names voxtral-mini-transcribe-3 and voxtral-mini-transcribe-latest as V3 aliases. Do not assume the old voxtral-mini-latest alias is interchangeable. Recheck response schemas and timing requirements before switching. V2 prices and capabilities are historical reference values; confirm retirement and continued access with Mistral.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/voxtral-mini-transcribe-2",
+          "Mistral V2 model lifecycle"
+        ],
+        [
+          "https://docs.mistral.ai/models",
+          "Mistral model directory"
+        ],
+        [
+          "https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2",
+          "Mistral V2-to-V3 migration table"
+        ]
+      ],
+      "replacements": [
+        [
+          "Mistral documents the model as GA Premier v26.02 and optimized for transcription purposes only.",
+          "Lifecycle rechecked 2026-11-24: Mistral originally released the model as Premier v26.02 for transcription only; it is now deprecated for new hosted integrations."
+        ]
+      ]
+    },
+    "voxtral-mini-transcribe-realtime": {
+      "title": "Deprecated hosted V2 realtime model; migrate to Realtime 3",
+      "text": "Mistral's current directory marks the hosted February 2026 realtime model deprecated. For new integrations the documented replacement is voxtral-mini-transcribe-realtime-3-0 (Voxtral Mini Transcribe Realtime 3). Revalidate WebSocket event handling, turn detection, streaming delay and transcript assembly against the V3 documentation. The API lifecycle notice does not itself revoke the Apache 2.0 licence of the separately released V2 open weights, and historic V2 prices should not be assumed to apply to V3.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime",
+          "Mistral V2 realtime model lifecycle"
+        ],
+        [
+          "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-3-0",
+          "Mistral V3 realtime model card"
+        ],
+        [
+          "https://docs.mistral.ai/studio/audio/migrate-from-voxtral-2",
+          "Mistral V2-to-V3 migration table"
+        ]
+      ],
+      "replacements": [
+        [
+          "Mistral GA audio specialist optimized exclusively for low-latency live transcription over realtime WebSocket sessions.",
+          "Mistral's February 2026 realtime transcription model; the hosted V2 endpoint is deprecated and Realtime 3 is recommended for new integrations."
+        ],
+        [
+          "Mistral lists Voxtral Mini Transcribe Realtime as GA v26.02 and optimized for live transcription only.",
+          "Lifecycle rechecked 2026-11-24: Mistral's model directory now marks this v26.02 hosted model deprecated; it was optimized for live transcription only."
+        ]
+      ]
+    }
+  }
+}

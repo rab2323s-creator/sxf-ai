@@ -101,7 +101,7 @@ def enrich_claude_haiku_45_page(page: str) -> str:
         raise ValueError("Missing article schema")
     article.update({
         "headline": TITLE.removesuffix(" | SXF"),
-        "description": DESCRIPTION, "dateModified": "2026-11-07",
+        "description": DESCRIPTION, "dateModified": "2026-11-24",
         "citation": SOURCES,
         "mainEntityOfPage": {"@type": "WebPage", "@id": URL},
         "author": {"@type": "Organization", "name": "SXF / AI", "url": "https://sxf.si/"},

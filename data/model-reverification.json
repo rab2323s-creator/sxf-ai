@@ -11,11 +11,11 @@
   },
   "summary": {
     "total": 100,
-    "fresh": 49,
+    "fresh": 52,
     "due": 0,
-    "overdue": 51,
+    "overdue": 48,
     "critical": 3,
-    "high": 48
+    "high": 45
   },
   "items": [
     {
@@ -831,57 +831,6 @@
       ]
     },
     {
-      "model_id": "voxtral-mini-2602",
-      "provider": "Mistral AI",
-      "model": "Voxtral Mini Transcribe 2",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-10-06",
-      "age_days": 35,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-11-05",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 5,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://docs.mistral.ai/inference/pricing",
-        "https://docs.mistral.ai/models",
-        "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
-      ]
-    },
-    {
-      "model_id": "voxtral-mini-transcribe-realtime-2602",
-      "provider": "Mistral AI",
-      "model": "Voxtral Mini Transcribe Realtime",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-10-06",
-      "age_days": 35,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-11-05",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 5,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
-        "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription"
-      ]
-    },
-    {
       "model_id": "gpt-5.6-cyber",
       "provider": "OpenAI",
       "model": "GPT-5.6 Cyber",
@@ -1029,31 +978,6 @@
       ],
       "source_urls": [
         "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
-      ]
-    },
-    {
-      "model_id": "gemini-3.7-flash",
-      "provider": "Google",
-      "model": "Gemini 3.7 Flash",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-10-07",
-      "age_days": 34,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-11-06",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 4,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
-        "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     },
     {
@@ -2553,6 +2477,85 @@
       "source_urls": [
         "https://developers.openai.com/api/docs/models/gpt-6-sol",
         "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    {
+      "model_id": "voxtral-mini-2602",
+      "provider": "Mistral AI",
+      "model": "Voxtral Mini Transcribe 2",
+      "lifecycle_status": "deprecated",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 35,
+      "policy": "deprecated",
+      "review_interval_days": 180,
+      "due_at": "2027-04-04",
+      "status": "fresh",
+      "priority": "low",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-2",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
+      ]
+    },
+    {
+      "model_id": "voxtral-mini-transcribe-realtime-2602",
+      "provider": "Mistral AI",
+      "model": "Voxtral Mini Transcribe Realtime",
+      "lifecycle_status": "deprecated",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-06",
+      "age_days": 35,
+      "policy": "deprecated",
+      "review_interval_days": 180,
+      "due_at": "2027-04-04",
+      "status": "fresh",
+      "priority": "low",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+        "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription"
+      ]
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "provider": "Google",
+      "model": "Gemini 3.7 Flash",
+      "lifecycle_status": "deprecated",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-10-07",
+      "age_days": 34,
+      "policy": "deprecated",
+      "review_interval_days": 180,
+      "due_at": "2027-04-05",
+      "status": "fresh",
+      "priority": "low",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/deprecations",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash",
+        "https://ai.google.dev/gemini-api/docs/pricing"
       ]
     }
   ]

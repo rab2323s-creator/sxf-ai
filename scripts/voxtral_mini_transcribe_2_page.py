@@ -191,7 +191,7 @@ def enrich_voxtral_mini_transcribe_2_page(page: str) -> str:
     article.update({
         "headline": TITLE.removesuffix(" | SXF"),
         "description": DESCRIPTION,
-        "dateModified": "2026-11-07",
+        "dateModified": "2026-11-24",
         "citation": SOURCES,
         "mainEntityOfPage": {"@type": "WebPage", "@id": CANONICAL},
         "author": {"@type": "Organization", "name": "SXF / AI", "url": "https://sxf.si/"},

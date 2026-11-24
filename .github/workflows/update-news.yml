@@ -33,6 +33,8 @@ jobs:
         run: python tests/test_content_ownership.py
       - name: Test model SEO protection and simulated price/spec updates
         run: python tests/test_model_editorial_guard.py
+      - name: Verify ten source-backed model editorial updates
+        run: python tests/test_verified_model_updates.py
       - name: Offline snapshot rendering unit tests
         run: python tests/test_snapshot_rendering.py
       - name: Editorial robots and indexing unit tests
@@ -206,6 +208,8 @@ jobs:
         run: |
           node --check assets/pricing-policy.js
           node tests/test_pricing_policy.cjs
+      - name: Verify dated model updates survived all rebuilds
+        run: python tests/test_verified_model_updates.py
       - name: Refresh sitemap after post-render changes
         run: python scripts/sitemap_lastmod.py --refresh
       - name: Verify complete Guides sitemap coverage

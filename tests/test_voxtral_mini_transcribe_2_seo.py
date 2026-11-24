@@ -60,7 +60,7 @@ def test_model_page() -> None:
     graph = json.loads(schema.group(1))
     article = next(x for x in graph["@graph"] if x["@type"] == "TechArticle")
     faq = next(x for x in graph["@graph"] if x["@type"] == "FAQPage")
-    assert article["dateModified"] == "2026-11-07"
+    assert article["dateModified"] == "2026-11-24"
     assert article["mainEntityOfPage"]["@id"] == URL
     assert len(article["citation"]) >= 7
     assert len(faq["mainEntity"]) == 8

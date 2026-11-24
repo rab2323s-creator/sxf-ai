@@ -300,10 +300,11 @@
       "official_sources": [
         "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
         "https://docs.mistral.ai/inference/pricing",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-2"
       ],
       "notes": [
-        "Mistral documents the model as GA Premier v26.02 and optimized for transcription purposes only.",
+        "Lifecycle rechecked 2026-11-24: Mistral originally released the model as Premier v26.02 for transcription only; it is now deprecated for new hosted integrations.",
         "The official model card displays no context value, so context_window remains null rather than inferred.",
         "Standard transcription pricing is $0.003 per minute; the lower batch rate is intentionally excluded."
       ],
@@ -330,7 +331,7 @@
           "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
           "pricing": "https://docs.mistral.ai/inference/pricing",
           "access": "https://docs.mistral.ai/models",
-          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02",
+          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-2",
           "capabilities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-26-02"
         }
       },
@@ -342,7 +343,7 @@
         "self_hostable": false
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "capabilities": [
         "audio",
@@ -849,16 +850,17 @@
           "text"
         ]
       },
-      "positioning": "Mistral GA audio specialist optimized exclusively for low-latency live transcription over realtime WebSocket sessions.",
+      "positioning": "Mistral's February 2026 realtime transcription model; the hosted V2 endpoint is deprecated and Realtime 3 is recommended for new integrations.",
       "sxf_url": "/models/voxtral-mini-transcribe-realtime/",
       "page_template": "catalog-reference",
       "official_sources": [
         "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
         "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime"
       ],
       "notes": [
-        "Mistral lists Voxtral Mini Transcribe Realtime as GA v26.02 and optimized for live transcription only.",
+        "Lifecycle rechecked 2026-11-24: Mistral's model directory now marks this v26.02 hosted model deprecated; it was optimized for live transcription only.",
         "The official model card publishes $0.006 per minute pricing and does not publish a context-window value.",
         "The realtime transcription endpoint uses WebSockets and is excluded from the token calculator."
       ],
@@ -885,7 +887,7 @@
           "modalities": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
           "pricing": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
           "access": "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription",
-          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime-26-02",
+          "lifecycle": "https://docs.mistral.ai/models/voxtral-mini-transcribe-realtime",
           "capabilities": "https://docs.mistral.ai/studio/audio/speech_to_text/realtime_transcription"
         }
       },
@@ -897,7 +899,7 @@
         "self_hostable": false
       },
       "lifecycle": {
-        "status": "current"
+        "status": "deprecated"
       },
       "capabilities": [
         "audio",
