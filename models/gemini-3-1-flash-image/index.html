@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="Nano Banana 2 (Gemini 3.1 Flash Image) — API Specs, Context &amp; Pricing | SXF / AI" />
       <meta name="twitter:description" content="Nano Banana 2 (Gemini 3.1 Flash Image) reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Go" />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gemini-3-1-flash-image/#article","headline":"Nano Banana 2 (Gemini 3.1 Flash Image) — API Specs, Context & Pricing","description":"Nano Banana 2 (Gemini 3.1 Flash Image) reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Google sources.","url":"https://sxf.si/models/gemini-3-1-flash-image/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Nano Banana 2 (Gemini 3.1 Flash Image)"},"citation":["https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image","https://ai.google.dev/gemini-api/docs/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Nano Banana 2 (Gemini 3.1 Flash Image)","item":"https://sxf.si/models/gemini-3-1-flash-image/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/gemini-3-1-flash-image/#article","headline":"Nano Banana 2 (Gemini 3.1 Flash Image) — API Specs, Context & Pricing","description":"Nano Banana 2 (Gemini 3.1 Flash Image) reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Google sources.","url":"https://sxf.si/models/gemini-3-1-flash-image/","dateModified":"2026-11-26","about":{"@type":"Thing","name":"Nano Banana 2 (Gemini 3.1 Flash Image)"},"citation":["https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image","https://ai.google.dev/gemini-api/docs/pricing","https://ai.google.dev/gemini-api/docs/deprecations"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Nano Banana 2 (Gemini 3.1 Flash Image)","item":"https://sxf.si/models/gemini-3-1-flash-image/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -42,16 +42,17 @@
         <div class="collection-stats">
           <div><strong>131,072</strong><span>context tokens</span></div>
           <div><strong>32,768</strong><span>max output</span></div>
-          <div><strong>2026-10-12</strong><span>last verified</span></div>
+          <div><strong>2026-11-26</strong><span>last verified</span></div>
         </div>
       </section>
+<section class="shell model-deep-section" id="sxf-verified-model-update" data-verified-model-update="gemini-3-1-flash-image"><div class="model-section-head"><p class="eyebrow">SOURCE-VERIFIED EDITORIAL UPDATE · 2026-11-26</p><h2>Nano Banana 2: stable endpoint and recommended successor</h2><p>Google still lists gemini-3.1-flash-image as stable without an announced shutdown date; its recommended successor is gemini-nano-banana-2.1. The model card documents text and image/PDF input, mixed image/text output, 131,072 input and 32,768 output tokens. Standard per-million prices remain $0.50 input, $3 text/thinking output and $60 image output. The current rate table estimates image-only output at $0.045 (0.5K), $0.067 (1K), $0.101 (2K) and $0.151 (4K). The card lists Batch support but no Flex or Priority; the reviewed price table shows only Standard, so confirm other serving-tier rates before use. Web/image grounding is metered per individual query beyond the shared allowance.</p></div><p class="reference-note">Primary sources: <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image" target="_blank" rel="noopener noreferrer">Provider documentation</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Provider pricing</a> · <a href="https://ai.google.dev/gemini-api/docs/deprecations" target="_blank" rel="noopener noreferrer">Provider lifecycle schedule</a></p></section>
 
       <section class="model-reference model-reference-deep shell">
         <div class="model-reference-intro">
           <div class="model-reference-copy">
             <p class="eyebrow">PRIMARY-SOURCE VERIFIED</p>
             <h2>Nano Banana 2 (Gemini 3.1 Flash Image) at a glance.</h2>
-            <p>Google documents a 131,072-token context window. Input modalities: text + image. Output: text + image. Pricing status: Official paid API.</p>
+            <p>Google documents a 131,072-token context window. Input modalities: text + image + PDF. Output: text + image. Pricing status: Official paid API.</p>
           </div>
           <div class="model-fact-grid">
             <div><span>MODEL ID</span><strong>gemini-3.1-flash-image</strong></div>
@@ -67,7 +68,7 @@
           <div class="model-section-head"><p class="eyebrow">CAPABILITY CONTRACT</p><h2>Published model behavior.</h2></div>
           <div class="model-capability-grid">
             <article><span>REASONING</span><h3>supported</h3><p>Only provider-documented reasoning controls are shown; missing controls remain unpublished rather than inferred.</p></article>
-            <article><span>INPUT</span><h3>text + image</h3><p>Input modalities come from the cited official model documentation.</p></article>
+            <article><span>INPUT</span><h3>text + image + PDF</h3><p>Input modalities come from the cited official model documentation.</p></article>
             <article><span>OUTPUT</span><h3>text + image</h3><p>Output modality and output-limit claims remain separate so an undocumented token cap is not guessed.</p></article>
           </div>
         </section>

@@ -1188,6 +1188,239 @@
         ]
       ],
       "replacements": []
+    },
+    "mistral-small-4": {
+      "date": "2026-11-26",
+      "title": "Mistral Small 4: open hybrid architecture and serving costs",
+      "text": "Mistral Small 4 remains GA under Apache 2.0. Its mixture-of-experts architecture has 119B total parameters and 6.5B active parameters; active parameters do not determine the full checkpoint size. The model card lists 256K context, chat completions, function calling, structured outputs, predicted outputs, document Q&A and Batch. The Standard rate card lists $0.15 input, $0.015 cached input and $0.60 output per million tokens. No independent output cap is published in the model card; do not treat the context limit as an output allowance.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "mistral-ocr-4-1": {
+      "date": "2026-11-26",
+      "title": "OCR 4.1: page billing, annotations and cached-rate disclosure",
+      "text": "OCR 4.1 remains a GA Premier hosted API. The model card distinguishes $4 per 1,000 standard pages and $5 per 1,000 annotated pages; the current Standard pricing table also displays $0.40 per 1,000 cached input pages. Do not treat cached pricing as an automatic discount or add both page categories to every request. The SXF calculator continues to estimate uncached standard or annotated processing separately; the catalog retains its base per-page meter. Use /v1/ocr for layout blocks, paragraph bounding boxes, structural labels and confidence scores. Validate extracted tables and uncertain blocks before downstream use.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/ocr-4-1",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "ministral-14b-2512": {
+      "date": "2026-11-26",
+      "title": "Ministral 3 14B: distinguish API from downloadable variants",
+      "text": "Mistral lists the 14B dense model as GA with a 256K context and separate Apache 2.0 base, instruct and reasoning weights. The dated API identifier is ministral-14b-2512; a separate reasoning checkpoint is not a guarantee of hosted reasoning_effort support. The provider's weight table estimates roughly 93 GB at BF16 and 24 GB at FP4 for its documented context configuration, not minimum weight-only VRAM. Standard API rates are $0.20 input, $0.02 cached input and $0.20 output per million tokens. Function calling, structured outputs, document Q&A and Batch are documented.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/ministral-3-14b",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "ministral-8b-2512": {
+      "date": "2026-11-26",
+      "title": "Ministral 3 8B: edge deployment and documented API features",
+      "text": "The 8B dense model remains listed in the active portfolio with 256K context. Mistral provides Apache 2.0 base, instruct and reasoning checkpoints with vision support; the dated hosted endpoint is ministral-8b-2512. The weight table estimates approximately 67 GB BF16 to 17 GB FP4 GPU RAM for its documented configuration, not a universal minimum. Standard API rates are $0.15 input, $0.015 cached input and $0.15 output per million tokens. Use the appropriate checkpoint locally; hosted function calling, structured outputs and Batch are documented separately.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/ministral-3-8b",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "ministral-3b-2512": {
+      "date": "2026-11-26",
+      "title": "Ministral 3 3B: local footprint and inference limits",
+      "text": "The 3B dense model remains listed with a 256K context and text/image understanding. Apache 2.0 base, instruct and reasoning checkpoints are distinct from the hosted ministral-3b-2512 endpoint. Mistral's weight table estimates roughly 43 GB BF16 to 11 GB FP4 GPU RAM for its documented configuration; shorter contexts and other runtimes may differ. The Standard API rate is $0.10 input, $0.01 cached input and $0.10 output per million tokens. Document Q&A, structured outputs, function calling and Batch are available; an independent maximum output limit remains unpublished.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/ministral-3-3b",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "mistral-embed": {
+      "date": "2026-11-26",
+      "title": "Mistral Embed: cached-input price and safe indexing",
+      "text": "Mistral's current rate table lists $0.10 per million ordinary input tokens and $0.01 per million cached input tokens, without a separate generated-output fee. The provider has not supplied an effective-start date for the cached rate in the reviewed table; SXF records the newly verified figure without asserting when it first took effect. The model remains GA Premier with 8K context and Embeddings and Batch endpoints. The existing SXF estimator assumes uncached inputs, so its calculations remain valid. Keep the same model and vector representation for indexing and querying; a text embedding is not a generated-text output.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ],
+        [
+          "https://docs.mistral.ai/api/endpoint/embeddings",
+          "Provider documentation"
+        ]
+      ],
+      "replacements": [
+        [
+          "<p>$0.10 input per 1 million tokens.</p>",
+          "<p>$0.10 input · $0.01 cached per 1 million tokens.</p>"
+        ],
+        [
+          "The Standard rate is $0.10 per million input tokens, with no separately published text-generation output rate. Vector storage and RAG answer generation are additional costs.",
+          "The Standard rate is $0.10 per million uncached input tokens; the current price table lists $0.01 per million cached input tokens. Vector storage and RAG answer generation remain additional costs, and there is no separate generated-text output charge."
+        ],
+        [
+          "The published Standard Mistral Embed rate is $0.10 per million input tokens, with no separately published generated-text output-token rate. Vector database and RAG answer-model costs are separate.",
+          "The published Standard Mistral Embed rate is $0.10 per million uncached input tokens and $0.01 per million cached input tokens. No generated-text output-token rate applies. Vector database and RAG answer-model costs are separate."
+        ]
+      ]
+    },
+    "shieldstral-1-0": {
+      "date": "2026-11-26",
+      "title": "Shieldstral 1.0: self-hosted policy classification",
+      "text": "The model card still labels Shieldstral 1.0 Public Preview, Apache 2.0, with 3.8B total and active parameters and a 32K context. It evaluates natural-language policy questions against text or image content, returning a yes/no classification for prompt/response moderation, refusal detection and safety filtering. Mistral's latest price table explicitly lists self-hosting rather than a hosted per-token API price. Costs therefore depend on local infrastructure; the model is distinct from Mistral Moderation 2. Treat classification as a policy signal, not a guarantee of safety.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/shieldstral-1-0",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "No direct Standard price published.",
+          "Self-hosted."
+        ]
+      ]
+    },
+    "gemini-3-1-pro-preview": {
+      "date": "2026-11-26",
+      "title": "Gemini 3.1 Pro Preview: availability and complete cost tiers",
+      "text": "Google's lifecycle table has no announced shutdown date for gemini-3.1-pro-preview; the endpoint remains Preview, not GA. The separate gemini-3.1-pro-preview-customtools endpoint prioritizes custom tools in agent workflows and uses the same pricing. Standard per-million rates for prompts up to 200K tokens are $2 input, $0.20 cached input and $12 output including thinking; above 200K they are $4, $0.40 and $18. Cache storage is $4.50 per million token-hours. The model card confirms 1,048,576 input and 65,536 output tokens and support for Batch, Flex and Priority; Live API and image generation are not supported. Search grounding is separately billed per query beyond the shared allowance.",
+      "sources": [
+        [
+          "https://aistudio.google.com/docs/models/gemini-3.1-pro-preview",
+          "Provider documentation"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Provider pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Provider lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "Official list prices verified 2026-10-12; no historical effective-start date is claimed.",
+          "Official list prices verified 2026-11-26; no historical effective-start date is claimed."
+        ]
+      ]
+    },
+    "gemini-3-1-flash-image": {
+      "date": "2026-11-26",
+      "title": "Nano Banana 2: stable endpoint and recommended successor",
+      "text": "Google still lists gemini-3.1-flash-image as stable without an announced shutdown date; its recommended successor is gemini-nano-banana-2.1. The model card documents text and image/PDF input, mixed image/text output, 131,072 input and 32,768 output tokens. Standard per-million prices remain $0.50 input, $3 text/thinking output and $60 image output. The current rate table estimates image-only output at $0.045 (0.5K), $0.067 (1K), $0.101 (2K) and $0.151 (4K). The card lists Batch support but no Flex or Priority; the reviewed price table shows only Standard, so confirm other serving-tier rates before use. Web/image grounding is metered per individual query beyond the shared allowance.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "Provider documentation"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Provider pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Provider lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "Input modalities: text + image. Output: text + image.",
+          "Input modalities: text + image + PDF. Output: text + image."
+        ],
+        [
+          "<span>INPUT</span><h3>text + image</h3>",
+          "<span>INPUT</span><h3>text + image + PDF</h3>"
+        ]
+      ]
+    },
+    "gemini-3-pro-image": {
+      "date": "2026-11-26",
+      "title": "Nano Banana Pro: current Standard prices and serving-tier caveat",
+      "text": "Google's lifecycle table still lists the stable gemini-3-pro-image endpoint with no announced shutdown date. The model card confirms 65,536 input and 32,768 output tokens, Search grounding and thinking. Standard pricing is $2 per million text/image input tokens, $12 per million text/thinking output tokens and $120 per million image output tokens. The provider estimates $0.134 for 1K/2K image output and $0.24 for 4K. The model card lists Batch, Flex and Priority support, but the reviewed pricing page publishes only Standard rates for this SKU; earlier Batch estimates must not be presented as confirmed current quotes. Search grounding is separately charged per individual query beyond the shared allowance.",
+      "sources": [
+        [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "Provider documentation"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "Provider pricing"
+        ],
+        [
+          "https://ai.google.dev/gemini-api/docs/deprecations",
+          "Provider lifecycle schedule"
+        ]
+      ],
+      "replacements": [
+        [
+          "Published Batch image-output equivalent, with asynchronous processing instead of the real-time request path.",
+          "Historical Batch image-output estimate; the November 26 price table does not list a current Batch rate. Confirm the effective price before use."
+        ],
+        [
+          "Published Batch estimate. A batch request can still generate additional input or non-image output charges.",
+          "Historical Batch estimate, not a current verified rate. Confirm the applicable tier and any additional input or non-image output charges."
+        ],
+        [
+          "Yes. Google publishes Batch pricing of approximately $0.067 per 1K/2K image and $0.12 per 4K image, excluding other request costs. Batch is suited to asynchronous production rather than instant editing.",
+          "The model card lists Batch support. Earlier estimates were $0.067 per 1K/2K image and $0.12 per 4K image; the current price table does not verify these Batch rates. Confirm the applicable tier before budgeting."
+        ]
+      ]
     }
   }
 }

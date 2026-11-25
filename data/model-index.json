@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "source_catalog_schema": "1.6",
-  "source_verified": "2026-11-25",
+  "source_verified": "2026-11-26",
   "model_count": 100,
   "provider_count": 21,
   "models": [
@@ -674,7 +674,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 0.15,
         "cached_input": 0.015,
@@ -850,7 +850,7 @@
         "meter": "pages",
         "display_unit": "per page"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "page": 0.004
       }
@@ -1134,7 +1134,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 0.2,
         "cached_input": 0.02,
@@ -1168,7 +1168,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 0.15,
         "cached_input": 0.015,
@@ -1202,7 +1202,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 0.1,
         "cached_input": 0.01,
@@ -1689,9 +1689,10 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-06",
+      "verified_at": "2026-11-26",
       "standard_rate": {
-        "input": 0.1
+        "input": 0.1,
+        "cached_input": 0.01
       }
     },
     {
@@ -1887,13 +1888,13 @@
       "lifecycle": {
         "status": "preview"
       },
-      "pricing_status": "not-published",
+      "pricing_status": "self-hosted",
       "calculator_eligible": false,
       "pricing_basis": {
         "meter": "tokens",
         "display_unit": "per 1 million tokens"
       },
-      "verified_at": "2026-10-07",
+      "verified_at": "2026-11-26",
       "standard_rate": null
     },
     {
@@ -2584,7 +2585,7 @@
         "meter": "tokens",
         "display_unit": "per 1 million tokens (IMAGE output; text output billed separately)"
       },
-      "verified_at": "2026-10-12",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 2,
         "output": 120
@@ -3215,7 +3216,7 @@
         "meter": "tokens",
         "display_unit": "per million tokens, <=200K or >200K prompt tier"
       },
-      "verified_at": "2026-10-12",
+      "verified_at": "2026-11-26",
       "standard_rate": null
     },
     {
@@ -3245,7 +3246,7 @@
         "meter": "tokens",
         "display_unit": "per million tokens: IMAGE output only, text output separate"
       },
-      "verified_at": "2026-10-12",
+      "verified_at": "2026-11-26",
       "standard_rate": {
         "input": 0.5,
         "output": 60

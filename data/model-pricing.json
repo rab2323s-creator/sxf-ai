@@ -2,7 +2,7 @@
   "schema_version": "1.6",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier and specialist AI models tracked by SXF / AI.",
-  "source_verified": "2026-11-25",
+  "source_verified": "2026-11-26",
   "currency": "USD",
   "pricing_unit": "Model-specific; see pricing_basis",
   "pricing_scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
@@ -1830,7 +1830,8 @@
       "notes": [
         "Mistral publishes the context window as 256k tokens; SXF stores this as 256,000 for normalized numeric filtering.",
         "No separate max-output token cap or knowledge cutoff is published in the cited model card, so those fields remain unknown.",
-        "Mistral Small 4 is GA and released under Apache 2.0 as open weights."
+        "Mistral Small 4 is GA and released under Apache 2.0 as open weights.",
+        "119B total/6.5B active MoE; API supports predicted outputs, function calling, structured outputs and Batch."
       ],
       "pricing": {
         "standard": [
@@ -1844,7 +1845,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/mistral-small-4-0-26-03",
@@ -2305,7 +2306,8 @@
         "Mistral documents OCR 4.1 as GA Premier and the latest OCR service in its Document AI stack.",
         "The OCR processor accepts document and image inputs and returns extracted text plus document-structure metadata.",
         "Standard OCR processing is normalized from $4 per 1,000 pages to $0.004 per page. Annotated-page pricing and batch pricing are outside this base Standard rate.",
-        "No token context window, max-output token cap, or knowledge cutoff is published for this OCR service, so those fields remain unknown."
+        "No token context window, max-output token cap, or knowledge cutoff is published for this OCR service, so those fields remain unknown.",
+        "Current price table additionally displays $0.40 per 1,000 cached input pages; the catalog and calculator retain the uncached base page rate, with eligibility unconfirmed."
       ],
       "pricing": {
         "standard": [
@@ -2319,7 +2321,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/ocr-4-1",
@@ -3033,7 +3035,9 @@
       "sxf_url": "/models/ministral-14b-2512/",
       "official_sources": [
         "https://docs.mistral.ai/models/ministral-3-14b-25-12",
-        "https://docs.mistral.ai/inference/pricing"
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-14b",
+        "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release"
       ],
       "pricing": {
         "standard": [
@@ -3047,7 +3051,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/ministral-3-14b-25-12",
@@ -3087,7 +3091,10 @@
           "output"
         ],
         "display_unit": "per 1 million tokens"
-      }
+      },
+      "notes": [
+        "Separate base, instruct and reasoning Apache 2.0 checkpoints; Mistral estimates 93–24 GB GPU RAM from BF16 to FP4 for its documented configuration."
+      ]
     },
     {
       "provider": "Mistral AI",
@@ -3111,7 +3118,9 @@
       "sxf_url": "/models/ministral-8b-2512/",
       "official_sources": [
         "https://docs.mistral.ai/models/ministral-3-8b-25-12",
-        "https://docs.mistral.ai/inference/pricing"
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-8b",
+        "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release"
       ],
       "pricing": {
         "standard": [
@@ -3125,7 +3134,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/ministral-3-8b-25-12",
@@ -3165,7 +3174,10 @@
           "output"
         ],
         "display_unit": "per 1 million tokens"
-      }
+      },
+      "notes": [
+        "Separate Apache 2.0 checkpoints; published GPU RAM estimate 67–17 GB BF16 to FP4 in the documented configuration."
+      ]
     },
     {
       "provider": "Mistral AI",
@@ -3189,7 +3201,9 @@
       "sxf_url": "/models/ministral-3b-2512/",
       "official_sources": [
         "https://docs.mistral.ai/models/ministral-3-3b-25-12",
-        "https://docs.mistral.ai/inference/pricing"
+        "https://docs.mistral.ai/inference/pricing",
+        "https://docs.mistral.ai/models/ministral-3-3b",
+        "https://docs.mistral.ai/resources/release-note/2025-12-02-mistral-large-3-and-ministral-3-release"
       ],
       "pricing": {
         "standard": [
@@ -3203,7 +3217,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/ministral-3-3b-25-12",
@@ -3243,7 +3257,10 @@
           "output"
         ],
         "display_unit": "per 1 million tokens"
-      }
+      },
+      "notes": [
+        "Separate Apache 2.0 checkpoints; published GPU RAM estimate 43–11 GB BF16 to FP4 in the documented configuration."
+      ]
     },
     {
       "provider": "Anthropic",
@@ -4504,24 +4521,27 @@
       "official_sources": [
         "https://docs.mistral.ai/models/mistral-embed-23-12",
         "https://docs.mistral.ai/api/endpoint/embeddings",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/inference/pricing"
       ],
       "notes": [
         "Mistral lists Mistral Embed as a current GA Premier embedding model with an 8k context window.",
         "The official model card publishes $0.10 per 1M input tokens.",
-        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension."
+        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension.",
+        "Standard rate card also lists $0.01 per million cached input tokens; verified November 26, with effective-start date unspecified. The estimator assumes ordinary uncached input."
       ],
       "pricing": {
         "standard": [
           {
             "start": "2023-12-11",
             "end": null,
-            "input": 0.1
+            "input": 0.1,
+            "cached_input": 0.01
           }
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/mistral-embed-23-12",
@@ -4530,7 +4550,7 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/mistral-embed-23-12",
           "reasoning": "https://docs.mistral.ai/models/mistral-embed-23-12",
           "modalities": "https://docs.mistral.ai/api/endpoint/embeddings",
-          "pricing": "https://docs.mistral.ai/models/mistral-embed-23-12",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
           "access": "https://docs.mistral.ai/api/endpoint/embeddings",
           "lifecycle": "https://docs.mistral.ai/models",
           "capabilities": "https://docs.mistral.ai/api/endpoint/embeddings"
@@ -4553,7 +4573,8 @@
         "meter": "tokens",
         "quantity": 1000000,
         "dimensions": [
-          "input"
+          "input",
+          "cached_input"
         ],
         "display_unit": "per 1 million tokens"
       }
@@ -5062,15 +5083,17 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://docs.mistral.ai/models/shieldstral-1-0",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/inference/pricing"
       ],
       "notes": [
         "Public Preview model released August 4, 2026 under Apache 2.0.",
-        "No directly comparable hosted Standard inference rate is asserted."
+        "No directly comparable hosted Standard inference rate is asserted.",
+        "The current price table explicitly lists self-hosted open weights; no hosted Standard price or official hosted API is asserted."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/shieldstral-1-0",
@@ -5079,13 +5102,13 @@
           "knowledge_cutoff": "https://docs.mistral.ai/models/shieldstral-1-0",
           "reasoning": "https://docs.mistral.ai/models/shieldstral-1-0",
           "modalities": "https://docs.mistral.ai/models/shieldstral-1-0",
-          "pricing": "https://docs.mistral.ai/models/shieldstral-1-0",
+          "pricing": "https://docs.mistral.ai/inference/pricing",
           "access": "https://docs.mistral.ai/models/shieldstral-1-0",
           "lifecycle": "https://docs.mistral.ai/models/shieldstral-1-0",
           "capabilities": "https://docs.mistral.ai/models/shieldstral-1-0"
         }
       },
-      "pricing_status": "not-published",
+      "pricing_status": "self-hosted",
       "calculator_eligible": false,
       "access": {
         "official_api": false,
@@ -6895,7 +6918,8 @@
         "Stable provider-native model ID is gemini-3-pro-image; Nano Banana Pro is its consumer-facing name.",
         "Standard paid API rates: $2.00 per 1M text/image input tokens and $120.00 per 1M generated IMAGE output tokens. Text and thinking output is priced separately at $12.00 per 1M text tokens.",
         "Google's Standard estimates are $0.134 per 1K/2K image or $0.24 per 4K image; prompt/input tokens, search grounding and optional service tiers can add charges.",
-        "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled."
+        "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled.",
+        "Stable endpoint has no announced shutdown. Model card lists Batch/Flex/Priority support; current pricing table shows Standard only, so historical Batch estimates are not current verified rates."
       ],
       "pricing": {
         "standard": [
@@ -6927,10 +6951,11 @@
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
         "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://ai.google.dev/gemini-api/docs/image-generation"
+        "https://ai.google.dev/gemini-api/docs/image-generation",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
@@ -6941,7 +6966,7 @@
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
         }
       },
@@ -8546,12 +8571,13 @@
       "notes": [
         "Official API ID gemini-3.1-pro-preview; preview availability may change.",
         "Standard tiered input/output token prices per million: $2/$12 for prompts <=200K, $4/$18 above 200K; caching and grounding are additional.",
-        "Fixed token calculator disabled because the rate depends on prompt length."
+        "Fixed token calculator disabled because the rate depends on prompt length.",
+        "Preview has no announced shutdown; customtools is a separate endpoint at the same pricing. Cache reads $0.20/$0.40 per million input tokens by prompt length; storage $4.50 per million token-hours."
       ],
       "pricing": {
         "tiered": {
           "basis": "input_tokens_per_request",
-          "verified_at": "2026-10-12",
+          "verified_at": "2026-11-26",
           "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
           "scopes": [
             {
@@ -8602,10 +8628,12 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://aistudio.google.com/docs/models/gemini-3.1-pro-preview",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
@@ -8615,7 +8643,7 @@
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
         }
@@ -8648,7 +8676,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "PDF"
         ],
         "output": [
           "text",
@@ -8660,7 +8689,8 @@
         "Native API ID gemini-3.1-flash-image is different from gemini-nano-banana-2.1 already in the catalog.",
         "Standard paid rates: text/image input $0.50 per million tokens; IMAGE output $60 per million tokens; text/thinking output $3 per million tokens.",
         "Provider image estimates are $0.045 for 0.5K, $0.067 for 1K, $0.101 for 2K and $0.151 for 4K output; additional inputs and grounding cost extra.",
-        "Mixed image/text pricing is not a generic fixed token calculator rate."
+        "Mixed image/text pricing is not a generic fixed token calculator rate.",
+        "Google recommends Nano Banana 2.1 for migration but lists no shutdown date for the stable 3.1 Flash Image endpoint; model card includes PDF input."
       ],
       "pricing": {
         "standard": [
@@ -8691,10 +8721,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
@@ -8704,7 +8735,7 @@
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
         }

@@ -1230,7 +1230,8 @@
         "Stable provider-native model ID is gemini-3-pro-image; Nano Banana Pro is its consumer-facing name.",
         "Standard paid API rates: $2.00 per 1M text/image input tokens and $120.00 per 1M generated IMAGE output tokens. Text and thinking output is priced separately at $12.00 per 1M text tokens.",
         "Google's Standard estimates are $0.134 per 1K/2K image or $0.24 per 4K image; prompt/input tokens, search grounding and optional service tiers can add charges.",
-        "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled."
+        "Not comparable to pure text-generation models on one input/output rate. Generic text token calculator is intentionally disabled.",
+        "Stable endpoint has no announced shutdown. Model card lists Batch/Flex/Priority support; current pricing table shows Standard only, so historical Batch estimates are not current verified rates."
       ],
       "pricing": {
         "standard": [
@@ -1262,10 +1263,11 @@
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
         "https://ai.google.dev/gemini-api/docs/pricing",
-        "https://ai.google.dev/gemini-api/docs/image-generation"
+        "https://ai.google.dev/gemini-api/docs/image-generation",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
@@ -1276,7 +1278,7 @@
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
         }
       },
@@ -1492,12 +1494,13 @@
       "notes": [
         "Official API ID gemini-3.1-pro-preview; preview availability may change.",
         "Standard tiered input/output token prices per million: $2/$12 for prompts <=200K, $4/$18 above 200K; caching and grounding are additional.",
-        "Fixed token calculator disabled because the rate depends on prompt length."
+        "Fixed token calculator disabled because the rate depends on prompt length.",
+        "Preview has no announced shutdown; customtools is a separate endpoint at the same pricing. Cache reads $0.20/$0.40 per million input tokens by prompt length; storage $4.50 per million token-hours."
       ],
       "pricing": {
         "tiered": {
           "basis": "input_tokens_per_request",
-          "verified_at": "2026-10-12",
+          "verified_at": "2026-11-26",
           "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
           "scopes": [
             {
@@ -1548,10 +1551,12 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://aistudio.google.com/docs/models/gemini-3.1-pro-preview",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
@@ -1561,7 +1566,7 @@
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
         }
@@ -1593,7 +1598,8 @@
       "modalities": {
         "input": [
           "text",
-          "image"
+          "image",
+          "PDF"
         ],
         "output": [
           "text",
@@ -1605,7 +1611,8 @@
         "Native API ID gemini-3.1-flash-image is different from gemini-nano-banana-2.1 already in the catalog.",
         "Standard paid rates: text/image input $0.50 per million tokens; IMAGE output $60 per million tokens; text/thinking output $3 per million tokens.",
         "Provider image estimates are $0.045 for 0.5K, $0.067 for 1K, $0.101 for 2K and $0.151 for 4K output; additional inputs and grounding cost extra.",
-        "Mixed image/text pricing is not a generic fixed token calculator rate."
+        "Mixed image/text pricing is not a generic fixed token calculator rate.",
+        "Google recommends Nano Banana 2.1 for migration but lists no shutdown date for the stable 3.1 Flash Image endpoint; model card includes PDF input."
       ],
       "pricing": {
         "standard": [
@@ -1636,10 +1643,11 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
-        "https://ai.google.dev/gemini-api/docs/pricing"
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/deprecations"
       ],
       "provenance": {
-        "verified_at": "2026-10-12",
+        "verified_at": "2026-11-26",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
@@ -1649,7 +1657,7 @@
           "reasoning": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "modalities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "access": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
-          "lifecycle": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
+          "lifecycle": "https://ai.google.dev/gemini-api/docs/deprecations",
           "capabilities": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image",
           "pricing": "https://ai.google.dev/gemini-api/docs/pricing"
         }
