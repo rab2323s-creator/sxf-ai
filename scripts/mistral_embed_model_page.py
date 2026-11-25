@@ -29,7 +29,7 @@ FAQ=[
     ("What is the Mistral Embed model ID?",
      "The versioned model card is mistral-embed-2312, while Mistral's Python and REST API examples use mistral-embed."),
     ("What is the price of Mistral Embed?",
-     "The Standard rate is $0.10 per million input tokens, with no separately published text-generation output rate. Vector storage and RAG answer generation are additional costs."),
+     "The Standard rate is $0.10 per million uncached input tokens; the current price table lists $0.01 per million cached input tokens. Vector storage and RAG answer generation remain additional costs, and there is no separate generated-text output charge."),
     ("How many dimensions does Mistral Embed produce?",
      "Mistral's Search Toolkit documents a 1024-dimension cosine-distance configuration for mistral-embed. Check response array length on your endpoint before creating an index."),
     ("What is the Mistral Embed context limit?",
