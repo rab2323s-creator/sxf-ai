@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T23:56:16.067725Z",
+  "updated_at": "2026-11-25T08:21:50.543682Z",
   "items": [
     {
       "title": "Inside the Codex sandbox",
@@ -511,32 +511,6 @@
         "OpenAI"
       ],
       "signal_score": 28
-    },
-    {
-      "title": "A thousand fewer paths to root",
-      "summary": "OpenAI reported on November 4, 2026 that an autonomous security research pipeline screened 2,308 candidate findings in selected Linux kernel code, dynamically reproduced 1,724 and developed distinct patches for 948 local privilege-escalation issues. The single research campaign used roughly $1.21 million in API credits. These are provider-reported results, not 948 already merged upstream fixes.",
-      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
-      "signal_url": "https://sxf.si/signals/a-thousand-fewer-paths-to-root/",
-      "source": "OpenAI",
-      "published": "2026-11-04T08:00:00Z",
-      "category": "Tools",
-      "tags": [
-        "OpenAI"
-      ],
-      "signal_score": 28
-    },
-    {
-      "title": "Introducing Images 2.6",
-      "summary": "OpenAI introduced Images 2.6 on November 4, 2026 for ChatGPT, Codex and its API. It reports image generation up to 50% faster than the previous release, adds animated GIFs and sharper editing controls, and offers two API models: speed-focused Flare and detail-focused Sunburst. Provider performance claims are not guarantees for every request.",
-      "url": "https://openai.com/index/introducing-images-2-6",
-      "signal_url": "https://sxf.si/signals/introducing-images-2-6/",
-      "source": "OpenAI",
-      "published": "2026-11-04T00:00:00Z",
-      "category": "Tools",
-      "tags": [
-        "OpenAI"
-      ],
-      "signal_score": 46
     }
   ],
   "feed_errors": [],
@@ -560,7 +534,7 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 16,
+      "OpenAI": 14,
       "Google AI": 5,
       "Hugging Face": 7,
       "GitHub": 9,
@@ -577,21 +551,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1430,
         "relevance_accepted_count": 1430,
-        "quality_accepted_count": 124,
-        "accepted_candidate_count": 124,
-        "rejected_candidate_count": 1306,
+        "quality_accepted_count": 119,
+        "accepted_candidate_count": 119,
+        "rejected_candidate_count": 1311,
         "duplicate_count": 2,
-        "age_rejection_count": 1304,
+        "age_rejection_count": 1309,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 16,
+        "publish_count": 14,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "Google AI": {
@@ -600,11 +574,11 @@
         "fetch_failure": false,
         "parsed_candidate_count": 20,
         "relevance_accepted_count": 20,
-        "quality_accepted_count": 18,
-        "accepted_candidate_count": 18,
-        "rejected_candidate_count": 2,
+        "quality_accepted_count": 17,
+        "accepted_candidate_count": 17,
+        "rejected_candidate_count": 3,
         "duplicate_count": 0,
-        "age_rejection_count": 2,
+        "age_rejection_count": 3,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
         "publish_count": 5,
@@ -614,7 +588,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "Hugging Face": {
@@ -637,7 +611,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "GitHub": {
@@ -660,7 +634,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "Google Research": {
@@ -683,7 +657,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "Anthropic": {
@@ -696,9 +670,9 @@
         "accepted_candidate_count": 1,
         "rejected_candidate_count": 28,
         "duplicate_count": 0,
-        "age_rejection_count": 25,
+        "age_rejection_count": 26,
         "relevance_rejection_count": 0,
-        "quality_rejection_count": 3,
+        "quality_rejection_count": 2,
         "publish_count": 2,
         "adapter": "anthropic-sitemap",
         "adapter_contract_version": "sxf-source-adapter-v1",
@@ -706,7 +680,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -731,7 +705,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "xAI": {
@@ -754,7 +728,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       },
       "Microsoft": {
@@ -777,7 +751,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-24T23:55:28.670566Z",
+        "last_successful_fetch": "2026-11-25T08:21:05.971051Z",
         "errors": []
       }
     },
