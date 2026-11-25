@@ -2012,9 +2012,9 @@
       }
     },
     "mistral-embed-2312": {
-      "last_event_verified_at": "2026-10-06",
-      "last_event_id": "evt_7615c7f00baf86299c8b",
-      "snapshot_hash": "20696e1b1c775abaeb51008bb15e823a2384dd48509d5caeca74ffa99adf573f",
+      "last_event_verified_at": "2026-11-26",
+      "last_event_id": "evt_ada084c3db3fa75ce707",
+      "snapshot_hash": "fc5bcc393db0ed6abdb4dfa89f8d0e40a6f69e36568a88c3aebc066b02067afe",
       "snapshot": {
         "provider": "Mistral AI",
         "family": "Mistral Embed",
@@ -2039,7 +2039,8 @@
             {
               "start": "2023-12-11",
               "end": null,
-              "input": 0.1
+              "input": 0.1,
+              "cached_input": 0.01
             }
           ]
         }
@@ -3749,9 +3750,9 @@
       }
     },
     "gemini-3.1-flash-image": {
-      "last_event_verified_at": "2026-10-12",
-      "last_event_id": "evt_93892929c6b88d49d7ff",
-      "snapshot_hash": "8b298ce3040f2c5f42231fd19036a16875925f752d42d68ab2cbcd5d54b83277",
+      "last_event_verified_at": "2026-11-26",
+      "last_event_id": "evt_8500839691e908db18c4",
+      "snapshot_hash": "9bd6bed290598e8f52ada3edecc02f63795aa76311ed8c96a2036c97f1d49ba2",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini Nano Banana",
@@ -3769,7 +3770,8 @@
         "modalities": {
           "input": [
             "text",
-            "image"
+            "image",
+            "PDF"
           ],
           "output": [
             "text",
@@ -3789,9 +3791,9 @@
       }
     },
     "gemini-3.1-pro-preview": {
-      "last_event_verified_at": "2026-10-12",
-      "last_event_id": "evt_cd0c382319e543377f34",
-      "snapshot_hash": "d5f0ee79647b0c0d41c25a08625a74ee71d63f54a3978b34afec6b743b15f4be",
+      "last_event_verified_at": "2026-11-26",
+      "last_event_id": "evt_a7fe7c51d6d58e836c3d",
+      "snapshot_hash": "c9edca4eaeff3ea5974c2d6fbc0d51adf09eab1339b5e85f8e055da32e7eb41c",
       "snapshot": {
         "provider": "Google",
         "family": "Gemini 3",
@@ -3821,7 +3823,7 @@
         "pricing": {
           "tiered": {
             "basis": "input_tokens_per_request",
-            "verified_at": "2026-10-12",
+            "verified_at": "2026-11-26",
             "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
             "scopes": [
               {
@@ -9714,7 +9716,153 @@
       ],
       "event_id": "evt_5c989f32149bf7d58bd2",
       "event_hash": "5c989f32149bf7d58bd2589595107bc6e26cfa24f42779c374b4819ac7667688"
+    },
+    {
+      "sequence": 109,
+      "type": "model_changed",
+      "model_id": "gemini-3.1-flash-image",
+      "verified_at": "2026-11-26",
+      "previous_event_hash": "5c989f32149bf7d58bd2589595107bc6e26cfa24f42779c374b4819ac7667688",
+      "changes": [
+        {
+          "field": "modalities",
+          "change_type": "modality_change",
+          "before": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text",
+              "image"
+            ]
+          },
+          "after": {
+            "input": [
+              "text",
+              "image",
+              "PDF"
+            ],
+            "output": [
+              "text",
+              "image"
+            ]
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image"
+        }
+      ],
+      "event_id": "evt_8500839691e908db18c4",
+      "event_hash": "8500839691e908db18c44f4ed3df40f7ece149ef50488aa00ffd4a542abce223"
+    },
+    {
+      "sequence": 110,
+      "type": "model_changed",
+      "model_id": "gemini-3.1-pro-preview",
+      "verified_at": "2026-11-26",
+      "previous_event_hash": "8500839691e908db18c44f4ed3df40f7ece149ef50488aa00ffd4a542abce223",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "tiered": {
+              "basis": "input_tokens_per_request",
+              "verified_at": "2026-10-12",
+              "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+              "scopes": [
+                {
+                  "scope": "Global",
+                  "regions": [
+                    "Global Standard API"
+                  ],
+                  "tiers": [
+                    {
+                      "min_input_tokens": 1,
+                      "max_input_tokens": 200000,
+                      "input": 2,
+                      "output": 12
+                    },
+                    {
+                      "min_input_tokens": 200001,
+                      "max_input_tokens": null,
+                      "input": 4,
+                      "output": 18
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "after": {
+            "tiered": {
+              "basis": "input_tokens_per_request",
+              "verified_at": "2026-11-26",
+              "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+              "scopes": [
+                {
+                  "scope": "Global",
+                  "regions": [
+                    "Global Standard API"
+                  ],
+                  "tiers": [
+                    {
+                      "min_input_tokens": 1,
+                      "max_input_tokens": 200000,
+                      "input": 2,
+                      "output": 12
+                    },
+                    {
+                      "min_input_tokens": 200001,
+                      "max_input_tokens": null,
+                      "input": 4,
+                      "output": 18
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "source_url": "https://ai.google.dev/gemini-api/docs/pricing"
+        }
+      ],
+      "event_id": "evt_a7fe7c51d6d58e836c3d",
+      "event_hash": "a7fe7c51d6d58e836c3d0cb3e0f08e66b6c10a240293bee109c049be8ce6355d"
+    },
+    {
+      "sequence": 111,
+      "type": "model_changed",
+      "model_id": "mistral-embed-2312",
+      "verified_at": "2026-11-26",
+      "previous_event_hash": "a7fe7c51d6d58e836c3d0cb3e0f08e66b6c10a240293bee109c049be8ce6355d",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2023-12-11",
+                "end": null,
+                "input": 0.1
+              }
+            ]
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2023-12-11",
+                "end": null,
+                "input": 0.1,
+                "cached_input": 0.01
+              }
+            ]
+          },
+          "source_url": "https://docs.mistral.ai/inference/pricing"
+        }
+      ],
+      "event_id": "evt_ada084c3db3fa75ce707",
+      "event_hash": "ada084c3db3fa75ce707c243d726cd86cc5c62e6395a965d7f5c23bc3324ae17"
     }
   ],
-  "chain_head": "5c989f32149bf7d58bd2589595107bc6e26cfa24f42779c374b4819ac7667688"
+  "chain_head": "ada084c3db3fa75ce707c243d726cd86cc5c62e6395a965d7f5c23bc3324ae17"
 }

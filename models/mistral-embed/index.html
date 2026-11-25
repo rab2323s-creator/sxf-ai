@@ -274,7 +274,7 @@ print("API usage:", result.usage)</code></pre>
           </nav>
         </section>
 
-        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Mistral lists Mistral Embed as a current GA Premier embedding model with an 8k context window.</p></div><div><span>02</span><p>The official model card publishes $0.10 per 1M input tokens.</p></div><div><span>03</span><p>The model is excluded from the generative token calculator because embeddings have no output-token price dimension.</p></div></div></section>
+        <section class="model-deep-section"><div class="model-section-head"><p class="eyebrow">CAVEATS</p><h2>What the source record does not assume.</h2></div><div class="model-caveat-list"><div><span>01</span><p>Mistral lists Mistral Embed as a current GA Premier embedding model with an 8k context window.</p></div><div><span>02</span><p>The official model card publishes $0.10 per 1M input tokens.</p></div><div><span>03</span><p>The model is excluded from the generative token calculator because embeddings have no output-token price dimension.</p></div><div><span>04</span><p>Standard rate card also lists $0.01 per million cached input tokens; verified November 26, with effective-start date unspecified. The estimator assumes ordinary uncached input.</p></div></div></section>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">EXPLORE</p><h2>Keep the model in context.</h2></div>
@@ -287,22 +287,34 @@ print("API usage:", result.usage)</code></pre>
 
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">OFFICIAL SOURCES</p><h2>Verification links.</h2></div>
-          <div class="model-sources"><a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/models/mistral-embed-23-12</span><b>↗</b></a><a href="https://docs.mistral.ai/api/endpoint/embeddings" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/api/endpoint/embeddings</span><b>↗</b></a><a href="https://docs.mistral.ai/models" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/models</span><b>↗</b></a></div>
+          <div class="model-sources"><a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/models/mistral-embed-23-12</span><b>↗</b></a><a href="https://docs.mistral.ai/api/endpoint/embeddings" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/api/endpoint/embeddings</span><b>↗</b></a><a href="https://docs.mistral.ai/models" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/models</span><b>↗</b></a><a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer"><span>docs.mistral.ai/inference/pricing</span><b>↗</b></a></div>
         </section>
       </section>
 
-      <section class="model-change-watch shell" data-what-changed data-change-count="0" data-change-models="mistral-embed-2312">
-          <div class="change-watch-empty"><div><p class="eyebrow">WHAT CHANGED</p><h2>Mistral Embed: what changed.</h2><p>No post-baseline factual changes recorded for Mistral Embed since 2026-10-06.</p></div>
-          <div class="change-watch-status"><span>HISTORICAL BASELINE</span><strong>2026-10-06</strong><small>Original ledger snapshot, not the latest source check. See Last verified above.</small></div></div>
-        </section>
+      <section class="model-change-watch shell" data-what-changed data-change-count="1" data-change-models="mistral-embed-2312">
+      <div class="intel-section-head"><div><p class="eyebrow">WHAT CHANGED</p><h2>Mistral Embed: what changed.</h2></div><span>1 verified change since 2026-10-06</span></div>
+      <div class="change-watch-grid"><article class="change-watch-card" data-change-event="evt_ada084c3db3fa75ce707" data-model-id="mistral-embed-2312">
+              <div class="change-watch-meta"><span>Mistral Embed</span><time datetime="2026-11-26">2026-11-26</time></div>
+              <div class="change-deltas"><div class="change-delta" data-change-type="pricing_change">
+              <span>Cached input / MTok</span>
+              <div><del>—</del><b>→</b><ins>$0.01</ins></div>
+            </div></div>
+              <a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Verify at official source ↗</a>
+            </article></div>
+      <div class="compare-live-foot"><span>Only source-backed factual changes enter this view.</span><a href="/data/model-history.json">Open full ledger ↗</a></div>
+    </section>
       <section class="model-history shell" data-model-history data-history-models="mistral-embed-2312">
       <div class="intel-section-head"><div><p class="eyebrow">VERIFIED CHANGE HISTORY</p><h2>Mistral Embed verified history.</h2></div><a href="/data/model-history.json">Open ledger JSON ↗</a></div>
-      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_7615c7f00baf86299c8b" data-model-id="mistral-embed-2312">
+      <div class="model-history-grid"><article class="model-history-event" data-history-event="evt_ada084c3db3fa75ce707" data-model-id="mistral-embed-2312">
+              <div class="model-history-meta"><span>CHANGE</span><time datetime="2026-11-26">2026-11-26</time></div>
+              <h3>Mistral Embed</h3><p>Cached input / MTok: — → $0.01</p>
+              <a href="https://docs.mistral.ai/inference/pricing" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
+            </article><article class="model-history-event" data-history-event="evt_7615c7f00baf86299c8b" data-model-id="mistral-embed-2312">
               <div class="model-history-meta"><span>BASELINE</span><time datetime="2026-10-06">2026-10-06</time></div>
               <h3>Mistral Embed</h3><p>Baseline verified: 8,000 context · Not published max output · $0.10 input per 1 million tokens</p>
               <a href="https://docs.mistral.ai/models/mistral-embed-23-12" target="_blank" rel="noopener noreferrer">Official evidence ↗</a>
             </article></div>
-      <p class="reference-note">Append-only SXF ledger · 1 verified event · chain head 5c989f32149b…</p>
+      <p class="reference-note">Append-only SXF ledger · 2 verified events · chain head ada084c3db3f…</p>
     </section>
       
     </main><footer class="footer shell">
