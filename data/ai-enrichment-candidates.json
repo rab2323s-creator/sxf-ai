@@ -1,7 +1,7 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "6ef9f65dc013e8aeb82a68abcc4f7b565b666e23d84557f534e223d5b24c1df1",
+  "snapshot_hash": "15c8e40a3541452f7b457f19e6c3babbcebcda567948eafa56bd4b56443b8141",
   "candidate_count": 10,
   "candidate_limit": 10,
   "budget_guard": {
@@ -15,82 +15,6 @@
   "candidates": [
     {
       "rank": 1,
-      "signal_slug": "gemini-decisions-api-pricing-1000-questions",
-      "signal_url": "https://sxf.si/signals/gemini-decisions-api-pricing-1000-questions/",
-      "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
-      "source": "Google AI",
-      "category": "Models",
-      "published": "2026-11-11T18:00:00Z",
-      "priority_score": 192,
-      "evidence_hash": "7922bb7526c7016d4dc2d35117b1c0a07220b5f3f484ac30bd2e305d22814111",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
-          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
-          "signal_url": "https://sxf.si/signals/gemini-decisions-api-pricing-1000-questions/",
-          "source": "Google AI",
-          "published": "2026-11-11T18:00:00Z",
-          "category": "Models",
-          "tags": [
-            "Multimodal AI",
-            "Google AI"
-          ],
-          "summary": "Google introduced the Gemini Decisions API on November 11, 2026, powered by Gemini Decision 1, for probabilistic classification rather than general text generation. The announcement lists up to 1,000 questions per request, 256,000-token multimodal inputs and a $0.10 per million-input-token list price, with no output-token billing. SXF explains the difference between advertised model-compute speed and end-to-end latency and shows how to design human-review thresholds instead of treating a confidence score as proof.",
-          "signal_score": 56,
-          "seo_quality_score": 81,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "named-model",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 2,
       "signal_slug": "google-search-gemini-4-hydrogen-upgrade",
       "signal_url": "https://sxf.si/signals/google-search-gemini-4-hydrogen-upgrade/",
       "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
@@ -164,7 +88,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 3,
+      "rank": 2,
       "signal_slug": "llama-cpp-1-0-api-abi-stability-upgrade",
       "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
       "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
@@ -238,7 +162,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 4,
+      "rank": 3,
       "signal_slug": "gemini-4-hydrogen-github-copilot-availability",
       "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
       "title": "Gemini 4 Hydrogen in GitHub Copilot",
@@ -312,7 +236,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
+      "rank": 4,
       "signal_slug": "openai-child-safety-research-funding-2026",
       "signal_url": "https://sxf.si/signals/openai-child-safety-research-funding-2026/",
       "title": "Supporting research on AI and children’s safety",
@@ -388,7 +312,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "signal_slug": "chatgpt-for-sales-crm-workflows-2026",
       "signal_url": "https://sxf.si/signals/chatgpt-for-sales-crm-workflows-2026/",
       "title": "Introducing ChatGPT for Sales",
@@ -461,7 +385,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "signal_slug": "chatgpt-wallet-payment-approval-safety",
       "signal_url": "https://sxf.si/signals/chatgpt-wallet-payment-approval-safety/",
       "title": "Introducing ChatGPT Wallet",
@@ -534,7 +458,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "signal_slug": "github-copilot-evals-setup-testing-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-evals-setup-testing-2026/",
       "title": "GitHub Copilot Evals is now in public preview",
@@ -607,7 +531,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "signal_slug": "openai-daybreak-nato-cyber-defense-2026",
       "signal_url": "https://sxf.si/signals/openai-daybreak-nato-cyber-defense-2026/",
       "title": "Strengthening NATO and allied cyber defenses with AI",
@@ -681,7 +605,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "github-copilot-models-retired-november-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-models-retired-november-2026/",
       "title": "GitHub Copilot models deprecated on November 16, 2026",
@@ -1633,6 +1557,76 @@
           "key_facts",
           "pricing_or_capability_impact",
           "before_vs_after",
+          "who_should_care",
+          "what_to_verify",
+          "faq",
+          "sources",
+          "primary_search_query",
+          "secondary_search_queries",
+          "comparison_points",
+          "technical_details",
+          "practical_takeaways"
+        ],
+        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
+        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
+        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
+        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
+        "fact_policy": "evidence-only",
+        "unknown_policy": "use unknown or omit; never infer unsupported facts",
+        "internal_link_policy": "links must come from existing SXF routes only"
+      },
+      "generation_status": "not-called",
+      "index_decision": "unchanged"
+    },
+    {
+      "rank": 10,
+      "signal_slug": "github-ai-scan-repository-rest-api-setup",
+      "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
+      "title": "Manage AI Scan for repositories using the REST API",
+      "source": "GitHub",
+      "category": "Tools",
+      "published": "2026-11-13T12:22:41Z",
+      "priority_score": 108,
+      "evidence_hash": "7d60675cfddee406cbe39918a68a19ede02b7f297802c36a78be2d71cd5cf834",
+      "evidence": {
+        "pricing_basis": {
+          "currency": "USD",
+          "unit": "Model-specific; see pricing_basis",
+          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
+          "source_urls": []
+        },
+        "signal": {
+          "title": "Manage AI Scan for repositories using the REST API",
+          "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
+          "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
+          "source": "GitHub",
+          "published": "2026-11-13T12:22:41Z",
+          "category": "Tools",
+          "tags": [],
+          "summary": "GitHub announced on November 13, 2026 a public-preview REST setting called repository_scan to manage AI Scan for repositories at organization and repository level. The update allows settings automation via GET and PATCH APIs but does not automatically run a scan; users with repository write access start scans on demand, consuming GitHub Code Security AI credits. SXF explains inheritance, enterprise policy, conflict errors and rollout checks, differentiating configuration from scanning results.",
+          "signal_score": 38,
+          "seo_quality_score": 70,
+          "seo_quality_factors": [
+            "substantive-source-summary",
+            "verified-editorial-evidence"
+          ]
+        },
+        "models": [],
+        "source_urls": [
+          "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
+        ]
+      },
+      "requested_output": {
+        "route_policy": "preserve-existing-signal-route",
+        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
+        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
+        "meta_description_policy": "105-160 chars, summarize change plus user value",
+        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
+        "required_sections": [
+          "intro",
+          "what_changed",
+          "why_it_matters",
+          "key_facts",
           "who_should_care",
           "what_to_verify",
           "faq",
