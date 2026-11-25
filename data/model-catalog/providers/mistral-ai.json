@@ -385,12 +385,15 @@
         "https://docs.mistral.ai/models/codestral-25-08",
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/resources/known-limitations",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/api/endpoint/fim",
+        "https://docs.mistral.ai/resources/release-note/2025-07-30-codestral-2508-release"
       ],
       "notes": [
         "Codestral v25.08 is the current GA Premier code-completion model; the older v25.01 model is retired.",
         "Mistral publishes a 128k context window and Standard rates of $0.30 input, $0.03 cached input, and $0.90 output per million tokens.",
-        "No separate max-output limit or knowledge cutoff is published in the cited model card."
+        "No separate max-output limit or knowledge cutoff is published in the cited model card.",
+        "Standard token prices remain unchanged; FIM completion uses a prefix and suffix via the dedicated endpoint."
       ],
       "pricing": {
         "standard": [
@@ -470,12 +473,14 @@
         "https://docs.mistral.ai/models/codestral-embed-25-05",
         "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings",
         "https://docs.mistral.ai/inference/pricing",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/inference/embeddings/code_embeddings"
       ],
       "notes": [
         "Codestral Embed is GA Premier v25.05 with an 8k context window and an embeddings API endpoint.",
         "Mistral publishes $0.15 per million input tokens and $0.015 per million cached input tokens with no output-token rate.",
-        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension."
+        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension.",
+        "The embedding API supports output_dimension and output_dtype, up to 3072 dimensions. Keep vector settings consistent in the index."
       ],
       "pricing": {
         "standard": [
@@ -488,7 +493,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/codestral-embed-25-05",

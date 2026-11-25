@@ -941,6 +941,253 @@
           "<strong>2026-11-24</strong><span>last verified</span>"
         ]
       ]
+    },
+    "embed-v4-0": {
+      "date": "2026-11-25",
+      "title": "Embed 4: vector dimensions and migration boundary",
+      "text": "Embed 4 remains listed for text and multimodal retrieval. Its supported vector sizes are 256, 512, 1024 and 1536 (default), with a 128K context. Embed 5 is the newer family; its Pro/Fast interoperability does not establish compatibility with Embed 4. For a version upgrade, build a separate index and evaluate retrieval before switching traffic. Cohere's public pricing page describes dedicated Model Vault instance rates, not a verified per-token Standard rate for this API.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/changelog/embed-v5",
+          "Provider release notes"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "embed-v5-0-pro": {
+      "date": "2026-11-25",
+      "title": "Embed 5 Pro: shared vector space and November availability",
+      "text": "Cohere recommends Pro for corpus indexing and quality-sensitive retrieval, with Fast available for query-time embedding in the same vector space. Match output_dimension and representation across index and query. Both variants accept text and images, support 128K context and return vectors of 256, 512, 768, 1024, 1536 or 2048 dimensions (2048 default). Cohere announced OpenRouter availability on November 4, 2026 under cohere/embed-5-pro. Direct API, managed deployment and partner billing are separate; no direct numeric Standard token rate is asserted.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/changelog/embed-v5",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.cohere.com/v1/changelog/embed-rerank-v5-openrouter",
+          "Provider release notes"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "embed-v5-0-fast": {
+      "date": "2026-11-25",
+      "title": "Embed 5 Fast: query-time retrieval and November availability",
+      "text": "Cohere recommends indexing with Pro and embedding interactive queries with Fast. The models share a vector space; use identical dimensions and output type. Fast supports 128K context and the same six vector lengths (256–2048), with float, int8 and binary representations. OpenRouter added cohere/embed-5-fast on November 4, 2026. Compare partner rates separately from direct API or Model Vault; the direct Standard price is not confirmed.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/changelog/embed-v5",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.cohere.com/v1/changelog/embed-rerank-v5-openrouter",
+          "Provider release notes"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "rerank-4-pro": {
+      "date": "2026-11-25",
+      "title": "Rerank 4 Pro is a previous-generation reranker",
+      "text": "Cohere released Rerank 5 on October 21, 2026 and recommends rerank-v5.0-pro for new quality-sensitive workloads. Rerank 4 Pro remains listed, not announced as retired in the model overview. Migration changes the ranking model, not stored corpus embeddings: send documents to the newer endpoint and retest ranking quality and thresholds. Rerank 5 adds Context Focus and calibrated relevance scores; do not assume these features exist in Rerank 4. The 32K context covers query plus document for each inference; search-unit billing is separate from LLM output tokens.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/v2/changelog/rerank-v5",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.cohere.com/docs/rerank",
+          "Provider documentation"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "Cohere's current high-quality Rerank 4 variant for complex multilingual retrieval and semi-structured data ranking.",
+          "Cohere's previous-generation Rerank 4 Pro variant for complex multilingual retrieval; Rerank 5 Pro is recommended for new projects."
+        ],
+        [
+          "Cohere lists rerank-v4.0-pro as a latest Rerank model and recommends it for state-of-the-art quality and complex use cases.",
+          "Cohere lists rerank-v4.0-pro as a previous-generation model and recommends rerank-v5.0-pro for new projects."
+        ]
+      ]
+    },
+    "rerank-4-fast": {
+      "date": "2026-11-25",
+      "title": "Rerank 4 Fast: migration to Rerank 5 Fast",
+      "text": "Rerank 5 Fast is Cohere's recommended successor for high-throughput reranking. Cohere reports improved quality even versus 4 Pro, but this is provider evidence rather than an SXF benchmark. Change the model ID to rerank-v5.0-fast and compare latency, relevance and thresholds on your own candidate set. There is no vector index migration solely for a reranker change. The earlier 4 Fast endpoint is still listed; no shutdown date or numeric direct search-unit rate was confirmed.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/v2/changelog/rerank-v5",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.cohere.com/docs/rerank",
+          "Provider documentation"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "Low-latency Rerank 4 variant for high-throughput multilingual retrieval and semi-structured data ranking.",
+          "Previous-generation low-latency Rerank 4 variant; Cohere recommends Rerank 5 Fast for new projects."
+        ],
+        [
+          "Cohere lists rerank-v4.0-fast as a latest Rerank model with 32,768-token context.",
+          "Cohere lists rerank-v4.0-fast as a previous-generation model with 32,768-token context; use rerank-v5.0-fast for new projects."
+        ]
+      ]
+    },
+    "parse-v5-0": {
+      "date": "2026-11-25",
+      "title": "Parse 5: layout-aware output and deployment options",
+      "text": "Cohere's release identifies Parse as a 2.3B-parameter multimodal parser. Its output can represent reading order, tables, page boundaries and visual locations, including Markdown/HTML and bounding boxes. The API reference describes a blocks output with ordered page regions. Use the Parse API rather than a chat completion; production systems should validate table structure, page ordering and missing regions. Cohere lists Microsoft Foundry, SageMaker and Model Vault options. No public direct per-page numeric rate was confirmed; the full model card could not be retrieved for this review.",
+      "sources": [
+        [
+          "https://docs.cohere.com/v2/changelog",
+          "Provider release notes"
+        ],
+        [
+          "https://docs.cohere.com/v2/reference/parse",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://cohere.com/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
+    },
+    "north-mini-code-1-0": {
+      "date": "2026-11-25",
+      "title": "North Mini Code: open weights versus hosted evaluation",
+      "text": "The provider lists 30B total and 3B active MoE parameters, 256K context, 64K maximum output and Apache 2.0 weights. Chat V2, Chat V1 and Chat Completions are documented; Cohere offers evaluation keys subject to limits and production via Model Vault. The 3B active parameter count is not total storage or VRAM. Size the actual checkpoint, runtime and KV cache for local use. Treat tool execution as a harness capability with controlled permissions, not an unrestricted model action.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/north-mini-code-1.0",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/docs/rate-limits",
+          "Provider documentation"
+        ]
+      ],
+      "replacements": [
+        [
+          "Available through Chat V2 API and as Apache 2.0 open weights.",
+          "Available through Chat V2, Chat V1 and Chat Completions, and as Apache 2.0 open weights."
+        ]
+      ]
+    },
+    "command-a-reasoning": {
+      "date": "2026-11-25",
+      "title": "Command A Reasoning: serving guidance and newer Command A+",
+      "text": "Cohere still lists the August 2025 reasoning endpoint as Live, with 256K context, 32K output and a June 1, 2024 knowledge cutoff. Its model card reports 111B parameters and support for 23 languages. Cohere recommends four H100 GPUs for production deployment and four A100s for evaluation; these are provider configurations, not universal hardware requirements. Command A+ is a newer MoE alternative with different limits, so compare workloads rather than assuming equivalent behavior. Rate-limited free API access is not a paid production tariff. The overview identifies this endpoint as text input; confirm any generic image-capability badges against the specific endpoint before enabling vision.",
+      "sources": [
+        [
+          "https://docs.cohere.com/docs/command-a-reasoning",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/docs/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.cohere.com/docs/rate-limits",
+          "Provider documentation"
+        ]
+      ],
+      "replacements": []
+    },
+    "codestral": {
+      "date": "2026-11-25",
+      "title": "Codestral: current pricing and FIM endpoint",
+      "text": "Mistral's current model overview and price table retain Codestral as the code-completion specialist. Standard rates per million tokens remain $0.30 input, $0.03 cached input and $0.90 output. Use the fill-in-the-middle endpoint with a prefix and suffix when completing an existing file; ordinary chat generation is a different integration. Keep the dated identifier codestral-2508 for reproducible evaluations and verify aliases before migrating. The old model-card URL could not be opened directly, so the existing 128K context and unpublished output limit are retained rather than reverified.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ],
+        [
+          "https://docs.mistral.ai/api/endpoint/fim",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/resources/release-note/2025-07-30-codestral-2508-release",
+          "Provider release notes"
+        ]
+      ],
+      "replacements": []
+    },
+    "codestral-embed": {
+      "date": "2026-11-25",
+      "title": "Codestral Embed: vector shape and native billing",
+      "text": "Mistral's model card lists GA Premier v25.05, 8K context, and Embeddings and Batch endpoints. The code embedding guide describes output_dimension and output_dtype controls, up to 3072 dimensions. The API alias is codestral-embed; keep dimension and representation consistent between indexed code and query vectors. Standard pricing is $0.15 per million input tokens and $0.015 for cached input, with no generative output charge. Embedding dimension is not a text output-token cap.",
+      "sources": [
+        [
+          "https://docs.mistral.ai/models/codestral-embed-25-05",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/embeddings/code_embeddings",
+          "Provider documentation"
+        ],
+        [
+          "https://docs.mistral.ai/inference/pricing",
+          "Provider pricing"
+        ]
+      ],
+      "replacements": []
     }
   }
 }

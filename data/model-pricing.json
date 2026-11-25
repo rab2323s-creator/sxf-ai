@@ -2,7 +2,7 @@
   "schema_version": "1.6",
   "name": "SXF AI Model Pricing & Specs Database",
   "description": "Canonical Standard API pricing and core specifications for selected frontier and specialist AI models tracked by SXF / AI.",
-  "source_verified": "2026-11-24",
+  "source_verified": "2026-11-25",
   "currency": "USD",
   "pricing_unit": "Model-specific; see pricing_basis",
   "pricing_scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
@@ -2455,7 +2455,7 @@
           "ranking"
         ]
       },
-      "positioning": "Cohere's current high-quality Rerank 4 variant for complex multilingual retrieval and semi-structured data ranking.",
+      "positioning": "Cohere's previous-generation Rerank 4 Pro variant for complex multilingual retrieval; Rerank 5 Pro is recommended for new projects.",
       "sxf_url": "/models/rerank-4-pro/",
       "page_template": "catalog-reference",
       "official_sources": [
@@ -2463,17 +2463,21 @@
         "https://docs.cohere.com/docs/reranking-best-practices",
         "https://docs.cohere.com/reference/rerank",
         "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
-        "https://docs.cohere.com/changelog/rerank-v4.0"
+        "https://docs.cohere.com/changelog/rerank-v4.0",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/v2/changelog/rerank-v5",
+        "https://cohere.com/pricing"
       ],
       "notes": [
-        "Cohere lists rerank-v4.0-pro as a latest Rerank model and recommends it for state-of-the-art quality and complex use cases.",
+        "Cohere lists rerank-v4.0-pro as a previous-generation model and recommends rerank-v5.0-pro for new projects.",
         "Cohere documents a 32,768-token context length for Rerank 4.0.",
         "The API reports billed search_units and Cohere states Rerank is priced by quantity of searches.",
-        "No current public PAYG numeric rate for Rerank 4 Pro was verified in the cited official pricing documentation, so pricing remains not-published rather than inheriting an older Rerank price."
+        "No current public PAYG numeric rate for Rerank 4 Pro was verified in the cited official pricing documentation, so pricing remains not-published rather than inheriting an older Rerank price.",
+        "The October 21 Rerank 5 release adds Context Focus and calibrated scores; upgrading rerankers does not require re-embedding the corpus."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/rerank",
@@ -2537,12 +2541,15 @@
         "https://docs.mistral.ai/models/codestral-25-08",
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/resources/known-limitations",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/api/endpoint/fim",
+        "https://docs.mistral.ai/resources/release-note/2025-07-30-codestral-2508-release"
       ],
       "notes": [
         "Codestral v25.08 is the current GA Premier code-completion model; the older v25.01 model is retired.",
         "Mistral publishes a 128k context window and Standard rates of $0.30 input, $0.03 cached input, and $0.90 output per million tokens.",
-        "No separate max-output limit or knowledge cutoff is published in the cited model card."
+        "No separate max-output limit or knowledge cutoff is published in the cited model card.",
+        "Standard token prices remain unchanged; FIM completion uses a prefix and suffix via the dedicated endpoint."
       ],
       "pricing": {
         "standard": [
@@ -2623,12 +2630,14 @@
         "https://docs.mistral.ai/models/codestral-embed-25-05",
         "https://docs.mistral.ai/studio/knowledge-rag/embeddings/code_embeddings",
         "https://docs.mistral.ai/inference/pricing",
-        "https://docs.mistral.ai/models"
+        "https://docs.mistral.ai/models",
+        "https://docs.mistral.ai/inference/embeddings/code_embeddings"
       ],
       "notes": [
         "Codestral Embed is GA Premier v25.05 with an 8k context window and an embeddings API endpoint.",
         "Mistral publishes $0.15 per million input tokens and $0.015 per million cached input tokens with no output-token rate.",
-        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension."
+        "The model is excluded from the generative token calculator because embeddings have no output-token price dimension.",
+        "The embedding API supports output_dimension and output_dtype, up to 3072 dimensions. Keep vector settings consistent in the index."
       ],
       "pricing": {
         "standard": [
@@ -2641,7 +2650,7 @@
         ]
       },
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.mistral.ai/models/codestral-embed-25-05",
@@ -3535,16 +3544,20 @@
       "official_sources": [
         "https://docs.cohere.com/v1/docs/models",
         "https://docs.cohere.com/docs/multimodal-embeddings",
-        "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/changelog/embed-v5",
+        "https://cohere.com/pricing"
       ],
       "notes": [
         "Cohere continues to list embed-v4.0 in the current model catalog with text, image and mixed text/image (PDF) inputs and a 128K context length.",
         "Cohere now lists Embed v5 variants as newer embedding models, but embed-v4.0 is not marked deprecated in the current official model table.",
-        "No current public numeric PAYG API token rate for embed-v4.0 was verified, so pricing remains not-published rather than inheriting a rate from another Embed generation."
+        "No current public numeric PAYG API token rate for embed-v4.0 was verified, so pricing remains not-published rather than inheriting a rate from another Embed generation.",
+        "Embed 4 supports 256/512/1024/1536-dimensional vectors (1536 default); do not reuse an Embed 4 index for Embed 5 without verified cross-generation compatibility."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/v1/docs/models",
@@ -3612,16 +3625,19 @@
       "official_sources": [
         "https://docs.cohere.com/docs/command-a-reasoning",
         "https://docs.cohere.com/v1/docs/models",
-        "https://docs.cohere.com/changelog/2025-08-21-command-a-reasoning"
+        "https://docs.cohere.com/changelog/2025-08-21-command-a-reasoning",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/docs/rate-limits"
       ],
       "notes": [
         "Cohere currently lists command-a-reasoning-08-2025 as Live with a 256K context window and 32K maximum output.",
         "Cohere states that both trial and production API keys are free until rate limits are reached; no numeric pay-as-you-go token rate is asserted.",
-        "The model is excluded from the calculator because no paid Standard token rate is published for the Cohere API."
+        "The model is excluded from the calculator because no paid Standard token rate is published for the Cohere API.",
+        "Model card documents 111B parameters, 23 languages and June 1, 2024 cutoff; compare the newer Command A+ separately."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/command-a-reasoning",
@@ -3873,16 +3889,19 @@
         "https://docs.cohere.com/docs/cohere-embed",
         "https://docs.cohere.com/changelog/embed-v5",
         "https://docs.cohere.com/v1/reference/embed",
-        "https://cohere.com/pricing"
+        "https://cohere.com/pricing",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/v1/changelog/embed-rerank-v5-openrouter"
       ],
       "notes": [
         "Cohere released Embed 5 Pro on September 30, 2026 and currently lists it as available through the Embed API.",
         "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
-        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing.",
+        "November 4: OpenRouter model cohere/embed-5-pro; use the shared Pro/Fast space with matching dimensionality for indexing and querying."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/cohere-embed",
@@ -3946,16 +3965,19 @@
         "https://docs.cohere.com/docs/cohere-embed",
         "https://docs.cohere.com/changelog/embed-v5",
         "https://docs.cohere.com/v1/reference/embed",
-        "https://cohere.com/pricing"
+        "https://cohere.com/pricing",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/v1/changelog/embed-rerank-v5-openrouter"
       ],
       "notes": [
         "Cohere released Embed 5 Fast on September 30, 2026 and currently lists it as available through the Embed API.",
         "The model supports text, images, and mixed text/image inputs including PDF pages with a 128K context window.",
-        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing."
+        "No public numeric pay-as-you-go Embed API token rate was verified. Cohere's published Model Vault instance pricing is a different deployment meter and is not treated as canonical API token pricing.",
+        "November 4: OpenRouter model cohere/embed-5-fast. Fast can query a Pro index with compatible vector settings; keep unrelated embedding generations separate."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-06",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/cohere-embed",
@@ -5113,11 +5135,15 @@
         "https://docs.cohere.com/docs/parse",
         "https://docs.cohere.com/v2/reference/parse",
         "https://docs.cohere.com/changelog/parse",
-        "https://docs.cohere.com/docs/model-vault/standard/pricing"
+        "https://docs.cohere.com/docs/model-vault/standard/pricing",
+        "https://docs.cohere.com/v2/changelog",
+        "https://docs.cohere.com/docs/models",
+        "https://cohere.com/pricing"
       ],
       "notes": [
         "Released August 27, 2026.",
-        "The API reports billed pages, but no public numeric PAYG per-page rate was verified; Model Vault instance pricing is not reused."
+        "The API reports billed pages, but no public numeric PAYG per-page rate was verified; Model Vault instance pricing is not reused.",
+        "Parse 5 produces structured page content, tables and location metadata; API billed pages are distinct from managed instance-hour charges."
       ],
       "pricing": {},
       "provenance": {
@@ -5187,15 +5213,18 @@
       "page_template": "catalog-reference",
       "official_sources": [
         "https://docs.cohere.com/docs/north-mini-code-1.0",
-        "https://docs.cohere.com/changelog/north-mini-code-1-0"
+        "https://docs.cohere.com/changelog/north-mini-code-1-0",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/docs/rate-limits"
       ],
       "notes": [
-        "Available through Chat V2 API and as Apache 2.0 open weights.",
-        "API evaluation access is free until rate limits; paid production Model Vault rates are a separate instance meter."
+        "Available through Chat V2, Chat V1 and Chat Completions, and as Apache 2.0 open weights.",
+        "API evaluation access is free until rate limits; paid production Model Vault rates are a separate instance meter.",
+        "30B total/3B active MoE; 256K context and 64K output; production Model Vault is separate from free rate-limited evaluation."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/north-mini-code-1.0",
@@ -5327,7 +5356,7 @@
           "ranking"
         ]
       },
-      "positioning": "Low-latency Rerank 4 variant for high-throughput multilingual retrieval and semi-structured data ranking.",
+      "positioning": "Previous-generation low-latency Rerank 4 variant; Cohere recommends Rerank 5 Fast for new projects.",
       "sxf_url": "/models/rerank-4-fast/",
       "page_template": "catalog-reference",
       "official_sources": [
@@ -5335,15 +5364,19 @@
         "https://docs.cohere.com/docs/reranking-best-practices",
         "https://docs.cohere.com/v2/reference/rerank",
         "https://docs.cohere.com/changelog/rerank-v4.0",
-        "https://docs.cohere.com/docs/how-does-cohere-pricing-work"
+        "https://docs.cohere.com/docs/how-does-cohere-pricing-work",
+        "https://docs.cohere.com/docs/models",
+        "https://docs.cohere.com/v2/changelog/rerank-v5",
+        "https://cohere.com/pricing"
       ],
       "notes": [
-        "Cohere lists rerank-v4.0-fast as a latest Rerank model with 32,768-token context.",
-        "The API bills in search_units; no current public numeric PAYG search-unit rate was verified."
+        "Cohere lists rerank-v4.0-fast as a previous-generation model with 32,768-token context; use rerank-v5.0-fast for new projects.",
+        "The API bills in search_units; no current public numeric PAYG search-unit rate was verified.",
+        "Rerank 5 Fast is the recommended new-project variant; 4 Fast remains listed without an announced shutdown in the overview."
       ],
       "pricing": {},
       "provenance": {
-        "verified_at": "2026-10-07",
+        "verified_at": "2026-11-25",
         "verification_method": "manual primary-source verification",
         "evidence": {
           "model_identity": "https://docs.cohere.com/docs/rerank",

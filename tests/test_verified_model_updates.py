@@ -12,7 +12,8 @@ def main():
     register = load_register(ROOT)
     stamp = register["date"]
     assert stamp >= "2026-11-24"
-    assert len(register["updates"]) >= 30
+    assert len(register["updates"]) >= 40
+    assert {"embed-v4-0","embed-v5-0-pro","embed-v5-0-fast","rerank-4-pro","rerank-4-fast","parse-v5-0","north-mini-code-1-0","command-a-reasoning","codestral","codestral-embed"} <= register["updates"].keys()
     assert {"gpt-image-2", "gemini-omni-1-1-flash", "gemini-3-8-live", "gemini-3-8-live-extended-thinking", "gemini-3-8-flash-tts", "gemini-3-8-flash-lite-tts", "gpt-realtime-2-1-mini", "gpt-transcribe", "gpt-live-transcribe", "gpt-realtime-translate"} <= register["updates"].keys()
     assert all(row.get("date", stamp) >= "2026-11-24" for row in register["updates"].values())
     for slug, row in register["updates"].items():
