@@ -11,11 +11,11 @@
   },
   "summary": {
     "total": 100,
-    "fresh": 38,
+    "fresh": 39,
     "due": 3,
-    "overdue": 59,
+    "overdue": 58,
     "critical": 0,
-    "high": 51
+    "high": 50
   },
   "items": [
     {
@@ -191,31 +191,6 @@
       "source_urls": [
         "https://developers.openai.com/api/docs/models/gpt-6-luna",
         "https://developers.openai.com/api/docs/pricing"
-      ]
-    },
-    {
-      "model_id": "grok-4.3",
-      "provider": "xAI",
-      "model": "Grok 4.3",
-      "lifecycle_status": "current",
-      "pricing_status": "official-paid",
-      "verified_at": "2026-10-03",
-      "age_days": 54,
-      "policy": "current_official_paid",
-      "review_interval_days": 30,
-      "due_at": "2026-11-02",
-      "status": "overdue",
-      "priority": "high",
-      "overdue_days": 24,
-      "review_scope": [
-        "identity",
-        "pricing",
-        "specs",
-        "lifecycle"
-      ],
-      "source_urls": [
-        "https://docs.x.ai/developers/migration/may-15-retirement",
-        "https://docs.x.ai/developers/models/grok-4.3"
       ]
     },
     {
@@ -2148,6 +2123,31 @@
       "source_urls": [
         "https://docs.mistral.ai/inference/pricing",
         "https://docs.mistral.ai/models/mistral-small-4-0-26-03"
+      ]
+    },
+    {
+      "model_id": "grok-4.3",
+      "provider": "xAI",
+      "model": "Grok 4.3",
+      "lifecycle_status": "current",
+      "pricing_status": "official-paid",
+      "verified_at": "2026-11-26",
+      "age_days": 0,
+      "policy": "current_official_paid",
+      "review_interval_days": 30,
+      "due_at": "2026-12-26",
+      "status": "fresh",
+      "priority": "medium",
+      "overdue_days": 0,
+      "review_scope": [
+        "identity",
+        "pricing",
+        "specs",
+        "lifecycle"
+      ],
+      "source_urls": [
+        "https://docs.x.ai/developers/models/grok-4.3",
+        "https://docs.x.ai/developers/pricing"
       ]
     },
     {

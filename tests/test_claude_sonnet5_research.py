@@ -54,8 +54,17 @@ assert s
 nodes=json.loads(s.group(1))["@graph"]
 assert {"TechArticle","BreadcrumbList","FAQPage","Dataset"} <= {n["@type"] for n in nodes}
 a=next(n for n in nodes if n["@type"]=="TechArticle")
-assert a["mainEntityOfPage"]==URL and a["dateModified"]=="2026-11-10"
-assert a["citation"]==SOURCES
+# The original research date and catalog provenance remain immutable.
+# A later source-backed editorial update must advance the page's dateModified,
+# without redating the original study or discarding its citation contract.
+register=json.loads((ROOT/"data/model-page-content/verified-model-updates.json").read_text(encoding="utf-8"))
+review=register["updates"]["claude-sonnet-5"]
+expected_modified=max(m["provenance"]["verified_at"],review.get("date",register["date"]))
+expected_citations=list(dict.fromkeys([*SOURCES,*(url for url,_ in review["sources"])]))
+assert a["mainEntityOfPage"]==URL and a["dateModified"]==expected_modified
+assert a["citation"]==expected_citations
+assert page.count('data-verified-model-update="claude-sonnet-5"')==1
+assert escape(review["title"]) in page and escape(review["text"]) in page
 faq=next(n for n in nodes if n["@type"]=="FAQPage")
 assert len(faq["mainEntity"])==len(FAQ)
 dataset=next(n for n in nodes if n["@type"]=="Dataset")
