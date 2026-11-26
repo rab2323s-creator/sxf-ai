@@ -1,8 +1,8 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "15c8e40a3541452f7b457f19e6c3babbcebcda567948eafa56bd4b56443b8141",
-  "candidate_count": 10,
+  "snapshot_hash": "484ca397674adf249a0e3e653d33fe017a6a31b1c30f3015edafb797910e055a",
+  "candidate_count": 9,
   "candidate_limit": 10,
   "budget_guard": {
     "monthly_budget_eur": 5,
@@ -237,82 +237,6 @@
     },
     {
       "rank": 4,
-      "signal_slug": "openai-child-safety-research-funding-2026",
-      "signal_url": "https://sxf.si/signals/openai-child-safety-research-funding-2026/",
-      "title": "Supporting research on AI and children’s safety",
-      "source": "OpenAI",
-      "category": "Research",
-      "published": "2026-11-12T00:00:00Z",
-      "priority_score": 138,
-      "evidence_hash": "5590d4be401fb27db1510502e2cfb54c34f0048ffbe8452ee8e662cd4f38c04a",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Supporting research on AI and children’s safety",
-          "url": "https://openai.com/index/children-first-declaration",
-          "signal_url": "https://sxf.si/signals/openai-child-safety-research-funding-2026/",
-          "source": "OpenAI",
-          "published": "2026-11-12T00:00:00Z",
-          "category": "Research",
-          "tags": [
-            "Security",
-            "Research",
-            "OpenAI"
-          ],
-          "summary": "OpenAI announced on November 12, 2026 that it committed $2 million to a research network under the Coalition for Children's Rights and Protection in the Age of AI after signing a charter at the Paris Peace Forum. The announced goal is shared scientific measurement of AI's risks and opportunities for children, with researcher control over findings and publication of inconclusive or negative results. SXF explains what the commitment actually funds in principle and which independent checks are still necessary before claiming improved child safety.",
-          "signal_score": 53,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/children-first-declaration"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 5,
       "signal_slug": "chatgpt-for-sales-crm-workflows-2026",
       "signal_url": "https://sxf.si/signals/chatgpt-for-sales-crm-workflows-2026/",
       "title": "Introducing ChatGPT for Sales",
@@ -385,7 +309,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 6,
+      "rank": 5,
       "signal_slug": "chatgpt-wallet-payment-approval-safety",
       "signal_url": "https://sxf.si/signals/chatgpt-wallet-payment-approval-safety/",
       "title": "Introducing ChatGPT Wallet",
@@ -458,7 +382,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 6,
       "signal_slug": "github-copilot-evals-setup-testing-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-evals-setup-testing-2026/",
       "title": "GitHub Copilot Evals is now in public preview",
@@ -531,7 +455,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 7,
       "signal_slug": "openai-daybreak-nato-cyber-defense-2026",
       "signal_url": "https://sxf.si/signals/openai-daybreak-nato-cyber-defense-2026/",
       "title": "Strengthening NATO and allied cyber defenses with AI",
@@ -605,7 +529,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 8,
       "signal_slug": "github-copilot-models-retired-november-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-models-retired-november-2026/",
       "title": "GitHub Copilot models deprecated on November 16, 2026",
@@ -1579,7 +1503,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 10,
+      "rank": 9,
       "signal_slug": "github-ai-scan-repository-rest-api-setup",
       "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
       "title": "Manage AI Scan for repositories using the REST API",
