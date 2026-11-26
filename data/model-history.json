@@ -696,9 +696,9 @@
       }
     },
     "grok-4.3": {
-      "last_event_verified_at": "2026-10-03",
-      "last_event_id": "evt_c658c24c246cb2d9576b",
-      "snapshot_hash": "3a34ded3230528e05567d7a340877828a6c27246b4b591b614cccf915f2927ba",
+      "last_event_verified_at": "2026-11-26",
+      "last_event_id": "evt_e445adafad891c95e047",
+      "snapshot_hash": "e819fe7ad16aa8d92348bb1c5867f9516589f071cae672a75c7b0ee9a1fd7117",
       "snapshot": {
         "provider": "xAI",
         "family": "Grok 4",
@@ -741,7 +741,7 @@
           ],
           "long_context": {
             "threshold_input_tokens": 200000,
-            "condition": "total input tokens greater than 200000",
+            "condition": "total input tokens at or above 200000",
             "applies_to_entire_request": true,
             "multipliers": {
               "input": 2,
@@ -9862,7 +9862,65 @@
       ],
       "event_id": "evt_ada084c3db3fa75ce707",
       "event_hash": "ada084c3db3fa75ce707c243d726cd86cc5c62e6395a965d7f5c23bc3324ae17"
+    },
+    {
+      "sequence": 112,
+      "type": "model_changed",
+      "model_id": "grok-4.3",
+      "verified_at": "2026-11-26",
+      "previous_event_hash": "ada084c3db3fa75ce707c243d726cd86cc5c62e6395a965d7f5c23bc3324ae17",
+      "changes": [
+        {
+          "field": "pricing",
+          "change_type": "pricing_change",
+          "before": {
+            "standard": [
+              {
+                "start": "2026-05-15",
+                "end": null,
+                "input": 1.25,
+                "cached_input": 0.2,
+                "output": 2.5
+              }
+            ],
+            "long_context": {
+              "threshold_input_tokens": 200000,
+              "condition": "total input tokens greater than 200000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "output": 2
+              }
+            }
+          },
+          "after": {
+            "standard": [
+              {
+                "start": "2026-05-15",
+                "end": null,
+                "input": 1.25,
+                "cached_input": 0.2,
+                "output": 2.5
+              }
+            ],
+            "long_context": {
+              "threshold_input_tokens": 200000,
+              "condition": "total input tokens at or above 200000",
+              "applies_to_entire_request": true,
+              "multipliers": {
+                "input": 2,
+                "cached_input": 2,
+                "output": 2
+              }
+            }
+          },
+          "source_url": "https://docs.x.ai/developers/pricing"
+        }
+      ],
+      "event_id": "evt_e445adafad891c95e047",
+      "event_hash": "e445adafad891c95e047a5896745d8305bee8425d6a05fd74a1931c6b0ea1213"
     }
   ],
-  "chain_head": "ada084c3db3fa75ce707c243d726cd86cc5c62e6395a965d7f5c23bc3324ae17"
+  "chain_head": "e445adafad891c95e047a5896745d8305bee8425d6a05fd74a1931c6b0ea1213"
 }
