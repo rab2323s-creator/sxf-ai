@@ -1666,6 +1666,172 @@
           "BFL model capabilities"
         ]
       ]
+    },
+    "claude-fable-5-2": {
+      "date": "2026-11-26",
+      "title": "Fable 5.2: model limits and API cost breakdown",
+      "text": "The exact API ID is claude-fable-5-2. Anthropic lists a 1M-token context, 128K maximum output and always-on adaptive thinking. Standard input/output prices are $8/$40 per million tokens; cache hits cost $0.20, five-minute writes $10 and one-hour writes $16 per million. Batch input/output rates are $4/$20; Fast mode is a separate premium service. Treat Mythos access restrictions and benchmarks separately from this public model.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "Anthropic model reference"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "Anthropic billing and cache rates"
+        ]
+      ],
+      "replacements": []
+    },
+    "claude-haiku-5-5": {
+      "date": "2026-11-26",
+      "title": "Haiku 5.5: exact 100K pricing boundary and cache costs",
+      "text": "Anthropic confirms a 1M-token context, 128K maximum output and adaptive thinking. Up to and including 100,000 prompt tokens, Standard input/output/cache-hit rates are $0.10/$0.50/$0.01 per million tokens, with five-minute and one-hour cache writes at $0.125/$0.20. Above 100,000 prompt tokens, the corresponding rates are $0.50/$2.50/$0.05 and $0.625/$1.00. All input tokens, including cache reads and writes, count toward the threshold. Batch input/output rates are half the corresponding Standard tier. Tokenization can differ from Haiku 4.5; compare real workload token counts.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "Anthropic model reference"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "Anthropic billing and cache rates"
+        ]
+      ],
+      "replacements": [
+        [
+          "GLOBAL ≤128K INPUT",
+          "GLOBAL ≤100K INPUT"
+        ],
+        [
+          "GLOBAL ≤128K OUTPUT",
+          "GLOBAL ≤100K OUTPUT"
+        ],
+        [
+          "Tiered Global list rates for ≤128K input/request: $0.10 input · $0.50 output per MTok. Above 128K up to 256K and other regions have different rates.",
+          "Standard global list rates for ≤100K prompt tokens: $0.10 input · $0.50 output per MTok. Above 100K: $0.50 input · $2.50 output per MTok, within the model context limit."
+        ]
+      ]
+    },
+    "claude-opus-5-5": {
+      "date": "2026-11-26",
+      "title": "Opus 5.5: current Standard, Batch and prompt-cache economics",
+      "text": "The model card confirms 1M context, 128K maximum output, adaptive thinking always on and medium default effort. Standard input/output rates are $4/$20 per million tokens across the context window. Cache hits are $0.20; five-minute and one-hour cache writes are $5/$8. Batch input/output rates are $2/$10. Tool and regional processing charges are separate. Compare Fable 5.2 on difficult tasks rather than assuming it replaces the Opus API.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "Anthropic model reference"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "Anthropic billing and cache rates"
+        ]
+      ],
+      "replacements": []
+    },
+    "claude-sonnet-5-5": {
+      "date": "2026-11-26",
+      "title": "Sonnet 5.5: cache-read discount and deployment economics",
+      "text": "The model card lists 1M context and 128K maximum output. Standard input/output rates are $2/$10 per million; cached reads cost $0.10, versus $0.20 for Sonnet 5. Five-minute and one-hour cache writes cost $2.50/$4. Batch is $1/$5 per million input/output tokens. The full context window is available at the same Standard token rates; tool and regional charges remain separate. Use actual token counts and cache hit rates when comparing the two Sonnet versions.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "Anthropic model reference"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "Anthropic billing and cache rates"
+        ]
+      ],
+      "replacements": []
+    },
+    "claude-sonnet-5": {
+      "date": "2026-11-26",
+      "title": "Sonnet 5: current pricing and successor comparison",
+      "text": "Anthropic's current pricing table retains $2/$10 per million input/output tokens and $0.20 cached reads for claude-sonnet-5. Cache writes cost $2.50 for five minutes and $4 for one hour per million tokens; Batch input/output is $1/$5. The model card lists 1M context and 128K output. Sonnet 5.5 is a distinct ID with a lower cache-hit price, not a change to this model's rate. The dated SXF study remains a historical reproducible calculation; compare current workload performance separately.",
+      "sources": [
+        [
+          "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "Anthropic model reference"
+        ],
+        [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "Anthropic billing and cache rates"
+        ]
+      ],
+      "replacements": []
+    },
+    "deepseek-v4-1-flash": {
+      "date": "2026-11-26",
+      "title": "V4.1 Flash: live API version and peak/off-peak prices",
+      "text": "DeepSeek's current API table identifies deepseek-flash as DeepSeek-V4.1-Flash-1017, with 1M context and 384K maximum output. The published off-peak input/cache-hit/output rates are $0.15/$0.003/$0.60 per million tokens; peak rates are $0.30/$0.006/$1.20. Peak windows are 01:00–04:00 and 06:00–10:00 UTC on weekdays excluding Chinese public holidays. The table lists vision, tool calls, JSON output and both thinking and non-thinking modes. Do not equate time-variable prices with a fixed token tariff.",
+      "sources": [
+        [
+          "https://api-docs.deepseek.com/quick_start/pricing/",
+          "DeepSeek official model and pricing table"
+        ]
+      ],
+      "replacements": []
+    },
+    "deepseek-v4-pro": {
+      "date": "2026-11-26",
+      "title": "V4 Pro: current served checkpoint and time-variable pricing",
+      "text": "The live official table identifies deepseek-v4-pro as DeepSeek-V4-Pro-0813 and lists 1M context and 384K maximum output. Off-peak input/cache-hit/output rates are $0.66/$0.022/$1.98 per million tokens; peak rates are $1.32/$0.044/$3.96. Peak hours are 01:00–04:00 and 06:00–10:00 UTC on weekdays excluding Chinese public holidays. The table supports tool calls, JSON output and thinking/non-thinking modes but does not support vision. Fixed-price calculations must not silently average these rates.",
+      "sources": [
+        [
+          "https://api-docs.deepseek.com/quick_start/pricing/",
+          "DeepSeek official model and pricing table"
+        ]
+      ],
+      "replacements": []
+    },
+    "grok-4-3": {
+      "date": "2026-11-26",
+      "title": "Grok 4.3: inclusive long-context threshold and Batch rates",
+      "text": "The official price table retains a 1M context and $1.25/$0.20/$2.50 per million input/cache/output tokens below 200,000 prompt tokens. At or above 200,000, all request tokens use $2.50/$0.40/$5.00. The current Batch pricing section lists a 20% discount for this model. A separate regional endpoint premium cannot be assumed to apply to every model; check availability for the exact ID.",
+      "sources": [
+        [
+          "https://docs.x.ai/developers/pricing",
+          "xAI current pricing"
+        ],
+        [
+          "https://docs.x.ai/developers/models/grok-4.3",
+          "xAI model reference"
+        ]
+      ],
+      "replacements": []
+    },
+    "grok-4-6": {
+      "date": "2026-11-26",
+      "title": "Grok 4.6: current Batch support and regional billing",
+      "text": "The current provider rate card lists a 500K context, with input/cache/output prices of $2/$0.50/$6 per million tokens below 200K prompt tokens and $4/$1/$12 from 200K onward, applied to all request tokens. Its current Batch table now lists a 20% discount for Grok 4.6. Requests on the supported US regional endpoint incur a 10% token premium. Compare this model against 4.7 on the same tasks and serving configuration.",
+      "sources": [
+        [
+          "https://docs.x.ai/developers/pricing",
+          "xAI current pricing"
+        ]
+      ],
+      "replacements": [
+        [
+          "Batch API is not supported.",
+          "The current xAI price table lists Batch API with a 20% discount."
+        ]
+      ]
+    },
+    "grok-4-7": {
+      "date": "2026-11-26",
+      "title": "Grok 4.7: global, regional, Batch and Fast pricing",
+      "text": "The current official global Standard prices remain $2/$0.50/$6 per million input/cache/output tokens below 200K prompt tokens and $4/$1/$12 at or above 200K, for the full request. The US regional endpoint adds 10%; Batch has a published 20% discount. Grok 4.7 Fast is restricted to Cursor and Grok Build, not a public API SKU: it costs twice the short-context Standard rate or 1.5 times the long-context rate. Keep those access and billing conditions distinct.",
+      "sources": [
+        [
+          "https://docs.x.ai/developers/pricing",
+          "xAI current pricing"
+        ],
+        [
+          "https://docs.x.ai/developers/models/grok-4.7",
+          "xAI model reference"
+        ]
+      ],
+      "replacements": []
     }
   }
 }

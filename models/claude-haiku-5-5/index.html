@@ -25,7 +25,7 @@
       <meta name="twitter:image:alt" content="SXF / AI — The AI Signals Hub" />
       <meta name="twitter:title" content="Claude Haiku 5.5 — API Specs, Context &amp; Pricing | SXF / AI" />
       <meta name="twitter:description" content="Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources." />
-      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-haiku-5-5/#article","headline":"Claude Haiku 5.5 — API Specs, Context & Pricing","description":"Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources.","url":"https://sxf.si/models/claude-haiku-5-5/","dateModified":"2026-10-12","about":{"@type":"Thing","name":"Claude Haiku 5.5"},"citation":["https://platform.claude.com/docs/en/models/haiku-5-5/overview","https://platform.claude.com/docs/en/about-claude/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 5.5","item":"https://sxf.si/models/claude-haiku-5-5/"}]}]}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://sxf.si/models/claude-haiku-5-5/#article","headline":"Claude Haiku 5.5 — API Specs, Context & Pricing","description":"Claude Haiku 5.5 reference: verified context window, output policy, modalities, reasoning controls, knowledge cutoff and pricing availability from official Anthropic sources.","url":"https://sxf.si/models/claude-haiku-5-5/","dateModified":"2026-11-26","about":{"@type":"Thing","name":"Claude Haiku 5.5"},"citation":["https://platform.claude.com/docs/en/models/haiku-5-5/overview","https://platform.claude.com/docs/en/about-claude/pricing"],"inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SXF / AI","item":"https://sxf.si/"},{"@type":"ListItem","position":2,"name":"Models","item":"https://sxf.si/models/"},{"@type":"ListItem","position":3,"name":"Claude Haiku 5.5","item":"https://sxf.si/models/claude-haiku-5-5/"}]}]}</script>
       <link rel="stylesheet" href="/styles.css" />
       <link rel="stylesheet" href="/intelligence.css" />
     </head>
@@ -45,6 +45,7 @@
           <div><strong>2026-10-12</strong><span>last verified</span></div>
         </div>
       </section>
+<section class="shell model-deep-section" id="sxf-verified-model-update" data-verified-model-update="claude-haiku-5-5"><div class="model-section-head"><p class="eyebrow">SOURCE-VERIFIED EDITORIAL UPDATE · 2026-11-26</p><h2>Haiku 5.5: exact 100K pricing boundary and cache costs</h2><p>Anthropic confirms a 1M-token context, 128K maximum output and adaptive thinking. Up to and including 100,000 prompt tokens, Standard input/output/cache-hit rates are $0.10/$0.50/$0.01 per million tokens, with five-minute and one-hour cache writes at $0.125/$0.20. Above 100,000 prompt tokens, the corresponding rates are $0.50/$2.50/$0.05 and $0.625/$1.00. All input tokens, including cache reads and writes, count toward the threshold. Batch input/output rates are half the corresponding Standard tier. Tokenization can differ from Haiku 4.5; compare real workload token counts.</p></div><p class="reference-note">Primary sources: <a href="https://platform.claude.com/docs/en/models/haiku-5-5/overview" target="_blank" rel="noopener noreferrer">Anthropic model reference</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener noreferrer">Anthropic billing and cache rates</a></p></section>
 
       <section class="model-reference model-reference-deep shell">
         <div class="model-reference-intro">
@@ -58,8 +59,8 @@
             <div><span>CONTEXT WINDOW</span><strong>1,000,000</strong><small>tokens</small></div>
             <div><span>MAX OUTPUT</span><strong>128,000</strong></div>
             <div><span>KNOWLEDGE CUTOFF</span><strong>2026-06</strong></div>
-            <div><span>GLOBAL ≤128K INPUT</span><strong>$0.10</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
-            <div><span>GLOBAL ≤128K OUTPUT</span><strong>$0.50</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
+            <div><span>GLOBAL ≤100K INPUT</span><strong>$0.10</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
+            <div><span>GLOBAL ≤100K OUTPUT</span><strong>$0.50</strong><small>per million tokens, &lt;=100K or &gt;100K prompt tier</small></div>
           </div>
         </div>
 
@@ -75,7 +76,7 @@
         <section class="model-deep-section">
           <div class="model-section-head"><p class="eyebrow">PRICING STATUS</p><h2>Official paid API.</h2></div>
           <div class="model-split">
-            <div><p>Tiered Global list rates for ≤128K input/request: $0.10 input · $0.50 output per MTok. Above 128K up to 256K and other regions have different rates.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
+            <div><p>Standard global list rates for ≤100K prompt tokens: $0.10 input · $0.50 output per MTok. Above 100K: $0.50 input · $2.50 output per MTok, within the model context limit.</p><p>SXF preserves the provider-published native billing basis. Only calculator-eligible generative token models enter token-cost arithmetic; specialist units and input-only embeddings remain visible without forced conversion.</p></div>
             <aside class="model-side-note"><span>CALCULATOR</span><strong>Excluded</strong><p>This model is intentionally excluded from generative token-cost arithmetic.</p></aside>
           </div>
         </section>

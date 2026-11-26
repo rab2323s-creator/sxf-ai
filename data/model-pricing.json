@@ -1244,7 +1244,7 @@
       "notes": [
         "xAI documents no separate text output limit for Grok 4.6.",
         "Long-context token rates apply to the entire request once the prompt reaches the 200,000-token threshold.",
-        "xAI documents function calling and structured outputs, with 150 requests/second and 50,000,000 tokens/minute on the current model page; Batch API is not supported."
+        "xAI documents function calling and structured outputs, with 150 requests/second and 50,000,000 tokens/minute on the current model page; The current xAI price table lists Batch API with a 20% discount."
       ],
       "pricing": {
         "standard": [
@@ -1369,7 +1369,7 @@
         ],
         "long_context": {
           "threshold_input_tokens": 200000,
-          "condition": "total input tokens greater than 200000",
+          "condition": "total input tokens at or above 200000",
           "applies_to_entire_request": true,
           "multipliers": {
             "input": 2,
