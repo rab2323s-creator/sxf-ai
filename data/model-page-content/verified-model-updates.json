@@ -1421,6 +1421,222 @@
           "The model card lists Batch support. Earlier estimates were $0.067 per 1K/2K image and $0.12 per 4K image; the current price table does not verify these Batch rates. Confirm the applicable tier before budgeting."
         ]
       ]
+    },
+    "llama-4-scout": {
+      "date": "2026-11-26",
+      "title": "Scout: checkpoint, long-context serving and licensing",
+      "text": "Meta's model card still distinguishes the 109B-total, 17B-active, 16-expert Scout from the 400B-total Maverick. The 10M-token context applies to the instruction-tuned Scout; an advertised context is not a guaranteed hosted request limit or a single-GPU capacity. Text and image inputs produce text/code, not generated images. The Llama 4 Community License is a custom license, not Apache 2.0; review its terms and the accompanying use policy before deployment. No universal Meta token price or separate output cap is inferred.",
+      "sources": [
+        [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "Meta model card"
+        ],
+        [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE",
+          "Meta license"
+        ],
+        [
+          "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "Meta release and long-context evidence"
+        ]
+      ]
+    },
+    "llama-4-maverick": {
+      "date": "2026-11-26",
+      "title": "Maverick: 400B weights, serving limits and deployment terms",
+      "text": "The official card specifies 400B total and 17B active parameters with 128 experts, a 1M-token context and an August 2024 knowledge cutoff. The model accepts text and images and returns text/code. Capacity planning must account for the stored expert weights rather than just active parameters. The 1M context does not guarantee that any specific host accepts a request of that length. The custom Llama 4 Community License and use policy apply; consult both before deployment. Provider-specific hosting fees are not a universal Meta API rate.",
+      "sources": [
+        [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/MODEL_CARD.md",
+          "Meta model card"
+        ],
+        [
+          "https://github.com/meta-llama/llama-models/blob/main/models/llama4/LICENSE",
+          "Meta license"
+        ],
+        [
+          "https://ai.meta.com/blog/llama-4-multimodal-intelligence/",
+          "Meta architecture announcement"
+        ]
+      ]
+    },
+    "gpt-oss-120b": {
+      "date": "2026-11-26",
+      "title": "gpt-oss-120b: hardware, reasoning and hosting economics",
+      "text": "OpenAI lists approximately 117B total and 5.1B active parameters, a 131,072-token context and a separately listed 131,072-token output limit. These limits are not additive to an unlimited request budget. The text-only model uses configurable low, medium and high reasoning effort and supports tool calling and structured outputs in compatible runtimes. Native MXFP4 weights permit deployment on an 80GB GPU in the documented configuration; memory overhead varies by workload. Apache 2.0 and the usage policy apply. OpenAI's support documentation confirms no direct OpenAI API serving or ChatGPT access; budget for infrastructure or third-party hosting instead.",
+      "sources": [
+        [
+          "https://developers.openai.com/api/docs/models/gpt-oss-120b",
+          "OpenAI model reference"
+        ],
+        [
+          "https://openai.com/index/introducing-gpt-oss/",
+          "OpenAI release and hardware"
+        ],
+        [
+          "https://help.openai.com/en/articles/11870455-openai-open-weight-models-gpt-oss",
+          "OpenAI availability and license"
+        ]
+      ]
+    },
+    "nova-3": {
+      "date": "2026-11-26",
+      "title": "Nova-3: November language expansion and billing distinctions",
+      "text": "Deepgram's November 24 changelog adds Odia (or), Santali (sat), Southern Ndebele (nr) and Western Frisian (fy) for both recorded and streaming audio, and reports improvements to several existing language models. Specify model=nova-3 and the language code. General Nova-3 is not the turn-detection model Flux. The current public pricing table shows promotional streaming PAYG rates of $0.0048/minute monolingual and $0.0058/minute multilingual (regular $0.0077 and $0.0092). The recorded-audio rates in the historical catalog are not separately confirmed by the current default table; verify the batch quote before budgeting. Billing is per second across processed channels; diarization and other paid add-ons can increase the total.",
+      "sources": [
+        [
+          "https://developers.deepgram.com/changelog/2026/11/24",
+          "November 24 language release"
+        ],
+        [
+          "https://developers.deepgram.com/docs/models-languages-overview",
+          "Model and language coverage"
+        ],
+        [
+          "https://deepgram.com/pricing",
+          "Current provider price table"
+        ]
+      ],
+      "replacements": [
+        [
+          "Official Pay-As-You-Go pre-recorded monolingual Nova-3 rate is $0.0043 per audio minute; multilingual pre-recorded is $0.0052/minute.",
+          "Previously published Pay-As-You-Go pre-recorded Nova-3 rates were $0.0043/minute monolingual and $0.0052/minute multilingual. The reviewed current default price table does not separately confirm batch rates; obtain a current quote."
+        ]
+      ]
+    },
+    "flux-general-en": {
+      "date": "2026-11-26",
+      "title": "Flux STT: v2 WebSocket, turn detection and current pricing",
+      "text": "The English model requires /v2/listen, not Nova-3's /v1/listen. Deepgram recommends 80ms audio chunks and offers eot_threshold, eager_eot_threshold and eot_timeout_ms to tune end-of-turn behavior. Early response generation should handle TurnResumed by canceling speculative work. The November 10 changelog documents rejection of unsupported language hints. PAYG English streaming remains promotional at $0.0065 per audio minute ($0.0077 regular); the separate multilingual model flux-general-multi is $0.0078/minute. Flux STT is not Flux TTS, which uses a separate speech-generation endpoint and meter.",
+      "sources": [
+        [
+          "https://developers.deepgram.com/docs/flux/quickstart",
+          "Flux STT integration"
+        ],
+        [
+          "https://developers.deepgram.com/changelog/2026/11/10",
+          "November 10 API changes"
+        ],
+        [
+          "https://deepgram.com/pricing",
+          "Provider pricing"
+        ]
+      ]
+    },
+    "ideogram-v4": {
+      "date": "2026-11-26",
+      "title": "Ideogram 4.0: v2 migration and verified image rates",
+      "text": "The current v2 route is POST /v2/image/generate/ideogram-4, with text or structured JSON prompts and 1K or 2K generation. The older v1 generation endpoint remains available with a documented successor; no removal date is listed. API prices are $0.03 Turbo, $0.06 Default and $0.10 Quality per generated image. Transparent output is a separate model route with resolution-specific pricing. Ideogram 4.6 is now listed as the newest generation, not 4.0. Use a request price quote for exact costs.",
+      "sources": [
+        [
+          "https://developer.ideogram.ai/ideogram-api/models",
+          "Provider model guide"
+        ],
+        [
+          "https://developer.ideogram.ai/v2/ideogram-api/deprecations",
+          "API lifecycle and replacements"
+        ],
+        [
+          "https://ideogram.ai/api-pricing",
+          "API price list"
+        ],
+        [
+          "https://developer.ideogram.ai/ideogram-api/price-quotes",
+          "Request price quote"
+        ]
+      ],
+      "replacements": [
+        [
+          "Provider's canonical API endpoint is POST /v1/ideogram-v4/generate. Rendering_speed=FLASH is currently not accepted at this version; Turbo, Default and Quality are the published modes.",
+          "The current v2 generation endpoint is POST /v2/image/generate/ideogram-4. The v1 endpoint remains supported with a documented successor. Turbo, Default and Quality are the documented v2 speed modes."
+        ]
+      ]
+    },
+    "ideogram-v3": {
+      "date": "2026-11-26",
+      "title": "Ideogram 3.0: current v2 routes, editing and price tiers",
+      "text": "Ideogram's current generation route is POST /v2/image/generate/ideogram-3. The v1 generation endpoint remains usable; the old v1 edit endpoint was deprecated on April 29, 2026 in favor of POST /v2/image/inpaint/ideogram-3, with no removal date announced. Standard generation is $0.03 Turbo, $0.06 Default and $0.09 Quality; the character-reference variant is $0.10, $0.15 or $0.20 respectively. The pricing page also lists Flash for the older 3.0 contract; the v2 route should be checked for accepted parameters. The model supports style references and negative prompts; newer 4.5 and 4.6 models have distinct contracts.",
+      "sources": [
+        [
+          "https://developer.ideogram.ai/ideogram-api/models",
+          "Provider model guide"
+        ],
+        [
+          "https://developer.ideogram.ai/v2/ideogram-api/deprecations",
+          "API lifecycle and replacements"
+        ],
+        [
+          "https://ideogram.ai/api-pricing",
+          "API price list"
+        ]
+      ],
+      "replacements": [
+        [
+          "Native official API endpoint is POST /v1/ideogram-v3/generate; provider documentation describes the model as a prior stable generation relative to Ideogram 4.0.",
+          "The current v2 generation route is POST /v2/image/generate/ideogram-3; the legacy v1 generation route still works. Ideogram 4.6 is the newest listed generation."
+        ]
+      ]
+    },
+    "flux-2-max": {
+      "date": "2026-11-26",
+      "title": "FLUX.2 Max: confirmed megapixel rates and model-family context",
+      "text": "The provider's current FLUX.2 price card retains $0.07 for the first output megapixel, $0.03 per additional output MP and $0.03 per reference-image MP. For two billed output MP and one billed reference MP, the derived charge is $0.13 before any other applicable fees. Max supports up to 4 MP output, up to eight API reference images (ten in Playground) and grounding search. FLUX 3 Image is separately listed in the current price card with its own pricing; do not apply FLUX 3 rates or assume a FLUX.2 retirement date. Verify factual claims in grounded images independently.",
+      "sources": [
+        [
+          "https://bfl.ai/pricing?category=flux.2",
+          "BFL price card"
+        ],
+        [
+          "https://docs.bfl.ai/quick_start/pricing",
+          "BFL billing documentation"
+        ],
+        [
+          "https://help.bfl.ai/articles/7655484417-what-flux-models-are-available",
+          "BFL model capabilities"
+        ]
+      ]
+    },
+    "flux-2-pro": {
+      "date": "2026-11-26",
+      "title": "FLUX.2 Pro: reference-image charges and current family positioning",
+      "text": "The current BFL rate remains $0.03 for the initial output megapixel, with $0.015 for each additional output MP and each reference-image MP. A two-MP output with two billed reference MP costs $0.075 using these components. Pro supports generation and editing, up to 4 MP output and eight reference images through the API (ten in Playground). BFL lists FLUX 3 Image separately; compare at the same resolution and reference count rather than treating the starting price as a flat charge. No new retirement date is inferred.",
+      "sources": [
+        [
+          "https://bfl.ai/pricing?category=flux.2",
+          "BFL price card"
+        ],
+        [
+          "https://docs.bfl.ai/quick_start/pricing",
+          "BFL billing documentation"
+        ],
+        [
+          "https://help.bfl.ai/articles/7655484417-what-flux-models-are-available",
+          "BFL model capabilities"
+        ]
+      ]
+    },
+    "flux-2-klein-9b": {
+      "date": "2026-11-26",
+      "title": "Klein 9B: fine-tuned endpoint beta and weight-license distinction",
+      "text": "BFL still lists $0.015 for the first output megapixel, plus $0.002 per additional output MP and reference MP. Its pricing documentation now lists the public-beta flux-2-klein-9b-kv-finetuned endpoint at the equivalent base-model rate for the same resolution. The 9B local weights use the FLUX Non-Commercial License; the separate 4B model is Apache 2.0. Klein supports up to four references. FLUX 3 Image Klein is a different model and billing schedule. Do not equate beta pricing with a permanent rate or hosted API access with commercial local-weight rights.",
+      "sources": [
+        [
+          "https://bfl.ai/pricing?category=flux.2",
+          "BFL price card"
+        ],
+        [
+          "https://docs.bfl.ai/quick_start/pricing",
+          "Fine-tuned endpoint pricing"
+        ],
+        [
+          "https://github.com/black-forest-labs/flux2",
+          "Official inference and licensing repository"
+        ],
+        [
+          "https://help.bfl.ai/articles/7655484417-what-flux-models-are-available",
+          "BFL model capabilities"
+        ]
+      ]
     }
   }
 }
