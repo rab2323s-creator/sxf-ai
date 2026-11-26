@@ -110,6 +110,36 @@ def unit_test():
         assert digest(module.ARCHIVE_OUT) == first_archive_hash
         assert digest(module.OUT) == first_news_hash
 
+    # Verify that the authored Grok guide refreshes its generated ledger
+    # modules after a factual source-backed change, including the precise
+    # pricing boundary rather than an unchanged Standard rate.
+    from model_history import sync_history
+    original_history_path = module.MODEL_HISTORY_PATH
+    ledger = json.loads(original_history_path.read_text(encoding="utf-8"))
+    updated_ledger, _ = sync_history(module.MODEL_PRICING_CATALOG, ledger)
+    grok_events = [event for event in updated_ledger["events"] if event["model_id"] == "grok-4.3"]
+    latest = grok_events[-1]
+    with tempfile.TemporaryDirectory() as tmp:
+        module.MODEL_HISTORY_PATH = Path(tmp) / "model-history.json"
+        module.MODEL_HISTORY_PATH.write_text(json.dumps(updated_ledger), encoding="utf-8")
+        html = module.render_catalog_model_page("grok-4.3", [])
+        assert html == module.render_catalog_model_page("grok-4.3", [])
+        assert html.count("data-model-history ") == 1
+        assert html.count("data-what-changed ") == 1
+        assert latest["event_id"] in html
+        assert 'id="sxf-grok43-original-guide"' in html
+        for event in grok_events:
+            for change in event.get("changes", []):
+                if change.get("field") == "pricing" and (
+                    (change.get("before") or {}).get("long_context", {}).get("condition") !=
+                    (change.get("after") or {}).get("long_context", {}).get("condition")
+                ):
+                    items = module.change_delta_items(change, event["verified_at"])
+                    assert any(item["label"] == "Long-context billing condition" and
+                               item["before"] != item["after"] for item in items)
+        assert 'data-model-evaluations="grok-4.3"' in html
+    module.MODEL_HISTORY_PATH = original_history_path
+
     # Signal articles decide model links from existing /models/ pages.
     # A fresh model release must not change its article on the second render.
     builder_source = inspect.getsource(module.build_discovery_pages)

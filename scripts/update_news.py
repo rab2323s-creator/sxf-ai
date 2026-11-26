@@ -1232,6 +1232,24 @@ def change_delta_items(change, verified_at):
                 "after": catalog_price_label(new) if new is not None else "—",
                 "delta": percent_delta_label(old, new),
             })
+        # A billing boundary can change while all Standard token rates remain
+        # identical. Show the actual documented condition instead of a
+        # misleading unchanged pricing schedule date.
+        old_long = (before or {}).get("long_context") or {}
+        new_long = (after or {}).get("long_context") or {}
+        for key, label in (
+            ("condition", "Long-context billing condition"),
+            ("threshold_input_tokens", "Long-context input threshold"),
+            ("applies_to_entire_request", "Long-context whole-request billing"),
+            ("multipliers", "Long-context rate multipliers"),
+        ):
+            if old_long.get(key) != new_long.get(key):
+                items.append({
+                    "label": label,
+                    "before": summarize_collection(old_long.get(key)),
+                    "after": summarize_collection(new_long.get(key)),
+                    "delta": "",
+                })
         if not items:
             old_schedule = (before or {}).get("standard", [])
             new_schedule = (after or {}).get("standard", [])
@@ -5632,6 +5650,16 @@ def render_catalog_model_page(model_id, items):
         html = source.read_text(encoding="utf-8")
         if html.count("<title>Grok 4.3") != 1 or 'id="sxf-grok43-original-guide"' not in html or "data-model-history" not in html:
             raise RuntimeError("Grok 4.3 editorial source invalid; refusing generated fallback")
+        # Only the two generated ledger modules are volatile. The authored
+        # guide, its SEO, tools and all other markup remain the source of truth.
+        for marker, fragment in (
+            ("data-what-changed", model_change_watch_html([model_id], "Grok 4.3: what changed.")),
+            ("data-model-history", model_history_html([model_id], "Grok 4.3 verified history.")),
+        ):
+            pattern = r"<section\b(?=[^>]*\s" + marker + r"(?:\s|>))[^>]*>.*?</section>"
+            html, count = re.subn(pattern, lambda match: fragment, html, flags=re.S)
+            if count != 1:
+                raise RuntimeError(f"Grok 4.3 editorial source must contain exactly one {marker} module")
         return html
     if model_id == "scribe_v2_realtime":
         # Preserve the editorial Scribe Realtime reference and its SEO metadata.
