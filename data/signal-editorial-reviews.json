@@ -9188,6 +9188,724 @@
         "alt": "SXF diagram of a Copilot Evals lifecycle: define a test case, approve a run, inspect failures and compare iterations.",
         "caption": "SXF illustration of the evaluation cycle, with preview and security limitations retained."
       }
+    },
+    "github-copilot-code-review-billing-december-2026": {
+      "reviewed_at": "2026-11-26",
+      "seo_title": "GitHub Copilot Code Review Billing: Dec 30 Changes",
+      "h1": "GitHub Copilot code review billing changes on December 30, 2026",
+      "meta_description": "GitHub changes default Copilot code review billing on December 30. Compare member and organization billing, exceptions, controls and cost planning.",
+      "source_name": "GitHub",
+      "primary_source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+      "sources": [
+        "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+        "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review",
+        "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/code-review"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "GitHub says that from December 30, 2026, eligible Business and Enterprise organizations with no explicit Copilot code review billing selection will default to billing the organization that owns the repository. Existing explicit settings and important exceptions remain. This guide explains who pays, how to inspect the setting and how teams can estimate the impact without assuming a fixed review price.",
+      "keywords": [
+        "GitHub Copilot code review billing",
+        "Copilot AI credits",
+        "GitHub Copilot Business billing",
+        "organization billing",
+        "Copilot code review cost"
+      ],
+      "longtail_keywords": [
+        "who pays for GitHub Copilot code review December 2026",
+        "how to change Copilot code review billing to member",
+        "GitHub Copilot organization AI credits code review",
+        "Copilot Enterprise code review billing exceptions",
+        "Copilot automatic pull request review cost"
+      ],
+      "search_intent": "Informational and administrative: understand the new default, determine the payer and locate billing controls before December 30.",
+      "search_questions": [
+        "When does GitHub change Copilot review billing?",
+        "Who pays if no setting is selected?",
+        "Does a member without a Copilot license change the outcome?",
+        "How can administrators keep member billing?",
+        "How can teams estimate review spending?"
+      ],
+      "editorial": {
+        "what_changed": "The default payer for eligible unset organization policies changes from member entitlement to the repository-owning organization.",
+        "why_it_matters": "A default change can move variable review consumption into a shared cost center even without an administrator changing a setting.",
+        "what_to_verify": "Inspect enterprise policy, organization policy, paid AI Credits availability and actual usage before assuming the default applies."
+      },
+      "evidence": [
+        {
+          "label": "Effective date",
+          "fact": "GitHub announced the new default for December 30, 2026.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Affected plans",
+          "fact": "The announcement concerns Copilot Business and Enterprise organizations.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Unset policy",
+          "fact": "When eligible and no explicit billing option exists, organization billing becomes the default.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Existing selections",
+          "fact": "Explicit member or organization billing selections are unchanged.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Exceptions",
+          "fact": "Member billing remains the fallback in cases including unavailable paid AI Credits, billing lock or no billable customer.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Unlicensed members",
+          "fact": "The announcement does not change the separate billing handling for members without a Copilot license.",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization"
+        },
+        {
+          "label": "Administration",
+          "fact": "Organization and enterprise settings expose code review billing choices; enforced enterprise policy takes precedence.",
+          "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+        },
+        {
+          "label": "Review effort",
+          "fact": "Review effort settings can change AI Credits consumption; higher effort can use more credits and some Actions minutes.",
+          "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+        },
+        {
+          "label": "Review triggers",
+          "fact": "Copilot code review can be requested and configured to run automatically under supported repository policies.",
+          "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/code-review"
+        }
+      ],
+      "limitations": "This is a forward-looking billing policy announcement, not a report that the change has already happened. No invoice data, independent cost benchmark or universal dollar-per-review figure is available. Account-specific entitlements and policies can override the default.",
+      "analysis": [
+        {
+          "heading": "What changes on December 30, and who pays?",
+          "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+          "paragraphs": [
+            "The important distinction is between an explicit choice and an inherited default. GitHub describes a change for eligible organizations that have never selected a review billing option, not a blanket replacement of every existing billing policy. An administrator who already chose member billing should not interpret the announcement as an automatic switch.",
+            "The repository owner is relevant because organization billing attributes eligible review usage to the organization that owns the repository. This is an accounting change, not a promise of unlimited reviews or new access for every member. Teams should examine the settings for the organization where a repository actually lives, rather than assuming the review requester's team is the payer."
+          ],
+          "inline_links": []
+        },
+        {
+          "heading": "How to check and control the billing setting",
+          "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review",
+          "paragraphs": [
+            "GitHub documents organization-level review configuration under Code planning automation and Copilot, and enterprise-level settings under AI controls. An enforced enterprise selection may restrict the choices available to an organization administrator. Check the effective policy, not merely whether a local setting appears blank.",
+            "Document the existing selection, then decide deliberately whether centralized or individual attribution makes sense. The separate Copilot code review API settings are relevant for automation, but billing policy should be checked in the documented administrative interface. Do not assume a review automation change automatically changes billing."
+          ],
+          "inline_links": [
+            {
+              "text": "Copilot code review API settings",
+              "url": "/signals/github-copilot-code-review-api-settings-2026/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF cost analysis: forecast review consumption, not seat count",
+          "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review",
+          "paragraphs": [
+            "A practical forecast starts with observed review volume and the organization's own measured AI Credits consumption per review. Multiply the expected number of eligible reviews by the observed average credits, then apply the account's actual billing terms. This is an illustrative calculation framework, not a price quote or a GitHub-provided benchmark.",
+            "Separate manually requested reviews from automated review triggers and track changes in effort settings. Teams with frequent pull request updates may have a different consumption profile from teams reviewing only once per change. Copilot evaluation and testing can help decide whether extra automated reviews provide useful findings rather than simply increasing usage."
+          ],
+          "inline_links": [
+            {
+              "text": "Copilot evaluation and testing",
+              "url": "/signals/github-copilot-evals-setup-testing-2026/"
+            }
+          ]
+        },
+        {
+          "heading": "How to decide whether organization billing is worth it",
+          "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/agent-powered-workflows-and-operations/code-review",
+          "paragraphs": [
+            "Central billing can simplify budget ownership for shared repositories and give maintainers a clearer view of the expense of automated reviews. Member billing can preserve individual attribution where policy and entitlement allow it. Neither configuration by itself establishes that the generated feedback is accurate or that it improves software quality.",
+            "Use an AI agent evaluation checklist to measure actionable findings, false positives and reviewer time alongside usage. A useful governance practice is to compare the incremental cost of review automation with the value of human-verified findings, while keeping human approval and normal testing requirements in place. Compare GitHub Copilot alternatives only if the broader workflow warrants a change."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent evaluation checklist",
+              "url": "/guides/ai-agent-evaluation-checklist/"
+            },
+            {
+              "text": "GitHub Copilot alternatives",
+              "url": "/guides/github-copilot-alternatives/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "Copilot code review API settings",
+          "url": "/signals/github-copilot-code-review-api-settings-2026/",
+          "description": "Understand the separate controls for review automation."
+        },
+        {
+          "title": "Copilot evaluation and testing",
+          "url": "/signals/github-copilot-evals-setup-testing-2026/",
+          "description": "Assess review usefulness rather than just request volume."
+        },
+        {
+          "title": "GitHub Copilot alternatives",
+          "url": "/guides/github-copilot-alternatives/",
+          "description": "Compare broader coding assistant options."
+        },
+        {
+          "title": "GitHub Copilot coverage",
+          "url": "/topics/github-copilot/",
+          "description": "Follow changes to the Copilot platform."
+        },
+        {
+          "title": "AI agent evaluation checklist",
+          "url": "/guides/ai-agent-evaluation-checklist/",
+          "description": "Use quality metrics to judge automated reviews."
+        }
+      ],
+      "reader_checklist": [
+        "Identify every organization with Copilot Business or Enterprise.",
+        "Inspect enterprise enforcement and organization billing selection.",
+        "Check paid AI Credits availability and any billing restrictions.",
+        "Measure actual review volume and consumption by review trigger.",
+        "Record the intended selection before December 30 and verify subsequent invoices."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF ANALYSIS / EVIDENCE",
+        "source": "https://github.blog/changelog/2026-11-25-copilot-code-review-billing-will-default-to-the-organization",
+        "heading": "Copilot billing scenarios before and after December 30",
+        "columns": [
+          "Policy scenario",
+          "Before change",
+          "From December 30"
+        ],
+        "rows": [
+          [
+            "Eligible, no explicit choice",
+            "Member entitlement default",
+            "Repository-owning organization"
+          ],
+          [
+            "Explicit member billing",
+            "Member",
+            "Member; unchanged"
+          ],
+          [
+            "Explicit organization billing",
+            "Organization",
+            "Organization; unchanged"
+          ],
+          [
+            "Paid credits unavailable or billing locked",
+            "Member fallback where applicable",
+            "Member fallback where applicable"
+          ],
+          [
+            "Member without license",
+            "Separate billing handling",
+            "Separate handling; unchanged"
+          ]
+        ],
+        "intro": "The policy comparison below distinguishes the default change from explicit administrator choices and GitHub's named exceptions.",
+        "note": "SXF synthesis of the GitHub announcement; not a universal invoice or price estimate.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "Frequently asked questions",
+      "faq": [
+        {
+          "question": "Will every Copilot organization be switched?",
+          "answer": "No. The announced change targets eligible organizations without an explicit selection. Existing explicit choices and named exceptions remain."
+        },
+        {
+          "question": "Can an administrator retain member billing?",
+          "answer": "Yes, where allowed by enterprise policy. Use the documented code review billing controls to make an explicit choice."
+        },
+        {
+          "question": "Is there a single fixed price for every review?",
+          "answer": "This announcement does not establish a universal price per review. Actual consumption and account billing terms matter."
+        },
+        {
+          "question": "Does organization billing grant everyone a Copilot license?",
+          "answer": "No. A billing selection is not an entitlement or permission grant."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/github-copilot-code-review-billing-december-2026.svg",
+        "alt": "Editorial diagram showing the eligible unset Copilot code review policy moving from member entitlement to repository organization billing on December 30.",
+        "caption": "Explicit choices remain unchanged"
+      }
+    },
+    "gpt-6-protein-design-research-evidence": {
+      "reviewed_at": "2026-11-26",
+      "seo_title": "GPT-6 Protein Design: Research Results and Limits",
+      "h1": "GPT-6 protein design research: what the evidence actually shows",
+      "meta_description": "OpenAI reports protein binding evidence across five targets. Examine what GPT-6 research establishes, its limits and why binding is not drug efficacy.",
+      "source_name": "OpenAI",
+      "primary_source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+      "sources": [
+        "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+        "https://cdn.openai.com/pdf/gpt-6-a-universal-foundation-model-for-protein-biology.pdf"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "OpenAI's November 24 research announcement reports evidence of binding across five targets in laboratory work with Onava, alongside computational evaluations of protein-related capabilities in GPT-6-family research models. The results are an important scientific signal, but they do not establish reliable end-to-end protein design, clinical efficacy or replacement of specialized biology models.",
+      "keywords": [
+        "GPT-6 protein design",
+        "AI protein design research",
+        "OpenAI protein biology",
+        "AI drug discovery evidence",
+        "GPT-6 biology benchmark"
+      ],
+      "longtail_keywords": [
+        "what did OpenAI GPT-6 protein design research show",
+        "does GPT-6 replace specialized protein models",
+        "AI protein binding versus drug efficacy",
+        "GPT-6 protein biology benchmark limitations",
+        "is OpenAI protein design research independently validated"
+      ],
+      "search_intent": "Scientific explainer and evidence comparison: interpret the research announcement, distinguish computational and laboratory findings, and understand what remains unproven.",
+      "search_questions": [
+        "What did OpenAI report on November 24?",
+        "Did the laboratory work show binding or treatment efficacy?",
+        "Are the research models equivalent to the public ChatGPT product?",
+        "Does this establish replacement of specialized models?",
+        "What evidence is still missing?"
+      ],
+      "editorial": {
+        "what_changed": "OpenAI reported laboratory binding evidence in addition to computational evaluation of general-purpose models on protein-related tasks.",
+        "why_it_matters": "The distinction between computational performance and physical validation is essential for interpreting progress in AI-assisted biology.",
+        "what_to_verify": "Check model identity, scope of the laboratory evidence, specialized-system contributions and independent replication before drawing broader claims."
+      },
+      "evidence": [
+        {
+          "label": "Announcement",
+          "fact": "OpenAI published the research announcement on November 24, 2026.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Model identity",
+          "fact": "The research discusses GPT-6-family models including research-stage variants, not a guarantee for every public ChatGPT configuration.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Laboratory partner",
+          "fact": "OpenAI identifies Onava as a collaborator for laboratory validation.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Binding evidence",
+          "fact": "The announcement reports binding evidence across five targets; this is not a clinical outcome.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Computational evidence",
+          "fact": "The work combines computational assessments with laboratory observations.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Specialized systems",
+          "fact": "Specialized systems contributed to parts of the reported research; the results should not be read as a completely independent general-model pipeline.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Folding limitations",
+          "fact": "The announcement describes limitations in predicting overall protein structure compared with dedicated systems.",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "label": "Research scope",
+          "fact": "The linked research paper is a scientific report on protein-related capabilities, not evidence of a clinically approved treatment.",
+          "source": "https://cdn.openai.com/pdf/gpt-6-a-universal-foundation-model-for-protein-biology.pdf"
+        }
+      ],
+      "limitations": "OpenAI is a participating researcher and its announcement is not independent replication. The study does not establish safety, clinical efficacy, reliable generalization or universal superiority over dedicated systems. The linked research paper is supplied as the primary technical record; this analysis relies on the accessible announcement for the reported experimental conclusions.",
+      "analysis": [
+        {
+          "heading": "What did the GPT-6 protein research actually demonstrate?",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "paragraphs": [
+            "The strongest part of the announcement is the distinction between computer-based evidence and a physical observation. OpenAI reports laboratory binding evidence across five targets through its collaboration with Onava. That statement should be preserved at its actual scope: it does not mean every proposed candidate worked, nor does it establish a therapeutic outcome.",
+            "The reported work also assesses a range of protein-related computational tasks. A reader should avoid combining those results into an implied single success rate for drug discovery. The AI model benchmarks explained guide gives useful background on why different tasks, baselines and validation settings measure different things."
+          ],
+          "inline_links": [
+            {
+              "text": "AI model benchmarks explained",
+              "url": "/guides/ai-model-benchmarks-explained/"
+            }
+          ]
+        },
+        {
+          "heading": "Why binding evidence is not the same as a drug",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "paragraphs": [
+            "Binding is a limited scientific endpoint. It does not on its own establish that a substance has the desired biological effect, that it is sufficiently selective, or that it is safe in a living system. A clinical claim requires a much broader body of evidence, and this announcement does not provide that basis.",
+            "SXF treats the laboratory observation as a meaningful improvement over a purely computational headline, while maintaining a strict boundary between the result and downstream medical claims. The BioBasicsBench wet-lab data benchmark covers another aspect of biological AI evaluation; it should not be interpreted as confirmation of this separate study."
+          ],
+          "inline_links": [
+            {
+              "text": "BioBasicsBench wet-lab data benchmark",
+              "url": "/signals/biobasicsbench-ai-wet-lab-data-benchmark/"
+            }
+          ]
+        },
+        {
+          "heading": "Does GPT-6 replace dedicated protein biology models?",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "paragraphs": [
+            "No such conclusion follows from the announcement. The work reports limitations in overall structure prediction and acknowledges contributions from specialized systems. A general-purpose model may demonstrate useful abilities across several tasks without matching a dedicated system on the tasks for which that system was developed.",
+            "The distinction matters when discussing the broader AI model ecosystem. A GPT-Rosalind research model page describes a separate domain-focused offering, while the present announcement is about specific research results. Product availability, a provider's benchmark result and externally replicated scientific performance are three different claims."
+          ],
+          "inline_links": [
+            {
+              "text": "GPT-Rosalind research model",
+              "url": "/models/gpt-rosalind-research/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: how to read future AI biology headlines",
+          "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+          "paragraphs": [
+            "A responsible evidence hierarchy separates claims based on computer evaluation, physical observations, independent confirmation and demonstrated real-world outcomes. Moving from one level to the next is not automatic. News coverage should identify exactly which level the source reports instead of implying that a computational achievement establishes practical medical benefit.",
+            "For future reporting, SXF would look for independent replication, clearly stated limitations and appropriately defined endpoints before strengthening the conclusion. The Rosalind academic research access report concerns a separate access initiative, not proof that its participants can reproduce the November study. The two stories are related by the research ecosystem rather than by demonstrated outcomes."
+          ],
+          "inline_links": [
+            {
+              "text": "Rosalind academic research access",
+              "url": "/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "BioBasicsBench wet-lab data benchmark",
+          "url": "/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
+          "description": "Explore a distinct evaluation of biology-related data understanding."
+        },
+        {
+          "title": "GPT-Rosalind research model",
+          "url": "/models/gpt-rosalind-research/",
+          "description": "Learn about a separate domain-focused research model."
+        },
+        {
+          "title": "Rosalind academic research access",
+          "url": "/signals/bringing-gpt-rosalind-to-academic-research-labs-a72d1e4/",
+          "description": "Distinguish model access news from validation evidence."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Understand what task-specific evaluation can establish."
+        },
+        {
+          "title": "SXF research archive",
+          "url": "/research/",
+          "description": "Read other research-focused evidence assessments."
+        }
+      ],
+      "reader_checklist": [
+        "Identify the research model and distinguish it from public products.",
+        "Separate computational results from laboratory observations.",
+        "Check whether specialized systems contributed to the reported result.",
+        "Look for independent confirmation before claiming generalization.",
+        "Do not infer a treatment, safety or clinical efficacy from binding alone."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF ANALYSIS / EVIDENCE",
+        "source": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+        "heading": "SXF evidence ladder: what each result can and cannot establish",
+        "columns": [
+          "Evidence level",
+          "What it supports",
+          "What remains unresolved"
+        ],
+        "rows": [
+          [
+            "Computational evaluation",
+            "Performance on specified computational tasks",
+            "Physical performance and generalization"
+          ],
+          [
+            "Reported laboratory binding",
+            "A physical interaction in the reported study",
+            "Biological effect, selectivity and safety"
+          ],
+          [
+            "Independent replication",
+            "Confidence outside the original team",
+            "Not established by the announcement"
+          ],
+          [
+            "Clinical evidence",
+            "Patient-relevant safety and efficacy",
+            "Not demonstrated by this research"
+          ]
+        ],
+        "intro": "These are different levels of evidence, not interchangeable success metrics. The table deliberately avoids treating a scientific research result as a medical product claim.",
+        "note": "SXF editorial interpretation of evidence categories, not a new experiment or clinical assessment.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "Frequently asked questions",
+      "faq": [
+        {
+          "question": "Did GPT-6 demonstrate drug efficacy?",
+          "answer": "No. The announcement reports protein-related computational research and laboratory binding evidence, not clinical efficacy."
+        },
+        {
+          "question": "How many targets showed binding evidence?",
+          "answer": "OpenAI reports evidence across five targets. That does not mean every candidate succeeded."
+        },
+        {
+          "question": "Does the result prove GPT-6 is better than all dedicated biology models?",
+          "answer": "No. The report describes limitations and the involvement of specialized systems."
+        },
+        {
+          "question": "Was the research independently replicated?",
+          "answer": "The announced collaboration is not independent replication. Further independent evidence is needed."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/gpt-6-protein-design-research-evidence.svg",
+        "alt": "Editorial evidence ladder distinguishing computational protein biology evaluations, reported laboratory binding and clinical evidence not demonstrated in the study.",
+        "caption": "Scientific evidence levels • not a clinical result"
+      }
+    },
+    "google-fuse-verifiable-social-reasoning-llm": {
+      "reviewed_at": "2026-11-26",
+      "seo_title": "Google Fuse: Verifiable Social Reasoning for LLMs",
+      "h1": "Google Fuse: how verifiable social reasoning tests AI assistants",
+      "meta_description": "Google's Fuse framework tests social reasoning from incomplete user narratives. Learn how its benchmark works, what it measures and what it cannot prove.",
+      "source_name": "Google Research",
+      "primary_source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+      "sources": [
+        "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+        "https://arxiv.org/abs/2609.17496"
+      ],
+      "schema_type": "NewsArticle",
+      "summary": "Google Research introduced Fuse in its November 25 article on verifiable social reasoning for LLM assistants. Its simulated scenarios separate what an observer knows from what a user actually tells an assistant, allowing researchers to evaluate how models handle incomplete social information. The approach aims to test reasoning under uncertainty rather than reward confident guesses about people.",
+      "keywords": [
+        "Google Fuse social reasoning",
+        "LLM social reasoning benchmark",
+        "verifiable social reasoning",
+        "AI theory of mind evaluation",
+        "AI assistant reliability"
+      ],
+      "longtail_keywords": [
+        "what is Google Fuse LLM benchmark",
+        "how does verifiable social reasoning work",
+        "Google AI assistant social reasoning benchmark limitations",
+        "LLM social reasoning from incomplete information",
+        "does Google Fuse measure theory of mind"
+      ],
+      "search_intent": "Research and technical explainer: understand Fuse's evaluation setup, reported dataset and comparison with other AI evaluation methods.",
+      "search_questions": [
+        "What is Google Fuse?",
+        "Why does it separate user and observer perspectives?",
+        "What did Google report about the benchmark dataset?",
+        "Can it determine someone's real intentions?",
+        "How should model evaluators interpret the results?"
+      ],
+      "editorial": {
+        "what_changed": "Google described an evaluation framework for reasoning about simulated social situations from a user's incomplete account.",
+        "why_it_matters": "Real assistant conversations rarely contain the complete information used by many conventional benchmark questions.",
+        "what_to_verify": "Check simulation faithfulness, evaluator reliability, the information provided to the assistant and external validity before generalizing to real people."
+      },
+      "evidence": [
+        {
+          "label": "Research release",
+          "fact": "Google Research described Fuse on November 25, 2026.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Research record",
+          "fact": "The associated arXiv preprint was published in September 2026, before the November blog announcement.",
+          "source": "https://arxiv.org/abs/2609.17496"
+        },
+        {
+          "label": "Benchmark size",
+          "fact": "Google describes approximately 21,000 examples.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Human annotations",
+          "fact": "Google reports approximately 24,000 human annotations for simulation faithfulness.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Model evaluation",
+          "fact": "Google reports evaluating 12 language models.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Perspective distinction",
+          "fact": "The assistant is given the user's narrative rather than the full observer view of simulated events.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Controlled information",
+          "fact": "The framework varies the information conveyed to the assistant.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        },
+        {
+          "label": "Context limitation",
+          "fact": "Google reports that more relevant details can help; greater narrative length alone is not a guarantee of better reasoning.",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/"
+        }
+      ],
+      "limitations": "The scenarios and known answers arise from a simulation, not verified private intentions of real people. Human annotations of simulation faithfulness do not eliminate all bias, and model-based judging introduces its own uncertainty. The benchmark does not establish clinical, interpersonal or real-world mind-reading accuracy.",
+      "analysis": [
+        {
+          "heading": "What is Fuse and why is user perspective important?",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+          "paragraphs": [
+            "A conventional social reasoning question may give a model all the relevant facts and then ask it to infer an explanation. Fuse instead models an assistant receiving a person's partial description of a simulated interaction. The distinction is important because real users may omit context, misunderstand an event or describe it from a single perspective.",
+            "The benchmark maintains an observer view of the underlying simulated events, allowing researchers to compare the assistant's response with information not necessarily supplied in the user narrative. The AI model benchmarks explained guide provides background on why the information available at evaluation time is part of the task definition, not merely a formatting choice."
+          ],
+          "inline_links": [
+            {
+              "text": "AI model benchmarks explained",
+              "url": "/guides/ai-model-benchmarks-explained/"
+            }
+          ]
+        },
+        {
+          "heading": "What does the dataset measure?",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+          "paragraphs": [
+            "Google describes approximately 21,000 examples and 24,000 human annotations for simulation faithfulness, and reports testing 12 language models. Those quantities refer to the research setup; they should not be treated as counts of real-life interpersonal incidents with independently verified private motives.",
+            "The framework offers an advantage for controlled evaluation because the scenario is constructed with known elements. However, an artificial situation can reflect assumptions about social behavior introduced by the simulation or evaluator. The AI agent evaluation checklist is useful when building evaluation sets that distinguish a clearly supported inference from an uncertain possibility."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent evaluation checklist",
+              "url": "/guides/ai-agent-evaluation-checklist/"
+            }
+          ]
+        },
+        {
+          "heading": "Why more text is not necessarily better context",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+          "paragraphs": [
+            "The useful variable is not simply how many words the user supplies. A longer account may repeat a single interpretation or introduce irrelevant details, whereas a shorter account can contain a fact that changes the plausible explanations. Google discusses this distinction in its research findings.",
+            "SXF's editorial interpretation is that evaluation should separate context availability, relevance and the model's willingness to admit uncertainty. A test that rewards only a confident answer risks hiding failure modes where several explanations fit the information. The AI agent reliability research page offers a related perspective on measuring behavior rather than assuming that fluent output is reliable."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent reliability research",
+              "url": "/research/ai-agent-reliability/"
+            }
+          ]
+        },
+        {
+          "heading": "SXF analysis: how Fuse differs from common evaluation styles",
+          "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+          "paragraphs": [
+            "A useful social-reasoning benchmark needs a clear boundary between the information provided to the assistant and the information held by the evaluator. Without that boundary, a system may appear more capable than it would be in a real conversation, where the user has not necessarily supplied every relevant fact.",
+            "Fuse is a distinct test design, not a universal measure of intelligence or an interpersonal diagnosis. Teams evaluating assistants should track appropriate uncertainty, requests for relevant context and unsupported assertions as separate outcomes. AI agent security is also relevant if an assistant is permitted to act on such inferences, because the consequences of a mistaken assumption may extend beyond a chat response."
+          ],
+          "inline_links": [
+            {
+              "text": "AI agent security",
+              "url": "/guides/ai-agent-security/"
+            }
+          ]
+        }
+      ],
+      "internal_links": [
+        {
+          "title": "AI agent evaluation checklist",
+          "url": "/guides/ai-agent-evaluation-checklist/",
+          "description": "Design bounded tests with explicit criteria."
+        },
+        {
+          "title": "AI agent reliability research",
+          "url": "/research/ai-agent-reliability/",
+          "description": "Explore the distinction between benchmark behavior and deployment reliability."
+        },
+        {
+          "title": "AI model benchmarks explained",
+          "url": "/guides/ai-model-benchmarks-explained/",
+          "description": "Interpret task-specific results and limitations."
+        },
+        {
+          "title": "AI agent security",
+          "url": "/guides/ai-agent-security/",
+          "description": "Consider operational risks when assistants act on uncertain information."
+        },
+        {
+          "title": "AI leaderboards compared",
+          "url": "/guides/ai-leaderboards-compared/",
+          "description": "Understand why rankings across different benchmarks are not interchangeable."
+        }
+      ],
+      "reader_checklist": [
+        "Record exactly what the model receives in each test.",
+        "Distinguish simulation-defined answers from real-world facts.",
+        "Track unsupported conclusions and calibrated uncertainty.",
+        "Review model-based scoring and human evaluation limitations.",
+        "Do not use benchmark performance to infer real people's private intentions."
+      ],
+      "sxf_feature": {
+        "type": "matrix",
+        "eyebrow": "SXF ANALYSIS / EVIDENCE",
+        "source": "https://research.google/blog/verifiable-social-reasoning-for-llm-assistants/",
+        "heading": "Fuse compared with other social-reasoning evaluation designs",
+        "columns": [
+          "Evaluation design",
+          "Information supplied",
+          "Main limitation"
+        ],
+        "rows": [
+          [
+            "Full-context question",
+            "All stated scenario facts",
+            "May overstate real assistant access to context"
+          ],
+          [
+            "Fuse user narrative",
+            "Partial account of a simulated event",
+            "Simulation may not represent real interactions"
+          ],
+          [
+            "Observer comparison",
+            "Underlying simulated event information",
+            "Not the information a real user necessarily knows"
+          ],
+          [
+            "Real-world user study",
+            "Actual user reports and observed outcomes",
+            "Private intentions often cannot be verified"
+          ]
+        ],
+        "intro": "This conceptual comparison shows why the information available to the model matters. It is not a ranking of commercial assistants.",
+        "note": "SXF analytical comparison based on Google's framework and general evaluation design principles; no independent tests were performed.",
+        "mobile_stacked": true
+      },
+      "faq_heading": "Frequently asked questions",
+      "faq": [
+        {
+          "question": "What is Google Fuse?",
+          "answer": "Fuse is Google's framework for evaluating social reasoning in language-model assistants from incomplete user narratives in simulated situations."
+        },
+        {
+          "question": "How large is the benchmark?",
+          "answer": "Google reports approximately 21,000 examples and 24,000 human annotations for simulation faithfulness."
+        },
+        {
+          "question": "Does Fuse verify real people's intentions?",
+          "answer": "No. It uses simulated scenarios with controlled information; that is not verification of private motives in real life."
+        },
+        {
+          "question": "Does a higher score mean an assistant is safe in every conversation?",
+          "answer": "No. Performance is specific to the evaluation setup, judging method and model configuration."
+        }
+      ],
+      "hero_image": {
+        "path": "/assets/signals/google-fuse-verifiable-social-reasoning-llm.svg",
+        "alt": "Editorial diagram of Google Fuse showing a simulated social event, a partial user narrative and an assistant response with an observer-information boundary.",
+        "caption": "Observer information ≠ assistant information"
+      }
     }
   }
 }
