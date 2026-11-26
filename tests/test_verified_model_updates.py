@@ -70,6 +70,16 @@ def main():
     assert large["access"]["open_weight"] and large["access"]["self_hostable"]
     rate = large["pricing"]["standard"][-1]
     assert (rate["input"], rate["cached_input"], rate["output"]) == (0.7, 0.07, 2.1)
+    pro_page = (ROOT / "models/gemini-3-1-pro-preview/index.html").read_text(encoding="utf-8")
+    assert "GLOBAL ≤200K INPUT" in pro_page and "GLOBAL ≤200K OUTPUT" in pro_page
+    assert "GLOBAL ≤128K INPUT" not in pro_page
+    assert "Above 128K up to 256K" not in pro_page
+    nova_page = (ROOT / "models/nova-3/index.html").read_text(encoding="utf-8")
+    assert "pre-recorded monolingual Nova-3 rate is $0.0043" in nova_page
+    assert "multilingual pre-recorded is $0.0052/minute" in nova_page
+    assert "does not separately confirm batch rates" not in nova_page
+    live_page = (ROOT / "models/gpt-live-1/index.html").read_text(encoding="utf-8")
+    assert "$0.02 per standby minute" in live_page
     print("PASS: all registered model update sections, official sources, dates, lifecycle and idempotent rendering")
 
 if __name__ == "__main__":

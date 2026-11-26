@@ -294,7 +294,7 @@
     },
     "gpt-live-1": {
       "title": "GPT-Live-1.1, standby, SIP and native decisions",
-      "text": "OpenAI introduced GPT-Live-1.1 on November 19, 2026 with improved multilingual pronunciation, accent consistency and transcription. Both Live-1 and Live-1.1 WebRTC sessions can use standby to pause inference during inactivity. Outbound SIP calling became available to all organizations November 2; prompt-to-voice launched October 16 (voice creation is free, speech uses regular Live billing), along with additional localized voices. Native GPT-6 Luna Decisions delegation was added October 15. Retest voice interruptions and delegation when changing the model ID; backend model and tool charges remain separate from session billing.",
+      "text": "OpenAI introduced GPT-Live-1.1 on November 19, 2026 with improved multilingual pronunciation, accent consistency and transcription. Both Live-1 and Live-1.1 WebRTC sessions can use standby to pause inference during inactivity. Outbound SIP calling became available to all organizations November 2; prompt-to-voice launched October 16 (voice creation is free, speech uses regular Live billing), along with additional localized voices. Native GPT-6 Luna Decisions delegation was added October 15. Retest voice interruptions and delegation when changing the model ID; backend model and tool charges remain separate from session billing. The published session rate is $0.05 per active minute and $0.02 per standby minute, billed per second. These rates are not additive for the same second.",
       "sources": [
         [
           "https://developers.openai.com/api/docs/changelog",
@@ -307,10 +307,19 @@
         [
           "https://developers.openai.com/api/docs/models/gpt-live-1.1",
           "GPT-Live-1.1 model card"
+        ],
+        [
+          "https://developers.openai.com/api/docs/pricing",
+          "OpenAI active and standby session pricing"
         ]
       ],
-      "replacements": [],
-      "date": "2026-11-24"
+      "replacements": [
+        [
+          "Voice sessions are billed per second at the published per-minute rate; backend model and tool usage is billed separately.",
+          "Voice sessions are billed per second: $0.05 per active minute and $0.02 per standby minute. Backend model and tool usage is billed separately."
+        ]
+      ],
+      "date": "2026-11-26"
     },
     "gpt-6-luna": {
       "title": "Decisions API GA and background processing",
@@ -1011,9 +1020,9 @@
       "replacements": []
     },
     "rerank-4-pro": {
-      "date": "2026-11-25",
+      "date": "2026-11-26",
       "title": "Rerank 4 Pro is a previous-generation reranker",
-      "text": "Cohere released Rerank 5 on October 21, 2026 and recommends rerank-v5.0-pro for new quality-sensitive workloads. Rerank 4 Pro remains listed, not announced as retired in the model overview. Migration changes the ranking model, not stored corpus embeddings: send documents to the newer endpoint and retest ranking quality and thresholds. Rerank 5 adds Context Focus and calibrated relevance scores; do not assume these features exist in Rerank 4. The 32K context covers query plus document for each inference; search-unit billing is separate from LLM output tokens.",
+      "text": "Cohere released Rerank 5 on October 21, 2026 and recommends rerank-v5.0-pro for new quality-sensitive workloads. Rerank 4 Pro remains listed, not announced as retired in the model overview. Migration changes the ranking model, not stored corpus embeddings: send documents to the newer endpoint and retest ranking quality and thresholds. Rerank 5 adds Context Focus and calibrated relevance scores; do not assume these features exist in Rerank 4. The 32K context covers query plus document for each inference; search-unit billing is separate from LLM output tokens. Cohere's Rerank 5 announcement lists $0.05 per million tokens for Rerank 5 Pro and $0.02 per million tokens for Rerank 5 Fast; these are successor-model prices, not Rerank 4 search-unit rates.",
       "sources": [
         [
           "https://docs.cohere.com/docs/models",
@@ -1044,9 +1053,9 @@
       ]
     },
     "rerank-4-fast": {
-      "date": "2026-11-25",
+      "date": "2026-11-26",
       "title": "Rerank 4 Fast: migration to Rerank 5 Fast",
-      "text": "Rerank 5 Fast is Cohere's recommended successor for high-throughput reranking. Cohere reports improved quality even versus 4 Pro, but this is provider evidence rather than an SXF benchmark. Change the model ID to rerank-v5.0-fast and compare latency, relevance and thresholds on your own candidate set. There is no vector index migration solely for a reranker change. The earlier 4 Fast endpoint is still listed; no shutdown date or numeric direct search-unit rate was confirmed.",
+      "text": "Rerank 5 Fast is Cohere's recommended successor for high-throughput reranking. Cohere reports improved quality even versus 4 Pro, but this is provider evidence rather than an SXF benchmark. Change the model ID to rerank-v5.0-fast and compare latency, relevance and thresholds on your own candidate set. There is no vector index migration solely for a reranker change. The earlier 4 Fast endpoint is still listed; no shutdown date or numeric direct search-unit rate was confirmed. Cohere's Rerank 5 announcement lists $0.05 per million tokens for Rerank 5 Pro and $0.02 per million tokens for Rerank 5 Fast; these are successor-model prices, not Rerank 4 search-unit rates.",
       "sources": [
         [
           "https://docs.cohere.com/docs/models",
@@ -1077,9 +1086,9 @@
       ]
     },
     "parse-v5-0": {
-      "date": "2026-11-25",
+      "date": "2026-11-26",
       "title": "Parse 5: layout-aware output and deployment options",
-      "text": "Cohere's release identifies Parse as a 2.3B-parameter multimodal parser. Its output can represent reading order, tables, page boundaries and visual locations, including Markdown/HTML and bounding boxes. The API reference describes a blocks output with ordered page regions. Use the Parse API rather than a chat completion; production systems should validate table structure, page ordering and missing regions. Cohere lists Microsoft Foundry, SageMaker and Model Vault options. No public direct per-page numeric rate was confirmed; the full model card could not be retrieved for this review.",
+      "text": "Cohere's release identifies Parse as a 2.3B-parameter multimodal parser. Its output can represent reading order, tables, page boundaries and visual locations, including Markdown/HTML and bounding boxes. The API reference describes a blocks output with ordered page regions. Use the Parse API rather than a chat completion; production systems should validate table structure, page ordering and missing regions. Cohere lists Microsoft Foundry, SageMaker and Model Vault options. The model card is available and lists 2.3B parameters, 8,192 context tokens and approximately 4.6 GB of model weights. No public direct per-page numeric rate was identified; managed instance-hour charges must not be presented as a per-page API rate.",
       "sources": [
         [
           "https://docs.cohere.com/v2/changelog",
@@ -1096,6 +1105,10 @@
         [
           "https://cohere.com/pricing",
           "Provider pricing"
+        ],
+        [
+          "https://docs.cohere.com/docs/parse",
+          "Parse model documentation"
         ]
       ],
       "replacements": []
@@ -1357,6 +1370,18 @@
         [
           "Official list prices verified 2026-10-12; no historical effective-start date is claimed.",
           "Official list prices verified 2026-11-26; no historical effective-start date is claimed."
+        ],
+        [
+          "GLOBAL ≤128K INPUT",
+          "GLOBAL ≤200K INPUT"
+        ],
+        [
+          "GLOBAL ≤128K OUTPUT",
+          "GLOBAL ≤200K OUTPUT"
+        ],
+        [
+          "Tiered Global list rates for ≤128K input/request: $2.00 input · $12.00 output per MTok. Above 128K up to 256K and other regions have different rates.",
+          "Standard global list rates for ≤200K prompt tokens: $2.00 input · $12.00 output per MTok. Above 200K: $4.00 input · $18.00 output per MTok, within the model context limit."
         ]
       ]
     },
@@ -1482,7 +1507,7 @@
     "nova-3": {
       "date": "2026-11-26",
       "title": "Nova-3: November language expansion and billing distinctions",
-      "text": "Deepgram's November 24 changelog adds Odia (or), Santali (sat), Southern Ndebele (nr) and Western Frisian (fy) for both recorded and streaming audio, and reports improvements to several existing language models. Specify model=nova-3 and the language code. General Nova-3 is not the turn-detection model Flux. The current public pricing table shows promotional streaming PAYG rates of $0.0048/minute monolingual and $0.0058/minute multilingual (regular $0.0077 and $0.0092). The recorded-audio rates in the historical catalog are not separately confirmed by the current default table; verify the batch quote before budgeting. Billing is per second across processed channels; diarization and other paid add-ons can increase the total.",
+      "text": "Deepgram's November 24 changelog adds Odia (or), Santali (sat), Southern Ndebele (nr) and Western Frisian (fy) for both recorded and streaming audio, and reports improvements to several existing language models. Specify model=nova-3 and the language code. General Nova-3 is not the turn-detection model Flux. The current public pricing table shows promotional streaming PAYG rates of $0.0048/minute monolingual and $0.0058/minute multilingual (regular $0.0077 and $0.0092). The provider's pre-recorded price table lists $0.0043/minute monolingual and $0.0052/minute multilingual. These are distinct from the promotional streaming rates; select the relevant processing mode. Billing is per second across processed channels; diarization and other paid add-ons can increase the total.",
       "sources": [
         [
           "https://developers.deepgram.com/changelog/2026/11/24",
@@ -1495,12 +1520,16 @@
         [
           "https://deepgram.com/pricing",
           "Current provider price table"
+        ],
+        [
+          "https://deepgram.com/pricing?trk=public_post_comment-text",
+          "Provider price table including pre-recorded rates"
         ]
       ],
       "replacements": [
         [
-          "Official Pay-As-You-Go pre-recorded monolingual Nova-3 rate is $0.0043 per audio minute; multilingual pre-recorded is $0.0052/minute.",
-          "Previously published Pay-As-You-Go pre-recorded Nova-3 rates were $0.0043/minute monolingual and $0.0052/minute multilingual. The reviewed current default price table does not separately confirm batch rates; obtain a current quote."
+          "Previously published Pay-As-You-Go pre-recorded Nova-3 rates were $0.0043/minute monolingual and $0.0052/minute multilingual. The reviewed current default price table does not separately confirm batch rates; obtain a current quote.",
+          "Official Pay-As-You-Go pre-recorded monolingual Nova-3 rate is $0.0043 per audio minute; multilingual pre-recorded is $0.0052/minute."
         ]
       ]
     },
@@ -1599,7 +1628,7 @@
     "flux-2-pro": {
       "date": "2026-11-26",
       "title": "FLUX.2 Pro: reference-image charges and current family positioning",
-      "text": "The current BFL rate remains $0.03 for the initial output megapixel, with $0.015 for each additional output MP and each reference-image MP. A two-MP output with two billed reference MP costs $0.075 using these components. Pro supports generation and editing, up to 4 MP output and eight reference images through the API (ten in Playground). BFL lists FLUX 3 Image separately; compare at the same resolution and reference count rather than treating the starting price as a flat charge. No new retirement date is inferred.",
+      "text": "BFL lists text-to-image from $0.03 and image editing from $0.045; the first output megapixel costs $0.03, with $0.015 for each additional output MP and each reference-image MP. A two-MP output with two billed reference MP costs $0.075 using these components. Pro supports generation and editing, up to 4 MP output and eight reference images through the API (ten in Playground). Compare at the same resolution and reference count rather than treating the starting price as a flat charge. No new retirement date is inferred.",
       "sources": [
         [
           "https://bfl.ai/pricing?category=flux.2",

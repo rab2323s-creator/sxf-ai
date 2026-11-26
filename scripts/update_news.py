@@ -3860,8 +3860,8 @@ def model_explorer_html():
 
         elif catalog_tiered_global(model):
             tier = catalog_tiered_global(model)[1]["tiers"][0]
-            input_label = f'From {catalog_price_label(tier["input"])} {basis.get("display_unit", "")} (Global ≤128K; tiered)'
-            output_label = f'From {catalog_price_label(tier["output"])} {basis.get("display_unit", "")} (Global ≤128K; tiered)'
+            input_label = f'From {catalog_price_label(tier["input"])} {basis.get("display_unit", "")} (Global {"≤200K" if model["model_id"] == "gemini-3.1-pro-preview" else "≤128K"}; tiered)'
+            output_label = f'From {catalog_price_label(tier["output"])} {basis.get("display_unit", "")} (Global {"≤200K" if model["model_id"] == "gemini-3.1-pro-preview" else "≤128K"}; tiered)'
             # Keep numeric sort as unavailable: a conditional tier rate is not a flat price.
 
         context = model.get("context_window")
