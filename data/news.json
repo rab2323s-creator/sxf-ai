@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T23:18:33.903863Z",
+  "updated_at": "2026-11-27T01:46:37.507132Z",
   "items": [
     {
       "title": "Copilot code review billing will default to the organization",
@@ -397,32 +397,6 @@
         "OpenAI"
       ],
       "signal_score": 28
-    },
-    {
-      "title": "Measuring how AI agents handle everyday wet-lab science",
-      "summary": "OpenAI introduced BioBasicsBench on November 6, 2026 with biotech partner Ligo, using 100 routine wet-lab tasks built from raw scientific evidence. At the highest compared reasoning setting GPT-6 Astra earned 66.7% mean rubric credit versus 43.8% for GPT-5.6 Sol. These are partial-credit benchmark averages, not percentages of experiments safely completed without scientific oversight.",
-      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
-      "signal_url": "https://sxf.si/signals/biobasicsbench-ai-wet-lab-data-benchmark/",
-      "source": "OpenAI",
-      "published": "2026-11-06T00:00:00Z",
-      "category": "Research",
-      "tags": [
-        "AI Agents",
-        "Research",
-        "OpenAI"
-      ],
-      "signal_score": 53
-    },
-    {
-      "title": "Egyptian and Nigerian English join the Open ASR Leaderboard",
-      "summary": "Hugging Face and Liva AI announced on November 6, 2026 that the Open ASR Leaderboard's private test set now includes spontaneous Egyptian-accented and Nigerian-accented English speech. The added conversational datasets are 1.34 and 1.55 hours respectively, and the leaderboard introduces comparisons between U.S., non-U.S. and international accent groupings. This improves evaluation coverage but does not prove speech systems are equally accurate across accents.",
-      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
-      "signal_url": "https://sxf.si/signals/open-asr-egyptian-nigerian-english-benchmark/",
-      "source": "Hugging Face",
-      "published": "2026-11-06T00:00:00Z",
-      "category": "Tools",
-      "tags": [],
-      "signal_score": 28
     }
   ],
   "feed_errors": [],
@@ -446,9 +420,9 @@
       "Microsoft": 2
     },
     "current_counts": {
-      "OpenAI": 11,
+      "OpenAI": 10,
       "Google AI": 4,
-      "Hugging Face": 5,
+      "Hugging Face": 4,
       "GitHub": 9,
       "Google Research": 1,
       "Anthropic": 2,
@@ -463,21 +437,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 1430,
         "relevance_accepted_count": 1430,
-        "quality_accepted_count": 112,
-        "accepted_candidate_count": 112,
-        "rejected_candidate_count": 1318,
+        "quality_accepted_count": 110,
+        "accepted_candidate_count": 110,
+        "rejected_candidate_count": 1320,
         "duplicate_count": 2,
-        "age_rejection_count": 1316,
+        "age_rejection_count": 1318,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 11,
+        "publish_count": 10,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "Google AI": {
@@ -500,7 +474,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "Hugging Face": {
@@ -509,21 +483,21 @@
         "fetch_failure": false,
         "parsed_candidate_count": 918,
         "relevance_accepted_count": 918,
-        "quality_accepted_count": 33,
-        "accepted_candidate_count": 33,
-        "rejected_candidate_count": 885,
+        "quality_accepted_count": 32,
+        "accepted_candidate_count": 32,
+        "rejected_candidate_count": 886,
         "duplicate_count": 0,
-        "age_rejection_count": 885,
+        "age_rejection_count": 886,
         "relevance_rejection_count": 0,
         "quality_rejection_count": 0,
-        "publish_count": 5,
+        "publish_count": 4,
         "adapter": "rss",
         "adapter_contract_version": null,
         "adapter_discovered_count": 0,
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "GitHub": {
@@ -546,7 +520,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "Google Research": {
@@ -569,7 +543,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "Anthropic": {
@@ -592,7 +566,7 @@
         "adapter_invalid_count": 9,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": [
           "Anthropic article missing required fields ['published']: https://www.anthropic.com/claude-fable-and-mythos-5-1"
         ]
@@ -617,7 +591,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "xAI": {
@@ -640,7 +614,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       },
       "Microsoft": {
@@ -663,7 +637,7 @@
         "adapter_invalid_count": 0,
         "adapter_fetch_failure_count": 0,
         "schema_drift": false,
-        "last_successful_fetch": "2026-11-26T23:17:49.372519Z",
+        "last_successful_fetch": "2026-11-27T01:45:49.034603Z",
         "errors": []
       }
     },
