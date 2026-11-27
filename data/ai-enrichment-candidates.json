@@ -1,8 +1,8 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "239a196eaea05ebe8b0272b092da2e979555da2ecfe893b09effe8db37233d08",
-  "candidate_count": 9,
+  "snapshot_hash": "6d249acfc96b6ed087a7d15c2822554395457fc845dc2804d3f32425cc5c6939",
+  "candidate_count": 6,
   "candidate_limit": 10,
   "budget_guard": {
     "monthly_budget_eur": 5,
@@ -619,154 +619,6 @@
     },
     {
       "rank": 2,
-      "signal_slug": "llama-cpp-1-0-api-abi-stability-upgrade",
-      "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
-      "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
-      "source": "Hugging Face",
-      "category": "Open Source",
-      "published": "2026-11-13T14:05:22Z",
-      "priority_score": 145,
-      "evidence_hash": "be1083398d283a6e2e3dffe54b5070192a852c5877805ff802fe8af42748865d",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "llama.cpp v1.0.0 : A stronger foundation for the local AI ecosystem",
-          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
-          "signal_url": "https://sxf.si/signals/llama-cpp-1-0-api-abi-stability-upgrade/",
-          "source": "Hugging Face",
-          "published": "2026-11-13T14:05:22Z",
-          "category": "Open Source",
-          "tags": [
-            "Open Source AI"
-          ],
-          "summary": "The ggml-org team announced version 1.0.0 of the llama.cpp and ggml libraries on November 13, 2026, clarifying semantic-versioning contracts for public C interfaces. Future API or ABI-breaking changes trigger major-version increments, while compatible features and bug fixes use minor and patch increments. The milestone matters to application integrators and package maintainers; it is not a claim that all backends have identical behaviour or that throughput improved by a measured percentage.",
-          "signal_score": 40,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "durable-intelligence-layer",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://huggingface.co/blog/ggml-org/llama-cpp-v1"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 3,
-      "signal_slug": "gemini-4-hydrogen-github-copilot-availability",
-      "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
-      "title": "Gemini 4 Hydrogen in GitHub Copilot",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-11-13T18:23:48Z",
-      "priority_score": 142,
-      "evidence_hash": "d5def5764fea4fc314fa94ac8cd797723226cce2cade2932d944fbeb72742f6e",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Gemini 4 Hydrogen in GitHub Copilot",
-          "url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot",
-          "signal_url": "https://sxf.si/signals/gemini-4-hydrogen-github-copilot-availability/",
-          "source": "GitHub",
-          "published": "2026-11-13T18:23:48Z",
-          "category": "Tools",
-          "tags": [
-            "GitHub Copilot"
-          ],
-          "summary": "GitHub announced Gemini 4 Hydrogen availability in GitHub Copilot on November 13, 2026 across individual and organization plans, including Pro, Pro+, Max, Business and Enterprise. The model is positioned for efficient agentic coding, tool use and multistep instructions, with gradual rollout and policy controls for enterprise administrators. SXF distinguishes Hydrogen from the already available Gemini 4 Carbon and the separate Google Search upgrade, and sets out a practical selection and evaluation procedure.",
-          "signal_score": 52,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "named-model",
-            "high-value-topic",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 4,
       "signal_slug": "chatgpt-for-sales-crm-workflows-2026",
       "signal_url": "https://sxf.si/signals/chatgpt-for-sales-crm-workflows-2026/",
       "title": "Introducing ChatGPT for Sales",
@@ -839,80 +691,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 5,
-      "signal_slug": "chatgpt-wallet-payment-approval-safety",
-      "signal_url": "https://sxf.si/signals/chatgpt-wallet-payment-approval-safety/",
-      "title": "Introducing ChatGPT Wallet",
-      "source": "OpenAI",
-      "category": "Tools",
-      "published": "2026-11-13T15:00:00Z",
-      "priority_score": 136,
-      "evidence_hash": "97f9303845f685e4cf9d0d1b63b3b307812925c4f59686beae5607c7d937b5b7",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Introducing ChatGPT Wallet",
-          "url": "https://openai.com/index/introducing-chatgpt-wallet",
-          "signal_url": "https://sxf.si/signals/chatgpt-wallet-payment-approval-safety/",
-          "source": "OpenAI",
-          "published": "2026-11-13T15:00:00Z",
-          "category": "Tools",
-          "tags": [
-            "OpenAI"
-          ],
-          "summary": "On November 13, 2026, OpenAI announced ChatGPT Wallet with an initial rollout in dots for eligible US ChatGPT Pro adults using supported US-issued cards. Purchases require the user to review the cart and approve the payment with a security check. The launch did not set dates for Plus or international availability, and fully pre-authorized buying was presented as future work.",
-          "signal_score": 46,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "search-worthy-event",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://openai.com/index/introducing-chatgpt-wallet"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 6,
+      "rank": 3,
       "signal_slug": "github-copilot-code-review-billing-december-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-code-review-billing-december-2026/",
       "title": "Copilot code review billing will default to the organization",
@@ -986,7 +765,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 7,
+      "rank": 4,
       "signal_slug": "github-copilot-evals-setup-testing-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-evals-setup-testing-2026/",
       "title": "GitHub Copilot Evals is now in public preview",
@@ -1059,7 +838,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 8,
+      "rank": 5,
       "signal_slug": "openai-daybreak-nato-cyber-defense-2026",
       "signal_url": "https://sxf.si/signals/openai-daybreak-nato-cyber-defense-2026/",
       "title": "Strengthening NATO and allied cyber defenses with AI",
@@ -1133,7 +912,7 @@
       "index_decision": "unchanged"
     },
     {
-      "rank": 9,
+      "rank": 6,
       "signal_slug": "github-copilot-models-retired-november-2026",
       "signal_url": "https://sxf.si/signals/github-copilot-models-retired-november-2026/",
       "title": "GitHub Copilot models deprecated on November 16, 2026",
