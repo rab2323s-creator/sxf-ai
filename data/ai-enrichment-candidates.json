@@ -1,8 +1,8 @@
 {
   "version": "sxf-ai-enrichment-v1",
   "mode": "dry-run",
-  "snapshot_hash": "64bd6c18c1aab3ab2798886afcdfe91bb0a2b475105096e6b38b298e3c862be8",
-  "candidate_count": 10,
+  "snapshot_hash": "239a196eaea05ebe8b0272b092da2e979555da2ecfe893b09effe8db37233d08",
+  "candidate_count": 9,
   "candidate_limit": 10,
   "budget_guard": {
     "monthly_budget_eur": 5,
@@ -2085,76 +2085,6 @@
           "key_facts",
           "pricing_or_capability_impact",
           "before_vs_after",
-          "who_should_care",
-          "what_to_verify",
-          "faq",
-          "sources",
-          "primary_search_query",
-          "secondary_search_queries",
-          "comparison_points",
-          "technical_details",
-          "practical_takeaways"
-        ],
-        "schema_requirement": "code-generated TechArticle + BreadcrumbList + FAQPage; ItemList when comparison exists",
-        "value_policy": "must add supported explanation, comparison, technical detail, and user decision value beyond news paraphrase",
-        "faq_policy": "3-6 search-intent questions; answers visible on page and evidence-cited",
-        "schema_policy": "code generates TechArticle + BreadcrumbList + FAQPage; add ItemList for comparisons",
-        "fact_policy": "evidence-only",
-        "unknown_policy": "use unknown or omit; never infer unsupported facts",
-        "internal_link_policy": "links must come from existing SXF routes only"
-      },
-      "generation_status": "not-called",
-      "index_decision": "unchanged"
-    },
-    {
-      "rank": 10,
-      "signal_slug": "github-ai-scan-repository-rest-api-setup",
-      "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
-      "title": "Manage AI Scan for repositories using the REST API",
-      "source": "GitHub",
-      "category": "Tools",
-      "published": "2026-11-13T12:22:41Z",
-      "priority_score": 108,
-      "evidence_hash": "7d60675cfddee406cbe39918a68a19ede02b7f297802c36a78be2d71cd5cf834",
-      "evidence": {
-        "pricing_basis": {
-          "currency": "USD",
-          "unit": "Model-specific; see pricing_basis",
-          "scope": "Provider-published Standard API pricing normalized to each model's explicit pricing_basis; unsupported pricing remains unavailable",
-          "source_urls": []
-        },
-        "signal": {
-          "title": "Manage AI Scan for repositories using the REST API",
-          "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api",
-          "signal_url": "https://sxf.si/signals/github-ai-scan-repository-rest-api-setup/",
-          "source": "GitHub",
-          "published": "2026-11-13T12:22:41Z",
-          "category": "Tools",
-          "tags": [],
-          "summary": "GitHub announced on November 13, 2026 a public-preview REST setting called repository_scan to manage AI Scan for repositories at organization and repository level. The update allows settings automation via GET and PATCH APIs but does not automatically run a scan; users with repository write access start scans on demand, consuming GitHub Code Security AI credits. SXF explains inheritance, enterprise policy, conflict errors and rollout checks, differentiating configuration from scanning results.",
-          "signal_score": 38,
-          "seo_quality_score": 70,
-          "seo_quality_factors": [
-            "substantive-source-summary",
-            "verified-editorial-evidence"
-          ]
-        },
-        "models": [],
-        "source_urls": [
-          "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api"
-        ]
-      },
-      "requested_output": {
-        "route_policy": "preserve-existing-signal-route",
-        "seo_slug_policy": "propose concise search-intent slug; code decides routing later",
-        "seo_title_policy": "30-60 chars, direct event/entity intent, no hype",
-        "meta_description_policy": "105-160 chars, summarize change plus user value",
-        "h1_policy": "25-90 chars, direct search intent, names primary entity/event",
-        "required_sections": [
-          "intro",
-          "what_changed",
-          "why_it_matters",
-          "key_facts",
           "who_should_care",
           "what_to_verify",
           "faq",
