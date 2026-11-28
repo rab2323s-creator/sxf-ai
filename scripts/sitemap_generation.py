@@ -205,6 +205,8 @@ def write_sitemap(items, context: SitemapContext):
         sitemap_entry(f"{BASE_URL}/ai-agent-cost/", "2026-10-09"),
         sitemap_entry(f"{BASE_URL}/research/microsoft-mai-dxo-ai-diagnosis-science/", "2026-11-02"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-hands-on-2026-11/", "2026-11-03"),
+        sitemap_image_entry(f"{BASE_URL}/research/voice-agent-benchmark-analysis/", "2026-11-28", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-latency.svg", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-test-framework.svg"),
+        sitemap_image_entry(f"{BASE_URL}/guides/best-ai-voice-agent-platforms/", "2026-11-28", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-architecture.svg", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-latency.svg", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-cost.svg", f"{BASE_URL}/guides/best-ai-voice-agent-platforms/images/voice-agent-test-framework.svg"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-reliability/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-memory/", "2026-10-01"),
         sitemap_entry(f"{BASE_URL}/research/ai-agent-payment-negotiation/", "2026-10-20"),

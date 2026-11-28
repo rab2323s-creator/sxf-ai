@@ -233,3 +233,37 @@ def test_voice_agent_guide_contract():
 
 if __name__ == "__main__":
     test_voice_agent_guide_contract()
+
+
+def test_voice_benchmark_research():
+    import csv
+    import subprocess
+    import sys
+    import xml.etree.ElementTree as ET
+    from content_ownership import is_authored_html
+    study = ROOT / "research/voice-agent-benchmark-analysis"
+    route = "/research/voice-agent-benchmark-analysis/"
+    guide = ROOT / "guides/best-ai-voice-agent-platforms"
+    page = (study / "index.html").read_text(encoding="utf-8")
+    buyer = (guide / "index.html").read_text(encoding="utf-8")
+    assert is_authored_html((study / "index.html").relative_to(ROOT))
+    assert 'href="https://sxf.si' + route + '"' in page
+    assert 'href="' + route + '"' in buyer
+    assert 'href="' + route + '"' in (ROOT / "research/index.html").read_text(encoding="utf-8")
+    assert 'href="' + route + '"' in (ROOT / "research/ai-agent-reliability/index.html").read_text(encoding="utf-8")
+    assert "Original analysis by SXF / AI Research, based on publicly available benchmark data." in page and "Original analysis by SXF / AI Research, based on publicly available benchmark data." in buyer
+    for file in ("voice-agent-architecture.svg", "voice-agent-latency.svg", "voice-agent-cost.svg", "voice-agent-test-framework.svg"):
+        assert ET.parse(guide / "images" / file).getroot().tag == "{http://www.w3.org/2000/svg}svg"
+        assert file in buyer
+    ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9", "i": "http://www.google.com/schemas/sitemap-image/1.1"}
+    root = ET.parse(ROOT / "sitemap.xml").getroot()
+    for url, n in (("https://sxf.si" + route, 2), ("https://sxf.si/guides/best-ai-voice-agent-platforms/", 4)):
+        nodes = [x for x in root.findall("s:url", ns) if x.findtext("s:loc", namespaces=ns) == url]
+        assert len(nodes) == 1, url
+        assert len(nodes[0].findall("i:image", ns)) == n, url
+    subprocess.run([sys.executable, str(study / "reproduce.py")], check=True)
+    print("PASS: SXF voice benchmark sources, derived arithmetic, illustrations and research discovery")
+
+
+if __name__ == "__main__":
+    test_voice_benchmark_research()
