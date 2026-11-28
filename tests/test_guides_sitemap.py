@@ -144,20 +144,20 @@ def test_ai_sdr_guide_contract():
     article = page.split('<article class="sdr-article" id="sdr-editorial">', 1)[1].split("</article>", 1)[0]
     parser = Text()
     parser.feed(article)
-    visible = re.sub(r"\\s+", " ", " ".join(parser.parts)).strip()
+    visible = re.sub(r"\s+", " ", " ".join(parser.parts)).strip()
     content = source.split("---", 2)[2]
     for line in content.splitlines():
         line = line.strip()
-        if not line or line.startswith("```") or re.fullmatch(r"[|:\\- ]+", line):
+        if not line or line.startswith("```") or re.fullmatch(r"[|: -]+", line):
             continue
-        line = re.sub(r"^#{1,3} |^[-] |^\\d+\\. ", "", line)
-        line = re.sub(r"\\[([^]]+)\\]\\([^)]+\\)", r"\\1", line)
+        line = re.sub(r"^#{1,3} |^[-] |^\d+\. ", "", line)
+        line = re.sub(r"\[([^]]+)\]\([^)]+\)", r"\1", line)
         line = line.replace("**", "").replace("`", "")
         parts = [p.strip() for p in line.split("|") if p.strip()] if line.startswith("|") else [line]
         for part in parts:
             # HTML inline tags can add whitespace before punctuation; normalize it away.
-            compact = re.sub(r"\\s+", "", part)
-            assert compact in re.sub(r"\\s+", "", visible), "Missing AI SDR source content: " + part[:120]
+            compact = re.sub(r"\s+", "", part)
+            assert compact in re.sub(r"\s+", "", visible), "Missing AI SDR source content: " + part[:120]
     with TemporaryDirectory() as temp:
         root = Path(temp)
         target = root / relative
