@@ -8226,6 +8226,21 @@ def guides_index_html(items, current_items):
             "read_time": "39 min",
         },
         {
+            "href": "/guides/best-ai-sdr-tools/",
+            "category": "Agents · Sales · Automation",
+            "categories": [
+                "agents",
+                "tools",
+                "research"
+            ],
+            "kicker": "AI SDR TOOLS · BUYER'S GUIDE",
+            "title": "Best AI SDR Tools for 2027: AI Sales Agents Compared by Pricing, Automation and Reliability",
+            "description": "Compare eight AI SDR platforms by pricing, autonomy, governance and reliability, with an interactive cost calculator and a proposed 12-case acceptance protocol.",
+            "meta": "AI SDR · Sales Agents · Pricing · Reliability",
+            "updated": "Nov 28, 2026",
+            "read_time": "26 min"
+        },
+        {
             "href": "/guides/ai-leaderboards-compared/",
             "category": "Models · Benchmarks · Research",
             "categories": ["models", "research", "tools"],

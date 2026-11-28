@@ -117,3 +117,56 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_ai_sdr_guide_contract():
+    from content_ownership import is_authored_html, preserve_authored_pages
+    from pathlib import Path
+    from tempfile import TemporaryDirectory
+    from html.parser import HTMLParser
+    import re
+    relative = Path("guides/best-ai-sdr-tools/index.html")
+    page = (ROOT / relative).read_text(encoding="utf-8")
+    source = (ROOT / "scripts/editorial/best-ai-sdr-tools.md").read_text(encoding="utf-8")
+    assert is_authored_html(relative), "AI SDR guide must be editorial-owned"
+    assert 'href="https://sxf.si/guides/best-ai-sdr-tools/"' in page and 'id="sdr-editorial"' in page
+    assert 'href="/guides/best-ai-sdr-tools/"' in (ROOT / "guides/index.html").read_text(encoding="utf-8")
+    assert '"href": "/guides/best-ai-sdr-tools/"' in (ROOT / "scripts/update_news.py").read_text(encoding="utf-8")
+    for path in ["guides/best-ai-agents/index.html","guides/best-ai-agents-for-marketing/index.html","guides/ai-agent-cost/index.html","research/ai-agent-reliability/index.html","guides/ai-agent-testing-tools/index.html","guides/ai-agent-observability/index.html"]:
+        assert 'href="/guides/best-ai-sdr-tools/"' in (ROOT / path).read_text(encoding="utf-8"), path
+    class Text(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.parts = []
+        def handle_data(self, data):
+            self.parts.append(data)
+    # Every source block must remain in the visible HTML, including tables, code, and final disclosure.
+    article = page.split('<article class="sdr-article" id="sdr-editorial">', 1)[1].split("</article>", 1)[0]
+    parser = Text()
+    parser.feed(article)
+    visible = re.sub(r"\\s+", " ", " ".join(parser.parts)).strip()
+    content = source.split("---", 2)[2]
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith("```") or re.fullmatch(r"[|:\\- ]+", line):
+            continue
+        line = re.sub(r"^#{1,3} |^[-] |^\\d+\\. ", "", line)
+        line = re.sub(r"\\[([^]]+)\\]\\([^)]+\\)", r"\\1", line)
+        line = line.replace("**", "").replace("`", "")
+        parts = [p.strip() for p in line.split("|") if p.strip()] if line.startswith("|") else [line]
+        for part in parts:
+            # HTML inline tags can add whitespace before punctuation; normalize it away.
+            compact = re.sub(r"\\s+", "", part)
+            assert compact in re.sub(r"\\s+", "", visible), "Missing AI SDR source content: " + part[:120]
+    with TemporaryDirectory() as temp:
+        root = Path(temp)
+        target = root / relative
+        target.parent.mkdir(parents=True)
+        target.write_text(page, encoding="utf-8")
+        with preserve_authored_pages(root):
+            target.unlink()
+        assert target.read_text(encoding="utf-8") == page
+    print("PASS: complete AI SDR source, reciprocal links and authored-page restore")
+
+if __name__ == "__main__":
+    test_ai_sdr_guide_contract()
