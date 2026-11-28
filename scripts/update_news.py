@@ -8226,6 +8226,21 @@ def guides_index_html(items, current_items):
             "read_time": "39 min",
         },
         {
+            "href": "/guides/best-ai-voice-agent-platforms/",
+            "category": "Agents · Voice · Automation",
+            "categories": [
+                "agents",
+                "tools",
+                "research"
+            ],
+            "kicker": "VOICE AI · SXF RELIABILITY LAB",
+            "title": "Best AI Voice Agent Platforms for 2027: Pricing, Latency & Reliability Compared",
+            "description": "Compare eight voice agent platforms by pricing, architecture, latency and reliability, with a cost-per-outcome calculator and a 16-case evaluation lab.",
+            "meta": "AI Voice Agents · Platforms · Pricing · Latency · Reliability",
+            "updated": "Nov 28, 2026",
+            "read_time": "25 min"
+        },
+        {
             "href": "/guides/best-ai-sdr-tools/",
             "category": "Agents · Sales · Automation",
             "categories": [

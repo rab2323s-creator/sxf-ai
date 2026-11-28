@@ -170,3 +170,66 @@ def test_ai_sdr_guide_contract():
 
 if __name__ == "__main__":
     test_ai_sdr_guide_contract()
+
+
+def test_voice_agent_guide_contract():
+    from content_ownership import is_authored_html, preserve_authored_pages
+    from pathlib import Path
+    from tempfile import TemporaryDirectory
+    from html.parser import HTMLParser
+    import re
+
+    relative = Path("guides/best-ai-voice-agent-platforms/index.html")
+    page = (ROOT / relative).read_text(encoding="utf-8")
+    source = (ROOT / "scripts/editorial/best-ai-voice-agent-platforms.md").read_text(encoding="utf-8")
+    route = "/guides/best-ai-voice-agent-platforms/"
+    assert is_authored_html(relative)
+    assert 'href="https://sxf.si' + route + '"' in page
+    assert 'name="robots" content="index,follow' in page
+    assert 'href="' + route + '"' in (ROOT / "guides/index.html").read_text(encoding="utf-8")
+    assert '"href": "' + route + '"' in (ROOT / "scripts/update_news.py").read_text(encoding="utf-8")
+    for path in ["guides/ai-receptionist/index.html","guides/gpt-realtime-2-1-playground/index.html","guides/best-ai-text-to-speech-models/index.html","guides/best-ai-agents/index.html","guides/best-ai-sdr-tools/index.html","guides/ai-agent-cost/index.html","guides/ai-agent-observability/index.html","guides/ai-agent-security/index.html","guides/ai-agent-testing-tools/index.html","research/ai-agent-reliability/index.html"]:
+        other = (ROOT / path).read_text(encoding="utf-8")
+        assert 'href="' + route + '"' in other, path
+        assert 'href="/' + path.removesuffix("index.html") + '"' in page, path
+
+    class Text(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.parts = []
+        def handle_data(self, data):
+            self.parts.append(data)
+
+    article = page.split('<article id="voice-editorial">', 1)[1].split("</article>", 1)[0]
+    parser = Text()
+    parser.feed(article)
+    visible = "".join("".join(parser.parts).split())
+    segments = 0
+    for line in source.split("---", 2)[2].splitlines():
+        line = line.strip()
+        if not line or line in ("[[COST_TOOL]]", "[[LAB_TOOL]]") or re.fullmatch(r"[|: -]+", line):
+            continue
+        line = re.sub(r"^#{1,3} |^[-] |^[0-9]+[.] ", "", line)
+        line = re.sub(r"[[]([^]]+)[]][(][^)]*[)]", lambda m: m.group(1), line).replace("**", "").replace(chr(96), "")
+        parts = [p.strip() for p in line.split("|") if p.strip()] if line.startswith("|") else [line]
+        for part in parts:
+            assert "".join(part.split()) in visible, "Missing voice guide source: " + part[:100]
+            segments += 1
+    assert segments >= 282
+    for control in ("cost-form", "trial-list", "lab-selftest", "lab-export", "cost-export"):
+        assert 'id="' + control + '"' in article
+    assert (ROOT / relative.parent / "voice.css").is_file()
+    assert (ROOT / relative.parent / "voice.js").is_file()
+    with TemporaryDirectory() as temp:
+        root = Path(temp)
+        target = root / relative
+        target.parent.mkdir(parents=True)
+        target.write_text(page, encoding="utf-8")
+        with preserve_authored_pages(root):
+            target.unlink()
+        assert target.read_text(encoding="utf-8") == page
+    print("PASS: voice guide full source, reciprocal links, tools and authored-page restoration")
+
+
+if __name__ == "__main__":
+    test_voice_agent_guide_contract()
